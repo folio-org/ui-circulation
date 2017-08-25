@@ -1,4 +1,4 @@
-# Change history for ui-history
+# Change history for ui-circulation
 
 ## 1.1.0 (IN PROGRESS)
 
