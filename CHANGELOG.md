@@ -1,5 +1,7 @@
 # Change history for ui-history
 
+## 1.1.0 (IN PROGRESS)
+
 ## [1.0.0](https://github.com/folio-org/ui-circulation/tree/v1.0.0) (2017-08-25)
 
 * Initial circulation module. UICIRC-2
