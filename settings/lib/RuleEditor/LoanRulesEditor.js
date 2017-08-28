@@ -177,6 +177,7 @@ class LoanRulesEditor extends React.Component {
     this.clearErrors = this.clearErrors.bind(this);
     this.showHelp = this.showHelp.bind(this);
     this.filterRules = this.filterRules.bind(this);
+    this.handleFocus = this.handleFocus.bind(this);
 
     // keep track of errWidgets for clearing later...
     this.errWidgets = [];
@@ -279,7 +280,7 @@ class LoanRulesEditor extends React.Component {
     }
     // scan rows with '#'
     const res = [];
-    const re = new RegExp(filter);
+    const re = new RegExp(filter,'i');
     let found = true;
     const rng = {};
     this.cm.eachLine((lh) => {
@@ -287,7 +288,8 @@ class LoanRulesEditor extends React.Component {
       if(/^\s*#/.test(lh.text)){
         if(!re.test(lh.text)){
           if (found) {
-            rng.start = {line: this.cm.getLineNumber(lh), ch: 0};
+            console.log(lh.text);
+            rng.start = {line: this.cm.getLineNumber(lh)-1, ch: 0};
             found = false;
           }
         } else {
@@ -309,7 +311,7 @@ class LoanRulesEditor extends React.Component {
 
     let lastLine = 0;
     res.forEach((rn) => {
-      this.filteredSections.push(this.cm.markText(rn.start, rn.end, {collapsed:true}));
+      this.filteredSections.push(this.cm.markText(rn.start, rn.end, { collapsed: true, inclusiveLeft: true, inclusiveRight: true, }));
     });
   }
 
@@ -317,6 +319,19 @@ class LoanRulesEditor extends React.Component {
     this.errWidgets.forEach((w) => {
       w.clear();
     });
+  }
+
+  handleFocus(focused) {
+    if(!focused){
+      // hide help if editor loses focus...
+      if( this.cm.state.completionActive && this.cm.state.completionActive.widget ) {
+        const w = this.cm.state.completionActive.widget;
+        this.cm.state.focused = false;
+        w.close();
+      }
+    } else {
+      this.cm.state.focused = true;
+    }
   }
 
   // display error in editor
@@ -337,7 +352,7 @@ class LoanRulesEditor extends React.Component {
 
   // execute hint-giving.
   showHelp(cm) {
-    if(cm.state.completionActive || !this.props.showAssist) return;
+    if(cm.state.completionActive || !this.props.showAssist || !cm.state.focused) return;
 
     const codeMirror = this.cmComponent.getCodeMirrorInstance();
 
