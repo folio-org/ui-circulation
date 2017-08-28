@@ -1,22 +1,16 @@
 module.exports.test = function(uiTestCtx) {
   describe('Module test: circulation:settings', function() {
-    const { config, utils: { auth, names } } = uiTestCtx;
+    const { config, helpers: { login, logout } } = uiTestCtx;
     const nightmare = new Nightmare(config.nightmare);
 
     this.timeout(Number(config.test_timeout));
 
     describe('Login > Open Circulation settings > Logout', () => {
       before( done => {
-        auth.login(nightmare,config,done);
+        login(nightmare, config, done);
       })
-      it('should open module "Check Out"', done => {
-        nightmare
-        .wait('#clickable-checkout-module')
-        .click('#clickable-checkout-module')
-        .then(function(result) {
-          done()
-        })
-        .catch(done)
+      after( done => {
+        logout(nightmare, config, done);
       })
       it('should open Circulation settings, Loan policies', done => {
         nightmare
@@ -28,9 +22,6 @@ module.exports.test = function(uiTestCtx) {
         .wait('a[href="/settings/circulation/loan-policies"]')
         .then(result => { done() })
         .catch(done)
-      })
-      it('should log out', done => {
-          auth.logout(nightmare,config,done);
       })
     })
   })
