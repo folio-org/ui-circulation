@@ -1,0 +1,9 @@
+.codeMirrorFullScreen{
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  & :global .CodeMirror {
+    height: 100%;
+    width: 100%;
+  }
+}
