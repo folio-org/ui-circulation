@@ -7,9 +7,9 @@ import {
   Col
 } from '@folio/stripes-components';
 
-import LoanRulesForm from './RuleEditor/LoanRulesForm';
+import LoanRulesForm from './lib/RuleEditor/LoanRulesForm';
 
-const CodeEditor = (props) => {
+const LoanRules = (props) => {
   // static placeholder data...
   const code = `# Setup / this applies to all rules
 \tfallback-policy : no-circulation 
@@ -76,7 +76,7 @@ const CodeEditor = (props) => {
 
   return (
     <Paneset>
-      <Pane paneTitle="Code Editor" defaultWidth="50%">
+      <Pane paneTitle="Loan Rules Editor" defaultWidth="fill">
         <LoanRulesForm
           handleSubmit={onSubmit}
           initialValues={{ 'loanRulesCode': code }}
@@ -87,4 +87,4 @@ const CodeEditor = (props) => {
   );
 }
 
-export default CodeEditor;
+export default LoanRules;
