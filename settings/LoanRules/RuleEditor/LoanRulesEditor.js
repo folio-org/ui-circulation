@@ -387,4 +387,3 @@ LoanRulesEditor.propTypes = propTypes;
 LoanRulesEditor.defaultProps = defaultProps;
 
 export default LoanRulesEditor;
-/* eslint-enable */
