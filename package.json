@@ -33,9 +33,7 @@
           "settings.enabled"
         ],
         "visible": true
-      }
-    ],
-    "permissionSets": [
+      },
       {
         "permissionName": "settings.loan-rules.all",
         "displayName": "Settings (Circ): Can create, edit and remove loan rules",
