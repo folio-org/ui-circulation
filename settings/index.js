@@ -9,11 +9,13 @@ const pages = [
     route: 'loan-policies',
     label: 'Loan policies',
     component: LoanPolicySettings,
+    // perm: 'settings.loan-policies.all',
   },
   {
     route: 'loan-rules',
     label: 'Loan rules',
     component: LoanRules,
+    // perm: 'settings.loan-rules.all',
   },
 ];
 
