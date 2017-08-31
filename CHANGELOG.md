@@ -1,7 +1,8 @@
 # Change history for ui-circulation
 
-## 1.2.0 In progress: 
+## 1.2.0 (IN PROGRESS)
 
+* Add new permission, `settings.loan-rules.all`. Part of UICIRC-10.
 
 ## [1.1.0](https://github.com/folio-org/ui-circulation/tree/v1.1.0) (2017-08-30)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v1.0.0...v1.1.0)

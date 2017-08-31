@@ -34,6 +34,18 @@
         ],
         "visible": true
       }
+    ],
+    "permissionSets": [
+      {
+        "permissionName": "settings.loan-rules.all",
+        "displayName": "Settings (Circ): Can create, edit and remove loan rules",
+        "subPermissions": [
+          "circulation-storage.loan-rules.get",
+          "circulation-storage.loan-rules.put",
+          "settings.enabled"
+        ],
+        "visible": true
+      }
     ]
   },
   "scripts": {
