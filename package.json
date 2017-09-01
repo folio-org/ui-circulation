@@ -37,7 +37,7 @@
       {
         "permissionName": "settings.loan-policies.all",
         "displayName": "Settings (Circ): Can create, edit and remove loan policies [LEGACY]",
-        "subPermissions": [ "ui-circulation.settings.loan-policies" ],
+        "subPermissions": [ "ui-circulation.settings.loan-policies" ]
       },
       {
         "permissionName": "ui-circulation.settings.loan-rules",
@@ -52,7 +52,7 @@
       {
         "permissionName": "settings.loan-rules.all",
         "displayName": "Settings (Circ): Can create, edit and remove loan rules [LEGACY]",
-        "subPermissions": [ "ui-circulation.settings.loan-rules" ],
+        "subPermissions": [ "ui-circulation.settings.loan-rules" ]
       },
       {
         "permissionName": "settings.circulation.enabled",
