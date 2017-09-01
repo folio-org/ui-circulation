@@ -30,7 +30,7 @@
           "circulation-storage.loan-policies.item.put",
           "circulation-storage.loan-policies.item.delete",
           "circulation-storage.loan-policies.collection.delete",
-          "settings.enabled"
+          "settings.circulation.enabled"
         ],
         "visible": true
       },
@@ -40,6 +40,14 @@
         "subPermissions": [
           "circulation-storage.loan-rules.get",
           "circulation-storage.loan-rules.put",
+          "settings.circulation.enabled"
+        ],
+        "visible": true
+      },
+      {
+        "permissionName": "settings.circulation.enabled",
+        "displayName": "Settings (Circ): display list of settings pages",
+        "subPermissions": [
           "settings.enabled"
         ],
         "visible": true
