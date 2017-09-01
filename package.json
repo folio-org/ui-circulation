@@ -21,7 +21,7 @@
     },
     "permissionSets": [
       {
-        "permissionName": "settings.loan-policies.all",
+        "permissionName": "ui-circulation.settings.loan-policies",
         "displayName": "Settings (Circ): Can create, edit and remove loan policies",
         "subPermissions": [
           "circulation-storage.loan-policies.collection.get",
@@ -35,7 +35,12 @@
         "visible": true
       },
       {
-        "permissionName": "settings.loan-rules.all",
+        "permissionName": "settings.loan-policies.all",
+        "displayName": "Settings (Circ): Can create, edit and remove loan policies [LEGACY]",
+        "subPermissions": [ "ui-circulation.settings.loan-policies" ],
+      },
+      {
+        "permissionName": "ui-circulation.settings.loan-rules",
         "displayName": "Settings (Circ): Can create, edit and remove loan rules",
         "subPermissions": [
           "circulation-storage.loan-rules.get",
@@ -43,6 +48,11 @@
           "settings.circulation.enabled"
         ],
         "visible": true
+      },
+      {
+        "permissionName": "settings.loan-rules.all",
+        "displayName": "Settings (Circ): Can create, edit and remove loan rules [LEGACY]",
+        "subPermissions": [ "ui-circulation.settings.loan-rules" ],
       },
       {
         "permissionName": "settings.circulation.enabled",
