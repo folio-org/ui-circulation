@@ -62,7 +62,7 @@ const initLoanRulesCMM = (CodeMirror) => {
           state.rValue = false;
           state.keyProperty = null;
           if(stream.eatSpace()){
-             return null;
+            return null;
           }
         }
     
@@ -130,6 +130,7 @@ const initLoanRulesCMM = (CodeMirror) => {
     
         blankLine: function(state) {
           state.comment = false;
+          state.indented = 0;
           state.keyProperty = null;
         },
     

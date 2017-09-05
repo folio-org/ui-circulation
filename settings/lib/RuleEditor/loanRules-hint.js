@@ -35,9 +35,10 @@ export default function loanRulesHint(cm) {
 
     // new rule at the start of lines and blank lines...
     if(cur.ch == 0 || cur.ch == token.state.indented || token.type != 'policy') {
-      let newRuleText = '#\n '
-      if(token.state.inRule) {
-        newRuleText = '\n# '
+      let newRuleText = '# '
+      // if we're in the middle of a line, a new line should be inserted, then a rule...
+      if(cur.ch != 0 && token.state.indented > 0 || token.type == 'ruleName') {
+        newRuleText = '\n\n# '
       }
       result.push({
         text: newRuleText,

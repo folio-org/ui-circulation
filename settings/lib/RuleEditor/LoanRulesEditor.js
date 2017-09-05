@@ -172,6 +172,8 @@ class LoanRulesEditor extends React.Component {
     this.cmComponent = null;
     this.cm = null;
 
+    this.editorFocused = false;
+
     // this.updateCode = this.updateCode.bind(this);
     this.renderError = this.renderError.bind(this);
     this.clearErrors = this.clearErrors.bind(this);
@@ -258,7 +260,7 @@ class LoanRulesEditor extends React.Component {
     // prettymuch always show the auto-complete.
     this.cm.on('cursorActivity', this.showHelp);
     this.cm.on('endCompletion', this.showHelp);
-    this.cm.on('focus', this.showHelp);
+    // this.cm.on('focus', this.showHelp);
   }
 
   componentDidUpdate() {
@@ -272,12 +274,12 @@ class LoanRulesEditor extends React.Component {
   }
 
   filterRules(filter) {
-    if(filter === '') {
-      this.filteredSections.forEach((fs) => {
-        fs.clear();
-      });
-      return;
-    }
+    
+    this.filteredSections.forEach((fs) => {
+      fs.clear();
+    });
+    if ( filter === '' ) { return; }
+    
     // scan rows with '#'
     const res = [];
     const re = new RegExp(filter,'i');
@@ -288,7 +290,6 @@ class LoanRulesEditor extends React.Component {
       if(/^\s*#/.test(lh.text)){
         if(!re.test(lh.text)){
           if (found) {
-            console.log(lh.text);
             rng.start = {line: this.cm.getLineNumber(lh)-1, ch: 0};
             found = false;
           }
@@ -321,16 +322,22 @@ class LoanRulesEditor extends React.Component {
     });
   }
 
+  // called before codemirror state is internally updated...
   handleFocus(focused) {
     if(!focused){
-      // hide help if editor loses focus...
-      if( this.cm.state.completionActive && this.cm.state.completionActive.widget ) {
-        const w = this.cm.state.completionActive.widget;
-        this.cm.state.focused = false;
-        w.close();
+      this.editorFocused = false;
+      // if help is present when editor loses focus, hide it...
+      // except for when it loses focuse due to clicking a help option (sheesh).
+      if (!this.cm.state.focused) {
+        if( this.cm.state.completionActive && this.cm.state.completionActive.widget ) {
+          const w = this.cm.state.completionActive.widget;
+          // this.cm.state.focused = false;
+          w.close();
+        }
       }
     } else {
-      this.cm.state.focused = true;
+      this.editorFocused = true;
+      this.showHelp(this.cm);
     }
   }
 
@@ -352,14 +359,18 @@ class LoanRulesEditor extends React.Component {
 
   // execute hint-giving.
   showHelp(cm) {
-    if(cm.state.completionActive || !this.props.showAssist || !cm.state.focused) return;
+    // return if
+    // * there's already an active help dropdown
+    // * if showing help has been turned off
+    // * component knows the editor is in focus(updates before the actual editor knows)
+    if(cm.state.completionActive || !this.props.showAssist || !this.editorFocused) return;
 
     const codeMirror = this.cmComponent.getCodeMirrorInstance();
 
     const hintOptions = {
       completeSingle: false,
       completeOnSingleClick: true,
-      closeOnUnfocus: true,
+      hideOnUnfocus: true,
       customKeys:{
         'Up': moveFocusUp,
         'Down': moveFocusDown,
@@ -389,8 +400,8 @@ class LoanRulesEditor extends React.Component {
         className={css.codeMirrorFullScreen}
         ref={(ref) => { this.cmComponent = ref; }}
         value={this.state.code}
+        onFocusChange={this.handleFocus}
         onChange={this.props.onChange}
-        onFocusChange ={this.handleFocus}
         options={this.state.codeMirrorOptions}
       />
     );
