@@ -94,7 +94,7 @@ class LoanRules extends React.Component {
         this.setState({ errors: [{ line: 1, message: data.statusText }] });
       }
       else {
-        this.setState({});
+        this.setState({ errors: null });
       }
     });
   }
@@ -108,6 +108,7 @@ class LoanRules extends React.Component {
   render() {
     const loanRulesCode = this.getLoanRulesCode();
     const editorProps = Object.assign({}, editorDefaultProps, { errors: this.state.errors });
+
     return (
       <Paneset>
         <Pane paneTitle="Loan Rules Editor" defaultWidth="fill">
