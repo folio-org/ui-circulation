@@ -37,7 +37,9 @@
       {
         "permissionName": "settings.loan-policies.all",
         "displayName": "Settings (Circ): Can create, edit and remove loan policies [LEGACY]",
-        "subPermissions": [ "ui-circulation.settings.loan-policies" ]
+        "subPermissions": [
+          "ui-circulation.settings.loan-policies"
+        ]
       },
       {
         "permissionName": "ui-circulation.settings.loan-rules",
@@ -52,7 +54,9 @@
       {
         "permissionName": "settings.loan-rules.all",
         "displayName": "Settings (Circ): Can create, edit and remove loan rules [LEGACY]",
-        "subPermissions": [ "ui-circulation.settings.loan-rules" ]
+        "subPermissions": [
+          "ui-circulation.settings.loan-rules"
+        ]
       },
       {
         "permissionName": "settings.circulation.enabled",
@@ -84,15 +88,15 @@
   },
   "dependencies": {
     "@folio/stripes-components": "^1.4.0",
+    "@skidding/react-codemirror": "^1.0.1",
+    "lodash": "^4.17.4",
     "prop-types": "^15.5.10",
     "query-string": "^4.3.2",
     "react": "^15.4.2",
     "react-bootstrap": "^0.30.7",
-    "react-codemirror": "^1.0.0",
     "react-flexbox-grid": "^1.1.3",
     "react-router-dom": "^4.0.0",
-    "redux-form": "^6.1.1",
-    "lodash": "^4.17.4"
+    "redux-form": "^6.1.1"
   },
   "peerDependencies": {
     "@folio/stripes-connect": "^2.5.1",
