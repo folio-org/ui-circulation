@@ -108,7 +108,6 @@ class LoanRules extends React.Component {
   render() {
     const loanRulesCode = this.getLoanRulesCode();
     const editorProps = Object.assign({}, editorDefaultProps, { errors: this.state.errors });
-
     return (
       <Paneset>
         <Pane paneTitle="Loan Rules Editor" defaultWidth="fill">

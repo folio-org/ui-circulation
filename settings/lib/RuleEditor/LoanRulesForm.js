@@ -73,7 +73,7 @@ class LoanRulesForm extends React.Component {
             </Col>
           </Row>
           <div style={editorWrapStyle}>
-            <Field component={LoanRulesField} name='loanRulesCode'{...editorProps} filter={this.state.ruleFilter}/>
+            <Field component={LoanRulesField} name="loanRulesCode" {...editorProps} filter={this.state.ruleFilter}/>
           </div>
       </form>
     )

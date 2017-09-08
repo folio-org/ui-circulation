@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import isEqual from 'lodash/isEqual';
 import PropTypes from 'prop-types';
 import Codemirror from 'codemirror';
-import CodeMirror from '@skidding/react-codemirror';
+import CodeMirror from 'react-codemirror2';
 import initLoanRulesCMM from './LoanRulesCMM';
 import 'codemirror/addon/fold/foldcode';
 import initFoldRules from './fold-rules';
@@ -256,10 +256,9 @@ class LoanRulesEditor extends React.Component {
   }
 
   componentDidMount() {
-    this.cm = this.cmComponent.getCodeMirror();
-    const codeMirror = this.cmComponent.getCodeMirrorInstance();
+    this.cm = this.cmComponent.editor;
     //set up hinting
-    loanRulesHint(codeMirror);
+    loanRulesHint(Codemirror);
 
     // prettymuch always show the auto-complete.
     this.cm.on('cursorActivity', this.showHelp);
@@ -369,8 +368,6 @@ class LoanRulesEditor extends React.Component {
     // * component knows the editor is in focus(updates before the actual editor knows)
     if(cm.state.completionActive || !this.props.showAssist || !this.editorFocused) return;
 
-    const codeMirror = this.cmComponent.getCodeMirrorInstance();
-
     const hintOptions = {
       completeSingle: false,
       completeOnSingleClick: true,
@@ -388,7 +385,7 @@ class LoanRulesEditor extends React.Component {
       }
     };
 
-    codeMirror.showHint(this.cm, codeMirror.hint.loanRulesCMM, hintOptions);
+    Codemirror.showHint(this.cm, Codemirror.hint.loanRulesCMM, hintOptions);
   }
 
   // updateCode(newCode) {
@@ -404,8 +401,9 @@ class LoanRulesEditor extends React.Component {
         className={css.codeMirrorFullScreen}
         ref={(ref) => { this.cmComponent = ref; }}
         value={this.state.code}
-        onFocusChange={this.handleFocus}
-        onChange={this.props.onChange}
+        onFocus={(editor, event) => this.handleFocus(true)}
+        onBlur={(editor, event) => this.handleFocus(false)}
+        onChange={(editor, metadata, value) => this.props.onChange(value)}
         options={this.state.codeMirrorOptions}
       />
     );
