@@ -1,14 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  Paneset,
-  Pane,
-  Button,
-  Row,
-  Col
-} from '@folio/stripes-components';
+import { Paneset, Pane } from '@folio/stripes-components';
 import fetch from 'isomorphic-fetch';
-import { SubmissionError } from 'redux-form';
 
 import LoanRulesForm from './lib/RuleEditor/LoanRulesForm';
 
@@ -17,12 +10,12 @@ const editorDefaultProps = {
   // whether or not to show the 'autocomplete' widget (pro mode)
   showAssist: true,
   completionLists: {
-    'Campus': ['main'],
+    Campus: ['main'],
     'Patron Groups': ['visitor', 'off-campus', 'on-campus', 'undergrad'],
-    'Branch': ['main', 'downtown'],
+    Branch: ['main', 'downtown'],
     'Material Type': ['book', 'cd', 'dvd', 'newspaper', 'streaming-subscription', 'rare'],
     'Loan Type': ['special-items', 'rare'],
-    'Shelf': ['periodicals'],
+    Shelf: ['periodicals'],
   },
   policies: [ // these will probably include other info about the policy - perhaps a URL or other info about the rule.
     { name: 'policy-a' },
@@ -34,13 +27,13 @@ const editorDefaultProps = {
     { name: 'locked' },
   ],
   typeMapping: { // these letters are hard-wired atm... but the labels have to correspond with completion lists.
-    'g': 'Patron Groups',
-    'a': 'Campus',
-    'b': 'Branch',
-    'c': 'Collection',
-    'm': 'Material Type',
-    's': 'Shelf',
-    't': 'Loan Type',
+    g: 'Patron Groups',
+    a: 'Campus',
+    b: 'Branch',
+    c: 'Collection',
+    m: 'Material Type',
+    s: 'Shelf',
+    t: 'Loan Type',
   },
   // the editor will place these appropriately.
   // errors: [{ line: 9, message: 'There\'s something amiss on line 9!' },],
@@ -50,11 +43,7 @@ class LoanRules extends React.Component {
 
   static propTypes = {
     resources: PropTypes.object.isRequired,
-    mutator: PropTypes.shape({
-      loanRules: PropTypes.shape({
-        PUT: PropTypes.func,
-      }),
-    }).isRequired,
+    stripes: PropTypes.object.isRequired,
   };
 
   static manifest = Object.freeze({
@@ -73,8 +62,7 @@ class LoanRules extends React.Component {
   // TODO: refactor to use mutator after PUT is changed on the server or stripes-connect supports
   // custom PUT requests without the id attached to the end of the URL.
   onSubmit(values) {
-    const { resources, stripes } = this.props;
-    const loanRules = (resources.loanRules || {}).records || [];
+    const stripes = this.props.stripes;
     const headers = Object.assign({}, {
       'X-Okapi-Tenant': stripes.okapi.tenant,
       'X-Okapi-Token': stripes.store.getState().okapi.token,
@@ -92,8 +80,7 @@ class LoanRules extends React.Component {
       if (data.status >= 400) {
         // TODO: handle errors when they are properly handled by the server
         this.setState({ errors: [{ line: 1, message: data.statusText }] });
-      }
-      else {
+      } else {
         this.setState({ errors: null });
       }
     });
