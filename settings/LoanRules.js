@@ -35,8 +35,6 @@ const editorDefaultProps = {
     s: 'Shelf',
     t: 'Loan Type',
   },
-  // the editor will place these appropriately.
-  // errors: [{ line: 9, message: 'There\'s something amiss on line 9!' },],
 };
 
 class LoanRules extends React.Component {
@@ -59,9 +57,20 @@ class LoanRules extends React.Component {
     this.state = {};
   }
 
+  onSubmit(values) {
+    const loanRules = values.loanRulesCode.replace(/\t/g, '    ');
+    this.saveLoanRules(loanRules);
+  }
+
+  getLoanRulesCode() {
+    const loanRules = (this.props.resources.loanRules || {}).records || [];
+    const loanRulesCode = (loanRules.length) ? loanRules[0].loanRulesAsTextFile : '';
+    return loanRulesCode.replace('    ', '\t');
+  }
+
   // TODO: refactor to use mutator after PUT is changed on the server or stripes-connect supports
   // custom PUT requests without the id attached to the end of the URL.
-  onSubmit(values) {
+  saveLoanRules(loanRulesAsTextFile) {
     const stripes = this.props.stripes;
     const headers = Object.assign({}, {
       'X-Okapi-Tenant': stripes.okapi.tenant,
@@ -69,32 +78,29 @@ class LoanRules extends React.Component {
       'Content-Type': 'application/json',
     });
 
-    const loanRulesAsTextFile = values.loanRulesCode.replace(/\t/g, '    ');
     const options = {
       method: 'PUT',
       headers,
       body: JSON.stringify({ loanRulesAsTextFile }),
     };
 
-    return fetch(`${stripes.okapi.url}/circulation/loan-rules`, options)
-      .then((resp) => {
-        if (resp.status >= 400) {
-          // TODO: replace with JSON errors when CIRC-34 is ready on the server
-          resp.text().then((text) => {
-            const message = text.replace(/^(.+?):\s+/, '').split(' in line')[0];
-            const line = parseInt(text.match(/ in line ([0-9]+)/, '')[1], 10);
-            this.setState({ errors: [{ line, message }] });
-          });
-        } else {
-          this.setState({ errors: null });
-        }
-      });
-  }
-
-  getLoanRulesCode() {
-    const loanRules = (this.props.resources.loanRules || {}).records || [];
-    const loanRulesCode = (loanRules.length) ? loanRules[0].loanRulesAsTextFile : '';
-    return loanRulesCode.replace('    ', '\t');
+    return fetch(`${stripes.okapi.url}/circulation/loan-rules`, options).then((resp) => {
+      if (resp.status >= 400) {
+        // TODO: replace with JSON errors when CIRC-34 is ready on the server
+        resp.text().then((text) => {
+          const message = text.replace(/^(.+?):\s+/, '').split(' in line')[0];
+          let line;
+          try {
+            line = parseInt(text.match(/ in line ([0-9]+)/, '')[1], 10);
+          } catch (e) {
+            line = 0;
+          }
+          this.setState({ errors: [{ line, message }] });
+        });
+      } else {
+        this.setState({ errors: null });
+      }
+    });
   }
 
   render() {
