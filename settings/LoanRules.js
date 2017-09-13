@@ -1,90 +1,112 @@
 import React from 'react';
-import {
-  Paneset,
-  Pane,
-  Button,
-  Row,
-  Col
-} from '@folio/stripes-components';
+import PropTypes from 'prop-types';
+import { Paneset, Pane } from '@folio/stripes-components';
+import fetch from 'isomorphic-fetch';
 
 import LoanRulesForm from './lib/RuleEditor/LoanRulesForm';
 
-const LoanRules = (props) => {
-  // static placeholder data...
-  const code = `# Setup / this applies to all rules
-\tfallback-policy : no-circulation 
-\tpriority: t, a, b, c, s, m, g
+// this represents a basic schema for what the loneRulesEditor expects...
+const editorDefaultProps = {
+  // whether or not to show the 'autocomplete' widget (pro mode)
+  showAssist: true,
+  completionLists: {
+    Campus: ['main'],
+    'Patron Groups': ['visitor', 'off-campus', 'on-campus', 'undergrad'],
+    Branch: ['main', 'downtown'],
+    'Material Type': ['book', 'cd', 'dvd', 'newspaper', 'streaming-subscription', 'rare'],
+    'Loan Type': ['special-items', 'rare'],
+    Shelf: ['periodicals'],
+  },
+  policies: [ // these will probably include other info about the policy - perhaps a URL or other info about the rule.
+    { name: 'policy-a' },
+    { name: 'policy-b' },
+    { name: 'policy-c' },
+    { name: 'policy-d' },
+    { name: 'in-house' },
+    { name: 'no-circulation' },
+    { name: 'locked' },
+  ],
+  typeMapping: { // these letters are hard-wired atm... but the labels have to correspond with completion lists.
+    g: 'Patron Groups',
+    a: 'Campus',
+    b: 'Branch',
+    c: 'Collection',
+    m: 'Material Type',
+    s: 'Shelf',
+    t: 'Loan Type',
+  },
+};
 
-# All branches
-\tm newspaper: policy-c
-\tm streaming-subscription: policy-c
-\t\tg visitor: in-house
-\t\tg undergrad: in-house
-\tm book cd dvd + t special-items : in-house
+class LoanRules extends React.Component {
 
-# General rules for main and music branch
-\tm newspaper: policy-d
-\tt special-items
-\t\tg !visitor: policy-d
-\t\tg visitor: in-house
+  static propTypes = {
+    resources: PropTypes.object.isRequired,
+    stripes: PropTypes.object.isRequired,
+  };
 
-# Exceptions across all branches
-\tg all + t rare + m all + s all : locked`;
-
-  // this represents a basic schema for what the loneRulesEditor expects...
-  const editorProps = {
-    // whether or not to show the 'autocomplete' widget (pro mode)
-    showAssist: true,
-    completionLists: {
-      'Campus': ['main'],
-      'Patron Groups': ['visitor', 'off-campus', 'on-campus', 'undergrad'],
-      'Branch': ['main', 'downtown'],
-      'Material Type': ['book', 'cd', 'dvd', 'newspaper', 'streaming-subscription', 'rare'],
-      'Loan Type': ['special-items', 'rare'],
-      'Shelf': ['periodicals'],
+  static manifest = Object.freeze({
+    loanRules: {
+      type: 'okapi',
+      path: 'circulation/loan-rules',
     },
-    policies: [ // these will probably include other info about the policy - perhaps a URL or other info about the rule.
-      { name: 'policy-a' },
-      { name: 'policy-b' },
-      { name: 'policy-c' },
-      { name: 'policy-d' },
-      { name: 'in-house' },
-      { name: 'no-circulation' },
-      { name: 'locked' },
-    ],
-    typeMapping: { // these letters are hard-wired atm... but the labels have to correspond with completion lists. 
-      'g': 'Patron Groups',
-      'a': 'Campus',
-      'b': 'Branch',
-      'c': 'Collection',
-      'm': 'Material Type',
-      's': 'Shelf',
-      't': 'Loan Type',
-    },
-    // the editor will place these appropriately.
-    // errors: [{ line: 9, message: 'There\'s something amiss on line 9!' },],
+  });
+
+  constructor(props) {
+    super(props);
+    this.onSubmit = this.onSubmit.bind(this);
+    this.state = {};
   }
 
-  const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+  onSubmit(values) {
+    const loanRules = values.loanRulesCode.replace(/\t/g, '    ');
+    this.saveLoanRules(loanRules);
+  }
 
-  function onSubmit(values) {
-    return sleep(1000) // simulate server latency
-    .then(() => {
-        throw new SubmissionError({ loanRulesCode: [{ line: 9, message: 'There\'s something amiss on line 9!' }] , _error: 'Ruleset contains errors.' })
+  getLoanRulesCode() {
+    const loanRules = (this.props.resources.loanRules || {}).records || [];
+    const loanRulesCode = (loanRules.length) ? loanRules[0].loanRulesAsTextFile : '';
+    return loanRulesCode.replace('    ', '\t');
+  }
+
+  // TODO: refactor to use mutator after PUT is changed on the server or stripes-connect supports
+  // custom PUT requests without the id attached to the end of the URL.
+  saveLoanRules(loanRulesAsTextFile) {
+    const stripes = this.props.stripes;
+    const headers = Object.assign({}, {
+      'X-Okapi-Tenant': stripes.okapi.tenant,
+      'X-Okapi-Token': stripes.store.getState().okapi.token,
+      'Content-Type': 'application/json',
+    });
+
+    const options = {
+      method: 'PUT',
+      headers,
+      body: JSON.stringify({ loanRulesAsTextFile }),
+    };
+
+    this.setState({ errors: null });
+    return fetch(`${stripes.okapi.url}/circulation/loan-rules`, options).then((resp) => {
+      if (resp.status >= 400) {
+        resp.json().then(json => this.setState({ errors: [json] }));
+      }
     });
   }
 
-  return (
-    <Paneset>
-      <Pane paneTitle="Loan Rules Editor" defaultWidth="fill">
-        <LoanRulesForm
-          handleSubmit={onSubmit}
-          initialValues={{ 'loanRulesCode': code }}
-          editorProps={editorProps}
-        />
-      </Pane>
-    </Paneset>
-  );
+  render() {
+    const loanRulesCode = this.getLoanRulesCode();
+    const editorProps = Object.assign({}, editorDefaultProps, { errors: this.state.errors });
+    return (
+      <Paneset>
+        <Pane paneTitle="Loan Rules Editor" defaultWidth="fill">
+          <LoanRulesForm
+            onSubmit={this.onSubmit}
+            initialValues={{ loanRulesCode }}
+            editorProps={editorProps}
+          />
+        </Pane>
+      </Paneset>
+    );
+  }
 }
 
 export default LoanRules;

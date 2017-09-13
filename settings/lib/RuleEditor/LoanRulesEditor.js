@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import isEqual from 'lodash/isEqual';
 import PropTypes from 'prop-types';
 import Codemirror from 'codemirror';
-import CodeMirror from 'react-codemirror';
+import CodeMirror from 'react-codemirror2';
 import initLoanRulesCMM from './LoanRulesCMM';
 import 'codemirror/addon/fold/foldcode';
 import initFoldRules from './fold-rules';
@@ -35,7 +35,7 @@ const propTypes = {
   policies: PropTypes.arrayOf(PropTypes.object),
 
   /*
-    values that could be applied to selections of typeGroups. Defaults to: 
+    values that could be applied to selections of typeGroups. Defaults to:
     {
       'g': 'Patron Groups',
       'a': 'Campus',
@@ -56,7 +56,7 @@ const propTypes = {
   errors: PropTypes.arrayOf(
     PropTypes.shape(
       {
-        message:PropTypes.string, 
+        message:PropTypes.string,
         line:PropTypes.number
       })),
   showAssist: PropTypes.bool,
@@ -84,7 +84,7 @@ function moveFocusDown(cm, handle){
     const widget = cm.state.completionActive.widget;
     const node = widget.hints.childNodes[0];
     node.className += " " + ACTIVE_HINT_ELEMENT_CLASS;
-    widget.selectedHint = 0; 
+    widget.selectedHint = 0;
     Codemirror.signal(widget.data, "select", widget.data.list[0], node);
   } else {
     handle.moveFocus(1);
@@ -101,7 +101,7 @@ function moveFocusUp(cm, handle) {
     const node = widget.hints.childNodes[handle.data.selectedHint];
     if (node) node.className = node.className.replace(" " + ACTIVE_HINT_ELEMENT_CLASS, "");
     handle.data.selectedHint = -1;
-    widget.selectedHint = -1; 
+    widget.selectedHint = -1;
     cm.focus();
   } else {
     handle.moveFocus(-1);
@@ -126,7 +126,7 @@ function handleTab(cm, handle) {
 
     const doc = cm.getDoc();
     const cursor = doc.getCursor(); // gets the line number in the cursor position
-    
+
     doc.replaceRange('\t', cursor); // adds a new line
   } else {
     handle.pick();
@@ -183,7 +183,7 @@ class LoanRulesEditor extends React.Component {
 
     // keep track of errWidgets for clearing later...
     this.errWidgets = [];
-    
+
     // track sections hidden via filter...
     this.filteredSections = [];
   }
@@ -210,6 +210,10 @@ class LoanRulesEditor extends React.Component {
     if(nextProps.filter !== this.props.filter) {
       this.filterRules(nextProps.filter);
     }
+
+    if (nextProps.code !== this.props.code) {
+      this.setState({ code: nextProps.code });
+    }
   }
 
   getInitialState() {
@@ -227,7 +231,7 @@ class LoanRulesEditor extends React.Component {
     const openTri = generateOpen();
     const foldedTri = generateFolded();
 
-		return  {
+    return  {
       codeMirrorOptions: {
         lineNumbers: true,
         lineWrapping: true,
@@ -246,16 +250,15 @@ class LoanRulesEditor extends React.Component {
           indicatorFolded: foldedTri,
         },
         gutters: ["CodeMirror-linenumbers", "LoanRules-foldgutter"],
-	  	},
+      },
       code: this.props.code,
     }
-	}
+  }
 
   componentDidMount() {
-    this.cm = this.cmComponent.getCodeMirror();
-    const codeMirror = this.cmComponent.getCodeMirrorInstance();
+    this.cm = this.cmComponent.editor;
     //set up hinting
-    loanRulesHint(codeMirror);
+    loanRulesHint(Codemirror);
 
     // prettymuch always show the auto-complete.
     this.cm.on('cursorActivity', this.showHelp);
@@ -274,19 +277,19 @@ class LoanRulesEditor extends React.Component {
   }
 
   filterRules(filter) {
-    
+
     this.filteredSections.forEach((fs) => {
       fs.clear();
     });
     if ( filter === '' ) { return; }
-    
+
     // scan rows with '#'
     const res = [];
     const re = new RegExp(filter,'i');
     let found = true;
     const rng = {};
     this.cm.eachLine((lh) => {
-      // test rule line for filer string... if 
+      // test rule line for filer string... if
       if(/^\s*#/.test(lh.text)){
         if(!re.test(lh.text)){
           if (found) {
@@ -365,8 +368,6 @@ class LoanRulesEditor extends React.Component {
     // * component knows the editor is in focus(updates before the actual editor knows)
     if(cm.state.completionActive || !this.props.showAssist || !this.editorFocused) return;
 
-    const codeMirror = this.cmComponent.getCodeMirrorInstance();
-
     const hintOptions = {
       completeSingle: false,
       completeOnSingleClick: true,
@@ -384,7 +385,7 @@ class LoanRulesEditor extends React.Component {
       }
     };
 
-    codeMirror.showHint(this.cm, codeMirror.hint.loanRulesCMM, hintOptions);
+    Codemirror.showHint(this.cm, Codemirror.hint.loanRulesCMM, hintOptions);
   }
 
   // updateCode(newCode) {
@@ -400,8 +401,9 @@ class LoanRulesEditor extends React.Component {
         className={css.codeMirrorFullScreen}
         ref={(ref) => { this.cmComponent = ref; }}
         value={this.state.code}
-        onFocusChange={this.handleFocus}
-        onChange={this.props.onChange}
+        onFocus={(editor, event) => this.handleFocus(true)}
+        onBlur={(editor, event) => this.handleFocus(false)}
+        onChange={(editor, metadata, value) => this.props.onChange(value)}
         options={this.state.codeMirrorOptions}
       />
     );

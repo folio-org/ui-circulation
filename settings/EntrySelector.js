@@ -50,6 +50,7 @@ class EntrySelector extends React.Component {
     if (this.state.creatingEntry) {
       const entryDiffs = _.differenceBy(this.props.allEntries, prevProps.allEntries, 'id');
       this.props.history.push(`${this.props.match.path}/${entryDiffs[0].id}`);
+      // eslint-disable-next-line react/no-did-update-set-state
       this.setState({
         creatingEntry: false,
       });

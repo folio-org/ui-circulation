@@ -2,7 +2,7 @@ import React from 'react';
 import {
   Row,
   Col,
-  Button, 
+  Button,
   TextField,
   Icon,
 } from '@folio/stripes-components';
@@ -61,6 +61,7 @@ class LoanRulesForm extends React.Component {
         <Icon icon='clearX'/>
       </Button>
     )
+
     return (
       <form id="form-loan-rules" style={containerStyle} onSubmit={handleSubmit}>
           <Row end='xs'>
@@ -72,7 +73,7 @@ class LoanRulesForm extends React.Component {
             </Col>
           </Row>
           <div style={editorWrapStyle}>
-            <Field component={LoanRulesField} name='loanRulesCode'{...editorProps} filter={this.state.ruleFilter}/>
+            <Field component={LoanRulesField} name="loanRulesCode" {...editorProps} filter={this.state.ruleFilter}/>
           </div>
       </form>
     )
@@ -82,5 +83,6 @@ class LoanRulesForm extends React.Component {
 export default reduxForm(
   {
     form: 'loanRulesForm',
+    enableReinitialize: true,
   }
 )(LoanRulesForm);
