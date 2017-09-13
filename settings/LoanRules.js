@@ -84,21 +84,10 @@ class LoanRules extends React.Component {
       body: JSON.stringify({ loanRulesAsTextFile }),
     };
 
+    this.setState({ errors: null });
     return fetch(`${stripes.okapi.url}/circulation/loan-rules`, options).then((resp) => {
       if (resp.status >= 400) {
-        // TODO: replace with JSON errors when CIRC-34 is ready on the server
-        resp.text().then((text) => {
-          const message = text.replace(/^(.+?):\s+/, '').split(' in line')[0];
-          let line;
-          try {
-            line = parseInt(text.match(/ in line ([0-9]+)/, '')[1], 10);
-          } catch (e) {
-            line = 0;
-          }
-          this.setState({ errors: [{ line, message }] });
-        });
-      } else {
-        this.setState({ errors: null });
+        resp.json().then(json => this.setState({ errors: [json] }));
       }
     });
   }
