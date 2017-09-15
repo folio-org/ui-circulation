@@ -2,6 +2,8 @@
 
 ## 1.2.0 (IN PROGRESS)
 
+* Setup Loan Rules crud v1. For UICIRC-5
+
 ## [1.1.1](https://github.com/folio-org/ui-circulation/tree/v1.1.1) (2017-09-02)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v1.1.0...v1.1.1)
 
