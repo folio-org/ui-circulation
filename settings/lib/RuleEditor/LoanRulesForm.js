@@ -66,7 +66,7 @@ class LoanRulesForm extends React.Component {
       <form id="form-loan-rules" style={containerStyle} onSubmit={handleSubmit}>
           <Row end='xs'>
             <Col xs={3}>
-              <TextField rounded value={this.state.ruleFilter} onChange={this.filterRules} placeholder="filter rules" endControl={(this.state.ruleFilter !== '') ? clearFilterButton : null}/>
+              <Field name="ruleFilter" component={TextField} rounded value={this.state.ruleFilter} onChange={this.filterRules} placeholder="filter rules" endControl={(this.state.ruleFilter !== '') ? clearFilterButton : null} />
             </Col>
             <Col xs={3}>
               <Button fullWidth id="clickable-save-loan-rules" type="submit" disabled={pristine || submitting }>Save</Button>
