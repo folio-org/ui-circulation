@@ -18,18 +18,11 @@ class LoanRulesForm extends React.Component {
     }
 
     this.filterRules = this.filterRules.bind(this);
-    this.clearFilter = this.clearFilter.bind(this);
   }
 
   filterRules(e) {
     this.setState({
       ruleFilter: e.target.value,
-    });
-  }
-
-  clearFilter() {
-    this.setState({
-      ruleFilter: '',
     });
   }
 
@@ -52,21 +45,11 @@ class LoanRulesForm extends React.Component {
       flexGrow: 2,
     }
 
-    const clearFilterButton=(
-      <Button
-        buttonStyle='fieldControl'
-        title='Clear rule filters'
-        onClick={this.clearFilter}
-      >
-        <Icon icon='clearX'/>
-      </Button>
-    )
-
     return (
       <form id="form-loan-rules" style={containerStyle} onSubmit={handleSubmit}>
           <Row end='xs'>
             <Col xs={3}>
-              <Field name="ruleFilter" component={TextField} rounded value={this.state.ruleFilter} onChange={this.filterRules} placeholder="filter rules" endControl={(this.state.ruleFilter !== '') ? clearFilterButton : null} />
+              <Field name="ruleFilter" component={TextField} rounded value={this.state.ruleFilter} onChange={this.filterRules} validationEnabled={false} placeholder="filter rules" />
             </Col>
             <Col xs={3}>
               <Button fullWidth id="clickable-save-loan-rules" type="submit" disabled={pristine || submitting }>Save</Button>
