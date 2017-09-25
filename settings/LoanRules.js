@@ -10,12 +10,9 @@ const editorDefaultProps = {
   // whether or not to show the 'autocomplete' widget (pro mode)
   showAssist: true,
   completionLists: {
-    Campus: ['main'],
-    'Patron Groups': ['visitor', 'off-campus', 'on-campus', 'undergrad'],
-    Branch: ['main', 'downtown'],
+    'Patron Group': ['visitor', 'off-campus', 'on-campus', 'undergrad'],
     'Material Type': ['book', 'cd', 'dvd', 'newspaper', 'streaming-subscription', 'rare'],
     'Loan Type': ['special-items', 'rare'],
-    Shelf: ['periodicals'],
   },
   policies: [ // these will probably include other info about the policy - perhaps a URL or other info about the rule.
     { name: 'policy-a' },
@@ -27,12 +24,8 @@ const editorDefaultProps = {
     { name: 'locked' },
   ],
   typeMapping: { // these letters are hard-wired atm... but the labels have to correspond with completion lists.
-    g: 'Patron Groups',
-    a: 'Campus',
-    b: 'Branch',
-    c: 'Collection',
+    g: 'Patron Group',
     m: 'Material Type',
-    s: 'Shelf',
     t: 'Loan Type',
   },
 };
