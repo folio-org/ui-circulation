@@ -10,9 +10,9 @@ const editorDefaultProps = {
   // whether or not to show the 'autocomplete' widget (pro mode)
   showAssist: true,
   completionLists: {
-    'Patron Group': ['visitor', 'off-campus', 'on-campus', 'undergrad'],
-    'Material Type': ['book', 'cd', 'dvd', 'newspaper', 'streaming-subscription', 'rare'],
-    'Loan Type': ['special-items', 'rare'],
+    'Patron Groups': [],
+    'Material Type': [],
+    'Loan Type': [],
   },
   policies: [ // these will probably include other info about the policy - perhaps a URL or other info about the rule.
     { name: 'policy-a' },
@@ -24,7 +24,7 @@ const editorDefaultProps = {
     { name: 'locked' },
   ],
   typeMapping: { // these letters are hard-wired atm... but the labels have to correspond with completion lists.
-    g: 'Patron Group',
+    g: 'Patron Groups',
     m: 'Material Type',
     t: 'Loan Type',
   },
@@ -42,12 +42,32 @@ class LoanRules extends React.Component {
       type: 'okapi',
       path: 'circulation/loan-rules',
     },
+    patronGroups: {
+      type: 'okapi',
+      path: 'groups',
+      records: 'usergroups',
+    },
+    materialTypes: {
+      type: 'okapi',
+      path: 'material-types',
+      records: 'mtypes',
+    },
+    loanTypes: {
+      type: 'okapi',
+      path: 'loan-types',
+      records: 'loantypes',
+    },
   });
 
   constructor(props) {
     super(props);
     this.onSubmit = this.onSubmit.bind(this);
     this.state = {};
+  }
+
+  shouldComponentUpdate(nextProps) {
+    const { resources: { patronGroups, materialTypes, loanTypes } } = nextProps;
+    return patronGroups.hasLoaded && materialTypes.hasLoaded && loanTypes.hasLoaded;
   }
 
   onSubmit(values) {
@@ -59,6 +79,19 @@ class LoanRules extends React.Component {
     const loanRules = (this.props.resources.loanRules || {}).records || [];
     const loanRulesCode = (loanRules.length) ? loanRules[0].loanRulesAsTextFile : '';
     return loanRulesCode.replace('    ', '\t');
+  }
+
+  getEditorProps() {
+    const { resources: { patronGroups, materialTypes, loanTypes } } = this.props;
+
+    return Object.assign({}, editorDefaultProps, {
+      errors: this.state.errors,
+      completionLists: {
+        'Patron Groups': patronGroups.records.map(g => g.group),
+        'Material Type': materialTypes.records.map(m => m.name),
+        'Loan Type': loanTypes.records.map(l => l.name),
+      },
+    });
   }
 
   // TODO: refactor to use mutator after PUT is changed on the server or stripes-connect supports
@@ -86,8 +119,13 @@ class LoanRules extends React.Component {
   }
 
   render() {
+    if (!this.props.resources.patronGroups) {
+      return (<div />);
+    }
+
     const loanRulesCode = this.getLoanRulesCode();
-    const editorProps = Object.assign({}, editorDefaultProps, { errors: this.state.errors });
+    const editorProps = this.getEditorProps();
+
     return (
       <Paneset>
         <Pane paneTitle="Loan Rules Editor" defaultWidth="fill">
