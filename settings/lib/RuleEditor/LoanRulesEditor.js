@@ -1,4 +1,5 @@
 /* eslint-disable */
+import _ from 'lodash';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import isEqual from 'lodash/isEqual';
@@ -212,7 +213,9 @@ class LoanRulesEditor extends React.Component {
     }
 
     if (nextProps.code !== this.props.code) {
-      this.setState({ code: nextProps.code });
+      this.setState(prevState =>
+        Object.assign(_.cloneDeep(prevState), { code: nextProps.code })
+      );
     }
   }
 
@@ -395,7 +398,6 @@ class LoanRulesEditor extends React.Component {
 	// }
 
   render() {
-
     return(
       <CodeMirror
         className={css.codeMirrorFullScreen}
