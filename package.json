@@ -69,7 +69,8 @@
     ]
   },
   "scripts": {
-    "lint": "eslint **/*.js --ignore-pattern node_modules/ || true"
+    "lint": "eslint **/*.js --ignore-pattern node_modules/",
+    "test": "echo 'placeholder. no tests implemented'"
   },
   "devDependencies": {
     "babel-core": "^6.17.0",
