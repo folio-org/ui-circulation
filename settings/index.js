@@ -9,7 +9,7 @@ const pages = [
     route: 'loan-policies',
     label: 'Loan policies',
     component: LoanPolicySettings,
-    perm: 'settings.loan-policies.all',
+    perm: 'ui-circulation.settings.loan-policies',
   },
   {
     route: 'loan-rules',
