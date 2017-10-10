@@ -15,7 +15,7 @@ const pages = [
     route: 'loan-rules',
     label: 'Loan rules',
     component: LoanRules,
-    perm: 'settings.loan-rules.all',
+    perm: 'ui-circulation.settings.loan-rules',
   },
 ];
 
