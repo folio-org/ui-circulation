@@ -8,7 +8,7 @@ import LoanPolicyDetail from './LoanPolicyDetail';
 class LoanPolicySettings extends React.Component {
 
   static propTypes = {
-    data: PropTypes.object.isRequired,
+    resources: PropTypes.object.isRequired,
     mutator: PropTypes.shape({
       loanPolicies: PropTypes.shape({
         POST: PropTypes.func,
@@ -50,7 +50,8 @@ class LoanPolicySettings extends React.Component {
   }
 
   render() {
-    const policies = _.sortBy(this.props.data.loanPolicies, ['name']);
+    const loanPolicies = (this.props.resources.loanPolicies || {}).records || [];
+    const policies = _.sortBy(loanPolicies, ['name']);
 
     return (
       <EntrySelector
