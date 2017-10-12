@@ -49,6 +49,9 @@ class EntrySelector extends React.Component {
     // If a new item has been added to the list, push it to history to gain focus
     if (this.state.creatingEntry) {
       const entryDiffs = _.differenceBy(this.props.allEntries, prevProps.allEntries, 'id');
+
+      if (!entryDiffs.length) return;
+
       this.props.history.push(`${this.props.match.path}/${entryDiffs[0].id}`);
       // eslint-disable-next-line react/no-did-update-set-state
       this.setState({

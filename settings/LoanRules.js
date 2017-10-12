@@ -14,15 +14,7 @@ const editorDefaultProps = {
     'Material Type': [],
     'Loan Type': [],
   },
-  policies: [ // these will probably include other info about the policy - perhaps a URL or other info about the rule.
-    { name: 'policy-a' },
-    { name: 'policy-b' },
-    { name: 'policy-c' },
-    { name: 'policy-d' },
-    { name: 'in-house' },
-    { name: 'no-circulation' },
-    { name: 'locked' },
-  ],
+  policies: [],
   typeMapping: { // these letters are hard-wired atm... but the labels have to correspond with completion lists.
     g: 'Patron Groups',
     m: 'Material Type',
@@ -57,6 +49,11 @@ class LoanRules extends React.Component {
       path: 'loan-types',
       records: 'loantypes',
     },
+    loanPolicies: {
+      type: 'okapi',
+      records: 'loanPolicies',
+      path: 'loan-policy-storage/loan-policies',
+    },
   });
 
   constructor(props) {
@@ -66,8 +63,11 @@ class LoanRules extends React.Component {
   }
 
   shouldComponentUpdate(nextProps) {
-    const { resources: { patronGroups, materialTypes, loanTypes } } = nextProps;
-    return patronGroups.hasLoaded && materialTypes.hasLoaded && loanTypes.hasLoaded;
+    const { resources: { patronGroups, materialTypes, loanTypes, loanPolicies } } = nextProps;
+    return !patronGroups.isPending &&
+      !materialTypes.isPending &&
+      !loanTypes.isPending &&
+      !loanPolicies.isPending;
   }
 
   onSubmit(values) {
@@ -82,10 +82,11 @@ class LoanRules extends React.Component {
   }
 
   getEditorProps() {
-    const { resources: { patronGroups, materialTypes, loanTypes } } = this.props;
+    const { resources: { patronGroups, materialTypes, loanTypes, loanPolicies } } = this.props;
 
     return Object.assign({}, editorDefaultProps, {
       errors: this.state.errors,
+      policies: loanPolicies.records.map(p => ({ name: p.name })),
       completionLists: {
         'Patron Groups': patronGroups.records.map(g => g.group),
         'Material Type': materialTypes.records.map(m => m.name),
