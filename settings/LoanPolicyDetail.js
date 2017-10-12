@@ -124,7 +124,7 @@ class LoanPolicyDetail extends React.Component {
       <div>
         {/* Primary information: policy name and description, plus delete button */}
         <h2 style={{ marginTop: '0' }}>About</h2>
-        <Field label="Policy name" name="name" component={TextField} required fullWidth rounded validate={this.validateField} onBlur={this.saveChanges} />
+        <Field label="Policy name" autoFocus name="name" component={TextField} required fullWidth rounded validate={this.validateField} onBlur={this.saveChanges} />
         <Field label="Policy description" name="description" component={TextArea} fullWidth rounded validate={this.validateField} onBlur={this.saveChanges} />
         <Button title="Delete policy" onClick={this.beginDelete} disabled={this.state.confirmDelete}>Delete policy</Button>
         {this.state.confirmDelete && <div>

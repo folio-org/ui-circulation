@@ -6,6 +6,7 @@
 * Add Real Loan Rule Params. Fixes UICIRC-17.
 * Support permission for loan-policy maintenance. Fixes UICIRC-21.
 * Replace `data` with `resources` Fixes UICIRC-25.
+* Focus on name field for a newly-created loan policy. Fixes UICIRC-19.
 
 ## [1.1.1](https://github.com/folio-org/ui-circulation/tree/v1.1.1) (2017-09-02)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v1.1.0...v1.1.1)
