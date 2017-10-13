@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 
-import EntrySelector from './EntrySelector';
+import EntrySelector from '@folio/stripes-components/lib/EntrySelector';
 import LoanPolicyDetail from './LoanPolicyDetail';
 
 class LoanPolicySettings extends React.Component {
