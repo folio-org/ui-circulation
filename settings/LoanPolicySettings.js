@@ -1,9 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
-
+import MultiColumnList from '@folio/stripes-components/lib/MultiColumnList';
 import EntrySelector from '@folio/stripes-components/lib/EntrySelector';
+import Route from 'react-router-dom/Route';
+import PaneMenu from '@folio/stripes-components/lib/PaneMenu';
+import Pane from '@folio/stripes-components/lib/Pane';
+import Paneset from '@folio/stripes-components/lib/Paneset';
+import Button from '@folio/stripes-components/lib/Button';
 import LoanPolicyDetail from './LoanPolicyDetail';
+
 
 class LoanPolicySettings extends React.Component {
 
@@ -15,6 +21,13 @@ class LoanPolicySettings extends React.Component {
         DELETE: PropTypes.func,
         GET: PropTypes.func,
       }),
+    }).isRequired,
+    history: PropTypes.shape({
+      push: PropTypes.func.isRequired,
+    }).isRequired,
+    location: PropTypes.shape({
+      pathname: PropTypes.string.isRequired,
+      search: PropTypes.string,
     }).isRequired,
   };
 
@@ -29,10 +42,27 @@ class LoanPolicySettings extends React.Component {
   constructor(props) {
     super(props);
 
-    this.createNewPolicy = this.createNewPolicy.bind(this);
+    this.createNew = this.createNew.bind(this);
+    this.onSelectRow = this.onSelectRow.bind(this);
+    this.onClickAddNew = this.onClickAddNew.bind(this);
+    this.onCloseDetails = this.onCloseDetails.bind(this);
+    this.connectedLoanPolicyDetail = props.stripes.connect(LoanPolicyDetail);
+
+    const pathname = this.props.location.pathname;
+    const selectedItem = (/loan-policies\/(.*)$/.test(pathname)) ? /loan-policies\/(.*)$/.exec(pathname)[1] : null;
+
+    this.state = {
+      selectedItem
+    };
   }
 
-  createNewPolicy() {
+  onSelectRow(e, meta) {
+    const policyId = meta.id;
+    this.setState({ selectedItem: policyId });
+    this.props.history.push(`${this.props.match.path}/${policyId}`);
+  }
+
+  createNew() {
     this.props.mutator.loanPolicies.POST({
       name: 'Untitled',
       loanable: true,
@@ -49,20 +79,77 @@ class LoanPolicySettings extends React.Component {
     });
   }
 
-  render() {
+  onClickAddNew() {
+  }
+
+  onCloseDetails() {
+    this.setState({ selectedItem: {} });
+    this.props.history.push(`${this.props.match.path}`);
+  }
+
+  getSelectedPolicy() {
     const loanPolicies = (this.props.resources.loanPolicies || {}).records || [];
-    const policies = _.sortBy(loanPolicies, ['name']);
+    if (loanPolicies.length && this.state.selectedItem) {
+      return loanPolicies.filter(p => p.id == this.state.selectedItem)[0];
+    }
+  }
+
+  render() {
+    const { stripes, resources: { loanPolicies } } = this.props;
+    const records = (loanPolicies || {}).records || [];
+    const policies = _.sortBy(records, ['name']);
+    const count = loanPolicies && loanPolicies.hasLoaded ? loanPolicies.other.totalRecords : '';
+    const resultsFormatter = {
+      name: policy => policy.name,
+    };
+
+    const loanPolicy = this.getSelectedPolicy();
+    const addNewButton = (
+      <PaneMenu>
+        <Button
+          id="clickable-newpolicy"
+          title="Add New User"
+          onClick={this.onClickAddNew}
+          buttonStyle="primary paneHeaderNewButton">+ New
+        </Button>
+      </PaneMenu>
+    );
 
     return (
-      <EntrySelector
-        {...this.props}
-        detailComponent={LoanPolicyDetail}
-        allEntries={policies}
-        entryCreator={this.createNewPolicy}
-        parentMutator={this.props.mutator}
-        paneTitle="Loan policies"
-        addButtonTitle="Add loan policy"
-      />
+      <Paneset>
+        <Pane
+          id="policies"
+          defaultWidth="fill"
+          paneTitle={
+            <div style={{ textAlign: 'center' }}>
+              <strong>Loan policies</strong>
+              <div>
+                <em>{stripes.intl.formatMessage({ id: 'ui-users.resultCount' }, { count })}</em>
+              </div>
+            </div>
+          }
+          lastMenu={addNewButton}
+          noOverflow>
+          <MultiColumnList
+            contentData={policies}
+            selectedRow={{ id: this.state.selectedItem }}
+            rowMetadata={['id', 'name']}
+            formatter={resultsFormatter}
+            onRowClick={this.onSelectRow}
+            visibleColumns={['name']}
+            isEmptyMessage={`No loan policies found`}
+            loading={loanPolicies ? loanPolicies.isPending : false}
+            autosize
+            virtualize
+            ariaLabel={'Loan policies'}
+          />
+        </Pane>
+
+        <Route
+          path={`${this.props.match.path}/:policyId`}
+          render={props => <this.connectedLoanPolicyDetail loanPolicy={loanPolicy} stripes={stripes} okapi={this.okapi} paneWidth="44%" onClose={this.onCloseDetails} {...props} />}
+        />
+      </Paneset>
     );
   }
 
