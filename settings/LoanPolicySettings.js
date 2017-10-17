@@ -49,7 +49,9 @@ class LoanPolicySettings extends React.Component {
     this.connectedLoanPolicyDetail = props.stripes.connect(LoanPolicyDetail);
 
     const pathname = this.props.location.pathname;
-    const selectedItem = (/loan-policies\/(.*)$/.test(pathname)) ? /loan-policies\/(.*)$/.exec(pathname)[1] : null;
+    const selectedItem = (/loan-policies\/(.*)$/.test(pathname))
+      ? /loan-policies\/(.*)$/.exec(pathname)[1]
+      : null;
 
     this.state = {
       selectedItem
@@ -115,25 +117,27 @@ class LoanPolicySettings extends React.Component {
       </PaneMenu>
     );
 
+    const paneTitle = (
+      <div style={{ textAlign: 'center' }}>
+        <strong>Loan policies</strong>
+        <div>
+          <em>{stripes.intl.formatMessage({ id: 'ui-users.resultCount' }, { count })}</em>
+        </div>
+      </div>
+    );
+
     return (
       <Paneset>
         <Pane
           id="policies"
           defaultWidth="fill"
-          paneTitle={
-            <div style={{ textAlign: 'center' }}>
-              <strong>Loan policies</strong>
-              <div>
-                <em>{stripes.intl.formatMessage({ id: 'ui-users.resultCount' }, { count })}</em>
-              </div>
-            </div>
-          }
+          paneTitle={paneTitle}
           lastMenu={addNewButton}
           noOverflow>
           <MultiColumnList
             contentData={policies}
             selectedRow={{ id: this.state.selectedItem }}
-            rowMetadata={['id', 'name']}
+            rowMetadata={['id']}
             formatter={resultsFormatter}
             onRowClick={this.onSelectRow}
             visibleColumns={['name']}
@@ -147,7 +151,7 @@ class LoanPolicySettings extends React.Component {
 
         <Route
           path={`${this.props.match.path}/:policyId`}
-          render={props => <this.connectedLoanPolicyDetail loanPolicy={loanPolicy} stripes={stripes} okapi={this.okapi} paneWidth="44%" onClose={this.onCloseDetails} {...props} />}
+          render={props => <this.connectedLoanPolicyDetail policy={loanPolicy} stripes={stripes} okapi={this.okapi} paneWidth="60%" onClose={this.onCloseDetails} {...props} />}
         />
       </Paneset>
     );
