@@ -2,7 +2,6 @@ import _ from 'lodash';
 import React from 'react';
 import PropTypes from 'prop-types';
 import queryString from 'query-string';
-import transitionToParams from '@folio/stripes-components/util/transitionToParams';
 import Pane from '@folio/stripes-components/lib/Pane';
 import PaneMenu from '@folio/stripes-components/lib/PaneMenu';
 import KeyValue from '@folio/stripes-components/lib/KeyValue';
@@ -11,6 +10,7 @@ import Icon from '@folio/stripes-components/lib/Icon';
 import Layer from '@folio/stripes-components/lib/Layer';
 
 import { loanProfileTypes, intervalPeriods, dueDateManagementOptions, renewFromOptions } from '../constants';
+import LoanPolicyForm from './LoanPolicyForm';
 
 class LoanPolicyDetail extends React.Component {
 
@@ -19,16 +19,17 @@ class LoanPolicyDetail extends React.Component {
       hasPerm: PropTypes.func.isRequired,
       connect: PropTypes.func.isRequired,
       locale: PropTypes.string.isRequired,
-      logger: PropTypes.shape({
-        log: PropTypes.func.isRequired,
-      }).isRequired,
     }).isRequired,
     paneWidth: PropTypes.string.isRequired,
     resources: PropTypes.shape({
-
+      editMode: PropTypes.shape({
+        mode: PropTypes.bool,
+      }),
     }),
     mutator: PropTypes.shape({
-
+      editMode: PropTypes.shape({
+        replace: PropTypes.func,
+      }),
     }),
     match: PropTypes.shape({
       path: PropTypes.string.isRequired,
@@ -41,16 +42,30 @@ class LoanPolicyDetail extends React.Component {
   };
 
   static manifest = Object.freeze({
-
+    editMode: { initialValue: { mode: false } },
   });
 
   constructor(props) {
     super(props);
     this.onClickEdit = this.onClickEdit.bind(this);
+    this.onCloseEdit = this.onCloseEdit.bind(this);
   }
 
   onClickEdit() {
+    this.props.mutator.editMode.replace({ mode: true });
+  }
 
+  onUpdate() {
+
+  }
+
+  onCloseEdit(e) {
+    e.preventDefault();
+    this.props.mutator.editMode.replace({ mode: false });
+  }
+
+  getInterval(id) {
+    return _.find(intervalPeriods, intr => intr.id === parseInt(id, 10));
   }
 
   renderLoans() {
@@ -59,6 +74,15 @@ class LoanPolicyDetail extends React.Component {
     if (policy.loansPolicy && policy.loansPolicy.profileId === '2') {
       dueDateScheduleFieldLabel += ' (due date limit)';
     }
+
+    const profileId = _.get(policy, ['loansPolicy', 'profileId']);
+    const profile = _.find(loanProfileTypes, t => t.id === parseInt(profileId, 10));
+    const ddId = _.get(policy, ['loansPolicy', 'closedLibraryDueDateManagementId']);
+    const closedLibraryDueDateManagement = _.find(dueDateManagementOptions, dd => dd.id === parseInt(ddId, 10));
+    const skipClosed = (_.get(policy, ['loansPolicy', 'skipClosed'])) ? 'Yes' : 'No';
+    const periodInterval = this.getInterval(_.get(policy, ['loansPolicy', 'period', 'intervalId']));
+    const exReqPerInterval = this.getInterval(_.get(policy, ['loansPolicy', 'existingRequestsPeriod', 'intervalId']));
+    const gracePeriodInterval = this.getInterval(_.get(policy, ['loansPolicy', 'gracePeriod', 'intervalId']));
 
     return (
       <div>
@@ -70,11 +94,9 @@ class LoanPolicyDetail extends React.Component {
         <br />
         <Row>
           <Col xs={12}>
-            <KeyValue label="Loans Profile" value={_.get(policy, ['loansPolicy', 'profileId'], '-')} />
+            <KeyValue label="Loans Profile" value={_.get(profile, ['label'], '-')} />
           </Col>
         </Row>
-
-        {/* loan period - only appears when profile is "rolling" */}
         {policy.loansPolicy.profileId === '2' &&
           <div>
             <br />
@@ -82,13 +104,11 @@ class LoanPolicyDetail extends React.Component {
               <Col xs={12}>
                 <KeyValue
                   label="Loan period"
-                  value={`${_.get(policy, ['loansPolicy', 'period', 'duration'], '')} ${_.get(policy, ['loansPolicy', 'period', 'intervalId'], '-')}`} />
+                  value={`${_.get(policy, ['loansPolicy', 'period', 'duration'], '')} ${_.get(periodInterval, ['label'], '-')}`} />
               </Col>
             </Row>
           </div>
         }
-
-        {/* fixed due date schedule - appears when profile is "fixed" or "rolling", but with different labels */}
         {(policy.loansPolicy && policy.loansPolicy.profileId !== '3') &&
           <div>
             <br />
@@ -99,41 +119,33 @@ class LoanPolicyDetail extends React.Component {
             </Row>
           </div>
         }
-
-        {/* closed library due date management - Select */}
         <br />
         <Row>
           <Col xs={12}>
-            <KeyValue label="Closed library due date management" value={_.get(policy, ['loansPolicy', 'closedLibraryDueDateManagementId'], '-')} />
+            <KeyValue label="Closed library due date management" value={_.get(closedLibraryDueDateManagement, ['label'], '-')} />
           </Col>
         </Row>
-
-        {/* skip closed dates - boolean */}
         <br />
         <Row>
           <Col xs={12}>
-            <KeyValue label="Skip closed dates in intervening period" value={_.get(policy, ['loansPolicy', 'skipClosed'], '-')} />
+            <KeyValue label="Skip closed dates in intervening period" value={skipClosed} />
           </Col>
         </Row>
-
-        {/* alternate loan period */}
         <br />
         <Row>
           <Col xs={12}>
             <KeyValue
               label="Alternate loan period for items with existing requests"
-              value={`${_.get(policy, ['loansPolicy', 'existingRequestsPeriod', 'duration'], '')} ${_.get(policy, ['loansPolicy', 'existingRequestsPeriod', 'intervalId'], '')}`}
+              value={`${_.get(policy, ['loansPolicy', 'existingRequestsPeriod', 'duration'], '')} ${_.get(exReqPerInterval, ['label'], '-')}`}
             />
           </Col>
         </Row>
-
-        {/* grace period */}
         <br />
         <Row>
           <Col xs={12}>
             <KeyValue
               label="Grace period"
-              value={`${_.get(policy, ['loansPolicy', 'gracePeriod', 'duration'], '')} ${_.get(policy, ['loansPolicy', 'gracePeriod', 'intervalId'], '-')}`}
+              value={`${_.get(policy, ['loansPolicy', 'gracePeriod', 'duration'], '')} ${_.get(gracePeriodInterval, ['label'], '-')}`}
             />
           </Col>
         </Row>
@@ -174,7 +186,14 @@ class LoanPolicyDetail extends React.Component {
       : 'Alternate fixed due date schedule for renewals';
 
 
-    console.log('policy', policy);
+    const unlimited = (_.get(policy, ['renewalsPolicy', 'unlimited'])) ? 'Yes' : 'No';
+    const differentPeriod = (_.get(policy, ['renewalsPolicy', 'differentPeriod'])) ? 'Yes' : 'No';
+
+    const renewFromId = _.get(policy, ['renewalsPolicy', 'renewFromId'], 0);
+    const renewFrom = _.find(renewFromOptions, r => r.id == renewFromId);
+    const intervalId = _.get(policy, ['renewalsPolicy', 'period', 'intervalId']);
+    const interval = _.find(intervalPeriods, intr => intr.id == intervalId);
+
     return (
       <div>
         <Row>
@@ -184,7 +203,7 @@ class LoanPolicyDetail extends React.Component {
         </Row>
         <Row>
           <Col xs={12}>
-            <KeyValue label="Unlimited renewals" value={_.get(policy, ['renewalsPolicy', 'unlimited'], '-')} />
+            <KeyValue label="Unlimited renewals" value={unlimited} />
           </Col>
         </Row>
         {policy.renewalsPolicy && policy.renewalsPolicy.unlimited === false &&
@@ -192,7 +211,7 @@ class LoanPolicyDetail extends React.Component {
             <br />
             <Row>
               <Col xs={12}>
-                <KeyValue label="Number of renewals allowed" value={_.get(policy, ['renewalsPolicy', 'numberAllowed'], '-')} />
+                <KeyValue label="Number of renewals allowed" value={_.get(policy, ['renewalsPolicy', 'numberAllowed'], 0)} />
               </Col>
             </Row>
           </div>
@@ -200,13 +219,13 @@ class LoanPolicyDetail extends React.Component {
         <br />
         <Row>
           <Col xs={12}>
-            <KeyValue label="Renew from" value={_.get(policy, ['renewalsPolicy', 'renewFromId'], '-')} />
+            <KeyValue label="Renew from" value={_.get(renewFrom, ['label'], '-')} />
           </Col>
         </Row>
         <br />
         <Row>
           <Col xs={12}>
-            <KeyValue label="Renewal period different from original loan" value={_.get(policy, ['renewalsPolicy', 'differentPeriod'], '-')} />
+            <KeyValue label="Renewal period different from original loan" value={differentPeriod} />
           </Col>
         </Row>
         {(policy.renewalsPolicy && policy.renewalsPolicy.differentPeriod && policy.loansPolicy.profileId === '2') &&
@@ -214,17 +233,7 @@ class LoanPolicyDetail extends React.Component {
             <br />
             <Row>
               <Col xs={12}>
-                <KeyValue label="Alternate loan period for renewals" value={`${_.get(policy, ['renewalsPolicy', 'period', 'duration'], '')} ${_.get(policy, ['renewalsPolicy', 'period', 'intervalId'], '-')}`} />
-              </Col>
-            </Row>
-          </div>
-        }
-        {(policy.renewalsPolicy && policy.renewalsPolicy.differentPeriod && policy.loansPolicy.profileId !== '3') &&
-          <div>
-            <br />
-            <Row>
-              <Col xs={12}>
-                <KeyValue label={altRenewalScheduleLabel} value={_.get(policy, ['renewalsPolicy'], '-')} />
+                <KeyValue label="Alternate loan period for renewals" value={`${_.get(policy, ['renewalsPolicy', 'period', 'duration'])} ${_.get(interval, ['label'], '-')}`} />
               </Col>
             </Row>
           </div>
@@ -234,7 +243,9 @@ class LoanPolicyDetail extends React.Component {
   }
 
   render() {
-    const policy = (this.props.policy || {});
+    const location = this.props.location;
+    const policy = this.props.policy || {};
+    const query = location.search ? queryString.parse(location.search) : {};
     const detailMenu = (
       <PaneMenu>
         <button id="clickable-edituser" onClick={this.onClickEdit} title="Edit Loan Policy"><Icon icon="edit" />Edit</button>
@@ -248,6 +259,15 @@ class LoanPolicyDetail extends React.Component {
         {policy.loanable && this.renderLoans()}
         <hr />
         {policy.renewable && this.renderRewals()}
+
+        <Layer isOpen={this.props.resources.editMode ? this.props.resources.editMode.mode : false} label="Edit Loan Policy">
+          <LoanPolicyForm
+            initialValues={policy}
+            onSubmit={(record) => { this.onUpdate(record); }}
+            onCancel={this.onCloseEdit}
+            okapi={this.props.okapi}
+          />
+        </Layer>
       </Pane>
     );
   }
