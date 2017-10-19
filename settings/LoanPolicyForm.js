@@ -32,8 +32,6 @@ class LoanPolicyForm extends React.Component {
 
     this.state = {
       confirmDelete: false,
-      // loanable: false,
-      // renewable: false,
     };
 
     this.beginDelete = this.beginDelete.bind(this);
@@ -41,11 +39,7 @@ class LoanPolicyForm extends React.Component {
     this.validateField = this.validateField.bind(this);
   }
 
-  // TODO: This feels like an abuse of the 'validate' parameter, using it to do an
-  // immediate save instead of actual validation ....
   validateField(fieldValue, allValues) {
-    // TODO: This is a bad hack to deal with constraints that both fields of
-    // a "period" object have to exist in the record. This should be rewritten ASAP
     const period = (allValues.loansPolicy && allValues.loansPolicy.period);
     if (period && period.duration && !period.intervalId) {
       this.props.change('loansPolicy.period.intervalId', 3);
