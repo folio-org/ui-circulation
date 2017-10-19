@@ -1,15 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
-import MultiColumnList from '@folio/stripes-components/lib/MultiColumnList';
 import EntrySelector from '@folio/stripes-components/lib/EntrySelector';
-import Route from 'react-router-dom/Route';
-import PaneMenu from '@folio/stripes-components/lib/PaneMenu';
-import Pane from '@folio/stripes-components/lib/Pane';
-import Paneset from '@folio/stripes-components/lib/Paneset';
-import Button from '@folio/stripes-components/lib/Button';
-import LoanPolicyDetail from './LoanPolicyDetail';
+import Layer from '@folio/stripes-components/lib/Layer';
 
+import LoanPolicyDetail from './LoanPolicyDetail';
+import LoanPolicyForm from './LoanPolicyForm';
+
+const defaultPolicy = {
+  name: 'Untitled',
+  loanable: true,
+  loansPolicy: {
+    profileId: '2',  // TODO: update when this is switched to a GUID
+    closedLibraryDueDateManagementId: '4',  // TODO: update when this is switched to a GUID
+  },
+  renewable: true,
+  renewalsPolicy: {
+    unlimited: false,
+    renewFromId: '2', // TODO: update when this is switched to a GUID
+    differentPeriod: false,
+  },
+};
 
 class LoanPolicySettings extends React.Component {
 
@@ -21,13 +32,6 @@ class LoanPolicySettings extends React.Component {
         DELETE: PropTypes.func,
         GET: PropTypes.func,
       }),
-    }).isRequired,
-    history: PropTypes.shape({
-      push: PropTypes.func.isRequired,
-    }).isRequired,
-    location: PropTypes.shape({
-      pathname: PropTypes.string.isRequired,
-      search: PropTypes.string,
     }).isRequired,
   };
 
@@ -42,121 +46,70 @@ class LoanPolicySettings extends React.Component {
   constructor(props) {
     super(props);
 
-    this.createNew = this.createNew.bind(this);
-    this.onSelectRow = this.onSelectRow.bind(this);
-    this.onClickAddNew = this.onClickAddNew.bind(this);
-    this.onCloseDetails = this.onCloseDetails.bind(this);
-    this.connectedLoanPolicyDetail = props.stripes.connect(LoanPolicyDetail);
+    this.onAdd = this.onAdd.bind(this);
+    this.onEdit = this.onEdit.bind(this);
+    this.onRemove = this.onRemove.bind(this);
+    this.onCancel = this.onCancel.bind(this);
 
-    const pathname = this.props.location.pathname;
-    const selectedItem = (/loan-policies\/(.*)$/.test(pathname))
-      ? /loan-policies\/(.*)$/.exec(pathname)[1]
-      : null;
-
-    this.state = {
-      selectedItem
-    };
+    this.state = { editMode: false };
   }
 
-  onSelectRow(e, meta) {
-    const policyId = meta.id;
-    this.setState({ selectedItem: policyId });
-    this.props.history.push(`${this.props.match.path}/${policyId}`);
+  onAdd() {
+    this.setState({ editMode: true, editItem: defaultPolicy });
   }
 
-  createNew() {
-    this.props.mutator.loanPolicies.POST({
-      name: 'Untitled',
-      loanable: true,
-      loansPolicy: {
-        profileId: '2',  // TODO: update when this is switched to a GUID
-        closedLibraryDueDateManagementId: '4',  // TODO: update when this is switched to a GUID
-      },
-      renewable: true,
-      renewalsPolicy: {
-        unlimited: false,
-        renewFromId: '2', // TODO: update when this is switched to a GUID
-        differentPeriod: false,
-      },
-    });
+  onEdit(editItem) {
+    this.setState({ editMode: true, editItem });
   }
 
-  onClickAddNew() {
+  onRemove(policy) {
+    this.props.mutator.loanPolicies.DELETE(policy);
+    this.hideLayer();
   }
 
-  onCloseDetails() {
-    this.setState({ selectedItem: {} });
-    this.props.history.push(`${this.props.match.path}`);
+  onCancel() {
+    this.hideLayer();
   }
 
-  getSelectedPolicy() {
-    const loanPolicies = (this.props.resources.loanPolicies || {}).records || [];
-    if (loanPolicies.length && this.state.selectedItem) {
-      return loanPolicies.filter(p => p.id == this.state.selectedItem)[0];
-    }
+  onSave(policy) {
+    const action = (policy.id) ? 'PUT' : 'POST';
+    this.props.mutator.loanPolicies[action](Object.assign(defaultPolicy, policy));
+    this.hideLayer();
+  }
+
+  hideLayer() {
+    this.setState({ editMode: false });
   }
 
   render() {
-    const { stripes, resources: { loanPolicies } } = this.props;
-    const records = (loanPolicies || {}).records || [];
-    const policies = _.sortBy(records, ['name']);
-    const count = loanPolicies && loanPolicies.hasLoaded ? loanPolicies.other.totalRecords : '';
-    const resultsFormatter = {
-      name: policy => policy.name,
-    };
-
-    const loanPolicy = this.getSelectedPolicy();
-    const addNewButton = (
-      <PaneMenu>
-        <Button
-          id="clickable-newpolicy"
-          title="Add New User"
-          onClick={this.onClickAddNew}
-          buttonStyle="primary paneHeaderNewButton">+ New
-        </Button>
-      </PaneMenu>
-    );
-
-    const paneTitle = (
-      <div style={{ textAlign: 'center' }}>
-        <strong>Loan policies</strong>
-        <div>
-          <em>{stripes.intl.formatMessage({ id: 'ui-users.resultCount' }, { count })}</em>
-        </div>
-      </div>
-    );
+    const loanPolicies = (this.props.resources.loanPolicies || {}).records || [];
+    const policies = _.sortBy(loanPolicies, ['name']);
+    const container = document.getElementById('ModuleContainer');
 
     return (
-      <Paneset>
-        <Pane
-          id="policies"
-          defaultWidth="fill"
-          paneTitle={paneTitle}
-          lastMenu={addNewButton}
-          noOverflow>
-          <MultiColumnList
-            contentData={policies}
-            selectedRow={{ id: this.state.selectedItem }}
-            rowMetadata={['id']}
-            formatter={resultsFormatter}
-            onRowClick={this.onSelectRow}
-            visibleColumns={['name']}
-            isEmptyMessage={`No loan policies found`}
-            loading={loanPolicies ? loanPolicies.isPending : false}
-            autosize
-            virtualize
-            ariaLabel={'Loan policies'}
+      <EntrySelector
+        {...this.props}
+        onAdd={this.onAdd}
+        onEdit={this.onEdit}
+        detailComponent={LoanPolicyDetail}
+        contentData={policies}
+        parentMutator={this.props.mutator}
+        paneTitle="Loan policies"
+        detailPaneTitle="Loan Policy Details"
+        paneWidth="70%"
+        addButtonTitle="Add loan policy"
+      >
+        <Layer isOpen={this.state.editMode} label="Edit Loan Policy" container={container}>
+          <LoanPolicyForm
+            initialValues={this.state.editItem}
+            onSubmit={record => this.onSave(record)}
+            onCancel={this.onCancel}
+            onRemove={this.onRemove}
           />
-        </Pane>
-
-        <Route
-          path={`${this.props.match.path}/:policyId`}
-          render={props => <this.connectedLoanPolicyDetail policy={loanPolicy} stripes={stripes} okapi={this.okapi} paneWidth="60%" onClose={this.onCloseDetails} {...props} />}
-        />
-      </Paneset>
+        </Layer>
+      </EntrySelector>
     );
   }
-
 }
 
 export default LoanPolicySettings;

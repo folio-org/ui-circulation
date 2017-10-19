@@ -18,21 +18,13 @@ import { loanProfileTypes, intervalPeriods, dueDateManagementOptions, renewFromO
 class LoanPolicyForm extends React.Component {
 
   static propTypes = {
-    initialValues: PropTypes.object.isRequired,
+    initialValues: PropTypes.object,
     change: PropTypes.func.isRequired,
     handleSubmit: PropTypes.func.isRequired,
     onCancel: PropTypes.func,
-
-
-    /*
-    parentMutator: PropTypes.shape({
-      loanPolicies: PropTypes.shape({
-        DELETE: PropTypes.func.isRequired,
-        PUT: PropTypes.func.isRequired,
-      }),
-    }).isRequired,
-    */
-    //clearSelection: PropTypes.func.isRequired,
+    onRemove: PropTypes.func,
+    pristine: PropTypes.bool,
+    submitting: PropTypes.bool,
   };
 
   constructor(props) {
@@ -40,8 +32,6 @@ class LoanPolicyForm extends React.Component {
 
     this.state = {
       confirmDelete: false,
-      policy: this.props.initialValues,
-      rollingProfile: false,
       // loanable: false,
       // renewable: false,
     };
@@ -49,7 +39,6 @@ class LoanPolicyForm extends React.Component {
     this.beginDelete = this.beginDelete.bind(this);
     this.deletePolicy = this.deletePolicy.bind(this);
     this.validateField = this.validateField.bind(this);
-
   }
 
   // TODO: This feels like an abuse of the 'validate' parameter, using it to do an
@@ -85,18 +74,6 @@ class LoanPolicyForm extends React.Component {
     if (altRenewPeriod && altRenewPeriod.intervalId && !altRenewPeriod.duration) {
       this.props.change('renewalsPolicy.period.duration', 1);
     }
-
-    this.setState({ policy: allValues });
-  }
-
-  saveChanges() {
-    // Hacks to deal with STRIPES-425
-    delete this.state.policy._cid; // eslint-disable-line no-underscore-dangle
-    delete this.state.policy.busy;
-    delete this.state.policy.pendingCreate;
-    delete this.state.policy.pendingUpdate;
-
-    //this.props.parentMutator.loanPolicies.PUT(this.state.policy);
   }
 
   beginDelete() {
@@ -107,15 +84,10 @@ class LoanPolicyForm extends React.Component {
 
   deletePolicy(confirmation) {
     if (confirmation) {
-      this.props.parentMutator.loanPolicies.DELETE(this.state.policy)
-      .then(() => {
-        this.setState({ confirmDelete: false });
-        this.props.clearSelection();
-      });
+      this.props.onRemove(this.props.initialValues);
+      this.setState({ confirmDelete: false });
     } else {
-      this.setState({
-        confirmDelete: false,
-      });
+      this.setState({ confirmDelete: false });
     }
   }
 
@@ -129,42 +101,25 @@ class LoanPolicyForm extends React.Component {
     );
   }
 
-  addLastMenu() {
+  saveLastMenu() {
     const { pristine, submitting, handleSubmit } = this.props;
 
     return (
       <PaneMenu>
         <Button
-          id="clickable-create-loan-policy"
+          id="clickable-save-loan-policy"
           type="submit"
-          title="Create Loan Policy"
+          title="Save and close"
           disabled={pristine || submitting}
           onClick={handleSubmit}
-        >Create Loan Policy</Button>
-      </PaneMenu>
-    );
-  }
-
-  editLastMenu() {
-    const { pristine, submitting, handleSubmit } = this.props;
-
-    return (
-      <PaneMenu>
-        <Button
-          id="clickable-update-loan-policy"
-          type="submit"
-          title="Update Loan Policy"
-          disabled={pristine || submitting}
-          onClick={handleSubmit}
-        >Update Loan Policy</Button>
+        >Save and close</Button>
       </PaneMenu>
     );
   }
 
   render() {
-    const policy = this.state.policy;
+    const policy = this.props.initialValues;
 
-    const { initialValues } = this.props;
 
     // Conditional field labels
     let dueDateScheduleFieldLabel = 'Fixed due date schedule';
@@ -174,16 +129,16 @@ class LoanPolicyForm extends React.Component {
       altRenewalScheduleLabel = 'Alternate fixed due date schedule (due date limit) for renewals';
     }
 
-    const paneTitle = initialValues.name ? 'Edit Loan Policy' : 'New Loan Policy';
+    const paneTitle = policy.id ? 'Edit Loan Policy' : 'New Loan Policy';
 
     return (
       <form id="form-policy">
         <Paneset isRoot>
-          <Pane defaultWidth="100%" firstMenu={this.addFirstMenu()} lastMenu={initialValues.name ? this.editLastMenu() : this.addLastMenu()} paneTitle={paneTitle}>
+          <Pane defaultWidth="100%" firstMenu={this.addFirstMenu()} lastMenu={this.saveLastMenu()} paneTitle={paneTitle}>
             {/* Primary information: policy name and description, plus delete button */}
             <h2 style={{ marginTop: '0' }}>About</h2>
-            <Field label="Policy name" autoFocus name="name" component={TextField} required fullWidth rounded validate={this.validateField}  />
-            <Field label="Policy description" name="description" component={TextArea} fullWidth rounded validate={this.validateField}  />
+            <Field label="Policy name" autoFocus name="name" component={TextField} required fullWidth rounded validate={this.validateField} />
+            <Field label="Policy description" name="description" component={TextArea} fullWidth rounded validate={this.validateField} />
             <Button title="Delete policy" onClick={this.beginDelete} disabled={this.state.confirmDelete}>Delete policy</Button>
             {this.state.confirmDelete && <div>
               <Button title="Confirm delete loan policy" onClick={() => { this.deletePolicy(true); }}>Confirm</Button>

@@ -1,75 +1,24 @@
 import _ from 'lodash';
 import React from 'react';
 import PropTypes from 'prop-types';
-import queryString from 'query-string';
-import Pane from '@folio/stripes-components/lib/Pane';
-import PaneMenu from '@folio/stripes-components/lib/PaneMenu';
 import KeyValue from '@folio/stripes-components/lib/KeyValue';
 import { Row, Col } from '@folio/stripes-components/lib/LayoutGrid';
-import Icon from '@folio/stripes-components/lib/Icon';
-import Layer from '@folio/stripes-components/lib/Layer';
 
 import { loanProfileTypes, intervalPeriods, dueDateManagementOptions, renewFromOptions } from '../constants';
-import LoanPolicyForm from './LoanPolicyForm';
 
 class LoanPolicyDetail extends React.Component {
 
   static propTypes = {
-    stripes: PropTypes.shape({
-      hasPerm: PropTypes.func.isRequired,
-      connect: PropTypes.func.isRequired,
-      locale: PropTypes.string.isRequired,
-    }).isRequired,
-    paneWidth: PropTypes.string.isRequired,
-    resources: PropTypes.shape({
-      editMode: PropTypes.shape({
-        mode: PropTypes.bool,
-      }),
-    }),
-    mutator: PropTypes.shape({
-      editMode: PropTypes.shape({
-        replace: PropTypes.func,
-      }),
-    }),
-    match: PropTypes.shape({
-      path: PropTypes.string.isRequired,
-    }).isRequired,
-    onClose: PropTypes.func,
-    okapi: PropTypes.object,
-    location: PropTypes.object,
-    history: PropTypes.object,
-    policy: PropTypes.object,
+    initialValues: PropTypes.object,
   };
 
-  static manifest = Object.freeze({
-    editMode: { initialValue: { mode: false } },
-  });
-
-  constructor(props) {
-    super(props);
-    this.onClickEdit = this.onClickEdit.bind(this);
-    this.onCloseEdit = this.onCloseEdit.bind(this);
-  }
-
-  onClickEdit() {
-    this.props.mutator.editMode.replace({ mode: true });
-  }
-
-  onUpdate() {
-
-  }
-
-  onCloseEdit(e) {
-    e.preventDefault();
-    this.props.mutator.editMode.replace({ mode: false });
-  }
-
+  // eslint-disable-next-line class-methods-use-this
   getInterval(id) {
     return _.find(intervalPeriods, intr => intr.id === parseInt(id, 10));
   }
 
   renderLoans() {
-    const policy = (this.props.policy || {});
+    const policy = this.props.initialValues || {};
     let dueDateScheduleFieldLabel = 'Fixed due date schedule';
     if (policy.loansPolicy && policy.loansPolicy.profileId === '2') {
       dueDateScheduleFieldLabel += ' (due date limit)';
@@ -104,7 +53,8 @@ class LoanPolicyDetail extends React.Component {
               <Col xs={12}>
                 <KeyValue
                   label="Loan period"
-                  value={`${_.get(policy, ['loansPolicy', 'period', 'duration'], '')} ${_.get(periodInterval, ['label'], '-')}`} />
+                  value={`${_.get(policy, ['loansPolicy', 'period', 'duration'], '')} ${_.get(periodInterval, ['label'], '-')}`}
+                />
               </Col>
             </Row>
           </div>
@@ -154,7 +104,7 @@ class LoanPolicyDetail extends React.Component {
   }
 
   renderAbout() {
-    const policy = (this.props.policy || {});
+    const policy = (this.props.initialValues || {});
 
     return (
       <div>
@@ -180,19 +130,13 @@ class LoanPolicyDetail extends React.Component {
   }
 
   renderRewals() {
-    const policy = this.props.policy || {};
-    const altRenewalScheduleLabel = (policy.loansPolicy && policy.loansPolicy.profileId === '2')
-      ? 'Alternate fixed due date schedule (due date limit) for renewals'
-      : 'Alternate fixed due date schedule for renewals';
-
-
+    const policy = this.props.initialValues || {};
     const unlimited = (_.get(policy, ['renewalsPolicy', 'unlimited'])) ? 'Yes' : 'No';
     const differentPeriod = (_.get(policy, ['renewalsPolicy', 'differentPeriod'])) ? 'Yes' : 'No';
-
     const renewFromId = _.get(policy, ['renewalsPolicy', 'renewFromId'], 0);
-    const renewFrom = _.find(renewFromOptions, r => r.id == renewFromId);
+    const renewFrom = _.find(renewFromOptions, r => r.id === parseInt(renewFromId, 10));
     const intervalId = _.get(policy, ['renewalsPolicy', 'period', 'intervalId']);
-    const interval = _.find(intervalPeriods, intr => intr.id == intervalId);
+    const interval = _.find(intervalPeriods, intr => intr.id === parseInt(intervalId, 10));
 
     return (
       <div>
@@ -243,32 +187,16 @@ class LoanPolicyDetail extends React.Component {
   }
 
   render() {
-    const location = this.props.location;
-    const policy = this.props.policy || {};
-    const query = location.search ? queryString.parse(location.search) : {};
-    const detailMenu = (
-      <PaneMenu>
-        <button id="clickable-edituser" onClick={this.onClickEdit} title="Edit Loan Policy"><Icon icon="edit" />Edit</button>
-      </PaneMenu>
-    );
+    const policy = this.props.initialValues || {};
 
     return (
-      <Pane defaultWidth={this.props.paneWidth} paneTitle="Loan Policy Details" lastMenu={detailMenu} dismissible onClose={this.props.onClose}>
+      <div>
         {this.renderAbout()}
         <hr />
         {policy.loanable && this.renderLoans()}
         <hr />
         {policy.renewable && this.renderRewals()}
-
-        <Layer isOpen={this.props.resources.editMode ? this.props.resources.editMode.mode : false} label="Edit Loan Policy">
-          <LoanPolicyForm
-            initialValues={policy}
-            onSubmit={(record) => { this.onUpdate(record); }}
-            onCancel={this.onCloseEdit}
-            okapi={this.props.okapi}
-          />
-        </Layer>
-      </Pane>
+      </div>
     );
   }
 }
