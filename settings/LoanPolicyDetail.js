@@ -135,8 +135,7 @@ class LoanPolicyDetail extends React.Component {
     const differentPeriod = (_.get(policy, ['renewalsPolicy', 'differentPeriod'])) ? 'Yes' : 'No';
     const renewFromId = _.get(policy, ['renewalsPolicy', 'renewFromId'], 0);
     const renewFrom = _.find(renewFromOptions, r => r.id === parseInt(renewFromId, 10));
-    const intervalId = _.get(policy, ['renewalsPolicy', 'period', 'intervalId']);
-    const interval = _.find(intervalPeriods, intr => intr.id === parseInt(intervalId, 10));
+    const interval = this.getInterval(_.get(policy, ['renewalsPolicy', 'period', 'intervalId']));
 
     return (
       <div>
