@@ -57,11 +57,11 @@ class LoanPolicySettings extends React.Component {
       <EntrySelector
         {...this.props}
         detailComponent={LoanPolicyDetail}
-        allEntries={policies}
         entryCreator={this.createNewPolicy}
         parentMutator={this.props.mutator}
         paneTitle="Loan policies"
         addButtonTitle="Add loan policy"
+        contentData={policies}
       />
     );
   }
