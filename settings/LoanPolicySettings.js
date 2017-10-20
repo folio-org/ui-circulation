@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import _ from 'lodash';
 import EntrySelector from '@folio/stripes-components/lib/EntrySelector';
 import Layer from '@folio/stripes-components/lib/Layer';
-
+import transitionToParams from '@folio/stripes-components/util/transitionToParams';
+import queryString from 'query-string';
 import LoanPolicyDetail from './LoanPolicyDetail';
 import LoanPolicyForm from './LoanPolicyForm';
 
@@ -26,6 +27,8 @@ class LoanPolicySettings extends React.Component {
 
   static propTypes = {
     resources: PropTypes.object.isRequired,
+    location: PropTypes.object,
+    history: PropTypes.object,
     mutator: PropTypes.shape({
       loanPolicies: PropTypes.shape({
         POST: PropTypes.func,
@@ -50,16 +53,22 @@ class LoanPolicySettings extends React.Component {
     this.onEdit = this.onEdit.bind(this);
     this.onRemove = this.onRemove.bind(this);
     this.onCancel = this.onCancel.bind(this);
+    this.transitionToParams = transitionToParams.bind(this);
+    const path = props.location.pathname;
+    const selectedId = (/loan-policies\//.test(path))
+      ? /loan-policies\/(.*)$/.exec(path)[1]
+      : null;
 
-    this.state = { editMode: false };
+    this.state = { selectedId };
   }
 
   onAdd() {
-    this.setState({ editMode: true, editItem: defaultPolicy });
+    this.showLayer('add');
   }
 
-  onEdit(editItem) {
-    this.setState({ editMode: true, editItem });
+  onEdit(policy) {
+    this.setState({ selectedId: policy.id });
+    this.showLayer('edit');
   }
 
   onRemove(policy) {
@@ -67,24 +76,39 @@ class LoanPolicySettings extends React.Component {
     this.hideLayer();
   }
 
-  onCancel() {
+  onCancel(e) {
+    e.preventDefault();
     this.hideLayer();
   }
 
   onSave(policy) {
     const action = (policy.id) ? 'PUT' : 'POST';
-    this.props.mutator.loanPolicies[action](Object.assign(defaultPolicy, policy));
-    this.hideLayer();
+    this.props.mutator.loanPolicies[action](policy)
+      .then(() => this.hideLayer());
+  }
+
+  showLayer(name) {
+    this.props.history.push(`${this.props.location.pathname}?layer=${name}`);
   }
 
   hideLayer() {
-    this.setState({ editMode: false });
+    this.props.history.push(`${this.props.location.pathname}`);
   }
 
   render() {
-    const loanPolicies = (this.props.resources.loanPolicies || {}).records || [];
+    const { resources, location } = this.props;
+    const loanPolicies = (resources.loanPolicies || {}).records || [];
     const policies = _.sortBy(loanPolicies, ['name']);
     const container = document.getElementById('ModuleContainer');
+    const query = location.search ? queryString.parse(location.search) : {};
+
+    const selectedItem = (query.layer === 'edit')
+      ? _.find(policies, p => p.id === this.state.selectedId)
+      : defaultPolicy;
+
+    if (!container) {
+      return (<div></div>);
+    }
 
     return (
       <EntrySelector
@@ -99,9 +123,9 @@ class LoanPolicySettings extends React.Component {
         paneWidth="70%"
         addButtonTitle="Add loan policy"
       >
-        <Layer isOpen={this.state.editMode} label="Edit Loan Policy" container={container}>
+        <Layer isOpen={!!(query.layer)} label="Edit Loan Policy" container={container}>
           <LoanPolicyForm
-            initialValues={this.state.editItem}
+            initialValues={selectedItem}
             onSubmit={record => this.onSave(record)}
             onCancel={this.onCancel}
             onRemove={this.onRemove}
