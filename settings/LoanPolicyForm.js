@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Field, reduxForm } from 'redux-form';
-
+import { Field } from 'redux-form';
+import stripesForm from '@folio/stripes-form';
 import Button from '@folio/stripes-components/lib/Button';
 import Checkbox from '@folio/stripes-components/lib/Checkbox';
 import { Row, Col } from '@folio/stripes-components/lib/LayoutGrid';
@@ -96,7 +96,7 @@ class LoanPolicyForm extends React.Component {
   }
 
   saveLastMenu() {
-    const { pristine, submitting, handleSubmit } = this.props;
+    const { pristine, submitting } = this.props;
 
     return (
       <PaneMenu>
@@ -105,15 +105,13 @@ class LoanPolicyForm extends React.Component {
           type="submit"
           title="Save and close"
           disabled={pristine || submitting}
-          onClick={handleSubmit}
         >Save and close</Button>
       </PaneMenu>
     );
   }
 
   render() {
-    const policy = this.props.initialValues;
-
+    const policy = this.props.initialValues || {};
 
     // Conditional field labels
     let dueDateScheduleFieldLabel = 'Fixed due date schedule';
@@ -126,7 +124,7 @@ class LoanPolicyForm extends React.Component {
     const paneTitle = policy.id ? 'Edit Loan Policy' : 'New Loan Policy';
 
     return (
-      <form id="form-policy">
+      <form id="form-policy" onSubmit={this.props.handleSubmit}>
         <Paneset isRoot>
           <Pane defaultWidth="100%" firstMenu={this.addFirstMenu()} lastMenu={this.saveLastMenu()} paneTitle={paneTitle}>
             {/* Primary information: policy name and description, plus delete button */}
@@ -388,7 +386,8 @@ class LoanPolicyForm extends React.Component {
   }
 }
 
-export default reduxForm({
+export default stripesForm({
   form: 'LoanPolicyForm',
-  enableReinitialize: true,
+  navigationCheck: true,
+  enableReinitialize: false,
 })(LoanPolicyForm);
