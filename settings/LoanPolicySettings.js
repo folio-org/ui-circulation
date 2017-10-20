@@ -107,7 +107,7 @@ class LoanPolicySettings extends React.Component {
       : defaultPolicy;
 
     if (!container) {
-      return (<div></div>);
+      return (<div />);
     }
 
     return (
