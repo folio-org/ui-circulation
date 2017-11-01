@@ -22,7 +22,7 @@ const pages = [
     route: 'fixed-due-date-schedules',
     label: 'Fixed due date schedules',
     component: FixedDueDateScheduleManager,
-    perm: 'ui-circulation.settings.fixed-due-date-schedules',
+    perm: 'ui-circulation.settings.loan-rules',
   },
 ];
 
