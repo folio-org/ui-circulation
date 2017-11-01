@@ -1,10 +1,59 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
+import moment from 'moment';
 import EntryManager from '@folio/stripes-smart-components/lib/EntryManager';
 import FixedDueDateScheduleDetail from './FixedDueDateScheduleDetail';
 import FixedDueDateScheduleForm from './FixedDueDateScheduleForm';
 
+const validate = (values) => {
+  const errors = {};
+
+  if (!values.name) {
+    errors.name = 'Please fill this in to continue';
+  }
+
+  if (!values.schedules || !values.schedules.length) {
+    errors.schedules = { _error: 'At least one schedule must be entered' };
+  } else {
+    const schedulesErrors = [];
+    values.schedules.forEach((schedule, i) => {
+      const scheduleErrors = {};
+      if (!schedule || !schedule.from) {
+        scheduleErrors.from = 'Please fill this in to continue';
+        schedulesErrors[i] = scheduleErrors;
+      }
+      if (!schedule || !schedule.to) {
+        scheduleErrors.to = 'Please fill this in to continue';
+        schedulesErrors[i] = scheduleErrors;
+      }
+      if (!schedule || !schedule.due) {
+        scheduleErrors.due = 'Please fill this in to continue';
+        schedulesErrors[i] = scheduleErrors;
+      }
+
+      if (schedule) {
+        const to = moment(schedule.to);
+        const from = moment(schedule.from);
+        const due = moment(schedule.due);
+        if (!to.isAfter(from)) {
+          scheduleErrors.to = 'To date must be after from date';
+          schedulesErrors[i] = scheduleErrors;
+        }
+
+        if (!due.isSameOrAfter(to)) {
+          scheduleErrors.due = 'Due date must be on or after to date';
+          schedulesErrors[i] = scheduleErrors;
+        }
+      }
+    });
+
+    if (schedulesErrors.length) {
+      errors.schedules = schedulesErrors;
+    }
+  }
+  return errors;
+};
 
 class FixedDueDateScheduleManager extends React.Component {
   static propTypes = {
