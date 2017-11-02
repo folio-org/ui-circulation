@@ -6,14 +6,14 @@ import EntrySelector from '@folio/stripes-components/lib/EntrySelector';
 import LoanPolicyDetail from './LoanPolicyDetail';
 
 class LoanPolicySettings extends React.Component {
-
   static propTypes = {
-    resources: PropTypes.object.isRequired,
+    resources: PropTypes.shape({
+      loanPolicies: PropTypes.object,
+    }).isRequired,
     mutator: PropTypes.shape({
       loanPolicies: PropTypes.shape({
         POST: PropTypes.func,
         DELETE: PropTypes.func,
-        GET: PropTypes.func,
       }),
     }).isRequired,
   };
