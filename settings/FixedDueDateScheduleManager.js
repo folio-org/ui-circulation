@@ -33,8 +33,6 @@ class FixedDueDateScheduleManager extends React.Component {
   }
 
   validate(values) {
-    const entries = this.props.resources.entries;
-
     const errors = {};
 
     if (!values.name) {
@@ -43,7 +41,7 @@ class FixedDueDateScheduleManager extends React.Component {
 
     // when searching for a name-match, skip the current record
     const records = (this.props.resources.entries || {}).records || [];
-    if (values.name && _.find(records, entry => entry.name == values.name && entry.id != values.id)) {
+    if (values.name && _.find(records, entry => entry.name === values.name && entry.id !== values.id)) {
       errors.name = 'Please enter a unique name.';
     }
 
