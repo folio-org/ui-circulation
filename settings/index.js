@@ -3,6 +3,7 @@ import Settings from '@folio/stripes-components/lib/Settings';
 
 import LoanPolicySettings from './LoanPolicySettings';
 import LoanRules from './LoanRules';
+import FixedDueDateScheduleManager from './FixedDueDateScheduleManager';
 
 const pages = [
   {
@@ -15,6 +16,12 @@ const pages = [
     route: 'loan-rules',
     label: 'Loan rules',
     component: LoanRules,
+    perm: 'ui-circulation.settings.loan-rules',
+  },
+  {
+    route: 'fixed-due-date-schedules',
+    label: 'Fixed due date schedules',
+    component: FixedDueDateScheduleManager,
     perm: 'ui-circulation.settings.loan-rules',
   },
 ];
