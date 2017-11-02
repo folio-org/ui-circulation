@@ -6,55 +6,6 @@ import EntryManager from '@folio/stripes-smart-components/lib/EntryManager';
 import FixedDueDateScheduleDetail from './FixedDueDateScheduleDetail';
 import FixedDueDateScheduleForm from './FixedDueDateScheduleForm';
 
-const validate = (values) => {
-  const errors = {};
-
-  if (!values.name) {
-    errors.name = 'Please fill this in to continue';
-  }
-
-  if (!values.schedules || !values.schedules.length) {
-    errors.schedules = { _error: 'At least one schedule must be entered' };
-  } else {
-    const schedulesErrors = [];
-    values.schedules.forEach((schedule, i) => {
-      const scheduleErrors = {};
-      if (!schedule || !schedule.from) {
-        scheduleErrors.from = 'Please fill this in to continue';
-        schedulesErrors[i] = scheduleErrors;
-      }
-      if (!schedule || !schedule.to) {
-        scheduleErrors.to = 'Please fill this in to continue';
-        schedulesErrors[i] = scheduleErrors;
-      }
-      if (!schedule || !schedule.due) {
-        scheduleErrors.due = 'Please fill this in to continue';
-        schedulesErrors[i] = scheduleErrors;
-      }
-
-      if (schedule) {
-        const to = moment(schedule.to);
-        const from = moment(schedule.from);
-        const due = moment(schedule.due);
-        if (!to.isAfter(from)) {
-          scheduleErrors.to = 'To date must be after from date';
-          schedulesErrors[i] = scheduleErrors;
-        }
-
-        if (!due.isSameOrAfter(to)) {
-          scheduleErrors.due = 'Due date must be on or after to date';
-          schedulesErrors[i] = scheduleErrors;
-        }
-      }
-    });
-
-    if (schedulesErrors.length) {
-      errors.schedules = schedulesErrors;
-    }
-  }
-  return errors;
-};
-
 class FixedDueDateScheduleManager extends React.Component {
   static propTypes = {
     resources: PropTypes.object.isRequired,
@@ -75,6 +26,69 @@ class FixedDueDateScheduleManager extends React.Component {
     },
   });
 
+  constructor(props) {
+    super(props);
+
+    this.validate = this.validate.bind(this);
+  }
+
+  validate(values) {
+    const entries = this.props.resources.entries;
+
+    const errors = {};
+
+    if (!values.name) {
+      errors.name = 'Please fill this in to continue';
+    }
+
+    // when searching for a name-match, skip the current record
+    const records = (this.props.resources.entries || {}).records || [];
+    if (values.name && _.find(records, entry => entry.name == values.name && entry.id != values.id)) {
+      errors.name = 'Please enter a unique name.';
+    }
+
+    if (!values.schedules || !values.schedules.length) {
+      errors.schedules = { _error: 'At least one schedule must be entered' };
+    } else {
+      const schedulesErrors = [];
+      values.schedules.forEach((schedule, i) => {
+        const scheduleErrors = {};
+        if (!schedule || !schedule.from) {
+          scheduleErrors.from = 'Please fill this in to continue';
+          schedulesErrors[i] = scheduleErrors;
+        }
+        if (!schedule || !schedule.to) {
+          scheduleErrors.to = 'Please fill this in to continue';
+          schedulesErrors[i] = scheduleErrors;
+        }
+        if (!schedule || !schedule.due) {
+          scheduleErrors.due = 'Please fill this in to continue';
+          schedulesErrors[i] = scheduleErrors;
+        }
+
+        if (schedule) {
+          const to = moment(schedule.to);
+          const from = moment(schedule.from);
+          const due = moment(schedule.due);
+          if (!to.isAfter(from)) {
+            scheduleErrors.to = 'To date must be after from date';
+            schedulesErrors[i] = scheduleErrors;
+          }
+
+          if (!due.isSameOrAfter(to)) {
+            scheduleErrors.due = 'Due date must be on or after to date';
+            schedulesErrors[i] = scheduleErrors;
+          }
+        }
+      });
+
+      if (schedulesErrors.length) {
+        errors.schedules = schedulesErrors;
+      }
+    }
+    return errors;
+  }
+
   render() {
     return (
       <EntryManager
@@ -87,10 +101,11 @@ class FixedDueDateScheduleManager extends React.Component {
         entryLabel="Fixed Due Date Schedule"
         nameKey="name"
         permissions={{
-          put: 'circulation-storage.fixed-due-date-schedules.item.put',
-          post: 'circulation-storage.fixed-due-date-schedules.item.post',
-          delete: 'circulation-storage.fixed-due-date-schedules.item.delete',
+          put: 'ui-circulation.settings.loan-rules',
+          post: 'ui-circulation.settings.loan-rules',
+          delete: 'ui-circulation.settings.loan-rules',
         }}
+        validate={this.validate}
       />
     );
   }
