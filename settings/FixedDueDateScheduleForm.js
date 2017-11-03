@@ -7,54 +7,44 @@ import Datepicker from '@folio/stripes-components/lib/Datepicker';
 import TextField from '@folio/stripes-components/lib/TextField';
 import TextArea from '@folio/stripes-components/lib/TextArea';
 
-const renderSchedules = ({ fields, meta: { error, submitFailed } }) => {
-  const addRow = () => {
-    fields.unshift({ from: '', to: '', due: '' });
-  };
-
-  if (!fields || fields.length === 0) {
-    addRow();
-    addRow();
-  }
-  return (
-    <div>
-      <Row>
-        <Col xs={11}><h2 style={{ marginTop: '0' }}>Schedules</h2></Col>
-        <Col xs={1}><Button type="button" onClick={() => addRow()}>+ New</Button></Col>
-      </Row>
-      {submitFailed && error && <Row><Col xs={12} className="error">{error}</Col></Row>}
-      {fields.map((schedule, index, f) => (
-        <div key={index}>
-          <Row>
-            <Col xs={12} sm={4}>
-              <Field
-                label="Date from"
-                name={`${schedule}.from`}
-                component={Datepicker}
-              />
-            </Col>
-            <Col xs={12} sm={4}>
-              <Field
-                label="Date to"
-                name={`${schedule}.to`}
-                component={Datepicker}
-              />
-            </Col>
-            <Col xs={12} sm={3}>
-              <Field
-                label="Due date"
-                name={`${schedule}.due`}
-                component={Datepicker}
-              />
-            </Col>
-            <Col xs={12} sm={1}><Button type="button" title="Remove" onClick={() => { f.remove(index); }}>X</Button></Col>
-          </Row>
-          <hr />
-        </div>
-      ))}
-    </div>
-  );
-};
+const renderSchedules = ({ fields, meta: { error, submitFailed } }) => (
+  <div>
+    <Row>
+      <Col xs={11}><h2 style={{ marginTop: '0' }}>Schedules</h2></Col>
+      <Col xs={1}><Button type="button" onClick={() => fields.push({})}>+ New</Button></Col>
+    </Row>
+    {submitFailed && error && <Row><Col xs={12} className="error">{error}</Col></Row>}
+    {fields.map((schedule, index, f) => (
+      <div key={index}>
+        <Row>
+          <Col xs={12} sm={4}>
+            <Field
+              label="Date from"
+              name={`${schedule}.from`}
+              component={Datepicker}
+            />
+          </Col>
+          <Col xs={12} sm={4}>
+            <Field
+              label="Date to"
+              name={`${schedule}.to`}
+              component={Datepicker}
+            />
+          </Col>
+          <Col xs={12} sm={3}>
+            <Field
+              label="Due date"
+              name={`${schedule}.due`}
+              component={Datepicker}
+            />
+          </Col>
+          <Col xs={12} sm={1}><Button type="button" title="Remove" onClick={() => { f.remove(index); }}>X</Button></Col>
+        </Row>
+        <hr />
+      </div>
+    ))}
+  </div>
+);
 
 renderSchedules.propTypes = {
   fields: PropTypes.object,
