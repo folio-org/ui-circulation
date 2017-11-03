@@ -8,19 +8,11 @@ import TextField from '@folio/stripes-components/lib/TextField';
 import TextArea from '@folio/stripes-components/lib/TextArea';
 
 const renderSchedules = ({ fields, meta: { error, submitFailed } }) => {
-  const addRow = () => {
-    fields.unshift({ from: '', to: '', due: '' });
-  };
-
-  if (!fields || fields.length === 0) {
-    addRow();
-    addRow();
-  }
   return (
     <div>
       <Row>
         <Col xs={11}><h2 style={{ marginTop: '0' }}>Schedules</h2></Col>
-        <Col xs={1}><Button type="button" onClick={() => addRow()}>+ New</Button></Col>
+        <Col xs={1}><Button type="button" onClick={() => fields.push({})}>+ New</Button></Col>
       </Row>
       {submitFailed && error && <Row><Col xs={12} className="error">{error}</Col></Row>}
       {fields.map((schedule, index, f) => (
