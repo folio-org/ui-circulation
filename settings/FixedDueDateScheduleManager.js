@@ -15,6 +15,9 @@ class FixedDueDateScheduleManager extends React.Component {
         DELETE: PropTypes.func,
         GET: PropTypes.func,
       }),
+      loanPolicies: PropTypes.shape({
+        GET: PropTypes.func,
+      }),
     }).isRequired,
   };
 
@@ -24,12 +27,27 @@ class FixedDueDateScheduleManager extends React.Component {
       records: 'fixedDueDateSchedules',
       path: 'fixed-due-date-schedule-storage/fixed-due-date-schedules',
     },
+    loanPolicies: {
+      type: 'okapi',
+      records: 'loanPolicies',
+      path: 'loan-policy-storage/loan-policies',
+    },
   });
 
   constructor(props) {
     super(props);
 
     this.validate = this.validate.bind(this);
+    this.deleteDisabled = this.deleteDisabled.bind(this);
+  }
+
+  deleteDisabled(schedule) {
+    const loanPolicies = (this.props.resources.loanPolicies || {}).records || [];
+    if (schedule.id && _.find(loanPolicies, entry => entry.loansPolicy.fixedDueDateSchedule === schedule.id)) {
+      return true;
+    }
+
+    return false;
   }
 
   validate(values) {
@@ -104,6 +122,8 @@ class FixedDueDateScheduleManager extends React.Component {
           delete: 'ui-circulation.settings.loan-rules',
         }}
         validate={this.validate}
+        deleteDisabled={this.deleteDisabled}
+        deleteDisabledMessage="Schedule cannot be deleted when used by one or more loan policies."
       />
     );
   }
