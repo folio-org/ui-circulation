@@ -9,6 +9,7 @@
 * Focus on name field for a newly-created loan policy. Fixes UICIRC-19.
 * Get `<EntrySelector>` from stripes-components v1.9.0 (and delete the local copy). Fixes UICIRC-26.
 * Use `<EntryManager>` to manage fixed-due-date-schedules. Fixes UICIRC-20, UICIRC-22.
+* Use `<EntryManager>` to manage loan policies. Fixes UICIRC-32.
 
 ## [1.1.1](https://github.com/folio-org/ui-circulation/tree/v1.1.1) (2017-09-02)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v1.1.0...v1.1.1)
