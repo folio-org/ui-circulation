@@ -49,14 +49,14 @@ class LoanPolicySettings extends React.Component {
         entryList={_.sortBy((this.props.resources.entries || {}).records || [], ['name'])}
         detailComponent={LoanPolicyDetail}
         formComponent={LoanPolicyForm}
-        paneTitle="Loan Rules"
-        entryLabel="Loan Rule"
+        paneTitle="Loan Policies"
+        entryLabel="Loan Policy"
         nameKey="name"
         defaultEntry={defaultPolicy}
         permissions={{
-          put: 'ui-circulation.settings.loan-rules',
-          post: 'ui-circulation.settings.loan-rules',
-          delete: 'ui-circulation.settings.loan-rules',
+          put: 'ui-circulation.settings.loan-policies',
+          post: 'ui-circulation.settings.loan-policies',
+          delete: 'ui-circulation.settings.loan-policies',
         }}
       />
     );
