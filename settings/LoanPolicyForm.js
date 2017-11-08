@@ -2,8 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
 import _ from 'lodash';
-import stripesForm from '@folio/stripes-form';
-import Button from '@folio/stripes-components/lib/Button';
 import Checkbox from '@folio/stripes-components/lib/Checkbox';
 import { Row, Col } from '@folio/stripes-components/lib/LayoutGrid';
 import Select from '@folio/stripes-components/lib/Select';

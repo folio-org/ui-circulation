@@ -31,6 +31,9 @@ class LoanPolicySettings extends React.Component {
         DELETE: PropTypes.func,
       }),
     }).isRequired,
+    stripes: PropTypes.shape({
+      connect: PropTypes.func.isRequired,
+    }),
   };
 
   static manifest = Object.freeze({
