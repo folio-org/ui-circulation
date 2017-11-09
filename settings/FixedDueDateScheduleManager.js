@@ -124,6 +124,7 @@ class FixedDueDateScheduleManager extends React.Component {
         validate={this.validate}
         deleteDisabled={this.deleteDisabled}
         deleteDisabledMessage="Schedule cannot be deleted when used by one or more loan policies."
+        defaultEntry={{ schedules: [{}, {}] }}
       />
     );
   }
