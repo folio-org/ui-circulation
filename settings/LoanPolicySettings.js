@@ -31,6 +31,9 @@ class LoanPolicySettings extends React.Component {
         DELETE: PropTypes.func,
       }),
     }).isRequired,
+    stripes: PropTypes.shape({
+      connect: PropTypes.func.isRequired,
+    }),
   };
 
   static manifest = Object.freeze({
@@ -41,6 +44,11 @@ class LoanPolicySettings extends React.Component {
     },
   });
 
+  constructor(props) {
+    super(props);
+    this.connectedForm = props.stripes.connect(LoanPolicyForm);
+  }
+
   render() {
     return (
       <EntryManager
@@ -48,7 +56,7 @@ class LoanPolicySettings extends React.Component {
         parentMutator={this.props.mutator}
         entryList={_.sortBy((this.props.resources.entries || {}).records || [], ['name'])}
         detailComponent={LoanPolicyDetail}
-        formComponent={LoanPolicyForm}
+        formComponent={this.connectedForm}
         paneTitle="Loan Policies"
         entryLabel="Loan Policy"
         nameKey="name"

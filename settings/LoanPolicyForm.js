@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
-import stripesForm from '@folio/stripes-form';
-import Button from '@folio/stripes-components/lib/Button';
+import _ from 'lodash';
 import Checkbox from '@folio/stripes-components/lib/Checkbox';
 import { Row, Col } from '@folio/stripes-components/lib/LayoutGrid';
 import Select from '@folio/stripes-components/lib/Select';
@@ -12,12 +11,22 @@ import TextArea from '@folio/stripes-components/lib/TextArea';
 import { loanProfileTypes, intervalPeriods, dueDateManagementOptions, renewFromOptions } from '../constants';
 
 class LoanPolicyForm extends React.Component {
-
   static propTypes = {
     initialValues: PropTypes.object,
     change: PropTypes.func.isRequired,
     onRemove: PropTypes.func,
+    resources: PropTypes.shape({
+      fixedDueDateSchedules: PropTypes.object,
+    }).isRequired,
   };
+
+  static manifest = Object.freeze({
+    fixedDueDateSchedules: {
+      type: 'okapi',
+      records: 'fixedDueDateSchedules',
+      path: 'fixed-due-date-schedule-storage/fixed-due-date-schedules',
+    },
+  });
 
   constructor(props) {
     super(props);
@@ -88,17 +97,21 @@ class LoanPolicyForm extends React.Component {
       altRenewalScheduleLabel = 'Alternate fixed due date schedule (due date limit) for renewals';
     }
 
+    const schedules = _.sortBy((this.props.resources.fixedDueDateSchedules || {}).records || [], ['name'])
+      .map(schedule => (
+        {
+          id: schedule.id,
+          value: schedule.id,
+          label: schedule.name,
+        }),
+      );
+
     return (
       <div>
         {/* Primary information: policy name and description, plus delete button */}
         <h2 style={{ marginTop: '0' }}>About</h2>
         <Field label="Policy name" autoFocus name="name" component={TextField} required fullWidth rounded validate={this.validateField} />
         <Field label="Policy description" name="description" component={TextArea} fullWidth rounded validate={this.validateField} />
-        <Button title="Delete policy" onClick={this.beginDelete} disabled={this.state.confirmDelete}>Delete policy</Button>
-        {this.state.confirmDelete && <div>
-          <Button title="Confirm delete loan policy" onClick={() => { this.deletePolicy(true); }}>Confirm</Button>
-          <Button title="Cancel delete loan policy" onClick={() => { this.deletePolicy(false); }}>Cancel</Button>
-        </div>}
         <hr />
 
         {/* Loan detail section */}
@@ -147,12 +160,11 @@ class LoanPolicyForm extends React.Component {
             but with different labels */}
         { (policy.loanable && policy.loansPolicy && policy.loansPolicy.profileId !== '3') &&
           <Field
-            disabled
             label={dueDateScheduleFieldLabel}
             name="loansPolicy.fixedDueDateSchedule"
             component={Select}
             placeholder="Select schedule"
-            dataOptions={[]}
+            dataOptions={schedules}
           />
         }
         {/* closed library due date management - Select */}
@@ -333,11 +345,10 @@ class LoanPolicyForm extends React.Component {
               policy.loansPolicy.profileId !== '3' &&
               <Field
                 label={altRenewalScheduleLabel}
-                disabled
                 name="renewalsPolicy"       // TODO: Need to hook this up with the right schema component when it's ready
                 component={Select}
                 placeholder="Select schedule"
-                dataOptions={[]}
+                dataOptions={schedules}
               />
             }
           </fieldset>
@@ -347,8 +358,4 @@ class LoanPolicyForm extends React.Component {
   }
 }
 
-export default stripesForm({
-  form: 'LoanPolicyForm',
-  navigationCheck: true,
-  enableReinitialize: false,
-})(LoanPolicyForm);
+export default LoanPolicyForm;
