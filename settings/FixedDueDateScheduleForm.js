@@ -6,11 +6,12 @@ import { Row, Col } from '@folio/stripes-components/lib/LayoutGrid';
 import Datepicker from '@folio/stripes-components/lib/Datepicker';
 import TextField from '@folio/stripes-components/lib/TextField';
 import TextArea from '@folio/stripes-components/lib/TextArea';
+import Icon from '@folio/stripes-components/lib/Icon';
 
 const renderSchedules = ({ fields, meta: { error, submitFailed } }) => (
   <div>
     <Row>
-      <Col xs={11}><h2 style={{ marginTop: '0' }}>Schedules</h2></Col>
+      <Col xs={11}><h2 style={{ marginTop: '0' }}>Schedule</h2></Col>
       <Col xs={1}><Button type="button" onClick={() => fields.unshift({})}>+ New</Button></Col>
     </Row>
     {submitFailed && error && <Row><Col xs={12} className="error">{error}</Col></Row>}
@@ -38,7 +39,17 @@ const renderSchedules = ({ fields, meta: { error, submitFailed } }) => (
               component={Datepicker}
             />
           </Col>
-          <Col xs={12} sm={1}><Button type="button" title="Remove" onClick={() => { f.remove(index); }}>X</Button></Col>
+          <Col xs={12} sm={1}>
+            <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+              <Button
+                buttonStyle="transparent slim"
+                style={{ position: 'absolute', bottom: '0' }}
+                title="Remove"
+                onClick={() => { f.remove(index); }}
+              ><Icon icon="trashBin" />
+              </Button>
+            </div>
+          </Col>
         </Row>
         <hr />
       </div>
