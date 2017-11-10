@@ -12,6 +12,7 @@
 * Use `<EntryManager>` to manage loan policies. Fixes UICIRC-32.
 * Include fixed due date schedule list in loan-policy form. Fixes UICIRC-27.
 * Show empty schedules in new Fixed Due Date Schedule form. Fixes UICIRC-30.
+* Add empty schedule rows to top of list. Fixes UICIRC-29.
 
 ## [1.1.1](https://github.com/folio-org/ui-circulation/tree/v1.1.1) (2017-09-02)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v1.1.0...v1.1.1)
