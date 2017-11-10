@@ -113,8 +113,8 @@ class FixedDueDateScheduleManager extends React.Component {
         entryList={_.sortBy((this.props.resources.entries || {}).records || [], ['name'])}
         detailComponent={FixedDueDateScheduleDetail}
         formComponent={FixedDueDateScheduleForm}
-        paneTitle="Fixed Due Date Schedule"
-        entryLabel="Fixed Due Date Schedule"
+        paneTitle="Fixed due date schedules"
+        entryLabel="Fixed due date schedule"
         nameKey="name"
         permissions={{
           put: 'ui-circulation.settings.loan-rules',
