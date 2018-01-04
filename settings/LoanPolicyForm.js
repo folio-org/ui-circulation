@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Field } from 'redux-form';
+import { Field, getFormValues } from 'redux-form';
 import _ from 'lodash';
 import Checkbox from '@folio/stripes-components/lib/Checkbox';
 import { Row, Col } from '@folio/stripes-components/lib/LayoutGrid';
@@ -12,32 +12,24 @@ import { loanProfileTypes, intervalPeriods, dueDateManagementOptions, renewFromO
 
 class LoanPolicyForm extends React.Component {
   static propTypes = {
-    initialValues: PropTypes.object,
-    change: PropTypes.func.isRequired,
-    onRemove: PropTypes.func,
+    stripes: PropTypes.shape({
+      store: PropTypes.object.isRequired,
+    }).isRequired,
     resources: PropTypes.shape({
       fixedDueDateSchedules: PropTypes.object,
     }).isRequired,
+    change: PropTypes.func.isRequired,
   };
-
-  static manifest = Object.freeze({
-    fixedDueDateSchedules: {
-      type: 'okapi',
-      records: 'fixedDueDateSchedules',
-      path: 'fixed-due-date-schedule-storage/fixed-due-date-schedules',
-    },
-  });
 
   constructor(props) {
     super(props);
-
-    this.state = {
-      confirmDelete: false,
-    };
-
-    this.beginDelete = this.beginDelete.bind(this);
-    this.deletePolicy = this.deletePolicy.bind(this);
     this.validateField = this.validateField.bind(this);
+  }
+
+  getCurrentValues() {
+    const { stripes: { store } } = this.props;
+    const state = store.getState();
+    return getFormValues('entryForm')(state) || {};
   }
 
   validateField(fieldValue, allValues) {
@@ -71,23 +63,8 @@ class LoanPolicyForm extends React.Component {
     }
   }
 
-  beginDelete() {
-    this.setState({
-      confirmDelete: true,
-    });
-  }
-
-  deletePolicy(confirmation) {
-    if (confirmation) {
-      this.props.onRemove(this.props.initialValues);
-      this.setState({ confirmDelete: false });
-    } else {
-      this.setState({ confirmDelete: false });
-    }
-  }
-
   render() {
-    const policy = this.props.initialValues || {};
+    const policy = this.getCurrentValues();
 
     // Conditional field labels
     let dueDateScheduleFieldLabel = 'Fixed due date schedule';
@@ -119,10 +96,9 @@ class LoanPolicyForm extends React.Component {
         {/* loanable: boolean determining visibility of all subsequent elements */}
         <Field
           label="Loanable"
+          id="loanable"
           name="loanable"
           component={Checkbox}
-          checked={policy.loanable}
-          validate={this.validateField}
           normalize={v => !!v}
         />
         {/* loan profile. Value affects visibility of several subsequent elements */}
@@ -181,9 +157,9 @@ class LoanPolicyForm extends React.Component {
         { policy.loanable &&
           <Field
             label="Skip closed dates in intervening period"
+            id="loansPolicy.skipClosed"
             name="loansPolicy.skipClosed"
             component={Checkbox}
-            checked={policy.loansPolicy && policy.loansPolicy.skipClosed}
             validate={this.validateField}
             normalize={v => !!v}
           />
@@ -258,7 +234,7 @@ class LoanPolicyForm extends React.Component {
               label="Renewable"
               name="renewable"
               component={Checkbox}
-              checked={policy.renewable}
+              id="renewable"
               validate={this.validateField}
               normalize={v => !!v}
             />
@@ -267,8 +243,9 @@ class LoanPolicyForm extends React.Component {
               <Field
                 label="Unlimited renewals"
                 name="renewalsPolicy.unlimited"
+                id="renewalsPolicy.unlimited"
                 component={Checkbox}
-                checked={policy.renewalsPolicy && policy.renewalsPolicy.unlimited === true} validate={this.validateField}
+                validate={this.validateField}
                 normalize={v => !!v}
               />
             }
@@ -303,9 +280,11 @@ class LoanPolicyForm extends React.Component {
             {/* different renewal period (bool) */}
             { policy.renewable &&
               <Field
-                label="Renewal period different from original loan" name="renewalsPolicy.differentPeriod"
+                label="Renewal period different from original loan"
+                name="renewalsPolicy.differentPeriod"
+                id="renewalsPolicy.differentPeriod"
                 component={Checkbox}
-                checked={policy.renewalsPolicy && policy.renewalsPolicy.differentPeriod} validate={this.validateField}
+                validate={this.validateField}
                 normalize={v => !!v}
               />
             }
