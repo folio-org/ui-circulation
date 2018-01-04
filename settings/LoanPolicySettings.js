@@ -24,6 +24,7 @@ class LoanPolicySettings extends React.Component {
   static propTypes = {
     resources: PropTypes.shape({
       entries: PropTypes.object,
+      fixedDueDateSchedules: PropTypes.object,
     }).isRequired,
     mutator: PropTypes.shape({
       entries: PropTypes.shape({
@@ -31,9 +32,6 @@ class LoanPolicySettings extends React.Component {
         DELETE: PropTypes.func,
       }),
     }).isRequired,
-    stripes: PropTypes.shape({
-      connect: PropTypes.func.isRequired,
-    }),
   };
 
   static manifest = Object.freeze({
@@ -42,12 +40,12 @@ class LoanPolicySettings extends React.Component {
       records: 'loanPolicies',
       path: 'loan-policy-storage/loan-policies',
     },
+    fixedDueDateSchedules: {
+      type: 'okapi',
+      records: 'fixedDueDateSchedules',
+      path: 'fixed-due-date-schedule-storage/fixed-due-date-schedules',
+    },
   });
-
-  constructor(props) {
-    super(props);
-    this.connectedForm = props.stripes.connect(LoanPolicyForm);
-  }
 
   render() {
     return (
@@ -56,7 +54,7 @@ class LoanPolicySettings extends React.Component {
         parentMutator={this.props.mutator}
         entryList={_.sortBy((this.props.resources.entries || {}).records || [], ['name'])}
         detailComponent={LoanPolicyDetail}
-        formComponent={this.connectedForm}
+        formComponent={LoanPolicyForm}
         paneTitle="Loan Policies"
         entryLabel="Loan Policy"
         nameKey="name"
