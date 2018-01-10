@@ -1,3 +1,4 @@
+import { kebabCase } from 'lodash';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Paneset, Pane } from '@folio/stripes-components';
@@ -33,6 +34,7 @@ class LoanRules extends React.Component {
     loanRules: {
       type: 'okapi',
       path: 'circulation/loan-rules',
+      resourceShouldRefresh: true,
     },
     patronGroups: {
       type: 'okapi',
@@ -78,7 +80,7 @@ class LoanRules extends React.Component {
   getLoanRulesCode() {
     const loanRules = (this.props.resources.loanRules || {}).records || [];
     const loanRulesCode = (loanRules.length) ? loanRules[0].loanRulesAsTextFile : '';
-    return loanRulesCode.replace('    ', '\t');
+    return this.convertIdsToNames(loanRulesCode.replace('    ', '\t'));
   }
 
   getEditorProps() {
@@ -86,18 +88,43 @@ class LoanRules extends React.Component {
 
     return Object.assign({}, editorDefaultProps, {
       errors: this.state.errors,
-      policies: loanPolicies.records.map(p => ({ name: p.name })),
+      policies: loanPolicies.records.map(p => ({ name: kebabCase(p.name) })),
       completionLists: {
-        'Patron Groups': patronGroups.records.map(g => g.group),
-        'Material Type': materialTypes.records.map(m => m.name),
-        'Loan Type': loanTypes.records.map(l => l.name),
+        'Patron Groups': patronGroups.records.map(g => kebabCase(g.group)),
+        'Material Type': materialTypes.records.map(m => kebabCase(m.name)),
+        'Loan Type': loanTypes.records.map(l => kebabCase(l.name)),
       },
     });
   }
 
+  getRecords() {
+    const { resources: { patronGroups, materialTypes, loanTypes, loanPolicies } } = this.props;
+
+    return [
+      ...patronGroups.records.map(r => ({ name: kebabCase(r.group), id: r.id, prefix: 'g' })),
+      ...materialTypes.records.map(r => ({ name: kebabCase(r.name), id: r.id, prefix: 'm' })),
+      ...loanTypes.records.map(r => ({ name: kebabCase(r.name), id: r.id, prefix: 't' })),
+      ...loanPolicies.records.map(r => ({ name: kebabCase(r.name), id: r.id, prefix: ':' })),
+    ];
+  }
+
+  convertNamesToIds(rulesStr) {
+    const records = this.getRecords();
+    return records.reduce((memo, r) => {
+      // eslint-disable-next-line no-useless-escape
+      const re = new RegExp(`(${r.prefix}.*?)(${r.name})(?=.*[g\s+|m\s+|t\s+|:\s+])?`, 'ig');
+      return memo.replace(re, `$1${r.id}`);
+    }, rulesStr);
+  }
+
+  convertIdsToNames(rulesStr) {
+    const records = this.getRecords();
+    return records.reduce((memo, r) => (memo.replace(r.id, r.name)), rulesStr);
+  }
+
   // TODO: refactor to use mutator after PUT is changed on the server or stripes-connect supports
   // custom PUT requests without the id attached to the end of the URL.
-  saveLoanRules(loanRulesAsTextFile) {
+  saveLoanRules(rules) {
     const stripes = this.props.stripes;
     const headers = Object.assign({}, {
       'X-Okapi-Tenant': stripes.okapi.tenant,
@@ -105,6 +132,7 @@ class LoanRules extends React.Component {
       'Content-Type': 'application/json',
     });
 
+    const loanRulesAsTextFile = this.convertNamesToIds(rules);
     const options = {
       method: 'PUT',
       headers,
