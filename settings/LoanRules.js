@@ -66,11 +66,10 @@ class LoanRules extends React.Component {
 
   shouldComponentUpdate(nextProps) {
     const { resources: { patronGroups, materialTypes, loanTypes, loanPolicies } } = nextProps;
-    const update = !patronGroups.isPending &&
+    return !patronGroups.isPending &&
       !materialTypes.isPending &&
       !loanTypes.isPending &&
       !loanPolicies.isPending;
-    return update;
   }
 
   onSubmit(values) {
