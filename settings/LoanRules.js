@@ -112,14 +112,17 @@ class LoanRules extends React.Component {
     const records = this.getRecords();
     return records.reduce((memo, r) => {
       // eslint-disable-next-line no-useless-escape
-      const re = new RegExp(`(${r.prefix}.*?)(${r.name})(?=.*[g\s+|m\s+|t\s+|:\s+])?`, 'ig');
+      const re = new RegExp(`(${r.prefix}.*?)(${r.name})(?=.*[g\s+|m\s+|t\s+|:\s*])?`, 'ig');
       return memo.replace(re, `$1${r.id}`);
     }, rulesStr);
   }
 
   convertIdsToNames(rulesStr) {
     const records = this.getRecords();
-    return records.reduce((memo, r) => (memo.replace(r.id, r.name)), rulesStr);
+    return records.reduce((memo, r) => {
+      const re = new RegExp(r.id, 'g');
+      return memo.replace(re, r.name);
+    }, rulesStr);
   }
 
   // TODO: refactor to use mutator after PUT is changed on the server or stripes-connect supports
