@@ -15,6 +15,7 @@
 * Add empty schedule rows to top of list. Fixes UICIRC-29.
 * Fix loan policy form. Fixes UICIRC-34.
 * Store and dereference UUID in loan rules. Fixes UICIRC-35.
+* Use more-current stripes-components. Refs STRIPES-495.
 
 ## [1.1.1](https://github.com/folio-org/ui-circulation/tree/v1.1.1) (2017-09-02)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v1.1.0...v1.1.1)
