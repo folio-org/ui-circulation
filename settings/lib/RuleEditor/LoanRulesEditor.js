@@ -192,18 +192,18 @@ class LoanRulesEditor extends React.Component {
   componentWillReceiveProps(nextProps){
     const nextState ={};
     if(nextProps.policies && !isEqual(nextProps.policies, this.props.polices)) {
-      nextState.polices = nextProps.policies;
+      nextState.policies = nextProps.policies;
     }
     if(nextProps.typeMapping && !isEqual(nextProps.typeMapping, this.props.typeMapping)) {
       nextState.typeMapping = nextProps.typeMapping;
     }
-    if(nextProps.dataLists && !isEqual(nextProps.dataLists, this.props.dataLists)) {
-      nextState.dataLists = nextProps.dataLists;
+    if(nextProps.completionLists && !isEqual(nextProps.completionLists, this.props.completionLists)) {
+      nextState.completionLists = nextProps.completionLists;
     }
-    if(Object.keys(nextState).length === 0) {
+    if(Object.keys(nextState).length > 0) {
       this.setState((curState) => {
-        const newState = curState;
-        Object.assign(newState.codeMirrorOptions, nextState);
+        const newState = _.cloneDeep(curState);
+        Object.assign(newState.codeMirrorOptions.mode, nextState);
         return newState;
       });
     }

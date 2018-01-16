@@ -40,21 +40,25 @@ class LoanRules extends React.Component {
       type: 'okapi',
       path: 'groups',
       records: 'usergroups',
+      resourceShouldRefresh: true,
     },
     materialTypes: {
       type: 'okapi',
       path: 'material-types',
       records: 'mtypes',
+      resourceShouldRefresh: true,
     },
     loanTypes: {
       type: 'okapi',
       path: 'loan-types',
       records: 'loantypes',
+      resourceShouldRefresh: true,
     },
     loanPolicies: {
       type: 'okapi',
       records: 'loanPolicies',
       path: 'loan-policy-storage/loan-policies',
+      resourceShouldRefresh: true,
     },
   });
 
@@ -66,6 +70,7 @@ class LoanRules extends React.Component {
 
   shouldComponentUpdate(nextProps) {
     const { resources: { patronGroups, materialTypes, loanTypes, loanPolicies } } = nextProps;
+
     return !patronGroups.isPending &&
       !materialTypes.isPending &&
       !loanTypes.isPending &&
@@ -151,7 +156,7 @@ class LoanRules extends React.Component {
   }
 
   render() {
-    if (!this.props.resources.patronGroups) {
+    if (!this.props.resources.loanPolicies) {
       return (<div />);
     }
 
