@@ -6,14 +6,16 @@ import {
   TextField,
   Icon,
 } from '@folio/stripes-components';
-import {Field, Form, reduxForm} from 'redux-form';
+import { Field } from 'redux-form';
+import stripesForm from '@folio/stripes-form';
+
 import LoanRulesField from './LoanRulesField';
 
 class LoanRulesForm extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state={
+    this.state = {
       ruleFilter: ''
     }
 
@@ -38,34 +40,34 @@ class LoanRulesForm extends React.Component {
       height: '100%',
       display: 'flex',
       flexDirection:'column',
-    }
+    };
 
     const editorWrapStyle = {
-      position: 'relative',
       flexGrow: 2,
-    }
+    };
 
     return (
       <form id="form-loan-rules" style={containerStyle} onSubmit={handleSubmit}>
-          <Row end='xs'>
-            <Col xs={3}>
-              <Field name="ruleFilter" component={TextField} rounded value={this.state.ruleFilter} onChange={this.filterRules} validationEnabled={false} placeholder="filter rules" />
-            </Col>
-            <Col xs={3}>
-              <Button fullWidth id="clickable-save-loan-rules" type="submit" disabled={pristine || submitting }>Save</Button>
-            </Col>
-          </Row>
-          <div style={editorWrapStyle}>
+        <Row end='xs'>
+          <Col xs={3}>
+            <TextField rounded value={this.state.ruleFilter} onChange={this.filterRules} validationEnabled={false} placeholder="filter rules" />
+          </Col>
+          <Col xs={3}>
+            <Button fullWidth id="clickable-save-loan-rules" type="submit" disabled={pristine || submitting }>Save</Button>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
             <Field component={LoanRulesField} name="loanRulesCode" {...editorProps} filter={this.state.ruleFilter}/>
-          </div>
+          </Col>
+        </Row>
       </form>
     )
   }
 }
 
-export default reduxForm(
-  {
-    form: 'loanRulesForm',
-    enableReinitialize: true,
-  }
-)(LoanRulesForm);
+export default stripesForm({
+  form: 'loanRulesForm',
+  navigationCheck: true,
+  enableReinitialize: true,
+})(LoanRulesForm);
