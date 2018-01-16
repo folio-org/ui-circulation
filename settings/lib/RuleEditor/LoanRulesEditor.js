@@ -190,16 +190,20 @@ class LoanRulesEditor extends React.Component {
   }
 
   componentWillReceiveProps(nextProps){
-    const nextState ={};
+    const nextState = {};
+
     if(nextProps.policies && !isEqual(nextProps.policies, this.props.polices)) {
       nextState.policies = nextProps.policies;
     }
+
     if(nextProps.typeMapping && !isEqual(nextProps.typeMapping, this.props.typeMapping)) {
       nextState.typeMapping = nextProps.typeMapping;
     }
+
     if(nextProps.completionLists && !isEqual(nextProps.completionLists, this.props.completionLists)) {
       nextState.completionLists = nextProps.completionLists;
     }
+
     if(Object.keys(nextState).length > 0) {
       this.setState((curState) => {
         const newState = _.cloneDeep(curState);
@@ -207,15 +211,16 @@ class LoanRulesEditor extends React.Component {
         return newState;
       });
     }
-    // filtering
-    if(nextProps.filter !== this.props.filter) {
-      this.filterRules(nextProps.filter);
-    }
 
     if (nextProps.code !== this.props.code) {
       this.setState(prevState =>
         Object.assign(_.cloneDeep(prevState), { code: nextProps.code })
       );
+    }
+
+    // filtering
+    if(nextProps.filter !== this.props.filter) {
+      this.filterRules(nextProps.filter);
     }
   }
 
