@@ -16,7 +16,7 @@
 * Fix loan policy form. Fixes UICIRC-34.
 * Store and dereference UUID in loan rules. Fixes UICIRC-35.
 * Use more-current stripes-components. Refs STRIPES-495.
-* Update depdencies. Refs STRIPES-501. 
+* Update dependencies. Refs STRIPES-501. 
 
 ## [1.1.1](https://github.com/folio-org/ui-circulation/tree/v1.1.1) (2017-09-02)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v1.1.0...v1.1.1)
