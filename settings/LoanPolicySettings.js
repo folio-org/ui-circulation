@@ -6,7 +6,7 @@ import LoanPolicyDetail from './LoanPolicyDetail';
 import LoanPolicyForm from './LoanPolicyForm';
 
 const defaultPolicy = {
-  name: 'Untitled',
+  name: '',
   loanable: true,
   loansPolicy: {
     profileId: '2',  // TODO: update when this is switched to a GUID
