@@ -3,6 +3,7 @@ import Settings from '@folio/stripes-components/lib/Settings';
 
 import LoanPolicySettings from './LoanPolicySettings';
 import LoanRules from './LoanRules';
+import ScanCheckoutSettings from './ScanCheckoutSettings';
 import FixedDueDateScheduleManager from './FixedDueDateScheduleManager';
 
 const pages = [
@@ -23,6 +24,11 @@ const pages = [
     label: 'Fixed due date schedules',
     component: FixedDueDateScheduleManager,
     perm: 'ui-circulation.settings.loan-rules',
+  },
+  {
+    route: 'checkout',
+    label: 'Scan ID',
+    component: ScanCheckoutSettings,
   },
 ];
 

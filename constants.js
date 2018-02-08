@@ -28,4 +28,11 @@ export const renewFromOptions = [
   { label: 'System date', id: 2, value: 2 },
 ];
 
+export const patronIdentifierTypes = [
+  { key: 'BARCODE', label: 'Barcode', queryKey: 'barcode' },
+  { key: 'EXTERNAL', label: 'External system id', queryKey: 'externalSystemId' },
+  { key: 'FOLIO', label: 'FOLIO record number', queryKey: 'id' },
+  { key: 'USER', label: 'Username', queryKey: 'username' },
+];
+
 export default '';
