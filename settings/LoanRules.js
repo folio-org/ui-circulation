@@ -24,7 +24,6 @@ const editorDefaultProps = {
 };
 
 class LoanRules extends React.Component {
-
   static propTypes = {
     resources: PropTypes.object.isRequired,
     stripes: PropTypes.object.isRequired,
