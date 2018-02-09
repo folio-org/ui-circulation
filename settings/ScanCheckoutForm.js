@@ -47,7 +47,7 @@ class ScanCheckoutForm extends React.Component {
     return (<Button type="submit" disabled={(pristine || submitting)}>Save</Button>);
   }
 
-   // eslint-disable-next-line class-methods-use-this
+  // eslint-disable-next-line class-methods-use-this
   renderList({ fields, meta }) {
     if (!fields.length) return (<div />);
 

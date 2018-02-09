@@ -7,7 +7,6 @@ import { Row, Col } from '@folio/stripes-components/lib/LayoutGrid';
 import { loanProfileTypes, intervalPeriods, dueDateManagementOptions, renewFromOptions } from '../constants';
 
 class LoanPolicyDetail extends React.Component {
-
   static propTypes = {
     initialValues: PropTypes.object,
   };

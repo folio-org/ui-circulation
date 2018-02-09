@@ -80,8 +80,7 @@ class LoanPolicyForm extends React.Component {
           id: schedule.id,
           value: schedule.id,
           label: schedule.name,
-        }),
-      );
+        }));
 
     return (
       <div>
@@ -324,7 +323,7 @@ class LoanPolicyForm extends React.Component {
               policy.loansPolicy.profileId !== '3' &&
               <Field
                 label={altRenewalScheduleLabel}
-                name="renewalsPolicy"       // TODO: Need to hook this up with the right schema component when it's ready
+                name="renewalsPolicy" // TODO: Need to hook this up with the right schema component when it's ready
                 component={Select}
                 placeholder="Select schedule"
                 dataOptions={schedules}
