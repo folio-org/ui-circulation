@@ -21,6 +21,12 @@ const defaultPolicy = {
 };
 
 class LoanPolicySettings extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.validate = this.validate.bind(this);
+  }
+
   static propTypes = {
     resources: PropTypes.shape({
       entries: PropTypes.object,
@@ -54,7 +60,7 @@ class LoanPolicySettings extends React.Component {
     }
     if (values.loansPolicy.profileId === '1' // 1 is for 'fixed'
       && !values.loansPolicy.fixedDueDateSchedule) {
-      errors.loansPolicy = {fixedDueDateSchedule: 'Please select a schedule'}
+      errors.loansPolicy = { fixedDueDateSchedule: 'Please select a schedule' };
     }
     return errors;
   }
