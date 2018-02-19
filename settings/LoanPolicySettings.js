@@ -22,11 +22,6 @@ const defaultPolicy = {
 
 class LoanPolicySettings extends React.Component {
 
-  constructor(props) {
-    super(props);
-    this.validate = this.validate.bind(this);
-  }
-
   static propTypes = {
     resources: PropTypes.shape({
       entries: PropTypes.object,
@@ -53,18 +48,6 @@ class LoanPolicySettings extends React.Component {
     },
   });
 
-  validate(values) {
-    const errors = {};
-    if (!values.name) {
-      errors.name = 'Please fill this in to continue';
-    }
-    if (values.loansPolicy.profileId === '1' // 1 is for 'fixed'
-      && !values.loansPolicy.fixedDueDateSchedule) {
-      errors.loansPolicy = { fixedDueDateSchedule: 'Please select a schedule' };
-    }
-    return errors;
-  }
-
   render() {
     return (
       <EntryManager
@@ -82,10 +65,22 @@ class LoanPolicySettings extends React.Component {
           post: 'ui-circulation.settings.loan-policies',
           delete: 'ui-circulation.settings.loan-policies',
         }}
-        validate={this.validate}
+        validate={validate}
       />
     );
   }
+}
+
+function validate(values) {
+  const errors = {};
+  if (!values.name) {
+    errors.name = 'Please fill this in to continue';
+  }
+  if (values.loansPolicy.profileId === '1' // 1 is for 'fixed'
+    && !values.loansPolicy.fixedDueDateSchedule) {
+    errors.loansPolicy = { fixedDueDateSchedule: 'Please select a schedule' };
+  }
+  return errors;
 }
 
 export default LoanPolicySettings;
