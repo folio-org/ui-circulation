@@ -16,6 +16,13 @@
     "displayName": "Circulation",
     "route": "/circulation",
     "hasSettings": true,
+    "icons": [
+     {
+       "name": "icon",
+       "alt": "Create and manage loan policies",
+       "title": "Circulation"
+     }
+    ],
     "okapiInterfaces": {
       "loan-policy-storage": "1.0"
     },
