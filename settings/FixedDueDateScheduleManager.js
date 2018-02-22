@@ -111,6 +111,7 @@ class FixedDueDateScheduleManager extends React.Component {
         {...this.props}
         parentMutator={this.props.mutator}
         entryList={_.sortBy((this.props.resources.entries || {}).records || [], ['name'])}
+        dataKey="fixedDueDateSchedules"
         detailComponent={FixedDueDateScheduleDetail}
         formComponent={FixedDueDateScheduleForm}
         paneTitle="Fixed due date schedules"
