@@ -65,6 +65,7 @@ class LoanPolicySettings extends React.Component {
         {...this.props}
         parentMutator={this.props.mutator}
         entryList={_.sortBy((this.props.resources.entries || {}).records || [], ['name'])}
+        dataKey="loanPolicies"
         detailComponent={LoanPolicyDetail}
         formComponent={LoanPolicyForm}
         paneTitle="Loan Policies"
