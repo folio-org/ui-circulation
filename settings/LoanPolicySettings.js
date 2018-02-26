@@ -27,7 +27,7 @@ function validate(values) {
   }
   if (values.loansPolicy.profileId === '1' // 1 is for 'fixed'
     && !values.loansPolicy.fixedDueDateSchedule) {
-    errors.loansPolicy = { fixedDueDateSchedule: 'Please select a schedule' };
+    errors.loansPolicy = { fixedDueDateSchedule: 'Please select a fixed due date schedule' };
   }
   return errors;
 }

@@ -72,6 +72,8 @@ class LoanPolicyForm extends React.Component {
     if (policy.loansPolicy && policy.loansPolicy.profileId === '2') {
       dueDateScheduleFieldLabel += ' (due date limit)';
       altRenewalScheduleLabel = 'Alternate fixed due date schedule (due date limit) for renewals';
+    } else if (policy.loansPolicy && policy.loansPolicy.profileId === '1') {
+      dueDateScheduleFieldLabel += ' *';
     }
 
     const schedules = _.sortBy((this.props.resources.fixedDueDateSchedules || {}).records || [], ['name'])
