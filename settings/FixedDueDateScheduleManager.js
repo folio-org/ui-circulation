@@ -10,7 +10,7 @@ class FixedDueDateScheduleManager extends React.Component {
   static propTypes = {
     resources: PropTypes.object.isRequired,
     mutator: PropTypes.shape({
-      entries: PropTypes.shape({
+      fixedDueDateSchedules: PropTypes.shape({
         POST: PropTypes.func,
         DELETE: PropTypes.func,
         GET: PropTypes.func,
@@ -22,7 +22,7 @@ class FixedDueDateScheduleManager extends React.Component {
   };
 
   static manifest = Object.freeze({
-    entries: {
+    fixedDueDateSchedules: {
       type: 'okapi',
       records: 'fixedDueDateSchedules',
       path: 'fixed-due-date-schedule-storage/fixed-due-date-schedules',
@@ -58,7 +58,7 @@ class FixedDueDateScheduleManager extends React.Component {
     }
 
     // when searching for a name-match, skip the current record
-    const records = (this.props.resources.entries || {}).records || [];
+    const records = (this.props.resources.fixedDueDateSchedules || {}).records || [];
     if (values.name && _.find(records, entry => entry.name === values.name && entry.id !== values.id)) {
       errors.name = 'Please enter a unique name.';
     }
@@ -110,8 +110,8 @@ class FixedDueDateScheduleManager extends React.Component {
       <EntryManager
         {...this.props}
         parentMutator={this.props.mutator}
-        entryList={_.sortBy((this.props.resources.entries || {}).records || [], ['name'])}
-        dataKey="fixedDueDateSchedules"
+        entryList={_.sortBy((this.props.resources.fixedDueDateSchedules || {}).records || [], ['name'])}
+        dataKey='fixedDueDateSchedules'
         detailComponent={FixedDueDateScheduleDetail}
         formComponent={FixedDueDateScheduleForm}
         paneTitle="Fixed due date schedules"

@@ -155,7 +155,7 @@ class LoanRules extends React.Component {
   }
 
   render() {
-    if (!this.props.resources.loanPolicies) {
+    if (!this.props.resources.loanTypes) {
       return (<div />);
     }
 

@@ -35,11 +35,11 @@ function validate(values) {
 class LoanPolicySettings extends React.Component {
   static propTypes = {
     resources: PropTypes.shape({
-      entries: PropTypes.object,
+      loanPolicies: PropTypes.object,
       fixedDueDateSchedules: PropTypes.object,
     }).isRequired,
     mutator: PropTypes.shape({
-      entries: PropTypes.shape({
+      loanPolicies: PropTypes.shape({
         POST: PropTypes.func,
         DELETE: PropTypes.func,
       }),
@@ -47,7 +47,7 @@ class LoanPolicySettings extends React.Component {
   };
 
   static manifest = Object.freeze({
-    entries: {
+    loanPolicies: {
       type: 'okapi',
       records: 'loanPolicies',
       path: 'loan-policy-storage/loan-policies',
@@ -64,7 +64,7 @@ class LoanPolicySettings extends React.Component {
       <EntryManager
         {...this.props}
         parentMutator={this.props.mutator}
-        entryList={_.sortBy((this.props.resources.entries || {}).records || [], ['name'])}
+        entryList={_.sortBy((this.props.resources.loanPolicies || {}).records || [], ['name'])}
         dataKey="loanPolicies"
         detailComponent={LoanPolicyDetail}
         formComponent={LoanPolicyForm}
