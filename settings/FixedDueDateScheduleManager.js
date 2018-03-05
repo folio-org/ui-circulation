@@ -31,7 +31,7 @@ class FixedDueDateScheduleManager extends React.Component {
       type: 'okapi',
       records: 'loanPolicies',
       path: 'loan-policy-storage/loan-policies',
-      dataKey: 'loan-policies'
+      dataKey: 'loan-policies',
     },
   });
 
@@ -112,7 +112,7 @@ class FixedDueDateScheduleManager extends React.Component {
         {...this.props}
         parentMutator={this.props.mutator}
         entryList={_.sortBy((this.props.resources.fixedDueDateSchedules || {}).records || [], ['name'])}
-        resourceKey='fixedDueDateSchedules'
+        resourceKey="fixedDueDateSchedules"
         detailComponent={FixedDueDateScheduleDetail}
         formComponent={FixedDueDateScheduleForm}
         paneTitle="Fixed due date schedules"
