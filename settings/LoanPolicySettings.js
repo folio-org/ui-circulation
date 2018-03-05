@@ -56,6 +56,7 @@ class LoanPolicySettings extends React.Component {
       type: 'okapi',
       records: 'fixedDueDateSchedules',
       path: 'fixed-due-date-schedule-storage/fixed-due-date-schedules',
+      dataKey: 'fixed-due-date-schedules'
     },
   });
 
@@ -65,7 +66,7 @@ class LoanPolicySettings extends React.Component {
         {...this.props}
         parentMutator={this.props.mutator}
         entryList={_.sortBy((this.props.resources.loanPolicies || {}).records || [], ['name'])}
-        dataKey="loanPolicies"
+        resourceKey="loanPolicies"
         detailComponent={LoanPolicyDetail}
         formComponent={LoanPolicyForm}
         paneTitle="Loan Policies"
