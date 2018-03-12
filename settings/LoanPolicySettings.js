@@ -25,8 +25,11 @@ function validate(values) {
   if (!values.name) {
     errors.name = 'Please fill this in to continue';
   }
-  if (values.loansPolicy.profileId === '1' // 1 is for 'fixed'
-    && !values.loansPolicy.fixedDueDateSchedule) {
+
+  const loansPolicy = values.loansPolicy || {};
+
+  if (loansPolicy.profileId === '1' // 1 is for 'fixed'
+    && !loansPolicy.fixedDueDateSchedule) {
     errors.loansPolicy = { fixedDueDateSchedule: 'Please select a fixed due date schedule' };
   }
   return errors;
