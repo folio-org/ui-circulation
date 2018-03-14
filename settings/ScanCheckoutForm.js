@@ -44,7 +44,7 @@ class ScanCheckoutForm extends React.Component {
 
   getLastMenu() {
     const { pristine, submitting } = this.props;
-    return (<Button type="submit" disabled={(pristine || submitting)}>Save</Button>);
+    return (<Button type="submit" disabled={(pristine || submitting)} id="clickable-savescanid">Save</Button>);
   }
 
   // eslint-disable-next-line class-methods-use-this
