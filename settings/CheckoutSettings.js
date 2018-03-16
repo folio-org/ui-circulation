@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import ConfigManager from '@folio/stripes-smart-components/lib/ConfigManager';
 
 import { patronIdentifierTypes } from '../constants';
-import ScanCheckoutForm from './ScanCheckoutForm';
+import CheckoutSettingsForm from './CheckoutSettingsForm';
 
-class ScanCheckoutSettings extends React.Component {
+class CheckoutSettings extends React.Component {
   static propTypes = {
     label: PropTypes.string,
     stripes: PropTypes.shape({
@@ -21,9 +21,20 @@ class ScanCheckoutSettings extends React.Component {
   // eslint-disable-next-line class-methods-use-this
   getInitialValues(settings) {
     const value = settings.length === 0 ? '' : settings[0].value;
-    const values = (value) ? value.split(',') : [];
+    const defaultConfig = { prefPatronIdentifier: '', audioAlertsEnabled: false };
+    let config;
+
+    try {
+      config = Object.assign({}, defaultConfig, JSON.parse(value));
+    } catch (e) {
+      config = defaultConfig;
+    }
+
+    const { audioAlertsEnabled, prefPatronIdentifier } = config;
+    const values = (prefPatronIdentifier) ? prefPatronIdentifier.split(',') : [];
     const idents = patronIdentifierTypes.map(i => (values.indexOf(i.key) >= 0));
-    return { idents };
+
+    return { idents, audioAlertsEnabled };
   }
 
   render() {
@@ -31,12 +42,12 @@ class ScanCheckoutSettings extends React.Component {
       <this.configManager
         label={this.props.label}
         moduleName="CHECKOUT"
-        configName="pref_patron_identifier"
+        configName="other_settings"
         getInitialValues={this.getInitialValues}
-        configFormComponent={ScanCheckoutForm}
+        configFormComponent={CheckoutSettingsForm}
       />
     );
   }
 }
 
-export default ScanCheckoutSettings;
+export default CheckoutSettings;

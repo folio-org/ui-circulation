@@ -3,7 +3,7 @@ import Settings from '@folio/stripes-components/lib/Settings';
 
 import LoanPolicySettings from './LoanPolicySettings';
 import LoanRules from './LoanRules';
-import ScanCheckoutSettings from './ScanCheckoutSettings';
+import CheckoutSettings from './CheckoutSettings';
 import FixedDueDateScheduleManager from './FixedDueDateScheduleManager';
 
 const pages = [
@@ -27,8 +27,8 @@ const pages = [
   },
   {
     route: 'checkout',
-    label: 'Scan ID',
-    component: ScanCheckoutSettings,
+    label: 'Other settings',
+    component: CheckoutSettings,
   },
 ];
 
