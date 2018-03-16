@@ -6,9 +6,9 @@ import Checkbox from '@folio/stripes-components/lib/Checkbox';
 import stripesForm from '@folio/stripes-form';
 import Pane from '@folio/stripes-components/lib/Pane';
 import { Field, FieldArray } from 'redux-form';
-
+import Select from '@folio/stripes-components/lib/Select';
 import { patronIdentifierTypes } from '../constants';
-import css from './ScanCheckoutForm.css';
+import css from './CheckoutSettingsForm.css';
 
 function validate(values) {
   const errors = {};
@@ -25,7 +25,7 @@ function validate(values) {
   return errors;
 }
 
-class ScanCheckoutForm extends React.Component {
+class CheckoutSettingsForm extends React.Component {
   constructor() {
     super();
     this.onSave = this.onSave.bind(this);
@@ -33,13 +33,18 @@ class ScanCheckoutForm extends React.Component {
   }
 
   onSave(data) {
-    const idents = data.idents;
+    const { idents, audioAlertsEnabled } = data;
     const values = idents.reduce((vals, ident, index) => {
       if (ident) vals.push(patronIdentifierTypes[index].key);
       return vals;
     }, []);
 
-    this.props.onSubmit({ pref_patron_identifier: values.join(',') });
+    const otherSettings = JSON.stringify({
+      audioAlertsEnabled: audioAlertsEnabled === 'true',
+      prefPatronIdentifier: values.join(','),
+    });
+
+    this.props.onSubmit({ other_settings: otherSettings });
   }
 
   getLastMenu() {
@@ -82,13 +87,27 @@ class ScanCheckoutForm extends React.Component {
       <form id="checkout-form" onSubmit={handleSubmit(this.onSave)}>
         <Pane defaultWidth="fill" fluidContentWidth paneTitle={label} lastMenu={this.getLastMenu()}>
           <FieldArray name="idents" component={this.renderList} />
+          <br />
+          <Row>
+            <Col xs={12}>
+              <Field
+                label="Enable audio alerts"
+                name="audioAlertsEnabled"
+                component={Select}
+                dataOptions={[
+                  { label: 'No', value: false },
+                  { label: 'Yes', value: true },
+                ]}
+              />
+            </Col>
+          </Row>
         </Pane>
       </form>
     );
   }
 }
 
-ScanCheckoutForm.propTypes = {
+CheckoutSettingsForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
   pristine: PropTypes.bool,
@@ -101,4 +120,4 @@ export default stripesForm({
   validate,
   navigationCheck: true,
   enableReinitialize: true,
-})(ScanCheckoutForm);
+})(CheckoutSettingsForm);
