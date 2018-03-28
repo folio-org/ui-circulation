@@ -1,18 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
-import { FormattedDate } from 'react-intl';
 import KeyValue from '@folio/stripes-components/lib/KeyValue';
 import { Row, Col } from '@folio/stripes-components/lib/LayoutGrid';
 
 function FixedDueDateScheduleDetail(props) {
   const fixedDueDateSchedule = props.initialValues;
+  const stripes = props.stripes;
 
   const renderSchedules = fixedDueDateSchedule.schedules.map((schedule, index) => (
     <Row key={index}>
-      <Col xs={4}><FormattedDate value={schedule.from} /></Col>
-      <Col xs={4}><FormattedDate value={schedule.to} /></Col>
-      <Col xs={4}><FormattedDate value={schedule.due} /></Col>
+      <Col xs={4}>{stripes.formatDate(schedule.from)}</Col>
+      <Col xs={4}>{stripes.formatDate(schedule.to)}</Col>
+      <Col xs={4}>{stripes.formatDate(schedule.due)}</Col>
     </Row>
   ));
 
@@ -51,6 +51,7 @@ function FixedDueDateScheduleDetail(props) {
 
 FixedDueDateScheduleDetail.propTypes = {
   initialValues: PropTypes.object,
+  stripes: PropTypes.object,
 };
 
 export default FixedDueDateScheduleDetail;
