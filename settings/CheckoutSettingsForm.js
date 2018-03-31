@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { FormattedMessage } from 'react-intl';
+import { stripesShape } from '@folio/stripes-core/src/Stripes';
 import { Row, Col } from '@folio/stripes-components/lib/LayoutGrid';
 import Button from '@folio/stripes-components/lib/Button';
 import Checkbox from '@folio/stripes-components/lib/Checkbox';
@@ -10,26 +12,12 @@ import Select from '@folio/stripes-components/lib/Select';
 import { patronIdentifierTypes } from '../constants';
 import css from './CheckoutSettingsForm.css';
 
-function validate(values) {
-  const errors = {};
-  const idents = values.idents;
-
-  if (!idents) return errors;
-
-  const isValid = idents.reduce((valid, v) => (valid || v), false);
-
-  if (!isValid) {
-    errors.idents = { _error: 'Please select to continue' };
-  }
-
-  return errors;
-}
-
 class CheckoutSettingsForm extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.onSave = this.onSave.bind(this);
     this.renderList = this.renderList.bind(this);
+    this.getLastMenu = this.getLastMenu.bind(this);
   }
 
   onSave(data) {
@@ -49,7 +37,11 @@ class CheckoutSettingsForm extends React.Component {
 
   getLastMenu() {
     const { pristine, submitting } = this.props;
-    return (<Button type="submit" disabled={(pristine || submitting)} id="clickable-savescanid">Save</Button>);
+    return (
+      <Button type="submit" disabled={(pristine || submitting)} id="clickable-savescanid">
+        <FormattedMessage id="ui-circulation.settings.checkout.save" />
+      </Button>
+    );
   }
 
   // eslint-disable-next-line class-methods-use-this
@@ -73,7 +65,9 @@ class CheckoutSettingsForm extends React.Component {
 
     return (
       <div>
-        <p className={css.label}>Patron ID(s) for checkout scanning *</p>
+        <p className={css.label}>
+          <FormattedMessage id="ui-circulation.settings.checkout.patronIds" />
+        </p>
         {meta.error && <div className={css.error}>{meta.error}</div>}
         {items}
       </div>
@@ -91,12 +85,18 @@ class CheckoutSettingsForm extends React.Component {
           <Row>
             <Col xs={12}>
               <Field
-                label="Enable audio alerts"
+                label={this.props.stripes.intl.formatMessage({ id: 'ui-circulation.settings.checkout.audioAlerts' })}
                 name="audioAlertsEnabled"
                 component={Select}
                 dataOptions={[
-                  { label: 'No', value: false },
-                  { label: 'Yes', value: true },
+                  {
+                    label: this.props.stripes.intl.formatMessage({ id: 'ui-circulation.settings.checkout.no' }),
+                    value: false,
+                  },
+                  {
+                    label: this.props.stripes.intl.formatMessage({ id: 'ui-circulation.settings.checkout.yes' }),
+                    value: true,
+                  },
                 ]}
               />
             </Col>
@@ -113,11 +113,11 @@ CheckoutSettingsForm.propTypes = {
   pristine: PropTypes.bool,
   submitting: PropTypes.bool,
   label: PropTypes.string,
+  stripes: stripesShape.isRequired,
 };
 
 export default stripesForm({
   form: 'checkoutForm',
-  validate,
   navigationCheck: true,
   enableReinitialize: true,
 })(CheckoutSettingsForm);
