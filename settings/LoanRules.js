@@ -164,7 +164,7 @@ class LoanRules extends React.Component {
 
     return (
       <Paneset>
-        <Pane paneTitle="Loan Rules Editor" defaultWidth="fill">
+        <Pane paneTitle={this.props.stripes.intl.formatMessage({ id: 'ui-circulation.settings.loanRules.paneTitle' })} defaultWidth="fill">
           <LoanRulesForm
             onSubmit={this.onSubmit}
             initialValues={{ loanRulesCode }}

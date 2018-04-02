@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
+import { stripesShape } from '@folio/stripes-core/src/Stripes';
 import EntryManager from '@folio/stripes-smart-components/lib/EntryManager';
 import LoanPolicyDetail from './LoanPolicyDetail';
 import LoanPolicyForm from './LoanPolicyForm';
@@ -20,21 +21,6 @@ const defaultPolicy = {
   },
 };
 
-function validate(values) {
-  const errors = {};
-  if (!values.name) {
-    errors.name = 'Please fill this in to continue';
-  }
-
-  const loansPolicy = values.loansPolicy || {};
-
-  if (loansPolicy.profileId === '1' // 1 is for 'fixed'
-    && !loansPolicy.fixedDueDateSchedule) {
-    errors.loansPolicy = { fixedDueDateSchedule: 'Please select a fixed due date schedule' };
-  }
-  return errors;
-}
-
 class LoanPolicySettings extends React.Component {
   static propTypes = {
     resources: PropTypes.shape({
@@ -47,6 +33,7 @@ class LoanPolicySettings extends React.Component {
         DELETE: PropTypes.func,
       }),
     }).isRequired,
+    stripes: stripesShape.isRequired,
   };
 
   static manifest = Object.freeze({
@@ -63,6 +50,27 @@ class LoanPolicySettings extends React.Component {
     },
   });
 
+  constructor(props) {
+    super(props);
+
+    this.validate = this.validate.bind(this);
+  }
+
+  validate(values) {
+    const errors = {};
+    if (!values.name) {
+      errors.name = this.props.stripes.intl.formatMessage({ id: 'ui-circulation.settings.validate.fillIn' });
+    }
+
+    const loansPolicy = values.loansPolicy || {};
+
+    if (loansPolicy.profileId === '1' // 1 is for 'fixed'
+      && !loansPolicy.fixedDueDateSchedule) {
+      errors.loansPolicy = { fixedDueDateSchedule: this.props.stripes.intl.formatMessage({ id: 'ui-circulation.settings.loanPolicy.selectFDDS' }) };
+    }
+    return errors;
+  }
+
   render() {
     return (
       <EntryManager
@@ -72,8 +80,8 @@ class LoanPolicySettings extends React.Component {
         resourceKey="loanPolicies"
         detailComponent={LoanPolicyDetail}
         formComponent={LoanPolicyForm}
-        paneTitle="Loan Policies"
-        entryLabel="Loan Policy"
+        paneTitle={this.props.stripes.intl.formatMessage({ id: 'ui-circulation.settings.loanPolicy.paneTitle' })}
+        entryLabel={this.props.stripes.intl.formatMessage({ id: 'ui-circulation.settings.loanPolicy.entryLabel' })}
         nameKey="name"
         defaultEntry={defaultPolicy}
         permissions={{
@@ -81,7 +89,7 @@ class LoanPolicySettings extends React.Component {
           post: 'ui-circulation.settings.loan-policies',
           delete: 'ui-circulation.settings.loan-policies',
         }}
-        validate={validate}
+        validate={this.validate}
       />
     );
   }
