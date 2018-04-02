@@ -9,12 +9,20 @@ export const loanProfileTypes = [
 ];
 
 export const intervalPeriods = [
-  { label: 'Minutes', id: 1, value: 1 },
-  { label: 'Hours', id: 2, value: 2 },
-  { label: 'Days', id: 3, value: 3 },
-  { label: 'Weeks', id: 4, value: 4 },
-  { label: 'Months', id: 5, value: 5 },
+  { label: 'Minutes', id: 1, value: 'Minutes' },
+  { label: 'Hours', id: 2, value: 'Hours' },
+  { label: 'Days', id: 3, value: 'Days' },
+  { label: 'Weeks', id: 4, value: 'Weeks' },
+  { label: 'Months', id: 5, value: 'Months' },
 ];
+
+export const intervalIdsMap = {
+  MINUTES: 'Minutes',
+  HOURS: 'Hours',
+  DAYS: 'Days',
+  WEEKS: 'Weeks',
+  MONTHS: 'Months',
+};
 
 export const dueDateManagementOptions = [
   { label: 'Keep the current due date', id: 1, value: 1 },

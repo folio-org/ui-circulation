@@ -8,7 +8,7 @@ import Select from '@folio/stripes-components/lib/Select';
 import TextField from '@folio/stripes-components/lib/TextField';
 import TextArea from '@folio/stripes-components/lib/TextArea';
 
-import { loanProfileTypes, intervalPeriods, dueDateManagementOptions, renewFromOptions } from '../constants';
+import { loanProfileTypes, intervalPeriods, dueDateManagementOptions, renewFromOptions, intervalIdsMap } from '../constants';
 
 class LoanPolicyForm extends React.Component {
   static propTypes = {
@@ -35,28 +35,28 @@ class LoanPolicyForm extends React.Component {
   validateField(fieldValue, allValues) {
     const period = (allValues.loansPolicy && allValues.loansPolicy.period);
     if (period && period.duration && !period.intervalId) {
-      this.props.change('loansPolicy.period.intervalId', 3);
+      this.props.change('loansPolicy.period.intervalId', intervalIdsMap.DAYS);
     }
     if (period && period.intervalId && !period.duration) {
       this.props.change('loansPolicy.period.duration', 1);
     }
     const existingPeriod = (allValues.loansPolicy && allValues.loansPolicy.existingRequestsPeriod);
     if (existingPeriod && existingPeriod.duration && !existingPeriod.intervalId) {
-      this.props.change('loansPolicy.existingRequestsPeriod.intervalId', 3);
+      this.props.change('loansPolicy.existingRequestsPeriod.intervalId', intervalIdsMap.DAYS);
     }
     if (existingPeriod && existingPeriod.intervalId && !existingPeriod.duration) {
       this.props.change('loansPolicy.existingRequestsPeriod.duration', 1);
     }
     const gracePeriod = (allValues.loansPolicy && allValues.loansPolicy.gracePeriod);
     if (gracePeriod && gracePeriod.duration && !gracePeriod.intervalId) {
-      this.props.change('loansPolicy.gracePeriod.intervalId', 3);
+      this.props.change('loansPolicy.gracePeriod.intervalId', intervalIdsMap.DAYS);
     }
     if (gracePeriod && gracePeriod.intervalId && !gracePeriod.duration) {
       this.props.change('loansPolicy.gracePeriod.duration', 1);
     }
     const altRenewPeriod = (allValues.renewalsPolicy && allValues.renewalsPolicy.period);
     if (altRenewPeriod && altRenewPeriod.duration && !altRenewPeriod.intervalId) {
-      this.props.change('renewalsPolicy.period.intervalId', 3);
+      this.props.change('renewalsPolicy.period.intervalId', intervalIdsMap.DAYS);
     }
     if (altRenewPeriod && altRenewPeriod.intervalId && !altRenewPeriod.duration) {
       this.props.change('renewalsPolicy.period.duration', 1);
