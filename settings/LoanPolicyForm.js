@@ -10,7 +10,14 @@ import TextField from '@folio/stripes-components/lib/TextField';
 import TextArea from '@folio/stripes-components/lib/TextArea';
 import { FormattedMessage } from 'react-intl';
 
-import { loanProfileTypes, intervalPeriods, dueDateManagementOptions, renewFromOptions } from '../constants';
+import {
+  loanProfileTypes,
+  intervalPeriods,
+  dueDateManagementOptions,
+  renewFromOptions,
+  intervalIdsMap,
+  loanProfileMap
+} from '../constants';
 
 class LoanPolicyForm extends React.Component {
   static propTypes = {
@@ -35,28 +42,28 @@ class LoanPolicyForm extends React.Component {
   validateField(fieldValue, allValues) {
     const period = (allValues.loansPolicy && allValues.loansPolicy.period);
     if (period && period.duration && !period.intervalId) {
-      this.props.change('loansPolicy.period.intervalId', 3);
+      this.props.change('loansPolicy.period.intervalId', intervalIdsMap.DAYS);
     }
     if (period && period.intervalId && !period.duration) {
       this.props.change('loansPolicy.period.duration', 1);
     }
     const existingPeriod = (allValues.loansPolicy && allValues.loansPolicy.existingRequestsPeriod);
     if (existingPeriod && existingPeriod.duration && !existingPeriod.intervalId) {
-      this.props.change('loansPolicy.existingRequestsPeriod.intervalId', 3);
+      this.props.change('loansPolicy.existingRequestsPeriod.intervalId', intervalIdsMap.DAYS);
     }
     if (existingPeriod && existingPeriod.intervalId && !existingPeriod.duration) {
       this.props.change('loansPolicy.existingRequestsPeriod.duration', 1);
     }
     const gracePeriod = (allValues.loansPolicy && allValues.loansPolicy.gracePeriod);
     if (gracePeriod && gracePeriod.duration && !gracePeriod.intervalId) {
-      this.props.change('loansPolicy.gracePeriod.intervalId', 3);
+      this.props.change('loansPolicy.gracePeriod.intervalId', intervalIdsMap.DAYS);
     }
     if (gracePeriod && gracePeriod.intervalId && !gracePeriod.duration) {
       this.props.change('loansPolicy.gracePeriod.duration', 1);
     }
     const altRenewPeriod = (allValues.renewalsPolicy && allValues.renewalsPolicy.period);
     if (altRenewPeriod && altRenewPeriod.duration && !altRenewPeriod.intervalId) {
-      this.props.change('renewalsPolicy.period.intervalId', 3);
+      this.props.change('renewalsPolicy.period.intervalId', intervalIdsMap.DAYS);
     }
     if (altRenewPeriod && altRenewPeriod.intervalId && !altRenewPeriod.duration) {
       this.props.change('renewalsPolicy.period.duration', 1);
@@ -70,10 +77,10 @@ class LoanPolicyForm extends React.Component {
     // Conditional field labels
     let dueDateScheduleFieldLabel = formatMsg({ id: 'ui-circulation.settings.loanPolicy.fDDS' });
     let altRenewalScheduleLabel = formatMsg({ id: 'ui-circulation.settings.loanPolicy.altFDDSforRenewals' });
-    if (policy.loansPolicy && policy.loansPolicy.profileId === '2') {
+    if (policy.loansPolicy && policy.loansPolicy.profileId === loanProfileMap.ROLLING) {
       dueDateScheduleFieldLabel = formatMsg({ id: 'ui-circulation.settings.loanPolicy.fDDSlimit' });
       altRenewalScheduleLabel = formatMsg({ id: 'ui-circulation.settings.loanPolicy.altFDDSDueDateLimit' });
-    } else if (policy.loansPolicy && policy.loansPolicy.profileId === '1') {
+    } else if (policy.loansPolicy && policy.loansPolicy.profileId === loanProfileMap.FIXED) {
       dueDateScheduleFieldLabel += ' *';
     }
 
@@ -132,7 +139,7 @@ class LoanPolicyForm extends React.Component {
           />
         }
         {/* loan period - only appears when profile is "rolling" */}
-        { (policy.loanable && policy.loansPolicy.profileId === '2') &&
+        { (policy.loanable && policy.loansPolicy.profileId === loanProfileMap.ROLLING) &&
           <div>
             <p>
               <FormattedMessage id="ui-circulation.settings.loanPolicy.loanPeriod" />
@@ -156,7 +163,7 @@ class LoanPolicyForm extends React.Component {
         }
         {/* fixed due date schedule - appears when profile is "fixed" or "rolling",
             but with different labels */}
-        { (policy.loanable && policy.loansPolicy && policy.loansPolicy.profileId !== '3') &&
+        { (policy.loanable && policy.loansPolicy && policy.loansPolicy.profileId !== loanProfileMap.INDEFINITE) &&
           <Field
             label={dueDateScheduleFieldLabel}
             name="loansPolicy.fixedDueDateSchedule"
@@ -321,7 +328,7 @@ class LoanPolicyForm extends React.Component {
             {/* alternate loan period for renewals ("rolling" profile only) */}
             { policy.renewable &&
               policy.renewalsPolicy.differentPeriod &&
-              policy.loansPolicy.profileId === '2' &&
+              policy.loansPolicy.profileId === loanProfileMap.ROLLING &&
               <div>
                 <p>
                   <FormattedMessage id="ui-circulation.settings.loanPolicy.alternateLoanPeriodRenewals" />
@@ -353,7 +360,7 @@ class LoanPolicyForm extends React.Component {
               "fixed" or "rolling", but with different labels */}
             { policy.renewable &&
               policy.renewalsPolicy.differentPeriod &&
-              policy.loansPolicy.profileId !== '3' &&
+              policy.loansPolicy.profileId !== loanProfileMap.INDEFINITE &&
               <Field
                 label={altRenewalScheduleLabel}
                 name="renewalsPolicy.alternateFixedDueDateScheduleId"

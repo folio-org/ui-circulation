@@ -16,10 +16,11 @@
 * Fix loan policy form. Fixes UICIRC-34.
 * Store and dereference UUID in loan rules. Fixes UICIRC-35.
 * Use more-current stripes-components. Refs STRIPES-495.
-* Update dependencies. Refs STRIPES-501. 
-* Provide ID for Scan-ID form for easy access by tests. Refs UITEST-20. Available from v1.1.2. 
+* Update dependencies. Refs STRIPES-501.
+* Provide ID for Scan-ID form for easy access by tests. Refs UITEST-20. Available from v1.1.2.
 * Add setting for audio alerts in circulation. Fixes UICIRC-47.
 * Ignore yarn-error.log file. Refs STRIPES-517.
+* Match periodId and profileId values with the values on the server. Fixes UICIRC-53.
 
 ## [1.1.1](https://github.com/folio-org/ui-circulation/tree/v1.1.1) (2017-09-02)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v1.1.0...v1.1.1)

@@ -5,12 +5,13 @@ import { stripesShape } from '@folio/stripes-core/src/Stripes';
 import EntryManager from '@folio/stripes-smart-components/lib/EntryManager';
 import LoanPolicyDetail from './LoanPolicyDetail';
 import LoanPolicyForm from './LoanPolicyForm';
+import { loanProfileMap } from '../constants';
 
 const defaultPolicy = {
   name: '',
   loanable: true,
   loansPolicy: {
-    profileId: '2', // TODO: update when this is switched to a GUID
+    profileId: loanProfileMap.ROLLING,
     closedLibraryDueDateManagementId: '4', // TODO: update when this is switched to a GUID
   },
   renewable: true,
@@ -64,7 +65,7 @@ class LoanPolicySettings extends React.Component {
 
     const loansPolicy = values.loansPolicy || {};
 
-    if (loansPolicy.profileId === '1' // 1 is for 'fixed'
+    if (loansPolicy.profileId === loanProfileMap.FIXED
       && !loansPolicy.fixedDueDateSchedule) {
       errors.loansPolicy = { fixedDueDateSchedule: this.props.stripes.intl.formatMessage({ id: 'ui-circulation.settings.loanPolicy.selectFDDS' }) };
     }
