@@ -25,8 +25,7 @@ function FixedDueDateScheduleDetail(props) {
         <Row>
           <Col xs={12}>
             <h2 style={{ marginTop: '0' }}>
-              <FormattedMessage id="" />
-              {formatMsg({ id: 'ui-circulation.settings.fDDSform.name' })}
+              <FormattedMessage id="ui-circulation.settings.fDDSform.name" />
             </h2>
           </Col>
         </Row>
