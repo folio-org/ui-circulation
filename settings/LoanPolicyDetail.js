@@ -6,7 +6,13 @@ import KeyValue from '@folio/stripes-components/lib/KeyValue';
 import { Row, Col } from '@folio/stripes-components/lib/LayoutGrid';
 import { FormattedMessage } from 'react-intl';
 
-import { loanProfileTypes, intervalPeriods, dueDateManagementOptions, renewFromOptions } from '../constants';
+import {
+  loanProfileTypes,
+  intervalPeriods,
+  dueDateManagementOptions,
+  renewFromOptions,
+  loanProfileMap
+} from '../constants';
 
 class LoanPolicyDetail extends React.Component {
   static propTypes = {
@@ -23,12 +29,12 @@ class LoanPolicyDetail extends React.Component {
     const formatMsg = this.props.stripes.intl.formatMessage;
     const policy = this.props.initialValues || {};
     let dueDateScheduleFieldLabel = formatMsg({ id: 'ui-circulation.settings.loanPolicy.fDDS' });
-    if (policy.loansPolicy && policy.loansPolicy.profileId === '2') {
+    if (policy.loansPolicy && policy.loansPolicy.profileId === loanProfileMap.ROLLING) {
       dueDateScheduleFieldLabel = formatMsg({ id: 'ui-circulation.settings.loanPolicy.fDDSlimit' });
     }
 
     const profileId = _.get(policy, ['loansPolicy', 'profileId']);
-    const profile = _.find(loanProfileTypes, t => t.id === parseInt(profileId, 10));
+    const profile = _.find(loanProfileTypes, t => t.value === profileId);
     const ddId = _.get(policy, ['loansPolicy', 'closedLibraryDueDateManagementId']);
     const closedLibraryDueDateManagement = _.find(dueDateManagementOptions, dd => dd.id === parseInt(ddId, 10));
     const skipClosed = (_.get(policy, ['loansPolicy', 'skipClosed'])) ? 'Yes' : 'No';
@@ -54,7 +60,7 @@ class LoanPolicyDetail extends React.Component {
             />
           </Col>
         </Row>
-        {policy.loansPolicy.profileId === '2' &&
+        {policy.loansPolicy.profileId === loanProfileMap.ROLLING &&
           <div>
             <br />
             <Row>
@@ -67,7 +73,7 @@ class LoanPolicyDetail extends React.Component {
             </Row>
           </div>
         }
-        {(policy.loansPolicy && policy.loansPolicy.profileId !== '3') &&
+        {(policy.loansPolicy && policy.loansPolicy.profileId !== loanProfileMap.INDEFINITE) &&
           <div>
             <br />
             <Row>
@@ -203,7 +209,7 @@ class LoanPolicyDetail extends React.Component {
             />
           </Col>
         </Row>
-        {(policy.renewalsPolicy && policy.renewalsPolicy.differentPeriod && policy.loansPolicy.profileId === '2') &&
+        {(policy.renewalsPolicy && policy.renewalsPolicy.differentPeriod && policy.loansPolicy.profileId === loanProfileMap.ROLLING) &&
           <div>
             <br />
             <Row>
