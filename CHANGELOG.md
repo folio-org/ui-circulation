@@ -21,6 +21,7 @@
 * Add setting for audio alerts in circulation. Fixes UICIRC-47.
 * Ignore yarn-error.log file. Refs STRIPES-517.
 * Match periodId and profileId values with the values on the server. Fixes UICIRC-53.
+* Fix creating loan policy with fixed due date schedule. Fixes UICIRC-56.
 
 ## [1.1.1](https://github.com/folio-org/ui-circulation/tree/v1.1.1) (2017-09-02)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v1.1.0...v1.1.1)

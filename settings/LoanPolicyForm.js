@@ -166,7 +166,7 @@ class LoanPolicyForm extends React.Component {
         { (policy.loanable && policy.loansPolicy && policy.loansPolicy.profileId !== loanProfileMap.INDEFINITE) &&
           <Field
             label={dueDateScheduleFieldLabel}
-            name="loansPolicy.fixedDueDateSchedule"
+            name="loansPolicy.fixedDueDateScheduleId"
             component={Select}
             placeholder={formatMsg({ id: 'ui-circulation.settings.loanPolicy.selectSchedule' })}
             dataOptions={schedules}
