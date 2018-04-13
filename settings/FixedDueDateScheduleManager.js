@@ -121,7 +121,7 @@ class FixedDueDateScheduleManager extends React.Component {
         detailComponent={FixedDueDateScheduleDetail}
         formComponent={FixedDueDateScheduleForm}
         paneTitle={formatMsg({ id: 'ui-circulation.settings.fDDS.paneTitle' })}
-        entryLabel={formatMsg({ id: 'ui-circulation.settings.loanPolicy.fDDS' })}
+        entryLabel={formatMsg({ id: 'ui-circulation.settings.fDDSform.entryLabel' })}
         nameKey="name"
         permissions={{
           put: 'ui-circulation.settings.loan-rules',
