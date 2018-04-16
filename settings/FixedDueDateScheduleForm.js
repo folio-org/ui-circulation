@@ -15,10 +15,9 @@ import IfPermission from '@folio/stripes-components/lib/IfPermission';
 import Pane from '@folio/stripes-components/lib/Pane';
 import Paneset from '@folio/stripes-components/lib/Paneset';
 import PaneMenu from '@folio/stripes-components/lib/PaneMenu';
-import MetaSection from '@folio/stripes-components/lib/MetaSection';
 import stripesForm from '@folio/stripes-form';
 import ConfirmationModal from '@folio/stripes-components/lib/structures/ConfirmationModal';
-
+import ViewMetaData from './ViewMetaData';
 import css from './FixedDueDateSchedule.css';
 
 class FixedDueDateScheduleForm extends React.Component {
@@ -42,7 +41,7 @@ class FixedDueDateScheduleForm extends React.Component {
     this.saveSet = this.saveSet.bind(this);
     this.beginDelete = this.beginDelete.bind(this);
     this.confirmDeleteSet = this.confirmDeleteSet.bind(this);
-    this.renderMeta = this.renderMeta.bind(this);
+    this.cViewMetaData = props.stripes.connect(ViewMetaData);
 
     this.state = {
       confirmDelete: false,
@@ -205,29 +204,10 @@ class FixedDueDateScheduleForm extends React.Component {
     );
   }
 
-  renderMeta() {
-    const { initialValues } = this.props;
-    const selectedSet = initialValues || {};
-    if (selectedSet.id) {
-      return (
-        <MetaSection
-          id="fixedDueDateScheduleMeta"
-          contentId="fixedDueDateScheduleMetaContent"
-          lastUpdatedDate={(initialValues && initialValues.metaData.updatedDate) || ''}
-          createdDate={(initialValues && initialValues.metaData.createdDate) || ''}
-          lastUpdatedBy={(initialValues && initialValues.metaData.updatedByUserId) || ''}
-          createdBy={(initialValues && initialValues.metaData.createdByUserId) || ''}
-        />
-      );
-    }
-    return '';
-  }
-
   render() {
     const { handleSubmit, initialValues } = this.props;
     const formatMsg = this.props.stripes.intl.formatMessage;
     const { confirmDelete, sections } = this.state;
-    const meta = this.renderMeta();
     const selectedSet = initialValues || {};
     const selectedName = selectedSet.name || formatMsg({ id: 'ui-circulation.settings.fDDSform.untitled' });
     const confirmationMessage = <FormattedMessage id="ui-circulation.settings.fDDSform.deleteMessage" values={{ name: <strong>{selectedName}</strong>, deleted: <strong>deleted</strong> }} />;
@@ -249,7 +229,9 @@ class FixedDueDateScheduleForm extends React.Component {
                 label={formatMsg({ id: 'ui-circulation.settings.fDDSform.about' })}
               >
                 <section className={css.accordianSection}>
-                  {meta}
+                  { (initialValues && initialValues.metaData && initialValues.metaData.createdDate) &&
+                    <this.cViewMetaData metadata={initialValues.metaData} />
+                  }
                   <div className={css.smformItem}>
                     <Field
                       name="name"
