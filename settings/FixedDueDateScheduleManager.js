@@ -119,9 +119,9 @@ class FixedDueDateScheduleManager extends React.Component {
         entryList={_.sortBy((this.props.resources.fixedDueDateSchedules || {}).records || [], ['name'])}
         resourceKey="fixedDueDateSchedules"
         detailComponent={FixedDueDateScheduleDetail}
-        formComponent={FixedDueDateScheduleForm}
+        entryFormComponent={FixedDueDateScheduleForm}
         paneTitle={formatMsg({ id: 'ui-circulation.settings.fDDS.paneTitle' })}
-        entryLabel={formatMsg({ id: 'ui-circulation.settings.loanPolicy.fDDS' })}
+        entryLabel={formatMsg({ id: 'ui-circulation.settings.fDDSform.entryLabel' })}
         nameKey="name"
         permissions={{
           put: 'ui-circulation.settings.loan-rules',
