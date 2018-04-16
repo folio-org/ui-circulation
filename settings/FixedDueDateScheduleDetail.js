@@ -1,13 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
-import { FormattedDate } from 'react-intl';
-
+import { FormattedDate, FormattedMessage } from 'react-intl'
+import MetaSection from '@folio/stripes-components/lib/MetaSection';
 import { Accordion, ExpandAllButton } from '@folio/stripes-components/lib/Accordion';
 import { stripesShape } from '@folio/stripes-core/src/Stripes';
 import KeyValue from '@folio/stripes-components/lib/KeyValue';
 import { Row, Col } from '@folio/stripes-components/lib/LayoutGrid';
-import { FormattedMessage } from 'react-intl';
 import css from './FixedDueDateSchedule.css';
 
 class FixedDueDateScheduleDetail extends React.Component{
@@ -21,6 +20,7 @@ class FixedDueDateScheduleDetail extends React.Component{
     this.handleExpandAll = this.handleExpandAll.bind(this);
     this.state ={
       sections:{
+        generalInformation:true,
         fixedDueDateSchedule:true,
       },
     };
@@ -77,13 +77,27 @@ class FixedDueDateScheduleDetail extends React.Component{
     
   return (
     <div>
+
         <Row end="xs">
           <Col xs>
             <ExpandAllButton accordionStatus={sections} onToggle={this.handleExpandAll} />
           </Col>
         </Row>
-        <div className={css.headerArea}>General information</div>
+        <Accordion
+          open={sections.generalInformation}
+          id="generalInformation"
+          onToggle={this.handleSectionToggle}
+          label="General information"
+        >
           <section className={css.accordianSection}>
+            <MetaSection
+              id="fixedDueDateScheduleMeta"
+              contentId="fixedDueDateScheduleMetaContent"
+              lastUpdatedDate={(fixedDueDateSchedule && fixedDueDateSchedule.metaData.updatedDate) || ''}
+              createdDate={(fixedDueDateSchedule  && fixedDueDateSchedule.metaData.createdDate) || ''}
+              lastUpdatedBy={(fixedDueDateSchedule  && fixedDueDateSchedule.metaData.updatedByUserId) || ''}
+              createdBy={(fixedDueDateSchedule  && fixedDueDateSchedule.metaData.createdByUserId) || ''}
+            />
             <Row>
               <Col xs={12}>
                 <KeyValue
@@ -101,6 +115,7 @@ class FixedDueDateScheduleDetail extends React.Component{
               </Col>
             </Row>
             </section>
+          </Accordion>
         <Accordion
           open={sections.fixedDueDateSchedule}
           id="fixedDueDateSchedule"

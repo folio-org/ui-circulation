@@ -5,7 +5,7 @@
 
 .accordianSection{
   max-width:700px;
-  margin-left:15px;
+  margin-left:20px;
 }
 .smformItem{
   max-width:40%;
@@ -13,15 +13,7 @@
 .adjustDelete{
   margin: 10px 0 10px 0;
 }
-.headerArea {
-  display: flex;
-  flex-grow: 2;
-  color: rgba(0, 0, 0, 0.62);;
-  font-weight: 600;
-  font-size: 130%;
-  justify-content: flex-start;
-  margin-bottom: 0.5em;
-}
+
 .scheduleItem {
   border-color: #999;
   border-width: 1px 1px 0;
