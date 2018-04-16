@@ -2,12 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 import { FormattedDate, FormattedMessage } from 'react-intl';
-import MetaSection from '@folio/stripes-components/lib/MetaSection';
 import { Accordion, ExpandAllButton } from '@folio/stripes-components/lib/Accordion';
 import { stripesShape } from '@folio/stripes-core/src/Stripes';
 import KeyValue from '@folio/stripes-components/lib/KeyValue';
 import { Row, Col } from '@folio/stripes-components/lib/LayoutGrid';
 import css from './FixedDueDateSchedule.css';
+import ViewMetaData from './ViewMetaData';
 
 class FixedDueDateScheduleDetail extends React.Component {
   static propTypes = {
@@ -18,6 +18,7 @@ class FixedDueDateScheduleDetail extends React.Component {
     super(props);
     this.handleSectionToggle = this.handleSectionToggle.bind(this);
     this.handleExpandAll = this.handleExpandAll.bind(this);
+    this.cViewMetaData = props.stripes.connect(ViewMetaData);
     this.state = {
       sections: {
         generalInformation: true,
@@ -85,14 +86,9 @@ class FixedDueDateScheduleDetail extends React.Component {
           label="General information"
         >
           <section className={css.accordianSection}>
-            <MetaSection
-              id="fixedDueDateScheduleMeta"
-              contentId="fixedDueDateScheduleMetaContent"
-              lastUpdatedDate={(fixedDueDateSchedule && fixedDueDateSchedule.metaData.updatedDate) || ''}
-              createdDate={(fixedDueDateSchedule && fixedDueDateSchedule.metaData.createdDate) || ''}
-              lastUpdatedBy={(fixedDueDateSchedule && fixedDueDateSchedule.metaData.updatedByUserId) || ''}
-              createdBy={(fixedDueDateSchedule && fixedDueDateSchedule.metaData.createdByUserId) || ''}
-            />
+            { (fixedDueDateSchedule.metaData && fixedDueDateSchedule.metaData.createdDate) &&
+              <this.cViewMetaData metadata={fixedDueDateSchedule.metaData} />
+            }
             <Row>
               <Col xs={12}>
                 <KeyValue
