@@ -3,9 +3,8 @@
 // The idea is to eventually replace them with small, controlled vocabularies
 // on the server side.
 export const loanProfileTypes = [
-  { label: 'Fixed', id: 1, value: 'Fixed' },
-  { label: 'Rolling', id: 2, value: 'Rolling' },
-  { label: 'Indefinite', id: 3, value: 'Indefinite' },
+  { label: 'Fixed', value: 'Fixed' },
+  { label: 'Rolling', value: 'Rolling' },
 ];
 
 export const intervalPeriods = [
