@@ -17,7 +17,7 @@ import Paneset from '@folio/stripes-components/lib/Paneset';
 import PaneMenu from '@folio/stripes-components/lib/PaneMenu';
 import stripesForm from '@folio/stripes-form';
 import ConfirmationModal from '@folio/stripes-components/lib/structures/ConfirmationModal';
-import ViewMetaData from './ViewMetaData';
+import ViewMetadata from './ViewMetadata';
 import css from './FixedDueDateSchedule.css';
 
 class FixedDueDateScheduleForm extends React.Component {
@@ -41,7 +41,7 @@ class FixedDueDateScheduleForm extends React.Component {
     this.saveSet = this.saveSet.bind(this);
     this.beginDelete = this.beginDelete.bind(this);
     this.confirmDeleteSet = this.confirmDeleteSet.bind(this);
-    this.cViewMetaData = props.stripes.connect(ViewMetaData);
+    this.cViewMetadata = props.stripes.connect(ViewMetadata);
 
     this.state = {
       confirmDelete: false,
@@ -229,8 +229,8 @@ class FixedDueDateScheduleForm extends React.Component {
                 label={formatMsg({ id: 'ui-circulation.settings.fDDSform.about' })}
               >
                 <section className={css.accordianSection}>
-                  { (initialValues && initialValues.metaData && initialValues.metaData.createdDate) &&
-                    <this.cViewMetaData metadata={initialValues.metaData} />
+                  { (initialValues && initialValues.metadata && initialValues.metadata.createdDate) &&
+                    <this.cViewMetadata metadata={initialValues.metadata} />
                   }
                   <div className={css.smformItem}>
                     <Field

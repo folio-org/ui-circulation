@@ -7,7 +7,7 @@ import { stripesShape } from '@folio/stripes-core/src/Stripes';
 import KeyValue from '@folio/stripes-components/lib/KeyValue';
 import { Row, Col } from '@folio/stripes-components/lib/LayoutGrid';
 import css from './FixedDueDateSchedule.css';
-import ViewMetaData from './ViewMetaData';
+import ViewMetadata from './ViewMetadata';
 
 class FixedDueDateScheduleDetail extends React.Component {
   static propTypes = {
@@ -18,7 +18,7 @@ class FixedDueDateScheduleDetail extends React.Component {
     super(props);
     this.handleSectionToggle = this.handleSectionToggle.bind(this);
     this.handleExpandAll = this.handleExpandAll.bind(this);
-    this.cViewMetaData = props.stripes.connect(ViewMetaData);
+    this.cViewMetadata = props.stripes.connect(ViewMetadata);
     this.state = {
       sections: {
         generalInformation: true,
@@ -86,8 +86,8 @@ class FixedDueDateScheduleDetail extends React.Component {
           label="General information"
         >
           <section className={css.accordianSection}>
-            { (fixedDueDateSchedule.metaData && fixedDueDateSchedule.metaData.createdDate) &&
-              <this.cViewMetaData metadata={fixedDueDateSchedule.metaData} />
+            { (fixedDueDateSchedule.metadata && fixedDueDateSchedule.metadata.createdDate) &&
+              <this.cViewMetadata metadata={fixedDueDateSchedule.metadata} />
             }
             <Row>
               <Col xs={12}>
