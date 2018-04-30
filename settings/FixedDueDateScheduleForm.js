@@ -239,7 +239,6 @@ class FixedDueDateScheduleForm extends React.Component {
                       autoFocus
                       required
                       fullWidth
-                      rounded
                       label={formatMsg({ id: 'ui-circulation.settings.fDDSform.nameRequired' })}
                     />
                   </div>
@@ -247,7 +246,6 @@ class FixedDueDateScheduleForm extends React.Component {
                     name="description"
                     component={TextArea}
                     fullWidth
-                    rounded
                     label={formatMsg({ id: 'ui-circulation.settings.fDDSform.description' })}
                   />
                 </section>
