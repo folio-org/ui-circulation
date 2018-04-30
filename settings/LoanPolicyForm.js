@@ -103,7 +103,6 @@ class LoanPolicyForm extends React.Component {
           component={TextField}
           required
           fullWidth
-          rounded
           validate={this.validateField}
         />
         <Field
@@ -111,7 +110,6 @@ class LoanPolicyForm extends React.Component {
           name="description"
           component={TextArea}
           fullWidth
-          rounded
           validate={this.validateField}
         />
         <hr />
@@ -146,7 +144,7 @@ class LoanPolicyForm extends React.Component {
             </p>
             <Row>
               <Col xs={2}>
-                <Field label="" name="loansPolicy.period.duration" component={TextField} rounded validate={this.validateField} />
+                <Field label="" name="loansPolicy.period.duration" component={TextField} validate={this.validateField} />
               </Col>
               <Col>
                 <Field
@@ -205,7 +203,6 @@ class LoanPolicyForm extends React.Component {
                   label=""
                   name="loansPolicy.existingRequestsPeriod.duration"
                   component={TextField}
-                  rounded
                   validate={this.validateField}
                 />
               </Col>
@@ -234,7 +231,6 @@ class LoanPolicyForm extends React.Component {
                   label=""
                   name="loansPolicy.gracePeriod.duration"
                   component={TextField}
-                  rounded
                   validate={this.validateField}
                 />
               </Col>
@@ -297,7 +293,6 @@ class LoanPolicyForm extends React.Component {
                       name="renewalsPolicy.numberAllowed"
                       component={TextField}
                       required
-                      rounded
                       validate={this.validateField}
                     />
                   </Col>
@@ -339,7 +334,6 @@ class LoanPolicyForm extends React.Component {
                       label=""
                       name="renewalsPolicy.period.duration"
                       component={TextField}
-                      rounded
                       validate={this.validateField}
                     />
                   </Col>
