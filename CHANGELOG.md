@@ -24,6 +24,7 @@
 * Fix creating loan policy with fixed due date schedule. Fixes UICIRC-56.
 * Remove "Indefinite" loan profile. Fixes UICIRC-55.
 * Favor metadata over metaData. One case to rule them all. Refs UICIRC-57.
+* Show chosen Fixed due date schedule on loan policy details. Fixes UICIRC-58.
 
 ## [1.1.1](https://github.com/folio-org/ui-circulation/tree/v1.1.1) (2017-09-02)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v1.1.0...v1.1.1)

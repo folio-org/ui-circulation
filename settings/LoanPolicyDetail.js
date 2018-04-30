@@ -18,6 +18,9 @@ class LoanPolicyDetail extends React.Component {
   static propTypes = {
     initialValues: PropTypes.object,
     stripes: stripesShape.isRequired,
+    parentResources: PropTypes.shape({
+      fixedDueDateSchedules: PropTypes.object,
+    }),
   };
 
   // eslint-disable-next-line class-methods-use-this
@@ -26,11 +29,20 @@ class LoanPolicyDetail extends React.Component {
   }
 
   renderLoans() {
-    const formatMsg = this.props.stripes.intl.formatMessage;
-    const policy = this.props.initialValues || {};
+    const { stripes, initialValues, parentResources } = this.props;
+
+    const formatMsg = stripes.intl.formatMessage;
+    const policy = initialValues || {};
+    const fixedDueDateSchedules = ((parentResources || {}).fixedDueDateSchedules || {}).records || [];
+
     let dueDateScheduleFieldLabel = formatMsg({ id: 'ui-circulation.settings.loanPolicy.fDDS' });
     if (policy.loansPolicy && policy.loansPolicy.profileId === loanProfileMap.ROLLING) {
       dueDateScheduleFieldLabel = formatMsg({ id: 'ui-circulation.settings.loanPolicy.fDDSlimit' });
+    }
+
+    let schedule = {};
+    if (policy.loansPolicy && policy.loansPolicy.fixedDueDateScheduleId) {
+      schedule = fixedDueDateSchedules.find(s => s.id === policy.loansPolicy.fixedDueDateScheduleId);
     }
 
     const profileId = _.get(policy, ['loansPolicy', 'profileId']);
@@ -78,7 +90,7 @@ class LoanPolicyDetail extends React.Component {
             <br />
             <Row>
               <Col xs={12}>
-                <KeyValue label={dueDateScheduleFieldLabel} value={_.get(policy, ['loansPolicy', 'fixedDueDateSchedule'], '-')} />
+                <KeyValue label={dueDateScheduleFieldLabel} value={_.get(schedule, ['name'], '-')} />
               </Col>
             </Row>
           </div>
