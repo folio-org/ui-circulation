@@ -5,9 +5,10 @@ import { stripesShape } from '@folio/stripes-core/src/Stripes';
 import { Row, Col } from '@folio/stripes-components/lib/LayoutGrid';
 import Button from '@folio/stripes-components/lib/Button';
 import Checkbox from '@folio/stripes-components/lib/Checkbox';
+import TextField from '@folio/stripes-components/lib/TextField';
 import stripesForm from '@folio/stripes-form';
 import Pane from '@folio/stripes-components/lib/Pane';
-import { Field, FieldArray } from 'redux-form';
+import { Field, FieldArray, getFormValues } from 'redux-form';
 import Select from '@folio/stripes-components/lib/Select';
 import { patronIdentifierTypes } from '../constants';
 import css from './CheckoutSettingsForm.css';
@@ -21,7 +22,7 @@ class CheckoutSettingsForm extends React.Component {
   }
 
   onSave(data) {
-    const { idents, audioAlertsEnabled } = data;
+    const { idents, audioAlertsEnabled, checkoutTimeout, checkoutTimeoutDuration } = data;
     const values = idents.reduce((vals, ident, index) => {
       if (ident) vals.push(patronIdentifierTypes[index].key);
       return vals;
@@ -30,6 +31,8 @@ class CheckoutSettingsForm extends React.Component {
     const otherSettings = JSON.stringify({
       audioAlertsEnabled: audioAlertsEnabled === 'true',
       prefPatronIdentifier: values.join(','),
+      checkoutTimeout,
+      checkoutTimeoutDuration,
     });
 
     this.props.onSubmit({ other_settings: otherSettings });
@@ -44,6 +47,11 @@ class CheckoutSettingsForm extends React.Component {
     );
   }
 
+  getCurrentValues() {
+    const { stripes: { store } } = this.props;
+    const state = store.getState();
+    return getFormValues('checkoutForm')(state) || {};
+  }
   // eslint-disable-next-line class-methods-use-this
   renderList({ fields, meta }) {
     if (!fields.length) return (<div />);
@@ -75,8 +83,8 @@ class CheckoutSettingsForm extends React.Component {
   }
 
   render() {
-    const { handleSubmit, label } = this.props;
-
+    const { handleSubmit, label, stripes } = this.props;
+    const checkoutValues = this.getCurrentValues();
     return (
       <form id="checkout-form" onSubmit={handleSubmit(this.onSave)}>
         <Pane defaultWidth="fill" fluidContentWidth paneTitle={label} lastMenu={this.getLastMenu()}>
@@ -85,16 +93,44 @@ class CheckoutSettingsForm extends React.Component {
           <Row>
             <Col xs={12}>
               <Field
-                label={this.props.stripes.intl.formatMessage({ id: 'ui-circulation.settings.checkout.audioAlerts' })}
+                label={stripes.intl.formatMessage({ id: 'ui-circulation.settings.checkout.timeout' })}
+                id="checkoutTimeout"
+                name="checkoutTimeout"
+                component={Checkbox}
+                normalize={v => !!v}
+              />
+            </Col>
+          </Row>
+          { checkoutValues.checkoutTimeout &&
+            <Row>
+              <div className={css.indentSection}>
+                <Col xs={5}>
+                  <Field
+                    id="checkoutTimeoutDuration"
+                    name="checkoutTimeoutDuration"
+                    component={TextField}
+                  />
+                </Col>
+                <Col xs={7}>
+                  <div>{stripes.intl.formatMessage({ id: 'ui-circulation.settings.checkout.minutes' })}</div>
+                </Col>
+              </div>
+            </Row>
+          }
+          <br />
+          <Row>
+            <Col xs={12}>
+              <Field
+                label={stripes.intl.formatMessage({ id: 'ui-circulation.settings.checkout.audioAlerts' })}
                 name="audioAlertsEnabled"
                 component={Select}
                 dataOptions={[
                   {
-                    label: this.props.stripes.intl.formatMessage({ id: 'ui-circulation.settings.checkout.no' }),
+                    label: stripes.intl.formatMessage({ id: 'ui-circulation.settings.checkout.no' }),
                     value: false,
                   },
                   {
-                    label: this.props.stripes.intl.formatMessage({ id: 'ui-circulation.settings.checkout.yes' }),
+                    label: stripes.intl.formatMessage({ id: 'ui-circulation.settings.checkout.yes' }),
                     value: true,
                   },
                 ]}
