@@ -31,8 +31,8 @@ class CheckoutSettingsForm extends React.Component {
     const otherSettings = JSON.stringify({
       audioAlertsEnabled: audioAlertsEnabled === 'true',
       prefPatronIdentifier: values.join(','),
-      checkoutTimeout: checkoutTimeout,
-      checkoutTimeoutDuration: checkoutTimeoutDuration,
+      checkoutTimeout,
+      checkoutTimeoutDuration,
     });
 
     this.props.onSubmit({ other_settings: otherSettings });
@@ -90,29 +90,29 @@ class CheckoutSettingsForm extends React.Component {
         <Pane defaultWidth="fill" fluidContentWidth paneTitle={label} lastMenu={this.getLastMenu()}>
           <FieldArray name="idents" component={this.renderList} />
           <br />
-            <Row>
+          <Row>
             <Col xs={12}>
-            <Field
-              label={stripes.intl.formatMessage({ id: 'ui-circulation.settings.checkout.timeout' })}
-              id="checkoutTimeout"
-              name="checkoutTimeout"
-              component={Checkbox}
-              normalize={v => !!v}
-            />
+              <Field
+                label={stripes.intl.formatMessage({ id: 'ui-circulation.settings.checkout.timeout' })}
+                id="checkoutTimeout"
+                name="checkoutTimeout"
+                component={Checkbox}
+                normalize={v => !!v}
+              />
             </Col>
-            </Row>
-            { checkoutValues.checkoutTimeout &&
+          </Row>
+          { checkoutValues.checkoutTimeout &&
             <Row>
               <div className={css.indentSection}>
                 <Col xs={5}>
-                    <Field
-                      id="checkoutTimeoutDuration"
-                      name="checkoutTimeoutDuration"
-                      component={TextField}
-                    />
+                  <Field
+                    id="checkoutTimeoutDuration"
+                    name="checkoutTimeoutDuration"
+                    component={TextField}
+                  />
                 </Col>
                 <Col xs={7}>
-                  <label>{stripes.intl.formatMessage({ id: 'ui-circulation.settings.checkout.minutes' })}</label>
+                  <div>{stripes.intl.formatMessage({ id: 'ui-circulation.settings.checkout.minutes' })}</div>
                 </Col>
               </div>
             </Row>

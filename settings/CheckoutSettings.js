@@ -22,8 +22,10 @@ class CheckoutSettings extends React.Component {
   // eslint-disable-next-line class-methods-use-this
   getInitialValues(settings) {
     const value = settings.length === 0 ? '' : settings[0].value;
-    const defaultConfig = { prefPatronIdentifier: '', audioAlertsEnabled: false,
-                            checkoutTimeout:true, checkoutTimeoutDuration:3 };
+    const defaultConfig = { prefPatronIdentifier: '',
+      audioAlertsEnabled: false,
+      checkoutTimeout: true,
+      checkoutTimeoutDuration: 3 };
     let config;
 
     try {
@@ -46,9 +48,9 @@ class CheckoutSettings extends React.Component {
     if (!isValid) {
       errors.idents = { _error: stripes.intl.formatMessage({ id: 'ui-circulation.settings.checkout.validate.selectContinue' }) };
     }
-    const checkoutTimeoutDuration = (_.isInteger(+values.checkoutTimeoutDuration) && (+values.checkoutTimeoutDuration > 0))
-    if (!checkoutTimeoutDuration){
-        errors.checkoutTimeoutDuration = { _error: stripes.intl.formatMessage({ id: 'ui-circulation.settings.checkout.validate.timeoutDuration'})};
+    const checkoutTimeoutDuration = (_.isInteger(+values.checkoutTimeoutDuration) && (+values.checkoutTimeoutDuration > 0));
+    if (!checkoutTimeoutDuration) {
+      errors.checkoutTimeoutDuration = { _error: stripes.intl.formatMessage({ id: 'ui-circulation.settings.checkout.validate.timeoutDuration' }) };
     }
     return errors;
   }
