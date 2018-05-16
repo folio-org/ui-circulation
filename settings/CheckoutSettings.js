@@ -39,7 +39,7 @@ class CheckoutSettings extends React.Component {
 
     return { idents, audioAlertsEnabled, checkoutTimeout, checkoutTimeoutDuration };
   }
-  validate(values) {
+  validate(values, allthevalues) {
     const stripes = this.props.stripes;
     const errors = {};
     const idents = values.idents;
@@ -47,6 +47,9 @@ class CheckoutSettings extends React.Component {
     const isValid = idents.reduce((valid, v) => (valid || v), false);
     if (!isValid) {
       errors.idents = { _error: stripes.intl.formatMessage({ id: 'ui-circulation.settings.checkout.validate.selectContinue' }) };
+    }
+    if (!values.checkoutTimeout) {
+      values.checkoutTimeoutDuration = allthevalues.initialValues.checkoutTimeoutDuration;
     }
     const checkoutTimeoutDuration = (_.isInteger(+values.checkoutTimeoutDuration) && (+values.checkoutTimeoutDuration > 0));
     if (!checkoutTimeoutDuration) {
