@@ -20,7 +20,6 @@ class CheckoutSettingsForm extends React.Component {
     this.renderList = this.renderList.bind(this);
     this.getLastMenu = this.getLastMenu.bind(this);
     this.handleCheckoutTimeout = this.handleCheckoutTimeout.bind(this);
-    // this.validTimeoutDuration = this.validTimeoutDuration.bind(this);
     this.state = { checked: false };
   }
 
@@ -54,14 +53,6 @@ class CheckoutSettingsForm extends React.Component {
       checked: !this.state.checked
     });
   }
-  /* validTimeoutDuration(values,allthevalues,formInitialValues){
-    console.log(values,allthevalues)
-    const checkoutTimeoutDuration = (_.isInteger(+values) && (+values > 0));
-    if (!checkoutTimeoutDuration) {
-      console.log("Inside:",formInitialValues.initialValues.checkoutTimeoutDuration);
-      values = formInitialValues.initialValues.checkoutTimeoutDuration;
-    }
-  } */
   getCurrentValues() {
     const { stripes: { store } } = this.props;
     const state = store.getState();
@@ -126,7 +117,6 @@ class CheckoutSettingsForm extends React.Component {
                   <Field
                     id="checkoutTimeoutDuration"
                     name="checkoutTimeoutDuration"
-                    // validate={this.validTimeoutDuration}
                     component={TextField}
                   />
                 </Col>
