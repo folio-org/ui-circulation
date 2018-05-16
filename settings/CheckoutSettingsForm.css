@@ -5,3 +5,6 @@
   display: -webkit-inline-box;
   margin: 5px 25px;
 }
+.hidden{
+  display: none;
+}

@@ -19,6 +19,9 @@ class CheckoutSettingsForm extends React.Component {
     this.onSave = this.onSave.bind(this);
     this.renderList = this.renderList.bind(this);
     this.getLastMenu = this.getLastMenu.bind(this);
+    this.handleCheckoutTimeout = this.handleCheckoutTimeout.bind(this);
+    // this.validTimeoutDuration = this.validTimeoutDuration.bind(this);
+    this.state = { checked: false };
   }
 
   onSave(data) {
@@ -46,7 +49,19 @@ class CheckoutSettingsForm extends React.Component {
       </Button>
     );
   }
-
+  handleCheckoutTimeout() {
+    this.setState({
+      checked: !this.state.checked
+    });
+  }
+  /* validTimeoutDuration(values,allthevalues,formInitialValues){
+    console.log(values,allthevalues)
+    const checkoutTimeoutDuration = (_.isInteger(+values) && (+values > 0));
+    if (!checkoutTimeoutDuration) {
+      console.log("Inside:",formInitialValues.initialValues.checkoutTimeoutDuration);
+      values = formInitialValues.initialValues.checkoutTimeoutDuration;
+    }
+  } */
   getCurrentValues() {
     const { stripes: { store } } = this.props;
     const state = store.getState();
@@ -85,6 +100,7 @@ class CheckoutSettingsForm extends React.Component {
   render() {
     const { handleSubmit, label, stripes } = this.props;
     const checkoutValues = this.getCurrentValues();
+    const hidden = this.state.checked ? '' : 'hidden';
     return (
       <form id="checkout-form" onSubmit={handleSubmit(this.onSave)}>
         <Pane defaultWidth="fill" fluidContentWidth paneTitle={label} lastMenu={this.getLastMenu()}>
@@ -97,17 +113,20 @@ class CheckoutSettingsForm extends React.Component {
                 id="checkoutTimeout"
                 name="checkoutTimeout"
                 component={Checkbox}
+                onChange={this.handleCheckoutTimeout}
                 normalize={v => !!v}
               />
             </Col>
+
           </Row>
           { checkoutValues.checkoutTimeout &&
-            <Row>
+            <Row className={hidden}>
               <div className={css.indentSection}>
                 <Col xs={5}>
                   <Field
                     id="checkoutTimeoutDuration"
                     name="checkoutTimeoutDuration"
+                    // validate={this.validTimeoutDuration}
                     component={TextField}
                   />
                 </Col>
