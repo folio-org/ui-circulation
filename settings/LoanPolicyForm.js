@@ -301,6 +301,7 @@ class LoanPolicyForm extends React.Component {
             }
             {/* renew from */}
             { policy.renewable &&
+              policy.loansPolicy.profileId === loanProfileMap.ROLLING &&
               <Field
                 label={formatMsg({ id: 'ui-circulation.settings.loanPolicy.renewFrom' })}
                 name="renewalsPolicy.renewFromId"
