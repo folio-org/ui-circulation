@@ -6,6 +6,7 @@ import LoanPolicySettings from './LoanPolicySettings';
 import LoanRules from './LoanRules';
 import CheckoutSettings from './CheckoutSettings';
 import FixedDueDateScheduleManager from './FixedDueDateScheduleManager';
+import StaffSlips from './StaffSlips';
 
 class Circulation extends React.Component {
   static propTypes = {
@@ -37,6 +38,11 @@ class Circulation extends React.Component {
         route: 'checkout',
         label: this.props.stripes.intl.formatMessage({ id: 'ui-circulation.settings.index.otherSettings' }),
         component: CheckoutSettings,
+      },
+      {
+        route: 'staffslips',
+        label: this.props.stripes.intl.formatMessage({ id: 'ui-circulation.settings.index.staffSlips' }),
+        component: StaffSlips,
       },
     ];
   }
