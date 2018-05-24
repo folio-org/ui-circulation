@@ -100,6 +100,7 @@ class LoanPolicyForm extends React.Component {
           label={formatMsg({ id: 'ui-circulation.settings.loanPolicy.policyName' })}
           autoFocus
           name="name"
+          id="input_policy_name"
           component={TextField}
           required
           fullWidth
@@ -131,6 +132,7 @@ class LoanPolicyForm extends React.Component {
           <Field
             label={formatMsg({ id: 'ui-circulation.settings.loanPolicy.loanProfile' })}
             name="loansPolicy.profileId"
+            id="input_loan_profile"
             component={Select}
             dataOptions={loanProfileTypes}
             validate={this.validateField}
@@ -144,12 +146,13 @@ class LoanPolicyForm extends React.Component {
             </p>
             <Row>
               <Col xs={2}>
-                <Field label="" name="loansPolicy.period.duration" component={TextField} validate={this.validateField} />
+                <Field label="" name="loansPolicy.period.duration" id="input_loan_period" component={TextField} validate={this.validateField} />
               </Col>
               <Col>
                 <Field
                   label=""
                   name="loansPolicy.period.intervalId"
+                  id="select_policy_period"
                   component={Select}
                   placeholder={formatMsg({ id: 'ui-circulation.settings.loanPolicy.selectInterval' })}
                   dataOptions={intervalPeriods}
@@ -165,6 +168,7 @@ class LoanPolicyForm extends React.Component {
           <Field
             label={dueDateScheduleFieldLabel}
             name="loansPolicy.fixedDueDateScheduleId"
+            id="input_loansPolicy_fixedDueDateSchedule"
             component={Select}
             placeholder={formatMsg({ id: 'ui-circulation.settings.loanPolicy.selectSchedule' })}
             dataOptions={schedules}
@@ -291,6 +295,7 @@ class LoanPolicyForm extends React.Component {
                     <Field
                       label=""
                       name="renewalsPolicy.numberAllowed"
+                      id="input_allowed_renewals"
                       component={TextField}
                       required
                       validate={this.validateField}
@@ -305,6 +310,7 @@ class LoanPolicyForm extends React.Component {
               <Field
                 label={formatMsg({ id: 'ui-circulation.settings.loanPolicy.renewFrom' })}
                 name="renewalsPolicy.renewFromId"
+                id="select_renew_from"
                 component={Select}
                 dataOptions={renewFromOptions}
                 validate={this.validateField}

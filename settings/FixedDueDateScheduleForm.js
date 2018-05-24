@@ -236,6 +236,7 @@ class FixedDueDateScheduleForm extends React.Component {
                     <Field
                       name="name"
                       component={TextField}
+                      id="input_schedule_name"
                       autoFocus
                       required
                       fullWidth

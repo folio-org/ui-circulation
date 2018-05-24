@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
-import { FormattedDate, FormattedMessage } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { Accordion, ExpandAllButton } from '@folio/stripes-components/lib/Accordion';
 import { stripesShape } from '@folio/stripes-core/src/Stripes';
 import KeyValue from '@folio/stripes-components/lib/KeyValue';
@@ -18,6 +18,7 @@ class FixedDueDateScheduleDetail extends React.Component {
     super(props);
     this.handleSectionToggle = this.handleSectionToggle.bind(this);
     this.handleExpandAll = this.handleExpandAll.bind(this);
+    this.formatDate = props.stripes.formatDate;
     this.cViewMetadata = props.stripes.connect(ViewMetadata);
     this.state = {
       sections: {
@@ -64,9 +65,9 @@ class FixedDueDateScheduleDetail extends React.Component {
             </Col>
           </Row>
           <Row key={index + 2}>
-            <Col xs={4}><FormattedDate value={schedule.from} /></Col>
-            <Col xs={4}><FormattedDate value={schedule.to} /></Col>
-            <Col xs={4}><FormattedDate value={schedule.due} /></Col>
+            <Col xs={4}>{this.formatDate(schedule.from)}</Col>
+            <Col xs={4}>{this.formatDate(schedule.to)}</Col>
+            <Col xs={4}>{this.formatDate(schedule.due)}</Col>
           </Row>
         </div>
       </div>
