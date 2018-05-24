@@ -21,6 +21,8 @@ import { Row, Col } from '@folio/stripes-components/lib/LayoutGrid';
 import stripesForm from '@folio/stripes-form';
 import { Field } from 'redux-form';
 
+import StaffSlipEditor from './StaffSlipEditor';
+
 class StaffSlipForm extends React.Component {
   static propTypes = {
     stripes: PropTypes.shape({
@@ -143,7 +145,7 @@ class StaffSlipForm extends React.Component {
             </Row>
             <Row>
               <Col xs={8}>
-                <Field label={this.translate('display')} name="display" id="input-staff-slip-display" component={TextArea} fullWidth  disabled={disabled} />
+                <StaffSlipEditor />
               </Col>
             </Row>
           </Pane>
