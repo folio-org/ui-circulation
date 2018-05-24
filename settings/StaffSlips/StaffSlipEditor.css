@@ -1,0 +1,40 @@
+.ql-picker.ql-insertCustomTags {
+  width: 120px;
+}
+
+.ql-picker.ql-insertCustomTags .ql-picker-item::before,
+.ql-picker.ql-insertCustomTags .ql-picker-label::before {
+  content: 'Insert token'
+}
+
+.ql-picker.ql-insertCustomTags [data-value="Item title"]::before {
+  content: 'Item title'
+}
+
+.ql-picker.ql-insertCustomTags [data-value="Item barcode"]::before {
+  content: 'Item barcode'
+}
+
+.ql-picker.ql-insertCustomTags [data-value="Item call number"]::before {
+  content: 'Item call number'
+}
+
+.ql-picker.ql-insertCustomTags [data-value="Item barcode"]::before {
+  content: 'Item barcode'
+}
+
+.ql-picker.ql-insertCustomTags [data-value="Patron last name"]::before {
+  content: 'Patron last name'
+}
+
+.ql-picker.ql-insertCustomTags [data-value="Patron first name"]::before {
+  content: 'Patron first name'
+}
+
+.ql-picker.ql-insertCustomTags [data-value="Transaction Id"]::before {
+  content: 'Transaction Id'
+}
+
+.ql-picker.ql-insertCustomTags [data-value="Hold expiration"]::before {
+  content: 'Hold expiration'
+}
