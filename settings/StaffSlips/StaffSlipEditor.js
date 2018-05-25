@@ -5,10 +5,8 @@ import '!style-loader!css-loader!react-quill/dist/quill.snow.css';
 class StaffSlipEditor extends Component {
   constructor(props) {
     super(props);
-    this.state = { text: '' };
     this.onChange = this.onChange.bind(this);
     this.insertToken = this.insertToken.bind(this);
-
     this.modules = {
       toolbar: {
         container:
@@ -18,7 +16,13 @@ class StaffSlipEditor extends Component {
           [{ 'indent': '-1' }, { 'indent': '+1' }],
           [{ 'size': ['small', false, 'large', 'huge'] }],
           [{ align: '' }, { align: 'center' }, { align: 'right' }, { align: 'justify' }],
-          [{ token: [ 'Item title', 'Item barcode', 'Item call number', 'Patron last name', 'Patron first name', 'Transaction Id', 'Hold expiration' ] }]
+          [{
+            token: [
+              'Item title', 'Item barcode', 'Item call number',
+              'Patron last name', 'Patron first name',
+              'Transaction Id', 'Hold expiration'
+            ]
+          }]
         ],
         handlers: {
           token: this.insertToken
@@ -28,6 +32,7 @@ class StaffSlipEditor extends Component {
   }
 
   componentDidMount() {
+    const { input } = this.props;
     Array.prototype.slice.call(
       document.querySelectorAll('.ql-token .ql-picker-item')
     ).forEach(item => item.textContent = item.dataset.value);
@@ -35,7 +40,9 @@ class StaffSlipEditor extends Component {
   }
 
   onChange(text) {
-    this.setState({ text });
+    if (text !== this.props.input.value) {
+      this.props.input.onChange(text);
+    }
   };
 
   insertToken(value) {
@@ -50,7 +57,7 @@ class StaffSlipEditor extends Component {
   render() {
     return (
       <ReactQuill
-        value={this.state.text}
+        value={this.props.input.value}
         ref={(ref) => { this.quill = ref; }}
         onChange={this.onChange}
         modules={this.modules}

@@ -145,7 +145,7 @@ class StaffSlipForm extends React.Component {
             </Row>
             <Row>
               <Col xs={8}>
-                <StaffSlipEditor />
+                <Field label={this.translate('display')} component={StaffSlipEditor} name="display" />
               </Col>
             </Row>
           </Pane>

@@ -55,7 +55,7 @@ class StaffSlipManager extends React.Component {
     try {
       staffSlips = JSON.parse(LocalStorage.getItem('staffSlips'));
     } catch(e) {
-      staffSlips = [{ id: 1, name: 'Hold' }];
+      staffSlips = [{ id: 1, name: 'Hold', display: '<p>Test</p>' }];
     }
     this.setState({ records: staffSlips });
   }
