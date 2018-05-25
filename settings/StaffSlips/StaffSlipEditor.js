@@ -1,73 +1,61 @@
 import React, { Component } from 'react';
 import ReactQuill from 'react-quill';
 import '!style-loader!css-loader!react-quill/dist/quill.snow.css';
-import '!style-loader!css-loader!./StaffSlipEditor.css';
-
-const Toolbar = () => (
-  <div id="toolbar">
-    <button className="ql-bold"></button>
-    <button className="ql-italic"></button>
-    <select className="ql-insertCustomTags">
-      <option value="1">One</option>
-      <option value="2">Two</option>
-    </select>
-  </div>
-);
 
 class StaffSlipEditor extends Component {
-  static insertCustomTags(text) {
-    if (!text) return;
-
-    const tag = "{" + text + "}";
-    const cursorPosition = this.quill.getSelection().index;
-    this.quill.insertText(cursorPosition, tag);
-    this.quill.setSelection(cursorPosition + tag.length);
-  }
-
   constructor(props) {
     super(props);
     this.state = { text: '' };
     this.onChange = this.onChange.bind(this);
+    this.insertToken = this.insertToken.bind(this);
+
+    this.modules = {
+      toolbar: {
+        container:
+        [
+          ['bold', 'italic', 'underline'],
+          [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+          [{ 'indent': '-1' }, { 'indent': '+1' }],
+          [{ 'size': ['small', false, 'large', 'huge'] }],
+          [{ align: '' }, { align: 'center' }, { align: 'right' }, { align: 'justify' }],
+          [{ token: [ 'Item title', 'Item barcode', 'Item call number', 'Patron last name', 'Patron first name', 'Transaction Id', 'Hold expiration' ] }]
+        ],
+        handlers: {
+          token: this.insertToken
+        }
+      }
+    };
+  }
+
+  componentDidMount() {
+    Array.prototype.slice.call(
+      document.querySelectorAll('.ql-token .ql-picker-item')
+    ).forEach(item => item.textContent = item.dataset.value);
+    document.querySelector('.ql-token .ql-picker-label').innerHTML = '\{ \}';
   }
 
   onChange(text) {
     this.setState({ text });
   };
 
+  insertToken(value) {
+    if (!value) return;
+    const tag = `{${value}}`;
+    const editor = this.quill.getEditor();
+    const cursorPosition = editor.getSelection().index;
+    editor.insertText(cursorPosition, tag);
+    editor.setSelection(cursorPosition + tag.length);
+  }
+
   render() {
     return (
-      <div>
-        <div id="toolbar">
-          <button className="ql-bold"></button>
-          <button className="ql-italic"></button>
-          <select className="ql-insertCustomTags">
-            <option value="">Insert token</option>
-            <option value="Item title">Item title</option>
-            <option value="Item barcode">Item barcode</option>
-            <option value="Item call number">Item call number</option>
-            <option value="Item barcode">Item type</option>
-            <option value="Patron last name">Patron last name</option>
-            <option value="Patron first name">Patron first name</option>
-            <option value="Transaction Id">Transaction ID</option>
-            <option value="Hold Expiration">Hold expiration</option>
-          </select>
-        </div>
-        <ReactQuill
-          value={this.state.text}
-          onChange={this.onChange}
-          modules={StaffSlipEditor.modules}
-        />
-      </div>
-    )
-  }
-}
-
-StaffSlipEditor.modules = {
-  toolbar: {
-    container: "#toolbar",
-    handlers: {
-      insertCustomTags: StaffSlipEditor.insertCustomTags
-    }
+      <ReactQuill
+        value={this.state.text}
+        ref={(ref) => { this.quill = ref; }}
+        onChange={this.onChange}
+        modules={this.modules}
+      />
+    );
   }
 }
 
