@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ReactQuill from 'react-quill';
 import '!style-loader!css-loader!react-quill/dist/quill.snow.css';
+import '!style-loader!css-loader!./StaffSlipEditor.css';
 
 class StaffSlipEditor extends Component {
   constructor(props) {
@@ -8,9 +9,14 @@ class StaffSlipEditor extends Component {
     this.onChange = this.onChange.bind(this);
     this.insertToken = this.insertToken.bind(this);
     this.modules = {
+      history: {
+        delay: 1000,
+        userOnly: false
+      },
       toolbar: {
         container:
         [
+          ['undo', 'redo'],
           ['bold', 'italic', 'underline'],
           [{ 'list': 'ordered' }, { 'list': 'bullet' }],
           [{ 'indent': '-1' }, { 'indent': '+1' }],
@@ -25,14 +31,19 @@ class StaffSlipEditor extends Component {
           }]
         ],
         handlers: {
-          token: this.insertToken
+          token: this.insertToken,
+          undo: function(value) {
+            this.quill.history.undo();
+          },
+          redo: function(value) {
+            this.quill.history.redo();
+          }
         }
       }
     };
   }
 
   componentDidMount() {
-    const { input } = this.props;
     Array.prototype.slice.call(
       document.querySelectorAll('.ql-token .ql-picker-item')
     ).forEach(item => item.textContent = item.dataset.value);
