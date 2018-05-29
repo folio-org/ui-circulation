@@ -37,9 +37,14 @@ export const dueDateManagementOptions = [
 ];
 
 export const renewFromOptions = [
-  { label: 'Current due date', id: 1, value: 1 },
-  { label: 'System date', id: 2, value: 2 },
+  { label: 'Current due date', id: 1, value: 'CURRENT_DUE_DATE' },
+  { label: 'System date', id: 2, value: 'SYSTEM_DATE' },
 ];
+
+export const renewFromIds = {
+  CURRENT_DUE_DATE: 'CURRENT_DUE_DATE',
+  SYSTEM_DATE: 'SYSTEM_DATE',
+};
 
 export const patronIdentifierTypes = [
   { key: 'BARCODE', label: 'Barcode', queryKey: 'barcode' },

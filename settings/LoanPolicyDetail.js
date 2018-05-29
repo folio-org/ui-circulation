@@ -11,7 +11,8 @@ import {
   intervalPeriods,
   dueDateManagementOptions,
   renewFromOptions,
-  loanProfileMap
+  loanProfileMap,
+  renewFromIds
 } from '../constants';
 
 class LoanPolicyDetail extends React.Component {
@@ -169,8 +170,8 @@ class LoanPolicyDetail extends React.Component {
     const policy = this.props.initialValues || {};
     const unlimited = (_.get(policy, ['renewalsPolicy', 'unlimited'])) ? 'Yes' : 'No';
     const differentPeriod = (_.get(policy, ['renewalsPolicy', 'differentPeriod'])) ? 'Yes' : 'No';
-    const renewFromId = _.get(policy, ['renewalsPolicy', 'renewFromId'], 0);
-    const renewFrom = _.find(renewFromOptions, r => r.id === parseInt(renewFromId, 10));
+    const renewFromId = _.get(policy, ['renewalsPolicy', 'renewFromId'], renewFromIds.SYSTEM_DATE);
+    const renewFrom = _.find(renewFromOptions, r => r.value === renewFromId);
     const interval = this.getInterval(_.get(policy, ['renewalsPolicy', 'period', 'intervalId']));
 
     return (
