@@ -29,6 +29,7 @@
 * Add checkout session timeout settings in circulation->otherSettings. Fixes UICIRC-48
 * Hide "Renew from" option for loan policies with a fixed loan profile. Fixes UICIRC-60.
 * Replace int values with string representations for renewFromOptions. Fixes UICIRC-66.
+* Loan policy intervals should display on read only view. Fixes UICIRC-65.
 
 ## [1.1.1](https://github.com/folio-org/ui-circulation/tree/v1.1.1) (2017-09-02)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v1.1.0...v1.1.1)
