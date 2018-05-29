@@ -1,4 +1,3 @@
-import { cloneDeep } from 'lodash';
 import React from 'react';
 import PropTypes from 'prop-types';
 import KeyValue from '@folio/stripes-components/lib/KeyValue';
@@ -12,10 +11,6 @@ class StaffSlipDetail extends React.Component {
     }).isRequired,
     initialValues: PropTypes.object,
   };
-
-  constructor(props) {
-    super();
-  }
 
   translate(id) {
     return this.props.stripes.intl.formatMessage({

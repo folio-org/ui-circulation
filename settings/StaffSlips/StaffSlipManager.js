@@ -2,7 +2,6 @@ import { sortBy } from 'lodash';
 import React from 'react';
 import PropTypes from 'prop-types';
 import EntryManager from '@folio/stripes-smart-components/lib/EntryManager';
-import { FormattedMessage } from 'react-intl';
 
 import StaffSlipDetail from './StaffSlipDetail';
 import StaffSlipForm from './StaffSlipForm';
@@ -42,22 +41,25 @@ class StaffSlipManager extends React.Component {
     this.state = { records: [] };
   }
 
-  translate(id) {
-    this.props.stripes.intl.formatMessage({
-      id: `ui-circulation.settings.staffSlips.${id}`
-    });
-  }
-
   // TODO: remove after server side is done
   componentDidMount() {
     let staffSlips;
 
     try {
+      // eslint-disable-next-line no-undef
       staffSlips = JSON.parse(LocalStorage.getItem('staffSlips'));
-    } catch(e) {
-      staffSlips = [{ id: 1, name: 'Hold', display: '<p>Test</p>' }];
+    } catch (e) {
+      staffSlips = [{ id: 1, name: 'Hold', display: '{Patron first name} {Patron last name} <br /> {Item barcode}' }];
     }
+
+    // eslint-disable-next-line react/no-did-mount-set-state
     this.setState({ records: staffSlips });
+  }
+
+  translate(id) {
+    this.props.stripes.intl.formatMessage({
+      id: `ui-circulation.settings.staffSlips.${id}`
+    });
   }
 
   validate(values) {
@@ -75,7 +77,7 @@ class StaffSlipManager extends React.Component {
       <EntryManager
         {...this.props}
         parentMutator={this.props.mutator}
-        //entryList={sortBy((this.props.resources.entries || {}).records || [], ['name'])}
+        // entryList={sortBy((this.props.resources.entries || {}).records || [], ['name'])}
         entryList={sortBy(this.state.records || [], ['name'])}
         detailComponent={StaffSlipDetail}
         paneTitle={this.props.label}

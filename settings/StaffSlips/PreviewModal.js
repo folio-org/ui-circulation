@@ -1,0 +1,85 @@
+import React from 'react';
+import { intlShape } from 'react-intl';
+import PropTypes from 'prop-types';
+import Barcode from 'react-barcode';
+import HtmlToReact, { Parser } from 'html-to-react';
+import { Row, Col } from '@folio/stripes-components/lib/LayoutGrid';
+import Button from '@folio/stripes-components/lib/Button';
+import Modal from '@folio/stripes-components/lib/Modal';
+
+import { template } from './util';
+
+class PreviewModal extends React.Component {
+  static propTypes = {
+    heading: PropTypes.string.isRequired,
+    onClose: PropTypes.func.isRequired,
+    open: PropTypes.bool.isRequired,
+    previewTemplate: PropTypes.string,
+  };
+
+  static contextTypes = {
+    intl: intlShape,
+  };
+
+  constructor() {
+    super();
+
+    const processNodeDefinitions = new HtmlToReact.ProcessNodeDefinitions(React);
+
+    this.demoData = {
+      'Item title': 'Hello',
+      'Item barcode': '<svg></svg>',
+      'Item call number': '123456789',
+      'Patron last name': 'Brown',
+      'Patron first name': 'John',
+      'Transaction Id': '101',
+      'Hold expiration': '10/10/2018',
+      'itemBarcode': '5901234123457',
+    };
+
+    this.rules = [
+      {
+        replaceChildren: true,
+        shouldProcessNode: node => node.name === 'svg',
+        processNode: () => (<Barcode value={this.demoData.itemBarcode} format="EAN13" />),
+      },
+      {
+        shouldProcessNode: () => true,
+        processNode: processNodeDefinitions.processDefaultNode,
+      }
+    ];
+
+    this.parser = new Parser();
+  }
+
+  render() {
+    const { open, onClose, heading, previewTemplate } = this.props;
+    const formatMsg = this.context.intl.formatMessage;
+    const closeLabel = formatMsg({ id: 'ui-circulation.settings.staffSlips.close' });
+    const tmpl = template(previewTemplate || '');
+    const contentComponent = this.parser.parseWithInstructions(tmpl(this.demoData), () => true, this.rules);
+
+    return (
+      <Modal
+        open={open}
+        label={heading}
+        id="preview-modal"
+        scope="module"
+        size="medium"
+        showHeader
+      >
+        <div className="ql-editor">
+          {contentComponent}
+        </div>
+        <br />
+        <Row>
+          <Col xs>
+            <Button onClick={onClose} id="clickable-close-preview">{closeLabel}</Button>
+          </Col>
+        </Row>
+      </Modal>
+    );
+  }
+}
+
+export default PreviewModal;
