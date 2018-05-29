@@ -4,6 +4,7 @@
   "settings.index.loanRules": "Loan rules",
   "settings.index.fdds": "Fixed due date schedules",
   "settings.index.otherSettings": "Other settings",
+  "settings.index.staffSlips": "Staff slips",
 
   "settings.loanPolicy.entryLabel": "Loan Policy",
   "settings.loanPolicy.paneTitle": "Loan Policies",
@@ -68,7 +69,6 @@
   "settings.fDDSform.saveSchedule": "Save Schedule",
   "settings.fDDSform.createSchedule": "Create Schedule",
 
-
   "settings.checkout.paneTitle": "Other settings",
   "settings.checkout.validate.selectContinue": "Please select to continue",
   "settings.checkout.save": "Save",
@@ -78,5 +78,22 @@
   "settings.checkout.yes": "Yes",
   "settings.checkout.timeout": "Automatically end checkout session after period of inactivity",
   "settings.checkout.minutes": "minutes",
-  "settings.checkout.validate.timeoutDuration": "Please enter a whole number greater than zero to continue"
+  "settings.checkout.validate.timeoutDuration": "Please enter a whole number greater than zero to continue",
+
+  "settings.staffSlips.label": "Staff slips",
+  "settings.staffSlips.name": "Name",
+  "settings.staffSlips.closeStaffSlipDialog": "Close",
+  "settings.staffSlips.createStaffSlip": "Create",
+  "settings.staffSlips.saveAndClose": "Save & close",
+  "settings.staffSlips.edit": "Edit",
+  "settings.staffSlips.new": "New staff slip",
+  "settings.staffSlips.display": "Display",
+  "settings.staffSlips.description": "Description",
+  "settings.staffSlips.delete": "Delete",
+  "settings.staffSlips.preview": "Preview",
+  "settings.staffSlips.active": "Active",
+  "settings.staffSlips.untitledStaffSlip": "Staff slip name",
+  "settings.staffSlips.deleteStaffSlipMessage": "The staff slip <strong>{name}</strong> will be <strong>deleted</strong>.",
+  "settings.staffSlips.validation.required": "Please fill this in to continue",
+  "settings.staffSlips.close": "Close"
 }
