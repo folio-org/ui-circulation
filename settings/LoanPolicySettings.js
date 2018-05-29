@@ -5,7 +5,7 @@ import { stripesShape } from '@folio/stripes-core/src/Stripes';
 import EntryManager from '@folio/stripes-smart-components/lib/EntryManager';
 import LoanPolicyDetail from './LoanPolicyDetail';
 import LoanPolicyForm from './LoanPolicyForm';
-import { loanProfileMap } from '../constants';
+import { loanProfileMap, renewFromIds } from '../constants';
 
 const defaultPolicy = {
   name: '',
@@ -17,7 +17,7 @@ const defaultPolicy = {
   renewable: true,
   renewalsPolicy: {
     unlimited: false,
-    renewFromId: '2', // TODO: update when this is switched to a GUID
+    renewFromId: renewFromIds.SYSTEM_DATE,
     differentPeriod: false,
   },
 };
