@@ -38,6 +38,7 @@
 
   "settings.validate.fillIn": "Please fill this in to continue",
 
+  "settings.fDDS.validate.overlappingDateRange": "Date Range {num1} cannot overlap with Date Range {num2}",
   "settings.fDDS.validate.uniqueName": "Please enter a unique name.",
   "settings.fDDS.validate.oneScheduleMin": "At least one schedule must be entered",
   "settings.fDDS.validate.toDate": "To date must be after from date",

@@ -72,6 +72,23 @@ class FixedDueDateScheduleManager extends React.Component {
       errors.schedules = { _error: formatMsg({ id: 'ui-circulation.settings.fDDS.validate.oneScheduleMin' }) };
     } else {
       const schedulesErrors = [];
+
+      const schedules = values.schedules;
+      // Check if any schedule's duration overlaps with another's
+      if (schedules.length > 1) {
+        for (let i = 0; i < schedules.length; i++) {
+          const s1 = schedules[i];
+          for (let j = i + 1; j < schedules.length; j++) {
+            const s2 = schedules[j];
+            const condA = (s1.from && s2.to) ? moment(s1.from).isBefore(s2.to) : false;
+            const condB = (s1.to && s2.from) ? moment(s1.to).isAfter(s2.from) : false;
+            if (condA && condB) {
+              errors.schedules = { _error: formatMsg({ id: 'ui-circulation.settings.fDDS.validate.overlappingDateRange' }, { num1: i + 1, num2: j + 1 }) };
+            }
+          }
+        }
+      }
+
       values.schedules.forEach((schedule, i) => {
         const scheduleErrors = {};
         if (!schedule || !schedule.from) {
