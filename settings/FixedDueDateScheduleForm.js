@@ -16,7 +16,7 @@ import Pane from '@folio/stripes-components/lib/Pane';
 import Paneset from '@folio/stripes-components/lib/Paneset';
 import PaneMenu from '@folio/stripes-components/lib/PaneMenu';
 import stripesForm from '@folio/stripes-form';
-import ConfirmationModal from '@folio/stripes-components/lib/structures/ConfirmationModal';
+import ConfirmationModal from '@folio/stripes-components/lib/ConfirmationModal';
 import ViewMetadata from './ViewMetadata';
 import css from './FixedDueDateSchedule.css';
 
@@ -154,10 +154,10 @@ class FixedDueDateScheduleForm extends React.Component {
             </Button>
           </Col>
         </Row>
-        {submitFailed && error && <Row><Col xs={12} className="error">{error}</Col></Row>}
+        {submitFailed && error && <Row><Col xs={12} className={css.scheduleError}>{error}</Col></Row>}
         {fields.map((schedule, index, f) => (
           <div key={index} className={css.scheduleItem}>
-            <div className={css.sceduleHeader} >
+            <div className={css.scheduleHeader} >
               <h4>
                 {this.props.stripes.intl.formatMessage({ id: 'ui-circulation.settings.fDDSform.dateRange' })} { index + 1 }
               </h4>
@@ -228,7 +228,7 @@ class FixedDueDateScheduleForm extends React.Component {
                 onToggle={this.handleSectionToggle}
                 label={formatMsg({ id: 'ui-circulation.settings.fDDSform.about' })}
               >
-                <section className={css.accordianSection}>
+                <section className={css.accordionSection}>
                   { (initialValues && initialValues.metadata && initialValues.metadata.createdDate) &&
                     <this.cViewMetadata metadata={initialValues.metadata} />
                   }
@@ -257,7 +257,7 @@ class FixedDueDateScheduleForm extends React.Component {
                 onToggle={this.handleSectionToggle}
                 label={formatMsg({ id: 'ui-circulation.settings.fDDSform.schedule' })}
               >
-                <section className={css.accordianSection}>
+                <section className={css.accordionSection}>
                   <FieldArray name="schedules" component={this.renderSchedules} />
                 </section>
               </Accordion>

@@ -47,7 +47,7 @@ class FixedDueDateScheduleDetail extends React.Component {
     const { sections } = this.state;
     const renderSchedules = fixedDueDateSchedule.schedules.map((schedule, index) => (
       <div key={index} className={css.scheduleItem}>
-        <div className={css.sceduleHeader} >
+        <div className={css.scheduleHeader} >
           <h4>
             <FormattedMessage id="ui-circulation.settings.fDDSform.dateRange" /> { index + 1 }
           </h4>
@@ -86,7 +86,7 @@ class FixedDueDateScheduleDetail extends React.Component {
           onToggle={this.handleSectionToggle}
           label="General information"
         >
-          <section className={css.accordianSection}>
+          <section className={css.accordionSection}>
             { (fixedDueDateSchedule.metadata && fixedDueDateSchedule.metadata.createdDate) &&
               <this.cViewMetadata metadata={fixedDueDateSchedule.metadata} />
             }
@@ -114,7 +114,7 @@ class FixedDueDateScheduleDetail extends React.Component {
           onToggle={this.handleSectionToggle}
           label="Schedule"
         >
-          <section className={css.accordianSection}>
+          <section className={css.accordionSection}>
             {renderSchedules}
           </section>
         </Accordion>

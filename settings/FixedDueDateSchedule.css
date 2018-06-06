@@ -1,11 +1,16 @@
 :root{
   --bg: #fcfcfc;
   --bgHover: color(var(--bg) contrast(100%) blend(var(--bg) 90%));
+  --error: #900;
 }
 
-.accordianSection{
+.accordionSection{
   max-width:700px;
   margin-left:20px;
+}
+.scheduleError {
+  color: var(--error);
+  margin-bottom: 5px;
 }
 .smformItem{
   max-width:40%;
@@ -32,7 +37,7 @@
 }
 
 
-.sceduleHeader {
+.scheduleHeader {
   background-color: var(--bgHover);
   display: flex;
   justify-content: flex-start;
