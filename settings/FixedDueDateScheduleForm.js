@@ -16,7 +16,7 @@ import Pane from '@folio/stripes-components/lib/Pane';
 import Paneset from '@folio/stripes-components/lib/Paneset';
 import PaneMenu from '@folio/stripes-components/lib/PaneMenu';
 import stripesForm from '@folio/stripes-form';
-import ConfirmationModal from '@folio/stripes-components/lib/structures/ConfirmationModal';
+import ConfirmationModal from '@folio/stripes-components/lib/ConfirmationModal';
 import ViewMetadata from './ViewMetadata';
 import css from './FixedDueDateSchedule.css';
 
