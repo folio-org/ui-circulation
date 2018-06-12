@@ -28,11 +28,11 @@ class PreviewModal extends React.Component {
 
     this.demoData = {
       'Item title': 'Hello',
-      'Item barcode': '<svg></svg>',
-      'Item call number': '123456789',
+      'Item barcode': '<Barcode/>',
+      'Item call number': '67822233223',
       'Patron last name': 'Brown',
       'Patron first name': 'John',
-      'Transaction Id': '101',
+      'Transaction Id': '10111222323222',
       'Hold expiration': '10/10/2018',
       'itemBarcode': '5901234123457',
     };
@@ -40,7 +40,7 @@ class PreviewModal extends React.Component {
     this.rules = [
       {
         replaceChildren: true,
-        shouldProcessNode: node => node.name === 'svg',
+        shouldProcessNode: node => node.name === 'barcode',
         processNode: () => (<Barcode value={this.demoData.itemBarcode} format="EAN13" />),
       },
       {
@@ -57,7 +57,8 @@ class PreviewModal extends React.Component {
     const formatMsg = this.context.intl.formatMessage;
     const closeLabel = formatMsg({ id: 'ui-circulation.settings.staffSlips.close' });
     const tmpl = template(previewTemplate || '');
-    const contentComponent = this.parser.parseWithInstructions(tmpl(this.demoData), () => true, this.rules);
+    const componentStr = tmpl(this.demoData);
+    const contentComponent = this.parser.parseWithInstructions(componentStr, () => true, this.rules);
 
     return (
       <Modal
