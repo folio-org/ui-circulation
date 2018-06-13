@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import { stripesShape } from '@folio/stripes-core/src/Stripes';
 import KeyValue from '@folio/stripes-components/lib/KeyValue';
 import { Row, Col } from '@folio/stripes-components/lib/LayoutGrid';
+import { Accordion, ExpandAllButton } from '@folio/stripes-components/lib/Accordion';
+import ViewMetaData from '@folio/stripes-smart-components/lib/ViewMetaData';
 import { FormattedMessage } from 'react-intl';
 
 import {
@@ -23,6 +25,36 @@ class LoanPolicyDetail extends React.Component {
       fixedDueDateSchedules: PropTypes.object,
     }),
   };
+
+  constructor(props) {
+    super(props);
+
+    this.handleSectionToggle = this.handleSectionToggle.bind(this);
+    this.handleExpandAll = this.handleExpandAll.bind(this);
+    this.state = {
+      sections: {
+        generalInformation: true,
+      },
+    };
+
+    this.cViewMetaData = props.stripes.connect(ViewMetaData);
+  }
+
+  handleExpandAll(sections) {
+    this.setState((curState) => {
+      const newState = _.cloneDeep(curState);
+      newState.sections = sections;
+      return newState;
+    });
+  }
+
+  handleSectionToggle({ id }) {
+    this.setState((curState) => {
+      const newState = _.cloneDeep(curState);
+      newState.sections[id] = !newState.sections[id];
+      return newState;
+    });
+  }
 
   renderLoans() {
     const { stripes, initialValues, parentResources } = this.props;
@@ -236,14 +268,37 @@ class LoanPolicyDetail extends React.Component {
 
   render() {
     const policy = this.props.initialValues || {};
+    const formatMsg = this.props.stripes.intl.formatMessage;
+    const { sections } = this.state;
 
     return (
       <div>
-        {this.renderAbout()}
-        <hr />
-        {policy.loanable && this.renderLoans()}
-        <hr />
-        {policy.renewable && this.renderRenewals()}
+        <Row end="xs">
+          <Col xs>
+            <ExpandAllButton accordionStatus={sections} onToggle={this.handleExpandAll} />
+          </Col>
+        </Row>
+        <Accordion
+          open={sections.generalInformation}
+          id="generalInformation"
+          onToggle={this.handleSectionToggle}
+          label={formatMsg({ id: 'ui-circulation.settings.loanPolicy.generalInformation' })}
+        >
+          {policy.metadata && policy.metadata.createdDate &&
+            <Row>
+              <Col xs={12}>
+                <this.cViewMetaData metadata={policy.metadata} />
+              </Col>
+            </Row>
+          }
+
+          {this.renderAbout()}
+          <hr />
+          {policy.loanable && this.renderLoans()}
+          <hr />
+          {policy.renewable && this.renderRenewals()}
+
+        </Accordion>
       </div>
     );
   }
