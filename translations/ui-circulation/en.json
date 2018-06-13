@@ -33,6 +33,7 @@
   "settings.loanPolicy.loanable": "Loanable",
   "settings.loanPolicy.selectInterval": "Select interval",
   "settings.loanPolicy.selectSchedule": "Select schedule",
+  "settings.loanPolicy.generalInformation": "General information",
 
   "settings.loanRules.paneTitle": "Loan Rules Editor",
 
