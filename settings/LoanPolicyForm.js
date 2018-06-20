@@ -188,7 +188,7 @@ class LoanPolicyForm extends React.Component {
             />
           }
           {/* loan period - only appears when profile is "rolling" */}
-          { (policy.loanable && policy.loansPolicy.profileId === loanProfileMap.ROLLING) &&
+          { (policy.loanable && policy.loansPolicy && policy.loansPolicy.profileId === loanProfileMap.ROLLING) &&
             <div>
               <p>
                 <FormattedMessage id="ui-circulation.settings.loanPolicy.loanPeriod" />
