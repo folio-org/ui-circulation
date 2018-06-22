@@ -10,7 +10,6 @@ import { FormattedMessage } from 'react-intl';
 
 import {
   loanProfileTypes,
-  intervalPeriods,
   dueDateManagementOptions,
   renewFromOptions,
   loanProfileMap,
