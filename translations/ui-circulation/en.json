@@ -1,4 +1,6 @@
 {
+  "meta.title": "Circulation",
+
   "settings.index.paneTitle": "Circulation",
   "settings.index.loanPolicies": "Loan policies",
   "settings.index.loanRules": "Loan rules",

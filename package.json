@@ -13,7 +13,7 @@
   "main": "index.js",
   "stripes": {
     "type": "settings",
-    "displayName": "Circulation",
+    "displayName": "ui-circulation.meta.title",
     "route": "/circulation",
     "hasSettings": true,
     "icons": [
