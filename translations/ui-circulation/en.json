@@ -99,5 +99,6 @@
   "settings.staffSlips.untitledStaffSlip": "Staff slip name",
   "settings.staffSlips.deleteStaffSlipMessage": "The staff slip <strong>{name}</strong> will be <strong>deleted</strong>.",
   "settings.staffSlips.validation.required": "Please fill this in to continue",
-  "settings.staffSlips.close": "Close"
+  "settings.staffSlips.close": "Close",
+  "settings.staffSlips.previewLabel": "Preview of staff slip - Hold"
 }

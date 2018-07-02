@@ -35,7 +35,7 @@ class StaffSlipDetail extends React.Component {
         </Row>
         <Row>
           <Col xs={4}>
-            <KeyValue label={this.translate('display')} value={staffSlip.display} />
+            <KeyValue label={this.translate('display')} value={staffSlip.template} />
           </Col>
         </Row>
       </div>

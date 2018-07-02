@@ -29,8 +29,8 @@ class StaffSlipManager extends React.Component {
   static manifest = Object.freeze({
     entries: {
       type: 'okapi',
-      records: 'staffslips',
-      path: 'staffslips',
+      records: 'staffSlips',
+      path: 'staff-slips-storage/staff-slips',
       throwErrors: false,
     },
   });
@@ -38,22 +38,15 @@ class StaffSlipManager extends React.Component {
   constructor() {
     super();
     this.validate = this.validate.bind(this);
-    this.state = { records: [] };
   }
 
-  // TODO: remove after server side is done
   componentDidMount() {
-    let staffSlips;
-
-    try {
-      // eslint-disable-next-line no-undef
-      staffSlips = JSON.parse(LocalStorage.getItem('staffSlips'));
-    } catch (e) {
-      staffSlips = [{ id: 1, name: 'Hold', display: '{Patron first name} {Patron last name} <br /> {Item barcode}' }];
-    }
-
-    // eslint-disable-next-line react/no-did-mount-set-state
-    this.setState({ records: staffSlips });
+    // TODO: remove after default HOLD slip is provisioned during build process
+    this.props.mutator.entries.POST({
+      name: 'Hold',
+      active: true,
+      template: '<p></p>',
+    });
   }
 
   translate(id) {
@@ -77,8 +70,7 @@ class StaffSlipManager extends React.Component {
       <EntryManager
         {...this.props}
         parentMutator={this.props.mutator}
-        // entryList={sortBy((this.props.resources.entries || {}).records || [], ['name'])}
-        entryList={sortBy(this.state.records || [], ['name'])}
+        entryList={sortBy((this.props.resources.entries || {}).records || [], ['name'])}
         detailComponent={StaffSlipDetail}
         paneTitle={this.props.label}
         entryLabel={this.props.label}
@@ -87,8 +79,8 @@ class StaffSlipManager extends React.Component {
         nameKey="name"
         permissions={{
           put: 'settings.organization.enabled',
-          post: 'settings.organization.enabled',
-          delete: 'settings.organization.enabled',
+          post: 'ui-circulation.settings.staffslips.post',
+          delete: 'ui-circulation.settings.staffslips.delete',
         }}
       />
     );

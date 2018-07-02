@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Pane from '@folio/stripes-components/lib/Pane';
 import TextField from '@folio/stripes-components/lib/TextField';
+import KeyValue from '@folio/stripes-components/lib/KeyValue';
+import Checkbox from '@folio/stripes-components/lib/Checkbox';
 // eslint-disable-next-line import/no-unused-vars
 import TextArea from '@folio/stripes-components/lib/TextArea';
 import Button from '@folio/stripes-components/lib/Button';
@@ -11,7 +13,6 @@ import IconButton from '@folio/stripes-components/lib/IconButton';
 import Icon from '@folio/stripes-components/lib/Icon';
 
 import { Row, Col } from '@folio/stripes-components/lib/LayoutGrid';
-
 import stripesForm from '@folio/stripes-form';
 import { Field } from 'redux-form';
 
@@ -86,14 +87,14 @@ class StaffSlipForm extends React.Component {
     const staffSlip = initialValues || {};
 
     if (staffSlip.id) {
-      return (<div><Icon size="small" icon="edit" /><span>{`${this.translate('edit')}: Staff slips - ${staffSlip.name}`}</span></div>);
+      return (<div><Icon size="small" icon="edit" /><span>{`${this.translate('edit')}: ${this.translate('label')} - ${staffSlip.name}`}</span></div>);
     }
 
     return this.translate('new');
   }
 
   render() {
-    const { stripes, handleSubmit } = this.props;
+    const { stripes, handleSubmit, initialValues } = this.props;
     const disabled = !stripes.hasPerm('settings.organization.enabled');
 
     return (
@@ -102,9 +103,15 @@ class StaffSlipForm extends React.Component {
           <Pane defaultWidth="100%" firstMenu={this.addFirstMenu()} lastMenu={this.saveLastMenu()} paneTitle={this.renderPaneTitle()}>
             <Row>
               <Col xs={8}>
-                <Field label={`${this.translate('name')} *`} name="name" id="input-staff-slip-name" component={TextField} autoFocus required fullWidth disabled={disabled} />
+                <KeyValue label={this.translate('name')} value={(initialValues || {}).name} />
               </Col>
             </Row>
+            <Row>
+              <Col xs={8}>
+                <Field label={`${this.translate('active')}`} name="active" id="input-staff-slip-active" component={Checkbox} disabled={disabled} />
+              </Col>
+            </Row>
+            <br />
             <Row>
               <Col xs={8}>
                 <Field label={this.translate('description')} name="description" id="input-staff-slip-description" component={TextArea} fullWidth disabled={disabled} />
@@ -112,7 +119,7 @@ class StaffSlipForm extends React.Component {
             </Row>
             <Row>
               <Col xs={8}>
-                <Field label={this.translate('display')} component={StaffSlipEditor} name="display" />
+                <Field label={this.translate('display')} component={StaffSlipEditor} name="template" />
               </Col>
             </Row>
           </Pane>
