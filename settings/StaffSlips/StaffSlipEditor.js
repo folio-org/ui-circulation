@@ -4,7 +4,9 @@ import ReactQuill from 'react-quill';
 import { Row, Col } from '@folio/stripes-components/lib/LayoutGrid';
 import Button from '@folio/stripes-components/lib/Button';
 
-import css from '@folio/stripes-components/lib/sharedStyles/form.css';
+import formCss from '@folio/stripes-components/lib/sharedStyles/form.css';
+import css from './StaffSlipEditor.css';
+
 // eslint-disable-next-line import/no-webpack-loader-syntax
 import '!style-loader!css-loader!react-quill/dist/quill.snow.css';
 // eslint-disable-next-line import/no-webpack-loader-syntax
@@ -66,10 +68,10 @@ class StaffSlipEditor extends Component {
     document.querySelector('.ql-token .ql-picker-label').innerHTML = '\{ \}';
   }
 
-  onChange(text) {
-    if (text !== this.props.input.value) {
-      this.props.input.onChange(text);
-      this.setState({ text });
+  onChange(template) {
+    if (template !== this.props.input.value) {
+      this.props.input.onChange(template);
+      this.setState({ template });
     }
   }
 
@@ -90,33 +92,48 @@ class StaffSlipEditor extends Component {
     editor.setSelection(cursorPosition + tag.length);
   }
 
+  translate(id) {
+    return this.props.stripes.intl.formatMessage({
+      id: `ui-circulation.settings.staffSlips.${id}`
+    });
+  }
+
   render() {
-    const { text, openDialog } = this.state;
+    const { template, openDialog } = this.state;
+    const { label, input: { value }, name } = this.props;
 
     return (
       <div>
         <Row>
           <Col xs={12}>
-            <label htmlFor="editor" className={css.label}>{this.props.label}</label>
-            <ReactQuill
-              id="editor"
-              value={this.props.input.value}
-              ref={(ref) => { this.quill = ref; }}
-              onChange={this.onChange}
-              modules={this.modules}
-            />
-          </Col>
-        </Row>
-        <br />
-        <Row>
-          <Col xs={12}>
-            <Button onClick={this.openPreviewDialog}>Preview</Button>
+            <Row bottom="xs">
+              <Col xs={9}>
+                <label htmlFor="editor" className={formCss.label}>{label}</label>
+              </Col>
+              <Col xs={3}>
+                <Row className={css.preview}>
+                  <Col>
+                    <Button bottomMargin0 onClick={this.openPreviewDialog}>Preview</Button>
+                  </Col>
+                </Row>
+              </Col>
+            </Row>
+            <Row>
+              <Col xs={12}>
+                <ReactQuill
+                  id="editor"
+                  value={value}
+                  ref={(ref) => { this.quill = ref; }}
+                  onChange={this.onChange}
+                  modules={this.modules}
+                />
+              </Col>
+            </Row>
           </Col>
         </Row>
         {openDialog &&
           <PreviewModal
-            heading="Preview of staff slip - HOLD"
-            previewTemplate={text}
+            previewTemplate={template || value}
             open={openDialog}
             onClose={this.closePreviewDialog}
           />

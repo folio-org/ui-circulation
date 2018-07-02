@@ -11,7 +11,6 @@ import { template } from './util';
 
 class PreviewModal extends React.Component {
   static propTypes = {
-    heading: PropTypes.string.isRequired,
     onClose: PropTypes.func.isRequired,
     open: PropTypes.bool.isRequired,
     previewTemplate: PropTypes.string,
@@ -53,9 +52,11 @@ class PreviewModal extends React.Component {
   }
 
   render() {
-    const { open, onClose, heading, previewTemplate } = this.props;
+    const { open, onClose, previewTemplate } = this.props;
     const formatMsg = this.context.intl.formatMessage;
     const closeLabel = formatMsg({ id: 'ui-circulation.settings.staffSlips.close' });
+    const heading = formatMsg({ id: 'settings.staffSlips.previewLabel' });
+
     const tmpl = template(previewTemplate || '');
     const componentStr = tmpl(this.demoData);
     const contentComponent = this.parser.parseWithInstructions(componentStr, () => true, this.rules);
