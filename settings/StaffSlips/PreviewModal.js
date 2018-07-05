@@ -1,5 +1,5 @@
 import React from 'react';
-import { intlShape } from 'react-intl';
+import { injectIntl, intlShape } from 'react-intl';
 import PropTypes from 'prop-types';
 import Barcode from 'react-barcode';
 import HtmlToReact, { Parser } from 'html-to-react';
@@ -11,13 +11,10 @@ import { template } from './util';
 
 class PreviewModal extends React.Component {
   static propTypes = {
+    intl: intlShape,
     onClose: PropTypes.func.isRequired,
     open: PropTypes.bool.isRequired,
     previewTemplate: PropTypes.string,
-  };
-
-  static contextTypes = {
-    intl: intlShape,
   };
 
   constructor() {
@@ -52,10 +49,9 @@ class PreviewModal extends React.Component {
   }
 
   render() {
-    const { open, onClose, previewTemplate } = this.props;
-    const formatMsg = this.context.intl.formatMessage;
-    const closeLabel = formatMsg({ id: 'ui-circulation.settings.staffSlips.close' });
-    const heading = formatMsg({ id: 'settings.staffSlips.previewLabel' });
+    const { open, onClose, previewTemplate, intl } = this.props;
+    const closeLabel = intl.formatMessage({ id: 'ui-circulation.settings.staffSlips.close' });
+    const heading = intl.formatMessage({ id: 'ui-circulation.settings.staffSlips.previewLabel' });
 
     const tmpl = template(previewTemplate || '');
     const componentStr = tmpl(this.demoData);
@@ -84,4 +80,4 @@ class PreviewModal extends React.Component {
   }
 }
 
-export default PreviewModal;
+export default injectIntl(PreviewModal);
