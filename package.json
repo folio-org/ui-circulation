@@ -109,7 +109,7 @@
     "@folio/stripes-components": "^2.1.5",
     "@folio/stripes-core": "^2.8.0",
     "@folio/stripes-form": "^0.8.0",
-    "@folio/stripes-smart-components": "^1.1.0",
+    "@folio/stripes-smart-components": "^1.4.19",
     "html-to-react": "^1.3.3",
     "isomorphic-fetch": "^2.2.1",
     "lodash": "^4.17.4",
