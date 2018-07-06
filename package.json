@@ -16,6 +16,7 @@
     "displayName": "ui-circulation.meta.title",
     "route": "/circulation",
     "hasSettings": true,
+    "queryResource": "query",
     "icons": [
       {
         "name": "app",
