@@ -123,6 +123,7 @@
     "react-intl": "^2.4.0",
     "react-quill": "^1.2.7",
     "react-router-dom": "^4.0.0",
+    "react-to-print": "^1.0.21",
     "redux-form": "^7.0.3"
   },
   "peerDependencies": {

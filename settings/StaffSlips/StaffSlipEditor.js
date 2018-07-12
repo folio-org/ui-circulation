@@ -44,7 +44,7 @@ class StaffSlipEditor extends Component {
           [{
             token: [
               'Item title', 'Item barcode', 'Item call number',
-              'Patron last name', 'Patron first name',
+              'Requester last name', 'Requester first name',
               'Transaction Id', 'Hold expiration'
             ]
           }]

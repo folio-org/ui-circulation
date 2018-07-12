@@ -3,6 +3,8 @@ import { injectIntl, intlShape } from 'react-intl';
 import PropTypes from 'prop-types';
 import Barcode from 'react-barcode';
 import HtmlToReact, { Parser } from 'html-to-react';
+import ReactToPrint from "react-to-print";
+
 import { Row, Col } from '@folio/stripes-components/lib/LayoutGrid';
 import Button from '@folio/stripes-components/lib/Button';
 import Modal from '@folio/stripes-components/lib/Modal';
@@ -20,14 +22,15 @@ class PreviewModal extends React.Component {
   constructor() {
     super();
 
+    this.editorRef = React.createRef();
     const processNodeDefinitions = new HtmlToReact.ProcessNodeDefinitions(React);
 
     this.demoData = {
       'Item title': 'Hello',
       'Item barcode': '<Barcode/>',
       'Item call number': '67822233223',
-      'Patron last name': 'Brown',
-      'Patron first name': 'John',
+      'Requester last name': 'Brown',
+      'Requester first name': 'John',
       'Transaction Id': '10111222323222',
       'Hold expiration': '10/10/2018',
       'itemBarcode': '5901234123457',
@@ -66,12 +69,13 @@ class PreviewModal extends React.Component {
         size="medium"
         showHeader
       >
-        <div className="ql-editor">
+        <div className="ql-editor" ref={this.editorRef}>
           {contentComponent}
         </div>
         <br />
         <Row>
           <Col xs>
+            <ReactToPrint trigger={() => <Button buttonStyle="primary">Print</Button>} content={() => this.editorRef.current} />
             <Button onClick={onClose} id="clickable-close-preview">{closeLabel}</Button>
           </Col>
         </Row>
