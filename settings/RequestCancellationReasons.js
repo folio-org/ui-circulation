@@ -25,7 +25,7 @@ class RequestCancellationReasons extends React.Component {
         label={this.props.stripes.intl.formatMessage({ id: 'ui-circulation.settings.cancelReasons.label' })}
         labelSingular={this.props.stripes.intl.formatMessage({ id: 'ui-circulation.settings.cancelReasons.labelSingular' })}
         objectLabel={this.props.stripes.intl.formatMessage({ id: 'ui-circulation.settings.cancelReasons.objectLabel' })}
-        visibleFields={['publicDescription']}
+        visibleFields={['name', 'description', 'publicDescription']}
         hiddenFields={['lastUpdated', 'numberOfObjects']}
         columnMapping={{
           description: this.props.stripes.intl.formatMessage({ id: 'ui-circulation.settings.cancelReasons.descriptionInternal' }),
@@ -33,7 +33,7 @@ class RequestCancellationReasons extends React.Component {
         }}
         actionSuppressor={{
           edit: () => false,
-          delete: reason => reason.requiresAdditionalInfo
+          delete: reason => reason.requiresAdditionalInformation,
         }}
         nameKey="name"
         id="request-cancellation-reasons"
