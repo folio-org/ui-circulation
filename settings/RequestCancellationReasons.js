@@ -28,6 +28,7 @@ class RequestCancellationReasons extends React.Component {
         visibleFields={['name', 'description', 'publicDescription']}
         hiddenFields={['lastUpdated', 'numberOfObjects']}
         columnMapping={{
+          name: this.props.stripes.intl.formatMessage({ id: 'ui-circulation.settings.cancelReasons.labelShort' }),
           description: this.props.stripes.intl.formatMessage({ id: 'ui-circulation.settings.cancelReasons.descriptionInternal' }),
           publicDescription: this.props.stripes.intl.formatMessage({ id: 'ui-circulation.settings.cancelReasons.descriptionPublic' }),
         }}

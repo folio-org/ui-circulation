@@ -74,9 +74,9 @@
   "settings.fDDSform.saveSchedule": "Save Schedule",
   "settings.fDDSform.createSchedule": "Create Schedule",
 
-  "settings.cancelReasons.label": "Cancellation reason",
-  "settings.cancelReasons.labelSingular": "Cancellation reason",
-  "settings.cancelReasons.objectLabel": "Cancel reason",
+  "settings.cancelReasons.label": "Request cancellation reasons",
+  "settings.cancelReasons.labelSingular": "Request cancellation reason",
+  "settings.cancelReasons.labelShort": "Cancel reason*",
   "settings.cancelReasons.descriptionInternal": "Description (internal)",
   "settings.cancelReasons.descriptionPublic": "Description (public)",
 
