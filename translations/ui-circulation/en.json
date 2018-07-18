@@ -7,6 +7,7 @@
   "settings.index.fdds": "Fixed due date schedules",
   "settings.index.otherSettings": "Other settings",
   "settings.index.staffSlips": "Staff slips",
+  "settings.index.requestCancellationReasons": "Request cancellation reasons",
 
   "settings.loanPolicy.entryLabel": "Loan Policy",
   "settings.loanPolicy.paneTitle": "Loan Policies",
@@ -72,6 +73,12 @@
   "settings.fDDSform.closeLabel": "Close Fixed Due Date Schedule Dialog",
   "settings.fDDSform.saveSchedule": "Save Schedule",
   "settings.fDDSform.createSchedule": "Create Schedule",
+
+  "settings.cancelReasons.label": "Cancellation reason",
+  "settings.cancelReasons.labelSingular": "Cancellation reason",
+  "settings.cancelReasons.objectLabel": "Cancel reason",
+  "settings.cancelReasons.descriptionInternal": "Description (internal)",
+  "settings.cancelReasons.descriptionPublic": "Description (public)",
 
   "settings.checkout.paneTitle": "Other settings",
   "settings.checkout.validate.selectContinue": "Please select to continue",
