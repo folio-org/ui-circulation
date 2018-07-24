@@ -131,7 +131,7 @@ class LoanRules extends React.Component {
   }
 
   static defaultProps = {
-    calloutMessage: 'Rules was successfully updated.',
+    calloutMessage: 'Rules were successfully updated.',
   };
 
   // TODO: refactor to use mutator after PUT is changed on the server or stripes-connect supports
