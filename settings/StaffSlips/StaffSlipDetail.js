@@ -30,6 +30,11 @@ class StaffSlipDetail extends React.Component {
         </Row>
         <Row>
           <Col xs={8}>
+            <KeyValue label={this.translate('active')} value={staffSlip.active ? this.translate('yes') : this.translate('no') } />
+          </Col>
+        </Row>
+        <Row>
+          <Col xs={8}>
             <KeyValue label={this.translate('description')} value={staffSlip.description} />
           </Col>
         </Row>
