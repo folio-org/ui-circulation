@@ -262,6 +262,7 @@ class FixedDueDateScheduleForm extends React.Component {
                 </section>
               </Accordion>
               <ConfirmationModal
+                id="deletefixedduedateschedule-confirmation"
                 open={confirmDelete}
                 heading={formatMsg({ id: 'ui-circulation.settings.fDDSform.deleteHeader' })}
                 message={confirmationMessage}
