@@ -33,6 +33,7 @@
 * Add last updated record metadata to loan policy form. Fixes UICIRC-63.
 * Add view/edit hold staff strip. Fixes UICIRC-52.
 * Update to stripes-components 3 for Pane/Paneset compatibility.
+* Checkout scanning checkboxes sometimes would not display. They should ALWAYS display. Refs UICIRC-75.
 
 ## [1.1.1](https://github.com/folio-org/ui-circulation/tree/v1.1.1) (2017-09-02)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v1.1.0...v1.1.1)

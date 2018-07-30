@@ -48,20 +48,21 @@ class CheckoutSettingsForm extends React.Component {
       </Button>
     );
   }
+
   handleCheckoutTimeout() {
     this.setState({
       checked: !this.state.checked
     });
   }
+
   getCurrentValues() {
     const { stripes: { store } } = this.props;
     const state = store.getState();
     return getFormValues('checkoutForm')(state) || {};
   }
+
   // eslint-disable-next-line class-methods-use-this
   renderList({ fields, meta }) {
-    if (!fields.length) return (<div />);
-
     const items = patronIdentifierTypes.map((iden, index) => (
       <Row key={`row-${index}`}>
         <Col xs={12}>
@@ -70,7 +71,6 @@ class CheckoutSettingsForm extends React.Component {
             id={`${iden.queryKey}-checkbox`}
             data-checked={fields.get(index)}
             label={iden.label}
-            key={`item-${index}`}
             name={`idents[${index}]`}
           />
         </Col>
