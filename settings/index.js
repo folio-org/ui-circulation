@@ -50,7 +50,7 @@ class Circulation extends React.Component {
         label: this.props.stripes.intl.formatMessage({ id: 'ui-circulation.settings.index.requestCancellationReasons' }),
         component: RequestCancellationReasons,
         perm: 'ui-circulation.settings.cancellation-reasons',
-      }
+      },
     ];
   }
   render() {

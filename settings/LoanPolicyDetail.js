@@ -13,7 +13,7 @@ import {
   dueDateManagementOptions,
   renewFromOptions,
   loanProfileMap,
-  renewFromIds
+  renewFromIds,
 } from '../constants';
 
 class LoanPolicyDetail extends React.Component {

@@ -8,6 +8,20 @@ import FixedDueDateScheduleDetail from './FixedDueDateScheduleDetail';
 import FixedDueDateScheduleForm from './FixedDueDateScheduleForm';
 
 class FixedDueDateScheduleManager extends React.Component {
+  static manifest = Object.freeze({
+    fixedDueDateSchedules: {
+      type: 'okapi',
+      records: 'fixedDueDateSchedules',
+      path: 'fixed-due-date-schedule-storage/fixed-due-date-schedules',
+    },
+    loanPolicies: {
+      type: 'okapi',
+      records: 'loanPolicies',
+      path: 'loan-policy-storage/loan-policies',
+      dataKey: 'loan-policies',
+    },
+  });
+
   static propTypes = {
     resources: PropTypes.object.isRequired,
     mutator: PropTypes.shape({
@@ -22,20 +36,6 @@ class FixedDueDateScheduleManager extends React.Component {
     }).isRequired,
     stripes: stripesShape.isRequired,
   };
-
-  static manifest = Object.freeze({
-    fixedDueDateSchedules: {
-      type: 'okapi',
-      records: 'fixedDueDateSchedules',
-      path: 'fixed-due-date-schedule-storage/fixed-due-date-schedules',
-    },
-    loanPolicies: {
-      type: 'okapi',
-      records: 'loanPolicies',
-      path: 'loan-policy-storage/loan-policies',
-      dataKey: 'loan-policies',
-    },
-  });
 
   constructor(props) {
     super(props);

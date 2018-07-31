@@ -18,7 +18,7 @@ import {
   dueDateManagementOptions,
   renewFromOptions,
   intervalIdsMap,
-  loanProfileMap
+  loanProfileMap,
 } from '../constants';
 
 class LoanPolicyForm extends React.Component {

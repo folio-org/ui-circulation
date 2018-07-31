@@ -25,11 +25,6 @@ const editorDefaultProps = {
 };
 
 class LoanRules extends React.Component {
-  static propTypes = {
-    resources: PropTypes.object.isRequired,
-    stripes: PropTypes.object.isRequired,
-  };
-
   static manifest = Object.freeze({
     loanRules: {
       type: 'okapi',
@@ -61,6 +56,16 @@ class LoanRules extends React.Component {
       resourceShouldRefresh: true,
     },
   });
+
+  static propTypes = {
+    resources: PropTypes.object.isRequired,
+    stripes: PropTypes.object.isRequired,
+    calloutMessage: PropTypes.string,
+  };
+
+  static defaultProps = {
+    calloutMessage: 'Rules were successfully updated.',
+  };
 
   constructor(props) {
     super(props);
@@ -129,10 +134,6 @@ class LoanRules extends React.Component {
       return memo.replace(re, r.name);
     }, rulesStr);
   }
-
-  static defaultProps = {
-    calloutMessage: 'Rules were successfully updated.',
-  };
 
   // TODO: refactor to use mutator after PUT is changed on the server or stripes-connect supports
   // custom PUT requests without the id attached to the end of the URL.

@@ -51,7 +51,7 @@ class CheckoutSettingsForm extends React.Component {
 
   handleCheckoutTimeout() {
     this.setState({
-      checked: !this.state.checked
+      checked: !this.state.checked,
     });
   }
 
