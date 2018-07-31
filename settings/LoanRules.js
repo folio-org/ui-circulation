@@ -3,6 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Paneset, Pane } from '@folio/stripes-components';
 import fetch from 'isomorphic-fetch';
+import Callout from '@folio/stripes-components/lib/Callout';
 
 import LoanRulesForm from './lib/RuleEditor/LoanRulesForm';
 
@@ -59,6 +60,11 @@ class LoanRules extends React.Component {
   static propTypes = {
     resources: PropTypes.object.isRequired,
     stripes: PropTypes.object.isRequired,
+    calloutMessage: PropTypes.string,
+  };
+
+  static defaultProps = {
+    calloutMessage: 'Rules were successfully updated.',
   };
 
   constructor(props) {
@@ -150,6 +156,8 @@ class LoanRules extends React.Component {
     return fetch(`${stripes.okapi.url}/circulation/loan-rules`, options).then((resp) => {
       if (resp.status >= 400) {
         resp.json().then(json => this.setState({ errors: [json] }));
+      } else {
+        this.callout.sendCallout({ message: this.props.calloutMessage });
       }
     });
   }
@@ -171,6 +179,7 @@ class LoanRules extends React.Component {
             editorProps={editorProps}
           />
         </Pane>
+        <Callout ref={(ref) => { this.callout = ref; }} />
       </Paneset>
     );
   }

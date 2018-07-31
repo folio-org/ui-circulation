@@ -33,7 +33,7 @@ class LoanPolicySettings extends React.Component {
       type: 'okapi',
       records: 'fixedDueDateSchedules',
       path: 'fixed-due-date-schedule-storage/fixed-due-date-schedules',
-      resourceShouldRefresh: true
+      resourceShouldRefresh: true,
     },
   });
 
