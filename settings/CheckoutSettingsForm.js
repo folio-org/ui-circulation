@@ -82,8 +82,8 @@ class CheckoutSettingsForm extends React.Component {
         <p className={css.label}>
           <FormattedMessage id="ui-circulation.settings.checkout.patronIds" />
         </p>
-        {meta.error && <div className={css.error}>{meta.error}</div>}
         {items}
+        {meta.error && <div className={css.error}>{meta.error}</div>}
       </div>
     );
   }
