@@ -3,6 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Paneset, Pane } from '@folio/stripes-components';
 import fetch from 'isomorphic-fetch';
+import Callout from '@folio/stripes-components/lib/Callout';
 
 import LoanRulesForm from './lib/RuleEditor/LoanRulesForm';
 
@@ -129,6 +130,10 @@ class LoanRules extends React.Component {
     }, rulesStr);
   }
 
+  static defaultProps = {
+    calloutMessage: 'Rules were successfully updated.',
+  };
+
   // TODO: refactor to use mutator after PUT is changed on the server or stripes-connect supports
   // custom PUT requests without the id attached to the end of the URL.
   saveLoanRules(rules) {
@@ -150,6 +155,8 @@ class LoanRules extends React.Component {
     return fetch(`${stripes.okapi.url}/circulation/loan-rules`, options).then((resp) => {
       if (resp.status >= 400) {
         resp.json().then(json => this.setState({ errors: [json] }));
+      } else {
+        this.callout.sendCallout({ message: this.props.calloutMessage });
       }
     });
   }
@@ -171,6 +178,7 @@ class LoanRules extends React.Component {
             editorProps={editorProps}
           />
         </Pane>
+        <Callout ref={(ref) => { this.callout = ref; }} />
       </Paneset>
     );
   }
