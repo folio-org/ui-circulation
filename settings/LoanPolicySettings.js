@@ -23,20 +23,6 @@ const defaultPolicy = {
 };
 
 class LoanPolicySettings extends React.Component {
-  static propTypes = {
-    resources: PropTypes.shape({
-      loanPolicies: PropTypes.object,
-      fixedDueDateSchedules: PropTypes.object,
-    }).isRequired,
-    mutator: PropTypes.shape({
-      loanPolicies: PropTypes.shape({
-        POST: PropTypes.func,
-        DELETE: PropTypes.func,
-      }),
-    }).isRequired,
-    stripes: stripesShape.isRequired,
-  };
-
   static manifest = Object.freeze({
     loanPolicies: {
       type: 'okapi',
@@ -50,6 +36,20 @@ class LoanPolicySettings extends React.Component {
       resourceShouldRefresh: true
     },
   });
+
+  static propTypes = {
+    resources: PropTypes.shape({
+      loanPolicies: PropTypes.object,
+      fixedDueDateSchedules: PropTypes.object,
+    }).isRequired,
+    mutator: PropTypes.shape({
+      loanPolicies: PropTypes.shape({
+        POST: PropTypes.func,
+        DELETE: PropTypes.func,
+      }),
+    }).isRequired,
+    stripes: stripesShape.isRequired,
+  };
 
   constructor(props) {
     super(props);

@@ -39,7 +39,6 @@ class LoanPolicyForm extends React.Component {
     this.cViewMetaData = props.stripes.connect(ViewMetaData);
 
     this.state = {
-      confirmDelete: false,
       sections: {
         generalSection: true,
       },

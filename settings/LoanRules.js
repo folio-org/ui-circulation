@@ -24,11 +24,6 @@ const editorDefaultProps = {
 };
 
 class LoanRules extends React.Component {
-  static propTypes = {
-    resources: PropTypes.object.isRequired,
-    stripes: PropTypes.object.isRequired,
-  };
-
   static manifest = Object.freeze({
     loanRules: {
       type: 'okapi',
@@ -60,6 +55,11 @@ class LoanRules extends React.Component {
       resourceShouldRefresh: true,
     },
   });
+
+  static propTypes = {
+    resources: PropTypes.object.isRequired,
+    stripes: PropTypes.object.isRequired,
+  };
 
   constructor(props) {
     super(props);
