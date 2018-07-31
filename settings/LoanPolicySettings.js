@@ -23,6 +23,20 @@ const defaultPolicy = {
 };
 
 class LoanPolicySettings extends React.Component {
+  static manifest = Object.freeze({
+    loanPolicies: {
+      type: 'okapi',
+      records: 'loanPolicies',
+      path: 'loan-policy-storage/loan-policies',
+    },
+    fixedDueDateSchedules: {
+      type: 'okapi',
+      records: 'fixedDueDateSchedules',
+      path: 'fixed-due-date-schedule-storage/fixed-due-date-schedules',
+      resourceShouldRefresh: true,
+    },
+  });
+
   static propTypes = {
     resources: PropTypes.shape({
       loanPolicies: PropTypes.object,
@@ -36,20 +50,6 @@ class LoanPolicySettings extends React.Component {
     }).isRequired,
     stripes: stripesShape.isRequired,
   };
-
-  static manifest = Object.freeze({
-    loanPolicies: {
-      type: 'okapi',
-      records: 'loanPolicies',
-      path: 'loan-policy-storage/loan-policies',
-    },
-    fixedDueDateSchedules: {
-      type: 'okapi',
-      records: 'fixedDueDateSchedules',
-      path: 'fixed-due-date-schedule-storage/fixed-due-date-schedules',
-      resourceShouldRefresh: true
-    },
-  });
 
   constructor(props) {
     super(props);
