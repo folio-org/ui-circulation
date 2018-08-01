@@ -7,6 +7,7 @@ import LoanRules from './LoanRules';
 import RequestCancellationReasons from './RequestCancellationReasons';
 import CheckoutSettings from './CheckoutSettings';
 import FixedDueDateScheduleManager from './FixedDueDateScheduleManager';
+import PatronNotices from './PatronNotices';
 import StaffSlips from './StaffSlips';
 
 class Circulation extends React.Component {
@@ -50,6 +51,11 @@ class Circulation extends React.Component {
         label: this.props.stripes.intl.formatMessage({ id: 'ui-circulation.settings.index.requestCancellationReasons' }),
         component: RequestCancellationReasons,
         perm: 'ui-circulation.settings.cancellation-reasons',
+      },
+      {
+        route: 'patron-notices',
+        label: this.props.stripes.intl.formatMessage({ id: 'ui-circulation.settings.index.patronNotices' }),
+        component: PatronNotices,
       },
     ];
   }
