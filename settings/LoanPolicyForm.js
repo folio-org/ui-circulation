@@ -24,7 +24,7 @@ import {
 class LoanPolicyForm extends React.Component {
   static propTypes = {
     stripes: stripesShape.isRequired,
-    resources: PropTypes.shape({
+    parentResources: PropTypes.shape({
       fixedDueDateSchedules: PropTypes.object,
     }).isRequired,
     change: PropTypes.func.isRequired,
@@ -113,7 +113,7 @@ class LoanPolicyForm extends React.Component {
       dueDateScheduleFieldLabel += ' *';
     }
 
-    const schedules = _.sortBy((this.props.resources.fixedDueDateSchedules || {}).records || [], ['name'])
+    const schedules = _.sortBy((this.props.parentResources.fixedDueDateSchedules || {}).records || [], ['name'])
       .map(schedule => (
         {
           id: schedule.id,
