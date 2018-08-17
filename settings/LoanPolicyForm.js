@@ -218,8 +218,8 @@ class LoanPolicyForm extends React.Component {
               name="loansPolicy.fixedDueDateScheduleId"
               id="input_loansPolicy_fixedDueDateSchedule"
               component={Select}
-              placeholder={formatMsg({ id: 'ui-circulation.settings.loanPolicy.selectSchedule' })}
-              dataOptions={schedules}
+              normalize={value => (value === '' ? null : value)}
+              dataOptions={[{ label: formatMsg({ id: 'ui-circulation.settings.loanPolicy.selectSchedule' }), value: '' }, ...schedules]}
             />
           }
           {/* closed library due date management - Select */}
