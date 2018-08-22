@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import KeyValue from '@folio/stripes-components/lib/KeyValue';
+import StaffSlipEditor from './StaffSlipEditor';
 import { Row, Col } from '@folio/stripes-components/lib/LayoutGrid';
 
 class StaffSlipDetail extends React.Component {
@@ -20,6 +21,10 @@ class StaffSlipDetail extends React.Component {
 
   render() {
     const staffSlip = this.props.initialValues;
+    const templateValue = { value: staffSlip.template};
+    const modulesConfig = {
+        toolbar: false,
+    };
 
     return (
       <div>
@@ -39,8 +44,8 @@ class StaffSlipDetail extends React.Component {
           </Col>
         </Row>
         <Row>
-          <Col xs={4}>
-            <KeyValue label={this.translate('display')} value={staffSlip.template} />
+          <Col xs={12}>
+            <StaffSlipEditor input={templateValue} label={this.translate('display')} modules={modulesConfig} readOnly />
           </Col>
         </Row>
       </div>
