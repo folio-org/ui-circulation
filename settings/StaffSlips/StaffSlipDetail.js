@@ -1,7 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import KeyValue from '@folio/stripes-components/lib/KeyValue';
+import StaffSlipEditor from './StaffSlipEditor';
+import HtmlToReact, { Parser } from 'html-to-react';
+import Button from '@folio/stripes-components/lib/Button';
+import formCss from '@folio/stripes-components/lib/sharedStyles/form.css';
+import css from './StaffSlipDetail.css';
+import { template } from './util';
 import { Row, Col } from '@folio/stripes-components/lib/LayoutGrid';
+import PreviewModal from './PreviewModal';
 
 class StaffSlipDetail extends React.Component {
   static propTypes = {
@@ -18,8 +25,50 @@ class StaffSlipDetail extends React.Component {
     });
   }
 
+  constructor(props) {
+   super(props);
+   this.editorRef = React.createRef();
+   this.openPreviewDialog = this.openPreviewDialog.bind(this);
+   this.closePreviewDialog = this.closePreviewDialog.bind(this);
+   const processNodeDefinitions = new HtmlToReact.ProcessNodeDefinitions(React);
+
+   this.detailFormat = {
+      'Item title': '',
+      'Item barcode': '',
+      'Item call number': ' Call number:',
+      'Requester last name': ' Requester Last name:',
+      'Requester first name': ' Requester First name:',
+      'Transaction Id': ' Transaction Id:',
+      'Hold expiration': ' Hold expiration:',
+    };
+
+   this.rules = [
+     {
+       shouldProcessNode: () => true,
+       processNode: processNodeDefinitions.processDefaultNode,
+     }
+   ];
+
+   this.state = { openDialog: false };
+   this.parser = new Parser();
+ }
+
+ openPreviewDialog() {
+   this.setState({ openDialog: true });
+ }
+
+ closePreviewDialog() {
+   this.setState({ openDialog: false });
+ }
+
+
   render() {
+    const { openDialog } = this.state;
+
     const staffSlip = this.props.initialValues;
+    const tmpl = template(staffSlip.template || '');
+    const componentStr = tmpl(this.detailFormat);
+    const contentComponent = this.parser.parseWithInstructions(componentStr, () => true, this.rules);
 
     return (
       <div>
@@ -38,11 +87,32 @@ class StaffSlipDetail extends React.Component {
             <KeyValue label={this.translate('description')} value={staffSlip.description} />
           </Col>
         </Row>
-        <Row>
-          <Col xs={4}>
-            <KeyValue label={this.translate('display')} value={staffSlip.template} />
+        <Row bottom="xs">
+          <Col xs={9}>
+            {this.translate('display')}
+          </Col>
+          <Col xs={3}>
+            <Row className={css.preview}>
+              <Col>
+                <Button bottomMargin0 onClick={this.openPreviewDialog}>Preview</Button>
+              </Col>
+            </Row>
           </Col>
         </Row>
+        <Row>
+          <Col xs={12}>
+            <div className={css.detail} ref={this.editorRef}>
+              {contentComponent}
+            </div>
+          </Col>
+        </Row>
+        {openDialog &&
+          <PreviewModal
+            previewTemplate={staffSlip.template}
+            open={openDialog}
+            onClose={this.closePreviewDialog}
+          />
+        }
       </div>
     );
   }
