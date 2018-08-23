@@ -90,5 +90,16 @@
     "settings.staffSlips.untitledStaffSlip": "Személyzeti nyomtatvány neve",
     "settings.staffSlips.deleteStaffSlipMessage": "A személyzeti nyomtatvány <strong>{name}</strong> <strong>törölve</strong> lesz.",
     "settings.staffSlips.validation.required": "Kérem, töltse ki ezt a folytatáshoz",
-    "settings.staffSlips.close": "Bezár"
+    "settings.staffSlips.close": "Bezár",
+    "settings.index.requestCancellationReasons": "Request cancellation reasons",
+    "settings.loanPolicy.generalInformation": "General information",
+    "settings.cancelReasons.label": "Request cancellation reasons",
+    "settings.cancelReasons.labelSingular": "Request cancellation reason",
+    "settings.cancelReasons.labelShort": "Cancel reason*",
+    "settings.cancelReasons.descriptionInternal": "Description (internal)",
+    "settings.cancelReasons.descriptionPublic": "Description (public)",
+    "settings.staffSlips.previewLabel": "Preview of staff slip - Hold",
+    "settings.staffSlips.yes": "Yes",
+    "settings.staffSlips.no": "No",
+    "meta.title": "Circulation"
 }

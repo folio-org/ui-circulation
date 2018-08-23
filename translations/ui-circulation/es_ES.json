@@ -81,7 +81,7 @@
     "settings.staffSlips.createStaffSlip": "Crear",
     "settings.staffSlips.saveAndClose": "Guardar y cerrar",
     "settings.staffSlips.edit": "Editar",
-    "settings.staffSlips.new": "Nuevo recibo de personal",
+    "settings.staffSlips.new": "Nueva hoja de personal",
     "settings.staffSlips.display": "Pantalla",
     "settings.staffSlips.description": "Descripción",
     "settings.staffSlips.delete": "Eliminar",
@@ -90,5 +90,16 @@
     "settings.staffSlips.untitledStaffSlip": "Nombre del empleado",
     "settings.staffSlips.deleteStaffSlipMessage": "El recibo de personal <strong>{name}</strong> será <strong>eliminado</strong>.",
     "settings.staffSlips.validation.required": "Por favor, complete esto para continuar",
-    "settings.staffSlips.close": "Cerrar"
+    "settings.staffSlips.close": "Cerrar",
+    "settings.index.requestCancellationReasons": "Solicitar razones de cancelación",
+    "settings.loanPolicy.generalInformation": "Información general",
+    "settings.cancelReasons.label": "Solicitar razones de cancelación",
+    "settings.cancelReasons.labelSingular": "Solicitar razón de cancelación",
+    "settings.cancelReasons.labelShort": "Cancelar razón*",
+    "settings.cancelReasons.descriptionInternal": "Descripción (interna)",
+    "settings.cancelReasons.descriptionPublic": "Descripción (pública)",
+    "settings.staffSlips.previewLabel": "Vista previa de la hoja de personal - Mantener",
+    "settings.staffSlips.yes": "Sí",
+    "settings.staffSlips.no": "No",
+    "meta.title": "Circulation"
 }
