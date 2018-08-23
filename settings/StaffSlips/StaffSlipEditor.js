@@ -18,8 +18,6 @@ class StaffSlipEditor extends Component {
   static propTypes = {
     input: PropTypes.object,
     label: PropTypes.string,
-    modules: PropTypes.object,
-    readOnly: PropTypes.boolean,
   };
 
   constructor(props) {
@@ -67,8 +65,7 @@ class StaffSlipEditor extends Component {
     // eslint-disable-next-line no-return-assign
       .forEach(item => (item.textContent = item.dataset.value));
     // eslint-disable-next-line no-useless-escape
-    const tokenSelector = document.querySelector('.ql-token .ql-picker-label');
-    if(tokenSelector) document.querySelector('.ql-token .ql-picker-label').innerHTML = '\{ \}';
+    document.querySelector('.ql-token .ql-picker-label').innerHTML = '\{ \}';
   }
 
   onChange(template) {
@@ -103,8 +100,7 @@ class StaffSlipEditor extends Component {
 
   render() {
     const { template, openDialog } = this.state;
-    const { label, input: { value }, name, modules, readOnly } = this.props;
-    const modulesConfig = modules || this.modules;
+    const { label, input: { value }, name } = this.props;
 
     return (
       <div>
@@ -129,8 +125,7 @@ class StaffSlipEditor extends Component {
                   value={value}
                   ref={(ref) => { this.quill = ref; }}
                   onChange={this.onChange}
-                  modules={modulesConfig}
-                  readOnly={readOnly}
+                  modules={this.modules}
                 />
               </Col>
             </Row>

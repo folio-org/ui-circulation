@@ -26,21 +26,20 @@ class PreviewModal extends React.Component {
     const processNodeDefinitions = new HtmlToReact.ProcessNodeDefinitions(React);
 
     this.demoData = {
-      'Item title': 'Hello',
+      'Item title': '',
       'Item barcode': '<Barcode/>',
-      'Item call number': '67822233223',
-      'Requester last name': 'Brown',
-      'Requester first name': 'John',
-      'Transaction Id': '10111222323222',
-      'Hold expiration': '10/10/2018',
-      'itemBarcode': '5901234123457',
+      'Item call number': ' Call number:',
+      'Requester last name': ' Requester Last name:',
+      'Requester first name': ' Requester First name:',
+      'Transaction Id': ' Transaction Id:',
+      'Hold expiration': ' Hold expiration:',
     };
 
     this.rules = [
       {
         replaceChildren: true,
         shouldProcessNode: node => node.name === 'barcode',
-        processNode: () => (<Barcode value={this.demoData.itemBarcode} format="EAN13" />),
+        processNode: (node, children) => <Barcode value={children[0] ? children[0].trim() : ' '} format="EAN13" />,
       },
       {
         shouldProcessNode: () => true,
