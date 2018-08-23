@@ -18,6 +18,7 @@ class StaffSlipEditor extends Component {
   static propTypes = {
     input: PropTypes.object,
     label: PropTypes.string,
+    slipType: PropTypes.string,
   };
 
   constructor(props) {
@@ -26,6 +27,19 @@ class StaffSlipEditor extends Component {
     this.insertToken = this.insertToken.bind(this);
     this.openPreviewDialog = this.openPreviewDialog.bind(this);
     this.closePreviewDialog = this.closePreviewDialog.bind(this);
+
+     this.token = props.slipType === 'Hold' ?
+     [
+       'Item title', 'Item barcode', 'Item call number',
+       'Requester last name', 'Requester first name',
+       'Transaction Id', 'Hold expiration'
+     ] :
+
+     [
+       'From location', 'To location', 'Needed for:',
+       'Date', 'Item title', 'Item author(s)', 'Item barcode',
+       'Item call number', 'Request/transaction number', 'Staff slip name'
+     ];
 
     this.modules = {
       history: {
@@ -42,11 +56,7 @@ class StaffSlipEditor extends Component {
           [{ 'size': ['small', false, 'large', 'huge'] }],
           [{ align: '' }, { align: 'center' }, { align: 'right' }, { align: 'justify' }],
           [{
-            token: [
-              'Item title', 'Item barcode', 'Item call number',
-              'Requester last name', 'Requester first name',
-              'Transaction Id', 'Hold expiration'
-            ]
+            token: this.token
           }]
         ],
         handlers: {
@@ -136,6 +146,7 @@ class StaffSlipEditor extends Component {
             previewTemplate={template || value}
             open={openDialog}
             onClose={this.closePreviewDialog}
+            slipType={this.props.slipType || ''}
           />
         }
       </div>

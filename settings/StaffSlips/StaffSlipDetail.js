@@ -32,15 +32,28 @@ class StaffSlipDetail extends React.Component {
    this.closePreviewDialog = this.closePreviewDialog.bind(this);
    const processNodeDefinitions = new HtmlToReact.ProcessNodeDefinitions(React);
 
-   this.detailFormat = {
-      'Item title': '',
-      'Item barcode': '',
-      'Item call number': ' Call number:',
-      'Requester last name': ' Requester Last name:',
-      'Requester first name': ' Requester First name:',
-      'Transaction Id': ' Transaction Id:',
-      'Hold expiration': ' Hold expiration:',
-    };
+   this.previewFormat = props.initialValues.name === 'Hold' ?
+   {
+     'Item title': '',
+     'Item barcode': '<Barcode/>',
+     'Item call number': ' Call number:',
+     'Requester last name': ' Requester Last name:',
+     'Requester first name': ' Requester First name:',
+     'Transaction Id': ' Transaction Id:',
+     'Hold expiration': ' Hold expiration:',
+   } :
+   {
+     'From location': ' From location:',
+     'To location': ' In Transit to:',
+     'Needed for:': ' Needed for:',
+     'Date': ' Date',
+     'Item title': '',
+     'Item author(s)': ' Authors:',
+     'Item barcode': '<Barcode/>',
+     'Item call number': ' Call number:',
+     'Request/transaction number': ' Transaction Id:',
+     'Staff slip name': ' Slip name:',
+   }
 
    this.rules = [
      {
@@ -67,7 +80,7 @@ class StaffSlipDetail extends React.Component {
 
     const staffSlip = this.props.initialValues;
     const tmpl = template(staffSlip.template || '');
-    const componentStr = tmpl(this.detailFormat);
+    const componentStr = tmpl(this.previewFormat);
     const contentComponent = this.parser.parseWithInstructions(componentStr, () => true, this.rules);
 
     return (

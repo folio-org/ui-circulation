@@ -17,15 +17,17 @@ class PreviewModal extends React.Component {
     onClose: PropTypes.func.isRequired,
     open: PropTypes.bool.isRequired,
     previewTemplate: PropTypes.string,
+    slipType: PropTypes.string,
   };
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.editorRef = React.createRef();
     const processNodeDefinitions = new HtmlToReact.ProcessNodeDefinitions(React);
 
-    this.demoData = {
+    this.previewFormat = props.slipType === 'Hold' ?
+    {
       'Item title': '',
       'Item barcode': '<Barcode/>',
       'Item call number': ' Call number:',
@@ -33,7 +35,19 @@ class PreviewModal extends React.Component {
       'Requester first name': ' Requester First name:',
       'Transaction Id': ' Transaction Id:',
       'Hold expiration': ' Hold expiration:',
-    };
+    } :
+    {
+      'From location': ' From location:',
+      'To location': ' In Transit to:',
+      'Needed for:': ' Needed for:',
+      'Date': ' Date',
+      'Item title': '',
+      'Item author(s)': ' Authors:',
+      'Item barcode': '<Barcode/>',
+      'Item call number': ' Call number:',
+      'Request/transaction number': ' Transaction Id:',
+      'Staff slip name': ' Slip name:',
+    }
 
     this.rules = [
       {
@@ -56,7 +70,7 @@ class PreviewModal extends React.Component {
     const heading = intl.formatMessage({ id: 'ui-circulation.settings.staffSlips.previewLabel' });
 
     const tmpl = template(previewTemplate || '');
-    const componentStr = tmpl(this.demoData);
+    const componentStr = tmpl(this.previewFormat);
     const contentComponent = this.parser.parseWithInstructions(componentStr, () => true, this.rules);
 
     return (

@@ -119,7 +119,7 @@ class StaffSlipForm extends React.Component {
             </Row>
             <Row>
               <Col xs={8}>
-                <Field label={this.translate('display')} component={StaffSlipEditor} name="template" />
+                <Field label={this.translate('display')} component={StaffSlipEditor} name="template" slipType={(initialValues || {}).name} />
               </Col>
             </Row>
           </Pane>
