@@ -47,6 +47,13 @@ class StaffSlipManager extends React.Component {
       active: true,
       template: '<p></p>',
     });
+
+    // TODO: remove after default TRANSIT slip is provisioned during build process
+    this.props.mutator.entries.POST({
+      name: 'Transit',
+      active: true,
+      template: '<p></p>',
+    });
   }
 
   translate(id) {

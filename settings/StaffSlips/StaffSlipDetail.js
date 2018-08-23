@@ -6,6 +6,7 @@ import HtmlToReact, { Parser } from 'html-to-react';
 import Button from '@folio/stripes-components/lib/Button';
 import formCss from '@folio/stripes-components/lib/sharedStyles/form.css';
 import css from './StaffSlipDetail.css';
+import { formats } from './formats.js';
 import { template } from './util';
 import { Row, Col } from '@folio/stripes-components/lib/LayoutGrid';
 import PreviewModal from './PreviewModal';
@@ -32,16 +33,7 @@ class StaffSlipDetail extends React.Component {
    this.closePreviewDialog = this.closePreviewDialog.bind(this);
    const processNodeDefinitions = new HtmlToReact.ProcessNodeDefinitions(React);
 
-   this.detailFormat = {
-      'Item title': '',
-      'Item barcode': '',
-      'Item call number': ' Call number:',
-      'Requester last name': ' Requester Last name:',
-      'Requester first name': ' Requester First name:',
-      'Transaction Id': ' Transaction Id:',
-      'Hold expiration': ' Hold expiration:',
-    };
-
+   this.previewFormat = formats[props.initialValues.name];
    this.rules = [
      {
        shouldProcessNode: () => true,
@@ -67,7 +59,7 @@ class StaffSlipDetail extends React.Component {
 
     const staffSlip = this.props.initialValues;
     const tmpl = template(staffSlip.template || '');
-    const componentStr = tmpl(this.detailFormat);
+    const componentStr = tmpl(this.previewFormat);
     const contentComponent = this.parser.parseWithInstructions(componentStr, () => true, this.rules);
 
     return (
@@ -111,6 +103,7 @@ class StaffSlipDetail extends React.Component {
             previewTemplate={staffSlip.template}
             open={openDialog}
             onClose={this.closePreviewDialog}
+            slipType={staffSlip.name}
           />
         }
       </div>

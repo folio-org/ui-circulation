@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Barcode from 'react-barcode';
 import HtmlToReact, { Parser } from 'html-to-react';
 import ReactToPrint from "react-to-print";
-
+import { formats } from './formats.js';
 import { Row, Col } from '@folio/stripes-components/lib/LayoutGrid';
 import Button from '@folio/stripes-components/lib/Button';
 import Modal from '@folio/stripes-components/lib/Modal';
@@ -17,24 +17,15 @@ class PreviewModal extends React.Component {
     onClose: PropTypes.func.isRequired,
     open: PropTypes.bool.isRequired,
     previewTemplate: PropTypes.string,
+    slipType: PropTypes.string,
   };
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.editorRef = React.createRef();
     const processNodeDefinitions = new HtmlToReact.ProcessNodeDefinitions(React);
-
-    this.demoData = {
-      'Item title': '',
-      'Item barcode': '<Barcode/>',
-      'Item call number': ' Call number:',
-      'Requester last name': ' Requester Last name:',
-      'Requester first name': ' Requester First name:',
-      'Transaction Id': ' Transaction Id:',
-      'Hold expiration': ' Hold expiration:',
-    };
-
+    this.previewFormat = formats[props.slipType];
     this.rules = [
       {
         replaceChildren: true,
@@ -56,7 +47,7 @@ class PreviewModal extends React.Component {
     const heading = intl.formatMessage({ id: 'ui-circulation.settings.staffSlips.previewLabel' });
 
     const tmpl = template(previewTemplate || '');
-    const componentStr = tmpl(this.demoData);
+    const componentStr = tmpl(this.previewFormat);
     const contentComponent = this.parser.parseWithInstructions(componentStr, () => true, this.rules);
 
     return (
