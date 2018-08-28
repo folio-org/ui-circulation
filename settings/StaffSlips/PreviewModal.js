@@ -3,12 +3,12 @@ import { injectIntl, intlShape } from 'react-intl';
 import PropTypes from 'prop-types';
 import Barcode from 'react-barcode';
 import HtmlToReact, { Parser } from 'html-to-react';
-import ReactToPrint from "react-to-print";
-import { formats } from './formats.js';
+import ReactToPrint from 'react-to-print';
 import { Row, Col } from '@folio/stripes-components/lib/LayoutGrid';
 import Button from '@folio/stripes-components/lib/Button';
 import Modal from '@folio/stripes-components/lib/Modal';
 
+import formats from './formats';
 import { template } from './util';
 
 class PreviewModal extends React.Component {
@@ -30,7 +30,9 @@ class PreviewModal extends React.Component {
       {
         replaceChildren: true,
         shouldProcessNode: node => node.name === 'barcode',
-        processNode: (node, children) => <Barcode value={children[0] ? children[0].trim() : ' '} format="EAN13" />,
+        processNode: (node, children) => {
+          return (<Barcode value={children[0] ? children[0].trim() : ' '} />);
+        },
       },
       {
         shouldProcessNode: () => true,
