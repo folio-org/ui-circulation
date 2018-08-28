@@ -3,9 +3,7 @@ import PropTypes from 'prop-types';
 import ReactQuill from 'react-quill';
 import { Row, Col } from '@folio/stripes-components/lib/LayoutGrid';
 import Button from '@folio/stripes-components/lib/Button';
-
 import formCss from '@folio/stripes-components/lib/sharedStyles/form.css';
-import css from './StaffSlipEditor.css';
 
 // eslint-disable-next-line import/no-webpack-loader-syntax
 import '!style-loader!css-loader!react-quill/dist/quill.snow.css';
@@ -13,12 +11,15 @@ import '!style-loader!css-loader!react-quill/dist/quill.snow.css';
 import '!style-loader!css-loader!./quillCustom.css';
 
 import PreviewModal from './PreviewModal';
+import css from './StaffSlipEditor.css';
 
 class StaffSlipEditor extends Component {
   static propTypes = {
     input: PropTypes.object,
     label: PropTypes.string,
     slipType: PropTypes.string,
+    tokens: PropTypes.arrayOf(PropTypes.string),
+    stripes: PropTypes.object,
   };
 
   constructor(props) {
@@ -27,19 +28,7 @@ class StaffSlipEditor extends Component {
     this.insertToken = this.insertToken.bind(this);
     this.openPreviewDialog = this.openPreviewDialog.bind(this);
     this.closePreviewDialog = this.closePreviewDialog.bind(this);
-
-     this.token = props.slipType === 'Hold' ?
-     [
-       'Item title', 'Item barcode', 'Item call number',
-       'Requester last name', 'Requester first name',
-       'Transaction Id', 'Hold expiration'
-     ] :
-
-     [
-       'From location', 'To location', 'Needed for:',
-       'Date', 'Item title', 'Item author(s)', 'Item barcode',
-       'Item call number', 'Request/transaction number', 'Staff slip name'
-     ];
+    this.token = props.tokens;
 
     this.modules = {
       history: {
@@ -75,7 +64,7 @@ class StaffSlipEditor extends Component {
     // eslint-disable-next-line no-return-assign
       .forEach(item => (item.textContent = item.dataset.value));
     // eslint-disable-next-line no-useless-escape
-    document.querySelector('.ql-token .ql-picker-label').innerHTML = '\{ \}';
+    document.querySelector('.ql-token .ql-picker-label').innerHTML = '\{\ \}';
   }
 
   onChange(template) {
@@ -95,7 +84,7 @@ class StaffSlipEditor extends Component {
 
   insertToken(value) {
     if (!value) return;
-    const tag = `{${value}}`;
+    const tag = `{{${value}}}`;
     const editor = this.quill.getEditor();
     const cursorPosition = editor.getSelection().index;
     editor.insertText(cursorPosition, tag);
@@ -110,7 +99,7 @@ class StaffSlipEditor extends Component {
 
   render() {
     const { template, openDialog } = this.state;
-    const { label, input: { value }, name } = this.props;
+    const { label, input: { value } } = this.props;
 
     return (
       <div>
@@ -146,7 +135,7 @@ class StaffSlipEditor extends Component {
             previewTemplate={template || value}
             open={openDialog}
             onClose={this.closePreviewDialog}
-            slipType={this.props.slipType || ''}
+            slipType={this.props.slipType}
           />
         }
       </div>
