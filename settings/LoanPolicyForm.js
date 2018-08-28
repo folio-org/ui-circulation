@@ -414,8 +414,8 @@ class LoanPolicyForm extends React.Component {
                   label={altRenewalScheduleLabel}
                   name="renewalsPolicy.alternateFixedDueDateScheduleId"
                   component={Select}
-                  placeholder={formatMsg({ id: 'ui-circulation.settings.loanPolicy.selectSchedule' })}
-                  dataOptions={schedules}
+                  normalize={value => (value === '' ? null : value)}
+                  dataOptions={[{ label: formatMsg({ id: 'ui-circulation.settings.loanPolicy.selectSchedule' }), value: '' }, ...schedules]}
                 />
               }
             </fieldset>
