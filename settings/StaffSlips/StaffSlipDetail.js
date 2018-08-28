@@ -6,7 +6,6 @@ import Button from '@folio/stripes-components/lib/Button';
 import { Row, Col } from '@folio/stripes-components/lib/LayoutGrid';
 
 import formats from './formats';
-import { template } from './util';
 import PreviewModal from './PreviewModal';
 
 import css from './StaffSlipDetail.css';
@@ -55,11 +54,8 @@ class StaffSlipDetail extends React.Component {
 
   render() {
     const { openDialog } = this.state;
-
     const staffSlip = this.props.initialValues;
-    const tmpl = template(staffSlip.template || '');
-    const componentStr = tmpl(this.previewFormat);
-    const contentComponent = this.parser.parseWithInstructions(componentStr, () => true, this.rules);
+    const contentComponent = this.parser.parseWithInstructions(staffSlip.template, () => true, this.rules);
 
     return (
       <div>
@@ -92,7 +88,7 @@ class StaffSlipDetail extends React.Component {
         </Row>
         <Row>
           <Col xs={12}>
-            <div className={css.detail} ref={this.editorRef}>
+            <div className="ql-editor" ref={this.editorRef}>
               {contentComponent}
             </div>
           </Col>
