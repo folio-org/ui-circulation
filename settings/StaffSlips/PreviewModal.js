@@ -30,9 +30,7 @@ class PreviewModal extends React.Component {
       {
         replaceChildren: true,
         shouldProcessNode: node => node.name === 'barcode',
-        processNode: (node, children) => {
-          return (<Barcode value={children[0] ? children[0].trim() : ' '} />);
-        },
+        processNode: (node, children) => (<Barcode value={children[0] ? children[0].trim() : ' '} />),
       },
       {
         shouldProcessNode: () => true,
