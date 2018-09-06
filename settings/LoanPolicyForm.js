@@ -24,7 +24,7 @@ import {
 class LoanPolicyForm extends React.Component {
   static propTypes = {
     stripes: stripesShape.isRequired,
-    resources: PropTypes.shape({
+    parentResources: PropTypes.shape({
       fixedDueDateSchedules: PropTypes.object,
     }).isRequired,
     change: PropTypes.func.isRequired,
@@ -113,7 +113,7 @@ class LoanPolicyForm extends React.Component {
       dueDateScheduleFieldLabel += ' *';
     }
 
-    const schedules = _.sortBy((this.props.resources.fixedDueDateSchedules || {}).records || [], ['name'])
+    const schedules = _.sortBy((this.props.parentResources.fixedDueDateSchedules || {}).records || [], ['name'])
       .map(schedule => (
         {
           id: schedule.id,
@@ -218,8 +218,8 @@ class LoanPolicyForm extends React.Component {
               name="loansPolicy.fixedDueDateScheduleId"
               id="input_loansPolicy_fixedDueDateSchedule"
               component={Select}
-              placeholder={formatMsg({ id: 'ui-circulation.settings.loanPolicy.selectSchedule' })}
-              dataOptions={schedules}
+              normalize={value => (value === '' ? null : value)}
+              dataOptions={[{ label: formatMsg({ id: 'ui-circulation.settings.loanPolicy.selectSchedule' }), value: '' }, ...schedules]}
             />
           }
           {/* closed library due date management - Select */}
@@ -414,8 +414,8 @@ class LoanPolicyForm extends React.Component {
                   label={altRenewalScheduleLabel}
                   name="renewalsPolicy.alternateFixedDueDateScheduleId"
                   component={Select}
-                  placeholder={formatMsg({ id: 'ui-circulation.settings.loanPolicy.selectSchedule' })}
-                  dataOptions={schedules}
+                  normalize={value => (value === '' ? null : value)}
+                  dataOptions={[{ label: formatMsg({ id: 'ui-circulation.settings.loanPolicy.selectSchedule' }), value: '' }, ...schedules]}
                 />
               }
             </fieldset>

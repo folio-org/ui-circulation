@@ -3,12 +3,12 @@ import { injectIntl, intlShape } from 'react-intl';
 import PropTypes from 'prop-types';
 import Barcode from 'react-barcode';
 import HtmlToReact, { Parser } from 'html-to-react';
-import ReactToPrint from "react-to-print";
-
+import ReactToPrint from 'react-to-print';
 import { Row, Col } from '@folio/stripes-components/lib/LayoutGrid';
 import Button from '@folio/stripes-components/lib/Button';
 import Modal from '@folio/stripes-components/lib/Modal';
 
+import formats from './formats';
 import { template } from './util';
 
 class PreviewModal extends React.Component {
@@ -17,30 +17,20 @@ class PreviewModal extends React.Component {
     onClose: PropTypes.func.isRequired,
     open: PropTypes.bool.isRequired,
     previewTemplate: PropTypes.string,
+    slipType: PropTypes.string,
   };
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.editorRef = React.createRef();
     const processNodeDefinitions = new HtmlToReact.ProcessNodeDefinitions(React);
-
-    this.demoData = {
-      'Item title': 'Hello',
-      'Item barcode': '<Barcode/>',
-      'Item call number': '67822233223',
-      'Requester last name': 'Brown',
-      'Requester first name': 'John',
-      'Transaction Id': '10111222323222',
-      'Hold expiration': '10/10/2018',
-      'itemBarcode': '5901234123457',
-    };
-
+    this.previewFormat = formats[props.slipType];
     this.rules = [
       {
         replaceChildren: true,
         shouldProcessNode: node => node.name === 'barcode',
-        processNode: () => (<Barcode value={this.demoData.itemBarcode} format="EAN13" />),
+        processNode: (node, children) => (<Barcode value={children[0] ? children[0].trim() : ' '} />),
       },
       {
         shouldProcessNode: () => true,
@@ -57,7 +47,7 @@ class PreviewModal extends React.Component {
     const heading = intl.formatMessage({ id: 'ui-circulation.settings.staffSlips.previewLabel' });
 
     const tmpl = template(previewTemplate || '');
-    const componentStr = tmpl(this.demoData);
+    const componentStr = tmpl(this.previewFormat);
     const contentComponent = this.parser.parseWithInstructions(componentStr, () => true, this.rules);
 
     return (

@@ -77,6 +77,7 @@ class LoanPolicySettings extends React.Component {
       <EntryManager
         {...this.props}
         parentMutator={this.props.mutator}
+        parentResources={this.props.resources}
         entryList={_.sortBy((this.props.resources.loanPolicies || {}).records || [], ['name'])}
         resourceKey="loanPolicies"
         detailComponent={LoanPolicyDetail}

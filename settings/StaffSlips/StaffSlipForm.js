@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Pane from '@folio/stripes-components/lib/Pane';
-import TextField from '@folio/stripes-components/lib/TextField';
 import KeyValue from '@folio/stripes-components/lib/KeyValue';
 import Checkbox from '@folio/stripes-components/lib/Checkbox';
 // eslint-disable-next-line import/no-unused-vars
@@ -17,6 +16,7 @@ import stripesForm from '@folio/stripes-form';
 import { Field } from 'redux-form';
 
 import StaffSlipEditor from './StaffSlipEditor';
+import formats from './formats';
 
 class StaffSlipForm extends React.Component {
   static propTypes = {
@@ -96,6 +96,7 @@ class StaffSlipForm extends React.Component {
   render() {
     const { stripes, handleSubmit, initialValues } = this.props;
     const disabled = !stripes.hasPerm('settings.organization.enabled');
+    const slipType = (initialValues || {}).name || 'Hold';
 
     return (
       <form id="form-staff-slip" onSubmit={handleSubmit(this.save)}>
@@ -119,7 +120,13 @@ class StaffSlipForm extends React.Component {
             </Row>
             <Row>
               <Col xs={8}>
-                <Field label={this.translate('display')} component={StaffSlipEditor} name="template" />
+                <Field
+                  label={this.translate('display')}
+                  component={StaffSlipEditor}
+                  tokens={Object.keys(formats[slipType])}
+                  name="template"
+                  slipType={slipType}
+                />
               </Col>
             </Row>
           </Pane>
