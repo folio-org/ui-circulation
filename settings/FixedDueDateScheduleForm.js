@@ -96,12 +96,14 @@ class FixedDueDateScheduleForm extends React.Component {
           onClick={this.props.onCancel}
           title={intl.formatMessage({ id: 'ui-circulation.settings.fDDSform.close' })}
           aria-label={intl.formatMessage({ id: 'ui-circulation.settings.fDDSform.closeLabel' })}
+          type="button"
         >
-          <span style={{ fontSize: '30px', color: '#999', lineHeight: '18px' }} >&times;</span>
+          <span style={{ fontSize: '30px', color: '#999', lineHeight: '18px' }}>&times;</span>
         </button>
       </PaneMenu>
     );
   }
+
   saveLastMenu() {
     const { pristine, submitting, initialValues, stripes: { intl } } = this.props;
     const { confirmDelete } = this.state;
@@ -119,7 +121,8 @@ class FixedDueDateScheduleForm extends React.Component {
               buttonStyle="danger"
               onClick={this.beginDelete}
               disabled={confirmDelete}
-            >Delete
+            >
+Delete
             </Button>
           </IfPermission>
         }
@@ -128,17 +131,24 @@ class FixedDueDateScheduleForm extends React.Component {
           type="submit"
           title={saveLabel}
           disabled={(pristine || submitting)}
-        >{saveLabel}
+        >
+          {saveLabel}
         </Button>
       </PaneMenu>
     );
   }
+
   renderPaneTitle() {
     const { initialValues, stripes: { intl } } = this.props;
     const selectedSet = initialValues || {};
 
     if (selectedSet.id) {
-      return (<div><Icon size="small" icon="edit" /><span>{`${intl.formatMessage({ id: 'ui-circulation.settings.fDDS.edit' })}: ${selectedSet.name}`}</span></div>);
+      return (
+        <div>
+          <Icon size="small" icon="edit" />
+          <span>{`${intl.formatMessage({ id: 'ui-circulation.settings.fDDS.edit' })}: ${selectedSet.name}`}</span>
+        </div>
+      );
     }
     return intl.formatMessage({ id: 'ui-circulation.settings.fDDSform.newFixDDSchedule' });
   }
@@ -157,9 +167,11 @@ class FixedDueDateScheduleForm extends React.Component {
         {submitFailed && error && <Row><Col xs={12} className={css.scheduleError}>{error}</Col></Row>}
         {fields.map((schedule, index, f) => (
           <div key={index} className={css.scheduleItem}>
-            <div className={css.scheduleHeader} >
+            <div className={css.scheduleHeader}>
               <h4>
-                {this.props.stripes.intl.formatMessage({ id: 'ui-circulation.settings.fDDSform.dateRange' })} { index + 1 }
+                {this.props.stripes.intl.formatMessage({ id: 'ui-circulation.settings.fDDSform.dateRange' })}
+                {' '}
+                { index + 1 }
               </h4>
             </div>
             <div className={css.scheduleItemContent}>
@@ -192,7 +204,8 @@ class FixedDueDateScheduleForm extends React.Component {
                       style={{ position: 'absolute', bottom: '0' }}
                       title={this.props.stripes.intl.formatMessage({ id: 'ui-circulation.settings.fDDSform.remove' })}
                       onClick={() => { f.remove(index); }}
-                    ><Icon icon="trashBin" />
+                    >
+                      <Icon icon="trashBin" />
                     </Button>
                   </div>
                 </Col>

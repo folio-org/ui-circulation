@@ -107,7 +107,7 @@
   },
   "scripts": {
     "start": "stripes serve",
-    "lint": "eslint **/*.js --ignore-pattern node_modules/",
+    "lint": "eslint .",
     "test": "echo 'placeholder. no tests implemented'"
   },
   "devDependencies": {

@@ -14,6 +14,7 @@ class FixedDueDateScheduleDetail extends React.Component {
     initialValues: PropTypes.object,
     stripes: stripesShape.isRequired,
   }
+
   constructor(props) {
     super(props);
     this.handleSectionToggle = this.handleSectionToggle.bind(this);
@@ -27,6 +28,7 @@ class FixedDueDateScheduleDetail extends React.Component {
       },
     };
   }
+
   handleExpandAll(sections) {
     this.setState((curState) => {
       const newState = _.cloneDeep(curState);
@@ -34,6 +36,7 @@ class FixedDueDateScheduleDetail extends React.Component {
       return newState;
     });
   }
+
   handleSectionToggle({ id }) {
     this.setState((curState) => {
       const newState = _.cloneDeep(curState);
@@ -41,15 +44,18 @@ class FixedDueDateScheduleDetail extends React.Component {
       return newState;
     });
   }
+
   render() {
     const fixedDueDateSchedule = this.props.initialValues;
     const formatMsg = this.props.stripes.intl.formatMessage;
     const { sections } = this.state;
     const renderSchedules = fixedDueDateSchedule.schedules.map((schedule, index) => (
       <div key={index} className={css.scheduleItem}>
-        <div className={css.scheduleHeader} >
+        <div className={css.scheduleHeader}>
           <h4>
-            <FormattedMessage id="ui-circulation.settings.fDDSform.dateRange" /> { index + 1 }
+            <FormattedMessage id="ui-circulation.settings.fDDSform.dateRange" />
+            {' '}
+            { index + 1 }
           </h4>
         </div>
         <div className={css.scheduleItemContent}>
