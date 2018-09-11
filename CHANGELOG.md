@@ -34,6 +34,7 @@
 * Add view/edit hold staff strip. Fixes UICIRC-52.
 * Update to stripes-components 3 for Pane/Paneset compatibility.
 * Checkout scanning checkboxes sometimes would not display. They should ALWAYS display. Refs UICIRC-75.
+* Depend on v3.0 or v4.0 of `circulation` interface. UICIRC-84.
 
 ## [1.1.1](https://github.com/folio-org/ui-circulation/tree/v1.1.1) (2017-09-02)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v1.1.0...v1.1.1)
