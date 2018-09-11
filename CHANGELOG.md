@@ -3,6 +3,8 @@
 ## 1.2.0 (IN PROGRESS)
 
 * Setup Loan Rules crud v1. For UICIRC-5.
+* Add Scan ID setting. UICIRC-12.
+* Create/Edit Loan Policy Form in Full-Page Overlay UICIRC-15.
 * Add Real Loan Rule Params. Fixes UICIRC-17.
 * Support permission for loan-policy maintenance. Fixes UICIRC-21.
 * Replace `data` with `resources` Fixes UICIRC-25.
@@ -13,6 +15,7 @@
 * Include fixed due date schedule list in loan-policy form. Fixes UICIRC-27.
 * Show empty schedules in new Fixed Due Date Schedule form. Fixes UICIRC-30.
 * Add empty schedule rows to top of list. Fixes UICIRC-29.
+* Setup Callout component for loan policy settings. UICIRC-31.
 * Fix loan policy form. Fixes UICIRC-34.
 * Store and dereference UUID in loan rules. Fixes UICIRC-35.
 * Use more-current stripes-components. Refs STRIPES-495.
@@ -24,17 +27,24 @@
 * Fix creating loan policy with fixed due date schedule. Fixes UICIRC-56.
 * Remove "Indefinite" loan profile. Fixes UICIRC-55.
 * Refined fixed due date schedule settings. UICIRC-40
+* Add Record Metadata to Fixed Due Date Schedules. UICIRC-41.
 * Favor metadata over metaData. One case to rule them all. Refs UICIRC-57.
 * Show chosen Fixed due date schedule on loan policy details. Fixes UICIRC-58.
 * Add checkout session timeout settings in circulation->otherSettings. Fixes UICIRC-48
 * Hide "Renew from" option for loan policies with a fixed loan profile. Fixes UICIRC-60.
+* Relocate language files. UICIRC-62.
 * Replace int values with string representations for renewFromOptions. Fixes UICIRC-66.
 * Loan policy intervals should display on read only view. Fixes UICIRC-65.
 * Add last updated record metadata to loan policy form. Fixes UICIRC-63.
 * Add view/edit hold staff strip. Fixes UICIRC-52.
+* View/Edit Transit Slip. UICIRC-76.
 * Update to stripes-components 3 for Pane/Paneset compatibility.
 * Checkout scanning checkboxes sometimes would not display. They should ALWAYS display. Refs UICIRC-75.
+* Refine View Mode for Hold Slip Template. UICIRC-79.
+* Fix holding slip template to use a proper mustache. UICIRC-83.
 * Depend on v3.0 or v4.0 of `circulation` interface. UICIRC-84.
+* Bug fixes without separate change log entry: UICIRC-14, UICIRC-28, UICIRC-33, UICIRC-37, UICIRC-42, UICIRC-43, UICIRC-45, UICIRC-51, UICIRC-69, UICIRC-78, UICIRC-82
+
 
 ## [1.1.1](https://github.com/folio-org/ui-circulation/tree/v1.1.1) (2017-09-02)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v1.1.0...v1.1.1)
