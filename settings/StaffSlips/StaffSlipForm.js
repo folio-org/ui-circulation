@@ -76,7 +76,8 @@ class StaffSlipForm extends React.Component {
           buttonStyle="primary paneHeaderNewButton"
           marginBottom0
           disabled={(pristine || submitting)}
-        >{saveLabel}
+        >
+          {saveLabel}
         </Button>
       </PaneMenu>
     );
@@ -87,7 +88,12 @@ class StaffSlipForm extends React.Component {
     const staffSlip = initialValues || {};
 
     if (staffSlip.id) {
-      return (<div><Icon size="small" icon="edit" /><span>{`${this.translate('edit')}: ${this.translate('label')} - ${staffSlip.name}`}</span></div>);
+      return (
+        <div>
+          <Icon size="small" icon="edit" />
+          <span>{`${this.translate('edit')}: ${this.translate('label')} - ${staffSlip.name}`}</span>
+        </div>
+      );
     }
 
     return this.translate('new');

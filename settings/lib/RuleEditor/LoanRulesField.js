@@ -2,7 +2,7 @@ import React from 'react';
 import LoanRulesEditor from './LoanRulesEditor';
 
 const LoanRulesField = (props) => {
-  const { input, meta, code, ...others } = props;
+  const { input, meta, code, ...others } = props; // eslint-disable-line no-unused-vars
 
   return (
     <LoanRulesEditor
@@ -11,6 +11,6 @@ const LoanRulesField = (props) => {
       {...others}
     />
   );
-}
+};
 
 export default LoanRulesField;
