@@ -1,6 +1,7 @@
 # Change history for ui-circulation
 
-## 1.2.0 (IN PROGRESS)
+## 1.2.0 (https://github.com/folio-org/ui-circulation/tree/v1.2.0) (2017-09-12)
+[Full Changelog](https://github.com/folio-org/ui-circulation/compare/v1.1.1...v1.2.0)
 
 * Setup Loan Rules crud v1. For UICIRC-5.
 * Add Scan ID setting. UICIRC-12.
