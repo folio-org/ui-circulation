@@ -111,7 +111,7 @@
     "test": "echo 'placeholder. no tests implemented'"
   },
   "devDependencies": {
-    "@folio/eslint-config-stripes": "^3.2.0",
+    "@folio/eslint-config-stripes": "^3.2.1",
     "@folio/stripes-cli": "^1.4.0",
     "@folio/stripes-connect": "^3.1.2",
     "@folio/stripes-logger": "^0.0.2",
@@ -120,8 +120,7 @@
     "react": "^16.5.0",
     "react-dom": "^16.5.0",
     "react-redux": "^5.0.7",
-    "redux": "^4.0.0",
-    "webpack": "^4.10.2"
+    "redux": "^4.0.0"
   },
   "dependencies": {
     "@folio/stripes-components": "^3.0.8",
