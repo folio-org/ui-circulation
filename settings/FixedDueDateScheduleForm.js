@@ -3,21 +3,25 @@ import _ from 'lodash';
 import PropTypes from 'prop-types';
 import { Field, FieldArray } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
-import { stripesShape } from '@folio/stripes-core/src/Stripes';
-import Button from '@folio/stripes-components/lib/Button';
-import { Row, Col } from '@folio/stripes-components/lib/LayoutGrid';
-import Datepicker from '@folio/stripes-components/lib/Datepicker';
-import TextField from '@folio/stripes-components/lib/TextField';
-import TextArea from '@folio/stripes-components/lib/TextArea';
-import Icon from '@folio/stripes-components/lib/Icon';
-import { Accordion, ExpandAllButton } from '@folio/stripes-components/lib/Accordion';
-import IfPermission from '@folio/stripes-components/lib/IfPermission';
-import Pane from '@folio/stripes-components/lib/Pane';
-import Paneset from '@folio/stripes-components/lib/Paneset';
-import PaneMenu from '@folio/stripes-components/lib/PaneMenu';
-import stripesForm from '@folio/stripes-form';
-import ConfirmationModal from '@folio/stripes-components/lib/ConfirmationModal';
-import ViewMetaData from '@folio/stripes-smart-components/lib/ViewMetaData';
+import { stripesShape } from '@folio/stripes/core';
+import {
+  Accordion,
+  Button,
+  Col,
+  ConfirmationModal,
+  Datepicker,
+  ExpandAllButton,
+  Icon,
+  IfPermission,
+  Pane,
+  PaneMenu,
+  Paneset,
+  Row,
+  TextArea,
+  TextField,
+} from '@folio/stripes/components';
+import stripesForm from '@folio/stripes/form';
+import { ViewMetaData } from '@folio/stripes/smart-components';
 import css from './FixedDueDateSchedule.css';
 
 class FixedDueDateScheduleForm extends React.Component {

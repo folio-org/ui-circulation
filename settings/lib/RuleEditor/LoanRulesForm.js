@@ -4,9 +4,9 @@ import {
   Col,
   Button,
   TextField
-} from '@folio/stripes-components';
+} from '@folio/stripes/components';
 import { Field } from 'redux-form';
-import stripesForm from '@folio/stripes-form';
+import stripesForm from '@folio/stripes/form';
 
 import LoanRulesField from './LoanRulesField';
 

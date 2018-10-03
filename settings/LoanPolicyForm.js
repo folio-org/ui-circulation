@@ -2,14 +2,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Field, getFormValues } from 'redux-form';
 import _ from 'lodash';
-import { stripesShape } from '@folio/stripes-core/src/Stripes';
-import Checkbox from '@folio/stripes-components/lib/Checkbox';
-import { Row, Col } from '@folio/stripes-components/lib/LayoutGrid';
-import Select from '@folio/stripes-components/lib/Select';
-import TextField from '@folio/stripes-components/lib/TextField';
-import TextArea from '@folio/stripes-components/lib/TextArea';
-import { Accordion, ExpandAllButton } from '@folio/stripes-components/lib/Accordion';
-import ViewMetaData from '@folio/stripes-smart-components/lib/ViewMetaData';
+import { stripesShape } from '@folio/stripes/core';
+import {
+  Accordion,
+  Checkbox,
+  Col,
+  ExpandAllButton,
+  Row,
+  Select,
+  TextArea,
+  TextField
+} from '@folio/stripes/components';
+import { ViewMetaData } from '@folio/stripes/smart-components';
 import { FormattedMessage } from 'react-intl';
 
 import {

@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
-import { stripesShape } from '@folio/stripes-core/src/Stripes';
-import ConfigManager from '@folio/stripes-smart-components/lib/ConfigManager';
+import { stripesShape } from '@folio/stripes/core';
+import { ConfigManager } from '@folio/stripes/smart-components';
 
 import { patronIdentifierTypes } from '../constants';
 import CheckoutSettingsForm from './CheckoutSettingsForm';

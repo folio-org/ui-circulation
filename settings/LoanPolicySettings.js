@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
-import { stripesShape } from '@folio/stripes-core/src/Stripes';
-import EntryManager from '@folio/stripes-smart-components/lib/EntryManager';
+import { stripesShape } from '@folio/stripes/core';
+import { EntryManager } from '@folio/stripes/smart-components';
 import LoanPolicyDetail from './LoanPolicyDetail';
 import LoanPolicyForm from './LoanPolicyForm';
 import { loanProfileMap, renewFromIds } from '../constants';

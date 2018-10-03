@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ReactQuill from 'react-quill';
-import { Row, Col } from '@folio/stripes-components/lib/LayoutGrid';
-import Button from '@folio/stripes-components/lib/Button';
+import { Button, Col, Row } from '@folio/stripes/components';
 import formCss from '@folio/stripes-components/lib/sharedStyles/form.css';
 
 // eslint-disable-next-line import/no-webpack-loader-syntax

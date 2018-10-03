@@ -1,18 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Pane from '@folio/stripes-components/lib/Pane';
-import KeyValue from '@folio/stripes-components/lib/KeyValue';
-import Checkbox from '@folio/stripes-components/lib/Checkbox';
-// eslint-disable-next-line import/no-unused-vars
-import TextArea from '@folio/stripes-components/lib/TextArea';
-import Button from '@folio/stripes-components/lib/Button';
-import Paneset from '@folio/stripes-components/lib/Paneset';
-import PaneMenu from '@folio/stripes-components/lib/PaneMenu';
-import IconButton from '@folio/stripes-components/lib/IconButton';
-import Icon from '@folio/stripes-components/lib/Icon';
 
-import { Row, Col } from '@folio/stripes-components/lib/LayoutGrid';
-import stripesForm from '@folio/stripes-form';
+import {
+  Button,
+  Checkbox,
+  Col,
+  Icon,
+  IconButton,
+  KeyValue,
+  Pane,
+  PaneMenu,
+  Paneset,
+  Row,
+  TextArea
+} from '@folio/stripes/components';
+import stripesForm from '@folio/stripes/form';
 import { Field } from 'redux-form';
 
 import StaffSlipEditor from './StaffSlipEditor';

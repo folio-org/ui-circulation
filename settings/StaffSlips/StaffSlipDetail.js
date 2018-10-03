@@ -1,9 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import KeyValue from '@folio/stripes-components/lib/KeyValue';
+import { Button, Col, KeyValue, Row } from '@folio/stripes/components';
 import HtmlToReact, { Parser } from 'html-to-react';
-import Button from '@folio/stripes-components/lib/Button';
-import { Row, Col } from '@folio/stripes-components/lib/LayoutGrid';
 
 import formats from './formats';
 import PreviewModal from './PreviewModal';
