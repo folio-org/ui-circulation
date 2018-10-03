@@ -1,8 +1,10 @@
 # Change history for ui-circulation
 
-## 1.3.0 IN PROGRESS
+## 1.3.0 (https://github.com/folio-org/ui-circulation/tree/v1.3.0) (2018-10-04)
+[Full Changelog](https://github.com/folio-org/ui-circulation/compare/v1.2.0...v1.3.0)
 
 * Update `stripes-form` dependency to v1.0.0
+* Use `stripes` 1.0 framework
 
 ## 1.2.0 (https://github.com/folio-org/ui-circulation/tree/v1.2.0) (2017-09-12)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v1.1.1...v1.2.0)
