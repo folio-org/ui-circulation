@@ -1,11 +1,9 @@
 import _ from 'lodash';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { stripesShape } from '@folio/stripes-core/src/Stripes';
-import KeyValue from '@folio/stripes-components/lib/KeyValue';
-import { Row, Col } from '@folio/stripes-components/lib/LayoutGrid';
-import { Accordion, ExpandAllButton } from '@folio/stripes-components/lib/Accordion';
-import ViewMetaData from '@folio/stripes-smart-components/lib/ViewMetaData';
+import { stripesShape } from '@folio/stripes/core';
+import { Accordion, Col, ExpandAllButton, KeyValue, Row } from '@folio/stripes/components';
+import { ViewMetaData } from '@folio/stripes/smart-components';
 import { FormattedMessage } from 'react-intl';
 
 import {

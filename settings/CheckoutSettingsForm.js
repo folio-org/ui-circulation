@@ -1,15 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
-import { stripesShape } from '@folio/stripes-core/src/Stripes';
-import { Row, Col } from '@folio/stripes-components/lib/LayoutGrid';
-import Button from '@folio/stripes-components/lib/Button';
-import Checkbox from '@folio/stripes-components/lib/Checkbox';
-import TextField from '@folio/stripes-components/lib/TextField';
-import stripesForm from '@folio/stripes-form';
-import Pane from '@folio/stripes-components/lib/Pane';
+import { stripesShape } from '@folio/stripes/core';
+import { Button, Checkbox, Col, Pane, Row, Select, TextField } from '@folio/stripes/components';
+import stripesForm from '@folio/stripes/form';
 import { Field, FieldArray, getFormValues } from 'redux-form';
-import Select from '@folio/stripes-components/lib/Select';
+
 import { patronIdentifierTypes } from '../constants';
 import css from './CheckoutSettingsForm.css';
 

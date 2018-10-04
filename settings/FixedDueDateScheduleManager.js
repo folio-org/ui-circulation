@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 import moment from 'moment';
-import { stripesShape } from '@folio/stripes-core/src/Stripes';
-import EntryManager from '@folio/stripes-smart-components/lib/EntryManager';
+import { stripesShape } from '@folio/stripes/core';
+import { EntryManager } from '@folio/stripes/smart-components';
 import FixedDueDateScheduleDetail from './FixedDueDateScheduleDetail';
 import FixedDueDateScheduleForm from './FixedDueDateScheduleForm';
 

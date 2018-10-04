@@ -1,9 +1,8 @@
 import { kebabCase } from 'lodash';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Paneset, Pane } from '@folio/stripes-components';
+import { Callout, Paneset, Pane } from '@folio/stripes/components';
 import fetch from 'isomorphic-fetch';
-import Callout from '@folio/stripes-components/lib/Callout';
 
 import LoanRulesForm from './lib/RuleEditor/LoanRulesForm';
 

@@ -1,5 +1,11 @@
+@import '@folio/stripes-components/lib/variables';
+
 .preview {
   justify-content: flex-end;
   padding-right: 5px;
   margin-bottom: 5px;
+}
+
+.label {
+  font-size: var(--font-size-small);
 }

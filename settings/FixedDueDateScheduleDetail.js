@@ -2,11 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 import { FormattedMessage } from 'react-intl';
-import { Accordion, ExpandAllButton } from '@folio/stripes-components/lib/Accordion';
-import { stripesShape } from '@folio/stripes-core/src/Stripes';
-import KeyValue from '@folio/stripes-components/lib/KeyValue';
-import { Row, Col } from '@folio/stripes-components/lib/LayoutGrid';
-import ViewMetaData from '@folio/stripes-smart-components/lib/ViewMetaData';
+import { Accordion, Col, ExpandAllButton, KeyValue, Row } from '@folio/stripes/components';
+import { stripesShape } from '@folio/stripes/core';
+import { ViewMetaData } from '@folio/stripes/smart-components';
 import css from './FixedDueDateSchedule.css';
 
 class FixedDueDateScheduleDetail extends React.Component {
