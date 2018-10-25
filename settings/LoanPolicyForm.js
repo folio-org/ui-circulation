@@ -236,17 +236,6 @@ class LoanPolicyForm extends React.Component {
               validate={this.validateField}
             />
           }
-          {/* skip closed dates - boolean */}
-          { policy.loanable &&
-            <Field
-              label={formatMsg({ id: 'ui-circulation.settings.loanPolicy.skipClosedDates' })}
-              id="loansPolicy.skipClosed"
-              name="loansPolicy.skipClosed"
-              component={Checkbox}
-              validate={this.validateField}
-              normalize={v => !!v}
-            />
-          }
           {/* alternate loan period */}
           { policy.loanable &&
             <div>
