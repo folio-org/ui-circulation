@@ -18,7 +18,6 @@
   "settings.loanPolicy.fDDS": "Fixed due date schedule",
   "settings.loanPolicy.fDDSlimit": "Fixed due date schedule (due date limit)",
   "settings.loanPolicy.closedDueDateMgmt": "Closed library due date management",
-  "settings.loanPolicy.skipClosedDates": "Skip closed dates in intervening period",
   "settings.loanPolicy.altFDDSforRenewals": "Alternate fixed due date schedule for renewals",
   "settings.loanPolicy.altFDDSDueDateLimit": "Alternate fixed due date schedule (due date limit) for renewals",
   "settings.loanPolicy.alternateLoanPeriodExisting": "Alternate loan period for items with existing requests",

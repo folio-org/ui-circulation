@@ -74,7 +74,6 @@ class LoanPolicyDetail extends React.Component {
     const profile = _.find(loanProfileTypes, t => t.value === profileId);
     const ddId = _.get(policy, ['loansPolicy', 'closedLibraryDueDateManagementId']);
     const closedLibraryDueDateManagement = _.find(dueDateManagementOptions, dd => dd.id === parseInt(ddId, 10));
-    const skipClosed = (_.get(policy, ['loansPolicy', 'skipClosed'])) ? 'Yes' : 'No';
     const periodInterval = _.get(policy, ['loansPolicy', 'period', 'intervalId']);
     const exReqPerInterval = _.get(policy, ['loansPolicy', 'existingRequestsPeriod', 'intervalId']);
     const gracePeriodInterval = _.get(policy, ['loansPolicy', 'gracePeriod', 'intervalId']);
@@ -124,12 +123,6 @@ class LoanPolicyDetail extends React.Component {
         <Row>
           <Col xs={12}>
             <KeyValue label={formatMsg({ id: 'ui-circulation.settings.loanPolicy.closedDueDateMgmt' })} value={_.get(closedLibraryDueDateManagement, ['label'], '-')} />
-          </Col>
-        </Row>
-        <br />
-        <Row>
-          <Col xs={12}>
-            <KeyValue label={formatMsg({ id: 'ui-circulation.settings.loanPolicy.skipClosedDates' })} value={skipClosed} />
           </Col>
         </Row>
         <br />
