@@ -7,6 +7,8 @@ import PaneMenu from '@folio/stripes-components/lib/PaneMenu';
 import ConfigManager from '@folio/stripes-smart-components/lib/ConfigManager';
 import { stripesShape } from '@folio/stripes-core/src/Stripes';
 
+import PatronNoticesConfigForm from './PatronNoticesConfigForm';
+
 class PatronNoticesGeneralConfig extends React.Component {
   static propTypes = {
     stripes: stripesShape.isRequired,
@@ -25,6 +27,7 @@ class PatronNoticesGeneralConfig extends React.Component {
         moduleName="CIRCULATION"
         configName="patron_notices_config"
         stripes={this.props.stripes}
+        configFormComponent={PatronNoticesConfigForm}
       />
     );
   }
