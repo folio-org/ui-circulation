@@ -1,16 +1,16 @@
 import React from 'react';
-import { injectIntl, intlShape } from 'react-intl';
 import PropTypes from 'prop-types';
 import Barcode from 'react-barcode';
 import HtmlToReact, { Parser } from 'html-to-react';
 import ReactToPrint from 'react-to-print';
+import { injectIntl, intlShape } from 'react-intl';
 import { Button, Col, Modal, Row } from '@folio/stripes/components';
 import formats from './formats';
 import { template } from './util';
 
 class PreviewModal extends React.Component {
   static propTypes = {
-    intl: intlShape,
+    intl: intlShape.isRequired,
     onClose: PropTypes.func.isRequired,
     open: PropTypes.bool.isRequired,
     previewTemplate: PropTypes.string,
@@ -39,9 +39,15 @@ class PreviewModal extends React.Component {
   }
 
   render() {
-    const { open, onClose, previewTemplate, intl } = this.props;
-    const closeLabel = intl.formatMessage({ id: 'ui-circulation.settings.staffSlips.close' });
-    const heading = intl.formatMessage({ id: 'ui-circulation.settings.staffSlips.previewLabel' });
+    const {
+      open,
+      onClose,
+      previewTemplate,
+      intl: { formatMessage },
+    } = this.props;
+
+    const closeLabel = formatMessage({ id: 'ui-circulation.settings.staffSlips.close' });
+    const heading = formatMessage({ id: 'ui-circulation.settings.staffSlips.previewLabel' });
 
     const tmpl = template(previewTemplate || '');
     const componentStr = tmpl(this.previewFormat);

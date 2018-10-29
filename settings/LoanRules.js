@@ -1,6 +1,7 @@
 import { kebabCase } from 'lodash';
 import React from 'react';
 import PropTypes from 'prop-types';
+import { intlShape, injectIntl } from 'react-intl';
 import { Callout, Paneset, Pane } from '@folio/stripes/components';
 import fetch from 'isomorphic-fetch';
 
@@ -21,6 +22,7 @@ const editorDefaultProps = {
     m: 'Material Type',
     t: 'Loan Type',
   },
+  intl: intlShape.isRequired,
 };
 
 class LoanRules extends React.Component {
@@ -57,6 +59,7 @@ class LoanRules extends React.Component {
   });
 
   static propTypes = {
+    intl: intlShape.isRequired,
     resources: PropTypes.object.isRequired,
     stripes: PropTypes.object.isRequired,
     calloutMessage: PropTypes.string,
@@ -73,7 +76,12 @@ class LoanRules extends React.Component {
   }
 
   shouldComponentUpdate(nextProps) {
-    const { resources: { patronGroups, materialTypes, loanTypes, loanPolicies } } = nextProps;
+    const {
+      patronGroups,
+      materialTypes,
+      loanTypes,
+      loanPolicies,
+    } = nextProps.resources;
 
     return !patronGroups.isPending &&
       !materialTypes.isPending &&
@@ -93,7 +101,12 @@ class LoanRules extends React.Component {
   }
 
   getEditorProps() {
-    const { resources: { patronGroups, materialTypes, loanTypes, loanPolicies } } = this.props;
+    const {
+      patronGroups,
+      materialTypes,
+      loanTypes,
+      loanPolicies,
+    } = this.props.resources;
 
     return Object.assign({}, editorDefaultProps, {
       errors: this.state.errors,
@@ -107,7 +120,12 @@ class LoanRules extends React.Component {
   }
 
   getRecords() {
-    const { resources: { patronGroups, materialTypes, loanTypes, loanPolicies } } = this.props;
+    const {
+      patronGroups,
+      materialTypes,
+      loanTypes,
+      loanPolicies,
+    } = this.props.resources;
 
     return [
       ...patronGroups.records.map(r => ({ name: kebabCase(r.group), id: r.id, prefix: 'g' })),
@@ -137,7 +155,7 @@ class LoanRules extends React.Component {
   // TODO: refactor to use mutator after PUT is changed on the server or stripes-connect supports
   // custom PUT requests without the id attached to the end of the URL.
   saveLoanRules(rules) {
-    const stripes = this.props.stripes;
+    const { stripes } = this.props;
     const headers = Object.assign({}, {
       'X-Okapi-Tenant': stripes.okapi.tenant,
       'X-Okapi-Token': stripes.store.getState().okapi.token,
@@ -162,7 +180,12 @@ class LoanRules extends React.Component {
   }
 
   render() {
-    if (!this.props.resources.loanTypes) {
+    const {
+      resources,
+      intl: { formatMessage },
+    } = this.props;
+
+    if (!resources.loanTypes) {
       return (<div />);
     }
 
@@ -171,7 +194,10 @@ class LoanRules extends React.Component {
 
     return (
       <Paneset>
-        <Pane paneTitle={this.props.stripes.intl.formatMessage({ id: 'ui-circulation.settings.loanRules.paneTitle' })} defaultWidth="fill">
+        <Pane
+          paneTitle={formatMessage({ id: 'ui-circulation.settings.loanRules.paneTitle' })}
+          defaultWidth="fill"
+        >
           <LoanRulesForm
             onSubmit={this.onSubmit}
             initialValues={{ loanRulesCode }}
@@ -184,4 +210,4 @@ class LoanRules extends React.Component {
   }
 }
 
-export default LoanRules;
+export default injectIntl(LoanRules);

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
 import { stripesShape } from '@folio/stripes/core';
 import { Button, Checkbox, Col, Pane, Row, Select, TextField } from '@folio/stripes/components';
 import stripesForm from '@folio/stripes/form';
@@ -52,7 +52,7 @@ class CheckoutSettingsForm extends React.Component {
   }
 
   getCurrentValues() {
-    const { stripes: { store } } = this.props;
+    const { store } = this.props.stripes;
     const state = store.getState();
     return getFormValues('checkoutForm')(state) || {};
   }
@@ -85,7 +85,12 @@ class CheckoutSettingsForm extends React.Component {
   }
 
   render() {
-    const { handleSubmit, label, stripes } = this.props;
+    const {
+      handleSubmit,
+      label,
+      intl: { formatMessage },
+    } = this.props;
+
     const checkoutValues = this.getCurrentValues();
     const hidden = this.state.checked ? '' : 'hidden';
     return (
@@ -96,7 +101,7 @@ class CheckoutSettingsForm extends React.Component {
           <Row>
             <Col xs={12}>
               <Field
-                label={stripes.intl.formatMessage({ id: 'ui-circulation.settings.checkout.timeout' })}
+                label={formatMessage({ id: 'ui-circulation.settings.checkout.timeout' })}
                 id="checkoutTimeout"
                 name="checkoutTimeout"
                 component={Checkbox}
@@ -117,7 +122,7 @@ class CheckoutSettingsForm extends React.Component {
                   />
                 </Col>
                 <Col xs={7}>
-                  <div>{stripes.intl.formatMessage({ id: 'ui-circulation.settings.checkout.minutes' })}</div>
+                  <div>{formatMessage({ id: 'ui-circulation.settings.checkout.minutes' })}</div>
                 </Col>
               </div>
             </Row>
@@ -126,16 +131,16 @@ class CheckoutSettingsForm extends React.Component {
           <Row>
             <Col xs={12}>
               <Field
-                label={stripes.intl.formatMessage({ id: 'ui-circulation.settings.checkout.audioAlerts' })}
+                label={formatMessage({ id: 'ui-circulation.settings.checkout.audioAlerts' })}
                 name="audioAlertsEnabled"
                 component={Select}
                 dataOptions={[
                   {
-                    label: stripes.intl.formatMessage({ id: 'ui-circulation.settings.checkout.no' }),
+                    label: formatMessage({ id: 'ui-circulation.settings.checkout.no' }),
                     value: false,
                   },
                   {
-                    label: stripes.intl.formatMessage({ id: 'ui-circulation.settings.checkout.yes' }),
+                    label: formatMessage({ id: 'ui-circulation.settings.checkout.yes' }),
                     value: true,
                   },
                 ]}
@@ -155,10 +160,11 @@ CheckoutSettingsForm.propTypes = {
   submitting: PropTypes.bool,
   label: PropTypes.string,
   stripes: stripesShape.isRequired,
+  intl: intlShape.isRequired,
 };
 
 export default stripesForm({
   form: 'checkoutForm',
   navigationCheck: true,
   enableReinitialize: true,
-})(CheckoutSettingsForm);
+})(injectIntl(CheckoutSettingsForm));

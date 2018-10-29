@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ReactQuill from 'react-quill';
+import { injectIntl, intlShape } from 'react-intl';
 import { Button, Col, Row } from '@folio/stripes/components';
 
 // eslint-disable-next-line import/no-webpack-loader-syntax
@@ -17,7 +18,7 @@ class StaffSlipEditor extends Component {
     label: PropTypes.string,
     slipType: PropTypes.string,
     tokens: PropTypes.arrayOf(PropTypes.string),
-    stripes: PropTypes.object,
+    intl: intlShape.isRequired,
   };
 
   constructor(props) {
@@ -90,7 +91,7 @@ class StaffSlipEditor extends Component {
   }
 
   translate(id) {
-    return this.props.stripes.intl.formatMessage({
+    return this.props.intl.formatMessage({
       id: `ui-circulation.settings.staffSlips.${id}`
     });
   }
@@ -141,4 +142,4 @@ class StaffSlipEditor extends Component {
   }
 }
 
-export default StaffSlipEditor;
+export default injectIntl(StaffSlipEditor);

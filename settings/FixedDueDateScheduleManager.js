@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 import moment from 'moment';
-import { stripesShape } from '@folio/stripes/core';
+import { intlShape, injectIntl } from 'react-intl';
 import { EntryManager } from '@folio/stripes/smart-components';
 import FixedDueDateScheduleDetail from './FixedDueDateScheduleDetail';
 import FixedDueDateScheduleForm from './FixedDueDateScheduleForm';
@@ -34,7 +34,7 @@ class FixedDueDateScheduleManager extends React.Component {
         GET: PropTypes.func,
       }),
     }).isRequired,
-    stripes: stripesShape.isRequired,
+    intl: intlShape.isRequired,
   };
 
   constructor(props) {
@@ -54,22 +54,26 @@ class FixedDueDateScheduleManager extends React.Component {
   }
 
   validate(values) {
-    const formatMsg = this.props.stripes.intl.formatMessage;
+    const {
+      intl: { formatMessage },
+      resources,
+    } = this.props;
+
     const errors = {};
-    const fillInMsg = formatMsg({ id: 'ui-circulation.settings.validate.fillIn' });
+    const fillInMsg = formatMessage({ id: 'ui-circulation.settings.validate.fillIn' });
 
     if (!values.name) {
       errors.name = fillInMsg;
     }
 
     // when searching for a name-match, skip the current record
-    const records = (this.props.resources.fixedDueDateSchedules || {}).records || [];
+    const records = (resources.fixedDueDateSchedules || {}).records || [];
     if (values.name && _.find(records, entry => entry.name === values.name && entry.id !== values.id)) {
-      errors.name = formatMsg({ id: 'ui-circulation.settings.fDDS.validate.uniqueName' });
+      errors.name = formatMessage({ id: 'ui-circulation.settings.fDDS.validate.uniqueName' });
     }
 
     if (!values.schedules || !values.schedules.length) {
-      errors.schedules = { _error: formatMsg({ id: 'ui-circulation.settings.fDDS.validate.oneScheduleMin' }) };
+      errors.schedules = { _error: formatMessage({ id: 'ui-circulation.settings.fDDS.validate.oneScheduleMin' }) };
     } else {
       const schedulesErrors = [];
 
@@ -83,7 +87,7 @@ class FixedDueDateScheduleManager extends React.Component {
             const condA = (s1.from && s2.to) ? moment(s1.from).isBefore(s2.to) : false;
             const condB = (s1.to && s2.from) ? moment(s1.to).isAfter(s2.from) : false;
             if (condA && condB) {
-              errors.schedules = { _error: formatMsg({ id: 'ui-circulation.settings.fDDS.validate.overlappingDateRange' }, { num1: i + 1, num2: j + 1 }) };
+              errors.schedules = { _error: formatMessage({ id: 'ui-circulation.settings.fDDS.validate.overlappingDateRange' }, { num1: i + 1, num2: j + 1 }) };
             }
           }
         }
@@ -109,12 +113,12 @@ class FixedDueDateScheduleManager extends React.Component {
           const from = moment(schedule.from);
           const due = moment(schedule.due);
           if (!to.isAfter(from)) {
-            scheduleErrors.to = formatMsg({ id: 'ui-circulation.settings.fDDS.validate.toDate' });
+            scheduleErrors.to = formatMessage({ id: 'ui-circulation.settings.fDDS.validate.toDate' });
             schedulesErrors[i] = scheduleErrors;
           }
 
           if (!due.isSameOrAfter(to)) {
-            scheduleErrors.due = formatMsg({ id: 'ui-circulation.settings.fDDS.validate.onOrAfter' });
+            scheduleErrors.due = formatMessage({ id: 'ui-circulation.settings.fDDS.validate.onOrAfter' });
             schedulesErrors[i] = scheduleErrors;
           }
         }
@@ -128,17 +132,22 @@ class FixedDueDateScheduleManager extends React.Component {
   }
 
   render() {
-    const formatMsg = this.props.stripes.intl.formatMessage;
+    const {
+      intl: { formatMessage },
+      resources,
+      mutator,
+    } = this.props;
+
     return (
       <EntryManager
         {...this.props}
-        parentMutator={this.props.mutator}
-        entryList={_.sortBy((this.props.resources.fixedDueDateSchedules || {}).records || [], ['name'])}
+        parentMutator={mutator}
+        entryList={_.sortBy((resources.fixedDueDateSchedules || {}).records || [], ['name'])}
         resourceKey="fixedDueDateSchedules"
         detailComponent={FixedDueDateScheduleDetail}
         entryFormComponent={FixedDueDateScheduleForm}
-        paneTitle={formatMsg({ id: 'ui-circulation.settings.fDDS.paneTitle' })}
-        entryLabel={formatMsg({ id: 'ui-circulation.settings.fDDSform.entryLabel' })}
+        paneTitle={formatMessage({ id: 'ui-circulation.settings.fDDS.paneTitle' })}
+        entryLabel={formatMessage({ id: 'ui-circulation.settings.fDDSform.entryLabel' })}
         nameKey="name"
         permissions={{
           put: 'ui-circulation.settings.loan-rules',
@@ -147,11 +156,11 @@ class FixedDueDateScheduleManager extends React.Component {
         }}
         validate={this.validate}
         deleteDisabled={this.deleteDisabled}
-        deleteDisabledMessage={formatMsg({ id: 'ui-circulation.settings.fDDS.deleteDisabled' })}
+        deleteDisabledMessage={formatMessage({ id: 'ui-circulation.settings.fDDS.deleteDisabled' })}
         defaultEntry={{ schedules: [{}] }}
       />
     );
   }
 }
 
-export default FixedDueDateScheduleManager;
+export default injectIntl(FixedDueDateScheduleManager);

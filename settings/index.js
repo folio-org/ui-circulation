@@ -1,6 +1,6 @@
 import React from 'react';
+import { intlShape, injectIntl } from 'react-intl';
 import { Settings } from '@folio/stripes/smart-components';
-import { stripesShape } from '@folio/stripes/core';
 
 import LoanPolicySettings from './LoanPolicySettings';
 import LoanRules from './LoanRules';
@@ -11,43 +11,44 @@ import StaffSlips from './StaffSlips';
 
 class Circulation extends React.Component {
   static propTypes = {
-    stripes: stripesShape.isRequired,
+    intl: intlShape.isRequired,
   }
 
   constructor(props) {
     super(props);
+    const { formatMessage } = props.intl;
     this.pages = [
       {
         route: 'loan-policies',
-        label: this.props.stripes.intl.formatMessage({ id: 'ui-circulation.settings.index.loanPolicies' }),
+        label: formatMessage({ id: 'ui-circulation.settings.index.loanPolicies' }),
         component: LoanPolicySettings,
         perm: 'ui-circulation.settings.loan-policies',
       },
       {
         route: 'loan-rules',
-        label: this.props.stripes.intl.formatMessage({ id: 'ui-circulation.settings.index.loanRules' }),
+        label: formatMessage({ id: 'ui-circulation.settings.index.loanRules' }),
         component: LoanRules,
         perm: 'ui-circulation.settings.loan-rules',
       },
       {
         route: 'fixed-due-date-schedules',
-        label: this.props.stripes.intl.formatMessage({ id: 'ui-circulation.settings.index.fdds' }),
+        label: formatMessage({ id: 'ui-circulation.settings.index.fdds' }),
         component: FixedDueDateScheduleManager,
         perm: 'ui-circulation.settings.loan-rules',
       },
       {
         route: 'checkout',
-        label: this.props.stripes.intl.formatMessage({ id: 'ui-circulation.settings.index.otherSettings' }),
+        label: formatMessage({ id: 'ui-circulation.settings.index.otherSettings' }),
         component: CheckoutSettings,
       },
       {
         route: 'staffslips',
-        label: this.props.stripes.intl.formatMessage({ id: 'ui-circulation.settings.index.staffSlips' }),
+        label: formatMessage({ id: 'ui-circulation.settings.index.staffSlips' }),
         component: StaffSlips,
       },
       {
         route: 'cancellation-reasons',
-        label: this.props.stripes.intl.formatMessage({ id: 'ui-circulation.settings.index.requestCancellationReasons' }),
+        label: formatMessage({ id: 'ui-circulation.settings.index.requestCancellationReasons' }),
         component: RequestCancellationReasons,
         perm: 'ui-circulation.settings.cancellation-reasons',
       },
@@ -59,10 +60,10 @@ class Circulation extends React.Component {
       <Settings
         {...this.props}
         pages={this.pages}
-        paneTitle={this.props.stripes.intl.formatMessage({ id: 'ui-circulation.settings.index.paneTitle' })}
+        paneTitle={this.props.intl.formatMessage({ id: 'ui-circulation.settings.index.paneTitle' })}
       />
     );
   }
 }
 
-export default Circulation;
+export default injectIntl(Circulation);
