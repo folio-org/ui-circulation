@@ -1,5 +1,9 @@
 # Change history for ui-circulation
 
+## 1.4.0 (IN PROGRESS)
+
+* Provide `sortby` prop to `<ControlledVocab>`. Refs STSMACOM-139.
+
 ## 1.3.0 (https://github.com/folio-org/ui-circulation/tree/v1.3.0) (2018-10-04)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v1.2.0...v1.3.0)
 

@@ -38,6 +38,7 @@ class RequestCancellationReasons extends React.Component {
         }}
         nameKey="name"
         id="request-cancellation-reasons"
+        sortby="name"
       />
     );
   }
