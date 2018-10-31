@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { injectIntl, intlShape } from 'react-intl';
 
 import {
   Button,
@@ -25,7 +26,6 @@ class StaffSlipForm extends React.Component {
     stripes: PropTypes.shape({
       hasPerm: PropTypes.func.isRequired,
       connect: PropTypes.func.isRequired,
-      intl: PropTypes.object.isRequired,
     }).isRequired,
     initialValues: PropTypes.object,
     handleSubmit: PropTypes.func.isRequired,
@@ -33,6 +33,7 @@ class StaffSlipForm extends React.Component {
     onCancel: PropTypes.func,
     pristine: PropTypes.bool,
     submitting: PropTypes.bool,
+    intl: intlShape.isRequired,
   };
 
   constructor(props) {
@@ -45,7 +46,7 @@ class StaffSlipForm extends React.Component {
   }
 
   translate(id) {
-    return this.props.stripes.intl.formatMessage({
+    return this.props.intl.formatMessage({
       id: `ui-circulation.settings.staffSlips.${id}`
     });
   }
@@ -148,4 +149,4 @@ export default stripesForm({
   form: 'staffSlipForm',
   navigationCheck: true,
   enableReinitialize: false,
-})(StaffSlipForm);
+})(injectIntl(StaffSlipForm));

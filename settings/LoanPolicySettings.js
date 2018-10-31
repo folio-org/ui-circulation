@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
-import { stripesShape } from '@folio/stripes/core';
+import { intlShape, injectIntl } from 'react-intl';
 import { EntryManager } from '@folio/stripes/smart-components';
 import LoanPolicyDetail from './LoanPolicyDetail';
 import LoanPolicyForm from './LoanPolicyForm';
@@ -48,7 +48,7 @@ class LoanPolicySettings extends React.Component {
         DELETE: PropTypes.func,
       }),
     }).isRequired,
-    stripes: stripesShape.isRequired,
+    intl: intlShape.isRequired,
   };
 
   constructor(props) {
@@ -59,31 +59,39 @@ class LoanPolicySettings extends React.Component {
 
   validate(values) {
     const errors = {};
+    const { formatMessage } = this.props.intl;
+
     if (!values.name) {
-      errors.name = this.props.stripes.intl.formatMessage({ id: 'ui-circulation.settings.validate.fillIn' });
+      errors.name = formatMessage({ id: 'ui-circulation.settings.validate.fillIn' });
     }
 
     const loansPolicy = values.loansPolicy || {};
 
     if (loansPolicy.profileId === loanProfileMap.FIXED
       && !loansPolicy.fixedDueDateSchedule) {
-      errors.loansPolicy = { fixedDueDateSchedule: this.props.stripes.intl.formatMessage({ id: 'ui-circulation.settings.loanPolicy.selectFDDS' }) };
+      errors.loansPolicy = { fixedDueDateSchedule: formatMessage({ id: 'ui-circulation.settings.loanPolicy.selectFDDS' }) };
     }
     return errors;
   }
 
   render() {
+    const {
+      intl: { formatMessage },
+      resources,
+      mutator,
+    } = this.props;
+
     return (
       <EntryManager
         {...this.props}
-        parentMutator={this.props.mutator}
-        parentResources={this.props.resources}
-        entryList={_.sortBy((this.props.resources.loanPolicies || {}).records || [], ['name'])}
+        parentMutator={mutator}
+        parentResources={resources}
+        entryList={_.sortBy((resources.loanPolicies || {}).records || [], ['name'])}
         resourceKey="loanPolicies"
         detailComponent={LoanPolicyDetail}
         formComponent={LoanPolicyForm}
-        paneTitle={this.props.stripes.intl.formatMessage({ id: 'ui-circulation.settings.loanPolicy.paneTitle' })}
-        entryLabel={this.props.stripes.intl.formatMessage({ id: 'ui-circulation.settings.loanPolicy.entryLabel' })}
+        paneTitle={formatMessage({ id: 'ui-circulation.settings.loanPolicy.paneTitle' })}
+        entryLabel={formatMessage({ id: 'ui-circulation.settings.loanPolicy.entryLabel' })}
         nameKey="name"
         defaultEntry={defaultPolicy}
         permissions={{
@@ -97,4 +105,4 @@ class LoanPolicySettings extends React.Component {
   }
 }
 
-export default LoanPolicySettings;
+export default injectIntl(LoanPolicySettings);

@@ -1,13 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { intlShape, injectIntl } from 'react-intl';
 import { ControlledVocab } from '@folio/stripes/smart-components';
 
 class RequestCancellationReasons extends React.Component {
   static propTypes = {
     stripes: PropTypes.shape({
       connect: PropTypes.func.isRequired,
-      intl: PropTypes.object.isRequired,
     }).isRequired,
+    intl: intlShape.isRequired,
   };
 
   constructor(props) {
@@ -17,20 +18,22 @@ class RequestCancellationReasons extends React.Component {
   }
 
   render() {
+    const { formatMessage } = this.props.intl;
+
     return (
       <this.connectedControlledVocab
         {...this.props}
         baseUrl="cancellation-reason-storage/cancellation-reasons"
         records="cancellationReasons"
-        label={this.props.stripes.intl.formatMessage({ id: 'ui-circulation.settings.cancelReasons.label' })}
-        labelSingular={this.props.stripes.intl.formatMessage({ id: 'ui-circulation.settings.cancelReasons.labelSingular' })}
+        label={formatMessage({ id: 'ui-circulation.settings.cancelReasons.label' })}
+        labelSingular={formatMessage({ id: 'ui-circulation.settings.cancelReasons.labelSingular' })}
         objectLabel=""
         visibleFields={['name', 'description', 'publicDescription']}
         hiddenFields={['lastUpdated', 'numberOfObjects']}
         columnMapping={{
-          name: this.props.stripes.intl.formatMessage({ id: 'ui-circulation.settings.cancelReasons.labelShort' }),
-          description: this.props.stripes.intl.formatMessage({ id: 'ui-circulation.settings.cancelReasons.descriptionInternal' }),
-          publicDescription: this.props.stripes.intl.formatMessage({ id: 'ui-circulation.settings.cancelReasons.descriptionPublic' }),
+          name: formatMessage({ id: 'ui-circulation.settings.cancelReasons.labelShort' }),
+          description: formatMessage({ id: 'ui-circulation.settings.cancelReasons.descriptionInternal' }),
+          publicDescription: formatMessage({ id: 'ui-circulation.settings.cancelReasons.descriptionPublic' }),
         }}
         actionSuppressor={{
           edit: () => false,
@@ -44,4 +47,4 @@ class RequestCancellationReasons extends React.Component {
   }
 }
 
-export default RequestCancellationReasons;
+export default injectIntl(RequestCancellationReasons);

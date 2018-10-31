@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, FormattedDate, intlShape, injectIntl } from 'react-intl';
 import { Accordion, Col, ExpandAllButton, KeyValue, Row } from '@folio/stripes/components';
 import { stripesShape } from '@folio/stripes/core';
 import { ViewMetaData } from '@folio/stripes/smart-components';
@@ -10,6 +10,7 @@ import css from './FixedDueDateSchedule.css';
 class FixedDueDateScheduleDetail extends React.Component {
   static propTypes = {
     initialValues: PropTypes.object,
+    intl: intlShape.isRequired,
     stripes: stripesShape.isRequired,
   }
 
@@ -17,7 +18,6 @@ class FixedDueDateScheduleDetail extends React.Component {
     super(props);
     this.handleSectionToggle = this.handleSectionToggle.bind(this);
     this.handleExpandAll = this.handleExpandAll.bind(this);
-    this.formatDate = props.stripes.formatDate;
     this.cViewMetaData = props.stripes.connect(ViewMetaData);
     this.state = {
       sections: {
@@ -44,8 +44,11 @@ class FixedDueDateScheduleDetail extends React.Component {
   }
 
   render() {
-    const fixedDueDateSchedule = this.props.initialValues;
-    const formatMsg = this.props.stripes.intl.formatMessage;
+    const {
+      intl: { formatMessage },
+      initialValues: fixedDueDateSchedule,
+    } = this.props;
+
     const { sections } = this.state;
     const renderSchedules = fixedDueDateSchedule.schedules.map((schedule, index) => (
       <div key={index} className={css.scheduleItem}>
@@ -69,9 +72,15 @@ class FixedDueDateScheduleDetail extends React.Component {
             </Col>
           </Row>
           <Row key={index + 2}>
-            <Col xs={4}>{this.formatDate(schedule.from)}</Col>
-            <Col xs={4}>{this.formatDate(schedule.to)}</Col>
-            <Col xs={4}>{this.formatDate(schedule.due)}</Col>
+            <Col xs={4}>
+              <FormattedDate value={schedule.from} />
+            </Col>
+            <Col xs={4}>
+              <FormattedDate value={schedule.to} />
+            </Col>
+            <Col xs={4}>
+              <FormattedDate value={schedule.due} />
+            </Col>
           </Row>
         </div>
       </div>
@@ -97,15 +106,15 @@ class FixedDueDateScheduleDetail extends React.Component {
             <Row>
               <Col xs={12}>
                 <KeyValue
-                  label={formatMsg({ id: 'ui-circulation.settings.fDDSform.name' })}
-                  value={_.get(fixedDueDateSchedule, ['name'], formatMsg({ id: 'ui-circulation.settings.fDDSform.untitled' }))}
+                  label={formatMessage({ id: 'ui-circulation.settings.fDDSform.name' })}
+                  value={_.get(fixedDueDateSchedule, ['name'], formatMessage({ id: 'ui-circulation.settings.fDDSform.untitled' }))}
                 />
               </Col>
             </Row>
             <Row>
               <Col xs={12}>
                 <KeyValue
-                  label={formatMsg({ id: 'ui-circulation.settings.fDDSform.description' })}
+                  label={formatMessage({ id: 'ui-circulation.settings.fDDSform.description' })}
                   value={_.get(fixedDueDateSchedule, ['description'], '')}
                 />
               </Col>
@@ -127,4 +136,4 @@ class FixedDueDateScheduleDetail extends React.Component {
   }
 }
 
-export default FixedDueDateScheduleDetail;
+export default injectIntl(FixedDueDateScheduleDetail);

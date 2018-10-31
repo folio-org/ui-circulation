@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { injectIntl, intlShape } from 'react-intl';
 import { Button, Col, KeyValue, Row } from '@folio/stripes/components';
 import HtmlToReact, { Parser } from 'html-to-react';
 
@@ -12,9 +13,9 @@ class StaffSlipDetail extends React.Component {
   static propTypes = {
     stripes: PropTypes.shape({
       connect: PropTypes.func.isRequired,
-      intl: PropTypes.object.isRequired,
     }).isRequired,
     initialValues: PropTypes.object,
+    intl: intlShape.isRequired,
   };
 
   constructor(props) {
@@ -37,7 +38,7 @@ class StaffSlipDetail extends React.Component {
   }
 
   translate(id) {
-    return this.props.stripes.intl.formatMessage({
+    return this.props.intl.formatMessage({
       id: `ui-circulation.settings.staffSlips.${id}`
     });
   }
@@ -52,7 +53,7 @@ class StaffSlipDetail extends React.Component {
 
   render() {
     const { openDialog } = this.state;
-    const staffSlip = this.props.initialValues;
+    const { initialValues: staffSlip } = this.props;
     const contentComponent = this.parser.parseWithInstructions(staffSlip.template, () => true, this.rules);
 
     return (
@@ -104,4 +105,4 @@ class StaffSlipDetail extends React.Component {
   }
 }
 
-export default StaffSlipDetail;
+export default injectIntl(StaffSlipDetail);

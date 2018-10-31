@@ -1,6 +1,7 @@
 import { sortBy } from 'lodash';
 import React from 'react';
 import PropTypes from 'prop-types';
+import { intlShape, injectIntl } from 'react-intl';
 import { EntryManager } from '@folio/stripes/smart-components';
 
 import StaffSlipDetail from './StaffSlipDetail';
@@ -21,9 +22,7 @@ class StaffSlipManager extends React.Component {
         DELETE: PropTypes.func,
       }),
     }).isRequired,
-    stripes: PropTypes.shape({
-      intl: PropTypes.object.isRequired,
-    }),
+    intl: intlShape.isRequired,
   };
 
   static manifest = Object.freeze({
@@ -57,7 +56,7 @@ class StaffSlipManager extends React.Component {
   }
 
   translate(id) {
-    this.props.stripes.intl.formatMessage({
+    this.props.intl.formatMessage({
       id: `ui-circulation.settings.staffSlips.${id}`
     });
   }
@@ -73,14 +72,20 @@ class StaffSlipManager extends React.Component {
   }
 
   render() {
+    const {
+      mutator,
+      resources,
+      label,
+    } = this.props;
+
     return (
       <EntryManager
         {...this.props}
-        parentMutator={this.props.mutator}
-        entryList={sortBy((this.props.resources.entries || {}).records || [], ['name'])}
+        parentMutator={mutator}
+        entryList={sortBy((resources.entries || {}).records || [], ['name'])}
         detailComponent={StaffSlipDetail}
-        paneTitle={this.props.label}
-        entryLabel={this.props.label}
+        paneTitle={label}
+        entryLabel={label}
         entryFormComponent={StaffSlipForm}
         validate={this.validate}
         nameKey="name"
@@ -94,4 +99,4 @@ class StaffSlipManager extends React.Component {
   }
 }
 
-export default StaffSlipManager;
+export default injectIntl(StaffSlipManager);
