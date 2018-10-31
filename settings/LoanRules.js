@@ -22,7 +22,6 @@ const editorDefaultProps = {
     m: 'Material Type',
     t: 'Loan Type',
   },
-  intl: intlShape.isRequired,
 };
 
 class LoanRules extends React.Component {
@@ -181,11 +180,11 @@ class LoanRules extends React.Component {
 
   render() {
     const {
-      resources,
+      resources: { loanTypes },
       intl: { formatMessage },
     } = this.props;
 
-    if (!resources.loanTypes) {
+    if (!loanTypes) {
       return (<div />);
     }
 

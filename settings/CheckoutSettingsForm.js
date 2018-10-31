@@ -122,7 +122,7 @@ class CheckoutSettingsForm extends React.Component {
                   />
                 </Col>
                 <Col xs={7}>
-                  <div>{formatMessage({ id: 'ui-circulation.settings.checkout.minutes' })}</div>
+                  <FormattedMessage id="ui-circulation.settings.checkout.minutes" />
                 </Col>
               </div>
             </Row>

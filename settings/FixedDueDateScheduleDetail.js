@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
-import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
+import { FormattedMessage, FormattedDate, intlShape, injectIntl } from 'react-intl';
 import { Accordion, Col, ExpandAllButton, KeyValue, Row } from '@folio/stripes/components';
 import { stripesShape } from '@folio/stripes/core';
 import { ViewMetaData } from '@folio/stripes/smart-components';
@@ -45,7 +45,7 @@ class FixedDueDateScheduleDetail extends React.Component {
 
   render() {
     const {
-      intl: { formatDate, formatMessage },
+      intl: { formatMessage },
       initialValues: fixedDueDateSchedule,
     } = this.props;
 
@@ -72,9 +72,15 @@ class FixedDueDateScheduleDetail extends React.Component {
             </Col>
           </Row>
           <Row key={index + 2}>
-            <Col xs={4}>{formatDate(schedule.from)}</Col>
-            <Col xs={4}>{formatDate(schedule.to)}</Col>
-            <Col xs={4}>{formatDate(schedule.due)}</Col>
+            <Col xs={4}>
+              <FormattedDate value={schedule.from} />
+            </Col>
+            <Col xs={4}>
+              <FormattedDate value={schedule.to} />
+            </Col>
+            <Col xs={4}>
+              <FormattedDate value={schedule.due} />
+            </Col>
           </Row>
         </div>
       </div>

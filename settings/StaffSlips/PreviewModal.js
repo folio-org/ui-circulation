@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Barcode from 'react-barcode';
 import HtmlToReact, { Parser } from 'html-to-react';
 import ReactToPrint from 'react-to-print';
-import { injectIntl, intlShape } from 'react-intl';
+import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { Button, Col, Modal, Row } from '@folio/stripes/components';
 import formats from './formats';
 import { template } from './util';
@@ -46,7 +46,7 @@ class PreviewModal extends React.Component {
       intl: { formatMessage },
     } = this.props;
 
-    const closeLabel = formatMessage({ id: 'ui-circulation.settings.staffSlips.close' });
+    const closeLabel = <FormattedMessage id="ui-circulation.settings.staffSlips.close" />;
     const heading = formatMessage({ id: 'ui-circulation.settings.staffSlips.previewLabel' });
 
     const tmpl = template(previewTemplate || '');

@@ -137,7 +137,7 @@ class FixedDueDateScheduleForm extends React.Component {
               onClick={this.beginDelete}
               disabled={confirmDelete}
             >
-              Delete
+              <FormattedMessage id="circulation.settings.staffSlips.delete" />
             </Button>
           </IfPermission>
         }
@@ -155,11 +155,9 @@ class FixedDueDateScheduleForm extends React.Component {
 
   renderPaneTitle() {
     const {
-      initialValues,
+      initialValues: selectedSet = {},
       intl: { formatMessage },
     } = this.props;
-
-    const selectedSet = initialValues || {};
 
     if (selectedSet.id) {
       return (
