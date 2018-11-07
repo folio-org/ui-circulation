@@ -47,13 +47,16 @@ class StaffSlipForm extends React.Component {
   addFirstMenu() {
     return (
       <PaneMenu>
-        <IconButton
-          id="clickable-close-staff-slip"
-          onClick={this.props.onCancel}
-          icon="closeX"
-          title={<FormattedMessage id="ui-circulation.settings.staffSlips.closeStaffSlipDialog" />}
-          aria-label={<FormattedMessage id="ui-circulation.settings.staffSlips.closeStaffSlipDialog" />}
-        />
+        <FormattedMessage id="ui-circulation.settings.staffSlips.closeStaffSlipDialog">
+          {ariaLabel => (
+            <IconButton
+              id="clickable-close-staff-slip"
+              onClick={this.props.onCancel}
+              icon="closeX"
+              aria-label={ariaLabel}
+            />
+          )}
+        </FormattedMessage>
       </PaneMenu>
     );
   }
@@ -70,7 +73,6 @@ class StaffSlipForm extends React.Component {
         <Button
           id="clickable-save-staff-slip"
           type="submit"
-          title={<FormattedMessage id="ui-circulation.settings.staffSlips.saveAndClose" />}
           buttonStyle="primary paneHeaderNewButton"
           marginBottom0
           disabled={(pristine || submitting)}

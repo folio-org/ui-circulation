@@ -1,12 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
-
-import {
-  FormattedMessage,
-  intlShape,
-  injectIntl,
-} from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
 import { EntryManager } from '@folio/stripes/smart-components';
 import LoanPolicyDetail from './LoanPolicyDetail';
@@ -54,7 +49,6 @@ class LoanPolicySettings extends React.Component {
         DELETE: PropTypes.func,
       }),
     }).isRequired,
-    intl: intlShape.isRequired,
   };
 
   constructor(props) {
@@ -83,7 +77,6 @@ class LoanPolicySettings extends React.Component {
     const {
       resources,
       mutator,
-      intl: { formatMessage },
     } = this.props;
 
     return (
@@ -96,7 +89,7 @@ class LoanPolicySettings extends React.Component {
         detailComponent={LoanPolicyDetail}
         formComponent={LoanPolicyForm}
         paneTitle={<FormattedMessage id="ui-circulation.settings.loanPolicy.paneTitle" />}
-        entryLabel={formatMessage({ id: 'ui-circulation.settings.loanPolicy.entryLabel' })}
+        entryLabel={<FormattedMessage id="ui-circulation.settings.loanPolicy.entryLabel" />}
         nameKey="name"
         defaultEntry={defaultPolicy}
         permissions={{
@@ -110,4 +103,4 @@ class LoanPolicySettings extends React.Component {
   }
 }
 
-export default injectIntl(LoanPolicySettings);
+export default LoanPolicySettings;
