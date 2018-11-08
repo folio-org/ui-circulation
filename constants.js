@@ -29,11 +29,17 @@ export const loanProfileMap = {
   INDEFINITE: 'Indefinite'
 };
 
-export const dueDateManagementOptions = [
-  { label: 'Keep the current due date', id: 1, value: 1 },
-  { label: 'Move to the end of the previous open day', id: 2, value: 2 },
-  { label: 'Move to the beginning of the next open day', id: 3, value: 3 },
-  { label: 'Move to the end of the next open day', id: 4, value: 4 },
+export const shortTermLoansOptions = [
+  { label: 'Keep the current due date/time', id: '01', value: '11' },
+  { label: 'Move to the end of the current service point hours', id: '02', value: '02' },
+  { label: 'Move to the beginning of the next open service point hours', id: '03', value: '03' },
+];
+
+export const longTermLoansOptions = [
+  { label: 'Keep the current due date', id: '11', value: '11' },
+  { label: 'Move to the end of the previous open day', id: '12', value: '12' },
+  { label: 'Move to the end of the next open day', id: '13', value: '13' },
+  { label: 'Move to the end of the current day', id: '14', value: '14' },
 ];
 
 export const renewFromOptions = [

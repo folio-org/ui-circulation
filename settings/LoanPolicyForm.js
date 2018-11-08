@@ -19,10 +19,11 @@ import { ViewMetaData } from '@folio/stripes/smart-components';
 import {
   loanProfileTypes,
   intervalPeriods,
-  dueDateManagementOptions,
   renewFromOptions,
   intervalIdsMap,
   loanProfileMap,
+  shortTermLoansOptions,
+  longTermLoansOptions,
 } from '../constants';
 
 class LoanPolicyForm extends React.Component {
@@ -49,6 +50,33 @@ class LoanPolicyForm extends React.Component {
       },
     };
   }
+
+  getDueDateManagementOptions = () => {
+    const isShortTermLoan = this.isShortTermLoan();
+
+    if (isShortTermLoan) {
+      return shortTermLoansOptions;
+    }
+
+    return longTermLoansOptions;
+  };
+
+  isShortTermLoan = () => {
+    const {
+      loanable,
+      loansPolicy: {
+        profileId,
+        period: {
+          intervalId = '',
+        } = {},
+      },
+    } = this.getCurrentValues();
+
+    const isProfileRolling = profileId === loanProfileMap.ROLLING;
+    const isShortTermPeriod = intervalId === intervalIdsMap.MINUTES || intervalId === intervalIdsMap.HOURS;
+
+    return loanable && isProfileRolling && isShortTermPeriod;
+  };
 
   getCurrentValues() {
     const { store } = this.props.stripes;
@@ -233,7 +261,7 @@ class LoanPolicyForm extends React.Component {
               label={formatMessage({ id: 'ui-circulation.settings.loanPolicy.closedDueDateMgmt' })}
               name="loansPolicy.closedLibraryDueDateManagementId"
               component={Select}
-              dataOptions={dueDateManagementOptions}
+              dataOptions={this.getDueDateManagementOptions()}
               validate={this.validateField}
             />
           }
