@@ -5,6 +5,8 @@
 * Provide `sortby` prop to `<ControlledVocab>`. Refs STSMACOM-139.
 * Provide `type` prop to `<Field>`. Refs PR #697.
 * Support circulation v5.0, requiring service-point information on loans. Refs UICIRC-100.
+* Use documented react-intl patterns instead of stripes.intl, UICIRC-91.
+* Apply internationalization to all hardcodded strings, UICIRC-97.
 
 ## 1.3.0 (https://github.com/folio-org/ui-circulation/tree/v1.3.0) (2018-10-04)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v1.2.0...v1.3.0)

@@ -1,6 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { intlShape, injectIntl } from 'react-intl';
+
+import {
+  intlShape,
+  injectIntl,
+} from 'react-intl';
+
 import { ControlledVocab } from '@folio/stripes/smart-components';
 
 class RequestCancellationReasons extends React.Component {
@@ -18,7 +23,7 @@ class RequestCancellationReasons extends React.Component {
   }
 
   render() {
-    const { formatMessage } = this.props.intl;
+    const { intl: { formatMessage } } = this.props;
 
     return (
       <this.connectedControlledVocab

@@ -1,7 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
-import { intlShape, injectIntl } from 'react-intl';
+
+import {
+  FormattedMessage,
+  intlShape,
+  injectIntl,
+} from 'react-intl';
+
 import { EntryManager } from '@folio/stripes/smart-components';
 import LoanPolicyDetail from './LoanPolicyDetail';
 import LoanPolicyForm from './LoanPolicyForm';
@@ -59,26 +65,25 @@ class LoanPolicySettings extends React.Component {
 
   validate(values) {
     const errors = {};
-    const { formatMessage } = this.props.intl;
 
     if (!values.name) {
-      errors.name = formatMessage({ id: 'ui-circulation.settings.validate.fillIn' });
+      errors.name = <FormattedMessage id="ui-circulation.settings.validate.fillIn" />;
     }
 
     const loansPolicy = values.loansPolicy || {};
 
     if (loansPolicy.profileId === loanProfileMap.FIXED
       && !loansPolicy.fixedDueDateSchedule) {
-      errors.loansPolicy = { fixedDueDateSchedule: formatMessage({ id: 'ui-circulation.settings.loanPolicy.selectFDDS' }) };
+      errors.loansPolicy = { fixedDueDateSchedule: <FormattedMessage id="ui-circulation.settings.loanPolicy.selectFDDS" /> };
     }
     return errors;
   }
 
   render() {
     const {
-      intl: { formatMessage },
       resources,
       mutator,
+      intl: { formatMessage },
     } = this.props;
 
     return (
@@ -90,7 +95,7 @@ class LoanPolicySettings extends React.Component {
         resourceKey="loanPolicies"
         detailComponent={LoanPolicyDetail}
         formComponent={LoanPolicyForm}
-        paneTitle={formatMessage({ id: 'ui-circulation.settings.loanPolicy.paneTitle' })}
+        paneTitle={<FormattedMessage id="ui-circulation.settings.loanPolicy.paneTitle" />}
         entryLabel={formatMessage({ id: 'ui-circulation.settings.loanPolicy.entryLabel' })}
         nameKey="name"
         defaultEntry={defaultPolicy}

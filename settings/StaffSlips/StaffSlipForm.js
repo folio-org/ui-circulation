@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { injectIntl, intlShape } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
 import {
   Button,
@@ -33,7 +33,6 @@ class StaffSlipForm extends React.Component {
     onCancel: PropTypes.func,
     pristine: PropTypes.bool,
     submitting: PropTypes.bool,
-    intl: intlShape.isRequired,
   };
 
   constructor(props) {
@@ -45,12 +44,6 @@ class StaffSlipForm extends React.Component {
     this.props.onSave(data);
   }
 
-  translate(id) {
-    return this.props.intl.formatMessage({
-      id: `ui-circulation.settings.staffSlips.${id}`
-    });
-  }
-
   addFirstMenu() {
     return (
       <PaneMenu>
@@ -58,8 +51,8 @@ class StaffSlipForm extends React.Component {
           id="clickable-close-staff-slip"
           onClick={this.props.onCancel}
           icon="closeX"
-          title="close"
-          aria-label={this.translate('closeStaffSlipDialog')}
+          title={<FormattedMessage id="ui-circulation.settings.staffSlips.closeStaffSlipDialog" />}
+          aria-label={<FormattedMessage id="ui-circulation.settings.staffSlips.closeStaffSlipDialog" />}
         />
       </PaneMenu>
     );
@@ -68,14 +61,15 @@ class StaffSlipForm extends React.Component {
   saveLastMenu() {
     const { pristine, submitting, initialValues } = this.props;
     const edit = initialValues && initialValues.id;
-    const saveLabel = edit ? this.translate('saveAndClose') : this.translate('createStaffSlip');
+    const saveLabel = edit ? <FormattedMessage id="ui-circulation.settings.staffSlips.saveAndClose" /> :
+    <FormattedMessage id="ui-circulation.settings.staffSlips.createStaffSlip" />;
 
     return (
       <PaneMenu>
         <Button
           id="clickable-save-staff-slip"
           type="submit"
-          title={this.translate('saveAndClose')}
+          title={<FormattedMessage id="ui-circulation.settings.staffSlips.saveAndClose" />}
           buttonStyle="primary paneHeaderNewButton"
           marginBottom0
           disabled={(pristine || submitting)}
@@ -87,50 +81,73 @@ class StaffSlipForm extends React.Component {
   }
 
   renderPaneTitle() {
-    const { initialValues } = this.props;
-    const staffSlip = initialValues || {};
+    const {
+      initialValues: staffSlip = {},
+    } = this.props;
 
     if (staffSlip.id) {
       return (
         <div>
           <Icon size="small" icon="edit" />
-          <span>{`${this.translate('edit')}: ${this.translate('label')} - ${staffSlip.name}`}</span>
+          <span>
+            <FormattedMessage id="ui-circulation.settings.staffSlips.editLabel" values={{ name: staffSlip.name }} />
+          </span>
         </div>
       );
     }
-
-    return this.translate('new');
+    return <FormattedMessage id="ui-circulation.settings.staffSlips.new" />;
   }
 
   render() {
     const { stripes, handleSubmit, initialValues } = this.props;
     const disabled = !stripes.hasPerm('settings.organization.enabled');
-    const slipType = (initialValues || {}).name || 'Hold';
+    const slipType = (initialValues || {}).name || <FormattedMessage id="ui-circulation.settings.staffSlips.hold" />;
 
     return (
       <form id="form-staff-slip" onSubmit={handleSubmit(this.save)}>
         <Paneset isRoot>
-          <Pane defaultWidth="100%" firstMenu={this.addFirstMenu()} lastMenu={this.saveLastMenu()} paneTitle={this.renderPaneTitle()}>
+          <Pane
+            defaultWidth="100%"
+            firstMenu={this.addFirstMenu()}
+            lastMenu={this.saveLastMenu()}
+            paneTitle={this.renderPaneTitle()}
+          >
             <Row>
               <Col xs={8}>
-                <KeyValue label={this.translate('name')} value={(initialValues || {}).name} />
-              </Col>
-            </Row>
-            <Row>
-              <Col xs={8}>
-                <Field label={`${this.translate('active')}`} name="active" id="input-staff-slip-active" component={Checkbox} disabled={disabled} />
-              </Col>
-            </Row>
-            <br />
-            <Row>
-              <Col xs={8}>
-                <Field label={this.translate('description')} name="description" id="input-staff-slip-description" component={TextArea} fullWidth disabled={disabled} />
+                <KeyValue
+                  label={<FormattedMessage id="ui-circulation.settings.staffSlips.name" />}
+                  value={(initialValues || {}).name}
+                />
               </Col>
             </Row>
             <Row>
               <Col xs={8}>
                 <Field
-                  label={this.translate('display')}
+                  label={<FormattedMessage id="ui-circulation.settings.staffSlips.active" />}
+                  name="active"
+                  id="input-staff-slip-active"
+                  component={Checkbox}
+                  disabled={disabled}
+                />
+              </Col>
+            </Row>
+            <br />
+            <Row>
+              <Col xs={8}>
+                <Field
+                  label={<FormattedMessage id="ui-circulation.settings.staffSlips.description" />}
+                  name="description"
+                  id="input-staff-slip-description"
+                  component={TextArea}
+                  fullWidth
+                  disabled={disabled}
+                />
+              </Col>
+            </Row>
+            <Row>
+              <Col xs={8}>
+                <Field
+                  label={<FormattedMessage id="ui-circulation.settings.staffSlips.display" />}
                   component={StaffSlipEditor}
                   tokens={Object.keys(formats[slipType])}
                   name="template"
@@ -149,4 +166,4 @@ export default stripesForm({
   form: 'staffSlipForm',
   navigationCheck: true,
   enableReinitialize: false,
-})(injectIntl(StaffSlipForm));
+})(StaffSlipForm);

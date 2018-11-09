@@ -3,14 +3,13 @@ import PropTypes from 'prop-types';
 import Barcode from 'react-barcode';
 import HtmlToReact, { Parser } from 'html-to-react';
 import ReactToPrint from 'react-to-print';
-import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { Button, Col, Modal, Row } from '@folio/stripes/components';
 import formats from './formats';
 import { template } from './util';
 
 class PreviewModal extends React.Component {
   static propTypes = {
-    intl: intlShape.isRequired,
     onClose: PropTypes.func.isRequired,
     open: PropTypes.bool.isRequired,
     previewTemplate: PropTypes.string,
@@ -38,16 +37,20 @@ class PreviewModal extends React.Component {
     this.parser = new Parser();
   }
 
+  getButtonPrint = () => {
+    return (
+      <Button buttonStyle="primary">
+        <FormattedMessage id="ui-circulation.settings.staffSlips.print" />
+      </Button>
+    );
+  }
+
   render() {
     const {
       open,
       onClose,
       previewTemplate,
-      intl: { formatMessage },
     } = this.props;
-
-    const closeLabel = <FormattedMessage id="ui-circulation.settings.staffSlips.close" />;
-    const heading = formatMessage({ id: 'ui-circulation.settings.staffSlips.previewLabel' });
 
     const tmpl = template(previewTemplate || '');
     const componentStr = tmpl(this.previewFormat);
@@ -56,7 +59,7 @@ class PreviewModal extends React.Component {
     return (
       <Modal
         open={open}
-        label={heading}
+        label={<FormattedMessage id="ui-circulation.settings.staffSlips.previewLabel" />}
         id="preview-modal"
         scope="module"
         size="medium"
@@ -68,8 +71,16 @@ class PreviewModal extends React.Component {
         <br />
         <Row>
           <Col xs>
-            <ReactToPrint trigger={() => <Button buttonStyle="primary">Print</Button>} content={() => this.editorRef.current} />
-            <Button onClick={onClose} id="clickable-close-preview">{closeLabel}</Button>
+            <ReactToPrint
+              trigger={this.getButtonPrint}
+              content={() => this.editorRef.current}
+            />
+            <Button
+              onClick={onClose}
+              id="clickable-close-preview"
+            >
+              <FormattedMessage id="ui-circulation.settings.staffSlips.close" />
+            </Button>
           </Col>
         </Row>
       </Modal>
@@ -77,4 +88,4 @@ class PreviewModal extends React.Component {
   }
 }
 
-export default injectIntl(PreviewModal);
+export default PreviewModal;

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ReactQuill from 'react-quill';
-import { injectIntl, intlShape } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { Button, Col, Row } from '@folio/stripes/components';
 
 // eslint-disable-next-line import/no-webpack-loader-syntax
@@ -18,7 +18,6 @@ class StaffSlipEditor extends Component {
     label: PropTypes.string,
     slipType: PropTypes.string,
     tokens: PropTypes.arrayOf(PropTypes.string),
-    intl: intlShape.isRequired,
   };
 
   constructor(props) {
@@ -90,12 +89,6 @@ class StaffSlipEditor extends Component {
     editor.setSelection(cursorPosition + tag.length);
   }
 
-  translate(id) {
-    return this.props.intl.formatMessage({
-      id: `ui-circulation.settings.staffSlips.${id}`
-    });
-  }
-
   render() {
     const { template, openDialog } = this.state;
     const { label, input: { value } } = this.props;
@@ -106,12 +99,16 @@ class StaffSlipEditor extends Component {
           <Col xs={12}>
             <Row bottom="xs">
               <Col xs={9}>
-                <label htmlFor="editor" className={css.label}>{label}</label>
+                <label htmlFor="editor" className={css.label}>
+                  {label}
+                </label>
               </Col>
               <Col xs={3}>
                 <Row className={css.preview}>
                   <Col>
-                    <Button bottomMargin0 onClick={this.openPreviewDialog}>Preview</Button>
+                    <Button bottomMargin0 onClick={this.openPreviewDialog}>
+                      <FormattedMessage id="ui-circulation.settings.staffSlips.preview" />
+                    </Button>
                   </Col>
                 </Row>
               </Col>
@@ -142,4 +139,4 @@ class StaffSlipEditor extends Component {
   }
 }
 
-export default injectIntl(StaffSlipEditor);
+export default StaffSlipEditor;

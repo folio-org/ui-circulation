@@ -7,7 +7,7 @@
 */
 import Codemirror from 'codemirror';
 
-export default function loanRulesHint(cm) {
+export default function loanRulesHint(cm, props) {
   Codemirror.registerHelper('hint', 'loanRulesCMM', (cm) => {
     const cur = cm.getCursor();
     const token = cm.getTokenAt(cur);
@@ -19,7 +19,6 @@ export default function loanRulesHint(cm) {
     // debug - can be used to render debug info to the dom for inspection.
     // let stateDiv = document.getElementById('ParserState');
     // stateDiv.innerHTML= JSON.stringify(token, null, 3);
-
     const currentLine = cm.getLine(cur.line);
     const start = cur.ch;
     const end = start;
@@ -43,7 +42,7 @@ export default function loanRulesHint(cm) {
       }
       result.push({
         text: newRuleText,
-        displayText: 'New Rule (#)',
+        displayText: props.intl.formatMessage({ id: 'ui-circulation.settings.loanRules.newRule' }),
         className: 'loan-rule-hint-major',
         completeOnSingleClick: true,
       });

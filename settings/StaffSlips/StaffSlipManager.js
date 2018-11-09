@@ -1,7 +1,7 @@
 import { sortBy } from 'lodash';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { intlShape, injectIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { EntryManager } from '@folio/stripes/smart-components';
 
 import StaffSlipDetail from './StaffSlipDetail';
@@ -22,7 +22,6 @@ class StaffSlipManager extends React.Component {
         DELETE: PropTypes.func,
       }),
     }).isRequired,
-    intl: intlShape.isRequired,
   };
 
   static manifest = Object.freeze({
@@ -55,17 +54,11 @@ class StaffSlipManager extends React.Component {
     });
   }
 
-  translate(id) {
-    this.props.intl.formatMessage({
-      id: `ui-circulation.settings.staffSlips.${id}`
-    });
-  }
-
   validate(values) {
     const errors = {};
 
     if (!values.name) {
-      errors.name = this.translate('validation.required');
+      errors.name = <FormattedMessage id="ui-circulation.settings.staffSlips.validation.required" />;
     }
 
     return errors;
@@ -99,4 +92,4 @@ class StaffSlipManager extends React.Component {
   }
 }
 
-export default injectIntl(StaffSlipManager);
+export default StaffSlipManager;
