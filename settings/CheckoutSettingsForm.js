@@ -64,6 +64,7 @@ class CheckoutSettingsForm extends React.Component {
         <Col xs={12}>
           <Field
             component={Checkbox}
+            type="checkbox"
             id={`${iden.queryKey}-checkbox`}
             data-checked={fields.get(index)}
             label={iden.label}
@@ -105,6 +106,7 @@ class CheckoutSettingsForm extends React.Component {
                 id="checkoutTimeout"
                 name="checkoutTimeout"
                 component={Checkbox}
+                type="checkbox"
                 onChange={this.handleCheckoutTimeout}
                 normalize={v => !!v}
               />
