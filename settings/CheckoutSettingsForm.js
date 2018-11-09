@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { stripesShape } from '@folio/stripes/core';
 import { Button, Checkbox, Col, Pane, Row, Select, TextField } from '@folio/stripes/components';
 import stripesForm from '@folio/stripes/form';
@@ -89,7 +89,6 @@ class CheckoutSettingsForm extends React.Component {
     const {
       handleSubmit,
       label,
-      intl: { formatMessage },
     } = this.props;
 
     const checkoutValues = this.getCurrentValues();
@@ -102,7 +101,7 @@ class CheckoutSettingsForm extends React.Component {
           <Row>
             <Col xs={12}>
               <Field
-                label={formatMessage({ id: 'ui-circulation.settings.checkout.timeout' })}
+                label={<FormattedMessage id="ui-circulation.settings.checkout.timeout" />}
                 id="checkoutTimeout"
                 name="checkoutTimeout"
                 component={Checkbox}
@@ -133,20 +132,17 @@ class CheckoutSettingsForm extends React.Component {
           <Row>
             <Col xs={12}>
               <Field
-                label={formatMessage({ id: 'ui-circulation.settings.checkout.audioAlerts' })}
+                label={<FormattedMessage id="ui-circulation.settings.checkout.audioAlerts" />}
                 name="audioAlertsEnabled"
                 component={Select}
-                dataOptions={[
-                  {
-                    label: formatMessage({ id: 'ui-circulation.settings.checkout.no' }),
-                    value: false,
-                  },
-                  {
-                    label: formatMessage({ id: 'ui-circulation.settings.checkout.yes' }),
-                    value: true,
-                  },
-                ]}
-              />
+              >
+                <FormattedMessage id="ui-circulation.settings.checkout.no">
+                  {(message) => <option value="false">{message}</option>}
+                </FormattedMessage>
+                <FormattedMessage id="ui-circulation.settings.checkout.yes">
+                  {(message) => <option value="true">{message}</option>}
+                </FormattedMessage>
+              </Field>
             </Col>
           </Row>
         </Pane>
@@ -162,11 +158,10 @@ CheckoutSettingsForm.propTypes = {
   submitting: PropTypes.bool,
   label: PropTypes.string,
   stripes: stripesShape.isRequired,
-  intl: intlShape.isRequired,
 };
 
 export default stripesForm({
   form: 'checkoutForm',
   navigationCheck: true,
   enableReinitialize: true,
-})(injectIntl(CheckoutSettingsForm));
+})(CheckoutSettingsForm);

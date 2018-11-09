@@ -406,8 +406,8 @@
   });
 
   CodeMirror.registerHelper('hint', 'fromList', (cm, options) => {
-    const cur = cm.getCursor(); const
-      token = cm.getTokenAt(cur);
+    const cur = cm.getCursor(); 
+    const token = cm.getTokenAt(cur);
     const to = CodeMirror.Pos(cur.line, token.end);
     if (token.string && /\w/.test(token.string[token.string.length - 1])) {
       var term = token.string; var
