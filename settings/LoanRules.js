@@ -172,7 +172,7 @@ class LoanRules extends React.Component {
     return fetch(`${stripes.okapi.url}/circulation/loan-rules`, options).then((resp) => {
       if (resp.status >= 400) {
         resp.json().then(json => this.setState({ errors: [json] }));
-      } else {
+      } else if (this.callout) {
         this.callout.sendCallout({ message: this.props.calloutMessage });
       }
     });
