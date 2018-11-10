@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { find } from 'lodash';
 
 import {
   Accordion,
@@ -11,6 +12,14 @@ import {
 } from '@folio/stripes/components';
 
 class PatronNoticeDetail extends React.Component {
+
+  static propTypes = {
+    stripes: PropTypes.shape({
+      connect: PropTypes.func.isRequired,
+      intl: PropTypes.object.isRequired,
+    }).isRequired,
+    initialValues: PropTypes.object,
+  };
 
   constructor(props) {
     super(props);
@@ -35,62 +44,79 @@ class PatronNoticeDetail extends React.Component {
   }
 
   render() {
+    const notice = this.props.initialValues;
+    const emailTemplate = find(notice.localizedTemplates, { 'header': 'email' });
+    const smsTemplate = find(notice.localizedTemplates, { 'header': 'sms' });
+    const printTemplate = find(notice.localizedTemplates, { 'header': 'print' });
+
     return (
       <div>
         <Row>
-          <KeyValue label="Name" value="" />
+          <KeyValue label="Name" value={notice.name} />
         </Row>
         <Row>
-          <KeyValue label="Active" value="" />
+          <KeyValue label="Active" value={notice.active ? 'Yes' : 'No'} />
         </Row>
         <Row>
-          <KeyValue label="Description" value="" />
+          <KeyValue label="Description" value={notice.description} />
         </Row>
         <Row>
-          <KeyValue label="Category" value="" />
+          <KeyValue label="Category" value={notice.category} />
         </Row>
         <AccordionSet accordionStatus={this.state.accordions} onToggle={this.onToggleSection}>
           <Accordion
             id="email-template"
             label="Email"
           >
-            <Row>
-              <Button>Preview</Button>
-            </Row>
-            <Row>
-              <KeyValue label="Subject" value="" />
-            </Row>
-            <Row>
-              <KeyValue label="Body" value="" />
-            </Row>
+            { emailTemplate &&
+              <div>
+                <Row>
+                  <Button>Preview</Button>
+                </Row>
+                <Row>
+                  <KeyValue label="Subject" value={notice.subject} />
+                </Row>
+                <Row>
+                  <KeyValue label="Body" value={emailTemplate.body} />
+                </Row>
+              </div>
+            }
           </Accordion>
           <Accordion
             id="sms-template"
             label="SMS"
           >
-            <Row>
-              <Button>Preview</Button>
-            </Row>
-            <Row>
-              <KeyValue label="Subject" value="" />
-            </Row>
-            <Row>
-              <KeyValue label="Body" value="" />
-            </Row>
+            { smsTemplate &&
+              <div>
+                <Row>
+                  <Button>Preview</Button>
+                </Row>
+                <Row>
+                  <KeyValue label="Subject" value={notice.subject} />
+                </Row>
+                <Row>
+                  <KeyValue label="Body" value={smsTemplate.body}  />
+                </Row>
+              </div>
+            }
           </Accordion>
           <Accordion
             id="print-template"
             label="Print"
           >
-            <Row>
-              <Button>Preview</Button>
-            </Row>
-            <Row>
-              <KeyValue label="Subject" value="" />
-            </Row>
-            <Row>
-              <KeyValue label="Body" value="" />
-            </Row>
+            { printTemplate &&
+              <div>
+                <Row>
+                  <Button>Preview</Button>
+                </Row>
+                <Row>
+                  <KeyValue label="Subject" value={notice.subject} />
+                </Row>
+                <Row>
+                  <KeyValue label="Body" value={printTemplate.body} />
+                </Row>
+              </div>
+            }
           </Accordion>
         </AccordionSet>
       </div>
