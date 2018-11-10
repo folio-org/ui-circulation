@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { sortBy } from 'lodash';
 
-import { stripesShape } from '@folio/stripes-core/src/Stripes';
 import EntryManager from '@folio/stripes-smart-components/lib/EntryManager';
 
 import PatronNoticeDetail from './PatronNoticeDetail';
@@ -28,14 +27,14 @@ class PatronNotices extends React.Component {
     }),
   };
 
-  constructor(props) {
-    super(props);
-  }
+  // constructor(props) {
+  //   super(props);
+  // }
 
   static manifest = Object.freeze({
     entries: {
       type: 'okapi',
-      path: 'template',
+      path: 'templates',
       records: 'templates',
     },
   });
@@ -51,12 +50,13 @@ class PatronNotices extends React.Component {
         entryLabel={this.props.label}
         entryFormComponent={PatronNoticeForm}
         // validate={this.validate}
-        nameKey="name"
-        // permissions={{
-        //   put: 'settings.organization.enabled',
-        //   post: 'ui-circulation.settings.staffslips.post',
-        //   delete: 'ui-circulation.settings.staffslips.delete',
-        // }}
+        nameKey="id"
+        // TODO: use real permissions once they exist (EntryManager crashes without a permissions object)
+        permissions={{
+          put: 'settings.organization.enabled',
+          post: 'ui-circulation.settings.patronnotices.post',
+          delete: 'ui-circulation.settings.patronnotices.delete',
+        }}
       />
     );
   }
