@@ -18,6 +18,7 @@ class PatronNoticesConfigForm extends React.Component {
       </Button>
     );
   }
+
   render() {
     const { handleSubmit, stripes } = this.props;
     return (
