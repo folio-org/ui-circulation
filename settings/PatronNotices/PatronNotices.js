@@ -27,30 +27,70 @@ class PatronNotices extends React.Component {
     }),
   };
 
-  // constructor(props) {
-  //   super(props);
-  // }
+  // static manifest = Object.freeze({
+  //   entries: {
+  //     type: 'okapi',
+  //     path: 'templates',
+  //     records: 'templates',
+  //   },
+  // });
 
-  static manifest = Object.freeze({
-    entries: {
-      type: 'okapi',
-      path: 'templates',
-      records: 'templates',
-    },
-  });
+  constructor(props) {
+    super(props);
+
+    // this.props.resources.entries
+    // temporary list of templates for development
+    this.entries = {
+      isPending: false,
+      dataKey: 'patron-notices',
+      records: [
+        {
+          id: '12345',
+          name: 'Test 1',
+          active: true,
+          description: 'Just a test template',
+          category: 'Request',
+          subject: 'Need some stuff',
+          outputFormats: [
+            'text/plain',
+          ],
+          templateResolver: 'mustache',
+          localizedTemplates: [
+            {
+              "lang": "en",
+              "header": "email",
+              "body": "<p>This is a {template} test for email.</p>"
+            },
+            {
+              "lang": "en",
+              "header": "sms",
+              "body": "<p>This is a {template} test for sms.</p>"
+            },
+            {
+              "lang": "en",
+              "header": "print",
+              "body": "<p>This is a {template} test for print.</p>"
+            }
+          ]
+        }
+      ]
+    };
+  }
 
   render() {
+    console.log("entries", this.entries)
     return (
       <EntryManager
         {...this.props}
         parentMutator={this.props.mutator}
-        entryList={sortBy((this.props.resources.entries || {}).records || [], ['name'])}
+        // entryList={sortBy((this.props.resources.entries || {}).records || [], ['name'])}
+        entryList={sortBy((this.entries || {}).records || [], ['name'])}
         detailComponent={PatronNoticeDetail}
         paneTitle={this.props.label}
         entryLabel={this.props.label}
         entryFormComponent={PatronNoticeForm}
         // validate={this.validate}
-        nameKey="id"
+        nameKey="name"
         // TODO: use real permissions once they exist (EntryManager crashes without a permissions object)
         permissions={{
           put: 'settings.organization.enabled',
