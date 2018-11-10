@@ -131,7 +131,7 @@ class FixedDueDateScheduleForm extends React.Component {
         {edit &&
           <IfPermission perm="ui-circulation.settings.loan-rules">
             <Button
-              id="clickable-delete-set"
+              id="clickable-delete-item"
               title={formatMessage({ id: 'ui-circulation.settings.fDDSform.delete' })}
               buttonStyle="danger"
               onClick={this.beginDelete}
