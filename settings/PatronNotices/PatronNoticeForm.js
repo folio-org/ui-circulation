@@ -137,46 +137,25 @@ class PatronNoticeForm extends React.Component {
                 id="email-template"
                 label="Email"
               >
-                {/* { emailTemplate && */}
-                  <div>
-                    <Row>
-                      <Button>Preview</Button>
-                    </Row>
-                    <Row>
-                      <Field label="Body" name="subject" id="input-email-template-body" component={PatronNoticeEditor} tokens={Object.keys(formats.Any)} />
-                    </Row>
-                  </div>
-                {/* } */}
+                <Row>
+                  <Field label="Body" name="subject" id="input-email-template-body" component={PatronNoticeEditor} tokens={Object.keys(formats.Any)} />
+                </Row>
               </Accordion>
               <Accordion
                 id="sms-template"
                 label="SMS"
               >
-                { smsTemplate &&
-                  <div>
-                    <Row>
-                      <Button>Preview</Button>
-                    </Row>
-                    <Row>
-                      {/* <Field label="Subject" name="subject" id="input-email-template-subject" component={TextField} /> */}
-                    </Row>
-                  </div>
-                }
+                <Row>
+                  {/* <Field label="Subject" name="subject" id="input-email-template-subject" component={TextField} /> */}
+                </Row>
               </Accordion>
               <Accordion
                 id="print-template"
                 label="Print"
               >
-                { printTemplate &&
-                  <div>
-                    <Row>
-                      <Button>Preview</Button>
-                    </Row>
-                    <Row>
-                      {/* <Field label="Subject" name="subject" id="input-email-template-subject" component={TextField} /> */}
-                    </Row>
-                  </div>
-                }
+                <Row>
+                  {/* <Field label="Subject" name="subject" id="input-email-template-subject" component={TextField} /> */}
+                </Row>
               </Accordion>
             </AccordionSet>
           </Pane>

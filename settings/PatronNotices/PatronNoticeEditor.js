@@ -10,7 +10,7 @@ import '!style-loader!css-loader!react-quill/dist/quill.snow.css';
 // eslint-disable-next-line import/no-webpack-loader-syntax
 import '!style-loader!css-loader!./quillCustom.css';
 
-//import PreviewModal from './PreviewModal';
+import PreviewModal from './PreviewModal';
 import css from './PatronNoticeEditor.css';
 
 class PatronNoticeEditor extends Component {
@@ -26,8 +26,8 @@ class PatronNoticeEditor extends Component {
     super(props);
     this.onChange = this.onChange.bind(this);
     this.insertToken = this.insertToken.bind(this);
-    //this.openPreviewDialog = this.openPreviewDialog.bind(this);
-    //this.closePreviewDialog = this.closePreviewDialog.bind(this);
+    this.openPreviewDialog = this.openPreviewDialog.bind(this);
+    this.closePreviewDialog = this.closePreviewDialog.bind(this);
     this.token = props.tokens;
 
     this.modules = {
@@ -74,13 +74,13 @@ class PatronNoticeEditor extends Component {
     }
   }
 
-  // openPreviewDialog() {
-  //   this.setState({ openDialog: true });
-  // }
+  openPreviewDialog() {
+    this.setState({ openDialog: true });
+  }
 
-  // closePreviewDialog() {
-  //   this.setState({ openDialog: false });
-  // }
+  closePreviewDialog() {
+    this.setState({ openDialog: false });
+  }
 
   insertToken(value) {
     if (!value) return;
@@ -106,7 +106,7 @@ class PatronNoticeEditor extends Component {
               <Col xs={3}>
                 <Row className={css.preview}>
                   <Col>
-                    {/* <Button bottomMargin0 onClick={this.openPreviewDialog}>Preview</Button> */}
+                    <Button bottomMargin0 onClick={this.openPreviewDialog}>Preview</Button>
                   </Col>
                 </Row>
               </Col>
@@ -125,13 +125,12 @@ class PatronNoticeEditor extends Component {
           </Col>
         </Row>
         {openDialog &&
-          // <PreviewModal
-          //   previewTemplate={template || value}
-          //   open={openDialog}
-          //   onClose={this.closePreviewDialog}
-          //   slipType={this.props.slipType}
-          // />
-          <p></p>
+          <PreviewModal
+            previewTemplate={template || value}
+            open={openDialog}
+            onClose={this.closePreviewDialog}
+            slipType="Any"
+          />
         }
       </div>
     );
