@@ -60,7 +60,6 @@ class LoanPolicyDetail extends React.Component {
       ...shortTermLoansOptions,
       ...longTermLoansOptions,
     ];
-    debugger;
 
     return _.find(availableLoansOptions, loanOption => loanOption.id === selectedItemId);
   };

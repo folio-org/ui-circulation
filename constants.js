@@ -50,7 +50,7 @@ export const shortTermLoansOptions = [
     value: END_OF_THE_CURRENT_SERVICE_POINT_HOURS,
   },
   {
-    label: 'Move to the beginning of the next open service point hours', 
+    label: 'Move to the beginning of the next open service point hours',
     id: BEGINNING_OF_THE_NEXT_OPEN_SERVICE_POINT_HOURS,
     value: BEGINNING_OF_THE_NEXT_OPEN_SERVICE_POINT_HOURS,
   },
