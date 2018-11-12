@@ -94,8 +94,8 @@ class PatronNotices extends React.Component {
         // TODO: use real permissions once they exist (EntryManager crashes without a permissions object)
         permissions={{
           put: 'settings.organization.enabled',
-          post: 'ui-circulation.settings.patronnotices.post',
-          delete: 'ui-circulation.settings.patronnotices.delete',
+          post: 'settings.organization.enabled',
+          delete: 'settings.organization.enabled',
         }}
       />
     );
