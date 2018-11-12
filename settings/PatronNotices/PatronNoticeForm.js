@@ -20,6 +20,8 @@ import {
 import stripesForm from '@folio/stripes-form';
 
 import PatronNoticeEditor from './PatronNoticeEditor';
+import PreviewModal from './PreviewModal';
+import formats from './formats';
 
 class PatronNoticeForm extends React.Component {
   constructor(props) {
@@ -135,16 +137,16 @@ class PatronNoticeForm extends React.Component {
                 id="email-template"
                 label="Email"
               >
-                { emailTemplate &&
+                {/* { emailTemplate && */}
                   <div>
                     <Row>
                       <Button>Preview</Button>
                     </Row>
                     <Row>
-                      {/* <Field label="Body" name="subject" id="input-email-template-subject" component={PatronNoticeEditor} /> */}
+                      <Field label="Body" name="subject" id="input-email-template-body" component={PatronNoticeEditor} tokens={Object.keys(formats.Any)} />
                     </Row>
                   </div>
-                }
+                {/* } */}
               </Accordion>
               <Accordion
                 id="sms-template"
