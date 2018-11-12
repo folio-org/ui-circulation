@@ -59,7 +59,7 @@ class PatronNotices extends React.Component {
             {
               "lang": "en",
               "header": "email",
-              "body": "<p>This is a {template} test for email.</p>"
+              "body": "<h2>Notice</h2><p>This is a template test for email. Your item is at {{location}} and will be kept until {{hold_expiration}}.</p>"
             },
             {
               "lang": "en",

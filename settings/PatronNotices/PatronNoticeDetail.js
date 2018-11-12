@@ -1,18 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { find } from 'lodash';
+import { find, cloneDeep } from 'lodash';
 
 import {
   Accordion,
   AccordionSet,
   Button,
   Col,
+  Dropdown,
   KeyValue,
   Row
 } from '@folio/stripes/components';
 
-class PatronNoticeDetail extends React.Component {
+import PreviewModal from './PreviewModal';
 
+class PatronNoticeDetail extends React.Component {
   static propTypes = {
     stripes: PropTypes.shape({
       connect: PropTypes.func.isRequired,
@@ -30,14 +32,25 @@ class PatronNoticeDetail extends React.Component {
         'sms-template': true,
         'print-template': true,
       },
+      openDialog: false,
     };
 
+    this.openPreviewDialog = this.openPreviewDialog.bind(this);
+    this.closePreviewDialog = this.closePreviewDialog.bind(this);
     this.onToggleSection = this.onToggleSection.bind(this);
+  }
+
+  openPreviewDialog() {
+    this.setState({ openDialog: true });
+  }
+
+  closePreviewDialog() {
+    this.setState({ openDialog: false });
   }
 
   onToggleSection({ id }) {
     this.setState((curState) => {
-      const newState = _.cloneDeep(curState);
+      const newState = cloneDeep(curState);
       newState.accordions[id] = !curState.accordions[id];
       return newState;
     });
@@ -71,7 +84,7 @@ class PatronNoticeDetail extends React.Component {
             { emailTemplate &&
               <div>
                 <Row>
-                  <Button>Preview</Button>
+                  <Button onClick={this.openPreviewDialog}>Preview</Button>
                 </Row>
                 <Row>
                   <KeyValue label="Subject" value={notice.subject} />
@@ -119,6 +132,14 @@ class PatronNoticeDetail extends React.Component {
             }
           </Accordion>
         </AccordionSet>
+        { this.state.openDialog &&
+          <PreviewModal
+            previewTemplate={emailTemplate.body}
+            open={this.state.openDialog}
+            onClose={this.closePreviewDialog}
+            slipType="Any"
+          />
+        }
       </div>
     );
   }
