@@ -29,17 +29,54 @@ export const loanProfileMap = {
   INDEFINITE: 'Indefinite'
 };
 
+export const CURRENT_DUE_DATE_TIME = 'CURRENT_DUE_DATE_TIME';
+export const END_OF_THE_CURRENT_SERVICE_POINT_HOURS = 'END_OF_THE_CURRENT_SERVICE_POINT_HOURS';
+export const BEGINNING_OF_THE_NEXT_OPEN_SERVICE_POINT_HOURS = 'BEGINNING_OF_THE_NEXT_OPEN_SERVICE_POINT_HOURS';
+
+export const CURRENT_DUE_DATE = 'CURRENT_DUE_DATE';
+export const END_OF_THE_PREVIOUS_OPEN_DAY = 'END_OF_THE_PREVIOUS_OPEN_DAY';
+export const END_OF_THE_NEXT_OPEN_DAY = 'END_OF_THE_NEXT_OPEN_DAY';
+export const END_OF_THE_CURRENT_DAY = 'END_OF_THE_CURRENT_DAY';
+
 export const shortTermLoansOptions = [
-  { label: 'Keep the current due date/time', id: '01', value: '11' },
-  { label: 'Move to the end of the current service point hours', id: '02', value: '02' },
-  { label: 'Move to the beginning of the next open service point hours', id: '03', value: '03' },
+  {
+    label: 'Keep the current due date/time',
+    id: CURRENT_DUE_DATE_TIME,
+    value: CURRENT_DUE_DATE_TIME,
+  },
+  {
+    label: 'Move to the end of the current service point hours',
+    id: END_OF_THE_CURRENT_SERVICE_POINT_HOURS,
+    value: END_OF_THE_CURRENT_SERVICE_POINT_HOURS,
+  },
+  {
+    label: 'Move to the beginning of the next open service point hours', 
+    id: BEGINNING_OF_THE_NEXT_OPEN_SERVICE_POINT_HOURS,
+    value: BEGINNING_OF_THE_NEXT_OPEN_SERVICE_POINT_HOURS,
+  },
 ];
 
 export const longTermLoansOptions = [
-  { label: 'Keep the current due date', id: '11', value: '11' },
-  { label: 'Move to the end of the previous open day', id: '12', value: '12' },
-  { label: 'Move to the end of the next open day', id: '13', value: '13' },
-  { label: 'Move to the end of the current day', id: '14', value: '14' },
+  {
+    label: 'Keep the current due date',
+    id: CURRENT_DUE_DATE,
+    value: CURRENT_DUE_DATE,
+  },
+  {
+    label: 'Move to the end of the previous open day',
+    id: END_OF_THE_PREVIOUS_OPEN_DAY,
+    value: END_OF_THE_PREVIOUS_OPEN_DAY,
+  },
+  {
+    label: 'Move to the end of the next open day',
+    id: END_OF_THE_NEXT_OPEN_DAY,
+    value: END_OF_THE_NEXT_OPEN_DAY,
+  },
+  {
+    label: 'Move to the end of the current day',
+    id: END_OF_THE_CURRENT_DAY,
+    value: END_OF_THE_CURRENT_DAY,
+  },
 ];
 
 export const renewFromOptions = [
