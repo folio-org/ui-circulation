@@ -35,44 +35,6 @@ class PatronNotices extends React.Component {
     },
   });
 
-  constructor(props) {
-    super(props);
-
-    // this.props.resources.entries
-    // temporary list of templates for development
-    // this.entries = {
-    //   isPending: false,
-    //   dataKey: 'patron-notices',
-    //   records: [
-    //     {
-    //       id: '12345',
-    //       name: 'Test 1',
-    //       active: true,
-    //       description: 'Just a test template',
-    //       category: 'Request',
-    //       subject: 'Need some stuff',
-    //       outputFormats: [
-    //         'text/plain',
-    //       ],
-    //       templateResolver: 'mustache',
-    //       localizedTemplates: {
-    //         "email": {
-    //           "body": "<h2>Notice</h2><p>This is a template test for email. Your item is at {{location}} and will be kept until {{hold_expiration}}.</p>"
-    //         },
-    //         "sms":
-    //         {
-    //           "body": "<p>This is a {template} test for sms.</p>"
-    //         },
-    //         "print":
-    //         {
-    //           "body": "<p>This is a {template} test for print.</p>"
-    //         }
-    //       }
-    //     }
-    //   ]
-    // };
-  }
-
   render() {
     console.log("entries", this.props.resources.entries)
     return (
