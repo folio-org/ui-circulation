@@ -58,9 +58,9 @@ class PatronNoticeDetail extends React.Component {
 
   render() {
     const notice = this.props.initialValues;
-    const emailTemplate = find(notice.localizedTemplates, { 'header': 'email' });
-    const smsTemplate = find(notice.localizedTemplates, { 'header': 'sms' });
-    const printTemplate = find(notice.localizedTemplates, { 'header': 'print' });
+    const emailTemplate = notice.localizedTemplates.email;
+    const smsTemplate = notice.localizedTemplates.sms;
+    const printTemplate = notice.localizedTemplates.print;
 
     return (
       <div>
@@ -108,7 +108,7 @@ class PatronNoticeDetail extends React.Component {
                   <KeyValue label="Subject" value={notice.subject} />
                 </Row>
                 <Row>
-                  <KeyValue label="Body" value={smsTemplate.body}  />
+                  <KeyValue label="Body" value={smsTemplate.body} />
                 </Row>
               </div>
             }

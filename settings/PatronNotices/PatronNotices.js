@@ -27,64 +27,64 @@ class PatronNotices extends React.Component {
     }),
   };
 
-  // static manifest = Object.freeze({
-  //   entries: {
-  //     type: 'okapi',
-  //     path: 'templates',
-  //     records: 'templates',
-  //   },
-  // });
+  static manifest = Object.freeze({
+    entries: {
+      type: 'okapi',
+      path: 'templates',
+      records: 'templates',
+    },
+  });
 
   constructor(props) {
     super(props);
 
     // this.props.resources.entries
     // temporary list of templates for development
-    this.entries = {
-      isPending: false,
-      dataKey: 'patron-notices',
-      records: [
-        {
-          id: '12345',
-          name: 'Test 1',
-          active: true,
-          description: 'Just a test template',
-          category: 'Request',
-          subject: 'Need some stuff',
-          outputFormats: [
-            'text/plain',
-          ],
-          templateResolver: 'mustache',
-          localizedTemplates: {
-            "email": {
-              "body": "<h2>Notice</h2><p>This is a template test for email. Your item is at {{location}} and will be kept until {{hold_expiration}}.</p>"
-            },
-            "sms":
-            {
-              "body": "<p>This is a {template} test for sms.</p>"
-            },
-            "print":
-            {
-              "body": "<p>This is a {template} test for print.</p>"
-            }
-          }
-        }
-      ]
-    };
+    // this.entries = {
+    //   isPending: false,
+    //   dataKey: 'patron-notices',
+    //   records: [
+    //     {
+    //       id: '12345',
+    //       name: 'Test 1',
+    //       active: true,
+    //       description: 'Just a test template',
+    //       category: 'Request',
+    //       subject: 'Need some stuff',
+    //       outputFormats: [
+    //         'text/plain',
+    //       ],
+    //       templateResolver: 'mustache',
+    //       localizedTemplates: {
+    //         "email": {
+    //           "body": "<h2>Notice</h2><p>This is a template test for email. Your item is at {{location}} and will be kept until {{hold_expiration}}.</p>"
+    //         },
+    //         "sms":
+    //         {
+    //           "body": "<p>This is a {template} test for sms.</p>"
+    //         },
+    //         "print":
+    //         {
+    //           "body": "<p>This is a {template} test for print.</p>"
+    //         }
+    //       }
+    //     }
+    //   ]
+    // };
   }
 
   render() {
-    console.log("entries", this.entries)
+    console.log("entries", this.props.resources.entries)
     return (
       <EntryManager
         {...this.props}
         parentMutator={this.props.mutator}
-        // entryList={sortBy((this.props.resources.entries || {}).records || [], ['name'])}
-        entryList={sortBy((this.entries || {}).records || [], ['name'])}
+        entryList={sortBy((this.props.resources.entries || {}).records || [], ['name'])}
         detailComponent={PatronNoticeDetail}
         paneTitle={this.props.label}
         entryLabel={this.props.label}
         entryFormComponent={PatronNoticeForm}
+        defaultEntry={{ outputFormats: ['html'], templateResolver: 'mustache' }}
         // validate={this.validate}
         nameKey="name"
         // TODO: use real permissions once they exist (EntryManager crashes without a permissions object)
