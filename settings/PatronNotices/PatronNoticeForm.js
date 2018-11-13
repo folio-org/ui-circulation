@@ -74,7 +74,7 @@ class PatronNoticeForm extends React.Component {
       return (<span>Patron notices | {notice.name}</span>);
     }
 
-    return <span>Patron notices</span>
+    return <span>Patron notices</span>;
   }
 
   renderSaveMenu() {
@@ -99,12 +99,9 @@ class PatronNoticeForm extends React.Component {
   }
 
   render() {
-    const { handleSubmit, initialValues } = this.props;
-    const notice = this.props.initialValues;
-    const emailTemplate = find(notice.localizedTemplates, { 'header': 'email' });
-    const smsTemplate = find(notice.localizedTemplates, { 'header': 'sms' });
-    const printTemplate = find(notice.localizedTemplates, { 'header': 'print' });
-console.log('initialvalues', initialValues)
+    const { handleSubmit } = this.props;
+    const isActive = this.props.initialValues && this.props.initialValues.active;
+
     return (
       <form id="form-patron-notice" onSubmit={handleSubmit(this.save)}>
         <Paneset isRoot>
@@ -114,7 +111,7 @@ console.log('initialvalues', initialValues)
                 <Field label="Name" name="name" id="input-patron-notice-name" component={TextField} />
               </Col>
               <Col xs={3}>
-                <Field label="Active" name="active" id="input-patron-notice-active" component={Checkbox} />
+                <Field label="Active" name="active" id="input-patron-notice-active" component={Checkbox} defaultChecked={isActive} normalize={v => !!v} />
               </Col>
             </Row>
             <Row>
