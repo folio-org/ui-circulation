@@ -55,23 +55,19 @@ class PatronNotices extends React.Component {
             'text/plain',
           ],
           templateResolver: 'mustache',
-          localizedTemplates: [
-            {
-              "lang": "en",
-              "header": "email",
+          localizedTemplates: {
+            "email": {
               "body": "<h2>Notice</h2><p>This is a template test for email. Your item is at {{location}} and will be kept until {{hold_expiration}}.</p>"
             },
+            "sms":
             {
-              "lang": "en",
-              "header": "sms",
               "body": "<p>This is a {template} test for sms.</p>"
             },
+            "print":
             {
-              "lang": "en",
-              "header": "print",
               "body": "<p>This is a {template} test for print.</p>"
             }
-          ]
+          }
         }
       ]
     };

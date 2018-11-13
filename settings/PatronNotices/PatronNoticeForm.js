@@ -104,7 +104,7 @@ class PatronNoticeForm extends React.Component {
     const emailTemplate = find(notice.localizedTemplates, { 'header': 'email' });
     const smsTemplate = find(notice.localizedTemplates, { 'header': 'sms' });
     const printTemplate = find(notice.localizedTemplates, { 'header': 'print' });
-
+console.log('initialvalues', initialValues)
     return (
       <form id="form-patron-notice" onSubmit={handleSubmit(this.save)}>
         <Paneset isRoot>
@@ -138,7 +138,7 @@ class PatronNoticeForm extends React.Component {
                 label="Email"
               >
                 <Row>
-                  <Field label="Body" name="subject" id="input-email-template-body" component={PatronNoticeEditor} tokens={Object.keys(formats.Any)} />
+                  <Field label="Body" name="localizedTemplates.email.body" id="input-email-template-body" component={PatronNoticeEditor} tokens={Object.keys(formats.Any)} />
                 </Row>
               </Accordion>
               <Accordion
@@ -146,7 +146,7 @@ class PatronNoticeForm extends React.Component {
                 label="SMS"
               >
                 <Row>
-                  {/* <Field label="Subject" name="subject" id="input-email-template-subject" component={TextField} /> */}
+                  <Field label="Body" name="localizedTemplates.sms.body" id="input-sms-template-body" component={PatronNoticeEditor} tokens={Object.keys(formats.Any)} />
                 </Row>
               </Accordion>
               <Accordion
@@ -154,7 +154,7 @@ class PatronNoticeForm extends React.Component {
                 label="Print"
               >
                 <Row>
-                  {/* <Field label="Subject" name="subject" id="input-email-template-subject" component={TextField} /> */}
+                  <Field label="Body" name="localizedTemplates.print.body" id="input-print-template-body" component={PatronNoticeEditor} tokens={Object.keys(formats.Any)} />
                 </Row>
               </Accordion>
             </AccordionSet>
