@@ -1,7 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
-import { FormattedMessage, FormattedDate } from 'react-intl';
+
+import {
+  FormattedMessage,
+  FormattedDate,
+} from 'react-intl';
+
 import { Accordion, Col, ExpandAllButton, KeyValue, Row } from '@folio/stripes/components';
 import { stripesShape } from '@folio/stripes/core';
 import { ViewMetaData } from '@folio/stripes/smart-components';

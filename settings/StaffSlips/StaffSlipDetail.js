@@ -48,8 +48,9 @@ class StaffSlipDetail extends React.Component {
     const { openDialog } = this.state;
     const { initialValues: staffSlip } = this.props;
     const contentComponent = this.parser.parseWithInstructions(staffSlip.template, () => true, this.rules);
-    const isActiveValue = staffSlip.active ? <FormattedMessage id="ui-circulation.settings.staffSlips.yes" /> :
-    <FormattedMessage id="ui-circulation.settings.staffSlips.no" />;
+    const isActiveValue = staffSlip.active
+      ? <FormattedMessage id="ui-circulation.settings.staffSlips.yes" />
+      : <FormattedMessage id="ui-circulation.settings.staffSlips.no" />;
 
     return (
       <div>
