@@ -8,10 +8,11 @@ import { ViewMetaData } from '@folio/stripes/smart-components';
 
 import {
   loanProfileTypes,
-  dueDateManagementOptions,
   renewFromOptions,
   loanProfileMap,
   renewFromIds,
+  shortTermLoansOptions,
+  longTermLoansOptions,
 } from '../constants';
 
 class LoanPolicyDetail extends React.Component {
@@ -54,6 +55,15 @@ class LoanPolicyDetail extends React.Component {
     });
   }
 
+  getClosedLibraryDueDateManagementItem = (selectedItemId) => {
+    const availableLoansOptions = [
+      ...shortTermLoansOptions,
+      ...longTermLoansOptions,
+    ];
+
+    return _.find(availableLoansOptions, loanOption => loanOption.id === selectedItemId);
+  };
+
   renderLoans() {
     const {
       intl: { formatMessage },
@@ -77,7 +87,7 @@ class LoanPolicyDetail extends React.Component {
     const profileId = _.get(policy, ['loansPolicy', 'profileId']);
     const profile = _.find(loanProfileTypes, t => t.value === profileId);
     const ddId = _.get(policy, ['loansPolicy', 'closedLibraryDueDateManagementId']);
-    const closedLibraryDueDateManagement = _.find(dueDateManagementOptions, dd => dd.id === parseInt(ddId, 10));
+    const closedLibraryDueDateManagementItem = this.getClosedLibraryDueDateManagementItem(ddId);
     const periodInterval = _.get(policy, ['loansPolicy', 'period', 'intervalId']);
     const exReqPerInterval = _.get(policy, ['loansPolicy', 'existingRequestsPeriod', 'intervalId']);
     const gracePeriodInterval = _.get(policy, ['loansPolicy', 'gracePeriod', 'intervalId']);
@@ -128,7 +138,7 @@ class LoanPolicyDetail extends React.Component {
           <Col xs={12}>
             <KeyValue
               label={formatMessage({ id: 'ui-circulation.settings.loanPolicy.closedDueDateMgmt' })}
-              value={_.get(closedLibraryDueDateManagement, ['label'], '-')}
+              value={_.get(closedLibraryDueDateManagementItem, ['label'], '-')}
             />
           </Col>
         </Row>
