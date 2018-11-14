@@ -61,8 +61,9 @@ class StaffSlipForm extends React.Component {
   saveLastMenu() {
     const { pristine, submitting, initialValues } = this.props;
     const edit = initialValues && initialValues.id;
-    const saveLabel = edit ? <FormattedMessage id="ui-circulation.settings.staffSlips.saveAndClose" /> :
-    <FormattedMessage id="ui-circulation.settings.staffSlips.createStaffSlip" />;
+    const saveLabel = edit
+      ? <FormattedMessage id="ui-circulation.settings.staffSlips.saveAndClose" />
+      : <FormattedMessage id="ui-circulation.settings.staffSlips.createStaffSlip" />;
 
     return (
       <PaneMenu>
@@ -90,7 +91,10 @@ class StaffSlipForm extends React.Component {
         <div>
           <Icon size="small" icon="edit" />
           <span>
-            <FormattedMessage id="ui-circulation.settings.staffSlips.editLabel" values={{ name: staffSlip.name }} />
+            <FormattedMessage
+              id="ui-circulation.settings.staffSlips.editLabel"
+              values={{ name: staffSlip.name }}
+            />
           </span>
         </div>
       );

@@ -124,8 +124,9 @@ class FixedDueDateScheduleForm extends React.Component {
 
     const { confirmDelete } = this.state;
     const edit = initialValues && initialValues.id;
-    const saveLabel = edit ? <FormattedMessage id="ui-circulation.settings.fDDSform.saveSchedule" /> :
-    <FormattedMessage id="ui-circulation.settings.fDDSform.createSchedule" />;
+    const saveLabel = edit
+      ? <FormattedMessage id="ui-circulation.settings.fDDSform.saveSchedule" />
+      : <FormattedMessage id="ui-circulation.settings.fDDSform.createSchedule" />;
 
     return (
       <PaneMenu>
@@ -164,7 +165,10 @@ class FixedDueDateScheduleForm extends React.Component {
         <div>
           <Icon size="small" icon="edit" />
           <span>
-            <FormattedMessage id="ui-circulation.settings.fDDS.editLabel" values={{ name: selectedSet.name }} />
+            <FormattedMessage
+              id="ui-circulation.settings.fDDS.editLabel"
+              values={{ name: selectedSet.name }}
+            />
           </span>
         </div>
       );

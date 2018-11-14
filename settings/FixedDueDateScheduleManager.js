@@ -93,7 +93,10 @@ class FixedDueDateScheduleManager extends React.Component {
             const condA = (s1.from && s2.to) ? moment(s1.from).isBefore(s2.to) : false;
             const condB = (s1.to && s2.from) ? moment(s1.to).isAfter(s2.from) : false;
             if (condA && condB) {
-              const overlappingDateRangeMessage = <FormattedMessage id="ui-circulation.settings.fDDS.validate.overlappingDateRange" values={{ num1: i + 1, num2: j + 1 }} />;
+              const overlappingDateRangeMessage = <FormattedMessage
+                id="ui-circulation.settings.fDDS.validate.overlappingDateRange"
+                values={{ num1: i + 1, num2: j + 1 }}
+              />;
               errors.schedules = { _error: overlappingDateRangeMessage };
             }
           }

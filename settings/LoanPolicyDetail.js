@@ -190,12 +190,12 @@ class LoanPolicyDetail extends React.Component {
 
   renderRenewals() {
     const { initialValues: policy = {} } = this.props;
-    const unlimited = (_.get(policy, ['renewalsPolicy', 'unlimited'])) ?
-      <FormattedMessage id="ui-circulation.settings.loanPolicy.yes" /> :
-      <FormattedMessage id="ui-circulation.settings.loanPolicy.no" />;
-    const differentPeriod = (_.get(policy, ['renewalsPolicy', 'differentPeriod'])) ?
-      <FormattedMessage id="ui-circulation.settings.loanPolicy.yes" /> :
-      <FormattedMessage id="ui-circulation.settings.loanPolicy.no" />;
+    const unlimited = (_.get(policy, ['renewalsPolicy', 'unlimited']))
+      ? <FormattedMessage id="ui-circulation.settings.loanPolicy.yes" />
+      : <FormattedMessage id="ui-circulation.settings.loanPolicy.no" />;
+    const differentPeriod = (_.get(policy, ['renewalsPolicy', 'differentPeriod']))
+      ? <FormattedMessage id="ui-circulation.settings.loanPolicy.yes" />
+      : <FormattedMessage id="ui-circulation.settings.loanPolicy.no" />;
     const renewFromId = _.get(policy, ['renewalsPolicy', 'renewFromId'], renewFromIds.SYSTEM_DATE);
     const renewFrom = _.find(renewFromOptions, r => r.value === renewFromId);
     const interval = _.get(policy, ['renewalsPolicy', 'period', 'intervalId']);
