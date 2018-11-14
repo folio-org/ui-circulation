@@ -106,7 +106,10 @@ class StaffSlipEditor extends Component {
               <Col xs={3}>
                 <Row className={css.preview}>
                   <Col>
-                    <Button bottomMargin0 onClick={this.openPreviewDialog}>
+                    <Button
+                      bottomMargin0
+                      onClick={this.openPreviewDialog}
+                    >
                       <FormattedMessage id="ui-circulation.settings.staffSlips.preview" />
                     </Button>
                   </Col>
