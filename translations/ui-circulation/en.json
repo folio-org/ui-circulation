@@ -17,6 +17,7 @@
   "settings.loanPolicy.loanProfile": "Loan profile",
   "settings.loanPolicy.fDDS": "Fixed due date schedule",
   "settings.loanPolicy.fDDSlimit": "Fixed due date schedule (due date limit)",
+  "settings.loanPolicy.fDDSRequired": "Fixed due date schedule *",
   "settings.loanPolicy.closedDueDateMgmt": "Closed library due date management",
   "settings.loanPolicy.altFDDSforRenewals": "Alternate fixed due date schedule for renewals",
   "settings.loanPolicy.altFDDSDueDateLimit": "Alternate fixed due date schedule (due date limit) for renewals",
@@ -36,8 +37,12 @@
   "settings.loanPolicy.selectInterval": "Select interval",
   "settings.loanPolicy.selectSchedule": "Select schedule",
   "settings.loanPolicy.generalInformation": "General information",
+  "settings.loanPolicy.yes": "Yes",
+  "settings.loanPolicy.no": "No",
 
   "settings.loanRules.paneTitle": "Loan Rules Editor",
+  "settings.loanRules.rulesUpdated": "Rules were successfully updated.",
+  "settings.loanRules.newRule": "New Rule (#)",
 
   "settings.validate.fillIn": "Please fill this in to continue",
 
@@ -51,6 +56,7 @@
   "settings.fDDS.successfulDelete": "The fixed due date schedule {name} was successfully {deleted}.",
   "settings.fDDS.successfulDeleteVerb": "deleted",
   "settings.fDDS.edit": "Edit",
+  "settings.fDDS.editLabel": "Edit: {name}",
   "settings.fDDSform.delete": "Delete",
   "settings.fDDSform.deleteMessage": "The fixed due date schedule {name} will be {deleted}.",
   "settings.fDDSform.deleteHeader": "Delete fixed due date schedule?",
@@ -89,6 +95,7 @@
   "settings.checkout.timeout": "Automatically end checkout session after period of inactivity",
   "settings.checkout.minutes": "minutes",
   "settings.checkout.validate.timeoutDuration": "Please enter a whole number greater than zero to continue",
+  "settings.checkout.filterRules": "filter rules",
 
   "settings.staffSlips.label": "Staff slips",
   "settings.staffSlips.name": "Name",
@@ -102,11 +109,14 @@
   "settings.staffSlips.delete": "Delete",
   "settings.staffSlips.preview": "Preview",
   "settings.staffSlips.active": "Active",
+  "settings.staffSlips.hold": "Hold",
   "settings.staffSlips.untitledStaffSlip": "Staff slip name",
   "settings.staffSlips.deleteStaffSlipMessage": "The staff slip <strong>{name}</strong> will be <strong>deleted</strong>.",
   "settings.staffSlips.validation.required": "Please fill this in to continue",
   "settings.staffSlips.close": "Close",
+  "settings.staffSlips.print": "Print",
   "settings.staffSlips.previewLabel": "Preview of staff slip - Hold",
+  "settings.staffSlips.editLabel": "Edit: Staff slips - {name}",
   "settings.staffSlips.yes": "Yes",
   "settings.staffSlips.no": "No"
 }

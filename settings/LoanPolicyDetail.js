@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { stripesShape } from '@folio/stripes/core';
 import { Accordion, Col, ExpandAllButton, KeyValue, Row } from '@folio/stripes/components';
 import { ViewMetaData } from '@folio/stripes/smart-components';
@@ -18,7 +18,6 @@ import {
 class LoanPolicyDetail extends React.Component {
   static propTypes = {
     initialValues: PropTypes.object,
-    intl: intlShape.isRequired,
     stripes: stripesShape.isRequired,
     parentResources: PropTypes.shape({
       fixedDueDateSchedules: PropTypes.object,
@@ -66,7 +65,6 @@ class LoanPolicyDetail extends React.Component {
 
   renderLoans() {
     const {
-      intl: { formatMessage },
       initialValues,
       parentResources,
     } = this.props;
@@ -74,9 +72,9 @@ class LoanPolicyDetail extends React.Component {
     const policy = initialValues || {};
     const fixedDueDateSchedules = ((parentResources || {}).fixedDueDateSchedules || {}).records || [];
 
-    let dueDateScheduleFieldLabel = formatMessage({ id: 'ui-circulation.settings.loanPolicy.fDDS' });
+    let dueDateScheduleFieldLabel = <FormattedMessage id="ui-circulation.settings.loanPolicy.fDDS" />;
     if (policy.loansPolicy && policy.loansPolicy.profileId === loanProfileMap.ROLLING) {
-      dueDateScheduleFieldLabel = formatMessage({ id: 'ui-circulation.settings.loanPolicy.fDDSlimit' });
+      dueDateScheduleFieldLabel = <FormattedMessage id="ui-circulation.settings.loanPolicy.fDDSlimit" />;
     }
 
     let schedule = {};
@@ -105,7 +103,7 @@ class LoanPolicyDetail extends React.Component {
         <Row>
           <Col xs={12}>
             <KeyValue
-              label={formatMessage({ id: 'ui-circulation.settings.loanPolicy.loanProfile' })}
+              label={<FormattedMessage id="ui-circulation.settings.loanPolicy.loanProfile" />}
               value={_.get(profile, ['label'], '-')}
             />
           </Col>
@@ -116,7 +114,7 @@ class LoanPolicyDetail extends React.Component {
             <Row>
               <Col xs={12}>
                 <KeyValue
-                  label={formatMessage({ id: 'ui-circulation.settings.loanPolicy.loanPeriod' })}
+                  label={<FormattedMessage id="ui-circulation.settings.loanPolicy.loanPeriod" />}
                   value={`${_.get(policy, ['loansPolicy', 'period', 'duration'], '')} ${periodInterval}`}
                 />
               </Col>
@@ -137,7 +135,7 @@ class LoanPolicyDetail extends React.Component {
         <Row>
           <Col xs={12}>
             <KeyValue
-              label={formatMessage({ id: 'ui-circulation.settings.loanPolicy.closedDueDateMgmt' })}
+              label={<FormattedMessage id="ui-circulation.settings.loanPolicy.closedDueDateMgmt" />}
               value={_.get(closedLibraryDueDateManagementItem, ['label'], '-')}
             />
           </Col>
@@ -146,7 +144,7 @@ class LoanPolicyDetail extends React.Component {
         <Row>
           <Col xs={12}>
             <KeyValue
-              label={formatMessage({ id: 'ui-circulation.settings.loanPolicy.alternateLoanPeriodExisting' })}
+              label={<FormattedMessage id="ui-circulation.settings.loanPolicy.alternateLoanPeriodExisting" />}
               value={`${_.get(policy, ['loansPolicy', 'existingRequestsPeriod', 'duration'], '')} ${exReqPerInterval}`}
             />
           </Col>
@@ -155,7 +153,7 @@ class LoanPolicyDetail extends React.Component {
         <Row>
           <Col xs={12}>
             <KeyValue
-              label={formatMessage({ id: 'ui-circulation.settings.loanPolicy.gracePeriod' })}
+              label={<FormattedMessage id="ui-circulation.settings.loanPolicy.gracePeriod" />}
               value={`${_.get(policy, ['loansPolicy', 'gracePeriod', 'duration'], '')} ${gracePeriodInterval}`}
             />
           </Col>
@@ -165,8 +163,9 @@ class LoanPolicyDetail extends React.Component {
   }
 
   renderAbout() {
-    const policy = (this.props.initialValues || {});
-    const { formatMessage } = this.props.intl;
+    const {
+      initialValues: policy = {},
+    } = this.props;
 
     return (
       <div>
@@ -181,7 +180,7 @@ class LoanPolicyDetail extends React.Component {
         <Row>
           <Col xs={12}>
             <KeyValue
-              label={formatMessage({ id: 'ui-circulation.settings.loanPolicy.policyName' })}
+              label={<FormattedMessage id="ui-circulation.settings.loanPolicy.policyName" />}
               value={_.get(policy, ['name'], '')}
             />
           </Col>
@@ -190,7 +189,7 @@ class LoanPolicyDetail extends React.Component {
         <Row>
           <Col xs={12}>
             <KeyValue
-              label={formatMessage({ id: 'ui-circulation.settings.loanPolicy.policyDescription' })}
+              label={<FormattedMessage id="ui-circulation.settings.loanPolicy.policyDescription" />}
               value={_.get(policy, ['description'], '-')}
             />
           </Col>
@@ -200,10 +199,13 @@ class LoanPolicyDetail extends React.Component {
   }
 
   renderRenewals() {
-    const { formatMessage } = this.props.intl;
-    const policy = this.props.initialValues || {};
-    const unlimited = (_.get(policy, ['renewalsPolicy', 'unlimited'])) ? 'Yes' : 'No';
-    const differentPeriod = (_.get(policy, ['renewalsPolicy', 'differentPeriod'])) ? 'Yes' : 'No';
+    const { initialValues: policy = {} } = this.props;
+    const unlimited = (_.get(policy, ['renewalsPolicy', 'unlimited']))
+      ? <FormattedMessage id="ui-circulation.settings.loanPolicy.yes" />
+      : <FormattedMessage id="ui-circulation.settings.loanPolicy.no" />;
+    const differentPeriod = (_.get(policy, ['renewalsPolicy', 'differentPeriod']))
+      ? <FormattedMessage id="ui-circulation.settings.loanPolicy.yes" />
+      : <FormattedMessage id="ui-circulation.settings.loanPolicy.no" />;
     const renewFromId = _.get(policy, ['renewalsPolicy', 'renewFromId'], renewFromIds.SYSTEM_DATE);
     const renewFrom = _.find(renewFromOptions, r => r.value === renewFromId);
     const interval = _.get(policy, ['renewalsPolicy', 'period', 'intervalId']);
@@ -220,7 +222,7 @@ class LoanPolicyDetail extends React.Component {
         <Row>
           <Col xs={12}>
             <KeyValue
-              label={formatMessage({ id: 'ui-circulation.settings.loanPolicy.unlimitedRenewals' })}
+              label={<FormattedMessage id="ui-circulation.settings.loanPolicy.unlimitedRenewals" />}
               value={unlimited}
             />
           </Col>
@@ -231,7 +233,7 @@ class LoanPolicyDetail extends React.Component {
             <Row>
               <Col xs={12}>
                 <KeyValue
-                  label={formatMessage({ id: 'ui-circulation.settings.loanPolicy.numRenewalsAllowed' })}
+                  label={<FormattedMessage id="ui-circulation.settings.loanPolicy.numRenewalsAllowed" />}
                   value={_.get(policy, ['renewalsPolicy', 'numberAllowed'], 0)}
                 />
               </Col>
@@ -242,7 +244,7 @@ class LoanPolicyDetail extends React.Component {
         <Row>
           <Col xs={12}>
             <KeyValue
-              label={formatMessage({ id: 'ui-circulation.settings.loanPolicy.renewFrom' })}
+              label={<FormattedMessage id="ui-circulation.settings.loanPolicy.renewFrom" />}
               value={_.get(renewFrom, ['label'], '-')}
             />
           </Col>
@@ -251,7 +253,7 @@ class LoanPolicyDetail extends React.Component {
         <Row>
           <Col xs={12}>
             <KeyValue
-              label={formatMessage({ id: 'ui-circulation.settings.loanPolicy.renewalPeriodDifferent' })}
+              label={<FormattedMessage id="ui-circulation.settings.loanPolicy.renewalPeriodDifferent" />}
               value={differentPeriod}
             />
           </Col>
@@ -262,7 +264,7 @@ class LoanPolicyDetail extends React.Component {
             <Row>
               <Col xs={12}>
                 <KeyValue
-                  label={formatMessage({ id: 'ui-circulation.settings.loanPolicy.alternateLoanPeriodRenewals' })}
+                  label={<FormattedMessage id="ui-circulation.settings.loanPolicy.alternateLoanPeriodRenewals" />}
                   value={`${_.get(policy, ['renewalsPolicy', 'period', 'duration'])} ${interval}`}
                 />
               </Col>
@@ -274,8 +276,7 @@ class LoanPolicyDetail extends React.Component {
   }
 
   render() {
-    const policy = this.props.initialValues || {};
-    const { formatMessage } = this.props.intl;
+    const { initialValues: policy = {} } = this.props;
     const { sections } = this.state;
 
     return (
@@ -289,7 +290,7 @@ class LoanPolicyDetail extends React.Component {
           open={sections.generalInformation}
           id="generalInformation"
           onToggle={this.handleSectionToggle}
-          label={formatMessage({ id: 'ui-circulation.settings.loanPolicy.generalInformation' })}
+          label={<FormattedMessage id="ui-circulation.settings.loanPolicy.generalInformation" />}
         >
           {policy.metadata && policy.metadata.createdDate &&
             <Row>
@@ -311,4 +312,4 @@ class LoanPolicyDetail extends React.Component {
   }
 }
 
-export default injectIntl(LoanPolicyDetail);
+export default LoanPolicyDetail;
