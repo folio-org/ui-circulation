@@ -1,10 +1,6 @@
 import React from 'react';
 
-import {
-  FormattedMessage,
-  intlShape,
-  injectIntl,
-} from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
 import { Settings } from '@folio/stripes/smart-components';
 
@@ -16,16 +12,8 @@ import FixedDueDateScheduleManager from './FixedDueDateScheduleManager';
 import StaffSlips from './StaffSlips';
 
 class Circulation extends React.Component {
-  static propTypes = {
-    intl: intlShape.isRequired,
-  };
-
   constructor(props) {
     super(props);
-
-    const {
-      intl: { formatMessage },
-    } = this.props;
 
     this.pages = [
       {
@@ -53,7 +41,7 @@ class Circulation extends React.Component {
       },
       {
         route: 'staffslips',
-        label: formatMessage({ id: 'ui-circulation.settings.index.staffSlips' }),
+        label: <FormattedMessage id="ui-circulation.settings.index.staffSlips" />,
         component: StaffSlips,
       },
       {
@@ -76,4 +64,4 @@ class Circulation extends React.Component {
   }
 }
 
-export default injectIntl(Circulation);
+export default Circulation;

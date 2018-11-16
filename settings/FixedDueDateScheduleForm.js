@@ -103,14 +103,17 @@ class FixedDueDateScheduleForm extends React.Component {
 
     return (
       <PaneMenu>
-        <IconButton
-          onClick={onCancel}
-          icon="closeX"
-          size="medium"
-          iconClassName="closeIcon"
-          title={<FormattedMessage id="ui-circulation.settings.fDDSform.close" />}
-          aria-label={<FormattedMessage id="ui-circulation.settings.fDDSform.closeLabel" />}
-        />
+        <FormattedMessage id="ui-circulation.settings.fDDSform.closeLabel">
+          {ariaLabel => (
+            <IconButton
+              onClick={onCancel}
+              icon="closeX"
+              size="medium"
+              iconClassName="closeIcon"
+              aria-label={ariaLabel}
+            />
+          )}
+        </FormattedMessage>
       </PaneMenu>
     );
   }
@@ -134,7 +137,6 @@ class FixedDueDateScheduleForm extends React.Component {
           <IfPermission perm="ui-circulation.settings.loan-rules">
             <Button
               id="clickable-delete-item"
-              title={<FormattedMessage id="ui-circulation.settings.fDDSform.delete" />}
               buttonStyle="danger"
               onClick={this.beginDelete}
               disabled={confirmDelete}
@@ -146,7 +148,6 @@ class FixedDueDateScheduleForm extends React.Component {
         <Button
           id="clickable-save-fixedDueDateSchedule"
           type="submit"
-          title={saveLabel}
           disabled={(pristine || submitting)}
         >
           {saveLabel}
@@ -223,14 +224,18 @@ class FixedDueDateScheduleForm extends React.Component {
                 </Col>
                 <Col xs={12} sm={1}>
                   <div style={{ position: 'relative', width: '100%', height: '100%' }}>
-                    <Button
-                      buttonStyle="transparent slim"
-                      style={{ position: 'absolute', bottom: '0' }}
-                      title={<FormattedMessage id="ui-circulation.settings.fDDSform.remove" />}
-                      onClick={() => { f.remove(index); }}
-                    >
-                      <Icon icon="trashBin" />
-                    </Button>
+                    <FormattedMessage id="ui-circulation.settings.fDDSform.remove">
+                      {ariaLabel => (
+                        <Button
+                          buttonStyle="transparent slim"
+                          style={{ position: 'absolute', bottom: '0' }}
+                          ariaLabel={ariaLabel}
+                          onClick={() => { f.remove(index); }}
+                        >
+                          <Icon icon="trashBin" />
+                        </Button>
+                      )}
+                    </FormattedMessage>
                   </div>
                 </Col>
               </Row>

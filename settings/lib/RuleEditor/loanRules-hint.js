@@ -42,7 +42,7 @@ export default function loanRulesHint(cm, props) {
       }
       result.push({
         text: newRuleText,
-        displayText: props.intl.formatMessage({ id: 'ui-circulation.settings.loanRules.newRule' }),
+        displayText: <FormattedMessage id="ui-circulation.settings.loanRules.newRule" />,
         className: 'loan-rule-hint-major',
         completeOnSingleClick: true,
       });

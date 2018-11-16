@@ -3,11 +3,7 @@ import PropTypes from 'prop-types';
 import { Field, getFormValues } from 'redux-form';
 import _ from 'lodash';
 
-import {
-  FormattedMessage,
-  intlShape,
-  injectIntl,
-} from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
 import { stripesShape } from '@folio/stripes/core';
 import {
@@ -39,7 +35,6 @@ class LoanPolicyForm extends React.Component {
       fixedDueDateSchedules: PropTypes.object,
     }).isRequired,
     change: PropTypes.func.isRequired,
-    intl: intlShape.isRequired,
   };
 
   constructor(props) {
@@ -149,14 +144,12 @@ class LoanPolicyForm extends React.Component {
     const policy = this.getCurrentValues();
     const { sections } = this.state;
     const {
-      intl: { formatMessage },
       parentResources,
     } = this.props;
 
     // Conditional field labels
     let dueDateScheduleFieldLabel = <FormattedMessage id="ui-circulation.settings.loanPolicy.fDDS" />;
     let altRenewalScheduleLabel = <FormattedMessage id="ui-circulation.settings.loanPolicy.altFDDSforRenewals" />;
-
     if (policy.loansPolicy && policy.loansPolicy.profileId === loanProfileMap.ROLLING) {
       dueDateScheduleFieldLabel = <FormattedMessage id="ui-circulation.settings.loanPolicy.fDDSlimit" />;
       altRenewalScheduleLabel = <FormattedMessage id="ui-circulation.settings.loanPolicy.altFDDSDueDateLimit" />;
@@ -247,16 +240,20 @@ class LoanPolicyForm extends React.Component {
                   <Field label="" name="loansPolicy.period.duration" id="input_loan_period" component={TextField} validate={this.validateField} />
                 </Col>
                 <Col>
-                  <Field
-                    label=""
-                    name="loansPolicy.period.intervalId"
-                    id="select_policy_period"
-                    component={Select}
-                    placeholder={formatMessage({ id: 'ui-circulation.settings.loanPolicy.selectInterval' })}
-                    validate={this.validateField}
-                  >
-                    {this.getOptions(intervalPeriods)}
-                  </Field>
+                  <FormattedMessage id="ui-circulation.settings.loanPolicy.selectInterval">
+                    {placeholder => (
+                      <Field
+                        label=""
+                        name="loansPolicy.period.intervalId"
+                        id="select_policy_period"
+                        component={Select}
+                        placeholder={placeholder}
+                        validate={this.validateField}
+                      >
+                        {this.getOptions(intervalPeriods)}
+                      </Field>
+                    )}
+                  </FormattedMessage>
                 </Col>
               </Row>
             </div>
@@ -304,15 +301,19 @@ class LoanPolicyForm extends React.Component {
                   />
                 </Col>
                 <Col>
-                  <Field
-                    label=""
-                    name="loansPolicy.existingRequestsPeriod.intervalId"
-                    component={Select}
-                    placeholder={formatMessage({ id: 'ui-circulation.settings.loanPolicy.selectInterval' })}
-                    validate={this.validateField}
-                  >
-                    {this.getOptions(intervalPeriods.slice(0, 3))}
-                  </Field>
+                  <FormattedMessage id="ui-circulation.settings.loanPolicy.selectInterval">
+                    {placeholder => (
+                      <Field
+                        label=""
+                        name="loansPolicy.existingRequestsPeriod.intervalId"
+                        component={Select}
+                        placeholder={placeholder}
+                        validate={this.validateField}
+                      >
+                        {this.getOptions(intervalPeriods.slice(0, 3))}
+                      </Field>
+                    )}
+                  </FormattedMessage>
                 </Col>
               </Row>
             </div>
@@ -333,15 +334,19 @@ class LoanPolicyForm extends React.Component {
                   />
                 </Col>
                 <Col>
-                  <Field
-                    label=""
-                    name="loansPolicy.gracePeriod.intervalId"
-                    component={Select}
-                    placeholder={formatMessage({ id: 'ui-circulation.settings.loanPolicy.selectInterval' })}
-                    validate={this.validateField}
-                  >
-                    {this.getOptions(intervalPeriods)}
-                  </Field>
+                  <FormattedMessage id="ui-circulation.settings.loanPolicy.selectInterval">
+                    {placeholder => (
+                      <Field
+                        label=""
+                        name="loansPolicy.gracePeriod.intervalId"
+                        component={Select}
+                        placeholder={placeholder}
+                        validate={this.validateField}
+                      >
+                        {this.getOptions(intervalPeriods)}
+                      </Field>
+                    )}
+                  </FormattedMessage>
                 </Col>
               </Row>
             </div>
@@ -440,15 +445,19 @@ class LoanPolicyForm extends React.Component {
                       />
                     </Col>
                     <Col>
-                      <Field
-                        label=""
-                        name="renewalsPolicy.period.intervalId"
-                        component={Select}
-                        placeholder={formatMessage({ id: 'ui-circulation.settings.loanPolicy.selectInterval' })}
-                        validate={this.validateField}
-                      >
-                        {this.getOptions(intervalPeriods)}
-                      </Field>
+                      <FormattedMessage id="ui-circulation.settings.loanPolicy.selectInterval">
+                        {placeholder => (
+                          <Field
+                            label=""
+                            name="renewalsPolicy.period.intervalId"
+                            component={Select}
+                            placeholder={placeholder}
+                            validate={this.validateField}
+                          >
+                            {this.getOptions(intervalPeriods)}
+                          </Field>
+                        )}
+                      </FormattedMessage>
                     </Col>
                   </Row>
                 </div>
@@ -478,4 +487,4 @@ class LoanPolicyForm extends React.Component {
   }
 }
 
-export default injectIntl(LoanPolicyForm);
+export default LoanPolicyForm;

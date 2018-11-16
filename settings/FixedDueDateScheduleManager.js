@@ -2,13 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 import moment from 'moment';
-
-import {
-  FormattedMessage,
-  intlShape,
-  injectIntl,
-} from 'react-intl';
-
+import { FormattedMessage } from 'react-intl';
 
 import { EntryManager } from '@folio/stripes/smart-components';
 import FixedDueDateScheduleDetail from './FixedDueDateScheduleDetail';
@@ -41,7 +35,6 @@ class FixedDueDateScheduleManager extends React.Component {
         GET: PropTypes.func,
       }),
     }).isRequired,
-    intl: intlShape.isRequired,
   };
 
   constructor(props) {
@@ -145,7 +138,6 @@ class FixedDueDateScheduleManager extends React.Component {
     const {
       resources,
       mutator,
-      intl: { formatMessage },
     } = this.props;
 
     return (
@@ -157,7 +149,7 @@ class FixedDueDateScheduleManager extends React.Component {
         detailComponent={FixedDueDateScheduleDetail}
         entryFormComponent={FixedDueDateScheduleForm}
         paneTitle={<FormattedMessage id="ui-circulation.settings.fDDS.paneTitle" />}
-        entryLabel={formatMessage({ id: 'ui-circulation.settings.fDDSform.entryLabel' })}
+        entryLabel={<FormattedMessage id="ui-circulation.settings.fDDSform.entryLabel" />}
         nameKey="name"
         permissions={{
           put: 'ui-circulation.settings.loan-rules',
@@ -173,4 +165,4 @@ class FixedDueDateScheduleManager extends React.Component {
   }
 }
 
-export default injectIntl(FixedDueDateScheduleManager);
+export default FixedDueDateScheduleManager;

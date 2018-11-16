@@ -6,22 +6,13 @@ import {
   TextField
 } from '@folio/stripes/components';
 import { Field } from 'redux-form';
-
-import {
-  FormattedMessage,
-  intlShape,
-  injectIntl,
-} from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
 import stripesForm from '@folio/stripes/form';
 
 import LoanRulesField from './LoanRulesField';
 
 class LoanRulesForm extends React.Component {
-  static propTypes = {
-    intl: intlShape.isRequired,
-  };
-
   constructor(props) {
     super(props);
 
@@ -44,7 +35,6 @@ class LoanRulesForm extends React.Component {
       handleSubmit,
       submitting,
       editorProps,
-      intl: { formatMessage },
     } = this.props;
 
     const containerStyle = {
@@ -57,12 +47,16 @@ class LoanRulesForm extends React.Component {
       <form id="form-loan-rules" style={containerStyle} onSubmit={handleSubmit}>
         <Row end="xs">
           <Col xs={3}>
-            <TextField
-              value={this.state.ruleFilter}
-              onChange={this.filterRules}
-              validationEnabled={false}
-              placeholder={formatMessage({ id: 'ui-circulation.settings.checkout.filterRules' })}
-            />
+            <FormattedMessage id="ui-circulation.settings.checkout.filterRules">
+              {placeholder => (
+                <TextField
+                  value={this.state.ruleFilter}
+                  onChange={this.filterRules}
+                  validationEnabled={false}
+                  placeholder={placeholder}
+                />
+              )}
+            </FormattedMessage>
           </Col>
           <Col xs={3}>
             <Button
@@ -89,4 +83,4 @@ export default stripesForm({
   form: 'loanRulesForm',
   navigationCheck: true,
   enableReinitialize: true,
-})(injectIntl(LoanRulesForm));
+})(LoanRulesForm);

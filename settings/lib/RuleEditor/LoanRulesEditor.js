@@ -6,7 +6,6 @@ import isEqual from 'lodash/isEqual';
 import PropTypes from 'prop-types';
 import Codemirror from 'codemirror';
 import CodeMirror from 'react-codemirror2';
-import { intlShape, injectIntl } from 'react-intl';
 
 import initLoanRulesCMM from './LoanRulesCMM';
 import 'codemirror/addon/fold/foldcode';
@@ -64,7 +63,6 @@ const propTypes = {
       })),
   showAssist: PropTypes.bool,
   filter: PropTypes.string,
-  intl: intlShape.isRequired,
 };
 
 const defaultProps = {
@@ -424,4 +422,4 @@ class LoanRulesEditor extends React.Component {
 LoanRulesEditor.propTypes = propTypes;
 LoanRulesEditor.defaultProps = defaultProps;
 
-export default injectIntl(LoanRulesEditor);
+export default LoanRulesEditor;
