@@ -205,6 +205,9 @@ class FixedDueDateScheduleForm extends React.Component {
                   <Field
                     label={<FormattedMessage id="ui-circulation.settings.fDDSform.dateFrom" />}
                     name={`${schedule}.from`}
+                    dateFormat="YYYY-MM-DD"
+                    timeZone="UTC"
+                    backendDateStandard="YYYY-MM-DD"
                     component={Datepicker}
                   />
                 </Col>
@@ -212,12 +215,18 @@ class FixedDueDateScheduleForm extends React.Component {
                   <Field
                     label={<FormattedMessage id="ui-circulation.settings.fDDSform.dateTo" />}
                     name={`${schedule}.to`}
+                    dateFormat="YYYY-MM-DD"
+                    timeZone="UTC"
+                    backendDateStandard="YYYY-MM-DD"
                     component={Datepicker}
                   />
                 </Col>
                 <Col xs={12} sm={3}>
                   <Field
                     label={<FormattedMessage id="ui-circulation.settings.fDDSform.dueDate" />}
+                    dateFormat="YYYY-MM-DD"
+                    timeZone="UTC"
+                    backendDateStandard="YYYY-MM-DD"
                     name={`${schedule}.due`}
                     component={Datepicker}
                   />
