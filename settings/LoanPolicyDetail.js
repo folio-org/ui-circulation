@@ -1,9 +1,20 @@
-import _ from 'lodash';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
+import {
+  get,
+  find,
+  cloneDeep,
+} from 'lodash';
+
 import { stripesShape } from '@folio/stripes/core';
-import { Accordion, Col, ExpandAllButton, KeyValue, Row } from '@folio/stripes/components';
+import {
+  Accordion,
+  ExpandAllButton,
+  KeyValue,
+  Col,
+  Row,
+} from '@folio/stripes/components';
 import { ViewMetaData } from '@folio/stripes/smart-components';
 
 import {
@@ -40,7 +51,7 @@ class LoanPolicyDetail extends React.Component {
 
   handleExpandAll(sections) {
     this.setState((curState) => {
-      const newState = _.cloneDeep(curState);
+      const newState = cloneDeep(curState);
       newState.sections = sections;
       return newState;
     });
@@ -48,7 +59,7 @@ class LoanPolicyDetail extends React.Component {
 
   handleSectionToggle({ id }) {
     this.setState((curState) => {
-      const newState = _.cloneDeep(curState);
+      const newState = cloneDeep(curState);
       newState.sections[id] = !newState.sections[id];
       return newState;
     });
@@ -60,7 +71,7 @@ class LoanPolicyDetail extends React.Component {
       ...longTermLoansOptions,
     ];
 
-    return _.find(availableLoansOptions, loanOption => loanOption.id === selectedItemId);
+    return find(availableLoansOptions, loanOption => loanOption.id === selectedItemId);
   };
 
   renderLoans() {
@@ -82,13 +93,14 @@ class LoanPolicyDetail extends React.Component {
       schedule = fixedDueDateSchedules.find(s => s.id === policy.loansPolicy.fixedDueDateScheduleId);
     }
 
-    const profileId = _.get(policy, ['loansPolicy', 'profileId']);
-    const profile = _.find(loanProfileTypes, t => t.value === profileId);
-    const ddId = _.get(policy, ['loansPolicy', 'closedLibraryDueDateManagementId']);
+    const profileId = get(policy, ['loansPolicy', 'profileId']);
+    const profile = find(loanProfileTypes, t => t.value === profileId);
+    const ddId = get(policy, ['loansPolicy', 'closedLibraryDueDateManagementId']);
     const closedLibraryDueDateManagementItem = this.getClosedLibraryDueDateManagementItem(ddId);
-    const periodInterval = _.get(policy, ['loansPolicy', 'period', 'intervalId']);
-    const exReqPerInterval = _.get(policy, ['loansPolicy', 'existingRequestsPeriod', 'intervalId']);
-    const gracePeriodInterval = _.get(policy, ['loansPolicy', 'gracePeriod', 'intervalId']);
+    const periodInterval = get(policy, ['loansPolicy', 'period', 'intervalId']);
+    const exReqPerInterval = get(policy, ['loansPolicy', 'existingRequestsPeriod', 'intervalId']);
+    const gracePeriodInterval = get(policy, ['loansPolicy', 'gracePeriod', 'intervalId']);
+    const timeOffsetInterval = get(policy, ['loansPolicy', 'openingTimeOffset', 'intervalId']);
 
     return (
       <div>
@@ -104,7 +116,7 @@ class LoanPolicyDetail extends React.Component {
           <Col xs={12}>
             <KeyValue
               label={<FormattedMessage id="ui-circulation.settings.loanPolicy.loanProfile" />}
-              value={_.get(profile, ['label'], '-')}
+              value={get(profile, ['label'], '-')}
             />
           </Col>
         </Row>
@@ -115,7 +127,7 @@ class LoanPolicyDetail extends React.Component {
               <Col xs={12}>
                 <KeyValue
                   label={<FormattedMessage id="ui-circulation.settings.loanPolicy.loanPeriod" />}
-                  value={`${_.get(policy, ['loansPolicy', 'period', 'duration'], '')} ${periodInterval}`}
+                  value={`${get(policy, ['loansPolicy', 'period', 'duration'], '')} ${periodInterval}`}
                 />
               </Col>
             </Row>
@@ -126,7 +138,7 @@ class LoanPolicyDetail extends React.Component {
             <br />
             <Row>
               <Col xs={12}>
-                <KeyValue label={dueDateScheduleFieldLabel} value={_.get(schedule, ['name'], '-')} />
+                <KeyValue label={dueDateScheduleFieldLabel} value={get(schedule, ['name'], '-')} />
               </Col>
             </Row>
           </div>
@@ -136,7 +148,16 @@ class LoanPolicyDetail extends React.Component {
           <Col xs={12}>
             <KeyValue
               label={<FormattedMessage id="ui-circulation.settings.loanPolicy.closedDueDateMgmt" />}
-              value={_.get(closedLibraryDueDateManagementItem, ['label'], '-')}
+              value={get(closedLibraryDueDateManagementItem, ['label'], '-')}
+            />
+          </Col>
+        </Row>
+        <br />
+        <Row>
+          <Col xs={12}>
+            <KeyValue
+              label={<FormattedMessage id="ui-circulation.settings.loanPolicy.openingTimeOffset" />}
+              value={`${get(policy, ['loansPolicy', 'openingTimeOffset', 'duration'], '')} ${timeOffsetInterval}`}
             />
           </Col>
         </Row>
@@ -145,7 +166,7 @@ class LoanPolicyDetail extends React.Component {
           <Col xs={12}>
             <KeyValue
               label={<FormattedMessage id="ui-circulation.settings.loanPolicy.alternateLoanPeriodExisting" />}
-              value={`${_.get(policy, ['loansPolicy', 'existingRequestsPeriod', 'duration'], '')} ${exReqPerInterval}`}
+              value={`${get(policy, ['loansPolicy', 'existingRequestsPeriod', 'duration'], '')} ${exReqPerInterval}`}
             />
           </Col>
         </Row>
@@ -154,7 +175,7 @@ class LoanPolicyDetail extends React.Component {
           <Col xs={12}>
             <KeyValue
               label={<FormattedMessage id="ui-circulation.settings.loanPolicy.gracePeriod" />}
-              value={`${_.get(policy, ['loansPolicy', 'gracePeriod', 'duration'], '')} ${gracePeriodInterval}`}
+              value={`${get(policy, ['loansPolicy', 'gracePeriod', 'duration'], '')} ${gracePeriodInterval}`}
             />
           </Col>
         </Row>
@@ -181,7 +202,7 @@ class LoanPolicyDetail extends React.Component {
           <Col xs={12}>
             <KeyValue
               label={<FormattedMessage id="ui-circulation.settings.loanPolicy.policyName" />}
-              value={_.get(policy, ['name'], '')}
+              value={get(policy, ['name'], '')}
             />
           </Col>
         </Row>
@@ -190,7 +211,7 @@ class LoanPolicyDetail extends React.Component {
           <Col xs={12}>
             <KeyValue
               label={<FormattedMessage id="ui-circulation.settings.loanPolicy.policyDescription" />}
-              value={_.get(policy, ['description'], '-')}
+              value={get(policy, ['description'], '-')}
             />
           </Col>
         </Row>
@@ -200,15 +221,15 @@ class LoanPolicyDetail extends React.Component {
 
   renderRenewals() {
     const { initialValues: policy = {} } = this.props;
-    const unlimited = (_.get(policy, ['renewalsPolicy', 'unlimited']))
+    const unlimited = (get(policy, ['renewalsPolicy', 'unlimited']))
       ? <FormattedMessage id="ui-circulation.settings.loanPolicy.yes" />
       : <FormattedMessage id="ui-circulation.settings.loanPolicy.no" />;
-    const differentPeriod = (_.get(policy, ['renewalsPolicy', 'differentPeriod']))
+    const differentPeriod = (get(policy, ['renewalsPolicy', 'differentPeriod']))
       ? <FormattedMessage id="ui-circulation.settings.loanPolicy.yes" />
       : <FormattedMessage id="ui-circulation.settings.loanPolicy.no" />;
-    const renewFromId = _.get(policy, ['renewalsPolicy', 'renewFromId'], renewFromIds.SYSTEM_DATE);
-    const renewFrom = _.find(renewFromOptions, r => r.value === renewFromId);
-    const interval = _.get(policy, ['renewalsPolicy', 'period', 'intervalId']);
+    const renewFromId = get(policy, ['renewalsPolicy', 'renewFromId'], renewFromIds.SYSTEM_DATE);
+    const renewFrom = find(renewFromOptions, r => r.value === renewFromId);
+    const interval = get(policy, ['renewalsPolicy', 'period', 'intervalId']);
 
     return (
       <div>
@@ -234,7 +255,7 @@ class LoanPolicyDetail extends React.Component {
               <Col xs={12}>
                 <KeyValue
                   label={<FormattedMessage id="ui-circulation.settings.loanPolicy.numRenewalsAllowed" />}
-                  value={_.get(policy, ['renewalsPolicy', 'numberAllowed'], 0)}
+                  value={get(policy, ['renewalsPolicy', 'numberAllowed'], 0)}
                 />
               </Col>
             </Row>
@@ -245,7 +266,7 @@ class LoanPolicyDetail extends React.Component {
           <Col xs={12}>
             <KeyValue
               label={<FormattedMessage id="ui-circulation.settings.loanPolicy.renewFrom" />}
-              value={_.get(renewFrom, ['label'], '-')}
+              value={get(renewFrom, ['label'], '-')}
             />
           </Col>
         </Row>
@@ -265,7 +286,7 @@ class LoanPolicyDetail extends React.Component {
               <Col xs={12}>
                 <KeyValue
                   label={<FormattedMessage id="ui-circulation.settings.loanPolicy.alternateLoanPeriodRenewals" />}
-                  value={`${_.get(policy, ['renewalsPolicy', 'period', 'duration'])} ${interval}`}
+                  value={`${get(policy, ['renewalsPolicy', 'period', 'duration'])} ${interval}`}
                 />
               </Col>
             </Row>

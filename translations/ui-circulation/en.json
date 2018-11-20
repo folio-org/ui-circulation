@@ -39,6 +39,7 @@
   "settings.loanPolicy.generalInformation": "General information",
   "settings.loanPolicy.yes": "Yes",
   "settings.loanPolicy.no": "No",
+  "settings.loanPolicy.openingTimeOffset": "Opening time offset",
 
   "settings.loanRules.paneTitle": "Loan Rules Editor",
   "settings.loanRules.rulesUpdated": "Rules were successfully updated.",
