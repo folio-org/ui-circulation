@@ -101,5 +101,15 @@
     "settings.staffSlips.previewLabel": "Személyzeti nyomtatvány előnézete - Félretétel",
     "settings.staffSlips.yes": "Igen",
     "settings.staffSlips.no": "Nem",
-    "meta.title": "Kölcsönzés"
+    "meta.title": "Kölcsönzés",
+    "settings.loanPolicy.fDDSRequired": "Fixed due date schedule *",
+    "settings.loanPolicy.yes": "Yes",
+    "settings.loanPolicy.no": "No",
+    "settings.loanRules.rulesUpdated": "Rules were successfully updated.",
+    "settings.loanRules.newRule": "New Rule (#)",
+    "settings.fDDS.editLabel": "Edit: {name}",
+    "settings.checkout.filterRules": "filter rules",
+    "settings.staffSlips.hold": "Hold",
+    "settings.staffSlips.print": "Print",
+    "settings.staffSlips.editLabel": "Edit: Staff slips - {name}"
 }
