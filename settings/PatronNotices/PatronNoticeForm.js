@@ -80,7 +80,12 @@ class PatronNoticeForm extends React.Component {
 
     // If there's an ID, this is editing an existing notice
     if (notice.id) {
-      return (<span>Patron notices | {notice.name}</span>);
+      return (
+        <span>
+          Patron notices |
+          {notice.name}
+        </span>
+      );
     }
 
     return <span>Patron notices</span>;
