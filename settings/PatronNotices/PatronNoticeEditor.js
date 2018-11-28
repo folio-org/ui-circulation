@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ReactQuill from 'react-quill';
-import { Row, Col } from '@folio/stripes-components/lib/LayoutGrid';
-import Button from '@folio/stripes-components/lib/Button';
-import formCss from '@folio/stripes-components/lib/sharedStyles/form.css';
+import {
+  Button,
+  Col,
+  Row,
+} from '@folio/stripes/components';
+// import formCss from '@folio/stripes-components/lib/sharedStyles/form.css';
+
 
 // eslint-disable-next-line import/no-webpack-loader-syntax
 import '!style-loader!css-loader!react-quill/dist/quill.snow.css';
@@ -11,15 +15,14 @@ import '!style-loader!css-loader!react-quill/dist/quill.snow.css';
 import '!style-loader!css-loader!./quillCustom.css';
 
 import PreviewModal from './PreviewModal';
-import css from './PatronNoticeEditor.css';
+// import css from './PatronNoticeEditor.css';
+import css from '../StaffSlips/StaffSlipEditor.css';
 
 class PatronNoticeEditor extends Component {
   static propTypes = {
     input: PropTypes.object,
     label: PropTypes.string,
-    slipType: PropTypes.string,
     tokens: PropTypes.arrayOf(PropTypes.string),
-    stripes: PropTypes.object,
   };
 
   constructor(props) {
@@ -101,7 +104,7 @@ class PatronNoticeEditor extends Component {
           <Col xs={12}>
             <Row bottom="xs">
               <Col xs={9}>
-                <label htmlFor="editor" className={formCss.label}>{label}</label>
+                <label htmlFor="editor" className={css.label}>{label}</label>
               </Col>
               <Col xs={3}>
                 <Row className={css.preview}>

@@ -1,7 +1,7 @@
 const formats = {
   Any: {
     'hold_expiration': '4/19/2020',
-    'location': 'Olin Library Circulation', 
+    'location': 'Olin Library Circulation',
     'item_title': 'A Canticle For Leibowitz',
     'item_call_number': 'PS3525.I29475 C2 1975',
     'item_author': 'Miller, Walter M., Jr.',

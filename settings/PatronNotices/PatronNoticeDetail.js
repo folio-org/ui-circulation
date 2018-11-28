@@ -6,8 +6,6 @@ import {
   Accordion,
   AccordionSet,
   Button,
-  Col,
-  Dropdown,
   KeyValue,
   Row
 } from '@folio/stripes/components';

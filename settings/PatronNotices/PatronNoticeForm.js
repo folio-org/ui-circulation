@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { find } from 'lodash';
 import { Field } from 'redux-form';
+import { cloneDeep } from 'lodash';
 
 import {
   Accordion,
@@ -17,13 +17,22 @@ import {
   TextArea,
   TextField,
 } from '@folio/stripes/components';
-import stripesForm from '@folio/stripes-form';
+import stripesForm from '@folio/stripes/form';
 
 import PatronNoticeEditor from './PatronNoticeEditor';
-import PreviewModal from './PreviewModal';
+// import PreviewModal from './PreviewModal';
 import formats from './formats';
 
 class PatronNoticeForm extends React.Component {
+  static propTypes = {
+    handleSubmit: PropTypes.func.isRequired,
+    initialValues: PropTypes.object,
+    onCancel: PropTypes.func,
+    onSave: PropTypes.func,
+    pristine: PropTypes.bool,
+    submitting: PropTypes.bool,
+  };
+
   constructor(props) {
     super(props);
 
@@ -41,7 +50,7 @@ class PatronNoticeForm extends React.Component {
 
   onToggleSection({ id }) {
     this.setState((curState) => {
-      const newState = _.cloneDeep(curState);
+      const newState = cloneDeep(curState);
       newState.accordions[id] = !curState.accordions[id];
       return newState;
     });
@@ -87,7 +96,7 @@ class PatronNoticeForm extends React.Component {
         <Button
           id="clickable-save-patron-notice"
           type="submit"
-          title='Save'
+          title="Save"
           buttonStyle="primary paneHeaderNewButton"
           marginBottom0
           disabled={(pristine || submitting)}
