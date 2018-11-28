@@ -1,7 +1,10 @@
 import React from 'react';
+import {
+  FormattedMessage,
+} from 'react-intl';
 import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
-import { cloneDeep } from 'lodash';
+import { cloneDeep, sortBy } from 'lodash';
 
 import {
   Accordion,
@@ -14,6 +17,7 @@ import {
   PaneMenu,
   Paneset,
   Row,
+  Select,
   TextArea,
   TextField,
 } from '@folio/stripes/components';
@@ -22,6 +26,7 @@ import stripesForm from '@folio/stripes/form';
 import PatronNoticeEditor from './PatronNoticeEditor';
 // import PreviewModal from './PreviewModal';
 import formats from './formats';
+import categories from './categories';
 
 class PatronNoticeForm extends React.Component {
   static propTypes = {
@@ -88,7 +93,7 @@ class PatronNoticeForm extends React.Component {
       );
     }
 
-    return <span>Patron notices</span>;
+    return <span>New patron notice</span>;
   }
 
   renderSaveMenu() {
@@ -113,8 +118,15 @@ class PatronNoticeForm extends React.Component {
   }
 
   render() {
-    const { handleSubmit } = this.props;
-    const isActive = this.props.initialValues && this.props.initialValues.active;
+    const { handleSubmit, initialValues } = this.props;
+    const category = initialValues && initialValues.category;
+    const isActive = initialValues && initialValues.active;
+    const sortedCategories = sortBy(categories, ['label']);
+    const categoryOptions = sortedCategories.map(({ label, id }) => ({
+      labelTranslationPath: label,
+      value: id,
+      selected: category === id
+    }));
 
     return (
       <form id="form-patron-notice" onSubmit={handleSubmit(this.save)}>
@@ -136,6 +148,27 @@ class PatronNoticeForm extends React.Component {
             <Row>
               <Col xs={8}>
                 <Field label="Category" name="category" id="input-patron-notice-category" component={TextField} />
+              </Col>
+              <Col xs={8}>
+                <Field
+                  label="Category"
+                  name="category"
+                  component={Select}
+                  fullWidth
+                >
+                  {categoryOptions.map(({ labelTranslationPath, value, selected }) => (
+                    <FormattedMessage id={labelTranslationPath}>
+                      {translatedLabel => (
+                        <option
+                          value={value}
+                          selected={selected}
+                        >
+                          {translatedLabel}
+                        </option>
+                      )}
+                    </FormattedMessage>
+                  ))}
+                </Field>
               </Col>
             </Row>
             <AccordionSet accordionStatus={this.state.accordions} onToggle={this.onToggleSection}>
