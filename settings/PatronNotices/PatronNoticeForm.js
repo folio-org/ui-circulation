@@ -4,7 +4,7 @@ import {
 } from 'react-intl';
 import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
-import { cloneDeep, sortBy } from 'lodash';
+import { cloneDeep, find, sortBy } from 'lodash';
 
 import {
   Accordion,
@@ -27,6 +27,36 @@ import PatronNoticeEditor from './PatronNoticeEditor';
 // import PreviewModal from './PreviewModal';
 import formats from './formats';
 import categories from './categories';
+
+/**
+ * on-blur validation checks that the name of the patron notice
+ * is unique.
+ *
+ * redux-form requires that the rejected Promises have the form
+ * { field: "error message" }
+ * hence the eslint-disable-next-line comments since ESLint is picky
+ * about the format of rejected promises.
+ *
+ * @see https://redux-form.com/7.3.0/examples/asyncchangevalidation/
+ */
+function asyncValidate(values, dispatch, props) {
+  if (values.name !== undefined) {
+    return new Promise((resolve, reject) => {
+      const uv = props.uniquenessValidator.nameUniquenessValidator;
+      const query = `(name="${values.name}")`;
+      uv.reset();
+      uv.GET({ params: { query } }).then((notices) => {
+        if (find(notices, ['name', values.name])) {
+          // eslint-disable-next-line prefer-promise-reject-errors
+          reject({ name: 'A patron notice with this name already exists' });
+        } else {
+          resolve();
+        }
+      });
+    });
+  }
+  return new Promise(resolve => resolve());
+}
 
 class PatronNoticeForm extends React.Component {
   static propTypes = {
@@ -221,4 +251,6 @@ export default stripesForm({
   form: 'patronNoticeForm',
   navigationCheck: true,
   enableReinitialize: false,
+  asyncValidate,
+  asyncBlurFields: ['name'],
 })(PatronNoticeForm);

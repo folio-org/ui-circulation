@@ -33,6 +33,13 @@ class PatronNotices extends React.Component {
       path: 'templates',
       records: 'templates',
     },
+    nameUniquenessValidator: {
+      type: 'okapi',
+      records: 'templates',
+      accumulate: 'true',
+      path: 'templates',
+      fetch: false,
+    },
   });
 
   render() {
@@ -54,6 +61,7 @@ class PatronNotices extends React.Component {
           post: 'settings.organization.enabled',
           delete: 'settings.organization.enabled',
         }}
+        uniquenessValidator={this.props.mutator}
       />
     );
   }
