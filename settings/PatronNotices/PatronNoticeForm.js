@@ -147,9 +147,6 @@ class PatronNoticeForm extends React.Component {
             </Row>
             <Row>
               <Col xs={8}>
-                <Field label="Category" name="category" id="input-patron-notice-category" component={TextField} />
-              </Col>
-              <Col xs={8}>
                 <Field
                   label="Category"
                   name="category"
