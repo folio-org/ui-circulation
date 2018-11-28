@@ -111,5 +111,7 @@
     "settings.checkout.filterRules": "filter rules",
     "settings.staffSlips.hold": "Hold",
     "settings.staffSlips.print": "Print",
-    "settings.staffSlips.editLabel": "Edit: Staff slips - {name}"
+    "settings.staffSlips.editLabel": "Edit: Staff slips - {name}",
+    "settings.loanPolicy.openingTimeOffset": "Opening time offset",
+    "settings.index.patronNotices": "Patron notices"
 }
