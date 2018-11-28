@@ -138,16 +138,16 @@ class PatronNoticeForm extends React.Component {
                 <Field label="Category" name="category" id="input-patron-notice-category" component={TextField} />
               </Col>
             </Row>
-            <Row>
-              <Col xs={8}>
-                <Field label="Subject" name="subject" id="input-patron-notice-subject" component={TextField} />
-              </Col>
-            </Row>
             <AccordionSet accordionStatus={this.state.accordions} onToggle={this.onToggleSection}>
               <Accordion
                 id="email-template"
                 label="Email"
               >
+                <Row>
+                  <Col xs={8}>
+                    <Field label="Subject" name="subject" id="input-patron-notice-subject" component={TextField} />
+                  </Col>
+                </Row>
                 <Row>
                   <Field label="Body" name="localizedTemplates.email.body" id="input-email-template-body" component={PatronNoticeEditor} tokens={Object.keys(formats.Any)} />
                 </Row>
