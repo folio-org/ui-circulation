@@ -117,6 +117,10 @@ class PatronNoticeForm extends React.Component {
     );
   }
 
+  // Synchronous validation functions
+  requireName = value => (value ? undefined : 'Name is required');
+  requireCategory = value => (value ? undefined : 'Category is required');
+
   render() {
     const { handleSubmit, initialValues } = this.props;
     const category = initialValues && initialValues.category;
@@ -134,7 +138,13 @@ class PatronNoticeForm extends React.Component {
           <Pane defaultWidth="100%" paneTitle={this.renderPaneTitle()} firstMenu={this.renderCLoseIcon()} lastMenu={this.renderSaveMenu()}>
             <Row>
               <Col xs={8}>
-                <Field label="Name" name="name" id="input-patron-notice-name" component={TextField} />
+                <Field
+                  label="Name"
+                  name="name"
+                  id="input-patron-notice-name"
+                  component={TextField}
+                  validate={this.requireName}
+                />
               </Col>
               <Col xs={3}>
                 <Field label="Active" name="active" id="input-patron-notice-active" component={Checkbox} defaultChecked={isActive} normalize={v => !!v} />
@@ -152,6 +162,7 @@ class PatronNoticeForm extends React.Component {
                   name="category"
                   component={Select}
                   fullWidth
+                  validate={this.requireCategory}
                 >
                   {categoryOptions.map(({ labelTranslationPath, value, selected }) => (
                     <FormattedMessage id={labelTranslationPath}>
