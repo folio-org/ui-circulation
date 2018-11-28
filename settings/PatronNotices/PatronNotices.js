@@ -36,7 +36,6 @@ class PatronNotices extends React.Component {
   });
 
   render() {
-    console.log("entries", this.props.resources.entries)
     return (
       <EntryManager
         {...this.props}
