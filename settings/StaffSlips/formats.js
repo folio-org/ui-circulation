@@ -3,10 +3,11 @@ const formats = {
     'Item title': '14 cows for America',
     'Item barcode': '<Barcode>9781561454907</Barcode>',
     'Item call number': '6016665333',
-    'Requester last name': ' John',
-    'Requester first name': ' Brown',
+    'Requester last name': ' Brown',
+    'Requester first name': ' John',
     'Transaction Id': ' 123456789',
     'Hold expiration': ' 10/10/2020',
+    'Requester barcode': '<Barcode>9781561454907</Barcode>'
   },
   Transit: {
     'From location': 'Mann Library',
@@ -19,6 +20,7 @@ const formats = {
     'Item call number': ' 6016665333',
     'Request/transaction number': ' 123456789',
     'Staff slip name': 'Slip 123',
+    'Requester barcode': '<Barcode>9781561454907</Barcode>'
   }
 };
 

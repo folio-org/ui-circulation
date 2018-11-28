@@ -1,9 +1,9 @@
 import { kebabCase } from 'lodash';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Paneset, Pane } from '@folio/stripes-components';
+import { FormattedMessage } from 'react-intl';
+import { Callout, Paneset, Pane } from '@folio/stripes/components';
 import fetch from 'isomorphic-fetch';
-import Callout from '@folio/stripes-components/lib/Callout';
 
 import LoanRulesForm from './lib/RuleEditor/LoanRulesForm';
 
@@ -60,11 +60,6 @@ class LoanRules extends React.Component {
   static propTypes = {
     resources: PropTypes.object.isRequired,
     stripes: PropTypes.object.isRequired,
-    calloutMessage: PropTypes.string,
-  };
-
-  static defaultProps = {
-    calloutMessage: 'Rules were successfully updated.',
   };
 
   constructor(props) {
@@ -74,7 +69,12 @@ class LoanRules extends React.Component {
   }
 
   shouldComponentUpdate(nextProps) {
-    const { resources: { patronGroups, materialTypes, loanTypes, loanPolicies } } = nextProps;
+    const {
+      patronGroups,
+      materialTypes,
+      loanTypes,
+      loanPolicies,
+    } = nextProps.resources;
 
     return !patronGroups.isPending &&
       !materialTypes.isPending &&
@@ -94,7 +94,12 @@ class LoanRules extends React.Component {
   }
 
   getEditorProps() {
-    const { resources: { patronGroups, materialTypes, loanTypes, loanPolicies } } = this.props;
+    const {
+      patronGroups,
+      materialTypes,
+      loanTypes,
+      loanPolicies,
+    } = this.props.resources;
 
     return Object.assign({}, editorDefaultProps, {
       errors: this.state.errors,
@@ -108,7 +113,12 @@ class LoanRules extends React.Component {
   }
 
   getRecords() {
-    const { resources: { patronGroups, materialTypes, loanTypes, loanPolicies } } = this.props;
+    const {
+      patronGroups,
+      materialTypes,
+      loanTypes,
+      loanPolicies,
+    } = this.props.resources;
 
     return [
       ...patronGroups.records.map(r => ({ name: kebabCase(r.group), id: r.id, prefix: 'g' })),
@@ -138,7 +148,10 @@ class LoanRules extends React.Component {
   // TODO: refactor to use mutator after PUT is changed on the server or stripes-connect supports
   // custom PUT requests without the id attached to the end of the URL.
   saveLoanRules(rules) {
-    const stripes = this.props.stripes;
+    const {
+      stripes,
+    } = this.props;
+
     const headers = Object.assign({}, {
       'X-Okapi-Tenant': stripes.okapi.tenant,
       'X-Okapi-Token': stripes.store.getState().okapi.token,
@@ -156,14 +169,18 @@ class LoanRules extends React.Component {
     return fetch(`${stripes.okapi.url}/circulation/loan-rules`, options).then((resp) => {
       if (resp.status >= 400) {
         resp.json().then(json => this.setState({ errors: [json] }));
-      } else {
-        this.callout.sendCallout({ message: this.props.calloutMessage });
+      } else if (this.callout) {
+        this.callout.sendCallout({ message: <FormattedMessage id="ui-circulation.settings.loanRules.rulesUpdated" /> });
       }
     });
   }
 
   render() {
-    if (!this.props.resources.loanTypes) {
+    const {
+      resources: { loanTypes },
+    } = this.props;
+
+    if (!loanTypes) {
       return (<div />);
     }
 
@@ -172,7 +189,10 @@ class LoanRules extends React.Component {
 
     return (
       <Paneset>
-        <Pane paneTitle={this.props.stripes.intl.formatMessage({ id: 'ui-circulation.settings.loanRules.paneTitle' })} defaultWidth="fill">
+        <Pane
+          paneTitle={<FormattedMessage id="ui-circulation.settings.loanRules.paneTitle" />}
+          defaultWidth="fill"
+        >
           <LoanRulesForm
             onSubmit={this.onSubmit}
             initialValues={{ loanRulesCode }}

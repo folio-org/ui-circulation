@@ -1,24 +1,36 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Field, getFormValues } from 'redux-form';
-import _ from 'lodash';
-import { stripesShape } from '@folio/stripes-core/src/Stripes';
-import Checkbox from '@folio/stripes-components/lib/Checkbox';
-import { Row, Col } from '@folio/stripes-components/lib/LayoutGrid';
-import Select from '@folio/stripes-components/lib/Select';
-import TextField from '@folio/stripes-components/lib/TextField';
-import TextArea from '@folio/stripes-components/lib/TextArea';
-import { Accordion, ExpandAllButton } from '@folio/stripes-components/lib/Accordion';
-import ViewMetaData from '@folio/stripes-smart-components/lib/ViewMetaData';
 import { FormattedMessage } from 'react-intl';
+import {
+  cloneDeep,
+  sortBy,
+} from 'lodash';
+
+import { stripesShape } from '@folio/stripes/core';
+import {
+  Accordion,
+  Checkbox,
+  ExpandAllButton,
+  Select,
+  TextArea,
+  TextField,
+  Col,
+  Row,
+} from '@folio/stripes/components';
+import { ViewMetaData } from '@folio/stripes/smart-components';
+
+import { PolicyPropertySetter } from './components';
 
 import {
   loanProfileTypes,
   intervalPeriods,
-  dueDateManagementOptions,
   renewFromOptions,
   intervalIdsMap,
   loanProfileMap,
+  shortTermLoansOptions,
+  longTermLoansOptions,
+  BEGINNING_OF_THE_NEXT_OPEN_SERVICE_POINT_HOURS,
 } from '../constants';
 
 class LoanPolicyForm extends React.Component {
@@ -45,8 +57,35 @@ class LoanPolicyForm extends React.Component {
     };
   }
 
+  getDueDateManagementOptions = () => {
+    const isShortTermLoan = this.isShortTermLoan();
+
+    if (isShortTermLoan) {
+      return shortTermLoansOptions;
+    }
+
+    return longTermLoansOptions;
+  };
+
+  isShortTermLoan = () => {
+    const {
+      loanable,
+      loansPolicy: {
+        profileId,
+        period: {
+          intervalId = '',
+        } = {},
+      },
+    } = this.getCurrentValues();
+
+    const isProfileRolling = profileId === loanProfileMap.ROLLING;
+    const isShortTermPeriod = intervalId === intervalIdsMap.MINUTES || intervalId === intervalIdsMap.HOURS;
+
+    return loanable && isProfileRolling && isShortTermPeriod;
+  };
+
   getCurrentValues() {
-    const { stripes: { store } } = this.props;
+    const { store } = this.props.stripes;
     const state = store.getState();
     return getFormValues('entryForm')(state) || {};
   }
@@ -80,11 +119,18 @@ class LoanPolicyForm extends React.Component {
     if (altRenewPeriod && altRenewPeriod.intervalId && !altRenewPeriod.duration) {
       this.props.change('renewalsPolicy.period.duration', 1);
     }
+
+    const openingTimeOffset = (allValues.loansPolicy && allValues.loansPolicy.openingTimeOffset);
+    const openingTimeOffsetIsVisible = openingTimeOffset && openingTimeOffset.intervalId && !openingTimeOffset.duration;
+
+    if (openingTimeOffsetIsVisible) {
+      this.props.change('loansPolicy.openingTimeOffset.duration', 0);
+    }
   }
 
   handleSectionToggle({ id }) {
     this.setState((curState) => {
-      const newState = _.cloneDeep(curState);
+      const newState = cloneDeep(curState);
       newState.sections[id] = !newState.sections[id];
       return newState;
     });
@@ -92,34 +138,54 @@ class LoanPolicyForm extends React.Component {
 
   handleExpandAll(sections) {
     this.setState((curState) => {
-      const newState = _.cloneDeep(curState);
+      const newState = cloneDeep(curState);
       newState.sections = sections;
       return newState;
     });
   }
 
+  getOptions(options) {
+    return options.map(({ value, label }) => (
+      <FormattedMessage id={label}>
+        {(message) => <option value={value}>{message}</option>}
+      </FormattedMessage>
+    ));
+  }
+
   render() {
-    const formatMsg = this.props.stripes.intl.formatMessage;
     const policy = this.getCurrentValues();
     const { sections } = this.state;
+    const {
+      parentResources,
+    } = this.props;
 
     // Conditional field labels
-    let dueDateScheduleFieldLabel = formatMsg({ id: 'ui-circulation.settings.loanPolicy.fDDS' });
-    let altRenewalScheduleLabel = formatMsg({ id: 'ui-circulation.settings.loanPolicy.altFDDSforRenewals' });
+    let dueDateScheduleFieldLabel = <FormattedMessage id="ui-circulation.settings.loanPolicy.fDDS" />;
+    let altRenewalScheduleLabel = <FormattedMessage id="ui-circulation.settings.loanPolicy.altFDDSforRenewals" />;
     if (policy.loansPolicy && policy.loansPolicy.profileId === loanProfileMap.ROLLING) {
-      dueDateScheduleFieldLabel = formatMsg({ id: 'ui-circulation.settings.loanPolicy.fDDSlimit' });
-      altRenewalScheduleLabel = formatMsg({ id: 'ui-circulation.settings.loanPolicy.altFDDSDueDateLimit' });
+      dueDateScheduleFieldLabel = <FormattedMessage id="ui-circulation.settings.loanPolicy.fDDSlimit" />;
+      altRenewalScheduleLabel = <FormattedMessage id="ui-circulation.settings.loanPolicy.altFDDSDueDateLimit" />;
     } else if (policy.loansPolicy && policy.loansPolicy.profileId === loanProfileMap.FIXED) {
-      dueDateScheduleFieldLabel += ' *';
+      dueDateScheduleFieldLabel = <FormattedMessage id="ui-circulation.settings.loanPolicy.fDDSRequired" />;
     }
 
-    const schedules = _.sortBy((this.props.parentResources.fixedDueDateSchedules || {}).records || [], ['name'])
+    const schedules = sortBy((parentResources.fixedDueDateSchedules || {}).records || [], ['name'])
       .map(schedule => (
-        {
-          id: schedule.id,
-          value: schedule.id,
-          label: schedule.name,
-        }));
+        <FormattedMessage id={schedule.name}>
+          {(message) => <option value={schedule.id}>{message}</option>}
+        </FormattedMessage>
+      ));
+
+    const isOpeningTimeOffsetVisible = () => {
+      const {
+        loansPolicy: {
+          closedLibraryDueDateManagementId,
+        },
+      } = policy;
+      const isShortTermMode = this.isShortTermLoan();
+
+      return isShortTermMode && closedLibraryDueDateManagementId === BEGINNING_OF_THE_NEXT_OPEN_SERVICE_POINT_HOURS;
+    };
 
     return (
       <div>
@@ -132,7 +198,7 @@ class LoanPolicyForm extends React.Component {
           open={sections.generalSection}
           id="generalSection"
           onToggle={this.handleSectionToggle}
-          label={formatMsg({ id: 'ui-circulation.settings.loanPolicy.generalInformation' })}
+          label={<FormattedMessage id="ui-circulation.settings.loanPolicy.generalInformation" />}
         >
           {policy.metadata && policy.metadata.createdDate &&
             <Row>
@@ -145,7 +211,7 @@ class LoanPolicyForm extends React.Component {
           {/* Primary information: policy name and description, plus delete button */}
           <h2 style={{ marginTop: '0' }}>About</h2>
           <Field
-            label={formatMsg({ id: 'ui-circulation.settings.loanPolicy.policyName' })}
+            label={<FormattedMessage id="ui-circulation.settings.loanPolicy.policyName" />}
             autoFocus
             name="name"
             id="input_policy_name"
@@ -155,7 +221,7 @@ class LoanPolicyForm extends React.Component {
             validate={this.validateField}
           />
           <Field
-            label={formatMsg({ id: 'ui-circulation.settings.loanPolicy.policyDescription' })}
+            label={<FormattedMessage id="ui-circulation.settings.loanPolicy.policyDescription" />}
             name="description"
             component={TextArea}
             fullWidth
@@ -169,7 +235,7 @@ class LoanPolicyForm extends React.Component {
           </h2>
           {/* loanable: boolean determining visibility of all subsequent elements */}
           <Field
-            label={formatMsg({ id: 'ui-circulation.settings.loanPolicy.loanable' })}
+            label={<FormattedMessage id="ui-circulation.settings.loanPolicy.loanable" />}
             id="loanable"
             name="loanable"
             component={Checkbox}
@@ -178,7 +244,7 @@ class LoanPolicyForm extends React.Component {
           {/* loan profile. Value affects visibility of several subsequent elements */}
           { policy.loanable &&
             <Field
-              label={formatMsg({ id: 'ui-circulation.settings.loanPolicy.loanProfile' })}
+              label={<FormattedMessage id="ui-circulation.settings.loanPolicy.loanProfile" />}
               name="loansPolicy.profileId"
               id="input_loan_profile"
               component={Select}
@@ -188,27 +254,13 @@ class LoanPolicyForm extends React.Component {
           }
           {/* loan period - only appears when profile is "rolling" */}
           { (policy.loanable && policy.loansPolicy && policy.loansPolicy.profileId === loanProfileMap.ROLLING) &&
-            <div>
-              <p>
-                <FormattedMessage id="ui-circulation.settings.loanPolicy.loanPeriod" />
-              </p>
-              <Row>
-                <Col xs={2}>
-                  <Field label="" name="loansPolicy.period.duration" id="input_loan_period" component={TextField} validate={this.validateField} />
-                </Col>
-                <Col>
-                  <Field
-                    label=""
-                    name="loansPolicy.period.intervalId"
-                    id="select_policy_period"
-                    component={Select}
-                    placeholder={formatMsg({ id: 'ui-circulation.settings.loanPolicy.selectInterval' })}
-                    dataOptions={intervalPeriods}
-                    validate={this.validateField}
-                  />
-                </Col>
-              </Row>
-            </div>
+            <PolicyPropertySetter
+              loanHeader="loanPeriod"
+              textFieldName="period"
+              selectFieldName="period"
+              intervalPeriods={this.getOptions(intervalPeriods)}
+              validator={this.validateField}
+            />
           }
           {/* fixed due date schedule - appears when profile is "fixed" or "rolling",
               but with different labels */}
@@ -219,85 +271,53 @@ class LoanPolicyForm extends React.Component {
               id="input_loansPolicy_fixedDueDateSchedule"
               component={Select}
               normalize={value => (value === '' ? null : value)}
-              dataOptions={[{ label: formatMsg({ id: 'ui-circulation.settings.loanPolicy.selectSchedule' }), value: '' }, ...schedules]}
-            />
+            >
+              <FormattedMessage id="ui-circulation.settings.loanPolicy.selectSchedule">
+                {(message) => <option value="" disabled>{message}</option>}
+              </FormattedMessage>
+              {schedules}
+            </Field>
           }
           {/* closed library due date management - Select */}
           { policy.loanable &&
             <Field
-              label={formatMsg({ id: 'ui-circulation.settings.loanPolicy.closedDueDateMgmt' })}
+              label={<FormattedMessage id="ui-circulation.settings.loanPolicy.closedDueDateMgmt" />}
               name="loansPolicy.closedLibraryDueDateManagementId"
               component={Select}
-              dataOptions={dueDateManagementOptions}
               validate={this.validateField}
-            />
+            >
+              {this.getOptions(this.getDueDateManagementOptions())}
+            </Field>
           }
-          {/* skip closed dates - boolean */}
-          { policy.loanable &&
-            <Field
-              label={formatMsg({ id: 'ui-circulation.settings.loanPolicy.skipClosedDates' })}
-              id="loansPolicy.skipClosed"
-              name="loansPolicy.skipClosed"
-              component={Checkbox}
-              validate={this.validateField}
-              normalize={v => !!v}
+          {/* opening time offset */}
+          {isOpeningTimeOffsetVisible() &&
+            <PolicyPropertySetter
+              loanHeader="openingTimeOffset"
+              textFieldName="openingTimeOffset"
+              selectFieldName="openingTimeOffset"
+              intervalPeriods={this.getOptions(intervalPeriods.slice(0, 2).reverse())}
+              validator={this.validateField}
             />
           }
           {/* alternate loan period */}
           { policy.loanable &&
-            <div>
-              <p>
-                <FormattedMessage id="ui-circulation.settings.loanPolicy.alternateLoanPeriodExisting" />
-              </p>
-              <Row>
-                <Col xs={2}>
-                  <Field
-                    label=""
-                    name="loansPolicy.existingRequestsPeriod.duration"
-                    component={TextField}
-                    validate={this.validateField}
-                  />
-                </Col>
-                <Col>
-                  <Field
-                    label=""
-                    name="loansPolicy.existingRequestsPeriod.intervalId"
-                    component={Select}
-                    placeholder={formatMsg({ id: 'ui-circulation.settings.loanPolicy.selectInterval' })}
-                    dataOptions={intervalPeriods.slice(0, 3)}
-                    validate={this.validateField}
-                  />
-                </Col>
-              </Row>
-            </div>
+            <PolicyPropertySetter
+              loanHeader="alternateLoanPeriodExisting"
+              textFieldName="existingRequestsPeriod"
+              selectFieldName="existingRequestsPeriod"
+              intervalPeriods={this.getOptions(intervalPeriods.slice(0, 3))}
+              validator={this.validateField}
+            />
           }
           {/* grace period */}
           { policy.loanable &&
-            <div>
-              <p>
-                <FormattedMessage id="ui-circulation.settings.loanPolicy.gracePeriod" />
-              </p>
-              <Row>
-                <Col xs={2}>
-                  <Field
-                    label=""
-                    name="loansPolicy.gracePeriod.duration"
-                    component={TextField}
-                    validate={this.validateField}
-                  />
-                </Col>
-                <Col>
-                  <Field
-                    label=""
-                    name="loansPolicy.gracePeriod.intervalId"
-                    component={Select}
-                    placeholder={formatMsg({ id: 'ui-circulation.settings.loanPolicy.selectInterval' })}
-                    dataOptions={intervalPeriods}
-                    validate={this.validateField}
-                  />
-                </Col>
-              </Row>
-            </div>
+            <PolicyPropertySetter
+              loanHeader="gracePeriod"
+              textFieldName="gracePeriod"
+              selectFieldName="gracePeriod"
+              intervalPeriods={this.getOptions(intervalPeriods)}
+              validator={this.validateField}
+            />
           }
 
           {/* ************ renewals section ************* */}
@@ -314,7 +334,7 @@ class LoanPolicyForm extends React.Component {
                 not handled properly -- see https://github.com/erikras/redux-form/issues/1993)
               */}
               <Field
-                label={formatMsg({ id: 'ui-circulation.settings.loanPolicy.renewable' })}
+                label={<FormattedMessage id="ui-circulation.settings.loanPolicy.renewable" />}
                 name="renewable"
                 component={Checkbox}
                 id="renewable"
@@ -324,7 +344,7 @@ class LoanPolicyForm extends React.Component {
               {/* unlimited renewals (bool) */}
               { policy.renewable &&
                 <Field
-                  label={formatMsg({ id: 'ui-circulation.settings.loanPolicy.unlimitedRenewals' })}
+                  label={<FormattedMessage id="ui-circulation.settings.loanPolicy.unlimitedRenewals" />}
                   name="renewalsPolicy.unlimited"
                   id="renewalsPolicy.unlimited"
                   component={Checkbox}
@@ -356,7 +376,7 @@ class LoanPolicyForm extends React.Component {
               { policy.renewable &&
                 policy.loansPolicy.profileId === loanProfileMap.ROLLING &&
                 <Field
-                  label={formatMsg({ id: 'ui-circulation.settings.loanPolicy.renewFrom' })}
+                  label={<FormattedMessage id="ui-circulation.settings.loanPolicy.renewFrom" />}
                   name="renewalsPolicy.renewFromId"
                   id="select_renew_from"
                   component={Select}
@@ -367,7 +387,7 @@ class LoanPolicyForm extends React.Component {
               {/* different renewal period (bool) */}
               { policy.renewable &&
                 <Field
-                  label={formatMsg({ id: 'ui-circulation.settings.loanPolicy.renewalPeriodDifferent' })}
+                  label={<FormattedMessage id="ui-circulation.settings.loanPolicy.renewalPeriodDifferent" />}
                   name="renewalsPolicy.differentPeriod"
                   id="renewalsPolicy.differentPeriod"
                   component={Checkbox}
@@ -393,14 +413,19 @@ class LoanPolicyForm extends React.Component {
                       />
                     </Col>
                     <Col>
-                      <Field
-                        label=""
-                        name="renewalsPolicy.period.intervalId"
-                        component={Select}
-                        placeholder={formatMsg({ id: 'ui-circulation.settings.loanPolicy.selectInterval' })}
-                        dataOptions={intervalPeriods}
-                        validate={this.validateField}
-                      />
+                      <FormattedMessage id="ui-circulation.settings.loanPolicy.selectInterval">
+                        {placeholder => (
+                          <Field
+                            label=""
+                            name="renewalsPolicy.period.intervalId"
+                            component={Select}
+                            placeholder={placeholder}
+                            validate={this.validateField}
+                          >
+                            {this.getOptions(intervalPeriods)}
+                          </Field>
+                        )}
+                      </FormattedMessage>
                     </Col>
                   </Row>
                 </div>
@@ -415,8 +440,12 @@ class LoanPolicyForm extends React.Component {
                   name="renewalsPolicy.alternateFixedDueDateScheduleId"
                   component={Select}
                   normalize={value => (value === '' ? null : value)}
-                  dataOptions={[{ label: formatMsg({ id: 'ui-circulation.settings.loanPolicy.selectSchedule' }), value: '' }, ...schedules]}
-                />
+                >
+                  <FormattedMessage id="ui-circulation.settings.loanPolicy.selectSchedule">
+                    {(message) => <option value="" disabled>{message}</option>}
+                  </FormattedMessage>
+                  {schedules}
+                </Field>
               }
             </fieldset>
           }

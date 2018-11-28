@@ -1,15 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
-import { stripesShape } from '@folio/stripes-core/src/Stripes';
-import { Row, Col } from '@folio/stripes-components/lib/LayoutGrid';
-import Button from '@folio/stripes-components/lib/Button';
-import Checkbox from '@folio/stripes-components/lib/Checkbox';
-import TextField from '@folio/stripes-components/lib/TextField';
-import stripesForm from '@folio/stripes-form';
-import Pane from '@folio/stripes-components/lib/Pane';
+import { stripesShape } from '@folio/stripes/core';
+import { Button, Checkbox, Col, Pane, Row, Select, TextField } from '@folio/stripes/components';
+import stripesForm from '@folio/stripes/form';
 import { Field, FieldArray, getFormValues } from 'redux-form';
-import Select from '@folio/stripes-components/lib/Select';
+
 import { patronIdentifierTypes } from '../constants';
 import css from './CheckoutSettingsForm.css';
 
@@ -50,13 +46,13 @@ class CheckoutSettingsForm extends React.Component {
   }
 
   handleCheckoutTimeout() {
-    this.setState({
-      checked: !this.state.checked,
-    });
+    this.setState(({ checked }) => ({
+      checked: !checked
+    }));
   }
 
   getCurrentValues() {
-    const { stripes: { store } } = this.props;
+    const { store } = this.props.stripes;
     const state = store.getState();
     return getFormValues('checkoutForm')(state) || {};
   }
@@ -68,6 +64,7 @@ class CheckoutSettingsForm extends React.Component {
         <Col xs={12}>
           <Field
             component={Checkbox}
+            type="checkbox"
             id={`${iden.queryKey}-checkbox`}
             data-checked={fields.get(index)}
             label={iden.label}
@@ -89,7 +86,11 @@ class CheckoutSettingsForm extends React.Component {
   }
 
   render() {
-    const { handleSubmit, label, stripes } = this.props;
+    const {
+      handleSubmit,
+      label,
+    } = this.props;
+
     const checkoutValues = this.getCurrentValues();
     const hidden = this.state.checked ? '' : 'hidden';
     return (
@@ -100,10 +101,11 @@ class CheckoutSettingsForm extends React.Component {
           <Row>
             <Col xs={12}>
               <Field
-                label={stripes.intl.formatMessage({ id: 'ui-circulation.settings.checkout.timeout' })}
+                label={<FormattedMessage id="ui-circulation.settings.checkout.timeout" />}
                 id="checkoutTimeout"
                 name="checkoutTimeout"
                 component={Checkbox}
+                type="checkbox"
                 onChange={this.handleCheckoutTimeout}
                 normalize={v => !!v}
               />
@@ -121,7 +123,7 @@ class CheckoutSettingsForm extends React.Component {
                   />
                 </Col>
                 <Col xs={7}>
-                  <div>{stripes.intl.formatMessage({ id: 'ui-circulation.settings.checkout.minutes' })}</div>
+                  <FormattedMessage id="ui-circulation.settings.checkout.minutes" />
                 </Col>
               </div>
             </Row>
@@ -130,20 +132,17 @@ class CheckoutSettingsForm extends React.Component {
           <Row>
             <Col xs={12}>
               <Field
-                label={stripes.intl.formatMessage({ id: 'ui-circulation.settings.checkout.audioAlerts' })}
+                label={<FormattedMessage id="ui-circulation.settings.checkout.audioAlerts" />}
                 name="audioAlertsEnabled"
                 component={Select}
-                dataOptions={[
-                  {
-                    label: stripes.intl.formatMessage({ id: 'ui-circulation.settings.checkout.no' }),
-                    value: false,
-                  },
-                  {
-                    label: stripes.intl.formatMessage({ id: 'ui-circulation.settings.checkout.yes' }),
-                    value: true,
-                  },
-                ]}
-              />
+              >
+                <FormattedMessage id="ui-circulation.settings.checkout.no">
+                  {(message) => <option value="false">{message}</option>}
+                </FormattedMessage>
+                <FormattedMessage id="ui-circulation.settings.checkout.yes">
+                  {(message) => <option value="true">{message}</option>}
+                </FormattedMessage>
+              </Field>
             </Col>
           </Row>
         </Pane>

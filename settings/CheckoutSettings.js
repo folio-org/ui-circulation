@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
-import { stripesShape } from '@folio/stripes-core/src/Stripes';
-import ConfigManager from '@folio/stripes-smart-components/lib/ConfigManager';
+import { FormattedMessage } from 'react-intl';
+import { stripesShape } from '@folio/stripes/core';
+import { ConfigManager } from '@folio/stripes/smart-components';
 
 import { patronIdentifierTypes } from '../constants';
 import CheckoutSettingsForm from './CheckoutSettingsForm';
@@ -41,12 +42,11 @@ class CheckoutSettings extends React.Component {
   }
 
   validate(values, allthevalues) {
-    const stripes = this.props.stripes;
     const errors = {};
 
     const isValid = values.idents && values.idents.reduce((valid, v) => (valid || v), false);
     if (!isValid) {
-      errors.idents = { _error: stripes.intl.formatMessage({ id: 'ui-circulation.settings.checkout.validate.selectContinue' }) };
+      errors.idents = { _error: <FormattedMessage id="ui-circulation.settings.checkout.validate.selectContinue" /> };
     }
 
     if (!values.checkoutTimeout) {
@@ -54,7 +54,7 @@ class CheckoutSettings extends React.Component {
     }
     const checkoutTimeoutDuration = (_.isInteger(+values.checkoutTimeoutDuration) && (+values.checkoutTimeoutDuration > 0));
     if (!checkoutTimeoutDuration) {
-      errors.checkoutTimeoutDuration = { _error: stripes.intl.formatMessage({ id: 'ui-circulation.settings.checkout.validate.timeoutDuration' }) };
+      errors.checkoutTimeoutDuration = { _error: <FormattedMessage id="ui-circulation.settings.checkout.validate.timeoutDuration" /> };
     }
     return errors;
   }

@@ -3,11 +3,12 @@ import {
   Row,
   Col,
   Button,
-  TextField,
-  Icon,
-} from '@folio/stripes-components';
+  TextField
+} from '@folio/stripes/components';
 import { Field } from 'redux-form';
-import stripesForm from '@folio/stripes-form';
+import { FormattedMessage } from 'react-intl';
+
+import stripesForm from '@folio/stripes/form';
 
 import LoanRulesField from './LoanRulesField';
 
@@ -17,7 +18,7 @@ class LoanRulesForm extends React.Component {
 
     this.state = {
       ruleFilter: ''
-    }
+    };
 
     this.filterRules = this.filterRules.bind(this);
   }
@@ -39,30 +40,42 @@ class LoanRulesForm extends React.Component {
     const containerStyle = {
       height: '100%',
       display: 'flex',
-      flexDirection:'column',
-    };
-
-    const editorWrapStyle = {
-      flexGrow: 2,
+      flexDirection: 'column',
     };
 
     return (
       <form id="form-loan-rules" style={containerStyle} onSubmit={handleSubmit}>
-        <Row end='xs'>
+        <Row end="xs">
           <Col xs={3}>
-            <TextField value={this.state.ruleFilter} onChange={this.filterRules} validationEnabled={false} placeholder="filter rules" />
+            <FormattedMessage id="ui-circulation.settings.checkout.filterRules">
+              {placeholder => (
+                <TextField
+                  value={this.state.ruleFilter}
+                  onChange={this.filterRules}
+                  validationEnabled={false}
+                  placeholder={placeholder}
+                />
+              )}
+            </FormattedMessage>
           </Col>
           <Col xs={3}>
-            <Button fullWidth id="clickable-save-loan-rules" type="submit" disabled={pristine || submitting }>Save</Button>
+            <Button
+              fullWidth
+              id="clickable-save-loan-rules"
+              type="submit"
+              disabled={pristine || submitting}
+            >
+              <FormattedMessage id="ui-circulation.settings.checkout.save" />
+            </Button>
           </Col>
         </Row>
         <Row>
           <Col>
-            <Field component={LoanRulesField} name="loanRulesCode" {...editorProps} filter={this.state.ruleFilter}/>
+            <Field component={LoanRulesField} name="loanRulesCode" {...editorProps} filter={this.state.ruleFilter} />
           </Col>
         </Row>
       </form>
-    )
+    );
   }
 }
 

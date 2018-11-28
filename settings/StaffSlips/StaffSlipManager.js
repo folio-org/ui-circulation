@@ -1,7 +1,8 @@
 import { sortBy } from 'lodash';
 import React from 'react';
 import PropTypes from 'prop-types';
-import EntryManager from '@folio/stripes-smart-components/lib/EntryManager';
+import { FormattedMessage } from 'react-intl';
+import { EntryManager } from '@folio/stripes/smart-components';
 
 import StaffSlipDetail from './StaffSlipDetail';
 import StaffSlipForm from './StaffSlipForm';
@@ -21,9 +22,6 @@ class StaffSlipManager extends React.Component {
         DELETE: PropTypes.func,
       }),
     }).isRequired,
-    stripes: PropTypes.shape({
-      intl: PropTypes.object.isRequired,
-    }),
   };
 
   static manifest = Object.freeze({
@@ -56,31 +54,31 @@ class StaffSlipManager extends React.Component {
     });
   }
 
-  translate(id) {
-    this.props.stripes.intl.formatMessage({
-      id: `ui-circulation.settings.staffSlips.${id}`
-    });
-  }
-
   validate(values) {
     const errors = {};
 
     if (!values.name) {
-      errors.name = this.translate('validation.required');
+      errors.name = <FormattedMessage id="ui-circulation.settings.staffSlips.validation.required" />;
     }
 
     return errors;
   }
 
   render() {
+    const {
+      mutator,
+      resources,
+      label,
+    } = this.props;
+
     return (
       <EntryManager
         {...this.props}
-        parentMutator={this.props.mutator}
-        entryList={sortBy((this.props.resources.entries || {}).records || [], ['name'])}
+        parentMutator={mutator}
+        entryList={sortBy((resources.entries || {}).records || [], ['name'])}
         detailComponent={StaffSlipDetail}
-        paneTitle={this.props.label}
-        entryLabel={this.props.label}
+        paneTitle={label}
+        entryLabel={label}
         entryFormComponent={StaffSlipForm}
         validate={this.validate}
         nameKey="name"

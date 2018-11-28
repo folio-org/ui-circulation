@@ -1,9 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import KeyValue from '@folio/stripes-components/lib/KeyValue';
+import { FormattedMessage } from 'react-intl';
+import { Button, Col, KeyValue, Row } from '@folio/stripes/components';
 import HtmlToReact, { Parser } from 'html-to-react';
-import Button from '@folio/stripes-components/lib/Button';
-import { Row, Col } from '@folio/stripes-components/lib/LayoutGrid';
 
 import formats from './formats';
 import PreviewModal from './PreviewModal';
@@ -14,7 +13,6 @@ class StaffSlipDetail extends React.Component {
   static propTypes = {
     stripes: PropTypes.shape({
       connect: PropTypes.func.isRequired,
-      intl: PropTypes.object.isRequired,
     }).isRequired,
     initialValues: PropTypes.object,
   };
@@ -38,12 +36,6 @@ class StaffSlipDetail extends React.Component {
     this.parser = new Parser();
   }
 
-  translate(id) {
-    return this.props.stripes.intl.formatMessage({
-      id: `ui-circulation.settings.staffSlips.${id}`
-    });
-  }
-
   openPreviewDialog() {
     this.setState({ openDialog: true });
   }
@@ -54,34 +46,48 @@ class StaffSlipDetail extends React.Component {
 
   render() {
     const { openDialog } = this.state;
-    const staffSlip = this.props.initialValues;
+    const { initialValues: staffSlip } = this.props;
     const contentComponent = this.parser.parseWithInstructions(staffSlip.template, () => true, this.rules);
+    const isActiveValue = staffSlip.active
+      ? <FormattedMessage id="ui-circulation.settings.staffSlips.yes" />
+      : <FormattedMessage id="ui-circulation.settings.staffSlips.no" />;
 
     return (
       <div>
         <Row>
           <Col xs={8}>
-            <KeyValue label={this.translate('name')} value={staffSlip.name} />
+            <KeyValue
+              label={<FormattedMessage id="ui-circulation.settings.staffSlips.name" />}
+              value={staffSlip.name}
+            />
           </Col>
         </Row>
         <Row>
           <Col xs={8}>
-            <KeyValue label={this.translate('active')} value={staffSlip.active ? this.translate('yes') : this.translate('no')} />
+            <KeyValue
+              label={<FormattedMessage id="ui-circulation.settings.staffSlips.active" />}
+              value={isActiveValue}
+            />
           </Col>
         </Row>
         <Row>
           <Col xs={8}>
-            <KeyValue label={this.translate('description')} value={staffSlip.description} />
+            <KeyValue
+              label={<FormattedMessage id="ui-circulation.settings.staffSlips.description" />}
+              value={staffSlip.description}
+            />
           </Col>
         </Row>
         <Row bottom="xs">
           <Col xs={9}>
-            {this.translate('display')}
+            <FormattedMessage id="ui-circulation.settings.staffSlips.display" />
           </Col>
           <Col xs={3}>
             <Row className={css.preview}>
               <Col>
-                <Button bottomMargin0 onClick={this.openPreviewDialog}>Preview</Button>
+                <Button bottomMargin0 onClick={this.openPreviewDialog}>
+                  <FormattedMessage id="ui-circulation.settings.staffSlips.preview" />
+                </Button>
               </Col>
             </Row>
           </Col>

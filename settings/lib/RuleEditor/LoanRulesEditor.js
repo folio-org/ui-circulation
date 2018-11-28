@@ -6,6 +6,7 @@ import isEqual from 'lodash/isEqual';
 import PropTypes from 'prop-types';
 import Codemirror from 'codemirror';
 import CodeMirror from 'react-codemirror2';
+
 import initLoanRulesCMM from './LoanRulesCMM';
 import 'codemirror/addon/fold/foldcode';
 import initFoldRules from './fold-rules';
@@ -266,7 +267,7 @@ class LoanRulesEditor extends React.Component {
   componentDidMount() {
     this.cm = this.cmComponent.editor;
     //set up hinting
-    loanRulesHint(Codemirror);
+    loanRulesHint(Codemirror, this.props);
 
     // prettymuch always show the auto-complete.
     this.cm.on('cursorActivity', this.showHelp);
