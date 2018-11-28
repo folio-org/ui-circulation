@@ -1,7 +1,10 @@
 import React from 'react';
+import {
+  FormattedMessage,
+} from 'react-intl';
 import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
-import { cloneDeep } from 'lodash';
+import { cloneDeep, find, sortBy } from 'lodash';
 
 import {
   Accordion,
@@ -14,6 +17,7 @@ import {
   PaneMenu,
   Paneset,
   Row,
+  Select,
   TextArea,
   TextField,
 } from '@folio/stripes/components';
@@ -22,6 +26,37 @@ import stripesForm from '@folio/stripes/form';
 import PatronNoticeEditor from './PatronNoticeEditor';
 // import PreviewModal from './PreviewModal';
 import formats from './formats';
+import categories from './categories';
+
+/**
+ * on-blur validation checks that the name of the patron notice
+ * is unique.
+ *
+ * redux-form requires that the rejected Promises have the form
+ * { field: "error message" }
+ * hence the eslint-disable-next-line comments since ESLint is picky
+ * about the format of rejected promises.
+ *
+ * @see https://redux-form.com/7.3.0/examples/asyncchangevalidation/
+ */
+function asyncValidate(values, dispatch, props) {
+  if (values.name !== undefined) {
+    return new Promise((resolve, reject) => {
+      const uv = props.uniquenessValidator.nameUniquenessValidator;
+      const query = `(name="${values.name}")`;
+      uv.reset();
+      uv.GET({ params: { query } }).then((notices) => {
+        if (find(notices, ['name', values.name])) {
+          // eslint-disable-next-line prefer-promise-reject-errors
+          reject({ name: 'A patron notice with this name already exists' });
+        } else {
+          resolve();
+        }
+      });
+    });
+  }
+  return new Promise(resolve => resolve());
+}
 
 class PatronNoticeForm extends React.Component {
   static propTypes = {
@@ -88,7 +123,7 @@ class PatronNoticeForm extends React.Component {
       );
     }
 
-    return <span>Patron notices</span>;
+    return <span>New patron notice</span>;
   }
 
   renderSaveMenu() {
@@ -112,9 +147,20 @@ class PatronNoticeForm extends React.Component {
     );
   }
 
+  // Synchronous validation functions
+  requireName = value => (value ? undefined : 'Name is required');
+  requireCategory = value => (value ? undefined : 'Category is required');
+
   render() {
-    const { handleSubmit } = this.props;
-    const isActive = this.props.initialValues && this.props.initialValues.active;
+    const { handleSubmit, initialValues } = this.props;
+    const category = initialValues && initialValues.category;
+    const isActive = initialValues && initialValues.active;
+    const sortedCategories = sortBy(categories, ['label']);
+    const categoryOptions = sortedCategories.map(({ label, id }) => ({
+      labelTranslationPath: label,
+      value: id,
+      selected: category === id
+    }));
 
     return (
       <form id="form-patron-notice" onSubmit={handleSubmit(this.save)}>
@@ -122,7 +168,13 @@ class PatronNoticeForm extends React.Component {
           <Pane defaultWidth="100%" paneTitle={this.renderPaneTitle()} firstMenu={this.renderCLoseIcon()} lastMenu={this.renderSaveMenu()}>
             <Row>
               <Col xs={8}>
-                <Field label="Name" name="name" id="input-patron-notice-name" component={TextField} />
+                <Field
+                  label="Name"
+                  name="name"
+                  id="input-patron-notice-name"
+                  component={TextField}
+                  validate={this.requireName}
+                />
               </Col>
               <Col xs={3}>
                 <Field label="Active" name="active" id="input-patron-notice-active" component={Checkbox} defaultChecked={isActive} normalize={v => !!v} />
@@ -135,12 +187,26 @@ class PatronNoticeForm extends React.Component {
             </Row>
             <Row>
               <Col xs={8}>
-                <Field label="Category" name="category" id="input-patron-notice-category" component={TextField} />
-              </Col>
-            </Row>
-            <Row>
-              <Col xs={8}>
-                <Field label="Subject" name="subject" id="input-patron-notice-subject" component={TextField} />
+                <Field
+                  label="Category"
+                  name="category"
+                  component={Select}
+                  fullWidth
+                  validate={this.requireCategory}
+                >
+                  {categoryOptions.map(({ labelTranslationPath, value, selected }) => (
+                    <FormattedMessage id={labelTranslationPath}>
+                      {translatedLabel => (
+                        <option
+                          value={value}
+                          selected={selected}
+                        >
+                          {translatedLabel}
+                        </option>
+                      )}
+                    </FormattedMessage>
+                  ))}
+                </Field>
               </Col>
             </Row>
             <AccordionSet accordionStatus={this.state.accordions} onToggle={this.onToggleSection}>
@@ -148,6 +214,11 @@ class PatronNoticeForm extends React.Component {
                 id="email-template"
                 label="Email"
               >
+                <Row>
+                  <Col xs={8}>
+                    <Field label="Subject" name="subject" id="input-patron-notice-subject" component={TextField} />
+                  </Col>
+                </Row>
                 <Row>
                   <Field label="Body" name="localizedTemplates.email.body" id="input-email-template-body" component={PatronNoticeEditor} tokens={Object.keys(formats.Any)} />
                 </Row>
@@ -180,4 +251,6 @@ export default stripesForm({
   form: 'patronNoticeForm',
   navigationCheck: true,
   enableReinitialize: false,
+  asyncValidate,
+  asyncBlurFields: ['name'],
 })(PatronNoticeForm);

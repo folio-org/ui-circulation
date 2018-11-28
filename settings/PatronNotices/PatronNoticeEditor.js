@@ -47,6 +47,7 @@ class PatronNoticeEditor extends Component {
           [{ 'indent': '-1' }, { 'indent': '+1' }],
           [{ 'size': ['small', false, 'large', 'huge'] }],
           [{ align: '' }, { align: 'center' }, { align: 'right' }, { align: 'justify' }],
+          ['link'],
           [{
             token: this.token
           }]
