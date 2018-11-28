@@ -45,7 +45,7 @@ class PatronNotices extends React.Component {
         paneTitle={this.props.label}
         entryLabel={this.props.label}
         entryFormComponent={PatronNoticeForm}
-        defaultEntry={{ outputFormats: ['html'], templateResolver: 'mustache' }}
+        defaultEntry={{ active: true, outputFormats: ['html'], templateResolver: 'mustache' }}
         // validate={this.validate}
         nameKey="name"
         // TODO: use real permissions once they exist (EntryManager crashes without a permissions object)
