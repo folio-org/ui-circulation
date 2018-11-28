@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { find, cloneDeep } from 'lodash';
+import { cloneDeep } from 'lodash';
 
 import {
   Accordion,
