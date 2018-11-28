@@ -111,5 +111,7 @@
     "settings.checkout.filterRules": "regras de filtragem",
     "settings.staffSlips.hold": "Aguarde",
     "settings.staffSlips.print": "Imprimir",
-    "settings.staffSlips.editLabel": "Editar: Ficha de encaminhamento - {name}"
+    "settings.staffSlips.editLabel": "Editar: Ficha de encaminhamento - {name}",
+    "settings.loanPolicy.openingTimeOffset": "Compensação de tempo de abertura",
+    "settings.index.patronNotices": "Avisos ao usuário"
 }

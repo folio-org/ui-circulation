@@ -111,5 +111,7 @@
     "settings.checkout.filterRules": "تنقيح القواعد",
     "settings.staffSlips.hold": "حجز",
     "settings.staffSlips.print": "طباعة",
-    "settings.staffSlips.editLabel": "تحرير: كشوف الموظفين - {name}"
+    "settings.staffSlips.editLabel": "تحرير: كشوف الموظفين - {name}",
+    "settings.loanPolicy.openingTimeOffset": "Opening time offset",
+    "settings.index.patronNotices": "Patron notices"
 }
