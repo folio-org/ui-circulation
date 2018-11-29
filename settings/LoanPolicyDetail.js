@@ -24,6 +24,8 @@ import {
   renewFromIds,
   shortTermLoansOptions,
   longTermLoansOptions,
+  BEGINNING_OF_THE_NEXT_OPEN_SERVICE_POINT_HOURS,
+  intervalIdsMap,
 } from '../constants';
 
 class LoanPolicyDetail extends React.Component {
@@ -74,6 +76,26 @@ class LoanPolicyDetail extends React.Component {
     return find(availableLoansOptions, loanOption => loanOption.id === selectedItemId);
   };
 
+  isOpeningTimeOffsetVisible = () => {
+    const policy = this.props.initialValues || {};
+    const {
+      loanable,
+      loansPolicy: {
+        closedLibraryDueDateManagementId,
+        profileId,
+        period: {
+          intervalId = '',
+        } = {},
+      },
+    } = policy;
+
+    const isProfileRolling = profileId === loanProfileMap.ROLLING;
+    const isShortTermPeriod = intervalId === intervalIdsMap.MINUTES || intervalId === intervalIdsMap.HOURS;
+    const isBeginningOfNextOpenServicePointHours = closedLibraryDueDateManagementId === BEGINNING_OF_THE_NEXT_OPEN_SERVICE_POINT_HOURS;
+
+    return loanable && isProfileRolling && isShortTermPeriod && isBeginningOfNextOpenServicePointHours;
+  };
+
   renderLoans() {
     const {
       initialValues,
@@ -101,6 +123,7 @@ class LoanPolicyDetail extends React.Component {
     const exReqPerInterval = get(policy, ['loansPolicy', 'existingRequestsPeriod', 'intervalId']);
     const gracePeriodInterval = get(policy, ['loansPolicy', 'gracePeriod', 'intervalId']);
     const timeOffsetInterval = get(policy, ['loansPolicy', 'openingTimeOffset', 'intervalId']);
+    const isOpeningTimeOffsetVisible = this.isOpeningTimeOffsetVisible();
 
     return (
       <div>
@@ -153,15 +176,19 @@ class LoanPolicyDetail extends React.Component {
           </Col>
         </Row>
         <br />
-        <Row>
-          <Col xs={12}>
-            <KeyValue
-              label={<FormattedMessage id="ui-circulation.settings.loanPolicy.openingTimeOffset" />}
-              value={`${get(policy, ['loansPolicy', 'openingTimeOffset', 'duration'], '')} ${timeOffsetInterval}`}
-            />
-          </Col>
-        </Row>
-        <br />
+        {isOpeningTimeOffsetVisible &&
+          <div>
+            <Row>
+              <Col xs={12}>
+                <KeyValue
+                  label={<FormattedMessage id="ui-circulation.settings.loanPolicy.openingTimeOffset" />}
+                  value={`${get(policy, ['loansPolicy', 'openingTimeOffset', 'duration'], '')} ${timeOffsetInterval}`}
+                />
+              </Col>
+            </Row>
+            <br />
+          </div>
+        }
         <Row>
           <Col xs={12}>
             <KeyValue

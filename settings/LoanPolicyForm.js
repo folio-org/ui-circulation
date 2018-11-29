@@ -122,9 +122,13 @@ class LoanPolicyForm extends React.Component {
 
     const openingTimeOffset = (allValues.loansPolicy && allValues.loansPolicy.openingTimeOffset);
     const openingTimeOffsetIsVisible = openingTimeOffset && openingTimeOffset.intervalId && !openingTimeOffset.duration;
+    const openingTimeOffsetIsDefault = openingTimeOffset && openingTimeOffset.duration && !openingTimeOffset.intervalId;
 
     if (openingTimeOffsetIsVisible) {
       this.props.change('loansPolicy.openingTimeOffset.duration', 0);
+    }
+    if (openingTimeOffsetIsDefault) {
+      this.props.change('loansPolicy.openingTimeOffset.intervalId', intervalIdsMap.HOURS);
     }
   }
 
@@ -297,6 +301,7 @@ class LoanPolicyForm extends React.Component {
               selectFieldName="openingTimeOffset"
               intervalPeriods={this.getOptions(intervalPeriods.slice(0, 2).reverse())}
               validator={this.validateField}
+              minInputValue={0}
             />
           }
           {/* alternate loan period */}

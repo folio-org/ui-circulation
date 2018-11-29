@@ -22,6 +22,7 @@ const PolicyPropertySetter = ({
   loanHeaderNamespace,
   durationDescriptor,
   timeIntervalsUnitsDescriptor,
+  minInputValue,
 }) => (
   <Fragment>
     <Row className={generalStyles.label}>
@@ -34,6 +35,8 @@ const PolicyPropertySetter = ({
         <Field
           label=""
           name={`${loansPolicyNamespace}.${textFieldName}.${durationDescriptor}`}
+          type="number"
+          min={minInputValue}
           component={TextField}
           validate={validator}
         />
@@ -67,6 +70,7 @@ PolicyPropertySetter.propTypes = {
   durationDescriptor: PropTypes.string,
   timeIntervalsUnitsDescriptor: PropTypes.string,
   loanHeaderNamespace: PropTypes.string,
+  minInputValue: PropTypes.number,
 };
 
 // Default string identifiers to set namespaces
@@ -75,6 +79,7 @@ PolicyPropertySetter.defaultProps = {
   durationDescriptor: 'duration',
   timeIntervalsUnitsDescriptor: 'intervalId',
   loanHeaderNamespace: 'ui-circulation.settings.loanPolicy',
+  minInputValue: 1,
 };
 
 export default PolicyPropertySetter;
