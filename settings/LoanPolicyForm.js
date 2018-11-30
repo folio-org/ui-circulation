@@ -144,11 +144,9 @@ class LoanPolicyForm extends React.Component {
     });
   }
 
-  getOptions(options) {
+  getOptions(options, id) {
     return options.map(({ value, label }) => (
-      <FormattedMessage id={label}>
-        {(message) => <option value={value}>{message}</option>}
-      </FormattedMessage>
+      <option value={value} key={`${id}-${value}`}>{label}</option>
     ));
   }
 
@@ -171,9 +169,7 @@ class LoanPolicyForm extends React.Component {
 
     const schedules = sortBy((parentResources.fixedDueDateSchedules || {}).records || [], ['name'])
       .map(schedule => (
-        <FormattedMessage id={schedule.name}>
-          {(message) => <option value={schedule.id}>{message}</option>}
-        </FormattedMessage>
+        <option value={schedule.id}>{schedule.name}</option>
       ));
 
     const isOpeningTimeOffsetVisible = () => {
@@ -239,6 +235,7 @@ class LoanPolicyForm extends React.Component {
             id="loanable"
             name="loanable"
             component={Checkbox}
+            type="checkbox"
             normalize={v => !!v}
           />
           {/* loan profile. Value affects visibility of several subsequent elements */}
@@ -256,9 +253,11 @@ class LoanPolicyForm extends React.Component {
           { (policy.loanable && policy.loansPolicy && policy.loansPolicy.profileId === loanProfileMap.ROLLING) &&
             <PolicyPropertySetter
               loanHeader="loanPeriod"
+              textFieldId="input_loan_period"
               textFieldName="period"
+              selectFieldId="select_policy_period"
               selectFieldName="period"
-              intervalPeriods={this.getOptions(intervalPeriods)}
+              intervalPeriods={this.getOptions(intervalPeriods, 'period')}
               validator={this.validateField}
             />
           }
@@ -286,16 +285,18 @@ class LoanPolicyForm extends React.Component {
               component={Select}
               validate={this.validateField}
             >
-              {this.getOptions(this.getDueDateManagementOptions())}
+              {this.getOptions(this.getDueDateManagementOptions(), 'closedDueDateMgmt')}
             </Field>
           }
           {/* opening time offset */}
           {isOpeningTimeOffsetVisible() &&
             <PolicyPropertySetter
               loanHeader="openingTimeOffset"
+              textFieldId="input_opening_time_offset"
               textFieldName="openingTimeOffset"
+              selectFieldId="select_opening_time_offset"
               selectFieldName="openingTimeOffset"
-              intervalPeriods={this.getOptions(intervalPeriods.slice(0, 2).reverse())}
+              intervalPeriods={this.getOptions(intervalPeriods.slice(0, 2).reverse(), 'openingTimeOffset')}
               validator={this.validateField}
             />
           }
@@ -303,9 +304,11 @@ class LoanPolicyForm extends React.Component {
           { policy.loanable &&
             <PolicyPropertySetter
               loanHeader="alternateLoanPeriodExisting"
+              textFieldId="input_alternate_loan_period"
               textFieldName="existingRequestsPeriod"
+              selectFieldId="select_alternate_loan_period"
               selectFieldName="existingRequestsPeriod"
-              intervalPeriods={this.getOptions(intervalPeriods.slice(0, 3))}
+              intervalPeriods={this.getOptions(intervalPeriods.slice(0, 3), 'existingRequestsPeriod')}
               validator={this.validateField}
             />
           }
@@ -313,9 +316,11 @@ class LoanPolicyForm extends React.Component {
           { policy.loanable &&
             <PolicyPropertySetter
               loanHeader="gracePeriod"
+              textFieldId="input_grace_period"
               textFieldName="gracePeriod"
+              selectFieldId="select_grace_period"
               selectFieldName="gracePeriod"
-              intervalPeriods={this.getOptions(intervalPeriods)}
+              intervalPeriods={this.getOptions(intervalPeriods, 'gracePeriod')}
               validator={this.validateField}
             />
           }
@@ -337,6 +342,7 @@ class LoanPolicyForm extends React.Component {
                 label={<FormattedMessage id="ui-circulation.settings.loanPolicy.renewable" />}
                 name="renewable"
                 component={Checkbox}
+                type="checkbox"
                 id="renewable"
                 validate={this.validateField}
                 normalize={v => !!v}
@@ -348,6 +354,7 @@ class LoanPolicyForm extends React.Component {
                   name="renewalsPolicy.unlimited"
                   id="renewalsPolicy.unlimited"
                   component={Checkbox}
+                  type="checkbox"
                   validate={this.validateField}
                   normalize={v => !!v}
                 />
@@ -391,6 +398,7 @@ class LoanPolicyForm extends React.Component {
                   name="renewalsPolicy.differentPeriod"
                   id="renewalsPolicy.differentPeriod"
                   component={Checkbox}
+                  type="checkbox"
                   validate={this.validateField}
                   normalize={v => !!v}
                 />
