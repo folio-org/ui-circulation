@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Field, getFormValues } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
@@ -377,6 +377,8 @@ class LoanPolicyForm extends React.Component {
                         name="renewalsPolicy.numberAllowed"
                         id="input_allowed_renewals"
                         component={TextField}
+                        type="number"
+                        min={0}
                         required
                         validate={this.validateField}
                       />
@@ -412,36 +414,19 @@ class LoanPolicyForm extends React.Component {
               { policy.renewable &&
                 policy.renewalsPolicy.differentPeriod &&
                 policy.loansPolicy.profileId === loanProfileMap.ROLLING &&
-                <div>
-                  <p>
-                    <FormattedMessage id="ui-circulation.settings.loanPolicy.alternateLoanPeriodRenewals" />
-                  </p>
-                  <Row>
-                    <Col xs={2}>
-                      <Field
-                        label=""
-                        name="renewalsPolicy.period.duration"
-                        component={TextField}
-                        validate={this.validateField}
-                      />
-                    </Col>
-                    <Col>
-                      <FormattedMessage id="ui-circulation.settings.loanPolicy.selectInterval">
-                        {placeholder => (
-                          <Field
-                            label=""
-                            name="renewalsPolicy.period.intervalId"
-                            component={Select}
-                            placeholder={placeholder}
-                            validate={this.validateField}
-                          >
-                            {this.getOptions(intervalPeriods)}
-                          </Field>
-                        )}
-                      </FormattedMessage>
-                    </Col>
-                  </Row>
-                </div>
+                <Fragment>
+                  <br />
+                  <PolicyPropertySetter
+                    loansPolicyNamespace="renewalsPolicy"
+                    loanHeader="alternateLoanPeriodRenewals"
+                    textFieldId="input_alternate_period"
+                    textFieldName="period"
+                    selectFieldId="select_alternate_period"
+                    selectFieldName="period"
+                    intervalPeriods={this.getOptions(intervalPeriods, 'period')}
+                    validator={this.validateField}
+                  />
+                </Fragment>
               }
               {/* alt fixed due date schedule for renewals - appears when profile is
                 "fixed" or "rolling", but with different labels */}
