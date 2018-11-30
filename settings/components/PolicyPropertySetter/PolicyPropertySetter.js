@@ -14,7 +14,9 @@ import generalStyles from './PolicyPropertySetter.css';
 
 const PolicyPropertySetter = ({
   loanHeader,
+  textFieldId,
   textFieldName,
+  selectFieldId,
   selectFieldName,
   intervalPeriods,
   validator,
@@ -34,6 +36,7 @@ const PolicyPropertySetter = ({
       <Col xs={1}>
         <Field
           label=""
+          id={textFieldId}
           name={`${loansPolicyNamespace}.${textFieldName}.${durationDescriptor}`}
           type="number"
           min={minInputValue}
@@ -46,6 +49,7 @@ const PolicyPropertySetter = ({
           {placeholder => (
             <Field
               label=""
+              id={selectFieldId}
               name={`${loansPolicyNamespace}.${selectFieldName}.${timeIntervalsUnitsDescriptor}`}
               component={Select}
               placeholder={placeholder}
@@ -61,8 +65,10 @@ const PolicyPropertySetter = ({
 );
 
 PolicyPropertySetter.propTypes = {
-  loanHeader: PropTypes.object.isRequired,
+  loanHeader: PropTypes.string.isRequired,
+  textFieldId: PropTypes.string.isRequired,
   textFieldName: PropTypes.string.isRequired,
+  selectFieldId: PropTypes.string.isRequired,
   selectFieldName: PropTypes.string.isRequired,
   intervalPeriods: PropTypes.arrayOf(PropTypes.string).isRequired,
   validator: PropTypes.func.isRequired,
