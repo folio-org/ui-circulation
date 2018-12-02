@@ -8,7 +8,7 @@
   "settings.index.otherSettings": "Other settings",
   "settings.index.staffSlips": "Staff slips",
   "settings.index.requestCancellationReasons": "Request cancellation reasons",
-  "settings.index.patronNotices": "Patron notices",
+  "settings.index.patronNotices": "Patron notice templates",
 
   "settings.loanPolicy.entryLabel": "Loan Policy",
   "settings.loanPolicy.paneTitle": "Loan Policies",
