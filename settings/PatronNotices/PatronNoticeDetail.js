@@ -56,9 +56,9 @@ class PatronNoticeDetail extends React.Component {
 
   render() {
     const notice = this.props.initialValues;
-    const emailTemplate = notice.localizedTemplates.email;
-    const smsTemplate = notice.localizedTemplates.sms;
-    const printTemplate = notice.localizedTemplates.print;
+    const emailTemplate = notice.localizedTemplates.en;
+    // const smsTemplate = notice.localizedTemplates.sms;
+    // const printTemplate = notice.localizedTemplates.print;
 
     return (
       <div>
@@ -93,7 +93,7 @@ class PatronNoticeDetail extends React.Component {
               </div>
             }
           </Accordion>
-          <Accordion
+          {/* <Accordion
             id="sms-template"
             label="SMS"
           >
@@ -128,7 +128,7 @@ class PatronNoticeDetail extends React.Component {
                 </Row>
               </div>
             }
-          </Accordion>
+          </Accordion> */}
         </AccordionSet>
         { this.state.openDialog &&
           <PreviewModal

@@ -220,10 +220,10 @@ class PatronNoticeForm extends React.Component {
                   </Col>
                 </Row>
                 <Row>
-                  <Field label="Body" name="localizedTemplates.email.body" id="input-email-template-body" component={PatronNoticeEditor} tokens={Object.keys(formats.Any)} />
+                  <Field label="Body" name="localizedTemplates.en.body" id="input-email-template-body" component={PatronNoticeEditor} tokens={Object.keys(formats.Any)} />
                 </Row>
               </Accordion>
-              <Accordion
+              {/* <Accordion
                 id="sms-template"
                 label="SMS"
               >
@@ -238,7 +238,7 @@ class PatronNoticeForm extends React.Component {
                 <Row>
                   <Field label="Body" name="localizedTemplates.print.body" id="input-print-template-body" component={PatronNoticeEditor} tokens={Object.keys(formats.Any)} />
                 </Row>
-              </Accordion>
+              </Accordion> */}
             </AccordionSet>
           </Pane>
         </Paneset>
