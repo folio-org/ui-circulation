@@ -64,6 +64,7 @@ class PatronNoticeForm extends React.Component {
     handleSubmit: PropTypes.func.isRequired,
     initialValues: PropTypes.object,
     onCancel: PropTypes.func,
+    onRemove: PropTypes.func,
     onSave: PropTypes.func,
     pristine: PropTypes.bool,
     submitting: PropTypes.bool,
@@ -78,7 +79,7 @@ class PatronNoticeForm extends React.Component {
         'sms-template': true,
         'print-template': true,
       },
-      confirrming: false,
+      confirming: false,
     };
 
     this.onToggleSection = this.onToggleSection.bind(this);
@@ -271,7 +272,7 @@ class PatronNoticeForm extends React.Component {
                   buttonStyle="danger"
                   onClick={this.showConfirm}
                   marginBottom0
-                  disabled={!pristine || submitting || initialValues.predefined}
+                  disabled={!pristine || submitting || confirming || initialValues.predefined}
                 >
                   Delete this notice
                 </Button>
