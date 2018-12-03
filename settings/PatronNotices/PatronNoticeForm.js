@@ -12,6 +12,7 @@ import {
   Button,
   Checkbox,
   Col,
+  ConfirmationModal,
   IconButton,
   Pane,
   PaneMenu,
@@ -77,10 +78,14 @@ class PatronNoticeForm extends React.Component {
         'sms-template': true,
         'print-template': true,
       },
+      confirrming: false,
     };
 
     this.onToggleSection = this.onToggleSection.bind(this);
     this.save = this.save.bind(this);
+    this.showConfirm = this.showConfirm.bind(this);
+    this.hideConfirm = this.hideConfirm.bind(this);
+    this.confirmDelete = this.confirmDelete.bind(this);
   }
 
   onToggleSection({ id }) {
@@ -93,6 +98,22 @@ class PatronNoticeForm extends React.Component {
 
   save(data) {
     this.props.onSave(data);
+  }
+
+  showConfirm() {
+    this.setState({
+      confirming: true,
+    });
+  }
+
+  hideConfirm() {
+    this.setState({
+      confirming: false,
+    });
+  }
+
+  confirmDelete() {
+    this.props.onRemove(this.props.initialValues);
   }
 
   renderCLoseIcon() {
@@ -152,7 +173,8 @@ class PatronNoticeForm extends React.Component {
   requireCategory = value => (value ? undefined : 'Category is required');
 
   render() {
-    const { handleSubmit, initialValues } = this.props;
+    const { handleSubmit, initialValues, pristine, submitting } = this.props;
+    const { confirming } = this.state;
     const category = initialValues && initialValues.category;
     const isActive = initialValues && initialValues.active;
     const sortedCategories = sortBy(categories, ['label']);
@@ -240,6 +262,35 @@ class PatronNoticeForm extends React.Component {
                 </Row>
               </Accordion> */}
             </AccordionSet>
+            <Row>
+              <Col xs={8}>
+                <Button
+                  id="clickable-delete-patron-notice"
+                  type="button"
+                  title="Delete"
+                  buttonStyle="danger"
+                  onClick={this.showConfirm}
+                  marginBottom0
+                  disabled={!pristine || submitting || initialValues.predefined}
+                >
+                  Delete this notice
+                </Button>
+              </Col>
+            </Row>
+            { initialValues.predefined &&
+              <Row>
+                <Col xs={8}>
+                  This is a predefined notice and cannot be deleted.
+                </Col>
+              </Row>
+            }
+            <ConfirmationModal
+              open={this.state.confirming}
+              heading="Confirm delete"
+              message="Are you sure you want to delete this patron notice?"
+              onConfirm={this.confirmDelete}
+              onCancel={this.hideConfirm}
+            />
           </Pane>
         </Paneset>
       </form>
