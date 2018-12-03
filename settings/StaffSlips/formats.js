@@ -10,8 +10,8 @@ const formats = {
     'Requester barcode': '<Barcode>9781561454907</Barcode>'
   },
   Transit: {
-    'From location': 'Mann Library',
-    'To location': 'Music Library',
+    'From Service Point': 'Circ Desk 1',
+    'To Service Point': 'Circ Desk 2',
     'Needed for': '10/11/2020',
     'Date': '10/10/2020',
     'Item title': '14 cows for America',
