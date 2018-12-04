@@ -54,7 +54,7 @@ class PatronNotices extends React.Component {
         entryFormComponent={PatronNoticeForm}
         defaultEntry={{ active: true, outputFormats: ['html'], templateResolver: 'mustache' }}
         // validate={this.validate}
-        nameKey="name"
+        nameKey="description"
         // TODO: use real permissions once they exist (EntryManager crashes without a permissions object)
         permissions={{
           put: 'settings.organization.enabled',
@@ -62,6 +62,9 @@ class PatronNotices extends React.Component {
           delete: 'settings.organization.enabled',
         }}
         uniquenessValidator={this.props.mutator}
+        editable
+        clonable
+        editElement="both"
       />
     );
   }

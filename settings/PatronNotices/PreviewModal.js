@@ -20,7 +20,12 @@ class PreviewModal extends React.Component {
     onClose: PropTypes.func.isRequired,
     open: PropTypes.bool.isRequired,
     previewTemplate: PropTypes.string,
+    printable: PropTypes.bool,
     slipType: PropTypes.string,
+  };
+
+  static defaultProps = {
+    printable: false,
   };
 
   constructor(props) {
@@ -45,8 +50,7 @@ class PreviewModal extends React.Component {
   }
 
   render() {
-    const { open, onClose, previewTemplate, intl } = this.props;
-    const closeLabel = intl.formatMessage({ id: 'ui-circulation.settings.staffSlips.close' });
+    const { open, onClose, previewTemplate, intl, printable } = this.props;
     const heading = intl.formatMessage({ id: 'ui-circulation.settings.staffSlips.previewLabel' });
 
     const tmpl = template(previewTemplate || '');
@@ -58,9 +62,11 @@ class PreviewModal extends React.Component {
         open={open}
         label={heading}
         id="preview-modal"
-        scope="module"
         size="medium"
         showHeader
+        dismissible
+        closeOnBackgroundClick
+        onClose={onClose}
       >
         <div className="ql-editor" ref={this.editorRef}>
           {contentComponent}
@@ -68,8 +74,9 @@ class PreviewModal extends React.Component {
         <br />
         <Row>
           <Col xs>
-            <ReactToPrint trigger={() => <Button buttonStyle="primary">Print</Button>} content={() => this.editorRef.current} />
-            <Button onClick={onClose} id="clickable-close-preview">{closeLabel}</Button>
+            {printable &&
+              <ReactToPrint trigger={() => <Button buttonStyle="primary">Print</Button>} content={() => this.editorRef.current} />
+            }
           </Col>
         </Row>
       </Modal>

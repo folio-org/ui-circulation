@@ -88,11 +88,24 @@ class PatronNoticeEditor extends Component {
 
   insertToken(value) {
     if (!value) return;
-    const tag = `{{${value}}}`;
+
+    let tag;
+    let insertionLength;
+    // If the value selected is a special iterator (e.g. #items), print an
+    // opening and closing tag and position the cursor between them. Otherwise,
+    // print a single tag and move the cursor to the end.
+    if (value.indexOf('#') === 0) {
+      tag = `{{${value}}}\n\n{{/${value.substring(1)}}}`;
+      insertionLength = value.length + 5;
+    } else {
+      tag = `{{${value}}}`;
+      insertionLength = tag.length;
+    }
+
     const editor = this.quill.getEditor();
     const cursorPosition = editor.getSelection().index;
     editor.insertText(cursorPosition, tag);
-    editor.setSelection(cursorPosition + tag.length);
+    editor.setSelection(cursorPosition + insertionLength);
   }
 
   render() {
