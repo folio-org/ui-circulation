@@ -1,12 +1,20 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { Field, getFormValues } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
+
+import {
+  Field,
+  getFormValues,
+} from 'redux-form';
+
 import {
   cloneDeep,
   sortBy,
+  some,
+  get,
 } from 'lodash';
 
+import { ViewMetaData } from '@folio/stripes/smart-components';
 import { stripesShape } from '@folio/stripes/core';
 import {
   Accordion,
@@ -18,7 +26,6 @@ import {
   Col,
   Row,
 } from '@folio/stripes/components';
-import { ViewMetaData } from '@folio/stripes/smart-components';
 
 import { PolicyPropertySetter } from './components';
 
@@ -31,6 +38,8 @@ import {
   shortTermLoansOptions,
   longTermLoansOptions,
   BEGINNING_OF_THE_NEXT_OPEN_SERVICE_POINT_HOURS,
+  CURRENT_DUE_DATE_TIME,
+  CURRENT_DUE_DATE,
 } from '../constants';
 
 class LoanPolicyForm extends React.Component {
@@ -44,10 +53,8 @@ class LoanPolicyForm extends React.Component {
 
   constructor(props) {
     super(props);
-    this.validateField = this.validateField.bind(this);
 
-    this.handleExpandAll = this.handleExpandAll.bind(this);
-    this.handleSectionToggle = this.handleSectionToggle.bind(this);
+    this.validateField = this.validateField.bind(this);
     this.cViewMetaData = props.stripes.connect(ViewMetaData);
 
     this.state = {
@@ -57,15 +64,9 @@ class LoanPolicyForm extends React.Component {
     };
   }
 
-  getDueDateManagementOptions = () => {
-    const isShortTermLoan = this.isShortTermLoan();
-
-    if (isShortTermLoan) {
-      return shortTermLoansOptions;
-    }
-
-    return longTermLoansOptions;
-  };
+  componentDidUpdate() {
+    this.setCorrectDueDateManagementSelectedValue();
+  }
 
   isShortTermLoan = () => {
     const {
@@ -73,15 +74,48 @@ class LoanPolicyForm extends React.Component {
       loansPolicy: {
         profileId,
         period: {
-          intervalId = '',
+          intervalId,
         } = {},
-      },
+      } = {},
     } = this.getCurrentValues();
 
     const isProfileRolling = profileId === loanProfileMap.ROLLING;
     const isShortTermPeriod = intervalId === intervalIdsMap.MINUTES || intervalId === intervalIdsMap.HOURS;
 
     return loanable && isProfileRolling && isShortTermPeriod;
+  };
+
+  isValidDueDateManagementIdSelected = (options, selectedId) => {
+    return some(options, ({ id }) => id === selectedId);
+  };
+
+  setCorrectDueDateManagementSelectedValue = () => {
+    const isShortTermLoan = this.isShortTermLoan();
+    const selectedId = get(this.getCurrentValues(), 'loansPolicy.closedLibraryDueDateManagementId');
+    const invalidShortTermLoanValue = !this.isValidDueDateManagementIdSelected(shortTermLoansOptions, selectedId);
+    const invalidLongTermLoanValue = !this.isValidDueDateManagementIdSelected(longTermLoansOptions, selectedId);
+
+    if (isShortTermLoan && invalidShortTermLoanValue) {
+      /* Set default value for short term loan if long term load item was selected */
+      this.props.change('loansPolicy.closedLibraryDueDateManagementId', CURRENT_DUE_DATE_TIME);
+    }
+
+    if (!isShortTermLoan && invalidLongTermLoanValue) {
+      /* Set default value for long term loan if short term load item was selected */
+      this.props.change('loansPolicy.closedLibraryDueDateManagementId', CURRENT_DUE_DATE);
+    }
+  };
+
+  getDueDateManagementOptions = () => {
+    return this.isShortTermLoan()
+      ? shortTermLoansOptions
+      : longTermLoansOptions;
+  };
+
+  isOpeningTimeOffsetVisible = () => {
+    const isShortTermMode = this.isShortTermLoan();
+    const dueDateManagementId = get(this.getCurrentValues(), 'loansPolicy.closedLibraryDueDateManagementId');
+    return isShortTermMode && dueDateManagementId === BEGINNING_OF_THE_NEXT_OPEN_SERVICE_POINT_HOURS;
   };
 
   getCurrentValues() {
@@ -132,21 +166,17 @@ class LoanPolicyForm extends React.Component {
     }
   }
 
-  handleSectionToggle({ id }) {
+  handleSectionToggle = ({ id }) => {
     this.setState((curState) => {
       const newState = cloneDeep(curState);
       newState.sections[id] = !newState.sections[id];
       return newState;
     });
-  }
+  };
 
-  handleExpandAll(sections) {
-    this.setState((curState) => {
-      const newState = cloneDeep(curState);
-      newState.sections = sections;
-      return newState;
-    });
-  }
+  handleExpandAll = (sections) => {
+    this.setState({ sections });
+  };
 
   getOptions(options, id) {
     return options.map(({ value, label }) => (
@@ -154,12 +184,24 @@ class LoanPolicyForm extends React.Component {
     ));
   }
 
-  render() {
-    const policy = this.getCurrentValues();
-    const { sections } = this.state;
+  generateScheduleOptions = () => {
     const {
-      parentResources,
+      parentResources: {
+        fixedDueDateSchedules: {
+          records = [],
+        } = {},
+      },
     } = this.props;
+
+    const sortedSchedules = sortBy(records, ['name']);
+    return sortedSchedules.map(({ id, name }) => (<option key={id} value={id}>{name}</option>));
+  };
+
+  render() {
+    const { sections } = this.state;
+    const policy = this.getCurrentValues();
+    const schedules = this.generateScheduleOptions();
+    const isOpeningTimeOffsetVisible = this.isOpeningTimeOffsetVisible();
 
     // Conditional field labels
     let dueDateScheduleFieldLabel = <FormattedMessage id="ui-circulation.settings.loanPolicy.fDDS" />;
@@ -170,22 +212,6 @@ class LoanPolicyForm extends React.Component {
     } else if (policy.loansPolicy && policy.loansPolicy.profileId === loanProfileMap.FIXED) {
       dueDateScheduleFieldLabel = <FormattedMessage id="ui-circulation.settings.loanPolicy.fDDSRequired" />;
     }
-
-    const schedules = sortBy((parentResources.fixedDueDateSchedules || {}).records || [], ['name'])
-      .map(schedule => (
-        <option value={schedule.id}>{schedule.name}</option>
-      ));
-
-    const isOpeningTimeOffsetVisible = () => {
-      const {
-        loansPolicy: {
-          closedLibraryDueDateManagementId,
-        },
-      } = policy;
-      const isShortTermMode = this.isShortTermLoan();
-
-      return isShortTermMode && closedLibraryDueDateManagementId === BEGINNING_OF_THE_NEXT_OPEN_SERVICE_POINT_HOURS;
-    };
 
     return (
       <div>
@@ -293,7 +319,7 @@ class LoanPolicyForm extends React.Component {
             </Field>
           }
           {/* opening time offset */}
-          {isOpeningTimeOffsetVisible() &&
+          {isOpeningTimeOffsetVisible &&
             <PolicyPropertySetter
               loanHeader="openingTimeOffset"
               textFieldId="input_opening_time_offset"
