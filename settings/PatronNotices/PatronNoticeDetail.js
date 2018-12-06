@@ -1,4 +1,5 @@
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
 import PropTypes from 'prop-types';
 import { cloneDeep } from 'lodash';
 
@@ -11,6 +12,7 @@ import {
 } from '@folio/stripes/components';
 
 import PreviewModal from './PreviewModal';
+import { isatty } from 'tty';
 
 class PatronNoticeDetail extends React.Component {
   static propTypes = {
@@ -27,8 +29,8 @@ class PatronNoticeDetail extends React.Component {
     this.state = {
       accordions: {
         'email-template': true,
-        'sms-template': true,
-        'print-template': true,
+        // 'sms-template': true,
+        // 'print-template': true,
       },
       openDialog: false,
     };
@@ -59,36 +61,42 @@ class PatronNoticeDetail extends React.Component {
     const emailTemplate = notice.localizedTemplates.en;
     // const smsTemplate = notice.localizedTemplates.sms;
     // const printTemplate = notice.localizedTemplates.print;
+    let isActiveLabel;
+    if (notice.active) {
+      isActiveLabel = <FormattedMessage id="ui-circulation.settings.patronNotices.yes" />;
+    } else {
+      isActiveLabel = <FormattedMessage id="ui-circulation.settings.patronNotices.no" />;
+    }
 
     return (
       <div>
         <Row>
-          <KeyValue label="Name" value={notice.name} />
+          <KeyValue label={<FormattedMessage id="ui-circulation.settings.patronNotices.notice.name" />} value={notice.name} />
         </Row>
         <Row>
-          <KeyValue label="Active" value={notice.active ? 'Yes' : 'No'} />
+          <KeyValue label={<FormattedMessage id="ui-circulation.settings.patronNotices.notice.active" />} value={isActiveLabel} />
         </Row>
         <Row>
-          <KeyValue label="Description" value={notice.description} />
+          <KeyValue label={<FormattedMessage id="ui-circulation.settings.patronNotices.notice.description" />} value={notice.description} />
         </Row>
         <Row>
-          <KeyValue label="Category" value={notice.category} />
+          <KeyValue label={<FormattedMessage id="ui-circulation.settings.patronNotices.notice.category" />} value={notice.category} />
         </Row>
         <AccordionSet accordionStatus={this.state.accordions} onToggle={this.onToggleSection}>
           <Accordion
             id="email-template"
-            label="Email"
+            label={<FormattedMessage id="ui-circulation.settings.patronNotices.email" />}
           >
             { emailTemplate &&
               <div>
                 <Row>
-                  <Button onClick={this.openPreviewDialog}>Preview</Button>
+                  <Button onClick={this.openPreviewDialog}><FormattedMessage id="ui-circulation.settings.patronNotices.preview" /></Button>
                 </Row>
                 <Row>
-                  <KeyValue label="Subject" value={notice.subject} />
+                  <KeyValue label={<FormattedMessage id="ui-circulation.settings.patronNotices.subject" />} value={notice.subject} />
                 </Row>
                 <Row>
-                  <KeyValue label="Body" value={emailTemplate.body} />
+                  <KeyValue label={<FormattedMessage id="ui-circulation.settings.patronNotices.body" />} value={emailTemplate.body} />
                 </Row>
               </div>
             }

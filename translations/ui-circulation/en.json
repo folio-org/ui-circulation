@@ -104,6 +104,17 @@
   "settings.patronNotices.categories.loan": "Loan",
   "settings.patronNotices.categories.other": "Other",
   "settings.patronNotices.categories.request": "Request",
+  "settings.patronNotices.notice.name": "Name",
+  "settings.patronNotices.notice.active": "Active",
+  "settings.patronNotices.notice.description": "Description",
+  "settings.patronNotices.notice.category": "Category",
+  "settings.patronNotices.email": "Email",
+  "settings.patronNotices.preview": "Preview",
+  "settings.patronNotices.subject": "Subject",
+  "settings.patronNotices.body": "Body",
+
+  "settings.patronNotices.yes": "Yes",
+  "settings.patronNotices.no": "No",
 
   "settings.staffSlips.label": "Staff slips",
   "settings.staffSlips.name": "Name",
