@@ -12,7 +12,6 @@ import {
 } from '@folio/stripes/components';
 
 import PreviewModal from './PreviewModal';
-import { isatty } from 'tty';
 
 class PatronNoticeDetail extends React.Component {
   static propTypes = {
