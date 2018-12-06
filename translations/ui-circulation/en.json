@@ -99,6 +99,12 @@
   "settings.checkout.validate.timeoutDuration": "Please enter a whole number greater than zero to continue",
   "settings.checkout.filterRules": "filter rules",
 
+  "settings.patronNotices.categories.feeFineAction": "Fee/fine action",
+  "settings.patronNotices.categories.feeFineCharge": "Fee/fine charge",
+  "settings.patronNotices.categories.loan": "Loan",
+  "settings.patronNotices.categories.other": "Other",
+  "settings.patronNotices.categories.request": "Request",
+
   "settings.staffSlips.label": "Staff slips",
   "settings.staffSlips.name": "Name",
   "settings.staffSlips.closeStaffSlipDialog": "Close",
