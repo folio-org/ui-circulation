@@ -264,21 +264,23 @@ class PatronNoticeForm extends React.Component {
                 </Row>
               </Accordion> */}
             </AccordionSet>
-            <Row>
-              <Col xs={8}>
-                <Button
-                  id="clickable-delete-patron-notice"
-                  type="button"
-                  title="Delete"
-                  buttonStyle="danger"
-                  onClick={this.showConfirm}
-                  marginBottom0
-                  disabled={!pristine || submitting || confirming || (initialValues && initialValues.predefined)}
-                >
-                  Delete this notice
-                </Button>
-              </Col>
-            </Row>
+            {initialValues && initialValues.id &&
+              <Row>
+                <Col xs={8}>
+                  <Button
+                    id="clickable-delete-patron-notice"
+                    type="button"
+                    title="Delete"
+                    buttonStyle="danger"
+                    onClick={this.showConfirm}
+                    marginBottom0
+                    disabled={!pristine || submitting || confirming || (initialValues && initialValues.predefined)}
+                  >
+                    Delete this notice
+                  </Button>
+                </Col>
+              </Row>
+            }
             { initialValues && initialValues.predefined &&
               <Row>
                 <Col xs={8}>
