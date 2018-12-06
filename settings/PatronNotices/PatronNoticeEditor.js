@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { FormattedMessage } from 'react-intl';
 import ReactQuill from 'react-quill';
 import {
   Button,
@@ -123,7 +124,7 @@ class PatronNoticeEditor extends Component {
               <Col xs={3}>
                 <Row className={css.preview}>
                   <Col>
-                    <Button bottomMargin0 onClick={this.openPreviewDialog}>Preview</Button>
+                    <Button bottomMargin0 onClick={this.openPreviewDialog}><FormattedMessage id="ui-circulation.settings.patronNotices.preview" /></Button>
                   </Col>
                 </Row>
               </Col>

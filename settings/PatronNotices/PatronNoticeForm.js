@@ -47,9 +47,10 @@ function asyncValidate(values, dispatch, props) {
       const query = `(name="${values.name}")`;
       uv.reset();
       uv.GET({ params: { query } }).then((notices) => {
-        if (find(notices, ['name', values.name])) {
+        const matchedNotice = find(notices, ['name', values.name]);
+        if (matchedNotice && matchedNotice.id !== values.id) {
           // eslint-disable-next-line prefer-promise-reject-errors
-          reject({ name: 'A patron notice with this name already exists' });
+          reject({ name: <FormattedMessage id="ui-circulation.settings.patronNotices.errors.nameExists" /> });
         } else {
           resolve();
         }
@@ -76,8 +77,8 @@ class PatronNoticeForm extends React.Component {
     this.state = {
       accordions: {
         'email-template': true,
-        'sms-template': true,
-        'print-template': true,
+        // 'sms-template': true,
+        // 'print-template': true,
       },
       confirming: false,
     };
@@ -120,13 +121,16 @@ class PatronNoticeForm extends React.Component {
   renderCLoseIcon() {
     return (
       <PaneMenu>
-        <IconButton
-          id="clickable-close-patron-notice"
-          onClick={this.props.onCancel}
-          icon="closeX"
-          title="close"
-          aria-label="Close"
-        />
+        <FormattedMessage id="ui-circulation.settings.patronNotices.closeDialog">
+          {ariaLabel => (
+            <IconButton
+              id="clickable-close-patron-notice"
+              onClick={this.props.onCancel}
+              icon="closeX"
+              aria-label={ariaLabel}
+            />
+          )}
+        </FormattedMessage>
       </PaneMenu>
     );
   }
@@ -138,27 +142,28 @@ class PatronNoticeForm extends React.Component {
     // If there's an ID, this is editing an existing notice
     if (notice.id) {
       return (
-        <span>
-          Patron notices |
-          {notice.name}
-        </span>
+        <FormattedMessage
+          id="ui-circulation.settings.patronNotices.editLabel"
+          values={{ name: notice.name }}
+        />
       );
     }
 
-    return <span>New patron notice</span>;
+    return <FormattedMessage id="ui-circulation.settings.patronNotices.newLabel" />;
   }
 
   renderSaveMenu() {
     const { pristine, submitting, initialValues } = this.props;
     const editing = initialValues && initialValues.id;
-    const saveLabel = editing ? 'Save' : 'Save new';
+    const saveLabel = editing
+      ? <FormattedMessage id="ui-circulation.settings.patronNotices.saveLabel" />
+      : <FormattedMessage id="ui-circulation.settings.patronNotices.saveNewLabel" />;
 
     return (
       <PaneMenu>
         <Button
           id="clickable-save-patron-notice"
           type="submit"
-          title="Save"
           buttonStyle="primary paneHeaderNewButton"
           marginBottom0
           disabled={(pristine || submitting)}
@@ -170,8 +175,8 @@ class PatronNoticeForm extends React.Component {
   }
 
   // Synchronous validation functions
-  requireName = value => (value ? undefined : 'Name is required');
-  requireCategory = value => (value ? undefined : 'Category is required');
+  requireName = value => (value ? undefined : <FormattedMessage id="ui-circulation.settings.patronNotices.errors.nameRequired" />);
+  requireCategory = value => (value ? undefined : <FormattedMessage id="ui-circulation.settings.patronNotices.errors.categoryRequired" />);
 
   render() {
     const { handleSubmit, initialValues, pristine, submitting } = this.props;
@@ -192,7 +197,7 @@ class PatronNoticeForm extends React.Component {
             <Row>
               <Col xs={8}>
                 <Field
-                  label="Name"
+                  label={<FormattedMessage id="ui-circulation.settings.patronNotices.notice.name" />}
                   name="name"
                   id="input-patron-notice-name"
                   component={TextField}
@@ -200,18 +205,30 @@ class PatronNoticeForm extends React.Component {
                 />
               </Col>
               <Col xs={3}>
-                <Field label="Active" name="active" id="input-patron-notice-active" component={Checkbox} defaultChecked={isActive} normalize={v => !!v} />
-              </Col>
-            </Row>
-            <Row>
-              <Col xs={8}>
-                <Field label="Description" name="description" id="input-patron-notice-description" component={TextArea} />
+                <Field
+                  label={<FormattedMessage id="ui-circulation.settings.patronNotices.notice.active" />}
+                  name="active"
+                  id="input-patron-notice-active"
+                  component={Checkbox}
+                  defaultChecked={isActive}
+                  normalize={v => !!v}
+                />
               </Col>
             </Row>
             <Row>
               <Col xs={8}>
                 <Field
-                  label="Category"
+                  label={<FormattedMessage id="ui-circulation.settings.patronNotices.notice.description" />}
+                  name="description"
+                  id="input-patron-notice-description"
+                  component={TextArea}
+                />
+              </Col>
+            </Row>
+            <Row>
+              <Col xs={8}>
+                <Field
+                  label={<FormattedMessage id="ui-circulation.settings.patronNotices.notice.category" />}
                   name="category"
                   component={Select}
                   fullWidth
@@ -235,15 +252,26 @@ class PatronNoticeForm extends React.Component {
             <AccordionSet accordionStatus={this.state.accordions} onToggle={this.onToggleSection}>
               <Accordion
                 id="email-template"
-                label="Email"
+                label={<FormattedMessage id="ui-circulation.settings.patronNotices.email" />}
               >
                 <Row>
                   <Col xs={8}>
-                    <Field label="Subject" name="subject" id="input-patron-notice-subject" component={TextField} />
+                    <Field
+                      label={<FormattedMessage id="ui-circulation.settings.patronNotices.subject" />}
+                      name="subject"
+                      id="input-patron-notice-subject"
+                      component={TextField}
+                    />
                   </Col>
                 </Row>
                 <Row>
-                  <Field label="Body" name="localizedTemplates.en.body" id="input-email-template-body" component={PatronNoticeEditor} tokens={Object.keys(formats.Any)} />
+                  <Field
+                    label={<FormattedMessage id="ui-circulation.settings.patronNotices.body" />}
+                    name="localizedTemplates.en.body"
+                    id="input-email-template-body"
+                    component={PatronNoticeEditor}
+                    tokens={Object.keys(formats.Any)}
+                  />
                 </Row>
               </Accordion>
               {/* <Accordion
@@ -263,32 +291,33 @@ class PatronNoticeForm extends React.Component {
                 </Row>
               </Accordion> */}
             </AccordionSet>
-            <Row>
-              <Col xs={8}>
-                <Button
-                  id="clickable-delete-patron-notice"
-                  type="button"
-                  title="Delete"
-                  buttonStyle="danger"
-                  onClick={this.showConfirm}
-                  marginBottom0
-                  disabled={!pristine || submitting || confirming || initialValues.predefined}
-                >
-                  Delete this notice
-                </Button>
-              </Col>
-            </Row>
-            { initialValues.predefined &&
+            {initialValues && initialValues.id &&
               <Row>
                 <Col xs={8}>
-                  This is a predefined notice and cannot be deleted.
+                  <Button
+                    id="clickable-delete-patron-notice"
+                    type="button"
+                    buttonStyle="danger"
+                    onClick={this.showConfirm}
+                    marginBottom0
+                    disabled={!pristine || submitting || confirming || (initialValues && initialValues.predefined)}
+                  >
+                    <FormattedMessage id="ui-circulation.settings.patronNotices.deleteLabel" />
+                  </Button>
+                </Col>
+              </Row>
+            }
+            { initialValues && initialValues.predefined &&
+              <Row>
+                <Col xs={8}>
+                  <FormattedMessage id="ui-circulation.settings.patronNotices.predefinedWarning" />
                 </Col>
               </Row>
             }
             <ConfirmationModal
               open={this.state.confirming}
-              heading="Confirm delete"
-              message="Are you sure you want to delete this patron notice?"
+              heading={<FormattedMessage id="ui-circulation.settings.patronNotices.deleteHeading" />}
+              message={<FormattedMessage id="ui-circulation.settings.patronNotices.deleteConfirm" />}
               onConfirm={this.confirmDelete}
               onCancel={this.hideConfirm}
             />
