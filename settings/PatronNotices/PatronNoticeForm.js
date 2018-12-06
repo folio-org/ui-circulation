@@ -47,7 +47,8 @@ function asyncValidate(values, dispatch, props) {
       const query = `(name="${values.name}")`;
       uv.reset();
       uv.GET({ params: { query } }).then((notices) => {
-        if (find(notices, ['name', values.name])) {
+        const matchedNotice = find(notices, ['name', values.name]);
+        if (matchedNotice && matchedNotice.id !== values.id) {
           // eslint-disable-next-line prefer-promise-reject-errors
           reject({ name: 'A patron notice with this name already exists' });
         } else {
@@ -272,13 +273,13 @@ class PatronNoticeForm extends React.Component {
                   buttonStyle="danger"
                   onClick={this.showConfirm}
                   marginBottom0
-                  disabled={!pristine || submitting || confirming || initialValues.predefined}
+                  disabled={!pristine || submitting || confirming || (initialValues && initialValues.predefined)}
                 >
                   Delete this notice
                 </Button>
               </Col>
             </Row>
-            { initialValues.predefined &&
+            { initialValues && initialValues.predefined &&
               <Row>
                 <Col xs={8}>
                   This is a predefined notice and cannot be deleted.
