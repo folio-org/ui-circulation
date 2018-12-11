@@ -6,6 +6,8 @@
 *  in state.nextApplicable.
 */
 import Codemirror from 'codemirror';
+import { FormattedMessage } from 'react-intl';
+import React from 'react';
 
 export default function loanRulesHint(cm, props) {
   Codemirror.registerHelper('hint', 'loanRulesCMM', (cm) => {
