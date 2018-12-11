@@ -32,6 +32,8 @@ class PatronNotices extends React.Component {
       type: 'okapi',
       path: 'templates',
       records: 'templates',
+      recordsRequired: 50,
+      perRequest: 50,
     },
     nameUniquenessValidator: {
       type: 'okapi',
