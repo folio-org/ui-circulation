@@ -32,6 +32,9 @@ class PatronNotices extends React.Component {
       type: 'okapi',
       path: 'templates',
       records: 'templates',
+      params: {
+        query: 'cql.allRecords=1 AND category=""',
+      },
       recordsRequired: 50,
       perRequest: 50,
     },
