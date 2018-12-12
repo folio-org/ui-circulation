@@ -2,6 +2,7 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import PropTypes from 'prop-types';
 import { cloneDeep } from 'lodash';
+import HtmlToReact, { Parser } from 'html-to-react';
 
 import {
   Accordion,
@@ -11,6 +12,7 @@ import {
   Row
 } from '@folio/stripes/components';
 
+import formats from './formats';
 import PreviewModal from './PreviewModal';
 
 class PatronNoticeDetail extends React.Component {
@@ -37,6 +39,17 @@ class PatronNoticeDetail extends React.Component {
     this.openPreviewDialog = this.openPreviewDialog.bind(this);
     this.closePreviewDialog = this.closePreviewDialog.bind(this);
     this.onToggleSection = this.onToggleSection.bind(this);
+
+    const processNodeDefinitions = new HtmlToReact.ProcessNodeDefinitions(React);
+
+    this.previewFormat = formats[props.initialValues.name];
+    this.rules = [
+      {
+        shouldProcessNode: () => true,
+        processNode: processNodeDefinitions.processDefaultNode,
+      }
+    ];
+    this.parser = new Parser();
   }
 
   openPreviewDialog() {
@@ -57,9 +70,11 @@ class PatronNoticeDetail extends React.Component {
 
   render() {
     const notice = this.props.initialValues;
-    const emailTemplate = notice.localizedTemplates.en;
+    const emailTemplate = notice.localizedTemplates.en.body;
+    const parsedEmailTemplate = this.parser.parseWithInstructions(emailTemplate, () => true, this.rules);
     // const smsTemplate = notice.localizedTemplates.sms;
     // const printTemplate = notice.localizedTemplates.print;
+
     let isActiveLabel;
     if (notice.active) {
       isActiveLabel = <FormattedMessage id="ui-circulation.settings.patronNotices.yes" />;
@@ -95,7 +110,7 @@ class PatronNoticeDetail extends React.Component {
                   <KeyValue label={<FormattedMessage id="ui-circulation.settings.patronNotices.subject" />} value={notice.subject} />
                 </Row>
                 <Row>
-                  <KeyValue label={<FormattedMessage id="ui-circulation.settings.patronNotices.body" />} value={emailTemplate.body} />
+                  <KeyValue label={<FormattedMessage id="ui-circulation.settings.patronNotices.body" />} value={parsedEmailTemplate} />
                 </Row>
               </div>
             }
@@ -139,7 +154,7 @@ class PatronNoticeDetail extends React.Component {
         </AccordionSet>
         { this.state.openDialog &&
           <PreviewModal
-            previewTemplate={emailTemplate.body}
+            previewTemplate={emailTemplate}
             open={this.state.openDialog}
             onClose={this.closePreviewDialog}
             slipType="Any"
