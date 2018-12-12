@@ -32,6 +32,11 @@ class PatronNotices extends React.Component {
       type: 'okapi',
       path: 'templates',
       records: 'templates',
+      params: {
+        query: 'cql.allRecords=1 AND category=""',
+      },
+      recordsRequired: 50,
+      perRequest: 50,
     },
     nameUniquenessValidator: {
       type: 'okapi',
@@ -54,7 +59,7 @@ class PatronNotices extends React.Component {
         entryFormComponent={PatronNoticeForm}
         defaultEntry={{ active: true, outputFormats: ['html'], templateResolver: 'mustache' }}
         // validate={this.validate}
-        nameKey="description"
+        nameKey="name"
         // TODO: use real permissions once they exist (EntryManager crashes without a permissions object)
         permissions={{
           put: 'settings.organization.enabled',

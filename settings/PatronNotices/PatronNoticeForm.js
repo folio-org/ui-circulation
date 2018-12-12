@@ -177,6 +177,7 @@ class PatronNoticeForm extends React.Component {
   // Synchronous validation functions
   requireName = value => (value ? undefined : <FormattedMessage id="ui-circulation.settings.patronNotices.errors.nameRequired" />);
   requireCategory = value => (value ? undefined : <FormattedMessage id="ui-circulation.settings.patronNotices.errors.categoryRequired" />);
+  requireDescription = value => (value ? undefined : <FormattedMessage id="ui-circulation.settings.patronNotices.errors.descriptionRequired" />);
 
   render() {
     const { handleSubmit, initialValues, pristine, submitting } = this.props;
@@ -204,6 +205,8 @@ class PatronNoticeForm extends React.Component {
                   validate={this.requireName}
                 />
               </Col>
+            </Row>
+            <Row>
               <Col xs={3}>
                 <Field
                   label={<FormattedMessage id="ui-circulation.settings.patronNotices.notice.active" />}
@@ -215,6 +218,7 @@ class PatronNoticeForm extends React.Component {
                 />
               </Col>
             </Row>
+            <br />
             <Row>
               <Col xs={8}>
                 <Field
@@ -222,6 +226,7 @@ class PatronNoticeForm extends React.Component {
                   name="description"
                   id="input-patron-notice-description"
                   component={TextArea}
+                  validate={this.requireDescription}
                 />
               </Col>
             </Row>
