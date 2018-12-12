@@ -205,6 +205,8 @@ class PatronNoticeForm extends React.Component {
                   validate={this.requireName}
                 />
               </Col>
+            </Row>
+            <Row>
               <Col xs={3}>
                 <Field
                   label={<FormattedMessage id="ui-circulation.settings.patronNotices.notice.active" />}
@@ -216,6 +218,7 @@ class PatronNoticeForm extends React.Component {
                 />
               </Col>
             </Row>
+            <br/>
             <Row>
               <Col xs={8}>
                 <Field

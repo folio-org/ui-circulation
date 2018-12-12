@@ -8,6 +8,7 @@ import {
   Accordion,
   AccordionSet,
   Button,
+  Col,
   KeyValue,
   Row
 } from '@folio/stripes/components';
@@ -104,13 +105,17 @@ class PatronNoticeDetail extends React.Component {
             { emailTemplate &&
               <div>
                 <Row>
-                  <Button onClick={this.openPreviewDialog}><FormattedMessage id="ui-circulation.settings.patronNotices.preview" /></Button>
+                  <Col xs={8}>
+                    <KeyValue label={<FormattedMessage id="ui-circulation.settings.patronNotices.subject" />} value={notice.subject} />
+                  </Col>
+                  <Col xs={4}>
+                    <Button onClick={this.openPreviewDialog}><FormattedMessage id="ui-circulation.settings.patronNotices.preview" /></Button>
+                  </Col>
                 </Row>
                 <Row>
-                  <KeyValue label={<FormattedMessage id="ui-circulation.settings.patronNotices.subject" />} value={notice.subject} />
-                </Row>
-                <Row>
-                  <KeyValue label={<FormattedMessage id="ui-circulation.settings.patronNotices.body" />} value={parsedEmailTemplate} />
+                  <Col xs={12}>
+                    <KeyValue label={<FormattedMessage id="ui-circulation.settings.patronNotices.body" />} value={parsedEmailTemplate} />
+                  </Col>
                 </Row>
               </div>
             }
