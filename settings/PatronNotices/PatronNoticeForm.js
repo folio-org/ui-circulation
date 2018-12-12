@@ -218,7 +218,7 @@ class PatronNoticeForm extends React.Component {
                 />
               </Col>
             </Row>
-            <br/>
+            <br />
             <Row>
               <Col xs={8}>
                 <Field
