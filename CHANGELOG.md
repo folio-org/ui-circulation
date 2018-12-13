@@ -1,6 +1,7 @@
 # Change history for ui-circulation
 
-## 1.4.0 (IN PROGRESS)
+## 1.4.0 (https://github.com/folio-org/ui-circulation/tree/v1.4.0) (2018-12-13)
+[Full Changelog](https://github.com/folio-org/ui-circulation/compare/v1.3.0...v1.4.0)
 
 * Provide `sortby` prop to `<ControlledVocab>`. Refs STSMACOM-139.
 * Provide `type` prop to `<Field>`. Refs PR #697.
@@ -9,6 +10,10 @@
 * Apply internationalization to all hardcodded strings, UICIRC-97.
 * Fix invalid dates. Fixes UICIRC-102.
 * Implement settings for patron notices. Completes UICIRC-70, -73, -74, -85, -86, -87.
+* Add Patron Barcode token to CRUD staff slip templates. UICIRC-95.
+* Change From/To Location Tokens in Transit Slip to From/To Service Point. UICIRC-119.
+* Loan Policy Editor - Context-based behavior for Closed Library Due Date Management. UICIRC-107.
+* Loan Policy: Add "Opening Time Offset". UICIRC-64.
 
 ## 1.3.0 (https://github.com/folio-org/ui-circulation/tree/v1.3.0) (2018-10-04)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v1.2.0...v1.3.0)
