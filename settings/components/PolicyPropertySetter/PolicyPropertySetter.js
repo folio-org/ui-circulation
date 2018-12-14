@@ -6,9 +6,6 @@ import {
   get,
   isEmpty,
   isNumber,
-  cloneDeep,
-  dropRight,
-  unset,
 } from 'lodash';
 
 import {
@@ -28,7 +25,7 @@ class PolicyPropertySetter extends React.Component {
     selectValuePath: PropTypes.string.isRequired,
     entity: PropTypes.object.isRequired,
     intervalPeriods: PropTypes.arrayOf(PropTypes.node),
-    reinitializeForm: PropTypes.func.isRequired,
+    changeFormValue: PropTypes.func.isRequired,
   };
 
   constructor(props) {
@@ -37,35 +34,12 @@ class PolicyPropertySetter extends React.Component {
     this.inputRef = React.createRef();
   }
 
-  cleanUpModel = () => {
-    const {
-      entity,
-      inputValuePath,
-      selectValuePath,
-    } = this.props;
-
-    const entityCopy = cloneDeep(entity);
-
-    const inputValueParentPath = dropRight(inputValuePath.split('.')).join('.');
-    const selectValueParentPath = dropRight(selectValuePath.split('.')).join('.');
-
-    if (inputValueParentPath === selectValueParentPath) {
-      unset(entityCopy, inputValueParentPath);
-
-      return entityCopy;
-    }
-
-    unset(entityCopy, inputValuePath);
-    unset(entityCopy, selectValuePath);
-
-    return entityCopy;
-  };
-
   onInputBlur = () => {
     const {
       inputValuePath,
+      selectValuePath,
       entity,
-      reinitializeForm,
+      changeFormValue,
     } = this.props;
 
     const inputValue = get(entity, inputValuePath);
@@ -74,12 +48,20 @@ class PolicyPropertySetter extends React.Component {
       return;
     }
 
-    reinitializeForm(this.cleanUpModel());
+    changeFormValue(selectValuePath, '');
+  };
+
+  onInputClear = () => {
+    const {
+      inputValuePath,
+      changeFormValue,
+    } = this.props;
+
+    changeFormValue(inputValuePath, '');
   };
 
   onSelectChange = () => {
-    const component = this.inputRef.current.getRenderedComponent();
-    component.input.current.focus();
+    this.inputRef.current.focus();
   };
 
   transformInputValue = (value) => {
@@ -112,16 +94,16 @@ class PolicyPropertySetter extends React.Component {
           </Col>
         </Row>
         <Row>
-          <Col xs={1}>
+          <Col xs={2}>
             <Field
               type="number"
-              hasClearIcon={false}
               readOnly={isInputReadOnly}
               name={inputValuePath}
               component={TextField}
               withRef
-              ref={this.inputRef}
+              inputRef={this.inputRef}
               onBlur={this.onInputBlur}
+              onClearField={this.onInputClear}
               parse={this.transformInputValue}
             />
           </Col>

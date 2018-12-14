@@ -73,6 +73,12 @@ class LoanPolicySettings extends React.Component {
     return errors;
   }
 
+  onBeforeSave = (entry) => {
+    const entryCopy = _.cloneDeep(entry);
+    entryCopy.name = 'Interceptor works';
+    return entryCopy;
+  };
+
   render() {
     const {
       resources,
@@ -98,6 +104,7 @@ class LoanPolicySettings extends React.Component {
           delete: 'ui-circulation.settings.loan-policies',
         }}
         validate={this.validate}
+        onBeforeSave={this.onBeforeSave}
       />
     );
   }

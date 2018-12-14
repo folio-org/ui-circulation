@@ -6,7 +6,6 @@ import { FormattedMessage } from 'react-intl';
 import {
   Field,
   getFormValues,
-  initialize,
 } from 'redux-form';
 
 import {
@@ -52,7 +51,6 @@ class LoanPolicyForm extends React.Component {
     }).isRequired,
     policy: PropTypes.object,
     change: PropTypes.func.isRequired,
-    reinitializeForm: PropTypes.func,
   };
 
   static defaultProps = {
@@ -159,7 +157,10 @@ class LoanPolicyForm extends React.Component {
   };
 
   render() {
-    const { policy } = this.props;
+    const {
+      policy,
+      change,
+    } = this.props;
     const { sections } = this.state;
 
     const schedules = this.generateScheduleOptions();
@@ -245,10 +246,9 @@ class LoanPolicyForm extends React.Component {
               selectPlaceholder="ui-circulation.settings.loanPolicy.selectInterval"
               inputValuePath="loansPolicy.period.duration"
               selectValuePath="loansPolicy.period.intervalId"
-              entity={this.props.policy}
+              changeFormValue={change}
+              entity={policy}
               intervalPeriods={this.getOptions(intervalPeriods, 'period')}
-              reinitializeForm={this.props.reinitializeForm}
-              required
             />
           }
           {/* fixed due date schedule - appears when profile is "fixed" or "rolling",
@@ -284,8 +284,8 @@ class LoanPolicyForm extends React.Component {
               selectPlaceholder="ui-circulation.settings.loanPolicy.selectInterval"
               inputValuePath="loansPolicy.openingTimeOffset.duration"
               selectValuePath="loansPolicy.openingTimeOffset.intervalId"
-              reinitializeForm={this.props.reinitializeForm}
-              entity={this.props.policy}
+              changeFormValue={change}
+              entity={policy}
               intervalPeriods={this.getOptions(intervalPeriods.slice(0, 2).reverse(), 'openingTimeOffset')}
             />
           }
@@ -296,8 +296,8 @@ class LoanPolicyForm extends React.Component {
               selectPlaceholder="ui-circulation.settings.loanPolicy.selectInterval"
               inputValuePath="loansPolicy.existingRequestsPeriod.duration"
               selectValuePath="loansPolicy.existingRequestsPeriod.intervalId"
-              reinitializeForm={this.props.reinitializeForm}
-              entity={this.props.policy}
+              changeFormValue={change}
+              entity={policy}
               intervalPeriods={this.getOptions(intervalPeriods.slice(0, 3), 'existingRequestsPeriod')}
             />
           }
@@ -308,8 +308,8 @@ class LoanPolicyForm extends React.Component {
               selectPlaceholder="ui-circulation.settings.loanPolicy.selectInterval"
               inputValuePath="loansPolicy.gracePeriod.duration"
               selectValuePath="loansPolicy.gracePeriod.intervalId"
-              reinitializeForm={this.props.reinitializeForm}
-              entity={this.props.policy}
+              changeFormValue={change}
+              entity={policy}
               intervalPeriods={this.getOptions(intervalPeriods, 'gracePeriod')}
             />
           }
@@ -347,7 +347,7 @@ class LoanPolicyForm extends React.Component {
                 />
               }
               {/* number of renewals allowed */}
-              { policy.renewable && policy.renewalsPolicy.unlimited === false &&
+              {policy.renewable && policy.renewalsPolicy.unlimited === false &&
                 <div>
                   <p>
                     <FormattedMessage id="ui-circulation.settings.loanPolicy.numRenewalsAllowed" />
@@ -400,7 +400,7 @@ class LoanPolicyForm extends React.Component {
                     selectPlaceholder="ui-circulation.settings.loanPolicy.selectInterval"
                     inputValuePath="renewalsPolicy.period.duration"
                     selectValuePath="renewalsPolicy.period.intervalId"
-                    reinitializeForm={this.props.reinitializeForm}
+                    changeFormValue={change}
                     entity={this.props.policy}
                     intervalPeriods={this.getOptions(intervalPeriods, 'renuwalPeriod')}
                   />
@@ -435,12 +435,4 @@ const mapStateToProps = (state) => ({
   policy: getFormValues('entryForm')(state),
 });
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    reinitializeForm: (formValues) => {
-      dispatch(initialize('entryForm', formValues));
-    },
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(LoanPolicyForm);
+export default connect(mapStateToProps)(LoanPolicyForm);
