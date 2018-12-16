@@ -70,7 +70,7 @@
   "settings.fDDSform.newFixDDSchedule": "Create fixed due date schedule",
   "settings.fDDSform.description": "Description",
   "settings.fDDSform.schedule": "Schedule",
-  "settings.fDDSform.new": "+ New",
+  "settings.fDDSform.new": "New",
   "settings.fDDSform.dateRange": "Date range",
   "settings.fDDSform.dateFrom": "Date from",
   "settings.fDDSform.dateTo": "Date to",
