@@ -1,6 +1,7 @@
 # Change history for ui-circulation
 
 ## 1.5.0 IN PROGRESS
+* Use standard repo layout. Fixes UICIRC-146.
 
 ## 1.4.0 (https://github.com/folio-org/ui-circulation/tree/v1.4.0) (2018-12-13)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v1.3.0...v1.4.0)
