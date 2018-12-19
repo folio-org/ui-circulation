@@ -140,5 +140,6 @@
     "settings.patronNotices.deleteConfirm": "Tem certeza de que deseja excluir este aviso do usuário?",
     "settings.patronNotices.predefinedWarning": "Este é um aviso pré-definido e não pode ser excluído",
     "settings.patronNotices.yes": "Sim",
-    "settings.patronNotices.no": "Não"
+    "settings.patronNotices.no": "Não",
+    "settings.patronNotices.errors.descriptionRequired": "Descrição é obrigatória"
 }
