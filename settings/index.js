@@ -32,17 +32,19 @@ class Circulation extends React.Component {
         route: 'fixed-due-date-schedules',
         label: <FormattedMessage id="ui-circulation.settings.index.fdds" />,
         component: FixedDueDateScheduleManager,
-        perm: 'ui-circulation.settings.loan-rules',
+        perm: 'ui-circulation.settings.fdds',
       },
       {
         route: 'checkout',
         label: <FormattedMessage id="ui-circulation.settings.index.otherSettings" />,
         component: CheckoutSettings,
+        perm: 'ui-circulation.settings.otherSettings',
       },
       {
         route: 'staffslips',
         label: <FormattedMessage id="ui-circulation.settings.index.staffSlips" />,
         component: StaffSlips,
+        perm: 'ui-circulation.settings.staffSlips',
       },
       {
         route: 'cancellation-reasons',
@@ -54,6 +56,7 @@ class Circulation extends React.Component {
         route: 'patron-notices',
         label: this.props.stripes.intl.formatMessage({ id: 'ui-circulation.settings.index.patronNotices' }),
         component: PatronNotices,
+        perm: 'ui-circulation.settings.patronNotices',
       },
     ];
   }

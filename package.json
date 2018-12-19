@@ -69,9 +69,10 @@
         "permissionName": "ui-circulation.settings.loan-rules",
         "displayName": "Settings (Circ): Can create, edit and remove loan rules",
         "subPermissions": [
+          "settings.circulation.enabled",
+          "inventory-storage.loan-types.get",
           "circulation-storage.loan-rules.get",
-          "circulation-storage.loan-rules.put",
-          "settings.circulation.enabled"
+          "circulation-storage.loan-rules.put"
         ],
         "visible": true
       },
