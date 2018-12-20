@@ -140,5 +140,6 @@
     "settings.patronNotices.deleteConfirm": "Are you sure you want to delete this patron notice?",
     "settings.patronNotices.predefinedWarning": "This is a predefined notice and cannot be deleted",
     "settings.patronNotices.yes": "Yes",
-    "settings.patronNotices.no": "No"
+    "settings.patronNotices.no": "No",
+    "settings.patronNotices.errors.descriptionRequired": "Description is required"
 }
