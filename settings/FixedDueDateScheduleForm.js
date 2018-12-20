@@ -185,7 +185,9 @@ class FixedDueDateScheduleForm extends React.Component {
           <Col xs={11} />
           <Col xs={1}>
             <Button type="button" onClick={() => fields.unshift({})}>
-              <FormattedMessage id="ui-circulation.settings.fDDSform.new" />
+              <Icon icon="plus-sign">
+                <FormattedMessage id="ui-circulation.settings.fDDSform.new" />
+              </Icon>
             </Button>
           </Col>
         </Row>
