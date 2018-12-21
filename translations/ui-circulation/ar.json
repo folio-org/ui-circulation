@@ -55,7 +55,7 @@
     "settings.fDDSform.newFixDDSchedule": "إنشاء جدول زمني لتاريخ الاستحقاق المثبت",
     "settings.fDDSform.description": "الوصف",
     "settings.fDDSform.schedule": "الجدول",
-    "settings.fDDSform.new": "جديد",
+    "settings.fDDSform.new": "+ جديد",
     "settings.fDDSform.dateRange": "نطاق التاريخ",
     "settings.fDDSform.dateFrom": "التاريخ من",
     "settings.fDDSform.dateTo": "التاريخ إلى",
@@ -140,5 +140,6 @@
     "settings.patronNotices.deleteConfirm": "Are you sure you want to delete this patron notice?",
     "settings.patronNotices.predefinedWarning": "This is a predefined notice and cannot be deleted",
     "settings.patronNotices.yes": "Yes",
-    "settings.patronNotices.no": "No"
+    "settings.patronNotices.no": "No",
+    "settings.patronNotices.errors.descriptionRequired": "Description is required"
 }
