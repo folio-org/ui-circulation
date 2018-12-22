@@ -12,6 +12,9 @@
 
   "settings.loanPolicy.entryLabel": "Loan Policy",
   "settings.loanPolicy.paneTitle": "Loan Policies",
+  "settings.loanPolicy.editEntryLabel": "Edit Loan Policy",
+  "settings.loanPolicy.saveAndClose": "Save and Close",
+  "settings.loanPolicy.createEntryLabel": "Create Loan Policy",
   "settings.loanPolicy.selectFDDS": "Please select a fixed due date schedule",
   "settings.loanPolicy.loans": "Loans",
   "settings.loanPolicy.loanPeriod": "Loan period",

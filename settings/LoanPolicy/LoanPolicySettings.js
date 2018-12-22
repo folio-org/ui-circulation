@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import _ from 'lodash';
+import { sortBy } from 'lodash';
 import { FormattedMessage } from 'react-intl';
 
 import { EntryManager } from '@folio/stripes/smart-components';
 import LoanPolicyDetail from './LoanPolicyDetail';
 import LoanPolicyForm from './LoanPolicyForm';
-import { loanProfileMap, renewFromIds } from '../constants';
+import { loanProfileMap, renewFromIds } from '../../constants';
+import validate from '../Validation/LoanPolicy';
 
 const defaultPolicy = {
   name: '',
@@ -51,60 +52,36 @@ class LoanPolicySettings extends React.Component {
     }).isRequired,
   };
 
-  constructor(props) {
-    super(props);
-
-    this.validate = this.validate.bind(this);
-  }
-
-  validate(values) {
-    const errors = {};
-
-    if (!values.name) {
-      errors.name = <FormattedMessage id="ui-circulation.settings.validate.fillIn" />;
-    }
-
-    const loansPolicy = values.loansPolicy || {};
-
-    if (loansPolicy.profileId === loanProfileMap.FIXED
-      && !loansPolicy.fixedDueDateSchedule) {
-      errors.loansPolicy = { fixedDueDateSchedule: <FormattedMessage id="ui-circulation.settings.loanPolicy.selectFDDS" /> };
-    }
-    return errors;
-  }
-
-  onBeforeSave = (entry) => {
-    const entryCopy = _.cloneDeep(entry);
-    entryCopy.name = 'Interceptor works';
-    return entryCopy;
-  };
-
   render() {
     const {
       resources,
       mutator,
     } = this.props;
 
+    const permissions = {
+      put: 'ui-circulation.settings.loan-policies',
+      post: 'ui-circulation.settings.loan-policies',
+      delete: 'ui-circulation.settings.loan-policies',
+    };
+
+    const entryList = sortBy((resources.loanPolicies || {}).records, ['name']);
+    // const loanPolicy = new LoanPolicy();
+
     return (
       <EntryManager
         {...this.props}
         parentMutator={mutator}
         parentResources={resources}
-        entryList={_.sortBy((resources.loanPolicies || {}).records || [], ['name'])}
+        entryList={entryList}
         resourceKey="loanPolicies"
         detailComponent={LoanPolicyDetail}
-        formComponent={LoanPolicyForm}
+        entryFormComponent={LoanPolicyForm}
         paneTitle={<FormattedMessage id="ui-circulation.settings.loanPolicy.paneTitle" />}
         entryLabel={<FormattedMessage id="ui-circulation.settings.loanPolicy.entryLabel" />}
         nameKey="name"
         defaultEntry={defaultPolicy}
-        permissions={{
-          put: 'ui-circulation.settings.loan-policies',
-          post: 'ui-circulation.settings.loan-policies',
-          delete: 'ui-circulation.settings.loan-policies',
-        }}
-        validate={this.validate}
-        onBeforeSave={this.onBeforeSave}
+        permissions={permissions}
+        validate={validate}
       />
     );
   }
