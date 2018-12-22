@@ -26,7 +26,7 @@ import {
   longTermLoansOptions,
   BEGINNING_OF_THE_NEXT_OPEN_SERVICE_POINT_HOURS,
   intervalIdsMap,
-} from '../constants';
+} from '../../constants';
 
 class LoanPolicyDetail extends React.Component {
   static propTypes = {
