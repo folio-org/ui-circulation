@@ -1,7 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Field } from 'redux-form';
+import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
+
+import {
+  change,
+  Field,
+} from 'redux-form';
+
 import {
   get,
   isEmpty,
@@ -15,7 +21,7 @@ import {
   TextField,
 } from '@folio/stripes/components';
 
-import generalStyles from './PolicyPropertySetter.css';
+import css from './PolicyPropertySetter.css';
 
 class PolicyPropertySetter extends React.Component {
   static propTypes = {
@@ -24,7 +30,7 @@ class PolicyPropertySetter extends React.Component {
     inputValuePath: PropTypes.string.isRequired,
     selectValuePath: PropTypes.string.isRequired,
     entity: PropTypes.object.isRequired,
-    intervalPeriods: PropTypes.arrayOf(PropTypes.node),
+    intervalPeriods: PropTypes.arrayOf(PropTypes.object),
     changeFormValue: PropTypes.func.isRequired,
   };
 
@@ -74,6 +80,19 @@ class PolicyPropertySetter extends React.Component {
     return numberValue >= 0 ? numberValue : 0;
   };
 
+  generateOptions = () => {
+    const {
+      intervalPeriods,
+      selectValuePath,
+    } = this.props;
+
+    return intervalPeriods.map(({ value, label }) => (
+      <option value={value} key={`${selectValuePath}-${value}`}>
+        {label}
+      </option>
+    ));
+  };
+
   render() {
     const {
       fieldLabel,
@@ -81,14 +100,13 @@ class PolicyPropertySetter extends React.Component {
       inputValuePath,
       selectValuePath,
       entity,
-      intervalPeriods,
     } = this.props;
 
     const isInputReadOnly = !get(entity, selectValuePath);
 
     return (
       <React.Fragment>
-        <Row className={generalStyles.label}>
+        <Row className={css.label}>
           <Col xs={12}>
             <FormattedMessage id={fieldLabel} />
           </Col>
@@ -116,7 +134,7 @@ class PolicyPropertySetter extends React.Component {
                   placeholder={placeholder}
                   onChange={this.onSelectChange}
                 >
-                  {intervalPeriods}
+                  {this.generateOptions()}
                 </Field>
               )}
             </FormattedMessage>
@@ -127,4 +145,8 @@ class PolicyPropertySetter extends React.Component {
   }
 }
 
-export default PolicyPropertySetter;
+const mapDispatchToProps = (dispatch) => ({
+  changeFormValue: (field, value) => dispatch(change('entryForm', field, value)),
+});
+
+export default connect(null, mapDispatchToProps)(PolicyPropertySetter);

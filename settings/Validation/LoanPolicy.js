@@ -1,5 +1,5 @@
 import LoanPolicy from '../Models/LoanPolicy';
-import FormValidator from './Validator';
+import FormValidator from './FormValidator';
 
 export default function (policy) {
   const loanPolicy = new LoanPolicy(policy);
@@ -11,11 +11,11 @@ export default function (policy) {
     },
     'loansPolicy.period.duration': {
       type: 'isNotEmpty',
-      shouldValidate: loanPolicy.isLoanPeriodActive(),
+      shouldValidate: loanPolicy.isProfileRolling(),
     },
     'loansPolicy.fixedDueDateScheduleId': {
       type: 'isNotEmpty',
-      shouldValidate: loanPolicy.isFixedDueDateScheduleActive(),
+      shouldValidate: loanPolicy.isProfileFixed(),
     },
     'loansPolicy.openingTimeOffset.duration': {
       type: 'isNotEmpty',

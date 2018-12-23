@@ -4,25 +4,10 @@ import { sortBy } from 'lodash';
 import { FormattedMessage } from 'react-intl';
 
 import { EntryManager } from '@folio/stripes/smart-components';
+
 import LoanPolicyDetail from './LoanPolicyDetail';
 import LoanPolicyForm from './LoanPolicyForm';
-import { loanProfileMap, renewFromIds } from '../../constants';
 import validate from '../Validation/LoanPolicy';
-
-const defaultPolicy = {
-  name: '',
-  loanable: true,
-  loansPolicy: {
-    profileId: loanProfileMap.ROLLING,
-    closedLibraryDueDateManagementId: '4', // TODO: update when this is switched to a GUID
-  },
-  renewable: true,
-  renewalsPolicy: {
-    unlimited: false,
-    renewFromId: renewFromIds.SYSTEM_DATE,
-    differentPeriod: false,
-  },
-};
 
 class LoanPolicySettings extends React.Component {
   static manifest = Object.freeze({
@@ -65,7 +50,6 @@ class LoanPolicySettings extends React.Component {
     };
 
     const entryList = sortBy((resources.loanPolicies || {}).records, ['name']);
-    // const loanPolicy = new LoanPolicy();
 
     return (
       <EntryManager
@@ -79,7 +63,6 @@ class LoanPolicySettings extends React.Component {
         paneTitle={<FormattedMessage id="ui-circulation.settings.loanPolicy.paneTitle" />}
         entryLabel={<FormattedMessage id="ui-circulation.settings.loanPolicy.entryLabel" />}
         nameKey="name"
-        defaultEntry={defaultPolicy}
         permissions={permissions}
         validate={validate}
       />

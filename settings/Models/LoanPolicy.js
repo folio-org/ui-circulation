@@ -38,6 +38,7 @@ class RenewalsPolicy {
   constructor(policy = {}) {
     this.unlimited = policy.unlimited;
     this.numberAllowed = policy.numberAllowed;
+    this.period = new Period(policy.period);
     this.reniewFromId = policy.reniewFromId;
     this.differentPeriod = policy.differentPeriod;
     this.alternateFixedDueDateScheduleId = policy.alternateFixedDueDateScheduleId;
@@ -72,11 +73,11 @@ export default class LoanPolicy {
     return isShortTermMode && dueDateManagementId === BEGINNING_OF_THE_NEXT_OPEN_SERVICE_POINT_HOURS;
   }
 
-  isFixedDueDateScheduleActive() {
-    return this.loansPolicy.profileId === loanProfileMap.FIXED;
+  isProfileFixed() {
+    return this.loanable && this.loansPolicy.profileId === loanProfileMap.FIXED;
   }
 
-  isLoanPeriodActive() {
+  isProfileRolling() {
     return this.loanable && this.loansPolicy.profileId === loanProfileMap.ROLLING;
   }
 
