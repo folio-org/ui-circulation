@@ -1,3 +1,6 @@
-// remove the suppression when other components will be added
-// eslint-disable-next-line import/prefer-default-export
-export { default as PolicyPropertySetter } from './PolicyPropertySetter';
+export * from './EditSections';
+export { default as CancelButton } from './CancelButton';
+export { default as SaveButton } from './SaveButton';
+export { default as PanelTitle } from './PanelTitle';
+export { default as Metadata } from './Metadata';
+export { default as DeleteEntry } from './DeleteEntity';

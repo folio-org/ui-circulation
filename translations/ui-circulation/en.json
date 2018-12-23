@@ -14,6 +14,7 @@
   "settings.loanPolicy.paneTitle": "Loan Policies",
   "settings.loanPolicy.editEntryLabel": "Edit Loan Policy",
   "settings.loanPolicy.saveAndClose": "Save and Close",
+  "settings.loanPolicy.deleteLoanPolicy": "Delete Loan Policy",
   "settings.loanPolicy.createEntryLabel": "Create Loan Policy",
   "settings.loanPolicy.selectFDDS": "Please select a fixed due date schedule",
   "settings.loanPolicy.loans": "Loans",
@@ -44,6 +45,8 @@
   "settings.loanPolicy.yes": "Yes",
   "settings.loanPolicy.no": "No",
   "settings.loanPolicy.openingTimeOffset": "Opening time offset",
+  "settings.loanPolicy.delete": "Delete",
+  "settings.loanPolicy.deleteMessage": "{name} will be {removed}.",
 
   "settings.loanRules.paneTitle": "Loan Rules Editor",
   "settings.loanRules.rulesUpdated": "Rules were successfully updated.",
