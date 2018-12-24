@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 
 import { Settings } from '@folio/stripes/smart-components';
 
-import LoanPolicySettings from './LoanPolicySettings';
+import LoanPolicySettings from './LoanPolicy/LoanPolicySettings';
 import LoanRules from './LoanRules';
 import RequestCancellationReasons from './RequestCancellationReasons';
 import CheckoutSettings from './CheckoutSettings';

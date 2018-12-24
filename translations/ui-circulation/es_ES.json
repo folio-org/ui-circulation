@@ -55,7 +55,7 @@
     "settings.fDDSform.newFixDDSchedule": "Crear un calendario de fechas de vencimiento fijo",
     "settings.fDDSform.description": "Descripción",
     "settings.fDDSform.schedule": "Horario",
-    "settings.fDDSform.new": "+ Nuevo",
+    "settings.fDDSform.new": "Nuevo",
     "settings.fDDSform.dateRange": "Rango de fecha",
     "settings.fDDSform.dateFrom": "Fecha de",
     "settings.fDDSform.dateTo": "Fecha para",

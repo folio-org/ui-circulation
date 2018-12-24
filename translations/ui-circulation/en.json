@@ -12,6 +12,10 @@
 
   "settings.loanPolicy.entryLabel": "Loan Policy",
   "settings.loanPolicy.paneTitle": "Loan Policies",
+  "settings.loanPolicy.editEntryLabel": "Edit Loan Policy",
+  "settings.loanPolicy.saveAndClose": "Save and Close",
+  "settings.loanPolicy.deleteLoanPolicy": "Delete Loan Policy",
+  "settings.loanPolicy.createEntryLabel": "Create Loan Policy",
   "settings.loanPolicy.selectFDDS": "Please select a fixed due date schedule",
   "settings.loanPolicy.loans": "Loans",
   "settings.loanPolicy.loanPeriod": "Loan period",
@@ -41,6 +45,8 @@
   "settings.loanPolicy.yes": "Yes",
   "settings.loanPolicy.no": "No",
   "settings.loanPolicy.openingTimeOffset": "Opening time offset",
+  "settings.loanPolicy.delete": "Delete",
+  "settings.loanPolicy.deleteMessage": "{name} will be {removed}.",
 
   "settings.loanRules.paneTitle": "Loan Rules Editor",
   "settings.loanRules.rulesUpdated": "Rules were successfully updated.",
@@ -70,7 +76,7 @@
   "settings.fDDSform.newFixDDSchedule": "Create fixed due date schedule",
   "settings.fDDSform.description": "Description",
   "settings.fDDSform.schedule": "Schedule",
-  "settings.fDDSform.new": "+ New",
+  "settings.fDDSform.new": "New",
   "settings.fDDSform.dateRange": "Date range",
   "settings.fDDSform.dateFrom": "Date from",
   "settings.fDDSform.dateTo": "Date to",
