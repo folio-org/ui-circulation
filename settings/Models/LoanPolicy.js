@@ -1,4 +1,8 @@
-import { get } from 'lodash';
+import {
+  get,
+  isNumber,
+  isEmpty,
+} from 'lodash';
 
 import {
   intervalIdsMap,
@@ -101,5 +105,9 @@ export default class LoanPolicy {
 
   isNumberOfRenewalsAllowedActive() {
     return this.renewable && !this.renewalsPolicy.unlimited;
+  }
+
+  isPeriodValid(period) {
+    return isNumber(period.duration) && !isEmpty(period.intervalId);
   }
 }
