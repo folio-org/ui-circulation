@@ -46,6 +46,7 @@ class LoanPolicyForm extends React.Component {
       fixedDueDateSchedules: PropTypes.object,
     }).isRequired,
     policy: PropTypes.object,
+    initialValues: PropTypes.object,
     onSave: PropTypes.func.isRequired,
     onCancel: PropTypes.func.isRequired,
     handleSubmit: PropTypes.func.isRequired,
@@ -55,6 +56,7 @@ class LoanPolicyForm extends React.Component {
 
   static defaultProps = {
     policy: {},
+    initialValues: {},
   };
 
   state = {
@@ -101,6 +103,7 @@ class LoanPolicyForm extends React.Component {
     const {
       pristine,
       policy,
+      initialValues,
       stripes,
       submitting,
       handleSubmit,
@@ -158,6 +161,7 @@ class LoanPolicyForm extends React.Component {
                 <DeleteEntry
                   confirmDelete={confirmDelete}
                   policyName={policy.name}
+                  initialValues={initialValues}
                   changeDeleteState={this.changeDeleteState}
                   onRemove={onRemove}
                 />
