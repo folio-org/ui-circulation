@@ -25,6 +25,7 @@ import {
 } from '@folio/stripes/components';
 
 import LoanPolicy from '../Models/LoanPolicy';
+import normalizeLoanPolicyForm from './utils/normalizeLoanPolicyForm';
 
 import {
   AboutSection,
@@ -92,7 +93,8 @@ class LoanPolicyForm extends React.Component {
   };
 
   saveForm = (loanPolicy) => {
-    this.props.onSave(loanPolicy);
+    const normalizedForm = normalizeLoanPolicyForm(loanPolicy);
+    this.props.onSave(normalizedForm);
   };
 
   changeDeleteState = (confirmDelete) => {
