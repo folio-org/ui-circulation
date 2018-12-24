@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { isEmpty } from 'lodash';
+import { isUndefined } from 'lodash';
 
 import { ViewMetaData } from '@folio/stripes/smart-components';
 import {
@@ -27,7 +27,7 @@ class Metadata extends React.Component {
   render() {
     const { metadata } = this.props;
 
-    if (isEmpty(metadata)) {
+    if (isUndefined(metadata) || isUndefined(metadata.createdDate)) {
       return null;
     }
 

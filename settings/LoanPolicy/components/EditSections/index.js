@@ -1,3 +1,3 @@
-export { default as AboutSection } from './About';
-export { default as LoansSection } from './Loans';
-export { default as RenewalsSection } from './Renewals';
+export { default as AboutSection } from './AboutSection';
+export { default as LoansSection } from './LoansSection';
+export { default as RenewalsSection } from './RenewalsSection';

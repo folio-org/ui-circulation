@@ -120,8 +120,7 @@ class LoanPolicyDetail extends React.Component {
     const ddId = get(policy, ['loansPolicy', 'closedLibraryDueDateManagementId']);
     const closedLibraryDueDateManagementItem = this.getClosedLibraryDueDateManagementItem(ddId);
     const periodInterval = get(policy, ['loansPolicy', 'period', 'intervalId']);
-    const exReqPerInterval = get(policy, ['loansPolicy', 'existingRequestsPeriod', 'intervalId']);
-    const gracePeriodInterval = get(policy, ['loansPolicy', 'gracePeriod', 'intervalId']);
+    const gracePeriodInterval = get(policy, ['loansPolicy', 'gracePeriod', 'intervalId'], '-');
     const timeOffsetInterval = get(policy, ['loansPolicy', 'openingTimeOffset', 'intervalId']);
     const isOpeningTimeOffsetVisible = this.isOpeningTimeOffsetVisible();
 
@@ -189,14 +188,6 @@ class LoanPolicyDetail extends React.Component {
             <br />
           </div>
         }
-        <Row>
-          <Col xs={12}>
-            <KeyValue
-              label={<FormattedMessage id="ui-circulation.settings.loanPolicy.alternateLoanPeriodExisting" />}
-              value={`${get(policy, ['loansPolicy', 'existingRequestsPeriod', 'duration'], '')} ${exReqPerInterval}`}
-            />
-          </Col>
-        </Row>
         <br />
         <Row>
           <Col xs={12}>

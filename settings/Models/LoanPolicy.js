@@ -3,6 +3,7 @@ import { get } from 'lodash';
 import {
   intervalIdsMap,
   loanProfileMap,
+  renewFromIds,
   BEGINNING_OF_THE_NEXT_OPEN_SERVICE_POINT_HOURS,
 } from '../../constants';
 
@@ -46,6 +47,23 @@ class RenewalsPolicy {
 }
 
 export default class LoanPolicy {
+  static defaultLoanPolicy() {
+    const defaultPolicy = {
+      loanable: true,
+      loansPolicy: {
+        profileId: loanProfileMap.ROLLING,
+      },
+      renewable: true,
+      renewalsPolicy: {
+        unlimited: false,
+        renewFromId: renewFromIds.SYSTEM_DATE,
+        differentPeriod: false,
+      },
+    };
+
+    return defaultPolicy;
+  }
+
   constructor(policy = {}) {
     this.id = policy.id;
     this.name = policy.name;

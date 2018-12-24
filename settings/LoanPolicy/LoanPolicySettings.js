@@ -8,6 +8,8 @@ import { EntryManager } from '@folio/stripes/smart-components';
 import LoanPolicyDetail from './LoanPolicyDetail';
 import LoanPolicyForm from './LoanPolicyForm';
 import validate from '../Validation/LoanPolicy';
+import LoanPolicy from '../Models/LoanPolicy';
+
 
 class LoanPolicySettings extends React.Component {
   static manifest = Object.freeze({
@@ -65,6 +67,7 @@ class LoanPolicySettings extends React.Component {
         nameKey="name"
         permissions={permissions}
         validate={validate}
+        defaultEntry={LoanPolicy.defaultLoanPolicy()}
       />
     );
   }

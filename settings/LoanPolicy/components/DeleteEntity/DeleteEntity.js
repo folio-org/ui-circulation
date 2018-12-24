@@ -12,13 +12,19 @@ import { IfPermission } from '@folio/stripes/core';
 class DeleteEntity extends React.Component {
   static propTypes = {
     policyName: PropTypes.string.isRequired,
+    initialValues: PropTypes.object,
     confirmDelete: PropTypes.bool.isRequired,
     changeDeleteState: PropTypes.func.isRequired,
     onRemove: PropTypes.func.isRequired,
   };
 
   onConfirm = () => {
-    this.props.onRemove({});
+    const {
+      initialValues,
+      onRemove,
+    } = this.props;
+
+    onRemove(initialValues);
   };
 
   onCancel = () => {
