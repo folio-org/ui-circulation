@@ -36,6 +36,7 @@ import {
   PanelTitle,
   Metadata,
   DeleteEntry,
+  RequestManagementSection,
 } from './components';
 
 class LoanPolicyForm extends React.Component {
@@ -99,7 +100,7 @@ class LoanPolicyForm extends React.Component {
 
   changeDeleteState = (confirmDelete) => {
     this.setState({ confirmDelete });
-  }
+  };
 
   render() {
     const {
@@ -157,6 +158,9 @@ class LoanPolicyForm extends React.Component {
                 <RenewalsSection
                   policy={policy}
                   schedules={schedules}
+                />
+                <RequestManagementSection
+                  policy={policy}
                 />
               </Accordion>
               {editMode &&
