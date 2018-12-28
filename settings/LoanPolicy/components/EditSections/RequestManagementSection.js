@@ -35,24 +35,24 @@ class RenewalsSection extends React.Component {
           <PolicyPropertySetter
             fieldLabel="ui-circulation.settings.requestManagement.recallReturnInterval"
             selectPlaceholder="ui-circulation.settings.loanPolicy.selectInterval"
-            inputValuePath="requestManagement.recallReturnInterval.duration"
-            selectValuePath="requestManagement.recallReturnInterval.intervalId"
+            inputValuePath="requestManagement.recalls.recallReturnInterval.duration"
+            selectValuePath="requestManagement.recalls.recallReturnInterval.intervalId"
             entity={policy}
             intervalPeriods={intervalPeriods}
           />
           <PolicyPropertySetter
             fieldLabel="ui-circulation.settings.requestManagement.minLoanPeriod"
             selectPlaceholder="ui-circulation.settings.loanPolicy.selectInterval"
-            inputValuePath="requestManagement.minLoanPeriod.duration"
-            selectValuePath="requestManagement.minLoanPeriod.intervalId"
+            inputValuePath="requestManagement.recalls.minLoanPeriod.duration"
+            selectValuePath="requestManagement.recalls.minLoanPeriod.intervalId"
             entity={policy}
             intervalPeriods={intervalPeriods}
           />
           <PolicyPropertySetter
             fieldLabel="ui-circulation.settings.requestManagement.alternateGracePeriod"
             selectPlaceholder="ui-circulation.settings.loanPolicy.selectInterval"
-            inputValuePath="requestManagement.alternateGracePeriod.duration"
-            selectValuePath="requestManagement.alternateGracePeriod.intervalId"
+            inputValuePath="requestManagement.recalls.alternateGracePeriod.duration"
+            selectValuePath="requestManagement.recalls.alternateGracePeriod.intervalId"
             entity={policy}
             intervalPeriods={intervalPeriods}
           />
@@ -63,8 +63,8 @@ class RenewalsSection extends React.Component {
           <PolicyPropertySetter
             fieldLabel="ui-circulation.settings.requestManagement.alternateCheckoutLoanPeriod"
             selectPlaceholder="ui-circulation.settings.loanPolicy.selectInterval"
-            inputValuePath="requestManagement.alternateCheckoutLoanPeriod.duration"
-            selectValuePath="requestManagement.alternateCheckoutLoanPeriod.intervalId"
+            inputValuePath="requestManagement.holds.alternateCheckoutLoanPeriod.duration"
+            selectValuePath="requestManagement.holds.alternateCheckoutLoanPeriod.intervalId"
             entity={policy}
             intervalPeriods={intervalPeriods}
           />
@@ -72,8 +72,8 @@ class RenewalsSection extends React.Component {
           <br />
           <Field
             label={<FormattedMessage id="ui-circulation.settings.requestManagement.renewItemsWithRequest" />}
-            name="requestManagement.renewItemsWithRequest"
-            id="requestManagement.renewItemsWithRequest"
+            name="requestManagement.holds.renewItemsWithRequest"
+            id="requestManagement.holds.renewItemsWithRequest"
             component={Checkbox}
             type="checkbox"
             normalize={v => !!v}
@@ -82,27 +82,27 @@ class RenewalsSection extends React.Component {
           <PolicyPropertySetter
             fieldLabel="ui-circulation.settings.requestManagement.alternateRenewalLoanPeriod"
             selectPlaceholder="ui-circulation.settings.loanPolicy.selectInterval"
-            inputValuePath="requestManagement.alternateRenewalLoanPeriod.duration"
-            selectValuePath="requestManagement.alternateRenewalLoanPeriod.intervalId"
+            inputValuePath="requestManagement.holds.alternateRenewalLoanPeriod.duration"
+            selectValuePath="requestManagement.holds.alternateRenewalLoanPeriod.intervalId"
             entity={policy}
             intervalPeriods={intervalPeriods}
           />
         </Accordion>
         <Accordion
-          label={<FormattedMessage id="ui-circulation.settings.requestManagement.holds" />}
+          label={<FormattedMessage id="ui-circulation.settings.requestManagement.pages" />}
         >
           <PolicyPropertySetter
-            fieldLabel="ui-circulation.settings.requestManagement.alternateRenewalLoanPeriod"
+            fieldLabel="ui-circulation.settings.requestManagement.alternateCheckoutLoanPeriod"
             selectPlaceholder="ui-circulation.settings.loanPolicy.selectInterval"
-            inputValuePath="requestManagement.alternateRenewalLoanPeriod.duration"
-            selectValuePath="requestManagement.alternateRenewalLoanPeriod.intervalId"
+            inputValuePath="requestManagement.pages.alternateCheckoutLoanPeriod.duration"
+            selectValuePath="requestManagement.pages.alternateCheckoutLoanPeriod.intervalId"
             entity={policy}
             intervalPeriods={intervalPeriods}
           />
           <Field
             label={<FormattedMessage id="ui-circulation.settings.requestManagement.renewItemsWithRequest" />}
             name="requestManagement.renewItemsWithRequest"
-            id="requestManagement.renewItemsWithRequest"
+            id="requestManagement.pages.renewItemsWithRequest"
             component={Checkbox}
             type="checkbox"
             normalize={v => !!v}
@@ -111,8 +111,8 @@ class RenewalsSection extends React.Component {
           <PolicyPropertySetter
             fieldLabel="ui-circulation.settings.requestManagement.alternateRenewalLoanPeriod"
             selectPlaceholder="ui-circulation.settings.loanPolicy.selectInterval"
-            inputValuePath="requestManagement.alternateRenewalLoanPeriod.duration"
-            selectValuePath="requestManagement.alternateRenewalLoanPeriod.intervalId"
+            inputValuePath="requestManagement.pages.alternateRenewalLoanPeriod.duration"
+            selectValuePath="requestManagement.pages.alternateRenewalLoanPeriod.intervalId"
             entity={policy}
             intervalPeriods={intervalPeriods}
           />
