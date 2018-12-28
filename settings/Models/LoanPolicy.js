@@ -50,6 +50,54 @@ class RenewalsPolicy {
   }
 }
 
+class Recalls {
+  constructor({
+    recallReturnInterval,
+    minLoanPeriod,
+    alternateGracePeriod,
+  } = {}) {
+    this.recallReturnInterval = new Period(recallReturnInterval);
+    this.minLoanPeriod = new Period(minLoanPeriod);
+    this.alternateGracePeriod = new Period(alternateGracePeriod);
+  }
+}
+
+class Holds {
+  constructor({
+    alternateCheckoutLoanPeriod,
+    renewItemsWithRequest,
+    alternateRenewalLoanPeriod,
+  } = {}) {
+    this.alternateCheckoutLoanPeriod = new Period(alternateCheckoutLoanPeriod);
+    this.renewItemsWithRequest = renewItemsWithRequest;
+    this.alternateRenewalLoanPeriod = new Period(alternateRenewalLoanPeriod);
+  }
+}
+
+class Pages {
+  constructor({
+    alternateCheckoutLoanPeriod,
+    renewItemsWithRequest,
+    alternateRenewalLoanPeriod,
+  } = {}) {
+    this.alternateCheckoutLoanPeriod = new Period(alternateCheckoutLoanPeriod);
+    this.renewItemsWithRequest = renewItemsWithRequest;
+    this.alternateRenewalLoanPeriod = new Period(alternateRenewalLoanPeriod);
+  }
+}
+
+class RequestManagement {
+  constructor({
+    recalls,
+    holds,
+    pages,
+  } = {}) {
+    this.recalls = new Recalls(recalls);
+    this.holds = new Holds(holds);
+    this.pages = new Pages(pages);
+  }
+}
+
 export default class LoanPolicy {
   static defaultLoanPolicy() {
     const defaultPolicy = {
@@ -77,6 +125,7 @@ export default class LoanPolicy {
     this.loansPolicy = new LoansPolicy(policy.loansPolicy);
     this.renewalsPolicy = new RenewalsPolicy(policy.renewalsPolicy);
     this.metadata = new Metadata(policy.metadata);
+    this.requestManagement = new RequestManagement(policy.requestManagement);
   }
 
   isShortTermLoan() {
