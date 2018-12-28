@@ -55,7 +55,7 @@
     "settings.fDDSform.newFixDDSchedule": "Fix lejárati dátum ütemterv létrehozása",
     "settings.fDDSform.description": "Leírás",
     "settings.fDDSform.schedule": "Ütemterv",
-    "settings.fDDSform.new": "Új",
+    "settings.fDDSform.new": "+ Új",
     "settings.fDDSform.dateRange": "Dátumtartomány",
     "settings.fDDSform.dateFrom": "Dátumtól",
     "settings.fDDSform.dateTo": "Dátumig",
@@ -140,5 +140,6 @@
     "settings.patronNotices.deleteConfirm": "Are you sure you want to delete this patron notice?",
     "settings.patronNotices.predefinedWarning": "This is a predefined notice and cannot be deleted",
     "settings.patronNotices.yes": "Yes",
-    "settings.patronNotices.no": "No"
+    "settings.patronNotices.no": "No",
+    "settings.patronNotices.errors.descriptionRequired": "Description is required"
 }

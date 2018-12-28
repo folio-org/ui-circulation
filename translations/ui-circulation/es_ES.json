@@ -55,7 +55,7 @@
     "settings.fDDSform.newFixDDSchedule": "Crear un calendario de fechas de vencimiento fijo",
     "settings.fDDSform.description": "Descripción",
     "settings.fDDSform.schedule": "Horario",
-    "settings.fDDSform.new": "Nuevo",
+    "settings.fDDSform.new": "+ Nuevo",
     "settings.fDDSform.dateRange": "Rango de fecha",
     "settings.fDDSform.dateFrom": "Fecha de",
     "settings.fDDSform.dateTo": "Fecha para",
@@ -140,5 +140,6 @@
     "settings.patronNotices.deleteConfirm": "Are you sure you want to delete this patron notice?",
     "settings.patronNotices.predefinedWarning": "This is a predefined notice and cannot be deleted",
     "settings.patronNotices.yes": "Yes",
-    "settings.patronNotices.no": "No"
+    "settings.patronNotices.no": "No",
+    "settings.patronNotices.errors.descriptionRequired": "Description is required"
 }
