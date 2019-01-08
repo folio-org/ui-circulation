@@ -52,7 +52,7 @@ class StaffSlipForm extends React.Component {
             <IconButton
               id="clickable-close-staff-slip"
               onClick={this.props.onCancel}
-              icon="closeX"
+              icon="times"
               aria-label={ariaLabel}
             />
           )}

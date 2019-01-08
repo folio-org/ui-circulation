@@ -126,7 +126,7 @@ class PatronNoticeForm extends React.Component {
             <IconButton
               id="clickable-close-patron-notice"
               onClick={this.props.onCancel}
-              icon="closeX"
+              icon="times"
               aria-label={ariaLabel}
             />
           )}
