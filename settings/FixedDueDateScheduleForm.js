@@ -107,7 +107,7 @@ class FixedDueDateScheduleForm extends React.Component {
           {ariaLabel => (
             <IconButton
               onClick={onCancel}
-              icon="closeX"
+              icon="times"
               size="medium"
               iconClassName="closeIcon"
               aria-label={ariaLabel}
