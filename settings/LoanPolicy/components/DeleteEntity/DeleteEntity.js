@@ -33,7 +33,7 @@ class DeleteEntity extends React.Component {
 
   openConfirmationModal = () => {
     this.props.changeDeleteState(true);
-  }
+  };
 
   render() {
     const {
@@ -41,15 +41,21 @@ class DeleteEntity extends React.Component {
       policyName,
     } = this.props;
 
-    const confirmationMessage = <FormattedMessage
-      id="ui-circulation.settings.loanPolicy.deleteMessage"
-      values={{ name: <strong>{policyName}</strong>, removed: <strong>removed</strong> }}
-    />;
+    const confirmationMessage = (
+      <FormattedMessage
+        id="ui-circulation.settings.loanPolicy.deleteMessage"
+        values={{
+          name: <strong>{policyName}</strong>,
+          removed: <strong><FormattedMessage id="ui-circulation.settings.loanPolicy.removed" /></strong>,
+        }}
+      />
+    );
 
     return (
       <React.Fragment>
         <IfPermission perm="ui-circulation.settings.loan-policies">
           <Button
+            id="clickable-delete-entry"
             disabled={confirmDelete}
             onClick={this.openConfirmationModal}
           >
