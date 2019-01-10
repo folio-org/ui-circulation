@@ -75,9 +75,7 @@ class PolicyPropertySetter extends React.Component {
       return '';
     }
 
-    const numberValue = Number(value);
-
-    return numberValue >= 0 ? numberValue : 0;
+    return Number(value);
   };
 
   generateOptions = () => {

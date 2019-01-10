@@ -6,23 +6,23 @@ export default function (policy) {
 
   const config = {
     'name': {
-      type: 'isNotEmpty',
+      rules: ['isNotEmpty'],
       shouldValidate: true,
     },
     'loansPolicy.period.duration': {
-      type: 'isNotEmpty',
+      rules: ['isNotEmpty', 'isIntegerGreaterThanOne'],
       shouldValidate: loanPolicy.isProfileRolling(),
     },
     'loansPolicy.fixedDueDateScheduleId': {
-      type: 'isNotEmpty',
+      rules: ['isNotEmpty'],
       shouldValidate: loanPolicy.isProfileFixed(),
     },
     'loansPolicy.openingTimeOffset.duration': {
-      type: 'isNotEmpty',
+      rules: ['isNotEmpty', 'isIntegerGreaterThanOne'],
       shouldValidate: loanPolicy.isOpeningTimeOffsetActive(),
     },
     'renewalsPolicy.numberAllowed': {
-      type: 'isNotEmpty',
+      rules: ['isNotEmpty'],
       shouldValidate: loanPolicy.isNumberOfRenewalsAllowedActive(),
     },
   };

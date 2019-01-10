@@ -4,8 +4,10 @@ import {
   get,
   set,
   forEach,
+  some,
   isEmpty,
   isNumber,
+  isInteger,
 } from 'lodash';
 
 const defaultValidators = {
@@ -13,7 +15,13 @@ const defaultValidators = {
     validate: (value) => isNumber(value) || !isEmpty(value),
     message: <FormattedMessage id="ui-circulation.settings.validate.fillIn" />,
   },
+  isIntegerGreaterThanOne: {
+    validate: (value) => isInteger(value) && value > 1,
+    message: <FormattedMessage id="ui-circulation.settings.validate.greaterThanOne" />,
+  },
 };
+
+const validateField = Symbol('validateField');
 
 export default class FormValidator {
   constructor(config, validators = defaultValidators) {
@@ -21,19 +29,17 @@ export default class FormValidator {
     this.validators = validators;
   }
 
-  validate(data) {
-    const errors = {};
+  [validateField](data, pathToField) {
+    let isFieldValid = true;
+    let validationMessage = null;
 
-    forEach(Object.keys(this.config), (pathToField) => {
-      const type = this.config[pathToField].type;
-      const validator = this.validators[type];
+    const validationRules = this.config[pathToField].rules || [];
 
-      if (!type) {
-        return;
-      }
+    some(validationRules, (validationRule) => {
+      const validator = this.validators[validationRule];
 
       if (!validator) {
-        throw new Error(`Validation: no handler to validate - ${type}`);
+        throw new Error(`Validation: no handler to validate - ${validationRule}`);
       }
 
       const valueToValidate = get(data, pathToField);
@@ -42,7 +48,30 @@ export default class FormValidator {
         : true;
 
       if (!isValid) {
-        set(errors, pathToField, validator.message);
+        isFieldValid = false;
+        validationMessage = validator.message;
+      }
+
+      return !isValid;
+    });
+
+    return {
+      isFieldValid,
+      validationMessage,
+    };
+  }
+
+  validate(data) {
+    const errors = {};
+
+    forEach(Object.keys(this.config), (pathToField) => {
+      const {
+        isFieldValid,
+        validationMessage,
+      } = this[validateField](data, pathToField);
+
+      if (!isFieldValid) {
+        set(errors, pathToField, validationMessage);
       }
     });
 
