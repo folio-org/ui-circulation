@@ -12,6 +12,10 @@
 
   "settings.loanPolicy.entryLabel": "Loan Policy",
   "settings.loanPolicy.paneTitle": "Loan Policies",
+  "settings.loanPolicy.editEntryLabel": "Edit Loan Policy",
+  "settings.loanPolicy.saveAndClose": "Save and Close",
+  "settings.loanPolicy.deleteLoanPolicy": "Delete Loan Policy",
+  "settings.loanPolicy.createEntryLabel": "Create Loan Policy",
   "settings.loanPolicy.selectFDDS": "Please select a fixed due date schedule",
   "settings.loanPolicy.loans": "Loans",
   "settings.loanPolicy.loanPeriod": "Loan period",
@@ -41,12 +45,16 @@
   "settings.loanPolicy.yes": "Yes",
   "settings.loanPolicy.no": "No",
   "settings.loanPolicy.openingTimeOffset": "Opening time offset",
+  "settings.loanPolicy.delete": "Delete",
+  "settings.loanPolicy.deleteMessage": "{name} will be {removed}.",
+  "settings.loanPolicy.removed": "removed",
 
   "settings.loanRules.paneTitle": "Loan Rules Editor",
   "settings.loanRules.rulesUpdated": "Rules were successfully updated.",
   "settings.loanRules.newRule": "New Rule (#)",
 
   "settings.validate.fillIn": "Please fill this in to continue",
+  "settings.validate.greaterThanOne": "The value must be integer and greater than 1",
 
   "settings.fDDS.validate.overlappingDateRange": "Date Range {num1} cannot overlap with Date Range {num2}",
   "settings.fDDS.validate.uniqueName": "Please enter a unique name.",
