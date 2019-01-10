@@ -63,6 +63,7 @@ class DeleteEntity extends React.Component {
           </Button>
         </IfPermission>
         <ConfirmationModal
+          id="delete-item-confirmation"
           open={confirmDelete}
           heading={<FormattedMessage id="ui-circulation.settings.loanPolicy.deleteLoanPolicy" />}
           message={confirmationMessage}
