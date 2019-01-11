@@ -33,7 +33,6 @@ class LoansPolicy {
     this.closedLibraryDueDateManagementId = policy.closedLibraryDueDateManagementId;
     this.fixedDueDateScheduleId = policy.fixedDueDateScheduleId;
     this.period = new Period(policy.period);
-    this.existingRequestsPeriod = new Period(policy.existingRequestsPeriod);
     this.gracePeriod = new Period(policy.gracePeriod);
     this.openingTimeOffset = new Period(policy.openingTimeOffset);
   }
