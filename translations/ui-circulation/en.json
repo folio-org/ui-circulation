@@ -55,6 +55,8 @@
 
   "settings.validate.fillIn": "Please fill this in to continue",
   "settings.validate.greaterThanOne": "The value must be integer and greater than 1",
+  "settings.validate.greaterThanZero": "The value must be integer and greater than 0",
+  "settings.validate.isPositiveNumber": "The value must be greater or equal 0",
 
   "settings.fDDS.validate.overlappingDateRange": "Date Range {num1} cannot overlap with Date Range {num2}",
   "settings.fDDS.validate.uniqueName": "Please enter a unique name.",
