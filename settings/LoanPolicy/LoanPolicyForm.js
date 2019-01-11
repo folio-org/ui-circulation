@@ -1,11 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
-
-import {
-  getFormValues,
-} from 'redux-form';
+import { getFormValues } from 'redux-form';
 
 import {
   cloneDeep,
@@ -65,6 +63,9 @@ class LoanPolicyForm extends React.Component {
     confirmDelete: false,
     sections: {
       generalSection: true,
+      recallsSection: true,
+      holdsSection: true,
+      pagesSection: true,
     },
   };
 
@@ -104,19 +105,28 @@ class LoanPolicyForm extends React.Component {
 
   render() {
     const {
+      onCancel,
+      onRemove,
       pristine,
       policy,
-      initialValues,
       stripes,
       submitting,
       handleSubmit,
-      onCancel,
-      onRemove,
+      initialValues,
+      change,
     } = this.props;
 
     const {
       sections,
       confirmDelete,
+    } = this.state;
+
+    const {
+      sections: {
+        recallsSection,
+        holdsSection,
+        pagesSection,
+      },
     } = this.state;
 
     const editMode = Boolean(policy.id);
@@ -141,9 +151,10 @@ class LoanPolicyForm extends React.Component {
                 </Col>
               </Row>
               <Accordion
+                id="generalSection"
                 open={sections.generalSection}
-                onToggle={this.handleSectionToggle}
                 label={<FormattedMessage id="ui-circulation.settings.loanPolicy.generalInformation" />}
+                onToggle={this.handleSectionToggle}
               >
                 <Metadata
                   connect={stripes.connect}
@@ -152,8 +163,8 @@ class LoanPolicyForm extends React.Component {
                 <AboutSection />
                 <LoansSection
                   policy={policy}
+                  change={change}
                   schedules={schedules}
-                  change={this.props.change}
                 />
                 <RenewalsSection
                   policy={policy}
@@ -161,15 +172,19 @@ class LoanPolicyForm extends React.Component {
                 />
                 <RequestManagementSection
                   policy={policy}
+                  holdsSectionOpen={holdsSection}
+                  pagesSectionOpen={pagesSection}
+                  recallsSectionOpen={recallsSection}
+                  accordionOnToggle={this.handleSectionToggle}
                 />
               </Accordion>
               {editMode &&
                 <DeleteEntry
-                  confirmDelete={confirmDelete}
+                  onRemove={onRemove}
                   policyName={policy.name}
                   initialValues={initialValues}
+                  confirmDelete={confirmDelete}
                   changeDeleteState={this.changeDeleteState}
-                  onRemove={onRemove}
                 />
               }
             </React.Fragment>

@@ -1,7 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { Field } from 'redux-form';
-import PropTypes from 'prop-types';
 
 import {
   Checkbox,
@@ -15,10 +15,20 @@ import PolicyPropertySetter from '../PolicyPropertySetter/PolicyPropertySetter';
 class RequestManagementSection extends React.Component {
   static propTypes = {
     policy: PropTypes.object.isRequired,
+    holdsSectionOpen: PropTypes.bool.isRequired,
+    pagesSectionOpen: PropTypes.bool.isRequired,
+    recallsSectionOpen: PropTypes.bool.isRequired,
+    accordionOnToggle: PropTypes.func.isRequired
   };
 
   render() {
-    const { policy } = this.props;
+    const {
+      policy,
+      holdsSectionOpen,
+      pagesSectionOpen,
+      recallsSectionOpen,
+      accordionOnToggle,
+    } = this.props;
 
     if (!policy.loanable) {
       return null;
@@ -30,6 +40,9 @@ class RequestManagementSection extends React.Component {
           <FormattedMessage id="ui-circulation.settings.requestManagement.requestManagement" />
         </h2>
         <Accordion
+          id="recallsSection"
+          open={recallsSectionOpen}
+          onToggle={accordionOnToggle}
           label={<FormattedMessage id="ui-circulation.settings.requestManagement.recalls" />}
         >
           <PolicyPropertySetter
@@ -58,6 +71,9 @@ class RequestManagementSection extends React.Component {
           />
         </Accordion>
         <Accordion
+          id="holdsSection"
+          open={holdsSectionOpen}
+          onToggle={accordionOnToggle}
           label={<FormattedMessage id="ui-circulation.settings.requestManagement.holds" />}
         >
           <PolicyPropertySetter
@@ -89,6 +105,9 @@ class RequestManagementSection extends React.Component {
           />
         </Accordion>
         <Accordion
+          id="pagesSection"
+          open={pagesSectionOpen}
+          onToggle={accordionOnToggle}
           label={<FormattedMessage id="ui-circulation.settings.requestManagement.pages" />}
         >
           <PolicyPropertySetter
@@ -101,7 +120,7 @@ class RequestManagementSection extends React.Component {
           />
           <Field
             label={<FormattedMessage id="ui-circulation.settings.requestManagement.renewItemsWithRequest" />}
-            name="requestManagement.renewItemsWithRequest"
+            name="requestManagement.pages.renewItemsWithRequest"
             id="requestManagement.pages.renewItemsWithRequest"
             component={Checkbox}
             type="checkbox"
