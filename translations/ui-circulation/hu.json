@@ -141,5 +141,13 @@
     "settings.patronNotices.predefinedWarning": "This is a predefined notice and cannot be deleted",
     "settings.patronNotices.yes": "Yes",
     "settings.patronNotices.no": "No",
-    "settings.patronNotices.errors.descriptionRequired": "Description is required"
+    "settings.patronNotices.errors.descriptionRequired": "Description is required",
+    "settings.loanPolicy.editEntryLabel": "Edit Loan Policy",
+    "settings.loanPolicy.saveAndClose": "Save and Close",
+    "settings.loanPolicy.deleteLoanPolicy": "Delete Loan Policy",
+    "settings.loanPolicy.createEntryLabel": "Create Loan Policy",
+    "settings.loanPolicy.delete": "Delete",
+    "settings.loanPolicy.deleteMessage": "{name} will be {removed}.",
+    "settings.loanPolicy.removed": "removed",
+    "settings.validate.greaterThanOne": "The value must be integer and greater than 1"
 }

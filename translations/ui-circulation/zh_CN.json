@@ -141,5 +141,13 @@
     "settings.patronNotices.predefinedWarning": "这是预定义的通知，无法删除",
     "settings.patronNotices.yes": "是",
     "settings.patronNotices.no": "否",
-    "settings.patronNotices.errors.descriptionRequired": "描述是必需的"
+    "settings.patronNotices.errors.descriptionRequired": "描述是必需的",
+    "settings.loanPolicy.editEntryLabel": "编辑借阅政策",
+    "settings.loanPolicy.saveAndClose": "保存并关闭",
+    "settings.loanPolicy.deleteLoanPolicy": "删除借阅政策",
+    "settings.loanPolicy.createEntryLabel": "创建借阅政策",
+    "settings.loanPolicy.delete": "删除",
+    "settings.loanPolicy.deleteMessage": "{name}将被{removed} 。",
+    "settings.loanPolicy.removed": "已删除",
+    "settings.validate.greaterThanOne": "该值必须为整数且大于1"
 }
