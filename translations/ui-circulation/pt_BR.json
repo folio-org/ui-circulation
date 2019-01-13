@@ -141,5 +141,13 @@
     "settings.patronNotices.predefinedWarning": "Este é um aviso pré-definido e não pode ser excluído",
     "settings.patronNotices.yes": "Sim",
     "settings.patronNotices.no": "Não",
-    "settings.patronNotices.errors.descriptionRequired": "Descrição é obrigatória"
+    "settings.patronNotices.errors.descriptionRequired": "Descrição é obrigatória",
+    "settings.loanPolicy.editEntryLabel": "Editar política de empréstimo",
+    "settings.loanPolicy.saveAndClose": "Salvar e fechar",
+    "settings.loanPolicy.deleteLoanPolicy": "Excluir a política de empréstimo",
+    "settings.loanPolicy.createEntryLabel": "Criar política de empréstimo",
+    "settings.loanPolicy.delete": "Excluir",
+    "settings.loanPolicy.deleteMessage": "{name} será {removed} .",
+    "settings.loanPolicy.removed": "removido",
+    "settings.validate.greaterThanOne": "O valor deve ser inteiro e maior que 1"
 }
