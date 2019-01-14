@@ -59,6 +59,19 @@
         "visible": true
       },
       {
+        "permissionName": "ui-circulation.settings.notice-policies",
+        "displayName": "Settings (Circ): Can create, edit and remove notice policies",
+        "subPermissions": [
+          "circulation-storage.notice-policies.collection.get",
+          "circulation-storage.notice-policies.item.get",
+          "circulation-storage.notice-policies.item.create",
+          "circulation-storage.notice-policies.item.update",
+          "circulation-storage.notice-policies.item.delete",
+          "settings.circulation.enabled"
+        ],
+        "visible": true
+      },
+      {
         "permissionName": "settings.loan-policies.all",
         "displayName": "Settings (Circ): Can create, edit and remove loan policies [LEGACY]",
         "subPermissions": [

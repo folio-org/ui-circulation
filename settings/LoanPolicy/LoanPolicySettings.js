@@ -10,7 +10,6 @@ import LoanPolicyForm from './LoanPolicyForm';
 import validate from '../Validation/LoanPolicy';
 import LoanPolicy from '../Models/LoanPolicy';
 
-
 class LoanPolicySettings extends React.Component {
   static manifest = Object.freeze({
     loanPolicies: {
