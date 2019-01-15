@@ -8,6 +8,7 @@ import {
   isEmpty,
   isNumber,
   isInteger,
+  isUndefined,
 } from 'lodash';
 
 const defaultValidators = {
@@ -18,6 +19,14 @@ const defaultValidators = {
   isIntegerGreaterThanOne: {
     validate: (value) => isInteger(value) && value > 1,
     message: <FormattedMessage id="ui-circulation.settings.validate.greaterThanOne" />,
+  },
+  isIntegerGreaterThanZero: {
+    validate: (value) => isUndefined(value) || (isInteger(value) && value > 0),
+    message: <FormattedMessage id="ui-circulation.settings.validate.greaterThanZero" />,
+  },
+  isPositiveNumber: {
+    validate: (value) => isUndefined(value) || (isInteger(value) && value >= 0),
+    message: <FormattedMessage id="ui-circulation.settings.validate.isPositiveNumber" />,
   },
 };
 
