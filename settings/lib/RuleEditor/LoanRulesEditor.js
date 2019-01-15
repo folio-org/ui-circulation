@@ -6,6 +6,7 @@ import isEqual from 'lodash/isEqual';
 import PropTypes from 'prop-types';
 import Codemirror from 'codemirror';
 import CodeMirror from 'react-codemirror2';
+import { injectIntl, intlShape } from 'react-intl';
 
 import initLoanRulesCMM from './LoanRulesCMM';
 import 'codemirror/addon/fold/foldcode';
@@ -18,6 +19,8 @@ import '!style-loader!css-loader!./CodeMirrorCustom.css';
 import css from './LoanRulesEditor.css';
 
 const propTypes = {
+  intl: intlShape.isRequired,
+
   /*
     big collection of 'code hint' data...
     all the possible named values/selectors from all of the system categories (typeGroups)...
@@ -286,11 +289,13 @@ class LoanRulesEditor extends React.Component {
   }
 
   filterRules(filter) {
-
     this.filteredSections.forEach((fs) => {
       fs.clear();
     });
-    if ( filter === '' ) { return; }
+
+    if ( filter === '' ) {
+      return;
+    }
 
     // scan rows with '#'
     const res = [];
@@ -416,10 +421,9 @@ class LoanRulesEditor extends React.Component {
       />
     );
   }
-
 }
 
 LoanRulesEditor.propTypes = propTypes;
 LoanRulesEditor.defaultProps = defaultProps;
 
-export default LoanRulesEditor;
+export default injectIntl(LoanRulesEditor);
