@@ -16,7 +16,7 @@ const defaultValidators = {
     message: <FormattedMessage id="ui-circulation.settings.validate.fillIn" />,
   },
   isNotEmptySelect: {
-    validate: (value) => isNumber(value) || !isEmpty(value),
+    validate: this.isNotEmpty.validate,
     message: <FormattedMessage id="ui-circulation.settings.validate.select" />,
   },
   isIntegerGreaterThanOne: {
