@@ -190,6 +190,7 @@ class LoanRules extends React.Component {
     return (
       <Paneset>
         <Pane
+          data-test-loan-rules
           paneTitle={<FormattedMessage id="ui-circulation.settings.loanRules.paneTitle" />}
           defaultWidth="fill"
         >
