@@ -85,10 +85,12 @@ const initLoanRulesCMM = (CodeMirror) => {
         state.keyProperty = cur;
         return 'keyword';
       }
+
       if (typegroups.indexOf(cur) !== -1) { // style typegroups
         state.keyProperty = cur;
         return cur;
       }
+
       if (state.keyProperty) {
         if (Object.prototype.hasOwnProperty.call(parserConfig.typeMapping, state.keyProperty)) {
           let returnClass = false;

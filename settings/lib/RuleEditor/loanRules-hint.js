@@ -24,16 +24,10 @@ export default function loanRulesHint(cm, props) {
     const currentLine = cm.getLine(cur.line);
     const start = cur.ch;
     const end = start;
-
     const spec = Codemirror.resolveMode('loanRulesCMM');
-
     const result = [];
-
-
     const ruleTypes = ['rule', 'ruleName'];
-
     const { typeMapping, completionLists, polices } = token.state.nextApplicable;
-
 
     // new rule at the start of lines and blank lines...
     if (cur.ch == 0 || cur.ch == token.state.indented || token.type != 'policy') {
@@ -42,6 +36,7 @@ export default function loanRulesHint(cm, props) {
       if (cur.ch != 0 && token.state.indented > 0 || token.type == 'ruleName') {
         newRuleText = '\n\n# ';
       }
+
       result.push({
         text: newRuleText,
         displayText: props.intl.formatMessage({ id: "ui-circulation.settings.loanRules.newRule" }),
@@ -57,9 +52,10 @@ export default function loanRulesHint(cm, props) {
       token.state.meta
     ) {
       for (const t in typeMapping) {
+        const text = props.intl.formatMessage({ id: `ui-circulation.settings.loanRules.${typeMapping[t]}` })
         result.push({
           text: `${t} `,
-          displayText: `${t}: ${typeMapping[t]}`,
+          displayText: `${t}: ${text}`,
           className: 'loan-rule-hint-minor',
           completeOnSingleClick: true,
         });

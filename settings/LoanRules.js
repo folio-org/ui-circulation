@@ -12,15 +12,15 @@ const editorDefaultProps = {
   // whether or not to show the 'autocomplete' widget (pro mode)
   showAssist: true,
   completionLists: {
-    'Patron Groups': [],
-    'Material Type': [],
-    'Loan Type': [],
+    patronGroups: [], // groups
+    materialTypes: [],
+    loanTypes: [],
   },
   policies: [],
-  typeMapping: { // these letters are hard-wired atm... but the labels have to correspond with completion lists.
-    g: 'Patron Groups',
-    m: 'Material Type',
-    t: 'Loan Type',
+  typeMapping: {
+    g: 'patronGroups',
+    m: 'materialTypes',
+    t: 'loanTypes',
   },
 };
 
@@ -105,9 +105,9 @@ class LoanRules extends React.Component {
       errors: this.state.errors,
       policies: loanPolicies.records.map(p => ({ name: kebabCase(p.name) })),
       completionLists: {
-        'Patron Groups': patronGroups.records.map(g => kebabCase(g.group)),
-        'Material Type': materialTypes.records.map(m => kebabCase(m.name)),
-        'Loan Type': loanTypes.records.map(l => kebabCase(l.name)),
+        patronGroups: patronGroups.records.map(g => kebabCase(g.group)),
+        materialTypes: materialTypes.records.map(m => kebabCase(m.name)),
+        loanTypes: loanTypes.records.map(l => kebabCase(l.name)),
       },
     });
   }
