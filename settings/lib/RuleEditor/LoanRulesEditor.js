@@ -35,11 +35,6 @@ const propTypes = {
   completionLists: PropTypes.object,
 
   /*
-    polcies that could be applied to selections of typeGroups.
-  */
-  policies: PropTypes.arrayOf(PropTypes.object),
-
-  /*
     values that could be applied to selections of typeGroups. Defaults to:
     {
       'g': 'Patron Groups',
@@ -53,6 +48,16 @@ const propTypes = {
     A value of this should be applied for each typegroup that's expected to be highlighted by the editor.
   */
   typeMapping: PropTypes.object.isRequired,
+
+  /*
+    values that could be applied to selections of policies:
+    {
+      'l': 'Loan policies',
+      'r': 'Request policies',
+      'n': 'Notice policies',
+    }
+  */
+  policyMapping: PropTypes.object.isRequired,
 
   /*
     the code that appears in the editor
@@ -196,10 +201,6 @@ class LoanRulesEditor extends React.Component {
   componentWillReceiveProps(nextProps) {
     const nextState = {};
 
-    if (nextProps.policies && !isEqual(nextProps.policies, this.props.polices)) {
-      nextState.policies = nextProps.policies;
-    }
-
     if (nextProps.typeMapping && !isEqual(nextProps.typeMapping, this.props.typeMapping)) {
       nextState.typeMapping = nextProps.typeMapping;
     }
@@ -235,7 +236,6 @@ class LoanRulesEditor extends React.Component {
   getInitialState() {
     const {
       completionLists,
-      policies,
       typeMapping,
       policyMapping,
     } = this.props;
@@ -244,7 +244,6 @@ class LoanRulesEditor extends React.Component {
     const modeConfig = {
       name,
       completionLists,
-      policies,
       typeMapping,
       policyMapping,
       keySelector: [

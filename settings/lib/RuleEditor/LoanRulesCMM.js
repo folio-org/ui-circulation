@@ -169,8 +169,7 @@ const initLoanRulesCMM = (CodeMirror) => {
           state.startOfLine = true;
         }
 
-        const style = processToken(stream, state, parserConfig);
-        return style;
+        return processToken(stream, state, parserConfig);
       }
     };
   });
