@@ -1,34 +1,16 @@
-import React from 'react';
-import { FormattedMessage } from 'react-intl';
 import {
   get,
   set,
   forEach,
   some,
-  isEmpty,
-  isNumber,
-  isInteger,
 } from 'lodash';
 
-const defaultValidators = {
-  isNotEmpty: {
-    validate: (value) => isNumber(value) || !isEmpty(value),
-    message: <FormattedMessage id="ui-circulation.settings.validate.fillIn" />,
-  },
-  isNotEmptySelect: {
-    validate: this.isNotEmpty.validate,
-    message: <FormattedMessage id="ui-circulation.settings.validate.select" />,
-  },
-  isIntegerGreaterThanOne: {
-    validate: (value) => isInteger(value) && value > 1,
-    message: <FormattedMessage id="ui-circulation.settings.validate.greaterThanOne" />,
-  },
-};
+import validatorsList from './validatorsList';
 
 const validateField = Symbol('validateField');
 
 export default class FormValidator {
-  constructor(config, validators = defaultValidators) {
+  constructor(config, validators = validatorsList) {
     this.config = config;
     this.validators = validators;
   }
