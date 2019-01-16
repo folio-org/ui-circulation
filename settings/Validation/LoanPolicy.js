@@ -33,6 +33,34 @@ export default function (policy) {
       rules: ['isNotEmpty'],
       shouldValidate: loanPolicy.isNumberOfRenewalsAllowedActive(),
     },
+    'requestManagement.recalls.recallReturnInterval.duration': {
+      rules: ['isPositiveNumber'],
+      shouldValidate: true,
+    },
+    'requestManagement.recalls.minLoanPeriod.duration': {
+      rules: ['isIntegerGreaterThanZero'],
+      shouldValidate: true,
+    },
+    'requestManagement.recalls.alternateGracePeriod.duration': {
+      rules: ['isIntegerGreaterThanZero'],
+      shouldValidate: true,
+    },
+    'requestManagement.holds.alternateCheckoutLoanPeriod.duration': {
+      rules: ['isIntegerGreaterThanZero'],
+      shouldValidate: true,
+    },
+    'requestManagement.holds.alternateRenewalLoanPeriod.duration': {
+      rules: ['isIntegerGreaterThanZero'],
+      shouldValidate: true,
+    },
+    'requestManagement.pages.alternateCheckoutLoanPeriod.duration': {
+      rules: ['isIntegerGreaterThanZero'],
+      shouldValidate: true,
+    },
+    'requestManagement.pages.alternateRenewalLoanPeriod.duration': {
+      rules: ['isIntegerGreaterThanZero'],
+      shouldValidate: true,
+    },
   };
   const formValidator = new FormValidator(config);
   return formValidator.validate(policy);

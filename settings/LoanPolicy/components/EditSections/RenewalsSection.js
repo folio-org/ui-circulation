@@ -126,6 +126,7 @@ class RenewalsSection extends React.Component {
             {schedules}
           </Field>
         }
+        <hr />
       </React.Fragment>
     );
   }

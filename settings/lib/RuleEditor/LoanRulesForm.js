@@ -44,7 +44,7 @@ class LoanRulesForm extends React.Component {
     };
 
     return (
-      <form id="form-loan-rules" style={containerStyle} onSubmit={handleSubmit}>
+      <form id="form-loan-rules" data-test-loan-rules-form style={containerStyle} onSubmit={handleSubmit}>
         <Row end="xs">
           <Col xs={3}>
             <FormattedMessage id="ui-circulation.settings.checkout.filterRules">
