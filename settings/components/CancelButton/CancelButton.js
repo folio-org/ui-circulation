@@ -7,9 +7,12 @@ import {
   PaneMenu,
 } from '@folio/stripes/components';
 
-const CancelButton = ({ onCancel }) => (
+const CancelButton = ({
+  onCancel,
+  labelKey,
+}) => (
   <PaneMenu>
-    <FormattedMessage id="ui-circulation.settings.fDDSform.closeLabel">
+    <FormattedMessage id={labelKey}>
       {ariaLabel => (
         <IconButton
           icon="times"
@@ -25,6 +28,11 @@ const CancelButton = ({ onCancel }) => (
 
 CancelButton.propTypes = {
   onCancel: PropTypes.func.isRequired,
+  labelKey: PropTypes.string,
+};
+
+CancelButton.defaultProps = {
+  labelKey: 'ui-circulation.settings.common.closeEntryDialog',
 };
 
 export default CancelButton;

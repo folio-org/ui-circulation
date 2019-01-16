@@ -30,14 +30,19 @@ import {
   AboutSection,
   LoansSection,
   RenewalsSection,
-  RequestManagementSection,
 } from './components';
 
 import {
   CancelButton,
   SaveButton,
   Metadata,
+<<<<<<< HEAD
+  DeleteEntry,
+  RequestManagementSection,
+} from './components';
+=======
 } from '../components';
+>>>>>>> UICIRC-98 - added notice policy form, loan policy form refactoring
 
 class LoanPolicyForm extends React.Component {
   static propTypes = {
@@ -107,14 +112,15 @@ class LoanPolicyForm extends React.Component {
 
   render() {
     const {
+      onCancel,
+      onRemove,
       pristine,
       policy,
-      initialValues,
       stripes,
       submitting,
       handleSubmit,
-      onCancel,
-      onRemove,
+      initialValues,
+      change,
     } = this.props;
 
     const {
@@ -175,7 +181,6 @@ class LoanPolicyForm extends React.Component {
                   policy={policy}
                   change={change}
                   schedules={schedules}
-                  change={this.props.change}
                 />
                 <RenewalsSection
                   policy={policy}
@@ -191,6 +196,13 @@ class LoanPolicyForm extends React.Component {
               </Accordion>
               {editMode &&
                 <DeleteEntry
+<<<<<<< HEAD
+                  onRemove={onRemove}
+                  policyName={policy.name}
+                  initialValues={initialValues}
+                  confirmDelete={confirmDelete}
+                  changeDeleteState={this.changeDeleteState}
+=======
                   isOpen={confirmDelete}
                   policyName={policy.name}
                   initialValues={initialValues}
@@ -198,6 +210,7 @@ class LoanPolicyForm extends React.Component {
                   deleteEntityKey="ui-circulation.settings.loanPolicy.deleteLoanPolicy"
                   onRemoveStatusChange={this.changeDeleteState}
                   onRemove={onRemove}
+>>>>>>> UICIRC-98 - added notice policy form, loan policy form refactoring
                 />
               }
             </React.Fragment>

@@ -182,6 +182,16 @@
   "settings.requestManagement.pages": "Pages",
   
   "settings.noticePolicy.entryLabel": "Notice Policy",
-  "settings.noticePolicy.paneTitle": "Notice Policies"
-
+  "settings.noticePolicy.saveAndClose": "Save",
+  "settings.noticePolicy.paneTitle": "Notice Policies",
+  "settings.noticePolicy.generalInformation": "General information",
+  "settings.noticePolicy.loanNotices": "Loan notices",
+  "settings.noticePolicy.feeFineNotices": "Fee/fine notices",
+  "settings.noticePolicy.requestNotices": "Request notices",
+  "settings.noticePolicy.createEntryLabel": "New notice policy",
+  "settings.noticePolicy.editEntryLabel": "Edit notice policy",
+  "settings.noticePolicy.deleteLoanPolicy": "Delete Notice Policy",
+  "settings.noticePolicy.policyName": "Policy Name",
+  "settings.noticePolicy.policyDescription": "Policy Description",
+  "settings.noticePolicy.active": "Active"
 }
