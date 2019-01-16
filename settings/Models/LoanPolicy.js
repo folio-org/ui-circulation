@@ -99,7 +99,7 @@ class RequestManagement {
 
 export default class LoanPolicy {
   static defaultLoanPolicy() {
-    const defaultPolicy = {
+    return {
       loanable: true,
       loansPolicy: {
         profileId: loanProfileMap.ROLLING,
@@ -111,8 +111,6 @@ export default class LoanPolicy {
         differentPeriod: false,
       },
     };
-
-    return defaultPolicy;
   }
 
   constructor(policy = {}) {
@@ -157,5 +155,13 @@ export default class LoanPolicy {
 
   isPeriodValid(period) {
     return isNumber(period.duration) && !isEmpty(period.intervalId);
+  }
+
+  isAlternateFixedDueDateScheduleIdRequired() {
+    return this.isProfileFixed() && this.renewable && this.renewalsPolicy.differentPeriod;
+  }
+
+  isRenewalsPolicyPeriodRequired() {
+    return this.isProfileRolling() && this.renewable && this.renewalsPolicy.differentPeriod;
   }
 }

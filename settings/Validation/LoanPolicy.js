@@ -14,12 +14,20 @@ export default function (policy) {
       shouldValidate: loanPolicy.isProfileRolling(),
     },
     'loansPolicy.fixedDueDateScheduleId': {
-      rules: ['isNotEmpty'],
+      rules: ['isNotEmptySelect'],
       shouldValidate: loanPolicy.isProfileFixed(),
     },
     'loansPolicy.openingTimeOffset.duration': {
       rules: ['isNotEmpty', 'isIntegerGreaterThanOne'],
       shouldValidate: loanPolicy.isOpeningTimeOffsetActive(),
+    },
+    'renewalsPolicy.alternateFixedDueDateScheduleId': {
+      rules: ['isNotEmptySelect'],
+      shouldValidate: loanPolicy.isAlternateFixedDueDateScheduleIdRequired(),
+    },
+    'renewalsPolicy.period.duration': {
+      rules: ['isNotEmpty'],
+      shouldValidate: loanPolicy.isRenewalsPolicyPeriodRequired(),
     },
     'renewalsPolicy.numberAllowed': {
       rules: ['isNotEmpty'],

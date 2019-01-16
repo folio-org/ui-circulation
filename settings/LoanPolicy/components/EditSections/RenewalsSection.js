@@ -38,7 +38,6 @@ class RenewalsSection extends React.Component {
       ? <FormattedMessage id="ui-circulation.settings.loanPolicy.altFDDSDueDateLimit" />
       : <FormattedMessage id="ui-circulation.settings.loanPolicy.altFDDSforRenewals" />;
 
-
     return (
       <React.Fragment>
         <h2>
