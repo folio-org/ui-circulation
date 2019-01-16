@@ -51,10 +51,14 @@
 
   "settings.loanRules.paneTitle": "Loan Rules Editor",
   "settings.loanRules.rulesUpdated": "Rules were successfully updated.",
-  "settings.loanRules.newRule": "New Rule (#)",
-  "settings.loanRules.patronGroups": "Patron Groups",
-  "settings.loanRules.materialTypes": "Material Types",
-  "settings.loanRules.loanTypes": "Loan Types",
+  "settings.loanRules.newRule": "New rule (#)",
+  "settings.loanRules.patronGroups": "Patron groups",
+  "settings.loanRules.materialTypes": "Material types",
+  "settings.loanRules.loanTypes": "Loan types",
+  "settings.loanRules.loanPolicies": "Loan policies",
+  "settings.loanRules.requestPolicies": "Request policies",
+  "settings.loanRules.noticePolicies": "Notice policies",
+  "settings.loanRules.circulationPolicies": "Circulation policies",
 
   "settings.validate.fillIn": "Please fill this in to continue",
   "settings.validate.greaterThanOne": "The value must be integer and greater than 1",

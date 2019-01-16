@@ -204,6 +204,10 @@ class LoanRulesEditor extends React.Component {
       nextState.typeMapping = nextProps.typeMapping;
     }
 
+    if (nextProps.policyMapping && !isEqual(nextProps.policyMapping, this.props.policyMapping)) {
+      nextState.policyMapping = nextProps.policyMapping;
+    }
+
     if (nextProps.completionLists && !isEqual(nextProps.completionLists, this.props.completionLists)) {
       nextState.completionLists = nextProps.completionLists;
     }
@@ -229,16 +233,25 @@ class LoanRulesEditor extends React.Component {
   }
 
   getInitialState() {
+    const {
+      completionLists,
+      policies,
+      typeMapping,
+      policyMapping,
+    } = this.props;
+
+    const name = 'loanRulesCMM';
     const modeConfig = {
-      name: 'loanRulesCMM',
-      completionLists: this.props.completionLists,
-      policies: this.props.policies,
-      typeMapping: this.props.typeMapping,
+      name,
+      completionLists,
+      policies,
+      typeMapping,
+      policyMapping,
       keySelector: [
         'all',
         'rare'
-      ]
-    }
+      ],
+    };
 
     const openTri = generateOpen();
     const foldedTri = generateFolded();

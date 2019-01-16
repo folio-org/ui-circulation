@@ -7,20 +7,23 @@ import fetch from 'isomorphic-fetch';
 
 import LoanRulesForm from './lib/RuleEditor/LoanRulesForm';
 
-// this represents a basic schema for what the loneRulesEditor expects...
 const editorDefaultProps = {
   // whether or not to show the 'autocomplete' widget (pro mode)
   showAssist: true,
   completionLists: {
-    patronGroups: [], // groups
+    patronGroups: [],
     materialTypes: [],
     loanTypes: [],
   },
-  policies: [],
   typeMapping: {
     g: 'patronGroups',
     m: 'materialTypes',
     t: 'loanTypes',
+  },
+  policyMapping: {
+    l: 'loanPolicies',
+    r: 'requestPolicies',
+    n: 'noticePolicies',
   },
 };
 
@@ -103,11 +106,17 @@ class LoanRules extends React.Component {
 
     return Object.assign({}, editorDefaultProps, {
       errors: this.state.errors,
-      policies: loanPolicies.records.map(p => ({ name: kebabCase(p.name) })),
       completionLists: {
+        // types
         patronGroups: patronGroups.records.map(g => kebabCase(g.group)),
         materialTypes: materialTypes.records.map(m => kebabCase(m.name)),
-        loanTypes: loanTypes.records.map(l => kebabCase(l.name)),
+        loanTypes: loanTypes.records.map(t => kebabCase(t.name)),
+        // policies
+        loanPolicies: loanPolicies.records.map(l => kebabCase(l.name)),
+        // TODO: replace with request policy records
+        requestPolicies: ['request-policy-1', 'request-policy-2'],
+        // TODO: replace with notice policy records
+        noticePolicies: ['notice-policy-1', 'notice-policy-2'],
       },
     });
   }

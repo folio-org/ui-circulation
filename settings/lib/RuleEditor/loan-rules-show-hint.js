@@ -299,7 +299,11 @@
 
     CodeMirror.on(hints, 'click', (e) => {
       const t = getHintElement(hints, e.target || e.srcElement);
+
       if (t && t.hintId != null) {
+        const opts = this.data[t.hintId];
+        // console.log('opts', opts);
+        if (opts && opts.inactive) return;
         widget.changeActive(t.hintId);
         if (completion.options.completeOnSingleClick) widget.pick();
       }
@@ -336,7 +340,10 @@
     },
 
     pick() {
-      this.completion.pick(this.data, this.selectedHint);
+      const cur = this.data.list[this.selectedHint];
+      if (!cur.inactive) {
+        this.completion.pick(this.data, this.selectedHint);
+      }
     },
 
     changeActive(i, avoidWrap) {
@@ -406,7 +413,7 @@
   });
 
   CodeMirror.registerHelper('hint', 'fromList', (cm, options) => {
-    const cur = cm.getCursor(); 
+    const cur = cm.getCursor();
     const token = cm.getTokenAt(cur);
     const to = CodeMirror.Pos(cur.line, token.end);
     if (token.string && /\w/.test(token.string[token.string.length - 1])) {
