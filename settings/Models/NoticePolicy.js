@@ -37,6 +37,7 @@ export default class NoticePolicy {
     this.metadata = new Metadata(policy.metadata);
     this.loanNotices = policy.loanNotices.reduce((loanNotices, loanNotice) => {
       const ln = new Notice(loanNotice);
+
       return [...loanNotices, ln];
     }, []);
   }

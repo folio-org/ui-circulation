@@ -25,9 +25,9 @@ class NoticePolicySettings extends React.Component {
     }).isRequired,
     mutator: PropTypes.shape({
       noticePolicies: PropTypes.shape({
-        POST: PropTypes.func,
-        PUT: PropTypes.func,
-        DELETE: PropTypes.func,
+        POST: PropTypes.func.isRequired,
+        PUT: PropTypes.func.isRequired,
+        DELETE: PropTypes.func.isRequired,
       }),
     }).isRequired,
   }
@@ -52,7 +52,7 @@ class NoticePolicySettings extends React.Component {
         parentMutator={mutator}
         parentResources={resources}
         entryList={entryList}
-        resourceKey="loanPolicies"
+        resourceKey="noticePolicies"
         detailComponent={NoticePolicyDetail}
         entryFormComponent={NoticePolicyForm}
         paneTitle={<FormattedMessage id="ui-circulation.settings.noticePolicy.paneTitle" />}
