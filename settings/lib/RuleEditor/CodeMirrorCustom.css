@@ -34,7 +34,10 @@
 .loan-rule-hint-major {
   background-color: #fff;
 }
-
+.loan-rule-hint-strong {
+  font-weight: bold;
+  background-color: #d7d7d7;
+}
 /* Codemirror foldgutter styles */
 .LoanRules-foldmarker {
   color: blue;

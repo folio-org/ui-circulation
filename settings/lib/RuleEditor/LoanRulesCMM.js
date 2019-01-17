@@ -1,128 +1,136 @@
-/* eslint-disable */
-
 /* Loan Rules Mode for CodeMirror.
 *  This is the code that parses the content of the codemirror editor for syntax highlighting. It also passes the completion list through to
 *  the loan rules code hinting functionality.
 */
 
-const initLoanRulesCMM = (CodeMirror) => {
-  CodeMirror.defineMode('loanRulesCMM', (config, parserConfig) => {
-    const indentUnit = config.indentUnit;
+const hooks = {
+  '#': (stream, state) => { // # starts a rule, followed by name of rule.
+    stream.eatWhile(/[^/]/);
+    state.ruleLine = true;
+    return 'ruleName';
+  },
+  '/': (stream) => { // comment for rest of line after '/'
+    stream.skipToEnd();
+    return 'comment';
+  },
+  ',': (stream) => { // comma separators.
+    stream.eatWhile(/\s/);
+    return 'comma';
+  },
+  '+': (stream) => { // plus 'and'
+    stream.eatWhile(/\s/);
+    return 'and';
+  },
+  ':': (stream, state) => { // separate l-value from r-value
+    stream.eatWhile(/\s/);
+    state.rValue = true;
+    state.keyProperty = null;
+  },
+  '!': (stream) => {
+    stream.eatWhile(/\s/);
+    return 'not';
+  }
+};
 
-    const typegroups = Object.keys(parserConfig.typeMapping);
+function processToken(stream, state, parserConfig) {
+  const {
+    typeMapping,
+    policyMapping,
+    completionLists,
+    keySelector,
+  } = parserConfig;
+  const typeKeys = Object.keys(typeMapping);
+  const policyKeys = Object.keys(policyMapping);
+  const keywords = [
+    'fallback-policy',
+    'priority',
+  ];
 
-    const keywords = [
-      'fallback-policy',
-      'priority',
-    ];
+  if (stream.sol()) {
+    state.rValue = false;
+    state.keyProperty = null;
+    if (stream.eatSpace()) {
+      return null;
+    }
+  }
 
-    // meta have typegroups or collections of typegroups as their value
-    const meta = [
-      'priority',
-    ];
+  if (stream.eatSpace()) {
+    return null; // skip whitespace..
+  }
 
+  const ch = stream.next();
 
-    // const regex = new RegExp("^["+keyChars.join("")+"]\\s(?:(?![\\+:]).)*");
-    const isPunctuationChar = new RegExp(/[,;\:]/);
-    const criteriaRegex = new RegExp('[' + typegroups.join('') + ']');
-    const commentRegex = new RegExp(/^\//);
-    const state = {};
+  if (hooks[ch]) {
+    const result = hooks[ch](stream, state);
 
-    let curPunc; let
-      isDefKeyword;
+    if (result !== 'ruleName' && result !== 'comment') {
+      state.ruleLine = false;
+    }
 
-    const hooks = {
-      '#': function (stream, state) { // # starts a rule, followed by name of rule.
-        stream.eatWhile(/[^\/]/);
-        state.ruleLine = true;
-        return 'ruleName';
-      },
-      '/': function (stream) { // comment for rest of line after '/'
-        stream.skipToEnd();
-        return 'comment';
-      },
-      ',': function (stream) { // comma separators.
-        stream.eatWhile(/\s/);
-        return 'comma';
-      },
-      '+': function (stream) { // plus 'and'
-        stream.eatWhile(/\s/);
-        return 'and';
-      },
-      ':': function (stream, state) { // separate l-value from r-value
-        stream.eatWhile(/\s/);
-        state.rValue = true;
-      },
-      '!': function (stream, state) {
-        stream.eatWhile(/\s/);
-        return 'not';
-      }
-    };
+    if (result !== false) {
+      return result;
+    }
+  }
 
-    function tokenBase(stream, state) {
-      if (stream.sol()) {
-        state.rValue = false;
-        state.keyProperty = null;
-        if (stream.eatSpace()) {
-          return null;
-        }
-      }
+  stream.eatWhile(/[^\s:,+$]/);
 
-      if (stream.eatSpace()) return; // skip whitespace..
-      const ch = stream.next();
+  const cur = stream.current();
+  if (keywords.indexOf(cur) !== -1) { // style keywords...
+    state.keyProperty = cur;
+    return 'keyword';
+  }
 
-      if (hooks[ch]) {
-        const result = hooks[ch](stream, state);
-        if (result !== 'ruleName' && result !== 'comment') {
-          state.ruleLine = false;
-        }
-        if (result !== false) return result;
-      }
+  if (typeKeys.indexOf(cur) !== -1) { // style types
+    state.keyProperty = cur;
+    return cur;
+  }
 
-      stream.eatWhile(/[^\s:,+$]/);
-      const cur = stream.current();
-      if (keywords.indexOf(cur) !== -1) { // style keywords...
-        state.keyProperty = cur;
-        return 'keyword';
-      }
-      if (typegroups.indexOf(cur) !== -1) { // style typegroups
-        state.keyProperty = cur;
-        return cur;
-      }
-      if (state.keyProperty) {
-        if (Object.prototype.hasOwnProperty.call(parserConfig.typeMapping, state.keyProperty)) {
-          let returnClass = false;
-          const keyProperty = parserConfig.typeMapping[state.keyProperty];
-          if (parserConfig.completionLists[keyProperty].indexOf(cur) !== -1) { // matches completion set
-            returnClass = true;
-          }
-          if (parserConfig.keySelector.indexOf(cur) !== -1) { // matches keySelector 'all' or established set.
-            returnClass = true;
-          }
-          if (returnClass) {
-            return `${state.keyProperty}-selector`;
-          }
-        }
+  if (policyKeys.indexOf(cur) !== -1) { // style policies
+    state.keyProperty = cur;
+    return cur;
+  }
+
+  const { keyProperty, rValue } = state;
+
+  if (keyProperty) {
+    if (typeMapping[keyProperty]) {
+      let returnClass = false;
+      const val = typeMapping[keyProperty];
+
+      if (completionLists[val].indexOf(cur) !== -1) { // matches completion set
+        returnClass = true;
       }
 
-      // policies
-      if (state.rValue) {
-        const policyRes = parserConfig.policies.filter((i) => i.name === cur);
-        if (policyRes.length > 0) {
-          return 'policy';
-        }
+      if (keySelector.indexOf(cur) !== -1) { // matches keySelector 'all' or established set.
+        returnClass = true;
+      }
+
+      if (returnClass) {
+        return `${keyProperty}-selector`;
       }
     }
 
-    return {
+    if (policyMapping[keyProperty] && rValue) {
+      state.keyProperty = null;
+      return 'policy';
+    }
+  }
 
+  return null;
+}
+
+const initLoanRulesCMM = (CodeMirror) => {
+  CodeMirror.defineMode('loanRulesCMM', (config, parserConfig) => {
+    const { indentUnit } = config;
+
+    return {
       startState() {
-        const { completionLists, policies, typeMapping } = parserConfig;
+        const { completionLists, typeMapping, policyMapping } = parserConfig;
         return {
           keyProperty: null, // current defined property or typegroup, if any.
           rValue: false, // in a property or value?
           indented: 0,
-          nextApplicable: { completionLists, policies, typeMapping },
+          nextApplicable: { completionLists, typeMapping, policyMapping },
           ruleLine: false,
           context: {
             align: null,
@@ -136,13 +144,16 @@ const initLoanRulesCMM = (CodeMirror) => {
         state.keyProperty = null;
       },
 
-      indent(state, textAfter) {
+      indent(state) {
         if (state.ruleLine) {
           return state.indented + indentUnit;
         }
+
         if (state.rValue) {
           return state.indented;
         }
+
+        return null;
       },
 
       eletricInput: /#.*$/,
@@ -158,11 +169,7 @@ const initLoanRulesCMM = (CodeMirror) => {
           state.startOfLine = true;
         }
 
-        const style = tokenBase(stream, state);
-
-        return style;
-
-        return tokenClass || null;
+        return processToken(stream, state, parserConfig);
       }
     };
   });

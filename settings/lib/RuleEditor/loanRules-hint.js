@@ -1,50 +1,51 @@
-/* eslint-disable */
-
 /* Hinting logic - this uses the token/state passed from the mode parser to display a popup with
 * 'nextApplicable' strings that could be applicable to the code.
 *  Its primary responsibility is filtering the list of possibilities that's always passed through
 *  in state.nextApplicable.
 */
-import Codemirror from 'codemirror';
-import { FormattedMessage } from 'react-intl';
-import React from 'react';
+import { forOwn } from 'lodash';
 
-export default function loanRulesHint(cm, props) {
+export default function loanRulesHint(Codemirror, props) {
   Codemirror.registerHelper('hint', 'loanRulesCMM', (cm) => {
     const cur = cm.getCursor();
     const token = cm.getTokenAt(cur);
-    const inner = Codemirror.innerMode(cm.getMode(), token.state);
-    if (inner.mode.name != 'loanRulesCMM') return;
+    const { state } = token;
+    const inner = Codemirror.innerMode(cm.getMode(), state);
 
-    const modeConfig = cm.getMode();
+    if (inner.mode.name !== 'loanRulesCMM') {
+      return null;
+    }
 
-    // debug - can be used to render debug info to the dom for inspection.
-    // let stateDiv = document.getElementById('ParserState');
-    // stateDiv.innerHTML= JSON.stringify(token, null, 3);
-    const currentLine = cm.getLine(cur.line);
+    const { intl: { formatMessage } } = props;
+    const {
+      nextApplicable,
+      keyProperty,
+      rValue,
+      indented,
+      meta,
+    } = state;
+
+    const {
+      policyMapping,
+      typeMapping,
+      completionLists
+    } = nextApplicable;
+
     const start = cur.ch;
     const end = start;
-
-    const spec = Codemirror.resolveMode('loanRulesCMM');
-
     const result = [];
 
-
-    const ruleTypes = ['rule', 'ruleName'];
-
-    const { typeMapping, completionLists, polices } = token.state.nextApplicable;
-
-
     // new rule at the start of lines and blank lines...
-    if (cur.ch == 0 || cur.ch == token.state.indented || token.type != 'policy') {
+    if (!rValue && (cur.ch === 0 || cur.ch === indented || token.type !== 'policy')) {
       let newRuleText = '# ';
       // if we're in the middle of a line, a new line should be inserted, then a rule...
-      if (cur.ch != 0 && token.state.indented > 0 || token.type == 'ruleName') {
+      if ((cur.ch !== 0 && indented > 0) || token.type === 'ruleName') {
         newRuleText = '\n\n# ';
       }
+
       result.push({
         text: newRuleText,
-        displayText: props.intl.formatMessage({ id: "ui-circulation.settings.loanRules.newRule" }),
+        displayText: formatMessage({ id: 'ui-circulation.settings.loanRules.newRule' }),
         className: 'loan-rule-hint-major',
         completeOnSingleClick: true,
       });
@@ -52,25 +53,26 @@ export default function loanRulesHint(cm, props) {
 
     // typegroups happen at the beginning of lines or if property is meta.
     if (
-      cur.ch == 0 ||
-      cur.ch == token.state.indented / 4 ||
-      token.state.meta
+      cur.ch === 0 ||
+      cur.ch === indented / 4 ||
+      meta
     ) {
-      for (const t in typeMapping) {
+      forOwn(typeMapping, (value, key) => {
+        const text = formatMessage({ id: `ui-circulation.settings.loanRules.${value}` });
         result.push({
-          text: `${t} `,
-          displayText: `${t}: ${typeMapping[t]}`,
+          text: `${key} `,
+          displayText: `${key}: ${text}`,
           className: 'loan-rule-hint-minor',
           completeOnSingleClick: true,
         });
-      }
+      });
     }
 
     // display criteria selectors if the cursor's not after a semicolon and state.keyPropery is not null...
-    if (!token.state.rValue && token.state.keyProperty != null) {
+    if (!rValue && keyProperty) {
       // not at beginning of line..
-      if (cur.ch != 0 && cur.ch > token.state.indented / 4) {
-        const type = typeMapping[token.state.keyProperty];
+      if (cur.ch !== 0 && cur.ch > indented / 4) {
+        const type = typeMapping[keyProperty];
         completionLists[type].forEach((selector) => {
           result.push({
             text: `${selector} `,
@@ -82,16 +84,41 @@ export default function loanRulesHint(cm, props) {
       }
     }
 
-    // display policies in rValues.
-    if (token.state.rValue && cur.ch > token.state.indented) {
-      token.state.nextApplicable.policies.forEach((p) => {
+    // display policy types in rValues.
+    if (rValue && cur.ch > indented && !keyProperty) {
+      const text = formatMessage({ id: 'ui-circulation.settings.loanRules.circulationPolicies' });
+
+      result.push({
+        text,
+        displayText: text,
+        className: 'loan-rule-hint-strong',
+        inactive: true,
+      });
+
+      forOwn(policyMapping, (value, key) => {
         result.push({
-          text: `${p.name} `,
-          displayText: p.name,
+          text: `${key} `,
+          displayText: formatMessage({ id: `ui-circulation.settings.loanRules.${value}` }),
           className: 'loan-rule-hint-minor',
           completeOnSingleClick: true,
         });
       });
+    }
+
+    // display policies
+    if (rValue && keyProperty) {
+      // not at beginning of line..
+      if (cur.ch !== 0 && cur.ch > indented / 4) {
+        const type = policyMapping[keyProperty];
+        completionLists[type].forEach((selector) => {
+          result.push({
+            text: `${selector} `,
+            displayText: selector,
+            className: 'loan-rule-hint-minor',
+            completeOnSingleClick: true,
+          });
+        });
+      }
     }
 
     if (result.length) {
@@ -102,5 +129,7 @@ export default function loanRulesHint(cm, props) {
         selectedHint: -1,
       };
     }
+
+    return null;
   });
 }

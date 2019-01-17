@@ -7,20 +7,23 @@ import fetch from 'isomorphic-fetch';
 
 import LoanRulesForm from './lib/RuleEditor/LoanRulesForm';
 
-// this represents a basic schema for what the loneRulesEditor expects...
 const editorDefaultProps = {
   // whether or not to show the 'autocomplete' widget (pro mode)
   showAssist: true,
   completionLists: {
-    'Patron Groups': [],
-    'Material Type': [],
-    'Loan Type': [],
+    patronGroups: [],
+    materialTypes: [],
+    loanTypes: [],
   },
-  policies: [],
-  typeMapping: { // these letters are hard-wired atm... but the labels have to correspond with completion lists.
-    g: 'Patron Groups',
-    m: 'Material Type',
-    t: 'Loan Type',
+  typeMapping: {
+    g: 'patronGroups',
+    m: 'materialTypes',
+    t: 'loanTypes',
+  },
+  policyMapping: {
+    l: 'loanPolicies',
+    r: 'requestPolicies',
+    n: 'noticePolicies',
   },
 };
 
@@ -28,31 +31,31 @@ class LoanRules extends React.Component {
   static manifest = Object.freeze({
     loanRules: {
       type: 'okapi',
-      path: 'circulation/loan-rules',
+      path: 'circulation/loan-rules?limit=100',
       resourceShouldRefresh: true,
     },
     patronGroups: {
       type: 'okapi',
       path: 'groups',
-      records: 'usergroups',
+      records: 'usergroups?limit=100',
       resourceShouldRefresh: true,
     },
     materialTypes: {
       type: 'okapi',
-      path: 'material-types',
+      path: 'material-types?limit=100',
       records: 'mtypes',
       resourceShouldRefresh: true,
     },
     loanTypes: {
       type: 'okapi',
-      path: 'loan-types',
+      path: 'loan-types?limit=100',
       records: 'loantypes',
       resourceShouldRefresh: true,
     },
     loanPolicies: {
       type: 'okapi',
       records: 'loanPolicies',
-      path: 'loan-policy-storage/loan-policies',
+      path: 'loan-policy-storage/loan-policies?limit=100',
       resourceShouldRefresh: true,
     },
   });
@@ -103,11 +106,17 @@ class LoanRules extends React.Component {
 
     return Object.assign({}, editorDefaultProps, {
       errors: this.state.errors,
-      policies: loanPolicies.records.map(p => ({ name: kebabCase(p.name) })),
       completionLists: {
-        'Patron Groups': patronGroups.records.map(g => kebabCase(g.group)),
-        'Material Type': materialTypes.records.map(m => kebabCase(m.name)),
-        'Loan Type': loanTypes.records.map(l => kebabCase(l.name)),
+        // types
+        patronGroups: patronGroups.records.map(g => kebabCase(g.group)),
+        materialTypes: materialTypes.records.map(m => kebabCase(m.name)),
+        loanTypes: loanTypes.records.map(t => kebabCase(t.name)),
+        // policies
+        loanPolicies: loanPolicies.records.map(l => kebabCase(l.name)),
+        // TODO: replace with request policy records
+        requestPolicies: ['request-policy-1', 'request-policy-2'],
+        // TODO: replace with notice policy records
+        noticePolicies: ['notice-policy-1', 'notice-policy-2'],
       },
     });
   }
