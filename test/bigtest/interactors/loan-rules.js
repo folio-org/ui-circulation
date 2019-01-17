@@ -1,5 +1,4 @@
 import {
-  clickable,
   interactor,
   isPresent,
   action,

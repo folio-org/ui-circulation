@@ -116,6 +116,15 @@ function processToken(stream, state, parserConfig) {
     }
   }
 
+  // TODO: for backward compatiblity.
+  // Please remove it after UICIRC-164 is completed
+  if (rValue) {
+    const policyRes = completionLists.loanPolicies.filter((p) => p === cur);
+    if (policyRes.length > 0) {
+      return 'policy';
+    }
+  }
+
   return null;
 }
 
