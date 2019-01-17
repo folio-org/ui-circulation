@@ -24,7 +24,8 @@ const hooks = {
   ':': (stream, state) => { // separate l-value from r-value
     stream.eatWhile(/\s/);
     state.rValue = true;
-    state.keyProperty = null;
+    // TODO: turn on after  UICIRC-164 is done
+    // state.keyProperty = null;
   },
   '!': (stream) => {
     stream.eatWhile(/\s/);
@@ -110,10 +111,12 @@ function processToken(stream, state, parserConfig) {
       }
     }
 
+    /* TODO: turn on after  UICIRC-164 is done
     if (policyMapping[keyProperty] && rValue) {
       state.keyProperty = null;
       return 'policy';
     }
+    */
   }
 
   // TODO: for backward compatiblity.
