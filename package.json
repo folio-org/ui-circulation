@@ -65,8 +65,8 @@
         "subPermissions": [
           "circulation-storage.notice-policies.collection.get",
           "circulation-storage.notice-policies.item.get",
-          "circulation-storage.notice-policies.item.create",
-          "circulation-storage.notice-policies.item.update",
+          "circulation-storage.notice-policies.item.post",
+          "circulation-storage.notice-policies.item.put",
           "circulation-storage.notice-policies.item.delete",
           "settings.circulation.enabled"
         ],
