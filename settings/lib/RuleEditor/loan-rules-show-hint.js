@@ -301,9 +301,6 @@
       const t = getHintElement(hints, e.target || e.srcElement);
 
       if (t && t.hintId != null) {
-        const opts = this.data[t.hintId];
-        // console.log('opts', opts);
-        if (opts && opts.inactive) return;
         widget.changeActive(t.hintId);
         if (completion.options.completeOnSingleClick) widget.pick();
       }
