@@ -36,7 +36,10 @@ export default function loanRulesHint(Codemirror, props) {
     const result = [];
 
     // new rule at the start of lines and blank lines...
-    if (!rValue && (cur.ch === 0 || cur.ch === indented || token.type !== 'policy')) {
+    // TODO: turn on next line after UICIRC-164 is done
+    // if (!rValue && (cur.ch === 0 || cur.ch === indented || token.type !== 'policy')) {
+    // TODO remove next line after UICIRC-164 is done
+    if (cur.ch == 0 || cur.ch == token.state.indented || token.type != 'policy') {
       let newRuleText = '# ';
       // if we're in the middle of a line, a new line should be inserted, then a rule...
       if ((cur.ch !== 0 && indented > 0) || token.type === 'ruleName') {
@@ -84,6 +87,20 @@ export default function loanRulesHint(Codemirror, props) {
       }
     }
 
+    // TODO remove entire condition after UICIRC-164 is done
+    // display policies in rValues.
+    if (rValue && cur.ch > indented) {
+      completionLists.loanPolicies.forEach((name) => {
+        result.push({
+          text: `${name} `,
+          displayText: name,
+          className: 'loan-rule-hint-minor',
+          completeOnSingleClick: true,
+        });
+      });
+    }
+
+    /* TODO: turn on after UICIRC-164 is done
     // display policy types in rValues.
     if (rValue && cur.ch > indented && !keyProperty) {
       const text = formatMessage({ id: 'ui-circulation.settings.loanRules.circulationPolicies' });
@@ -120,6 +137,7 @@ export default function loanRulesHint(Codemirror, props) {
         });
       }
     }
+    */
 
     if (result.length) {
       return {
