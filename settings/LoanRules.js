@@ -31,31 +31,31 @@ class LoanRules extends React.Component {
   static manifest = Object.freeze({
     loanRules: {
       type: 'okapi',
-      path: 'circulation/loan-rules',
+      path: 'circulation/loan-rules?limit=100',
       resourceShouldRefresh: true,
     },
     patronGroups: {
       type: 'okapi',
       path: 'groups',
-      records: 'usergroups',
+      records: 'usergroups?limit=100',
       resourceShouldRefresh: true,
     },
     materialTypes: {
       type: 'okapi',
-      path: 'material-types',
+      path: 'material-types?limit=100',
       records: 'mtypes',
       resourceShouldRefresh: true,
     },
     loanTypes: {
       type: 'okapi',
-      path: 'loan-types',
+      path: 'loan-types?limit=100',
       records: 'loantypes',
       resourceShouldRefresh: true,
     },
     loanPolicies: {
       type: 'okapi',
       records: 'loanPolicies',
-      path: 'loan-policy-storage/loan-policies',
+      path: 'loan-policy-storage/loan-policies?limit=100',
       resourceShouldRefresh: true,
     },
   });
