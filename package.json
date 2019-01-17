@@ -28,7 +28,8 @@
       "circulation": "3.0 4.0 5.0",
       "fixed-due-date-schedules-storage": "2.0",
       "loan-policy-storage": "1.0",
-      "template-engine": "1.0"
+      "template-engine": "1.0",
+      "patron-notice-policy-storage": "0.1"
     },
     "permissionSets": [
       {
@@ -54,6 +55,19 @@
           "circulation-storage.loan-policies.item.put",
           "circulation-storage.loan-policies.item.delete",
           "circulation-storage.loan-policies.collection.delete",
+          "settings.circulation.enabled"
+        ],
+        "visible": true
+      },
+      {
+        "permissionName": "ui-circulation.settings.notice-policies",
+        "displayName": "Settings (Circ): Can create, edit and remove notice policies",
+        "subPermissions": [
+          "circulation-storage.notice-policies.collection.get",
+          "circulation-storage.notice-policies.item.get",
+          "circulation-storage.notice-policies.item.post",
+          "circulation-storage.notice-policies.item.put",
+          "circulation-storage.notice-policies.item.delete",
           "settings.circulation.enabled"
         ],
         "visible": true

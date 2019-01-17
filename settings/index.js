@@ -10,6 +10,7 @@ import CheckoutSettings from './CheckoutSettings';
 import FixedDueDateScheduleManager from './FixedDueDateScheduleManager';
 import PatronNotices from './PatronNotices';
 import StaffSlips from './StaffSlips';
+import NoticePolicySettings from './NoticePolicy';
 
 class Circulation extends React.Component {
   constructor(props) {
@@ -52,8 +53,14 @@ class Circulation extends React.Component {
       },
       {
         route: 'patron-notices',
-        label: this.props.stripes.intl.formatMessage({ id: 'ui-circulation.settings.index.patronNotices' }),
+        label: <FormattedMessage id="ui-circulation.settings.index.patronNotices" />,
         component: PatronNotices,
+      },
+      {
+        route: 'notice-policies',
+        label: <FormattedMessage id="ui-circulation.settings.index.noticePolicies" />,
+        component: NoticePolicySettings,
+        // perm: 'ui-circulation.settings.notice-policies',
       },
     ];
   }

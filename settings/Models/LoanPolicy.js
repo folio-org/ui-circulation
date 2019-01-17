@@ -5,27 +5,16 @@ import {
 } from 'lodash';
 
 import {
+  Metadata,
+  Period,
+} from './common';
+
+import {
   intervalIdsMap,
   loanProfileMap,
   renewFromIds,
   BEGINNING_OF_THE_NEXT_OPEN_SERVICE_POINT_HOURS,
 } from '../../constants';
-
-class Period {
-  constructor(period = {}) {
-    this.duration = period.duration;
-    this.intervalId = period.intervalId;
-  }
-}
-
-class Metadata {
-  constructor(metadata = {}) {
-    this.createdByUserId = metadata.createdByUserId;
-    this.createdDate = metadata.createdDate;
-    this.updatedByUserId = metadata.updatedByUserId;
-    this.updatedDate = metadata.updatedDate;
-  }
-}
 
 class LoansPolicy {
   constructor(policy = {}) {
