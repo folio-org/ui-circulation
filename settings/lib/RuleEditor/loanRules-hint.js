@@ -26,7 +26,7 @@ export default function loanRulesHint(Codemirror, props) {
     } = state;
 
     const {
-      policyMapping,
+      // policyMapping,
       typeMapping,
       completionLists
     } = nextApplicable;
