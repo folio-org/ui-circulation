@@ -26,16 +26,18 @@ import LoanPolicy from '../Models/LoanPolicy';
 import normalizeLoanPolicyForm from './utils/normalizeLoanPolicyForm';
 
 import {
+  DeleteEntry,
   AboutSection,
   LoansSection,
   RenewalsSection,
-  CancelButton,
-  SaveButton,
-  PanelTitle,
-  Metadata,
-  DeleteEntry,
   RequestManagementSection,
 } from './components';
+
+import {
+  CancelButton,
+  SaveButton,
+  Metadata,
+} from '../components';
 
 class LoanPolicyForm extends React.Component {
   static propTypes = {
@@ -47,10 +49,10 @@ class LoanPolicyForm extends React.Component {
     }).isRequired,
     policy: PropTypes.object,
     initialValues: PropTypes.object,
+    change: PropTypes.func.isRequired,
+    handleSubmit: PropTypes.func.isRequired,
     onSave: PropTypes.func.isRequired,
     onCancel: PropTypes.func.isRequired,
-    handleSubmit: PropTypes.func.isRequired,
-    change: PropTypes.func.isRequired,
     onRemove: PropTypes.func.isRequired,
   };
 
@@ -105,15 +107,15 @@ class LoanPolicyForm extends React.Component {
 
   render() {
     const {
-      onCancel,
-      onRemove,
       pristine,
       policy,
+      initialValues,
       stripes,
       submitting,
       handleSubmit,
-      initialValues,
       change,
+      onCancel,
+      onRemove,
     } = this.props;
 
     const {
@@ -138,8 +140,17 @@ class LoanPolicyForm extends React.Component {
           <Pane
             defaultWidth="100%"
             firstMenu={<CancelButton onCancel={onCancel} />}
-            lastMenu={<SaveButton pristine={pristine} submitting={submitting} />}
-            paneTitle={<PanelTitle editMode={editMode} />}
+            lastMenu={
+              <SaveButton
+                pristine={pristine}
+                submitting={submitting}
+              />
+            }
+            paneTitle={
+              editMode
+                ? <FormattedMessage id="ui-circulation.settings.loanPolicy.editEntryLabel" />
+                : <FormattedMessage id="ui-circulation.settings.loanPolicy.createEntryLabel" />
+            }
           >
             <React.Fragment>
               <Row end="xs">
@@ -163,8 +174,8 @@ class LoanPolicyForm extends React.Component {
                 <AboutSection />
                 <LoansSection
                   policy={policy}
-                  change={change}
                   schedules={schedules}
+                  change={change}
                 />
                 <RenewalsSection
                   policy={policy}
@@ -180,11 +191,13 @@ class LoanPolicyForm extends React.Component {
               </Accordion>
               {editMode &&
                 <DeleteEntry
-                  onRemove={onRemove}
+                  isOpen={confirmDelete}
                   policyName={policy.name}
                   initialValues={initialValues}
-                  confirmDelete={confirmDelete}
-                  changeDeleteState={this.changeDeleteState}
+                  perm="ui-circulation.settings.loan-policies"
+                  deleteEntityKey="ui-circulation.settings.loanPolicy.deleteLoanPolicy"
+                  onRemoveStatusChange={this.changeDeleteState}
+                  onRemove={onRemove}
                 />
               }
             </React.Fragment>

@@ -10,15 +10,18 @@ import {
 const SaveButton = ({
   pristine,
   submitting,
+  textKey,
+  buttonStyle
 }) => (
   <PaneMenu>
     <Button
-      id="clickable-save-fixedDueDateSchedule"
+      id="clickable-save-entry"
       type="submit"
+      buttonStyle={buttonStyle}
       disabled={(pristine || submitting)}
       marginBottom0
     >
-      <FormattedMessage id="ui-circulation.settings.loanPolicy.saveAndClose" />
+      <FormattedMessage id={textKey} />
     </Button>
   </PaneMenu>
 );
@@ -26,6 +29,13 @@ const SaveButton = ({
 SaveButton.propTypes = {
   pristine: PropTypes.bool.isRequired,
   submitting: PropTypes.bool.isRequired,
+  textKey: PropTypes.string,
+  buttonStyle: PropTypes.string,
+};
+
+SaveButton.defaultProps = {
+  textKey: 'ui-circulation.settings.common.saveAndClose',
+  buttonStyle: 'default',
 };
 
 export default SaveButton;
