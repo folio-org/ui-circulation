@@ -25,8 +25,8 @@ import {
 class NoticePolicyForm extends React.Component {
   static propTypes = {
     stripes: stripesShape.isRequired,
-    pristine: PropTypes.bool,
-    submitting: PropTypes.bool,
+    pristine: PropTypes.bool.isRequired,
+    submitting: PropTypes.bool.isRequired,
     policy: PropTypes.object,
     initialValues: PropTypes.object,
     permissions: PropTypes.object.isRequired,
@@ -55,7 +55,7 @@ class NoticePolicyForm extends React.Component {
     this.setState((state) => {
       const sections = { ...state.sections };
       sections[id] = !sections[id];
-      return { ...state, sections };
+      return { sections };
     });
   };
 

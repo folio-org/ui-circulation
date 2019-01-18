@@ -13,7 +13,7 @@ class DeleteEntity extends React.Component {
     perm: PropTypes.string.isRequired,
     policyName: PropTypes.string.isRequired,
     deleteEntityKey: PropTypes.string.isRequired,
-    initialValues: PropTypes.object,
+    initialValues: PropTypes.object.isRequired,
     onRemoveStatusChange: PropTypes.func.isRequired,
     onRemove: PropTypes.func.isRequired,
   };

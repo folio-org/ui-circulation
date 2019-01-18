@@ -10,7 +10,8 @@ import {
   Accordion,
 } from '@folio/stripes/components';
 
-import { Metadata } from '../../../../components';
+// eslint-disable-next-line
+import { Metadata } from '@folio/circulation/settings/components';
 
 import styles from './GeneralSection.css';
 
