@@ -43,24 +43,23 @@ class GeneralSection extends React.Component {
         />
         <Field
           id="notice_policy_name"
+          name="name"
           label={<FormattedMessage id="ui-circulation.settings.noticePolicy.policyName" />}
           component={TextField}
-          name="name"
         />
         <Field
           id="notice_policy_active"
+          name="active"
+          type="checkbox"
           className={styles.checkbox}
           label={<FormattedMessage id="ui-circulation.settings.noticePolicy.active" />}
-          style={{ margin: '10px 0' }}
-          name="active"
           component={Checkbox}
-          type="checkbox"
           normalize={v => !!v}
         />
         <Field
           id="notice_policy_description"
-          label={<FormattedMessage id="ui-circulation.settings.noticePolicy.policyDescription" />}
           name="description"
+          label={<FormattedMessage id="ui-circulation.settings.noticePolicy.policyDescription" />}
           component={TextArea}
         />
       </Accordion>

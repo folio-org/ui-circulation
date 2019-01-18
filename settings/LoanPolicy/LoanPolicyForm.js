@@ -49,10 +49,10 @@ class LoanPolicyForm extends React.Component {
     }).isRequired,
     policy: PropTypes.object,
     initialValues: PropTypes.object,
+    change: PropTypes.func.isRequired,
+    handleSubmit: PropTypes.func.isRequired,
     onSave: PropTypes.func.isRequired,
     onCancel: PropTypes.func.isRequired,
-    handleSubmit: PropTypes.func.isRequired,
-    change: PropTypes.func.isRequired,
     onRemove: PropTypes.func.isRequired,
   };
 
@@ -113,6 +113,7 @@ class LoanPolicyForm extends React.Component {
       stripes,
       submitting,
       handleSubmit,
+      change,
       onCancel,
       onRemove,
     } = this.props;
@@ -173,9 +174,8 @@ class LoanPolicyForm extends React.Component {
                 <AboutSection />
                 <LoansSection
                   policy={policy}
-                  change={change}
                   schedules={schedules}
-                  change={this.props.change}
+                  change={change}
                 />
                 <RenewalsSection
                   policy={policy}
