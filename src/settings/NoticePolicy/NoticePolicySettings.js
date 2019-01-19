@@ -9,6 +9,7 @@ import NoticePolicyDetail from './NoticePolicyDetail';
 import NoticePolicyForm from './NoticePolicyForm';
 import validate from '../Validation/NoticePolicy';
 import NoticePolicy from '../Models/NoticePolicy';
+import stripesConnect from '../../connect';
 
 class NoticePolicySettings extends React.Component {
   static manifest = Object.freeze({
@@ -66,4 +67,4 @@ class NoticePolicySettings extends React.Component {
   }
 }
 
-export default NoticePolicySettings;
+export default stripesConnect(NoticePolicySettings);

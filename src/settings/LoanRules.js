@@ -6,6 +6,7 @@ import { Callout, Paneset, Pane } from '@folio/stripes/components';
 import fetch from 'isomorphic-fetch';
 
 import LoanRulesForm from './lib/RuleEditor/LoanRulesForm';
+import stripesConnect from '../connect';
 
 const editorDefaultProps = {
   // whether or not to show the 'autocomplete' widget (pro mode)
@@ -227,4 +228,4 @@ class LoanRules extends React.Component {
   }
 }
 
-export default LoanRules;
+export default stripesConnect(LoanRules);

@@ -7,6 +7,7 @@ import { FormattedMessage } from 'react-intl';
 import { EntryManager } from '@folio/stripes/smart-components';
 import FixedDueDateScheduleDetail from './FixedDueDateScheduleDetail';
 import FixedDueDateScheduleForm from './FixedDueDateScheduleForm';
+import stripesConnect from '../connect';
 
 class FixedDueDateScheduleManager extends React.Component {
   static manifest = Object.freeze({
@@ -165,4 +166,4 @@ class FixedDueDateScheduleManager extends React.Component {
   }
 }
 
-export default FixedDueDateScheduleManager;
+export default stripesConnect(FixedDueDateScheduleManager);

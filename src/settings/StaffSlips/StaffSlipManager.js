@@ -6,10 +6,10 @@ import { EntryManager } from '@folio/stripes/smart-components';
 
 import StaffSlipDetail from './StaffSlipDetail';
 import StaffSlipForm from './StaffSlipForm';
+import stripesConnect from '../../connect';
 
 class StaffSlipManager extends React.Component {
   static propTypes = {
-    label: PropTypes.string.isRequired,
     resources: PropTypes.shape({
       entries: PropTypes.shape({
         records: PropTypes.arrayOf(PropTypes.object),
@@ -68,7 +68,6 @@ class StaffSlipManager extends React.Component {
     const {
       mutator,
       resources,
-      label,
     } = this.props;
 
     return (
@@ -77,8 +76,8 @@ class StaffSlipManager extends React.Component {
         parentMutator={mutator}
         entryList={sortBy((resources.entries || {}).records || [], ['name'])}
         detailComponent={StaffSlipDetail}
-        paneTitle={label}
-        entryLabel={label}
+        paneTitle={<FormattedMessage id="ui-circulation.settings.index.staffSlips" />}
+        entryLabel={<FormattedMessage id="ui-circulation.settings.index.staffSlips" />}
         entryFormComponent={StaffSlipForm}
         validate={this.validate}
         nameKey="name"
@@ -92,4 +91,4 @@ class StaffSlipManager extends React.Component {
   }
 }
 
-export default StaffSlipManager;
+export default stripesConnect(StaffSlipManager);

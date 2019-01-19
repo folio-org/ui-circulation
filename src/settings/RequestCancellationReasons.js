@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 
+import { withStripes } from '@folio/stripes/core';
 import { ControlledVocab } from '@folio/stripes/smart-components';
 
 class RequestCancellationReasons extends React.Component {
@@ -45,4 +46,4 @@ class RequestCancellationReasons extends React.Component {
   }
 }
 
-export default RequestCancellationReasons;
+export default withStripes(RequestCancellationReasons);

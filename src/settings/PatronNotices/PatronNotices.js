@@ -1,15 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { sortBy } from 'lodash';
+import { FormattedMessage } from 'react-intl';
 
 import { EntryManager } from '@folio/stripes/smart-components';
 
 import PatronNoticeDetail from './PatronNoticeDetail';
 import PatronNoticeForm from './PatronNoticeForm';
+import stripesConnect from '../../connect';
 
 class PatronNotices extends React.Component {
   static propTypes = {
-    label: PropTypes.string.isRequired,
     resources: PropTypes.shape({
       entries: PropTypes.shape({
         records: PropTypes.arrayOf(PropTypes.object),
@@ -54,8 +55,8 @@ class PatronNotices extends React.Component {
         parentMutator={this.props.mutator}
         entryList={sortBy((this.props.resources.entries || {}).records || [], ['name'])}
         detailComponent={PatronNoticeDetail}
-        paneTitle={this.props.label}
-        entryLabel={this.props.label}
+        paneTitle={<FormattedMessage id="ui-circulation.settings.index.patronNotices" />}
+        entryLabel={<FormattedMessage id="ui-circulation.settings.index.patronNotices" />}
         entryFormComponent={PatronNoticeForm}
         defaultEntry={{ active: true, outputFormats: ['html'], templateResolver: 'mustache' }}
         // validate={this.validate}
@@ -75,4 +76,4 @@ class PatronNotices extends React.Component {
   }
 }
 
-export default PatronNotices;
+export default stripesConnect(PatronNotices);

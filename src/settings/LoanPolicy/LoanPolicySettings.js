@@ -9,6 +9,7 @@ import LoanPolicyDetail from './LoanPolicyDetail';
 import LoanPolicyForm from './LoanPolicyForm';
 import validate from '../Validation/LoanPolicy';
 import LoanPolicy from '../Models/LoanPolicy';
+import stripesConnect from '../../connect';
 
 class LoanPolicySettings extends React.Component {
   static manifest = Object.freeze({
@@ -72,4 +73,4 @@ class LoanPolicySettings extends React.Component {
   }
 }
 
-export default LoanPolicySettings;
+export default stripesConnect(LoanPolicySettings);
