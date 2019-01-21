@@ -6,8 +6,7 @@ import {
   isIntegerGreaterThanOne,
   isIntegerGreaterThanZero,
   isPositiveNumber,
-} from './validators';
-
+} from './handlers';
 
 export default {
   isNotEmpty: {

@@ -1,11 +1,9 @@
-import FormValidator from './FormValidator';
+import FormValidator from '../engine/FormValidator';
+import general from './general';
 
 export default function (policy) {
   const config = {
-    'name': {
-      rules: ['isNotEmpty'],
-      shouldValidate: true,
-    },
+    ...general(),
   };
   const formValidator = new FormValidator(config);
   return formValidator.validate(policy);

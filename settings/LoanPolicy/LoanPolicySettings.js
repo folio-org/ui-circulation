@@ -7,8 +7,8 @@ import { EntryManager } from '@folio/stripes/smart-components';
 
 import LoanPolicyDetail from './LoanPolicyDetail';
 import LoanPolicyForm from './LoanPolicyForm';
-import validate from '../Validation/LoanPolicy';
 import LoanPolicy from '../Models/LoanPolicy';
+import { LoanPolicy as validateLoanPolicy } from '../Validation';
 
 class LoanPolicySettings extends React.Component {
   static manifest = Object.freeze({
@@ -32,8 +32,9 @@ class LoanPolicySettings extends React.Component {
     }).isRequired,
     mutator: PropTypes.shape({
       loanPolicies: PropTypes.shape({
-        POST: PropTypes.func,
-        DELETE: PropTypes.func,
+        POST: PropTypes.func.isRequired,
+        PUT: PropTypes.func.isRequired,
+        DELETE: PropTypes.func.isRequired,
       }),
     }).isRequired,
   };
@@ -67,7 +68,7 @@ class LoanPolicySettings extends React.Component {
             entryLabel={entryLabel}
             nameKey="name"
             permissions={permissions}
-            validate={validate}
+            validate={validateLoanPolicy}
             defaultEntry={LoanPolicy.defaultLoanPolicy()}
           />
         )}

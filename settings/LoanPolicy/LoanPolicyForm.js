@@ -1,24 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { getFormValues } from 'redux-form';
-
-import {
-  cloneDeep,
-  sortBy,
-} from 'lodash';
+import { sortBy } from 'lodash';
 
 import stripesForm from '@folio/stripes/form';
 import { stripesShape } from '@folio/stripes/core';
-
 import {
   Accordion,
   ExpandAllButton,
   Col,
   Row,
-  Pane,
   Paneset,
 } from '@folio/stripes/components';
 
@@ -26,6 +19,7 @@ import LoanPolicy from '../Models/LoanPolicy';
 import normalizeLoanPolicyForm from './utils/normalizeLoanPolicyForm';
 
 import {
+  HeaderPane,
   DeleteEntry,
   AboutSection,
   LoansSection,
@@ -33,11 +27,7 @@ import {
   RequestManagementSection,
 } from './components';
 
-import {
-  CancelButton,
-  SaveButton,
-  Metadata,
-} from '../components';
+import { Metadata } from '../components';
 
 class LoanPolicyForm extends React.Component {
   static propTypes = {
@@ -49,6 +39,7 @@ class LoanPolicyForm extends React.Component {
     }).isRequired,
     policy: PropTypes.object,
     initialValues: PropTypes.object,
+    permissions: PropTypes.object.isRequired,
     change: PropTypes.func.isRequired,
     handleSubmit: PropTypes.func.isRequired,
     onSave: PropTypes.func.isRequired,
@@ -72,10 +63,10 @@ class LoanPolicyForm extends React.Component {
   };
 
   handleSectionToggle = ({ id }) => {
-    this.setState((curState) => {
-      const newState = cloneDeep(curState);
-      newState.sections[id] = !newState.sections[id];
-      return newState;
+    this.setState((state) => {
+      const sections = { ...state.sections };
+      sections[id] = !sections[id];
+      return { sections };
     });
   };
 
@@ -109,6 +100,7 @@ class LoanPolicyForm extends React.Component {
     const {
       pristine,
       policy,
+      permissions,
       initialValues,
       stripes,
       submitting,
@@ -123,34 +115,17 @@ class LoanPolicyForm extends React.Component {
       confirmDelete,
     } = this.state;
 
-    const {
-      sections: {
-        recallsSection,
-        holdsSection,
-        pagesSection,
-      },
-    } = this.state;
-
     const editMode = Boolean(policy.id);
     const schedules = this.generateScheduleOptions();
 
     return (
       <form onSubmit={handleSubmit(this.saveForm)}>
         <Paneset isRoot>
-          <Pane
-            defaultWidth="100%"
-            firstMenu={<CancelButton onCancel={onCancel} />}
-            lastMenu={
-              <SaveButton
-                pristine={pristine}
-                submitting={submitting}
-              />
-            }
-            paneTitle={
-              editMode
-                ? <FormattedMessage id="ui-circulation.settings.loanPolicy.editEntryLabel" />
-                : <FormattedMessage id="ui-circulation.settings.loanPolicy.createEntryLabel" />
-            }
+          <HeaderPane
+            editMode={editMode}
+            pristine={pristine}
+            submitting={submitting}
+            onCancel={onCancel}
           >
             <React.Fragment>
               <Row end="xs">
@@ -180,13 +155,15 @@ class LoanPolicyForm extends React.Component {
                 <RenewalsSection
                   policy={policy}
                   schedules={schedules}
+                  change={change}
                 />
                 <RequestManagementSection
                   policy={policy}
-                  holdsSectionOpen={holdsSection}
-                  pagesSectionOpen={pagesSection}
-                  recallsSectionOpen={recallsSection}
+                  holdsSectionOpen={sections.holdsSection}
+                  pagesSectionOpen={sections.pagesSection}
+                  recallsSectionOpen={sections.recallsSection}
                   accordionOnToggle={this.handleSectionToggle}
+                  change={change}
                 />
               </Accordion>
               {editMode &&
@@ -194,14 +171,14 @@ class LoanPolicyForm extends React.Component {
                   isOpen={confirmDelete}
                   policyName={policy.name}
                   initialValues={initialValues}
-                  perm="ui-circulation.settings.loan-policies"
+                  perm={permissions}
                   deleteEntityKey="ui-circulation.settings.loanPolicy.deleteLoanPolicy"
                   onRemoveStatusChange={this.changeDeleteState}
                   onRemove={onRemove}
                 />
               }
             </React.Fragment>
-          </Pane>
+          </HeaderPane>
         </Paneset>
       </form>
     );

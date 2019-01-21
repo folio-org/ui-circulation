@@ -7,7 +7,7 @@ import { EntryManager } from '@folio/stripes/smart-components';
 
 import NoticePolicyDetail from './NoticePolicyDetail';
 import NoticePolicyForm from './NoticePolicyForm';
-import validate from '../Validation/NoticePolicy';
+import { NoticePolicy as validateNoticePolicy } from '../Validation';
 import NoticePolicy from '../Models/NoticePolicy';
 
 class NoticePolicySettings extends React.Component {
@@ -59,7 +59,7 @@ class NoticePolicySettings extends React.Component {
         entryLabel={<FormattedMessage id="ui-circulation.settings.noticePolicy.entryLabel" />}
         nameKey="name"
         permissions={permissions}
-        validate={validate}
+        validate={validateNoticePolicy}
         defaultEntry={NoticePolicy.defaultNoticePolicy()}
       />
     );
