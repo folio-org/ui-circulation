@@ -11,23 +11,27 @@ import {
   Row,
 } from '@folio/stripes/components';
 
+// eslint-disable-next-line
 import {
   intervalPeriods,
   renewFromOptions,
-} from '../../../../constants';
+} from '@folio/circulation/constants';
 
-import PolicyPropertySetter from '../PolicyPropertySetter';
+// eslint-disable-next-line
+import { Period } from '@folio/circulation/settings/components';
 
 class RenewalsSection extends React.Component {
   static propTypes = {
     policy: PropTypes.object.isRequired,
     schedules: PropTypes.arrayOf(PropTypes.node).isRequired,
+    change: PropTypes.func.isRequired,
   };
 
   render() {
     const {
       policy,
       schedules,
+      change,
     } = this.props;
 
     if (!policy.loanable) {
@@ -102,13 +106,13 @@ class RenewalsSection extends React.Component {
         { policy.renewable && policy.renewalsPolicy.differentPeriod && policy.isProfileRolling() &&
           <React.Fragment>
             <br />
-            <PolicyPropertySetter
+            <Period
               fieldLabel="ui-circulation.settings.loanPolicy.alternateLoanPeriodRenewals"
               selectPlaceholder="ui-circulation.settings.loanPolicy.selectInterval"
               inputValuePath="renewalsPolicy.period.duration"
               selectValuePath="renewalsPolicy.period.intervalId"
-              entity={policy}
               intervalPeriods={intervalPeriods}
+              changeFormValue={change}
             />
           </React.Fragment>
         }

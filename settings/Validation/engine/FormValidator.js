@@ -5,12 +5,12 @@ import {
   some,
 } from 'lodash';
 
-import validatorsList from './validatorsList';
+import defaultValidators from './validators';
 
 const validateField = Symbol('validateField');
 
 export default class FormValidator {
-  constructor(config, validators = validatorsList) {
+  constructor(config, validators = defaultValidators) {
     this.config = config;
     this.validators = validators;
   }

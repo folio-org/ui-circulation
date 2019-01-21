@@ -1,18 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 
-import {
-  change,
-  Field,
-} from 'redux-form';
-
-import {
-  get,
-  isEmpty,
-  isNumber,
-} from 'lodash';
+import { Field } from 'redux-form';
+import { isEmpty } from 'lodash';
 
 import {
   Col,
@@ -21,40 +12,16 @@ import {
   TextField,
 } from '@folio/stripes/components';
 
-import css from './PolicyPropertySetter.css';
+import css from './Period.css';
 
-class PolicyPropertySetter extends React.Component {
+class Period extends React.Component {
   static propTypes = {
     fieldLabel: PropTypes.string.isRequired,
     selectPlaceholder: PropTypes.string.isRequired,
     inputValuePath: PropTypes.string.isRequired,
     selectValuePath: PropTypes.string.isRequired,
-    entity: PropTypes.object.isRequired,
-    intervalPeriods: PropTypes.arrayOf(PropTypes.object),
+    intervalPeriods: PropTypes.arrayOf(PropTypes.object).isRequired,
     changeFormValue: PropTypes.func.isRequired,
-  };
-
-  constructor(props) {
-    super(props);
-
-    this.inputRef = React.createRef();
-  }
-
-  onInputBlur = () => {
-    const {
-      inputValuePath,
-      selectValuePath,
-      entity,
-      changeFormValue,
-    } = this.props;
-
-    const inputValue = get(entity, inputValuePath);
-
-    if (isNumber(inputValue)) {
-      return;
-    }
-
-    changeFormValue(selectValuePath, '');
   };
 
   onInputClear = () => {
@@ -64,10 +31,6 @@ class PolicyPropertySetter extends React.Component {
     } = this.props;
 
     changeFormValue(inputValuePath, '');
-  };
-
-  onSelectChange = () => {
-    this.inputRef.current.focus();
   };
 
   transformInputValue = (value) => {
@@ -97,10 +60,7 @@ class PolicyPropertySetter extends React.Component {
       selectPlaceholder,
       inputValuePath,
       selectValuePath,
-      entity,
     } = this.props;
-
-    const isInputReadOnly = !get(entity, selectValuePath);
 
     return (
       <React.Fragment>
@@ -113,12 +73,8 @@ class PolicyPropertySetter extends React.Component {
           <Col xs={2}>
             <Field
               type="number"
-              readOnly={isInputReadOnly}
               name={inputValuePath}
               component={TextField}
-              withRef
-              inputRef={this.inputRef}
-              onBlur={this.onInputBlur}
               onClearField={this.onInputClear}
               parse={this.transformInputValue}
             />
@@ -130,7 +86,6 @@ class PolicyPropertySetter extends React.Component {
                   name={selectValuePath}
                   component={Select}
                   placeholder={placeholder}
-                  onChange={this.onSelectChange}
                 >
                   {this.generateOptions()}
                 </Field>
@@ -143,8 +98,4 @@ class PolicyPropertySetter extends React.Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  changeFormValue: (field, value) => dispatch(change('entryForm', field, value)),
-});
-
-export default connect(null, mapDispatchToProps)(PolicyPropertySetter);
+export default Period;

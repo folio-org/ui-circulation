@@ -46,7 +46,7 @@
   "settings.loanPolicy.generalInformation": "General information",
   "settings.loanPolicy.yes": "Yes",
   "settings.loanPolicy.no": "No",
-  "settings.loanPolicy.openingTimeOffset": "Opening time offset",
+  "settings.loanPolicy.openingTimeOffset": "Opening time offset *",
   "settings.loanPolicy.delete": "Delete",
   "settings.loanPolicy.deleteMessage": "{name} will be {removed}.",
   "settings.loanPolicy.removed": "removed",

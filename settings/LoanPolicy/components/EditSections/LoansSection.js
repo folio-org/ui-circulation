@@ -13,8 +13,7 @@ import {
   Select,
 } from '@folio/stripes/components';
 
-import PolicyPropertySetter from '../PolicyPropertySetter';
-
+// eslint-disable-next-line
 import {
   loanProfileTypes,
   intervalPeriods,
@@ -22,7 +21,10 @@ import {
   longTermLoansOptions,
   CURRENT_DUE_DATE_TIME,
   CURRENT_DUE_DATE,
-} from '../../../../constants';
+} from '@folio/circulation/constants';
+
+// eslint-disable-next-line
+import { Period } from '@folio/circulation/settings/components';
 
 class LoansSection extends React.Component {
   static propTypes = {
@@ -72,6 +74,7 @@ class LoansSection extends React.Component {
     const {
       policy,
       schedules,
+      change,
     } = this.props;
 
     const dueDateScheduleFieldLabel = policy.isProfileRolling()
@@ -103,13 +106,13 @@ class LoansSection extends React.Component {
           />
         }
         { policy.isProfileRolling() &&
-          <PolicyPropertySetter
+          <Period
             fieldLabel="ui-circulation.settings.loanPolicy.loanPeriod"
             selectPlaceholder="ui-circulation.settings.loanPolicy.selectInterval"
             inputValuePath="loansPolicy.period.duration"
             selectValuePath="loansPolicy.period.intervalId"
-            entity={policy}
             intervalPeriods={intervalPeriods}
+            changeFormValue={change}
           />
         }
         { (policy.isProfileRolling() || policy.isProfileFixed()) &&
@@ -140,23 +143,23 @@ class LoansSection extends React.Component {
           </Field>
         }
         { policy.isOpeningTimeOffsetActive() &&
-          <PolicyPropertySetter
+          <Period
             fieldLabel="ui-circulation.settings.loanPolicy.openingTimeOffset"
             selectPlaceholder="ui-circulation.settings.loanPolicy.selectInterval"
             inputValuePath="loansPolicy.openingTimeOffset.duration"
             selectValuePath="loansPolicy.openingTimeOffset.intervalId"
-            entity={policy}
             intervalPeriods={intervalPeriods.slice(0, 2).reverse()}
+            changeFormValue={change}
           />
         }
         { policy.loanable &&
-          <PolicyPropertySetter
+          <Period
             fieldLabel="ui-circulation.settings.loanPolicy.gracePeriod"
             selectPlaceholder="ui-circulation.settings.loanPolicy.selectInterval"
             inputValuePath="loansPolicy.gracePeriod.duration"
             selectValuePath="loansPolicy.gracePeriod.intervalId"
-            entity={policy}
             intervalPeriods={intervalPeriods}
+            changeFormValue={change}
           />
         }
         <hr />
