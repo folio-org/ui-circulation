@@ -206,8 +206,9 @@
   "settings.requestPolicy.entryLabel": "Request policy",
   "settings.requestPolicy.deletPolicy": "Delete request policy",
   "settings.requestPolicy.generalInformation": "General information",
-  "settings.requestPolicy.policyName": "Policy name",
-  "settings.requestPolicy.policyDescription": "Policy description",
+  "settings.requestPolicy.policyName": "Request policy name",
+  "settings.requestPolicy.policyDescription": "Request policy description",
+  "settings.requestPolicy.policyTypes": "Request types allowed",
   "settings.requestPolicy.saveAndClose": "Save",
   "settings.requestPolicy.createEntryLabel": "New request policy"
 }
