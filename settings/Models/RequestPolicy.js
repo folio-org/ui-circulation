@@ -2,13 +2,14 @@ import { Metadata } from './common';
 
 export default class RequestPolicy {
   static defaultPolicy() {
-    return {};
+    return { requestTypes: [] };
   }
 
   constructor(policy = {}) {
     this.id = policy.id;
     this.name = policy.name;
-    this.descrition = policy.descrition;
+    this.description = policy.description;
+    this.requestTypes = policy.requestTypes;
     this.metadata = new Metadata(policy.metadata);
   }
 }

@@ -1,16 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Field } from 'redux-form';
+import {
+  Field,
+  FieldArray,
+} from 'redux-form';
 import { FormattedMessage } from 'react-intl';
 
 import {
   TextArea,
   TextField,
   Accordion,
+  Checkbox,
+  Row,
+  Col,
 } from '@folio/stripes/components';
 
 // eslint-disable-next-line
 import { Metadata } from '@folio/circulation/settings/components';
+
+import { requestPolicyTypes } from '../../../../../constants';
 
 class GeneralSection extends React.Component {
   static propTypes = {
@@ -19,6 +27,32 @@ class GeneralSection extends React.Component {
     metadata: PropTypes.object.isRequired,
     connect: PropTypes.func.isRequired,
   };
+
+  renderTypes = ({ fields, meta }) => {
+    const items = requestPolicyTypes.map((name, index) => (
+      <Row key={`row-${index}`}>
+        <Col xs={12}>
+          <Field
+            component={Checkbox}
+            type="checkbox"
+            id={`${name}-checkbox`}
+            data-checked={fields.get(index)}
+            label={name}
+            name={`requestTypes[${index}]`}
+          />
+        </Col>
+      </Row>
+    ));
+
+    return (
+      <React.Fragment>
+        <p>
+          <FormattedMessage id="ui-circulation.settings.requestPolicy.policyTypes" />
+        </p>
+        {items}
+      </React.Fragment>
+    );
+  }
 
   render() {
     const {
@@ -52,6 +86,12 @@ class GeneralSection extends React.Component {
           label={<FormattedMessage id="ui-circulation.settings.requestPolicy.policyDescription" />}
           component={TextArea}
         />
+
+        <FieldArray
+          name="requestTypes"
+          component={this.renderTypes}
+        />
+
       </Accordion>
     );
   }
