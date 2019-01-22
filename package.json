@@ -72,6 +72,19 @@
         "visible": true
       },
       {
+        "permissionName": "ui-circulation.settings.request-policies",
+        "displayName": "Settings (Circ): Can create, edit and remove request policies",
+        "subPermissions": [
+          "circulation-storage.request-policies.collection.get",
+          "circulation-storage.request-policies.item.get",
+          "circulation-storage.request-policies.item.post",
+          "circulation-storage.request-policies.item.put",
+          "circulation-storage.request-policies.item.delete",
+          "settings.circulation.enabled"
+        ],
+        "visible": true
+      },
+      {
         "permissionName": "settings.loan-policies.all",
         "displayName": "Settings (Circ): Can create, edit and remove loan policies [LEGACY]",
         "subPermissions": [

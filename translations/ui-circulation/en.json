@@ -10,6 +10,7 @@
   "settings.index.requestCancellationReasons": "Request cancellation reasons",
   "settings.index.patronNotices": "Patron notice templates",
   "settings.index.noticePolicies": "Notice policies",
+  "settings.index.requestPolicies": "Request policies",
 
   "settings.loanPolicy.entryLabel": "Loan Policy",
   "settings.loanPolicy.paneTitle": "Loan Policies",
@@ -186,7 +187,7 @@
   "settings.common.deleteMessage": "{name} will be {removed}.",
   "settings.common.removed": "removed",
   "settings.common.delete": "Delete",
-  
+
   "settings.noticePolicy.entryLabel": "Notice Policy",
   "settings.noticePolicy.saveAndClose": "Save",
   "settings.noticePolicy.paneTitle": "Notice Policies",
@@ -199,5 +200,14 @@
   "settings.noticePolicy.deleteLoanPolicy": "Delete Notice Policy",
   "settings.noticePolicy.policyName": "Policy Name",
   "settings.noticePolicy.policyDescription": "Policy Description",
-  "settings.noticePolicy.active": "Active"
+  "settings.noticePolicy.active": "Active",
+
+  "settings.requestPolicy.paneTitle": "Request policies",
+  "settings.requestPolicy.entryLabel": "Request policy",
+  "settings.requestPolicy.deletPolicy": "Delete request policy",
+  "settings.requestPolicy.generalInformation": "General information",
+  "settings.requestPolicy.policyName": "Policy name",
+  "settings.requestPolicy.policyDescription": "Policy description",
+  "settings.requestPolicy.saveAndClose": "Save",
+  "settings.requestPolicy.createEntryLabel": "New request policy"
 }
