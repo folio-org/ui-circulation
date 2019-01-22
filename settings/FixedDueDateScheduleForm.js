@@ -13,7 +13,6 @@ import {
   ExpandAllButton,
   Icon,
   IconButton,
-  IfPermission,
   Pane,
   PaneMenu,
   Paneset,
@@ -21,6 +20,9 @@ import {
   TextArea,
   TextField,
 } from '@folio/stripes/components';
+import {
+  IfPermission,
+} from '@folio/stripes/core';
 import stripesForm from '@folio/stripes/form';
 import { ViewMetaData } from '@folio/stripes/smart-components';
 import css from './FixedDueDateSchedule.css';
