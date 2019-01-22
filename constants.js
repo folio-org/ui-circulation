@@ -97,9 +97,9 @@ export const patronIdentifierTypes = [
 ];
 
 export const requestPolicyTypes = [
-  "Hold",
-  "Page",
-  "Recall",
+  'Hold',
+  'Page',
+  'Recall',
 ];
 
 export default '';
