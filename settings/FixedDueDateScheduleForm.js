@@ -3,7 +3,7 @@ import _ from 'lodash';
 import PropTypes from 'prop-types';
 import { Field, FieldArray } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
-import { stripesShape } from '@folio/stripes/core';
+import { stripesShape, IfPermission } from '@folio/stripes/core';
 import {
   Accordion,
   Button,
@@ -13,7 +13,6 @@ import {
   ExpandAllButton,
   Icon,
   IconButton,
-  IfPermission,
   Pane,
   PaneMenu,
   Paneset,
