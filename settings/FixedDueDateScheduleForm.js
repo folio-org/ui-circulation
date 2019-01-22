@@ -3,7 +3,7 @@ import _ from 'lodash';
 import PropTypes from 'prop-types';
 import { Field, FieldArray } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
-import { stripesShape } from '@folio/stripes/core';
+import { stripesShape, IfPermission } from '@folio/stripes/core';
 import {
   Accordion,
   Button,
@@ -20,9 +20,6 @@ import {
   TextArea,
   TextField,
 } from '@folio/stripes/components';
-import {
-  IfPermission,
-} from '@folio/stripes/core';
 import stripesForm from '@folio/stripes/form';
 import { ViewMetaData } from '@folio/stripes/smart-components';
 import css from './FixedDueDateSchedule.css';
