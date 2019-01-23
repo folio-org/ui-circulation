@@ -13,7 +13,6 @@ import {
   Select,
 } from '@folio/stripes/components';
 
-// eslint-disable-next-line
 import {
   loanProfileTypes,
   intervalPeriods,
@@ -21,10 +20,9 @@ import {
   longTermLoansOptions,
   CURRENT_DUE_DATE_TIME,
   CURRENT_DUE_DATE,
-} from '@folio/circulation/constants';
+} from '../../../../constants';
 
-// eslint-disable-next-line
-import { Period } from '@folio/circulation/settings/components';
+import { Period } from '../../../components';
 
 class LoansSection extends React.Component {
   static propTypes = {
