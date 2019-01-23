@@ -14,6 +14,7 @@ import {
   loanProfileMap,
   renewFromIds,
   BEGINNING_OF_THE_NEXT_OPEN_SERVICE_POINT_HOURS,
+  END_OF_THE_NEXT_OPEN_DAY,
 } from '../../constants';
 
 class LoansPolicy {
@@ -92,6 +93,7 @@ export default class LoanPolicy {
       loanable: true,
       loansPolicy: {
         profileId: loanProfileMap.ROLLING,
+        closedLibraryDueDateManagementId: END_OF_THE_NEXT_OPEN_DAY
       },
       renewable: true,
       renewalsPolicy: {

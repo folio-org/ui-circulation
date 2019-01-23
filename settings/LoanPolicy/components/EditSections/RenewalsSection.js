@@ -11,14 +11,12 @@ import {
   Row,
 } from '@folio/stripes/components';
 
-// eslint-disable-next-line
 import {
   intervalPeriods,
   renewFromOptions,
-} from '@folio/circulation/constants';
+} from '../../../../constants';
 
-// eslint-disable-next-line
-import { Period } from '@folio/circulation/settings/components';
+import { Period } from '../../../components';
 
 class RenewalsSection extends React.Component {
   static propTypes = {
