@@ -240,7 +240,6 @@ export default function config() {
     const body = JSON.parse(request.requestBody);
     const requestPolicy = requestPolicies.get(body.id);
     requestPolicy.update({ name: body.name });
-    console.log('in put...');
     return requestPolicy.attrs;
   });
 }

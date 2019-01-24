@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
   Row,
   Col,
@@ -13,6 +14,14 @@ import stripesForm from '@folio/stripes/form';
 import LoanRulesField from './LoanRulesField';
 
 class LoanRulesForm extends React.Component {
+  static propTypes = {
+    pristine: PropTypes.bool.isRequired,
+    submitting: PropTypes.bool.isRequired,
+    onSave: PropTypes.func.isRequired,
+    handleSubmit: PropTypes.func.isRequired,
+    editorProps: PropTypes.object,
+  };
+
   constructor(props) {
     super(props);
 

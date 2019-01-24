@@ -142,7 +142,7 @@
     "@bigtest/mirage": "^0.0.1",
     "@bigtest/mocha": "^0.5.2",
     "@bigtest/react": "^0.1.2",
-    "@folio/eslint-config-stripes": "^3.2.1",
+    "@folio/eslint-config-stripes": "^4.0.1",
     "@folio/stripes": "^1.0.0",
     "@folio/stripes-cli": "^1.7.0",
     "@folio/stripes-core": "^2.17.0",
