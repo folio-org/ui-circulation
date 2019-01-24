@@ -11,6 +11,7 @@ import FixedDueDateScheduleManager from './FixedDueDateScheduleManager';
 import PatronNotices from './PatronNotices';
 import StaffSlips from './StaffSlips';
 import NoticePolicySettings from './NoticePolicy';
+import RequestPolicySettings from './RequestPolicy';
 
 class Circulation extends React.Component {
   constructor(props) {
@@ -61,6 +62,13 @@ class Circulation extends React.Component {
         label: <FormattedMessage id="ui-circulation.settings.index.noticePolicies" />,
         component: NoticePolicySettings,
         // perm: 'ui-circulation.settings.notice-policies',
+      },
+      {
+        route: 'request-policies',
+        label: <FormattedMessage id="ui-circulation.settings.index.requestPolicies" />,
+        component: RequestPolicySettings,
+        // TODO: turn on after server side is done
+        // perm: 'ui-circulation.settings.request-policies',
       },
     ];
   }

@@ -96,4 +96,10 @@ export const patronIdentifierTypes = [
   { key: 'USER', label: 'Username', queryKey: 'username' },
 ];
 
+export const requestPolicyTypes = [
+  'Hold',
+  'Page',
+  'Recall',
+];
+
 export default '';
