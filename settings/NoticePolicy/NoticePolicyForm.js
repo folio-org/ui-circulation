@@ -45,7 +45,7 @@ class NoticePolicyForm extends React.Component {
     showDeleteConfirmation: false,
     sections: {
       general: true,
-      loanNotices: false,
+      loanNotices: true,
       feeFineNotices: false,
       requestNotices: false,
     },

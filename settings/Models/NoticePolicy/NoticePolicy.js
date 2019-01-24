@@ -4,7 +4,7 @@ import {
 } from '../common';
 
 class NoticeSendOptions {
-  constructor(options) {
+  constructor(options = {}) {
     this.sendHow = options.sendHow;
     this.sendWhen = options.sendWhen;
     this.sendBy = new Period(options.sendBy);
@@ -13,7 +13,7 @@ class NoticeSendOptions {
 }
 
 class Notice {
-  constructor(notice) {
+  constructor(notice = {}) {
     this.name = notice.name;
     this.templateId = notice.templateId;
     this.templateName = notice.templateName;

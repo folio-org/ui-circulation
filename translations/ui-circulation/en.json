@@ -211,5 +211,12 @@
   "settings.requestPolicy.policyDescription": "Request policy description",
   "settings.requestPolicy.policyTypes": "Request types allowed",
   "settings.requestPolicy.saveAndClose": "Save",
-  "settings.requestPolicy.createEntryLabel": "New request policy"
+  "settings.requestPolicy.createEntryLabel": "New request policy",
+  
+  "settings.noticePolicy.addNotice": "Add Notice",
+  "settings.noticePolicy.countableNotice": "Notice {counter}",
+  "settings.noticePolicy.loanNotices.via": "via",
+  "settings.noticePolicy.loanNotices.template": "Template *",
+  "settings.noticePolicy.loanNotices.format": "Format *",
+  "settings.noticePolicy.loanNotices.frequency": "Frequency *"
 }

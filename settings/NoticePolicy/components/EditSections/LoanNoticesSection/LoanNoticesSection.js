@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { Accordion } from '@folio/stripes/components';
 
+import { LoanNoticesList } from './components';
+
 class LoanNoticesSection extends React.Component {
   static propTypes = {
     isOpen: PropTypes.bool.isRequired,
@@ -22,7 +24,7 @@ class LoanNoticesSection extends React.Component {
         label={<FormattedMessage id="ui-circulation.settings.noticePolicy.loanNotices" />}
         onToggle={onToggle}
       >
-        <span>Content will be available soon.</span>
+        <LoanNoticesList />
       </Accordion>
     );
   }
