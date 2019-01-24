@@ -86,7 +86,7 @@ class RequestPolicyForm extends React.Component {
     const editMode = Boolean(policy.id);
 
     return (
-      <form onSubmit={handleSubmit(this.saveForm)}>
+      <form data-test-request-policy-form onSubmit={handleSubmit(this.saveForm)}>
         <Paneset isRoot>
           <HeaderPane
             editMode={editMode}

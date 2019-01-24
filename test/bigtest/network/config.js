@@ -225,4 +225,22 @@ export default function config() {
     }],
     'totalRecords' : 2
   });
+
+  this.get('/request-policy-storage/request-policies', function ({ requestPolicies }) {
+    return this.serializerOrRegistry.serialize(requestPolicies.all());
+  });
+
+  this.post('/request-policy-storage/request-policies', ({ requestPolicies }, request) => {
+    const body = JSON.parse(request.requestBody);
+    const requestPolicy = requestPolicies.create(body);
+    return requestPolicy.attrs;
+  });
+
+  this.put('/request-policy-storage/request-policies/:id', ({ requestPolicies }, request) => {
+    const body = JSON.parse(request.requestBody);
+    const requestPolicy = requestPolicies.get(body.id);
+    requestPolicy.update({ name: body.name });
+    console.log('in put...');
+    return requestPolicy.attrs;
+  });
 }

@@ -39,7 +39,6 @@ class RequestPolicySettings extends React.Component {
       mutator,
     } = this.props;
 
-
     const permissions = {
       // TODO: update  after server side is done
       put: 'ui-circulation.settings.loan-policies',
@@ -52,6 +51,8 @@ class RequestPolicySettings extends React.Component {
     return (
       <EntryManager
         {...this.props}
+        id="request-policy-settings"
+        data-test-request-policy-settings
         parentMutator={mutator}
         parentResources={resources}
         entryList={entryList}

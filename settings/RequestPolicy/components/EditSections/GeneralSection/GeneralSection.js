@@ -15,9 +15,7 @@ import {
   Col,
 } from '@folio/stripes/components';
 
-// eslint-disable-next-line
-import { Metadata } from '@folio/circulation/settings/components';
-
+import { Metadata } from '../../../../components';
 import { requestPolicyTypes } from '../../../../../constants';
 
 class GeneralSection extends React.Component {
@@ -28,14 +26,14 @@ class GeneralSection extends React.Component {
     connect: PropTypes.func.isRequired,
   };
 
-  renderTypes = ({ fields, meta }) => {
+  renderTypes = ({ fields }) => {
     const items = requestPolicyTypes.map((name, index) => (
       <Row key={`row-${index}`}>
         <Col xs={12}>
           <Field
             component={Checkbox}
             type="checkbox"
-            id={`${name}-checkbox`}
+            id={`${name.toLowerCase()}-checkbox`}
             data-checked={fields.get(index)}
             label={name}
             name={`requestTypes[${index}]`}
