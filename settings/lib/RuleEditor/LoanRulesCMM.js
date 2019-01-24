@@ -24,8 +24,7 @@ const hooks = {
   ':': (stream, state) => { // separate l-value from r-value
     stream.eatWhile(/\s/);
     state.rValue = true;
-    // TODO: turn on after  UICIRC-164 is done
-    // state.keyProperty = null;
+    state.keyProperty = null;
   },
   '!': (stream) => {
     stream.eatWhile(/\s/);
@@ -111,19 +110,8 @@ function processToken(stream, state, parserConfig) {
       }
     }
 
-    /* TODO: turn on after  UICIRC-164 is done
     if (policyMapping[keyProperty] && rValue) {
       state.keyProperty = null;
-      return 'policy';
-    }
-    */
-  }
-
-  // TODO: for backward compatiblity.
-  // Please remove it after UICIRC-164 is completed
-  if (rValue) {
-    const policyRes = completionLists.loanPolicies.filter((p) => p === cur);
-    if (policyRes.length > 0) {
       return 'policy';
     }
   }

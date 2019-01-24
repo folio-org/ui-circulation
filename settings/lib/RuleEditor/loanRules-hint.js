@@ -26,7 +26,7 @@ export default function loanRulesHint(Codemirror, props) {
     } = state;
 
     const {
-      // policyMapping,
+      policyMapping,
       typeMapping,
       completionLists
     } = nextApplicable;
@@ -36,10 +36,7 @@ export default function loanRulesHint(Codemirror, props) {
     const result = [];
 
     // new rule at the start of lines and blank lines...
-    // TODO: turn on next line after UICIRC-164 is done
-    // if (!rValue && (cur.ch === 0 || cur.ch === indented || token.type !== 'policy')) {
-    // TODO remove next line after UICIRC-164 is done
-    if (cur.ch === 0 || cur.ch === token.state.indented || token.type !== 'policy') {
+    if (!rValue && (cur.ch === 0 || cur.ch === indented || token.type !== 'policy')) {
       let newRuleText = '# ';
       // if we're in the middle of a line, a new line should be inserted, then a rule...
       if ((cur.ch !== 0 && indented > 0) || token.type === 'ruleName') {
@@ -74,8 +71,9 @@ export default function loanRulesHint(Codemirror, props) {
     // display criteria selectors if the cursor's not after a semicolon and state.keyPropery is not null...
     if (!rValue && keyProperty) {
       // not at beginning of line..
-      if (cur.ch !== 0 && cur.ch > indented / 4) {
+      if (cur.ch !== 0 && cur.ch > indented / 4 && typeMapping[keyProperty]) {
         const type = typeMapping[keyProperty];
+
         completionLists[type].forEach((selector) => {
           result.push({
             text: `${selector} `,
@@ -87,20 +85,6 @@ export default function loanRulesHint(Codemirror, props) {
       }
     }
 
-    // TODO remove entire condition after UICIRC-164 is done
-    // display policies in rValues.
-    if (rValue && cur.ch > indented) {
-      completionLists.loanPolicies.forEach((name) => {
-        result.push({
-          text: `${name} `,
-          displayText: name,
-          className: 'loan-rule-hint-minor',
-          completeOnSingleClick: true,
-        });
-      });
-    }
-
-    /* TODO: turn on after UICIRC-164 is done
     // display policy types in rValues.
     if (rValue && cur.ch > indented && !keyProperty) {
       const text = formatMessage({ id: 'ui-circulation.settings.loanRules.circulationPolicies' });
@@ -125,7 +109,7 @@ export default function loanRulesHint(Codemirror, props) {
     // display policies
     if (rValue && keyProperty) {
       // not at beginning of line..
-      if (cur.ch !== 0 && cur.ch > indented / 4) {
+      if (cur.ch !== 0 && cur.ch > indented / 4 && policyMapping[keyProperty]) {
         const type = policyMapping[keyProperty];
         completionLists[type].forEach((selector) => {
           result.push({
@@ -137,7 +121,6 @@ export default function loanRulesHint(Codemirror, props) {
         });
       }
     }
-    */
 
     if (result.length) {
       return {
