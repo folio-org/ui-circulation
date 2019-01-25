@@ -1,8 +1,4 @@
-import checkPeriod from '../utils';
-
 export default function (loanPolicy) {
-  const gracePeriod = checkPeriod(loanPolicy, 'loansPolicy.gracePeriod');
-
   return {
     'loansPolicy.period.duration': {
       rules: ['isNotEmpty', 'isIntegerGreaterThanOne'],
@@ -14,11 +10,7 @@ export default function (loanPolicy) {
     },
     'loansPolicy.gracePeriod.duration': {
       rules: ['isIntegerGreaterThanZero'],
-      shouldValidate: gracePeriod.duration || gracePeriod.intervalId,
-    },
-    'loansPolicy.gracePeriod.intervalId': {
-      rules: ['isNotEmptySelect'],
-      shouldValidate: gracePeriod.duration,
+      shouldValidate: loanPolicy.hasValue('loansPolicy.gracePeriod.duration')
     },
     'loansPolicy.fixedDueDateScheduleId': {
       rules: ['isNotEmptySelect'],
@@ -26,10 +18,6 @@ export default function (loanPolicy) {
     },
     'loansPolicy.openingTimeOffset.duration': {
       rules: ['isNotEmpty', 'isIntegerGreaterThanOne'],
-      shouldValidate: loanPolicy.isOpeningTimeOffsetActive(),
-    },
-    'loansPolicy.openingTimeOffset.intervalId': {
-      rules: ['isNotEmptySelect'],
       shouldValidate: loanPolicy.isOpeningTimeOffsetActive(),
     },
   };

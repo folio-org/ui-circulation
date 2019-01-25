@@ -8,10 +8,6 @@ export default function (loanPolicy) {
       rules: ['isNotEmpty'],
       shouldValidate: loanPolicy.isRenewalsPolicyPeriodRequired(),
     },
-    'renewalsPolicy.period.intervalId': {
-      rules: ['isNotEmptySelect'],
-      shouldValidate: loanPolicy.isRenewalsPolicyPeriodRequired(),
-    },
     'renewalsPolicy.numberAllowed': {
       rules: ['isNotEmpty'],
       shouldValidate: loanPolicy.isNumberOfRenewalsAllowedActive(),

@@ -93,15 +93,37 @@ export default class LoanPolicy {
       loanable: true,
       loansPolicy: {
         profileId: loanProfileMap.ROLLING,
-        closedLibraryDueDateManagementId: END_OF_THE_NEXT_OPEN_DAY
+        closedLibraryDueDateManagementId: END_OF_THE_NEXT_OPEN_DAY,
+        period: { intervalId: intervalIdsMap.DAYS },
+        openingTimeOffset: { intervalId: intervalIdsMap.HOURS },
+        gracePeriod: { intervalId: intervalIdsMap.HOURS }
       },
       renewable: true,
       renewalsPolicy: {
         unlimited: false,
         renewFromId: renewFromIds.SYSTEM_DATE,
         differentPeriod: false,
+        period: { intervalId: intervalIdsMap.DAYS }
+      },
+      requestManagement: {
+        recalls: {
+          recallReturnInterval: { intervalId: intervalIdsMap.DAYS },
+          minLoanPeriod: { intervalId: intervalIdsMap.DAYS },
+        },
+        holds: {
+          alternateCheckoutLoanPeriod: { intervalId: intervalIdsMap.DAYS },
+          alternateRenewalLoanPeriod: { intervalId: intervalIdsMap.DAYS },
+        },
+        pages: {
+          alternateCheckoutLoanPeriod: { intervalId: intervalIdsMap.DAYS },
+          alternateRenewalLoanPeriod: { intervalId: intervalIdsMap.DAYS },
+        },
       },
     };
+  }
+
+  static isPeriodValid(period = {}) {
+    return isNumber(period.duration) && !isEmpty(period.intervalId);
   }
 
   constructor(policy = {}) {
@@ -114,6 +136,12 @@ export default class LoanPolicy {
     this.renewalsPolicy = new RenewalsPolicy(policy.renewalsPolicy);
     this.metadata = new Metadata(policy.metadata);
     this.requestManagement = new RequestManagement(policy.requestManagement);
+  }
+
+  hasValue(pathToValue) {
+    const value = get(this, pathToValue);
+
+    return isNumber(value);
   }
 
   isShortTermLoan() {
@@ -142,10 +170,6 @@ export default class LoanPolicy {
 
   isNumberOfRenewalsAllowedActive() {
     return this.renewable && !this.renewalsPolicy.unlimited;
-  }
-
-  isPeriodValid(period) {
-    return isNumber(period.duration) && !isEmpty(period.intervalId);
   }
 
   isAlternateFixedDueDateScheduleIdRequired() {
