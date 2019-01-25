@@ -1,9 +1,14 @@
 # Change history for ui-circulation
 
-## 1.5.0 IN PROGRESS
+## 1.6.0 (IN PROGRESS)
+
+* React deps should be as lenient as possible.
+
+## 1.5.0 (https://github.com/folio-org/ui-circulation/tree/v1.5.0) (2019-01-25)
+[Full Changelog](https://github.com/folio-org/ui-circulation/compare/v1.4.0...v1.5.0)
 
 * Add new policy types to policy menu in rules editor. Fixes UICIRC-164.
-* React deps should be as lenient as possible.
+* Upgrade to stripes v2.0.0.
 
 ## 1.4.0 (https://github.com/folio-org/ui-circulation/tree/v1.4.0) (2018-12-13)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v1.3.0...v1.4.0)
