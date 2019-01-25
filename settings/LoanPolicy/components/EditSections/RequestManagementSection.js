@@ -64,14 +64,6 @@ class RequestManagementSection extends React.Component {
             intervalPeriods={intervalPeriods}
             changeFormValue={change}
           />
-          <Period
-            fieldLabel="ui-circulation.settings.requestManagement.alternateGracePeriod"
-            selectPlaceholder="ui-circulation.settings.loanPolicy.selectInterval"
-            inputValuePath="requestManagement.recalls.alternateGracePeriod.duration"
-            selectValuePath="requestManagement.recalls.alternateGracePeriod.intervalId"
-            intervalPeriods={intervalPeriods}
-            changeFormValue={change}
-          />
         </Accordion>
         <Accordion
           id="holdsSection"
@@ -87,8 +79,6 @@ class RequestManagementSection extends React.Component {
             intervalPeriods={intervalPeriods}
             changeFormValue={change}
           />
-          <hr />
-          <br />
           <Field
             label={<FormattedMessage id="ui-circulation.settings.requestManagement.renewItemsWithRequest" />}
             name="requestManagement.holds.renewItemsWithRequest"
