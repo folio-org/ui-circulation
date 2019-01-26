@@ -188,5 +188,15 @@
     "settings.noticePolicy.deleteLoanPolicy": "Excluir política de avisos",
     "settings.noticePolicy.policyName": "Nome da política",
     "settings.noticePolicy.policyDescription": "Descrição da política",
-    "settings.noticePolicy.active": "Ativo"
+    "settings.noticePolicy.active": "Ativo",
+    "settings.index.requestPolicies": "Políticas de pedidos de compra",
+    "settings.requestPolicy.paneTitle": "Políticas de pedidos de compra",
+    "settings.requestPolicy.entryLabel": "Política de pedido de compra",
+    "settings.requestPolicy.deletPolicy": "Excluir política de pedido de compra",
+    "settings.requestPolicy.generalInformation": "Informações gerais",
+    "settings.requestPolicy.policyName": "Nome da política de pedido de compra",
+    "settings.requestPolicy.policyDescription": "Descrição da política de solicitação de compra",
+    "settings.requestPolicy.policyTypes": "Tipos de solicitação de compra permitidos",
+    "settings.requestPolicy.saveAndClose": "Salvar",
+    "settings.requestPolicy.createEntryLabel": "Nova política de solicitação de compra"
 }
