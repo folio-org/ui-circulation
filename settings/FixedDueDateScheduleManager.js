@@ -141,26 +141,30 @@ class FixedDueDateScheduleManager extends React.Component {
     } = this.props;
 
     return (
-      <EntryManager
-        {...this.props}
-        parentMutator={mutator}
-        entryList={_.sortBy((resources.fixedDueDateSchedules || {}).records || [], ['name'])}
-        resourceKey="fixedDueDateSchedules"
-        detailComponent={FixedDueDateScheduleDetail}
-        entryFormComponent={FixedDueDateScheduleForm}
-        paneTitle={<FormattedMessage id="ui-circulation.settings.fDDS.paneTitle" />}
-        entryLabel={<FormattedMessage id="ui-circulation.settings.fDDSform.entryLabel" />}
-        nameKey="name"
-        permissions={{
-          put: 'ui-circulation.settings.loan-rules',
-          post: 'ui-circulation.settings.loan-rules',
-          delete: 'ui-circulation.settings.loan-rules',
-        }}
-        validate={this.validate}
-        deleteDisabled={this.deleteDisabled}
-        deleteDisabledMessage={<FormattedMessage id="ui-circulation.settings.fDDS.deleteDisabled" />}
-        defaultEntry={{ schedules: [{}] }}
-      />
+      <FormattedMessage id="ui-circulation.settings.fDDSform.entryLabel">
+        { entryLabel => (
+          <EntryManager
+            {...this.props}
+            parentMutator={mutator}
+            entryList={_.sortBy((resources.fixedDueDateSchedules || {}).records || [], ['name'])}
+            resourceKey="fixedDueDateSchedules"
+            detailComponent={FixedDueDateScheduleDetail}
+            entryFormComponent={FixedDueDateScheduleForm}
+            paneTitle={<FormattedMessage id="ui-circulation.settings.fDDS.paneTitle" />}
+            entryLabel={entryLabel}
+            nameKey="name"
+            permissions={{
+              put: 'ui-circulation.settings.loan-rules',
+              post: 'ui-circulation.settings.loan-rules',
+              delete: 'ui-circulation.settings.loan-rules',
+            }}
+            validate={this.validate}
+            deleteDisabled={this.deleteDisabled}
+            deleteDisabledMessage={<FormattedMessage id="ui-circulation.settings.fDDS.deleteDisabled" />}
+            defaultEntry={{ schedules: [{}] }}
+          />
+        )}
+      </FormattedMessage>
     );
   }
 }
