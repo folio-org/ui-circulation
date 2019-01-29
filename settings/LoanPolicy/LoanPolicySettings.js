@@ -53,21 +53,25 @@ class LoanPolicySettings extends React.Component {
     const entryList = sortBy((resources.loanPolicies || {}).records, ['name']);
 
     return (
-      <EntryManager
-        {...this.props}
-        parentMutator={mutator}
-        parentResources={resources}
-        entryList={entryList}
-        resourceKey="loanPolicies"
-        detailComponent={LoanPolicyDetail}
-        entryFormComponent={LoanPolicyForm}
-        paneTitle={<FormattedMessage id="ui-circulation.settings.loanPolicy.paneTitle" />}
-        entryLabel={<FormattedMessage id="ui-circulation.settings.loanPolicy.entryLabel" />}
-        nameKey="name"
-        permissions={permissions}
-        validate={validate}
-        defaultEntry={LoanPolicy.defaultLoanPolicy()}
-      />
+      <FormattedMessage id="ui-circulation.settings.loanPolicy.entryLabel">
+        { entryLabel => (
+          <EntryManager
+            {...this.props}
+            parentMutator={mutator}
+            parentResources={resources}
+            entryList={entryList}
+            resourceKey="loanPolicies"
+            detailComponent={LoanPolicyDetail}
+            entryFormComponent={LoanPolicyForm}
+            paneTitle={<FormattedMessage id="ui-circulation.settings.loanPolicy.paneTitle" />}
+            entryLabel={entryLabel}
+            nameKey="name"
+            permissions={permissions}
+            validate={validate}
+            defaultEntry={LoanPolicy.defaultLoanPolicy()}
+          />
+        )}
+      </FormattedMessage>
     );
   }
 }
