@@ -14,17 +14,17 @@ class NoticePolicySettings extends React.Component {
   static manifest = Object.freeze({
     noticePolicies: {
       type: 'okapi',
-      records: 'noticePolicies',
+      records: 'patronNoticePolicies',
       path: 'patron-notice-policy-storage/patron-notice-policies',
     },
   });
 
   static propTypes = {
     resources: PropTypes.shape({
-      noticePolicies: PropTypes.object,
+      patronNoticePolicies: PropTypes.object,
     }).isRequired,
     mutator: PropTypes.shape({
-      noticePolicies: PropTypes.shape({
+      patronNoticePolicies: PropTypes.shape({
         POST: PropTypes.func.isRequired,
         PUT: PropTypes.func.isRequired,
         DELETE: PropTypes.func.isRequired,
@@ -44,7 +44,7 @@ class NoticePolicySettings extends React.Component {
       delete: 'ui-circulation.settings.notice-policies',
     };
 
-    const entryList = sortBy((resources.noticePolicies || {}).records, ['name']);
+    const entryList = sortBy((resources.patronNoticePolicies || {}).records, ['name']);
 
     return (
       <EntryManager
@@ -52,7 +52,7 @@ class NoticePolicySettings extends React.Component {
         parentMutator={mutator}
         parentResources={resources}
         entryList={entryList}
-        resourceKey="noticePolicies"
+        resourceKey="patronNoticePolicies"
         detailComponent={NoticePolicyDetail}
         entryFormComponent={NoticePolicyForm}
         paneTitle={<FormattedMessage id="ui-circulation.settings.noticePolicy.paneTitle" />}
