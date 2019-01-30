@@ -187,6 +187,8 @@
   "settings.common.deleteMessage": "{name} will be {removed}.",
   "settings.common.removed": "removed",
   "settings.common.delete": "Delete",
+  "settings.common.edit": "Edit",
+  "settings.common.duplicate": "Duplicate",
 
   "settings.noticePolicy.entryLabel": "Notice Policy",
   "settings.noticePolicy.saveAndClose": "Save",
