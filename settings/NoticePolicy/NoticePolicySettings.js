@@ -12,7 +12,7 @@ import NoticePolicy from '../Models/NoticePolicy';
 
 class NoticePolicySettings extends React.Component {
   static manifest = Object.freeze({
-    noticePolicies: {
+    patronNoticePolicies: {
       type: 'okapi',
       records: 'patronNoticePolicies',
       path: 'patron-notice-policy-storage/patron-notice-policies',
