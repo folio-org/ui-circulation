@@ -30,7 +30,7 @@ class NoticePolicySettings extends React.Component {
         DELETE: PropTypes.func.isRequired,
       }),
     }).isRequired,
-  }
+  };
 
   render() {
     const {
@@ -60,6 +60,7 @@ class NoticePolicySettings extends React.Component {
         nameKey="name"
         permissions={permissions}
         validate={validate}
+        isActionMenuActive
         defaultEntry={NoticePolicy.defaultNoticePolicy()}
       />
     );
