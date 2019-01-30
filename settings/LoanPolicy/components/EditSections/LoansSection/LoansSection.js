@@ -4,68 +4,28 @@ import { FormattedMessage } from 'react-intl';
 import { Field } from 'redux-form';
 
 import {
-  some,
-  get,
-} from 'lodash';
-
-import {
   Checkbox,
   Select,
 } from '@folio/stripes/components';
 
+// eslint-disable-next-line
 import {
   loanProfileTypes,
   intervalPeriods,
   shortTermLoansOptions,
   longTermLoansOptions,
-  CURRENT_DUE_DATE_TIME,
-  CURRENT_DUE_DATE,
-} from '../../../../constants';
+} from '@folio/circulation/constants';
 
-import { Period } from '../../../components';
+// eslint-disable-next-line
+import { Period } from '@folio/circulation/settings/components';
+
+import withLoansPolicyDefaults from './withLoansPolicyDefaults';
 
 class LoansSection extends React.Component {
   static propTypes = {
     policy: PropTypes.object.isRequired,
     schedules: PropTypes.arrayOf(PropTypes.node).isRequired,
     change: PropTypes.func.isRequired,
-  };
-
-  componentDidUpdate() {
-    this.setCorrectDueDateManagementSelectedValue();
-  }
-
-  isValidItemSelected = (options, selectedId) => {
-    return some(options, ({ id }) => id === selectedId);
-  };
-
-  setCorrectDueDateManagementSelectedValue = () => {
-    const {
-      policy,
-      change,
-    } = this.props;
-
-    const isShortTermLoan = policy.isShortTermLoan();
-    const selectedId = get(policy, 'loansPolicy.closedLibraryDueDateManagementId');
-
-    const isValidShortTermLoanValue = this.isValidItemSelected(shortTermLoansOptions, selectedId);
-    const isValidLongTermLoanValue = this.isValidItemSelected(longTermLoansOptions, selectedId);
-
-    if (isShortTermLoan && !isValidShortTermLoanValue) {
-      /* Set default value for short term loan if long term loan item was selected */
-      change('loansPolicy.closedLibraryDueDateManagementId', CURRENT_DUE_DATE_TIME);
-    }
-
-    if (!isShortTermLoan && !isValidLongTermLoanValue) {
-      /* Set default value for long term loan if short term loan item was selected */
-      change('loansPolicy.closedLibraryDueDateManagementId', CURRENT_DUE_DATE);
-    }
-  };
-
-  getDueDateManagementOptions = () => {
-    return this.props.policy.isShortTermLoan()
-      ? shortTermLoansOptions
-      : longTermLoansOptions;
   };
 
   render() {
@@ -79,7 +39,9 @@ class LoansSection extends React.Component {
       ? <FormattedMessage id="ui-circulation.settings.loanPolicy.fDDSlimit" />
       : <FormattedMessage id="ui-circulation.settings.loanPolicy.fDDSRequired" />;
 
-    const dueDateManagementOptions = this.getDueDateManagementOptions();
+    const dueDateManagementOptions = policy.isShortTermLoan()
+      ? shortTermLoansOptions
+      : longTermLoansOptions;
 
     return (
       <React.Fragment>
@@ -94,7 +56,7 @@ class LoansSection extends React.Component {
           type="checkbox"
           normalize={v => !!v}
         />
-        { policy.loanable &&
+        { policy.isLoanable() &&
           <Field
             label={<FormattedMessage id="ui-circulation.settings.loanPolicy.loanProfile" />}
             name="loansPolicy.profileId"
@@ -127,18 +89,13 @@ class LoansSection extends React.Component {
             {schedules}
           </Field>
         }
-        { policy.loanable &&
+        { policy.isLoanable() &&
           <Field
             label={<FormattedMessage id="ui-circulation.settings.loanPolicy.closedDueDateMgmt" />}
             name="loansPolicy.closedLibraryDueDateManagementId"
             component={Select}
-          >
-            {dueDateManagementOptions.map(({ value, label }) => (
-              <option value={value} key={`${label}-${value}`}>
-                {label}
-              </option>
-            ))}
-          </Field>
+            dataOptions={dueDateManagementOptions}
+          />
         }
         { policy.isOpeningTimeOffsetActive() &&
           <Period
@@ -150,7 +107,7 @@ class LoansSection extends React.Component {
             changeFormValue={change}
           />
         }
-        { policy.loanable &&
+        { policy.isLoanable() &&
           <Period
             fieldLabel="ui-circulation.settings.loanPolicy.gracePeriod"
             selectPlaceholder="ui-circulation.settings.loanPolicy.selectInterval"
@@ -166,4 +123,4 @@ class LoansSection extends React.Component {
   }
 }
 
-export default LoansSection;
+export default withLoansPolicyDefaults(LoansSection);

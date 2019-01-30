@@ -10,6 +10,7 @@ import {
 
 // eslint-disable-next-line
 import { intervalPeriods } from '@folio/circulation/constants';
+
 // eslint-disable-next-line
 import { Period } from '@folio/circulation/settings/components';
 

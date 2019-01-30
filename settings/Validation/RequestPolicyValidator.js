@@ -1,4 +1,4 @@
-import FormValidator from './FormValidator';
+import FormValidator from './engine/FormValidator';
 
 export default function (policy) {
   const config = {
