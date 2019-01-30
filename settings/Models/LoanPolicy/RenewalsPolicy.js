@@ -1,6 +1,8 @@
-import utils from './utils';
-import defaultLoanPolicy from './defaults';
 import { Period } from '../common';
+import {
+  defaultLoanPolicy,
+  helpers,
+} from './utils';
 
 export default class RenewalsPolicy {
   constructor(policy = {}) {
@@ -13,10 +15,10 @@ export default class RenewalsPolicy {
   }
 
   get defaultsSelected() {
-    return utils.isDefaultsSelected(this, defaultLoanPolicy.renewalsPolicy);
+    return helpers.isDefaultsSelected(this, defaultLoanPolicy.renewalsPolicy);
   }
 
   get additionalFieldsSelected() {
-    return /* !this.defaultsSelected && */ utils.additionalFieldsSelected(this, defaultLoanPolicy.renewalsPolicy);
+    return helpers.additionalFieldsSelected(this, defaultLoanPolicy.renewalsPolicy);
   }
 }

@@ -20,7 +20,7 @@ import {
 // eslint-disable-next-line
 import { Period } from '@folio/circulation/settings/components';
 
-import withRenewalsPolicyDefaults from './withRenewalsPolicyDefaults';
+import withSectionDefaults from '../withSectionDefaults';
 
 class RenewalsSection extends React.Component {
   static propTypes = {
@@ -138,4 +138,4 @@ class RenewalsSection extends React.Component {
   }
 }
 
-export default withRenewalsPolicyDefaults(RenewalsSection);
+export default withSectionDefaults(RenewalsSection, 'renewalsPolicy');

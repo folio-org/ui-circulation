@@ -19,7 +19,7 @@ const additionalFieldsSelected = (model, defaultState) => {
   }
 
   const fields = reduce(currentState, (res, value, key) => {
-    const hasNewValue = has(defaultState, key) && !isEqual(defaultState[key], value);
+    const hasNewValue = has(defaultState, key) && !isEqual(defaultState[key], value) && !isEmpty(value);
     const hasNewKey = !has(defaultState, key);
     if (hasNewKey || hasNewValue) {
       res.push(key);
