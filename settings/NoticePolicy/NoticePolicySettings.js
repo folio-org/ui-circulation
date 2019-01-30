@@ -15,7 +15,7 @@ class NoticePolicySettings extends React.Component {
     noticePolicies: {
       type: 'okapi',
       records: 'noticePolicies',
-      path: 'notice-policy-storage/notice-policies',
+      path: 'patron-notice-policy-storage/patron-notice-policies',
     },
   });
 
