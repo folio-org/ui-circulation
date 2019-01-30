@@ -13,7 +13,11 @@ const AboutSection = () => (
       <FormattedMessage id="ui-circulation.settings.loanPolicy.about" />
     </h2>
     <Field
-      label={<FormattedMessage id="ui-circulation.settings.loanPolicy.policyName" />}
+      label={(
+        <FormattedMessage id="ui-circulation.settings.loanPolicy.policyName">
+          {message => `${message} *`}
+        </FormattedMessage>
+      )}
       autoFocus
       component={TextField}
       name="name"

@@ -27,7 +27,6 @@ import {
 import { Period } from '@folio/circulation/settings/components';
 // eslint-disable-next-line
 import { defaultLoanPolicy } from '@folio/circulation/settings/Models/LoanPolicy/utils'
-
 import withSectionDefaults from '../withSectionDefaults';
 
 class LoansSection extends React.Component {
@@ -78,7 +77,11 @@ class LoansSection extends React.Component {
 
     const dueDateScheduleFieldLabel = policy.isProfileRolling()
       ? <FormattedMessage id="ui-circulation.settings.loanPolicy.fDDSlimit" />
-      : <FormattedMessage id="ui-circulation.settings.loanPolicy.fDDSRequired" />;
+      : (
+        <FormattedMessage id="ui-circulation.settings.loanPolicy.fDDS">
+          {message => `${message} *`}
+        </FormattedMessage>
+      );
 
     const dueDateManagementOptions = policy.isShortTermLoan()
       ? shortTermLoansOptions
@@ -114,6 +117,7 @@ class LoansSection extends React.Component {
             selectValuePath="loansPolicy.period.intervalId"
             intervalPeriods={intervalPeriods}
             changeFormValue={change}
+            required
           />
         }
         { (policy.isProfileRolling() || policy.isProfileFixed()) &&
@@ -146,6 +150,7 @@ class LoansSection extends React.Component {
             selectValuePath="loansPolicy.openingTimeOffset.intervalId"
             intervalPeriods={intervalPeriods.slice(0, 2).reverse()}
             changeFormValue={change}
+            required
           />
         }
         { policy.isLoanable() &&
