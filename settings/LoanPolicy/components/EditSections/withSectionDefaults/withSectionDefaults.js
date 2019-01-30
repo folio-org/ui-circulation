@@ -2,12 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {
   get,
-  upperFirst,
+  forEach,
 } from 'lodash';
 
-import LoanPolicy from '../../../../Models/LoanPolicy';
-
-function withSectionDefaults(WrappedComponent, sectionName) {
+function withSectionDefaults({
+  component: WrappedComponent,
+  checkMethodName,
+  sectionsDefaults = {},
+  dropdownDefaults = {},
+}) {
   return class extends React.Component {
     static propTypes = {
       policy: PropTypes.object.isRequired,
@@ -16,6 +19,7 @@ function withSectionDefaults(WrappedComponent, sectionName) {
 
     componentDidUpdate() {
       this.setDefaultValues();
+      this.setEmptyDropdownDefaults();
     }
 
     setDefaultValues = () => {
@@ -24,12 +28,26 @@ function withSectionDefaults(WrappedComponent, sectionName) {
         change,
       } = this.props;
 
-      if (policy[`shouldInit${upperFirst(sectionName)}`]()) {
-        const defaultPolicy = LoanPolicy.defaultLoanPolicy();
-        const sectionDefaults = get(defaultPolicy, sectionName, {});
-
-        change(sectionName, sectionDefaults);
+      if (policy[checkMethodName]()) {
+        forEach(sectionsDefaults, (value, key) => {
+          change(key, value);
+        });
       }
+    };
+
+    setEmptyDropdownDefaults = () => {
+      const {
+        policy,
+        change,
+      } = this.props;
+
+      forEach(dropdownDefaults, (value, key) => {
+        const field = get(policy, key);
+
+        if (!field.intervalId) {
+          change(key, value);
+        }
+      });
     };
 
     render() {

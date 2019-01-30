@@ -2,6 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { Field } from 'redux-form';
+import {
+  get,
+  some,
+} from 'lodash';
 
 import {
   Checkbox,
@@ -10,22 +14,59 @@ import {
 
 // eslint-disable-next-line
 import {
+  intervalIdsMap,
   loanProfileTypes,
   intervalPeriods,
   shortTermLoansOptions,
   longTermLoansOptions,
+  CURRENT_DUE_DATE_TIME,
+  CURRENT_DUE_DATE,
 } from '@folio/circulation/constants';
 
 // eslint-disable-next-line
 import { Period } from '@folio/circulation/settings/components';
+// eslint-disable-next-line
+import { defaultLoanPolicy } from '@folio/circulation/settings/Models/LoanPolicy/utils'
 
-import withLoansPolicyDefaults from './withLoansPolicyDefaults';
+import withSectionDefaults from '../withSectionDefaults';
 
 class LoansSection extends React.Component {
   static propTypes = {
     policy: PropTypes.object.isRequired,
     schedules: PropTypes.arrayOf(PropTypes.node).isRequired,
     change: PropTypes.func.isRequired,
+  };
+
+  componentDidUpdate() {
+    this.setDueDateManagementSelectedId();
+  }
+
+  isValidItemSelected = (options, selectedId) => {
+    return some(options, ({ id }) => id === selectedId);
+  };
+
+  setDueDateManagementSelectedId = () => {
+    const {
+      policy,
+      change,
+    } = this.props;
+
+    const pathToField = 'loansPolicy.closedLibraryDueDateManagementId';
+    const isShortTermLoan = policy.isShortTermLoan();
+    const selectedId = get(policy, pathToField);
+
+    const isValidShortTermLoanValue = this.isValidItemSelected(shortTermLoansOptions, selectedId);
+    const isValidLongTermLoanValue = this.isValidItemSelected(longTermLoansOptions, selectedId);
+
+    if (isShortTermLoan && !isValidShortTermLoanValue) {
+      /* Set default value for short term loan if long term loan item was selected */
+      change(pathToField, CURRENT_DUE_DATE_TIME);
+    }
+
+    if (!isShortTermLoan && !isValidLongTermLoanValue) {
+      /* Set default value for long term loan if short term loan item was selected */
+      change(pathToField, CURRENT_DUE_DATE);
+    }
   };
 
   render() {
@@ -123,4 +164,18 @@ class LoansSection extends React.Component {
   }
 }
 
-export default withLoansPolicyDefaults(LoansSection);
+export default withSectionDefaults({
+  component: LoansSection,
+  checkMethodName: 'shouldInitLoansPolicy',
+  sectionsDefaults: {
+    'loansPolicy': defaultLoanPolicy.loansPolicy,
+    'renewable': true,
+    'renewalsPolicy': defaultLoanPolicy.renewalsPolicy,
+    'requestManagement': defaultLoanPolicy.requestManagement,
+  },
+  dropdownDefaults: {
+    'loansPolicy.period': { intervalId: intervalIdsMap.DAYS },
+    'loansPolicy.openingTimeOffset': { intervalId: intervalIdsMap.HOURS },
+    'loansPolicy.gracePeriod': { intervalId: intervalIdsMap.HOURS },
+  },
+});
