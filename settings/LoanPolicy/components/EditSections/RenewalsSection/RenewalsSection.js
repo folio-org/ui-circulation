@@ -11,12 +11,16 @@ import {
   Row,
 } from '@folio/stripes/components';
 
+// eslint-disable-next-line
 import {
   intervalPeriods,
   renewFromOptions,
-} from '../../../../constants';
+} from '@folio/circulation/constants';
 
-import { Period } from '../../../components';
+// eslint-disable-next-line
+import { Period } from '@folio/circulation/settings/components';
+
+import withRenewalsPolicyDefaults from './withRenewalsPolicyDefaults';
 
 class RenewalsSection extends React.Component {
   static propTypes = {
@@ -32,7 +36,7 @@ class RenewalsSection extends React.Component {
       change,
     } = this.props;
 
-    if (!policy.loanable) {
+    if (!policy.isLoanable()) {
       return null;
     }
 
@@ -53,7 +57,7 @@ class RenewalsSection extends React.Component {
           id="renewable"
           normalize={v => !!v}
         />
-        { policy.renewable &&
+        { policy.isRenewable() &&
           <Field
             label={<FormattedMessage id="ui-circulation.settings.loanPolicy.unlimitedRenewals" />}
             name="renewalsPolicy.unlimited"
@@ -63,7 +67,7 @@ class RenewalsSection extends React.Component {
             normalize={v => !!v}
           />
         }
-        { policy.renewable && policy.renewalsPolicy.unlimited === false &&
+        { policy.isRenewable() && !policy.isUnlimitedRenewals() &&
           <React.Fragment>
             <p>
               <FormattedMessage id="ui-circulation.settings.loanPolicy.numRenewalsAllowed" />
@@ -82,7 +86,7 @@ class RenewalsSection extends React.Component {
             </Row>
           </React.Fragment>
         }
-        { policy.renewable && policy.isProfileRolling() &&
+        { policy.isRenewable() && policy.isProfileRolling() &&
           <Field
             label={<FormattedMessage id="ui-circulation.settings.loanPolicy.renewFrom" />}
             name="renewalsPolicy.renewFromId"
@@ -91,7 +95,7 @@ class RenewalsSection extends React.Component {
             dataOptions={renewFromOptions}
           />
         }
-        { policy.renewable &&
+        { policy.isRenewable() &&
           <Field
             label={<FormattedMessage id="ui-circulation.settings.loanPolicy.renewalPeriodDifferent" />}
             name="renewalsPolicy.differentPeriod"
@@ -101,7 +105,7 @@ class RenewalsSection extends React.Component {
             normalize={v => !!v}
           />
         }
-        { policy.renewable && policy.renewalsPolicy.differentPeriod && policy.isProfileRolling() &&
+        { policy.isRenewable() && policy.isDifferentPeriod() && policy.isProfileRolling() &&
           <React.Fragment>
             <br />
             <Period
@@ -114,8 +118,8 @@ class RenewalsSection extends React.Component {
             />
           </React.Fragment>
         }
-        { policy.renewable && policy.renewalsPolicy.differentPeriod &&
-          (policy.isProfileRolling() || policy.isProfileFixed()) &&
+        { policy.isRenewable() && policy.isDifferentPeriod()
+          && (policy.isProfileRolling() || policy.isProfileFixed()) &&
           <Field
             label={altRenewalScheduleLabel}
             name="renewalsPolicy.alternateFixedDueDateScheduleId"
@@ -134,4 +138,4 @@ class RenewalsSection extends React.Component {
   }
 }
 
-export default RenewalsSection;
+export default withRenewalsPolicyDefaults(RenewalsSection);

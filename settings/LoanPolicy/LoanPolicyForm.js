@@ -7,6 +7,7 @@ import { sortBy } from 'lodash';
 
 import stripesForm from '@folio/stripes/form';
 import { stripesShape } from '@folio/stripes/core';
+
 import {
   Accordion,
   ExpandAllButton,
@@ -21,11 +22,14 @@ import { normalize } from './utils/normalize';
 import {
   HeaderPane,
   DeleteEntry,
+} from './components';
+
+import {
   AboutSection,
   LoansSection,
   RenewalsSection,
   RequestManagementSection,
-} from './components';
+} from './components/EditSections';
 
 import { Metadata } from '../components';
 
@@ -171,7 +175,7 @@ class LoanPolicyForm extends React.Component {
                   isOpen={confirmDelete}
                   policyName={policy.name}
                   initialValues={initialValues}
-                  perm={permissions}
+                  perm={permissions.delete}
                   deleteEntityKey="ui-circulation.settings.loanPolicy.deleteLoanPolicy"
                   onRemoveStatusChange={this.changeDeleteState}
                   onRemove={onRemove}
@@ -186,13 +190,13 @@ class LoanPolicyForm extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  policy: new LoanPolicy(getFormValues('entryForm')(state)),
+  policy: new LoanPolicy(getFormValues('loanPolicyForm')(state)),
 });
 
 const connectedLoanPolicyForm = connect(mapStateToProps)(LoanPolicyForm);
 
 export default stripesForm({
-  form: 'entryForm',
+  form: 'loanPolicyForm',
   navigationCheck: true,
   enableReinitialize: false,
 })(connectedLoanPolicyForm);

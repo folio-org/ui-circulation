@@ -7,6 +7,7 @@ import {
 } from 'lodash';
 
 import LoanPolicy from '../../Models/LoanPolicy';
+import { Period } from '../../Models/common';
 import { loanProfileMap } from '../../../constants';
 
 const checkInvalidPeriods = (policy) => {
@@ -28,7 +29,7 @@ const checkInvalidPeriods = (policy) => {
 
   forEach(periodsList, (path) => {
     const period = get(loanPolicy, path);
-    if (!LoanPolicy.isPeriodValid(period)) {
+    if (!Period.isPeriodValid(period)) {
       unset(loanPolicy, path);
     }
   });
@@ -48,8 +49,9 @@ const checkFixedProfile = (policy) => {
 
 const checkUnlimitedRenewals = (policy) => {
   const loanPolicy = cloneDeep(policy);
+  const isUnlimited = get(loanPolicy, 'renewalsPolicy.unlimited');
 
-  if (loanPolicy.renewalsPolicy.unlimited) {
+  if (isUnlimited) {
     unset(loanPolicy, 'renewalsPolicy.numberAllowed');
   }
 
@@ -58,8 +60,9 @@ const checkUnlimitedRenewals = (policy) => {
 
 const checkDifferentRenewalPeriod = (policy) => {
   const loanPolicy = cloneDeep(policy);
+  const isDifferentPeriod = get(loanPolicy, 'renewalsPolicy.differentPeriod');
 
-  if (!loanPolicy.renewalsPolicy.differentPeriod) {
+  if (!isDifferentPeriod) {
     unset(loanPolicy, 'renewalsPolicy.alternateFixedDueDateScheduleId');
     unset(loanPolicy, 'renewalsPolicy.period');
   }
@@ -80,8 +83,10 @@ const checkOpeningTimeOffset = (policy) => {
 
 const checkLoanable = (policy) => {
   const notLoanablePolicy = {
+    id: policy.id,
     name: policy.name,
     description: policy.description,
+    metadata: policy.metadata,
     loanable: false,
     renewable: false,
   };
@@ -129,7 +134,6 @@ const filter = (entity, ...callbacks) => {
 };
 
 export const normalize = (entity) => {
-  // NOTE: the order is important
   const callbacks = [
     checkFixedProfile,
     checkOpeningTimeOffset,
