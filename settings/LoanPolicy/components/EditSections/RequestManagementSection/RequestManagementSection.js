@@ -9,10 +9,14 @@ import {
 } from '@folio/stripes/components';
 
 // eslint-disable-next-line
-import { intervalPeriods } from '@folio/circulation/constants';
-
+import {
+  intervalIdsMap,
+  intervalPeriods,
+} from '@folio/circulation/constants';
 // eslint-disable-next-line
 import { Period } from '@folio/circulation/settings/components';
+// eslint-disable-next-line
+import { defaultLoanPolicy } from '@folio/circulation/settings/Models/LoanPolicy/utils'
 
 import withSectionDefaults from '../withSectionDefaults';
 
@@ -137,4 +141,16 @@ class RequestManagementSection extends React.Component {
   }
 }
 
-export default withSectionDefaults(RequestManagementSection, 'requestManagement');
+export default withSectionDefaults({
+  component: RequestManagementSection,
+  checkMethodName: 'shouldInitRequestManagement',
+  sectionsDefaults: { 'requestManagement': defaultLoanPolicy.requestManagement },
+  dropdownDefaults: {
+    'requestManagement.recalls.recallReturnInterval': { intervalId: intervalIdsMap.DAYS },
+    'requestManagement.recalls.minLoanPeriod': { intervalId: intervalIdsMap.DAYS },
+    'requestManagement.holds.alternateCheckoutLoanPeriod': { intervalId: intervalIdsMap.DAYS },
+    'requestManagement.holds.alternateRenewalLoanPeriod': { intervalId: intervalIdsMap.DAYS },
+    'requestManagement.pages.alternateCheckoutLoanPeriod': { intervalId: intervalIdsMap.DAYS },
+    'requestManagement.pages.alternateRenewalLoanPeriod': { intervalId: intervalIdsMap.DAYS },
+  },
+});

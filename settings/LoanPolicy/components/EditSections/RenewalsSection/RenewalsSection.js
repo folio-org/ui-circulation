@@ -14,11 +14,13 @@ import {
 // eslint-disable-next-line
 import {
   intervalPeriods,
+  intervalIdsMap,
   renewFromOptions,
 } from '@folio/circulation/constants';
-
 // eslint-disable-next-line
 import { Period } from '@folio/circulation/settings/components';
+// eslint-disable-next-line
+import { defaultLoanPolicy } from '@folio/circulation/settings/Models/LoanPolicy/utils'
 
 import withSectionDefaults from '../withSectionDefaults';
 
@@ -138,4 +140,9 @@ class RenewalsSection extends React.Component {
   }
 }
 
-export default withSectionDefaults(RenewalsSection, 'renewalsPolicy');
+export default withSectionDefaults({
+  component: RenewalsSection,
+  checkMethodName: 'shouldInitRenewalsPolicy',
+  sectionsDefaults: { 'renewalsPolicy': defaultLoanPolicy.renewalsPolicy },
+  dropdownDefaults: { 'renewalsPolicy.period': { intervalId: intervalIdsMap.DAYS } }
+});
