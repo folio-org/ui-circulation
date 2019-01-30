@@ -14,6 +14,8 @@ import { intervalPeriods } from '@folio/circulation/constants';
 // eslint-disable-next-line
 import { Period } from '@folio/circulation/settings/components';
 
+import withSectionDefaults from '../withSectionDefaults';
+
 class RequestManagementSection extends React.Component {
   static propTypes = {
     policy: PropTypes.object.isRequired,
@@ -135,4 +137,4 @@ class RequestManagementSection extends React.Component {
   }
 }
 
-export default RequestManagementSection;
+export default withSectionDefaults(RequestManagementSection, 'requestManagement');

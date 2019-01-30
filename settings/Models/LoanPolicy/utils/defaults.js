@@ -3,7 +3,7 @@ import {
   loanProfileMap,
   renewFromIds,
   END_OF_THE_NEXT_OPEN_DAY,
-} from '../../../constants';
+} from '../../../../constants';
 
 export default {
   loanable: true,
@@ -16,6 +16,8 @@ export default {
     gracePeriod: { intervalId: intervalIdsMap.HOURS }
   },
   renewalsPolicy: {
+    unlimited: false,
+    differentPeriod: false,
     renewFromId: renewFromIds.SYSTEM_DATE,
     period: { intervalId: intervalIdsMap.DAYS }
   },

@@ -1,4 +1,4 @@
-import { Metadata } from './common';
+import { Metadata } from '../common';
 
 export default class RequestPolicy {
   static defaultPolicy() {

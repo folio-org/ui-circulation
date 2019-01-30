@@ -11,11 +11,10 @@ import {
   BEGINNING_OF_THE_NEXT_OPEN_SERVICE_POINT_HOURS,
 } from '../../../constants';
 
-import defaultLoanPolicy from './defaults';
-
 import RenewalsPolicy from './RenewalsPolicy';
 import RequestManagement from './RequestManagement';
 import LoansPolicy from './LoansPolicy';
+import { defaultLoanPolicy } from './utils';
 
 export default class LoanPolicy {
   static defaultLoanPolicy() {
@@ -93,11 +92,19 @@ export default class LoanPolicy {
     return this.isProfileRolling() && this.renewable && this.renewalsPolicy.differentPeriod;
   }
 
-  shouldUpdateLoansPolicies() {
-    return !this.isLoanable() && !this.loansPolicy.defaultsSelected; // && !this.loansPolicy.additionalFieldsSelected;
+  shouldInitLoansPolicy() {
+    const invalidState = !this.loansPolicy.defaultsSelected && !this.loansPolicy.additionalFieldsSelected;
+
+    return !this.isLoanable() && invalidState;
   }
 
-  shouldInitRenewalsPolicies() {
-    return !this.isRenewable() && !this.renewalsPolicy.defaultsSelected && !this.renewalsPolicy.additionalFieldsSelected;
+  shouldInitRenewalsPolicy() {
+    const invalidState = !this.renewalsPolicy.defaultsSelected && !this.renewalsPolicy.additionalFieldsSelected;
+
+    return !this.isRenewable() && invalidState;
+  }
+
+  shouldInitRequestManagement() {
+    return !this.requestManagement.defaultsSelected && !this.requestManagement.additionalFieldsSelected;
   }
 }

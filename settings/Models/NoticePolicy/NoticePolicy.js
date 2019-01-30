@@ -1,7 +1,7 @@
 import {
   Metadata,
   Period,
-} from './common';
+} from '../common';
 
 class NoticeSendOptions {
   constructor(options) {

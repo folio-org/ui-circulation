@@ -7,7 +7,7 @@ import { EntryManager } from '@folio/stripes/smart-components';
 
 import RequestPolicyDetail from './RequestPolicyDetail';
 import RequestPolicyForm from './RequestPolicyForm';
-import validate from '../Validation/RequestPolicyValidator';
+import { RequestPolicy as validateRequestPolicy } from '../Validation';
 import RequestPolicy from '../Models/RequestPolicy';
 
 class RequestPolicySettings extends React.Component {
@@ -63,7 +63,7 @@ class RequestPolicySettings extends React.Component {
         entryLabel={<FormattedMessage id="ui-circulation.settings.requestPolicy.entryLabel" />}
         nameKey="name"
         permissions={permissions}
-        validate={validate}
+        validate={validateRequestPolicy}
         defaultEntry={RequestPolicy.defaultPolicy()}
       />
     );

@@ -38,7 +38,7 @@ function withLoansPolicyDefaults(WrappedComponent) {
         change,
       } = this.props;
 
-      if (policy.shouldUpdateLoansPolicies()) {
+      if (policy.shouldInitLoansPolicy()) {
         const {
           loansPolicy,
           renewalsPolicy,

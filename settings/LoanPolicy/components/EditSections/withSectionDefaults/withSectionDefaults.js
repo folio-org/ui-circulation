@@ -1,10 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {
+  get,
+  upperFirst,
+} from 'lodash';
 
-// eslint-disable-next-line
-import LoanPolicy from '@folio/circulation/settings/Models/LoanPolicy';
+import LoanPolicy from '../../../../Models/LoanPolicy';
 
-function withRenewalsPolicyDefaults(WrappedComponent) {
+function withSectionDefaults(WrappedComponent, sectionName) {
   return class extends React.Component {
     static propTypes = {
       policy: PropTypes.object.isRequired,
@@ -21,10 +24,11 @@ function withRenewalsPolicyDefaults(WrappedComponent) {
         change,
       } = this.props;
 
-      if (policy.shouldInitRenewalsPolicies()) {
-        const { renewalsPolicy } = LoanPolicy.defaultLoanPolicy();
+      if (policy[`shouldInit${upperFirst(sectionName)}`]()) {
+        const defaultPolicy = LoanPolicy.defaultLoanPolicy();
+        const sectionDefaults = get(defaultPolicy, sectionName, {});
 
-        change('renewalsPolicy', renewalsPolicy);
+        change(sectionName, sectionDefaults);
       }
     };
 
@@ -34,4 +38,4 @@ function withRenewalsPolicyDefaults(WrappedComponent) {
   };
 }
 
-export default withRenewalsPolicyDefaults;
+export default withSectionDefaults;
