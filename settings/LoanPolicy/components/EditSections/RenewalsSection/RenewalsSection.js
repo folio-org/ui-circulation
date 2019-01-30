@@ -7,8 +7,6 @@ import {
   Checkbox,
   Select,
   TextField,
-  Col,
-  Row,
 } from '@folio/stripes/components';
 
 // eslint-disable-next-line
@@ -71,31 +69,32 @@ class RenewalsSection extends React.Component {
         }
         { policy.isRenewable() && !policy.isUnlimitedRenewals() &&
           <React.Fragment>
-            <p>
-              <FormattedMessage id="ui-circulation.settings.loanPolicy.numRenewalsAllowed" />
-            </p>
-            <Row>
-              <Col xs={2}>
-                <Field
-                  label=""
-                  name="renewalsPolicy.numberAllowed"
-                  id="input_allowed_renewals"
-                  component={TextField}
-                  type="number"
-                  min={0}
-                />
-              </Col>
-            </Row>
+            <br />
+            <Field
+              label={(
+                <FormattedMessage id="ui-circulation.settings.loanPolicy.numRenewalsAllowed">
+                  {message => `${message} *`}
+                </FormattedMessage>
+              )}
+              name="renewalsPolicy.numberAllowed"
+              id="input_allowed_renewals"
+              component={TextField}
+              type="number"
+              min={0}
+            />
           </React.Fragment>
         }
         { policy.isRenewable() && policy.isProfileRolling() &&
-          <Field
-            label={<FormattedMessage id="ui-circulation.settings.loanPolicy.renewFrom" />}
-            name="renewalsPolicy.renewFromId"
-            id="select_renew_from"
-            component={Select}
-            dataOptions={renewFromOptions}
-          />
+          <React.Fragment>
+            <br />
+            <Field
+              label={<FormattedMessage id="ui-circulation.settings.loanPolicy.renewFrom" />}
+              name="renewalsPolicy.renewFromId"
+              id="select_renew_from"
+              component={Select}
+              dataOptions={renewFromOptions}
+            />
+          </React.Fragment>
         }
         { policy.isRenewable() &&
           <Field
@@ -117,6 +116,7 @@ class RenewalsSection extends React.Component {
               selectValuePath="renewalsPolicy.period.intervalId"
               intervalPeriods={intervalPeriods}
               changeFormValue={change}
+              required
             />
           </React.Fragment>
         }

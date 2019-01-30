@@ -22,6 +22,11 @@ class Period extends React.Component {
     selectValuePath: PropTypes.string.isRequired,
     intervalPeriods: PropTypes.arrayOf(PropTypes.object).isRequired,
     changeFormValue: PropTypes.func.isRequired,
+    required: PropTypes.bool,
+  };
+
+  static defaultProps = {
+    required: false,
   };
 
   onInputClear = () => {
@@ -60,13 +65,16 @@ class Period extends React.Component {
       selectPlaceholder,
       inputValuePath,
       selectValuePath,
+      required
     } = this.props;
 
     return (
       <React.Fragment>
         <Row className={css.label}>
           <Col xs={12}>
-            <FormattedMessage id={fieldLabel} />
+            <FormattedMessage id={fieldLabel}>
+              {message => (required ? `${message} *` : message)}
+            </FormattedMessage>
           </Col>
         </Row>
         <Row>
