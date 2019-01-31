@@ -12,7 +12,9 @@ import {
   Select,
 } from '@folio/stripes/components';
 
-// eslint-disable-next-line
+import { Period } from '../../../../components';
+import { defaultLoanPolicy } from '../../../../Models/LoanPolicy/utils';
+import withSectionDefaults from '../withSectionDefaults';
 import {
   intervalIdsMap,
   loanProfileTypes,
@@ -21,13 +23,7 @@ import {
   longTermLoansOptions,
   CURRENT_DUE_DATE_TIME,
   CURRENT_DUE_DATE,
-} from '@folio/circulation/constants';
-
-// eslint-disable-next-line
-import { Period } from '@folio/circulation/settings/components';
-// eslint-disable-next-line
-import { defaultLoanPolicy } from '@folio/circulation/settings/Models/LoanPolicy/utils'
-import withSectionDefaults from '../withSectionDefaults';
+} from '../../../../../constants';
 
 class LoansSection extends React.Component {
   static propTypes = {
