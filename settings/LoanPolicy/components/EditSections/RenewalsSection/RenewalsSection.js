@@ -9,18 +9,14 @@ import {
   TextField,
 } from '@folio/stripes/components';
 
-// eslint-disable-next-line
+import { Period } from '../../../../components';
+import { defaultLoanPolicy } from '../../../../Models/LoanPolicy/utils';
+import withSectionDefaults from '../withSectionDefaults';
 import {
   intervalPeriods,
   intervalIdsMap,
   renewFromOptions,
-} from '@folio/circulation/constants';
-// eslint-disable-next-line
-import { Period } from '@folio/circulation/settings/components';
-// eslint-disable-next-line
-import { defaultLoanPolicy } from '@folio/circulation/settings/Models/LoanPolicy/utils'
-
-import withSectionDefaults from '../withSectionDefaults';
+} from '../../../../../constants';
 
 class RenewalsSection extends React.Component {
   static propTypes = {
