@@ -60,10 +60,10 @@ class RequestManagementSection extends React.Component {
             changeFormValue={change}
           />
           <Period
-            fieldLabel="ui-circulation.settings.requestManagement.minLoanPeriod"
+            fieldLabel="ui-circulation.settings.requestManagement.minimumGuaranteedLoanPeriod"
             selectPlaceholder="ui-circulation.settings.loanPolicy.selectInterval"
-            inputValuePath="requestManagement.recalls.minLoanPeriod.duration"
-            selectValuePath="requestManagement.recalls.minLoanPeriod.intervalId"
+            inputValuePath="requestManagement.recalls.minimumGuaranteedLoanPeriod.duration"
+            selectValuePath="requestManagement.recalls.minimumGuaranteedLoanPeriod.intervalId"
             intervalPeriods={intervalPeriods}
             changeFormValue={change}
           />
@@ -143,7 +143,7 @@ export default withSectionDefaults({
   sectionsDefaults: { 'requestManagement': defaultLoanPolicy.requestManagement },
   dropdownDefaults: {
     'requestManagement.recalls.recallReturnInterval': { intervalId: intervalIdsMap.DAYS },
-    'requestManagement.recalls.minLoanPeriod': { intervalId: intervalIdsMap.DAYS },
+    'requestManagement.recalls.minimumGuaranteedLoanPeriod': { intervalId: intervalIdsMap.DAYS },
     'requestManagement.holds.alternateCheckoutLoanPeriod': { intervalId: intervalIdsMap.DAYS },
     'requestManagement.holds.alternateRenewalLoanPeriod': { intervalId: intervalIdsMap.DAYS },
     'requestManagement.pages.alternateCheckoutLoanPeriod': { intervalId: intervalIdsMap.DAYS },

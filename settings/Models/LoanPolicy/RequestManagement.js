@@ -7,7 +7,7 @@ import {
 class Recalls {
   constructor(recall = {}) {
     this.recallReturnInterval = new Period(recall.recallReturnInterval);
-    this.minLoanPeriod = new Period(recall.minLoanPeriod);
+    this.minimumGuaranteedLoanPeriod = new Period(recall.minimumGuaranteedLoanPeriod);
   }
 }
 

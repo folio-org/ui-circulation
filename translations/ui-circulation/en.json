@@ -173,7 +173,7 @@
   "settings.requestManagement.requestManagement": "Request Management",
   "settings.requestManagement.recalls": "Recalls",
   "settings.requestManagement.recallReturnInterval": "Recall return interval",
-  "settings.requestManagement.minLoanPeriod": "Minimum guaranteed loan period for recalled items",
+  "settings.requestManagement.minimumGuaranteedLoanPeriod": "Minimum guaranteed loan period for recalled items",
   "settings.requestManagement.alternateGracePeriod": "Alternate grace period for recalled items",
   "settings.requestManagement.alternateCheckoutLoanPeriod": "Alternate loan period at checkout for items with an active, pending hold request",
   "settings.requestManagement.renewItemsWithRequest": "Allow renewal of items with an active, pending hold request",

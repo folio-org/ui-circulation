@@ -4,9 +4,9 @@ const recalls = (loanPolicy) => {
       rules: ['isPositiveNumber'],
       shouldValidate: loanPolicy.hasValue('requestManagement.recalls.recallReturnInterval.duration'),
     },
-    'requestManagement.recalls.minLoanPeriod.duration': {
+    'requestManagement.recalls.minimumGuaranteedLoanPeriod.duration': {
       rules: ['isIntegerGreaterThanZero'],
-      shouldValidate: loanPolicy.hasValue('requestManagement.recalls.minLoanPeriod.duration'),
+      shouldValidate: loanPolicy.hasValue('requestManagement.recalls.minimumGuaranteedLoanPeriod.duration'),
     },
   };
 };

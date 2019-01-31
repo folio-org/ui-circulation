@@ -24,7 +24,7 @@ export default {
   requestManagement: {
     recalls: {
       recallReturnInterval: { intervalId: intervalIdsMap.DAYS },
-      minLoanPeriod: { intervalId: intervalIdsMap.DAYS },
+      minimumGuaranteedLoanPeriod: { intervalId: intervalIdsMap.DAYS },
     },
     holds: {
       alternateCheckoutLoanPeriod: { intervalId: intervalIdsMap.DAYS },
