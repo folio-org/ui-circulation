@@ -1,5 +1,9 @@
 # Change history for ui-circulation
 
+## 1.6.0 (IN PROGRESS)
+
+* React deps should be as lenient as possible.
+
 ## 1.5.0 (https://github.com/folio-org/ui-circulation/tree/v1.5.0) (2019-01-25)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v1.4.0...v1.5.0)
 

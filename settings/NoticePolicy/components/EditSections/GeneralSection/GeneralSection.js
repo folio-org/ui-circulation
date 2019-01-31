@@ -10,16 +10,15 @@ import {
   Accordion,
 } from '@folio/stripes/components';
 
-// eslint-disable-next-line
-import { Metadata } from '@folio/circulation/settings/components';
+import { Metadata } from '../../../../components';
 
 import styles from './GeneralSection.css';
 
 class GeneralSection extends React.Component {
   static propTypes = {
     isOpen: PropTypes.bool.isRequired,
-    onToggle: PropTypes.func.isRequired,
     metadata: PropTypes.object.isRequired,
+    onToggle: PropTypes.func.isRequired,
     connect: PropTypes.func.isRequired,
   };
 
@@ -45,7 +44,11 @@ class GeneralSection extends React.Component {
         <Field
           id="notice_policy_name"
           name="name"
-          label={<FormattedMessage id="ui-circulation.settings.noticePolicy.policyName" />}
+          label={(
+            <FormattedMessage id="ui-circulation.settings.noticePolicy.policyName">
+              {message => `${message} *`}
+            </FormattedMessage>
+          )}
           component={TextField}
         />
         <Field
