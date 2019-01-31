@@ -198,5 +198,8 @@
     "settings.requestPolicy.policyDescription": "请求政策描述",
     "settings.requestPolicy.policyTypes": "允许的请求类型",
     "settings.requestPolicy.saveAndClose": "保存",
-    "settings.requestPolicy.createEntryLabel": "新的请求政策"
+    "settings.requestPolicy.createEntryLabel": "新的请求政策",
+    "settings.common.edit": "Edit",
+    "settings.common.duplicate": "Duplicate",
+    "settings.requestManagement.minimumGuaranteedLoanPeriod": "Minimum guaranteed loan period for recalled items"
 }
