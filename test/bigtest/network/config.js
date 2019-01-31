@@ -226,6 +226,114 @@ export default function config() {
     'totalRecords' : 2
   });
 
+  this.get('/notice-policy-storage/notice-policies', {
+    'noticePolicies': [
+      {
+        id: 'test-id',
+        name: 'test-name', // required
+        description: 'test-description', // required
+        active: true, // required
+        metadata: {
+          createdByUserId: '2aec72a0-33b2-5fd2-a502-f4b8b8efb5fa',
+          createdDate: '2019-01-30T01:58:24.158+0000',
+          updatedByUserId: '2aec72a0-33b2-5fd2-a502-f4b8b8efb5fa',
+          updatedDate: '2019-01-30T01:58:24.158+0000',
+          type: [
+            'metadata-type-1',
+            'metadata-type-2',
+          ],
+          description: 'metadata-description',
+          items: {
+            name: 'metadata-items-name', // required
+            templateId: 'metadata-items-templateId', // required
+            templateName: 'metadata-items-templateName', // required
+            format: 'metadata-items-format', // required
+            frequency: 'metadata-items-frequency', // required
+            realTime: true, // required
+            sendOptions: {
+              sendHow: 'metadata-items-sendOptions-sendHow', // required
+              sendWhen: 'Available', // enum: ["Available", "Hold Expiration", "Cancellation"], required
+              sendBy: {
+                duration: 20, // required
+                intervalId: 'Weeks', // required
+              },
+              sendEvery: {
+                duration: 20, // required
+                intervalId: 'Weeks', // required
+              },
+            },
+          },
+        },
+      },
+      {
+        id: 'test-id-test-2',
+        name: 'test-name-test-2',
+        description: 'test-description-test-2',
+        active: false,
+        metadata: {
+          createdByUserId: '2aec72a0-33b2-5fd2-a502-f4b8b8efb5fa',
+          createdDate: '2019-01-30T01:58:24.158+0000',
+          updatedByUserId: '2aec72a0-33b2-5fd2-a502-f4b8b8efb5fa',
+          updatedDate: '2019-01-30T01:58:24.158+0000',
+          type: [
+            'metadata-type-1-test-2',
+            'metadata-type-2-test-2',
+          ],
+          description: 'metadata-description-test-2',
+          items: {
+            name: 'metadata-items-name-test-2',
+            templateId: 'metadata-items-templateId-test-2',
+            templateName: 'metadata-items-templateName-test-2',
+            format: 'metadata-items-format-test-2',
+            frequency: 'metadata-items-frequency-test-2',
+            realTime: false,
+            sendOptions: {
+              sendHow: 'metadata-items-sendOptions-sendHow-test-2',
+              sendWhen: 'Available',
+              sendBy: {
+                duration: 20,
+                intervalId: 'Weeks',
+              },
+              sendEvery: {
+                duration: 20,
+                intervalId: 'Weeks',
+              },
+            },
+          },
+        },
+      },
+    ],
+    'totalRecords' : 2,
+  });
+
+  this.get('/fixed-due-date-schedule-storage/fixed-due-date-schedules', {
+    fixedDueDateSchedules: [],
+    totalRecords: 0,
+  });
+
+  this.get('/users', {
+    users: [
+      {
+        active: true,
+        createdDate: '2019-01-30T01:54:56.642+0000',
+        id: '2aec72a0-33b2-5fd2-a502-f4b8b8efb5fa',
+        personal: {
+          lastName: 'ADMINISTRATOR',
+          firstName: 'DIKU',
+          email: 'admin@diku.example.org',
+          addresses: []
+        },
+        addresses: [],
+        email: 'admin@diku.example.org',
+        firstName: 'DIKU',
+        lastName: 'ADMINISTRATOR',
+        proxyFor: [],
+        updatedDate: '2019-01-30T01:54:56.642+0000',
+        username: 'diku_admin',
+      }
+    ]
+  });
+
   this.get('/request-policy-storage/request-policies', function ({ requestPolicies }) {
     return this.serializerOrRegistry.serialize(requestPolicies.all());
   });

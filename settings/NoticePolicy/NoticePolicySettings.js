@@ -30,7 +30,7 @@ class NoticePolicySettings extends React.Component {
         DELETE: PropTypes.func.isRequired,
       }),
     }).isRequired,
-  }
+  };
 
   render() {
     const {
@@ -59,6 +59,7 @@ class NoticePolicySettings extends React.Component {
         entryLabel={<FormattedMessage id="ui-circulation.settings.noticePolicy.entryLabel" />}
         nameKey="name"
         permissions={permissions}
+        enableDetailsActionMenu
         validate={validateNoticePolicy}
         defaultEntry={NoticePolicy.defaultNoticePolicy()}
       />

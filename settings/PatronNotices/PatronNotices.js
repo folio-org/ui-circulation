@@ -67,8 +67,7 @@ class PatronNotices extends React.Component {
           delete: 'settings.organization.enabled',
         }}
         uniquenessValidator={this.props.mutator}
-        editable
-        clonable
+        enableDetailsActionMenu
         editElement="both"
       />
     );

@@ -69,7 +69,7 @@ class NoticePolicyForm extends React.Component {
 
   changeDeleteState = (showDeleteConfirmation) => {
     this.setState({ showDeleteConfirmation });
-  }
+  };
 
   render() {
     const {
@@ -103,44 +103,42 @@ class NoticePolicyForm extends React.Component {
             onCancel={onCancel}
             onRemove={this.changeDeleteState}
           >
-            <React.Fragment>
-              <Row end="xs">
-                <Col xs>
-                  <ExpandAllButton
-                    accordionStatus={sections}
-                    onToggle={this.handleExpandAll}
-                  />
-                </Col>
-              </Row>
-              <GeneralSection
-                isOpen={sections.general}
-                metadata={policy.metadata}
-                connect={stripes.connect}
-                onToggle={this.handleSectionToggle}
-              />
-              <LoanNoticesSection
-                isOpen={sections.loanNotices}
-                onToggle={this.handleSectionToggle}
-              />
-              <FeeFineNoticesSection
-                isOpen={sections.feeFineNotices}
-                onToggle={this.handleSectionToggle}
-              />
-              <RequestNoticesSection
-                isOpen={sections.requestNotices}
-                onToggle={this.handleSectionToggle}
-              />
-              {editMode &&
-                <DeleteConfirmationModal
-                  isOpen={showDeleteConfirmation}
-                  policyName={policy.name}
-                  deleteEntityKey="ui-circulation.settings.noticePolicy.deleteLoanPolicy"
-                  initialValues={initialValues}
-                  onCancel={this.changeDeleteState}
-                  onRemove={onRemove}
+            <Row end="xs">
+              <Col xs>
+                <ExpandAllButton
+                  accordionStatus={sections}
+                  onToggle={this.handleExpandAll}
                 />
-              }
-            </React.Fragment>
+              </Col>
+            </Row>
+            <GeneralSection
+              isOpen={sections.general}
+              metadata={policy.metadata}
+              connect={stripes.connect}
+              onToggle={this.handleSectionToggle}
+            />
+            <LoanNoticesSection
+              isOpen={sections.loanNotices}
+              onToggle={this.handleSectionToggle}
+            />
+            <FeeFineNoticesSection
+              isOpen={sections.feeFineNotices}
+              onToggle={this.handleSectionToggle}
+            />
+            <RequestNoticesSection
+              isOpen={sections.requestNotices}
+              onToggle={this.handleSectionToggle}
+            />
+            {editMode &&
+              <DeleteConfirmationModal
+                isOpen={showDeleteConfirmation}
+                policyName={policy.name}
+                deleteEntityKey="ui-circulation.settings.noticePolicy.deleteLoanPolicy"
+                initialValues={initialValues}
+                onCancel={this.changeDeleteState}
+                onRemove={onRemove}
+              />
+            }
           </HeaderPane>
         </Paneset>
       </form>
