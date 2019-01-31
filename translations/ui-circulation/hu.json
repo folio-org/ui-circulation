@@ -198,5 +198,8 @@
     "settings.requestPolicy.policyDescription": "Request policy description",
     "settings.requestPolicy.policyTypes": "Request types allowed",
     "settings.requestPolicy.saveAndClose": "Save",
-    "settings.requestPolicy.createEntryLabel": "New request policy"
+    "settings.requestPolicy.createEntryLabel": "New request policy",
+    "settings.common.edit": "Edit",
+    "settings.common.duplicate": "Duplicate",
+    "settings.requestManagement.minimumGuaranteedLoanPeriod": "Minimum guaranteed loan period for recalled items"
 }
