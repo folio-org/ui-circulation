@@ -60,7 +60,7 @@ class NoticePolicySettings extends React.Component {
         nameKey="name"
         permissions={permissions}
         validate={validate}
-        isActionMenuActive
+        enableDetailsActionMenu
         defaultEntry={NoticePolicy.defaultNoticePolicy()}
       />
     );

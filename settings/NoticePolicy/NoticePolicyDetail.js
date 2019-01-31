@@ -1,7 +1,6 @@
 import React from 'react';
 
 import PropTypes from 'prop-types';
-import { cloneDeep } from 'lodash';
 
 import {
   ExpandAllButton,
@@ -9,7 +8,6 @@ import {
   Row,
 } from '@folio/stripes/components';
 import { stripesShape } from '@folio/stripes/core';
-import { ViewMetaData } from '@folio/stripes/smart-components';
 
 import {
   GeneralSection,
@@ -18,46 +16,40 @@ import {
   FeeFineNoticesSection,
 } from './components/DetailSections';
 
-
 class NoticePolicyDetail extends React.Component {
   static propTypes= {
     initialValues: PropTypes.object.isRequired,
     stripes: stripesShape.isRequired,
   };
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      sections: {
-        generalInformation: true,
-        loanNotices: true,
-        feeFineNotices: false,
-        requestNotices: false,
-      },
-    };
-
-    this.connectedViewMetaData = props.stripes.connect(ViewMetaData);
-  }
+  state = {
+    sections: {
+      generalInformation: true,
+      loanNotices: true,
+      feeFineNotices: false,
+      requestNotices: false,
+    },
+  };
 
   handleExpandAll = (sections) => {
-    this.setState((curState) => {
-      const newState = cloneDeep(curState);
-      newState.sections = sections;
-      return newState;
-    });
+    this.setState({ sections });
   };
 
   handleSectionToggle = ({ id }) => {
-    this.setState((curState) => {
-      const newState = cloneDeep(curState);
-      newState.sections[id] = !newState.sections[id];
-      return newState;
+    this.setState((state) => {
+      const sections = { ...state.sections };
+      sections[id] = !sections[id];
+      return { sections };
     });
   };
 
   render() {
-    const { initialValues: policy = {} } = this.props;
+    const {
+      initialValues: policy = {},
+      stripes: {
+        connect,
+      },
+    } = this.props;
     const { sections } = this.state;
     const {
       generalInformation,
@@ -70,27 +62,26 @@ class NoticePolicyDetail extends React.Component {
       name: policyName = '',
       active: isPolicyActive = false,
       description: policyDescription = '-',
+      metadata = {},
     } = policy;
 
     return (
       <div>
         <Row end="xs">
           <Col xs>
-            <ExpandAllButton accordionStatus={sections} onToggle={this.handleExpandAll} />
+            <ExpandAllButton
+              accordionStatus={sections}
+              onToggle={this.handleExpandAll}
+            />
           </Col>
         </Row>
-        {policy.metadata && policy.metadata.createdDate &&
-          <Row>
-            <Col xs={12}>
-              <this.connectedViewMetaData metadata={policy.metadata} />
-            </Col>
-          </Row>
-        }
         <GeneralSection
           isOpen={generalInformation}
-          policyName={policyName}
           isPolicyActive={isPolicyActive}
+          policyName={policyName}
           policyDescription={policyDescription}
+          metadata={metadata}
+          connect={connect}
           onToggle={this.handleSectionToggle}
         />
         <LoanNoticesSection

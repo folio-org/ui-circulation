@@ -8,10 +8,14 @@ import {
   Col,
   Row,
 } from '@folio/stripes/components';
+// eslint-disable-next-line
+import { Metadata } from '@folio/circulation/settings/components';
 
 const GeneralSection = (props) => {
   const {
     isOpen,
+    connect,
+    metadata,
     onToggle,
     policyName,
     isPolicyActive,
@@ -29,6 +33,10 @@ const GeneralSection = (props) => {
       onToggle={onToggle}
       label={<FormattedMessage id="ui-circulation.settings.loanPolicy.generalInformation" />}
     >
+      <Metadata
+        connect={connect}
+        metadata={metadata}
+      />
       <Row>
         <Col xs={12}>
           <KeyValue
@@ -59,10 +67,12 @@ const GeneralSection = (props) => {
 
 
 GeneralSection.propTypes = {
+  metadata: PropTypes.object.isRequired,
   isOpen: PropTypes.bool.isRequired,
   isPolicyActive: PropTypes.bool.isRequired,
   policyName: PropTypes.string.isRequired,
   policyDescription: PropTypes.string.isRequired,
+  connect: PropTypes.func.isRequired,
   onToggle: PropTypes.func.isRequired,
 };
 
