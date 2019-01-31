@@ -3,18 +3,16 @@ import {
   isNumber,
 } from 'lodash';
 
+import RenewalsPolicy from './RenewalsPolicy';
+import RequestManagement from './RequestManagement';
+import LoansPolicy from './LoansPolicy';
 import { Metadata } from '../common';
-
+import { defaultLoanPolicy } from './utils';
 import {
   intervalIdsMap,
   loanProfileMap,
   BEGINNING_OF_THE_NEXT_OPEN_SERVICE_POINT_HOURS,
 } from '../../../constants';
-
-import RenewalsPolicy from './RenewalsPolicy';
-import RequestManagement from './RequestManagement';
-import LoansPolicy from './LoansPolicy';
-import { defaultLoanPolicy } from './utils';
 
 export default class LoanPolicy {
   static defaultLoanPolicy() {

@@ -7,8 +7,8 @@ import { EntryManager } from '@folio/stripes/smart-components';
 
 import NoticePolicyDetail from './NoticePolicyDetail';
 import NoticePolicyForm from './NoticePolicyForm';
-import { NoticePolicy as validateNoticePolicy } from '../Validation';
 import NoticePolicy from '../Models/NoticePolicy';
+import { NoticePolicy as validateNoticePolicy } from '../Validation';
 
 class NoticePolicySettings extends React.Component {
   static manifest = Object.freeze({

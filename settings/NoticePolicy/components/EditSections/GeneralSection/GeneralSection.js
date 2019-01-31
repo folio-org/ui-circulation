@@ -10,16 +10,15 @@ import {
   Accordion,
 } from '@folio/stripes/components';
 
-// eslint-disable-next-line
-import { Metadata } from '@folio/circulation/settings/components';
+import { Metadata } from '../../../../components';
 
 import styles from './GeneralSection.css';
 
 class GeneralSection extends React.Component {
   static propTypes = {
     isOpen: PropTypes.bool.isRequired,
-    onToggle: PropTypes.func.isRequired,
     metadata: PropTypes.object.isRequired,
+    onToggle: PropTypes.func.isRequired,
     connect: PropTypes.func.isRequired,
   };
 
