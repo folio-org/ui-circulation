@@ -46,7 +46,9 @@ class DeleteEntity extends React.Component {
         </IfPermission>
         <DeleteConfirmationModal
           isOpen={isOpen}
+          triggerSubmitSucceeded
           policyName={policyName}
+          formName="loanPolicyForm"
           deleteEntityKey="ui-circulation.settings.noticePolicy.deleteLoanPolicy"
           initialValues={initialValues}
           onCancel={onRemoveStatusChange}

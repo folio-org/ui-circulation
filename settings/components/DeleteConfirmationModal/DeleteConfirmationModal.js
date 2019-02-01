@@ -1,24 +1,42 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 
 import { ConfirmationModal } from '@folio/stripes/components';
 
+import setSubmitSucceeded from './actions/setSubmitSucceeded';
+
 class DeleteConfirmationModal extends React.Component {
   static propTypes = {
     isOpen: PropTypes.bool.isRequired,
+    triggerSubmitSucceeded: PropTypes.bool,
+    formName: PropTypes.string,
     policyName: PropTypes.string.isRequired,
     deleteEntityKey: PropTypes.string.isRequired,
     initialValues: PropTypes.object.isRequired,
+    setSubmitSucceeded: PropTypes.func.isRequired,
     onCancel: PropTypes.func.isRequired,
     onRemove: PropTypes.func.isRequired,
+  };
+
+  static defaultProps = {
+    triggerSubmitSucceeded: false,
+    formName: '',
   };
 
   onConfirm = () => {
     const {
       initialValues,
+      formName,
+      triggerSubmitSucceeded,
+      setSubmitSucceeded: setFormSubmitSucceeded,
       onRemove,
     } = this.props;
+
+    if (triggerSubmitSucceeded) {
+      setFormSubmitSucceeded(formName);
+    }
 
     onRemove(initialValues);
   };
@@ -58,4 +76,4 @@ class DeleteConfirmationModal extends React.Component {
   }
 }
 
-export default DeleteConfirmationModal;
+export default connect(null, { setSubmitSucceeded })(DeleteConfirmationModal);
