@@ -5,7 +5,7 @@ import { FormattedMessage } from 'react-intl';
 
 import { ConfirmationModal } from '@folio/stripes/components';
 
-import setSubmitSucceededAction from './actions/setSubmitSucceeded';
+import setSubmitSucceeded from './actions/setSubmitSucceeded';
 
 class DeleteConfirmationModal extends React.Component {
   static propTypes = {
@@ -30,12 +30,12 @@ class DeleteConfirmationModal extends React.Component {
       initialValues,
       formName,
       triggerSubmitSucceeded,
-      setSubmitSucceeded,
+      setSubmitSucceeded: setFormSubmitSucceeded,
       onRemove,
     } = this.props;
 
     if (triggerSubmitSucceeded) {
-      setSubmitSucceeded(formName);
+      setFormSubmitSucceeded(formName);
     }
 
     onRemove(initialValues);
@@ -76,8 +76,4 @@ class DeleteConfirmationModal extends React.Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  setSubmitSucceeded: (formName) => dispatch(setSubmitSucceededAction(formName)),
-});
-
-export default connect(null, mapDispatchToProps)(DeleteConfirmationModal);
+export default connect(null, { setSubmitSucceeded })(DeleteConfirmationModal);
