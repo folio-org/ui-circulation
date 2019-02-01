@@ -122,6 +122,18 @@ const checkRequestManagementSection = (policy) => {
   return loanPolicy;
 };
 
+const checkReniewFrom = (policy) => {
+  const loanPolicy = cloneDeep(policy);
+  const profileId = get(loanPolicy, 'loansPolicy.profileId');
+  const isProfileFixed = profileId === loanProfileMap.FIXED;
+
+  if (isProfileFixed) {
+    unset(loanPolicy, 'renewalsPolicy.renewFromId');
+  }
+
+  return loanPolicy;
+};
+
 const filter = (entity, ...callbacks) => {
   let filteredEntity = cloneDeep(entity);
 
@@ -137,6 +149,7 @@ export const normalize = (entity) => {
     checkFixedProfile,
     checkOpeningTimeOffset,
     checkUnlimitedRenewals,
+    checkReniewFrom,
     checkDifferentRenewalPeriod,
     checkRenewable,
     checkLoanable,
