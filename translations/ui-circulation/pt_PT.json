@@ -198,5 +198,8 @@
     "settings.requestPolicy.policyDescription": "Descrição da política de pedidos",
     "settings.requestPolicy.policyTypes": "Tipos de solicitação permitidos",
     "settings.requestPolicy.saveAndClose": "Guardar",
-    "settings.requestPolicy.createEntryLabel": "Nova política de pedido"
+    "settings.requestPolicy.createEntryLabel": "Nova política de pedido",
+    "settings.common.edit": "Edit",
+    "settings.common.duplicate": "Duplicate",
+    "settings.requestManagement.minimumGuaranteedLoanPeriod": "Minimum guaranteed loan period for recalled items"
 }

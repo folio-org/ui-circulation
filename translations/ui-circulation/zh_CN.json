@@ -198,5 +198,8 @@
     "settings.requestPolicy.policyDescription": "请求政策描述",
     "settings.requestPolicy.policyTypes": "允许的请求类型",
     "settings.requestPolicy.saveAndClose": "保存",
-    "settings.requestPolicy.createEntryLabel": "新的请求政策"
+    "settings.requestPolicy.createEntryLabel": "新的请求政策",
+    "settings.common.edit": "编辑",
+    "settings.common.duplicate": "重复",
+    "settings.requestManagement.minimumGuaranteedLoanPeriod": "召回单件的最低保证借阅期限"
 }
