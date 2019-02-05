@@ -4,7 +4,6 @@ import { FormattedMessage } from 'react-intl';
 import {
   get,
   find,
-  cloneDeep,
 } from 'lodash';
 
 import { stripesShape } from '@folio/stripes/core';
@@ -28,6 +27,8 @@ import {
   intervalIdsMap,
 } from '../../constants';
 
+import RequestManagementSection from './components/ViewSections/RequestManagementSection';
+
 class LoanPolicyDetail extends React.Component {
   static propTypes = {
     initialValues: PropTypes.object,
@@ -40,32 +41,29 @@ class LoanPolicyDetail extends React.Component {
   constructor(props) {
     super(props);
 
-    this.handleSectionToggle = this.handleSectionToggle.bind(this);
-    this.handleExpandAll = this.handleExpandAll.bind(this);
     this.state = {
       sections: {
         generalInformation: true,
+        recalls: true,
+        holds: true,
+        pages: true,
       },
     };
 
     this.cViewMetaData = props.stripes.connect(ViewMetaData);
   }
 
-  handleExpandAll(sections) {
-    this.setState((curState) => {
-      const newState = cloneDeep(curState);
-      newState.sections = sections;
-      return newState;
-    });
-  }
+  handleExpandAll = (sections) => {
+    this.setState({ sections });
+  };
 
-  handleSectionToggle({ id }) {
-    this.setState((curState) => {
-      const newState = cloneDeep(curState);
-      newState.sections[id] = !newState.sections[id];
-      return newState;
+  handleSectionToggle = ({ id }) => {
+    this.setState((state) => {
+      const sections = { ...state.sections };
+      sections[id] = !sections[id];
+      return { sections };
     });
-  }
+  };
 
   getClosedLibraryDueDateManagementItem = (selectedItemId) => {
     const availableLoansOptions = [
@@ -197,6 +195,7 @@ class LoanPolicyDetail extends React.Component {
             />
           </Col>
         </Row>
+        <hr />
       </div>
     );
   }
@@ -233,6 +232,7 @@ class LoanPolicyDetail extends React.Component {
             />
           </Col>
         </Row>
+        <hr />
       </div>
     );
   }
@@ -310,6 +310,7 @@ class LoanPolicyDetail extends React.Component {
             </Row>
           </div>
         }
+        <hr />
       </div>
     );
   }
@@ -340,11 +341,16 @@ class LoanPolicyDetail extends React.Component {
           }
 
           {this.renderAbout()}
-          <hr />
           {policy.loanable && this.renderLoans()}
-          <hr />
           {policy.renewable && this.renderRenewals()}
-
+          <RequestManagementSection
+            isVisible={policy.loanable}
+            isRecallsOpen={sections.recalls}
+            isHoldsOpen={sections.holds}
+            isPagesOpen={sections.pages}
+            requestManagementOptions={policy.requestManagement}
+            onSectionToggle={this.handleSectionToggle}
+          />
         </Accordion>
       </div>
     );
