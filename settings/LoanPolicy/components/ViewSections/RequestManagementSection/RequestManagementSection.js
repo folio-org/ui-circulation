@@ -59,9 +59,9 @@ class RequestManagementSection extends React.Component {
         </h2>
         <Accordion
           id="recalls"
+          label={<FormattedMessage id="ui-circulation.settings.requestManagement.recalls" />}
           open={isRecallsOpen}
           onToggle={onSectionToggle}
-          label={<FormattedMessage id="ui-circulation.settings.requestManagement.recalls" />}
         >
           <Row>
             <Col xs={12}>
@@ -82,9 +82,9 @@ class RequestManagementSection extends React.Component {
         </Accordion>
         <Accordion
           id="holds"
+          label={<FormattedMessage id="ui-circulation.settings.requestManagement.holds" />}
           open={isHoldsOpen}
           onToggle={onSectionToggle}
-          label={<FormattedMessage id="ui-circulation.settings.requestManagement.holds" />}
         >
           <Row>
             <Col xs={12}>
@@ -113,9 +113,9 @@ class RequestManagementSection extends React.Component {
         </Accordion>
         <Accordion
           id="pages"
+          label={<FormattedMessage id="ui-circulation.settings.requestManagement.pages" />}
           open={isPagesOpen}
           onToggle={onSectionToggle}
-          label={<FormattedMessage id="ui-circulation.settings.requestManagement.pages" />}
         >
           <Row>
             <Col xs={12}>
