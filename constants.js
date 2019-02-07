@@ -1,7 +1,3 @@
-
-import React from 'react';
-import Intl from 'react-intl';
-
 // These next sets are temporary Select list options for LoanPolicyDetail.js
 // The idea is to eventually replace them with small, controlled vocabularies
 // on the server side.
