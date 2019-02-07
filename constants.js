@@ -102,4 +102,36 @@ export const requestPolicyTypes = [
   'Recall',
 ];
 
+export const loanNoticesFormats = [
+  { value: 'Email', label: 'Email' },
+];
+
+export const loanNoticesFrequencyMap = {
+  ONE_TIME: 'One time',
+  RECURRING: 'Recurring',
+};
+
+export const loanNoticesSendEventMap = {
+  AFTER: 'After',
+  BEFORE: 'Before',
+  UPON: 'Upon At'
+};
+
+export const loanNoticesFrequency = [
+  { value: loanNoticesFrequencyMap.ONE_TIME, label: loanNoticesFrequencyMap.ONE_TIME },
+  { value: loanNoticesFrequencyMap.RECURRING, label: loanNoticesFrequencyMap.RECURRING },
+];
+
+export const loanNoticesSendEvent = [
+  { value: loanNoticesSendEventMap.UPON, label: 'Upon/At' },
+  { value: loanNoticesSendEventMap.BEFORE, label: loanNoticesSendEventMap.BEFORE },
+  { value: loanNoticesSendEventMap.AFTER, label: loanNoticesSendEventMap.AFTER },
+];
+
+export const loanNoticesSendWhen = [
+  { value: 'Due date', label: 'Due date' },
+  { value: 'Overdue', label: 'Overdue' },
+  { value: 'Renewed', label: 'Renewed' },
+];
+
 export default '';

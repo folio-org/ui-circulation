@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getFormValues } from 'redux-form';
+import { reduce } from 'lodash';
 
 import stripesForm from '@folio/stripes/form';
 import { stripesShape } from '@folio/stripes/core';
@@ -12,7 +13,8 @@ import {
   ExpandAllButton,
 } from '@folio/stripes/components';
 
-import NoticePolicy from '../Models/NoticePolicy';
+import normalize from './utils/normalize';
+import { NoticePolicy } from '../Models/NoticePolicy';
 import { DeleteConfirmationModal } from '../components';
 import {
   HeaderPane,
@@ -29,6 +31,9 @@ class NoticePolicyForm extends React.Component {
     submitting: PropTypes.bool.isRequired,
     policy: PropTypes.object,
     initialValues: PropTypes.object,
+    parentResources: PropTypes.shape({
+      templates: PropTypes.object,
+    }).isRequired,
     permissions: PropTypes.object.isRequired,
     onSave: PropTypes.func.isRequired,
     onCancel: PropTypes.func.isRequired,
@@ -51,6 +56,22 @@ class NoticePolicyForm extends React.Component {
     },
   };
 
+  getTemplates = (noticeCategory) => {
+    const {
+      parentResources: {
+        templates,
+      },
+    } = this.props;
+
+    return reduce(templates.records, (items, { id, name, category }) => {
+      if (category === noticeCategory) {
+        items.push({ value: id, label: name });
+      }
+
+      return items;
+    }, []);
+  };
+
   handleSectionToggle = ({ id }) => {
     this.setState((state) => {
       const sections = { ...state.sections };
@@ -64,7 +85,8 @@ class NoticePolicyForm extends React.Component {
   };
 
   saveForm = (noticePolicy) => {
-    this.props.onSave(noticePolicy);
+    const policy = normalize(noticePolicy);
+    this.props.onSave(policy);
   };
 
   changeDeleteState = (showDeleteConfirmation) => {
@@ -119,6 +141,8 @@ class NoticePolicyForm extends React.Component {
             />
             <LoanNoticesSection
               isOpen={sections.loanNotices}
+              policy={policy}
+              templates={this.getTemplates('Loan')}
               onToggle={this.handleSectionToggle}
             />
             <FeeFineNoticesSection

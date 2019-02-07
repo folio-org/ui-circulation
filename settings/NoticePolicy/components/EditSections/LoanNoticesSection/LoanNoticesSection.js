@@ -8,12 +8,19 @@ import { LoanNoticesList } from './components';
 class LoanNoticesSection extends React.Component {
   static propTypes = {
     isOpen: PropTypes.bool.isRequired,
+    policy: PropTypes.object.isRequired,
+    templates: PropTypes.arrayOf(PropTypes.shape({
+      value: PropTypes.string.isRequired,
+      label: PropTypes.string.isRequired,
+    })).isRequired,
     onToggle: PropTypes.func.isRequired,
   };
 
   render() {
     const {
       isOpen,
+      policy,
+      templates,
       onToggle,
     } = this.props;
 
@@ -24,7 +31,10 @@ class LoanNoticesSection extends React.Component {
         label={<FormattedMessage id="ui-circulation.settings.noticePolicy.loanNotices" />}
         onToggle={onToggle}
       >
-        <LoanNoticesList />
+        <LoanNoticesList
+          policy={policy}
+          templates={templates}
+        />
       </Accordion>
     );
   }

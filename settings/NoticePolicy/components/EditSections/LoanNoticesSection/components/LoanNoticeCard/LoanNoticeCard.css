@@ -3,21 +3,31 @@
   margin: 10px 0;
   width: 100%;
 }
-
+  
 .header {
   background-color: #e6e6e6;
-  margin: 0 0;
 }
-
+  
 .headerTitle {
   padding: 5px 10px;
-  font-weight: bold; 
+  font-weight: 600;
 }
-
+  
 .headerIcon {
   text-align: right;  
 }
-
+  
 .noticeField {
   padding: 10px 20px;
+}
+  
+.cardText {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+}
+  
+.fieldLabel {
+  padding-left: 20px;
 }

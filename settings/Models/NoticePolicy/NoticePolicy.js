@@ -1,28 +1,6 @@
-import {
-  Metadata,
-  Period,
-} from '../common';
+import { Metadata } from '../common';
 
-class NoticeSendOptions {
-  constructor(options = {}) {
-    this.sendHow = options.sendHow;
-    this.sendWhen = options.sendWhen;
-    this.sendBy = new Period(options.sendBy);
-    this.sendEvery = new Period(options.sendEvery);
-  }
-}
-
-class Notice {
-  constructor(notice = {}) {
-    this.name = notice.name;
-    this.templateId = notice.templateId;
-    this.templateName = notice.templateName;
-    this.format = notice.format;
-    this.frequency = notice.frequency;
-    this.realTime = notice.realTime;
-    this.sendOptions = new NoticeSendOptions(notice.sendOptions);
-  }
-}
+import LoanNotice from './LoanNotice';
 
 export default class NoticePolicy {
   static defaultNoticePolicy() {
@@ -36,7 +14,7 @@ export default class NoticePolicy {
     this.active = policy.active;
     this.metadata = new Metadata(policy.metadata);
     this.loanNotices = policy.loanNotices ? policy.loanNotices.reduce((loanNotices, loanNotice) => {
-      const ln = new Notice(loanNotice);
+      const ln = new LoanNotice(loanNotice);
 
       return [...loanNotices, ln];
     }, []) : [];

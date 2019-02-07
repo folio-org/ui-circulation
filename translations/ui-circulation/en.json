@@ -188,6 +188,8 @@
   "settings.common.delete": "Delete",
   "settings.common.edit": "Edit",
   "settings.common.duplicate": "Duplicate",
+  "settings.common.yes": "Yes",
+  "settings.common.no": "No",
 
   "settings.noticePolicy.entryLabel": "Notice Policy",
   "settings.noticePolicy.saveAndClose": "Save",
@@ -216,7 +218,12 @@
   "settings.noticePolicy.addNotice": "Add Notice",
   "settings.noticePolicy.countableNotice": "Notice {counter}",
   "settings.noticePolicy.loanNotices.via": "via",
-  "settings.noticePolicy.loanNotices.template": "Template *",
-  "settings.noticePolicy.loanNotices.format": "Format *",
-  "settings.noticePolicy.loanNotices.frequency": "Frequency *"
+  "settings.noticePolicy.loanNotices.by": "by",
+  "settings.noticePolicy.loanNotices.template": "Template",
+  "settings.noticePolicy.loanNotices.format": "Format",
+  "settings.noticePolicy.loanNotices.frequency": "Frequency",
+  "settings.noticePolicy.loanNotices.realTime": "Send in real-time",
+  "settings.noticePolicy.loanNotices.sendEvent": "Send Event",
+  "settings.noticePolicy.loanNotices.startigSendEvent": "Starting Send Event",
+  "settings.noticePolicy.loanNotices.sendEvery": "Send Every"
 }
