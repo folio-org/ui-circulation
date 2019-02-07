@@ -7,7 +7,7 @@ import { EntryManager } from '@folio/stripes/smart-components';
 
 import NoticePolicyDetail from './NoticePolicyDetail';
 import NoticePolicyForm from './NoticePolicyForm';
-import NoticePolicy from '../Models/NoticePolicy';
+import { NoticePolicy } from '../Models/NoticePolicy';
 import { NoticePolicy as validateNoticePolicy } from '../Validation';
 
 class NoticePolicySettings extends React.Component {
@@ -17,11 +17,20 @@ class NoticePolicySettings extends React.Component {
       records: 'patronNoticePolicies',
       path: 'patron-notice-policy-storage/patron-notice-policies',
     },
+    templates: {
+      type: 'okapi',
+      records: 'templates',
+      path: 'templates',
+      params: {
+        query: 'cql.allRecords=1 AND category=""',
+      },
+    },
   });
 
   static propTypes = {
     resources: PropTypes.shape({
       patronNoticePolicies: PropTypes.object,
+      templates: PropTypes.object,
     }).isRequired,
     mutator: PropTypes.shape({
       patronNoticePolicies: PropTypes.shape({

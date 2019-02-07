@@ -1,14 +1,14 @@
 import React from 'react';
-
 import PropTypes from 'prop-types';
 
+import { stripesShape } from '@folio/stripes/core';
 import {
-  ExpandAllButton,
   Col,
+  ExpandAllButton,
   Row,
 } from '@folio/stripes/components';
-import { stripesShape } from '@folio/stripes/core';
 
+import { NoticePolicy } from '../Models/NoticePolicy';
 import {
   GeneralSection,
   LoanNoticesSection,
@@ -16,10 +16,15 @@ import {
   FeeFineNoticesSection,
 } from './components/DetailSections';
 
+import getTemplates from './utils/get-templates';
+
 class NoticePolicyDetail extends React.Component {
   static propTypes= {
     initialValues: PropTypes.object.isRequired,
     stripes: stripesShape.isRequired,
+    parentResources: PropTypes.shape({
+      templates: PropTypes.object,
+    }).isRequired,
   };
 
   state = {
@@ -49,57 +54,58 @@ class NoticePolicyDetail extends React.Component {
       stripes: {
         connect,
       },
+      parentResources: {
+        templates: {
+          records: patronNoticeTemplates = [],
+        },
+      },
     } = this.props;
-    const { sections } = this.state;
+
     const {
       generalInformation,
       loanNotices,
       feeFineNotices,
       requestNotices,
-    } = sections;
+    } = this.state.sections;
 
-    const {
-      name: policyName = '',
-      active: isPolicyActive = false,
-      description: policyDescription = '-',
-      metadata = {},
-    } = policy;
+    const noticePolicy = new NoticePolicy(policy);
 
     return (
-      <div>
+      <React.Fragment>
         <Row end="xs">
           <Col xs>
             <ExpandAllButton
-              accordionStatus={sections}
+              accordionStatus={this.state.sections}
               onToggle={this.handleExpandAll}
             />
           </Col>
         </Row>
         <GeneralSection
           isOpen={generalInformation}
-          isPolicyActive={isPolicyActive}
-          policyName={policyName}
-          policyDescription={policyDescription}
-          metadata={metadata}
+          isPolicyActive={policy.active}
+          policyName={policy.name}
+          policyDescription={policy.description}
+          metadata={policy.metadata}
           connect={connect}
           onToggle={this.handleSectionToggle}
         />
         <LoanNoticesSection
           isOpen={loanNotices}
-          policy={policy}
+          policy={noticePolicy}
+          templates={getTemplates(patronNoticeTemplates, 'Loan')}
           onToggle={this.handleSectionToggle}
         />
         <FeeFineNoticesSection
           isOpen={feeFineNotices}
-          policy={policy}
+          policy={noticePolicy}
           onToggle={this.handleSectionToggle}
         />
         <RequestNoticesSection
           isOpen={requestNotices}
-          policy={policy}
+          policy={noticePolicy}
           onToggle={this.handleSectionToggle}
         />
-      </div>
+      </React.Fragment>
     );
   }
 }

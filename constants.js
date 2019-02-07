@@ -1,4 +1,3 @@
-
 // These next sets are temporary Select list options for LoanPolicyDetail.js
 // The idea is to eventually replace them with small, controlled vocabularies
 // on the server side.
@@ -100,6 +99,56 @@ export const requestPolicyTypes = [
   'Hold',
   'Page',
   'Recall',
+];
+
+export const loanNoticesFrequencyMap = {
+  ONE_TIME: 'One time',
+  RECURRING: 'Recurring',
+};
+
+export const loanNoticesSendEventMap = {
+  AFTER: 'After',
+  BEFORE: 'Before',
+  UPON: 'Upon At',
+};
+
+export const loanNoticesFormatsMap = {
+  EMAIL: 'Email',
+};
+
+export const loanNoticesSendWhenMap = {
+  DUE_DATE: 'Due date',
+  OVERDUE: 'Overdue',
+  RENEWED: 'Renewed',
+};
+
+export const loanNoticesFormats = [
+  { value: loanNoticesFormatsMap.EMAIL, label: 'ui-circulation.settings.noticePolicy.loanNotices.email' },
+];
+
+export const loanNoticesFrequency = [
+  { value: loanNoticesFrequencyMap.ONE_TIME, label: 'ui-circulation.settings.noticePolicy.loanNotices.oneTime' },
+  { value: loanNoticesFrequencyMap.RECURRING, label: 'ui-circulation.settings.noticePolicy.loanNotices.recurring' },
+];
+
+export const loanNoticesSendEvent = [
+  { value: loanNoticesSendEventMap.UPON, label: 'ui-circulation.settings.noticePolicy.loanNotices.upon' },
+  { value: loanNoticesSendEventMap.BEFORE, label: 'ui-circulation.settings.noticePolicy.loanNotices.before' },
+  { value: loanNoticesSendEventMap.AFTER, label: 'ui-circulation.settings.noticePolicy.loanNotices.after' },
+];
+
+export const loanNoticesSendWhen = [
+  { value: loanNoticesSendWhenMap.DUE_DATE, label: 'ui-circulation.settings.noticePolicy.loanNotices.dueDate' },
+  { value: loanNoticesSendWhenMap.OVERDUE, label: 'ui-circulation.settings.noticePolicy.loanNotices.overdue' },
+  { value: loanNoticesSendWhenMap.RENEWED, label: 'ui-circulation.settings.noticePolicy.loanNotices.renewed' },
+];
+
+export const loanNoticesIntervalPeriods = [
+  { value: intervalIdsMap.MINUTES, label: 'ui-circulation.settings.noticePolicy.loanNotices.minutes' },
+  { value: intervalIdsMap.HOURS, label: 'ui-circulation.settings.noticePolicy.loanNotices.hours' },
+  { value: intervalIdsMap.DAYS, label: 'ui-circulation.settings.noticePolicy.loanNotices.days' },
+  { value: intervalIdsMap.WEEKS, label: 'ui-circulation.settings.noticePolicy.loanNotices.weeks' },
+  { value: intervalIdsMap.MONTHS, label: 'ui-circulation.settings.noticePolicy.loanNotices.months' },
 ];
 
 export default '';
