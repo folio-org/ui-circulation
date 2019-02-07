@@ -1,6 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage } from 'react-intl';
+import {
+  intlShape,
+  injectIntl,
+  FormattedMessage
+} from 'react-intl';
 import {
   find,
   get,
@@ -17,7 +21,7 @@ import {
   loanNoticesFrequency,
   loanNoticesSendEvent,
   loanNoticesSendWhen,
-  intervalPeriods,
+  loanNoticesIntervalPeriods,
 } from '../../../../../../../constants';
 
 import css from './LoanNoticeCard.css';
@@ -25,16 +29,21 @@ import css from './LoanNoticeCard.css';
 class LoanNoticeCard extends React.Component {
   static propTypes = {
     policy: PropTypes.object.isRequired,
+    intl: intlShape.isRequired,
     index: PropTypes.number.isRequired,
     templates: PropTypes.arrayOf(PropTypes.object).isRequired,
   };
 
   getDropdownValue = (pathToValue, index, items) => {
-    const { policy } = this.props;
-    const seletedValue = get(policy, `loanNotices[${index}].${pathToValue}`);
-    const selectedItem = find(items, (item) => item.value === seletedValue) || {};
+    const {
+      intl,
+      policy,
+    } = this.props;
 
-    return selectedItem.label;
+    const seletedValue = get(policy, `loanNotices[${index}].${pathToValue}`);
+    const selectedItem = find(items, (item) => item.value === seletedValue);
+
+    return selectedItem ? intl.formatMessage({ id: selectedItem.label }) : null;
   };
 
   getCheckboxValue = (pathToValue, index) => {
@@ -123,7 +132,7 @@ class LoanNoticeCard extends React.Component {
                         </Col>
                         <Col xs={3}>
                           <KeyValue>
-                            {this.getDropdownValue('sendOptions.sendBy.intervalId', i, intervalPeriods)}
+                            {this.getDropdownValue('sendOptions.sendBy.intervalId', i, loanNoticesIntervalPeriods)}
                           </KeyValue>
                         </Col>
                       </React.Fragment>
@@ -145,7 +154,7 @@ class LoanNoticeCard extends React.Component {
                     </Col>
                     <Col xs={3}>
                       <KeyValue>
-                        {this.getDropdownValue('sendOptions.sendEvery.intervalId', i, intervalPeriods)}
+                        {this.getDropdownValue('sendOptions.sendEvery.intervalId', i, loanNoticesIntervalPeriods)}
                       </KeyValue>
                     </Col>
                   </Row>
@@ -167,4 +176,4 @@ class LoanNoticeCard extends React.Component {
   }
 }
 
-export default LoanNoticeCard;
+export default injectIntl(LoanNoticeCard);

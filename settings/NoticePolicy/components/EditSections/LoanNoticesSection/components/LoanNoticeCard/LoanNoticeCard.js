@@ -1,7 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage } from 'react-intl';
 import { Field } from 'redux-form';
+import { map } from 'lodash';
+import {
+  intlShape,
+  injectIntl,
+  FormattedMessage,
+} from 'react-intl';
 
 import {
   Button,
@@ -17,7 +22,7 @@ import {
   loanNoticesFrequency,
   loanNoticesSendEvent,
   loanNoticesSendWhen,
-  intervalPeriods,
+  loanNoticesIntervalPeriods,
 } from '../../../../../../../constants';
 
 import css from './LoanNoticeCard.css';
@@ -26,6 +31,7 @@ class LoanNoticeCard extends React.Component {
   static propTypes = {
     fields: PropTypes.object.isRequired,
     policy: PropTypes.object.isRequired,
+    intl: intlShape.isRequired,
     templates: PropTypes.arrayOf(PropTypes.shape({
       value: PropTypes.string.isRequired,
       label: PropTypes.string.isRequired,
@@ -36,6 +42,15 @@ class LoanNoticeCard extends React.Component {
     return new Array(100).fill().map((value, index) => ({
       value: index + 1,
       label: index + 1,
+    }));
+  };
+
+  getDropdownItems = (items) => {
+    const { intl } = this.props;
+
+    return map(items, ({ value, label }) => ({
+      value,
+      label: intl.formatMessage({ id: label })
     }));
   };
 
@@ -96,7 +111,7 @@ class LoanNoticeCard extends React.Component {
                         </FormattedMessage>
                       )}
                       component={Select}
-                      dataOptions={loanNoticesFormats}
+                      dataOptions={this.getDropdownItems(loanNoticesFormats)}
                       placeholder=" "
                     />
                   </Col>
@@ -109,7 +124,7 @@ class LoanNoticeCard extends React.Component {
                         </FormattedMessage>
                       )}
                       component={Select}
-                      dataOptions={loanNoticesFrequency}
+                      dataOptions={this.getDropdownItems(loanNoticesFrequency)}
                       placeholder=" "
                     />
                   </Col>
@@ -127,7 +142,7 @@ class LoanNoticeCard extends React.Component {
                       <Field
                         name={`${loanNotice}.sendOptions.sendHow`}
                         component={Select}
-                        dataOptions={loanNoticesSendEvent}
+                        dataOptions={this.getDropdownItems(loanNoticesSendEvent)}
                         placeholder=" "
                       />
                     </Col>
@@ -135,7 +150,7 @@ class LoanNoticeCard extends React.Component {
                       <Field
                         name={`${loanNotice}.sendOptions.sendWhen`}
                         component={Select}
-                        dataOptions={loanNoticesSendWhen}
+                        dataOptions={this.getDropdownItems(loanNoticesSendWhen)}
                         placeholder=" "
                       />
                     </Col>
@@ -156,7 +171,7 @@ class LoanNoticeCard extends React.Component {
                           <Field
                             name={`${loanNotice}.sendOptions.sendBy.intervalId`}
                             component={Select}
-                            dataOptions={intervalPeriods}
+                            dataOptions={this.getDropdownItems(loanNoticesIntervalPeriods)}
                             placeholder=" "
                           />
                         </Col>
@@ -187,7 +202,7 @@ class LoanNoticeCard extends React.Component {
                         <Field
                           name={`${loanNotice}.sendOptions.sendEvery.intervalId`}
                           component={Select}
-                          dataOptions={intervalPeriods}
+                          dataOptions={this.getDropdownItems(loanNoticesIntervalPeriods)}
                           placeholder=" "
                         />
                       </Col>
@@ -225,4 +240,4 @@ class LoanNoticeCard extends React.Component {
   }
 }
 
-export default LoanNoticeCard;
+export default injectIntl(LoanNoticeCard);

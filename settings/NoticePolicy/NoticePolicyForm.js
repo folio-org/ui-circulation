@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getFormValues } from 'redux-form';
-import { reduce } from 'lodash';
 
 import stripesForm from '@folio/stripes/form';
 import { stripesShape } from '@folio/stripes/core';
@@ -14,6 +13,7 @@ import {
 } from '@folio/stripes/components';
 
 import normalize from './utils/normalize';
+import getTemplates from './utils/get-templates';
 import { NoticePolicy } from '../Models/NoticePolicy';
 import { DeleteConfirmationModal } from '../components';
 import {
@@ -56,22 +56,6 @@ class NoticePolicyForm extends React.Component {
     },
   };
 
-  getTemplates = (noticeCategory) => {
-    const {
-      parentResources: {
-        templates,
-      },
-    } = this.props;
-
-    return reduce(templates.records, (items, { id, name, category }) => {
-      if (category === noticeCategory) {
-        items.push({ value: id, label: name });
-      }
-
-      return items;
-    }, []);
-  };
-
   handleSectionToggle = ({ id }) => {
     this.setState((state) => {
       const sections = { ...state.sections };
@@ -97,13 +81,18 @@ class NoticePolicyForm extends React.Component {
     const {
       pristine,
       policy,
+      parentResources: {
+        templates: {
+          records: patronNoticeTemplates = [],
+        },
+      },
       initialValues,
       stripes,
+      permissions,
       submitting,
       handleSubmit,
       onCancel,
       onRemove,
-      permissions,
     } = this.props;
 
     const {
@@ -142,7 +131,7 @@ class NoticePolicyForm extends React.Component {
             <LoanNoticesSection
               isOpen={sections.loanNotices}
               policy={policy}
-              templates={this.getTemplates('Loan')}
+              templates={getTemplates(patronNoticeTemplates, 'Loan')}
               onToggle={this.handleSectionToggle}
             />
             <FeeFineNoticesSection

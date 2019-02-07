@@ -225,5 +225,19 @@
   "settings.noticePolicy.loanNotices.realTime": "Send in real-time",
   "settings.noticePolicy.loanNotices.sendEvent": "Send Event",
   "settings.noticePolicy.loanNotices.startigSendEvent": "Starting Send Event",
-  "settings.noticePolicy.loanNotices.sendEvery": "Send Every"
+  "settings.noticePolicy.loanNotices.sendEvery": "Send Every",
+  "settings.noticePolicy.loanNotices.email": "Email",
+  "settings.noticePolicy.loanNotices.oneTime": "One Time",
+  "settings.noticePolicy.loanNotices.recurring": "Recurring",
+  "settings.noticePolicy.loanNotices.before": "Before",
+  "settings.noticePolicy.loanNotices.after": "After",
+  "settings.noticePolicy.loanNotices.upon": "Upon/At",
+  "settings.noticePolicy.loanNotices.dueDate": "Due date",
+  "settings.noticePolicy.loanNotices.overdue": "Overdue",
+  "settings.noticePolicy.loanNotices.renewed": "Renewed",
+  "settings.noticePolicy.loanNotices.minutes": "Minute(s)",
+  "settings.noticePolicy.loanNotices.hours": "Hour(s)",
+  "settings.noticePolicy.loanNotices.days": "Day(s)",
+  "settings.noticePolicy.loanNotices.weeks": "Week(s)",
+  "settings.noticePolicy.loanNotices.months": "Month(s)"
 }
