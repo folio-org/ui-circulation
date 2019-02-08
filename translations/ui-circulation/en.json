@@ -179,7 +179,6 @@
   "settings.requestManagement.renewItemsWithRequest": "Allow renewal of items with an active, pending hold request",
   "settings.requestManagement.alternateRenewalLoanPeriod": "Alternate loan period at renewal for items with an active, pending hold request",
   "settings.requestManagement.holds": "Holds",
-  "settings.requestManagement.pages": "Pages",
 
   "settings.common.closeEntryDialog": "Close entry dialog",
   "settings.common.saveAndClose": "Save & close",

@@ -19,19 +19,10 @@ class Holds {
   }
 }
 
-class Pages {
-  constructor(page = {}) {
-    this.alternateCheckoutLoanPeriod = new Period(page.alternateCheckoutLoanPeriod);
-    this.renewItemsWithRequest = page.renewItemsWithRequest;
-    this.alternateRenewalLoanPeriod = new Period(page.alternateRenewalLoanPeriod);
-  }
-}
-
 export default class RequestManagement {
-  constructor({ recalls, holds, pages } = {}) {
+  constructor({ recalls, holds } = {}) {
     this.recalls = new Recalls(recalls);
     this.holds = new Holds(holds);
-    this.pages = new Pages(pages);
   }
 
   get defaultsSelected() {

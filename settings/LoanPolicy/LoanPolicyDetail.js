@@ -46,7 +46,6 @@ class LoanPolicyDetail extends React.Component {
         generalInformation: true,
         recalls: true,
         holds: true,
-        pages: true,
       },
     };
 
@@ -347,7 +346,6 @@ class LoanPolicyDetail extends React.Component {
             isVisible={policy.loanable}
             isRecallsOpen={sections.recalls}
             isHoldsOpen={sections.holds}
-            isPagesOpen={sections.pages}
             requestManagementOptions={policy.requestManagement}
             onSectionToggle={this.handleSectionToggle}
           />

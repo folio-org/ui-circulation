@@ -20,7 +20,6 @@ class RequestManagementSection extends React.Component {
   static propTypes = {
     policy: PropTypes.object.isRequired,
     holdsSectionOpen: PropTypes.bool.isRequired,
-    pagesSectionOpen: PropTypes.bool.isRequired,
     recallsSectionOpen: PropTypes.bool.isRequired,
     accordionOnToggle: PropTypes.func.isRequired,
     change: PropTypes.func.isRequired,
@@ -30,7 +29,6 @@ class RequestManagementSection extends React.Component {
     const {
       policy,
       holdsSectionOpen,
-      pagesSectionOpen,
       recallsSectionOpen,
       accordionOnToggle,
       change,
@@ -100,38 +98,6 @@ class RequestManagementSection extends React.Component {
             changeFormValue={change}
           />
         </Accordion>
-        <Accordion
-          id="pagesSection"
-          open={pagesSectionOpen}
-          onToggle={accordionOnToggle}
-          label={<FormattedMessage id="ui-circulation.settings.requestManagement.pages" />}
-        >
-          <Period
-            fieldLabel="ui-circulation.settings.requestManagement.alternateCheckoutLoanPeriod"
-            selectPlaceholder="ui-circulation.settings.loanPolicy.selectInterval"
-            inputValuePath="requestManagement.pages.alternateCheckoutLoanPeriod.duration"
-            selectValuePath="requestManagement.pages.alternateCheckoutLoanPeriod.intervalId"
-            intervalPeriods={intervalPeriods}
-            changeFormValue={change}
-          />
-          <Field
-            label={<FormattedMessage id="ui-circulation.settings.requestManagement.renewItemsWithRequest" />}
-            name="requestManagement.pages.renewItemsWithRequest"
-            id="requestManagement.pages.renewItemsWithRequest"
-            component={Checkbox}
-            type="checkbox"
-            normalize={v => !!v}
-          />
-          <br />
-          <Period
-            fieldLabel="ui-circulation.settings.requestManagement.alternateRenewalLoanPeriod"
-            selectPlaceholder="ui-circulation.settings.loanPolicy.selectInterval"
-            inputValuePath="requestManagement.pages.alternateRenewalLoanPeriod.duration"
-            selectValuePath="requestManagement.pages.alternateRenewalLoanPeriod.intervalId"
-            intervalPeriods={intervalPeriods}
-            changeFormValue={change}
-          />
-        </Accordion>
       </React.Fragment>
     );
   }
@@ -146,7 +112,5 @@ export default withSectionDefaults({
     'requestManagement.recalls.minimumGuaranteedLoanPeriod': { intervalId: intervalIdsMap.DAYS },
     'requestManagement.holds.alternateCheckoutLoanPeriod': { intervalId: intervalIdsMap.DAYS },
     'requestManagement.holds.alternateRenewalLoanPeriod': { intervalId: intervalIdsMap.DAYS },
-    'requestManagement.pages.alternateCheckoutLoanPeriod': { intervalId: intervalIdsMap.DAYS },
-    'requestManagement.pages.alternateRenewalLoanPeriod': { intervalId: intervalIdsMap.DAYS },
   },
 });
