@@ -62,7 +62,6 @@ class LoanPolicyForm extends React.Component {
       generalSection: true,
       recallsSection: true,
       holdsSection: false,
-      pagesSection: false,
     },
   };
 
@@ -164,7 +163,6 @@ class LoanPolicyForm extends React.Component {
                 <RequestManagementSection
                   policy={policy}
                   holdsSectionOpen={sections.holdsSection}
-                  pagesSectionOpen={sections.pagesSection}
                   recallsSectionOpen={sections.recallsSection}
                   accordionOnToggle={this.handleSectionToggle}
                   change={change}

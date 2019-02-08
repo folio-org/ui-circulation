@@ -30,9 +30,5 @@ export default {
       alternateCheckoutLoanPeriod: { intervalId: intervalIdsMap.DAYS },
       alternateRenewalLoanPeriod: { intervalId: intervalIdsMap.DAYS },
     },
-    pages: {
-      alternateCheckoutLoanPeriod: { intervalId: intervalIdsMap.DAYS },
-      alternateRenewalLoanPeriod: { intervalId: intervalIdsMap.DAYS },
-    },
   },
 };

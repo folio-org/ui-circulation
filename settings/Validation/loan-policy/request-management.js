@@ -24,23 +24,9 @@ const holds = (loanPolicy) => {
   };
 };
 
-const pages = (loanPolicy) => {
-  return {
-    'requestManagement.pages.alternateCheckoutLoanPeriod.duration': {
-      rules: ['isIntegerGreaterThanZero'],
-      shouldValidate: loanPolicy.hasValue('requestManagement.pages.alternateCheckoutLoanPeriod.duration'),
-    },
-    'requestManagement.pages.alternateRenewalLoanPeriod.duration': {
-      rules: ['isIntegerGreaterThanZero'],
-      shouldValidate: loanPolicy.hasValue('requestManagement.pages.alternateRenewalLoanPeriod.duration'),
-    },
-  };
-};
-
 export default function (loanPolicy) {
   return {
     ...recalls(loanPolicy),
     ...holds(loanPolicy),
-    ...pages(loanPolicy),
   };
 }

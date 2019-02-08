@@ -15,7 +15,6 @@ class RequestManagementSection extends React.Component {
     isVisible: PropTypes.bool.isRequired,
     isRecallsOpen: PropTypes.bool.isRequired,
     isHoldsOpen: PropTypes.bool.isRequired,
-    isPagesOpen: PropTypes.bool.isRequired,
     requestManagementOptions: PropTypes.object,
     onSectionToggle: PropTypes.func.isRequired,
   };
@@ -44,7 +43,6 @@ class RequestManagementSection extends React.Component {
       isVisible,
       isRecallsOpen,
       isHoldsOpen,
-      isPagesOpen,
       onSectionToggle,
     } = this.props;
 
@@ -107,37 +105,6 @@ class RequestManagementSection extends React.Component {
               <KeyValue
                 label={<FormattedMessage id="ui-circulation.settings.requestManagement.alternateRenewalLoanPeriod" />}
                 value={this.getPeriodValue('holds.alternateRenewalLoanPeriod')}
-              />
-            </Col>
-          </Row>
-        </Accordion>
-        <Accordion
-          id="pages"
-          label={<FormattedMessage id="ui-circulation.settings.requestManagement.pages" />}
-          open={isPagesOpen}
-          onToggle={onSectionToggle}
-        >
-          <Row>
-            <Col xs={12}>
-              <KeyValue
-                label={<FormattedMessage id="ui-circulation.settings.requestManagement.alternateCheckoutLoanPeriod" />}
-                value={this.getPeriodValue('pages.alternateCheckoutLoanPeriod')}
-              />
-            </Col>
-          </Row>
-          <Row>
-            <Col xs={12}>
-              <KeyValue
-                label={<FormattedMessage id="ui-circulation.settings.requestManagement.renewItemsWithRequest" />}
-                value={this.getCheckboxValue('pages.renewItemsWithRequest')}
-              />
-            </Col>
-          </Row>
-          <Row>
-            <Col xs={12}>
-              <KeyValue
-                label={<FormattedMessage id="ui-circulation.settings.requestManagement.alternateRenewalLoanPeriod" />}
-                value={this.getPeriodValue('pages.alternateRenewalLoanPeriod')}
               />
             </Col>
           </Row>
