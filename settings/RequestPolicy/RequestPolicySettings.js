@@ -9,6 +9,7 @@ import RequestPolicyDetail from './RequestPolicyDetail';
 import RequestPolicyForm from './RequestPolicyForm';
 import { RequestPolicy as validateRequestPolicy } from '../Validation';
 import RequestPolicy from '../Models/RequestPolicy';
+import { requestPolicyTypes } from '../../constants';
 
 class RequestPolicySettings extends React.Component {
   static manifest = Object.freeze({
@@ -16,7 +17,13 @@ class RequestPolicySettings extends React.Component {
       type: 'okapi',
       records: 'requestPolicies',
       path: 'request-policy-storage/request-policies',
-      throwErrors: false,
+    },
+    nameUniquenessValidator: {
+      type: 'okapi',
+      records: 'requestPolicies',
+      accumulate: 'true',
+      path: 'request-policy-storage/request-policies',
+      fetch: false,
     },
   });
 
@@ -31,6 +38,16 @@ class RequestPolicySettings extends React.Component {
         DELETE: PropTypes.func.isRequired,
       }),
     }).isRequired,
+  }
+
+  parseInitialValues = (values = {}) => {
+    const types = values.requestTypes || [];
+    const typesMap = types.reduce((acc, type) => ({ ...acc, [type]: true }), {});
+    const requestTypes = requestPolicyTypes.map((type) => {
+      return !!typesMap[type];
+    });
+
+    return { ...values, requestTypes };
   }
 
   render() {
@@ -54,6 +71,7 @@ class RequestPolicySettings extends React.Component {
         id="request-policy-settings"
         data-test-request-policy-settings
         parentMutator={mutator}
+        parseInitialValues={this.parseInitialValues}
         parentResources={resources}
         entryList={entryList}
         resourceKey="requestPolicies"

@@ -18,6 +18,8 @@ import {
   HeaderPane,
   GeneralSection,
 } from './components';
+import asyncValidate from '../Validation/request-policy/unique-name';
+import { requestPolicyTypes } from '../../constants';
 
 class RequestPolicyForm extends React.Component {
   static propTypes = {
@@ -57,8 +59,13 @@ class RequestPolicyForm extends React.Component {
     this.setState({ sections });
   };
 
-  saveForm = (requestPolicy) => {
-    this.props.onSave(requestPolicy);
+  saveForm = (data) => {
+    const requestTypes = data.requestTypes.reduce((acc, type, index) => {
+      if (type) acc.push(requestPolicyTypes[index]);
+      return acc;
+    }, []);
+
+    this.props.onSave({ ...data, requestTypes });
   };
 
   changeDeleteState = (showDeleteConfirmation) => {
@@ -140,5 +147,7 @@ const connectedRequestPolicyForm = connect(mapStateToProps)(RequestPolicyForm);
 export default stripesForm({
   form: 'requestPolicyForm',
   navigationCheck: true,
-  enableReinitialize: false,
+  enableReinitialize: true,
+  asyncValidate,
+  asyncBlurFields: ['name'],
 })(connectedRequestPolicyForm);

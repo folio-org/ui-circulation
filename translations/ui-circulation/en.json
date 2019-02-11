@@ -213,7 +213,8 @@
   "settings.requestPolicy.policyTypes": "Request types allowed",
   "settings.requestPolicy.saveAndClose": "Save",
   "settings.requestPolicy.createEntryLabel": "New request policy",
-  
+  "settings.requestPolicy.errors.nameExists": "A request policy with this name already exists",
+
   "settings.noticePolicy.addNotice": "Add Notice",
   "settings.noticePolicy.countableNotice": "Notice {counter}",
   "settings.noticePolicy.loanNotices.via": "via",

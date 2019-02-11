@@ -9,6 +9,7 @@ import {
   Row,
   KeyValue,
   ExpandAllButton,
+  List,
 } from '@folio/stripes/components';
 
 import { Metadata } from '../components';
@@ -41,6 +42,12 @@ class RequestPolicyDetail extends React.Component {
     this.setState({ sections });
   };
 
+  renderItem = (requestType) => {
+    return (
+      <li key={requestType}>{requestType}</li>
+    );
+  }
+
   render() {
     const {
       initialValues: policy = {},
@@ -50,6 +57,8 @@ class RequestPolicyDetail extends React.Component {
     const {
       sections,
     } = this.state;
+
+    const { requestTypes } = policy;
 
     return (
       <div data-test-request-policy-detail>
@@ -87,6 +96,20 @@ class RequestPolicyDetail extends React.Component {
                 label={<FormattedMessage id="ui-circulation.settings.requestPolicy.policyDescription" />}
                 value={get(policy, 'description', '-')}
               />
+            </Col>
+          </Row>
+          <Row>
+            <Col xs={12}>
+              <KeyValue
+                label={<FormattedMessage id="ui-circulation.settings.requestPolicy.policyTypes" />}
+              >
+                <div data-test-request-types-list>
+                  <List
+                    items={requestTypes}
+                    itemFormatter={requestType => <li key={requestType}>{requestType}</li>}
+                  />
+                </div>
+              </KeyValue>
             </Col>
           </Row>
         </Accordion>
