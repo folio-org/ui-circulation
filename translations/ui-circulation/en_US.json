@@ -228,5 +228,6 @@
     "settings.noticePolicy.loanNotices.hours": "Hour(s)",
     "settings.noticePolicy.loanNotices.days": "Day(s)",
     "settings.noticePolicy.loanNotices.weeks": "Week(s)",
-    "settings.noticePolicy.loanNotices.months": "Month(s)"
+    "settings.noticePolicy.loanNotices.months": "Month(s)",
+    "settings.requestPolicy.errors.nameExists": "A request policy with this name already exists"
 }
