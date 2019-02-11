@@ -26,15 +26,14 @@ class GeneralSection extends React.Component {
     connect: PropTypes.func.isRequired,
   };
 
-  renderTypes = ({ fields }) => {
+  renderTypes = () => {
     const items = requestPolicyTypes.map((name, index) => (
-      <Row key={`row-${index}`}>
+      <Row key={`request-policy-type-${index}`}>
         <Col xs={12}>
           <Field
             component={Checkbox}
             type="checkbox"
             id={`${name.toLowerCase()}-checkbox`}
-            data-checked={fields.get(index)}
             label={name}
             name={`requestTypes[${index}]`}
           />
@@ -74,6 +73,7 @@ class GeneralSection extends React.Component {
         <Field
           id="request_policy_name"
           name="name"
+          required
           label={<FormattedMessage id="ui-circulation.settings.requestPolicy.policyName" />}
           component={TextField}
         />
