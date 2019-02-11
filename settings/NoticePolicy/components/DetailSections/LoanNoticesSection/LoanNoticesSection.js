@@ -5,13 +5,17 @@ import { map } from 'lodash';
 
 import { Accordion } from '@folio/stripes/components';
 
-import LoanNoticeCard from './components';
+import NoticeCard from '../components';
+import { loanNoticesSendWhen } from '../../../../../constants';
 
 class LoanNoticesSection extends React.Component {
   static propTypes = {
     isOpen: PropTypes.bool.isRequired,
-    policy: PropTypes.bool.isRequired,
-    templates: PropTypes.arrayOf(PropTypes.object).isRequired,
+    policy: PropTypes.object.isRequired,
+    templates: PropTypes.arrayOf(PropTypes.shape({
+      value: PropTypes.string.isRequired,
+      label: PropTypes.string.isRequired,
+    })).isRequired,
     onToggle: PropTypes.func.isRequired,
   };
 
@@ -30,11 +34,14 @@ class LoanNoticesSection extends React.Component {
         label={<FormattedMessage id="ui-circulation.settings.noticePolicy.loanNotices" />}
         onToggle={onToggle}
       >
-        {map(policy.loanNotices, (loanNotice, index) => (
-          <LoanNoticeCard
-            policy={policy}
+        {map(policy.loanNotices, (notice, index) => (
+          <NoticeCard
+            key={index}
             index={index}
+            sectionKey="loanNotices"
+            policy={policy}
             templates={templates}
+            sendWhenOptions={loanNoticesSendWhen}
           />
         ))}
       </Accordion>

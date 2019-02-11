@@ -5,7 +5,7 @@ import {
   isUndefined,
 } from 'lodash';
 
-import { LoanNotice } from '../../Models/NoticePolicy';
+import { Notice } from '../../Models/NoticePolicy';
 
 const setLoanNoticeDefaults = (policy) => {
   const noticePolicy = cloneDeep(policy);
@@ -26,7 +26,7 @@ const checkLoanNoticeHiddenFields = (policy) => {
   const noticePolicy = cloneDeep(policy);
 
   forEach(noticePolicy.loanNotices, (loanNotice, index) => {
-    const notice = new LoanNotice(loanNotice);
+    const notice = new Notice(loanNotice);
 
     if (!notice.isRecurring()) {
       unset(noticePolicy, `loanNotices[${index}].sendOptions.sendEvery`);

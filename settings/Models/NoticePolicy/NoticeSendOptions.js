@@ -1,9 +1,9 @@
 import { isEqual } from 'lodash';
 
 import { Period } from '../common';
-import { loanNoticesSendEventMap } from '../../../constants';
+import { noticesSendEventMap } from '../../../constants';
 
-export default class LoanNoticeSendOptions {
+export default class NoticeSendOptions {
   constructor(options = {}) {
     this.sendHow = options.sendHow;
     this.sendWhen = options.sendWhen;
@@ -12,7 +12,7 @@ export default class LoanNoticeSendOptions {
   }
 
   isBeforeOrAfter() {
-    return isEqual(this.sendHow, loanNoticesSendEventMap.AFTER)
-       || isEqual(this.sendHow, loanNoticesSendEventMap.BEFORE);
+    return isEqual(this.sendHow, noticesSendEventMap.AFTER)
+       || isEqual(this.sendHow, noticesSendEventMap.BEFORE);
   }
 }

@@ -1,6 +1,5 @@
+import Notice from './Notice';
 import { Metadata } from '../common';
-
-import LoanNotice from './LoanNotice';
 
 export default class NoticePolicy {
   static defaultNoticePolicy() {
@@ -14,9 +13,14 @@ export default class NoticePolicy {
     this.active = policy.active;
     this.metadata = new Metadata(policy.metadata);
     this.loanNotices = policy.loanNotices ? policy.loanNotices.reduce((loanNotices, loanNotice) => {
-      const ln = new LoanNotice(loanNotice);
+      const ln = new Notice(loanNotice);
 
       return [...loanNotices, ln];
+    }, []) : [];
+    this.requestNotices = policy.requestNotices ? policy.requestNotices.reduce((requestNotices, requestNotice) => {
+      const rn = new Notice(requestNotice);
+
+      return [...requestNotices, rn];
     }, []) : [];
   }
 }

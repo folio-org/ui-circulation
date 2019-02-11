@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { Accordion } from '@folio/stripes/components';
 
-import { LoanNoticesList } from './components';
+import NoticesList from '../components';
+import { loanNoticesSendWhen } from '../../../../../constants';
 
 class LoanNoticesSection extends React.Component {
   static propTypes = {
@@ -31,9 +32,11 @@ class LoanNoticesSection extends React.Component {
         label={<FormattedMessage id="ui-circulation.settings.noticePolicy.loanNotices" />}
         onToggle={onToggle}
       >
-        <LoanNoticesList
+        <NoticesList
+          sectionKey="loanNotices"
           policy={policy}
           templates={templates}
+          sendWhenOptions={loanNoticesSendWhen}
         />
       </Accordion>
     );
