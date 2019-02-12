@@ -22,8 +22,8 @@ function getEditorLine(lineNo = 0) {
 
 @interactor class Hints {
    static defaultScope = '.CodeMirror-hints';
-   arePresent = isPresent('.loan-rule-hint-minor');
-   text = text('.loan-rule-hint-minor');
+   arePresent = isPresent('.rule-hint-minor');
+   text = text('.rule-hint-minor');
 }
 
 @interactor class Editor {
@@ -55,11 +55,11 @@ function getEditorLine(lineNo = 0) {
   line0 = getEditorLine(0);
 }
 
-@interactor class LoanRules {
-  static defaultScope = '[data-test-loan-rules]';
-  formPresent = isPresent('[data-test-loan-rules-form]');
+@interactor class CirculationRules {
+  static defaultScope = '[data-test-circulation-rules]';
+  formPresent = isPresent('[data-test-circulation-rules-form]');
   editorPresent = isPresent('.react-codemirror2');
   editor = new Editor();
 }
 
-export default new LoanRules();
+export default new CirculationRules();

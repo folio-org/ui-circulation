@@ -8,15 +8,15 @@ import Codemirror from 'codemirror';
 import CodeMirror from 'react-codemirror2';
 import { injectIntl, intlShape } from 'react-intl';
 
-import initLoanRulesCMM from './LoanRulesCMM';
+import initRulesCMM from './RulesCMM';
 import 'codemirror/addon/fold/foldcode';
 import initFoldRules from './fold-rules';
 import 'codemirror/addon/fold/foldgutter';
-import './loan-rules-show-hint';
-import loanRulesHint from './loanRules-hint';
+import './rules-show-hint';
+import rulesHint from './Rules-hint';
 import 'codemirror/addon/hint/css-hint';
 import '!style-loader!css-loader!./CodeMirrorCustom.css';
-import css from './LoanRulesEditor.css';
+import css from './RulesEditor.css';
 
 const propTypes = {
   intl: intlShape.isRequired,
@@ -170,12 +170,12 @@ function generateFolded() {
   return container;
 }
 
-class LoanRulesEditor extends React.Component {
+class RulesEditor extends React.Component {
 
   constructor(props) {
     super(props);
 
-    initLoanRulesCMM(Codemirror);
+    initRulesCMM(Codemirror);
     initFoldRules(Codemirror);
     this.state = this.getInitialState();
 
@@ -240,7 +240,7 @@ class LoanRulesEditor extends React.Component {
       policyMapping,
     } = this.props;
 
-    const name = 'loanRulesCMM';
+    const name = 'rulesCMM';
     const modeConfig = {
       name,
       completionLists,
@@ -269,11 +269,11 @@ class LoanRulesEditor extends React.Component {
         electricChars: true,
         foldGutter: {
           rangeFinder: Codemirror.fold.rules,
-          gutter: "LoanRules-foldgutter",
+          gutter: "rules-foldgutter",
           indicatorOpen: openTri,
           indicatorFolded: foldedTri,
         },
-        gutters: ["CodeMirror-linenumbers", "LoanRules-foldgutter"],
+        gutters: ["CodeMirror-linenumbers", "rules-foldgutter"],
       },
       code: this.props.code,
     }
@@ -282,7 +282,7 @@ class LoanRulesEditor extends React.Component {
   componentDidMount() {
     this.cm = this.cmComponent.editor;
     //set up hinting
-    loanRulesHint(Codemirror, this.props);
+    rulesHint(Codemirror, this.props);
 
     // prettymuch always show the auto-complete.
     this.cm.on('cursorActivity', this.showHelp);
@@ -373,7 +373,7 @@ class LoanRulesEditor extends React.Component {
   // display error in editor
   renderError(lineNumber, errMsg) {
     const errElement = document.createElement('div');
-    errElement.className = 'loan-rule-error';
+    errElement.className = 'rule-error';
     errElement.innerHTML = errMsg;
 
     this.errWidgets.push(this.cm.doc.addLineWidget(
@@ -411,7 +411,7 @@ class LoanRulesEditor extends React.Component {
       }
     };
 
-    Codemirror.showHint(this.cm, Codemirror.hint.loanRulesCMM, hintOptions);
+    Codemirror.showHint(this.cm, Codemirror.hint.rulesCMM, hintOptions);
   }
 
   // updateCode(newCode) {
@@ -435,7 +435,7 @@ class LoanRulesEditor extends React.Component {
   }
 }
 
-LoanRulesEditor.propTypes = propTypes;
-LoanRulesEditor.defaultProps = defaultProps;
+RulesEditor.propTypes = propTypes;
+RulesEditor.defaultProps = defaultProps;
 
-export default injectIntl(LoanRulesEditor);
+export default injectIntl(RulesEditor);

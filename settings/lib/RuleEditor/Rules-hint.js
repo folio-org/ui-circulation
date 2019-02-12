@@ -5,14 +5,14 @@
 */
 import { forOwn } from 'lodash';
 
-export default function loanRulesHint(Codemirror, props) {
-  Codemirror.registerHelper('hint', 'loanRulesCMM', (cm) => {
+export default function rulesHint(Codemirror, props) {
+  Codemirror.registerHelper('hint', 'rulesCMM', (cm) => {
     const cur = cm.getCursor();
     const token = cm.getTokenAt(cur);
     const { state } = token;
     const inner = Codemirror.innerMode(cm.getMode(), state);
 
-    if (inner.mode.name !== 'loanRulesCMM') {
+    if (inner.mode.name !== 'rulesCMM') {
       return null;
     }
 
@@ -45,8 +45,8 @@ export default function loanRulesHint(Codemirror, props) {
 
       result.push({
         text: newRuleText,
-        displayText: formatMessage({ id: 'ui-circulation.settings.loanRules.newRule' }),
-        className: 'loan-rule-hint-major',
+        displayText: formatMessage({ id: 'ui-circulation.settings.circulationRules.newRule' }),
+        className: 'rule-hint-major',
         completeOnSingleClick: true,
       });
     }
@@ -58,11 +58,11 @@ export default function loanRulesHint(Codemirror, props) {
       meta
     ) {
       forOwn(typeMapping, (value, key) => {
-        const text = formatMessage({ id: `ui-circulation.settings.loanRules.${value}` });
+        const text = formatMessage({ id: `ui-circulation.settings.circulationRules.${value}` });
         result.push({
           text: `${key} `,
           displayText: `${key}: ${text}`,
-          className: 'loan-rule-hint-minor',
+          className: 'rule-hint-minor',
           completeOnSingleClick: true,
         });
       });
@@ -78,7 +78,7 @@ export default function loanRulesHint(Codemirror, props) {
           result.push({
             text: `${selector} `,
             displayText: selector,
-            className: 'loan-rule-hint-minor',
+            className: 'rule-hint-minor',
             completeOnSingleClick: true,
           });
         });
@@ -87,20 +87,20 @@ export default function loanRulesHint(Codemirror, props) {
 
     // display policy types in rValues.
     if (rValue && cur.ch > indented && !keyProperty) {
-      const text = formatMessage({ id: 'ui-circulation.settings.loanRules.circulationPolicies' });
+      const text = formatMessage({ id: 'ui-circulation.settings.circulationRules.circulationPolicies' });
 
       result.push({
         text,
         displayText: text,
-        className: 'loan-rule-hint-strong',
+        className: 'rule-hint-strong',
         inactive: true,
       });
 
       forOwn(policyMapping, (value, key) => {
         result.push({
           text: `${key} `,
-          displayText: formatMessage({ id: `ui-circulation.settings.loanRules.${value}` }),
-          className: 'loan-rule-hint-minor',
+          displayText: formatMessage({ id: `ui-circulation.settings.circulationRules.${value}` }),
+          className: 'rule-hint-minor',
           completeOnSingleClick: true,
         });
       });
@@ -115,7 +115,7 @@ export default function loanRulesHint(Codemirror, props) {
           result.push({
             text: `${selector} `,
             displayText: selector,
-            className: 'loan-rule-hint-minor',
+            className: 'rule-hint-minor',
             completeOnSingleClick: true,
           });
         });

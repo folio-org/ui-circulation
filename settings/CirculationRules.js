@@ -5,7 +5,7 @@ import { FormattedMessage } from 'react-intl';
 import { Callout, Paneset, Pane } from '@folio/stripes/components';
 import fetch from 'isomorphic-fetch';
 
-import LoanRulesForm from './lib/RuleEditor/LoanRulesForm';
+import RulesForm from './lib/RuleEditor/RulesForm';
 
 const editorDefaultProps = {
   // whether or not to show the 'autocomplete' widget (pro mode)
@@ -27,11 +27,11 @@ const editorDefaultProps = {
   },
 };
 
-class LoanRules extends React.Component {
+class CirculationRules extends React.Component {
   static manifest = Object.freeze({
-    loanRules: {
+    circulationRules: {
       type: 'okapi',
-      path: 'circulation/loan-rules',
+      path: 'circulation/rules',
       resourceShouldRefresh: true,
     },
     patronGroups: {
@@ -98,14 +98,15 @@ class LoanRules extends React.Component {
   }
 
   onSubmit(values) {
-    const loanRules = values.loanRulesCode.replace(/\t/g, '    ');
-    this.saveLoanRules(loanRules);
+    const rules = values.rules.replace(/\t/g, '    ');
+    this.save(rules);
   }
 
-  getLoanRulesCode() {
-    const loanRules = (this.props.resources.loanRules || {}).records || [];
-    const loanRulesCode = (loanRules.length) ? loanRules[0].loanRulesAsTextFile : '';
-    return this.convertIdsToNames(loanRulesCode.replace('    ', '\t'));
+  getRules() {
+    const rules = (this.props.resources.circulationRules || {}).records || [];
+    const rulesStr = (rules.length) ? rules[0].loanRulesAsTextFile : '';
+
+    return this.convertIdsToNames(rulesStr.replace('    ', '\t'));
   }
 
   getEditorProps() {
@@ -168,7 +169,7 @@ class LoanRules extends React.Component {
 
   // TODO: refactor to use mutator after PUT is changed on the server or stripes-connect supports
   // custom PUT requests without the id attached to the end of the URL.
-  saveLoanRules(rules) {
+  save(rules) {
     const {
       stripes,
     } = this.props;
@@ -180,18 +181,19 @@ class LoanRules extends React.Component {
     });
 
     const loanRulesAsTextFile = this.convertNamesToIds(rules);
+    const body = JSON.stringify({ loanRulesAsTextFile });
     const options = {
       method: 'PUT',
       headers,
-      body: JSON.stringify({ loanRulesAsTextFile }),
+      body,
     };
 
     this.setState({ errors: null });
-    return fetch(`${stripes.okapi.url}/circulation/loan-rules`, options).then((resp) => {
+    return fetch(`${stripes.okapi.url}/circulation/rules`, options).then((resp) => {
       if (resp.status >= 400) {
         resp.json().then(json => this.setState({ errors: [json] }));
       } else if (this.callout) {
-        this.callout.sendCallout({ message: <FormattedMessage id="ui-circulation.settings.loanRules.rulesUpdated" /> });
+        this.callout.sendCallout({ message: <FormattedMessage id="ui-circulation.settings.circulationRules.rulesUpdated" /> });
       }
     });
   }
@@ -205,19 +207,19 @@ class LoanRules extends React.Component {
       return (<div />);
     }
 
-    const loanRulesCode = this.getLoanRulesCode();
+    const rules = this.getRules();
     const editorProps = this.getEditorProps();
 
     return (
       <Paneset>
         <Pane
-          data-test-loan-rules
-          paneTitle={<FormattedMessage id="ui-circulation.settings.loanRules.paneTitle" />}
+          data-test-circulation-rules
+          paneTitle={<FormattedMessage id="ui-circulation.settings.circulationRules.paneTitle" />}
           defaultWidth="fill"
         >
-          <LoanRulesForm
+          <RulesForm
             onSubmit={this.onSubmit}
-            initialValues={{ loanRulesCode }}
+            initialValues={{ rules }}
             editorProps={editorProps}
           />
         </Pane>
@@ -227,4 +229,4 @@ class LoanRules extends React.Component {
   }
 }
 
-export default LoanRules;
+export default CirculationRules;

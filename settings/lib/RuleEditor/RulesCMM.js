@@ -1,6 +1,6 @@
-/* Loan Rules Mode for CodeMirror.
+/* Circulation Rules Mode for CodeMirror.
 *  This is the code that parses the content of the codemirror editor for syntax highlighting. It also passes the completion list through to
-*  the loan rules code hinting functionality.
+*  the circulation rules code hinting functionality.
 */
 
 const hooks = {
@@ -119,8 +119,8 @@ function processToken(stream, state, parserConfig) {
   return null;
 }
 
-const initLoanRulesCMM = (CodeMirror) => {
-  CodeMirror.defineMode('loanRulesCMM', (config, parserConfig) => {
+const initRulesCMM = (CodeMirror) => {
+  CodeMirror.defineMode('rulesCMM', (config, parserConfig) => {
     const { indentUnit } = config;
 
     return {
@@ -175,4 +175,4 @@ const initLoanRulesCMM = (CodeMirror) => {
   });
 };
 
-export default initLoanRulesCMM;
+export default initRulesCMM;
