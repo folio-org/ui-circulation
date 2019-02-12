@@ -5,35 +5,35 @@ import {
   isUndefined,
 } from 'lodash';
 
-import { LoanNotice } from '../../Models/NoticePolicy';
+import { Notice } from '../../Models/NoticePolicy';
 
-const setLoanNoticeDefaults = (policy) => {
+const setNoticeDefaults = (sectionKey, policy) => {
   const noticePolicy = cloneDeep(policy);
 
-  forEach(noticePolicy.loanNotices, (loanNotice) => {
-    loanNotice.name = 'mockName';
-    loanNotice.templateName = 'mockTemplateName';
+  forEach(noticePolicy[sectionKey], (notice) => {
+    notice.name = 'mockName';
+    notice.templateName = 'mockTemplateName';
 
-    if (isUndefined(loanNotice.realTime)) {
-      loanNotice.realTime = false;
+    if (isUndefined(notice.realTime)) {
+      notice.realTime = false;
     }
   });
 
   return noticePolicy;
 };
 
-const checkLoanNoticeHiddenFields = (policy) => {
+const checkNoticeHiddenFields = (sectionKey, policy) => {
   const noticePolicy = cloneDeep(policy);
 
-  forEach(noticePolicy.loanNotices, (loanNotice, index) => {
-    const notice = new LoanNotice(loanNotice);
+  forEach(noticePolicy[sectionKey], (item, index) => {
+    const notice = new Notice(item);
 
     if (!notice.isRecurring()) {
-      unset(noticePolicy, `loanNotices[${index}].sendOptions.sendEvery`);
+      unset(noticePolicy, `[${sectionKey}][${index}].sendOptions.sendEvery`);
     }
 
     if (!notice.sendOptions.isBeforeOrAfter()) {
-      unset(noticePolicy, `loanNotices[${index}].sendOptions.sendBy`);
+      unset(noticePolicy, `[${sectionKey}][${index}].sendOptions.sendBy`);
     }
   });
 
@@ -52,8 +52,10 @@ const filter = (entity, ...callbacks) => {
 
 export default (entity) => {
   const callbacks = [
-    setLoanNoticeDefaults,
-    checkLoanNoticeHiddenFields,
+    setNoticeDefaults.bind(null, 'loanNotices'),
+    checkNoticeHiddenFields.bind(null, 'loanNotices'),
+    setNoticeDefaults.bind(null, 'requestNotices'),
+    checkNoticeHiddenFields.bind(null, 'requestNotices'),
   ];
 
   return filter(entity, ...callbacks);

@@ -8,6 +8,7 @@ import {
 import {
   find,
   get,
+  isNull,
 } from 'lodash';
 
 import {
@@ -17,38 +18,57 @@ import {
 } from '@folio/stripes/components';
 
 import {
-  loanNoticesFormats,
-  loanNoticesFrequency,
-  loanNoticesSendEvent,
-  loanNoticesSendWhen,
-  loanNoticesIntervalPeriods,
-} from '../../../../../../../constants';
+  noticesFormats,
+  noticesFrequency,
+  noticesSendEvent,
+  noticesIntervalPeriods,
+} from '../../../../../../constants';
 
-import css from './LoanNoticeCard.css';
+import css from './NoticeCard.css';
 
-class LoanNoticeCard extends React.Component {
+class NoticeCard extends React.Component {
   static propTypes = {
-    policy: PropTypes.object.isRequired,
-    intl: intlShape.isRequired,
     index: PropTypes.number.isRequired,
-    templates: PropTypes.arrayOf(PropTypes.object).isRequired,
+    sectionKey: PropTypes.string.isRequired,
+    intl: intlShape.isRequired,
+    policy: PropTypes.object.isRequired,
+    templates: PropTypes.arrayOf(PropTypes.shape({
+      value: PropTypes.string.isRequired,
+      label: PropTypes.string.isRequired,
+    })).isRequired,
+    sendWhenOptions: PropTypes.arrayOf(PropTypes.shape({
+      value: PropTypes.string.isRequired,
+      label: PropTypes.string.isRequired,
+    })).isRequired,
   };
 
   getDropdownValue = (pathToValue, index, items) => {
     const {
-      intl,
+      sectionKey,
       policy,
     } = this.props;
 
-    const seletedValue = get(policy, `loanNotices[${index}].${pathToValue}`);
+    const seletedValue = get(policy, `${sectionKey}[${index}].${pathToValue}`);
     const selectedItem = find(items, (item) => item.value === seletedValue);
 
-    return selectedItem ? intl.formatMessage({ id: selectedItem.label }) : null;
+    return selectedItem ? selectedItem.label : null;
+  };
+
+  getTranslatedDropdownValue = (pathToValue, index, items) => {
+    const { intl } = this.props;
+
+    const translationKey = this.getDropdownValue(pathToValue, index, items);
+
+    return isNull(translationKey) ? null : intl.formatMessage({ id: translationKey });
   };
 
   getCheckboxValue = (pathToValue, index) => {
-    const { policy } = this.props;
-    const seletedValue = get(policy, `loanNotices[${index}].${pathToValue}`);
+    const {
+      sectionKey,
+      policy,
+    } = this.props;
+
+    const seletedValue = get(policy, `${sectionKey}[${index}].${pathToValue}`);
 
     return seletedValue
       ? <FormattedMessage id="ui-circulation.settings.common.yes" />
@@ -57,19 +77,21 @@ class LoanNoticeCard extends React.Component {
 
   render() {
     const {
-      policy,
       index: i,
+      sectionKey,
+      policy,
       templates,
+      sendWhenOptions,
     } = this.props;
 
-    const isRecurring = policy.loanNotices[i].isRecurring();
-    const isBeforeOrAfter = policy.loanNotices[i].sendOptions.isBeforeOrAfter();
+    const isRecurring = policy[sectionKey][i].isRecurring();
+    const isBeforeOrAfter = policy[sectionKey][i].sendOptions.isBeforeOrAfter();
     const sendEventLabelId = isRecurring ? 'startigSendEvent' : 'sendEvent';
     const translationNamespace = 'ui-circulation.settings.noticePolicy';
 
     return (
       <Row>
-        <Col xs={12} className={css.loanNotice}>
+        <Col xs={12} className={css.notice}>
           <Row className={css.header}>
             <Col xs={3} className={css.headerTitle}>
               <FormattedMessage
@@ -81,58 +103,58 @@ class LoanNoticeCard extends React.Component {
           <Row>
             <Col xs={5} className={css.noticeField}>
               <KeyValue
-                label={<FormattedMessage id={`${translationNamespace}.loanNotices.template`} />}
+                label={<FormattedMessage id={`${translationNamespace}.notices.template`} />}
                 value={this.getDropdownValue('templateId', i, templates)}
               />
             </Col>
             <Col xs={1} className={css.cardText}>
               <KeyValue>
-                <FormattedMessage id={`${translationNamespace}.loanNotices.via`} />
+                <FormattedMessage id={`${translationNamespace}.notices.via`} />
               </KeyValue>
             </Col>
             <Col xs={3} className={css.noticeField}>
               <KeyValue
-                label={<FormattedMessage id={`${translationNamespace}.loanNotices.format`} />}
-                value={this.getDropdownValue('format', i, loanNoticesFormats)}
+                label={<FormattedMessage id={`${translationNamespace}.notices.format`} />}
+                value={this.getTranslatedDropdownValue('format', i, noticesFormats)}
               />
             </Col>
             <Col xs={3} className={css.noticeField}>
               <KeyValue
-                label={<FormattedMessage id={`${translationNamespace}.loanNotices.frequency`} />}
-                value={this.getDropdownValue('frequency', i, loanNoticesFrequency)}
+                label={<FormattedMessage id={`${translationNamespace}.notices.frequency`} />}
+                value={this.getTranslatedDropdownValue('frequency', i, noticesFrequency)}
               />
             </Col>
           </Row>
           <React.Fragment>
             <Row>
               <Col xs={12} className={css.fieldLabel}>
-                <KeyValue label={<FormattedMessage id={`${translationNamespace}.loanNotices.${sendEventLabelId}`} />}>
+                <KeyValue label={<FormattedMessage id={`${translationNamespace}.notices.${sendEventLabelId}`} />}>
                   <Row>
                     <Col xs={2}>
                       <KeyValue>
-                        {this.getDropdownValue('sendOptions.sendHow', i, loanNoticesSendEvent)}
+                        {this.getTranslatedDropdownValue('sendOptions.sendHow', i, noticesSendEvent)}
                       </KeyValue>
                     </Col>
                     <Col xs={3}>
                       <KeyValue>
-                        {this.getDropdownValue('sendOptions.sendWhen', i, loanNoticesSendWhen)}
+                        {this.getTranslatedDropdownValue('sendOptions.sendWhen', i, sendWhenOptions)}
                       </KeyValue>
                     </Col>
                     { isBeforeOrAfter && (
                       <React.Fragment>
                         <Col xs={1}>
                           <KeyValue>
-                            <FormattedMessage id={`${translationNamespace}.loanNotices.by`} />
+                            <FormattedMessage id={`${translationNamespace}.notices.by`} />
                           </KeyValue>
                         </Col>
                         <Col xs={3}>
                           <KeyValue>
-                            {get(policy, `loanNotices[${i}].sendOptions.sendBy.duration`)}
+                            {get(policy, `[${sectionKey}][${i}].sendOptions.sendBy.duration`)}
                           </KeyValue>
                         </Col>
                         <Col xs={3}>
                           <KeyValue>
-                            {this.getDropdownValue('sendOptions.sendBy.intervalId', i, loanNoticesIntervalPeriods)}
+                            {this.getTranslatedDropdownValue('sendOptions.sendBy.intervalId', i, noticesIntervalPeriods)}
                           </KeyValue>
                         </Col>
                       </React.Fragment>
@@ -145,16 +167,16 @@ class LoanNoticeCard extends React.Component {
           { isRecurring && (
             <Row>
               <Col xs={12} className={css.fieldLabel}>
-                <KeyValue label={<FormattedMessage id={`${translationNamespace}.loanNotices.sendEvery`} />}>
+                <KeyValue label={<FormattedMessage id={`${translationNamespace}.notices.sendEvery`} />}>
                   <Row>
                     <Col xs={3}>
                       <KeyValue>
-                        {get(policy, `loanNotices[${i}].sendOptions.sendEvery.duration`)}
+                        {get(policy, `[${sectionKey}][${i}].sendOptions.sendEvery.duration`)}
                       </KeyValue>
                     </Col>
                     <Col xs={3}>
                       <KeyValue>
-                        {this.getDropdownValue('sendOptions.sendEvery.intervalId', i, loanNoticesIntervalPeriods)}
+                        {this.getTranslatedDropdownValue('sendOptions.sendEvery.intervalId', i, noticesIntervalPeriods)}
                       </KeyValue>
                     </Col>
                   </Row>
@@ -165,7 +187,7 @@ class LoanNoticeCard extends React.Component {
           <Row>
             <Col xs={12} className={css.noticeField}>
               <KeyValue
-                label={<FormattedMessage id={`${translationNamespace}.loanNotices.realTime`} />}
+                label={<FormattedMessage id={`${translationNamespace}.notices.realTime`} />}
                 value={this.getCheckboxValue('realTime', i)}
               />
             </Col>
@@ -176,4 +198,4 @@ class LoanNoticeCard extends React.Component {
   }
 }
 
-export default injectIntl(LoanNoticeCard);
+export default injectIntl(NoticeCard);

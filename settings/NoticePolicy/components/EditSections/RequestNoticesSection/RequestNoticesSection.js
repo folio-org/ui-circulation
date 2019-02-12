@@ -3,15 +3,25 @@ import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { Accordion } from '@folio/stripes/components';
 
+import NoticesList from '../components';
+import { requestNoticesSendWhen } from '../../../../../constants';
+
 class RequestNoticesSection extends React.Component {
   static propTypes = {
     isOpen: PropTypes.bool.isRequired,
+    policy: PropTypes.object.isRequired,
+    templates: PropTypes.arrayOf(PropTypes.shape({
+      value: PropTypes.string.isRequired,
+      label: PropTypes.string.isRequired,
+    })).isRequired,
     onToggle: PropTypes.func.isRequired,
   };
 
   render() {
     const {
       isOpen,
+      policy,
+      templates,
       onToggle,
     } = this.props;
 
@@ -22,7 +32,12 @@ class RequestNoticesSection extends React.Component {
         label={<FormattedMessage id="ui-circulation.settings.noticePolicy.requestNotices" />}
         onToggle={onToggle}
       >
-        <span>Content will be available soon.</span>
+        <NoticesList
+          sectionKey="requestNotices"
+          policy={policy}
+          templates={templates}
+          sendWhenOptions={requestNoticesSendWhen}
+        />
       </Accordion>
     );
   }

@@ -20,6 +20,7 @@ export const intervalIdsMap = {
   DAYS: 'Days',
   WEEKS: 'Weeks',
   MONTHS: 'Months',
+  YEARS: 'Years',
 };
 
 export const loanProfileMap = {
@@ -101,19 +102,19 @@ export const requestPolicyTypes = [
   'Recall',
 ];
 
-export const loanNoticesFrequencyMap = {
+export const noticesFormatsMap = {
+  EMAIL: 'Email',
+};
+
+export const noticesFrequencyMap = {
   ONE_TIME: 'One time',
   RECURRING: 'Recurring',
 };
 
-export const loanNoticesSendEventMap = {
+export const noticesSendEventMap = {
   AFTER: 'After',
   BEFORE: 'Before',
   UPON: 'Upon At',
-};
-
-export const loanNoticesFormatsMap = {
-  EMAIL: 'Email',
 };
 
 export const loanNoticesSendWhenMap = {
@@ -122,19 +123,37 @@ export const loanNoticesSendWhenMap = {
   RENEWED: 'Renewed',
 };
 
-export const loanNoticesFormats = [
-  { value: loanNoticesFormatsMap.EMAIL, label: 'ui-circulation.settings.noticePolicy.loanNotices.email' },
+export const requestNoticesSendWhenMap = {
+  RECALL_REQUEST: 'Recall request',
+  HOLD_REQUEST: 'Hold request',
+  PAGING_REQUEST: 'Paging request',
+  AVAILABLE: 'Available',
+  HOLD_EXPIRATION: 'Hold Expiration',
+  REQUEST_CANCELATION: 'Request cancellation',
+};
+
+export const noticesFormats = [
+  { value: noticesFormatsMap.EMAIL, label: 'ui-circulation.settings.noticePolicy.notices.email' },
 ];
 
-export const loanNoticesFrequency = [
-  { value: loanNoticesFrequencyMap.ONE_TIME, label: 'ui-circulation.settings.noticePolicy.loanNotices.oneTime' },
-  { value: loanNoticesFrequencyMap.RECURRING, label: 'ui-circulation.settings.noticePolicy.loanNotices.recurring' },
+export const noticesFrequency = [
+  { value: noticesFrequencyMap.ONE_TIME, label: 'ui-circulation.settings.noticePolicy.notices.oneTime' },
+  { value: noticesFrequencyMap.RECURRING, label: 'ui-circulation.settings.noticePolicy.notices.recurring' },
 ];
 
-export const loanNoticesSendEvent = [
-  { value: loanNoticesSendEventMap.UPON, label: 'ui-circulation.settings.noticePolicy.loanNotices.upon' },
-  { value: loanNoticesSendEventMap.BEFORE, label: 'ui-circulation.settings.noticePolicy.loanNotices.before' },
-  { value: loanNoticesSendEventMap.AFTER, label: 'ui-circulation.settings.noticePolicy.loanNotices.after' },
+export const noticesSendEvent = [
+  { value: noticesSendEventMap.UPON, label: 'ui-circulation.settings.noticePolicy.notices.upon' },
+  { value: noticesSendEventMap.BEFORE, label: 'ui-circulation.settings.noticePolicy.notices.before' },
+  { value: noticesSendEventMap.AFTER, label: 'ui-circulation.settings.noticePolicy.notices.after' },
+];
+
+export const noticesIntervalPeriods = [
+  { value: intervalIdsMap.MINUTES, label: 'ui-circulation.settings.noticePolicy.notices.minutes' },
+  { value: intervalIdsMap.HOURS, label: 'ui-circulation.settings.noticePolicy.notices.hours' },
+  { value: intervalIdsMap.DAYS, label: 'ui-circulation.settings.noticePolicy.notices.days' },
+  { value: intervalIdsMap.WEEKS, label: 'ui-circulation.settings.noticePolicy.notices.weeks' },
+  { value: intervalIdsMap.MONTHS, label: 'ui-circulation.settings.noticePolicy.notices.months' },
+  { value: intervalIdsMap.YEARS, label: 'ui-circulation.settings.noticePolicy.notices.years' },
 ];
 
 export const loanNoticesSendWhen = [
@@ -143,12 +162,13 @@ export const loanNoticesSendWhen = [
   { value: loanNoticesSendWhenMap.RENEWED, label: 'ui-circulation.settings.noticePolicy.loanNotices.renewed' },
 ];
 
-export const loanNoticesIntervalPeriods = [
-  { value: intervalIdsMap.MINUTES, label: 'ui-circulation.settings.noticePolicy.loanNotices.minutes' },
-  { value: intervalIdsMap.HOURS, label: 'ui-circulation.settings.noticePolicy.loanNotices.hours' },
-  { value: intervalIdsMap.DAYS, label: 'ui-circulation.settings.noticePolicy.loanNotices.days' },
-  { value: intervalIdsMap.WEEKS, label: 'ui-circulation.settings.noticePolicy.loanNotices.weeks' },
-  { value: intervalIdsMap.MONTHS, label: 'ui-circulation.settings.noticePolicy.loanNotices.months' },
+export const requestNoticesSendWhen = [
+  { value: requestNoticesSendWhenMap.RECALL_REQUEST, label: 'ui-circulation.settings.noticePolicy.requestNotices.recallRequest' },
+  { value: requestNoticesSendWhenMap.HOLD_REQUEST, label: 'ui-circulation.settings.noticePolicy.requestNotices.holdRequest' },
+  { value: requestNoticesSendWhenMap.PAGING_REQUEST, label: 'ui-circulation.settings.noticePolicy.requestNotices.pagingRequest' },
+  { value: requestNoticesSendWhenMap.AVAILABLE, label: 'ui-circulation.settings.noticePolicy.requestNotices.available' },
+  { value: requestNoticesSendWhenMap.HOLD_EXPIRATION, label: 'ui-circulation.settings.noticePolicy.requestNotices.holdExpiration' },
+  { value: requestNoticesSendWhenMap.REQUEST_CANCELATION, label: 'ui-circulation.settings.noticePolicy.requestNotices.requestCancelation' },
 ];
 
 export default '';

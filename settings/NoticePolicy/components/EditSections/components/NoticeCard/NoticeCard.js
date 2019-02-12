@@ -18,21 +18,25 @@ import {
 } from '@folio/stripes/components';
 
 import {
-  loanNoticesFormats,
-  loanNoticesFrequency,
-  loanNoticesSendEvent,
-  loanNoticesSendWhen,
-  loanNoticesIntervalPeriods,
-} from '../../../../../../../constants';
+  noticesFormats,
+  noticesFrequency,
+  noticesSendEvent,
+  noticesIntervalPeriods,
+} from '../../../../../../constants';
 
-import css from './LoanNoticeCard.css';
+import css from './NoticeCard.css';
 
-class LoanNoticeCard extends React.Component {
+class NoticeCard extends React.Component {
   static propTypes = {
+    sectionKey: PropTypes.string.isRequired,
     fields: PropTypes.object.isRequired,
     policy: PropTypes.object.isRequired,
     intl: intlShape.isRequired,
     templates: PropTypes.arrayOf(PropTypes.shape({
+      value: PropTypes.string.isRequired,
+      label: PropTypes.string.isRequired,
+    })).isRequired,
+    sendWhenOptions: PropTypes.arrayOf(PropTypes.shape({
       value: PropTypes.string.isRequired,
       label: PropTypes.string.isRequired,
     })).isRequired,
@@ -50,26 +54,28 @@ class LoanNoticeCard extends React.Component {
 
     return map(items, ({ value, label }) => ({
       value,
-      label: intl.formatMessage({ id: label })
+      label: intl.formatMessage({ id: label }),
     }));
   };
 
   render() {
     const {
+      sectionKey,
       fields,
       policy,
       templates,
+      sendWhenOptions,
     } = this.props;
 
     return (
       <React.Fragment>
         {fields.map((loanNotice, index) => {
-          const isRecurring = policy.loanNotices[index].isRecurring();
-          const isBeforeOrAfter = policy.loanNotices[index].sendOptions.isBeforeOrAfter();
+          const isRecurring = policy[sectionKey][index].isRecurring();
+          const isBeforeOrAfter = policy[sectionKey][index].sendOptions.isBeforeOrAfter();
           const sendEventLabelId = isRecurring ? 'startigSendEvent' : 'sendEvent';
 
           return (
-            <Row>
+            <Row key={loanNotice}>
               <Col xs={7} key={index} className={css.loanNotice}>
                 <Row className={css.header}>
                   <Col xs={3} className={css.headerTitle}>
@@ -90,7 +96,7 @@ class LoanNoticeCard extends React.Component {
                     <Field
                       name={`${loanNotice}.templateId`}
                       label={(
-                        <FormattedMessage id="ui-circulation.settings.noticePolicy.loanNotices.template">
+                        <FormattedMessage id="ui-circulation.settings.noticePolicy.notices.template">
                           { message => `${message} *` }
                         </FormattedMessage>
                       )}
@@ -100,18 +106,18 @@ class LoanNoticeCard extends React.Component {
                     />
                   </Col>
                   <Col xs={1} className={css.cardText}>
-                    <FormattedMessage id="ui-circulation.settings.noticePolicy.loanNotices.via" />
+                    <FormattedMessage id="ui-circulation.settings.noticePolicy.notices.via" />
                   </Col>
                   <Col xs={3} className={css.noticeField}>
                     <Field
                       name={`${loanNotice}.format`}
                       label={(
-                        <FormattedMessage id="ui-circulation.settings.noticePolicy.loanNotices.format">
+                        <FormattedMessage id="ui-circulation.settings.noticePolicy.notices.format">
                           { message => `${message} *` }
                         </FormattedMessage>
                       )}
                       component={Select}
-                      dataOptions={this.getDropdownItems(loanNoticesFormats)}
+                      dataOptions={this.getDropdownItems(noticesFormats)}
                       placeholder=" "
                     />
                   </Col>
@@ -119,12 +125,12 @@ class LoanNoticeCard extends React.Component {
                     <Field
                       name={`${loanNotice}.frequency`}
                       label={(
-                        <FormattedMessage id="ui-circulation.settings.noticePolicy.loanNotices.frequency">
+                        <FormattedMessage id="ui-circulation.settings.noticePolicy.notices.frequency">
                           { message => `${message} *` }
                         </FormattedMessage>
                       )}
                       component={Select}
-                      dataOptions={this.getDropdownItems(loanNoticesFrequency)}
+                      dataOptions={this.getDropdownItems(noticesFrequency)}
                       placeholder=" "
                     />
                   </Col>
@@ -132,7 +138,7 @@ class LoanNoticeCard extends React.Component {
                 <React.Fragment>
                   <Row>
                     <Col xs={12} className={css.fieldLabel}>
-                      <FormattedMessage id={`ui-circulation.settings.noticePolicy.loanNotices.${sendEventLabelId}`}>
+                      <FormattedMessage id={`ui-circulation.settings.noticePolicy.notices.${sendEventLabelId}`}>
                         { message => `${message} *` }
                       </FormattedMessage>
                     </Col>
@@ -142,7 +148,7 @@ class LoanNoticeCard extends React.Component {
                       <Field
                         name={`${loanNotice}.sendOptions.sendHow`}
                         component={Select}
-                        dataOptions={this.getDropdownItems(loanNoticesSendEvent)}
+                        dataOptions={this.getDropdownItems(noticesSendEvent)}
                         placeholder=" "
                       />
                     </Col>
@@ -150,14 +156,14 @@ class LoanNoticeCard extends React.Component {
                       <Field
                         name={`${loanNotice}.sendOptions.sendWhen`}
                         component={Select}
-                        dataOptions={this.getDropdownItems(loanNoticesSendWhen)}
+                        dataOptions={this.getDropdownItems(sendWhenOptions)}
                         placeholder=" "
                       />
                     </Col>
                     { isBeforeOrAfter && (
                       <React.Fragment>
                         <Col xs={1} className={css.cardText} style={{ paddingBottom: '15px' }}>
-                          <FormattedMessage id="ui-circulation.settings.noticePolicy.loanNotices.by" />
+                          <FormattedMessage id="ui-circulation.settings.noticePolicy.notices.by" />
                         </Col>
                         <Col xs={3} className={css.noticeField}>
                           <Field
@@ -171,7 +177,7 @@ class LoanNoticeCard extends React.Component {
                           <Field
                             name={`${loanNotice}.sendOptions.sendBy.intervalId`}
                             component={Select}
-                            dataOptions={this.getDropdownItems(loanNoticesIntervalPeriods)}
+                            dataOptions={this.getDropdownItems(noticesIntervalPeriods)}
                             placeholder=" "
                           />
                         </Col>
@@ -184,7 +190,7 @@ class LoanNoticeCard extends React.Component {
                   <React.Fragment>
                     <Row>
                       <Col xs={12} className={css.fieldLabel}>
-                        <FormattedMessage id="ui-circulation.settings.noticePolicy.loanNotices.sendEvery">
+                        <FormattedMessage id="ui-circulation.settings.noticePolicy.notices.sendEvery">
                           { message => `${message} *` }
                         </FormattedMessage>
                       </Col>
@@ -202,7 +208,7 @@ class LoanNoticeCard extends React.Component {
                         <Field
                           name={`${loanNotice}.sendOptions.sendEvery.intervalId`}
                           component={Select}
-                          dataOptions={this.getDropdownItems(loanNoticesIntervalPeriods)}
+                          dataOptions={this.getDropdownItems(noticesIntervalPeriods)}
                           placeholder=" "
                         />
                       </Col>
@@ -213,7 +219,7 @@ class LoanNoticeCard extends React.Component {
                   <Col xs={12} className={css.noticeField}>
                     <Field
                       name={`${loanNotice}.realTime`}
-                      label={<FormattedMessage id="ui-circulation.settings.noticePolicy.loanNotices.realTime" />}
+                      label={<FormattedMessage id="ui-circulation.settings.noticePolicy.notices.realTime" />}
                       component={Checkbox}
                       type="checkbox"
                       normalize={v => !!v}
@@ -224,7 +230,7 @@ class LoanNoticeCard extends React.Component {
             </Row>
           );
         })}
-        <Row start="xs">
+        <Row start="xs" className={css.buttonContainer}>
           <Col xs={1}>
             <Button
               type="button"
@@ -240,4 +246,4 @@ class LoanNoticeCard extends React.Component {
   }
 }
 
-export default injectIntl(LoanNoticeCard);
+export default injectIntl(NoticeCard);

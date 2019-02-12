@@ -1,2 +1,2 @@
 export { default as NoticePolicy } from './NoticePolicy';
-export { default as LoanNotice } from './LoanNotice';
+export { default as Notice } from './Notice';

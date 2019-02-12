@@ -51,8 +51,8 @@ class NoticePolicyForm extends React.Component {
     sections: {
       general: true,
       loanNotices: true,
+      requestNotices: true,
       feeFineNotices: false,
-      requestNotices: false,
     },
   };
 
@@ -134,12 +134,14 @@ class NoticePolicyForm extends React.Component {
               templates={getTemplates(patronNoticeTemplates, 'Loan')}
               onToggle={this.handleSectionToggle}
             />
-            <FeeFineNoticesSection
-              isOpen={sections.feeFineNotices}
-              onToggle={this.handleSectionToggle}
-            />
             <RequestNoticesSection
               isOpen={sections.requestNotices}
+              policy={policy}
+              templates={getTemplates(patronNoticeTemplates, 'Request')}
+              onToggle={this.handleSectionToggle}
+            />
+            <FeeFineNoticesSection
+              isOpen={sections.feeFineNotices}
               onToggle={this.handleSectionToggle}
             />
             {editMode &&
