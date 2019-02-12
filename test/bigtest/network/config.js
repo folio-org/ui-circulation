@@ -1,6 +1,6 @@
 // typical mirage config export
 export default function config() {
-  this.get('/circulation/loan-rules', {
+  this.get('/circulation/rules', {
     'id' : '4c70f818-2edc-4cf8-aa27-16c14c5c7b58',
     'loanRulesAsTextFile' : 'priority: t, s, c, b, a, m, g\nfallback-policy: 43198de5-f56a-4a53-a0bd-5a324418967a\nm 1a54b431-2e4f-452d-9cae-9cee66c9a892: d9cd0bed-1b49-4b5e-a7bd-064b8d177231',
     'loanRulesAsDrools' : 'package loanrules\nimport org.folio.circulation.loanrules.*\nglobal Match match\n\nrule \'line 2\'\n  salience 2\n  when\n  then\n    match.loanPolicyId = \'43198de5-f56a-4a53-a0bd-5a324418967a\';\n    match.lineNumber = 2;\n    drools.halt();\nend\n\nrule \'line 3\'\n  salience 210000003\n  when\n    ItemType(id == \'1a54b431-2e4f-452d-9cae-9cee66c9a892\')\n  then\n    match.loanPolicyId = \'d9cd0bed-1b49-4b5e-a7bd-064b8d177231\';\n    match.lineNumber = 3;\n    drools.halt();\nend\n\n'
