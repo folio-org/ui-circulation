@@ -149,7 +149,7 @@ class NoticeCard extends React.Component {
                         </Col>
                         <Col xs={3}>
                           <KeyValue>
-                            {get(policy, `loanNotices[${i}].sendOptions.sendBy.duration`)}
+                            {get(policy, `[${sectionKey}][${i}].sendOptions.sendBy.duration`)}
                           </KeyValue>
                         </Col>
                         <Col xs={3}>
@@ -171,7 +171,7 @@ class NoticeCard extends React.Component {
                   <Row>
                     <Col xs={3}>
                       <KeyValue>
-                        {get(policy, `loanNotices[${i}].sendOptions.sendEvery.duration`)}
+                        {get(policy, `[${sectionKey}][${i}].sendOptions.sendEvery.duration`)}
                       </KeyValue>
                     </Col>
                     <Col xs={3}>

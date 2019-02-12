@@ -128,7 +128,7 @@ export const requestNoticesSendWhenMap = {
   HOLD_REQUEST: 'Hold request',
   PAGING_REQUEST: 'Paging request',
   AVAILABLE: 'Available',
-  HOLD_EXPIRATION: 'Hold expiration',
+  HOLD_EXPIRATION: 'Hold Expiration',
   REQUEST_CANCELATION: 'Request cancellation',
 };
 

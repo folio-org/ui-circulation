@@ -51,8 +51,8 @@ class NoticePolicyForm extends React.Component {
     sections: {
       general: true,
       loanNotices: true,
+      requestNotices: true,
       feeFineNotices: false,
-      requestNotices: false,
     },
   };
 
