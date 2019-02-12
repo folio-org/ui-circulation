@@ -228,5 +228,6 @@
     "settings.noticePolicy.loanNotices.hours": "ساعة",
     "settings.noticePolicy.loanNotices.days": "أيام",
     "settings.noticePolicy.loanNotices.weeks": "أسبوع",
-    "settings.noticePolicy.loanNotices.months": "شهرًا"
+    "settings.noticePolicy.loanNotices.months": "شهرًا",
+    "settings.requestPolicy.errors.nameExists": "A request policy with this name already exists"
 }

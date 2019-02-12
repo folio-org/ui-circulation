@@ -101,7 +101,7 @@
     "settings.staffSlips.previewLabel": "Preview of staff slip - Hold",
     "settings.staffSlips.yes": "Sim",
     "settings.staffSlips.no": "Não",
-    "meta.title": "Circulation",
+    "meta.title": "Circulação",
     "settings.loanPolicy.fDDSRequired": "Prazo de vencimento previsto *",
     "settings.loanPolicy.yes": "Sim",
     "settings.loanPolicy.no": "No",
@@ -228,5 +228,6 @@
     "settings.noticePolicy.loanNotices.hours": "Hour(s)",
     "settings.noticePolicy.loanNotices.days": "Day(s)",
     "settings.noticePolicy.loanNotices.weeks": "Week(s)",
-    "settings.noticePolicy.loanNotices.months": "Month(s)"
+    "settings.noticePolicy.loanNotices.months": "Month(s)",
+    "settings.requestPolicy.errors.nameExists": "A request policy with this name already exists"
 }
