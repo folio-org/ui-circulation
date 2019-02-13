@@ -154,9 +154,9 @@ class FixedDueDateScheduleManager extends React.Component {
             entryLabel={entryLabel}
             nameKey="name"
             permissions={{
-              put: 'ui-circulation.settings.loan-rules',
-              post: 'ui-circulation.settings.loan-rules',
-              delete: 'ui-circulation.settings.loan-rules',
+              put: 'ui-circulation.settings.circulation-rules',
+              post: 'ui-circulation.settings.circulation-rules',
+              delete: 'ui-circulation.settings.circulation-rules',
             }}
             validate={this.validate}
             deleteDisabled={this.deleteDisabled}

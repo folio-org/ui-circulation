@@ -93,11 +93,11 @@
         ]
       },
       {
-        "permissionName": "ui-circulation.settings.loan-rules",
+        "permissionName": "ui-circulation.settings.circulation-rules",
         "displayName": "Settings (Circ): Can create, edit and remove loan rules",
         "subPermissions": [
-          "circulation-storage.loan-rules.get",
-          "circulation-storage.loan-rules.put",
+          "circulation-storage.circulation-rules.get",
+          "circulation-storage.circulation-rules.put",
           "settings.circulation.enabled"
         ],
         "visible": true
@@ -120,7 +120,7 @@
         "permissionName": "settings.loan-rules.all",
         "displayName": "Settings (Circ): Can create, edit and remove loan rules [LEGACY]",
         "subPermissions": [
-          "ui-circulation.settings.loan-rules"
+          "ui-circulation.settings.circulation-rules"
         ]
       },
       {

@@ -28,13 +28,13 @@ class Circulation extends React.Component {
         route: 'rules',
         label: <FormattedMessage id="ui-circulation.settings.index.circulationRules" />,
         component: CirculationRules,
-        perm: 'ui-circulation.settings.loan-rules',
+        perm: 'ui-circulation.settings.circulation-rules',
       },
       {
         route: 'fixed-due-date-schedules',
         label: <FormattedMessage id="ui-circulation.settings.index.fdds" />,
         component: FixedDueDateScheduleManager,
-        perm: 'ui-circulation.settings.loan-rules',
+        perm: 'ui-circulation.settings.circulation-rules',
       },
       {
         route: 'checkout',
