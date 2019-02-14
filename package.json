@@ -98,6 +98,8 @@
         "subPermissions": [
           "circulation-storage.circulation-rules.get",
           "circulation-storage.circulation-rules.put",
+          "circulation.rules.get",
+          "circulation.rules.put",
           "settings.circulation.enabled"
         ],
         "visible": true
