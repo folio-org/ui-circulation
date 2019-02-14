@@ -13,7 +13,7 @@ export default function (requestPolicy, _, props) {
 
     validator.reset();
     return validator.GET({ params: { query } }).then((items) => {
-      const item = find(items, { name });
+      const item = find(items, new RegExp(name, 'i'));
       if (item && item.id !== id) {
         const error = {
           name: <FormattedMessage id="ui-circulation.settings.requestPolicy.errors.nameExists" />
