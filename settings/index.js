@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { Settings } from '@folio/stripes/smart-components';
 
 import LoanPolicySettings from './LoanPolicy/LoanPolicySettings';
-import LoanRules from './LoanRules';
+import CirculationRules from './CirculationRules';
 import RequestCancellationReasons from './RequestCancellationReasons';
 import CheckoutSettings from './CheckoutSettings';
 import FixedDueDateScheduleManager from './FixedDueDateScheduleManager';
@@ -25,16 +25,16 @@ class Circulation extends React.Component {
         perm: 'ui-circulation.settings.loan-policies',
       },
       {
-        route: 'loan-rules',
-        label: <FormattedMessage id="ui-circulation.settings.index.loanRules" />,
-        component: LoanRules,
-        perm: 'ui-circulation.settings.loan-rules',
+        route: 'rules',
+        label: <FormattedMessage id="ui-circulation.settings.index.circulationRules" />,
+        component: CirculationRules,
+        perm: 'ui-circulation.settings.circulation-rules',
       },
       {
         route: 'fixed-due-date-schedules',
         label: <FormattedMessage id="ui-circulation.settings.index.fdds" />,
         component: FixedDueDateScheduleManager,
-        perm: 'ui-circulation.settings.loan-rules',
+        perm: 'ui-circulation.settings.circulation-rules',
       },
       {
         route: 'checkout',

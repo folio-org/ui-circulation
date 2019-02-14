@@ -133,7 +133,7 @@ class FixedDueDateScheduleForm extends React.Component {
     return (
       <PaneMenu>
         {edit &&
-          <IfPermission perm="ui-circulation.settings.loan-rules">
+          <IfPermission perm="ui-circulation.settings.circulation-rules">
             <Button
               id="clickable-delete-item"
               buttonStyle="danger"

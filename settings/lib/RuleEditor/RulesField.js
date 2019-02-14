@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import LoanRulesEditor from './LoanRulesEditor';
+import RulesEditor from './RulesEditor';
 
-const LoanRulesField = (props) => {
+const RulesField = (props) => {
   const { input, meta, code, ...others } = props; // eslint-disable-line no-unused-vars
 
   return (
-    <LoanRulesEditor
+    <RulesEditor
       code={input.value}
       onChange={input.onChange}
       {...others}
@@ -14,10 +14,10 @@ const LoanRulesField = (props) => {
   );
 };
 
-LoanRulesField.propTypes = {
+RulesField.propTypes = {
   input: PropTypes.object,
   meta: PropTypes.object,
   code: PropTypes.string,
 };
 
-export default LoanRulesField;
+export default RulesField;

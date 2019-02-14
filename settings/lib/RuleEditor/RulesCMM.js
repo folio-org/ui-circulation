@@ -1,6 +1,6 @@
-/* Loan Rules Mode for CodeMirror.
+/* Circulation Rules Mode for CodeMirror.
 *  This is the code that parses the content of the codemirror editor for syntax highlighting. It also passes the completion list through to
-*  the loan rules code hinting functionality.
+*  the circulation rules code hinting functionality.
 */
 
 const hooks = {
@@ -24,8 +24,7 @@ const hooks = {
   ':': (stream, state) => { // separate l-value from r-value
     stream.eatWhile(/\s/);
     state.rValue = true;
-    // TODO: turn on after  UICIRC-164 is done
-    // state.keyProperty = null;
+    state.keyProperty = null;
   },
   '!': (stream) => {
     stream.eatWhile(/\s/);
@@ -111,19 +110,8 @@ function processToken(stream, state, parserConfig) {
       }
     }
 
-    /* TODO: turn on after  UICIRC-164 is done
     if (policyMapping[keyProperty] && rValue) {
       state.keyProperty = null;
-      return 'policy';
-    }
-    */
-  }
-
-  // TODO: for backward compatiblity.
-  // Please remove it after UICIRC-164 is completed
-  if (rValue) {
-    const policyRes = completionLists.loanPolicies.filter((p) => p === cur);
-    if (policyRes.length > 0) {
       return 'policy';
     }
   }
@@ -131,8 +119,8 @@ function processToken(stream, state, parserConfig) {
   return null;
 }
 
-const initLoanRulesCMM = (CodeMirror) => {
-  CodeMirror.defineMode('loanRulesCMM', (config, parserConfig) => {
+const initRulesCMM = (CodeMirror) => {
+  CodeMirror.defineMode('rulesCMM', (config, parserConfig) => {
     const { indentUnit } = config;
 
     return {
@@ -187,4 +175,4 @@ const initLoanRulesCMM = (CodeMirror) => {
   });
 };
 
-export default initLoanRulesCMM;
+export default initRulesCMM;

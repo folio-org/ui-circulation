@@ -5,7 +5,7 @@ import { FormattedMessage } from 'react-intl';
 import { Callout, Paneset, Pane } from '@folio/stripes/components';
 import fetch from 'isomorphic-fetch';
 
-import LoanRulesForm from './lib/RuleEditor/LoanRulesForm';
+import RulesForm from './lib/RuleEditor/RulesForm';
 
 const editorDefaultProps = {
   // whether or not to show the 'autocomplete' widget (pro mode)
@@ -27,11 +27,11 @@ const editorDefaultProps = {
   },
 };
 
-class LoanRules extends React.Component {
+class CirculationRules extends React.Component {
   static manifest = Object.freeze({
-    loanRules: {
+    circulationRules: {
       type: 'okapi',
-      path: 'circulation/loan-rules',
+      path: 'circulation/rules',
       resourceShouldRefresh: true,
     },
     patronGroups: {
@@ -70,6 +70,24 @@ class LoanRules extends React.Component {
       },
       resourceShouldRefresh: true,
     },
+    requestPolicies: {
+      type: 'okapi',
+      records: 'requestPolicies',
+      path: 'request-policy-storage/request-policies',
+      params: {
+        limit: '100',
+      },
+      resourceShouldRefresh: true,
+    },
+    noticePolicies: {
+      type: 'okapi',
+      records: 'patronNoticePolicies',
+      path: 'patron-notice-policy-storage/patron-notice-policies',
+      params: {
+        limit: '100',
+      },
+      resourceShouldRefresh: true,
+    },
   });
 
   static propTypes = {
@@ -89,23 +107,28 @@ class LoanRules extends React.Component {
       materialTypes,
       loanTypes,
       loanPolicies,
+      requestPolicies,
+      noticePolicies,
     } = nextProps.resources;
 
     return !patronGroups.isPending &&
       !materialTypes.isPending &&
       !loanTypes.isPending &&
-      !loanPolicies.isPending;
+      !loanPolicies.isPending &&
+      !requestPolicies.isPending &&
+      !noticePolicies.isPending;
   }
 
   onSubmit(values) {
-    const loanRules = values.loanRulesCode.replace(/\t/g, '    ');
-    this.saveLoanRules(loanRules);
+    const rules = values.rules.replace(/\t/g, '    ');
+    this.save(rules);
   }
 
-  getLoanRulesCode() {
-    const loanRules = (this.props.resources.loanRules || {}).records || [];
-    const loanRulesCode = (loanRules.length) ? loanRules[0].loanRulesAsTextFile : '';
-    return this.convertIdsToNames(loanRulesCode.replace('    ', '\t'));
+  getRules() {
+    const rules = (this.props.resources.circulationRules || {}).records || [];
+    const rulesStr = (rules.length) ? rules[0].rulesAsText : '';
+
+    return this.convertIdsToNames(rulesStr.replace('    ', '\t'));
   }
 
   getEditorProps() {
@@ -114,6 +137,8 @@ class LoanRules extends React.Component {
       materialTypes,
       loanTypes,
       loanPolicies,
+      noticePolicies,
+      requestPolicies,
     } = this.props.resources;
 
     return Object.assign({}, editorDefaultProps, {
@@ -125,10 +150,8 @@ class LoanRules extends React.Component {
         loanTypes: loanTypes.records.map(t => kebabCase(t.name)),
         // policies
         loanPolicies: loanPolicies.records.map(l => kebabCase(l.name)),
-        // TODO: replace with request policy records
-        requestPolicies: ['request-policy-1', 'request-policy-2'],
-        // TODO: replace with notice policy records
-        noticePolicies: ['notice-policy-1', 'notice-policy-2'],
+        requestPolicies: requestPolicies.records.map(r => kebabCase(r.name)),
+        noticePolicies: noticePolicies.records.map(n => kebabCase(n.name)),
       },
     });
   }
@@ -139,13 +162,17 @@ class LoanRules extends React.Component {
       materialTypes,
       loanTypes,
       loanPolicies,
+      requestPolicies,
+      noticePolicies,
     } = this.props.resources;
 
     return [
       ...patronGroups.records.map(r => ({ name: kebabCase(r.group), id: r.id, prefix: 'g' })),
       ...materialTypes.records.map(r => ({ name: kebabCase(r.name), id: r.id, prefix: 'm' })),
       ...loanTypes.records.map(r => ({ name: kebabCase(r.name), id: r.id, prefix: 't' })),
-      ...loanPolicies.records.map(r => ({ name: kebabCase(r.name), id: r.id, prefix: ':' })),
+      ...loanPolicies.records.map(r => ({ name: kebabCase(r.name), id: r.id, prefix: 'l' })),
+      ...requestPolicies.records.map(r => ({ name: kebabCase(r.name), id: r.id, prefix: 'r' })),
+      ...noticePolicies.records.map(r => ({ name: kebabCase(r.name), id: r.id, prefix: 'n' })),
     ];
   }
 
@@ -153,7 +180,7 @@ class LoanRules extends React.Component {
     const records = this.getRecords();
     return records.reduce((memo, r) => {
       // eslint-disable-next-line no-useless-escape
-      const re = new RegExp(`(${r.prefix}.*?)(${r.name})(?=.*[g\s+|m\s+|t\s+|:\s*])?`, 'ig');
+      const re = new RegExp(`(${r.prefix}.*?)(${r.name})(?=.*[g\s+|m\s+|t\s+|l\s+|r\s+|n\s+|:\s*])?`, 'ig');
       return memo.replace(re, `$1${r.id}`);
     }, rulesStr);
   }
@@ -168,7 +195,7 @@ class LoanRules extends React.Component {
 
   // TODO: refactor to use mutator after PUT is changed on the server or stripes-connect supports
   // custom PUT requests without the id attached to the end of the URL.
-  saveLoanRules(rules) {
+  save(rules) {
     const {
       stripes,
     } = this.props;
@@ -179,19 +206,20 @@ class LoanRules extends React.Component {
       'Content-Type': 'application/json',
     });
 
-    const loanRulesAsTextFile = this.convertNamesToIds(rules);
+    const rulesAsText = this.convertNamesToIds(rules);
+    const body = JSON.stringify({ rulesAsText });
     const options = {
       method: 'PUT',
       headers,
-      body: JSON.stringify({ loanRulesAsTextFile }),
+      body,
     };
 
     this.setState({ errors: null });
-    return fetch(`${stripes.okapi.url}/circulation/loan-rules`, options).then((resp) => {
+    return fetch(`${stripes.okapi.url}/circulation/rules`, options).then((resp) => {
       if (resp.status >= 400) {
         resp.json().then(json => this.setState({ errors: [json] }));
       } else if (this.callout) {
-        this.callout.sendCallout({ message: <FormattedMessage id="ui-circulation.settings.loanRules.rulesUpdated" /> });
+        this.callout.sendCallout({ message: <FormattedMessage id="ui-circulation.settings.circulationRules.rulesUpdated" /> });
       }
     });
   }
@@ -205,19 +233,19 @@ class LoanRules extends React.Component {
       return (<div />);
     }
 
-    const loanRulesCode = this.getLoanRulesCode();
+    const rules = this.getRules();
     const editorProps = this.getEditorProps();
 
     return (
       <Paneset>
         <Pane
-          data-test-loan-rules
-          paneTitle={<FormattedMessage id="ui-circulation.settings.loanRules.paneTitle" />}
+          data-test-circulation-rules
+          paneTitle={<FormattedMessage id="ui-circulation.settings.circulationRules.paneTitle" />}
           defaultWidth="fill"
         >
-          <LoanRulesForm
+          <RulesForm
             onSubmit={this.onSubmit}
-            initialValues={{ loanRulesCode }}
+            initialValues={{ rules }}
             editorProps={editorProps}
           />
         </Pane>
@@ -227,4 +255,4 @@ class LoanRules extends React.Component {
   }
 }
 
-export default LoanRules;
+export default CirculationRules;

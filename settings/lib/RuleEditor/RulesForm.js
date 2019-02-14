@@ -8,16 +8,15 @@ import {
 } from '@folio/stripes/components';
 import { Field } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
-
 import stripesForm from '@folio/stripes/form';
 
-import LoanRulesField from './LoanRulesField';
+import RulesField from './RulesField';
 
-class LoanRulesForm extends React.Component {
+class RulesForm extends React.Component {
   static propTypes = {
     pristine: PropTypes.bool.isRequired,
     submitting: PropTypes.bool.isRequired,
-    onSave: PropTypes.func.isRequired,
+    onSave: PropTypes.func,
     handleSubmit: PropTypes.func.isRequired,
     editorProps: PropTypes.object,
   };
@@ -53,7 +52,7 @@ class LoanRulesForm extends React.Component {
     };
 
     return (
-      <form id="form-loan-rules" data-test-loan-rules-form style={containerStyle} onSubmit={handleSubmit}>
+      <form id="form-loan-rules" data-test-circulation-rules-form style={containerStyle} onSubmit={handleSubmit}>
         <Row end="xs">
           <Col xs={3}>
             <FormattedMessage id="ui-circulation.settings.checkout.filterRules">
@@ -80,7 +79,7 @@ class LoanRulesForm extends React.Component {
         </Row>
         <Row>
           <Col>
-            <Field component={LoanRulesField} name="loanRulesCode" {...editorProps} filter={this.state.ruleFilter} />
+            <Field component={RulesField} name="rules" {...editorProps} filter={this.state.ruleFilter} />
           </Col>
         </Row>
       </form>
@@ -89,7 +88,7 @@ class LoanRulesForm extends React.Component {
 }
 
 export default stripesForm({
-  form: 'loanRulesForm',
+  form: 'rulesForm',
   navigationCheck: true,
   enableReinitialize: true,
-})(LoanRulesForm);
+})(RulesForm);

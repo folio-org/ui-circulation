@@ -5,14 +5,14 @@
 */
 import { forOwn } from 'lodash';
 
-export default function loanRulesHint(Codemirror, props) {
-  Codemirror.registerHelper('hint', 'loanRulesCMM', (cm) => {
+export default function rulesHint(Codemirror, props) {
+  Codemirror.registerHelper('hint', 'rulesCMM', (cm) => {
     const cur = cm.getCursor();
     const token = cm.getTokenAt(cur);
     const { state } = token;
     const inner = Codemirror.innerMode(cm.getMode(), state);
 
-    if (inner.mode.name !== 'loanRulesCMM') {
+    if (inner.mode.name !== 'rulesCMM') {
       return null;
     }
 
@@ -26,7 +26,7 @@ export default function loanRulesHint(Codemirror, props) {
     } = state;
 
     const {
-      // policyMapping,
+      policyMapping,
       typeMapping,
       completionLists
     } = nextApplicable;
@@ -36,10 +36,7 @@ export default function loanRulesHint(Codemirror, props) {
     const result = [];
 
     // new rule at the start of lines and blank lines...
-    // TODO: turn on next line after UICIRC-164 is done
-    // if (!rValue && (cur.ch === 0 || cur.ch === indented || token.type !== 'policy')) {
-    // TODO remove next line after UICIRC-164 is done
-    if (cur.ch === 0 || cur.ch === token.state.indented || token.type !== 'policy') {
+    if (!rValue && (cur.ch === 0 || cur.ch === indented || token.type !== 'policy')) {
       let newRuleText = '# ';
       // if we're in the middle of a line, a new line should be inserted, then a rule...
       if ((cur.ch !== 0 && indented > 0) || token.type === 'ruleName') {
@@ -48,8 +45,8 @@ export default function loanRulesHint(Codemirror, props) {
 
       result.push({
         text: newRuleText,
-        displayText: formatMessage({ id: 'ui-circulation.settings.loanRules.newRule' }),
-        className: 'loan-rule-hint-major',
+        displayText: formatMessage({ id: 'ui-circulation.settings.circulationRules.newRule' }),
+        className: 'rule-hint-major',
         completeOnSingleClick: true,
       });
     }
@@ -61,11 +58,11 @@ export default function loanRulesHint(Codemirror, props) {
       meta
     ) {
       forOwn(typeMapping, (value, key) => {
-        const text = formatMessage({ id: `ui-circulation.settings.loanRules.${value}` });
+        const text = formatMessage({ id: `ui-circulation.settings.circulationRules.${value}` });
         result.push({
           text: `${key} `,
           displayText: `${key}: ${text}`,
-          className: 'loan-rule-hint-minor',
+          className: 'rule-hint-minor',
           completeOnSingleClick: true,
         });
       });
@@ -74,49 +71,36 @@ export default function loanRulesHint(Codemirror, props) {
     // display criteria selectors if the cursor's not after a semicolon and state.keyPropery is not null...
     if (!rValue && keyProperty) {
       // not at beginning of line..
-      if (cur.ch !== 0 && cur.ch > indented / 4) {
+      if (cur.ch !== 0 && cur.ch > indented / 4 && typeMapping[keyProperty]) {
         const type = typeMapping[keyProperty];
+
         completionLists[type].forEach((selector) => {
           result.push({
             text: `${selector} `,
             displayText: selector,
-            className: 'loan-rule-hint-minor',
+            className: 'rule-hint-minor',
             completeOnSingleClick: true,
           });
         });
       }
     }
 
-    // TODO remove entire condition after UICIRC-164 is done
-    // display policies in rValues.
-    if (rValue && cur.ch > indented) {
-      completionLists.loanPolicies.forEach((name) => {
-        result.push({
-          text: `${name} `,
-          displayText: name,
-          className: 'loan-rule-hint-minor',
-          completeOnSingleClick: true,
-        });
-      });
-    }
-
-    /* TODO: turn on after UICIRC-164 is done
     // display policy types in rValues.
     if (rValue && cur.ch > indented && !keyProperty) {
-      const text = formatMessage({ id: 'ui-circulation.settings.loanRules.circulationPolicies' });
+      const text = formatMessage({ id: 'ui-circulation.settings.circulationRules.circulationPolicies' });
 
       result.push({
         text,
         displayText: text,
-        className: 'loan-rule-hint-strong',
+        className: 'rule-hint-strong',
         inactive: true,
       });
 
       forOwn(policyMapping, (value, key) => {
         result.push({
           text: `${key} `,
-          displayText: formatMessage({ id: `ui-circulation.settings.loanRules.${value}` }),
-          className: 'loan-rule-hint-minor',
+          displayText: formatMessage({ id: `ui-circulation.settings.circulationRules.${value}` }),
+          className: 'rule-hint-minor',
           completeOnSingleClick: true,
         });
       });
@@ -125,19 +109,18 @@ export default function loanRulesHint(Codemirror, props) {
     // display policies
     if (rValue && keyProperty) {
       // not at beginning of line..
-      if (cur.ch !== 0 && cur.ch > indented / 4) {
+      if (cur.ch !== 0 && cur.ch > indented / 4 && policyMapping[keyProperty]) {
         const type = policyMapping[keyProperty];
         completionLists[type].forEach((selector) => {
           result.push({
             text: `${selector} `,
             displayText: selector,
-            className: 'loan-rule-hint-minor',
+            className: 'rule-hint-minor',
             completeOnSingleClick: true,
           });
         });
       }
     }
-    */
 
     if (result.length) {
       return {

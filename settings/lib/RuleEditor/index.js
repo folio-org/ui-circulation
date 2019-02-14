@@ -1,1 +1,1 @@
-export { default } from './LoanRulesForm';
+export { default } from './RulesForm';
