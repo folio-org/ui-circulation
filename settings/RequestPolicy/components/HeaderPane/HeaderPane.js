@@ -34,6 +34,8 @@ class HeaderPane extends React.Component {
     const {
       permissions,
       onRemove,
+      onCancel,
+      editMode,
     } = this.props;
 
     const handleClick = () => {
@@ -41,15 +43,32 @@ class HeaderPane extends React.Component {
       onToggle();
     };
 
+    const handleCancel = (e) => {
+      onCancel(e);
+      onToggle();
+    };
+
     return (
       <IfPermission perm={permissions.delete}>
+        {editMode &&
+          <Button
+            data-test-delete-user-form-action
+            buttonStyle="dropdownItem"
+            onClick={handleClick}
+          >
+            <Icon icon="trash">
+              <FormattedMessage id="ui-circulation.settings.common.delete" />
+            </Icon>
+          </Button>
+        }
+
         <Button
           data-test-cancel-user-form-action
           buttonStyle="dropdownItem"
-          onClick={handleClick}
+          onClick={handleCancel}
         >
-          <Icon icon="trash">
-            <FormattedMessage id="ui-circulation.settings.common.delete" />
+          <Icon icon="times">
+            <FormattedMessage id="ui-circulation.settings.common.cancel" />
           </Icon>
         </Button>
       </IfPermission>
@@ -91,7 +110,6 @@ class HeaderPane extends React.Component {
 
   render() {
     const {
-      editMode,
       children,
     } = this.props;
 
@@ -101,7 +119,7 @@ class HeaderPane extends React.Component {
         firstMenu={this.renderCancelButton()}
         lastMenu={this.renderSaveButton()}
         paneTitle={this.renderPanelTitle()}
-        {... editMode ? { actionMenu: this.renderActionMenuItems } : {}}
+        actionMenu={this.renderActionMenuItems}
       >
         {children}
       </Pane>

@@ -189,6 +189,7 @@
   "settings.common.duplicate": "Duplicate",
   "settings.common.yes": "Yes",
   "settings.common.no": "No",
+  "settings.common.cancel": "Cancel",
 
   "settings.noticePolicy.entryLabel": "Notice Policy",
   "settings.noticePolicy.saveAndClose": "Save",

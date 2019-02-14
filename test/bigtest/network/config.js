@@ -346,8 +346,9 @@ export default function config() {
 
   this.put('/request-policy-storage/request-policies/:id', ({ requestPolicies }, request) => {
     const body = JSON.parse(request.requestBody);
-    const requestPolicy = requestPolicies.get(body.id);
-    requestPolicy.update({ name: body.name });
+    const { name, description } = body;
+    const requestPolicy = requestPolicies.find(body.id);
+    requestPolicy.update({ name, description });
     return requestPolicy.attrs;
   });
 }
