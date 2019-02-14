@@ -70,6 +70,24 @@ class CirculationRules extends React.Component {
       },
       resourceShouldRefresh: true,
     },
+    requestPolicies: {
+      type: 'okapi',
+      records: 'requestPolicies',
+      path: 'request-policy-storage/request-policies',
+      params: {
+        limit: '100',
+      },
+      resourceShouldRefresh: true,
+    },
+    noticePolicies: {
+      type: 'okapi',
+      records: 'patronNoticePolicies',
+      path: 'patron-notice-policy-storage/patron-notice-policies',
+      params: {
+        limit: '100',
+      },
+      resourceShouldRefresh: true,
+    },
   });
 
   static propTypes = {
@@ -89,12 +107,16 @@ class CirculationRules extends React.Component {
       materialTypes,
       loanTypes,
       loanPolicies,
+      requestPolicies,
+      noticePolicies,
     } = nextProps.resources;
 
     return !patronGroups.isPending &&
       !materialTypes.isPending &&
       !loanTypes.isPending &&
-      !loanPolicies.isPending;
+      !loanPolicies.isPending &&
+      !requestPolicies.isPending &&
+      !noticePolicies.isPending;
   }
 
   onSubmit(values) {
@@ -104,7 +126,7 @@ class CirculationRules extends React.Component {
 
   getRules() {
     const rules = (this.props.resources.circulationRules || {}).records || [];
-    const rulesStr = (rules.length) ? rules[0].loanRulesAsTextFile : '';
+    const rulesStr = (rules.length) ? rules[0].rulesAsText : '';
 
     return this.convertIdsToNames(rulesStr.replace('    ', '\t'));
   }
@@ -115,6 +137,8 @@ class CirculationRules extends React.Component {
       materialTypes,
       loanTypes,
       loanPolicies,
+      noticePolicies,
+      requestPolicies,
     } = this.props.resources;
 
     return Object.assign({}, editorDefaultProps, {
@@ -126,10 +150,8 @@ class CirculationRules extends React.Component {
         loanTypes: loanTypes.records.map(t => kebabCase(t.name)),
         // policies
         loanPolicies: loanPolicies.records.map(l => kebabCase(l.name)),
-        // TODO: replace with request policy records
-        requestPolicies: ['request-policy-1', 'request-policy-2'],
-        // TODO: replace with notice policy records
-        noticePolicies: ['notice-policy-1', 'notice-policy-2'],
+        requestPolicies: requestPolicies.records.map(r => kebabCase(r.name)),
+        noticePolicies: noticePolicies.records.map(n => kebabCase(n.name)),
       },
     });
   }
@@ -140,13 +162,17 @@ class CirculationRules extends React.Component {
       materialTypes,
       loanTypes,
       loanPolicies,
+      requestPolicies,
+      noticePolicies,
     } = this.props.resources;
 
     return [
       ...patronGroups.records.map(r => ({ name: kebabCase(r.group), id: r.id, prefix: 'g' })),
       ...materialTypes.records.map(r => ({ name: kebabCase(r.name), id: r.id, prefix: 'm' })),
       ...loanTypes.records.map(r => ({ name: kebabCase(r.name), id: r.id, prefix: 't' })),
-      ...loanPolicies.records.map(r => ({ name: kebabCase(r.name), id: r.id, prefix: ':' })),
+      ...loanPolicies.records.map(r => ({ name: kebabCase(r.name), id: r.id, prefix: 'l' })),
+      ...requestPolicies.records.map(r => ({ name: kebabCase(r.name), id: r.id, prefix: 'r' })),
+      ...noticePolicies.records.map(r => ({ name: kebabCase(r.name), id: r.id, prefix: 'n' })),
     ];
   }
 
@@ -154,7 +180,7 @@ class CirculationRules extends React.Component {
     const records = this.getRecords();
     return records.reduce((memo, r) => {
       // eslint-disable-next-line no-useless-escape
-      const re = new RegExp(`(${r.prefix}.*?)(${r.name})(?=.*[g\s+|m\s+|t\s+|:\s*])?`, 'ig');
+      const re = new RegExp(`(${r.prefix}.*?)(${r.name})(?=.*[g\s+|m\s+|t\s+|l\s+|r\s+|n\s+|:\s*])?`, 'ig');
       return memo.replace(re, `$1${r.id}`);
     }, rulesStr);
   }
@@ -180,8 +206,8 @@ class CirculationRules extends React.Component {
       'Content-Type': 'application/json',
     });
 
-    const loanRulesAsTextFile = this.convertNamesToIds(rules);
-    const body = JSON.stringify({ loanRulesAsTextFile });
+    const rulesAsText = this.convertNamesToIds(rules);
+    const body = JSON.stringify({ rulesAsText });
     const options = {
       method: 'PUT',
       headers,
