@@ -80,6 +80,7 @@ class RequestPolicySettings extends React.Component {
         paneTitle={<FormattedMessage id="ui-circulation.settings.requestPolicy.paneTitle" />}
         entryLabel={<FormattedMessage id="ui-circulation.settings.requestPolicy.entryLabel" />}
         nameKey="name"
+        enableDetailsActionMenu
         permissions={permissions}
         validate={validateRequestPolicy}
         defaultEntry={RequestPolicy.defaultPolicy()}
