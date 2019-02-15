@@ -9,7 +9,7 @@ import {
   Row,
 } from '@folio/stripes/components';
 // eslint-disable-next-line
-import { Metadata } from '@folio/circulation/settings/components';
+import { Metadata } from '../../../../components';
 
 const GeneralSection = (props) => {
   const {
