@@ -51,8 +51,8 @@ class RequestManagementSection extends React.Component {
     }
 
     return (
-      <React.Fragment>
-        <h2>
+      <div data-test-loan-policy-detail-request-management-section>
+        <h2 data-test-request-management-section-header>
           <FormattedMessage id="ui-circulation.settings.requestManagement.requestManagement" />
         </h2>
         <Accordion
@@ -63,18 +63,22 @@ class RequestManagementSection extends React.Component {
         >
           <Row>
             <Col xs={12}>
-              <KeyValue
-                label={<FormattedMessage id="ui-circulation.settings.requestManagement.recallReturnInterval" />}
-                value={this.getPeriodValue('recalls.recallReturnInterval')}
-              />
+              <div data-test-request-management-section-recall-return-interval>
+                <KeyValue
+                  label={<FormattedMessage id="ui-circulation.settings.requestManagement.recallReturnInterval" />}
+                  value={this.getPeriodValue('recalls.recallReturnInterval')}
+                />
+              </div>
             </Col>
           </Row>
           <Row>
             <Col xs={12}>
-              <KeyValue
-                label={<FormattedMessage id="ui-circulation.settings.requestManagement.minimumGuaranteedLoanPeriod" />}
-                value={this.getPeriodValue('recalls.minimumGuaranteedLoanPeriod')}
-              />
+              <div data-test-request-management-section-minimum-guaranteed-loan-period>
+                <KeyValue
+                  label={<FormattedMessage id="ui-circulation.settings.requestManagement.minimumGuaranteedLoanPeriod" />}
+                  value={this.getPeriodValue('recalls.minimumGuaranteedLoanPeriod')}
+                />
+              </div>
             </Col>
           </Row>
         </Accordion>
@@ -86,30 +90,36 @@ class RequestManagementSection extends React.Component {
         >
           <Row>
             <Col xs={12}>
-              <KeyValue
-                label={<FormattedMessage id="ui-circulation.settings.requestManagement.alternateCheckoutLoanPeriod" />}
-                value={this.getPeriodValue('holds.alternateCheckoutLoanPeriod')}
-              />
+              <div data-test-request-management-section-alternate-checkout-loan-period>
+                <KeyValue
+                  label={<FormattedMessage id="ui-circulation.settings.requestManagement.alternateCheckoutLoanPeriod" />}
+                  value={this.getPeriodValue('holds.alternateCheckoutLoanPeriod')}
+                />
+              </div>
             </Col>
           </Row>
           <Row>
             <Col xs={12}>
-              <KeyValue
-                label={<FormattedMessage id="ui-circulation.settings.requestManagement.renewItemsWithRequest" />}
-                value={this.getCheckboxValue('holds.renewItemsWithRequest')}
-              />
+              <div data-test-request-management-section-renew-items-with-request>
+                <KeyValue
+                  label={<FormattedMessage id="ui-circulation.settings.requestManagement.renewItemsWithRequest" />}
+                  value={this.getCheckboxValue('holds.renewItemsWithRequest')}
+                />
+              </div>
             </Col>
           </Row>
           <Row>
             <Col xs={12}>
-              <KeyValue
-                label={<FormattedMessage id="ui-circulation.settings.requestManagement.alternateRenewalLoanPeriod" />}
-                value={this.getPeriodValue('holds.alternateRenewalLoanPeriod')}
-              />
+              <div data-test-request-management-section-alternate-renewal-loan-period>
+                <KeyValue
+                  label={<FormattedMessage id="ui-circulation.settings.requestManagement.alternateRenewalLoanPeriod" />}
+                  value={this.getPeriodValue('holds.alternateRenewalLoanPeriod')}
+                />
+              </div>
             </Col>
           </Row>
         </Accordion>
-      </React.Fragment>
+      </div>
     );
   }
 }
