@@ -256,5 +256,17 @@
     "settings.noticePolicy.requestNotices.pagingRequest": "Pedido de paginação",
     "settings.noticePolicy.requestNotices.available": "Disponível",
     "settings.noticePolicy.requestNotices.holdExpiration": "Expiração da reserva",
-    "settings.noticePolicy.requestNotices.requestCancelation": "Requisitar cancelamento"
+    "settings.noticePolicy.requestNotices.requestCancelation": "Requisitar cancelamento",
+    "settings.index.circulationRules": "Regras de circulação",
+    "settings.circulationRules.paneTitle": "Editor de regras de circulação",
+    "settings.circulationRules.rulesUpdated": "As regras foram atualizadas com sucesso.",
+    "settings.circulationRules.newRule": "Nova regra (#)",
+    "settings.circulationRules.patronGroups": "Grupos de usuários",
+    "settings.circulationRules.materialTypes": "Tipos de material",
+    "settings.circulationRules.loanTypes": "Tipos de empréstimo",
+    "settings.circulationRules.loanPolicies": "Políticas de empréstimos",
+    "settings.circulationRules.requestPolicies": "Políticas de pedidos de compra",
+    "settings.circulationRules.noticePolicies": "Políticas de avisos",
+    "settings.circulationRules.circulationPolicies": "Políticas de circulação",
+    "settings.common.cancel": "Cancelar"
 }
