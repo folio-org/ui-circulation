@@ -256,5 +256,17 @@
     "settings.noticePolicy.requestNotices.pagingRequest": "Paging request",
     "settings.noticePolicy.requestNotices.available": "Available",
     "settings.noticePolicy.requestNotices.holdExpiration": "Hold expiration",
-    "settings.noticePolicy.requestNotices.requestCancelation": "Request cancellation"
+    "settings.noticePolicy.requestNotices.requestCancelation": "Request cancellation",
+    "settings.index.circulationRules": "Circulation rules",
+    "settings.circulationRules.paneTitle": "Circulation Rules Editor",
+    "settings.circulationRules.rulesUpdated": "Rules were successfully updated.",
+    "settings.circulationRules.newRule": "New rule (#)",
+    "settings.circulationRules.patronGroups": "Patron groups",
+    "settings.circulationRules.materialTypes": "Material types",
+    "settings.circulationRules.loanTypes": "Loan types",
+    "settings.circulationRules.loanPolicies": "Loan policies",
+    "settings.circulationRules.requestPolicies": "Request policies",
+    "settings.circulationRules.noticePolicies": "Notice policies",
+    "settings.circulationRules.circulationPolicies": "Circulation policies",
+    "settings.common.cancel": "Cancel"
 }
