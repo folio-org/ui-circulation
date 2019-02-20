@@ -132,6 +132,20 @@
           "settings.enabled"
         ],
         "visible": true
+      },
+      {
+        "permissionName": "ui-circulation.settings.staff-slips",
+        "displayName": "Settings (Circ): Can create, edit and remove staff slips",
+        "subPermissions": [
+          "circulation-storage.staff-slips.item.delete",
+          "circulation-storage.staff-slips.collection.delete",
+          "circulation-storage.staff-slips.collection.get",
+          "circulation-storage.staff-slips.item.post",
+          "circulation-storage.staff-slips.item.put",
+          "circulation-storage.staff-slips.item.get",
+          "settings.circulation.enabled"
+        ],
+        "visible": true
       }
     ]
   },
