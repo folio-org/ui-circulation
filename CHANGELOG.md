@@ -7,6 +7,7 @@
 * Add new policy types to 'fallback policy' section. Fixes UICIRC-165.
 * Add request policy CRU v1. Fixes UIREQ-181.
 * Add permission set for staff slips. Fixes UICIRC-194.
+* Do not show unsaved changes popup when policy form is not dirty. Fixes UICIRC-104.
 
 ## 1.5.0 (https://github.com/folio-org/ui-circulation/tree/v1.5.0) (2019-01-25)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v1.4.0...v1.5.0)
