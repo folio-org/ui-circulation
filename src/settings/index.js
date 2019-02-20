@@ -45,6 +45,7 @@ class Circulation extends React.Component {
         route: 'staffslips',
         label: <FormattedMessage id="ui-circulation.settings.index.staffSlips" />,
         component: StaffSlips,
+        perm: 'ui-circulation.settings.staff-slips',
       },
       {
         route: 'cancellation-reasons',

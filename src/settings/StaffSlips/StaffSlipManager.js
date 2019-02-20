@@ -83,9 +83,9 @@ class StaffSlipManager extends React.Component {
         validate={this.validate}
         nameKey="name"
         permissions={{
-          put: 'settings.organization.enabled',
-          post: 'ui-circulation.settings.staffslips.post',
-          delete: 'ui-circulation.settings.staffslips.delete',
+          put: 'ui-circulation.settings.staff-slips',
+          post: 'ui-circulation.settings.staff-slips',
+          delete: 'ui-circulation.settings.staff-slips',
         }}
       />
     );

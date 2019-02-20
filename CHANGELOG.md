@@ -6,6 +6,7 @@
 * Add new policy types to policy menu in rules editor. Fixes UICIRC-164.
 * Add new policy types to 'fallback policy' section. Fixes UICIRC-165.
 * Add request policy CRU v1. Fixes UIREQ-181.
+* Add permission set for staff slips. Fixes UICIRC-194.
 
 ## 1.5.0 (https://github.com/folio-org/ui-circulation/tree/v1.5.0) (2019-01-25)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v1.4.0...v1.5.0)
