@@ -41,97 +41,111 @@ class RenewalsSection extends React.Component {
       : <FormattedMessage id="ui-circulation.settings.loanPolicy.altFDDSforRenewals" />;
 
     return (
-      <React.Fragment>
-        <h2>
+      <div data-test-loan-policy-form-renewals-section>
+        <h2 data-test-renewals-section-header>
           <FormattedMessage id="ui-circulation.settings.loanPolicy.renewals" />
         </h2>
-        <Field
-          label={<FormattedMessage id="ui-circulation.settings.loanPolicy.renewable" />}
-          name="renewable"
-          component={Checkbox}
-          type="checkbox"
-          id="renewable"
-          normalize={v => !!v}
-        />
-        { policy.isRenewable() &&
+        <div data-test-renewals-section-renewable>
           <Field
-            label={<FormattedMessage id="ui-circulation.settings.loanPolicy.unlimitedRenewals" />}
-            name="renewalsPolicy.unlimited"
-            id="renewalsPolicy.unlimited"
+            label={<FormattedMessage id="ui-circulation.settings.loanPolicy.renewable" />}
+            name="renewable"
             component={Checkbox}
             type="checkbox"
+            id="renewable"
             normalize={v => !!v}
           />
+        </div>
+        { policy.isRenewable() &&
+          <div data-test-renewals-section-unlimited-renewals>
+            <Field
+              label={<FormattedMessage id="ui-circulation.settings.loanPolicy.unlimitedRenewals" />}
+              name="renewalsPolicy.unlimited"
+              id="renewalsPolicy.unlimited"
+              component={Checkbox}
+              type="checkbox"
+              normalize={v => !!v}
+            />
+          </div>
         }
         { policy.isRenewable() && !policy.isUnlimitedRenewals() &&
           <React.Fragment>
             <br />
-            <Field
-              label={(
-                <FormattedMessage id="ui-circulation.settings.loanPolicy.numRenewalsAllowed">
-                  {message => `${message} *`}
-                </FormattedMessage>
-              )}
-              name="renewalsPolicy.numberAllowed"
-              id="input_allowed_renewals"
-              component={TextField}
-              type="number"
-              min={0}
-            />
+            <div data-test-renewals-section-num-renewals-allowed>
+              <Field
+                label={(
+                  <FormattedMessage id="ui-circulation.settings.loanPolicy.numRenewalsAllowed">
+                    {message => `${message} *`}
+                  </FormattedMessage>
+                )}
+                name="renewalsPolicy.numberAllowed"
+                id="input_allowed_renewals"
+                component={TextField}
+                type="number"
+                min={0}
+              />
+            </div>
           </React.Fragment>
         }
         { policy.isRenewable() && policy.isProfileRolling() &&
           <React.Fragment>
             <br />
-            <Field
-              label={<FormattedMessage id="ui-circulation.settings.loanPolicy.renewFrom" />}
-              name="renewalsPolicy.renewFromId"
-              id="select_renew_from"
-              component={Select}
-              dataOptions={renewFromOptions}
-            />
+            <div data-test-renewals-section-renew-from>
+              <Field
+                label={<FormattedMessage id="ui-circulation.settings.loanPolicy.renewFrom" />}
+                name="renewalsPolicy.renewFromId"
+                id="select_renew_from"
+                component={Select}
+                dataOptions={renewFromOptions}
+              />
+            </div>
           </React.Fragment>
         }
         { policy.isRenewable() &&
-          <Field
-            label={<FormattedMessage id="ui-circulation.settings.loanPolicy.renewalPeriodDifferent" />}
-            name="renewalsPolicy.differentPeriod"
-            id="renewalsPolicy.differentPeriod"
-            component={Checkbox}
-            type="checkbox"
-            normalize={v => !!v}
-          />
+          <div data-test-renewals-section-renewal-period-different>
+            <Field
+              label={<FormattedMessage id="ui-circulation.settings.loanPolicy.renewalPeriodDifferent" />}
+              name="renewalsPolicy.differentPeriod"
+              id="renewalsPolicy.differentPeriod"
+              component={Checkbox}
+              type="checkbox"
+              normalize={v => !!v}
+            />
+          </div>
         }
         { policy.isRenewable() && policy.isDifferentPeriod() && policy.isProfileRolling() &&
           <React.Fragment>
             <br />
-            <Period
-              fieldLabel="ui-circulation.settings.loanPolicy.alternateLoanPeriodRenewals"
-              selectPlaceholder="ui-circulation.settings.loanPolicy.selectInterval"
-              inputValuePath="renewalsPolicy.period.duration"
-              selectValuePath="renewalsPolicy.period.intervalId"
-              intervalPeriods={intervalPeriods}
-              changeFormValue={change}
-              required
-            />
+            <div data-test-renewals-section-alternate-loan-period-renewals>
+              <Period
+                fieldLabel="ui-circulation.settings.loanPolicy.alternateLoanPeriodRenewals"
+                selectPlaceholder="ui-circulation.settings.loanPolicy.selectInterval"
+                inputValuePath="renewalsPolicy.period.duration"
+                selectValuePath="renewalsPolicy.period.intervalId"
+                intervalPeriods={intervalPeriods}
+                changeFormValue={change}
+                required
+              />
+            </div>
           </React.Fragment>
         }
         { policy.isRenewable() && policy.isDifferentPeriod()
           && (policy.isProfileRolling() || policy.isProfileFixed()) &&
-          <Field
-            label={altRenewalScheduleLabel}
-            name="renewalsPolicy.alternateFixedDueDateScheduleId"
-            component={Select}
-            normalize={value => (value === '' ? null : value)}
-          >
-            <FormattedMessage id="ui-circulation.settings.loanPolicy.selectSchedule">
-              {(message) => <option value="" disabled>{message}</option>}
-            </FormattedMessage>
-            {schedules}
-          </Field>
+          <div data-test-renewals-alternate-fixed-due-date-schedule>
+            <Field
+              label={altRenewalScheduleLabel}
+              name="renewalsPolicy.alternateFixedDueDateScheduleId"
+              component={Select}
+              normalize={value => (value === '' ? null : value)}
+            >
+              <FormattedMessage id="ui-circulation.settings.loanPolicy.selectSchedule">
+                {(message) => <option value="" disabled>{message}</option>}
+              </FormattedMessage>
+              {schedules}
+            </Field>
+          </div>
         }
         <hr />
-      </React.Fragment>
+      </div>
     );
   }
 }

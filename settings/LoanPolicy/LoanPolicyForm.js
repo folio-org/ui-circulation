@@ -3,7 +3,10 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { getFormValues } from 'redux-form';
-import { sortBy } from 'lodash';
+import {
+  sortBy,
+  get,
+} from 'lodash';
 
 import stripesForm from '@folio/stripes/form';
 import { stripesShape } from '@folio/stripes/core';
@@ -78,13 +81,11 @@ class LoanPolicyForm extends React.Component {
   };
 
   generateScheduleOptions = () => {
-    const {
-      parentResources: {
-        fixedDueDateSchedules: {
-          records = [],
-        } = {},
-      },
-    } = this.props;
+    const records = get(
+      this.props,
+      'parentResources.fixedDueDateSchedules.records',
+      [],
+    );
 
     const sortedSchedules = sortBy(records, ['name']);
     return sortedSchedules.map(({ id, name }) => (<option key={id} value={id}>{name}</option>));
@@ -122,7 +123,10 @@ class LoanPolicyForm extends React.Component {
     const schedules = this.generateScheduleOptions();
 
     return (
-      <form onSubmit={handleSubmit(this.saveForm)}>
+      <form
+        data-test-loan-policy-form
+        onSubmit={handleSubmit(this.saveForm)}
+      >
         <Paneset isRoot>
           <HeaderPane
             editMode={editMode}
@@ -145,10 +149,12 @@ class LoanPolicyForm extends React.Component {
                 label={<FormattedMessage id="ui-circulation.settings.loanPolicy.generalInformation" />}
                 onToggle={this.handleSectionToggle}
               >
-                <Metadata
-                  connect={stripes.connect}
-                  metadata={policy.metadata}
-                />
+                <div>
+                  <Metadata
+                    connect={stripes.connect}
+                    metadata={policy.metadata}
+                  />
+                </div>
                 <AboutSection />
                 <LoansSection
                   policy={policy}

@@ -281,6 +281,19 @@ export default function config() {
     return requestPolicy.attrs;
   });
 
+  this.post('/loan-policy-storage/loan-policies', ({ loanPolicies }, request) => {
+    const body = JSON.parse(request.requestBody);
+    const loanPolicy = loanPolicies.create(body);
+    return loanPolicy.attrs;
+  });
+
+  this.put('/loan-policy-storage/loan-policies/:id', ({ loanPolicies }, request) => {
+    const { id, name, description } = JSON.parse(request.requestBody);
+    const loanPolicy = loanPolicies.find(id);
+    loanPolicy.update({ name, description });
+    return loanPolicy.attrs;
+  });
+
   this.put('/request-policy-storage/request-policies/:id', ({ requestPolicies }, request) => {
     const body = JSON.parse(request.requestBody);
     const requestPolicy = requestPolicies.get(body.id);

@@ -13,3 +13,5 @@ export const getBooleanRepresentation = (flag) => {
     ? translation['settings.loanPolicy.yes']
     : translation['settings.loanPolicy.no'];
 };
+
+export const getRequiredLabel = (text) => `${text} *`;

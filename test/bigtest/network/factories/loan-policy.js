@@ -26,6 +26,7 @@ export default Factory.extend({
       longTermLoansOptions.map((element) => element.id)
     ),
     gracePeriod: getPeriod,
+    openingTimeOffset: getPeriod,
   },
   renewable: () => faker.random.boolean(),
   renewalsPolicy: {

@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Field } from 'redux-form';
 
@@ -8,29 +8,33 @@ import {
 } from '@folio/stripes/components';
 
 const AboutSection = () => (
-  <Fragment>
-    <h2>
+  <div data-test-loan-policy-form-about-section>
+    <h2 data-test-about-section-header>
       <FormattedMessage id="ui-circulation.settings.loanPolicy.about" />
     </h2>
-    <Field
-      label={(
-        <FormattedMessage id="ui-circulation.settings.loanPolicy.policyName">
-          {message => `${message} *`}
-        </FormattedMessage>
-      )}
-      autoFocus
-      component={TextField}
-      name="name"
-      id="input_policy_name"
-      fullWidth
-    />
-    <Field
-      label={<FormattedMessage id="ui-circulation.settings.loanPolicy.policyDescription" />}
-      name="description"
-      component={TextArea}
-    />
+    <div data-test-about-section-policy-name>
+      <Field
+        label={(
+          <FormattedMessage id="ui-circulation.settings.loanPolicy.policyName">
+            {message => `${message} *`}
+          </FormattedMessage>
+        )}
+        autoFocus
+        component={TextField}
+        name="name"
+        id="input_policy_name"
+        fullWidth
+      />
+    </div>
+    <div data-test-about-section-policy-description>
+      <Field
+        label={<FormattedMessage id="ui-circulation.settings.loanPolicy.policyDescription" />}
+        name="description"
+        component={TextArea}
+      />
+    </div>
     <hr />
-  </Fragment>
+  </div>
 );
 
 export default AboutSection;

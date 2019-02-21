@@ -70,35 +70,41 @@ class Period extends React.Component {
 
     return (
       <React.Fragment>
-        <Row className={css.label}>
-          <Col xs={12}>
-            <FormattedMessage id={fieldLabel}>
-              {message => (required ? `${message} *` : message)}
-            </FormattedMessage>
-          </Col>
-        </Row>
+        <div data-test-period-label>
+          <Row className={css.label}>
+            <Col xs={12}>
+              <FormattedMessage id={fieldLabel}>
+                {message => (required ? `${message} *` : message)}
+              </FormattedMessage>
+            </Col>
+          </Row>
+        </div>
         <Row>
           <Col xs={2}>
-            <Field
-              type="number"
-              name={inputValuePath}
-              component={TextField}
-              onClearField={this.onInputClear}
-              parse={this.transformInputValue}
-            />
+            <div data-test-period-duration>
+              <Field
+                type="number"
+                name={inputValuePath}
+                component={TextField}
+                onClearField={this.onInputClear}
+                parse={this.transformInputValue}
+              />
+            </div>
           </Col>
           <Col xs={2}>
-            <FormattedMessage id={selectPlaceholder}>
-              {placeholder => (
-                <Field
-                  name={selectValuePath}
-                  component={Select}
-                  placeholder={placeholder}
-                >
-                  {this.generateOptions()}
-                </Field>
-              )}
-            </FormattedMessage>
+            <div data-test-period-interval>
+              <FormattedMessage id={selectPlaceholder}>
+                {placeholder => (
+                  <Field
+                    name={selectValuePath}
+                    component={Select}
+                    placeholder={placeholder}
+                  >
+                    {this.generateOptions()}
+                  </Field>
+                )}
+              </FormattedMessage>
+            </div>
           </Col>
         </Row>
       </React.Fragment>

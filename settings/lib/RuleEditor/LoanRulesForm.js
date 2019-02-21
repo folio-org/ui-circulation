@@ -17,7 +17,7 @@ class LoanRulesForm extends React.Component {
   static propTypes = {
     pristine: PropTypes.bool.isRequired,
     submitting: PropTypes.bool.isRequired,
-    onSave: PropTypes.func.isRequired,
+    onSubmit: PropTypes.func.isRequired,
     handleSubmit: PropTypes.func.isRequired,
     editorProps: PropTypes.object,
   };

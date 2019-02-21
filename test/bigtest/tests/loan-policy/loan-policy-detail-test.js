@@ -9,6 +9,7 @@ import {
   shortTermLoansOptions,
   longTermLoansOptions,
   renewFromOptions,
+  BEGINNING_OF_THE_NEXT_OPEN_SERVICE_POINT_HOURS, loanProfileMap,
 } from '../../../../constants';
 import {
   getBooleanRepresentation,
@@ -20,8 +21,8 @@ describe('LoanPolicyDetail', () => {
 
   let loanPolicy;
 
-  describe.only('viewing loan policy', () => {
-    describe('about section', () => {
+  describe('viewing loan policy', () => {
+    describe('\n\tabout section\n', () => {
       describe('loan policy:\n\t-loanable\n', () => {
         beforeEach(function () {
           loanPolicy = this.server.create('loanPolicy', {
@@ -71,7 +72,428 @@ describe('LoanPolicyDetail', () => {
       });
     });
 
-    describe('request management section', () => {
+    describe('\n\tloans section\n', () => {
+      describe('loan policy:\n\t-not loanable\n', () => {
+        beforeEach(function () {
+          loanPolicy = this.server.create('loanPolicy', {
+            loanable: false,
+          });
+
+          this.visit(`/settings/circulation/loan-policies/${loanPolicy.id}`);
+        });
+
+        describe('loans section', () => {
+          it.always('should not be displayed', () => {
+            expect(LoanPolicyDetail.loansSection.isPresent).to.be.false;
+          });
+        });
+      });
+
+      describe('loan policy:\n\t-loanable\n', () => {
+        beforeEach(function () {
+          loanPolicy = this.server.create('loanPolicy', {
+            loanable: true,
+          });
+
+          this.visit(`/settings/circulation/loan-policies/${loanPolicy.id}`);
+        });
+
+        describe('header', () => {
+          it('should be displayed', () => {
+            expect(LoanPolicyDetail.loansSection.header.isPresent).to.be.true;
+          });
+
+          it('should have proper text', () => {
+            expect(LoanPolicyDetail.loansSection.header.text).to.equal(translation['settings.loanPolicy.loans']);
+          });
+        });
+
+        describe('loan profile', () => {
+          it('should be displayed', () => {
+            expect(LoanPolicyDetail.loansSection.loanProfile.isPresent).to.be.true;
+          });
+
+          it('should have a proper label', () => {
+            expect(LoanPolicyDetail.loansSection.loanProfile.label.text).to.equal(translation['settings.loanPolicy.loanProfile']);
+          });
+
+          it('should have a proper value', () => {
+            expect(LoanPolicyDetail.loansSection.loanProfile.value.text).to.equal(loanPolicy.loansPolicy.profileId);
+          });
+        });
+
+        describe('closed library due date management', () => {
+          it('should be displayed', () => {
+            expect(LoanPolicyDetail.loansSection.closedDueDateMgmt.isPresent).to.be.true;
+          });
+
+          it('should have a proper label', () => {
+            expect(LoanPolicyDetail.loansSection.closedDueDateMgmt.label.text).to.equal(translation['settings.loanPolicy.closedDueDateMgmt']);
+          });
+
+          it('should have a proper value', () => {
+            expect(LoanPolicyDetail.loansSection.closedDueDateMgmt.value.text).to.equal(
+              getOptionsRepresentation(
+                [
+                  ...longTermLoansOptions,
+                  ...shortTermLoansOptions,
+                ],
+                loanPolicy.loansPolicy.closedLibraryDueDateManagementId
+              )
+            );
+          });
+        });
+
+        describe('grace period', () => {
+          it('should be displayed', () => {
+            expect(LoanPolicyDetail.loansSection.gracePeriod.isPresent).to.be.true;
+          });
+
+          it('should have a proper label', () => {
+            expect(LoanPolicyDetail.loansSection.gracePeriod.label.text).to.equal(translation['settings.loanPolicy.gracePeriod']);
+          });
+
+          it('should have a proper value', () => {
+            expect(LoanPolicyDetail.loansSection.gracePeriod.value.text).to.equal(
+              `${loanPolicy.loansPolicy.gracePeriod.duration} ${loanPolicy.loansPolicy.gracePeriod.intervalId}`
+            );
+          });
+        });
+      });
+
+      describe('loan policy:\n\t-loanable\n\t-rolling\n', () => {
+        beforeEach(function () {
+          loanPolicy = this.server.create('loanPolicy', {
+            loanable: true,
+            loansPolicy: {
+              profileId: loanProfileMap.ROLLING,
+              period: getPeriod,
+            },
+          });
+
+          this.visit(`/settings/circulation/loan-policies/${loanPolicy.id}`);
+        });
+
+        describe('loan period', () => {
+          it('should be displayed', () => {
+            expect(LoanPolicyDetail.loansSection.loanPeriod.isPresent).to.be.true;
+          });
+
+          it('should have a proper label', () => {
+            expect(LoanPolicyDetail.loansSection.loanPeriod.label.text).to.equal(translation['settings.loanPolicy.loanPeriod']);
+          });
+
+          it('should have a proper value', () => {
+            expect(LoanPolicyDetail.loansSection.loanPeriod.value.text).to.equal(
+              `${loanPolicy.loansPolicy.period.duration} ${loanPolicy.loansPolicy.period.intervalId}`
+            );
+          });
+        });
+
+        describe('loan due date schedule', () => {
+          it('should be displayed', () => {
+            expect(LoanPolicyDetail.loansSection.dueDateSchedule.isPresent).to.be.true;
+          });
+
+          it('should have a proper label', () => {
+            expect(LoanPolicyDetail.loansSection.dueDateSchedule.label.text).to.equal(translation['settings.loanPolicy.fDDSlimit']);
+          });
+
+          it('should have a proper value', () => {
+            expect(LoanPolicyDetail.loansSection.dueDateSchedule.value.text).to.equal('-');
+          });
+        });
+      });
+
+      describe('loan policy:\n\t-loanable\n\t-fixed\n', () => {
+        beforeEach(function () {
+          loanPolicy = this.server.create('loanPolicy', {
+            loanable: true,
+            loansPolicy: {
+              profileId: loanProfileMap.FIXED,
+              period: getPeriod,
+            },
+          });
+
+          this.visit(`/settings/circulation/loan-policies/${loanPolicy.id}`);
+        });
+
+        describe('loan period', () => {
+          it.always('should not be displayed', () => {
+            expect(LoanPolicyDetail.loansSection.loanPeriod.isPresent).to.be.false;
+          });
+        });
+
+        describe('loan due date schedule', () => {
+          it('should be displayed', () => {
+            expect(LoanPolicyDetail.loansSection.dueDateSchedule.isPresent).to.be.true;
+          });
+
+          it('should have a proper label', () => {
+            expect(LoanPolicyDetail.loansSection.dueDateSchedule.label.text).to.equal(translation['settings.loanPolicy.fDDS']);
+          });
+
+          it('should have a proper value', () => {
+            expect(LoanPolicyDetail.loansSection.dueDateSchedule.value.text).to.equal('-');
+          });
+        });
+      });
+
+      describe('loan policy:\n\t-rolling\n\t-loanable\n\t-short term period\n\t-closed library due date management - beginning of the next open service point hours\n', () => {
+        beforeEach(function () {
+          loanPolicy = this.server.create('loanPolicy', {
+            loanable: true,
+            loansPolicy: {
+              profileId: loanProfileMap.ROLLING,
+              closedLibraryDueDateManagementId: BEGINNING_OF_THE_NEXT_OPEN_SERVICE_POINT_HOURS,
+              period: {
+                intervalId: 'Minutes',
+                duration: 12,
+              },
+              openingTimeOffset: getPeriod,
+            },
+          });
+
+          this.visit(`/settings/circulation/loan-policies/${loanPolicy.id}`);
+        });
+
+        describe('opening time offset', () => {
+          it('should be displayed', () => {
+            expect(LoanPolicyDetail.loansSection.openingTimeOffset.isPresent).to.be.true;
+          });
+
+          it('should have a proper label', () => {
+            expect(LoanPolicyDetail.loansSection.openingTimeOffset.label.text).to.equal(translation['settings.loanPolicy.openingTimeOffset']);
+          });
+
+          it('should have a proper value', () => {
+            expect(LoanPolicyDetail.loansSection.openingTimeOffset.value.text).to.equal(
+              `${loanPolicy.loansPolicy.openingTimeOffset.duration} ${loanPolicy.loansPolicy.openingTimeOffset.intervalId}`
+            );
+          });
+        });
+      });
+
+      describe('loan policy:\n\t-rolling\n\t-loanable\n\t-long term period\n\t-closed library due date management - beginning of the next open service point hours\n', () => {
+        beforeEach(function () {
+          loanPolicy = this.server.create('loanPolicy', {
+            loansPolicy: {
+              loanable: true,
+              profileId: loanProfileMap.ROLLING,
+              closedLibraryDueDateManagementId: BEGINNING_OF_THE_NEXT_OPEN_SERVICE_POINT_HOURS,
+              period: {
+                intervalId: 'Month',
+                duration: 12,
+              },
+            },
+          });
+
+          this.visit(`/settings/circulation/loan-policies/${loanPolicy.id}`);
+        });
+
+        describe('opening time offset', () => {
+          it.always('should not be displayed', () => {
+            expect(LoanPolicyDetail.loansSection.openingTimeOffset.isPresent).to.be.false;
+          });
+        });
+      });
+    });
+
+    describe('\n\trenewals section\n', () => {
+      describe('loan policy:\n\t-non renewable\n', () => {
+        beforeEach(function () {
+          loanPolicy = this.server.create('loanPolicy', {
+            renewable: false,
+          });
+
+          this.visit(`/settings/circulation/loan-policies/${loanPolicy.id}`);
+        });
+
+        describe('renewals section', () => {
+          it.always('should not be displayed', () => {
+            expect(LoanPolicyDetail.renewalsSection.isPresent).to.be.false;
+          });
+        });
+      });
+
+      describe('loan policy:\n\t-renewable\n\t-loanable\n\t-with limited renewals\n', () => {
+        beforeEach(function () {
+          loanPolicy = this.server.create('loanPolicy', {
+            renewable: true,
+            loanable: true,
+            renewalsPolicy: {
+              unlimited: false,
+              numberAllowed: 666,
+            }
+          });
+
+          this.visit(`/settings/circulation/loan-policies/${loanPolicy.id}`);
+        });
+
+        describe('number renewals allowed', () => {
+          it('should be displayed', () => {
+            expect(LoanPolicyDetail.renewalsSection.numRenewalsAllowed.isPresent).to.be.true;
+          });
+
+          it('should have a proper label', () => {
+            expect(LoanPolicyDetail.renewalsSection.numRenewalsAllowed.label.text).to.equal(translation['settings.loanPolicy.numRenewalsAllowed']);
+          });
+
+          it('should have a proper value', () => {
+            expect(LoanPolicyDetail.renewalsSection.numRenewalsAllowed.value.text).to.equal(loanPolicy.renewalsPolicy.numberAllowed.toString());
+          });
+        });
+      });
+
+      describe('loan policy:\n\t-renewable\n\t-loanable\n\t-unlimited renewals\n', () => {
+        beforeEach(function () {
+          loanPolicy = this.server.create('loanPolicy', {
+            renewable: true,
+            loanable: true,
+            renewalsPolicy: {
+              unlimited: true,
+            }
+          });
+
+          this.visit(`/settings/circulation/loan-policies/${loanPolicy.id}`);
+        });
+
+        describe('number renewals allowed', () => {
+          it.always('should not be displayed', () => {
+            expect(LoanPolicyDetail.renewalsSection.numRenewalsAllowed.isPresent).to.be.false;
+          });
+        });
+      });
+
+      describe('loan policy:\n\t-renewable\n\t-loanable\n\t-different period\n\t-rolling\n', () => {
+        beforeEach(function () {
+          loanPolicy = this.server.create('loanPolicy', {
+            renewable: true,
+            loanable: true,
+            loansPolicy: {
+              profileId: loanProfileMap.ROLLING,
+            },
+            renewalsPolicy: {
+              differentPeriod: true,
+              period: getPeriod,
+            }
+          });
+
+          this.visit(`/settings/circulation/loan-policies/${loanPolicy.id}`);
+        });
+
+        describe('alternate loan period renewals', () => {
+          it('should be displayed', () => {
+            expect(LoanPolicyDetail.renewalsSection.alternateLoanPeriodRenewals.isPresent).to.be.true;
+          });
+
+          it('should have a proper label', () => {
+            expect(LoanPolicyDetail.renewalsSection.alternateLoanPeriodRenewals.label.text).to.equal(translation['settings.loanPolicy.alternateLoanPeriodRenewals']);
+          });
+
+          it('should have a proper value', () => {
+            expect(LoanPolicyDetail.renewalsSection.alternateLoanPeriodRenewals.value.text).to.equal(
+              `${loanPolicy.renewalsPolicy.period.duration} ${loanPolicy.renewalsPolicy.period.intervalId}`
+            );
+          });
+        });
+      });
+
+      describe('loan policy:\n\t-renewable\n\t-loanable\n\t-same period\n\t-rolling\n', () => {
+        beforeEach(function () {
+          loanPolicy = this.server.create('loanPolicy', {
+            renewable: true,
+            loanable: true,
+            loansPolicy: {
+              profileId: loanProfileMap.ROLLING,
+            },
+            renewalsPolicy: {
+              differentPeriod: false,
+              period: getPeriod,
+            }
+          });
+
+          this.visit(`/settings/circulation/loan-policies/${loanPolicy.id}`);
+        });
+
+        describe('alternate loan period renewals', () => {
+          it.always('should not be displayed', () => {
+            expect(LoanPolicyDetail.renewalsSection.alternateLoanPeriodRenewals.isPresent).to.be.false;
+          });
+        });
+      });
+
+      describe('loan policy:\n\t-renewable\n\t-loanable\n', () => {
+        beforeEach(function () {
+          loanPolicy = this.server.create('loanPolicy', {
+            renewable: true,
+            loanable: true,
+          });
+
+          this.visit(`/settings/circulation/loan-policies/${loanPolicy.id}`);
+        });
+
+        describe('header', () => {
+          it('should be displayed', () => {
+            expect(LoanPolicyDetail.renewalsSection.header.isPresent).to.be.true;
+          });
+
+          it('should have proper text', () => {
+            expect(LoanPolicyDetail.renewalsSection.header.text).to.equal(translation['settings.loanPolicy.renewals']);
+          });
+        });
+
+        describe('unlimited renewals', () => {
+          it('should be displayed', () => {
+            expect(LoanPolicyDetail.renewalsSection.unlimitedRenewals.isPresent).to.be.true;
+          });
+
+          it('should have a proper label', () => {
+            expect(LoanPolicyDetail.renewalsSection.unlimitedRenewals.label.text).to.equal(translation['settings.loanPolicy.unlimitedRenewals']);
+          });
+
+          it('should have a proper value', () => {
+            expect(LoanPolicyDetail.renewalsSection.unlimitedRenewals.value.text).to.equal(
+              getBooleanRepresentation(loanPolicy.renewalsPolicy.unlimited)
+            );
+          });
+        });
+
+        describe('renew from', () => {
+          it('should be displayed', () => {
+            expect(LoanPolicyDetail.renewalsSection.renewFrom.isPresent).to.be.true;
+          });
+
+          it('should have a proper label', () => {
+            expect(LoanPolicyDetail.renewalsSection.renewFrom.label.text).to.equal(translation['settings.loanPolicy.renewFrom']);
+          });
+
+          it('should have a proper value', () => {
+            expect(LoanPolicyDetail.renewalsSection.renewFrom.value.text).to.equal(
+              getOptionsRepresentation(renewFromOptions, loanPolicy.renewalsPolicy.renewFromId)
+            );
+          });
+        });
+
+        describe('renewal period different', () => {
+          it('should be displayed', () => {
+            expect(LoanPolicyDetail.renewalsSection.renewalPeriodDifferent.isPresent).to.be.true;
+          });
+
+          it('should have a proper label', () => {
+            expect(LoanPolicyDetail.renewalsSection.renewalPeriodDifferent.label.text).to.equal(translation['settings.loanPolicy.renewalPeriodDifferent']);
+          });
+
+          it('should have a proper value', () => {
+            expect(LoanPolicyDetail.renewalsSection.renewalPeriodDifferent.value.text).to.equal(
+              getBooleanRepresentation(loanPolicy.renewalsPolicy.differentPeriod)
+            );
+          });
+        });
+      });
+    });
+
+    describe('\n\trequest management section\n', () => {
       describe('loan policy:\n\t-non loanable\n', () => {
         beforeEach(function () {
           loanPolicy = this.server.create('loanPolicy', {
@@ -187,352 +609,6 @@ describe('LoanPolicyDetail', () => {
                 `${loanPolicy.requestManagement.holds.alternateRenewalLoanPeriod.duration} ${loanPolicy.requestManagement.holds.alternateRenewalLoanPeriod.intervalId}`
               );
             });
-          });
-        });
-      });
-    });
-
-    describe('loans section', () => {
-      describe('loan policy:\n\t-loanable\n', () => {
-        beforeEach(function () {
-          loanPolicy = this.server.create('loanPolicy', {
-            loanable: true,
-          });
-
-          this.visit(`/settings/circulation/loan-policies/${loanPolicy.id}`);
-        });
-
-        describe('header', () => {
-          it('should be displayed', () => {
-            expect(LoanPolicyDetail.loansSection.header.isPresent).to.be.true;
-          });
-
-          it('should have proper text', () => {
-            expect(LoanPolicyDetail.loansSection.header.text).to.equal(translation['settings.loanPolicy.loans']);
-          });
-        });
-
-        describe('loan profile', () => {
-          it('should be displayed', () => {
-            expect(LoanPolicyDetail.loansSection.loanProfile.isPresent).to.be.true;
-          });
-
-          it('should have a proper label', () => {
-            expect(LoanPolicyDetail.loansSection.loanProfile.label.text).to.equal(translation['settings.loanPolicy.loanProfile']);
-          });
-
-          it('should have a proper value', () => {
-            expect(LoanPolicyDetail.loansSection.loanProfile.value.text).to.equal(loanPolicy.loansPolicy.profileId);
-          });
-        });
-
-        describe('closed library due date management', () => {
-          it('should be displayed', () => {
-            expect(LoanPolicyDetail.loansSection.closedDueDateMgmt.isPresent).to.be.true;
-          });
-
-          it('should have a proper label', () => {
-            expect(LoanPolicyDetail.loansSection.closedDueDateMgmt.label.text).to.equal(translation['settings.loanPolicy.closedDueDateMgmt']);
-          });
-
-          it('should have a proper value', () => {
-            expect(LoanPolicyDetail.loansSection.closedDueDateMgmt.value.text).to.equal(
-              getOptionsRepresentation(
-                [
-                  ...longTermLoansOptions,
-                  ...shortTermLoansOptions,
-                ],
-                loanPolicy.loansPolicy.closedLibraryDueDateManagementId
-              )
-            );
-          });
-        });
-
-        describe('grace period', () => {
-          it('should be displayed', () => {
-            expect(LoanPolicyDetail.loansSection.gracePeriod.isPresent).to.be.true;
-          });
-
-          it('should have a proper label', () => {
-            expect(LoanPolicyDetail.loansSection.gracePeriod.label.text).to.equal(translation['settings.loanPolicy.gracePeriod']);
-          });
-
-          it('should have a proper value', () => {
-            expect(LoanPolicyDetail.loansSection.gracePeriod.value.text).to.equal(
-              `${loanPolicy.loansPolicy.gracePeriod.duration} ${loanPolicy.loansPolicy.gracePeriod.intervalId}`
-            );
-          });
-        });
-      });
-
-      describe('loan policy:\n\t-loanable\n\t-rolling\n', () => {
-        beforeEach(function () {
-          loanPolicy = this.server.create('loanPolicy', {
-            loanable: true,
-            loansPolicy: {
-              profileId: 'Rolling',
-              period: getPeriod,
-            },
-          });
-
-          this.visit(`/settings/circulation/loan-policies/${loanPolicy.id}`);
-        });
-
-        describe('loan period', () => {
-          it('should be displayed', () => {
-            expect(LoanPolicyDetail.loansSection.loanPeriod.isPresent).to.be.true;
-          });
-
-          it('should have a proper label', () => {
-            expect(LoanPolicyDetail.loansSection.loanPeriod.label.text).to.equal(translation['settings.loanPolicy.loanPeriod']);
-          });
-
-          it('should have a proper value', () => {
-            expect(LoanPolicyDetail.loansSection.loanPeriod.value.text).to.equal(
-              `${loanPolicy.loansPolicy.period.duration} ${loanPolicy.loansPolicy.period.intervalId}`
-            );
-          });
-        });
-
-        describe('loan due date schedule', () => {
-          it('should be displayed', () => {
-            expect(LoanPolicyDetail.loansSection.dueDateSchedule.isPresent).to.be.true;
-          });
-
-          it('should have a proper label', () => {
-            expect(LoanPolicyDetail.loansSection.dueDateSchedule.label.text).to.equal(translation['settings.loanPolicy.fDDSlimit']);
-          });
-
-          it('should have a proper value', () => {
-            expect(LoanPolicyDetail.loansSection.dueDateSchedule.value.text).to.equal('-');
-          });
-        });
-      });
-
-
-      describe('loan policy:\n\t-loanable\n\t-fixed\n', () => {
-        beforeEach(function () {
-          loanPolicy = this.server.create('loanPolicy', {
-            loanable: true,
-            loansPolicy: {
-              profileId: 'Fixed',
-              period: getPeriod,
-            },
-          });
-
-          this.visit(`/settings/circulation/loan-policies/${loanPolicy.id}`);
-        });
-
-        describe('loan period', () => {
-          it.always('should not be displayed', () => {
-            expect(LoanPolicyDetail.loansSection.loanPeriod.isPresent).to.be.false;
-          });
-        });
-
-        describe('loan due date schedule', () => {
-          it('should be displayed', () => {
-            expect(LoanPolicyDetail.loansSection.dueDateSchedule.isPresent).to.be.true;
-          });
-
-          it('should have a proper label', () => {
-            expect(LoanPolicyDetail.loansSection.dueDateSchedule.label.text).to.equal(translation['settings.loanPolicy.fDDS']);
-          });
-
-          it('should have a proper value', () => {
-            expect(LoanPolicyDetail.loansSection.dueDateSchedule.value.text).to.equal('-');
-          });
-        });
-      });
-    });
-
-    describe('renewals section', () => {
-      describe('loan policy:\n\t-non loanable\n', () => {
-        beforeEach(function () {
-          loanPolicy = this.server.create('loanPolicy', {
-            loanable: false,
-          });
-
-          this.visit(`/settings/circulation/loan-policies/${loanPolicy.id}`);
-        });
-        describe('renewals section', () => {
-          it.always('should not be displayed', () => {
-            expect(LoanPolicyDetail.renewalsSection.isPresent).to.be.false;
-          });
-        });
-      });
-
-      describe('loan policy:\n\t-renewable\n\t-loanable\n\t-with limited renewals\n', () => {
-        beforeEach(function () {
-          loanPolicy = this.server.create('loanPolicy', {
-            renewable: true,
-            loanable: true,
-            renewalsPolicy: {
-              unlimited: false,
-              numberAllowed: 666,
-            }
-          });
-
-          this.visit(`/settings/circulation/loan-policies/${loanPolicy.id}`);
-        });
-
-        describe('number renewals allowed', () => {
-          it('should be displayed', () => {
-            expect(LoanPolicyDetail.renewalsSection.numRenewalsAllowed.isPresent).to.be.true;
-          });
-
-          it('should have a proper label', () => {
-            expect(LoanPolicyDetail.renewalsSection.numRenewalsAllowed.label.text).to.equal(translation['settings.loanPolicy.numRenewalsAllowed']);
-          });
-
-          it('should have a proper value', () => {
-            expect(LoanPolicyDetail.renewalsSection.numRenewalsAllowed.value.text).to.equal(loanPolicy.renewalsPolicy.numberAllowed.toString());
-          });
-        });
-      });
-
-      describe('loan policy:\n\t-renewable\n\t-loanable\n\t-unlimited renewals\n', () => {
-        beforeEach(function () {
-          loanPolicy = this.server.create('loanPolicy', {
-            renewable: true,
-            loanable: true,
-            renewalsPolicy: {
-              unlimited: true,
-            }
-          });
-
-          this.visit(`/settings/circulation/loan-policies/${loanPolicy.id}`);
-        });
-
-        describe('number renewals allowed', () => {
-          it.always('should not be displayed', () => {
-            expect(LoanPolicyDetail.renewalsSection.numRenewalsAllowed.isPresent).to.be.false;
-          });
-        });
-      });
-
-      describe('loan policy:\n\t-renewable\n\t-loanable\n\t-different period\n\t-rolling\n', () => {
-        beforeEach(function () {
-          loanPolicy = this.server.create('loanPolicy', {
-            renewable: true,
-            loanable: true,
-            loansPolicy: {
-              profileId: 'Rolling',
-            },
-            renewalsPolicy: {
-              differentPeriod: true,
-              period: getPeriod,
-            }
-          });
-
-          this.visit(`/settings/circulation/loan-policies/${loanPolicy.id}`);
-        });
-
-        describe('alternate loan period renewals', () => {
-          it('should be displayed', () => {
-            expect(LoanPolicyDetail.renewalsSection.alternateLoanPeriodRenewals.isPresent).to.be.true;
-          });
-
-          it('should have a proper label', () => {
-            expect(LoanPolicyDetail.renewalsSection.alternateLoanPeriodRenewals.label.text).to.equal(translation['settings.loanPolicy.alternateLoanPeriodRenewals']);
-          });
-
-          it('should have a proper value', () => {
-            expect(LoanPolicyDetail.renewalsSection.alternateLoanPeriodRenewals.value.text).to.equal(
-              `${loanPolicy.renewalsPolicy.period.duration} ${loanPolicy.renewalsPolicy.period.intervalId}`
-            );
-          });
-        });
-      });
-
-      describe('loan policy:\n\t-renewable\n\t-loanable\n\t-same period\n\t-rolling\n', () => {
-        beforeEach(function () {
-          loanPolicy = this.server.create('loanPolicy', {
-            renewable: true,
-            loanable: true,
-            loansPolicy: {
-              profileId: 'Rolling',
-            },
-            renewalsPolicy: {
-              differentPeriod: false,
-              period: getPeriod,
-            }
-          });
-
-          this.visit(`/settings/circulation/loan-policies/${loanPolicy.id}`);
-        });
-
-        describe('alternate loan period renewals', () => {
-          it.always('should not be displayed', () => {
-            expect(LoanPolicyDetail.renewalsSection.alternateLoanPeriodRenewals.isPresent).to.be.false;
-          });
-        });
-      });
-
-      describe('loan policy:\n\t-renewable\n\t-loanable\n', () => {
-        beforeEach(function () {
-          loanPolicy = this.server.create('loanPolicy', {
-            renewable: true,
-            loanable: true,
-          });
-
-          this.visit(`/settings/circulation/loan-policies/${loanPolicy.id}`);
-        });
-
-        describe('header', () => {
-          it('should be displayed', () => {
-            expect(LoanPolicyDetail.renewalsSection.header.isPresent).to.be.true;
-          });
-
-          it('should have proper text', () => {
-            expect(LoanPolicyDetail.renewalsSection.header.text).to.equal(translation['settings.loanPolicy.renewals']);
-          });
-        });
-
-        describe('unlimited renewals', () => {
-          it('should be displayed', () => {
-            expect(LoanPolicyDetail.renewalsSection.unlimitedRenewals.isPresent).to.be.true;
-          });
-
-          it('should have a proper label', () => {
-            expect(LoanPolicyDetail.renewalsSection.unlimitedRenewals.label.text).to.equal(translation['settings.loanPolicy.unlimitedRenewals']);
-          });
-
-          it('should have a proper value', () => {
-            expect(LoanPolicyDetail.renewalsSection.unlimitedRenewals.value.text).to.equal(
-              getBooleanRepresentation(loanPolicy.renewalsPolicy.unlimited)
-            );
-          });
-        });
-
-        describe('renew from', () => {
-          it('should be displayed', () => {
-            expect(LoanPolicyDetail.renewalsSection.renewFrom.isPresent).to.be.true;
-          });
-
-          it('should have a proper label', () => {
-            expect(LoanPolicyDetail.renewalsSection.renewFrom.label.text).to.equal(translation['settings.loanPolicy.renewFrom']);
-          });
-
-          it('should have a proper value', () => {
-            expect(LoanPolicyDetail.renewalsSection.renewFrom.value.text).to.equal(
-              getOptionsRepresentation(renewFromOptions, loanPolicy.renewalsPolicy.renewFromId)
-            );
-          });
-        });
-
-        describe('renewal period different', () => {
-          it('should be displayed', () => {
-            expect(LoanPolicyDetail.renewalsSection.renewalPeriodDifferent.isPresent).to.be.true;
-          });
-
-          it('should have a proper label', () => {
-            expect(LoanPolicyDetail.renewalsSection.renewalPeriodDifferent.label.text).to.equal(translation['settings.loanPolicy.renewalPeriodDifferent']);
-          });
-
-          it('should have a proper value', () => {
-            expect(LoanPolicyDetail.renewalsSection.renewalPeriodDifferent.value.text).to.equal(
-              getBooleanRepresentation(loanPolicy.renewalsPolicy.differentPeriod)
-            );
           });
         });
       });
