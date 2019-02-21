@@ -49,28 +49,47 @@ describe('RequestPolicyForm', () => {
 
     beforeEach(function () {
       requestPolicy = this.server.create('requestPolicy', {
-        name: 'Request policy 1',
+        name: 'Request policy 20',
         description: 'Request policy 1 desc',
       });
+    });
 
-      this.visit(`/settings/circulation/request-policies/${requestPolicy.id}?layer=edit`);
+    beforeEach(async function () {
+      await this.visit(`/settings/circulation/request-policies/${requestPolicy.id}?layer=edit`);
     });
 
     it('has a request policy name field', () => {
       expect(RequestPolicyForm.nameValue).to.equal(requestPolicy.name);
     });
+  });
 
-    describe('clicking save', () => {
-      beforeEach(async function () {
-        await RequestPolicyForm
-          .fillName('updated request policy')
-          .fillDescription('updated request policy description')
-          .save();
-      });
+  describe('saving updated policy', () => {
+    let requestPolicy;
 
-      it('renders updated policy name', () => {
-        expect(RequestPolicyDetail.name).to.equal('updated request policy');
+    beforeEach(function () {
+      requestPolicy = this.server.create('requestPolicy', {
+        name: 'Request policy',
+        description: 'Request policy 1 desc',
       });
+    });
+
+    beforeEach(function () {
+      this.visit(`/settings/circulation/request-policies/${requestPolicy.id}?layer=edit`);
+    });
+
+    beforeEach(async () => {
+      await RequestPolicyForm.whenLoaded();
+    });
+
+    beforeEach(async function () {
+      await RequestPolicyForm
+        .fillName('updated policy name')
+        .fillDescription('updated request policy description')
+        .save();
+    });
+
+    it('renders updated policy name', () => {
+      expect(RequestPolicyDetail.name).to.equal('updated policy name');
     });
   });
 });

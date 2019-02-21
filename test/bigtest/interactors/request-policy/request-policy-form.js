@@ -7,6 +7,11 @@ import {
 } from '@bigtest/interactor';
 
 @interactor class RequestPolicyForm {
+  isLoaded = isPresent('[value="Request policy"]');
+  whenLoaded() {
+    return this.when(() => this.isLoaded);
+  }
+
   hasName = isPresent('#request_policy_name');
   nameValue = value('#request_policy_name');
   hasDescription = isPresent('#request_policy_description');

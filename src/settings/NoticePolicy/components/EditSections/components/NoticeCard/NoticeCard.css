@@ -1,0 +1,37 @@
+.loanNotice {
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  margin: 10px;
+  width: 100%;
+}
+  
+.header {
+  background-color: #e6e6e6;
+}
+  
+.headerTitle {
+  padding: 5px 10px;
+  font-weight: 600;
+}
+  
+.headerIcon {
+  text-align: right;  
+}
+  
+.noticeField {
+  padding: 10px 20px;
+}
+  
+.cardText {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+}
+  
+.fieldLabel {
+  padding-left: 20px;
+}
+
+.buttonContainer {
+  margin-top: 15px;
+}
