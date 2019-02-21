@@ -1,4 +1,4 @@
-import get from 'lodash/get';
+import { get } from 'lodash';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
@@ -18,8 +18,6 @@ import {
   intervalPeriods,
   shortTermLoansOptions,
   longTermLoansOptions,
-  CURRENT_DUE_DATE_TIME,
-  CURRENT_DUE_DATE,
 } from '../../../../../constants';
 
 class LoansSection extends React.Component {
@@ -30,30 +28,24 @@ class LoansSection extends React.Component {
     change: PropTypes.func.isRequired,
   };
 
-  componentDidUpdate() {
-    this.setDueDateManagementSelectedId();
+  componentDidUpdate(prevProps) {
+    const { policy } = prevProps;
+    this.setDueDateManagementSelectedId(policy);
   }
 
-  setDueDateManagementSelectedId = () => {
+  setDueDateManagementSelectedId(prevPolicy) {
     const {
       policy,
       change,
     } = this.props;
-
     const pathToField = 'loansPolicy.closedLibraryDueDateManagementId';
-    const isShortTermLoan = policy.isShortTermLoan();
     const selectedId = get(policy, pathToField);
+    const prevSelectedId = get(prevPolicy, pathToField);
 
-    if (isShortTermLoan && !policy.loansPolicy.isValidShortTermLoanValue(selectedId)) {
-      /* Set default value for short term loan if long term loan item was selected */
-      change(pathToField, CURRENT_DUE_DATE_TIME);
+    if (selectedId !== prevSelectedId) {
+      change(pathToField, selectedId);
     }
-
-    if (!isShortTermLoan && !policy.loansPolicy.isValidLongTermLoanValue(selectedId)) {
-      /* Set default value for long term loan if short term loan item was selected */
-      change(pathToField, CURRENT_DUE_DATE);
-    }
-  };
+  }
 
   render() {
     const {
