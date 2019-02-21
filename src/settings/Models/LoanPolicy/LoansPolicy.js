@@ -33,19 +33,24 @@ export default class LoansPolicy {
   // set correct closedLibraryDueDateManagementId
   setDueDateManagementId(isShortTermLoan) {
     const selectedId = this.closedLibraryDueDateManagementId;
-    const isValidShortTermLoanValue = this.isValidItemSelected(shortTermLoansOptions, selectedId);
-    const isValidLongTermLoanValue = this.isValidItemSelected(longTermLoansOptions, selectedId);
-
-    if (isShortTermLoan && !isValidShortTermLoanValue) {
+    if (isShortTermLoan && !this.isValidShortTermLoanValue(selectedId)) {
       this.closedLibraryDueDateManagementId = CURRENT_DUE_DATE_TIME;
     }
 
-    if (!isShortTermLoan && !isValidLongTermLoanValue) {
+    if (!isShortTermLoan && !this.isValidLongTermLoanValue(selectedId)) {
       this.closedLibraryDueDateManagementId = CURRENT_DUE_DATE;
     }
   }
 
-  isValidItemSelected = (options, selectedId) => {
+  isValidShortTermLoanValue(selectedId) {
+    return this.isValidItemSelected(shortTermLoansOptions, selectedId);
+  }
+
+  isValidLongTermLoanValue(selectedId) {
+    return this.isValidItemSelected(longTermLoansOptions, selectedId);
+  }
+
+  isValidItemSelected(options, selectedId) {
     return some(options, ({ id }) => id === selectedId);
-  };
+  }
 }
