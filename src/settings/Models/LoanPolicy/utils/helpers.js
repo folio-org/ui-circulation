@@ -3,6 +3,7 @@ import {
   reduce,
   isEqual,
   isEmpty,
+  some,
 } from 'lodash';
 
 const isDefaultsSelected = (model, defaultState) => {
@@ -31,7 +32,12 @@ const additionalFieldsSelected = (model, defaultState) => {
   return !isEmpty(fields);
 };
 
+const isValidItemSelected = (options, selectedId) => {
+  return some(options, ({ id }) => id === selectedId);
+};
+
 export default {
   isDefaultsSelected,
   additionalFieldsSelected,
+  isValidItemSelected,
 };
