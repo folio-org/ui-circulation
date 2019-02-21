@@ -18,6 +18,7 @@ import Period from '../Period';
   header = scoped('[data-test-about-section-header]');
   policyName = new TextFieldInteractor('[data-test-about-section-policy-name]');
   policyDescription = new TextFieldInteractor('[data-test-about-section-policy-description]');
+  policyNameValue = scoped('#input_policy_name');
 }
 
 @interactor class LoansSection {
@@ -60,8 +61,8 @@ import Period from '../Period';
 @interactor class LoanPolicyForm {
   static defaultScope = ('[data-test-loan-policy-form]');
 
-  whenLoaded() {
-    return this.when(() => this.isLoaded);
+  whenLoaded(policyName) {
+    return this.when(() => this.aboutSection.scoped('#input_policy_name').value === policyName);
   }
 
   aboutSection = new AboutSection();

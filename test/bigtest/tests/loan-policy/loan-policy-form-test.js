@@ -817,40 +817,4 @@ describe('LoanPolicyForm', () => {
       });
     });
   });
-
-  describe('updating an existing loan policy', () => {
-    let loanPolicy;
-    const newLoanPolicyName = 'updated loan policy';
-
-    beforeEach(async function () {
-      loanPolicy = await this.server.create('loanPolicy', {
-        renewable: true,
-        loanable: true,
-        loansPolicy: {
-          profileId: loanProfileMap.ROLLING,
-        },
-        renewalsPolicy: {
-          unlimited: false,
-          numberAllowed: 666,
-        },
-      });
-
-      await this.visit(`/settings/circulation/loan-policies/${loanPolicy.id}?layer=edit`);
-      await LoanPolicyForm.whenLoaded();
-    });
-
-    describe('clicking save', () => {
-      beforeEach(async function () {
-        await LoanPolicyForm
-          .aboutSection.policyName.fillAndBlur(newLoanPolicyName)
-          .loansSection.loanPeriod.duration.fillAndBlur(2)
-          .renewalsSection.numRenewalsAllowed.fillAndBlur(1)
-          .save();
-      });
-
-      it('should render updated policy name', () => {
-        expect(LoanPolicyDetail.aboutSection.policyName.value.text).to.equal(newLoanPolicyName);
-      });
-    });
-  });
 });
