@@ -57,10 +57,9 @@ class RequestPolicySettings extends React.Component {
     } = this.props;
 
     const permissions = {
-      // TODO: update  after server side is done
-      put: 'ui-circulation.settings.loan-policies',
-      post: 'ui-circulation.settings.loan-policies',
-      delete: 'ui-circulation.settings.loan-policies',
+      put: 'ui-circulation.settings.request-policies',
+      post: 'ui-circulation.settings.request-policies',
+      delete: 'ui-circulation.settings.request-policies',
     };
 
     const entryList = sortBy((resources.requestPolicies || {}).records, ['name']);
