@@ -34,7 +34,7 @@ class Circulation extends React.Component {
         route: 'fixed-due-date-schedules',
         label: <FormattedMessage id="ui-circulation.settings.index.fdds" />,
         component: FixedDueDateScheduleManager,
-        perm: 'ui-circulation.settings.circulation-rules',
+        perm: 'ui-circulation.settings.fixed-due-date-schedules',
       },
       {
         route: 'checkout',

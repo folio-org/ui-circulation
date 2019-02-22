@@ -202,5 +202,5 @@ const connectedLoanPolicyForm = connect(mapStateToProps)(LoanPolicyForm);
 export default stripesForm({
   form: 'loanPolicyForm',
   navigationCheck: true,
-  enableReinitialize: false,
+  enableReinitialize: true,
 })(connectedLoanPolicyForm);

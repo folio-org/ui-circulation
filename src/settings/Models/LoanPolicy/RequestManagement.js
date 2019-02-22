@@ -3,19 +3,22 @@ import {
   defaultLoanPolicy,
   helpers,
 } from './utils';
+import {
+  intervalIdsMap,
+} from '../../../constants';
 
 class Recalls {
   constructor(recall = {}) {
-    this.recallReturnInterval = new Period(recall.recallReturnInterval);
-    this.minimumGuaranteedLoanPeriod = new Period(recall.minimumGuaranteedLoanPeriod);
+    this.recallReturnInterval = new Period(recall.recallReturnInterval || { intervalId: intervalIdsMap.DAYS });
+    this.minimumGuaranteedLoanPeriod = new Period(recall.minimumGuaranteedLoanPeriod || { intervalId: intervalIdsMap.DAYS });
   }
 }
 
 class Holds {
   constructor(hold = {}) {
-    this.alternateCheckoutLoanPeriod = new Period(hold.alternateCheckoutLoanPeriod);
+    this.alternateCheckoutLoanPeriod = new Period(hold.alternateCheckoutLoanPeriod || { intervalId: intervalIdsMap.DAYS });
     this.renewItemsWithRequest = hold.renewItemsWithRequest;
-    this.alternateRenewalLoanPeriod = new Period(hold.alternateRenewalLoanPeriod);
+    this.alternateRenewalLoanPeriod = new Period(hold.alternateRenewalLoanPeriod || { intervalId: intervalIdsMap.DAYS });
   }
 }
 

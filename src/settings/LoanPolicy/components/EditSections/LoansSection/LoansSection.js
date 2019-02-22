@@ -1,11 +1,8 @@
+import { get } from 'lodash';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { Field } from 'redux-form';
-import {
-  get,
-  some,
-} from 'lodash';
 
 import {
   Checkbox,
@@ -21,54 +18,41 @@ import {
   intervalPeriods,
   shortTermLoansOptions,
   longTermLoansOptions,
-  CURRENT_DUE_DATE_TIME,
-  CURRENT_DUE_DATE,
 } from '../../../../../constants';
 
 class LoansSection extends React.Component {
   static propTypes = {
+    intl: intlShape,
     policy: PropTypes.object.isRequired,
     schedules: PropTypes.arrayOf(PropTypes.node).isRequired,
     change: PropTypes.func.isRequired,
   };
 
-  componentDidUpdate() {
-    this.setDueDateManagementSelectedId();
+  componentDidUpdate(prevProps) {
+    const { policy } = prevProps;
+    this.setDueDateManagementSelectedId(policy);
   }
 
-  isValidItemSelected = (options, selectedId) => {
-    return some(options, ({ id }) => id === selectedId);
-  };
-
-  setDueDateManagementSelectedId = () => {
+  setDueDateManagementSelectedId(prevPolicy) {
     const {
       policy,
       change,
     } = this.props;
-
     const pathToField = 'loansPolicy.closedLibraryDueDateManagementId';
-    const isShortTermLoan = policy.isShortTermLoan();
     const selectedId = get(policy, pathToField);
+    const prevSelectedId = get(prevPolicy, pathToField);
 
-    const isValidShortTermLoanValue = this.isValidItemSelected(shortTermLoansOptions, selectedId);
-    const isValidLongTermLoanValue = this.isValidItemSelected(longTermLoansOptions, selectedId);
-
-    if (isShortTermLoan && !isValidShortTermLoanValue) {
-      /* Set default value for short term loan if long term loan item was selected */
-      change(pathToField, CURRENT_DUE_DATE_TIME);
+    if (selectedId !== prevSelectedId) {
+      change(pathToField, selectedId);
     }
-
-    if (!isShortTermLoan && !isValidLongTermLoanValue) {
-      /* Set default value for long term loan if short term loan item was selected */
-      change(pathToField, CURRENT_DUE_DATE);
-    }
-  };
+  }
 
   render() {
     const {
       policy,
       schedules,
       change,
+      intl: { formatMessage },
     } = this.props;
 
     const dueDateScheduleFieldLabel = policy.isProfileRolling()
@@ -129,13 +113,9 @@ class LoansSection extends React.Component {
               name="loansPolicy.fixedDueDateScheduleId"
               id="input_loansPolicy_fixedDueDateSchedule"
               component={Select}
-              normalize={value => (value === '' ? null : value)}
-            >
-              <FormattedMessage id="ui-circulation.settings.loanPolicy.selectSchedule">
-                {(message) => <option value="" disabled>{message}</option>}
-              </FormattedMessage>
-              {schedules}
-            </Field>
+              placeholder={formatMessage({ id: 'ui-circulation.settings.loanPolicy.selectSchedule' })}
+              dataOptions={schedules}
+            />
           </div>
         }
         { policy.isLoanable() &&
@@ -179,7 +159,7 @@ class LoansSection extends React.Component {
   }
 }
 
-export default withSectionDefaults({
+export default injectIntl(withSectionDefaults({
   component: LoansSection,
   checkMethodName: 'shouldInitLoansPolicy',
   sectionsDefaults: {
@@ -193,4 +173,4 @@ export default withSectionDefaults({
     'loansPolicy.openingTimeOffset': { intervalId: intervalIdsMap.HOURS },
     'loansPolicy.gracePeriod': { intervalId: intervalIdsMap.HOURS },
   },
-});
+}));

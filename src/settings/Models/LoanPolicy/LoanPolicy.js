@@ -29,6 +29,7 @@ export default class LoanPolicy {
     this.renewalsPolicy = new RenewalsPolicy(policy.renewalsPolicy);
     this.requestManagement = new RequestManagement(policy.requestManagement);
     this.metadata = new Metadata(policy.metadata);
+    this.loansPolicy.setDueDateManagementId(this.isShortTermLoan());
   }
 
   hasValue(pathToValue) {
