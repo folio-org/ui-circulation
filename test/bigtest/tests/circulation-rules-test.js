@@ -5,7 +5,7 @@ import setupApplication from '../helpers/setup-application';
 import circulationRules from '../interactors/circulation-rules';
 
 describe('CirculationRules', () => {
-  setupApplication();
+  setupApplication({ scenarios: ['stabbedLoanPolicies'] });
 
   beforeEach(function () {
     return this.visit('/settings/circulation/rules', () => {

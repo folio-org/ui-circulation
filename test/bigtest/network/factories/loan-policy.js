@@ -3,13 +3,13 @@ import {
   faker,
 } from '@bigtest/mirage';
 
-// eslint-disable-next-line import/no-extraneous-dependencies
 import {
   intervalIdsMap,
   loanProfileMap,
   renewFromOptions,
   longTermLoansOptions,
-} from '@folio/circulation/src/constants';
+} from '@folio/circulation/src/constants'; // eslint-disable-line import/no-extraneous-dependencies, import/no-unresolved
+
 
 export const getPeriod = {
   duration: () => faker.random.number(),

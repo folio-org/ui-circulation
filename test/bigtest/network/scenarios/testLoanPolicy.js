@@ -1,4 +1,4 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
+// eslint-disable-next-line import/no-extraneous-dependencies, import/no-unresolved
 import { loanProfileMap } from '@folio/circulation/src/constants';
 import testLoanPolicySettings from '../../constants/testLoanPolicySettings';
 

@@ -1,15 +1,14 @@
 import { beforeEach, describe, it } from '@bigtest/mocha';
 import { expect } from 'chai';
 
-// eslint-disable-next-line import/no-extraneous-dependencies
 import {
   shortTermLoansOptions,
   longTermLoansOptions,
   renewFromOptions,
   BEGINNING_OF_THE_NEXT_OPEN_SERVICE_POINT_HOURS,
   loanProfileMap,
-} from '@folio/circulation/src/constants';
-// eslint-disable-next-line import/extensions, import/no-extraneous-dependencies
+} from '@folio/circulation/src/constants'; // eslint-disable-line import/no-extraneous-dependencies, import/no-unresolved
+// eslint-disable-next-line import/extensions, import/no-extraneous-dependencies, import/no-unresolved
 import translation from '@folio/circulation/translations/ui-circulation/en.json';
 
 import { getPeriod } from '../../network/factories/loan-policy';
