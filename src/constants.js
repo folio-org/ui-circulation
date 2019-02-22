@@ -170,4 +170,9 @@ export const requestNoticesSendWhen = [
   { value: requestNoticesSendWhenMap.REQUEST_CANCELATION, label: 'ui-circulation.settings.noticePolicy.requestNotices.requestCancelation' },
 ];
 
+export const staffSlipMap = {
+  HOLD: 'Hold',
+  TRANSIT: 'Transit',
+};
+
 export default '';

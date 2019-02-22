@@ -20,6 +20,7 @@ import { Field } from 'redux-form';
 
 import StaffSlipEditor from './StaffSlipEditor';
 import formats from './formats';
+import { staffSlipMap } from '../../constants';
 
 class StaffSlipForm extends React.Component {
   static propTypes = {
@@ -107,7 +108,7 @@ class StaffSlipForm extends React.Component {
   render() {
     const { stripes, handleSubmit, initialValues } = this.props;
     const disabled = !stripes.hasPerm('settings.organization.enabled');
-    const slipType = (initialValues || {}).name || <FormattedMessage id="ui-circulation.settings.staffSlips.hold" />;
+    const slipType = (initialValues || {}).name || staffSlipMap.HOLD;
 
     return (
       <form id="form-staff-slip" onSubmit={handleSubmit(this.save)}>
