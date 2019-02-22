@@ -3,11 +3,15 @@ import { expect } from 'chai';
 
 import setupApplication from '../helpers/setup-application';
 import circulationRules from '../interactors/circulation-rules';
+import { toLowercaseReplaceAllSpaces } from '../helpers/messageСonverters';
 
 describe('CirculationRules', () => {
   setupApplication();
+  let loanPolicies;
 
-  beforeEach(function () {
+  beforeEach(async function () {
+    loanPolicies = await this.server.createList('loanPolicy', 3);
+
     return this.visit('/settings/circulation/rules', () => {
       expect(circulationRules.$root).to.exist;
     });
@@ -63,7 +67,9 @@ describe('CirculationRules', () => {
     });
 
     it('should choose loan policy', () => {
-      expect(circulationRules.editor.value).to.be.equal('m book: l example-loan-policy ');
+      expect(circulationRules.editor.value).to.be.equal(
+        `m book: l ${toLowercaseReplaceAllSpaces(loanPolicies[0].name)} `
+      );
     });
   });
 
@@ -77,7 +83,9 @@ describe('CirculationRules', () => {
     });
 
     it('should choose loan policy as a fallback', () => {
-      expect(circulationRules.editor.value).to.be.equal('fallback-policy: l example-loan-policy ');
+      expect(circulationRules.editor.value).to.be.equal(
+        `fallback-policy: l ${toLowercaseReplaceAllSpaces(loanPolicies[0].name)} `
+      );
     });
   });
 });

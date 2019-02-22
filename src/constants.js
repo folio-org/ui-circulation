@@ -26,7 +26,6 @@ export const intervalIdsMap = {
 export const loanProfileMap = {
   FIXED: 'Fixed',
   ROLLING: 'Rolling',
-  INDEFINITE: 'Indefinite'
 };
 
 export const CURRENT_DUE_DATE_TIME = 'CURRENT_DUE_DATE_TIME';

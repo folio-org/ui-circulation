@@ -122,10 +122,13 @@ class LoanPolicyDetail extends React.Component {
     const isOpeningTimeOffsetVisible = this.isOpeningTimeOffsetVisible();
 
     return (
-      <div>
+      <div data-test-loan-policy-detail-loans-section>
         <Row>
           <Col xs={12}>
-            <h2 style={{ marginTop: '0' }}>
+            <h2
+              data-test-loans-section-header
+              style={{ marginTop: '0' }}
+            >
               <FormattedMessage id="ui-circulation.settings.loanPolicy.loans" />
             </h2>
           </Col>
@@ -133,10 +136,12 @@ class LoanPolicyDetail extends React.Component {
         <br />
         <Row>
           <Col xs={12}>
-            <KeyValue
-              label={<FormattedMessage id="ui-circulation.settings.loanPolicy.loanProfile" />}
-              value={get(profile, ['label'], '-')}
-            />
+            <div data-test-loans-section-loan-profile>
+              <KeyValue
+                label={<FormattedMessage id="ui-circulation.settings.loanPolicy.loanProfile" />}
+                value={get(profile, ['label'], '-')}
+              />
+            </div>
           </Col>
         </Row>
         {policy.loansPolicy.profileId === loanProfileMap.ROLLING &&
@@ -144,10 +149,12 @@ class LoanPolicyDetail extends React.Component {
             <br />
             <Row>
               <Col xs={12}>
-                <KeyValue
-                  label={<FormattedMessage id="ui-circulation.settings.loanPolicy.loanPeriod" />}
-                  value={`${get(policy, ['loansPolicy', 'period', 'duration'], '')} ${periodInterval}`}
-                />
+                <div data-test-loans-section-loan-period>
+                  <KeyValue
+                    label={<FormattedMessage id="ui-circulation.settings.loanPolicy.loanPeriod" />}
+                    value={`${get(policy, ['loansPolicy', 'period', 'duration'], '')} ${periodInterval}`}
+                  />
+                </div>
               </Col>
             </Row>
           </div>
@@ -157,7 +164,12 @@ class LoanPolicyDetail extends React.Component {
             <br />
             <Row>
               <Col xs={12}>
-                <KeyValue label={dueDateScheduleFieldLabel} value={get(schedule, ['name'], '-')} />
+                <div data-test-loans-section-due-date-schedule>
+                  <KeyValue
+                    label={dueDateScheduleFieldLabel}
+                    value={get(schedule, ['name'], '-')}
+                  />
+                </div>
               </Col>
             </Row>
           </div>
@@ -165,33 +177,39 @@ class LoanPolicyDetail extends React.Component {
         <br />
         <Row>
           <Col xs={12}>
-            <KeyValue
-              label={<FormattedMessage id="ui-circulation.settings.loanPolicy.closedDueDateMgmt" />}
-              value={get(closedLibraryDueDateManagementItem, ['label'], '-')}
-            />
+            <div data-test-loans-section-closed-due-date-mgmte>
+              <KeyValue
+                label={<FormattedMessage id="ui-circulation.settings.loanPolicy.closedDueDateMgmt" />}
+                value={get(closedLibraryDueDateManagementItem, ['label'], '-')}
+              />
+            </div>
           </Col>
         </Row>
         <br />
         {isOpeningTimeOffsetVisible &&
-          <div>
-            <Row>
-              <Col xs={12}>
+        <div>
+          <Row>
+            <Col xs={12}>
+              <div data-test-loans-section-opening-time-offset>
                 <KeyValue
                   label={<FormattedMessage id="ui-circulation.settings.loanPolicy.openingTimeOffset" />}
                   value={`${get(policy, ['loansPolicy', 'openingTimeOffset', 'duration'], '')} ${timeOffsetInterval}`}
                 />
-              </Col>
-            </Row>
-            <br />
-          </div>
+              </div>
+            </Col>
+          </Row>
+          <br />
+        </div>
         }
         <br />
         <Row>
           <Col xs={12}>
-            <KeyValue
-              label={<FormattedMessage id="ui-circulation.settings.loanPolicy.gracePeriod" />}
-              value={`${get(policy, ['loansPolicy', 'gracePeriod', 'duration'], '')} ${gracePeriodInterval}`}
-            />
+            <div data-test-loans-section-grace-period>
+              <KeyValue
+                label={<FormattedMessage id="ui-circulation.settings.loanPolicy.gracePeriod" />}
+                value={`${get(policy, ['loansPolicy', 'gracePeriod', 'duration'], '')} ${gracePeriodInterval}`}
+              />
+            </div>
           </Col>
         </Row>
         <hr />
@@ -205,10 +223,13 @@ class LoanPolicyDetail extends React.Component {
     } = this.props;
 
     return (
-      <div>
+      <div data-test-loan-policy-detail-about-section>
         <Row>
           <Col xs={12}>
-            <h2 style={{ marginTop: '0' }}>
+            <h2
+              style={{ marginTop: '0' }}
+              data-test-about-section-header
+            >
               <FormattedMessage id="ui-circulation.settings.loanPolicy.about" />
             </h2>
           </Col>
@@ -216,19 +237,23 @@ class LoanPolicyDetail extends React.Component {
         <br />
         <Row>
           <Col xs={12}>
-            <KeyValue
-              label={<FormattedMessage id="ui-circulation.settings.loanPolicy.policyName" />}
-              value={get(policy, ['name'], '')}
-            />
+            <div data-test-about-section-policy-name>
+              <KeyValue
+                label={<FormattedMessage id="ui-circulation.settings.loanPolicy.policyName" />}
+                value={get(policy, ['name'], '')}
+              />
+            </div>
           </Col>
         </Row>
         <br />
         <Row>
           <Col xs={12}>
-            <KeyValue
-              label={<FormattedMessage id="ui-circulation.settings.loanPolicy.policyDescription" />}
-              value={get(policy, ['description'], '-')}
-            />
+            <div data-test-about-section-policy-description>
+              <KeyValue
+                label={<FormattedMessage id="ui-circulation.settings.loanPolicy.policyDescription" />}
+                value={get(policy, ['description'], '-')}
+              />
+            </div>
           </Col>
         </Row>
         <hr />
@@ -249,20 +274,25 @@ class LoanPolicyDetail extends React.Component {
     const interval = get(policy, ['renewalsPolicy', 'period', 'intervalId']);
 
     return (
-      <div>
+      <div data-test-loan-policy-detail-renewals-section>
         <Row>
           <Col xs={12}>
-            <h2 style={{ marginTop: '0' }}>
+            <h2
+              style={{ marginTop: '0' }}
+              data-test-renewals-section-header
+            >
               <FormattedMessage id="ui-circulation.settings.loanPolicy.renewals" />
             </h2>
           </Col>
         </Row>
         <Row>
           <Col xs={12}>
-            <KeyValue
-              label={<FormattedMessage id="ui-circulation.settings.loanPolicy.unlimitedRenewals" />}
-              value={unlimited}
-            />
+            <div data-test-renewals-section-unlimited-renewals>
+              <KeyValue
+                label={<FormattedMessage id="ui-circulation.settings.loanPolicy.unlimitedRenewals" />}
+                value={unlimited}
+              />
+            </div>
           </Col>
         </Row>
         {policy.renewalsPolicy && policy.renewalsPolicy.unlimited === false &&
@@ -270,10 +300,12 @@ class LoanPolicyDetail extends React.Component {
             <br />
             <Row>
               <Col xs={12}>
-                <KeyValue
-                  label={<FormattedMessage id="ui-circulation.settings.loanPolicy.numRenewalsAllowed" />}
-                  value={get(policy, ['renewalsPolicy', 'numberAllowed'], 0)}
-                />
+                <div data-test-renewals-section-number-renewals-allowed>
+                  <KeyValue
+                    label={<FormattedMessage id="ui-circulation.settings.loanPolicy.numRenewalsAllowed" />}
+                    value={get(policy, ['renewalsPolicy', 'numberAllowed'], 0)}
+                  />
+                </div>
               </Col>
             </Row>
           </div>
@@ -281,33 +313,39 @@ class LoanPolicyDetail extends React.Component {
         <br />
         <Row>
           <Col xs={12}>
-            <KeyValue
-              label={<FormattedMessage id="ui-circulation.settings.loanPolicy.renewFrom" />}
-              value={get(renewFrom, ['label'], '-')}
-            />
+            <div data-test-renewals-section-renew-from>
+              <KeyValue
+                label={<FormattedMessage id="ui-circulation.settings.loanPolicy.renewFrom" />}
+                value={get(renewFrom, ['label'], '-')}
+              />
+            </div>
           </Col>
         </Row>
         <br />
         <Row>
           <Col xs={12}>
-            <KeyValue
-              label={<FormattedMessage id="ui-circulation.settings.loanPolicy.renewalPeriodDifferent" />}
-              value={differentPeriod}
-            />
+            <div data-test-renewals-section-renewal-period-different>
+              <KeyValue
+                label={<FormattedMessage id="ui-circulation.settings.loanPolicy.renewalPeriodDifferent" />}
+                value={differentPeriod}
+              />
+            </div>
           </Col>
         </Row>
         {(policy.renewalsPolicy && policy.renewalsPolicy.differentPeriod && policy.loansPolicy.profileId === loanProfileMap.ROLLING) &&
-          <div>
-            <br />
-            <Row>
-              <Col xs={12}>
+        <div>
+          <br />
+          <Row>
+            <Col xs={12}>
+              <div data-test-renewals-section-alternate-loan-period-renewals>
                 <KeyValue
                   label={<FormattedMessage id="ui-circulation.settings.loanPolicy.alternateLoanPeriodRenewals" />}
                   value={`${get(policy, ['renewalsPolicy', 'period', 'duration'])} ${interval}`}
                 />
-              </Col>
-            </Row>
-          </div>
+              </div>
+            </Col>
+          </Row>
+        </div>
         }
         <hr />
       </div>
@@ -319,7 +357,7 @@ class LoanPolicyDetail extends React.Component {
     const { sections } = this.state;
 
     return (
-      <div>
+      <div data-test-loan-policy-detail>
         <Row end="xs">
           <Col xs>
             <ExpandAllButton accordionStatus={sections} onToggle={this.handleExpandAll} />

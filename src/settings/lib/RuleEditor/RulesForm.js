@@ -16,7 +16,7 @@ class RulesForm extends React.Component {
   static propTypes = {
     pristine: PropTypes.bool.isRequired,
     submitting: PropTypes.bool.isRequired,
-    onSave: PropTypes.func,
+    onSubmit: PropTypes.func.isRequired,
     handleSubmit: PropTypes.func.isRequired,
     editorProps: PropTypes.object,
   };

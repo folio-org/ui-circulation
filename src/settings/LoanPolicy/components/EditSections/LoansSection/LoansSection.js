@@ -68,79 +68,93 @@ class LoansSection extends React.Component {
       : longTermLoansOptions;
 
     return (
-      <React.Fragment>
-        <h2>
+      <div data-test-loan-policy-form-loans-section>
+        <h2 data-test-loans-section-header>
           <FormattedMessage id="ui-circulation.settings.loanPolicy.loans" />
         </h2>
-        <Field
-          label={<FormattedMessage id="ui-circulation.settings.loanPolicy.loanable" />}
-          id="loanable"
-          name="loanable"
-          component={Checkbox}
-          type="checkbox"
-          normalize={v => !!v}
-        />
-        { policy.isLoanable() &&
+        <div data-test-loans-section-loanable>
           <Field
-            label={<FormattedMessage id="ui-circulation.settings.loanPolicy.loanProfile" />}
-            name="loansPolicy.profileId"
-            id="input_loan_profile"
-            component={Select}
-            dataOptions={loanProfileTypes}
+            label={<FormattedMessage id="ui-circulation.settings.loanPolicy.loanable" />}
+            id="loanable"
+            name="loanable"
+            component={Checkbox}
+            type="checkbox"
+            normalize={v => !!v}
           />
+        </div>
+        { policy.isLoanable() &&
+          <div data-test-loans-section-loan-profile>
+            <Field
+              label={<FormattedMessage id="ui-circulation.settings.loanPolicy.loanProfile" />}
+              name="loansPolicy.profileId"
+              id="input_loan_profile"
+              component={Select}
+              dataOptions={loanProfileTypes}
+            />
+          </div>
         }
         { policy.isProfileRolling() &&
-          <Period
-            fieldLabel="ui-circulation.settings.loanPolicy.loanPeriod"
-            selectPlaceholder="ui-circulation.settings.loanPolicy.selectInterval"
-            inputValuePath="loansPolicy.period.duration"
-            selectValuePath="loansPolicy.period.intervalId"
-            intervalPeriods={intervalPeriods}
-            changeFormValue={change}
-            required
-          />
+          <div data-test-loans-section-loan-period>
+            <Period
+              fieldLabel="ui-circulation.settings.loanPolicy.loanPeriod"
+              selectPlaceholder="ui-circulation.settings.loanPolicy.selectInterval"
+              inputValuePath="loansPolicy.period.duration"
+              selectValuePath="loansPolicy.period.intervalId"
+              intervalPeriods={intervalPeriods}
+              changeFormValue={change}
+              required
+            />
+          </div>
         }
         { (policy.isProfileRolling() || policy.isProfileFixed()) &&
-          <Field
-            label={dueDateScheduleFieldLabel}
-            name="loansPolicy.fixedDueDateScheduleId"
-            id="input_loansPolicy_fixedDueDateSchedule"
-            component={Select}
-            placeholder={formatMessage({ id: 'ui-circulation.settings.loanPolicy.selectSchedule' })}
-            dataOptions={schedules}
-          />
+          <div data-test-loans-section-fixed-due-date-schedule-id>
+            <Field
+              label={dueDateScheduleFieldLabel}
+              name="loansPolicy.fixedDueDateScheduleId"
+              id="input_loansPolicy_fixedDueDateSchedule"
+              component={Select}
+              placeholder={formatMessage({ id: 'ui-circulation.settings.loanPolicy.selectSchedule' })}
+              dataOptions={schedules}
+            />
+          </div>
         }
         { policy.isLoanable() &&
-          <Field
-            label={<FormattedMessage id="ui-circulation.settings.loanPolicy.closedDueDateMgmt" />}
-            name="loansPolicy.closedLibraryDueDateManagementId"
-            component={Select}
-            dataOptions={dueDateManagementOptions}
-          />
+          <div data-test-loans-section-closed-due-date-mgmt>
+            <Field
+              label={<FormattedMessage id="ui-circulation.settings.loanPolicy.closedDueDateMgmt" />}
+              name="loansPolicy.closedLibraryDueDateManagementId"
+              component={Select}
+              dataOptions={dueDateManagementOptions}
+            />
+          </div>
         }
         { policy.isOpeningTimeOffsetActive() &&
-          <Period
-            fieldLabel="ui-circulation.settings.loanPolicy.openingTimeOffset"
-            selectPlaceholder="ui-circulation.settings.loanPolicy.selectInterval"
-            inputValuePath="loansPolicy.openingTimeOffset.duration"
-            selectValuePath="loansPolicy.openingTimeOffset.intervalId"
-            intervalPeriods={intervalPeriods.slice(0, 2).reverse()}
-            changeFormValue={change}
-            required
-          />
+          <div data-test-loans-section-opening-time-offset>
+            <Period
+              fieldLabel="ui-circulation.settings.loanPolicy.openingTimeOffset"
+              selectPlaceholder="ui-circulation.settings.loanPolicy.selectInterval"
+              inputValuePath="loansPolicy.openingTimeOffset.duration"
+              selectValuePath="loansPolicy.openingTimeOffset.intervalId"
+              intervalPeriods={intervalPeriods.slice(0, 2).reverse()}
+              changeFormValue={change}
+              required
+            />
+          </div>
         }
         { policy.isLoanable() &&
-          <Period
-            fieldLabel="ui-circulation.settings.loanPolicy.gracePeriod"
-            selectPlaceholder="ui-circulation.settings.loanPolicy.selectInterval"
-            inputValuePath="loansPolicy.gracePeriod.duration"
-            selectValuePath="loansPolicy.gracePeriod.intervalId"
-            intervalPeriods={intervalPeriods}
-            changeFormValue={change}
-          />
+          <div data-test-loans-section-grace-period>
+            <Period
+              fieldLabel="ui-circulation.settings.loanPolicy.gracePeriod"
+              selectPlaceholder="ui-circulation.settings.loanPolicy.selectInterval"
+              inputValuePath="loansPolicy.gracePeriod.duration"
+              selectValuePath="loansPolicy.gracePeriod.intervalId"
+              intervalPeriods={intervalPeriods}
+              changeFormValue={change}
+            />
+          </div>
         }
         <hr />
-      </React.Fragment>
+      </div>
     );
   }
 }

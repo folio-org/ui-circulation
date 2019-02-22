@@ -158,73 +158,6 @@ export default function config() {
     'totalRecords' : 4
   });
 
-  this.get('/loan-policy-storage/loan-policies', {
-    'loanPolicies' : [{
-      'id' : 'd9cd0bed-1b49-4b5e-a7bd-064b8d177231',
-      'name' : 'Example Loan Policy',
-      'description' : 'An example loan policy',
-      'loanable' : true,
-      'loansPolicy' : {
-        'profileId' : 'Rolling',
-        'period' : {
-          'duration' : 1,
-          'intervalId' : 'Months'
-        },
-        'closedLibraryDueDateManagementId' : 'KEEP_CURRENT_DATE',
-        'existingRequestsPeriod' : {
-          'duration' : 1,
-          'intervalId' : 'Weeks'
-        },
-        'gracePeriod' : {
-          'duration' : 7,
-          'intervalId' : 'Days'
-        }
-      },
-      'renewable' : true,
-      'renewalsPolicy' : {
-        'unlimited' : true,
-        'renewFromId' : 'CURRENT_DUE_DATE',
-        'differentPeriod' : true,
-        'period' : {
-          'duration' : 30,
-          'intervalId' : 'Days'
-        }
-      },
-      'metadata' : {
-        'createdDate' : '2019-01-08T02:53:58.033+0000',
-        'createdByUserId' : '1d2a5d7d-e472-55a3-8da2-285ef27f7125',
-        'updatedDate' : '2019-01-08T02:53:58.033+0000',
-        'updatedByUserId' : '1d2a5d7d-e472-55a3-8da2-285ef27f7125'
-      }
-    }, {
-      'id' : '43198de5-f56a-4a53-a0bd-5a324418967a',
-      'name' : 'One Hour',
-      'loanable' : true,
-      'loansPolicy' : {
-        'profileId' : 'Rolling',
-        'period' : {
-          'duration' : 1,
-          'intervalId' : 'Hours'
-        },
-        'closedLibraryDueDateManagementId' : 'KEEP_CURRENT_DATE'
-      },
-      'renewable' : true,
-      'renewalsPolicy' : {
-        'unlimited' : false,
-        'numberAllowed' : 3.0,
-        'renewFromId' : 'SYSTEM_DATE',
-        'differentPeriod' : false
-      },
-      'metadata' : {
-        'createdDate' : '2019-01-08T02:53:59.182+0000',
-        'createdByUserId' : '1d2a5d7d-e472-55a3-8da2-285ef27f7125',
-        'updatedDate' : '2019-01-08T02:53:59.182+0000',
-        'updatedByUserId' : '1d2a5d7d-e472-55a3-8da2-285ef27f7125'
-      }
-    }],
-    'totalRecords' : 2
-  });
-
   this.get('/notice-policy-storage/notice-policies', {
     'noticePolicies': [
       {
@@ -333,14 +266,64 @@ export default function config() {
     ]
   });
 
+  this.get('/patron-notice-policy-storage/patron-notice-policies', {
+    'patronNoticePolicies' : [{
+      'id' : '16b88363-0d93-464a-967a-ad5ad0f9187c',
+      'description' : 'An alternate notice policy',
+      'name' : 'Alternate Notice Policy',
+      'active' : true,
+      'metadata' : {
+        'createdDate' : '2019-02-22T01:57:45.999+0000',
+        'createdByUserId' : '0758d6d8-3e0f-52bc-aa98-2eb9cb9fd7cd',
+        'updatedDate' : '2019-02-22T01:57:45.999+0000',
+        'updatedByUserId' : '0758d6d8-3e0f-52bc-aa98-2eb9cb9fd7cd'
+      },
+      'loanNotices' : [],
+      'feeFineNotices' : [],
+      'requestNotices' : []
+    }, {
+      'id' : '122b3d2b-4788-4f1e-9117-56daa91cb75c',
+      'name' : 'Basic Notice Policy',
+      'description' : 'A basic notice policy',
+      'active' : true,
+      'metadata' : {
+        'createdDate' : '2019-02-22T01:57:46.651+0000',
+        'createdByUserId' : '0758d6d8-3e0f-52bc-aa98-2eb9cb9fd7cd',
+        'updatedDate' : '2019-02-22T01:57:46.651+0000',
+        'updatedByUserId' : '0758d6d8-3e0f-52bc-aa98-2eb9cb9fd7cd'
+      },
+      'loanNotices' : [],
+      'feeFineNotices' : [],
+      'requestNotices' : []
+    }],
+    'totalRecords' : 2
+  });
+
   this.get('/request-policy-storage/request-policies', function ({ requestPolicies }) {
     return this.serializerOrRegistry.serialize(requestPolicies.all());
+  });
+
+  this.get('/loan-policy-storage/loan-policies', function ({ loanPolicies }) {
+    return this.serializerOrRegistry.serialize(loanPolicies.all());
   });
 
   this.post('/request-policy-storage/request-policies', ({ requestPolicies }, request) => {
     const body = JSON.parse(request.requestBody);
     const requestPolicy = requestPolicies.create(body);
     return requestPolicy.attrs;
+  });
+
+  this.post('/loan-policy-storage/loan-policies', ({ loanPolicies }, request) => {
+    const body = JSON.parse(request.requestBody);
+    const loanPolicy = loanPolicies.create(body);
+    return loanPolicy.attrs;
+  });
+
+  this.put('/loan-policy-storage/loan-policies/:id', ({ loanPolicies }, request) => {
+    const { id, name, description } = JSON.parse(request.requestBody);
+    const loanPolicy = loanPolicies.find(id);
+    loanPolicy.update({ name, description });
+    return loanPolicy.attrs;
   });
 
   this.put('/request-policy-storage/request-policies/:id', ({ requestPolicies }, request) => {
