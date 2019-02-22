@@ -68,8 +68,7 @@ class Circulation extends React.Component {
         route: 'request-policies',
         label: <FormattedMessage id="ui-circulation.settings.index.requestPolicies" />,
         component: RequestPolicySettings,
-        // TODO: turn on after server side is done
-        // perm: 'ui-circulation.settings.request-policies',
+        perm: 'ui-circulation.settings.request-policies',
       },
     ];
   }

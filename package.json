@@ -146,6 +146,20 @@
           "settings.circulation.enabled"
         ],
         "visible": true
+      },
+      {
+        "permissionName": "ui-circulation.settings.request-policies",
+        "displayName": "Settings (Circ): Can create, edit and remove request policies",
+        "subPermissions": [
+          "circulation-storage.request-policies.collection.get",
+          "circulation-storage.request-policies.item.get",
+          "circulation-storage.request-policies.collection.delete",
+          "circulation-storage.request-policies.item.delete",
+          "circulation-storage.request-policies.item.post",
+          "circulation-storage.request-policies.item.put",
+          "settings.circulation.enabled"
+        ],
+        "visible": true
       }
     ]
   },
