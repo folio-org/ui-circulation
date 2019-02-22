@@ -102,7 +102,7 @@ describe('LoanPolicyForm', () => {
           });
 
           it('should have proper label', () => {
-            expect(LoanPolicyForm.loansSection.loanable.label).to.equal(translation['settings.loanPolicy.loanable']);
+            expect(LoanPolicyForm.loansSection.loanable.text).to.equal(translation['settings.loanPolicy.loanable']);
           });
 
           it('should be checked by default', () => {
@@ -347,7 +347,7 @@ describe('LoanPolicyForm', () => {
             });
 
             it('should have proper label', () => {
-              expect(LoanPolicyForm.renewalsSection.renewable.label).to.equal(
+              expect(LoanPolicyForm.renewalsSection.renewable.text).to.equal(
                 translation['settings.loanPolicy.renewable']
               );
             });
@@ -375,7 +375,7 @@ describe('LoanPolicyForm', () => {
             });
 
             it('should have proper label', () => {
-              expect(LoanPolicyForm.renewalsSection.unlimitedRenewals.label).to.equal(
+              expect(LoanPolicyForm.renewalsSection.unlimitedRenewals.text).to.equal(
                 translation['settings.loanPolicy.unlimitedRenewals']
               );
             });
@@ -491,7 +491,7 @@ describe('LoanPolicyForm', () => {
             });
 
             it('should have proper label', () => {
-              expect(LoanPolicyForm.renewalsSection.renewalPeriodDifferent.label).to.equal(
+              expect(LoanPolicyForm.renewalsSection.renewalPeriodDifferent.text).to.equal(
                 translation['settings.loanPolicy.renewalPeriodDifferent']
               );
             });
@@ -760,7 +760,7 @@ describe('LoanPolicyForm', () => {
             });
 
             it('should have proper label', () => {
-              expect(LoanPolicyForm.requestManagementSection.renewItemsWithRequest.label).to.equal(
+              expect(LoanPolicyForm.requestManagementSection.renewItemsWithRequest.text).to.equal(
                 translation['settings.requestManagement.renewItemsWithRequest']
               );
             });

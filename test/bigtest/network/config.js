@@ -266,6 +266,39 @@ export default function config() {
     ]
   });
 
+  this.get('/patron-notice-policy-storage/patron-notice-policies', {
+    'patronNoticePolicies' : [{
+      'id' : '16b88363-0d93-464a-967a-ad5ad0f9187c',
+      'description' : 'An alternate notice policy',
+      'name' : 'Alternate Notice Policy',
+      'active' : true,
+      'metadata' : {
+        'createdDate' : '2019-02-22T01:57:45.999+0000',
+        'createdByUserId' : '0758d6d8-3e0f-52bc-aa98-2eb9cb9fd7cd',
+        'updatedDate' : '2019-02-22T01:57:45.999+0000',
+        'updatedByUserId' : '0758d6d8-3e0f-52bc-aa98-2eb9cb9fd7cd'
+      },
+      'loanNotices' : [],
+      'feeFineNotices' : [],
+      'requestNotices' : []
+    }, {
+      'id' : '122b3d2b-4788-4f1e-9117-56daa91cb75c',
+      'name' : 'Basic Notice Policy',
+      'description' : 'A basic notice policy',
+      'active' : true,
+      'metadata' : {
+        'createdDate' : '2019-02-22T01:57:46.651+0000',
+        'createdByUserId' : '0758d6d8-3e0f-52bc-aa98-2eb9cb9fd7cd',
+        'updatedDate' : '2019-02-22T01:57:46.651+0000',
+        'updatedByUserId' : '0758d6d8-3e0f-52bc-aa98-2eb9cb9fd7cd'
+      },
+      'loanNotices' : [],
+      'feeFineNotices' : [],
+      'requestNotices' : []
+    }],
+    'totalRecords' : 2
+  });
+
   this.get('/request-policy-storage/request-policies', function ({ requestPolicies }) {
     return this.serializerOrRegistry.serialize(requestPolicies.all());
   });
