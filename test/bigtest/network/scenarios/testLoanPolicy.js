@@ -1,6 +1,6 @@
-import { loanProfileMap } from '../../../../constants';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { loanProfileMap } from '@folio/circulation/src/constants';
 import testLoanPolicySettings from '../../constants/testLoanPolicySettings';
-
 
 export default (server) => {
   server.create('loanPolicy', {

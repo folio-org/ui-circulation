@@ -2,12 +2,14 @@ import {
   Factory,
   faker,
 } from '@bigtest/mirage';
+
+// eslint-disable-next-line import/no-extraneous-dependencies
 import {
   intervalIdsMap,
   loanProfileMap,
   renewFromOptions,
   longTermLoansOptions,
-} from '../../../../constants';
+} from '@folio/circulation/src/constants';
 
 export const getPeriod = {
   duration: () => faker.random.number(),

@@ -1,8 +1,10 @@
-import { interactor, text } from '@bigtest/interactor';
 import {
-  TextFieldInteractor,
-  SelectInteractor,
-} from '@folio/stripes/components';
+  interactor,
+  text,
+} from '@bigtest/interactor';
+
+import TextFieldInteractor from '@folio/stripes-components/lib/TextField/tests/interactor';
+import SelectInteractor from '@folio/stripes-components/lib/Select/tests/interactor';
 
 export default interactor(class Period {
   duration = new TextFieldInteractor('[data-test-period-duration]');

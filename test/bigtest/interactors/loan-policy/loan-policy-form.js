@@ -4,11 +4,9 @@ import {
   scoped,
 } from '@bigtest/interactor';
 
-import {
-  TextFieldInteractor,
-  CheckboxInteractor,
-  SelectInteractor,
-} from '@folio/stripes/components';
+import TextFieldInteractor from '@folio/stripes-components/lib/TextField/tests/interactor';
+import CheckboxInteractor from '@folio/stripes-components/lib/Checkbox/tests/interactor';
+import SelectInteractor from '@folio/stripes-components/lib/Select/tests/interactor';
 
 import Period from '../Period';
 
