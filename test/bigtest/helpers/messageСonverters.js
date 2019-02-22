@@ -15,3 +15,7 @@ export const getBooleanRepresentation = (flag) => {
 };
 
 export const getRequiredLabel = (text) => `${text} *`;
+
+export const toLowercaseReplaceAllSpaces = (text, newSubstr = '-') => text.toLowerCase()
+  .split(' ')
+  .join(newSubstr);
