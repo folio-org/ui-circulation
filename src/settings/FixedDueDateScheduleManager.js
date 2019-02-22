@@ -154,9 +154,9 @@ class FixedDueDateScheduleManager extends React.Component {
             entryLabel={entryLabel}
             nameKey="name"
             permissions={{
-              put: 'ui-circulation.settings.circulation-rules',
-              post: 'ui-circulation.settings.circulation-rules',
-              delete: 'ui-circulation.settings.circulation-rules',
+              put: 'ui-circulation.settings.fixed-due-date-schedules',
+              post: 'ui-circulation.settings.fixed-due-date-schedules',
+              delete: 'ui-circulation.settings.fixed-due-date-schedules',
             }}
             validate={this.validate}
             deleteDisabled={this.deleteDisabled}
