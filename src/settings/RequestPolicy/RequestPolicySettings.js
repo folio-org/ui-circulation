@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { sortBy } from 'lodash';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 
 import { EntryManager } from '@folio/stripes/smart-components';
 
@@ -28,6 +28,7 @@ class RequestPolicySettings extends React.Component {
   });
 
   static propTypes = {
+    intl: intlShape.isRequired,
     resources: PropTypes.shape({
       requestPolicies: PropTypes.object,
     }).isRequired,
@@ -77,7 +78,7 @@ class RequestPolicySettings extends React.Component {
         detailComponent={RequestPolicyDetail}
         entryFormComponent={RequestPolicyForm}
         paneTitle={<FormattedMessage id="ui-circulation.settings.requestPolicy.paneTitle" />}
-        entryLabel={<FormattedMessage id="ui-circulation.settings.requestPolicy.entryLabel" />}
+        entryLabel={this.props.intl.formatMessage({ id : 'ui-circulation.settings.requestPolicy.entryLabel' })}
         nameKey="name"
         enableDetailsActionMenu
         permissions={permissions}
@@ -88,4 +89,4 @@ class RequestPolicySettings extends React.Component {
   }
 }
 
-export default RequestPolicySettings;
+export default injectIntl(RequestPolicySettings);
