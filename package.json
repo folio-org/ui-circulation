@@ -157,6 +157,8 @@
           "circulation-storage.request-policies.item.delete",
           "circulation-storage.request-policies.item.post",
           "circulation-storage.request-policies.item.put",
+          "users.collection.get",
+          "users.item.get",
           "settings.circulation.enabled"
         ],
         "visible": true
