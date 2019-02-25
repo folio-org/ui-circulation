@@ -162,6 +162,19 @@
           "settings.circulation.enabled"
         ],
         "visible": true
+      },
+      {
+        "permissionName": "ui-circulation.settings.other-settings",
+        "displayName": "Settings (Circ): Can create, edit and remove other settings",
+        "subPermissions": [
+          "configuration.entries.collection.get",
+          "configuration.entries.item.get",
+          "configuration.entries.item.post",
+          "configuration.entries.item.put",
+          "configuration.entries.item.delete",
+          "configuration.audit.collection.get"
+        ],
+        "visible": true
       }
     ]
   },
