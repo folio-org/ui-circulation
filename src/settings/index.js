@@ -40,6 +40,7 @@ class Circulation extends React.Component {
         route: 'checkout',
         label: <FormattedMessage id="ui-circulation.settings.index.otherSettings" />,
         component: CheckoutSettings,
+        perm: 'ui-circulation.settings.other-settings',
       },
       {
         route: 'staffslips',
