@@ -58,6 +58,7 @@ class Circulation extends React.Component {
         route: 'patron-notices',
         label: <FormattedMessage id="ui-circulation.settings.index.patronNotices" />,
         component: PatronNotices,
+        perm: 'ui-circulation.settings.notice-templates',
       },
       {
         route: 'notice-policies',
