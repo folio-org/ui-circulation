@@ -58,13 +58,11 @@ class PatronNotices extends React.Component {
         entryLabel={this.props.label}
         entryFormComponent={PatronNoticeForm}
         defaultEntry={{ active: true, outputFormats: ['html'], templateResolver: 'mustache' }}
-        // validate={this.validate}
         nameKey="name"
-        // TODO: use real permissions once they exist (EntryManager crashes without a permissions object)
         permissions={{
-          put: 'settings.organization.enabled',
-          post: 'settings.organization.enabled',
-          delete: 'settings.organization.enabled',
+          put: 'ui-circulation.settings.notice-templates',
+          post: 'ui-circulation.settings.notice-templates',
+          delete: 'ui-circulation.settings.notice-templates',
         }}
         uniquenessValidator={this.props.mutator}
         enableDetailsActionMenu

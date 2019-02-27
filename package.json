@@ -64,24 +64,11 @@
         "permissionName": "ui-circulation.settings.notice-policies",
         "displayName": "Settings (Circ): Can create, edit and remove notice policies",
         "subPermissions": [
-          "circulation-storage.notice-policies.collection.get",
-          "circulation-storage.notice-policies.item.get",
-          "circulation-storage.notice-policies.item.post",
-          "circulation-storage.notice-policies.item.put",
-          "circulation-storage.notice-policies.item.delete",
-          "settings.circulation.enabled"
-        ],
-        "visible": true
-      },
-      {
-        "permissionName": "ui-circulation.settings.request-policies",
-        "displayName": "Settings (Circ): Can create, edit and remove request policies",
-        "subPermissions": [
-          "circulation-storage.request-policies.collection.get",
-          "circulation-storage.request-policies.item.get",
-          "circulation-storage.request-policies.item.post",
-          "circulation-storage.request-policies.item.put",
-          "circulation-storage.request-policies.item.delete",
+          "circulation-storage.patron-notice-policies.item.post",
+          "circulation-storage.patron-notice-policies.item.put",
+          "circulation-storage.patron-notice-policies.item.delete",
+          "circulation-storage.patron-notice-policies.collection.get",
+          "circulation-storage.patron-notice-policies.item.get",
           "settings.circulation.enabled"
         ],
         "visible": true
@@ -168,7 +155,22 @@
         "permissionName": "ui-circulation.settings.other-settings",
         "displayName": "Settings (Circ): Can create, edit and remove other settings",
         "subPermissions": [
-          "configuration.all"
+          "configuration.all",
+          "settings.circulation.enabled"
+        ],
+        "visible": true
+      },
+      {
+        "permissionName": "ui-circulation.settings.notice-templates",
+        "displayName": "Settings (Circ): Can create, edit and remove patron notice templates",
+        "subPermissions": [
+          "templates.collection.get",
+          "templates.item.get",
+          "templates.item.post",
+          "templates.item.put",
+          "templates.item.delete",
+          "template-request.post",
+          "settings.circulation.enabled"
         ],
         "visible": true
       }
