@@ -69,6 +69,10 @@
           "circulation-storage.patron-notice-policies.item.delete",
           "circulation-storage.patron-notice-policies.collection.get",
           "circulation-storage.patron-notice-policies.item.get",
+          "templates.collection.get",
+          "templates.item.get",
+          "users.collection.get",
+          "users.item.get",
           "settings.circulation.enabled"
         ],
         "visible": true
