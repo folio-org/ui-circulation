@@ -42,7 +42,10 @@
           "circulation-storage.cancellation-reasons.item.put",
           "circulation-storage.cancellation-reasons.item.delete",
           "circulation-storage.cancellation-reasons.collection.get",
-          "circulation-storage.cancellation-reasons.collection.delete"
+          "circulation-storage.cancellation-reasons.collection.delete",
+          "users.collection.get",
+          "users.item.get",
+          "settings.circulation.enabled"
         ],
         "visible": true
       },
@@ -56,6 +59,10 @@
           "circulation-storage.loan-policies.item.put",
           "circulation-storage.loan-policies.item.delete",
           "circulation-storage.loan-policies.collection.delete",
+          "circulation-storage.fixed-due-date-schedules.collection.get",
+          "circulation-storage.fixed-due-date-schedules.item.get",
+          "users.collection.get",
+          "users.item.get",
           "settings.circulation.enabled"
         ],
         "visible": true
@@ -86,12 +93,23 @@
       },
       {
         "permissionName": "ui-circulation.settings.circulation-rules",
-        "displayName": "Settings (Circ): Can create, edit and remove loan rules",
+        "displayName": "Settings (Circ): Can create, edit and remove circulation rules",
         "subPermissions": [
           "circulation-storage.circulation-rules.get",
           "circulation-storage.circulation-rules.put",
           "circulation.rules.get",
           "circulation.rules.put",
+          "usergroups.collection.get",
+          "circulation-storage.loan-policies.collection.get",
+          "circulation-storage.request-policies.collection.get",
+          "circulation-storage.patron-notice-policies.collection.get",
+          "inventory-storage.material-types.collection.get",
+          "inventory-storage.loan-types.collection.get",
+          "circulation-storage.loan-policies.item.get",
+          "circulation-storage.request-policies.item.get",
+          "circulation-storage.patron-notice-policies.item.get",
+          "inventory-storage.material-types.item.get",
+          "inventory-storage.loan-types.item.get",
           "settings.circulation.enabled"
         ],
         "visible": true
@@ -106,6 +124,8 @@
           "circulation-storage.fixed-due-date-schedules.item.put",
           "circulation-storage.fixed-due-date-schedules.item.delete",
           "circulation-storage.fixed-due-date-schedules.collection.delete",
+          "users.collection.get",
+          "users.item.get",
           "settings.circulation.enabled"
         ],
         "visible": true
