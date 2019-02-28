@@ -71,7 +71,7 @@ class NoticePolicyDetail extends React.Component {
     const noticePolicy = new NoticePolicy(policy);
 
     return (
-      <React.Fragment>
+      <div data-test-notice-policy-detail>
         <Row end="xs">
           <Col xs>
             <ExpandAllButton
@@ -106,7 +106,7 @@ class NoticePolicyDetail extends React.Component {
           policy={noticePolicy}
           onToggle={this.handleSectionToggle}
         />
-      </React.Fragment>
+      </div>
     );
   }
 }
