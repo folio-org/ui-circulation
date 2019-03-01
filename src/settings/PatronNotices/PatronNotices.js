@@ -57,7 +57,7 @@ class PatronNotices extends React.Component {
         paneTitle={this.props.label}
         entryLabel={this.props.label}
         entryFormComponent={PatronNoticeForm}
-        defaultEntry={{ active: true, outputFormats: ['html'], templateResolver: 'mustache' }}
+        defaultEntry={{ active: true, outputFormats: ['text/html'], templateResolver: 'mustache' }}
         nameKey="name"
         permissions={{
           put: 'ui-circulation.settings.notice-templates',
