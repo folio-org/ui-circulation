@@ -195,7 +195,11 @@ class NoticeCard extends React.Component {
           </React.Fragment>
           { isRecurring && (
             <Row>
-              <Col xs={12} className={css.fieldLabel}>
+              <Col
+                xs={12}
+                className={css.fieldLabel}
+                data-test-notice-card-send-every-label
+              >
                 <KeyValue label={<FormattedMessage id={`${translationNamespace}.notices.sendEvery`} />}>
                   <Row>
                     <Col

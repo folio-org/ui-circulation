@@ -190,6 +190,9 @@ export default function config() {
       }
     ]
   });
+  this.get('/templates', function ({ templates }) {
+    return this.serializerOrRegistry.serialize(templates.all());
+  });
 
   this.get('/request-policy-storage/request-policies', function ({ requestPolicies }) {
     return this.serializerOrRegistry.serialize(requestPolicies.all());
