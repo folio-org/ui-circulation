@@ -82,9 +82,15 @@ class NoticeCard extends React.Component {
 
     return (
       <Row>
-        <Col xs={12} className={css.notice}>
+        <Col
+          xs={12}
+          className={css.notice}
+        >
           <Row className={css.header}>
-            <Col xs={3} className={css.headerTitle}>
+            <Col
+              xs={3}
+              className={css.headerTitle}
+            >
               <FormattedMessage
                 id={`${translationNamespace}.countableNotice`}
                 values={{ counter: index + 1 }}
@@ -92,24 +98,36 @@ class NoticeCard extends React.Component {
             </Col>
           </Row>
           <Row>
-            <Col xs={4} className={css.noticeField}>
+            <Col
+              xs={4}
+              className={css.noticeField}
+            >
               <KeyValue
                 label={<FormattedMessage id={`${translationNamespace}.notices.template`} />}
                 value={this.getDropdownValue('templateId', templates)}
               />
             </Col>
-            <Col xs={1} className={css.cardText}>
+            <Col
+              xs={1}
+              className={css.cardText}
+            >
               <KeyValue>
                 <FormattedMessage id={`${translationNamespace}.notices.via`} />
               </KeyValue>
             </Col>
-            <Col xs={2} className={css.noticeField}>
+            <Col
+              xs={2}
+              className={css.noticeField}
+            >
               <KeyValue
                 label={<FormattedMessage id={`${translationNamespace}.notices.format`} />}
                 value={this.getTranslatedDropdownValue('format', noticesFormats)}
               />
             </Col>
-            <Col xs={5} className={css.noticeField}>
+            <Col
+              xs={5}
+              className={css.noticeField}
+            >
               <KeyValue
                 label={<FormattedMessage id={`${translationNamespace}.notices.triggeringEvent`} />}
                 value={this.getTranslatedDropdownValue('sendOptions.sendWhen', triggeringEvents)}
@@ -119,7 +137,10 @@ class NoticeCard extends React.Component {
           { notice.sendOptions.isTimeBasedEventSelected(timeBasedEventsIds) && (
             <React.Fragment>
               <Row>
-                <Col xs={12} className={css.fieldLabel}>
+                <Col
+                  xs={12}
+                  className={css.fieldLabel}
+                >
                   <KeyValue label={<FormattedMessage id={`${translationNamespace}.notices.send`} />}>
                     <Row>
                       <Col xs={4}>
@@ -151,7 +172,10 @@ class NoticeCard extends React.Component {
                 </Col>
               </Row>
               <Row>
-                <Col xs={12} className={css.fieldLabel}>
+                <Col
+                  xs={12}
+                  className={css.fieldLabel}
+                >
                   <KeyValue label={<FormattedMessage id={`${translationNamespace}.notices.frequency`} />}>
                     <Row>
                       <Col xs={4}>
@@ -185,7 +209,10 @@ class NoticeCard extends React.Component {
             </React.Fragment>
           )}
           <Row>
-            <Col xs={12} className={css.noticeField}>
+            <Col
+              xs={12}
+              className={css.noticeField}
+            >
               <KeyValue
                 label={<FormattedMessage id={`${translationNamespace}.notices.realTime`} />}
                 value={this.getCheckboxValue('realTime')}
