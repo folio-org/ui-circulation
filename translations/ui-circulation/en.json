@@ -226,7 +226,6 @@
   "settings.noticePolicy.notices.frequency": "Frequency",
   "settings.noticePolicy.notices.realTime": "Send in real-time",
   "settings.noticePolicy.notices.send": "Send",
-  "settings.noticePolicy.notices.sendEvery": "Send Every",
   "settings.noticePolicy.notices.email": "Email",
   "settings.noticePolicy.notices.oneTime": "One Time",
   "settings.noticePolicy.notices.recurring": "Recurring",

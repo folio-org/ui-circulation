@@ -75,6 +75,10 @@ class Period extends React.Component {
       return value;
     }
 
+    if (isEmpty(value)) {
+      return '';
+    }
+
     return intl.formatMessage({ id: value });
   };
 

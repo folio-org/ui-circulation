@@ -116,21 +116,6 @@ export const noticesSendEventMap = {
   UPON: 'Upon At',
 };
 
-export const loanNoticesSendWhenMap = {
-  DUE_DATE: 'Due date',
-  OVERDUE: 'Overdue',
-  RENEWED: 'Renewed',
-};
-
-export const requestNoticesSendWhenMap = {
-  RECALL_REQUEST: 'Recall request',
-  HOLD_REQUEST: 'Hold request',
-  PAGING_REQUEST: 'Paging request',
-  AVAILABLE: 'Available',
-  HOLD_EXPIRATION: 'Hold Expiration',
-  REQUEST_CANCELATION: 'Request cancellation',
-};
-
 export const noticesFormats = [
   { value: noticesFormatsMap.EMAIL, label: 'ui-circulation.settings.noticePolicy.notices.email' },
 ];
@@ -153,21 +138,6 @@ export const noticesIntervalPeriods = [
   { value: intervalIdsMap.WEEKS, label: 'ui-circulation.settings.noticePolicy.notices.weeks' },
   { value: intervalIdsMap.MONTHS, label: 'ui-circulation.settings.noticePolicy.notices.months' },
   { value: intervalIdsMap.YEARS, label: 'ui-circulation.settings.noticePolicy.notices.years' },
-];
-
-export const loanNoticesSendWhen = [
-  { value: loanNoticesSendWhenMap.DUE_DATE, label: 'ui-circulation.settings.noticePolicy.loanNotices.dueDate' },
-  { value: loanNoticesSendWhenMap.OVERDUE, label: 'ui-circulation.settings.noticePolicy.loanNotices.overdue' },
-  { value: loanNoticesSendWhenMap.RENEWED, label: 'ui-circulation.settings.noticePolicy.loanNotices.renewed' },
-];
-
-export const requestNoticesSendWhen = [
-  { value: requestNoticesSendWhenMap.RECALL_REQUEST, label: 'ui-circulation.settings.noticePolicy.requestNotices.recallRequest' },
-  { value: requestNoticesSendWhenMap.HOLD_REQUEST, label: 'ui-circulation.settings.noticePolicy.requestNotices.holdRequest' },
-  { value: requestNoticesSendWhenMap.PAGING_REQUEST, label: 'ui-circulation.settings.noticePolicy.requestNotices.pagingRequest' },
-  { value: requestNoticesSendWhenMap.AVAILABLE, label: 'ui-circulation.settings.noticePolicy.requestNotices.available' },
-  { value: requestNoticesSendWhenMap.HOLD_EXPIRATION, label: 'ui-circulation.settings.noticePolicy.requestNotices.holdExpiration' },
-  { value: requestNoticesSendWhenMap.REQUEST_CANCELATION, label: 'ui-circulation.settings.noticePolicy.requestNotices.requestCancelation' },
 ];
 
 export const loanUserInitiatedEventsIds = {
