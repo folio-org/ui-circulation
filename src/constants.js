@@ -170,6 +170,49 @@ export const requestNoticesSendWhen = [
   { value: requestNoticesSendWhenMap.REQUEST_CANCELATION, label: 'ui-circulation.settings.noticePolicy.requestNotices.requestCancelation' },
 ];
 
+export const loanUserInitiatedEventsIds = {
+  CHECK_IN: 'Check in',
+  CHECK_OUT: 'Check out',
+  RENEWED: 'Renewed',
+};
+
+export const loanTimeBasedEventsIds = {
+  DUE_DATE: 'Due date',
+};
+
+export const loanNoticesTriggeringEvents = [
+  { value: loanUserInitiatedEventsIds.CHECK_IN, label: 'ui-circulation.settings.noticePolicy.loanNotices.checkIn' },
+  { value: loanUserInitiatedEventsIds.CHECK_OUT, label: 'ui-circulation.settings.noticePolicy.loanNotices.checkOut' },
+  { value: loanUserInitiatedEventsIds.RENEWED, label: 'ui-circulation.settings.noticePolicy.loanNotices.renewed' },
+  { value: loanTimeBasedEventsIds.DUE_DATE, label: 'ui-circulation.settings.noticePolicy.loanNotices.dueDate' },
+];
+
+export const requestUserInitiatedEventsIds = {
+  RECALL_REQUEST: 'Recall request',
+  RECALL_LOANEE: 'Recall loanee',
+  HOLD: 'Hold request',
+  PAGE: 'Paging request',
+  CANCEL: 'Request cancellation'
+};
+
+export const requestTimeBasedEventsIds = {
+  HOLD_EXPIRATION: 'Hold Expiration',
+};
+
+export const requestItemStateChangeEventsIds = {
+  AVAILABLE: 'Available',
+};
+
+export const requestNoticesTriggeringEvents = [
+  { value: requestUserInitiatedEventsIds.RECALL_LOANEE, label: 'ui-circulation.settings.noticePolicy.requestNotices.recallLoanee' },
+  { value: requestUserInitiatedEventsIds.RECALL_REQUEST, label: 'ui-circulation.settings.noticePolicy.requestNotices.recallRequest' },
+  { value: requestUserInitiatedEventsIds.HOLD, label: 'ui-circulation.settings.noticePolicy.requestNotices.holdRequest' },
+  { value: requestUserInitiatedEventsIds.PAGE, label: 'ui-circulation.settings.noticePolicy.requestNotices.pagingRequest' },
+  { value: requestUserInitiatedEventsIds.CANCEL, label: 'ui-circulation.settings.noticePolicy.requestNotices.requestCancelation' },
+  { value: requestTimeBasedEventsIds.HOLD_EXPIRATION, label: 'ui-circulation.settings.noticePolicy.requestNotices.holdExpiration' },
+  { value: requestItemStateChangeEventsIds.AVAILABLE, label: 'ui-circulation.settings.noticePolicy.requestNotices.available' },
+];
+
 export const staffSlipMap = {
   HOLD: 'Hold',
   TRANSIT: 'Transit',

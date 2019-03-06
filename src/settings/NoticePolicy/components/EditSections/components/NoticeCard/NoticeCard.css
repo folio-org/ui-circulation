@@ -1,16 +1,21 @@
-.loanNotice {
+.notice {
   border: 1px solid rgba(0, 0, 0, 0.2);
   margin: 10px;
   width: 100%;
 }
+
+.noticeContainer {
+  padding: 10px 20px;
+}
   
 .header {
+  padding: 0.15rem;
+  font-weight: 600;
   background-color: #e6e6e6;
 }
   
 .headerTitle {
   padding: 5px 10px;
-  font-weight: 600;
 }
   
 .headerIcon {
@@ -18,7 +23,8 @@
 }
   
 .noticeField {
-  padding: 10px 20px;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
   
 .cardText {
@@ -27,11 +33,11 @@
   flex-direction: column;
   text-align: center;
 }
+
+.cardTextWithotLabel {
+  padding-bottom: 20px;
+}
   
 .fieldLabel {
   padding-left: 20px;
-}
-
-.buttonContainer {
-  margin-top: 15px;
 }

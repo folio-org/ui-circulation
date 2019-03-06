@@ -1,19 +1,27 @@
 import {
+  isUndefined,
   cloneDeep,
   forEach,
+  values,
   unset,
-  isUndefined,
 } from 'lodash';
 
 import { Notice } from '../../Models/NoticePolicy';
+
+import {
+  loanTimeBasedEventsIds,
+  requestTimeBasedEventsIds
+} from '../../../constants';
+
+const timeBasedEventsIds = [
+  ...values(loanTimeBasedEventsIds),
+  ...values(requestTimeBasedEventsIds),
+];
 
 const setNoticeDefaults = (sectionKey, policy) => {
   const noticePolicy = cloneDeep(policy);
 
   forEach(noticePolicy[sectionKey], (notice) => {
-    notice.name = 'mockName';
-    notice.templateName = 'mockTemplateName';
-
     if (isUndefined(notice.realTime)) {
       notice.realTime = false;
     }
@@ -28,12 +36,19 @@ const checkNoticeHiddenFields = (sectionKey, policy) => {
   forEach(noticePolicy[sectionKey], (item, index) => {
     const notice = new Notice(item);
 
-    if (!notice.isRecurring()) {
+    if (!notice.sendOptions.isTimeBasedEventSelected(timeBasedEventsIds)) {
       unset(noticePolicy, `[${sectionKey}][${index}].sendOptions.sendEvery`);
+      unset(noticePolicy, `[${sectionKey}][${index}].sendOptions.sendBy`);
+      unset(noticePolicy, `[${sectionKey}][${index}].sendOptions.sendHow`);
+      unset(noticePolicy, `[${sectionKey}][${index}].frequency`);
     }
 
     if (!notice.sendOptions.isBeforeOrAfter()) {
       unset(noticePolicy, `[${sectionKey}][${index}].sendOptions.sendBy`);
+    }
+
+    if (!notice.isRecurring()) {
+      unset(noticePolicy, `[${sectionKey}][${index}].sendOptions.sendEvery`);
     }
   });
 

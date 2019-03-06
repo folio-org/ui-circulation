@@ -1,10 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
+import { FieldArray } from 'redux-form';
+import { values } from 'lodash';
 import { Accordion } from '@folio/stripes/components';
 
 import NoticesList from '../components';
-import { loanNoticesSendWhen } from '../../../../../constants';
+import {
+  loanNoticesTriggeringEvents,
+  loanTimeBasedEventsIds,
+} from '../../../../../constants';
 
 class LoanNoticesSection extends React.Component {
   static propTypes = {
@@ -25,6 +30,14 @@ class LoanNoticesSection extends React.Component {
       onToggle,
     } = this.props;
 
+    const props = {
+      sectionKey: 'loanNotices',
+      policy,
+      templates,
+      triggeringEvents: loanNoticesTriggeringEvents,
+      timeBasedEventsIds: values(loanTimeBasedEventsIds),
+    };
+
     return (
       <Accordion
         id="loanNotices"
@@ -32,11 +45,10 @@ class LoanNoticesSection extends React.Component {
         label={<FormattedMessage id="ui-circulation.settings.noticePolicy.loanNotices" />}
         onToggle={onToggle}
       >
-        <NoticesList
-          sectionKey="loanNotices"
-          policy={policy}
-          templates={templates}
-          sendWhenOptions={loanNoticesSendWhen}
+        <FieldArray
+          name={props.sectionKey}
+          component={NoticesList}
+          props={props}
         />
       </Accordion>
     );

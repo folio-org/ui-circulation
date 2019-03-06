@@ -1,12 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
-import { map } from 'lodash';
+import {
+  map,
+  values,
+} from 'lodash';
 
 import { Accordion } from '@folio/stripes/components';
 
 import NoticeCard from '../components';
-import { requestNoticesSendWhen } from '../../../../../constants';
+import {
+  requestTimeBasedEventsIds,
+  requestNoticesTriggeringEvents,
+} from '../../../../../constants';
 
 class RequestNoticesSection extends React.Component {
   static propTypes = {
@@ -38,10 +44,10 @@ class RequestNoticesSection extends React.Component {
           <NoticeCard
             key={index}
             index={index}
-            sectionKey="requestNotices"
-            policy={policy}
+            notice={notice}
+            timeBasedEventsIds={values(requestTimeBasedEventsIds)}
             templates={templates}
-            sendWhenOptions={requestNoticesSendWhen}
+            triggeringEvents={requestNoticesTriggeringEvents}
           />
         ))}
       </Accordion>
