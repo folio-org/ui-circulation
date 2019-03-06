@@ -225,6 +225,20 @@ export default function config() {
     return loanPolicy.attrs;
   });
 
+  this.put('/patron-notice-policy-storage/patron-notice-policies/:id', ({ patronNoticePolicies }, request) => {
+    const { id, name, description } = JSON.parse(request.requestBody);
+    const patronNoticePolicy = patronNoticePolicies.find(id);
+    patronNoticePolicy.update({ name, description });
+    return patronNoticePolicy.attrs;
+  });
+
+  this.delete('/patron-notice-policy-storage/patron-notice-policies/:id', ({ patronNoticePolicies }, request) => {
+    const { params: { id } } = request;
+    const patronNoticePolicy = patronNoticePolicies.find(id);
+    patronNoticePolicy.destroy();
+    return patronNoticePolicy.attrs;
+  });
+
   this.put('/request-policy-storage/request-policies/:id', ({ requestPolicies }, request) => {
     const body = JSON.parse(request.requestBody);
     const { name, description } = body;

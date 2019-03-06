@@ -75,24 +75,44 @@ class NoticeCard extends React.Component {
           const sendEventLabelId = isRecurring ? 'startigSendEvent' : 'sendEvent';
 
           return (
-            <Row key={loanNotice}>
-              <Col xs={7} key={index} className={css.loanNotice}>
+            <Row
+              data-test-notice-card
+              key={loanNotice}
+            >
+              <Col
+                xs={7}
+                key={index}
+                className={css.loanNotice}
+              >
                 <Row className={css.header}>
-                  <Col xs={3} className={css.headerTitle}>
+                  <Col
+                    xs={3}
+                    className={css.headerTitle}
+                    data-test-notice-card-counter
+                  >
                     <FormattedMessage
                       id="ui-circulation.settings.noticePolicy.countableNotice"
                       values={{ counter: index + 1 }}
                     />
                   </Col>
-                  <Col xs={1} xsOffset={8} className={css.headerIcon}>
+                  <Col
+                    xs={1}
+                    xsOffset={8}
+                    className={css.headerIcon}
+                  >
                     <IconButton
+                      data-test-notice-card-remove
                       icon="trash"
                       onClick={() => fields.remove(index)}
                     />
                   </Col>
                 </Row>
                 <Row>
-                  <Col xs={5} className={css.noticeField}>
+                  <Col
+                    xs={5}
+                    className={css.noticeField}
+                    data-test-notice-card-template-id
+                  >
                     <Field
                       name={`${loanNotice}.templateId`}
                       label={(
@@ -105,10 +125,18 @@ class NoticeCard extends React.Component {
                       placeholder=" "
                     />
                   </Col>
-                  <Col xs={1} className={css.cardText}>
+                  <Col
+                    xs={1}
+                    className={css.cardText}
+                    data-test-notice-card-via-text
+                  >
                     <FormattedMessage id="ui-circulation.settings.noticePolicy.notices.via" />
                   </Col>
-                  <Col xs={3} className={css.noticeField}>
+                  <Col
+                    xs={3}
+                    className={css.noticeField}
+                    data-test-notice-card-format
+                  >
                     <Field
                       name={`${loanNotice}.format`}
                       label={(
@@ -121,7 +149,11 @@ class NoticeCard extends React.Component {
                       placeholder=" "
                     />
                   </Col>
-                  <Col xs={3} className={css.noticeField}>
+                  <Col
+                    xs={3}
+                    className={css.noticeField}
+                    data-test-notice-card-frequency
+                  >
                     <Field
                       name={`${loanNotice}.frequency`}
                       label={(
@@ -137,14 +169,22 @@ class NoticeCard extends React.Component {
                 </Row>
                 <React.Fragment>
                   <Row>
-                    <Col xs={12} className={css.fieldLabel}>
+                    <Col
+                      xs={12}
+                      className={css.fieldLabel}
+                      data-test-notice-card-event-label
+                    >
                       <FormattedMessage id={`ui-circulation.settings.noticePolicy.notices.${sendEventLabelId}`}>
                         { message => `${message} *` }
                       </FormattedMessage>
                     </Col>
                   </Row>
                   <Row>
-                    <Col xs={2} className={css.noticeField}>
+                    <Col
+                      xs={2}
+                      className={css.noticeField}
+                      data-test-notice-card-send-how
+                    >
                       <Field
                         name={`${loanNotice}.sendOptions.sendHow`}
                         component={Select}
@@ -152,7 +192,11 @@ class NoticeCard extends React.Component {
                         placeholder=" "
                       />
                     </Col>
-                    <Col xs={3} className={css.noticeField}>
+                    <Col
+                      xs={3}
+                      className={css.noticeField}
+                      data-test-notice-card-send-when
+                    >
                       <Field
                         name={`${loanNotice}.sendOptions.sendWhen`}
                         component={Select}
@@ -162,10 +206,19 @@ class NoticeCard extends React.Component {
                     </Col>
                     { isBeforeOrAfter && (
                       <React.Fragment>
-                        <Col xs={1} className={css.cardText} style={{ paddingBottom: '15px' }}>
+                        <Col
+                          xs={1}
+                          className={css.cardText}
+                          style={{ paddingBottom: '15px' }}
+                          data-test-notice-card-send-by-label
+                        >
                           <FormattedMessage id="ui-circulation.settings.noticePolicy.notices.by" />
                         </Col>
-                        <Col xs={3} className={css.noticeField}>
+                        <Col
+                          xs={3}
+                          className={css.noticeField}
+                          data-test-notice-card-send-by-duration
+                        >
                           <Field
                             name={`${loanNotice}.sendOptions.sendBy.duration`}
                             component={Select}
@@ -173,8 +226,13 @@ class NoticeCard extends React.Component {
                             placeholder=" "
                           />
                         </Col>
-                        <Col xs={3} className={css.noticeField}>
+                        <Col
+                          xs={3}
+                          className={css.noticeField}
+                          data-test-notice-card-send-by-interval-id
+                        >
                           <Field
+                            data-test-notice-card-send-by-interval-id
                             name={`${loanNotice}.sendOptions.sendBy.intervalId`}
                             component={Select}
                             dataOptions={this.getDropdownItems(noticesIntervalPeriods)}
@@ -189,14 +247,22 @@ class NoticeCard extends React.Component {
                 { isRecurring && (
                   <React.Fragment>
                     <Row>
-                      <Col xs={12} className={css.fieldLabel}>
+                      <Col
+                        xs={12}
+                        className={css.fieldLabel}
+                        data-test-notice-card-send-every-label
+                      >
                         <FormattedMessage id="ui-circulation.settings.noticePolicy.notices.sendEvery">
                           { message => `${message} *` }
                         </FormattedMessage>
                       </Col>
                     </Row>
                     <Row>
-                      <Col xs={3} className={css.noticeField}>
+                      <Col
+                        xs={3}
+                        className={css.noticeField}
+                        data-test-notice-card-send-every-duration
+                      >
                         <Field
                           name={`${loanNotice}.sendOptions.sendEvery.duration`}
                           component={Select}
@@ -204,7 +270,11 @@ class NoticeCard extends React.Component {
                           placeholder=" "
                         />
                       </Col>
-                      <Col xs={3} className={css.noticeField}>
+                      <Col
+                        xs={3}
+                        className={css.noticeField}
+                        data-test-notice-card-send-every-interval-id
+                      >
                         <Field
                           name={`${loanNotice}.sendOptions.sendEvery.intervalId`}
                           component={Select}
@@ -216,7 +286,11 @@ class NoticeCard extends React.Component {
                   </React.Fragment>
                 )}
                 <Row>
-                  <Col xs={12} className={css.noticeField}>
+                  <Col
+                    xs={12}
+                    className={css.noticeField}
+                    data-test-notice-card-real-time
+                  >
                     <Field
                       name={`${loanNotice}.realTime`}
                       label={<FormattedMessage id="ui-circulation.settings.noticePolicy.notices.realTime" />}
@@ -230,12 +304,16 @@ class NoticeCard extends React.Component {
             </Row>
           );
         })}
-        <Row start="xs" className={css.buttonContainer}>
+        <Row
+          start="xs"
+          className={css.buttonContainer}
+        >
           <Col xs={1}>
             <Button
               type="button"
               buttonStyle="default"
               onClick={() => fields.push({})}
+              data-test-add-notice-card
             >
               <FormattedMessage id="ui-circulation.settings.noticePolicy.addNotice" />
             </Button>

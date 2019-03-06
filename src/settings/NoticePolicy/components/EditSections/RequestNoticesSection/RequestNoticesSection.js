@@ -26,19 +26,21 @@ class RequestNoticesSection extends React.Component {
     } = this.props;
 
     return (
-      <Accordion
-        id="requestNotices"
-        open={isOpen}
-        label={<FormattedMessage id="ui-circulation.settings.noticePolicy.requestNotices" />}
-        onToggle={onToggle}
-      >
-        <NoticesList
-          sectionKey="requestNotices"
-          policy={policy}
-          templates={templates}
-          sendWhenOptions={requestNoticesSendWhen}
-        />
-      </Accordion>
+      <div data-test-notice-policy-form-request-notices-section>
+        <Accordion
+          id="requestNotices"
+          open={isOpen}
+          label={<FormattedMessage id="ui-circulation.settings.noticePolicy.requestNotices" />}
+          onToggle={onToggle}
+        >
+          <NoticesList
+            sectionKey="requestNotices"
+            policy={policy}
+            templates={templates}
+            sendWhenOptions={requestNoticesSendWhen}
+          />
+        </Accordion>
+      </div>
     );
   }
 }

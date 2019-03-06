@@ -10,7 +10,7 @@ import setupApplication from '../../helpers/setup-application';
 import NoticePolicyDetail from '../../interactors/notice-policy/notice-policy-detail';
 import { getBooleanRepresentation } from '../../helpers/messageСonverters';
 
-describe.only('NoticePolicyDetail', () => {
+describe('NoticePolicyDetail', () => {
   setupApplication();
 
   describe('viewing notice policy', () => {
