@@ -235,8 +235,15 @@ export default function config() {
   this.delete('/patron-notice-policy-storage/patron-notice-policies/:id', ({ patronNoticePolicies }, request) => {
     const { params: { id } } = request;
     const patronNoticePolicy = patronNoticePolicies.find(id);
-    patronNoticePolicy.destroy();
-    return patronNoticePolicy.attrs;
+
+    return patronNoticePolicy.destroy();
+  });
+
+  this.delete('/loan-policy-storage/loan-policies/:id', ({ loanPolicies }, request) => {
+    const { params: { id } } = request;
+    const loanPolicy = loanPolicies.find(id);
+
+    return loanPolicy.destroy();
   });
 
   this.put('/request-policy-storage/request-policies/:id', ({ requestPolicies }, request) => {

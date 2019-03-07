@@ -63,17 +63,13 @@ describe('NoticePolicyDelete', () => {
         });
       });
 
-      describe('delete cancellation', () => {
+      describe('delete confirmation', () => {
         beforeEach(async () => {
           await NoticePolicyForm.deleteNoticePolicyConfirm.click();
         });
 
-        it('should have cards', () => {
-          expect(NoticePolicyDetail.loanNoticesSection.hasCards).to.be.true;
-        });
-
-        it('has none of cards', () => {
-          expect(NoticePolicyDetail.loanNoticesSection.isPresent).to.be.false;
+        it('NoticePolicyDetail should not be displayed', () => {
+          expect(NoticePolicyDetail.isPresent).to.be.false;
         });
       });
     });
