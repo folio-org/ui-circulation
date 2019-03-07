@@ -1,12 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
-import { map } from 'lodash';
+import {
+  map,
+  values,
+} from 'lodash';
 
 import { Accordion } from '@folio/stripes/components';
 
 import NoticeCard from '../components';
-import { loanNoticesSendWhen } from '../../../../../constants';
+import {
+  loanTimeBasedEventsIds,
+  loanNoticesTriggeringEvents,
+} from '../../../../../constants';
 
 class LoanNoticesSection extends React.Component {
   static propTypes = {
@@ -38,10 +44,10 @@ class LoanNoticesSection extends React.Component {
           <NoticeCard
             key={index}
             index={index}
-            sectionKey="loanNotices"
-            policy={policy}
+            notice={notice}
+            timeBasedEventsIds={values(loanTimeBasedEventsIds)}
             templates={templates}
-            sendWhenOptions={loanNoticesSendWhen}
+            triggeringEvents={loanNoticesTriggeringEvents}
           />
         ))}
       </Accordion>

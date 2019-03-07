@@ -1,9 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage } from 'react-intl';
-
 import { Field } from 'redux-form';
-import { isEmpty } from 'lodash';
+import {
+  intlShape,
+  injectIntl,
+  FormattedMessage,
+} from 'react-intl';
+import {
+  isEmpty,
+  isString,
+  noop,
+} from 'lodash';
 
 import {
   Col,
@@ -16,17 +23,32 @@ import css from './Period.css';
 
 class Period extends React.Component {
   static propTypes = {
-    fieldLabel: PropTypes.string.isRequired,
-    selectPlaceholder: PropTypes.string.isRequired,
+    intl: intlShape.isRequired,
     inputValuePath: PropTypes.string.isRequired,
     selectValuePath: PropTypes.string.isRequired,
     intervalPeriods: PropTypes.arrayOf(PropTypes.object).isRequired,
-    changeFormValue: PropTypes.func.isRequired,
     required: PropTypes.bool,
+    emptySelectPlaceholder: PropTypes.bool,
+    inputSize: PropTypes.number,
+    selectSize: PropTypes.number,
+    fieldLabel: PropTypes.string,
+    selectPlaceholder: PropTypes.string,
+    inputPlaceholder: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number,
+    ]),
+    changeFormValue: PropTypes.func,
   };
 
   static defaultProps = {
     required: false,
+    emptySelectPlaceholder: false,
+    inputSize: 2,
+    selectSize: 2,
+    fieldLabel: '',
+    inputPlaceholder: '',
+    selectPlaceholder: '',
+    changeFormValue: noop,
   };
 
   onInputClear = () => {
@@ -46,64 +68,81 @@ class Period extends React.Component {
     return Number(value);
   };
 
-  generateOptions = () => {
+  getPlaceholder = (value) => {
+    const { intl } = this.props;
+
+    if (!isString(value)) {
+      return value;
+    }
+
+    if (isEmpty(value)) {
+      return '';
+    }
+
+    return intl.formatMessage({ id: value });
+  };
+
+  getSelectPlaceholder = () => {
     const {
-      intervalPeriods,
-      selectValuePath,
+      selectPlaceholder,
+      emptySelectPlaceholder,
     } = this.props;
 
-    return intervalPeriods.map(({ value, label }) => (
-      <option value={value} key={`${selectValuePath}-${value}`}>
-        {label}
-      </option>
-    ));
+    if (emptySelectPlaceholder) {
+      return ' ';
+    }
+
+    return this.getPlaceholder(selectPlaceholder);
   };
 
   render() {
     const {
       fieldLabel,
-      selectPlaceholder,
+      inputPlaceholder,
       inputValuePath,
       selectValuePath,
-      required
+      intervalPeriods,
+      required,
+      inputSize,
+      selectSize,
     } = this.props;
 
     return (
       <React.Fragment>
-        <div data-test-period-label>
-          <Row className={css.label}>
-            <Col xs={12}>
-              <FormattedMessage id={fieldLabel}>
-                {message => (required ? `${message} *` : message)}
-              </FormattedMessage>
-            </Col>
-          </Row>
-        </div>
+        {fieldLabel && (
+          <div data-test-period-label>
+            <Row className={css.label}>
+              <Col xs={12}>
+                { fieldLabel && (
+                  <FormattedMessage id={fieldLabel}>
+                    {message => (required ? `${message} *` : message)}
+                  </FormattedMessage>
+                )}
+              </Col>
+            </Row>
+          </div>
+        )}
         <Row>
-          <Col xs={2}>
+          <Col xs={inputSize}>
             <div data-test-period-duration>
               <Field
                 type="number"
                 name={inputValuePath}
                 component={TextField}
+                placeholder={this.getPlaceholder(inputPlaceholder)}
                 onClearField={this.onInputClear}
                 parse={this.transformInputValue}
               />
             </div>
           </Col>
-          <Col xs={2}>
+          <Col xs={selectSize}>
             <div data-test-period-interval>
-              <FormattedMessage id={selectPlaceholder}>
-                {placeholder => (
-                  <Field
-                    name={selectValuePath}
-                    component={Select}
-                    placeholder={placeholder}
-                  >
-                    {this.generateOptions()}
-                  </Field>
-                )}
-              </FormattedMessage>
+              <Field
+                name={selectValuePath}
+                component={Select}
+                placeholder={this.getSelectPlaceholder()}
+                dataOptions={intervalPeriods}
+              />
             </div>
           </Col>
         </Row>
@@ -112,4 +151,4 @@ class Period extends React.Component {
   }
 }
 
-export default Period;
+export default injectIntl(Period);

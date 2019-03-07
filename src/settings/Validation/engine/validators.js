@@ -6,6 +6,7 @@ import {
   isIntegerGreaterThanOne,
   isIntegerGreaterThanZero,
   isPositiveNumber,
+  isInInterval,
 } from './handlers';
 
 export default {
@@ -28,5 +29,9 @@ export default {
   isPositiveNumber: {
     validate: isPositiveNumber,
     message: <FormattedMessage id="ui-circulation.settings.validate.isPositiveNumber" />,
+  },
+  isFromOneToHundred: {
+    validate: isInInterval.bind(null, 1, 100),
+    message: <FormattedMessage id="ui-circulation.settings.validate.isFromOneToHundred" />,
   },
 };

@@ -116,58 +116,140 @@ export const noticesSendEventMap = {
   UPON: 'Upon At',
 };
 
-export const loanNoticesSendWhenMap = {
-  DUE_DATE: 'Due date',
-  OVERDUE: 'Overdue',
-  RENEWED: 'Renewed',
-};
-
-export const requestNoticesSendWhenMap = {
-  RECALL_REQUEST: 'Recall request',
-  HOLD_REQUEST: 'Hold request',
-  PAGING_REQUEST: 'Paging request',
-  AVAILABLE: 'Available',
-  HOLD_EXPIRATION: 'Hold Expiration',
-  REQUEST_CANCELATION: 'Request cancellation',
-};
-
 export const noticesFormats = [
-  { value: noticesFormatsMap.EMAIL, label: 'ui-circulation.settings.noticePolicy.notices.email' },
+  {
+    value: noticesFormatsMap.EMAIL,
+    label: 'ui-circulation.settings.noticePolicy.notices.email',
+  },
 ];
 
 export const noticesFrequency = [
-  { value: noticesFrequencyMap.ONE_TIME, label: 'ui-circulation.settings.noticePolicy.notices.oneTime' },
-  { value: noticesFrequencyMap.RECURRING, label: 'ui-circulation.settings.noticePolicy.notices.recurring' },
+  {
+    value: noticesFrequencyMap.ONE_TIME,
+    label: 'ui-circulation.settings.noticePolicy.notices.oneTime',
+  },
+  {
+    value: noticesFrequencyMap.RECURRING,
+    label: 'ui-circulation.settings.noticePolicy.notices.recurring',
+  },
 ];
 
 export const noticesSendEvent = [
-  { value: noticesSendEventMap.UPON, label: 'ui-circulation.settings.noticePolicy.notices.upon' },
-  { value: noticesSendEventMap.BEFORE, label: 'ui-circulation.settings.noticePolicy.notices.before' },
-  { value: noticesSendEventMap.AFTER, label: 'ui-circulation.settings.noticePolicy.notices.after' },
+  {
+    value: noticesSendEventMap.UPON,
+    label: 'ui-circulation.settings.noticePolicy.notices.upon',
+  },
+  {
+    value: noticesSendEventMap.BEFORE,
+    label: 'ui-circulation.settings.noticePolicy.notices.before',
+  },
+  {
+    value: noticesSendEventMap.AFTER,
+    label: 'ui-circulation.settings.noticePolicy.notices.after',
+  },
 ];
 
 export const noticesIntervalPeriods = [
-  { value: intervalIdsMap.MINUTES, label: 'ui-circulation.settings.noticePolicy.notices.minutes' },
-  { value: intervalIdsMap.HOURS, label: 'ui-circulation.settings.noticePolicy.notices.hours' },
-  { value: intervalIdsMap.DAYS, label: 'ui-circulation.settings.noticePolicy.notices.days' },
-  { value: intervalIdsMap.WEEKS, label: 'ui-circulation.settings.noticePolicy.notices.weeks' },
-  { value: intervalIdsMap.MONTHS, label: 'ui-circulation.settings.noticePolicy.notices.months' },
-  { value: intervalIdsMap.YEARS, label: 'ui-circulation.settings.noticePolicy.notices.years' },
+  {
+    value: intervalIdsMap.MINUTES,
+    label: 'ui-circulation.settings.noticePolicy.notices.minutes',
+  },
+  {
+    value: intervalIdsMap.HOURS,
+    label: 'ui-circulation.settings.noticePolicy.notices.hours',
+  },
+  {
+    value: intervalIdsMap.DAYS,
+    label: 'ui-circulation.settings.noticePolicy.notices.days',
+  },
+  {
+    value: intervalIdsMap.WEEKS,
+    label: 'ui-circulation.settings.noticePolicy.notices.weeks',
+  },
+  {
+    value: intervalIdsMap.MONTHS,
+    label: 'ui-circulation.settings.noticePolicy.notices.months',
+  },
+  {
+    value: intervalIdsMap.YEARS,
+    label: 'ui-circulation.settings.noticePolicy.notices.years',
+  },
 ];
 
-export const loanNoticesSendWhen = [
-  { value: loanNoticesSendWhenMap.DUE_DATE, label: 'ui-circulation.settings.noticePolicy.loanNotices.dueDate' },
-  { value: loanNoticesSendWhenMap.OVERDUE, label: 'ui-circulation.settings.noticePolicy.loanNotices.overdue' },
-  { value: loanNoticesSendWhenMap.RENEWED, label: 'ui-circulation.settings.noticePolicy.loanNotices.renewed' },
+export const loanUserInitiatedEventsIds = {
+  CHECK_IN: 'Check in',
+  CHECK_OUT: 'Check out',
+  RENEWED: 'Renewed',
+};
+
+export const loanTimeBasedEventsIds = {
+  DUE_DATE: 'Due date',
+};
+
+export const loanNoticesTriggeringEvents = [
+  {
+    value: loanUserInitiatedEventsIds.CHECK_IN,
+    label: 'ui-circulation.settings.noticePolicy.loanNotices.checkIn',
+  },
+  {
+    value: loanUserInitiatedEventsIds.CHECK_OUT,
+    label: 'ui-circulation.settings.noticePolicy.loanNotices.checkOut',
+  },
+  {
+    value: loanUserInitiatedEventsIds.RENEWED,
+    label: 'ui-circulation.settings.noticePolicy.loanNotices.renewed',
+  },
+  {
+    value: loanTimeBasedEventsIds.DUE_DATE,
+    label: 'ui-circulation.settings.noticePolicy.loanNotices.dueDate',
+  },
 ];
 
-export const requestNoticesSendWhen = [
-  { value: requestNoticesSendWhenMap.RECALL_REQUEST, label: 'ui-circulation.settings.noticePolicy.requestNotices.recallRequest' },
-  { value: requestNoticesSendWhenMap.HOLD_REQUEST, label: 'ui-circulation.settings.noticePolicy.requestNotices.holdRequest' },
-  { value: requestNoticesSendWhenMap.PAGING_REQUEST, label: 'ui-circulation.settings.noticePolicy.requestNotices.pagingRequest' },
-  { value: requestNoticesSendWhenMap.AVAILABLE, label: 'ui-circulation.settings.noticePolicy.requestNotices.available' },
-  { value: requestNoticesSendWhenMap.HOLD_EXPIRATION, label: 'ui-circulation.settings.noticePolicy.requestNotices.holdExpiration' },
-  { value: requestNoticesSendWhenMap.REQUEST_CANCELATION, label: 'ui-circulation.settings.noticePolicy.requestNotices.requestCancelation' },
+export const requestUserInitiatedEventsIds = {
+  RECALL_REQUEST: 'Recall request',
+  RECALL_LOANEE: 'Recall loanee',
+  HOLD: 'Hold request',
+  PAGE: 'Paging request',
+  CANCEL: 'Request cancellation'
+};
+
+export const requestTimeBasedEventsIds = {
+  HOLD_EXPIRATION: 'Hold Expiration',
+};
+
+export const requestItemStateChangeEventsIds = {
+  AVAILABLE: 'Available',
+};
+
+export const requestNoticesTriggeringEvents = [
+  {
+    value: requestUserInitiatedEventsIds.RECALL_LOANEE,
+    label: 'ui-circulation.settings.noticePolicy.requestNotices.recallLoanee',
+  },
+  {
+    value: requestUserInitiatedEventsIds.RECALL_REQUEST,
+    label: 'ui-circulation.settings.noticePolicy.requestNotices.recallRequest',
+  },
+  {
+    value: requestUserInitiatedEventsIds.HOLD,
+    label: 'ui-circulation.settings.noticePolicy.requestNotices.holdRequest',
+  },
+  {
+    value: requestUserInitiatedEventsIds.PAGE,
+    label: 'ui-circulation.settings.noticePolicy.requestNotices.pagingRequest',
+  },
+  {
+    value: requestUserInitiatedEventsIds.CANCEL,
+    label: 'ui-circulation.settings.noticePolicy.requestNotices.requestCancelation',
+  },
+  {
+    value: requestTimeBasedEventsIds.HOLD_EXPIRATION,
+    label: 'ui-circulation.settings.noticePolicy.requestNotices.holdExpiration',
+  },
+  {
+    value: requestItemStateChangeEventsIds.AVAILABLE,
+    label: 'ui-circulation.settings.noticePolicy.requestNotices.available',
+  },
 ];
 
 export const staffSlipMap = {

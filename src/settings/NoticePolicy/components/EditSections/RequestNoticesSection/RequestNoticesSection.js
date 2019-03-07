@@ -1,10 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
+import { FieldArray } from 'redux-form';
+import { values } from 'lodash';
 import { Accordion } from '@folio/stripes/components';
 
 import NoticesList from '../components';
-import { requestNoticesSendWhen } from '../../../../../constants';
+import {
+  requestNoticesTriggeringEvents,
+  requestTimeBasedEventsIds,
+} from '../../../../../constants';
 
 class RequestNoticesSection extends React.Component {
   static propTypes = {
@@ -25,6 +30,14 @@ class RequestNoticesSection extends React.Component {
       onToggle,
     } = this.props;
 
+    const props = {
+      sectionKey: 'requestNotices',
+      policy,
+      templates,
+      triggeringEvents: requestNoticesTriggeringEvents,
+      timeBasedEventsIds: values(requestTimeBasedEventsIds),
+    };
+
     return (
       <Accordion
         id="requestNotices"
@@ -32,11 +45,10 @@ class RequestNoticesSection extends React.Component {
         label={<FormattedMessage id="ui-circulation.settings.noticePolicy.requestNotices" />}
         onToggle={onToggle}
       >
-        <NoticesList
-          sectionKey="requestNotices"
-          policy={policy}
-          templates={templates}
-          sendWhenOptions={requestNoticesSendWhen}
+        <FieldArray
+          name={props.sectionKey}
+          component={NoticesList}
+          props={props}
         />
       </Accordion>
     );
