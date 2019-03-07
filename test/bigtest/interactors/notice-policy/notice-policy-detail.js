@@ -3,7 +3,7 @@ import {
   isPresent,
   count,
   collection,
-  text,
+  text, scoped,
 } from '@bigtest/interactor';
 
 import KeyValue from '../KeyValue';
@@ -33,6 +33,7 @@ import KeyValue from '../KeyValue';
   name = new KeyValue('[data-notice-policy-name] div');
   description = new KeyValue('[data-notice-policy-description] div');
   active = new KeyValue('[data-notice-policy-active] div');
+  content = scoped('[class^="content-"]');
 }
 
 @interactor class LoanNoticesSection {
@@ -40,6 +41,7 @@ import KeyValue from '../KeyValue';
 
   hasCards = isPresent('[data-test-notice-card]');
   cardsCount = count('[data-test-notice-card]');
+  content = scoped('[class^="content-"]');
 
   loanNotices = collection('[data-test-notice-card]', NoticeCard);
 }
@@ -49,6 +51,7 @@ import KeyValue from '../KeyValue';
 
   hasCards = isPresent('[data-test-notice-card]');
   cardsCount = count('[data-test-notice-card]');
+  content = scoped('[class^="content-"]');
 
   requestNotices = collection('[data-test-notice-card]', NoticeCard);
 }
@@ -57,6 +60,8 @@ import KeyValue from '../KeyValue';
   generalSection = new GeneralSection();
   loanNoticesSection = new LoanNoticesSection();
   requestNoticesSection = new RequestNoticesSection();
+
+  expandAll = scoped('[data-test-expand-all] button')
 }
 
 export default new NoticePolicyDetail('[data-test-notice-policy-detail]');

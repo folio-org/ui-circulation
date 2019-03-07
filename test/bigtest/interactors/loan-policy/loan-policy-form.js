@@ -73,6 +73,7 @@ import Period from '../Period';
   deleteLoanPolicyModal = new Interactor('#delete-item-confirmation');
   deleteLoanPolicyCancel= new Interactor('[data-test-confirmation-modal-cancel-button]');
   deleteLoanPolicyConfirm = new Interactor('[data-test-confirmation-modal-confirm-button]');
+  expandAll = scoped('[data-test-expand-all] button');
 
   save = clickable('#clickable-save-entry');
 }

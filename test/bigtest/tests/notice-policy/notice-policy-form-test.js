@@ -13,6 +13,52 @@ import { getRequiredLabel } from '../../helpers/messageСonverters';
 describe('NoticePolicyForm', () => {
   setupApplication();
 
+  describe('\n\taccordions\n', () => {
+    beforeEach(function () {
+      this.visit('/settings/circulation/notice-policies?layer=add');
+    });
+
+    it('should be displayed', () => {
+      expect(NoticePolicyForm.expandAll.isPresent).to.be.true;
+    });
+
+    describe('\n\tcollapse all\n', () => {
+      beforeEach(async () => {
+        await NoticePolicyForm.expandAll.click();
+      });
+
+      it('generalSection should not be displayed', () => {
+        expect(NoticePolicyForm.generalSection.content.isHidden).to.be.true;
+      });
+
+      it('loanNoticesSection should not be displayed', () => {
+        expect(NoticePolicyForm.loanNoticesSection.content.isHidden).to.be.true;
+      });
+
+      it('requestNoticesSection should not be displayed', () => {
+        expect(NoticePolicyForm.requestNoticesSection.content.isHidden).to.be.true;
+      });
+
+      describe('\n\texpand all\n', () => {
+        beforeEach(async () => {
+          await NoticePolicyForm.expandAll.click();
+        });
+
+        it('generalSection should be displayed', () => {
+          expect(NoticePolicyForm.generalSection.content.isVisible).to.be.true;
+        });
+
+        it('loanNoticesSection should be displayed', () => {
+          expect(NoticePolicyForm.loanNoticesSection.content.isVisible).to.be.true;
+        });
+
+        it('requestNoticesSection should be displayed', () => {
+          expect(NoticePolicyForm.requestNoticesSection.content.isVisible).to.be.true;
+        });
+      });
+    });
+  });
+
   describe('create a new notice policy', () => {
     beforeEach(async function () {
       this.visit('/settings/circulation/notice-policies?layer=add');

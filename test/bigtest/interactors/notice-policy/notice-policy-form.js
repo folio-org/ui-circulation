@@ -14,6 +14,8 @@ import SelectInteractor from '@folio/stripes-components/lib/Select/tests/interac
   policyName = new TextFieldInteractor('[data-test-general-section-policy-name]');
   active = new CheckboxInteractor('[data-test-general-section-active]');
   policyDescription = new TextFieldInteractor('[data-test-general-section-policy-description]');
+
+  content = scoped('[class^="content-"]');
 }
 
 @interactor class NoticeCard {
@@ -41,6 +43,7 @@ import SelectInteractor from '@folio/stripes-components/lib/Select/tests/interac
   hasCards = isPresent('[data-test-notice-card]');
   cardsCount = count('[data-test-notice-card]');
   loanNotices = collection('[data-test-notice-card]', NoticeCard);
+  content = scoped('[class^="content-"]');
 
   addCard() {
     return this.click('button[data-test-add-notice-card]');
@@ -63,6 +66,7 @@ import SelectInteractor from '@folio/stripes-components/lib/Select/tests/interac
   deleteNoticePolicyConfirm = new Interactor('[data-test-confirmation-modal-confirm-button]');
 
   save = clickable('#clickable-save-entry');
+  expandAll = scoped('[data-test-expand-all] button')
 }
 
 export default new NoticePolicyForm();

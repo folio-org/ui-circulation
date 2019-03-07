@@ -1,13 +1,13 @@
 import { beforeEach, describe, it } from '@bigtest/mocha';
 import { expect } from 'chai';
 
-import {
+import { // eslint-disable-line import/no-extraneous-dependencies
   shortTermLoansOptions,
   longTermLoansOptions,
   renewFromOptions,
   BEGINNING_OF_THE_NEXT_OPEN_SERVICE_POINT_HOURS,
   loanProfileMap,
-} from '@folio/circulation/src/constants'; // eslint-disable-line import/no-extraneous-dependencies, import/no-unresolved
+} from '@folio/circulation/src/constants'; // import/no-unresolved
 // eslint-disable-next-line import/extensions, import/no-extraneous-dependencies, import/no-unresolved
 import translation from '@folio/circulation/translations/ui-circulation/en.json';
 
@@ -25,6 +25,40 @@ describe('LoanPolicyDetail', () => {
   let loanPolicy;
 
   describe('viewing loan policy', () => {
+    describe('\n\taccordions\n', () => {
+      beforeEach(function () {
+        loanPolicy = this.server.create('loanPolicy', {
+          loanable: true,
+        });
+
+        this.visit(`/settings/circulation/loan-policies/${loanPolicy.id}`);
+      });
+
+      it('should be displayed', () => {
+        expect(LoanPolicyDetail.expandAll.isPresent).to.be.true;
+      });
+
+      describe('\n\tcollapse all\n', () => {
+        beforeEach(async () => {
+          await LoanPolicyDetail.expandAll.click();
+        });
+
+        it('content should be hidden', () => {
+          expect(LoanPolicyDetail.content.isHidden).to.be.true;
+        });
+
+        describe('\n\texpand all\n', () => {
+          beforeEach(async () => {
+            await LoanPolicyDetail.expandAll.click();
+          });
+
+          it('content should be visible', () => {
+            expect(LoanPolicyDetail.content.isVisible).to.be.true;
+          });
+        });
+      });
+    });
+
     describe('\n\tabout section\n', () => {
       describe('loan policy:\n\t-loanable\n', () => {
         beforeEach(function () {

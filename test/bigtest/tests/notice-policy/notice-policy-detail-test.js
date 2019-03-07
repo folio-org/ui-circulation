@@ -10,10 +10,60 @@ import setupApplication from '../../helpers/setup-application';
 import NoticePolicyDetail from '../../interactors/notice-policy/notice-policy-detail';
 import { getBooleanRepresentation } from '../../helpers/messageСonverters';
 
-describe.only('NoticePolicyDetail', () => {
+describe('NoticePolicyDetail', () => {
   setupApplication();
 
   describe('viewing notice policy', () => {
+    describe('\n\taccordions\n', () => {
+      let noticePolicy;
+
+      beforeEach(function () {
+        noticePolicy = this.server.create('patronNoticePolicy');
+
+        this.visit(`/settings/circulation/notice-policies/${noticePolicy.id}`);
+      });
+
+      it('should be displayed', () => {
+        expect(NoticePolicyDetail.expandAll.isPresent).to.be.true;
+      });
+
+      describe('\n\tcollapse all\n', () => {
+        beforeEach(async () => {
+          await NoticePolicyDetail.expandAll.click();
+        });
+
+        it('generalSection should not be displayed', () => {
+          expect(NoticePolicyDetail.generalSection.content.isHidden).to.be.true;
+        });
+
+        it('loanNoticesSection should not be displayed', () => {
+          expect(NoticePolicyDetail.loanNoticesSection.content.isHidden).to.be.true;
+        });
+
+        it('requestNoticesSection should not be displayed', () => {
+          expect(NoticePolicyDetail.requestNoticesSection.content.isHidden).to.be.true;
+        });
+
+        describe('\n\texpand all\n', () => {
+          beforeEach(async () => {
+            await NoticePolicyDetail.expandAll.click();
+          });
+
+          it('generalSection should be displayed', () => {
+            expect(NoticePolicyDetail.generalSection.content.isVisible).to.be.true;
+          });
+
+          it('loanNoticesSection should be displayed', () => {
+            expect(NoticePolicyDetail.loanNoticesSection.content.isVisible).to.be.true;
+          });
+
+          it('requestNoticesSection should be displayed', () => {
+            expect(NoticePolicyDetail.requestNoticesSection.content.isVisible).to.be.true;
+          });
+        });
+      });
+    });
+
     describe('general section', () => {
       describe('random notice policy', () => {
         let patronNoticeTemplate;

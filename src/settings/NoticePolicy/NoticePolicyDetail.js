@@ -73,7 +73,10 @@ class NoticePolicyDetail extends React.Component {
     return (
       <div data-test-notice-policy-detail>
         <Row end="xs">
-          <Col xs>
+          <Col
+            data-test-expand-all
+            xs
+          >
             <ExpandAllButton
               accordionStatus={this.state.sections}
               onToggle={this.handleExpandAll}

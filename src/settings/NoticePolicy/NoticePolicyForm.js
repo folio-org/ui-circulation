@@ -116,7 +116,10 @@ class NoticePolicyForm extends React.Component {
             onRemove={this.changeDeleteState}
           >
             <Row end="xs">
-              <Col xs>
+              <Col
+                data-test-expand-all
+                xs
+              >
                 <ExpandAllButton
                   accordionStatus={sections}
                   onToggle={this.handleExpandAll}
