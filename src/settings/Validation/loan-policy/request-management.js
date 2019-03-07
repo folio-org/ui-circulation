@@ -1,7 +1,7 @@
 const recalls = (loanPolicy) => {
   return {
     'requestManagement.recalls.recallReturnInterval.duration': {
-      rules: ['isPositiveNumber'],
+      rules: ['isIntegerGreaterThanZero'],
       shouldValidate: loanPolicy.hasValue('requestManagement.recalls.recallReturnInterval.duration'),
     },
     'requestManagement.recalls.minimumGuaranteedLoanPeriod.duration': {

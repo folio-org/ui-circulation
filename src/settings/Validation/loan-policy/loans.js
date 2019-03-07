@@ -1,7 +1,7 @@
 export default function (loanPolicy) {
   return {
     'loansPolicy.period.duration': {
-      rules: ['isNotEmpty', 'isIntegerGreaterThanOne'],
+      rules: ['isNotEmpty', 'isIntegerGreaterThanZero'],
       shouldValidate: loanPolicy.isProfileRolling(),
     },
     'loansPolicy.period.intervalId': {
@@ -17,7 +17,7 @@ export default function (loanPolicy) {
       shouldValidate: loanPolicy.isProfileFixed(),
     },
     'loansPolicy.openingTimeOffset.duration': {
-      rules: ['isNotEmpty', 'isIntegerGreaterThanOne'],
+      rules: ['isNotEmpty', 'isIntegerGreaterThanZero'],
       shouldValidate: loanPolicy.isOpeningTimeOffsetActive(),
     },
   };
