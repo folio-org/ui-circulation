@@ -3,7 +3,6 @@ import { FormattedMessage } from 'react-intl';
 
 import {
   isNotEmpty,
-  isIntegerGreaterThanOne,
   isIntegerGreaterThanZero,
   isPositiveNumber,
   isInInterval,
@@ -17,10 +16,6 @@ export default {
   isNotEmptySelect: {
     validate: isNotEmpty,
     message: <FormattedMessage id="ui-circulation.settings.validate.select" />,
-  },
-  isIntegerGreaterThanOne: {
-    validate: isIntegerGreaterThanOne,
-    message: <FormattedMessage id="ui-circulation.settings.validate.greaterThanOne" />,
   },
   isIntegerGreaterThanZero: {
     validate: isIntegerGreaterThanZero,

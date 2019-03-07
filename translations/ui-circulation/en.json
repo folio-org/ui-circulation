@@ -63,7 +63,6 @@
 
   "settings.validate.fillIn": "Please fill this in to continue",
   "settings.validate.select": "Please make a selection",
-  "settings.validate.greaterThanOne": "The value must be integer and greater than 1",
   "settings.validate.greaterThanZero": "The value must be integer and greater than 0",
   "settings.validate.isPositiveNumber": "The value must be greater or equal 0",
   "settings.validate.isFromOneToHundred": "The value must be between 1 and 100",
