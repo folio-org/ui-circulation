@@ -3,12 +3,12 @@ import {
   faker,
 } from '@bigtest/mirage';
 
-import {
+import { // eslint-disable-line import/no-extraneous-dependencies
   intervalIdsMap,
   loanProfileMap,
   renewFromOptions,
   longTermLoansOptions,
-} from '@folio/circulation/src/constants'; // eslint-disable-line import/no-extraneous-dependencies, import/no-unresolved
+} from '@folio/circulation/src/constants'; // eslint-disable-line  import/no-unresolved
 
 
 export const getPeriod = {
