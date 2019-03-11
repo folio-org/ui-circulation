@@ -263,7 +263,7 @@ class PatronNoticeForm extends React.Component {
                   <Col xs={8}>
                     <Field
                       label={<FormattedMessage id="ui-circulation.settings.patronNotices.subject" />}
-                      name="subject"
+                      name="localizedTemplates.en.header"
                       id="input-patron-notice-subject"
                       component={TextField}
                     />
