@@ -72,6 +72,7 @@ class NoticesList extends React.Component {
             <Button
               type="button"
               buttonStyle="default"
+              data-test-add-notice-card
               onClick={this.onAddField}
             >
               <FormattedMessage id="ui-circulation.settings.noticePolicy.addNotice" />

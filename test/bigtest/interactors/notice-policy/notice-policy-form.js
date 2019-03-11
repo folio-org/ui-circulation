@@ -8,6 +8,9 @@ import TextFieldInteractor from '@folio/stripes-components/lib/TextField/tests/i
 import CheckboxInteractor from '@folio/stripes-components/lib/Checkbox/tests/interactor';
 import SelectInteractor from '@folio/stripes-components/lib/Select/tests/interactor';
 
+import Period from '../Period';
+
+
 @interactor class GeneralSection {
   static defaultScope = ('[data-test-notice-policy-form-general-section]');
 
@@ -27,14 +30,14 @@ import SelectInteractor from '@folio/stripes-components/lib/Select/tests/interac
   viaText = scoped('[data-test-notice-card-via-text]');
   format = new SelectInteractor('[data-test-notice-card-format]');
   frequency = new SelectInteractor('[data-test-notice-card-frequency]');
+  frequencyLabel = new SelectInteractor('[data-test-notice-card-frequency-label]');
+  triggeringEvent = new SelectInteractor('[data-test-notice-card-triggering-event]');
   eventLabel = scoped('[data-test-notice-card-event-label]');
   sendHow = new SelectInteractor('[data-test-notice-card-send-how] div');
   sendWhen = new SelectInteractor('[data-test-notice-card-send-when] div');
-  sendByDuration = new SelectInteractor('[data-test-notice-card-send-by-duration]');
-  sendByIntervalId = new SelectInteractor('[data-test-notice-card-send-by-interval-id]');
+  sendBy = new Period('[data-test-notice-card-send-by]');
   sendByLabel = scoped('[data-test-notice-card-send-by-label]');
-  sendEveryDuration = new SelectInteractor('[data-test-notice-card-send-every-duration]');
-  sendEveryIntervalId = new SelectInteractor('[data-test-notice-card-send-every-interval-id]');
+  sendEvery = new Period('[data-test-notice-card-send-every]');
   sendEveryLabel = scoped('[data-test-notice-card-send-every-label]');
   realTime = new CheckboxInteractor('[data-test-notice-card-real-time] div');
 }

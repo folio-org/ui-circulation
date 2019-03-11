@@ -161,22 +161,44 @@ describe('NoticePolicyForm', () => {
             });
           });
 
-          describe('frequency', () => {
+          describe('triggering event', () => {
             it('should be displayed', () => {
-              expect(NoticePolicyForm.loanNoticesSection.loanNotices(0).frequency.hasSelect).to.be.true;
+              expect(NoticePolicyForm.loanNoticesSection.loanNotices(0).triggeringEvent.hasSelect).to.be.true;
             });
 
             it('should have proper label', () => {
-              expect(NoticePolicyForm.loanNoticesSection.loanNotices(0).frequency.label).to.be.equal(
-                getRequiredLabel(translation['settings.noticePolicy.notices.frequency'])
+              expect(NoticePolicyForm.loanNoticesSection.loanNotices(0).triggeringEvent.label).to.be.equal(
+                getRequiredLabel(translation['settings.noticePolicy.notices.triggeringEvent'])
               );
             });
           });
 
+          describe('frequency', () => {
+            it('should not be displayed', () => {
+              expect(NoticePolicyForm.loanNoticesSection.loanNotices(0).frequency.hasSelect).to.be.false;
+            });
+
+            describe('-triggering event: Due date', () => {
+              beforeEach(async () => {
+                await NoticePolicyForm.loanNoticesSection.loanNotices(0).triggeringEvent.selectAndBlur('Loan due date/time');
+              });
+
+              it('should be displayed', () => {
+                expect(NoticePolicyForm.loanNoticesSection.loanNotices(0).frequency.hasSelect).to.be.true;
+              });
+
+              it('should have proper label', () => {
+                expect(NoticePolicyForm.loanNoticesSection.loanNotices(0).frequencyLabel.text).to.be.equal(
+                  getRequiredLabel(translation['settings.noticePolicy.notices.frequency'])
+                );
+              });
+            });
+          });
+
           describe('event label', () => {
-            describe('-Frequency: recurring', () => {
+            describe('-triggering event: Due date', () => {
               beforeEach(async () => {
-                await NoticePolicyForm.loanNoticesSection.loanNotices(0).frequency.selectAndBlur('Recurring');
+                await NoticePolicyForm.loanNoticesSection.loanNotices(0).triggeringEvent.selectAndBlur('Loan due date/time');
               });
 
               it('should be displayed', () => {
@@ -185,187 +207,189 @@ describe('NoticePolicyForm', () => {
 
               it('should have proper text', () => {
                 expect(NoticePolicyForm.loanNoticesSection.loanNotices(0).eventLabel.text).to.be.equal(
-                  getRequiredLabel(translation['settings.noticePolicy.notices.startigSendEvent'])
+                  getRequiredLabel(translation['settings.noticePolicy.notices.send'])
                 );
-              });
-            });
-
-            describe('-Frequency: one time', () => {
-              beforeEach(async () => {
-                await NoticePolicyForm.loanNoticesSection.loanNotices(0).frequency.selectAndBlur('One Time');
-              });
-
-              it('should be displayed', () => {
-                expect(NoticePolicyForm.loanNoticesSection.loanNotices(0).eventLabel.isPresent).to.be.true;
-              });
-
-              it('should have proper text', () => {
-                expect(NoticePolicyForm.loanNoticesSection.loanNotices(0).eventLabel.text).to.be.equal(
-                  getRequiredLabel(translation['settings.noticePolicy.notices.sendEvent'])
-                );
-              });
-            });
-
-            describe('send how', () => {
-              it('should be displayed', () => {
-                expect(NoticePolicyForm.loanNoticesSection.loanNotices(0).sendHow.hasSelect).to.be.true;
-              });
-            });
-
-            describe('send when', () => {
-              it('should be displayed', () => {
-                expect(NoticePolicyForm.loanNoticesSection.loanNotices(0).sendWhen.hasSelect).to.be.true;
               });
             });
 
             describe('sendByLabel', () => {
-              describe('-send: Upon At', () => {
+              describe('-triggering event: Due date', () => {
                 beforeEach(async () => {
-                  await NoticePolicyForm.loanNoticesSection.loanNotices(0).sendHow.selectAndBlur('Upon/At');
+                  await NoticePolicyForm.loanNoticesSection.loanNotices(0).triggeringEvent.selectAndBlur('Loan due date/time');
                 });
 
-                it('should not be displayed', () => {
-                  expect(NoticePolicyForm.loanNoticesSection.loanNotices(0).sendByLabel.isPresent).to.be.false;
-                });
-              });
+                describe('-send: Upon At', () => {
+                  beforeEach(async () => {
+                    await NoticePolicyForm.loanNoticesSection.loanNotices(0).sendHow.selectAndBlur('Upon/At');
+                  });
 
-              describe('-send: Before', () => {
-                beforeEach(async () => {
-                  await NoticePolicyForm.loanNoticesSection.loanNotices(0).sendHow.selectAndBlur('Before');
-                });
-
-                it('should be displayed', () => {
-                  expect(NoticePolicyForm.loanNoticesSection.loanNotices(0).sendByLabel.isPresent).to.be.true;
+                  it('should not be displayed', () => {
+                    expect(NoticePolicyForm.loanNoticesSection.loanNotices(0).sendByLabel.isPresent).to.be.false;
+                  });
                 });
 
-                it('should have proper text', () => {
-                  expect(NoticePolicyForm.loanNoticesSection.loanNotices(0).sendByLabel.text).to.be.equal(
-                    translation['settings.noticePolicy.notices.by']
-                  );
-                });
-              });
+                describe('-send: Before', () => {
+                  beforeEach(async () => {
+                    await NoticePolicyForm.loanNoticesSection.loanNotices(0).sendHow.selectAndBlur('Before');
+                  });
 
-              describe('-send: After', () => {
-                beforeEach(async () => {
-                  await NoticePolicyForm.loanNoticesSection.loanNotices(0).sendHow.selectAndBlur('After');
+                  it('should be displayed', () => {
+                    expect(NoticePolicyForm.loanNoticesSection.loanNotices(0).sendByLabel.isPresent).to.be.true;
+                  });
+
+                  it('should have proper text', () => {
+                    expect(NoticePolicyForm.loanNoticesSection.loanNotices(0).sendByLabel.text).to.be.equal(
+                      translation['settings.noticePolicy.notices.by']
+                    );
+                  });
                 });
 
-                it('should be displayed', () => {
-                  expect(NoticePolicyForm.loanNoticesSection.loanNotices(0).sendByLabel.isPresent).to.be.true;
-                });
+                describe('-send: After', () => {
+                  beforeEach(async () => {
+                    await NoticePolicyForm.loanNoticesSection.loanNotices(0).sendHow.selectAndBlur('After');
+                  });
 
-                it('should have proper text', () => {
-                  expect(NoticePolicyForm.loanNoticesSection.loanNotices(0).sendByLabel.text).to.be.equal(
-                    translation['settings.noticePolicy.notices.by']
-                  );
+                  it('should be displayed', () => {
+                    expect(NoticePolicyForm.loanNoticesSection.loanNotices(0).sendByLabel.isPresent).to.be.true;
+                  });
+
+                  it('should have proper text', () => {
+                    expect(NoticePolicyForm.loanNoticesSection.loanNotices(0).sendByLabel.text).to.be.equal(
+                      translation['settings.noticePolicy.notices.by']
+                    );
+                  });
                 });
               });
             });
 
             describe('sendByDuration', () => {
-              describe('-send: Upon At', () => {
+              describe('-triggering event: Due date', () => {
                 beforeEach(async () => {
-                  await NoticePolicyForm.loanNoticesSection.loanNotices(0).sendHow.selectAndBlur('Upon/At');
+                  await NoticePolicyForm.loanNoticesSection.loanNotices(0).triggeringEvent.selectAndBlur('Loan due date/time');
                 });
 
-                it('should not be displayed', () => {
-                  expect(NoticePolicyForm.loanNoticesSection.loanNotices(0).sendByDuration.hasSelect).to.be.false;
-                });
-              });
+                describe('-send: Upon At', () => {
+                  beforeEach(async () => {
+                    await NoticePolicyForm.loanNoticesSection.loanNotices(0).sendHow.selectAndBlur('Upon/At');
+                  });
 
-              describe('-send: Before', () => {
-                beforeEach(async () => {
-                  await NoticePolicyForm.loanNoticesSection.loanNotices(0).sendHow.selectAndBlur('Before');
-                });
-
-                it('should be displayed', () => {
-                  expect(NoticePolicyForm.loanNoticesSection.loanNotices(0).sendByDuration.hasSelect).to.be.true;
-                });
-              });
-
-              describe('-send: After', () => {
-                beforeEach(async () => {
-                  await NoticePolicyForm.loanNoticesSection.loanNotices(0).sendHow.selectAndBlur('After');
+                  it('should not be displayed', () => {
+                    expect(NoticePolicyForm.loanNoticesSection.loanNotices(0).sendBy.duration.isPresent).to.be.false;
+                  });
                 });
 
-                it('should be displayed', () => {
-                  expect(NoticePolicyForm.loanNoticesSection.loanNotices(0).sendByDuration.hasSelect).to.be.true;
+                describe('-send: Before', () => {
+                  beforeEach(async () => {
+                    await NoticePolicyForm.loanNoticesSection.loanNotices(0).sendHow.selectAndBlur('Before');
+                  });
+
+                  it('should be displayed', () => {
+                    expect(NoticePolicyForm.loanNoticesSection.loanNotices(0).sendBy.duration.isPresent).to.be.true;
+                  });
+                });
+
+                describe('-send: After', () => {
+                  beforeEach(async () => {
+                    await NoticePolicyForm.loanNoticesSection.loanNotices(0).sendHow.selectAndBlur('After');
+                  });
+
+                  it('should be displayed', () => {
+                    expect(NoticePolicyForm.loanNoticesSection.loanNotices(0).sendBy.duration.isPresent).to.be.true;
+                  });
                 });
               });
             });
 
             describe('sendByIntervalId', () => {
-              describe('-send: Upon At', () => {
+              describe('-triggering event: Due date', () => {
                 beforeEach(async () => {
-                  await NoticePolicyForm.loanNoticesSection.loanNotices(0).sendHow.selectAndBlur('Upon/At');
+                  await NoticePolicyForm.loanNoticesSection.loanNotices(0).triggeringEvent.selectAndBlur('Loan due date/time');
                 });
 
-                it('should not be displayed', () => {
-                  expect(NoticePolicyForm.loanNoticesSection.loanNotices(0).sendByIntervalId.hasSelect).to.be.false;
-                });
-              });
+                describe('-send: Upon At', () => {
+                  beforeEach(async () => {
+                    await NoticePolicyForm.loanNoticesSection.loanNotices(0).sendHow.selectAndBlur('Upon/At');
+                  });
 
-              describe('-send: Before', () => {
-                beforeEach(async () => {
-                  await NoticePolicyForm.loanNoticesSection.loanNotices(0).sendHow.selectAndBlur('Before');
-                });
-
-                it('should be displayed', () => {
-                  expect(NoticePolicyForm.loanNoticesSection.loanNotices(0).sendByIntervalId.hasSelect).to.be.true;
-                });
-              });
-
-              describe('-send: After', () => {
-                beforeEach(async () => {
-                  await NoticePolicyForm.loanNoticesSection.loanNotices(0).sendHow.selectAndBlur('After');
+                  it('should not be displayed', () => {
+                    expect(NoticePolicyForm.loanNoticesSection.loanNotices(0).sendBy.interval.isPresent).to.be.false;
+                  });
                 });
 
-                it('should be displayed', () => {
-                  expect(NoticePolicyForm.loanNoticesSection.loanNotices(0).sendByIntervalId.hasSelect).to.be.true;
+                describe('-send: Before', () => {
+                  beforeEach(async () => {
+                    await NoticePolicyForm.loanNoticesSection.loanNotices(0).sendHow.selectAndBlur('Before');
+                  });
+
+                  it('should be displayed', () => {
+                    expect(NoticePolicyForm.loanNoticesSection.loanNotices(0).sendBy.interval.isPresent).to.be.true;
+                  });
+                });
+
+                describe('-send: After', () => {
+                  beforeEach(async () => {
+                    await NoticePolicyForm.loanNoticesSection.loanNotices(0).sendHow.selectAndBlur('After');
+                  });
+
+                  it('should be displayed', () => {
+                    expect(NoticePolicyForm.loanNoticesSection.loanNotices(0).sendBy.interval.isPresent).to.be.true;
+                  });
                 });
               });
             });
 
             describe('sendEveryDuration', () => {
-              describe('-Frequency: recurring', () => {
+              describe('-triggering event: Due date', () => {
                 beforeEach(async () => {
-                  await NoticePolicyForm.loanNoticesSection.loanNotices(0).frequency.selectAndBlur('Recurring');
+                  await NoticePolicyForm.loanNoticesSection.loanNotices(0).triggeringEvent.selectAndBlur('Loan due date/time');
                 });
 
-                it('should be displayed', () => {
-                  expect(NoticePolicyForm.loanNoticesSection.loanNotices(0).sendEveryDuration.isPresent).to.be.true;
-                });
-              });
+                describe('-Frequency: recurring', () => {
+                  beforeEach(async () => {
+                    await NoticePolicyForm.loanNoticesSection.loanNotices(0).frequency.selectAndBlur('Recurring');
+                  });
 
-              describe('-Frequency: one time', () => {
-                beforeEach(async () => {
-                  await NoticePolicyForm.loanNoticesSection.loanNotices(0).frequency.selectAndBlur('One Time');
+                  it('should be displayed', () => {
+                    expect(NoticePolicyForm.loanNoticesSection.loanNotices(0).sendEvery.duration.isPresent).to.be.true;
+                  });
                 });
 
-                it('should not be displayed', () => {
-                  expect(NoticePolicyForm.loanNoticesSection.loanNotices(0).sendEveryDuration.isPresent).to.be.false;
+                describe('-Frequency: one time', () => {
+                  beforeEach(async () => {
+                    await NoticePolicyForm.loanNoticesSection.loanNotices(0).frequency.selectAndBlur('One Time');
+                  });
+
+                  it('should not be displayed', () => {
+                    expect(NoticePolicyForm.loanNoticesSection.loanNotices(0).sendEvery.duration.isPresent).to.be.false;
+                  });
                 });
               });
             });
 
             describe('sendEveryIntervalId', () => {
-              describe('-Frequency: recurring', () => {
+              describe('-triggering event: Due date', () => {
                 beforeEach(async () => {
-                  await NoticePolicyForm.loanNoticesSection.loanNotices(0).frequency.selectAndBlur('Recurring');
+                  await NoticePolicyForm.loanNoticesSection.loanNotices(0).triggeringEvent.selectAndBlur('Loan due date/time');
                 });
 
-                it('should be displayed', () => {
-                  expect(NoticePolicyForm.loanNoticesSection.loanNotices(0).sendEveryIntervalId.isPresent).to.be.true;
-                });
-              });
+                describe('-Frequency: recurring', () => {
+                  beforeEach(async () => {
+                    await NoticePolicyForm.loanNoticesSection.loanNotices(0).frequency.selectAndBlur('Recurring');
+                  });
 
-              describe('-Frequency: one time', () => {
-                beforeEach(async () => {
-                  await NoticePolicyForm.loanNoticesSection.loanNotices(0).frequency.selectAndBlur('One Time');
+                  it('should be displayed', () => {
+                    expect(NoticePolicyForm.loanNoticesSection.loanNotices(0).sendEvery.interval.isPresent).to.be.true;
+                  });
                 });
 
-                it('should not be displayed', () => {
-                  expect(NoticePolicyForm.loanNoticesSection.loanNotices(0).sendEveryIntervalId.isPresent).to.be.false;
+                describe('-Frequency: one time', () => {
+                  beforeEach(async () => {
+                    await NoticePolicyForm.loanNoticesSection.loanNotices(0).frequency.selectAndBlur('One Time');
+                  });
+
+                  it('should not be displayed', () => {
+                    expect(NoticePolicyForm.loanNoticesSection.loanNotices(0).sendEvery.interval.isPresent).to.be.false;
+                  });
                 });
               });
             });
@@ -373,6 +397,7 @@ describe('NoticePolicyForm', () => {
             describe('sendEveryLabel', () => {
               describe('-Frequency: recurring', () => {
                 beforeEach(async () => {
+                  await NoticePolicyForm.loanNoticesSection.loanNotices(0).triggeringEvent.selectAndBlur('Loan due date/time');
                   await NoticePolicyForm.loanNoticesSection.loanNotices(0).frequency.selectAndBlur('Recurring');
                 });
 
@@ -382,13 +407,14 @@ describe('NoticePolicyForm', () => {
 
                 it('should have proper text', () => {
                   expect(NoticePolicyForm.loanNoticesSection.loanNotices(0).sendEveryLabel.text).to.be.equal(
-                    getRequiredLabel(translation['settings.noticePolicy.notices.sendEvery'])
+                    translation['settings.noticePolicy.notices.andEvery']
                   );
                 });
               });
 
               describe('-Frequency: one time', () => {
                 beforeEach(async () => {
+                  await NoticePolicyForm.loanNoticesSection.loanNotices(0).triggeringEvent.selectAndBlur('Loan due date/time');
                   await NoticePolicyForm.loanNoticesSection.loanNotices(0).frequency.selectAndBlur('One Time');
                 });
 

@@ -188,11 +188,16 @@ class NoticeCard extends React.Component {
                 <Col
                   xs={12}
                   className={css.fieldLabel}
-                  data-test-notice-card-frequency
+                  data-test-notice-card-frequency-label
                 >
-                  <KeyValue label={<FormattedMessage id={`${translationNamespace}.notices.frequency`} />}>
+                  <KeyValue
+                    label={<FormattedMessage id={`${translationNamespace}.notices.frequency`} />}
+                  >
                     <Row>
-                      <Col xs={4}>
+                      <Col
+                        xs={4}
+                        data-test-notice-card-frequency
+                      >
                         <KeyValue>
                           {this.getTranslatedDropdownValue('frequency', noticesFrequency)}
                         </KeyValue>

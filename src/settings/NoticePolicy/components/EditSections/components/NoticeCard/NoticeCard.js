@@ -152,7 +152,7 @@ class NoticeCard extends React.Component {
                 <Col
                   xs={3}
                   className={css.noticeField}
-                  data-test-notice-card-triggeringEvent
+                  data-test-notice-card-triggering-event
                 >
                   <Field
                     name={`${pathToNotice}.sendOptions.sendWhen`}
@@ -197,6 +197,7 @@ class NoticeCard extends React.Component {
                         <Col
                           xs={2}
                           className={`${css.cardText} ${css.cardTextWithotLabel}`}
+                          data-test-notice-card-send-by-label
                         >
                           <FormattedMessage id="ui-circulation.settings.noticePolicy.notices.by" />
                         </Col>
@@ -221,7 +222,10 @@ class NoticeCard extends React.Component {
                   </Row>
                   <React.Fragment>
                     <Row>
-                      <Col xs={12}>
+                      <Col
+                        xs={12}
+                        data-test-notice-card-frequency-label
+                      >
                         <FormattedMessage id="ui-circulation.settings.noticePolicy.notices.frequency">
                           {message => `${message} *`}
                         </FormattedMessage>
@@ -245,13 +249,14 @@ class NoticeCard extends React.Component {
                           <Col
                             xs={2}
                             className={`${css.cardText} ${css.cardTextWithotLabel}`}
-                            data-test-notice-card-send-every
+                            data-test-notice-card-send-every-label
                           >
                             <FormattedMessage id="ui-circulation.settings.noticePolicy.notices.andEvery" />
                           </Col>
                           <Col
                             xs={6}
                             className={css.noticeField}
+                            data-test-notice-card-send-every
                           >
                             <Period
                               emptySelectPlaceholder

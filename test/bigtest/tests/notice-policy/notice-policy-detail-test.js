@@ -308,6 +308,24 @@ describe('NoticePolicyDetail', () => {
           expect(NoticePolicyDetail.loanNoticesSection.cardsCount).to.equal(1);
         });
 
+        describe('triggering event', () => {
+          it('should be displayed', () => {
+            expect(NoticePolicyDetail.loanNoticesSection.loanNotices(0).triggeringEvent.isPresent).to.be.true;
+          });
+
+          it('should have a proper label', () => {
+            expect(NoticePolicyDetail.loanNoticesSection.loanNotices(0).triggeringEvent.label.text).to.equal(
+              translation['settings.noticePolicy.notices.triggeringEvent']
+            );
+          });
+
+          it('should have a proper value', () => {
+            expect(NoticePolicyDetail.loanNoticesSection.loanNotices(0).triggeringEvent.value.text).to.equal(
+              translation['settings.noticePolicy.loanNotices.dueDate']
+            );
+          });
+        });
+
         describe('templateId', () => {
           it('should be displayed', () => {
             expect(NoticePolicyDetail.loanNoticesSection.loanNotices(0).templateId.isPresent).to.be.true;
@@ -362,13 +380,13 @@ describe('NoticePolicyDetail', () => {
           });
 
           it('should have a proper value', () => {
-            expect(NoticePolicyDetail.loanNoticesSection.loanNotices(0).frequency.value.text).to.equal(
+            expect(NoticePolicyDetail.loanNoticesSection.loanNotices(0).frequency.text).to.equal(
               noticePolicy.loanNotices[0].frequency
             );
           });
 
           it('should have a proper label', () => {
-            expect(NoticePolicyDetail.loanNoticesSection.loanNotices(0).frequency.label.text).to.equal(
+            expect(NoticePolicyDetail.loanNoticesSection.loanNotices(0).frequencyLabel.text).to.equal(
               translation['settings.noticePolicy.notices.frequency']
             );
           });
@@ -388,103 +406,6 @@ describe('NoticePolicyDetail', () => {
           it('should have a proper label', () => {
             expect(NoticePolicyDetail.loanNoticesSection.loanNotices(0).realTime.label.text).to.equal(
               translation['settings.noticePolicy.notices.realTime']
-            );
-          });
-        });
-      });
-
-      describe('event text', () => {
-        describe('random notice policy', () => {
-          let patronNoticeTemplate;
-          let noticePolicy;
-
-          beforeEach(function () {
-            patronNoticeTemplate = this.server.create('templates', { category: 'Loan' });
-            noticePolicy = this.server.create('patronNoticePolicy', {
-              active: true,
-              loanNotices: [{
-                name: 'mockName',
-                templateId: patronNoticeTemplate.id,
-                templateName: 'mockTemplateName',
-                format: 'Email',
-                frequency: 'Recurring',
-                realTime: true,
-                sendOptions: {
-                  sendHow: 'After',
-                  sendWhen: 'Due date',
-                  sendBy: {
-                    duration: 2,
-                    intervalId: 'Hours'
-                  },
-                  sendEvery: {
-                    duration: 2,
-                    intervalId: 'Hours'
-                  }
-                }
-              }],
-            });
-
-            this.visit(`/settings/circulation/notice-policies/${noticePolicy.id}`);
-          });
-
-          it('should be displayed', () => {
-            expect(NoticePolicyDetail.loanNoticesSection.loanNotices(0).eventText.isPresent).to.be.true;
-          });
-
-          it('should have a proper value', () => {
-            expect(NoticePolicyDetail.loanNoticesSection.loanNotices(0).eventText.value.text).to.equal(
-              noticePolicy.loanNotices[0].sendOptions.sendHow +
-              noticePolicy.loanNotices[0].sendOptions.sendWhen +
-              translation['settings.noticePolicy.notices.by'] +
-              noticePolicy.loanNotices[0].sendOptions.sendBy.duration +
-              translation['settings.noticePolicy.notices.hours']
-            );
-          });
-
-          it('should have a proper label', () => {
-            expect(NoticePolicyDetail.loanNoticesSection.loanNotices(0).eventText.label.text).to.equal(
-              translation['settings.noticePolicy.notices.startigSendEvent']
-            );
-          });
-        });
-
-        describe('notice policy\n\t\t-send Upon At', () => {
-          let noticePolicy;
-
-          beforeEach(function () {
-            noticePolicy = this.server.create('patronNoticePolicy', {
-              active: true,
-              loanNotices: [{
-                name: 'mockName',
-                realTime: true,
-                sendOptions: {
-                  sendHow: 'Upon At',
-                  sendWhen: 'Due date',
-                  sendBy: {
-                    duration: 2,
-                    intervalId: 'Hours'
-                  },
-                }
-              }],
-            });
-
-            this.visit(`/settings/circulation/notice-policies/${noticePolicy.id}`);
-          });
-
-          it('should be displayed', () => {
-            expect(NoticePolicyDetail.loanNoticesSection.loanNotices(0).eventText.isPresent).to.be.true;
-          });
-
-          it('should have a proper value', () => {
-            expect(NoticePolicyDetail.loanNoticesSection.loanNotices(0).eventText.value.text).to.equal(
-              translation['settings.noticePolicy.notices.upon'] +
-              noticePolicy.loanNotices[0].sendOptions.sendWhen
-            );
-          });
-
-          it('should have a proper label', () => {
-            expect(NoticePolicyDetail.loanNoticesSection.loanNotices(0).eventText.label.text).to.equal(
-              translation['settings.noticePolicy.notices.sendEvent']
             );
           });
         });
@@ -522,12 +443,6 @@ describe('NoticePolicyDetail', () => {
             });
 
             this.visit(`/settings/circulation/notice-policies/${noticePolicy.id}`);
-          });
-
-          it('should have a proper label', () => {
-            expect(NoticePolicyDetail.loanNoticesSection.loanNotices(0).sendEveryLabel).to.equal(
-              translation['settings.noticePolicy.notices.sendEvery']
-            );
           });
 
           describe('duration', () => {
