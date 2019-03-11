@@ -9,13 +9,14 @@ import {
 } from 'react-intl';
 
 import {
-  Button,
   Col,
   Row,
   IconButton,
   Select,
   Checkbox,
 } from '@folio/stripes/components';
+
+import Period from '../../../../../components/Period';
 
 import {
   noticesFormats,
@@ -28,25 +29,20 @@ import css from './NoticeCard.css';
 
 class NoticeCard extends React.Component {
   static propTypes = {
-    sectionKey: PropTypes.string.isRequired,
-    fields: PropTypes.object.isRequired,
-    policy: PropTypes.object.isRequired,
     intl: intlShape.isRequired,
+    noticeIndex: PropTypes.number.isRequired,
+    pathToNotice: PropTypes.string.isRequired,
+    notice: PropTypes.object.isRequired,
+    timeBasedEventsIds: PropTypes.arrayOf(PropTypes.string).isRequired,
     templates: PropTypes.arrayOf(PropTypes.shape({
       value: PropTypes.string.isRequired,
       label: PropTypes.string.isRequired,
     })).isRequired,
-    sendWhenOptions: PropTypes.arrayOf(PropTypes.shape({
+    triggeringEvents: PropTypes.arrayOf(PropTypes.shape({
       value: PropTypes.string.isRequired,
       label: PropTypes.string.isRequired,
     })).isRequired,
-  };
-
-  getIntervalValues = () => {
-    return new Array(100).fill().map((value, index) => ({
-      value: index + 1,
-      label: index + 1,
-    }));
+    onRemoveNotice: PropTypes.func.isRequired,
   };
 
   getDropdownItems = (items) => {
@@ -58,268 +54,240 @@ class NoticeCard extends React.Component {
     }));
   };
 
+  onRemove = () => {
+    const {
+      noticeIndex,
+      onRemoveNotice,
+    } = this.props;
+
+    onRemoveNotice(noticeIndex);
+  };
+
   render() {
     const {
-      sectionKey,
-      fields,
-      policy,
+      noticeIndex,
+      pathToNotice,
+      notice,
+      timeBasedEventsIds,
       templates,
-      sendWhenOptions,
+      triggeringEvents,
     } = this.props;
 
     return (
-      <React.Fragment>
-        {fields.map((loanNotice, index) => {
-          const isRecurring = policy[sectionKey][index].isRecurring();
-          const isBeforeOrAfter = policy[sectionKey][index].sendOptions.isBeforeOrAfter();
-          const sendEventLabelId = isRecurring ? 'startigSendEvent' : 'sendEvent';
-
-          return (
-            <Row
-              data-test-notice-card
-              key={loanNotice}
+      <Row data-test-notice-card>
+        <Col
+          xs={7}
+          className={css.notice}
+        >
+          <Row className={css.header}>
+            <Col
+              xs={3}
+              className={css.headerTitle}
+              data-test-notice-card-counter
             >
-              <Col
-                xs={7}
-                key={index}
-                className={css.loanNotice}
-              >
-                <Row className={css.header}>
-                  <Col
-                    xs={3}
-                    className={css.headerTitle}
-                    data-test-notice-card-counter
-                  >
-                    <FormattedMessage
-                      id="ui-circulation.settings.noticePolicy.countableNotice"
-                      values={{ counter: index + 1 }}
-                    />
-                  </Col>
-                  <Col
-                    xs={1}
-                    xsOffset={8}
-                    className={css.headerIcon}
-                  >
-                    <IconButton
-                      data-test-notice-card-remove
-                      icon="trash"
-                      onClick={() => fields.remove(index)}
-                    />
-                  </Col>
-                </Row>
-                <Row>
-                  <Col
-                    xs={5}
-                    className={css.noticeField}
-                    data-test-notice-card-template-id
-                  >
-                    <Field
-                      name={`${loanNotice}.templateId`}
-                      label={(
-                        <FormattedMessage id="ui-circulation.settings.noticePolicy.notices.template">
-                          { message => `${message} *` }
-                        </FormattedMessage>
-                      )}
-                      component={Select}
-                      dataOptions={templates}
-                      placeholder=" "
-                    />
-                  </Col>
-                  <Col
-                    xs={1}
-                    className={css.cardText}
-                    data-test-notice-card-via-text
-                  >
-                    <FormattedMessage id="ui-circulation.settings.noticePolicy.notices.via" />
-                  </Col>
-                  <Col
-                    xs={3}
-                    className={css.noticeField}
-                    data-test-notice-card-format
-                  >
-                    <Field
-                      name={`${loanNotice}.format`}
-                      label={(
-                        <FormattedMessage id="ui-circulation.settings.noticePolicy.notices.format">
-                          { message => `${message} *` }
-                        </FormattedMessage>
-                      )}
-                      component={Select}
-                      dataOptions={this.getDropdownItems(noticesFormats)}
-                      placeholder=" "
-                    />
-                  </Col>
-                  <Col
-                    xs={3}
-                    className={css.noticeField}
-                    data-test-notice-card-frequency
-                  >
-                    <Field
-                      name={`${loanNotice}.frequency`}
-                      label={(
-                        <FormattedMessage id="ui-circulation.settings.noticePolicy.notices.frequency">
-                          { message => `${message} *` }
-                        </FormattedMessage>
-                      )}
-                      component={Select}
-                      dataOptions={this.getDropdownItems(noticesFrequency)}
-                      placeholder=" "
-                    />
-                  </Col>
-                </Row>
+              <FormattedMessage
+                id="ui-circulation.settings.noticePolicy.countableNotice"
+                values={{ counter: noticeIndex + 1 }}
+              />
+            </Col>
+            <Col
+              xs={1}
+              xsOffset={8}
+              className={css.headerIcon}
+            >
+              <IconButton
+                icon="trash"
+                data-test-notice-card-remove
+                onClick={this.onRemove}
+              />
+            </Col>
+          </Row>
+          <Row>
+            <Col
+              xs={12}
+              className={css.noticeContainer}
+            >
+              <Row>
+                <Col
+                  xs={4}
+                  className={css.noticeField}
+                  data-test-notice-card-template-id
+                >
+                  <Field
+                    name={`${pathToNotice}.templateId`}
+                    label={(
+                      <FormattedMessage id="ui-circulation.settings.noticePolicy.notices.template">
+                        {message => `${message} *`}
+                      </FormattedMessage>
+                    )}
+                    component={Select}
+                    dataOptions={templates}
+                    placeholder=" "
+                  />
+                </Col>
+                <Col
+                  xs={2}
+                  className={css.cardText}
+                  data-test-notice-card-via-text
+                >
+                  <FormattedMessage id="ui-circulation.settings.noticePolicy.notices.via" />
+                </Col>
+                <Col
+                  xs={3}
+                  className={css.noticeField}
+                  data-test-notice-card-format
+                >
+                  <Field
+                    name={`${pathToNotice}.format`}
+                    label={(
+                      <FormattedMessage id="ui-circulation.settings.noticePolicy.notices.format">
+                        {message => `${message} *`}
+                      </FormattedMessage>
+                    )}
+                    component={Select}
+                    dataOptions={this.getDropdownItems(noticesFormats)}
+                    placeholder=" "
+                  />
+                </Col>
+                <Col
+                  xs={3}
+                  className={css.noticeField}
+                  data-test-notice-card-triggeringEvent
+                >
+                  <Field
+                    name={`${pathToNotice}.sendOptions.sendWhen`}
+                    label={(
+                      <FormattedMessage id="ui-circulation.settings.noticePolicy.notices.triggeringEvent">
+                        {message => `${message} *`}
+                      </FormattedMessage>
+                    )}
+                    component={Select}
+                    dataOptions={this.getDropdownItems(triggeringEvents)}
+                    placeholder=" "
+                  />
+                </Col>
+              </Row>
+              {notice.sendOptions.isTimeBasedEventSelected(timeBasedEventsIds) && (
                 <React.Fragment>
                   <Row>
                     <Col
                       xs={12}
-                      className={css.fieldLabel}
                       data-test-notice-card-event-label
                     >
-                      <FormattedMessage id={`ui-circulation.settings.noticePolicy.notices.${sendEventLabelId}`}>
-                        { message => `${message} *` }
+                      <FormattedMessage id="ui-circulation.settings.noticePolicy.notices.send">
+                        {message => `${message} *`}
                       </FormattedMessage>
                     </Col>
                   </Row>
                   <Row>
                     <Col
-                      xs={2}
+                      xs={4}
                       className={css.noticeField}
                       data-test-notice-card-send-how
                     >
                       <Field
-                        name={`${loanNotice}.sendOptions.sendHow`}
+                        name={`${pathToNotice}.sendOptions.sendHow`}
                         component={Select}
                         dataOptions={this.getDropdownItems(noticesSendEvent)}
                         placeholder=" "
                       />
                     </Col>
-                    <Col
-                      xs={3}
-                      className={css.noticeField}
-                      data-test-notice-card-send-when
-                    >
-                      <Field
-                        name={`${loanNotice}.sendOptions.sendWhen`}
-                        component={Select}
-                        dataOptions={this.getDropdownItems(sendWhenOptions)}
-                        placeholder=" "
-                      />
-                    </Col>
-                    { isBeforeOrAfter && (
+                    {notice.sendOptions.isBeforeOrAfter() && (
                       <React.Fragment>
                         <Col
-                          xs={1}
-                          className={css.cardText}
-                          style={{ paddingBottom: '15px' }}
-                          data-test-notice-card-send-by-label
+                          xs={2}
+                          className={`${css.cardText} ${css.cardTextWithotLabel}`}
                         >
                           <FormattedMessage id="ui-circulation.settings.noticePolicy.notices.by" />
                         </Col>
                         <Col
-                          xs={3}
+                          xs={6}
                           className={css.noticeField}
-                          data-test-notice-card-send-by-duration
+                          data-test-notice-card-send-by
                         >
-                          <Field
-                            name={`${loanNotice}.sendOptions.sendBy.duration`}
-                            component={Select}
-                            dataOptions={this.getIntervalValues()}
-                            placeholder=" "
-                          />
-                        </Col>
-                        <Col
-                          xs={3}
-                          className={css.noticeField}
-                          data-test-notice-card-send-by-interval-id
-                        >
-                          <Field
-                            data-test-notice-card-send-by-interval-id
-                            name={`${loanNotice}.sendOptions.sendBy.intervalId`}
-                            component={Select}
-                            dataOptions={this.getDropdownItems(noticesIntervalPeriods)}
-                            placeholder=" "
+                          <Period
+                            emptySelectPlaceholder
+                            inputSize={6}
+                            selectSize={6}
+                            inputPlaceholder={1}
+                            inputValuePath={`${pathToNotice}.sendOptions.sendBy.duration`}
+                            selectValuePath={`${pathToNotice}.sendOptions.sendBy.intervalId`}
+                            intervalPeriods={this.getDropdownItems(noticesIntervalPeriods)}
                           />
                         </Col>
                       </React.Fragment>
                     )
-                  }
+                    }
                   </Row>
-                </React.Fragment>
-                { isRecurring && (
                   <React.Fragment>
                     <Row>
-                      <Col
-                        xs={12}
-                        className={css.fieldLabel}
-                        data-test-notice-card-send-every-label
-                      >
-                        <FormattedMessage id="ui-circulation.settings.noticePolicy.notices.sendEvery">
-                          { message => `${message} *` }
+                      <Col xs={12}>
+                        <FormattedMessage id="ui-circulation.settings.noticePolicy.notices.frequency">
+                          {message => `${message} *`}
                         </FormattedMessage>
                       </Col>
                     </Row>
                     <Row>
                       <Col
-                        xs={3}
+                        xs={4}
                         className={css.noticeField}
-                        data-test-notice-card-send-every-duration
+                        data-test-notice-card-frequency
                       >
                         <Field
-                          name={`${loanNotice}.sendOptions.sendEvery.duration`}
+                          name={`${pathToNotice}.frequency`}
                           component={Select}
-                          dataOptions={this.getIntervalValues()}
+                          dataOptions={this.getDropdownItems(noticesFrequency)}
                           placeholder=" "
                         />
                       </Col>
-                      <Col
-                        xs={3}
-                        className={css.noticeField}
-                        data-test-notice-card-send-every-interval-id
-                      >
-                        <Field
-                          name={`${loanNotice}.sendOptions.sendEvery.intervalId`}
-                          component={Select}
-                          dataOptions={this.getDropdownItems(noticesIntervalPeriods)}
-                          placeholder=" "
-                        />
-                      </Col>
+                      {notice.isRecurring() && (
+                        <React.Fragment>
+                          <Col
+                            xs={2}
+                            className={`${css.cardText} ${css.cardTextWithotLabel}`}
+                            data-test-notice-card-send-every
+                          >
+                            <FormattedMessage id="ui-circulation.settings.noticePolicy.notices.andEvery" />
+                          </Col>
+                          <Col
+                            xs={6}
+                            className={css.noticeField}
+                          >
+                            <Period
+                              emptySelectPlaceholder
+                              inputSize={6}
+                              selectSize={6}
+                              inputPlaceholder={1}
+                              inputValuePath={`${pathToNotice}.sendOptions.sendEvery.duration`}
+                              selectValuePath={`${pathToNotice}.sendOptions.sendEvery.intervalId`}
+                              intervalPeriods={this.getDropdownItems(noticesIntervalPeriods)}
+                            />
+                          </Col>
+                        </React.Fragment>
+                      )}
                     </Row>
                   </React.Fragment>
-                )}
-                <Row>
-                  <Col
-                    xs={12}
-                    className={css.noticeField}
-                    data-test-notice-card-real-time
-                  >
-                    <Field
-                      name={`${loanNotice}.realTime`}
-                      label={<FormattedMessage id="ui-circulation.settings.noticePolicy.notices.realTime" />}
-                      component={Checkbox}
-                      type="checkbox"
-                      normalize={v => !!v}
-                    />
-                  </Col>
-                </Row>
-              </Col>
-            </Row>
-          );
-        })}
-        <Row
-          start="xs"
-          className={css.buttonContainer}
-        >
-          <Col xs={1}>
-            <Button
-              type="button"
-              buttonStyle="default"
-              onClick={() => fields.push({})}
-              data-test-add-notice-card
-            >
-              <FormattedMessage id="ui-circulation.settings.noticePolicy.addNotice" />
-            </Button>
-          </Col>
-        </Row>
-      </React.Fragment>
+                </React.Fragment>
+              )}
+              <Row>
+                <Col
+                  xs={12}
+                  className={css.noticeField}
+                  data-test-notice-card-real-time
+                >
+                  <Field
+                    name={`${pathToNotice}.realTime`}
+                    label={<FormattedMessage id="ui-circulation.settings.noticePolicy.notices.realTime" />}
+                    component={Checkbox}
+                    type="checkbox"
+                    normalize={v => !!v}
+                  />
+                </Col>
+              </Row>
+            </Col>
+          </Row>
+        </Col>
+      </Row>
     );
   }
 }

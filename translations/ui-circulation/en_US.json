@@ -250,7 +250,7 @@
     "settings.noticePolicy.notices.days": "Day(s)",
     "settings.noticePolicy.notices.weeks": "Week(s)",
     "settings.noticePolicy.notices.months": "Month(s)",
-    "settings.noticePolicy.notices.years": "Years(s)",
+    "settings.noticePolicy.notices.years": "Year(s)",
     "settings.noticePolicy.requestNotices.recallRequest": "Recall request",
     "settings.noticePolicy.requestNotices.holdRequest": "Hold request",
     "settings.noticePolicy.requestNotices.pagingRequest": "Paging request",

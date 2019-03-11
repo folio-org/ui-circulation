@@ -10,6 +10,7 @@
 * Update circulation OKAPI interface to v7.0. Part of UICHKOUT-492.
 * Do not show unsaved changes popup when policy form is not dirty. Fixes UICIRC-104.
 * Add permission set for other settings. Fixes UICIRC-193.
+* Change output format for patron notices to 'text/html'.
 
 ## 1.5.0 (https://github.com/folio-org/ui-circulation/tree/v1.5.0) (2019-01-25)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v1.4.0...v1.5.0)

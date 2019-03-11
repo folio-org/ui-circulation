@@ -5,12 +5,13 @@
 }
     
 .header {
+  padding: 0.15rem;
+  font-weight: 600;
   background-color: #e6e6e6;
 }
     
 .headerTitle {
   padding: 5px 10px;
-  font-weight: 600;
 }
     
 .noticeField {

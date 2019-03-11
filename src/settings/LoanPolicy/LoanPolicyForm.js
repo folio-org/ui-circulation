@@ -88,7 +88,7 @@ class LoanPolicyForm extends React.Component {
     );
 
     const sortedSchedules = sortBy(records, ['name']);
-    return sortedSchedules.map(({ id, name }) => (<option key={id} value={id}>{name}</option>));
+    return sortedSchedules.map(({ id, name }) => ({ value: id, label: name }));
   };
 
   saveForm = (loanPolicy) => {

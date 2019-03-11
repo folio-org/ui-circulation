@@ -1,4 +1,7 @@
-import { isEqual } from 'lodash';
+import {
+  isEqual,
+  includes,
+} from 'lodash';
 
 import { Period } from '../common';
 import { noticesSendEventMap } from '../../../constants';
@@ -9,6 +12,10 @@ export default class NoticeSendOptions {
     this.sendWhen = options.sendWhen;
     this.sendBy = new Period(options.sendBy);
     this.sendEvery = new Period(options.sendEvery);
+  }
+
+  isTimeBasedEventSelected(timeBasedEventsIds = []) {
+    return includes(timeBasedEventsIds, this.sendWhen);
   }
 
   isBeforeOrAfter() {
