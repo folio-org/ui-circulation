@@ -50,7 +50,7 @@ class GeneralSection extends React.Component {
                 <FormattedMessage id="ui-circulation.settings.noticePolicy.policyName">
                   {message => `${message} *`}
                 </FormattedMessage>
-          )}
+              )}
               component={TextField}
             />
           </div>

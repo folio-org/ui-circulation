@@ -190,6 +190,7 @@ export default function config() {
       }
     ]
   });
+
   this.get('/templates', function ({ templates }) {
     return this.serializerOrRegistry.serialize(templates.all());
   });
@@ -209,38 +210,60 @@ export default function config() {
   this.post('/request-policy-storage/request-policies', ({ requestPolicies }, request) => {
     const body = JSON.parse(request.requestBody);
     const requestPolicy = requestPolicies.create(body);
+
     return requestPolicy.attrs;
   });
 
   this.post('/loan-policy-storage/loan-policies', ({ loanPolicies }, request) => {
     const body = JSON.parse(request.requestBody);
     const loanPolicy = loanPolicies.create(body);
+
     return loanPolicy.attrs;
   });
 
   this.put('/loan-policy-storage/loan-policies/:id', ({ loanPolicies }, request) => {
-    const { id, name, description } = JSON.parse(request.requestBody);
+    const {
+      id,
+      name,
+      description,
+    } = JSON.parse(request.requestBody);
     const loanPolicy = loanPolicies.find(id);
+
     loanPolicy.update({ name, description });
+
     return loanPolicy.attrs;
   });
 
   this.put('/patron-notice-policy-storage/patron-notice-policies/:id', ({ patronNoticePolicies }, request) => {
-    const { id, name, description } = JSON.parse(request.requestBody);
+    const {
+      id,
+      name,
+      description,
+    } = JSON.parse(request.requestBody);
     const patronNoticePolicy = patronNoticePolicies.find(id);
+
     patronNoticePolicy.update({ name, description });
+
     return patronNoticePolicy.attrs;
   });
 
   this.delete('/patron-notice-policy-storage/patron-notice-policies/:id', ({ patronNoticePolicies }, request) => {
-    const { params: { id } } = request;
+    const {
+      params: {
+        id
+      }
+    } = request;
     const patronNoticePolicy = patronNoticePolicies.find(id);
 
     return patronNoticePolicy.destroy();
   });
 
   this.delete('/loan-policy-storage/loan-policies/:id', ({ loanPolicies }, request) => {
-    const { params: { id } } = request;
+    const {
+      params: {
+        id
+      }
+    } = request;
     const loanPolicy = loanPolicies.find(id);
 
     return loanPolicy.destroy();
@@ -248,9 +271,14 @@ export default function config() {
 
   this.put('/request-policy-storage/request-policies/:id', ({ requestPolicies }, request) => {
     const body = JSON.parse(request.requestBody);
-    const { name, description } = body;
+    const {
+      name,
+      description
+    } = body;
     const requestPolicy = requestPolicies.find(body.id);
+
     requestPolicy.update({ name, description });
+
     return requestPolicy.attrs;
   });
 }

@@ -31,15 +31,18 @@ const GeneralSection = (props) => {
       <Accordion
         open={isOpen}
         id="generalInformation"
-        onToggle={onToggle}
         label={<FormattedMessage id="ui-circulation.settings.loanPolicy.generalInformation" />}
+        onToggle={onToggle}
       >
         <Metadata
           connect={connect}
           metadata={metadata}
         />
         <Row>
-          <Col xs={12} data-notice-policy-name>
+          <Col
+            xs={12}
+            data-notice-policy-name
+          >
             <KeyValue
               label={<FormattedMessage id="ui-circulation.settings.noticePolicy.policyName" />}
               value={policyName}
@@ -47,7 +50,10 @@ const GeneralSection = (props) => {
           </Col>
         </Row>
         <Row>
-          <Col xs={12} data-notice-policy-active>
+          <Col
+            xs={12}
+            data-notice-policy-active
+          >
             <KeyValue
               label={<FormattedMessage id="ui-circulation.settings.noticePolicy.active" />}
               value={active}
@@ -55,7 +61,10 @@ const GeneralSection = (props) => {
           </Col>
         </Row>
         <Row>
-          <Col xs={12} data-notice-policy-description>
+          <Col
+            xs={12}
+            data-notice-policy-description
+          >
             <KeyValue
               label={<FormattedMessage id="ui-circulation.settings.loanPolicy.policyDescription" />}
               value={policyDescription}

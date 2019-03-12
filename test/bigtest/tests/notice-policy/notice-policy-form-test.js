@@ -13,7 +13,7 @@ import { getRequiredLabel } from '../../helpers/messageСonverters';
 describe('NoticePolicyForm', () => {
   setupApplication();
 
-  describe('\n\taccordions\n', () => {
+  describe('accordions', () => {
     beforeEach(function () {
       this.visit('/settings/circulation/notice-policies?layer=add');
     });
@@ -22,7 +22,7 @@ describe('NoticePolicyForm', () => {
       expect(NoticePolicyForm.expandAll.isPresent).to.be.true;
     });
 
-    describe('\n\tcollapse all\n', () => {
+    describe('collapse all', () => {
       beforeEach(async () => {
         await NoticePolicyForm.expandAll.click();
       });
@@ -39,7 +39,7 @@ describe('NoticePolicyForm', () => {
         expect(NoticePolicyForm.requestNoticesSection.content.isHidden).to.be.true;
       });
 
-      describe('\n\texpand all\n', () => {
+      describe('expand all', () => {
         beforeEach(async () => {
           await NoticePolicyForm.expandAll.click();
         });

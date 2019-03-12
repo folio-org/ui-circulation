@@ -14,7 +14,7 @@ describe('NoticePolicyDetail', () => {
   setupApplication();
 
   describe('viewing notice policy', () => {
-    describe('\n\taccordions\n', () => {
+    describe('accordions', () => {
       let noticePolicy;
 
       beforeEach(function () {
@@ -27,7 +27,7 @@ describe('NoticePolicyDetail', () => {
         expect(NoticePolicyDetail.expandAll.isPresent).to.be.true;
       });
 
-      describe('\n\tcollapse all\n', () => {
+      describe('collapse all', () => {
         beforeEach(async () => {
           await NoticePolicyDetail.expandAll.click();
         });
@@ -44,7 +44,7 @@ describe('NoticePolicyDetail', () => {
           expect(NoticePolicyDetail.requestNoticesSection.content.isHidden).to.be.true;
         });
 
-        describe('\n\texpand all\n', () => {
+        describe('expand all', () => {
           beforeEach(async () => {
             await NoticePolicyDetail.expandAll.click();
           });
@@ -264,7 +264,6 @@ describe('NoticePolicyDetail', () => {
         });
       });
     });
-
 
     describe('notice card', () => {
       describe('random notice policy', () => {

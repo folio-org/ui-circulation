@@ -190,9 +190,7 @@ class NoticeCard extends React.Component {
                   className={css.fieldLabel}
                   data-test-notice-card-frequency-label
                 >
-                  <KeyValue
-                    label={<FormattedMessage id={`${translationNamespace}.notices.frequency`} />}
-                  >
+                  <KeyValue label={<FormattedMessage id={`${translationNamespace}.notices.frequency`} />}>
                     <Row>
                       <Col
                         xs={4}

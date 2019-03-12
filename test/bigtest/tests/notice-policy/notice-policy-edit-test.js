@@ -1,5 +1,6 @@
 import { beforeEach, describe, it } from '@bigtest/mocha';
 import { expect } from 'chai';
+
 import NoticePolicyForm from '../../interactors/notice-policy/notice-policy-form';
 import NoticePolicyDetail from '../../interactors/notice-policy/notice-policy-detail';
 import setupApplication from '../../helpers/setup-application';
@@ -13,6 +14,7 @@ describe('NoticePolicyEdit', () => {
 
     beforeEach(async function () {
       const patronNoticeTemplate = this.server.create('templates', { category: 'Loan' });
+
       noticePolicy = this.server.create('patronNoticePolicy', {
         active: true,
         loanNotices: [{
@@ -36,6 +38,7 @@ describe('NoticePolicyEdit', () => {
           }
         }],
       });
+
       await this.visit(`/settings/circulation/notice-policies/${noticePolicy.id}?layer=edit`);
       await NoticePolicyForm.whenLoaded(noticePolicy.name);
     });

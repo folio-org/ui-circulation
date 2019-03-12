@@ -1,5 +1,10 @@
-import { beforeEach, describe, it } from '@bigtest/mocha';
+import {
+  beforeEach,
+  describe,
+  it,
+} from '@bigtest/mocha';
 import { expect } from 'chai';
+
 import LoanPolicyForm from '../../interactors/loan-policy/loan-policy-form';
 import LoanPolicyDetail from '../../interactors/loan-policy/loan-policy-detail';
 import setupApplication from '../../helpers/setup-application';

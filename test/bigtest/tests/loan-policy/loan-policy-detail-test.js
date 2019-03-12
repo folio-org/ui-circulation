@@ -25,7 +25,7 @@ describe('LoanPolicyDetail', () => {
   let loanPolicy;
 
   describe('viewing loan policy', () => {
-    describe('\n\taccordions\n', () => {
+    describe('accordions', () => {
       beforeEach(function () {
         loanPolicy = this.server.create('loanPolicy', {
           loanable: true,
@@ -38,7 +38,7 @@ describe('LoanPolicyDetail', () => {
         expect(LoanPolicyDetail.expandAll.isPresent).to.be.true;
       });
 
-      describe('\n\tcollapse all\n', () => {
+      describe('collapse all', () => {
         beforeEach(async () => {
           await LoanPolicyDetail.expandAll.click();
         });
@@ -47,7 +47,7 @@ describe('LoanPolicyDetail', () => {
           expect(LoanPolicyDetail.content.isHidden).to.be.true;
         });
 
-        describe('\n\texpand all\n', () => {
+        describe('expand all', () => {
           beforeEach(async () => {
             await LoanPolicyDetail.expandAll.click();
           });

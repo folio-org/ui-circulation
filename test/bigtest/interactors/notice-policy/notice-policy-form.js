@@ -1,7 +1,12 @@
 import {
-  clickable, collection, count,
-  interactor, isPresent,
-  scoped, text, Interactor
+  text,
+  count,
+  scoped,
+  isPresent,
+  clickable,
+  interactor,
+  collection,
+  Interactor,
 } from '@bigtest/interactor';
 
 import TextFieldInteractor from '@folio/stripes-components/lib/TextField/tests/interactor';
@@ -9,7 +14,6 @@ import CheckboxInteractor from '@folio/stripes-components/lib/Checkbox/tests/int
 import SelectInteractor from '@folio/stripes-components/lib/Select/tests/interactor';
 
 import Period from '../Period';
-
 
 @interactor class GeneralSection {
   static defaultScope = ('[data-test-notice-policy-form-general-section]');

@@ -3,7 +3,8 @@ import {
   isPresent,
   count,
   collection,
-  text, scoped,
+  text,
+  scoped,
 } from '@bigtest/interactor';
 
 import KeyValue from '../KeyValue';

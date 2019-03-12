@@ -20,7 +20,7 @@ import {
 describe('LoanPolicyForm', () => {
   setupApplication();
 
-  describe('\n\taccordions\n', () => {
+  describe('accordions', () => {
     beforeEach(function () {
       this.visit('/settings/circulation/loan-policies?layer=add');
     });
@@ -29,7 +29,7 @@ describe('LoanPolicyForm', () => {
       expect(LoanPolicyForm.expandAll.isPresent).to.be.true;
     });
 
-    describe('\n\tcollapse all\n', () => {
+    describe('collapse all', () => {
       beforeEach(async () => {
         await LoanPolicyForm.expandAll.click();
       });
@@ -50,7 +50,7 @@ describe('LoanPolicyForm', () => {
         expect(LoanPolicyForm.requestManagementSection.isHidden).to.be.true;
       });
 
-      describe('\n\texpand all\n', () => {
+      describe('expand all', () => {
         beforeEach(async () => {
           await LoanPolicyForm.expandAll.click();
         });
