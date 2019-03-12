@@ -268,5 +268,12 @@
     "settings.circulationRules.requestPolicies": "سياسات الطلبات",
     "settings.circulationRules.noticePolicies": "سياسات الإخطارات",
     "settings.circulationRules.circulationPolicies": "سياسات الإعارة",
-    "settings.common.cancel": "إلغاء"
+    "settings.common.cancel": "إلغاء",
+    "settings.validate.isFromOneToHundred": "يجب أن تكون القيمة بين 1 و 100",
+    "settings.noticePolicy.notices.send": "إرسال",
+    "settings.noticePolicy.requestNotices.recallLoanee": "استدعاء- المقترض",
+    "settings.noticePolicy.notices.triggeringEvent": "تشغيل الحدث",
+    "settings.noticePolicy.loanNotices.checkIn": "رد",
+    "settings.noticePolicy.loanNotices.checkOut": "إعارة",
+    "settings.noticePolicy.notices.andEvery": "وكل"
 }
