@@ -1,7 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { sortBy } from 'lodash';
-import { FormattedMessage } from 'react-intl';
+import {
+  FormattedMessage,
+  injectIntl,
+} from 'react-intl';
 
 import { EntryManager } from '@folio/stripes/smart-components';
 
@@ -43,6 +46,9 @@ class LoanPolicySettings extends React.Component {
     const {
       resources,
       mutator,
+      intl: {
+        formatMessage,
+      },
     } = this.props;
 
     const permissions = {
@@ -54,27 +60,23 @@ class LoanPolicySettings extends React.Component {
     const entryList = sortBy((resources.loanPolicies || {}).records, ['name']);
 
     return (
-      <FormattedMessage id="ui-circulation.settings.loanPolicy.entryLabel">
-        { entryLabel => (
-          <EntryManager
-            {...this.props}
-            parentMutator={mutator}
-            parentResources={resources}
-            entryList={entryList}
-            resourceKey="loanPolicies"
-            detailComponent={LoanPolicyDetail}
-            entryFormComponent={LoanPolicyForm}
-            paneTitle={<FormattedMessage id="ui-circulation.settings.loanPolicy.paneTitle" />}
-            entryLabel={entryLabel}
-            nameKey="name"
-            permissions={permissions}
-            validate={validateLoanPolicy}
-            defaultEntry={LoanPolicy.defaultLoanPolicy()}
-          />
-        )}
-      </FormattedMessage>
+      <EntryManager
+        {...this.props}
+        parentMutator={mutator}
+        parentResources={resources}
+        entryList={entryList}
+        resourceKey="loanPolicies"
+        detailComponent={LoanPolicyDetail}
+        entryFormComponent={LoanPolicyForm}
+        paneTitle={<FormattedMessage id="ui-circulation.settings.loanPolicy.paneTitle" />}
+        entryLabel={formatMessage({ id: 'stripes-core.mainnav.currentAppAriaLabel' })}
+        nameKey="name"
+        permissions={permissions}
+        validate={validateLoanPolicy}
+        defaultEntry={LoanPolicy.defaultLoanPolicy()}
+      />
     );
   }
 }
 
-export default LoanPolicySettings;
+export default injectIntl(LoanPolicySettings);
