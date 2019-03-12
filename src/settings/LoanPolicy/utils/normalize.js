@@ -122,7 +122,7 @@ const checkRequestManagementSection = (policy) => {
   return loanPolicy;
 };
 
-const checkReniewFrom = (policy) => {
+const checkRenewFrom = (policy) => {
   const loanPolicy = cloneDeep(policy);
   const profileId = get(loanPolicy, 'loansPolicy.profileId');
   const isProfileFixed = profileId === loanProfileMap.FIXED;
@@ -149,7 +149,7 @@ export const normalize = (entity) => {
     checkFixedProfile,
     checkOpeningTimeOffset,
     checkUnlimitedRenewals,
-    checkReniewFrom,
+    checkRenewFrom,
     checkDifferentRenewalPeriod,
     checkRenewable,
     checkLoanable,
