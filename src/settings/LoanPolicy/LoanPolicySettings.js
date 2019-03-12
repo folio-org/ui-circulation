@@ -64,18 +64,18 @@ class LoanPolicySettings extends React.Component {
     return (
       <EntryManager
         {...this.props}
-        parentMutator={mutator}
-        parentResources={resources}
-        entryList={entryList}
+        nameKey="name"
         resourceKey="loanPolicies"
+        entryList={entryList}
+        parentMutator={mutator}
+        permissions={permissions}
+        parentResources={resources}
         detailComponent={LoanPolicyDetail}
         entryFormComponent={LoanPolicyForm}
         paneTitle={<FormattedMessage id="ui-circulation.settings.loanPolicy.paneTitle" />}
         entryLabel={formatMessage({ id: 'ui-circulation.settings.loanPolicy.entryLabel' })}
-        nameKey="name"
-        permissions={permissions}
-        validate={validateLoanPolicy}
         defaultEntry={LoanPolicy.defaultLoanPolicy()}
+        validate={validateLoanPolicy}
       />
     );
   }

@@ -66,17 +66,17 @@ class NoticePolicySettings extends React.Component {
     return (
       <EntryManager
         {...this.props}
-        parentMutator={mutator}
-        parentResources={resources}
-        entryList={entryList}
+        nameKey="name"
         resourceKey="patronNoticePolicies"
+        entryList={entryList}
+        parentMutator={mutator}
+        enableDetailsActionMenu
+        permissions={permissions}
+        parentResources={resources}
         detailComponent={NoticePolicyDetail}
         entryFormComponent={NoticePolicyForm}
         paneTitle={<FormattedMessage id="ui-circulation.settings.noticePolicy.paneTitle" />}
         entryLabel={formatMessage({ id: 'ui-circulation.settings.noticePolicy.entryLabel' })}
-        nameKey="name"
-        permissions={permissions}
-        enableDetailsActionMenu
         validate={validateNoticePolicy}
         defaultEntry={NoticePolicy.defaultNoticePolicy()}
       />
