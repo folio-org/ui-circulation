@@ -3,12 +3,12 @@ import {
   faker,
 } from '@bigtest/mirage';
 
-import {
+import { // eslint-disable-line import/no-extraneous-dependencies
   intervalIdsMap,
   loanProfileMap,
   renewFromOptions,
   longTermLoansOptions,
-} from '@folio/circulation/src/constants'; // eslint-disable-line import/no-extraneous-dependencies, import/no-unresolved
+} from '@folio/circulation/src/constants'; // eslint-disable-line  import/no-unresolved
 
 
 export const getPeriod = {
@@ -24,7 +24,7 @@ export default Factory.extend({
   loansPolicy: {
     profileId: () => faker.random.arrayElement(Object.values(loanProfileMap)),
     period: getPeriod,
-    closedLibraryDueDateManagementId : () => faker.random.arrayElement(
+    closedLibraryDueDateManagementId: () => faker.random.arrayElement(
       longTermLoansOptions.map((element) => element.id)
     ),
     gracePeriod: getPeriod,
@@ -34,7 +34,7 @@ export default Factory.extend({
   renewalsPolicy: {
     unlimited: () => faker.random.boolean(),
     numberAllowed: () => faker.random.number(),
-    renewFromId : () => faker.random.arrayElement(
+    renewFromId: () => faker.random.arrayElement(
       renewFromOptions.map((element) => element.value)
     ),
     differentPeriod: () => faker.random.boolean(),
@@ -52,9 +52,9 @@ export default Factory.extend({
     },
   },
   metadata: {
-    createdDate : faker.date.past(0.1, faker.date.past(0.1)).toString(),
-    createdByUserId : faker.random.uuid(),
-    updatedDate : faker.date.past(0.1).toString(),
-    updatedByUserId : faker.random.uuid(),
+    createdDate: faker.date.past(0.1, faker.date.past(0.1)).toString(),
+    createdByUserId: faker.random.uuid(),
+    updatedDate: faker.date.past(0.1).toString(),
+    updatedByUserId: faker.random.uuid(),
   }
 });

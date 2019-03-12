@@ -359,8 +359,14 @@ class LoanPolicyDetail extends React.Component {
     return (
       <div data-test-loan-policy-detail>
         <Row end="xs">
-          <Col xs>
-            <ExpandAllButton accordionStatus={sections} onToggle={this.handleExpandAll} />
+          <Col
+            data-test-expand-all
+            xs
+          >
+            <ExpandAllButton
+              accordionStatus={sections}
+              onToggle={this.handleExpandAll}
+            />
           </Col>
         </Row>
         <Accordion

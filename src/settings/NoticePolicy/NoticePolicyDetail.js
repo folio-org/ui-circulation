@@ -71,9 +71,12 @@ class NoticePolicyDetail extends React.Component {
     const noticePolicy = new NoticePolicy(policy);
 
     return (
-      <React.Fragment>
+      <div data-test-notice-policy-detail>
         <Row end="xs">
-          <Col xs>
+          <Col
+            data-test-expand-all
+            xs
+          >
             <ExpandAllButton
               accordionStatus={this.state.sections}
               onToggle={this.handleExpandAll}
@@ -106,7 +109,7 @@ class NoticePolicyDetail extends React.Component {
           policy={noticePolicy}
           onToggle={this.handleSectionToggle}
         />
-      </React.Fragment>
+      </div>
     );
   }
 }

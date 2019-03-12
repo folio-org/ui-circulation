@@ -1,14 +1,14 @@
 import { beforeEach, describe, it } from '@bigtest/mocha';
 import { expect } from 'chai';
 
+// eslint-disable-next-line import/extensions, import/no-extraneous-dependencies, import/no-unresolved
+import translation from '@folio/circulation/translations/ui-circulation/en.json';
+
 import {
   loanProfileMap,
   shortTermLoansOptions,
   BEGINNING_OF_THE_NEXT_OPEN_SERVICE_POINT_HOURS,
-} from '@folio/circulation/src/constants'; // eslint-disable-line import/no-extraneous-dependencies, import/no-unresolved
-// eslint-disable-next-line import/extensions, import/no-extraneous-dependencies, import/no-unresolved
-import translation from '@folio/circulation/translations/ui-circulation/en.json';
-
+} from '../../../../src/constants';
 import setupApplication from '../../helpers/setup-application';
 import LoanPolicyForm from '../../interactors/loan-policy/loan-policy-form';
 import LoanPolicyDetail from '../../interactors/loan-policy/loan-policy-detail';
@@ -19,6 +19,60 @@ import {
 
 describe('LoanPolicyForm', () => {
   setupApplication();
+
+  describe('accordions', () => {
+    beforeEach(function () {
+      this.visit('/settings/circulation/loan-policies?layer=add');
+    });
+
+    it('should be displayed', () => {
+      expect(LoanPolicyForm.expandAll.isPresent).to.be.true;
+    });
+
+    describe('collapse all', () => {
+      beforeEach(async () => {
+        await LoanPolicyForm.expandAll.click();
+      });
+
+      it('aboutSection should not be displayed', () => {
+        expect(LoanPolicyForm.aboutSection.isHidden).to.be.true;
+      });
+
+      it('loansSection should not be displayed', () => {
+        expect(LoanPolicyForm.loansSection.isHidden).to.be.true;
+      });
+
+      it('renewalsSection should not be displayed', () => {
+        expect(LoanPolicyForm.renewalsSection.isHidden).to.be.true;
+      });
+
+      it('requestManagement should not be displayed', () => {
+        expect(LoanPolicyForm.requestManagementSection.isHidden).to.be.true;
+      });
+
+      describe('expand all', () => {
+        beforeEach(async () => {
+          await LoanPolicyForm.expandAll.click();
+        });
+
+        it('aboutSection should be displayed', () => {
+          expect(LoanPolicyForm.aboutSection.isVisible).to.be.true;
+        });
+
+        it('loansSection should be displayed', () => {
+          expect(LoanPolicyForm.loansSection.isVisible).to.be.true;
+        });
+
+        it('renewalsSection should be displayed', () => {
+          expect(LoanPolicyForm.renewalsSection.isVisible).to.be.true;
+        });
+
+        it('requestManagement should be displayed', () => {
+          expect(LoanPolicyForm.requestManagementSection.isVisible).to.be.true;
+        }).timeout(3000);
+      });
+    });
+  });
 
   describe('create a new loan policy', () => {
     beforeEach(function () {

@@ -1,16 +1,16 @@
 import { beforeEach, describe, it } from '@bigtest/mocha';
 import { expect } from 'chai';
 
+// eslint-disable-next-line import/extensions, import/no-extraneous-dependencies, import/no-unresolved
+import translation from '@folio/circulation/translations/ui-circulation/en.json';
+
 import {
   shortTermLoansOptions,
   longTermLoansOptions,
   renewFromOptions,
   BEGINNING_OF_THE_NEXT_OPEN_SERVICE_POINT_HOURS,
   loanProfileMap,
-} from '@folio/circulation/src/constants'; // eslint-disable-line import/no-extraneous-dependencies, import/no-unresolved
-// eslint-disable-next-line import/extensions, import/no-extraneous-dependencies, import/no-unresolved
-import translation from '@folio/circulation/translations/ui-circulation/en.json';
-
+} from '../../../../src/constants';
 import { getPeriod } from '../../network/factories/loan-policy';
 import setupApplication from '../../helpers/setup-application';
 import LoanPolicyDetail from '../../interactors/loan-policy/loan-policy-detail';
@@ -25,6 +25,40 @@ describe('LoanPolicyDetail', () => {
   let loanPolicy;
 
   describe('viewing loan policy', () => {
+    describe('accordions', () => {
+      beforeEach(function () {
+        loanPolicy = this.server.create('loanPolicy', {
+          loanable: true,
+        });
+
+        this.visit(`/settings/circulation/loan-policies/${loanPolicy.id}`);
+      });
+
+      it('should be displayed', () => {
+        expect(LoanPolicyDetail.expandAll.isPresent).to.be.true;
+      });
+
+      describe('collapse all', () => {
+        beforeEach(async () => {
+          await LoanPolicyDetail.expandAll.click();
+        });
+
+        it('content should be hidden', () => {
+          expect(LoanPolicyDetail.content.isHidden).to.be.true;
+        });
+
+        describe('expand all', () => {
+          beforeEach(async () => {
+            await LoanPolicyDetail.expandAll.click();
+          });
+
+          it('content should be visible', () => {
+            expect(LoanPolicyDetail.content.isVisible).to.be.true;
+          });
+        });
+      });
+    });
+
     describe('\n\tabout section\n', () => {
       describe('loan policy:\n\t-loanable\n', () => {
         beforeEach(function () {

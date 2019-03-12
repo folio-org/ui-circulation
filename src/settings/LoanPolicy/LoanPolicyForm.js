@@ -136,7 +136,10 @@ class LoanPolicyForm extends React.Component {
           >
             <React.Fragment>
               <Row end="xs">
-                <Col xs>
+                <Col
+                  data-test-expand-all
+                  xs
+                >
                   <ExpandAllButton
                     accordionStatus={sections}
                     onToggle={this.handleExpandAll}

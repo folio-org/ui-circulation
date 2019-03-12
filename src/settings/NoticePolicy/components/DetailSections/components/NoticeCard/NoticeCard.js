@@ -81,7 +81,7 @@ class NoticeCard extends React.Component {
     const translationNamespace = 'ui-circulation.settings.noticePolicy';
 
     return (
-      <Row>
+      <Row data-test-notice-card>
         <Col
           xs={12}
           className={css.notice}
@@ -101,6 +101,7 @@ class NoticeCard extends React.Component {
             <Col
               xs={4}
               className={css.noticeField}
+              data-test-notice-card-template-id
             >
               <KeyValue
                 label={<FormattedMessage id={`${translationNamespace}.notices.template`} />}
@@ -110,6 +111,7 @@ class NoticeCard extends React.Component {
             <Col
               xs={1}
               className={css.cardText}
+              data-test-notice-card-via-text
             >
               <KeyValue>
                 <FormattedMessage id={`${translationNamespace}.notices.via`} />
@@ -118,6 +120,7 @@ class NoticeCard extends React.Component {
             <Col
               xs={2}
               className={css.noticeField}
+              data-test-notice-card-format
             >
               <KeyValue
                 label={<FormattedMessage id={`${translationNamespace}.notices.format`} />}
@@ -127,6 +130,7 @@ class NoticeCard extends React.Component {
             <Col
               xs={5}
               className={css.noticeField}
+              data-test-notice-card-triggering-event
             >
               <KeyValue
                 label={<FormattedMessage id={`${translationNamespace}.notices.triggeringEvent`} />}
@@ -144,23 +148,32 @@ class NoticeCard extends React.Component {
                   <KeyValue label={<FormattedMessage id={`${translationNamespace}.notices.send`} />}>
                     <Row>
                       <Col xs={4}>
-                        <KeyValue>
+                        <KeyValue data-test-notice-card-send-how>
                           {this.getTranslatedDropdownValue('sendOptions.sendHow', noticesSendEvent)}
                         </KeyValue>
                       </Col>
                       {notice.sendOptions.isBeforeOrAfter() && (
                         <React.Fragment>
-                          <Col xs={3}>
+                          <Col
+                            xs={3}
+                            data-test-notice-card-by-text
+                          >
                             <KeyValue>
                               <FormattedMessage id={`${translationNamespace}.notices.by`} />
                             </KeyValue>
                           </Col>
-                          <Col xs={1}>
+                          <Col
+                            xs={1}
+                            data-test-notice-card-send-by-duration
+                          >
                             <KeyValue>
                               {get(notice, 'sendOptions.sendBy.duration')}
                             </KeyValue>
                           </Col>
-                          <Col xs={4}>
+                          <Col
+                            xs={4}
+                            data-test-notice-card-send-by-interval-id
+                          >
                             <KeyValue>
                               {this.getTranslatedDropdownValue('sendOptions.sendBy.intervalId', noticesIntervalPeriods)}
                             </KeyValue>
@@ -175,10 +188,14 @@ class NoticeCard extends React.Component {
                 <Col
                   xs={12}
                   className={css.fieldLabel}
+                  data-test-notice-card-frequency-label
                 >
                   <KeyValue label={<FormattedMessage id={`${translationNamespace}.notices.frequency`} />}>
                     <Row>
-                      <Col xs={4}>
+                      <Col
+                        xs={4}
+                        data-test-notice-card-frequency
+                      >
                         <KeyValue>
                           {this.getTranslatedDropdownValue('frequency', noticesFrequency)}
                         </KeyValue>
@@ -190,12 +207,18 @@ class NoticeCard extends React.Component {
                               <FormattedMessage id={`${translationNamespace}.notices.andEvery`} />
                             </KeyValue>
                           </Col>
-                          <Col xs={1}>
+                          <Col
+                            xs={1}
+                            data-test-notice-card-send-every-duration
+                          >
                             <KeyValue>
                               {get(notice, 'sendOptions.sendEvery.duration')}
                             </KeyValue>
                           </Col>
-                          <Col xs={4}>
+                          <Col
+                            xs={4}
+                            data-test-notice-card-send-every-interval-id
+                          >
                             <KeyValue>
                               {this.getTranslatedDropdownValue('sendOptions.sendEvery.intervalId', noticesIntervalPeriods)}
                             </KeyValue>
@@ -212,6 +235,7 @@ class NoticeCard extends React.Component {
             <Col
               xs={12}
               className={css.noticeField}
+              data-test-notice-card-real-time
             >
               <KeyValue
                 label={<FormattedMessage id={`${translationNamespace}.notices.realTime`} />}

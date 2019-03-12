@@ -74,7 +74,7 @@ class NoticeCard extends React.Component {
     } = this.props;
 
     return (
-      <Row>
+      <Row data-test-notice-card>
         <Col
           xs={7}
           className={css.notice}
@@ -83,6 +83,7 @@ class NoticeCard extends React.Component {
             <Col
               xs={3}
               className={css.headerTitle}
+              data-test-notice-card-counter
             >
               <FormattedMessage
                 id="ui-circulation.settings.noticePolicy.countableNotice"
@@ -96,6 +97,7 @@ class NoticeCard extends React.Component {
             >
               <IconButton
                 icon="trash"
+                data-test-notice-card-remove
                 onClick={this.onRemove}
               />
             </Col>
@@ -109,6 +111,7 @@ class NoticeCard extends React.Component {
                 <Col
                   xs={4}
                   className={css.noticeField}
+                  data-test-notice-card-template-id
                 >
                   <Field
                     name={`${pathToNotice}.templateId`}
@@ -125,12 +128,14 @@ class NoticeCard extends React.Component {
                 <Col
                   xs={2}
                   className={css.cardText}
+                  data-test-notice-card-via-text
                 >
                   <FormattedMessage id="ui-circulation.settings.noticePolicy.notices.via" />
                 </Col>
                 <Col
                   xs={3}
                   className={css.noticeField}
+                  data-test-notice-card-format
                 >
                   <Field
                     name={`${pathToNotice}.format`}
@@ -147,6 +152,7 @@ class NoticeCard extends React.Component {
                 <Col
                   xs={3}
                   className={css.noticeField}
+                  data-test-notice-card-triggering-event
                 >
                   <Field
                     name={`${pathToNotice}.sendOptions.sendWhen`}
@@ -164,7 +170,10 @@ class NoticeCard extends React.Component {
               {notice.sendOptions.isTimeBasedEventSelected(timeBasedEventsIds) && (
                 <React.Fragment>
                   <Row>
-                    <Col xs={12}>
+                    <Col
+                      xs={12}
+                      data-test-notice-card-event-label
+                    >
                       <FormattedMessage id="ui-circulation.settings.noticePolicy.notices.send">
                         {message => `${message} *`}
                       </FormattedMessage>
@@ -174,6 +183,7 @@ class NoticeCard extends React.Component {
                     <Col
                       xs={4}
                       className={css.noticeField}
+                      data-test-notice-card-send-how
                     >
                       <Field
                         name={`${pathToNotice}.sendOptions.sendHow`}
@@ -187,12 +197,14 @@ class NoticeCard extends React.Component {
                         <Col
                           xs={2}
                           className={`${css.cardText} ${css.cardTextWithotLabel}`}
+                          data-test-notice-card-send-by-label
                         >
                           <FormattedMessage id="ui-circulation.settings.noticePolicy.notices.by" />
                         </Col>
                         <Col
                           xs={6}
                           className={css.noticeField}
+                          data-test-notice-card-send-by
                         >
                           <Period
                             emptySelectPlaceholder
@@ -210,7 +222,10 @@ class NoticeCard extends React.Component {
                   </Row>
                   <React.Fragment>
                     <Row>
-                      <Col xs={12}>
+                      <Col
+                        xs={12}
+                        data-test-notice-card-frequency-label
+                      >
                         <FormattedMessage id="ui-circulation.settings.noticePolicy.notices.frequency">
                           {message => `${message} *`}
                         </FormattedMessage>
@@ -220,6 +235,7 @@ class NoticeCard extends React.Component {
                       <Col
                         xs={4}
                         className={css.noticeField}
+                        data-test-notice-card-frequency
                       >
                         <Field
                           name={`${pathToNotice}.frequency`}
@@ -233,12 +249,14 @@ class NoticeCard extends React.Component {
                           <Col
                             xs={2}
                             className={`${css.cardText} ${css.cardTextWithotLabel}`}
+                            data-test-notice-card-send-every-label
                           >
                             <FormattedMessage id="ui-circulation.settings.noticePolicy.notices.andEvery" />
                           </Col>
                           <Col
                             xs={6}
                             className={css.noticeField}
+                            data-test-notice-card-send-every
                           >
                             <Period
                               emptySelectPlaceholder
@@ -260,6 +278,7 @@ class NoticeCard extends React.Component {
                 <Col
                   xs={12}
                   className={css.noticeField}
+                  data-test-notice-card-real-time
                 >
                   <Field
                     name={`${pathToNotice}.realTime`}

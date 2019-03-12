@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { get } from 'lodash';
 import { connect } from 'react-redux';
 import { getFormValues } from 'redux-form';
 
@@ -81,11 +82,6 @@ class NoticePolicyForm extends React.Component {
     const {
       pristine,
       policy,
-      parentResources: {
-        templates: {
-          records: patronNoticeTemplates = [],
-        },
-      },
       initialValues,
       stripes,
       permissions,
@@ -95,6 +91,8 @@ class NoticePolicyForm extends React.Component {
       onRemove,
     } = this.props;
 
+    const patronNoticeTemplates = get(this.props, 'parentResources.templates.records', []);
+
     const {
       sections,
       showDeleteConfirmation,
@@ -103,7 +101,10 @@ class NoticePolicyForm extends React.Component {
     const editMode = Boolean(policy.id);
 
     return (
-      <form onSubmit={handleSubmit(this.saveForm)}>
+      <form
+        data-test-notice-policy-form
+        onSubmit={handleSubmit(this.saveForm)}
+      >
         <Paneset isRoot>
           <HeaderPane
             editMode={editMode}
@@ -115,7 +116,10 @@ class NoticePolicyForm extends React.Component {
             onRemove={this.changeDeleteState}
           >
             <Row end="xs">
-              <Col xs>
+              <Col
+                data-test-expand-all
+                xs
+              >
                 <ExpandAllButton
                   accordionStatus={sections}
                   onToggle={this.handleExpandAll}

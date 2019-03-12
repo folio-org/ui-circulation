@@ -39,18 +39,20 @@ class LoanNoticesSection extends React.Component {
     };
 
     return (
-      <Accordion
-        id="loanNotices"
-        open={isOpen}
-        label={<FormattedMessage id="ui-circulation.settings.noticePolicy.loanNotices" />}
-        onToggle={onToggle}
-      >
-        <FieldArray
-          name={props.sectionKey}
-          component={NoticesList}
-          props={props}
-        />
-      </Accordion>
+      <div data-test-notice-policy-form-loan-notices-section>
+        <Accordion
+          id="loanNotices"
+          open={isOpen}
+          label={<FormattedMessage id="ui-circulation.settings.noticePolicy.loanNotices" />}
+          onToggle={onToggle}
+        >
+          <FieldArray
+            name={props.sectionKey}
+            component={NoticesList}
+            props={props}
+          />
+        </Accordion>
+      </div>
     );
   }
 }

@@ -2,6 +2,7 @@ import {
   clickable,
   interactor,
   scoped,
+  Interactor,
 } from '@bigtest/interactor';
 
 import TextFieldInteractor from '@folio/stripes-components/lib/TextField/tests/interactor';
@@ -67,6 +68,12 @@ import Period from '../Period';
   loansSection = new LoansSection();
   renewalsSection = new RenewalsSection();
   requestManagementSection = new RequestManagementSection();
+
+  deleteLoanPolicy = new Interactor('#clickable-delete-entry');
+  deleteLoanPolicyModal = new Interactor('#delete-item-confirmation');
+  deleteLoanPolicyCancel= new Interactor('[data-test-confirmation-modal-cancel-button]');
+  deleteLoanPolicyConfirm = new Interactor('[data-test-confirmation-modal-confirm-button]');
+  expandAll = scoped('[data-test-expand-all] button');
 
   save = clickable('#clickable-save-entry');
 }

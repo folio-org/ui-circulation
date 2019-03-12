@@ -56,6 +56,9 @@ import KeyValue from '../KeyValue';
   loansSection = new LoansSection();
   renewalsSection = new RenewalsSection();
   requestManagement = new RequestManagementSection();
+
+  content = scoped('[class^="content-"]');
+  expandAll = scoped('[data-test-expand-all] button')
 }
 
 export default new LoanPolicyDetail();

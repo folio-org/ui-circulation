@@ -158,88 +158,13 @@ export default function config() {
     'totalRecords' : 4
   });
 
-  this.get('/notice-policy-storage/notice-policies', {
-    'noticePolicies': [
-      {
-        id: 'test-id',
-        name: 'test-name', // required
-        description: 'test-description', // required
-        active: true, // required
-        metadata: {
-          createdByUserId: '2aec72a0-33b2-5fd2-a502-f4b8b8efb5fa',
-          createdDate: '2019-01-30T01:58:24.158+0000',
-          updatedByUserId: '2aec72a0-33b2-5fd2-a502-f4b8b8efb5fa',
-          updatedDate: '2019-01-30T01:58:24.158+0000',
-          type: [
-            'metadata-type-1',
-            'metadata-type-2',
-          ],
-          description: 'metadata-description',
-          items: {
-            name: 'metadata-items-name', // required
-            templateId: 'metadata-items-templateId', // required
-            templateName: 'metadata-items-templateName', // required
-            format: 'metadata-items-format', // required
-            frequency: 'metadata-items-frequency', // required
-            realTime: true, // required
-            sendOptions: {
-              sendHow: 'metadata-items-sendOptions-sendHow', // required
-              sendWhen: 'Available', // enum: ["Available", "Hold Expiration", "Cancellation"], required
-              sendBy: {
-                duration: 20, // required
-                intervalId: 'Weeks', // required
-              },
-              sendEvery: {
-                duration: 20, // required
-                intervalId: 'Weeks', // required
-              },
-            },
-          },
-        },
-      },
-      {
-        id: 'test-id-test-2',
-        name: 'test-name-test-2',
-        description: 'test-description-test-2',
-        active: false,
-        metadata: {
-          createdByUserId: '2aec72a0-33b2-5fd2-a502-f4b8b8efb5fa',
-          createdDate: '2019-01-30T01:58:24.158+0000',
-          updatedByUserId: '2aec72a0-33b2-5fd2-a502-f4b8b8efb5fa',
-          updatedDate: '2019-01-30T01:58:24.158+0000',
-          type: [
-            'metadata-type-1-test-2',
-            'metadata-type-2-test-2',
-          ],
-          description: 'metadata-description-test-2',
-          items: {
-            name: 'metadata-items-name-test-2',
-            templateId: 'metadata-items-templateId-test-2',
-            templateName: 'metadata-items-templateName-test-2',
-            format: 'metadata-items-format-test-2',
-            frequency: 'metadata-items-frequency-test-2',
-            realTime: false,
-            sendOptions: {
-              sendHow: 'metadata-items-sendOptions-sendHow-test-2',
-              sendWhen: 'Available',
-              sendBy: {
-                duration: 20,
-                intervalId: 'Weeks',
-              },
-              sendEvery: {
-                duration: 20,
-                intervalId: 'Weeks',
-              },
-            },
-          },
-        },
-      },
-    ],
-    'totalRecords' : 2,
-  });
-
   this.get('/fixed-due-date-schedule-storage/fixed-due-date-schedules', {
     fixedDueDateSchedules: [],
+    totalRecords: 0,
+  });
+
+  this.get('/templates', {
+    templates: [],
     totalRecords: 0,
   });
 
@@ -266,37 +191,8 @@ export default function config() {
     ]
   });
 
-  this.get('/patron-notice-policy-storage/patron-notice-policies', {
-    'patronNoticePolicies' : [{
-      'id' : '16b88363-0d93-464a-967a-ad5ad0f9187c',
-      'description' : 'An alternate notice policy',
-      'name' : 'Alternate Notice Policy',
-      'active' : true,
-      'metadata' : {
-        'createdDate' : '2019-02-22T01:57:45.999+0000',
-        'createdByUserId' : '0758d6d8-3e0f-52bc-aa98-2eb9cb9fd7cd',
-        'updatedDate' : '2019-02-22T01:57:45.999+0000',
-        'updatedByUserId' : '0758d6d8-3e0f-52bc-aa98-2eb9cb9fd7cd'
-      },
-      'loanNotices' : [],
-      'feeFineNotices' : [],
-      'requestNotices' : []
-    }, {
-      'id' : '122b3d2b-4788-4f1e-9117-56daa91cb75c',
-      'name' : 'Basic Notice Policy',
-      'description' : 'A basic notice policy',
-      'active' : true,
-      'metadata' : {
-        'createdDate' : '2019-02-22T01:57:46.651+0000',
-        'createdByUserId' : '0758d6d8-3e0f-52bc-aa98-2eb9cb9fd7cd',
-        'updatedDate' : '2019-02-22T01:57:46.651+0000',
-        'updatedByUserId' : '0758d6d8-3e0f-52bc-aa98-2eb9cb9fd7cd'
-      },
-      'loanNotices' : [],
-      'feeFineNotices' : [],
-      'requestNotices' : []
-    }],
-    'totalRecords' : 2
+  this.get('/templates', function ({ templates }) {
+    return this.serializerOrRegistry.serialize(templates.all());
   });
 
   this.get('/request-policy-storage/request-policies', function ({ requestPolicies }) {
@@ -307,30 +203,82 @@ export default function config() {
     return this.serializerOrRegistry.serialize(loanPolicies.all());
   });
 
+  this.get('/patron-notice-policy-storage/patron-notice-policies', ({ patronNoticePolicies }) => {
+    return this.serializerOrRegistry.serialize(patronNoticePolicies.all());
+  });
+
   this.post('/request-policy-storage/request-policies', ({ requestPolicies }, request) => {
     const body = JSON.parse(request.requestBody);
     const requestPolicy = requestPolicies.create(body);
+
     return requestPolicy.attrs;
   });
 
   this.post('/loan-policy-storage/loan-policies', ({ loanPolicies }, request) => {
     const body = JSON.parse(request.requestBody);
     const loanPolicy = loanPolicies.create(body);
+
     return loanPolicy.attrs;
   });
 
   this.put('/loan-policy-storage/loan-policies/:id', ({ loanPolicies }, request) => {
-    const { id, name, description } = JSON.parse(request.requestBody);
+    const {
+      id,
+      name,
+      description,
+    } = JSON.parse(request.requestBody);
     const loanPolicy = loanPolicies.find(id);
+
     loanPolicy.update({ name, description });
+
     return loanPolicy.attrs;
+  });
+
+  this.put('/patron-notice-policy-storage/patron-notice-policies/:id', ({ patronNoticePolicies }, request) => {
+    const {
+      id,
+      name,
+      description,
+    } = JSON.parse(request.requestBody);
+    const patronNoticePolicy = patronNoticePolicies.find(id);
+
+    patronNoticePolicy.update({ name, description });
+
+    return patronNoticePolicy.attrs;
+  });
+
+  this.delete('/patron-notice-policy-storage/patron-notice-policies/:id', ({ patronNoticePolicies }, request) => {
+    const {
+      params: {
+        id
+      }
+    } = request;
+    const patronNoticePolicy = patronNoticePolicies.find(id);
+
+    return patronNoticePolicy.destroy();
+  });
+
+  this.delete('/loan-policy-storage/loan-policies/:id', ({ loanPolicies }, request) => {
+    const {
+      params: {
+        id
+      }
+    } = request;
+    const loanPolicy = loanPolicies.find(id);
+
+    return loanPolicy.destroy();
   });
 
   this.put('/request-policy-storage/request-policies/:id', ({ requestPolicies }, request) => {
     const body = JSON.parse(request.requestBody);
-    const { name, description } = body;
+    const {
+      name,
+      description
+    } = body;
     const requestPolicy = requestPolicies.find(body.id);
+
     requestPolicy.update({ name, description });
+
     return requestPolicy.attrs;
   });
 }
