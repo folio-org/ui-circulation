@@ -272,7 +272,7 @@
     "settings.validate.isFromOneToHundred": "The value must be between 1 and 100",
     "settings.noticePolicy.notices.send": "Send",
     "settings.noticePolicy.requestNotices.recallLoanee": "Recall - Loanee",
-    "settings.noticePolicy.notices.triggeringEvent": "Triggering Event",
+    "settings.noticePolicy.notices.triggeringEvent": "Triggering event",
     "settings.noticePolicy.loanNotices.checkIn": "Check in",
     "settings.noticePolicy.loanNotices.checkOut": "Check out",
     "settings.noticePolicy.notices.andEvery": "and every"
