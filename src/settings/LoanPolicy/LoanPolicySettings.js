@@ -1,7 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { sortBy } from 'lodash';
-import { FormattedMessage } from 'react-intl';
+import {
+  FormattedMessage,
+  injectIntl,
+  intlShape,
+} from 'react-intl';
 
 import { EntryManager } from '@folio/stripes/smart-components';
 
@@ -28,6 +32,7 @@ class LoanPolicySettings extends React.Component {
   });
 
   static propTypes = {
+    intl: intlShape.isRequired,
     resources: PropTypes.shape({
       loanPolicies: PropTypes.object,
       fixedDueDateSchedules: PropTypes.object,
@@ -45,6 +50,9 @@ class LoanPolicySettings extends React.Component {
     const {
       resources,
       mutator,
+      intl: {
+        formatMessage,
+      },
     } = this.props;
 
     const permissions = {
@@ -56,27 +64,23 @@ class LoanPolicySettings extends React.Component {
     const entryList = sortBy((resources.loanPolicies || {}).records, ['name']);
 
     return (
-      <FormattedMessage id="ui-circulation.settings.loanPolicy.entryLabel">
-        { entryLabel => (
-          <EntryManager
-            {...this.props}
-            parentMutator={mutator}
-            parentResources={resources}
-            entryList={entryList}
-            resourceKey="loanPolicies"
-            detailComponent={LoanPolicyDetail}
-            entryFormComponent={LoanPolicyForm}
-            paneTitle={<FormattedMessage id="ui-circulation.settings.loanPolicy.paneTitle" />}
-            entryLabel={entryLabel}
-            nameKey="name"
-            permissions={permissions}
-            validate={validateLoanPolicy}
-            defaultEntry={LoanPolicy.defaultLoanPolicy()}
-          />
-        )}
-      </FormattedMessage>
+      <EntryManager
+        {...this.props}
+        nameKey="name"
+        resourceKey="loanPolicies"
+        entryList={entryList}
+        parentMutator={mutator}
+        permissions={permissions}
+        parentResources={resources}
+        detailComponent={LoanPolicyDetail}
+        entryFormComponent={LoanPolicyForm}
+        paneTitle={<FormattedMessage id="ui-circulation.settings.loanPolicy.paneTitle" />}
+        entryLabel={formatMessage({ id: 'ui-circulation.settings.loanPolicy.entryLabel' })}
+        defaultEntry={LoanPolicy.defaultLoanPolicy()}
+        validate={validateLoanPolicy}
+      />
     );
   }
 }
 
-export default LoanPolicySettings;
+export default injectIntl(LoanPolicySettings);

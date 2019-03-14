@@ -106,7 +106,7 @@ class PatronNoticeDetail extends React.Component {
               <div>
                 <Row>
                   <Col xs={8}>
-                    <KeyValue label={<FormattedMessage id="ui-circulation.settings.patronNotices.subject" />} value={notice.subject} />
+                    <KeyValue label={<FormattedMessage id="ui-circulation.settings.patronNotices.subject" />} value={notice.localizedTemplates.en.header} />
                   </Col>
                   <Col xs={4}>
                     <Button onClick={this.openPreviewDialog}><FormattedMessage id="ui-circulation.settings.patronNotices.preview" /></Button>

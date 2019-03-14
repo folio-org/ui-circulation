@@ -255,7 +255,7 @@
     "settings.noticePolicy.requestNotices.holdRequest": "Prenotazione",
     "settings.noticePolicy.requestNotices.pagingRequest": "Pagina",
     "settings.noticePolicy.requestNotices.available": "Disponibile",
-    "settings.noticePolicy.requestNotices.holdExpiration": "Scadenza prenoatazione",
+    "settings.noticePolicy.requestNotices.holdExpiration": "Scadenza prenotazione",
     "settings.noticePolicy.requestNotices.requestCancelation": "Annulla",
     "settings.index.circulationRules": "Regole di circolazione",
     "settings.circulationRules.paneTitle": "Editor regole di circolazione",

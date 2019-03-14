@@ -1,7 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { sortBy } from 'lodash';
-import { FormattedMessage } from 'react-intl';
+import {
+  FormattedMessage,
+  injectIntl,
+  intlShape,
+} from 'react-intl';
 
 import { EntryManager } from '@folio/stripes/smart-components';
 
@@ -28,6 +32,7 @@ class NoticePolicySettings extends React.Component {
   });
 
   static propTypes = {
+    intl: intlShape.isRequired,
     resources: PropTypes.shape({
       patronNoticePolicies: PropTypes.object,
       templates: PropTypes.object,
@@ -45,6 +50,9 @@ class NoticePolicySettings extends React.Component {
     const {
       resources,
       mutator,
+      intl: {
+        formatMessage,
+      },
     } = this.props;
 
     const permissions = {
@@ -58,17 +66,17 @@ class NoticePolicySettings extends React.Component {
     return (
       <EntryManager
         {...this.props}
-        parentMutator={mutator}
-        parentResources={resources}
-        entryList={entryList}
+        nameKey="name"
         resourceKey="patronNoticePolicies"
+        entryList={entryList}
+        parentMutator={mutator}
+        enableDetailsActionMenu
+        permissions={permissions}
+        parentResources={resources}
         detailComponent={NoticePolicyDetail}
         entryFormComponent={NoticePolicyForm}
         paneTitle={<FormattedMessage id="ui-circulation.settings.noticePolicy.paneTitle" />}
-        entryLabel={<FormattedMessage id="ui-circulation.settings.noticePolicy.entryLabel" />}
-        nameKey="name"
-        permissions={permissions}
-        enableDetailsActionMenu
+        entryLabel={formatMessage({ id: 'ui-circulation.settings.noticePolicy.entryLabel' })}
         validate={validateNoticePolicy}
         defaultEntry={NoticePolicy.defaultNoticePolicy()}
       />
@@ -76,4 +84,4 @@ class NoticePolicySettings extends React.Component {
   }
 }
 
-export default NoticePolicySettings;
+export default injectIntl(NoticePolicySettings);
