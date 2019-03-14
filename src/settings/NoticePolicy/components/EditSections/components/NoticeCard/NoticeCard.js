@@ -210,7 +210,6 @@ class NoticeCard extends React.Component {
                             emptySelectPlaceholder
                             inputSize={6}
                             selectSize={6}
-                            inputPlaceholder={1}
                             inputValuePath={`${pathToNotice}.sendOptions.sendBy.duration`}
                             selectValuePath={`${pathToNotice}.sendOptions.sendBy.intervalId`}
                             intervalPeriods={this.getDropdownItems(noticesIntervalPeriods)}
@@ -262,7 +261,6 @@ class NoticeCard extends React.Component {
                               emptySelectPlaceholder
                               inputSize={6}
                               selectSize={6}
-                              inputPlaceholder={1}
                               inputValuePath={`${pathToNotice}.sendOptions.sendEvery.duration`}
                               selectValuePath={`${pathToNotice}.sendOptions.sendEvery.intervalId`}
                               intervalPeriods={this.getDropdownItems(noticesIntervalPeriods)}
