@@ -13,11 +13,13 @@ class FixedDueDateScheduleManager extends React.Component {
     fixedDueDateSchedules: {
       type: 'okapi',
       records: 'fixedDueDateSchedules',
+      perRequest: 100,
       path: 'fixed-due-date-schedule-storage/fixed-due-date-schedules',
     },
     loanPolicies: {
       type: 'okapi',
       records: 'loanPolicies',
+      perRequest: 100,
       path: 'loan-policy-storage/loan-policies',
       dataKey: 'loan-policies',
     },
