@@ -1,23 +1,35 @@
 # Change history for ui-circulation
 
-## 1.6.0 (IN PROGRESS)
+## [1.6.0](https://github.com/folio-org/ui-circulation/tree/v1.6.0) (2019-03-17)
+[Full Changelog](https://github.com/folio-org/ui-circulation/compare/v1.5.0...v1.6.0)
 
-* React deps should be as lenient as possible.
+* Support `circulation` interface 7.0. UICIRC-192.
+* Support `loan-policy-storage` interface 2.0. CIRCSTORE-96.
 * Add new policy types to policy menu in rules editor. Fixes UICIRC-164.
 * Add new policy types to 'fallback policy' section. Fixes UICIRC-165.
+* Remove `Pages` section from loan policy editor. UICIRC-188.
+* Add loan policy fields, request management. UICIRC-139.
+* Add request management configurations to loan policy preview. UICIRC-186.
 * Add request policy CRU v1. Fixes UIREQ-181.
+* Permission set for request policy CRUD. UICIRC-163.
+* Add notice policy view. UICIRC-108.
+* Add request notices to notice policy. UICRIC-157.
+* Refine notice policy forms. UICIRC-203, UICIRC-206.
+* Constrain patron notices to one per notice policy. UICIRC-106.
 * Add permission set for staff slips. Fixes UICIRC-194.
-* Update circulation OKAPI interface to v7.0. Part of UICHKOUT-492.
 * Do not show unsaved changes popup when policy form is not dirty. Fixes UICIRC-104.
 * Add permission set for other settings. Fixes UICIRC-193.
+* Add test coverage. UICIRC-190, UICIRC-191.
+* Convert source to standard reposity structure. UICIRC-146.
 * Change output format for patron notices to 'text/html'.
+* Bug fixes. UICIRC-207, UICIRC-213, UICIRC-134, UICIRC-170, UICIRC-205, UICIRC-211
 
-## 1.5.0 (https://github.com/folio-org/ui-circulation/tree/v1.5.0) (2019-01-25)
+## [1.5.0](https://github.com/folio-org/ui-circulation/tree/v1.5.0) (2019-01-25)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v1.4.0...v1.5.0)
 
 * Upgrade to stripes v2.0.0.
 
-## 1.4.0 (https://github.com/folio-org/ui-circulation/tree/v1.4.0) (2018-12-13)
+## [1.4.0](https://github.com/folio-org/ui-circulation/tree/v1.4.0) (2018-12-13)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v1.3.0...v1.4.0)
 
 * Provide `sortby` prop to `<ControlledVocab>`. Refs STSMACOM-139.
@@ -32,13 +44,13 @@
 * Loan Policy Editor - Context-based behavior for Closed Library Due Date Management. UICIRC-107.
 * Loan Policy: Add "Opening Time Offset". UICIRC-64.
 
-## 1.3.0 (https://github.com/folio-org/ui-circulation/tree/v1.3.0) (2018-10-04)
+## [1.3.0](https://github.com/folio-org/ui-circulation/tree/v1.3.0) (2018-10-04)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v1.2.0...v1.3.0)
 
 * Update `stripes-form` dependency to v1.0.0
 * Use `stripes` 1.0 framework
 
-## 1.2.0 (https://github.com/folio-org/ui-circulation/tree/v1.2.0) (2017-09-12)
+## [1.2.0](https://github.com/folio-org/ui-circulation/tree/v1.2.0) (2017-09-12)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v1.1.1...v1.2.0)
 
 * Setup Loan Rules crud v1. For UICIRC-5.
