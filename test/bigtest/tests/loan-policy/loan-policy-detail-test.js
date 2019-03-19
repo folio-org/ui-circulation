@@ -434,6 +434,51 @@ describe('LoanPolicyDetail', () => {
             );
           });
         });
+
+        describe('alternate fixed due date schedule id', () => {
+          it('should be displayed', () => {
+            expect(LoanPolicyDetail.renewalsSection.alternateFixedDueDateScheduleId.isPresent).to.be.true;
+          });
+
+          it('should have a proper label', () => {
+            expect(LoanPolicyDetail.renewalsSection.alternateFixedDueDateScheduleId.label.text).to.equal(translation['settings.loanPolicy.altFDDSDueDateLimit']);
+          });
+
+          it('should have a proper value', () => {
+            expect(LoanPolicyDetail.renewalsSection.alternateFixedDueDateScheduleId.value.text).to.equal('-');
+          });
+        });
+      });
+
+      describe('loan policy:\n\t-renewable\n\t-loanable\n\t-different period\n\t-fixed\n', () => {
+        beforeEach(function () {
+          loanPolicy = this.server.create('loanPolicy', {
+            renewable: true,
+            loanable: true,
+            loansPolicy: {
+              profileId: loanProfileMap.FIXED,
+            },
+            renewalsPolicy: {
+              differentPeriod: true,
+            }
+          });
+
+          this.visit(`/settings/circulation/loan-policies/${loanPolicy.id}`);
+        });
+
+        describe('Alternate fixed due date schedule for renewals', () => {
+          it('should be displayed', () => {
+            expect(LoanPolicyDetail.renewalsSection.alternateFixedDueDateScheduleId.isPresent).to.be.true;
+          });
+
+          it('should have a proper label', () => {
+            expect(LoanPolicyDetail.renewalsSection.alternateFixedDueDateScheduleId.label.text).to.equal(translation['settings.loanPolicy.view.altFDDSforRenewals']);
+          });
+
+          it('should have a proper value', () => {
+            expect(LoanPolicyDetail.renewalsSection.alternateFixedDueDateScheduleId.value.text).to.equal('-');
+          });
+        });
       });
 
       describe('loan policy:\n\t-renewable\n\t-loanable\n\t-same period\n\t-rolling\n', () => {

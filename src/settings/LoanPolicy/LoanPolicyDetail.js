@@ -262,7 +262,11 @@ class LoanPolicyDetail extends React.Component {
   }
 
   renderRenewals() {
-    const { initialValues: policy = {} } = this.props;
+    const {
+      initialValues: policy = {},
+      parentResources,
+    } = this.props;
+
     const unlimited = (get(policy, ['renewalsPolicy', 'unlimited']))
       ? <FormattedMessage id="ui-circulation.settings.loanPolicy.yes" />
       : <FormattedMessage id="ui-circulation.settings.loanPolicy.no" />;
@@ -272,6 +276,12 @@ class LoanPolicyDetail extends React.Component {
     const renewFromId = get(policy, ['renewalsPolicy', 'renewFromId'], renewFromIds.SYSTEM_DATE);
     const renewFrom = find(renewFromOptions, r => r.value === renewFromId);
     const interval = get(policy, ['renewalsPolicy', 'period', 'intervalId']);
+    const altRenewalScheduleLabel = policy.loanable && policy.loansPolicy.profileId === loanProfileMap.ROLLING
+      ? <FormattedMessage id="ui-circulation.settings.loanPolicy.altFDDSDueDateLimit" />
+      : <FormattedMessage id="ui-circulation.settings.loanPolicy.view.altFDDSforRenewals" />;
+
+    const fixedDueDateSchedules = get(parentResources, 'fixedDueDateSchedules.records', []);
+    const schedule = fixedDueDateSchedules.find(s => s.id === policy.renewalsPolicy.alternateFixedDueDateScheduleId);
 
     return (
       <div data-test-loan-policy-detail-renewals-section>
@@ -346,6 +356,21 @@ class LoanPolicyDetail extends React.Component {
             </Col>
           </Row>
         </div>
+        }
+        {(policy.renewalsPolicy && policy.renewalsPolicy.differentPeriod) &&
+          <div>
+            <br />
+            <Row>
+              <Col xs={12}>
+                <div data-test-renewals-section-alternate-fixed-due-date-schedule-id>
+                  <KeyValue
+                    label={altRenewalScheduleLabel}
+                    value={get(schedule, ['name'], '-')}
+                  />
+                </div>
+              </Col>
+            </Row>
+          </div>
         }
         <hr />
       </div>

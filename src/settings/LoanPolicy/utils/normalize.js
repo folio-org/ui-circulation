@@ -129,7 +129,27 @@ const checkRenewFrom = (policy) => {
 
   if (isProfileFixed) {
     unset(loanPolicy, 'renewalsPolicy.renewFromId');
+    unset(loanPolicy, 'renewalsPolicy.period');
   }
+
+  return loanPolicy;
+};
+
+const checkSchedules = (policy) => {
+  const loanPolicy = cloneDeep(policy);
+
+  const schedulesList = [
+    'loansPolicy.fixedDueDateScheduleId',
+    'renewalsPolicy.alternateFixedDueDateScheduleId',
+  ];
+
+  forEach(schedulesList, (path) => {
+    const scheduleId = get(loanPolicy, path);
+
+    if (isEmpty(scheduleId)) {
+      unset(loanPolicy, path);
+    }
+  });
 
   return loanPolicy;
 };
@@ -155,6 +175,7 @@ export const normalize = (entity) => {
     checkLoanable,
     checkInvalidPeriods,
     checkRequestManagementSection,
+    checkSchedules,
   ];
 
   return filter(entity, ...callbacks);
