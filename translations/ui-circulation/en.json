@@ -1,6 +1,8 @@
 {
   "meta.title": "Circulation",
 
+  "dateFormat": "MM/DD/YYYY",
+
   "settings.index.paneTitle": "Circulation",
   "settings.index.loanPolicies": "Loan policies",
   "settings.index.circulationRules": "Circulation rules",
@@ -83,7 +85,6 @@
   "settings.fDDSform.deleteHeader": "Delete fixed due date schedule?",
   "settings.fDDSform.about": "General information",
   "settings.fDDSform.name": "Fixed due date schedule name",
-  "settings.fDDSform.nameRequired": "Fixed due date schedule name *",
   "settings.fDDSform.entryLabel": "fixed due date schedule",
   "settings.fDDSform.untitled": "Untitled Fixed Due Date Schedule",
   "settings.fDDSform.newFixDDSchedule": "Create fixed due date schedule",

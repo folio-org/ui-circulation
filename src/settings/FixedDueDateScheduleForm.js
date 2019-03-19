@@ -2,8 +2,16 @@ import React from 'react';
 import _ from 'lodash';
 import PropTypes from 'prop-types';
 import { Field, FieldArray } from 'redux-form';
-import { FormattedMessage } from 'react-intl';
-import { stripesShape, IfPermission } from '@folio/stripes/core';
+import {
+  FormattedMessage,
+  injectIntl,
+  intlShape,
+} from 'react-intl';
+
+import {
+  stripesShape,
+  IfPermission,
+} from '@folio/stripes/core';
 import {
   Accordion,
   Button,
@@ -22,11 +30,13 @@ import {
 } from '@folio/stripes/components';
 import stripesForm from '@folio/stripes/form';
 import { ViewMetaData } from '@folio/stripes/smart-components';
+
 import css from './FixedDueDateSchedule.css';
 
 class FixedDueDateScheduleForm extends React.Component {
   static propTypes = {
     stripes: stripesShape.isRequired,
+    intl: intlShape.isRequired,
     initialValues: PropTypes.object,
     handleSubmit: PropTypes.func.isRequired,
     onSave: PropTypes.func,
@@ -34,7 +44,7 @@ class FixedDueDateScheduleForm extends React.Component {
     onRemove: PropTypes.func,
     pristine: PropTypes.bool,
     submitting: PropTypes.bool,
-  }
+  };
 
   constructor(props) {
     super(props);
@@ -178,6 +188,8 @@ class FixedDueDateScheduleForm extends React.Component {
   }
 
   renderSchedules({ fields, meta: { error, submitFailed } }) {
+    const { intl: { formatMessage } } = this.props;
+
     return (
       <div>
         <Row>
@@ -206,7 +218,7 @@ class FixedDueDateScheduleForm extends React.Component {
                   <Field
                     label={<FormattedMessage id="ui-circulation.settings.fDDSform.dateFrom" />}
                     name={`${schedule}.from`}
-                    dateFormat="YYYY-MM-DD"
+                    dateFormat={formatMessage({ id: 'ui-circulation.dateFormat' })}
                     timeZone="UTC"
                     backendDateStandard="YYYY-MM-DD"
                     component={Datepicker}
@@ -216,7 +228,7 @@ class FixedDueDateScheduleForm extends React.Component {
                   <Field
                     label={<FormattedMessage id="ui-circulation.settings.fDDSform.dateTo" />}
                     name={`${schedule}.to`}
-                    dateFormat="YYYY-MM-DD"
+                    dateFormat={formatMessage({ id: 'ui-circulation.dateFormat' })}
                     timeZone="UTC"
                     backendDateStandard="YYYY-MM-DD"
                     component={Datepicker}
@@ -225,7 +237,7 @@ class FixedDueDateScheduleForm extends React.Component {
                 <Col xs={12} sm={3}>
                   <Field
                     label={<FormattedMessage id="ui-circulation.settings.fDDSform.dueDate" />}
-                    dateFormat="YYYY-MM-DD"
+                    dateFormat={formatMessage({ id: 'ui-circulation.dateFormat' })}
                     timeZone="UTC"
                     backendDateStandard="YYYY-MM-DD"
                     name={`${schedule}.due`}
@@ -303,7 +315,7 @@ class FixedDueDateScheduleForm extends React.Component {
                       autoFocus
                       required
                       fullWidth
-                      label={<FormattedMessage id="ui-circulation.settings.fDDSform.nameRequired" />}
+                      label={<FormattedMessage id="ui-circulation.settings.fDDSform.name" />}
                     />
                   </div>
                   <Field
@@ -346,4 +358,4 @@ export default stripesForm({
   form: 'FixedDueDateScheduleForm',
   navigationCheck: true,
   enableReinitialize: false,
-})(FixedDueDateScheduleForm);
+})(injectIntl(FixedDueDateScheduleForm));

@@ -6,6 +6,7 @@ import { EntryManager } from '@folio/stripes/smart-components';
 
 import PatronNoticeDetail from './PatronNoticeDetail';
 import PatronNoticeForm from './PatronNoticeForm';
+import categories from './categories';
 
 class PatronNotices extends React.Component {
   static propTypes = {
@@ -48,6 +49,8 @@ class PatronNotices extends React.Component {
   });
 
   render() {
+    const [{ id: defaultCategory }] = sortBy(categories, ['label']);
+
     return (
       <EntryManager
         {...this.props}
@@ -57,7 +60,12 @@ class PatronNotices extends React.Component {
         paneTitle={this.props.label}
         entryLabel={this.props.label}
         entryFormComponent={PatronNoticeForm}
-        defaultEntry={{ active: true, outputFormats: ['text/html'], templateResolver: 'mustache' }}
+        defaultEntry={{
+          active: true,
+          outputFormats: ['text/html'],
+          templateResolver: 'mustache',
+          category: defaultCategory,
+        }}
         nameKey="name"
         permissions={{
           put: 'ui-circulation.settings.notice-templates',
