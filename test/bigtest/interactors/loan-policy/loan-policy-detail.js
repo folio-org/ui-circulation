@@ -34,6 +34,7 @@ import KeyValue from '../KeyValue';
   numRenewalsAllowed = new KeyValue('[data-test-renewals-section-number-renewals-allowed] div');
   renewalPeriodDifferent = new KeyValue('[data-test-renewals-section-renewal-period-different] div');
   alternateLoanPeriodRenewals = new KeyValue('[data-test-renewals-section-alternate-loan-period-renewals] div');
+  alternateFixedDueDateScheduleId = new KeyValue('[data-test-renewals-section-alternate-fixed-due-date-schedule-id] div');
 }
 
 @interactor class RequestManagementSection {
