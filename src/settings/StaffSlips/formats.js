@@ -2,7 +2,6 @@ const formats = {
   Hold: {
     'Item title': '14 cows for America',
     'Item barcode': '<Barcode>9781561454907</Barcode>',
-    'Item call number': '6016665333',
     'Requester last name': ' Brown',
     'Requester first name': ' John',
     'Transaction Id': ' 123456789',
