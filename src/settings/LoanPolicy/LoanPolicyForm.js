@@ -1,8 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
 import { getFormValues } from 'redux-form';
+import {
+  FormattedMessage,
+  injectIntl,
+  intlShape,
+} from 'react-intl';
 import {
   sortBy,
   get,
@@ -38,6 +42,7 @@ import { Metadata } from '../components';
 
 class LoanPolicyForm extends React.Component {
   static propTypes = {
+    intl: intlShape.isRequired,
     stripes: stripesShape.isRequired,
     pristine: PropTypes.bool,
     submitting: PropTypes.bool,
@@ -81,14 +86,32 @@ class LoanPolicyForm extends React.Component {
   };
 
   generateScheduleOptions = () => {
-    const records = get(
-      this.props,
-      'parentResources.fixedDueDateSchedules.records',
-      [],
+    const {
+      intl: {
+        formatMessage,
+      },
+    } = this.props;
+    const records = get(this.props, 'parentResources.fixedDueDateSchedules.records', []);
+    const sortedSchedules = sortBy(records, ['name']);
+
+    const placeholder = (
+      <option value="" key="x">
+        {formatMessage({ id: 'ui-circulation.settings.loanPolicy.selectSchedule' })}
+      </option>
     );
 
-    const sortedSchedules = sortBy(records, ['name']);
-    return sortedSchedules.map(({ id, name }) => ({ value: id, label: name }));
+    const schedules = sortedSchedules.map(({ id, name }) => {
+      return (
+        <option
+          value={id}
+          key={id}
+        >
+          {name}
+        </option>
+      );
+    });
+
+    return [placeholder, ...schedules];
   };
 
   saveForm = (loanPolicy) => {
@@ -200,7 +223,7 @@ const mapStateToProps = (state) => ({
   policy: new LoanPolicy(getFormValues('loanPolicyForm')(state)),
 });
 
-const connectedLoanPolicyForm = connect(mapStateToProps)(LoanPolicyForm);
+const connectedLoanPolicyForm = connect(mapStateToProps)(injectIntl(LoanPolicyForm));
 
 export default stripesForm({
   form: 'loanPolicyForm',

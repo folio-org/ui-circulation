@@ -1,10 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  FormattedMessage,
-  injectIntl,
-  intlShape,
-} from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { Field } from 'redux-form';
 
 import {
@@ -24,7 +20,6 @@ import {
 
 class RenewalsSection extends React.Component {
   static propTypes = {
-    intl: intlShape,
     policy: PropTypes.object.isRequired,
     schedules: PropTypes.arrayOf(PropTypes.node).isRequired,
     change: PropTypes.func.isRequired,
@@ -35,7 +30,6 @@ class RenewalsSection extends React.Component {
       policy,
       schedules,
       change,
-      intl: { formatMessage }
     } = this.props;
 
     if (!policy.isLoanable()) {
@@ -134,16 +128,15 @@ class RenewalsSection extends React.Component {
             </div>
           </React.Fragment>
         }
-        { policy.isRenewable() && policy.isDifferentPeriod()
-          && (policy.isProfileRolling() || policy.isProfileFixed()) &&
+        { policy.isRenewable() && policy.isDifferentPeriod() &&
           <div data-test-renewals-alternate-fixed-due-date-schedule>
             <Field
               label={altRenewalScheduleLabel}
               name="renewalsPolicy.alternateFixedDueDateScheduleId"
               component={Select}
-              placeholder={formatMessage({ id: 'ui-circulation.settings.loanPolicy.selectSchedule' })}
-              dataOptions={schedules}
-            />
+            >
+              {schedules}
+            </Field>
           </div>
         }
         <hr />
@@ -152,9 +145,9 @@ class RenewalsSection extends React.Component {
   }
 }
 
-export default injectIntl(withSectionDefaults({
+export default withSectionDefaults({
   component: RenewalsSection,
   checkMethodName: 'shouldInitRenewalsPolicy',
   sectionsDefaults: { 'renewalsPolicy': defaultLoanPolicy.renewalsPolicy },
   dropdownDefaults: { 'renewalsPolicy.period': { intervalId: intervalIdsMap.DAYS } }
-}));
+});

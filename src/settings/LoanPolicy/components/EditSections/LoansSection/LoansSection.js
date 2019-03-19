@@ -1,7 +1,7 @@
 import { get } from 'lodash';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { Field } from 'redux-form';
 
 import {
@@ -22,7 +22,6 @@ import {
 
 class LoansSection extends React.Component {
   static propTypes = {
-    intl: intlShape,
     policy: PropTypes.object.isRequired,
     schedules: PropTypes.arrayOf(PropTypes.node).isRequired,
     change: PropTypes.func.isRequired,
@@ -52,7 +51,6 @@ class LoansSection extends React.Component {
       policy,
       schedules,
       change,
-      intl: { formatMessage },
     } = this.props;
 
     const dueDateScheduleFieldLabel = policy.isProfileRolling()
@@ -113,9 +111,9 @@ class LoansSection extends React.Component {
               name="loansPolicy.fixedDueDateScheduleId"
               id="input_loansPolicy_fixedDueDateSchedule"
               component={Select}
-              placeholder={formatMessage({ id: 'ui-circulation.settings.loanPolicy.selectSchedule' })}
-              dataOptions={schedules}
-            />
+            >
+              {schedules}
+            </Field>
           </div>
         }
         { policy.isLoanable() &&
@@ -159,7 +157,7 @@ class LoansSection extends React.Component {
   }
 }
 
-export default injectIntl(withSectionDefaults({
+export default withSectionDefaults({
   component: LoansSection,
   checkMethodName: 'shouldInitLoansPolicy',
   sectionsDefaults: {
@@ -173,4 +171,4 @@ export default injectIntl(withSectionDefaults({
     'loansPolicy.openingTimeOffset': { intervalId: intervalIdsMap.HOURS },
     'loansPolicy.gracePeriod': { intervalId: intervalIdsMap.HOURS },
   },
-}));
+});
