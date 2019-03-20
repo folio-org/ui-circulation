@@ -133,6 +133,7 @@ class StaffSlipForm extends React.Component {
                   label={<FormattedMessage id="ui-circulation.settings.staffSlips.active" />}
                   name="active"
                   id="input-staff-slip-active"
+                  type="checkbox"
                   component={Checkbox}
                   disabled={disabled}
                 />
