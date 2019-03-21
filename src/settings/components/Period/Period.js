@@ -1,14 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
-import {
-  intlShape,
-  injectIntl,
-  FormattedMessage,
-} from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import {
   isEmpty,
-  isString,
   noop,
 } from 'lodash';
 
@@ -23,30 +18,22 @@ import css from './Period.css';
 
 class Period extends React.Component {
   static propTypes = {
-    intl: intlShape.isRequired,
     inputValuePath: PropTypes.string.isRequired,
     selectValuePath: PropTypes.string.isRequired,
-    intervalPeriods: PropTypes.arrayOf(PropTypes.object).isRequired,
+    intervalPeriods: PropTypes.arrayOf(PropTypes.node).isRequired,
     required: PropTypes.bool,
-    emptySelectPlaceholder: PropTypes.bool,
     inputSize: PropTypes.number,
     selectSize: PropTypes.number,
     fieldLabel: PropTypes.string,
     selectPlaceholder: PropTypes.string,
-    inputPlaceholder: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.number,
-    ]),
     changeFormValue: PropTypes.func,
   };
 
   static defaultProps = {
     required: false,
-    emptySelectPlaceholder: false,
     inputSize: 2,
     selectSize: 2,
     fieldLabel: '',
-    inputPlaceholder: '',
     selectPlaceholder: '',
     changeFormValue: noop,
   };
@@ -68,40 +55,13 @@ class Period extends React.Component {
     return Number(value);
   };
 
-  getPlaceholder = (value) => {
-    const { intl } = this.props;
-
-    if (!isString(value)) {
-      return value;
-    }
-
-    if (isEmpty(value)) {
-      return '';
-    }
-
-    return intl.formatMessage({ id: value });
-  };
-
-  getSelectPlaceholder = () => {
-    const {
-      selectPlaceholder,
-      emptySelectPlaceholder,
-    } = this.props;
-
-    if (emptySelectPlaceholder) {
-      return ' ';
-    }
-
-    return this.getPlaceholder(selectPlaceholder);
-  };
-
   render() {
     const {
       fieldLabel,
-      inputPlaceholder,
       inputValuePath,
       selectValuePath,
       intervalPeriods,
+      selectPlaceholder,
       required,
       inputSize,
       selectSize,
@@ -129,7 +89,6 @@ class Period extends React.Component {
                 type="number"
                 name={inputValuePath}
                 component={TextField}
-                placeholder={this.getPlaceholder(inputPlaceholder)}
                 onClearField={this.onInputClear}
                 parse={this.transformInputValue}
               />
@@ -140,9 +99,10 @@ class Period extends React.Component {
               <Field
                 name={selectValuePath}
                 component={Select}
-                placeholder={this.getSelectPlaceholder()}
-                dataOptions={intervalPeriods}
-              />
+                placeholder={selectPlaceholder ? <FormattedMessage id={selectPlaceholder} /> : ''}
+              >
+                {intervalPeriods}
+              </Field>
             </div>
           </Col>
         </Row>
@@ -151,4 +111,4 @@ class Period extends React.Component {
   }
 }
 
-export default injectIntl(Period);
+export default Period;

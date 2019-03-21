@@ -187,7 +187,7 @@ class LoanPolicyForm extends React.Component {
                   schedules={schedules}
                   change={change}
                 />
-                <RenewalsSection
+                {/* <RenewalsSection
                   policy={policy}
                   schedules={schedules}
                   change={change}
@@ -198,7 +198,7 @@ class LoanPolicyForm extends React.Component {
                   recallsSectionOpen={sections.recallsSection}
                   accordionOnToggle={this.handleSectionToggle}
                   change={change}
-                />
+                /> */}
               </Accordion>
               {editMode &&
                 <DeleteEntry
