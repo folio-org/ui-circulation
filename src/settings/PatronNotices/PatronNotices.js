@@ -4,6 +4,7 @@ import { sortBy } from 'lodash';
 
 import { EntryManager } from '@folio/stripes/smart-components';
 
+import stripesConnect from '../../connect';
 import PatronNoticeDetail from './PatronNoticeDetail';
 import PatronNoticeForm from './PatronNoticeForm';
 
@@ -72,4 +73,4 @@ class PatronNotices extends React.Component {
   }
 }
 
-export default PatronNotices;
+export default stripesConnect(PatronNotices);

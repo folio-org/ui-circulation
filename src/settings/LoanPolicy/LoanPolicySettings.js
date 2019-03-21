@@ -9,6 +9,7 @@ import {
 
 import { EntryManager } from '@folio/stripes/smart-components';
 
+import stripesConnect from '../../connect';
 import LoanPolicyDetail from './LoanPolicyDetail';
 import LoanPolicyForm from './LoanPolicyForm';
 import LoanPolicy from '../Models/LoanPolicy';
@@ -83,4 +84,4 @@ class LoanPolicySettings extends React.Component {
   }
 }
 
-export default injectIntl(LoanPolicySettings);
+export default stripesConnect(injectIntl(LoanPolicySettings));

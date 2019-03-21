@@ -5,6 +5,7 @@ import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 
 import { EntryManager } from '@folio/stripes/smart-components';
 
+import stripesConnect from '../../connect';
 import RequestPolicyDetail from './RequestPolicyDetail';
 import RequestPolicyForm from './RequestPolicyForm';
 import { RequestPolicy as validateRequestPolicy } from '../Validation';
@@ -89,4 +90,4 @@ class RequestPolicySettings extends React.Component {
   }
 }
 
-export default injectIntl(RequestPolicySettings);
+export default injectIntl(stripesConnect(RequestPolicySettings));

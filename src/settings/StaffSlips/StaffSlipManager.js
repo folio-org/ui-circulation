@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { EntryManager } from '@folio/stripes/smart-components';
 
+import stripesConnect from '../../connect';
 import StaffSlipDetail from './StaffSlipDetail';
 import StaffSlipForm from './StaffSlipForm';
 
@@ -92,4 +93,4 @@ class StaffSlipManager extends React.Component {
   }
 }
 
-export default StaffSlipManager;
+export default stripesConnect(StaffSlipManager);

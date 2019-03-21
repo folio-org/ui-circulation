@@ -5,6 +5,7 @@ import { FormattedMessage } from 'react-intl';
 import { Callout, Paneset, Pane } from '@folio/stripes/components';
 import fetch from 'isomorphic-fetch';
 
+import stripesConnect from '../connect';
 import RulesForm from './lib/RuleEditor/RulesForm';
 
 const editorDefaultProps = {
@@ -255,4 +256,4 @@ class CirculationRules extends React.Component {
   }
 }
 
-export default CirculationRules;
+export default stripesConnect(CirculationRules);
