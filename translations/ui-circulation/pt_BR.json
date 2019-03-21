@@ -275,5 +275,6 @@
     "settings.noticePolicy.notices.triggeringEvent": "Evento desencadeante",
     "settings.noticePolicy.loanNotices.checkIn": "Devolução",
     "settings.noticePolicy.loanNotices.checkOut": "Emprestar",
-    "settings.noticePolicy.notices.andEvery": "e todo"
+    "settings.noticePolicy.notices.andEvery": "e todo",
+    "settings.loanPolicy.view.altFDDSforRenewals": "Programação de data de vencimento fixa alternativa para renovações"
 }
