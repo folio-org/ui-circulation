@@ -8,8 +8,8 @@ import {
 } from 'react-intl';
 
 import { EntryManager } from '@folio/stripes/smart-components';
+import { stripesConnect } from '@folio/stripes/core';
 
-import stripesConnect from '../../connect';
 import NoticePolicyDetail from './NoticePolicyDetail';
 import NoticePolicyForm from './NoticePolicyForm';
 import { NoticePolicy } from '../Models/NoticePolicy';

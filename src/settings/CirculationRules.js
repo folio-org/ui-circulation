@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { Callout, Paneset, Pane } from '@folio/stripes/components';
 import fetch from 'isomorphic-fetch';
+import { stripesConnect } from '@folio/stripes/core';
 
-import stripesConnect from '../connect';
 import RulesForm from './lib/RuleEditor/RulesForm';
 
 const editorDefaultProps = {

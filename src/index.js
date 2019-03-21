@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Route, Switch } from '@folio/stripes/core';
 
-import { Route, Switch } from './nestedRouter';
 import Settings from './settings';
 import LoanPolicySettings from './settings/LoanPolicy/LoanPolicySettings';
 import CirculationRules from './settings/CirculationRules';

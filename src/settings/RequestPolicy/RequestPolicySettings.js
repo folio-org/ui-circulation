@@ -4,8 +4,8 @@ import { sortBy } from 'lodash';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 
 import { EntryManager } from '@folio/stripes/smart-components';
+import { stripesConnect } from '@folio/stripes/core';
 
-import stripesConnect from '../../connect';
 import RequestPolicyDetail from './RequestPolicyDetail';
 import RequestPolicyForm from './RequestPolicyForm';
 import { RequestPolicy as validateRequestPolicy } from '../Validation';

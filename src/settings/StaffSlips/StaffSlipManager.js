@@ -3,8 +3,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { EntryManager } from '@folio/stripes/smart-components';
+import { stripesConnect } from '@folio/stripes/core';
 
-import stripesConnect from '../../connect';
 import StaffSlipDetail from './StaffSlipDetail';
 import StaffSlipForm from './StaffSlipForm';
 

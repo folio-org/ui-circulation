@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { sortBy } from 'lodash';
 
 import { EntryManager } from '@folio/stripes/smart-components';
+import { stripesConnect } from '@folio/stripes/core';
 
-import stripesConnect from '../../connect';
 import PatronNoticeDetail from './PatronNoticeDetail';
 import PatronNoticeForm from './PatronNoticeForm';
 
