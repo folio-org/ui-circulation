@@ -275,5 +275,6 @@
     "settings.noticePolicy.notices.triggeringEvent": "تشغيل الحدث",
     "settings.noticePolicy.loanNotices.checkIn": "رد",
     "settings.noticePolicy.loanNotices.checkOut": "إعارة",
-    "settings.noticePolicy.notices.andEvery": "وكل"
+    "settings.noticePolicy.notices.andEvery": "وكل",
+    "settings.loanPolicy.view.altFDDSforRenewals": "جدول تاريح الاستحقاق المثبت البديل للتجديدات"
 }
