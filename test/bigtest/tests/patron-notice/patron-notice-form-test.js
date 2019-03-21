@@ -11,9 +11,9 @@ import patronNoticeForm from '../../interactors/patron-notice/patron-notice-form
 describe('patronNoticeDetail', () => {
   setupApplication();
 
-  describe('viewing notice policy', () => {
+  describe('viewing patron notice form', () => {
     beforeEach(function () {
-      this.visit('/settings/circulation/fixed-due-date-schedules?layer=add');
+      this.visit('/settings/circulation/patron-notices?layer=add');
     });
 
     it('should be displayed', () => {
