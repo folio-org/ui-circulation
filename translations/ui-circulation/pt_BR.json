@@ -276,5 +276,6 @@
     "settings.noticePolicy.loanNotices.checkIn": "Devolução",
     "settings.noticePolicy.loanNotices.checkOut": "Emprestar",
     "settings.noticePolicy.notices.andEvery": "e todo",
-    "settings.loanPolicy.view.altFDDSforRenewals": "Programação de data de vencimento fixa alternativa para renovações"
+    "settings.loanPolicy.view.altFDDSforRenewals": "Programação de data de vencimento fixa alternativa para renovações",
+    "dateFormat": "MM/DD/YYYY"
 }
