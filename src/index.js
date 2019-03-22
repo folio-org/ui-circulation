@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { FormattedMessage } from 'react-intl';
 import PropTypes from 'prop-types';
 import { Route, Switch } from '@folio/stripes/core';
 
@@ -12,6 +13,63 @@ import PatronNotices from './settings/PatronNotices';
 import StaffSlips from './settings/StaffSlips';
 import NoticePolicySettings from './settings/NoticePolicy';
 import RequestPolicySettings from './settings/RequestPolicy';
+
+export const settingsRoutes = [
+  {
+    route: 'loan-policies',
+    label: <FormattedMessage id="ui-circulation.settings.index.loanPolicies" />,
+    component: LoanPolicySettings,
+    perm: 'ui-circulation.settings.loan-policies',
+  },
+  {
+    route: 'rules',
+    label: <FormattedMessage id="ui-circulation.settings.index.circulationRules" />,
+    component: CirculationRules,
+    perm: 'ui-circulation.settings.circulation-rules',
+  },
+  {
+    route: 'fixed-due-date-schedules',
+    label: <FormattedMessage id="ui-circulation.settings.index.fdds" />,
+    component: FixedDueDateScheduleManager,
+    perm: 'ui-circulation.settings.fixed-due-date-schedules',
+  },
+  {
+    route: 'checkout',
+    label: <FormattedMessage id="ui-circulation.settings.index.otherSettings" />,
+    component: CheckoutSettings,
+    perm: 'ui-circulation.settings.other-settings',
+  },
+  {
+    route: 'staffslips',
+    label: <FormattedMessage id="ui-circulation.settings.index.staffSlips" />,
+    component: StaffSlips,
+    perm: 'ui-circulation.settings.staff-slips',
+  },
+  {
+    route: 'cancellation-reasons',
+    label: <FormattedMessage id="ui-circulation.settings.index.requestCancellationReasons" />,
+    component: RequestCancellationReasons,
+    perm: 'ui-circulation.settings.cancellation-reasons',
+  },
+  {
+    route: 'patron-notices',
+    label: <FormattedMessage id="ui-circulation.settings.index.patronNotices" />,
+    component: PatronNotices,
+    perm: 'ui-circulation.settings.notice-templates',
+  },
+  {
+    route: 'notice-policies',
+    label: <FormattedMessage id="ui-circulation.settings.index.noticePolicies" />,
+    component: NoticePolicySettings,
+    perm: 'ui-circulation.settings.notice-policies',
+  },
+  {
+    route: 'request-policies',
+    label: <FormattedMessage id="ui-circulation.settings.index.requestPolicies" />,
+    component: RequestPolicySettings,
+    perm: 'ui-circulation.settings.request-policies',
+  },
+];
 
 export default class Circulation extends Component {
   static actionNames = ['stripesHome', 'usersSortByName'];
@@ -32,33 +90,10 @@ export default class Circulation extends Component {
     return (
       <Route path={path} component={Settings}>
         <Switch>
-          {stripes.hasPerm('ui-circulation.settings.loan-policies') && (
-            <Route path={`${path}/loan-policies`} component={LoanPolicySettings} />
-          )}
-          {stripes.hasPerm('ui-circulation.settings.circulation-rules') && (
-            <Route path={`${path}/rules`} exact component={CirculationRules} />
-          )}
-          {stripes.hasPerm('ui-circulation.settings.fixed-due-date-schedules') && (
-            <Route path={`${path}/fixed-due-date-schedules`} component={FixedDueDateScheduleManager} />
-          )}
-          {stripes.hasPerm('ui-circulation.settings.other-settings') && (
-            <Route path={`${path}/checkout`} exact component={CheckoutSettings} />
-          )}
-          {stripes.hasPerm('ui-circulation.settings.staff-slips') && (
-            <Route path={`${path}/staffslips`} component={StaffSlips} />
-          )}
-          {stripes.hasPerm('ui-circulation.settings.cancellation-reasons') && (
-            <Route path={`${path}/cancellation-reasons`} exact component={RequestCancellationReasons} />
-          )}
-          {stripes.hasPerm('ui-circulation.settings.notice-templates') && (
-            <Route path={`${path}/patron-notices`} component={PatronNotices} />
-          )}
-          {stripes.hasPerm('ui-circulation.settings.notice-policies') && (
-            <Route path={`${path}/notice-policies`} component={NoticePolicySettings} />
-          )}
-          {stripes.hasPerm('ui-circulation.settings.request-policies') && (
-            <Route path={`${path}/request-policies`} component={RequestPolicySettings} />
-          )}
+          {settingsRoutes
+            .filter(setting => stripes.hasPerm(setting.perm))
+            .map(setting => <Route path={`${path}/${setting.route}`} key={setting.route} component={setting.component} />)
+          }
         </Switch>
       </Route>
     );
