@@ -276,5 +276,6 @@
     "settings.noticePolicy.loanNotices.checkIn": "Check in",
     "settings.noticePolicy.loanNotices.checkOut": "Check out",
     "settings.noticePolicy.notices.andEvery": "and every",
-    "settings.loanPolicy.view.altFDDSforRenewals": "Alternate fixed due date schedule for renewals"
+    "settings.loanPolicy.view.altFDDSforRenewals": "Alternate fixed due date schedule for renewals",
+    "dateFormat": "MM/DD/YYYY"
 }

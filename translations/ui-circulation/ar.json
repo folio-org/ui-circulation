@@ -276,5 +276,6 @@
     "settings.noticePolicy.loanNotices.checkIn": "رد",
     "settings.noticePolicy.loanNotices.checkOut": "إعارة",
     "settings.noticePolicy.notices.andEvery": "وكل",
-    "settings.loanPolicy.view.altFDDSforRenewals": "جدول تاريح الاستحقاق المثبت البديل للتجديدات"
+    "settings.loanPolicy.view.altFDDSforRenewals": "جدول تاريح الاستحقاق المثبت البديل للتجديدات",
+    "dateFormat": "MM/DD/YYYY"
 }

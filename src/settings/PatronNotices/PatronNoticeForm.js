@@ -191,7 +191,11 @@ class PatronNoticeForm extends React.Component {
     }));
 
     return (
-      <form id="form-patron-notice" onSubmit={handleSubmit(this.save)}>
+      <form
+        id="form-patron-notice"
+        data-test-patron-notice-form
+        onSubmit={handleSubmit(this.save)}
+      >
         <Paneset isRoot>
           <Pane defaultWidth="100%" paneTitle={this.renderPaneTitle()} firstMenu={this.renderCLoseIcon()} lastMenu={this.renderSaveMenu()}>
             <Row>
