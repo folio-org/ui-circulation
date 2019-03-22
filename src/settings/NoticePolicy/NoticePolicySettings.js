@@ -8,6 +8,7 @@ import {
 } from 'react-intl';
 
 import { EntryManager } from '@folio/stripes/smart-components';
+import { stripesConnect } from '@folio/stripes/core';
 
 import NoticePolicyDetail from './NoticePolicyDetail';
 import NoticePolicyForm from './NoticePolicyForm';
@@ -84,4 +85,4 @@ class NoticePolicySettings extends React.Component {
   }
 }
 
-export default injectIntl(NoticePolicySettings);
+export default injectIntl(stripesConnect(NoticePolicySettings));

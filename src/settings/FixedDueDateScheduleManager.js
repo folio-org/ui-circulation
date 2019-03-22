@@ -5,6 +5,8 @@ import moment from 'moment';
 import { FormattedMessage } from 'react-intl';
 
 import { EntryManager } from '@folio/stripes/smart-components';
+import { stripesConnect } from '@folio/stripes/core';
+
 import FixedDueDateScheduleDetail from './FixedDueDateScheduleDetail';
 import FixedDueDateScheduleForm from './FixedDueDateScheduleForm';
 
@@ -171,4 +173,4 @@ class FixedDueDateScheduleManager extends React.Component {
   }
 }
 
-export default FixedDueDateScheduleManager;
+export default stripesConnect(FixedDueDateScheduleManager);

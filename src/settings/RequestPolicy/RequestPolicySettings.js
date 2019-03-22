@@ -4,6 +4,7 @@ import { sortBy } from 'lodash';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 
 import { EntryManager } from '@folio/stripes/smart-components';
+import { stripesConnect } from '@folio/stripes/core';
 
 import RequestPolicyDetail from './RequestPolicyDetail';
 import RequestPolicyForm from './RequestPolicyForm';
@@ -89,4 +90,4 @@ class RequestPolicySettings extends React.Component {
   }
 }
 
-export default injectIntl(RequestPolicySettings);
+export default injectIntl(stripesConnect(RequestPolicySettings));

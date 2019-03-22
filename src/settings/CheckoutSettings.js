@@ -1,8 +1,7 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import _ from 'lodash';
 import { FormattedMessage } from 'react-intl';
-import { stripesShape } from '@folio/stripes/core';
+import { stripesShape, withStripes } from '@folio/stripes/core';
 import { ConfigManager } from '@folio/stripes/smart-components';
 
 import { patronIdentifierTypes } from '../constants';
@@ -10,7 +9,6 @@ import CheckoutSettingsForm from './CheckoutSettingsForm';
 
 class CheckoutSettings extends React.Component {
   static propTypes = {
-    label: PropTypes.string,
     stripes: stripesShape.isRequired,
   };
 
@@ -62,7 +60,7 @@ class CheckoutSettings extends React.Component {
   render() {
     return (
       <this.configManager
-        label={this.props.label} // already translated
+        label={<FormattedMessage id="ui-circulation.settings.index.otherSettings" />}
         moduleName="CHECKOUT"
         configName="other_settings"
         getInitialValues={this.getInitialValues}
@@ -74,4 +72,4 @@ class CheckoutSettings extends React.Component {
   }
 }
 
-export default CheckoutSettings;
+export default withStripes(CheckoutSettings);
