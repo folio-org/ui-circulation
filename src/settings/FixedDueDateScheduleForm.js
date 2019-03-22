@@ -2,8 +2,16 @@ import React from 'react';
 import _ from 'lodash';
 import PropTypes from 'prop-types';
 import { Field, FieldArray } from 'redux-form';
-import { FormattedMessage } from 'react-intl';
-import { stripesShape, IfPermission } from '@folio/stripes/core';
+import {
+  FormattedMessage,
+  injectIntl,
+  intlShape,
+} from 'react-intl';
+
+import {
+  stripesShape,
+  IfPermission,
+} from '@folio/stripes/core';
 import {
   Accordion,
   Button,
@@ -22,11 +30,13 @@ import {
 } from '@folio/stripes/components';
 import stripesForm from '@folio/stripes/form';
 import { ViewMetaData } from '@folio/stripes/smart-components';
+
 import css from './FixedDueDateSchedule.css';
 
 class FixedDueDateScheduleForm extends React.Component {
   static propTypes = {
     stripes: stripesShape.isRequired,
+    intl: intlShape.isRequired,
     initialValues: PropTypes.object,
     handleSubmit: PropTypes.func.isRequired,
     onSave: PropTypes.func,
@@ -34,7 +44,7 @@ class FixedDueDateScheduleForm extends React.Component {
     onRemove: PropTypes.func,
     pristine: PropTypes.bool,
     submitting: PropTypes.bool,
-  }
+  };
 
   constructor(props) {
     super(props);
@@ -133,16 +143,16 @@ class FixedDueDateScheduleForm extends React.Component {
     return (
       <PaneMenu>
         {edit &&
-          <IfPermission perm="ui-circulation.settings.circulation-rules">
-            <Button
-              id="clickable-delete-item"
-              buttonStyle="danger"
-              onClick={this.beginDelete}
-              disabled={confirmDelete}
-            >
-              <FormattedMessage id="ui-circulation.settings.staffSlips.delete" />
-            </Button>
-          </IfPermission>
+        <IfPermission perm="ui-circulation.settings.circulation-rules">
+          <Button
+            id="clickable-delete-item"
+            buttonStyle="danger"
+            onClick={this.beginDelete}
+            disabled={confirmDelete}
+          >
+            <FormattedMessage id="ui-circulation.settings.staffSlips.delete" />
+          </Button>
+        </IfPermission>
         }
         <Button
           id="clickable-save-fixedDueDateSchedule"
@@ -178,12 +188,18 @@ class FixedDueDateScheduleForm extends React.Component {
   }
 
   renderSchedules({ fields, meta: { error, submitFailed } }) {
+    const { intl: { formatMessage } } = this.props;
+
     return (
       <div>
         <Row>
           <Col xs={11} />
           <Col xs={1}>
-            <Button type="button" onClick={() => fields.unshift({})}>
+            <Button
+              type="button"
+              data-test-add-schedule
+              onClick={() => fields.unshift({})}
+            >
               <Icon icon="plus-sign">
                 <FormattedMessage id="ui-circulation.settings.fDDSform.new" />
               </Icon>
@@ -192,8 +208,15 @@ class FixedDueDateScheduleForm extends React.Component {
         </Row>
         {submitFailed && error && <Row><Col xs={12} className={css.scheduleError}>{error}</Col></Row>}
         {fields.map((schedule, index, f) => (
-          <div key={index} className={css.scheduleItem}>
-            <div className={css.scheduleHeader}>
+          <div
+            data-test-schedule
+            key={index}
+            className={css.scheduleItem}
+          >
+            <div
+              className={css.scheduleHeader}
+              data-test-schedule-date-range
+            >
               <h4>
                 <FormattedMessage id="ui-circulation.settings.fDDSform.dateRange" />
                 {' '}
@@ -202,43 +225,67 @@ class FixedDueDateScheduleForm extends React.Component {
             </div>
             <div className={css.scheduleItemContent}>
               <Row>
-                <Col xs={12} sm={4}>
+                <Col
+                  data-test-schedule-date-from
+                  xs={12}
+                  sm={4}
+                >
                   <Field
                     label={<FormattedMessage id="ui-circulation.settings.fDDSform.dateFrom" />}
                     name={`${schedule}.from`}
-                    dateFormat="YYYY-MM-DD"
+                    dateFormat={formatMessage({ id: 'ui-circulation.dateFormat' })}
                     timeZone="UTC"
                     backendDateStandard="YYYY-MM-DD"
                     component={Datepicker}
                   />
                 </Col>
-                <Col xs={12} sm={4}>
+                <Col
+                  data-test-schedule-date-to
+                  xs={12}
+                  sm={4}
+                >
                   <Field
                     label={<FormattedMessage id="ui-circulation.settings.fDDSform.dateTo" />}
                     name={`${schedule}.to`}
-                    dateFormat="YYYY-MM-DD"
+                    dateFormat={formatMessage({ id: 'ui-circulation.dateFormat' })}
                     timeZone="UTC"
                     backendDateStandard="YYYY-MM-DD"
                     component={Datepicker}
                   />
                 </Col>
-                <Col xs={12} sm={3}>
+                <Col
+                  data-test-schedule-due-date
+                  xs={12}
+                  sm={3}
+                >
                   <Field
                     label={<FormattedMessage id="ui-circulation.settings.fDDSform.dueDate" />}
-                    dateFormat="YYYY-MM-DD"
+                    dateFormat={formatMessage({ id: 'ui-circulation.dateFormat' })}
                     timeZone="UTC"
                     backendDateStandard="YYYY-MM-DD"
                     name={`${schedule}.due`}
                     component={Datepicker}
                   />
                 </Col>
-                <Col xs={12} sm={1}>
-                  <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+                <Col
+                  data-test-schedule-remove
+                  xs={12}
+                  sm={1}
+                >
+                  <div style={{
+                    position: 'relative',
+                    width: '100%',
+                    height: '100%',
+                  }}
+                  >
                     <FormattedMessage id="ui-circulation.settings.fDDSform.remove">
                       {ariaLabel => (
                         <Button
                           buttonStyle="transparent slim"
-                          style={{ position: 'absolute', bottom: '0' }}
+                          style={{
+                            position: 'absolute',
+                            bottom: '0',
+                          }}
                           ariaLabel={ariaLabel}
                           onClick={() => { f.remove(index); }}
                         >
@@ -271,7 +318,11 @@ class FixedDueDateScheduleForm extends React.Component {
     />;
 
     return (
-      <form id="form-fixedDueDateSchedule" onSubmit={handleSubmit(this.saveSet)}>
+      <form
+        id="form-fixedDueDateSchedule"
+        onSubmit={handleSubmit(this.saveSet)}
+        data-test-fdds-form
+      >
         <Paneset isRoot>
           <Pane
             defaultWidth="100%"
@@ -281,8 +332,14 @@ class FixedDueDateScheduleForm extends React.Component {
           >
             <div>
               <Row end="xs">
-                <Col xs>
-                  <ExpandAllButton accordionStatus={sections} onToggle={this.handleExpandAll} />
+                <Col
+                  data-test-expand-all
+                  xs
+                >
+                  <ExpandAllButton
+                    accordionStatus={sections}
+                    onToggle={this.handleExpandAll}
+                  />
                 </Col>
               </Row>
               <Accordion
@@ -291,11 +348,17 @@ class FixedDueDateScheduleForm extends React.Component {
                 onToggle={this.handleSectionToggle}
                 label={<FormattedMessage id="ui-circulation.settings.fDDSform.about" />}
               >
-                <section className={css.accordionSection}>
+                <section
+                  data-test-fdds-form-general-section
+                  className={css.accordionSection}
+                >
                   {(initialValues && initialValues.metadata && initialValues.metadata.createdDate) &&
-                    <this.cViewMetaData metadata={initialValues.metadata} />
+                  <this.cViewMetaData metadata={initialValues.metadata} />
                   }
-                  <div className={css.smformItem}>
+                  <div
+                    className={css.smformItem}
+                    data-test-general-section-name
+                  >
                     <Field
                       name="name"
                       component={TextField}
@@ -303,15 +366,17 @@ class FixedDueDateScheduleForm extends React.Component {
                       autoFocus
                       required
                       fullWidth
-                      label={<FormattedMessage id="ui-circulation.settings.fDDSform.nameRequired" />}
+                      label={<FormattedMessage id="ui-circulation.settings.fDDSform.name" />}
                     />
                   </div>
-                  <Field
-                    name="description"
-                    component={TextArea}
-                    fullWidth
-                    label={<FormattedMessage id="ui-circulation.settings.fDDSform.description" />}
-                  />
+                  <div data-test-general-section-description>
+                    <Field
+                      name="description"
+                      component={TextArea}
+                      fullWidth
+                      label={<FormattedMessage id="ui-circulation.settings.fDDSform.description" />}
+                    />
+                  </div>
                 </section>
               </Accordion>
               <Accordion
@@ -320,8 +385,14 @@ class FixedDueDateScheduleForm extends React.Component {
                 onToggle={this.handleSectionToggle}
                 label={<FormattedMessage id="ui-circulation.settings.fDDSform.schedule" />}
               >
-                <section className={css.accordionSection}>
-                  <FieldArray name="schedules" component={this.renderSchedules} />
+                <section
+                  className={css.accordionSection}
+                  data-test-fdds-form-schedule-section
+                >
+                  <FieldArray
+                    name="schedules"
+                    component={this.renderSchedules}
+                  />
                 </section>
               </Accordion>
               <ConfirmationModal
@@ -346,4 +417,4 @@ export default stripesForm({
   form: 'FixedDueDateScheduleForm',
   navigationCheck: true,
   enableReinitialize: false,
-})(FixedDueDateScheduleForm);
+})(injectIntl(FixedDueDateScheduleForm));
