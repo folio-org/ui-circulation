@@ -1,5 +1,16 @@
 # Change history for ui-circulation
 
+## [1.6.1](https://github.com/folio-org/ui-circulation/tree/v1.6.1) (2019-03-26)
+[Full Changelog](https://github.com/folio-org/ui-circulation/compare/v1.6.0...v1.6.1)
+
+* Don't require description for patron notices. Fixes UICIRC-160.
+* Correctly configure hold slip and transit slip checkboxes. Fixes UICIRC-171, UICIRC-172.
+* Display correct hold expiration date. Refs UICIRC-175.
+* Remove call number from hold slip. Refs UICIRC-175.
+* Allow loan policies without due-date schedules. Fixes UICIRC-208
+* Display date-picker values according to tenant's locale. Fixes UICIRC-223.
+
+
 ## [1.6.0](https://github.com/folio-org/ui-circulation/tree/v1.6.0) (2019-03-17)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v1.5.0...v1.6.0)
 
