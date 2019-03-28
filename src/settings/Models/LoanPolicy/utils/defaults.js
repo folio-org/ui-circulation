@@ -1,14 +1,14 @@
-import {
+/* import {
   intervalIdsMap,
   loanProfileMap,
   renewFromIds,
   END_OF_THE_NEXT_OPEN_DAY,
-} from '../../../../constants';
+} from '../../../../constants'; */
 
 export default {
   loanable: true,
   renewable: true,
-  loansPolicy: {
+  /* loansPolicy: {
     profileId: loanProfileMap.ROLLING,
     closedLibraryDueDateManagementId: END_OF_THE_NEXT_OPEN_DAY,
     period: { intervalId: intervalIdsMap.DAYS },
@@ -30,5 +30,5 @@ export default {
       alternateCheckoutLoanPeriod: { intervalId: intervalIdsMap.DAYS },
       alternateRenewalLoanPeriod: { intervalId: intervalIdsMap.DAYS },
     },
-  },
+  }, */
 };

@@ -104,15 +104,23 @@ export const longTermLoansOptions = [
   },
 ];
 
-export const renewFromOptions = [
-  { label: 'Current due date', id: 1, value: 'CURRENT_DUE_DATE' },
-  { label: 'System date', id: 2, value: 'SYSTEM_DATE' },
-];
-
 export const renewFromIds = {
   CURRENT_DUE_DATE: 'CURRENT_DUE_DATE',
   SYSTEM_DATE: 'SYSTEM_DATE',
 };
+
+export const renewFromOptions = [
+  {
+    label: 'ui-circulation.settings.loanPolicy.renewFrom.currentDueDate',
+    id: renewFromIds.CURRENT_DUE_DATE,
+    value: renewFromIds.CURRENT_DUE_DATE,
+  },
+  {
+    label: 'ui-circulation.settings.loanPolicy.renewFrom.systemDate',
+    id: renewFromIds.SYSTEM_DATE,
+    value: renewFromIds.SYSTEM_DATE,
+  },
+];
 
 export const patronIdentifierTypes = [
   { key: 'BARCODE', label: 'Barcode', queryKey: 'barcode' },

@@ -1,8 +1,12 @@
 import { get } from 'lodash';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { Field } from 'redux-form';
+import {
+  injectIntl,
+  intlShape,
+  FormattedMessage,
+} from 'react-intl';
 
 import {
   Checkbox,

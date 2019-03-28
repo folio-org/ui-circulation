@@ -1,7 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage } from 'react-intl';
 import { Field } from 'redux-form';
+import {
+  injectIntl,
+  intlShape,
+  FormattedMessage,
+} from 'react-intl';
 
 import {
   Checkbox,
@@ -16,14 +20,23 @@ import {
   intervalPeriods,
 } from '../../../../../constants';
 
+import optionsGenarator from '../../../utils/options-genarator';
+
 class RequestManagementSection extends React.Component {
   static propTypes = {
+    intl: intlShape.isRequired,
     policy: PropTypes.object.isRequired,
     holdsSectionOpen: PropTypes.bool.isRequired,
     recallsSectionOpen: PropTypes.bool.isRequired,
     accordionOnToggle: PropTypes.func.isRequired,
     change: PropTypes.func.isRequired,
   };
+
+  constructor(props) {
+    super(props);
+
+    this.genarateOptions = optionsGenarator.bind(null, this.props.intl.formatMessage);
+  }
 
   render() {
     const {
@@ -52,20 +65,22 @@ class RequestManagementSection extends React.Component {
           <div data-test-request-management-section-recall-return-interval>
             <Period
               fieldLabel="ui-circulation.settings.requestManagement.recallReturnInterval"
-              selectPlaceholder="ui-circulation.settings.loanPolicy.selectInterval"
+              // selectPlaceholder="ui-circulation.settings.loanPolicy.selectInterval"
               inputValuePath="requestManagement.recalls.recallReturnInterval.duration"
               selectValuePath="requestManagement.recalls.recallReturnInterval.intervalId"
-              intervalPeriods={intervalPeriods}
+              // intervalPeriods={intervalPeriods}
+              intervalPeriods={this.genarateOptions(intervalPeriods, 'ui-circulation.settings.loanPolicy.selectInterval')}
               changeFormValue={change}
             />
           </div>
           <div data-test-request-management-section-minimum-guaranteed-loan-period>
             <Period
               fieldLabel="ui-circulation.settings.requestManagement.minimumGuaranteedLoanPeriod"
-              selectPlaceholder="ui-circulation.settings.loanPolicy.selectInterval"
+              // selectPlaceholder="ui-circulation.settings.loanPolicy.selectInterval"
               inputValuePath="requestManagement.recalls.minimumGuaranteedLoanPeriod.duration"
               selectValuePath="requestManagement.recalls.minimumGuaranteedLoanPeriod.intervalId"
-              intervalPeriods={intervalPeriods}
+              // intervalPeriods={intervalPeriods}
+              intervalPeriods={this.genarateOptions(intervalPeriods, 'ui-circulation.settings.loanPolicy.selectInterval')}
               changeFormValue={change}
             />
           </div>
@@ -79,10 +94,11 @@ class RequestManagementSection extends React.Component {
           <div data-test-request-management-section-alternate-checkout-loan-period>
             <Period
               fieldLabel="ui-circulation.settings.requestManagement.alternateCheckoutLoanPeriod"
-              selectPlaceholder="ui-circulation.settings.loanPolicy.selectInterval"
+              // selectPlaceholder="ui-circulation.settings.loanPolicy.selectInterval"
               inputValuePath="requestManagement.holds.alternateCheckoutLoanPeriod.duration"
               selectValuePath="requestManagement.holds.alternateCheckoutLoanPeriod.intervalId"
-              intervalPeriods={intervalPeriods}
+              // intervalPeriods={intervalPeriods}
+              intervalPeriods={this.genarateOptions(intervalPeriods, 'ui-circulation.settings.loanPolicy.selectInterval')}
               changeFormValue={change}
             />
           </div>
@@ -100,10 +116,11 @@ class RequestManagementSection extends React.Component {
           <div data-test-request-management-section-alternate-renewal-loan-period>
             <Period
               fieldLabel="ui-circulation.settings.requestManagement.alternateRenewalLoanPeriod"
-              selectPlaceholder="ui-circulation.settings.loanPolicy.selectInterval"
+              // selectPlaceholder="ui-circulation.settings.loanPolicy.selectInterval"
               inputValuePath="requestManagement.holds.alternateRenewalLoanPeriod.duration"
               selectValuePath="requestManagement.holds.alternateRenewalLoanPeriod.intervalId"
-              intervalPeriods={intervalPeriods}
+              // intervalPeriods={intervalPeriods}
+              intervalPeriods={this.genarateOptions(intervalPeriods, 'ui-circulation.settings.loanPolicy.selectInterval')}
               changeFormValue={change}
             />
           </div>
@@ -113,7 +130,9 @@ class RequestManagementSection extends React.Component {
   }
 }
 
-export default withSectionDefaults({
+export default injectIntl(RequestManagementSection);
+
+/* export default withSectionDefaults({
   component: RequestManagementSection,
   checkMethodName: 'shouldInitRequestManagement',
   sectionsDefaults: { 'requestManagement': defaultLoanPolicy.requestManagement },
@@ -123,4 +142,4 @@ export default withSectionDefaults({
     'requestManagement.holds.alternateCheckoutLoanPeriod': { intervalId: intervalIdsMap.DAYS },
     'requestManagement.holds.alternateRenewalLoanPeriod': { intervalId: intervalIdsMap.DAYS },
   },
-});
+}); */

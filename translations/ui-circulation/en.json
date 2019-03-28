@@ -54,6 +54,8 @@
   "settings.loanPolicy.removed": "removed",
   "settings.loanPolicy.profileType.fixed": "Fixed",
   "settings.loanPolicy.profileType.rolling": "Rolling",
+  "settings.loanPolicy.renewFrom.systemDate": "System date",
+  "settings.loanPolicy.renewFrom.currentDueDate": "Current due date",
 
   "settings.loanPolicy.shortTermLoan.currentDueDateTime": "Keep the current due date/time",
   "settings.loanPolicy.shortTermLoan.endOfTheCurrentServicePointHours": "Move to the end of the current service point hours",

@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
-import { FormattedMessage } from 'react-intl';
+import {
+  injectIntl,
+  intlShape,
+  FormattedMessage,
+} from 'react-intl';
 import {
   isEmpty,
   noop,
@@ -16,8 +20,9 @@ import {
 
 import css from './Period.css';
 
-class Period extends React.Component {
+class Period extends PureComponent {
   static propTypes = {
+    intl: intlShape.isRequired,
     inputValuePath: PropTypes.string.isRequired,
     selectValuePath: PropTypes.string.isRequired,
     intervalPeriods: PropTypes.arrayOf(PropTypes.node).isRequired,
@@ -65,6 +70,9 @@ class Period extends React.Component {
       required,
       inputSize,
       selectSize,
+      intl: {
+        formatMessage,
+      }
     } = this.props;
 
     return (
@@ -99,7 +107,7 @@ class Period extends React.Component {
               <Field
                 name={selectValuePath}
                 component={Select}
-                placeholder={selectPlaceholder ? <FormattedMessage id={selectPlaceholder} /> : ''}
+                placeholder={isEmpty(selectPlaceholder) ? '' : formatMessage({ id: selectPlaceholder })}
               >
                 {intervalPeriods}
               </Field>
@@ -111,4 +119,4 @@ class Period extends React.Component {
   }
 }
 
-export default Period;
+export default injectIntl(Period);

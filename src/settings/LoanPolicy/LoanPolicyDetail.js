@@ -1,9 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage } from 'react-intl';
+import {
+  injectIntl,
+  intlShape,
+  FormattedMessage,
+} from 'react-intl';
 import {
   get,
   find,
+  isNull,
+  isEmpty,
 } from 'lodash';
 
 import { stripesShape } from '@folio/stripes/core';
@@ -20,17 +26,18 @@ import {
   loanProfileTypes,
   renewFromOptions,
   loanProfileMap,
-  renewFromIds,
   shortTermLoansOptions,
   longTermLoansOptions,
   BEGINNING_OF_THE_NEXT_OPEN_SERVICE_POINT_HOURS,
   intervalIdsMap,
+  intervalPeriods,
 } from '../../constants';
 
 import RequestManagementSection from './components/ViewSections/RequestManagementSection';
 
 class LoanPolicyDetail extends React.Component {
   static propTypes = {
+    intl: intlShape.isRequired,
     initialValues: PropTypes.object,
     stripes: stripesShape.isRequired,
     parentResources: PropTypes.shape({
@@ -93,6 +100,50 @@ class LoanPolicyDetail extends React.Component {
     return loanable && isProfileRolling && isShortTermPeriod && isBeginningOfNextOpenServicePointHours;
   };
 
+  getPeriodValue = (pathToPeriod) => {
+    const {
+      initialValues: loanPolicy,
+      intl: {
+        formatMessage,
+      },
+    } = this.props;
+
+    const period = get(loanPolicy, pathToPeriod);
+
+    if (isEmpty(period)) {
+      return '-';
+    }
+
+    const itervalIdKey = find(intervalPeriods, ({ value }) => value === period.intervalId).label;
+
+    return `${period.duration} ${formatMessage({ id: itervalIdKey })}`;
+  };
+
+  getDropdownValue = (pathToValue, items) => {
+    const { initialValues: loanPolicy } = this.props;
+
+    const seletedValue = get(loanPolicy, pathToValue);
+    const selectedItem = find(items, (item) => item.value === seletedValue);
+
+    return selectedItem ? selectedItem.label : null;
+  };
+
+  getTranslatedDropdownValue = (pathToValue, items) => {
+    const translationKey = this.getDropdownValue(pathToValue, items);
+
+    return isNull(translationKey) ? null : <FormattedMessage id={translationKey} />;
+  };
+
+  getCheckboxValue = (pathToValue) => {
+    const { initialValues: loanPolicy } = this.props;
+
+    const seletedValue = get(loanPolicy, pathToValue);
+
+    return seletedValue
+      ? <FormattedMessage id="ui-circulation.settings.common.yes" />
+      : <FormattedMessage id="ui-circulation.settings.common.no" />;
+  };
+
   renderLoans() {
     const {
       initialValues,
@@ -116,9 +167,6 @@ class LoanPolicyDetail extends React.Component {
     const profile = find(loanProfileTypes, t => t.value === profileId);
     const ddId = get(policy, ['loansPolicy', 'closedLibraryDueDateManagementId']);
     const closedLibraryDueDateManagementItem = this.getClosedLibraryDueDateManagementItem(ddId);
-    const periodInterval = get(policy, ['loansPolicy', 'period', 'intervalId']);
-    const gracePeriodInterval = get(policy, ['loansPolicy', 'gracePeriod', 'intervalId'], '-');
-    const timeOffsetInterval = get(policy, ['loansPolicy', 'openingTimeOffset', 'intervalId']);
     const isOpeningTimeOffsetVisible = this.isOpeningTimeOffsetVisible();
 
     return (
@@ -139,7 +187,7 @@ class LoanPolicyDetail extends React.Component {
             <div data-test-loans-section-loan-profile>
               <KeyValue
                 label={<FormattedMessage id="ui-circulation.settings.loanPolicy.loanProfile" />}
-                value={get(profile, ['label'], '-')}
+                value={<FormattedMessage id={get(profile, ['label'])} />}
               />
             </div>
           </Col>
@@ -152,7 +200,7 @@ class LoanPolicyDetail extends React.Component {
                 <div data-test-loans-section-loan-period>
                   <KeyValue
                     label={<FormattedMessage id="ui-circulation.settings.loanPolicy.loanPeriod" />}
-                    value={`${get(policy, ['loansPolicy', 'period', 'duration'], '')} ${periodInterval}`}
+                    value={this.getPeriodValue('loansPolicy.period')}
                   />
                 </div>
               </Col>
@@ -180,7 +228,7 @@ class LoanPolicyDetail extends React.Component {
             <div data-test-loans-section-closed-due-date-mgmte>
               <KeyValue
                 label={<FormattedMessage id="ui-circulation.settings.loanPolicy.closedDueDateMgmt" />}
-                value={get(closedLibraryDueDateManagementItem, ['label'], '-')}
+                value={<FormattedMessage id={get(closedLibraryDueDateManagementItem, ['label'], '-')} />}
               />
             </div>
           </Col>
@@ -193,7 +241,7 @@ class LoanPolicyDetail extends React.Component {
               <div data-test-loans-section-opening-time-offset>
                 <KeyValue
                   label={<FormattedMessage id="ui-circulation.settings.loanPolicy.openingTimeOffset" />}
-                  value={`${get(policy, ['loansPolicy', 'openingTimeOffset', 'duration'], '')} ${timeOffsetInterval}`}
+                  value={this.getPeriodValue('loansPolicy.openingTimeOffset')}
                 />
               </div>
             </Col>
@@ -207,7 +255,7 @@ class LoanPolicyDetail extends React.Component {
             <div data-test-loans-section-grace-period>
               <KeyValue
                 label={<FormattedMessage id="ui-circulation.settings.loanPolicy.gracePeriod" />}
-                value={`${get(policy, ['loansPolicy', 'gracePeriod', 'duration'], '')} ${gracePeriodInterval}`}
+                value={this.getPeriodValue('loansPolicy.gracePeriod')}
               />
             </div>
           </Col>
@@ -267,15 +315,8 @@ class LoanPolicyDetail extends React.Component {
       parentResources,
     } = this.props;
 
-    const unlimited = (get(policy, ['renewalsPolicy', 'unlimited']))
-      ? <FormattedMessage id="ui-circulation.settings.loanPolicy.yes" />
-      : <FormattedMessage id="ui-circulation.settings.loanPolicy.no" />;
-    const differentPeriod = (get(policy, ['renewalsPolicy', 'differentPeriod']))
-      ? <FormattedMessage id="ui-circulation.settings.loanPolicy.yes" />
-      : <FormattedMessage id="ui-circulation.settings.loanPolicy.no" />;
-    const renewFromId = get(policy, ['renewalsPolicy', 'renewFromId'], renewFromIds.SYSTEM_DATE);
+    const renewFromId = get(policy, ['renewalsPolicy', 'renewFromId']);
     const renewFrom = find(renewFromOptions, r => r.value === renewFromId);
-    const interval = get(policy, ['renewalsPolicy', 'period', 'intervalId']);
     const altRenewalScheduleLabel = policy.loanable && policy.loansPolicy.profileId === loanProfileMap.ROLLING
       ? <FormattedMessage id="ui-circulation.settings.loanPolicy.altFDDSDueDateLimit" />
       : <FormattedMessage id="ui-circulation.settings.loanPolicy.view.altFDDSforRenewals" />;
@@ -300,7 +341,7 @@ class LoanPolicyDetail extends React.Component {
             <div data-test-renewals-section-unlimited-renewals>
               <KeyValue
                 label={<FormattedMessage id="ui-circulation.settings.loanPolicy.unlimitedRenewals" />}
-                value={unlimited}
+                value={this.getCheckboxValue('renewalsPolicy.unlimited')}
               />
             </div>
           </Col>
@@ -326,7 +367,7 @@ class LoanPolicyDetail extends React.Component {
             <div data-test-renewals-section-renew-from>
               <KeyValue
                 label={<FormattedMessage id="ui-circulation.settings.loanPolicy.renewFrom" />}
-                value={get(renewFrom, ['label'], '-')}
+                value={<FormattedMessage id={get(renewFrom, ['label'])} />}
               />
             </div>
           </Col>
@@ -337,7 +378,7 @@ class LoanPolicyDetail extends React.Component {
             <div data-test-renewals-section-renewal-period-different>
               <KeyValue
                 label={<FormattedMessage id="ui-circulation.settings.loanPolicy.renewalPeriodDifferent" />}
-                value={differentPeriod}
+                value={this.getCheckboxValue('renewalsPolicy.differentPeriod')}
               />
             </div>
           </Col>
@@ -350,7 +391,7 @@ class LoanPolicyDetail extends React.Component {
               <div data-test-renewals-section-alternate-loan-period-renewals>
                 <KeyValue
                   label={<FormattedMessage id="ui-circulation.settings.loanPolicy.alternateLoanPeriodRenewals" />}
-                  value={`${get(policy, ['renewalsPolicy', 'period', 'duration'])} ${interval}`}
+                  value={this.getPeriodValue('renewalsPolicy.period')}
                 />
               </div>
             </Col>
@@ -424,4 +465,4 @@ class LoanPolicyDetail extends React.Component {
   }
 }
 
-export default LoanPolicyDetail;
+export default injectIntl(LoanPolicyDetail);
