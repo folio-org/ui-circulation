@@ -13,16 +13,12 @@ import {
   TextField,
 } from '@folio/stripes/components';
 
+import optionsGenarator from '../../../utils/options-genarator';
 import { Period } from '../../../../components';
-import { defaultLoanPolicy } from '../../../../Models/LoanPolicy/utils';
-import withSectionDefaults from '../withSectionDefaults';
 import {
   intervalPeriods,
-  intervalIdsMap,
   renewFromOptions,
 } from '../../../../../constants';
-
-import optionsGenarator from '../../../utils/options-genarator';
 
 class RenewalsSection extends React.Component {
   static propTypes = {
@@ -134,10 +130,8 @@ class RenewalsSection extends React.Component {
             <div data-test-renewals-section-alternate-loan-period-renewals>
               <Period
                 fieldLabel="ui-circulation.settings.loanPolicy.alternateLoanPeriodRenewals"
-                // selectPlaceholder="ui-circulation.settings.loanPolicy.selectInterval"
                 inputValuePath="renewalsPolicy.period.duration"
                 selectValuePath="renewalsPolicy.period.intervalId"
-                // intervalPeriods={intervalPeriods}
                 intervalPeriods={this.genarateOptions(intervalPeriods, 'ui-circulation.settings.loanPolicy.selectInterval')}
                 changeFormValue={change}
                 required
@@ -163,10 +157,3 @@ class RenewalsSection extends React.Component {
 }
 
 export default injectIntl(RenewalsSection);
-
-/* export default withSectionDefaults({
-  component: RenewalsSection,
-  checkMethodName: 'shouldInitRenewalsPolicy',
-  sectionsDefaults: { 'renewalsPolicy': defaultLoanPolicy.renewalsPolicy },
-  dropdownDefaults: { 'renewalsPolicy.period': { intervalId: intervalIdsMap.DAYS } }
-}); */

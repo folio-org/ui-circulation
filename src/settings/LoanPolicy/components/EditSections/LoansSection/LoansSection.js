@@ -14,10 +14,7 @@ import {
 } from '@folio/stripes/components';
 
 import { Period } from '../../../../components';
-import { defaultLoanPolicy } from '../../../../Models/LoanPolicy/utils';
-import withSectionDefaults from '../withSectionDefaults';
 import {
-  intervalIdsMap,
   loanProfileTypes,
   intervalPeriods,
   shortTermLoansOptions,
@@ -50,6 +47,7 @@ class LoansSection extends React.Component {
       policy,
       change,
     } = this.props;
+
     const pathToField = 'loansPolicy.closedLibraryDueDateManagementId';
     const selectedId = get(policy, pathToField);
     const prevSelectedId = get(prevPolicy, pathToField);
@@ -178,19 +176,3 @@ class LoansSection extends React.Component {
 }
 
 export default injectIntl(LoansSection);
-
-/* export default withSectionDefaults({
-  component: LoansSection,
-  checkMethodName: 'shouldInitLoansPolicy',
-  sectionsDefaults: {
-    'loansPolicy': defaultLoanPolicy.loansPolicy,
-    'renewable': true,
-    'renewalsPolicy': defaultLoanPolicy.renewalsPolicy,
-    'requestManagement': defaultLoanPolicy.requestManagement,
-  },
-  dropdownDefaults: {
-    'loansPolicy.period': { intervalId: intervalIdsMap.DAYS },
-    'loansPolicy.openingTimeOffset': { intervalId: intervalIdsMap.HOURS },
-    'loansPolicy.gracePeriod': { intervalId: intervalIdsMap.HOURS },
-  },
-}); */
