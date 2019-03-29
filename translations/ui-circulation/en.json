@@ -210,6 +210,7 @@
   "settings.common.weeks": "Week(s)",
   "settings.common.months": "Month(s)",
   "settings.common.years": "Years(s)",
+  "settings.common.blankPlaceholder": " ",
 
   "settings.noticePolicy.entryLabel": "Notice Policy",
   "settings.noticePolicy.saveAndClose": "Save",

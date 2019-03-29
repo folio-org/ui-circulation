@@ -12,7 +12,7 @@ import {
   Accordion,
 } from '@folio/stripes/components';
 
-import optionsGenarator from '../../../utils/options-genarator';
+import optionsGenarator from '../../../../utils/options-genarator';
 import { Period } from '../../../../components';
 import { intervalPeriods } from '../../../../../constants';
 

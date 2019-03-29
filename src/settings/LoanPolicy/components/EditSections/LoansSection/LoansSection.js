@@ -21,7 +21,7 @@ import {
   longTermLoansOptions,
 } from '../../../../../constants';
 
-import optionsGenarator from '../../../utils/options-genarator';
+import optionsGenarator from '../../../../utils/options-genarator';
 
 class LoansSection extends React.Component {
   static propTypes = {
