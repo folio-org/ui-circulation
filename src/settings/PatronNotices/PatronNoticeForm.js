@@ -21,8 +21,10 @@ import {
   Select,
   TextArea,
   TextField,
+  Icon,
 } from '@folio/stripes/components';
 import stripesForm from '@folio/stripes/form';
+import { IfPermission } from '@folio/stripes/core';
 
 import PatronNoticeEditor from './PatronNoticeEditor';
 // import PreviewModal from './PreviewModal';
@@ -69,6 +71,7 @@ class PatronNoticeForm extends React.Component {
     onSave: PropTypes.func,
     pristine: PropTypes.bool,
     submitting: PropTypes.bool,
+    permissions: PropTypes.object.isRequired,
   };
 
   constructor(props) {
@@ -174,13 +177,54 @@ class PatronNoticeForm extends React.Component {
     );
   }
 
+  renderActionMenuItems = ({ onToggle }) => {
+    const {
+      permissions,
+      onCancel,
+    } = this.props;
+
+    const handleDeleteClick = () => {
+      this.showConfirm();
+      onToggle();
+    };
+
+    const handleCancelClick = (e) => {
+      onCancel(e);
+      onToggle();
+    };
+
+    return (
+      <React.Fragment>
+        <Button
+          data-test-cancel-patron-notice-form-action
+          buttonStyle="dropdownItem"
+          onClick={handleCancelClick}
+        >
+          <Icon icon="times">
+            <FormattedMessage id="ui-circulation.settings.common.cancel" />
+          </Icon>
+        </Button>
+        <IfPermission perm={permissions.delete}>
+          <Button
+            data-test-delete-patron-notice-form-action
+            buttonStyle="dropdownItem"
+            onClick={handleDeleteClick}
+          >
+            <Icon icon="trash">
+              <FormattedMessage id="ui-circulation.settings.common.delete" />
+            </Icon>
+          </Button>
+        </IfPermission>
+      </React.Fragment>
+    );
+  };
+
   // Synchronous validation functions
   requireName = value => (value ? undefined : <FormattedMessage id="ui-circulation.settings.patronNotices.errors.nameRequired" />);
   requireCategory = value => (value ? undefined : <FormattedMessage id="ui-circulation.settings.patronNotices.errors.categoryRequired" />);
 
   render() {
-    const { handleSubmit, initialValues, pristine, submitting } = this.props;
-    const { confirming } = this.state;
+    const { handleSubmit, initialValues = {} } = this.props;
     const category = initialValues && initialValues.category;
     const isActive = initialValues && initialValues.active;
     const sortedCategories = sortBy(categories, ['label']);
@@ -190,6 +234,8 @@ class PatronNoticeForm extends React.Component {
       selected: category === id
     }));
 
+    const editMode = Boolean(initialValues.id);
+
     return (
       <form
         id="form-patron-notice"
@@ -197,7 +243,13 @@ class PatronNoticeForm extends React.Component {
         onSubmit={handleSubmit(this.save)}
       >
         <Paneset isRoot>
-          <Pane defaultWidth="100%" paneTitle={this.renderPaneTitle()} firstMenu={this.renderCLoseIcon()} lastMenu={this.renderSaveMenu()}>
+          <Pane
+            defaultWidth="100%"
+            paneTitle={this.renderPaneTitle()}
+            firstMenu={this.renderCLoseIcon()}
+            lastMenu={this.renderSaveMenu()}
+            {... editMode ? { actionMenu: this.renderActionMenuItems } : {}}
+          >
             <Row>
               <Col xs={8}>
                 <Field
@@ -298,22 +350,6 @@ class PatronNoticeForm extends React.Component {
                 </Row>
               </Accordion> */}
             </AccordionSet>
-            {initialValues && initialValues.id &&
-              <Row>
-                <Col xs={8}>
-                  <Button
-                    id="clickable-delete-patron-notice"
-                    type="button"
-                    buttonStyle="danger"
-                    onClick={this.showConfirm}
-                    marginBottom0
-                    disabled={!pristine || submitting || confirming || (initialValues && initialValues.predefined)}
-                  >
-                    <FormattedMessage id="ui-circulation.settings.patronNotices.deleteLabel" />
-                  </Button>
-                </Col>
-              </Row>
-            }
             { initialValues && initialValues.predefined &&
               <Row>
                 <Col xs={8}>
