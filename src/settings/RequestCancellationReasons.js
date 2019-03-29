@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 
 import { ControlledVocab } from '@folio/stripes/smart-components';
+import { stripesConnect } from '@folio/stripes/core';
+
 
 class RequestCancellationReasons extends React.Component {
   static propTypes = {
@@ -13,7 +15,6 @@ class RequestCancellationReasons extends React.Component {
 
   constructor(props) {
     super(props);
-
     this.connectedControlledVocab = props.stripes.connect(ControlledVocab);
   }
 
@@ -45,4 +46,4 @@ class RequestCancellationReasons extends React.Component {
   }
 }
 
-export default RequestCancellationReasons;
+export default stripesConnect(RequestCancellationReasons);
