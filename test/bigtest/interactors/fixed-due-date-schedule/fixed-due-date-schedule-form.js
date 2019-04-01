@@ -24,7 +24,7 @@ import DatepickerInteractor from '@folio/stripes-components/lib/Datepicker/tests
   remove = scoped('[data-test-schedule-remove] button');
 }
 
-@interactor class ShceduleSection {
+@interactor class ScheduleSection {
   static defaultScope = ('[data-test-fdds-form-schedule-section]');
 
   addSchedule = scoped('[data-test-add-schedule]');
@@ -36,7 +36,7 @@ import DatepickerInteractor from '@folio/stripes-components/lib/Datepicker/tests
   static defaultScope = ('[data-test-fdds-form]');
 
   generalSection = new GeneralSection();
-  scheduleSection = new ShceduleSection();
+  scheduleSection = new ScheduleSection();
 
   save = clickable('#clickable-save-entry');
   expandAll = scoped('[data-test-expand-all] button')

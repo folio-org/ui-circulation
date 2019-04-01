@@ -32,6 +32,8 @@ const hooks = {
   }
 };
 
+const priorityKeys = ['s', 'c', 'b', 'a'];
+
 function processToken(stream, state, parserConfig) {
   const {
     typeMapping,
@@ -80,7 +82,7 @@ function processToken(stream, state, parserConfig) {
     return 'keyword';
   }
 
-  if (typeKeys.indexOf(cur) !== -1) { // style types
+  if (typeKeys.indexOf(cur) !== -1 || priorityKeys.indexOf(cur) !== -1) { // style types
     state.keyProperty = cur;
     return cur;
   }
