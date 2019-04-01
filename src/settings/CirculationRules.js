@@ -181,7 +181,7 @@ class CirculationRules extends React.Component {
     const records = this.getRecords();
     return records.reduce((memo, r) => {
       // eslint-disable-next-line no-useless-escape
-      const re = new RegExp(`(${r.prefix}.*?)(${r.name})(?=.*[g\s+|m\s+|t\s+|l\s+|r\s+|n\s+|:\s*])?`, 'ig');
+      const re = new RegExp(`(${r.prefix}\\s+)(${r.name})(?=\\s+[g\s+|m\s+|t\s+|l\s+|r\s+|n\s+|:\s*])`, 'igm');
       return memo.replace(re, `$1${r.id}`);
     }, rulesStr);
   }
