@@ -98,7 +98,7 @@
     "settings.cancelReasons.labelShort": "Motivo de cancelamento*",
     "settings.cancelReasons.descriptionInternal": "Descrição (interna)",
     "settings.cancelReasons.descriptionPublic": "Descrição (público)",
-    "settings.staffSlips.previewLabel": "Preview of staff slip - Hold",
+    "settings.staffSlips.previewLabel": "Visualização da ficha de encaminhamento",
     "settings.staffSlips.yes": "Sim",
     "settings.staffSlips.no": "Não",
     "meta.title": "Circulação",
