@@ -118,7 +118,7 @@ describe('FddsForm', () => {
         });
 
         it('should have proper text', () => {
-          expect(FddsForm.scheduleSection.schedules(0).dateFrom.labelText).to.equal(
+          expect(FddsForm.scheduleSection.schedules(0).dateFrom.text).to.equal(
             translation['settings.fDDSform.dateFrom']
           );
         });
@@ -130,7 +130,7 @@ describe('FddsForm', () => {
         });
 
         it('should have proper text', () => {
-          expect(FddsForm.scheduleSection.schedules(0).dateTo.labelText).to.equal(
+          expect(FddsForm.scheduleSection.schedules(0).dateTo.text).to.equal(
             translation['settings.fDDSform.dateTo']
           );
         });
@@ -142,7 +142,7 @@ describe('FddsForm', () => {
         });
 
         it('should have proper text', () => {
-          expect(FddsForm.scheduleSection.schedules(0).dueDate.labelText).to.equal(
+          expect(FddsForm.scheduleSection.schedules(0).dueDate.text).to.equal(
             translation['settings.fDDSform.dueDate']
           );
         });
