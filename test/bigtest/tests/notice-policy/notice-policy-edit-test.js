@@ -57,5 +57,26 @@ describe('NoticePolicyEdit', () => {
         expect(NoticePolicyDetail.generalSection.name.value.text).to.equal(newNoticePolicyName);
       });
     });
+
+    describe('Cancel editing for pristine form ', () => {
+      beforeEach(async () => {
+        await NoticePolicyForm.cancelEditingNoticePolicy.click();
+      });
+
+      it('should not show cancel editing confirmation', () => {
+        expect(NoticePolicyForm.cancelEditingNoticePolicyModal.isPresent).to.be.false;
+      });
+    });
+
+    describe('Cancel editing on dirty form', () => {
+      beforeEach(async () => {
+        await NoticePolicyForm.generalSection.policyName.fillAndBlur(newNoticePolicyName);
+        await NoticePolicyForm.cancelEditingNoticePolicy.click();
+      });
+
+      it('should show cancel editing confirmation', () => {
+        expect(NoticePolicyForm.cancelEditingNoticePolicyModal.isPresent).to.be.true;
+      });
+    });
   });
 });

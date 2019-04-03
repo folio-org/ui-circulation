@@ -71,6 +71,8 @@ import Period from '../Period';
   deleteNoticePolicyModal = new Interactor('#delete-item-confirmation');
   deleteNoticePolicyCancel= new Interactor('[data-test-confirmation-modal-cancel-button]');
   deleteNoticePolicyConfirm = new Interactor('[data-test-confirmation-modal-confirm-button]');
+  cancelEditingNoticePolicy = new Interactor('[data-test-cancel-user-form-action]');
+  cancelEditingNoticePolicyModal = new Interactor('#cancel-editing-confirmation');
 
   save = clickable('#clickable-save-entry');
   expandAll = scoped('[data-test-expand-all] button')
