@@ -33,26 +33,43 @@ class HeaderPane extends React.Component {
   renderActionMenuItems = ({ onToggle }) => {
     const {
       permissions,
+      onCancel,
       onRemove,
     } = this.props;
 
-    const handleClick = () => {
+    const handleDeleteClick = () => {
       onRemove(true);
       onToggle();
     };
 
+    const handleCancelClick = (e) => {
+      onCancel(e);
+      onToggle();
+    };
+
     return (
-      <IfPermission perm={permissions.delete}>
+      <React.Fragment>
         <Button
           data-test-cancel-user-form-action
           buttonStyle="dropdownItem"
-          onClick={handleClick}
+          onClick={handleCancelClick}
         >
-          <Icon icon="trash">
-            <FormattedMessage id="ui-circulation.settings.common.delete" />
+          <Icon icon="times">
+            <FormattedMessage id="ui-circulation.settings.common.cancel" />
           </Icon>
         </Button>
-      </IfPermission>
+        <IfPermission perm={permissions.delete}>
+          <Button
+            data-test-delete-user-form-action
+            buttonStyle="dropdownItem"
+            onClick={handleDeleteClick}
+          >
+            <Icon icon="trash">
+              <FormattedMessage id="ui-circulation.settings.common.delete" />
+            </Icon>
+          </Button>
+        </IfPermission>
+      </React.Fragment>
     );
   };
 

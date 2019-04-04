@@ -67,10 +67,12 @@ import Period from '../Period';
   generalSection = new GeneralSection();
   loanNoticesSection = new NoticesSection('[data-test-notice-policy-form-loan-notices-section]');
   requestNoticesSection = new NoticesSection('[data-test-notice-policy-form-request-notices-section]');
-  deleteNoticePolicy = new Interactor('[data-test-cancel-user-form-action]');
+  deleteNoticePolicy = new Interactor('[data-test-delete-user-form-action]');
   deleteNoticePolicyModal = new Interactor('#delete-item-confirmation');
   deleteNoticePolicyCancel= new Interactor('[data-test-confirmation-modal-cancel-button]');
   deleteNoticePolicyConfirm = new Interactor('[data-test-confirmation-modal-confirm-button]');
+  cancelEditingNoticePolicy = new Interactor('[data-test-cancel-user-form-action]');
+  cancelEditingNoticePolicyModal = new Interactor('#cancel-editing-confirmation');
 
   save = clickable('#clickable-save-entry');
   expandAll = scoped('[data-test-expand-all] button')
