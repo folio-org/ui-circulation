@@ -251,7 +251,10 @@ class PatronNoticeForm extends React.Component {
             {... editMode ? { actionMenu: this.renderActionMenuItems } : {}}
           >
             <Row>
-              <Col xs={8}>
+              <Col
+                xs={8}
+                data-test-patron-notice-template-name
+              >
                 <Field
                   label={<FormattedMessage id="ui-circulation.settings.patronNotices.notice.name" />}
                   name="name"
@@ -358,6 +361,7 @@ class PatronNoticeForm extends React.Component {
               </Row>
             }
             <ConfirmationModal
+              id="delete-item-confirmation"
               open={this.state.confirming}
               heading={<FormattedMessage id="ui-circulation.settings.patronNotices.deleteHeading" />}
               message={<FormattedMessage id="ui-circulation.settings.patronNotices.deleteConfirm" />}
