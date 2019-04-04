@@ -141,7 +141,6 @@
   "settings.patronNotices.newLabel": "New patron notice",
   "settings.patronNotices.saveLabel": "Save",
   "settings.patronNotices.saveNewLabel": "Save new",
-  "settings.patronNotices.deleteLabel": "Delete this notice",
   "settings.patronNotices.deleteHeading": "Confirm delete",
   "settings.patronNotices.deleteConfirm": "Are you sure you want to delete this patron notice?",
   "settings.patronNotices.predefinedWarning": "This is a predefined notice and cannot be deleted",
