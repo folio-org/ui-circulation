@@ -61,7 +61,6 @@ export const BEGINNING_OF_THE_NEXT_OPEN_SERVICE_POINT_HOURS = 'BEGINNING_OF_THE_
 export const CURRENT_DUE_DATE = 'CURRENT_DUE_DATE';
 export const END_OF_THE_PREVIOUS_OPEN_DAY = 'END_OF_THE_PREVIOUS_OPEN_DAY';
 export const END_OF_THE_NEXT_OPEN_DAY = 'END_OF_THE_NEXT_OPEN_DAY';
-export const END_OF_THE_CURRENT_DAY = 'END_OF_THE_CURRENT_DAY';
 
 export const shortTermLoansOptions = [
   {
@@ -96,11 +95,6 @@ export const longTermLoansOptions = [
     label: 'ui-circulation.settings.loanPolicy.longTermLoan.endOfTheNextOpenDay',
     id: END_OF_THE_NEXT_OPEN_DAY,
     value: END_OF_THE_NEXT_OPEN_DAY,
-  },
-  {
-    label: 'ui-circulation.settings.loanPolicy.longTermLoan.endOfTheCurrentDay',
-    id: END_OF_THE_CURRENT_DAY,
-    value: END_OF_THE_CURRENT_DAY,
   },
 ];
 

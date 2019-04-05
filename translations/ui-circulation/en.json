@@ -64,7 +64,6 @@
   "settings.loanPolicy.longTermLoan.currentDueDate": "Keep the current due date",
   "settings.loanPolicy.longTermLoan.endOfThePreviousOpenDay": "Move to the end of the previous open day",
   "settings.loanPolicy.longTermLoan.endOfTheNextOpenDay": "Move to the end of the next open day",
-  "settings.loanPolicy.longTermLoan.endOfTheCurrentDay": "Move to the end of the current day",
 
   "settings.circulationRules.paneTitle": "Circulation Rules Editor",
   "settings.circulationRules.rulesUpdated": "Rules were successfully updated.",

@@ -463,9 +463,7 @@ describe('NoticePolicyDetail', () => {
 
             it('should have a proper value', () => {
               expect(NoticePolicyDetail.loanNoticesSection.loanNotices(0).sendEveryIntervalId.text).to.equal(
-                translation[
-                  `settings.noticePolicy.notices.${noticePolicy.loanNotices[0].sendOptions.sendEvery.intervalId.toLowerCase()}`
-                ]
+                translation['settings.common.hours']
               );
             });
           });
@@ -577,9 +575,7 @@ describe('NoticePolicyDetail', () => {
 
             it('should have a proper value', () => {
               expect(NoticePolicyDetail.loanNoticesSection.loanNotices(0).sendByIntervalId.text).to.equal(
-                translation[
-                  `settings.noticePolicy.notices.${noticePolicy.loanNotices[0].sendOptions.sendBy.intervalId.toLowerCase()}`
-                ]
+                translation['settings.common.hours']
               );
             });
           });
@@ -643,9 +639,7 @@ describe('NoticePolicyDetail', () => {
 
             it('should have a proper value', () => {
               expect(NoticePolicyDetail.loanNoticesSection.loanNotices(0).sendByIntervalId.text).to.equal(
-                translation[
-                  `settings.noticePolicy.notices.${noticePolicy.loanNotices[0].sendOptions.sendBy.intervalId.toLowerCase()}`
-                ]
+                translation['settings.common.hours']
               );
             });
           });

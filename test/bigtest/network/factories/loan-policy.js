@@ -4,7 +4,7 @@ import {
 } from '@bigtest/mirage';
 
 import { // eslint-disable-line import/no-extraneous-dependencies
-  intervalIdsMap,
+  intervalPeriods,
   loanProfileMap,
   renewFromOptions,
   longTermLoansOptions,
@@ -13,7 +13,7 @@ import { // eslint-disable-line import/no-extraneous-dependencies
 
 export const getPeriod = {
   duration: () => faker.random.number(),
-  intervalId: () => faker.random.arrayElement(Object.values(intervalIdsMap)),
+  intervalId: () => faker.random.arrayElement(intervalPeriods).value,
 };
 
 export default Factory.extend({

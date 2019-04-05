@@ -17,6 +17,7 @@ import LoanPolicyDetail from '../../interactors/loan-policy/loan-policy-detail';
 import {
   getBooleanRepresentation,
   getOptionsRepresentation,
+  getPeriodRepresentation,
 } from '../../helpers/messageСonverters';
 
 describe('LoanPolicyDetail', () => {
@@ -191,9 +192,8 @@ describe('LoanPolicyDetail', () => {
           });
 
           it('should have a proper value', () => {
-            expect(LoanPolicyDetail.loansSection.gracePeriod.value.text).to.equal(
-              `${loanPolicy.loansPolicy.gracePeriod.duration} ${loanPolicy.loansPolicy.gracePeriod.intervalId}`
-            );
+            const period = getPeriodRepresentation(loanPolicy.loansPolicy.gracePeriod);
+            expect(LoanPolicyDetail.loansSection.gracePeriod.value.text).to.equal(period);
           });
         });
       });
@@ -221,9 +221,8 @@ describe('LoanPolicyDetail', () => {
           });
 
           it('should have a proper value', () => {
-            expect(LoanPolicyDetail.loansSection.loanPeriod.value.text).to.equal(
-              `${loanPolicy.loansPolicy.period.duration} ${loanPolicy.loansPolicy.period.intervalId}`
-            );
+            const period = getPeriodRepresentation(loanPolicy.loansPolicy.period);
+            expect(LoanPolicyDetail.loansSection.loanPeriod.value.text).to.equal(period);
           });
         });
 
@@ -304,9 +303,8 @@ describe('LoanPolicyDetail', () => {
           });
 
           it('should have a proper value', () => {
-            expect(LoanPolicyDetail.loansSection.openingTimeOffset.value.text).to.equal(
-              `${loanPolicy.loansPolicy.openingTimeOffset.duration} ${loanPolicy.loansPolicy.openingTimeOffset.intervalId}`
-            );
+            const period = getPeriodRepresentation(loanPolicy.loansPolicy.openingTimeOffset);
+            expect(LoanPolicyDetail.loansSection.openingTimeOffset.value.text).to.equal(period);
           });
         });
       });
@@ -429,9 +427,8 @@ describe('LoanPolicyDetail', () => {
           });
 
           it('should have a proper value', () => {
-            expect(LoanPolicyDetail.renewalsSection.alternateLoanPeriodRenewals.value.text).to.equal(
-              `${loanPolicy.renewalsPolicy.period.duration} ${loanPolicy.renewalsPolicy.period.intervalId}`
-            );
+            const period = getPeriodRepresentation(loanPolicy.renewalsPolicy.period);
+            expect(LoanPolicyDetail.renewalsSection.alternateLoanPeriodRenewals.value.text).to.equal(period);
           });
         });
 
@@ -621,9 +618,8 @@ describe('LoanPolicyDetail', () => {
             });
 
             it('should have a proper value', () => {
-              expect(LoanPolicyDetail.requestManagement.recallReturnInterval.value.text).to.equal(
-                `${loanPolicy.requestManagement.recalls.recallReturnInterval.duration} ${loanPolicy.requestManagement.recalls.recallReturnInterval.intervalId}`
-              );
+              const period = getPeriodRepresentation(loanPolicy.requestManagement.recalls.recallReturnInterval);
+              expect(LoanPolicyDetail.requestManagement.recallReturnInterval.value.text).to.equal(period);
             });
           });
 
@@ -637,9 +633,8 @@ describe('LoanPolicyDetail', () => {
             });
 
             it('should have a proper value', () => {
-              expect(LoanPolicyDetail.requestManagement.minimumGuaranteedLoanPeriod.value.text).to.equal(
-                `${loanPolicy.requestManagement.recalls.minimumGuaranteedLoanPeriod.duration} ${loanPolicy.requestManagement.recalls.minimumGuaranteedLoanPeriod.intervalId}`
-              );
+              const period = getPeriodRepresentation(loanPolicy.requestManagement.recalls.minimumGuaranteedLoanPeriod);
+              expect(LoanPolicyDetail.requestManagement.minimumGuaranteedLoanPeriod.value.text).to.equal(period);
             });
           });
         });
@@ -655,9 +650,8 @@ describe('LoanPolicyDetail', () => {
             });
 
             it('should have a proper value', () => {
-              expect(LoanPolicyDetail.requestManagement.alternateCheckoutLoanPeriod.value.text).to.equal(
-                `${loanPolicy.requestManagement.holds.alternateCheckoutLoanPeriod.duration} ${loanPolicy.requestManagement.holds.alternateCheckoutLoanPeriod.intervalId}`
-              );
+              const period = getPeriodRepresentation(loanPolicy.requestManagement.holds.alternateCheckoutLoanPeriod);
+              expect(LoanPolicyDetail.requestManagement.alternateCheckoutLoanPeriod.value.text).to.equal(period);
             });
           });
 
@@ -687,9 +681,8 @@ describe('LoanPolicyDetail', () => {
             });
 
             it('should have a proper value', () => {
-              expect(LoanPolicyDetail.requestManagement.alternateRenewalLoanPeriod.value.text).to.equal(
-                `${loanPolicy.requestManagement.holds.alternateRenewalLoanPeriod.duration} ${loanPolicy.requestManagement.holds.alternateRenewalLoanPeriod.intervalId}`
-              );
+              const period = getPeriodRepresentation(loanPolicy.requestManagement.holds.alternateRenewalLoanPeriod);
+              expect(LoanPolicyDetail.requestManagement.alternateRenewalLoanPeriod.value.text).to.equal(period);
             });
           });
         });

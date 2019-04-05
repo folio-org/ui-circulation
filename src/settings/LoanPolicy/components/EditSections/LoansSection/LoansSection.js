@@ -25,7 +25,7 @@ import optionsGenarator from '../../../../utils/options-genarator';
 
 class LoansSection extends React.Component {
   static propTypes = {
-    intl: intlShape,
+    intl: intlShape.isRequired,
     policy: PropTypes.object.isRequired,
     schedules: PropTypes.arrayOf(PropTypes.node).isRequired,
     change: PropTypes.func.isRequired,
