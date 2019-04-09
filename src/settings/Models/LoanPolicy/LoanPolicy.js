@@ -7,7 +7,6 @@ import RenewalsPolicy from './RenewalsPolicy';
 import RequestManagement from './RequestManagement';
 import LoansPolicy from './LoansPolicy';
 import { Metadata } from '../common';
-import { defaultLoanPolicy } from './utils';
 import {
   intervalIdsMap,
   loanProfileMap,
@@ -16,7 +15,10 @@ import {
 
 export default class LoanPolicy {
   static defaultLoanPolicy() {
-    return defaultLoanPolicy;
+    return {
+      loanable: true,
+      renewable: true,
+    };
   }
 
   constructor(policy = {}) {
@@ -89,21 +91,5 @@ export default class LoanPolicy {
 
   isRenewalsPolicyPeriodRequired() {
     return this.isProfileRolling() && this.renewable && this.renewalsPolicy.differentPeriod;
-  }
-
-  shouldInitLoansPolicy() {
-    const invalidState = !this.loansPolicy.defaultsSelected && !this.loansPolicy.additionalFieldsSelected;
-
-    return !this.isLoanable() && invalidState;
-  }
-
-  shouldInitRenewalsPolicy() {
-    const invalidState = !this.renewalsPolicy.defaultsSelected && !this.renewalsPolicy.additionalFieldsSelected;
-
-    return !this.isRenewable() && invalidState;
-  }
-
-  shouldInitRequestManagement() {
-    return !this.requestManagement.defaultsSelected && !this.requestManagement.additionalFieldsSelected;
   }
 }

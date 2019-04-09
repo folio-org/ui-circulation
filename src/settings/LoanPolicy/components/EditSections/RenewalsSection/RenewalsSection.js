@@ -1,7 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage } from 'react-intl';
 import { Field } from 'redux-form';
+import {
+  injectIntl,
+  intlShape,
+  FormattedMessage,
+} from 'react-intl';
 
 import {
   Checkbox,
@@ -9,21 +13,26 @@ import {
   TextField,
 } from '@folio/stripes/components';
 
+import optionsGenarator from '../../../../utils/options-genarator';
 import { Period } from '../../../../components';
-import { defaultLoanPolicy } from '../../../../Models/LoanPolicy/utils';
-import withSectionDefaults from '../withSectionDefaults';
 import {
   intervalPeriods,
-  intervalIdsMap,
   renewFromOptions,
 } from '../../../../../constants';
 
 class RenewalsSection extends React.Component {
   static propTypes = {
+    intl: intlShape.isRequired,
     policy: PropTypes.object.isRequired,
     schedules: PropTypes.arrayOf(PropTypes.node).isRequired,
     change: PropTypes.func.isRequired,
   };
+
+  constructor(props) {
+    super(props);
+
+    this.genarateOptions = optionsGenarator.bind(null, this.props.intl.formatMessage);
+  }
 
   render() {
     const {
@@ -69,7 +78,6 @@ class RenewalsSection extends React.Component {
         }
         { policy.isRenewable() && !policy.isUnlimitedRenewals() &&
           <React.Fragment>
-            <br />
             <div data-test-renewals-section-num-renewals-allowed>
               <Field
                 label={(
@@ -88,15 +96,19 @@ class RenewalsSection extends React.Component {
         }
         { policy.isRenewable() && policy.isProfileRolling() &&
           <React.Fragment>
-            <br />
             <div data-test-renewals-section-renew-from>
               <Field
-                label={<FormattedMessage id="ui-circulation.settings.loanPolicy.renewFrom" />}
+                label={(
+                  <FormattedMessage id="ui-circulation.settings.loanPolicy.renewFrom">
+                    { message => `${message} *`}
+                  </FormattedMessage>
+                )}
                 name="renewalsPolicy.renewFromId"
                 id="select_renew_from"
                 component={Select}
-                dataOptions={renewFromOptions}
-              />
+              >
+                {this.genarateOptions(renewFromOptions, 'ui-circulation.settings.common.pleaseSelect')}
+              </Field>
             </div>
           </React.Fragment>
         }
@@ -118,10 +130,9 @@ class RenewalsSection extends React.Component {
             <div data-test-renewals-section-alternate-loan-period-renewals>
               <Period
                 fieldLabel="ui-circulation.settings.loanPolicy.alternateLoanPeriodRenewals"
-                selectPlaceholder="ui-circulation.settings.loanPolicy.selectInterval"
                 inputValuePath="renewalsPolicy.period.duration"
                 selectValuePath="renewalsPolicy.period.intervalId"
-                intervalPeriods={intervalPeriods}
+                intervalPeriods={this.genarateOptions(intervalPeriods, 'ui-circulation.settings.loanPolicy.selectInterval')}
                 changeFormValue={change}
                 required
               />
@@ -145,9 +156,4 @@ class RenewalsSection extends React.Component {
   }
 }
 
-export default withSectionDefaults({
-  component: RenewalsSection,
-  checkMethodName: 'shouldInitRenewalsPolicy',
-  sectionsDefaults: { 'renewalsPolicy': defaultLoanPolicy.renewalsPolicy },
-  dropdownDefaults: { 'renewalsPolicy.period': { intervalId: intervalIdsMap.DAYS } }
-});
+export default injectIntl(RenewalsSection);

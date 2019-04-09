@@ -19,7 +19,6 @@ const AboutSection = () => (
             {message => `${message} *`}
           </FormattedMessage>
         )}
-        autoFocus
         component={TextField}
         name="name"
         id="input_policy_name"

@@ -12,5 +12,9 @@ export default function (loanPolicy) {
       rules: ['isNotEmpty'],
       shouldValidate: loanPolicy.isNumberOfRenewalsAllowedActive(),
     },
+    'renewalsPolicy.renewFromId': {
+      rules: ['isNotEmptySelect'],
+      shouldValidate: loanPolicy.isRenewable() && loanPolicy.isProfileRolling(),
+    },
   };
 }

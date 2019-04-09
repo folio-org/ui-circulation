@@ -1,14 +1,8 @@
+import helpers from './utils';
 import { Period } from '../common';
 import {
-  defaultLoanPolicy,
-  helpers,
-} from './utils';
-import {
-  intervalIdsMap,
   shortTermLoansOptions,
   longTermLoansOptions,
-  CURRENT_DUE_DATE_TIME,
-  CURRENT_DUE_DATE,
 } from '../../../constants';
 
 export default class LoansPolicy {
@@ -17,16 +11,8 @@ export default class LoansPolicy {
     this.closedLibraryDueDateManagementId = policy.closedLibraryDueDateManagementId;
     this.fixedDueDateScheduleId = policy.fixedDueDateScheduleId;
     this.period = new Period(policy.period);
-    this.gracePeriod = new Period(policy.gracePeriod || { intervalId: intervalIdsMap.HOURS });
-    this.openingTimeOffset = new Period(policy.openingTimeOffset || { intervalId: intervalIdsMap.HOURS });
-  }
-
-  get defaultsSelected() {
-    return helpers.isDefaultsSelected(this, defaultLoanPolicy.loansPolicy);
-  }
-
-  get additionalFieldsSelected() {
-    return helpers.additionalFieldsSelected(this, defaultLoanPolicy.loansPolicy);
+    this.gracePeriod = new Period(policy.gracePeriod);
+    this.openingTimeOffset = new Period(policy.openingTimeOffset);
   }
 
   // set correct closedLibraryDueDateManagementId
@@ -36,11 +22,11 @@ export default class LoansPolicy {
     const isValidLongTermLoanValue = helpers.isValidItemSelected(longTermLoansOptions, selectedId);
 
     if (isShortTermLoan && !isValidShortTermLoanValue) {
-      this.closedLibraryDueDateManagementId = CURRENT_DUE_DATE_TIME;
+      this.closedLibraryDueDateManagementId = '';
     }
 
     if (!isShortTermLoan && !isValidLongTermLoanValue) {
-      this.closedLibraryDueDateManagementId = CURRENT_DUE_DATE;
+      this.closedLibraryDueDateManagementId = '';
     }
   }
 }
