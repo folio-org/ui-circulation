@@ -26,10 +26,7 @@ import {
 import LoanPolicy from '../Models/LoanPolicy';
 import { normalize } from './utils/normalize';
 
-import {
-  HeaderPane,
-  DeleteEntry,
-} from './components';
+import { HeaderPane } from './components';
 
 import {
   AboutSection,
@@ -38,7 +35,10 @@ import {
   RequestManagementSection,
 } from './components/EditSections';
 
-import { Metadata } from '../components';
+import {
+  DeleteConfirmationModal,
+  Metadata,
+} from '../components';
 
 class LoanPolicyForm extends React.Component {
   static propTypes = {
@@ -153,9 +153,12 @@ class LoanPolicyForm extends React.Component {
         <Paneset isRoot>
           <HeaderPane
             editMode={editMode}
+            entryTitle={policy.name}
             pristine={pristine}
             submitting={submitting}
+            permissions={permissions}
             onCancel={onCancel}
+            onRemove={this.changeDeleteState}
           >
             <React.Fragment>
               <Row end="xs">
@@ -175,12 +178,10 @@ class LoanPolicyForm extends React.Component {
                 label={<FormattedMessage id="ui-circulation.settings.loanPolicy.generalInformation" />}
                 onToggle={this.handleSectionToggle}
               >
-                <div>
-                  <Metadata
-                    connect={stripes.connect}
-                    metadata={policy.metadata}
-                  />
-                </div>
+                <Metadata
+                  connect={stripes.connect}
+                  metadata={policy.metadata}
+                />
                 <AboutSection />
                 <LoansSection
                   policy={policy}
@@ -201,13 +202,14 @@ class LoanPolicyForm extends React.Component {
                 />
               </Accordion>
               {editMode &&
-                <DeleteEntry
+                <DeleteConfirmationModal
                   isOpen={confirmDelete}
+                  triggerSubmitSucceeded
                   policyName={policy.name}
+                  formName="loanPolicyForm"
+                  deleteEntityKey="ui-circulation.settings.noticePolicy.deleteLoanPolicy"
                   initialValues={initialValues}
-                  perm={permissions.delete}
-                  deleteEntityKey="ui-circulation.settings.loanPolicy.deleteLoanPolicy"
-                  onRemoveStatusChange={this.changeDeleteState}
+                  onCancel={this.changeDeleteState}
                   onRemove={onRemove}
                 />
               }

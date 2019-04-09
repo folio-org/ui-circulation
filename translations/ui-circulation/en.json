@@ -16,7 +16,6 @@
 
   "settings.loanPolicy.entryLabel": "Loan Policy",
   "settings.loanPolicy.paneTitle": "Loan Policies",
-  "settings.loanPolicy.editEntryLabel": "Edit Loan Policy",
   "settings.loanPolicy.saveAndClose": "Save and Close",
   "settings.loanPolicy.deleteLoanPolicy": "Delete Loan Policy",
   "settings.loanPolicy.createEntryLabel": "Create Loan Policy",
