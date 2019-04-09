@@ -22,9 +22,8 @@ describe('LoanPolicyEdit', () => {
 
     describe('updating an existing loan policy', () => {
       beforeEach(async function () {
-        await LoanPolicyForm.aboutSection.policyNameValue.fill(newLoanPolicyName)
-          .loansSection.loanPeriod.duration.fillAndBlur(2)
-          .renewalsSection.numRenewalsAllowed.fillAndBlur(1)
+        await LoanPolicyForm.aboutSection.policyNameValue
+          .fill(newLoanPolicyName)
           .save();
       });
 

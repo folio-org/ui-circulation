@@ -1,17 +1,20 @@
 // These next sets are temporary Select list options for LoanPolicyDetail.js
 // The idea is to eventually replace them with small, controlled vocabularies
 // on the server side.
-export const loanProfileTypes = [
-  { label: 'Fixed', value: 'Fixed' },
-  { label: 'Rolling', value: 'Rolling' },
-];
+export const loanProfileTypeIdsMap = {
+  FIXED: 'Fixed',
+  ROLLING: 'Rolling',
+};
 
-export const intervalPeriods = [
-  { label: 'Minutes', id: 1, value: 'Minutes' },
-  { label: 'Hours', id: 2, value: 'Hours' },
-  { label: 'Days', id: 3, value: 'Days' },
-  { label: 'Weeks', id: 4, value: 'Weeks' },
-  { label: 'Months', id: 5, value: 'Months' },
+export const loanProfileTypes = [
+  {
+    label: 'ui-circulation.settings.loanPolicy.profileType.fixed',
+    value: loanProfileTypeIdsMap.FIXED,
+  },
+  {
+    label: 'ui-circulation.settings.loanPolicy.profileType.rolling',
+    value: loanProfileTypeIdsMap.ROLLING,
+  },
 ];
 
 export const intervalIdsMap = {
@@ -22,6 +25,29 @@ export const intervalIdsMap = {
   MONTHS: 'Months',
   YEARS: 'Years',
 };
+
+export const intervalPeriods = [
+  {
+    value: intervalIdsMap.MINUTES,
+    label: 'ui-circulation.settings.common.minutes',
+  },
+  {
+    value: intervalIdsMap.HOURS,
+    label: 'ui-circulation.settings.common.hours',
+  },
+  {
+    value: intervalIdsMap.DAYS,
+    label: 'ui-circulation.settings.common.days',
+  },
+  {
+    value: intervalIdsMap.WEEKS,
+    label: 'ui-circulation.settings.common.weeks',
+  },
+  {
+    value: intervalIdsMap.MONTHS,
+    label: 'ui-circulation.settings.common.months',
+  },
+];
 
 export const loanProfileMap = {
   FIXED: 'Fixed',
@@ -35,21 +61,20 @@ export const BEGINNING_OF_THE_NEXT_OPEN_SERVICE_POINT_HOURS = 'BEGINNING_OF_THE_
 export const CURRENT_DUE_DATE = 'CURRENT_DUE_DATE';
 export const END_OF_THE_PREVIOUS_OPEN_DAY = 'END_OF_THE_PREVIOUS_OPEN_DAY';
 export const END_OF_THE_NEXT_OPEN_DAY = 'END_OF_THE_NEXT_OPEN_DAY';
-export const END_OF_THE_CURRENT_DAY = 'END_OF_THE_CURRENT_DAY';
 
 export const shortTermLoansOptions = [
   {
-    label: 'Keep the current due date/time',
+    label: 'ui-circulation.settings.loanPolicy.shortTermLoan.currentDueDateTime',
     id: CURRENT_DUE_DATE_TIME,
     value: CURRENT_DUE_DATE_TIME,
   },
   {
-    label: 'Move to the end of the current service point hours',
+    label: 'ui-circulation.settings.loanPolicy.shortTermLoan.endOfTheCurrentServicePointHours',
     id: END_OF_THE_CURRENT_SERVICE_POINT_HOURS,
     value: END_OF_THE_CURRENT_SERVICE_POINT_HOURS,
   },
   {
-    label: 'Move to the beginning of the next open service point hours',
+    label: 'ui-circulation.settings.loanPolicy.shortTermLoan.beginningOhTheNextOpenServicePointHours',
     id: BEGINNING_OF_THE_NEXT_OPEN_SERVICE_POINT_HOURS,
     value: BEGINNING_OF_THE_NEXT_OPEN_SERVICE_POINT_HOURS,
   },
@@ -57,36 +82,39 @@ export const shortTermLoansOptions = [
 
 export const longTermLoansOptions = [
   {
-    label: 'Keep the current due date',
+    label: 'ui-circulation.settings.loanPolicy.longTermLoan.currentDueDate',
     id: CURRENT_DUE_DATE,
     value: CURRENT_DUE_DATE,
   },
   {
-    label: 'Move to the end of the previous open day',
+    label: 'ui-circulation.settings.loanPolicy.longTermLoan.endOfThePreviousOpenDay',
     id: END_OF_THE_PREVIOUS_OPEN_DAY,
     value: END_OF_THE_PREVIOUS_OPEN_DAY,
   },
   {
-    label: 'Move to the end of the next open day',
+    label: 'ui-circulation.settings.loanPolicy.longTermLoan.endOfTheNextOpenDay',
     id: END_OF_THE_NEXT_OPEN_DAY,
     value: END_OF_THE_NEXT_OPEN_DAY,
   },
-  {
-    label: 'Move to the end of the current day',
-    id: END_OF_THE_CURRENT_DAY,
-    value: END_OF_THE_CURRENT_DAY,
-  },
-];
-
-export const renewFromOptions = [
-  { label: 'Current due date', id: 1, value: 'CURRENT_DUE_DATE' },
-  { label: 'System date', id: 2, value: 'SYSTEM_DATE' },
 ];
 
 export const renewFromIds = {
   CURRENT_DUE_DATE: 'CURRENT_DUE_DATE',
   SYSTEM_DATE: 'SYSTEM_DATE',
 };
+
+export const renewFromOptions = [
+  {
+    label: 'ui-circulation.settings.loanPolicy.renewFrom.currentDueDate',
+    id: renewFromIds.CURRENT_DUE_DATE,
+    value: renewFromIds.CURRENT_DUE_DATE,
+  },
+  {
+    label: 'ui-circulation.settings.loanPolicy.renewFrom.systemDate',
+    id: renewFromIds.SYSTEM_DATE,
+    value: renewFromIds.SYSTEM_DATE,
+  },
+];
 
 export const patronIdentifierTypes = [
   { key: 'BARCODE', label: 'Barcode', queryKey: 'barcode' },
@@ -150,29 +178,10 @@ export const noticesSendEvent = [
 ];
 
 export const noticesIntervalPeriods = [
-  {
-    value: intervalIdsMap.MINUTES,
-    label: 'ui-circulation.settings.noticePolicy.notices.minutes',
-  },
-  {
-    value: intervalIdsMap.HOURS,
-    label: 'ui-circulation.settings.noticePolicy.notices.hours',
-  },
-  {
-    value: intervalIdsMap.DAYS,
-    label: 'ui-circulation.settings.noticePolicy.notices.days',
-  },
-  {
-    value: intervalIdsMap.WEEKS,
-    label: 'ui-circulation.settings.noticePolicy.notices.weeks',
-  },
-  {
-    value: intervalIdsMap.MONTHS,
-    label: 'ui-circulation.settings.noticePolicy.notices.months',
-  },
+  ...intervalPeriods,
   {
     value: intervalIdsMap.YEARS,
-    label: 'ui-circulation.settings.noticePolicy.notices.years',
+    label: 'ui-circulation.settings.common.years',
   },
 ];
 

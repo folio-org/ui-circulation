@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
-import { map } from 'lodash';
 import {
   intlShape,
   injectIntl,
@@ -25,6 +24,8 @@ import {
   noticesIntervalPeriods,
 } from '../../../../../../constants';
 
+import optionsGenarator from '../../../../../utils/options-genarator';
+
 import css from './NoticeCard.css';
 
 class NoticeCard extends React.Component {
@@ -45,14 +46,11 @@ class NoticeCard extends React.Component {
     onRemoveNotice: PropTypes.func.isRequired,
   };
 
-  getDropdownItems = (items) => {
-    const { intl } = this.props;
+  constructor(props) {
+    super(props);
 
-    return map(items, ({ value, label }) => ({
-      value,
-      label: intl.formatMessage({ id: label }),
-    }));
-  };
+    this.generateOptions = optionsGenarator.bind(null, this.props.intl.formatMessage);
+  }
 
   onRemove = () => {
     const {
@@ -65,6 +63,7 @@ class NoticeCard extends React.Component {
 
   render() {
     const {
+      intl,
       noticeIndex,
       pathToNotice,
       notice,
@@ -72,6 +71,8 @@ class NoticeCard extends React.Component {
       templates,
       triggeringEvents,
     } = this.props;
+
+    const blankPlaceholder = intl.formatMessage({ id: 'ui-circulation.settings.common.blankPlaceholder' });
 
     return (
       <Row data-test-notice-card>
@@ -122,7 +123,7 @@ class NoticeCard extends React.Component {
                     )}
                     component={Select}
                     dataOptions={templates}
-                    placeholder=" "
+                    placeholder={blankPlaceholder}
                   />
                 </Col>
                 <Col
@@ -145,9 +146,10 @@ class NoticeCard extends React.Component {
                       </FormattedMessage>
                     )}
                     component={Select}
-                    dataOptions={this.getDropdownItems(noticesFormats)}
-                    placeholder=" "
-                  />
+                    placeholder={blankPlaceholder}
+                  >
+                    {this.generateOptions(noticesFormats)}
+                  </Field>
                 </Col>
                 <Col
                   xs={3}
@@ -162,9 +164,10 @@ class NoticeCard extends React.Component {
                       </FormattedMessage>
                     )}
                     component={Select}
-                    dataOptions={this.getDropdownItems(triggeringEvents)}
-                    placeholder=" "
-                  />
+                    placeholder={blankPlaceholder}
+                  >
+                    {this.generateOptions(triggeringEvents)}
+                  </Field>
                 </Col>
               </Row>
               {notice.sendOptions.isTimeBasedEventSelected(timeBasedEventsIds) && (
@@ -188,9 +191,10 @@ class NoticeCard extends React.Component {
                       <Field
                         name={`${pathToNotice}.sendOptions.sendHow`}
                         component={Select}
-                        dataOptions={this.getDropdownItems(noticesSendEvent)}
-                        placeholder=" "
-                      />
+                        placeholder={blankPlaceholder}
+                      >
+                        {this.generateOptions(noticesSendEvent)}
+                      </Field>
                     </Col>
                     {notice.sendOptions.isBeforeOrAfter() && (
                       <React.Fragment>
@@ -207,12 +211,12 @@ class NoticeCard extends React.Component {
                           data-test-notice-card-send-by
                         >
                           <Period
-                            emptySelectPlaceholder
                             inputSize={6}
                             selectSize={6}
+                            selectPlaceholder="ui-circulation.settings.common.blankPlaceholder"
                             inputValuePath={`${pathToNotice}.sendOptions.sendBy.duration`}
                             selectValuePath={`${pathToNotice}.sendOptions.sendBy.intervalId`}
-                            intervalPeriods={this.getDropdownItems(noticesIntervalPeriods)}
+                            intervalPeriods={this.generateOptions(noticesIntervalPeriods)}
                           />
                         </Col>
                       </React.Fragment>
@@ -239,9 +243,10 @@ class NoticeCard extends React.Component {
                         <Field
                           name={`${pathToNotice}.frequency`}
                           component={Select}
-                          dataOptions={this.getDropdownItems(noticesFrequency)}
-                          placeholder=" "
-                        />
+                          placeholder={blankPlaceholder}
+                        >
+                          {this.generateOptions(noticesFrequency)}
+                        </Field>
                       </Col>
                       {notice.isRecurring() && (
                         <React.Fragment>
@@ -258,12 +263,12 @@ class NoticeCard extends React.Component {
                             data-test-notice-card-send-every
                           >
                             <Period
-                              emptySelectPlaceholder
                               inputSize={6}
                               selectSize={6}
+                              selectPlaceholder="ui-circulation.settings.common.blankPlaceholder"
                               inputValuePath={`${pathToNotice}.sendOptions.sendEvery.duration`}
                               selectValuePath={`${pathToNotice}.sendOptions.sendEvery.intervalId`}
-                              intervalPeriods={this.getDropdownItems(noticesIntervalPeriods)}
+                              intervalPeriods={this.generateOptions(noticesIntervalPeriods)}
                             />
                           </Col>
                         </React.Fragment>

@@ -1,5 +1,13 @@
 export default function (loanPolicy) {
   return {
+    'loansPolicy.profileId': {
+      rules: ['isNotEmpty'],
+      shouldValidate: true,
+    },
+    'loansPolicy.closedLibraryDueDateManagementId': {
+      rules: ['isNotEmpty'],
+      shouldValidate: true,
+    },
     'loansPolicy.period.duration': {
       rules: ['isNotEmpty', 'isIntegerGreaterThanZero'],
       shouldValidate: loanPolicy.isProfileRolling(),
@@ -18,6 +26,10 @@ export default function (loanPolicy) {
     },
     'loansPolicy.openingTimeOffset.duration': {
       rules: ['isNotEmpty', 'isIntegerGreaterThanZero'],
+      shouldValidate: loanPolicy.isOpeningTimeOffsetActive(),
+    },
+    'loansPolicy.openingTimeOffset.intervalId': {
+      rules: ['isNotEmpty'],
       shouldValidate: loanPolicy.isOpeningTimeOffsetActive(),
     },
   };

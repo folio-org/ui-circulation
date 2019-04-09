@@ -5,9 +5,9 @@ import { expect } from 'chai';
 import translation from '@folio/circulation/translations/ui-circulation/en.json';
 
 import {
-  loanProfileMap,
   shortTermLoansOptions,
   BEGINNING_OF_THE_NEXT_OPEN_SERVICE_POINT_HOURS,
+  CURRENT_DUE_DATE_TIME,
 } from '../../../../src/constants';
 import setupApplication from '../../helpers/setup-application';
 import LoanPolicyForm from '../../interactors/loan-policy/loan-policy-form';
@@ -170,11 +170,7 @@ describe('LoanPolicyForm', () => {
             });
 
             it('should have proper label', () => {
-              expect(LoanPolicyForm.loansSection.loanProfile.label).to.equal(translation['settings.loanPolicy.loanProfile']);
-            });
-
-            it('should be Rolling by default', () => {
-              expect(LoanPolicyForm.loansSection.loanProfile.val).to.equal(loanProfileMap.ROLLING);
+              expect(LoanPolicyForm.loansSection.loanProfile.label).to.equal(`${translation['settings.loanPolicy.loanProfile']} *`);
             });
           });
 
@@ -192,7 +188,7 @@ describe('LoanPolicyForm', () => {
         describe('loan period', () => {
           describe('loan policy:\n\t\t-loanable\n\t\t-rolling\n', () => {
             beforeEach(async () => {
-              await LoanPolicyForm.loansSection.loanProfile.selectAndBlur(loanProfileMap.ROLLING);
+              await LoanPolicyForm.loansSection.loanProfile.selectAndBlur(translation['settings.loanPolicy.profileType.rolling']);
             });
 
             it('should be displayed', () => {
@@ -208,7 +204,7 @@ describe('LoanPolicyForm', () => {
 
           describe('loan policy:\n\t\t-loanable\n\t\t-fixed\n', () => {
             beforeEach(async () => {
-              await LoanPolicyForm.loansSection.loanProfile.selectAndBlur(loanProfileMap.FIXED);
+              await LoanPolicyForm.loansSection.loanProfile.selectAndBlur(translation['settings.loanPolicy.profileType.fixed']);
             });
 
             it('should not be displayed', () => {
@@ -230,7 +226,7 @@ describe('LoanPolicyForm', () => {
         describe('fixed due date schedule', () => {
           describe('loan policy:\n\t\t-loanable\n\t\t-rolling\n', () => {
             beforeEach(async () => {
-              await LoanPolicyForm.loansSection.loanProfile.selectAndBlur(loanProfileMap.ROLLING);
+              await LoanPolicyForm.loansSection.loanProfile.selectAndBlur(translation['settings.loanPolicy.profileType.rolling']);
             });
 
             it('should be displayed', () => {
@@ -246,7 +242,7 @@ describe('LoanPolicyForm', () => {
 
           describe('loan policy:\n\t\t-loanable\n\t\t-fixed\n', () => {
             beforeEach(async () => {
-              await LoanPolicyForm.loansSection.loanProfile.selectAndBlur(loanProfileMap.FIXED);
+              await LoanPolicyForm.loansSection.loanProfile.selectAndBlur(translation['settings.loanPolicy.profileType.fixed']);
             });
 
             it('should be displayed', () => {
@@ -278,7 +274,7 @@ describe('LoanPolicyForm', () => {
             });
 
             it('should have proper label', () => {
-              expect(LoanPolicyForm.loansSection.closedDueDateMgmt.label).to.equal(translation['settings.loanPolicy.closedDueDateMgmt']);
+              expect(LoanPolicyForm.loansSection.closedDueDateMgmt.label).to.equal(`${translation['settings.loanPolicy.closedDueDateMgmt']} *`);
             });
           });
 
@@ -312,8 +308,9 @@ describe('LoanPolicyForm', () => {
 
           describe('loan policy:\n\t\t-short term loan\n\t\t-closed library due date management - beginning of the next open service point hours\n', () => {
             beforeEach(async () => {
+              await LoanPolicyForm.loansSection.loanProfile.selectAndBlur(translation['settings.loanPolicy.profileType.rolling']);
               await LoanPolicyForm.loansSection.loanPeriod.fillAndBlurDuration(2);
-              await LoanPolicyForm.loansSection.loanPeriod.selectAndBlurInterval('Minutes');
+              await LoanPolicyForm.loansSection.loanPeriod.selectAndBlurInterval(translation['settings.common.hours']);
               await LoanPolicyForm.loansSection.closedDueDateMgmt.selectAndBlur(
                 getOptionsRepresentation(shortTermLoansOptions, BEGINNING_OF_THE_NEXT_OPEN_SERVICE_POINT_HOURS)
               );
@@ -432,10 +429,6 @@ describe('LoanPolicyForm', () => {
                 translation['settings.loanPolicy.unlimitedRenewals']
               );
             });
-
-            it('should not be checked by default', () => {
-              expect(LoanPolicyForm.renewalsSection.unlimitedRenewals.isChecked).to.be.false;
-            });
           });
 
           describe('loan policy:\n\t\tnot loanable\n', () => {
@@ -505,13 +498,17 @@ describe('LoanPolicyForm', () => {
 
         describe('renew from', () => {
           describe('loan policy:\n\t\t-loanable\n\t\t-rolling\n\t\t-renewable\n', () => {
+            beforeEach(async () => {
+              await LoanPolicyForm.loansSection.loanProfile.selectAndBlur(translation['settings.loanPolicy.profileType.rolling']);
+            });
+
             it('should be displayed', () => {
               expect(LoanPolicyForm.renewalsSection.renewFrom.isPresent).to.be.true;
             });
 
             it('should have proper label', () => {
               expect(LoanPolicyForm.renewalsSection.renewFrom.label).to.equal(
-                translation['settings.loanPolicy.renewFrom']
+                `${translation['settings.loanPolicy.renewFrom']} *`
               );
             });
           });
@@ -601,7 +598,7 @@ describe('LoanPolicyForm', () => {
 
           describe('loan policy:\n\t\t-loanable\n\t\t-renewable\n\t\t-fixed\n\t\t-different period\n', () => {
             beforeEach(async () => {
-              await LoanPolicyForm.loansSection.loanProfile.selectAndBlur(loanProfileMap.FIXED);
+              await LoanPolicyForm.loansSection.loanProfile.selectAndBlur(translation['settings.loanPolicy.profileType.fixed']);
               await LoanPolicyForm.renewalsSection.renewalPeriodDifferent.clickAndBlur();
             });
 
@@ -612,6 +609,7 @@ describe('LoanPolicyForm', () => {
 
           describe('loan policy:\n\t\t-loanable\n\t\t-renewable\n\t\t-rolling\n\t\t-different period\n', () => {
             beforeEach(async () => {
+              await LoanPolicyForm.loansSection.loanProfile.selectAndBlur(translation['settings.loanPolicy.profileType.rolling']);
               await LoanPolicyForm.renewalsSection.renewalPeriodDifferent.clickAndBlur();
             });
 
@@ -656,7 +654,7 @@ describe('LoanPolicyForm', () => {
 
           describe('loan policy:\n\t\t-loanable\n\t\t-renewable\n\t\t-fixed\n\t\t-different period\n', () => {
             beforeEach(async () => {
-              await LoanPolicyForm.loansSection.loanProfile.selectAndBlur(loanProfileMap.FIXED);
+              await LoanPolicyForm.loansSection.loanProfile.selectAndBlur(translation['settings.loanPolicy.profileType.fixed']);
               await LoanPolicyForm.renewalsSection.renewalPeriodDifferent.clickAndBlur();
             });
 
@@ -673,6 +671,7 @@ describe('LoanPolicyForm', () => {
 
           describe('loan policy:\n\t\t-loanable\n\t\t-renewable\n\t\t-rolling\n\t\t-different period\n', () => {
             beforeEach(async () => {
+              await LoanPolicyForm.loansSection.loanProfile.selectAndBlur(translation['settings.loanPolicy.profileType.rolling']);
               await LoanPolicyForm.renewalsSection.renewalPeriodDifferent.clickAndBlur();
             });
 
@@ -862,8 +861,14 @@ describe('LoanPolicyForm', () => {
       beforeEach(async function () {
         await LoanPolicyForm
           .aboutSection.policyName.fillAndBlur(newLoanPolicyName)
+          .loansSection.loanProfile.selectAndBlur(translation['settings.loanPolicy.profileType.rolling'])
           .loansSection.loanPeriod.duration.fillAndBlur(2)
+          .loansSection.loanPeriod.selectAndBlurInterval(translation['settings.common.hours'])
+          .loansSection.closedDueDateMgmt.selectAndBlur(
+            getOptionsRepresentation(shortTermLoansOptions, CURRENT_DUE_DATE_TIME)
+          )
           .renewalsSection.numRenewalsAllowed.fillAndBlur(1)
+          .renewalsSection.renewFrom.selectAndBlur(translation['settings.loanPolicy.renewFrom.systemDate'])
           .save();
       });
 
