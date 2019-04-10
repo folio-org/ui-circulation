@@ -327,7 +327,7 @@ describe('LoanPolicyDetail', () => {
         });
 
         describe('opening time offset', () => {
-          it.always('should not be displayed', () => {
+          it('should not be displayed', () => {
             expect(LoanPolicyDetail.loansSection.openingTimeOffset.isPresent).to.be.false;
           });
         });

@@ -38,8 +38,9 @@ const checkInvalidPeriods = (policy) => {
 
 const checkFixedProfile = (policy) => {
   const loanPolicy = cloneDeep(policy);
+  const profileId = get(loanPolicy, 'loansPolicy.profileId');
 
-  if (loanPolicy.loansPolicy.profileId === loanProfileMap.FIXED) {
+  if (profileId === loanProfileMap.FIXED) {
     unset(loanPolicy, 'loansPolicy.period');
   }
 

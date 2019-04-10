@@ -69,11 +69,13 @@ import Period from '../Period';
   renewalsSection = new RenewalsSection();
   requestManagementSection = new RequestManagementSection();
 
-  deleteLoanPolicy = new Interactor('#clickable-delete-entry');
+  deleteLoanPolicy = new Interactor('[data-test-delete-loan-policy-form-action]');
   deleteLoanPolicyModal = new Interactor('#delete-item-confirmation');
   deleteLoanPolicyCancel= new Interactor('[data-test-confirmation-modal-cancel-button]');
   deleteLoanPolicyConfirm = new Interactor('[data-test-confirmation-modal-confirm-button]');
   expandAll = scoped('[data-test-expand-all] button');
+  cancelEditingLoanPolicy = new Interactor('[data-test-cancel-loan-policy-form-action]');
+  cancelEditingLoanPolicyModal = new Interactor('#cancel-editing-confirmation');
 
   save = clickable('#clickable-save-entry');
 }
