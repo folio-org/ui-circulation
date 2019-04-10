@@ -256,6 +256,7 @@ class PatronNoticeForm extends React.Component {
                 data-test-patron-notice-template-name
               >
                 <Field
+                  required
                   label={<FormattedMessage id="ui-circulation.settings.patronNotices.notice.name" />}
                   name="name"
                   id="input-patron-notice-name"
