@@ -74,6 +74,7 @@ class LoanPolicySettings extends React.Component {
         permissions={permissions}
         parentResources={resources}
         detailComponent={LoanPolicyDetail}
+        enableDetailsActionMenu
         entryFormComponent={LoanPolicyForm}
         paneTitle={<FormattedMessage id="ui-circulation.settings.loanPolicy.paneTitle" />}
         entryLabel={formatMessage({ id: 'ui-circulation.settings.loanPolicy.entryLabel' })}
