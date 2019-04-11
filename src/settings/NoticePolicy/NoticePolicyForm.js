@@ -25,6 +25,8 @@ import {
   RequestNoticesSection,
 } from './components';
 
+import EntityInUseModal from '../components/EntityInUseModal';
+
 class NoticePolicyForm extends React.Component {
   static propTypes = {
     stripes: stripesShape.isRequired,
@@ -34,6 +36,7 @@ class NoticePolicyForm extends React.Component {
     initialValues: PropTypes.object,
     parentResources: PropTypes.shape({
       templates: PropTypes.object,
+      circulationRules: PropTypes.object,
     }).isRequired,
     permissions: PropTypes.object.isRequired,
     onSave: PropTypes.func.isRequired,
@@ -48,6 +51,7 @@ class NoticePolicyForm extends React.Component {
   };
 
   state = {
+    showEntityInUseModal: false,
     showDeleteConfirmation: false,
     sections: {
       general: true,
@@ -78,6 +82,19 @@ class NoticePolicyForm extends React.Component {
     this.setState({ showDeleteConfirmation });
   };
 
+  changeEntityInUseState = (showEntityInUseModal) => {
+    this.setState({ showEntityInUseModal });
+  };
+
+  isPolicyInUse = () => {
+    const policy = get(this.props, 'initialValues');
+    const [
+      circulationRules = { rulesAsText: '' },
+    ] = get(this.props, 'parentResources.circulationRules.records', []);
+
+    return circulationRules.rulesAsText.includes(policy.id);
+  };
+
   render() {
     const {
       pristine,
@@ -96,6 +113,7 @@ class NoticePolicyForm extends React.Component {
     const {
       sections,
       showDeleteConfirmation,
+      showEntityInUseModal,
     } = this.state;
 
     const editMode = Boolean(policy.id);
@@ -108,12 +126,14 @@ class NoticePolicyForm extends React.Component {
         <Paneset isRoot>
           <HeaderPane
             editMode={editMode}
+            policyInUse={this.isPolicyInUse()}
             submitting={submitting}
             permissions={permissions}
             pristine={pristine}
             entryTitle={policy.name}
             onCancel={onCancel}
-            onRemove={this.changeDeleteState}
+            showDeleteConfirmationModal={this.changeDeleteState}
+            showEntityInUseModal={this.changeEntityInUseState}
           >
             <Row end="xs">
               <Col
@@ -148,7 +168,7 @@ class NoticePolicyForm extends React.Component {
               isOpen={sections.feeFineNotices}
               onToggle={this.handleSectionToggle}
             />
-            {editMode &&
+            { editMode &&
               <DeleteConfirmationModal
                 isOpen={showDeleteConfirmation}
                 policyName={policy.name}
@@ -156,6 +176,14 @@ class NoticePolicyForm extends React.Component {
                 initialValues={initialValues}
                 onCancel={this.changeDeleteState}
                 onRemove={onRemove}
+              />
+            }
+            { editMode &&
+              <EntityInUseModal
+                isOpen={showEntityInUseModal}
+                labelTranslationKey="ui-circulation.settings.noticePolicy.denyDelete.header"
+                contentTranslationKey="ui-circulation.settings.noticePolicy.denyDelete.body"
+                onClose={this.changeEntityInUseState}
               />
             }
           </HeaderPane>

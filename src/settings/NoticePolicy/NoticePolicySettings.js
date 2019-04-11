@@ -30,6 +30,11 @@ class NoticePolicySettings extends React.Component {
         query: 'cql.allRecords=1 AND category=""',
       },
     },
+    circulationRules: {
+      type: 'okapi',
+      path: 'circulation/rules',
+      resourceShouldRefresh: true,
+    },
   });
 
   static propTypes = {
@@ -37,6 +42,7 @@ class NoticePolicySettings extends React.Component {
     resources: PropTypes.shape({
       patronNoticePolicies: PropTypes.object,
       templates: PropTypes.object,
+      circulationRules: PropTypes.object,
     }).isRequired,
     mutator: PropTypes.shape({
       patronNoticePolicies: PropTypes.shape({
