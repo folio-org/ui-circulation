@@ -83,6 +83,7 @@ class HeaderPane extends React.Component {
         <Button
           data-test-cancel-loan-policy-form-action
           buttonStyle="dropdownItem"
+          id="dropdown-clickable-cancel-item"
           onClick={handleCancelClick}
         >
           <Icon icon="times">
@@ -93,6 +94,7 @@ class HeaderPane extends React.Component {
           <Button
             data-test-delete-loan-policy-form-action
             buttonStyle="dropdownItem"
+            id="dropdown-clickable-delete-item"
             onClick={handleDeleteClick}
           >
             <Icon icon="trash">
