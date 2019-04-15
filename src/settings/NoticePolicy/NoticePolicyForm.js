@@ -1,8 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { get } from 'lodash';
 import { connect } from 'react-redux';
 import { getFormValues } from 'redux-form';
+import {
+  get,
+  noop,
+} from 'lodash';
 
 import stripesForm from '@folio/stripes/form';
 import { stripesShape } from '@folio/stripes/core';
@@ -34,9 +37,9 @@ class NoticePolicyForm extends React.Component {
     submitting: PropTypes.bool.isRequired,
     policy: PropTypes.object,
     initialValues: PropTypes.object,
+    isEntryInUse: PropTypes.func,
     parentResources: PropTypes.shape({
       templates: PropTypes.object,
-      circulationRules: PropTypes.object,
     }).isRequired,
     permissions: PropTypes.object.isRequired,
     onSave: PropTypes.func.isRequired,
@@ -48,6 +51,7 @@ class NoticePolicyForm extends React.Component {
   static defaultProps = {
     policy: {},
     initialValues: {},
+    isEntryInUse: noop,
   };
 
   state = {
@@ -86,15 +90,6 @@ class NoticePolicyForm extends React.Component {
     this.setState({ showEntityInUseModal });
   };
 
-  isPolicyInUse = () => {
-    const policy = get(this.props, 'initialValues');
-    const [
-      circulationRules = { rulesAsText: '' },
-    ] = get(this.props, 'parentResources.circulationRules.records', []);
-
-    return circulationRules.rulesAsText.includes(policy.id);
-  };
-
   render() {
     const {
       pristine,
@@ -103,6 +98,7 @@ class NoticePolicyForm extends React.Component {
       stripes,
       permissions,
       submitting,
+      isEntryInUse,
       handleSubmit,
       onCancel,
       onRemove,
@@ -117,6 +113,7 @@ class NoticePolicyForm extends React.Component {
     } = this.state;
 
     const editMode = Boolean(policy.id);
+    const isPolicyInUse = isEntryInUse(policy.id);
 
     return (
       <form
@@ -126,7 +123,7 @@ class NoticePolicyForm extends React.Component {
         <Paneset isRoot>
           <HeaderPane
             editMode={editMode}
-            policyInUse={this.isPolicyInUse()}
+            policyInUse={isPolicyInUse}
             submitting={submitting}
             permissions={permissions}
             pristine={pristine}

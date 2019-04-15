@@ -18,25 +18,21 @@ const EntityInUseModal = ({
     onClose(false);
   };
 
-  const footer = (
-    <React.Fragment>
-      <Button
-        buttonStyle="primary"
-        marginBottom0
-        onClick={handleClose}
-      >
-        <FormattedMessage id={closeTranslationKey} />
-      </Button>
-    </React.Fragment>
-  );
-
   return (
     <Modal
       open={isOpen}
       id="entity-in-use-modal"
       label={<FormattedMessage id={labelTranslationKey} />}
       size="medium"
-      footer={footer}
+      footer={(
+        <Button
+          buttonStyle="primary"
+          marginBottom0
+          onClick={handleClose}
+        >
+          <FormattedMessage id={closeTranslationKey} />
+        </Button>
+      )}
     >
       <FormattedMessage id={contentTranslationKey} />
     </Modal>

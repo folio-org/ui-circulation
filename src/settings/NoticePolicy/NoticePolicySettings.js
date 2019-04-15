@@ -1,6 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { sortBy } from 'lodash';
+import {
+  get,
+  sortBy,
+} from 'lodash';
 import {
   FormattedMessage,
   injectIntl,
@@ -53,6 +56,14 @@ class NoticePolicySettings extends React.Component {
     }).isRequired,
   };
 
+  isPolicyInUse = (policyId) => {
+    const [
+      circulationRules = { rulesAsText: '' },
+    ] = get(this.props, 'resources.circulationRules.records', []);
+
+    return circulationRules.rulesAsText.includes(policyId);
+  };
+
   render() {
     const {
       resources,
@@ -86,6 +97,12 @@ class NoticePolicySettings extends React.Component {
         entryLabel={formatMessage({ id: 'ui-circulation.settings.noticePolicy.entryLabel' })}
         validate={validateNoticePolicy}
         defaultEntry={NoticePolicy.defaultNoticePolicy()}
+        isEntryInUse={this.isPolicyInUse}
+        prohibitItemDelete={{
+          close: <FormattedMessage id="ui-circulation.settings.common.close" />,
+          label: <FormattedMessage id="ui-circulation.settings.noticePolicy.denyDelete.header" />,
+          message: <FormattedMessage id="ui-circulation.settings.noticePolicy.denyDelete.body" />,
+        }}
       />
     );
   }
