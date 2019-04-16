@@ -4,6 +4,7 @@
 
 * Eject from deprecated Settings component and demonstrate new routing guidelines. UICIRC-201.
 * Provide IDs for loan-policy's actionmenu buttons. Refs UICIRC-237.
+* Sort settings entries. Fixes UICIRC-196.
 
 ## [1.6.0](https://github.com/folio-org/ui-circulation/tree/v1.6.0) (2019-03-17)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v1.5.0...v1.6.0)

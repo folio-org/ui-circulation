@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage } from 'react-intl';
+import { intlShape, injectIntl, FormattedMessage } from 'react-intl';
 import { IfPermission } from '@folio/stripes/core';
 import {
   Headline,
@@ -11,14 +11,19 @@ import {
 } from '@folio/stripes/components';
 import { settingsRoutes } from '..';
 
-export default class Settings extends Component {
+class Settings extends Component {
   static propTypes = {
     children: PropTypes.node,
+    intl: intlShape.isRequired,
     match: PropTypes.object.isRequired,
   };
 
   render() {
-    const { children, match: { path } } = this.props;
+    const { children, intl, match: { path } } = this.props;
+
+    settingsRoutes.forEach(r => {
+      r.displayName = intl.formatMessage({ id: r.label });
+    });
 
     return (
       <Fragment>
@@ -34,11 +39,13 @@ export default class Settings extends Component {
           )}
         >
           <NavList>
-            {settingsRoutes.map(setting => (
-              <IfPermission key={setting.route} perm={setting.perm}>
-                <NavListItem to={`${path}/${setting.route}`}>{setting.label}</NavListItem>
-              </IfPermission>
-            ))}
+            {settingsRoutes
+              .sort((a, b) => a.displayName.toLowerCase().localeCompare(b.displayName.toLowerCase()))
+              .map(setting => (
+                <IfPermission key={setting.route} perm={setting.perm}>
+                  <NavListItem to={`${path}/${setting.route}`}>{setting.displayName}</NavListItem>
+                </IfPermission>
+              ))}
           </NavList>
         </Pane>
         {children}
@@ -46,3 +53,5 @@ export default class Settings extends Component {
     );
   }
 }
+
+export default injectIntl(Settings);
