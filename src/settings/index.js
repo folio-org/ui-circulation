@@ -6,6 +6,7 @@ import {
   Headline,
   NavList,
   NavListItem,
+  NavListSection,
   Pane,
   PaneBackLink,
 } from '@folio/stripes/components';
@@ -16,6 +17,7 @@ class Settings extends Component {
     children: PropTypes.node,
     intl: intlShape.isRequired,
     match: PropTypes.object.isRequired,
+    location: PropTypes.object,
   };
 
   render() {
@@ -23,6 +25,7 @@ class Settings extends Component {
 
     settingsRoutes.forEach(r => {
       r.displayName = intl.formatMessage({ id: r.label });
+      r.isActive = this.props.location.pathname.startsWith(`${path}/${r.route}`);
     });
 
     return (
@@ -39,13 +42,15 @@ class Settings extends Component {
           )}
         >
           <NavList>
-            {settingsRoutes
-              .sort((a, b) => a.displayName.toLowerCase().localeCompare(b.displayName.toLowerCase()))
-              .map(setting => (
-                <IfPermission key={setting.route} perm={setting.perm}>
-                  <NavListItem to={`${path}/${setting.route}`}>{setting.displayName}</NavListItem>
-                </IfPermission>
-              ))}
+            <NavListSection>
+              {settingsRoutes
+                .sort((a, b) => a.displayName.toLowerCase().localeCompare(b.displayName.toLowerCase()))
+                .map(setting => (
+                  <IfPermission key={setting.route} perm={setting.perm}>
+                    <NavListItem to={`${path}/${setting.route}`} isActive={setting.isActive}>{setting.displayName}</NavListItem>
+                  </IfPermission>
+                ))}
+            </NavListSection>
           </NavList>
         </Pane>
         {children}
