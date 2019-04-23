@@ -164,7 +164,7 @@ class PatronNoticeEditor extends Component {
             <Row>
               <Col xs={12}>
                 <ReactQuill
-                  id="editor"
+                  id="patron-notice-editor"
                   value={value}
                   ref={(ref) => { this.quill = ref; }}
                   onChange={this.onChange}
@@ -176,7 +176,11 @@ class PatronNoticeEditor extends Component {
             </Row>
             { (touched || submitFailed) && !valid &&
               <Row>
-                <Col xs={12} className={css.errorMessage}>
+                <Col
+                  id="patron-notice-error-container"
+                  xs={12}
+                  className={css.errorMessage}
+                >
                   {this.props.meta.error}
                 </Col>
               </Row>
