@@ -14,5 +14,6 @@ export const isInInterval = (min, max, value) => value >= min && value <= max;
 
 export const isNotEmptyEditor = (value = '') => {
   const plainText = value.replace(/<\/?[^>]+(>|$)/g, '');
+
   return !isEmpty(plainText);
 };
