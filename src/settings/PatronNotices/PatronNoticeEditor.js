@@ -16,19 +16,25 @@ import '!style-loader!css-loader!react-quill/dist/quill.snow.css';
 import '!style-loader!css-loader!./quillCustom.css';
 
 import PreviewModal from './PreviewModal';
-// import css from './PatronNoticeEditor.css';
-import css from '../StaffSlips/StaffSlipEditor.css';
+import css from './PatronNoticeEditor.css';
 
 class PatronNoticeEditor extends Component {
   static propTypes = {
     input: PropTypes.object,
-    label: PropTypes.string,
+    label: PropTypes.object,
     tokens: PropTypes.arrayOf(PropTypes.string),
+    meta: PropTypes.shape({
+      touched: PropTypes.bool.isRequired,
+      submitFailed: PropTypes.bool.isRequired,
+      valid: PropTypes.bool.isRequired,
+      error: PropTypes.node.isRequired,
+    }).isRequired,
   };
 
   constructor(props) {
     super(props);
     this.onChange = this.onChange.bind(this);
+    this.onBlur = this.onBlur.bind(this);
     this.insertToken = this.insertToken.bind(this);
     this.openPreviewDialog = this.openPreviewDialog.bind(this);
     this.closePreviewDialog = this.closePreviewDialog.bind(this);
@@ -79,6 +85,17 @@ class PatronNoticeEditor extends Component {
     }
   }
 
+  onBlur() {
+    const {
+      input: {
+        value,
+        onBlur,
+      },
+    } = this.props;
+
+    onBlur(value);
+  }
+
   openPreviewDialog() {
     this.setState({ openDialog: true });
   }
@@ -111,7 +128,17 @@ class PatronNoticeEditor extends Component {
 
   render() {
     const { template, openDialog } = this.state;
-    const { label, input: { value } } = this.props;
+    const {
+      label,
+      input: {
+        value,
+      },
+      meta: {
+        submitFailed,
+        valid,
+        touched,
+      }
+    } = this.props;
 
     return (
       <div>
@@ -119,7 +146,12 @@ class PatronNoticeEditor extends Component {
           <Col xs={12}>
             <Row bottom="xs">
               <Col xs={9}>
-                <label htmlFor="editor" className={css.label}>{label}</label>
+                <label
+                  htmlFor="editor"
+                  className={css.label}
+                >
+                  {label}
+                </label>
               </Col>
               <Col xs={3}>
                 <Row className={css.preview}>
@@ -136,10 +168,19 @@ class PatronNoticeEditor extends Component {
                   value={value}
                   ref={(ref) => { this.quill = ref; }}
                   onChange={this.onChange}
+                  onBlur={this.onBlur}
                   modules={this.modules}
+                  {... (touched || submitFailed) && !valid ? { className: css.error } : {}}
                 />
               </Col>
             </Row>
+            { (touched || submitFailed) && !valid &&
+              <Row>
+                <Col xs={12} className={css.errorMessage}>
+                  {this.props.meta.error}
+                </Col>
+              </Row>
+            }
           </Col>
         </Row>
         {openDialog &&
