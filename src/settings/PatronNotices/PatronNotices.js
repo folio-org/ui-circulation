@@ -8,6 +8,7 @@ import { stripesConnect } from '@folio/stripes/core';
 import PatronNoticeDetail from './PatronNoticeDetail';
 import PatronNoticeForm from './PatronNoticeForm';
 import categories from './categories';
+import { PatronNoticeTemplate as validatePatronNoticeTemplate } from '../Validation';
 
 class PatronNotices extends React.Component {
   static propTypes = {
@@ -76,6 +77,7 @@ class PatronNotices extends React.Component {
         uniquenessValidator={this.props.mutator}
         enableDetailsActionMenu
         editElement="both"
+        validate={validatePatronNoticeTemplate}
       />
     );
   }

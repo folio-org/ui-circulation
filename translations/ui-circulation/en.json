@@ -11,7 +11,7 @@
   "settings.index.staffSlips": "Staff slips",
   "settings.index.requestCancellationReasons": "Request cancellation reasons",
   "settings.index.patronNotices": "Patron notice templates",
-  "settings.index.noticePolicies": "Patron Notice policies",
+  "settings.index.noticePolicies": "Patron notice policies",
   "settings.index.requestPolicies": "Request policies",
 
   "settings.loanPolicy.entryLabel": "Loan Policy",
@@ -144,8 +144,6 @@
   "settings.patronNotices.preview": "Preview",
   "settings.patronNotices.subject": "Subject",
   "settings.patronNotices.body": "Body",
-  "settings.patronNotices.errors.nameRequired": "Name is required",
-  "settings.patronNotices.errors.categoryRequired": "Category is required",
   "settings.patronNotices.errors.nameExists": "A patron notice with this name already exists",
   "settings.patronNotices.closeDialog": "Close",
   "settings.patronNotices.editLabel": "Patron notices | {name}",

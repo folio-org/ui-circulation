@@ -3,3 +3,19 @@
   padding-right: 5px;
   margin-bottom: 5px;
 }
+
+.label {
+  display: inline-block;
+  margin-bottom: 0.5rem;
+}
+
+.error {
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-color: #900;
+  background-color: rgba(153, 0, 0, 0.050000000000000044);
+}
+
+.errorMessage {
+  margin-top: 5px;
+  color: #900;
+}

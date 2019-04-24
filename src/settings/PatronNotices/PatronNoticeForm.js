@@ -219,10 +219,6 @@ class PatronNoticeForm extends React.Component {
     );
   };
 
-  // Synchronous validation functions
-  requireName = value => (value ? undefined : <FormattedMessage id="ui-circulation.settings.patronNotices.errors.nameRequired" />);
-  requireCategory = value => (value ? undefined : <FormattedMessage id="ui-circulation.settings.patronNotices.errors.categoryRequired" />);
-
   render() {
     const { handleSubmit, initialValues = {} } = this.props;
     const category = initialValues && initialValues.category;
@@ -256,12 +252,14 @@ class PatronNoticeForm extends React.Component {
                 data-test-patron-notice-template-name
               >
                 <Field
-                  required
-                  label={<FormattedMessage id="ui-circulation.settings.patronNotices.notice.name" />}
+                  label={
+                    <FormattedMessage id="ui-circulation.settings.patronNotices.notice.name">
+                      {(message) => `${message} *`}
+                    </FormattedMessage>
+                  }
                   name="name"
                   id="input-patron-notice-name"
                   component={TextField}
-                  validate={this.requireName}
                 />
               </Col>
             </Row>
@@ -295,7 +293,6 @@ class PatronNoticeForm extends React.Component {
                   name="category"
                   component={Select}
                   fullWidth
-                  validate={this.requireCategory}
                 >
                   {categoryOptions.map(({ labelTranslationPath, value, selected }) => (
                     <FormattedMessage id={labelTranslationPath}>
@@ -320,7 +317,11 @@ class PatronNoticeForm extends React.Component {
                 <Row>
                   <Col xs={8}>
                     <Field
-                      label={<FormattedMessage id="ui-circulation.settings.patronNotices.subject" />}
+                      label={
+                        <FormattedMessage id="ui-circulation.settings.patronNotices.subject">
+                          {(message) => `${message} *`}
+                        </FormattedMessage>
+                      }
                       name="localizedTemplates.en.header"
                       id="input-patron-notice-subject"
                       component={TextField}
@@ -328,13 +329,19 @@ class PatronNoticeForm extends React.Component {
                   </Col>
                 </Row>
                 <Row>
-                  <Field
-                    label={<FormattedMessage id="ui-circulation.settings.patronNotices.body" />}
-                    name="localizedTemplates.en.body"
-                    id="input-email-template-body"
-                    component={PatronNoticeEditor}
-                    tokens={Object.keys(formats.Any)}
-                  />
+                  <Col xs={8}>
+                    <Field
+                      label={
+                        <FormattedMessage id="ui-circulation.settings.patronNotices.body">
+                          {(message) => `${message} *`}
+                        </FormattedMessage>
+                      }
+                      name="localizedTemplates.en.body"
+                      id="input-email-template-body"
+                      component={PatronNoticeEditor}
+                      tokens={Object.keys(formats.Any)}
+                    />
+                  </Col>
                 </Row>
               </Accordion>
               {/* <Accordion
