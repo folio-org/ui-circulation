@@ -26,12 +26,17 @@ class RequestPolicySettings extends React.Component {
       path: 'request-policy-storage/request-policies',
       fetch: false,
     },
+    circulationRules: {
+      type: 'okapi',
+      path: 'circulation/rules',
+    },
   });
 
   static propTypes = {
     intl: intlShape.isRequired,
     resources: PropTypes.shape({
       requestPolicies: PropTypes.object,
+      circulationRules: PropTypes.object,
     }).isRequired,
     mutator: PropTypes.shape({
       requestPolicies: PropTypes.shape({

@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getFormValues } from 'redux-form';
+import { get } from 'lodash';
 
 import stripesForm from '@folio/stripes/form';
 import { stripesShape } from '@folio/stripes/core';
@@ -13,7 +14,10 @@ import {
 } from '@folio/stripes/components';
 
 import RequestPolicy from '../Models/RequestPolicy';
-import { DeleteConfirmationModal } from '../components';
+import {
+  DeleteConfirmationModal,
+  CannotDeleteModal,
+} from '../components';
 import {
   HeaderPane,
   GeneralSection,
@@ -33,6 +37,7 @@ class RequestPolicyForm extends React.Component {
     onCancel: PropTypes.func.isRequired,
     onRemove: PropTypes.func.isRequired,
     handleSubmit: PropTypes.func.isRequired,
+    parentResources: PropTypes.object,
   };
 
   static defaultProps = {
@@ -42,6 +47,7 @@ class RequestPolicyForm extends React.Component {
 
   state = {
     showDeleteConfirmation: false,
+    showCannotDeleteModal: false,
     sections: {
       general: true,
     },
@@ -68,9 +74,24 @@ class RequestPolicyForm extends React.Component {
     this.props.onSave({ ...data, requestTypes });
   };
 
+  isDeletionALlowed() {
+    const { parentResources, policy } = this.props;
+    const circulationRules = get(parentResources, 'circulationRules.records[0].rulesAsText', '');
+
+    return !circulationRules.match(policy.id);
+  }
+
   changeDeleteState = (showDeleteConfirmation) => {
-    this.setState({ showDeleteConfirmation });
+    if (showDeleteConfirmation && !this.isDeletionALlowed()) {
+      return this.setState({ showCannotDeleteModal: true });
+    }
+
+    return this.setState({ showDeleteConfirmation });
   };
+
+  hideCannotDeleteModal = () => {
+    this.setState({ showCannotDeleteModal: false });
+  }
 
   render() {
     const {
@@ -88,6 +109,7 @@ class RequestPolicyForm extends React.Component {
     const {
       sections,
       showDeleteConfirmation,
+      showCannotDeleteModal,
     } = this.state;
 
     const editMode = Boolean(policy.id);
@@ -131,6 +153,15 @@ class RequestPolicyForm extends React.Component {
                   initialValues={initialValues}
                   onCancel={this.changeDeleteState}
                   onRemove={onRemove}
+                />
+              }
+
+              {editMode &&
+                <CannotDeleteModal
+                  isOpen={showCannotDeleteModal}
+                  onConfirm={this.hideCannotDeleteModal}
+                  labelKey="ui-circulation.settings.requestPolicy.cannotDelete.label"
+                  messageKey="ui-circulation.settings.requestPolicy.cannotDelete.message"
                 />
               }
             </React.Fragment>

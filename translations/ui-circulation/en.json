@@ -232,6 +232,8 @@
   "settings.requestPolicy.saveAndClose": "Save",
   "settings.requestPolicy.createEntryLabel": "New request policy",
   "settings.requestPolicy.errors.nameExists": "A request policy with this name already exists",
+  "settings.requestPolicy.cannotDelete.label": "Request policy cannot be deleted",
+  "settings.requestPolicy.cannotDelete.message": "This request policy is used by circulation rules and it cannot be deleted",
 
   "settings.noticePolicy.addNotice": "Add Notice",
   "settings.noticePolicy.countableNotice": "Notice {counter}",

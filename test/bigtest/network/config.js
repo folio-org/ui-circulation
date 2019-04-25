@@ -196,6 +196,7 @@ export default function config() {
   });
 
   this.get('/request-policy-storage/request-policies', function ({ requestPolicies }) {
+    console.log('return all policies');
     return this.serializerOrRegistry.serialize(requestPolicies.all());
   });
 
