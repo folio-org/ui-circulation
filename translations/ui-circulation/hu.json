@@ -163,7 +163,7 @@
     "settings.requestManagement.holds": "Holds",
     "settings.requestManagement.pages": "Pages",
     "settings.validate.select": "Please make a selection",
-    "settings.index.noticePolicies": "Patron Notice policies",
+    "settings.index.noticePolicies": "Patron notice policies",
     "settings.noticePolicy.entryLabel": "Patron Notice Policy",
     "settings.noticePolicy.paneTitle": "Patron Notice Policies",
     "settings.loanRules.patronGroups": "Patron groups",
