@@ -74,7 +74,7 @@ class RequestPolicyForm extends React.Component {
     this.props.onSave({ ...data, requestTypes });
   };
 
-  isDeletionALlowed() {
+  isDeletionAllowed() {
     const { parentResources, policy } = this.props;
     const circulationRules = get(parentResources, 'circulationRules.records[0].rulesAsText', '');
 
@@ -82,7 +82,7 @@ class RequestPolicyForm extends React.Component {
   }
 
   changeDeleteState = (showDeleteConfirmation) => {
-    if (showDeleteConfirmation && !this.isDeletionALlowed()) {
+    if (showDeleteConfirmation && !this.isDeletionAllowed()) {
       return this.setState({ showCannotDeleteModal: true });
     }
 
