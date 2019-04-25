@@ -1,5 +1,6 @@
 import {
   interactor,
+  Interactor,
   isPresent,
   fillable,
   clickable,
@@ -21,6 +22,10 @@ import {
   fillName = fillable('#request_policy_name');
   fillDescription = fillable('#request_policy_description');
   clickHoldCheckbox = clickable('#hold-checkbox');
+
+  deleteRequestPolicy = new Interactor('[data-test-delete-user-form-action]');
+  cannotDeleteModal = new Interactor('[data-test-cannot-delete-modal]');
+  cannotDeleteConfirm = new Interactor('[data-test-cannot-delete-modal-close]');
 
   save = clickable('#clickable-save-entry');
 }
