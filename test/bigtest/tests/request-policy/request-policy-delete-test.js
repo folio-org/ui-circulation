@@ -30,7 +30,7 @@ describe('RequestPolicyDelete', () => {
         await RequestPolicyForm.deleteRequestPolicy.click();
       });
 
-      it('should open delete modal', () => {
+      it('should open cannot delete modal', () => {
         expect(RequestPolicyForm.cannotDeleteModal.isPresent).to.be.true;
       });
     });
