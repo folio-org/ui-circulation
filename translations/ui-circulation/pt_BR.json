@@ -295,5 +295,7 @@
     "settings.common.weeks": "Semana(s)",
     "settings.common.months": "Mês(es)",
     "settings.common.years": "Ano(s)",
-    "settings.common.blankPlaceholder": " "
+    "settings.common.blankPlaceholder": " ",
+    "settings.requestPolicy.cannotDelete.label": "Request policy cannot be deleted",
+    "settings.requestPolicy.cannotDelete.message": "This request policy is used by circulation rules and it cannot be deleted"
 }

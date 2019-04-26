@@ -295,5 +295,7 @@
     "settings.common.weeks": "أسبوع",
     "settings.common.months": "شهرًا",
     "settings.common.years": "سنة",
-    "settings.common.blankPlaceholder": "."
+    "settings.common.blankPlaceholder": ".",
+    "settings.requestPolicy.cannotDelete.label": "لا يمكن حذف سياسة الطلب",
+    "settings.requestPolicy.cannotDelete.message": "سياسة الطلب تلك قيد الاستخدام بواسطة قواعد الإعارة ولا يمكن حذفها."
 }
