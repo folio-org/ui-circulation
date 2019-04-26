@@ -24,6 +24,7 @@ class NoticePolicySettings extends React.Component {
       type: 'okapi',
       records: 'patronNoticePolicies',
       path: 'patron-notice-policy-storage/patron-notice-policies',
+      throwErrors: false,
     },
     templates: {
       type: 'okapi',
