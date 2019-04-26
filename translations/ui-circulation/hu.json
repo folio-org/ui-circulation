@@ -163,7 +163,7 @@
     "settings.requestManagement.holds": "Holds",
     "settings.requestManagement.pages": "Pages",
     "settings.validate.select": "Please make a selection",
-    "settings.index.noticePolicies": "Patron Notice policies",
+    "settings.index.noticePolicies": "Patron notice policies",
     "settings.noticePolicy.entryLabel": "Patron Notice Policy",
     "settings.noticePolicy.paneTitle": "Patron Notice Policies",
     "settings.loanRules.patronGroups": "Patron groups",
@@ -295,5 +295,7 @@
     "settings.common.weeks": "Week(s)",
     "settings.common.months": "Month(s)",
     "settings.common.years": "Years(s)",
-    "settings.common.blankPlaceholder": " "
+    "settings.common.blankPlaceholder": " ",
+    "settings.requestPolicy.cannotDelete.label": "Request policy cannot be deleted",
+    "settings.requestPolicy.cannotDelete.message": "This request policy is used by circulation rules and it cannot be deleted"
 }
