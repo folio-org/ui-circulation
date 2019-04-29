@@ -296,6 +296,6 @@
     "settings.common.months": "Mes(es)",
     "settings.common.years": "Año(s)",
     "settings.common.blankPlaceholder": ".",
-    "settings.requestPolicy.cannotDelete.label": "Request policy cannot be deleted",
-    "settings.requestPolicy.cannotDelete.message": "This request policy is used by circulation rules and it cannot be deleted"
+    "settings.requestPolicy.cannotDelete.label": "La norma de solicitud no puede ser eliminada",
+    "settings.requestPolicy.cannotDelete.message": "Esta norma de solicitud se usa en alguna de las normas de circulación y no se puede eliminar"
 }
