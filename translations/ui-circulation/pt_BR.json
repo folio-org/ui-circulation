@@ -295,5 +295,7 @@
     "settings.common.weeks": "Semana(s)",
     "settings.common.months": "Mês(es)",
     "settings.common.years": "Ano(s)",
-    "settings.common.blankPlaceholder": " "
+    "settings.common.blankPlaceholder": " ",
+    "settings.requestPolicy.cannotDelete.label": "Política de solicitação não pode ser excluída",
+    "settings.requestPolicy.cannotDelete.message": "Esta política de solicitação é usada por regras de circulação e não pode ser excluída"
 }
