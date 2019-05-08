@@ -49,7 +49,6 @@ class RequestPolicyForm extends React.Component {
   state = {
     showEntityInUseModal: false,
     showDeleteConfirmation: false,
-    // showCannotDeleteModal: false,
     sections: {
       general: true,
     },
