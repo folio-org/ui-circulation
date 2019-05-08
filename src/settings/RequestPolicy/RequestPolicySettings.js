@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { sortBy } from 'lodash';
+import { sortBy, get } from 'lodash';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 
 import { EntryManager } from '@folio/stripes/smart-components';
@@ -57,6 +57,14 @@ class RequestPolicySettings extends React.Component {
     return { ...values, requestTypes };
   }
 
+  isPolicyInUse = (policyId) => {
+    const { resources } = this.props;
+    const circulationRules = get(resources, 'circulationRules.records[0].rulesAsText', '');
+
+    return circulationRules.match(policyId);
+  }
+
+
   render() {
     const {
       resources,
@@ -90,6 +98,12 @@ class RequestPolicySettings extends React.Component {
         permissions={permissions}
         validate={validateRequestPolicy}
         defaultEntry={RequestPolicy.defaultPolicy()}
+        isEntryInUse={this.isPolicyInUse}
+        prohibitItemDelete={{
+          close: <FormattedMessage id="ui-circulation.settings.common.close" />,
+          label: <FormattedMessage id="ui-circulation.settings.requestPolicy.cannotDelete.label" />,
+          message: <FormattedMessage id="ui-circulation.settings.requestPolicy.cannotDelete.message" />,
+        }}
       />
     );
   }
