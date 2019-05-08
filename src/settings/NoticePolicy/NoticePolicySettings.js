@@ -1,6 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { sortBy } from 'lodash';
+import {
+  get,
+  sortBy,
+} from 'lodash';
 import {
   FormattedMessage,
   injectIntl,
@@ -21,6 +24,7 @@ class NoticePolicySettings extends React.Component {
       type: 'okapi',
       records: 'patronNoticePolicies',
       path: 'patron-notice-policy-storage/patron-notice-policies',
+      throwErrors: false,
     },
     templates: {
       type: 'okapi',
@@ -30,6 +34,11 @@ class NoticePolicySettings extends React.Component {
         query: 'cql.allRecords=1 AND category=""',
       },
     },
+    circulationRules: {
+      type: 'okapi',
+      path: 'circulation/rules',
+      resourceShouldRefresh: true,
+    },
   });
 
   static propTypes = {
@@ -37,6 +46,7 @@ class NoticePolicySettings extends React.Component {
     resources: PropTypes.shape({
       patronNoticePolicies: PropTypes.object,
       templates: PropTypes.object,
+      circulationRules: PropTypes.object,
     }).isRequired,
     mutator: PropTypes.shape({
       patronNoticePolicies: PropTypes.shape({
@@ -45,6 +55,14 @@ class NoticePolicySettings extends React.Component {
         DELETE: PropTypes.func.isRequired,
       }),
     }).isRequired,
+  };
+
+  isPolicyInUse = (policyId) => {
+    const [
+      circulationRules = { rulesAsText: '' },
+    ] = get(this.props, 'resources.circulationRules.records', []);
+
+    return circulationRules.rulesAsText.includes(policyId);
   };
 
   render() {
@@ -80,6 +98,12 @@ class NoticePolicySettings extends React.Component {
         entryLabel={formatMessage({ id: 'ui-circulation.settings.noticePolicy.entryLabel' })}
         validate={validateNoticePolicy}
         defaultEntry={NoticePolicy.defaultNoticePolicy()}
+        isEntryInUse={this.isPolicyInUse}
+        prohibitItemDelete={{
+          close: <FormattedMessage id="ui-circulation.settings.common.close" />,
+          label: <FormattedMessage id="ui-circulation.settings.noticePolicy.denyDelete.header" />,
+          message: <FormattedMessage id="ui-circulation.settings.noticePolicy.denyDelete.body" />,
+        }}
       />
     );
   }

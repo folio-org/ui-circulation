@@ -207,6 +207,7 @@
   "settings.common.months": "Month(s)",
   "settings.common.years": "Years(s)",
   "settings.common.blankPlaceholder": " ",
+  "settings.common.close": "Close",
 
   "settings.noticePolicy.entryLabel": "Patron Notice Policy",
   "settings.noticePolicy.saveAndClose": "Save",
@@ -221,6 +222,8 @@
   "settings.noticePolicy.policyName": "Policy Name",
   "settings.noticePolicy.policyDescription": "Policy Description",
   "settings.noticePolicy.active": "Active",
+  "settings.noticePolicy.denyDelete.header": "Cannot delete Patron notice",
+  "settings.noticePolicy.denyDelete.body": "This Notice policy cannot be deleted, as it is in use by one or more records.",
 
   "settings.requestPolicy.paneTitle": "Request policies",
   "settings.requestPolicy.entryLabel": "Request policy",
