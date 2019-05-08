@@ -297,5 +297,8 @@
     "settings.common.years": "Ano(s)",
     "settings.common.blankPlaceholder": " ",
     "settings.requestPolicy.cannotDelete.label": "Política de solicitação não pode ser excluída",
-    "settings.requestPolicy.cannotDelete.message": "Esta política de solicitação é usada por regras de circulação e não pode ser excluída"
+    "settings.requestPolicy.cannotDelete.message": "Esta política de solicitação é usada por regras de circulação e não pode ser excluída",
+    "settings.common.close": "Close",
+    "settings.noticePolicy.denyDelete.header": "Cannot delete Patron notice",
+    "settings.noticePolicy.denyDelete.body": "This Notice policy cannot be deleted, as it is in use by one or more records."
 }

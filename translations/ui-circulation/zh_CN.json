@@ -297,5 +297,8 @@
     "settings.common.years": "Years(s)",
     "settings.common.blankPlaceholder": " ",
     "settings.requestPolicy.cannotDelete.label": "Request policy cannot be deleted",
-    "settings.requestPolicy.cannotDelete.message": "This request policy is used by circulation rules and it cannot be deleted"
+    "settings.requestPolicy.cannotDelete.message": "This request policy is used by circulation rules and it cannot be deleted",
+    "settings.common.close": "Close",
+    "settings.noticePolicy.denyDelete.header": "Cannot delete Patron notice",
+    "settings.noticePolicy.denyDelete.body": "This Notice policy cannot be deleted, as it is in use by one or more records."
 }
