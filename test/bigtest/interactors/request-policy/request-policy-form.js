@@ -24,8 +24,8 @@ import {
   clickHoldCheckbox = clickable('#hold-checkbox');
 
   deleteRequestPolicy = new Interactor('[data-test-delete-user-form-action]');
-  cannotDeleteModal = new Interactor('[data-test-entity-in-use-modal]');
-  cannotDeleteConfirm = new Interactor('[data-test-entity-in-use-modal-close]');
+  entityInUseModal = new Interactor('[data-test-entity-in-use-modal]');
+  entityInUseConfirm = new Interactor('[data-test-entity-in-use-modal-close]');
 
   save = clickable('#clickable-save-entry');
 }

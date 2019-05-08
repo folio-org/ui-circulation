@@ -22,12 +22,14 @@ const EntityInUseModal = ({
     <Modal
       open={isOpen}
       id="entity-in-use-modal"
+      data-test-entity-in-use-modal
       label={<FormattedMessage id={labelTranslationKey} />}
       size="medium"
       footer={(
         <Button
           buttonStyle="primary"
           marginBottom0
+          data-test-entity-in-use-modal-close
           onClick={handleClose}
         >
           <FormattedMessage id={closeTranslationKey} />
