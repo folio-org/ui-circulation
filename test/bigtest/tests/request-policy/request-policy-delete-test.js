@@ -31,7 +31,7 @@ describe('RequestPolicyDelete', () => {
       });
 
       it('should open cannot delete modal', () => {
-        expect(RequestPolicyForm.cannotDeleteModal.isPresent).to.be.true;
+        expect(RequestPolicyForm.entityInUseModal.isPresent).to.be.true;
       });
     });
   });
