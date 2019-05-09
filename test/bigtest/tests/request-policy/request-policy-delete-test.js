@@ -6,12 +6,13 @@ import {
 import { expect } from 'chai';
 
 import RequestPolicyForm from '../../interactors/request-policy/request-policy-form';
+import RequestPolicyDetail from '../../interactors/request-policy/request-policy-detail';
 import setupApplication from '../../helpers/setup-application';
 
-describe('RequestPolicyDelete', () => {
+describe.only('RequestPolicyDelete', () => {
   setupApplication();
 
-  describe('show cannot delete request modal', () => {
+  describe('show entity in use modal', () => {
     let requestPolicy;
 
     beforeEach(function () {
@@ -21,17 +22,25 @@ describe('RequestPolicyDelete', () => {
       });
     });
 
-    beforeEach(async function () {
-      await this.visit(`/settings/circulation/request-policies/${requestPolicy.id}?layer=edit`);
-    });
-
-    describe('choose action delete on existing notice policy', () => {
-      beforeEach(async () => {
+    describe('choose action delete on existing notice policy from policy form', () => {
+      beforeEach(async function () {
+        await this.visit(`/settings/circulation/request-policies/${requestPolicy.id}?layer=edit`);
         await RequestPolicyForm.deleteRequestPolicy.click();
       });
 
-      it('should open cannot delete modal', () => {
+      it('should open entity in use modal', () => {
         expect(RequestPolicyForm.entityInUseModal.isPresent).to.be.true;
+      });
+    });
+
+    describe('choose action delete on existing notice policy from policy details view', () => {
+      beforeEach(async function () {
+        await this.visit(`/settings/circulation/request-policies/${requestPolicy.id}`);
+        await RequestPolicyDetail.deleteRequestPolicy.click();
+      });
+
+      it('should open entity in use modal', () => {
+        expect(RequestPolicyDetail.entityInUseModal.isPresent).to.be.true;
       });
     });
   });
