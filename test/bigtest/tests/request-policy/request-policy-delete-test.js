@@ -9,7 +9,7 @@ import RequestPolicyForm from '../../interactors/request-policy/request-policy-f
 import RequestPolicyDetail from '../../interactors/request-policy/request-policy-detail';
 import setupApplication from '../../helpers/setup-application';
 
-describe.only('RequestPolicyDelete', () => {
+describe('RequestPolicyDelete', () => {
   setupApplication();
 
   describe('show entity in use modal', () => {
