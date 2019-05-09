@@ -23,7 +23,9 @@ class HeaderPane extends React.Component {
     entryTitle: PropTypes.string,
     permissions: PropTypes.object.isRequired,
     onCancel: PropTypes.func.isRequired,
-    onRemove: PropTypes.func.isRequired,
+    policyInUse: PropTypes.bool.isRequired,
+    showDeleteConfirmationModal: PropTypes.func.isRequired,
+    showEntityInUseModal: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
@@ -33,13 +35,20 @@ class HeaderPane extends React.Component {
   renderActionMenuItems = ({ onToggle }) => {
     const {
       permissions,
-      onRemove,
       onCancel,
       editMode,
+      policyInUse,
+      showDeleteConfirmationModal,
+      showEntityInUseModal,
+
     } = this.props;
 
     const handleClick = () => {
-      onRemove(true);
+      if (policyInUse) {
+        showEntityInUseModal(true);
+      } else {
+        showDeleteConfirmationModal(true);
+      }
       onToggle();
     };
 
