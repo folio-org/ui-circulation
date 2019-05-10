@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getFormValues } from 'redux-form';
-import { get, noop } from 'lodash';
+import { noop } from 'lodash';
 
 import stripesForm from '@folio/stripes/form';
 import { stripesShape } from '@folio/stripes/core';
