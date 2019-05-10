@@ -1,11 +1,17 @@
 # Change history for ui-circulation
 
-## In progress
+## [1.7.0](https://github.com/folio-org/ui-circulation/tree/v1.7.0) (2019-05-10)
+[Full Changelog](https://github.com/folio-org/ui-circulation/compare/v1.6.0...v1.7.0)
 
 * Eject from deprecated Settings component and demonstrate new routing guidelines. UICIRC-201.
 * Provide IDs for loan-policy's actionmenu buttons. Refs UICIRC-237.
 * Sort settings entries. Fixes UICIRC-196.
 * Disallow deletion of request policies used in circ rules. Part of UICIRC-228.
+* Disallow deletion of patron notice policy in use. UICIRC-184.
+* Update to pane header to include dropdown menu for notice templates. UICIRC-143.
+* Update to pane header to include dropdown menu for loan policies. UICIRC-226.
+* Update to pane header to include "Cancel" option in dropdown menu for notice policy. UICIRC-229.
+* Bug fixes: UICIRC-159, UICIRC-160, UICIRC-171, UICIRC-172, UICIRC-175, UICIRC-208, UICIRC-210, UICIRC-216, UICIRC-223, UICIRC-231, UICIRC-232.
 
 ## [1.6.0](https://github.com/folio-org/ui-circulation/tree/v1.6.0) (2019-03-17)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v1.5.0...v1.6.0)
