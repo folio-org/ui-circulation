@@ -298,7 +298,7 @@
     "settings.common.blankPlaceholder": ".",
     "settings.requestPolicy.cannotDelete.label": "لا يمكن حذف سياسة الطلب",
     "settings.requestPolicy.cannotDelete.message": "سياسة الطلب تلك قيد الاستخدام بواسطة قواعد الإعارة ولا يمكن حذفها.",
-    "settings.common.close": "Close",
-    "settings.noticePolicy.denyDelete.header": "Cannot delete Patron notice",
-    "settings.noticePolicy.denyDelete.body": "This Notice policy cannot be deleted, as it is in use by one or more records."
+    "settings.common.close": "إغلاق",
+    "settings.noticePolicy.denyDelete.header": "تعذّر حذف إخطار المستفيد",
+    "settings.noticePolicy.denyDelete.body": "لا يمكن حذف سياسة الإخطار، حيث أنها قيد استخدام تسجيلة أو أكثر."
 }
