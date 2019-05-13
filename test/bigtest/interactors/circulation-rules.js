@@ -4,6 +4,7 @@ import {
   action,
   computed,
   text,
+  clickable,
 } from '@bigtest/interactor';
 
 function getEditorValue() {
@@ -34,6 +35,7 @@ function getEditorLine(lineNo = 0) {
       CodeMirror.doc.setValue(value);
       CodeMirror.setCursor(CodeMirror.lineCount(), 0);
       CodeMirror.showHint();
+
       return CodeMirror;
     }).run();
   });
@@ -59,6 +61,7 @@ function getEditorLine(lineNo = 0) {
   static defaultScope = '[data-test-circulation-rules]';
   formPresent = isPresent('[data-test-circulation-rules-form]');
   editorPresent = isPresent('.react-codemirror2');
+  clickSaveRulesBtn = clickable('#clickable-save-loan-rules');
   editor = new Editor();
 }
 

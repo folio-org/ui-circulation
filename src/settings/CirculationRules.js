@@ -168,12 +168,12 @@ class CirculationRules extends React.Component {
     } = this.props.resources;
 
     return [
-      ...patronGroups.records.map(r => ({ name: kebabCase(r.group), id: r.id, prefix: 'g' })),
-      ...materialTypes.records.map(r => ({ name: kebabCase(r.name), id: r.id, prefix: 'm' })),
-      ...loanTypes.records.map(r => ({ name: kebabCase(r.name), id: r.id, prefix: 't' })),
-      ...loanPolicies.records.map(r => ({ name: kebabCase(r.name), id: r.id, prefix: 'l' })),
-      ...requestPolicies.records.map(r => ({ name: kebabCase(r.name), id: r.id, prefix: 'r' })),
-      ...noticePolicies.records.map(r => ({ name: kebabCase(r.name), id: r.id, prefix: 'n' })),
+      ...patronGroups.records.map(r => ({ name: kebabCase(r.group), id: r.id, prefix: 'g', divider: '.' })),
+      ...materialTypes.records.map(r => ({ name: kebabCase(r.name), id: r.id, prefix: 'm', divider: '.' })),
+      ...loanTypes.records.map(r => ({ name: kebabCase(r.name), id: r.id, prefix: 't', divider: '.' })),
+      ...loanPolicies.records.map(r => ({ name: kebabCase(r.name), id: r.id, prefix: 'l', divider: '\\s' })),
+      ...requestPolicies.records.map(r => ({ name: kebabCase(r.name), id: r.id, prefix: 'r', divider: '\\s' })),
+      ...noticePolicies.records.map(r => ({ name: kebabCase(r.name), id: r.id, prefix: 'n', divider: '\\s' })),
     ];
   }
 
@@ -181,9 +181,8 @@ class CirculationRules extends React.Component {
     const records = this.getRecords();
     return records.reduce((memo, r) => {
       // eslint-disable-next-line no-useless-escape
-      const re = new RegExp(`(${r.prefix}\\s+)(${r.name})(?=\\s+[g\s+|m\s+|t\s+|l\s+|r\s+|n\s+|:\s*])?`, 'igm');
-      const result = memo.replace(re, `$1${r.id}`);
-      return result;
+      const re = new RegExp(`(${r.prefix}${r.divider}+)(${r.name})(?=\\s+[g\s+|m\s+|t\s+|l\s+|r\s+|n\s+|:\s*])?`, 'igm');
+      return memo.replace(re, `$1${r.id}`);
     }, rulesStr);
   }
 
