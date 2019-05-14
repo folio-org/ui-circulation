@@ -53,7 +53,7 @@ class StaffSlipDetail extends React.Component {
       : <FormattedMessage id="ui-circulation.settings.staffSlips.no" />;
 
     return (
-      <div>
+      <div data-test-staff-slip-details>
         <Row>
           <Col xs={8}>
             <KeyValue
@@ -94,7 +94,7 @@ class StaffSlipDetail extends React.Component {
         </Row>
         <Row>
           <Col xs={12}>
-            <div className="ql-editor" ref={this.editorRef}>
+            <div data-test-staff-slip-content className="ql-editor" ref={this.editorRef}>
               {contentComponent}
             </div>
           </Col>
