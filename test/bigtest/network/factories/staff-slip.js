@@ -1,7 +1,8 @@
 import { Factory, faker } from '@bigtest/mirage';
 
 export default Factory.extend({
-  name: () => faker.hacker.noun(),
+  name: () => 'Hold',
   description: () => faker.company.catchPhrase(),
-  requestTypes: () => ['Hold'],
+  active: true,
+  template: '<p>{{Item barcode}}</p>',
 });

@@ -39,7 +39,7 @@ class PreviewModal extends React.Component {
 
   getButtonPrint = () => {
     return (
-      <Button buttonStyle="primary">
+      <Button id="print-preview-button" data-test-print-button buttonStyle="primary">
         <FormattedMessage id="ui-circulation.settings.staffSlips.print" />
       </Button>
     );
@@ -76,6 +76,7 @@ class PreviewModal extends React.Component {
               content={() => this.editorRef.current}
             />
             <Button
+              data-test-close-preview-button
               onClick={onClose}
               id="clickable-close-preview"
             >

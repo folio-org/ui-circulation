@@ -39,22 +39,6 @@ class StaffSlipManager extends React.Component {
     this.validate = this.validate.bind(this);
   }
 
-  componentDidMount() {
-    // TODO: remove after default HOLD slip is provisioned during build process
-    this.props.mutator.entries.POST({
-      name: 'Hold',
-      active: true,
-      template: '<p></p>',
-    });
-
-    // TODO: remove after default TRANSIT slip is provisioned during build process
-    this.props.mutator.entries.POST({
-      name: 'Transit',
-      active: true,
-      template: '<p></p>',
-    });
-  }
-
   validate(values) {
     const errors = {};
 

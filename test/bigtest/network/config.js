@@ -281,4 +281,40 @@ export default function config() {
 
     return requestPolicy.attrs;
   });
+
+  this.get('/staff-slips-storage/staff-slips', ({ staffSlips }) => {
+    return this.serializerOrRegistry.serialize(staffSlips.all());
+  });
+
+  this.put('/staff-slips-storage/staff-slips/:id', ({ staffSlips }, request) => {
+    const body = JSON.parse(request.requestBody);
+    const {
+      name,
+      description,
+      template
+    } = body;
+    const staffSlip = staffSlips.find(body.id);
+
+    staffSlip.update({ name, description, template });
+
+    return staffSlip.attrs;
+  });
+
+  this.delete('/staff-slips-storage/staff-slips/:id', ({ staffSlips }, request) => {
+    const {
+      params: {
+        id
+      }
+    } = request;
+    const staffSlip = staffSlips.find(id);
+
+    return staffSlip.destroy();
+  });
+
+  this.post('/staff-slips-storage/staff-slips', ({ staffSlips }, request) => {
+    const body = JSON.parse(request.requestBody);
+    const staffSlip = staffSlips.create(body);
+
+    return staffSlip.attrs;
+  });
 }

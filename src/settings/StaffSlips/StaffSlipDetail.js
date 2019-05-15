@@ -53,7 +53,7 @@ class StaffSlipDetail extends React.Component {
       : <FormattedMessage id="ui-circulation.settings.staffSlips.no" />;
 
     return (
-      <div>
+      <div data-test-staff-slip-details>
         <Row>
           <Col xs={8}>
             <KeyValue
@@ -85,7 +85,7 @@ class StaffSlipDetail extends React.Component {
           <Col xs={3}>
             <Row className={css.preview}>
               <Col>
-                <Button bottomMargin0 onClick={this.openPreviewDialog}>
+                <Button data-test-open-preview-btn bottomMargin0 onClick={this.openPreviewDialog}>
                   <FormattedMessage id="ui-circulation.settings.staffSlips.preview" />
                 </Button>
               </Col>
@@ -94,7 +94,7 @@ class StaffSlipDetail extends React.Component {
         </Row>
         <Row>
           <Col xs={12}>
-            <div className="ql-editor" ref={this.editorRef}>
+            <div data-test-staff-slip-content className="ql-editor" ref={this.editorRef}>
               {contentComponent}
             </div>
           </Col>
