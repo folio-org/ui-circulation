@@ -20,7 +20,7 @@ describe('StaffSlipSettings', () => {
       expect(StaffSlipSettings.hasList).to.be.true;
     });
 
-    it('has 2 items', () => {
+    it('has 3 items', () => {
       expect(StaffSlipSettings.staffSlipCount).to.equal(3);
     });
   });

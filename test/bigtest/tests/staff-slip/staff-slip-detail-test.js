@@ -46,15 +46,5 @@ describe('StaffSlipDetail', () => {
         expect(StaffSlipDetail.previewModalIsVisible).to.be.false;
       });
     });
-
-    describe('print preview', () => {
-      beforeEach(async function () {
-        await StaffSlipDetail.previewModal.clickPrintBtn();
-      });
-
-      it('closes preview modal', () => {
-        expect(StaffSlipDetail.previewModalIsVisible).to.be.true;
-      });
-    });
   });
 });
