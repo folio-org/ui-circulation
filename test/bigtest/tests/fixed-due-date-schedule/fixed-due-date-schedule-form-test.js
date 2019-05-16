@@ -5,6 +5,8 @@ import { expect } from 'chai';
 import translation from '@folio/circulation/translations/ui-circulation/en.json';
 
 import FddsForm from '../../interactors/fixed-due-date-schedule/fixed-due-date-schedule-form';
+import FddsDetail from '../../interactors/fixed-due-date-schedule/fixed-due-date-schedule-detail';
+
 import setupApplication from '../../helpers/setup-application';
 
 describe('FddsForm', () => {
@@ -219,6 +221,24 @@ describe('FddsForm', () => {
           );
         });
       });
+    });
+  });
+
+  describe('edit existing fdds', () => {
+    let fdds;
+
+    beforeEach(async function () {
+      fdds = this.server.create('fixedDueDateSchedule');
+      this.visit(`/settings/circulation/fixed-due-date-schedules/${fdds.id}?layer=edit`);
+
+      await FddsForm.whenLoaded();
+      await FddsForm.fillName('new schedule');
+      await FddsForm.fillDescription('test');
+      await FddsForm.clickSave();
+    });
+
+    it('saived ffds', () => {
+      expect(FddsDetail.containsContent('new schedule')).to.be.true;
     });
   });
 });

@@ -88,8 +88,9 @@ class FixedDueDateScheduleDetail extends React.Component {
         </div>
       </div>
     ));
+
     return (
-      <div>
+      <div id="date-test-fixed-due-date-schedule-detail">
         <Row end="xs">
           <Col xs>
             <ExpandAllButton accordionStatus={sections} onToggle={this.handleExpandAll} />
