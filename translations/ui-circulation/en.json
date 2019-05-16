@@ -155,6 +155,8 @@
   "settings.patronNotices.predefinedWarning": "This is a predefined notice and cannot be deleted",
   "settings.patronNotices.yes": "Yes",
   "settings.patronNotices.no": "No",
+  "settings.patronNotices.addToken": "Add token",
+  "settings.patronNotices.itemTokenHeader": "Item",
 
   "settings.staffSlips.label": "Staff slips",
   "settings.staffSlips.name": "Name",

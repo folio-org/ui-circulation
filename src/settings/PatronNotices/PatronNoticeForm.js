@@ -26,7 +26,7 @@ import {
 import stripesForm from '@folio/stripes/form';
 import { IfPermission } from '@folio/stripes/core';
 
-import PatronNoticeEditor from './PatronNoticeEditor';
+import TemplateEditor from './TemplateEditor';
 // import PreviewModal from './PreviewModal';
 import formats from './formats';
 import categories from './categories';
@@ -338,7 +338,7 @@ class PatronNoticeForm extends React.Component {
                       }
                       name="localizedTemplates.en.body"
                       id="input-email-template-body"
-                      component={PatronNoticeEditor}
+                      component={TemplateEditor}
                       tokens={Object.keys(formats.Any)}
                     />
                   </Col>
