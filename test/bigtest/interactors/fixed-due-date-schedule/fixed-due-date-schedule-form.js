@@ -3,7 +3,9 @@ import {
   clickable,
   interactor,
   collection,
+  fillable,
   count,
+  isPresent,
 } from '@bigtest/interactor';
 
 import TextFieldInteractor from '@folio/stripes-components/lib/TextField/tests/interactor';
@@ -34,12 +36,18 @@ import DatepickerInteractor from '@folio/stripes-components/lib/Datepicker/tests
 
 @interactor class FddsForm {
   static defaultScope = ('[data-test-fdds-form]');
+  isLoaded = isPresent('[class^="scheduleItemContent---"]');
+
+  whenLoaded() {
+    return this.when(() => this.isLoaded);
+  }
 
   generalSection = new GeneralSection();
   scheduleSection = new ScheduleSection();
-
-  save = clickable('#clickable-save-entry');
-  expandAll = scoped('[data-test-expand-all] button')
+  fillName = fillable('#input_schedule_name');
+  fillDescription = fillable('[name="description"]');
+  clickSave = clickable('#clickable-save-fixedDueDateSchedule');
+  expandAll = scoped('[data-test-expand-all] button');
 }
 
 export default new FddsForm();

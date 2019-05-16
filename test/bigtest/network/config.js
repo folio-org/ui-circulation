@@ -158,11 +158,6 @@ export default function config() {
     'totalRecords' : 4
   });
 
-  this.get('/fixed-due-date-schedule-storage/fixed-due-date-schedules', {
-    fixedDueDateSchedules: [],
-    totalRecords: 0,
-  });
-
   this.get('/templates', {
     templates: [],
     totalRecords: 0,
@@ -316,6 +311,41 @@ export default function config() {
     const staffSlip = staffSlips.create(body);
 
     return staffSlip.attrs;
+  });
+
+  this.get('/fixed-due-date-schedule-storage/fixed-due-date-schedules', ({ fixedDueDateSchedules }) => {
+    return this.serializerOrRegistry.serialize(fixedDueDateSchedules.all());
+  });
+
+  this.put('/fixed-due-date-schedule-storage/fixed-due-date-schedules/:id', ({ fixedDueDateSchedules }, request) => {
+    const body = JSON.parse(request.requestBody);
+    const {
+      name,
+      description,
+      template
+    } = body;
+    const fixedDueDateSchedule = fixedDueDateSchedules.find(body.id);
+
+    fixedDueDateSchedule.update({ name, description, template });
+    return fixedDueDateSchedule.attrs;
+  });
+
+  this.delete('/fixed-due-date-schedule-storage/fixed-due-date-schedules/:id', ({ fixedDueDateSchedules }, request) => {
+    const {
+      params: {
+        id
+      }
+    } = request;
+    const fixedDueDateSchedule = fixedDueDateSchedules.find(id);
+
+    return fixedDueDateSchedule.destroy();
+  });
+
+  this.post('/fixed-due-date-schedule-storage/fixed-due-date-schedules', ({ fixedDueDateSchedules }, request) => {
+    const body = JSON.parse(request.requestBody);
+    const fixedDueDateSchedule = fixedDueDateSchedules.create(body);
+
+    return fixedDueDateSchedule.attrs;
   });
 
   this.get('/configurations/entries', {
