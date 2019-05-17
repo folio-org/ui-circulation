@@ -1,16 +1,15 @@
 /* eslint-disable */
 import _ from 'lodash';
 import React from 'react';
-import ReactDOM from 'react-dom';
 import isEqual from 'lodash/isEqual';
 import PropTypes from 'prop-types';
 import Codemirror from 'codemirror';
 import CodeMirror from 'react-codemirror2';
 import { injectIntl, intlShape } from 'react-intl';
 
-import initRulesCMM from './RulesCMM';
+import initRulesCMM from './initRulesCMM';
 import 'codemirror/addon/fold/foldcode';
-import initFoldRules from './fold-rules';
+import initFoldRules from './initFoldRules';
 import 'codemirror/addon/fold/foldgutter';
 import './rules-show-hint';
 import rulesHint from './Rules-hint';
@@ -87,7 +86,6 @@ const defaultProps = {
 
 // custom-handlers for working with the ever-present code hinting.
 function moveFocusDown(cm, handle){
-  const HINT_ELEMENT_CLASS        = "CodeMirror-hint";
   const ACTIVE_HINT_ELEMENT_CLASS = "CodeMirror-hint-active";
   if (cm.state.completionActive.widget.data.selectedHint === -1) {
     handle.data.selectedHint = 0;
@@ -100,11 +98,10 @@ function moveFocusDown(cm, handle){
     handle.moveFocus(1);
     cm.state.completionActive.widget.data.selectedHint += 1;
   }
-};
+}
 
 function moveFocusUp(cm, handle) {
-  var HINT_ELEMENT_CLASS        = "CodeMirror-hint";
-  var ACTIVE_HINT_ELEMENT_CLASS = "CodeMirror-hint-active";
+  const ACTIVE_HINT_ELEMENT_CLASS = "CodeMirror-hint-active";
   //if it's the first element in the list, we'll need to refocus the editor...
   if (cm.state.completionActive.widget.data.selectedHint <= 0) {
     const widget = cm.state.completionActive.widget;
@@ -117,7 +114,7 @@ function moveFocusUp(cm, handle) {
     handle.moveFocus(-1);
     cm.state.completionActive.widget.data.selectedHint -= 1;
   }
-};
+}
 
 function handleEnter(cm, handle) {
   if (handle.data.selectedHint === -1) {
@@ -125,7 +122,7 @@ function handleEnter(cm, handle) {
   } else {
     handle.pick();
   }
-};
+}
 
 function handleTab(cm, handle) {
   if (handle.data.selectedHint === -1) {
@@ -337,9 +334,8 @@ class RulesEditor extends React.Component {
         }
       }
     });
-    // if filter not found, mark rows until next '#'
 
-    let lastLine = 0;
+    // if filter not found, mark rows until next '#'
     res.forEach((rn) => {
       this.filteredSections.push(this.cm.markText(rn.start, rn.end, { collapsed: true, inclusiveLeft: true, inclusiveRight: true, }));
     });

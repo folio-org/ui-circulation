@@ -146,14 +146,26 @@
   function parseOptions(cm, pos, options) {
     const editor = cm.options.hintOptions;
     const out = {};
-    for (var prop in defaultOptions) out[prop] = defaultOptions[prop];
+    let prop;
+
+    for (prop in defaultOptions) {
+      out[prop] = defaultOptions[prop];
+    }
+
     if (editor) {
-      for (var prop in editor) if (editor[prop] !== undefined) out[prop] = editor[prop];
+      for (prop in editor) {
+        if (editor[prop] !== undefined) out[prop] = editor[prop];
+      }
     }
+
     if (options) {
-      for (var prop in options) if (options[prop] !== undefined) out[prop] = options[prop];
+      for (prop in options) {
+        if (options[prop] !== undefined) out[prop] = options[prop];
+      }
     }
+
     if (out.hint.resolve) out.hint = out.hint.resolve(cm, pos);
+
     return out;
   }
 
@@ -184,13 +196,16 @@
       else bound = val;
       ourMap[key] = bound;
     }
+    let key;
+
     if (custom) {
-      for (var key in custom) { if (custom.hasOwnProperty(key)) addBinding(key, custom[key]); }
+      for (key in custom) { if (custom.hasOwnProperty(key)) addBinding(key, custom[key]); }
     }
     const extra = completion.options.extraKeys;
     if (extra) {
-      for (var key in extra) { if (extra.hasOwnProperty(key)) addBinding(key, extra[key]); }
+      for (key in extra) { if (extra.hasOwnProperty(key)) addBinding(key, extra[key]); }
     }
+
     return ourMap;
   }
 
@@ -413,16 +428,19 @@
     const cur = cm.getCursor();
     const token = cm.getTokenAt(cur);
     const to = CodeMirror.Pos(cur.line, token.end);
+    let term;
+    let from;
+
     if (token.string && /\w/.test(token.string[token.string.length - 1])) {
-      var term = token.string; var
-        from = CodeMirror.Pos(cur.line, token.start);
+      term = token.string;
+      from = CodeMirror.Pos(cur.line, token.start);
     } else {
-      var term = '';
-
-
-      var from = to;
+      term = '';
+      from = to;
     }
+
     const found = [];
+
     for (let i = 0; i < options.words.length; i++) {
       const word = options.words[i];
       if (word.slice(0, term.length) == term) found.push(word);
