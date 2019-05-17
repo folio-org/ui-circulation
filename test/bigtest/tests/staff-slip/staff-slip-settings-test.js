@@ -11,12 +11,12 @@ describe('StaffSlipSettings', () => {
     this.server.createList('staffSlips', 3);
   });
 
-  describe('viewing staff slipt list', () => {
+  describe('viewing staff slip list', () => {
     beforeEach(function () {
       this.visit('/settings/circulation/staffslips');
     });
 
-    it('has a request policy list', () => {
+    it('has a staff slip list', () => {
       expect(StaffSlipSettings.hasList).to.be.true;
     });
 
