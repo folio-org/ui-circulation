@@ -1,0 +1,12 @@
+.ql-editor {
+  min-height: 100px !important;
+}
+
+.ql-token {
+  font-weight: 500;
+  padding-bottom: 5px;
+}
+
+.ql-toolbar {
+  border-bottom: none !important;
+}

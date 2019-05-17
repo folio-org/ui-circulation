@@ -1,0 +1,10 @@
+.preview {
+  justify-content: flex-end;
+  padding-right: 5px;
+  margin-bottom: 5px;
+}
+  
+.label {
+  display: inline-block;
+  margin-bottom: 0.5rem;
+}

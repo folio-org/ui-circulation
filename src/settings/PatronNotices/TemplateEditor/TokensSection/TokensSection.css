@@ -1,0 +1,12 @@
+.categoryHeader {
+  font-weight: bold;
+}
+
+.tokensList {
+  list-style-type: none;
+  padding: 0;
+}
+
+label {
+  padding-left: 10px;
+}

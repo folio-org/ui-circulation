@@ -26,10 +26,12 @@ import {
 import stripesForm from '@folio/stripes/form';
 import { IfPermission } from '@folio/stripes/core';
 
-import PatronNoticeEditor from './PatronNoticeEditor';
+import TemplateEditor from './TemplateEditor';
 // import PreviewModal from './PreviewModal';
 import formats from './formats';
 import categories from './categories';
+
+import TokensList from './TemplateEditor/TokensList';
 
 /**
  * on-blur validation checks that the name of the patron notice
@@ -338,8 +340,9 @@ class PatronNoticeForm extends React.Component {
                       }
                       name="localizedTemplates.en.body"
                       id="input-email-template-body"
-                      component={PatronNoticeEditor}
+                      component={TemplateEditor}
                       tokens={Object.keys(formats.Any)}
+                      list={TokensList}
                     />
                   </Col>
                 </Row>
