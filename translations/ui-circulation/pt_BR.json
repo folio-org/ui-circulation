@@ -300,5 +300,7 @@
     "settings.requestPolicy.cannotDelete.message": "Esta política de solicitação é usada por regras de circulação e não pode ser excluída",
     "settings.common.close": "Fechar",
     "settings.noticePolicy.denyDelete.header": "Não é possível excluir o aviso para o usuário",
-    "settings.noticePolicy.denyDelete.body": "Esta política de aviso não pode ser excluída, pois está em uso por um ou mais registros."
+    "settings.noticePolicy.denyDelete.body": "Esta política de aviso não pode ser excluída, pois está em uso por um ou mais registros.",
+    "settings.patronNotices.addToken": "Adicionar token",
+    "settings.patronNotices.itemTokenHeader": "Item"
 }
