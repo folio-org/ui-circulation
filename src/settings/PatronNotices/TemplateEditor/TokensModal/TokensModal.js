@@ -1,6 +1,7 @@
 import React, { useReducer } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
+import { isEmpty } from 'lodash';
 
 import {
   Button,
@@ -49,6 +50,8 @@ const TokensModal = (props) => {
   const footer = (
     <React.Fragment>
       <Button
+        data-test-add-tokens
+        disabled={isEmpty(selectedTokens)}
         buttonStyle="primary"
         marginBottom0
         onClick={onAddTokens}
@@ -56,6 +59,7 @@ const TokensModal = (props) => {
         <FormattedMessage id="ui-circulation.settings.patronNotices.addToken" />
       </Button>
       <Button
+        data-test-close-tokens-modal
         style={{ marginRight: '10px' }}
         marginBottom0
         onClick={onClose}
@@ -67,6 +71,7 @@ const TokensModal = (props) => {
 
   return (
     <Modal
+      data-test-template-editor-tokens-modal
       dismissible
       open={isOpen}
       label={<FormattedMessage id="ui-circulation.settings.patronNotices.addToken" />}
@@ -84,7 +89,7 @@ const TokensModal = (props) => {
 TokensModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   tokens: PropTypes.arrayOf(PropTypes.string),
-  list: PropTypes.object.isRequired,
+  list: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,
   onAdd: PropTypes.func.isRequired,
 };

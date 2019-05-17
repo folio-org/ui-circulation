@@ -35,7 +35,7 @@ class TemplateEditor extends React.Component {
       valid: PropTypes.bool.isRequired,
       error: PropTypes.node,
     }).isRequired,
-    list: PropTypes.object.isRequired,
+    list: PropTypes.func.isRequired,
   };
 
   constructor(props) {

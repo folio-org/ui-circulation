@@ -35,7 +35,7 @@ class EditorToolbar extends React.Component {
           <button type="button" className="ql-link" />
         </span>
         <span className="ql-formats">
-          <button type="button" className="ql-token">
+          <button data-test-teplate-editor-tokens type="button" className="ql-token">
             {'{ }'}
           </button>
         </span>

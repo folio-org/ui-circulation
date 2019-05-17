@@ -17,7 +17,10 @@ const TokensSection = (props) => {
       <div className={css.categoryHeader}>
         {header}
       </div>
-      <ul className={css.tokensList}>
+      <ul
+        data-test-available-tokens
+        className={css.tokensList}
+      >
         {tokens.map((token) => {
           return (
             <li key={token}>
