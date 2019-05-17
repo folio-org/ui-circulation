@@ -348,6 +348,41 @@ export default function config() {
     return fixedDueDateSchedule.attrs;
   });
 
+  this.get('/cancellation-reason-storage/cancellation-reasons', ({ cancellationReasons }) => {
+    return this.serializerOrRegistry.serialize(cancellationReasons.all());
+  });
+
+  this.put('/cancellation-reason-storage/cancellation-reasons/:id', ({ cancellationReasons }, request) => {
+    const body = JSON.parse(request.requestBody);
+    const {
+      name,
+      description,
+      template
+    } = body;
+    const cancellationReason = cancellationReasons.find(body.id);
+
+    cancellationReason.update({ name, description, template });
+    return cancellationReason.attrs;
+  });
+
+  this.delete('/cancellation-reason-storage/cancellation-reasons/:id', ({ cancellationReasons }, request) => {
+    const {
+      params: {
+        id
+      }
+    } = request;
+    const cancellationReason = cancellationReasons.find(id);
+
+    return cancellationReason.destroy();
+  });
+
+  this.post('/cancellation-reason-storage/cancellation-reasons', ({ cancellationReasons }, request) => {
+    const body = JSON.parse(request.requestBody);
+    const cancellationReason = cancellationReasons.create(body);
+
+    return cancellationReason.attrs;
+  });
+
   this.get('/configurations/entries', {
     'configs': [{
       'id': '8fee8fd0-49b1-456a-bea0-678050ca9015',
