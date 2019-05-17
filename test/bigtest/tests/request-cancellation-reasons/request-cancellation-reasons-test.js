@@ -4,7 +4,7 @@ import { expect } from 'chai';
 import setupApplication from '../../helpers/setup-application';
 import RCReasons from '../../interactors/request-cancellation-reasons/request-cancellation-reasons';
 
-describe.only('Request Cancellation reasons', () => {
+describe('Request Cancellation reasons', () => {
   setupApplication();
 
   beforeEach(function () {
