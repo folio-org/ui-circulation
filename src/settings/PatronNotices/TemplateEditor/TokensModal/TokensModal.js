@@ -4,14 +4,8 @@ import { FormattedMessage } from 'react-intl';
 
 import {
   Button,
-  Col,
   Modal,
-  Row,
 } from '@folio/stripes/components';
-
-import TokensSection from '../TokensSection';
-
-// import css from './TokensModal.css';
 
 const tokensReducer = (tokens, action) => {
   switch (action.type) {
@@ -29,12 +23,13 @@ const tokensReducer = (tokens, action) => {
 const TokensModal = (props) => {
   const {
     isOpen,
-    itemTokens,
+    tokens,
+    list: List,
     onCancel,
     onAdd,
   } = props;
 
-  const [tokens, dispatch] = useReducer(tokensReducer, []);
+  const [selectedTokens, dispatch] = useReducer(tokensReducer, []);
 
   const onSelect = (value, checked) => {
     const action = checked ? 'add' : 'remove';
@@ -48,7 +43,7 @@ const TokensModal = (props) => {
 
   const onAddTokens = () => {
     onClose();
-    onAdd(tokens);
+    onAdd(selectedTokens);
   };
 
   const footer = (
@@ -78,24 +73,18 @@ const TokensModal = (props) => {
       onClose={onClose}
       footer={footer}
     >
-      <Row>
-        <Col xs={4}>
-          <TokensSection
-            header={<FormattedMessage id="ui-circulation.settings.patronNotices.itemTokenHeader" />}
-            tokens={itemTokens}
-            onSelect={onSelect}
-          />
-        </Col>
-        <Col xs={4}><br /></Col>
-        <Col xs={4}><br /></Col>
-      </Row>
+      <List
+        tokens={tokens}
+        onSelect={onSelect}
+      />
     </Modal>
   );
 };
 
 TokensModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
-  itemTokens: PropTypes.arrayOf(PropTypes.string),
+  tokens: PropTypes.arrayOf(PropTypes.string),
+  list: PropTypes.object.isRequired,
   onCancel: PropTypes.func.isRequired,
   onAdd: PropTypes.func.isRequired,
 };

@@ -35,6 +35,7 @@ class TemplateEditor extends React.Component {
       valid: PropTypes.bool.isRequired,
       error: PropTypes.node,
     }).isRequired,
+    list: PropTypes.object.isRequired,
   };
 
   constructor(props) {
@@ -123,16 +124,15 @@ class TemplateEditor extends React.Component {
 
     const {
       label,
-      input: {
-        value,
-      },
+      tokens,
+      input: { value },
+      list,
       meta: {
         submitFailed,
         valid,
         touched,
         error,
       },
-      tokens,
     } = this.props;
 
     const invalid = (touched || submitFailed) && !valid && !showTokensDialog;
@@ -171,7 +171,8 @@ class TemplateEditor extends React.Component {
         />
         <TokensModal
           isOpen={showTokensDialog}
-          itemTokens={tokens}
+          tokens={tokens}
+          list={list}
           onAdd={this.insertTokens}
           onCancel={this.closeTokenDialog}
         />

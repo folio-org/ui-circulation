@@ -31,6 +31,8 @@ import TemplateEditor from './TemplateEditor';
 import formats from './formats';
 import categories from './categories';
 
+import TokensList from './TemplateEditor/TokensList';
+
 /**
  * on-blur validation checks that the name of the patron notice
  * is unique.
@@ -340,6 +342,7 @@ class PatronNoticeForm extends React.Component {
                       id="input-email-template-body"
                       component={TemplateEditor}
                       tokens={Object.keys(formats.Any)}
+                      list={TokensList}
                     />
                   </Col>
                 </Row>
