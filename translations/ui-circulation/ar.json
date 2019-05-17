@@ -300,5 +300,7 @@
     "settings.requestPolicy.cannotDelete.message": "سياسة الطلب تلك قيد الاستخدام بواسطة قواعد الإعارة ولا يمكن حذفها.",
     "settings.common.close": "إغلاق",
     "settings.noticePolicy.denyDelete.header": "تعذّر حذف إخطار المستفيد",
-    "settings.noticePolicy.denyDelete.body": "لا يمكن حذف سياسة الإخطار، حيث أنها قيد استخدام تسجيلة أو أكثر."
+    "settings.noticePolicy.denyDelete.body": "لا يمكن حذف سياسة الإخطار، حيث أنها قيد استخدام تسجيلة أو أكثر.",
+    "settings.patronNotices.addToken": "Add token",
+    "settings.patronNotices.itemTokenHeader": "Item"
 }

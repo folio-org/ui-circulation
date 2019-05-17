@@ -300,5 +300,7 @@
     "settings.requestPolicy.cannotDelete.message": "This request policy is used by circulation rules and it cannot be deleted",
     "settings.common.close": "Close",
     "settings.noticePolicy.denyDelete.header": "Cannot delete Patron notice",
-    "settings.noticePolicy.denyDelete.body": "This Notice policy cannot be deleted, as it is in use by one or more records."
+    "settings.noticePolicy.denyDelete.body": "This Notice policy cannot be deleted, as it is in use by one or more records.",
+    "settings.patronNotices.addToken": "Add token",
+    "settings.patronNotices.itemTokenHeader": "Item"
 }
