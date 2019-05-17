@@ -88,7 +88,7 @@ describe('Patron notice editor', () => {
             await PatronNoticeForm.tokensModal.cancelBtn.click();
           });
 
-          it.only('shound not display tokens modal', () => {
+          it('shound not display tokens modal', () => {
             expect(PatronNoticeForm.tokensModal.availbaleTokens.isPresent).to.be.false;
           });
         });
