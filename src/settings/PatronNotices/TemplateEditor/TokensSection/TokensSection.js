@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { noop } from 'lodash';
+
 import { Checkbox } from '@folio/stripes/components';
 
 import css from './TokensSection.css';
@@ -13,7 +14,7 @@ const TokensSection = (props) => {
   } = props;
 
   return (
-    <div>
+    <React.Fragment>
       <div className={css.categoryHeader}>
         {header}
       </div>
@@ -33,7 +34,7 @@ const TokensSection = (props) => {
           );
         })}
       </ul>
-    </div>
+    </React.Fragment>
   );
 };
 

@@ -75,8 +75,8 @@ const TokensModal = (props) => {
       dismissible
       open={isOpen}
       label={<FormattedMessage id="ui-circulation.settings.patronNotices.addToken" />}
-      onClose={onClose}
       footer={footer}
+      onClose={onClose}
     >
       <List
         tokens={tokens}
