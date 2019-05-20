@@ -301,6 +301,6 @@
     "settings.common.close": "إغلاق",
     "settings.noticePolicy.denyDelete.header": "تعذّر حذف إخطار المستفيد",
     "settings.noticePolicy.denyDelete.body": "لا يمكن حذف سياسة الإخطار، حيث أنها قيد استخدام تسجيلة أو أكثر.",
-    "settings.patronNotices.addToken": "Add token",
-    "settings.patronNotices.itemTokenHeader": "Item"
+    "settings.patronNotices.addToken": "إضافة رمز",
+    "settings.patronNotices.itemTokenHeader": "مادة"
 }
