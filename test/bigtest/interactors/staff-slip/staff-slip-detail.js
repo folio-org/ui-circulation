@@ -5,16 +5,17 @@ import {
 } from '@bigtest/interactor';
 
 import { contains } from '../helpers';
+import KeyValue from '../KeyValue';
 
 @interactor class PreviewModal {
-  isLoaded = isPresent('#clickable-close-preview');
+  isLoaded = isPresent('[data-test-close-tokens-modal]');
   whenLoaded() {
     return this.when(() => this.isLoaded);
   }
 
   barcodeIsPresent = isPresent('barcode');
-  clickCloseBtn = clickable('#clickable-close-preview');
-  clickPrintBtn = clickable('#print-preview-button');
+  clickCloseBtn = clickable('[data-test-close-tokens-modal]');
+  clickPrintBtn = clickable('[data-test-print-modal-template]');
 }
 
 @interactor class StaffSlipDetail {
@@ -22,6 +23,7 @@ import { contains } from '../helpers';
   clickPreviewBtn = clickable('[data-test-open-preview-btn]');
   previewModal = new PreviewModal('#preview-modal');
   previewModalIsVisible = isPresent('#preview-modal');
+  name = new KeyValue('[data-test-staff-slip-name] div');
 }
 
 export default new StaffSlipDetail();

@@ -60,10 +60,12 @@ class StaffSlipDetail extends React.Component {
       <div data-test-staff-slip-details>
         <Row>
           <Col xs={12}>
-            <KeyValue
-              label={<FormattedMessage id="ui-circulation.settings.staffSlips.name" />}
-              value={staffSlip.name}
-            />
+            <div data-test-staff-slip-name>
+              <KeyValue
+                label={<FormattedMessage id="ui-circulation.settings.staffSlips.name" />}
+                value={staffSlip.name}
+              />
+            </div>
           </Col>
         </Row>
         <Row>
@@ -101,7 +103,7 @@ class StaffSlipDetail extends React.Component {
           </Col>
         </Row>
         <Row>
-          <Col xs={12}>
+          <Col xs={12} data-test-staff-slip-content>
             {parsedEmailTemplate}
           </Col>
         </Row>

@@ -14,7 +14,7 @@ import {
 } from '@folio/stripes/components';
 
 import formats from './formats';
-import PreviewModal from '../components';
+import { PreviewModal } from '../components';
 
 class PatronNoticeDetail extends React.Component {
   static propTypes = {
@@ -76,10 +76,12 @@ class PatronNoticeDetail extends React.Component {
       <React.Fragment>
         <Row>
           <Col xs={12}>
-            <KeyValue
-              label={<FormattedMessage id="ui-circulation.settings.patronNotices.notice.name" />}
-              value={notice.name}
-            />
+            <div data-test-staff-slip-name>
+              <KeyValue
+                label={<FormattedMessage id="ui-circulation.settings.patronNotices.notice.name" />}
+                value={notice.name}
+              />
+            </div>
           </Col>
         </Row>
         <Row>

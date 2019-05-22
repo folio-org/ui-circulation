@@ -153,7 +153,7 @@ class TemplateEditor extends React.Component {
                 <div {... invalid ? { className: css.error } : {}}>
                   <EditorToolbar />
                   <ReactQuill
-                    id="patron-notice-editor"
+                    id="template-editor"
                     value={value}
                     ref={this.quill}
                     modules={this.modules}

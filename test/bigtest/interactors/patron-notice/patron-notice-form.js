@@ -37,7 +37,7 @@ import TextFieldInteractor from '@folio/stripes-components/lib/TextField/tests/i
   cancelEditingPatronNoticeTemplate = new Interactor('[data-test-cancel-patron-notice-form-action]');
   cancelEditingPatronNoticeTempateModal = new Interactor('#cancel-editing-confirmation');
 
-  templateBody = new Interactor('#patron-notice-editor');
+  templateBody = new Interactor('#template-editor');
   errorContainer = new Interactor('#patron-notice-error-container');
   save = clickable('#clickable-save-patron-notice');
 

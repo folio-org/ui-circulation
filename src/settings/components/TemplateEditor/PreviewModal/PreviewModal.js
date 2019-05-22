@@ -66,6 +66,7 @@ class PreviewModal extends React.Component {
         <ReactToPrint
           trigger={() => (
             <Button
+              data-test-print-modal-template
               buttonStyle="primary"
               marginBottom0
             >

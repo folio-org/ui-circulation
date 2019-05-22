@@ -29,7 +29,7 @@ describe('StaffSlipDetail', () => {
 
     describe('open preview modal', () => {
       it('opens preview modal', () => {
-        expect(StaffSlipDetail.previewModal.isVisible).to.be.true;
+        expect(StaffSlipDetail.previewModal.isPresent).to.be.true;
       });
 
       it('has a barcode', () => {
