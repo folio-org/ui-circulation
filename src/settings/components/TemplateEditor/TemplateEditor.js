@@ -14,7 +14,7 @@ import {
 
 import TokensModal from './TokensModal';
 import EditorToolbar from './EditorToolbar';
-import PreviewModal from '../PreviewModal';
+import PreviewModal from './PreviewModal';
 import ControlHeader from './ControlHeader';
 import ValidationContainer from './ValidationContainer';
 
@@ -26,16 +26,17 @@ import css from './TemplateEditor.css';
 
 class TemplateEditor extends React.Component {
   static propTypes = {
-    input: PropTypes.object,
-    label: PropTypes.object,
-    tokens: PropTypes.arrayOf(PropTypes.string),
-    meta: PropTypes.shape({
-      touched: PropTypes.bool.isRequired,
-      submitFailed: PropTypes.bool.isRequired,
-      valid: PropTypes.bool.isRequired,
-      error: PropTypes.node,
-    }).isRequired,
-    list: PropTypes.func.isRequired,
+    input: PropTypes.object.isRequired,
+    label: PropTypes.node.isRequired,
+    tokens: PropTypes.object.isRequired,
+    tokensList: PropTypes.func.isRequired,
+    previewModalHeader: PropTypes.node.isRequired,
+    printable: PropTypes.bool,
+    meta: PropTypes.object.isRequired,
+  };
+
+  static defaultProps = {
+    printable: false,
   };
 
   constructor(props) {
@@ -126,13 +127,15 @@ class TemplateEditor extends React.Component {
       label,
       tokens,
       input: { value },
-      list,
+      tokensList,
       meta: {
         submitFailed,
         valid,
         touched,
         error,
       },
+      previewModalHeader,
+      printable,
     } = this.props;
 
     const invalid = (touched || submitFailed) && !valid && !showTokensDialog;
@@ -165,14 +168,16 @@ class TemplateEditor extends React.Component {
         </Row>
         <PreviewModal
           open={openDialog}
-          slipType="Any"
+          header={previewModalHeader}
+          previewFormat={tokens}
           previewTemplate={value}
+          printable={printable}
           onClose={this.closePreviewDialog}
         />
         <TokensModal
           isOpen={showTokensDialog}
-          tokens={tokens}
-          list={list}
+          tokens={Object.keys(tokens)}
+          list={tokensList}
           onAdd={this.insertTokens}
           onCancel={this.closeTokenDialog}
         />

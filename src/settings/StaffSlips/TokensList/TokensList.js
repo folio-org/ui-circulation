@@ -1,13 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage } from 'react-intl';
 
 import {
   Col,
   Row,
 } from '@folio/stripes/components';
 
-import TokensSection from '../TokensSection';
+import { TokensSection } from '../../components';
 
 class TokensList extends React.Component {
   static propTypes = {
@@ -23,15 +22,12 @@ class TokensList extends React.Component {
 
     return (
       <Row>
-        <Col xs={4}>
+        <Col xs={12}>
           <TokensSection
-            header={<FormattedMessage id="ui-circulation.settings.patronNotices.itemTokenHeader" />}
             tokens={tokens}
             onSelect={onSelect}
           />
         </Col>
-        <Col xs={4}><br /></Col>
-        <Col xs={4}><br /></Col>
       </Row>
     );
   }

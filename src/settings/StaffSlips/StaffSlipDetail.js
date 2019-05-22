@@ -1,30 +1,31 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage } from 'react-intl';
-import { Button, Col, KeyValue, Row } from '@folio/stripes/components';
 import HtmlToReact, { Parser } from 'html-to-react';
+import { FormattedMessage } from 'react-intl';
+
+import {
+  Button,
+  Col,
+  KeyValue,
+  Row,
+} from '@folio/stripes/components';
 
 import formats from './formats';
-import PreviewModal from './PreviewModal';
+import { PreviewModal } from '../components';
 
 import css from './StaffSlipDetail.css';
 
 class StaffSlipDetail extends React.Component {
   static propTypes = {
-    stripes: PropTypes.shape({
-      connect: PropTypes.func.isRequired,
-    }).isRequired,
-    initialValues: PropTypes.object,
+    initialValues: PropTypes.object.isRequired,
   };
 
   constructor(props) {
     super(props);
-    this.editorRef = React.createRef();
-    this.openPreviewDialog = this.openPreviewDialog.bind(this);
-    this.closePreviewDialog = this.closePreviewDialog.bind(this);
-    const processNodeDefinitions = new HtmlToReact.ProcessNodeDefinitions(React);
 
-    this.previewFormat = formats[props.initialValues.name];
+    const processNodeDefinitions = new HtmlToReact.ProcessNodeDefinitions(React);
+    this.parser = new Parser();
+
     this.rules = [
       {
         shouldProcessNode: () => true,
@@ -32,22 +33,25 @@ class StaffSlipDetail extends React.Component {
       }
     ];
 
-    this.state = { openDialog: false };
-    this.parser = new Parser();
+    this.state = {
+      openPreview: false,
+    };
   }
 
-  openPreviewDialog() {
-    this.setState({ openDialog: true });
-  }
+  openPreviewDialog = () => {
+    this.setState({ openPreview: true });
+  };
 
-  closePreviewDialog() {
-    this.setState({ openDialog: false });
-  }
+  closePreviewDialog = () => {
+    this.setState({ openPreview: false });
+  };
 
   render() {
-    const { openDialog } = this.state;
+    const { openPreview } = this.state;
     const { initialValues: staffSlip } = this.props;
-    const contentComponent = this.parser.parseWithInstructions(staffSlip.template, () => true, this.rules);
+
+    const parsedEmailTemplate = this.parser.parseWithInstructions(staffSlip.template, () => true, this.rules);
+
     const isActiveValue = staffSlip.active
       ? <FormattedMessage id="ui-circulation.settings.staffSlips.yes" />
       : <FormattedMessage id="ui-circulation.settings.staffSlips.no" />;
@@ -55,7 +59,7 @@ class StaffSlipDetail extends React.Component {
     return (
       <div data-test-staff-slip-details>
         <Row>
-          <Col xs={8}>
+          <Col xs={12}>
             <KeyValue
               label={<FormattedMessage id="ui-circulation.settings.staffSlips.name" />}
               value={staffSlip.name}
@@ -63,7 +67,7 @@ class StaffSlipDetail extends React.Component {
           </Col>
         </Row>
         <Row>
-          <Col xs={8}>
+          <Col xs={12}>
             <KeyValue
               label={<FormattedMessage id="ui-circulation.settings.staffSlips.active" />}
               value={isActiveValue}
@@ -71,21 +75,25 @@ class StaffSlipDetail extends React.Component {
           </Col>
         </Row>
         <Row>
-          <Col xs={8}>
+          <Col xs={12}>
             <KeyValue
               label={<FormattedMessage id="ui-circulation.settings.staffSlips.description" />}
               value={staffSlip.description}
             />
           </Col>
         </Row>
-        <Row bottom="xs">
+        <Row>
           <Col xs={9}>
             <FormattedMessage id="ui-circulation.settings.staffSlips.display" />
           </Col>
           <Col xs={3}>
             <Row className={css.preview}>
               <Col>
-                <Button data-test-open-preview-btn bottomMargin0 onClick={this.openPreviewDialog}>
+                <Button
+                  data-test-open-preview-btn
+                  bottomMargin0
+                  onClick={this.openPreviewDialog}
+                >
                   <FormattedMessage id="ui-circulation.settings.staffSlips.preview" />
                 </Button>
               </Col>
@@ -94,19 +102,17 @@ class StaffSlipDetail extends React.Component {
         </Row>
         <Row>
           <Col xs={12}>
-            <div data-test-staff-slip-content className="ql-editor" ref={this.editorRef}>
-              {contentComponent}
-            </div>
+            {parsedEmailTemplate}
           </Col>
         </Row>
-        {openDialog &&
-          <PreviewModal
-            previewTemplate={staffSlip.template}
-            open={openDialog}
-            onClose={this.closePreviewDialog}
-            slipType={staffSlip.name}
-          />
-        }
+        <PreviewModal
+          open={openPreview}
+          printable
+          header={<FormattedMessage id="ui-circulation.settings.staffSlips.previewLabel" />}
+          previewTemplate={staffSlip.template}
+          previewFormat={formats[staffSlip.name]}
+          onClose={this.closePreviewDialog}
+        />
       </div>
     );
   }
