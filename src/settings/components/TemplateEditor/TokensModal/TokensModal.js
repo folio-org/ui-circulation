@@ -8,6 +8,8 @@ import {
   Modal,
 } from '@folio/stripes/components';
 
+import css from './TokensModal.css';
+
 const tokensReducer = (tokens, action) => {
   switch (action.type) {
     case 'add':
@@ -48,7 +50,14 @@ const TokensModal = (props) => {
   };
 
   const footer = (
-    <React.Fragment>
+    <div className={css.footer}>
+      <Button
+        data-test-close-tokens-modal
+        marginBottom0
+        onClick={onClose}
+      >
+        <FormattedMessage id="ui-circulation.settings.common.cancel" />
+      </Button>
       <Button
         data-test-add-tokens
         disabled={isEmpty(selectedTokens)}
@@ -58,25 +67,15 @@ const TokensModal = (props) => {
       >
         <FormattedMessage id="ui-circulation.settings.patronNotices.addToken" />
       </Button>
-      <Button
-        data-test-close-tokens-modal
-        style={{ marginRight: '10px' }}
-        marginBottom0
-        onClick={onClose}
-      >
-        <FormattedMessage id="ui-circulation.settings.common.cancel" />
-      </Button>
-    </React.Fragment>
+    </div>
   );
 
   return (
     <Modal
       data-test-template-editor-tokens-modal
-      dismissible
       open={isOpen}
       label={<FormattedMessage id="ui-circulation.settings.patronNotices.addToken" />}
       footer={footer}
-      onClose={onClose}
     >
       <List
         tokens={tokens}

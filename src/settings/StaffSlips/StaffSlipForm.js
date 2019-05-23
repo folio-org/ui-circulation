@@ -15,12 +15,15 @@ import {
   Row,
   TextArea
 } from '@folio/stripes/components';
+
 import stripesForm from '@folio/stripes/form';
 import { Field } from 'redux-form';
 
-import StaffSlipEditor from './StaffSlipEditor';
 import formats from './formats';
 import { staffSlipMap } from '../../constants';
+
+import { TemplateEditor } from '../components';
+import TokensList from './TokensList';
 
 class StaffSlipForm extends React.Component {
   static propTypes = {
@@ -156,10 +159,12 @@ class StaffSlipForm extends React.Component {
               <Col xs={8}>
                 <Field
                   label={<FormattedMessage id="ui-circulation.settings.staffSlips.display" />}
-                  component={StaffSlipEditor}
-                  tokens={Object.keys(formats[slipType])}
+                  component={TemplateEditor}
+                  tokens={formats[slipType]}
                   name="template"
-                  slipType={slipType}
+                  previewModalHeader={<FormattedMessage id="ui-circulation.settings.staffSlips.preview" />}
+                  tokensList={TokensList}
+                  printable
                 />
               </Col>
             </Row>

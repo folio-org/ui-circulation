@@ -35,7 +35,7 @@ describe('StaffSlipForm', () => {
     });
 
     it('renders updated policy name', () => {
-      expect(StaffSlipDetail.containsContent('{{Item barcode}}')).to.be.true;
+      expect(StaffSlipDetail.name.value.text).to.equal('Hold');
     });
   });
 });

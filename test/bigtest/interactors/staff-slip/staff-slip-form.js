@@ -7,7 +7,7 @@ import {
 } from '@bigtest/interactor';
 
 @interactor class StaffSlipForm {
-  isLoaded = isPresent('#editor');
+  isLoaded = isPresent('#template-editor');
   whenLoaded() {
     return this.when(() => this.isLoaded);
   }
@@ -20,7 +20,7 @@ import {
 
   fillDescription = fillable('#input-staff-slip-description');
   clickActiveCheckbox = clickable('#input-staff-slip-active');
-  fillEditor = fillable('#editor');
+  fillEditor = fillable('#template-editor');
 
   save = clickable('#clickable-save-staff-slip');
 }

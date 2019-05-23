@@ -157,6 +157,7 @@
   "settings.patronNotices.no": "No",
   "settings.patronNotices.addToken": "Add token",
   "settings.patronNotices.itemTokenHeader": "Item",
+  "settings.patronNotices.previewHeader": "Patron notice template preview",
 
   "settings.staffSlips.label": "Staff slips",
   "settings.staffSlips.name": "Name",
@@ -210,6 +211,7 @@
   "settings.common.years": "Years(s)",
   "settings.common.blankPlaceholder": " ",
   "settings.common.close": "Close",
+  "settings.common.print": "Print",
 
   "settings.noticePolicy.entryLabel": "Patron Notice Policy",
   "settings.noticePolicy.saveAndClose": "Save",

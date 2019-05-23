@@ -26,12 +26,10 @@ import {
 import stripesForm from '@folio/stripes/form';
 import { IfPermission } from '@folio/stripes/core';
 
-import TemplateEditor from './TemplateEditor';
-// import PreviewModal from './PreviewModal';
+import { TemplateEditor } from '../components';
 import formats from './formats';
 import categories from './categories';
-
-import TokensList from './TemplateEditor/TokensList';
+import TokensList from './TokensList';
 
 /**
  * on-blur validation checks that the name of the patron notice
@@ -341,28 +339,13 @@ class PatronNoticeForm extends React.Component {
                       name="localizedTemplates.en.body"
                       id="input-email-template-body"
                       component={TemplateEditor}
-                      tokens={Object.keys(formats.Any)}
-                      list={TokensList}
+                      tokens={formats.Any}
+                      tokensList={TokensList}
+                      previewModalHeader={<FormattedMessage id="ui-circulation.settings.patronNotices.previewHeader" />}
                     />
                   </Col>
                 </Row>
               </Accordion>
-              {/* <Accordion
-                id="sms-template"
-                label="SMS"
-              >
-                <Row>
-                  <Field label="Body" name="localizedTemplates.sms.body" id="input-sms-template-body" component={PatronNoticeEditor} tokens={Object.keys(formats.Any)} />
-                </Row>
-              </Accordion>
-              <Accordion
-                id="print-template"
-                label="Print"
-              >
-                <Row>
-                  <Field label="Body" name="localizedTemplates.print.body" id="input-print-template-body" component={PatronNoticeEditor} tokens={Object.keys(formats.Any)} />
-                </Row>
-              </Accordion> */}
             </AccordionSet>
             { initialValues && initialValues.predefined &&
               <Row>

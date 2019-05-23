@@ -1,8 +1,8 @@
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
 import PropTypes from 'prop-types';
-import { cloneDeep } from 'lodash';
 import HtmlToReact, { Parser } from 'html-to-react';
+import { FormattedMessage } from 'react-intl';
+import { get } from 'lodash';
 
 import {
   Accordion,
@@ -14,158 +14,143 @@ import {
 } from '@folio/stripes/components';
 
 import formats from './formats';
-import PreviewModal from './PreviewModal';
+import { PreviewModal } from '../components';
 
 class PatronNoticeDetail extends React.Component {
   static propTypes = {
-    stripes: PropTypes.shape({
-      connect: PropTypes.func.isRequired,
-      intl: PropTypes.object.isRequired,
-    }).isRequired,
-    initialValues: PropTypes.object,
+    initialValues: PropTypes.object.isRequired,
   };
 
   constructor(props) {
     super(props);
 
-    this.state = {
-      accordions: {
-        'email-template': true,
-        // 'sms-template': true,
-        // 'print-template': true,
-      },
-      openDialog: false,
-    };
-
-    this.openPreviewDialog = this.openPreviewDialog.bind(this);
-    this.closePreviewDialog = this.closePreviewDialog.bind(this);
-    this.onToggleSection = this.onToggleSection.bind(this);
-
     const processNodeDefinitions = new HtmlToReact.ProcessNodeDefinitions(React);
+    this.parser = new Parser();
 
-    this.previewFormat = formats[props.initialValues.name];
     this.rules = [
       {
         shouldProcessNode: () => true,
         processNode: processNodeDefinitions.processDefaultNode,
       }
     ];
-    this.parser = new Parser();
+
+    this.state = {
+      accordions: {
+        'email-template': true,
+      },
+      openPreview: false,
+    };
   }
 
-  openPreviewDialog() {
-    this.setState({ openDialog: true });
+  openPreviewDialog = () => {
+    this.setState({ openPreview: true });
+  };
+
+  closePreviewDialog = () => {
+    this.setState({ openPreview: false });
   }
 
-  closePreviewDialog() {
-    this.setState({ openDialog: false });
-  }
-
-  onToggleSection({ id }) {
+  onToggleSection = ({ id }) => {
     this.setState((curState) => {
-      const newState = cloneDeep(curState);
-      newState.accordions[id] = !curState.accordions[id];
-      return newState;
+      const accordions = { ...curState.accordions };
+      accordions[id] = !accordions[id];
+      return { accordions };
     });
   }
 
   render() {
-    const notice = this.props.initialValues;
-    const emailTemplate = notice.localizedTemplates.en.body;
-    const parsedEmailTemplate = this.parser.parseWithInstructions(emailTemplate, () => true, this.rules);
-    // const smsTemplate = notice.localizedTemplates.sms;
-    // const printTemplate = notice.localizedTemplates.print;
+    const { initialValues: notice } = this.props;
+    const {
+      accordions,
+      openPreview,
+    } = this.state;
 
-    let isActiveLabel;
-    if (notice.active) {
-      isActiveLabel = <FormattedMessage id="ui-circulation.settings.patronNotices.yes" />;
-    } else {
-      isActiveLabel = <FormattedMessage id="ui-circulation.settings.patronNotices.no" />;
-    }
+    const emailTemplate = get(notice, 'localizedTemplates.en.body', '');
+    const parsedEmailTemplate = this.parser.parseWithInstructions(emailTemplate, () => true, this.rules);
+
+    const isActiveLabel = notice.active
+      ? <FormattedMessage id="ui-circulation.settings.patronNotices.yes" />
+      : <FormattedMessage id="ui-circulation.settings.patronNotices.no" />;
 
     return (
-      <div>
+      <React.Fragment>
         <Row>
-          <KeyValue label={<FormattedMessage id="ui-circulation.settings.patronNotices.notice.name" />} value={notice.name} />
+          <Col xs={12}>
+            <div data-test-staff-slip-name>
+              <KeyValue
+                label={<FormattedMessage id="ui-circulation.settings.patronNotices.notice.name" />}
+                value={notice.name}
+              />
+            </div>
+          </Col>
         </Row>
         <Row>
-          <KeyValue label={<FormattedMessage id="ui-circulation.settings.patronNotices.notice.active" />} value={isActiveLabel} />
+          <Col xs={12}>
+            <KeyValue
+              label={<FormattedMessage id="ui-circulation.settings.patronNotices.notice.active" />}
+              value={isActiveLabel}
+            />
+          </Col>
         </Row>
         <Row>
-          <KeyValue label={<FormattedMessage id="ui-circulation.settings.patronNotices.notice.description" />} value={notice.description} />
+          <Col xs={12}>
+            <KeyValue
+              label={<FormattedMessage id="ui-circulation.settings.patronNotices.notice.description" />}
+              value={notice.description}
+            />
+          </Col>
         </Row>
         <Row>
-          <KeyValue label={<FormattedMessage id="ui-circulation.settings.patronNotices.notice.category" />} value={notice.category} />
+          <Col xs={12}>
+            <KeyValue
+              label={<FormattedMessage id="ui-circulation.settings.patronNotices.notice.category" />}
+              value={notice.category}
+            />
+          </Col>
         </Row>
-        <AccordionSet accordionStatus={this.state.accordions} onToggle={this.onToggleSection}>
+        <AccordionSet
+          accordionStatus={accordions}
+          onToggle={this.onToggleSection}
+        >
           <Accordion
             id="email-template"
             label={<FormattedMessage id="ui-circulation.settings.patronNotices.email" />}
           >
             { emailTemplate &&
-              <div>
+              <React.Fragment>
                 <Row>
                   <Col xs={8}>
-                    <KeyValue label={<FormattedMessage id="ui-circulation.settings.patronNotices.subject" />} value={notice.localizedTemplates.en.header} />
+                    <KeyValue
+                      label={<FormattedMessage id="ui-circulation.settings.patronNotices.subject" />}
+                      value={notice.localizedTemplates.en.header}
+                    />
                   </Col>
                   <Col xs={4}>
-                    <Button onClick={this.openPreviewDialog}><FormattedMessage id="ui-circulation.settings.patronNotices.preview" /></Button>
+                    <Button onClick={this.openPreviewDialog}>
+                      <FormattedMessage id="ui-circulation.settings.patronNotices.preview" />
+                    </Button>
                   </Col>
                 </Row>
                 <Row>
                   <Col xs={12}>
-                    <KeyValue label={<FormattedMessage id="ui-circulation.settings.patronNotices.body" />} value={parsedEmailTemplate} />
+                    <KeyValue
+                      label={<FormattedMessage id="ui-circulation.settings.patronNotices.body" />}
+                      value={parsedEmailTemplate}
+                    />
                   </Col>
                 </Row>
-              </div>
+              </React.Fragment>
             }
           </Accordion>
-          {/* <Accordion
-            id="sms-template"
-            label="SMS"
-          >
-            { smsTemplate &&
-              <div>
-                <Row>
-                  <Button>Preview</Button>
-                </Row>
-                <Row>
-                  <KeyValue label="Subject" value={notice.subject} />
-                </Row>
-                <Row>
-                  <KeyValue label="Body" value={smsTemplate.body} />
-                </Row>
-              </div>
-            }
-          </Accordion>
-          <Accordion
-            id="print-template"
-            label="Print"
-          >
-            { printTemplate &&
-              <div>
-                <Row>
-                  <Button>Preview</Button>
-                </Row>
-                <Row>
-                  <KeyValue label="Subject" value={notice.subject} />
-                </Row>
-                <Row>
-                  <KeyValue label="Body" value={printTemplate.body} />
-                </Row>
-              </div>
-            }
-          </Accordion> */}
         </AccordionSet>
-        { this.state.openDialog &&
-          <PreviewModal
-            previewTemplate={emailTemplate}
-            open={this.state.openDialog}
-            onClose={this.closePreviewDialog}
-            slipType="Any"
-          />
-        }
-      </div>
+        <PreviewModal
+          open={openPreview}
+          header={<FormattedMessage id="ui-circulation.settings.patronNotices.previewHeader" />}
+          previewTemplate={emailTemplate}
+          previewFormat={formats.Any}
+          onClose={this.closePreviewDialog}
+        />
+      </React.Fragment>
     );
   }
 }
