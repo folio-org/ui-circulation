@@ -27,8 +27,8 @@ import stripesForm from '@folio/stripes/form';
 import { IfPermission } from '@folio/stripes/core';
 
 import { TemplateEditor } from '../components';
-import formats from './formats';
-import categories from './categories';
+import tokens from './tokens';
+import { patronNoticeCategories } from '../../constants';
 import TokensList from './TokensList';
 
 /**
@@ -223,7 +223,7 @@ class PatronNoticeForm extends React.Component {
     const { handleSubmit, initialValues = {} } = this.props;
     const category = initialValues && initialValues.category;
     const isActive = initialValues && initialValues.active;
-    const sortedCategories = sortBy(categories, ['label']);
+    const sortedCategories = sortBy(patronNoticeCategories, ['label']);
     const categoryOptions = sortedCategories.map(({ label, id }) => ({
       labelTranslationPath: label,
       value: id,
@@ -339,9 +339,9 @@ class PatronNoticeForm extends React.Component {
                       name="localizedTemplates.en.body"
                       id="input-email-template-body"
                       component={TemplateEditor}
-                      tokens={formats.Any}
+                      tokens={tokens}
                       tokensList={TokensList}
-                      previewModalHeader={<FormattedMessage id="ui-circulation.settings.patronNotices.previewHeader" />}
+                      previewModalHeader={<FormattedMessage id="ui-circulation.settings.patronNotices.form.previewHeader" />}
                     />
                   </Col>
                 </Row>

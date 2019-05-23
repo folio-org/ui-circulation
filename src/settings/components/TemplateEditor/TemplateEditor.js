@@ -18,6 +18,8 @@ import PreviewModal from './PreviewModal';
 import ControlHeader from './ControlHeader';
 import ValidationContainer from './ValidationContainer';
 
+import tokensReducer from '../../utils/tokens-reducer';
+
 // eslint-disable-next-line import/no-webpack-loader-syntax
 import '!style-loader!css-loader!react-quill/dist/quill.snow.css';
 // eslint-disable-next-line import/no-webpack-loader-syntax
@@ -28,11 +30,11 @@ class TemplateEditor extends React.Component {
   static propTypes = {
     input: PropTypes.object.isRequired,
     label: PropTypes.node.isRequired,
+    meta: PropTypes.object.isRequired,
     tokens: PropTypes.object.isRequired,
     tokensList: PropTypes.func.isRequired,
     previewModalHeader: PropTypes.node.isRequired,
     printable: PropTypes.bool,
-    meta: PropTypes.object.isRequired,
   };
 
   static defaultProps = {
@@ -169,14 +171,14 @@ class TemplateEditor extends React.Component {
         <PreviewModal
           open={openDialog}
           header={previewModalHeader}
-          previewFormat={tokens}
+          previewFormat={tokensReducer(tokens)}
           previewTemplate={value}
           printable={printable}
           onClose={this.closePreviewDialog}
         />
         <TokensModal
           isOpen={showTokensDialog}
-          tokens={Object.keys(tokens)}
+          tokens={tokens}
           list={tokensList}
           onAdd={this.insertTokens}
           onCancel={this.closeTokenDialog}

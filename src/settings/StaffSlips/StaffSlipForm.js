@@ -19,8 +19,7 @@ import {
 import stripesForm from '@folio/stripes/form';
 import { Field } from 'redux-form';
 
-import formats from './formats';
-import { staffSlipMap } from '../../constants';
+import tokens from './tokens';
 
 import { TemplateEditor } from '../components';
 import TokensList from './TokensList';
@@ -111,7 +110,6 @@ class StaffSlipForm extends React.Component {
   render() {
     const { stripes, handleSubmit, initialValues } = this.props;
     const disabled = !stripes.hasPerm('settings.organization.enabled');
-    const slipType = (initialValues || {}).name || staffSlipMap.HOLD;
 
     return (
       <form id="form-staff-slip" onSubmit={handleSubmit(this.save)}>
@@ -160,9 +158,9 @@ class StaffSlipForm extends React.Component {
                 <Field
                   label={<FormattedMessage id="ui-circulation.settings.staffSlips.display" />}
                   component={TemplateEditor}
-                  tokens={formats[slipType]}
+                  tokens={tokens}
                   name="template"
-                  previewModalHeader={<FormattedMessage id="ui-circulation.settings.staffSlips.preview" />}
+                  previewModalHeader={<FormattedMessage id="ui-circulation.settings.staffSlips.form.previewLabel" />}
                   tokensList={TokensList}
                   printable
                 />

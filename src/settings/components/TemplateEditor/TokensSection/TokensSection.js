@@ -11,6 +11,7 @@ const TokensSection = (props) => {
     tokens,
     onSelect,
     header,
+    disabled,
   } = props;
 
   return (
@@ -28,6 +29,7 @@ const TokensSection = (props) => {
               <Checkbox
                 value={token}
                 label={token}
+                disabled={disabled}
                 onChange={({ target: { checked, value } }) => onSelect(value, checked)}
               />
             </li>
@@ -42,12 +44,14 @@ TokensSection.propTypes = {
   header: PropTypes.node,
   tokens: PropTypes.arrayOf(PropTypes.string),
   onSelect: PropTypes.func,
+  disabled: PropTypes.bool,
 };
 
 TokensSection.defaultProps = {
   header: null,
   tokens: [],
   onSelect: noop,
+  disabled: false,
 };
 
 export default TokensSection;

@@ -10,7 +10,7 @@ import {
   Row,
 } from '@folio/stripes/components';
 
-import formats from './formats';
+import tokens from './tokens';
 import { PreviewModal } from '../components';
 
 import css from './StaffSlipDetail.css';
@@ -109,10 +109,15 @@ class StaffSlipDetail extends React.Component {
         </Row>
         <PreviewModal
           open={openPreview}
-          printable
-          header={<FormattedMessage id="ui-circulation.settings.staffSlips.previewLabel" />}
+          header={
+            <FormattedMessage
+              id="ui-circulation.settings.staffSlips.view.previewLabel"
+              values={{ name: staffSlip.name }}
+            />
+          }
           previewTemplate={staffSlip.template}
-          previewFormat={formats[staffSlip.name]}
+          previewFormat={tokens[staffSlip.name]}
+          printable
           onClose={this.closePreviewDialog}
         />
       </div>

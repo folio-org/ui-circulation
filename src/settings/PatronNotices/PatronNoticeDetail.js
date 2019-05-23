@@ -13,8 +13,9 @@ import {
   Row
 } from '@folio/stripes/components';
 
-import formats from './formats';
+import tokens from './tokens';
 import { PreviewModal } from '../components';
+import tokensReducer from '../utils/tokens-reducer';
 
 class PatronNoticeDetail extends React.Component {
   static propTypes = {
@@ -145,9 +146,14 @@ class PatronNoticeDetail extends React.Component {
         </AccordionSet>
         <PreviewModal
           open={openPreview}
-          header={<FormattedMessage id="ui-circulation.settings.patronNotices.previewHeader" />}
+          header={
+            <FormattedMessage
+              id="ui-circulation.settings.patronNotices.view.previewHeader"
+              values={{ name: notice.name }}
+            />
+          }
           previewTemplate={emailTemplate}
-          previewFormat={formats.Any}
+          previewFormat={tokensReducer(tokens)}
           onClose={this.closePreviewDialog}
         />
       </React.Fragment>
