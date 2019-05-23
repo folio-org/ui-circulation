@@ -302,5 +302,7 @@
     "settings.noticePolicy.denyDelete.header": "Cannot delete Patron notice",
     "settings.noticePolicy.denyDelete.body": "This Notice policy cannot be deleted, as it is in use by one or more records.",
     "settings.patronNotices.addToken": "Add token",
-    "settings.patronNotices.itemTokenHeader": "Item"
+    "settings.patronNotices.itemTokenHeader": "Item",
+    "settings.patronNotices.previewHeader": "Patron notice template preview",
+    "settings.common.print": "Print"
 }
