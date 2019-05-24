@@ -163,8 +163,7 @@
   "settings.patronNotices.form.previewHeader": "Preview of patron notice template",
   "settings.patronNotices.view.previewHeader": "Preview of patron notice template - {name}",
   "settings.patronNotices.denyDelete.header": "Cannot delete Patron notice template",
-  "settings.patronNotices.denyDelete.body": "This Notice policy template cannot be deleted, as it is in use by one or more records.",
-
+  "settings.patronNotices.denyDelete.body": "This Patron notice template cannot be deleted, as it is in use by one or more records.",
 
   "settings.staffSlips.label": "Staff slips",
   "settings.staffSlips.name": "Name",
