@@ -22,6 +22,11 @@ class PatronNotices extends React.Component {
       entries: PropTypes.shape({
         records: PropTypes.arrayOf(PropTypes.object),
       }),
+      patronNoticePolicies: PropTypes.shape({
+        entries: PropTypes.shape({
+          records: PropTypes.arrayOf(PropTypes.object),
+        }),
+      }),
     }).isRequired,
     mutator: PropTypes.shape({
       entries: PropTypes.shape({

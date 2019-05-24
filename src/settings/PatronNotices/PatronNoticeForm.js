@@ -390,8 +390,8 @@ class PatronNoticeForm extends React.Component {
             { editMode &&
               <EntityInUseModal
                 isOpen={showEntityInUseModal}
-                labelTranslationKey="ui-circulation.settings.noticePolicy.denyDelete.header"
-                contentTranslationKey="ui-circulation.settings.noticePolicy.denyDelete.body"
+                labelTranslationKey="ui-circulation.settings.patronNotices.denyDelete.header"
+                contentTranslationKey="ui-circulation.settings.patronNotices.denyDelete.body"
                 onClose={this.changeEntityInUseState}
               />
             }
