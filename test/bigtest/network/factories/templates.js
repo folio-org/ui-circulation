@@ -1,8 +1,8 @@
 import { Factory, faker } from '@bigtest/mirage';
 
-import categories from '../../../../src/settings/PatronNotices/categories';
+import { patronNoticeCategories } from '../../../../src/constants';
 
-const categoriesIds = categories.map(({ id }) => id);
+const categoriesIds = patronNoticeCategories.map(({ id }) => id);
 
 export default Factory.extend({
   id: () => faker.random.uuid(),

@@ -266,4 +266,35 @@ export const staffSlipMap = {
   TRANSIT: 'Transit',
 };
 
+export const patronNoticeCategoryIds = {
+  LOAN: 'Loan',
+  REQUEST: 'Request',
+  FEE_FINE_CHARGE: 'FeeFineCharge',
+  FEE_FINE_ACTION: 'FeeFineAction',
+  OTHER: 'Other',
+};
+
+export const patronNoticeCategories = [
+  {
+    id: patronNoticeCategoryIds.LOAN,
+    label: 'ui-circulation.settings.patronNotices.categories.loan',
+  },
+  {
+    id: patronNoticeCategoryIds.REQUEST,
+    label: 'ui-circulation.settings.patronNotices.categories.request',
+  },
+  {
+    id: patronNoticeCategoryIds.FEE_FINE_CHARGE,
+    label: 'ui-circulation.settings.patronNotices.categories.feeFineCharge',
+  },
+  {
+    id: patronNoticeCategoryIds.FEE_FINE_ACTION,
+    label: 'ui-circulation.settings.patronNotices.categories.feeFineAction',
+  },
+  {
+    id: patronNoticeCategoryIds.OTHER,
+    label: 'ui-circulation.settings.patronNotices.categories.other',
+  },
+];
+
 export default '';

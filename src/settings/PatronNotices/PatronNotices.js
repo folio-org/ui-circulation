@@ -7,7 +7,7 @@ import { stripesConnect } from '@folio/stripes/core';
 
 import PatronNoticeDetail from './PatronNoticeDetail';
 import PatronNoticeForm from './PatronNoticeForm';
-import categories from './categories';
+import { patronNoticeCategories } from '../../constants';
 import { PatronNoticeTemplate as validatePatronNoticeTemplate } from '../Validation';
 
 class PatronNotices extends React.Component {
@@ -51,7 +51,7 @@ class PatronNotices extends React.Component {
   });
 
   render() {
-    const [{ id: defaultCategory }] = sortBy(categories, ['label']);
+    const [{ id: defaultCategory }] = sortBy(patronNoticeCategories, ['label']);
 
     return (
       <EntryManager

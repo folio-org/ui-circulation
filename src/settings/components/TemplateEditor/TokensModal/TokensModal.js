@@ -75,6 +75,7 @@ const TokensModal = (props) => {
       data-test-template-editor-tokens-modal
       open={isOpen}
       label={<FormattedMessage id="ui-circulation.settings.patronNotices.addToken" />}
+      size="large"
       footer={footer}
     >
       <List

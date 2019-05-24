@@ -79,7 +79,7 @@ describe('Patron notice editor', () => {
           });
 
           it('should insert token into editor', () => {
-            expect(PatronNoticeForm.templateBody.text).to.equal('{{library_address}}');
+            expect(PatronNoticeForm.templateBody.text).to.equal('{{item.title}}');
           });
         });
 
