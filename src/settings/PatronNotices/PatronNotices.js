@@ -1,6 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { sortBy } from 'lodash';
+import { FormattedMessage } from 'react-intl';
+import {
+  sortBy,
+  get,
+  reduce
+} from 'lodash';
 
 import { EntryManager } from '@folio/stripes/smart-components';
 import { stripesConnect } from '@folio/stripes/core';
@@ -48,7 +53,32 @@ class PatronNotices extends React.Component {
       path: 'templates',
       fetch: false,
     },
+    patronNoticePolicies: {
+      type: 'okapi',
+      records: 'patronNoticePolicies',
+      path: 'patron-notice-policy-storage/patron-notice-policies',
+      throwErrors: false,
+    },
   });
+
+  isTemplateInUse = (templateId) => {
+    const noticePolicies = get(this.props, 'resources.patronNoticePolicies.records', []);
+    const patronNoticeTemplateIds = reduce(noticePolicies, (templateIds, policy) => {
+      const notices = [
+        ...policy.loanNotices,
+        ...policy.requestNotices,
+        ...policy.feeFineNotices,
+      ];
+
+      const noticeIds = reduce(notices, (ids, notice) => {
+        return [...ids, notice.templateId];
+      }, []);
+
+      return [...templateIds, ...noticeIds];
+    }, []);
+
+    return patronNoticeTemplateIds.includes(templateId);
+  };
 
   render() {
     const [{ id: defaultCategory }] = sortBy(patronNoticeCategories, ['label']);
@@ -78,6 +108,12 @@ class PatronNotices extends React.Component {
         enableDetailsActionMenu
         editElement="both"
         validate={validatePatronNoticeTemplate}
+        isEntryInUse={this.isTemplateInUse}
+        prohibitItemDelete={{
+          close: <FormattedMessage id="ui-circulation.settings.common.close" />,
+          label: <FormattedMessage id="ui-circulation.settings.patronNotices.denyDelete.header" />,
+          message: <FormattedMessage id="ui-circulation.settings.patronNotices.denyDelete.body" />,
+        }}
       />
     );
   }

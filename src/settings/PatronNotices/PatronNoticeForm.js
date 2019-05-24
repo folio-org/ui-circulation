@@ -4,7 +4,12 @@ import {
 } from 'react-intl';
 import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
-import { cloneDeep, find, sortBy } from 'lodash';
+import {
+  cloneDeep,
+  find,
+  sortBy,
+  noop,
+} from 'lodash';
 
 import {
   Accordion,
@@ -30,6 +35,7 @@ import { TemplateEditor } from '../components';
 import tokens from './tokens';
 import { patronNoticeCategories } from '../../constants';
 import TokensList from './TokensList';
+import EntityInUseModal from '../components/EntityInUseModal';
 
 /**
  * on-blur validation checks that the name of the patron notice
@@ -66,12 +72,17 @@ class PatronNoticeForm extends React.Component {
   static propTypes = {
     handleSubmit: PropTypes.func.isRequired,
     initialValues: PropTypes.object,
+    isEntryInUse: PropTypes.func,
     onCancel: PropTypes.func,
     onRemove: PropTypes.func,
     onSave: PropTypes.func,
     pristine: PropTypes.bool,
     submitting: PropTypes.bool,
     permissions: PropTypes.object.isRequired,
+  };
+
+  static defaultProps = {
+    isEntryInUse: noop,
   };
 
   constructor(props) {
@@ -84,6 +95,7 @@ class PatronNoticeForm extends React.Component {
         // 'print-template': true,
       },
       confirming: false,
+      showEntityInUseModal: false,
     };
 
     this.onToggleSection = this.onToggleSection.bind(this);
@@ -120,6 +132,10 @@ class PatronNoticeForm extends React.Component {
   confirmDelete() {
     this.props.onRemove(this.props.initialValues);
   }
+
+  changeEntityInUseState = (showEntityInUseModal) => {
+    this.setState({ showEntityInUseModal });
+  };
 
   renderCLoseIcon() {
     return (
@@ -179,12 +195,20 @@ class PatronNoticeForm extends React.Component {
 
   renderActionMenuItems = ({ onToggle }) => {
     const {
+      initialValues,
       permissions,
+      isEntryInUse,
       onCancel,
     } = this.props;
 
+    const isTemplateInUse = isEntryInUse(initialValues.id);
+
     const handleDeleteClick = () => {
-      this.showConfirm();
+      if (isTemplateInUse) {
+        this.changeEntityInUseState(true);
+      } else {
+        this.showConfirm();
+      }
       onToggle();
     };
 
@@ -220,6 +244,7 @@ class PatronNoticeForm extends React.Component {
   };
 
   render() {
+    const { showEntityInUseModal } = this.state;
     const { handleSubmit, initialValues = {} } = this.props;
     const category = initialValues && initialValues.category;
     const isActive = initialValues && initialValues.active;
@@ -362,6 +387,14 @@ class PatronNoticeForm extends React.Component {
               onConfirm={this.confirmDelete}
               onCancel={this.hideConfirm}
             />
+            { editMode &&
+              <EntityInUseModal
+                isOpen={showEntityInUseModal}
+                labelTranslationKey="ui-circulation.settings.noticePolicy.denyDelete.header"
+                contentTranslationKey="ui-circulation.settings.noticePolicy.denyDelete.body"
+                onClose={this.changeEntityInUseState}
+              />
+            }
           </Pane>
         </Paneset>
       </form>
