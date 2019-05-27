@@ -88,7 +88,7 @@ const TokensModal = (props) => {
 
 TokensModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
-  tokens: PropTypes.arrayOf(PropTypes.string),
+  tokens: PropTypes.object.isRequired,
   list: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,
   onAdd: PropTypes.func.isRequired,

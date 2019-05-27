@@ -36,6 +36,7 @@ import TextFieldInteractor from '@folio/stripes-components/lib/TextField/tests/i
   deletePatronNoticeTemplateModal = new Interactor('#delete-item-confirmation');
   cancelEditingPatronNoticeTemplate = new Interactor('[data-test-cancel-patron-notice-form-action]');
   cancelEditingPatronNoticeTempateModal = new Interactor('#cancel-editing-confirmation');
+  prohibitDeletion = new Interactor('[data-test-entity-in-use-modal]');
 
   templateBody = new Interactor('#template-editor');
   errorContainer = new Interactor('#patron-notice-error-container');
