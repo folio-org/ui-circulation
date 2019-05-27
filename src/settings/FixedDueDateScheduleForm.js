@@ -1,12 +1,11 @@
 import React from 'react';
 import _ from 'lodash';
 import PropTypes from 'prop-types';
-import { Field, FieldArray } from 'redux-form';
 import {
-  FormattedMessage,
-  injectIntl,
-  intlShape,
-} from 'react-intl';
+  Field,
+  FieldArray
+} from 'redux-form';
+import { FormattedMessage } from 'react-intl';
 
 import {
   stripesShape,
@@ -36,7 +35,6 @@ import css from './FixedDueDateSchedule.css';
 class FixedDueDateScheduleForm extends React.Component {
   static propTypes = {
     stripes: stripesShape.isRequired,
-    intl: intlShape.isRequired,
     initialValues: PropTypes.object,
     handleSubmit: PropTypes.func.isRequired,
     onSave: PropTypes.func,
@@ -188,8 +186,6 @@ class FixedDueDateScheduleForm extends React.Component {
   }
 
   renderSchedules({ fields, meta: { error, submitFailed } }) {
-    const { intl: { formatMessage } } = this.props;
-
     return (
       <div>
         <Row>
@@ -233,7 +229,6 @@ class FixedDueDateScheduleForm extends React.Component {
                   <Field
                     label={<FormattedMessage id="ui-circulation.settings.fDDSform.dateFrom" />}
                     name={`${schedule}.from`}
-                    dateFormat={formatMessage({ id: 'ui-circulation.dateFormat' })}
                     timeZone="UTC"
                     backendDateStandard="YYYY-MM-DD"
                     component={Datepicker}
@@ -247,7 +242,6 @@ class FixedDueDateScheduleForm extends React.Component {
                   <Field
                     label={<FormattedMessage id="ui-circulation.settings.fDDSform.dateTo" />}
                     name={`${schedule}.to`}
-                    dateFormat={formatMessage({ id: 'ui-circulation.dateFormat' })}
                     timeZone="UTC"
                     backendDateStandard="YYYY-MM-DD"
                     component={Datepicker}
@@ -260,7 +254,6 @@ class FixedDueDateScheduleForm extends React.Component {
                 >
                   <Field
                     label={<FormattedMessage id="ui-circulation.settings.fDDSform.dueDate" />}
-                    dateFormat={formatMessage({ id: 'ui-circulation.dateFormat' })}
                     timeZone="UTC"
                     backendDateStandard="YYYY-MM-DD"
                     name={`${schedule}.due`}
@@ -417,4 +410,4 @@ export default stripesForm({
   form: 'FixedDueDateScheduleForm',
   navigationCheck: true,
   enableReinitialize: false,
-})(injectIntl(FixedDueDateScheduleForm));
+})(FixedDueDateScheduleForm);
