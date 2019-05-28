@@ -265,8 +265,8 @@
   "settings.noticePolicy.notices.after": "After",
   "settings.noticePolicy.notices.upon": "Upon/At",
 
-  "settings.noticePolicy.requestNotices.recallRequest": "Recall - Requester",
-  "settings.noticePolicy.requestNotices.recallLoanee": "Recall - Loanee",
+  "settings.noticePolicy.requestNotices.recallRequest": "Recall",
+  "settings.noticePolicy.requestNotices.recallLoanee": "Due date change",
   "settings.noticePolicy.requestNotices.holdRequest": "Hold",
   "settings.noticePolicy.requestNotices.pagingRequest": "Page",
   "settings.noticePolicy.requestNotices.available": "Available",
