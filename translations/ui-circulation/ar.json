@@ -303,6 +303,15 @@
     "settings.noticePolicy.denyDelete.body": "لا يمكن حذف سياسة الإخطار، حيث أنها قيد استخدام تسجيلة أو أكثر.",
     "settings.patronNotices.addToken": "إضافة رمز",
     "settings.patronNotices.itemTokenHeader": "مادة",
-    "settings.patronNotices.previewHeader": "Patron notice template preview",
-    "settings.common.print": "Print"
+    "settings.patronNotices.previewHeader": "معاينة قالب إخطار المستفيد",
+    "settings.common.print": "طباعة",
+    "settings.patronNotices.userTokenHeader": "المستخدم",
+    "settings.patronNotices.requestTokenHeader": "طلب",
+    "settings.patronNotices.loanTokenHeader": "الإعارة",
+    "settings.patronNotices.form.previewHeader": "معاينة قالب إخطار المستفيد",
+    "settings.patronNotices.view.previewHeader": "معاينة قالب إخطار المستفيد - {name}",
+    "settings.staffSlips.view.previewLabel": "معاينة كشف الموظفين - {name}",
+    "settings.staffSlips.form.previewLabel": "معاينة كشف الموظفين",
+    "settings.patronNotices.denyDelete.header": "لا يمكن حذف قالب إخطار المستفيد",
+    "settings.patronNotices.denyDelete.body": "لا يمكن حذف قالب إخطار المستفيد، حيث أنه قيد استخدام تسجيلة أو أكثر."
 }

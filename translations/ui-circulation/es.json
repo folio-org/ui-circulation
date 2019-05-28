@@ -303,6 +303,15 @@
     "settings.noticePolicy.denyDelete.body": "This Notice policy cannot be deleted, as it is in use by one or more records.",
     "settings.patronNotices.addToken": "Add token",
     "settings.patronNotices.itemTokenHeader": "Item",
-    "settings.patronNotices.previewHeader": "Patron notice template preview",
-    "settings.common.print": "Print"
+    "settings.patronNotices.previewHeader": "Vista previa de la plantilla de aviso del usuario",
+    "settings.common.print": "Imprimir",
+    "settings.patronNotices.userTokenHeader": "Usuario",
+    "settings.patronNotices.requestTokenHeader": "Solicitud",
+    "settings.patronNotices.loanTokenHeader": "Préstamo",
+    "settings.patronNotices.form.previewHeader": "Vista previa de la plantilla de aviso del usuario",
+    "settings.patronNotices.view.previewHeader": "Vista previa de la plantilla de aviso del usuario - {name}",
+    "settings.staffSlips.view.previewLabel": "Vista previa de la nota de aviso al personal - {name}",
+    "settings.staffSlips.form.previewLabel": "Vista previa de la nota de aviso al personal",
+    "settings.patronNotices.denyDelete.header": "No se puede eliminar la plantilla de aviso de usuario",
+    "settings.patronNotices.denyDelete.body": "Esta plantilla de aviso de usuario no se puede eliminar, ya que está siendo utilizada por uno o más registros."
 }
