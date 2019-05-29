@@ -304,5 +304,14 @@
     "settings.patronNotices.addToken": "Add token",
     "settings.patronNotices.itemTokenHeader": "Item",
     "settings.patronNotices.previewHeader": "Patron notice template preview",
-    "settings.common.print": "Print"
+    "settings.common.print": "Print",
+    "settings.patronNotices.userTokenHeader": "User",
+    "settings.patronNotices.requestTokenHeader": "Request",
+    "settings.patronNotices.loanTokenHeader": "Loan",
+    "settings.patronNotices.form.previewHeader": "Preview of patron notice template",
+    "settings.patronNotices.view.previewHeader": "Preview of patron notice template - {name}",
+    "settings.staffSlips.view.previewLabel": "Preview of staff slip - {name}",
+    "settings.staffSlips.form.previewLabel": "Preview of staff slip",
+    "settings.patronNotices.denyDelete.header": "Cannot delete Patron notice template",
+    "settings.patronNotices.denyDelete.body": "This Patron notice template cannot be deleted as it is in use by one or more records."
 }

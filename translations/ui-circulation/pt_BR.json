@@ -303,6 +303,15 @@
     "settings.noticePolicy.denyDelete.body": "Esta política de aviso não pode ser excluída, pois está em uso por um ou mais registros.",
     "settings.patronNotices.addToken": "Adicionar token",
     "settings.patronNotices.itemTokenHeader": "Item",
-    "settings.patronNotices.previewHeader": "Patron notice template preview",
-    "settings.common.print": "Print"
+    "settings.patronNotices.previewHeader": "Pré-visualização do modelo de aviso aos usuários",
+    "settings.common.print": "Imprimir",
+    "settings.patronNotices.userTokenHeader": "Usuário",
+    "settings.patronNotices.requestTokenHeader": "Pedido de compra",
+    "settings.patronNotices.loanTokenHeader": "Empréstimo",
+    "settings.patronNotices.form.previewHeader": "Pré-visualização do modelo de aviso ao usuário",
+    "settings.patronNotices.view.previewHeader": "Pré-visualização do modelo de aviso ao usuário - {name}",
+    "settings.staffSlips.view.previewLabel": "Pré-visualização da ficha de encaminhamento - {name}",
+    "settings.staffSlips.form.previewLabel": "Pré-visualização da ficha de encaminhamento",
+    "settings.patronNotices.denyDelete.header": "Não é possível excluir o modelo de aviso aos usuários",
+    "settings.patronNotices.denyDelete.body": "Este modelo de aviso aos usuários não pode ser excluído, pois está em uso por um ou mais registros."
 }
