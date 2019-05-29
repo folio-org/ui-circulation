@@ -1,8 +1,6 @@
 {
   "meta.title": "Circulation",
 
-  "dateFormat": "MM/DD/YYYY",
-
   "settings.index.paneTitle": "Circulation",
   "settings.index.loanPolicies": "Loan policies",
   "settings.index.circulationRules": "Circulation rules",
