@@ -297,4 +297,23 @@ export const patronNoticeCategories = [
   },
 ];
 
+export const closingTypesMap = {
+  IMMEDIATELY: 'immediately',
+  INTERVAL: 'interval',
+  NEVER: 'never',
+};
+
+export const closingTypes = [
+  { label: 'Immediately after loan closes', value: 'immediately' },
+  { label: 'After interval after loan closes', value: 'interval' },
+  { label: 'Never', value: 'never' },
+];
+
+export const intervalTypes = [
+  { value: 'Select interval', label: 'Select interval' },
+  { value: 'Day(s)', label: 'Day(s)' },
+  { value: 'Week(s)', label: 'Week(s)' },
+  { value: 'Month(s)', label: 'Month(s)' }
+];
+
 export default '';
