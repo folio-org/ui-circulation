@@ -281,7 +281,6 @@
   "settings.loanHistory.validate.intervalValue": "Please enter a whole number greater than zero to continue",
   "settings.loanHistory.validate.selectContinue": "Please select to continue",
   "settings.loanHistory.selectInterval": "Select interval",
-  "settings.loanHistory.save": "Save",
   "settings.loanHistory.closedLoans": "Closed loans",
   "settings.loanHistory.anonymize": "Anonymize closed loans",
   "settings.loanHistory.immediately": "Immediately after loan closes",

@@ -21,7 +21,7 @@ import {
   longTermLoansOptions,
 } from '../../../../../constants';
 
-import optionsGenarator from '../../../../utils/options-genarator';
+import optionsGenerator from '../../../../utils/options-generator';
 
 class LoansSection extends React.Component {
   static propTypes = {
@@ -34,7 +34,7 @@ class LoansSection extends React.Component {
   constructor(props) {
     super(props);
 
-    this.genarateOptions = optionsGenarator.bind(null, this.props.intl.formatMessage);
+    this.generateOptions = optionsGenerator.bind(null, this.props.intl.formatMessage);
   }
 
   componentDidUpdate(prevProps) {
@@ -73,8 +73,8 @@ class LoansSection extends React.Component {
       );
 
     const dueDateManagementOptions = policy.isShortTermLoan()
-      ? this.genarateOptions(shortTermLoansOptions, 'ui-circulation.settings.common.pleaseSelect')
-      : this.genarateOptions(longTermLoansOptions, 'ui-circulation.settings.common.pleaseSelect');
+      ? this.generateOptions(shortTermLoansOptions, 'ui-circulation.settings.common.pleaseSelect')
+      : this.generateOptions(longTermLoansOptions, 'ui-circulation.settings.common.pleaseSelect');
 
     return (
       <div data-test-loan-policy-form-loans-section>
@@ -103,7 +103,7 @@ class LoansSection extends React.Component {
               id="input_loan_profile"
               component={Select}
             >
-              {this.genarateOptions(loanProfileTypes, 'ui-circulation.settings.common.pleaseSelect')}
+              {this.generateOptions(loanProfileTypes, 'ui-circulation.settings.common.pleaseSelect')}
             </Field>
           </div>
         }
@@ -113,7 +113,7 @@ class LoansSection extends React.Component {
               fieldLabel="ui-circulation.settings.loanPolicy.loanPeriod"
               inputValuePath="loansPolicy.period.duration"
               selectValuePath="loansPolicy.period.intervalId"
-              intervalPeriods={this.genarateOptions(intervalPeriods, 'ui-circulation.settings.loanPolicy.selectInterval')}
+              intervalPeriods={this.generateOptions(intervalPeriods, 'ui-circulation.settings.loanPolicy.selectInterval')}
               changeFormValue={change}
               required
             />
@@ -152,7 +152,7 @@ class LoansSection extends React.Component {
               fieldLabel="ui-circulation.settings.loanPolicy.openingTimeOffset"
               inputValuePath="loansPolicy.openingTimeOffset.duration"
               selectValuePath="loansPolicy.openingTimeOffset.intervalId"
-              intervalPeriods={this.genarateOptions(intervalPeriods.slice(0, 2).reverse(), 'ui-circulation.settings.loanPolicy.selectInterval')}
+              intervalPeriods={this.generateOptions(intervalPeriods.slice(0, 2).reverse(), 'ui-circulation.settings.loanPolicy.selectInterval')}
               changeFormValue={change}
               required
             />
@@ -164,7 +164,7 @@ class LoansSection extends React.Component {
               fieldLabel="ui-circulation.settings.loanPolicy.gracePeriod"
               inputValuePath="loansPolicy.gracePeriod.duration"
               selectValuePath="loansPolicy.gracePeriod.intervalId"
-              intervalPeriods={this.genarateOptions(intervalPeriods, 'ui-circulation.settings.loanPolicy.selectInterval')}
+              intervalPeriods={this.generateOptions(intervalPeriods, 'ui-circulation.settings.loanPolicy.selectInterval')}
               changeFormValue={change}
             />
           </div>

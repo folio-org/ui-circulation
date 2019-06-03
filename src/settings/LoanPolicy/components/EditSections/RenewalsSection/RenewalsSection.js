@@ -13,7 +13,7 @@ import {
   TextField,
 } from '@folio/stripes/components';
 
-import optionsGenarator from '../../../../utils/options-genarator';
+import optionsGenerator from '../../../../utils/options-generator';
 import { Period } from '../../../../components';
 import {
   intervalPeriods,
@@ -31,7 +31,7 @@ class RenewalsSection extends React.Component {
   constructor(props) {
     super(props);
 
-    this.genarateOptions = optionsGenarator.bind(null, this.props.intl.formatMessage);
+    this.generateOptions = optionsGenerator.bind(null, this.props.intl.formatMessage);
   }
 
   render() {
@@ -107,7 +107,7 @@ class RenewalsSection extends React.Component {
                 id="select_renew_from"
                 component={Select}
               >
-                {this.genarateOptions(renewFromOptions, 'ui-circulation.settings.common.pleaseSelect')}
+                {this.generateOptions(renewFromOptions, 'ui-circulation.settings.common.pleaseSelect')}
               </Field>
             </div>
           </React.Fragment>
@@ -132,7 +132,7 @@ class RenewalsSection extends React.Component {
                 fieldLabel="ui-circulation.settings.loanPolicy.alternateLoanPeriodRenewals"
                 inputValuePath="renewalsPolicy.period.duration"
                 selectValuePath="renewalsPolicy.period.intervalId"
-                intervalPeriods={this.genarateOptions(intervalPeriods, 'ui-circulation.settings.loanPolicy.selectInterval')}
+                intervalPeriods={this.generateOptions(intervalPeriods, 'ui-circulation.settings.loanPolicy.selectInterval')}
                 changeFormValue={change}
                 required
               />

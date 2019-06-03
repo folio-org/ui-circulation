@@ -22,7 +22,7 @@ import {
 } from '@folio/stripes/components';
 
 import { Period } from '../components';
-import optionsGenarator from '../utils/options-genarator';
+import optionsGenerator from '../utils/options-generator';
 import {
   closingTypes,
   closingTypesMap,
@@ -32,30 +32,44 @@ import {
 import css from './LoanHistoryForm.css';
 
 class LoanHistoryForm extends Component {
+  static propTypes = {
+    intl: intlShape.isRequired,
+    handleSubmit: PropTypes.func.isRequired,
+    onSubmit: PropTypes.func.isRequired,
+    pristine: PropTypes.bool,
+    submitting: PropTypes.bool,
+    label: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+    initialValues: PropTypes.oneOfType([PropTypes.array]),
+  };
+
   constructor(props) {
     super(props);
-    this.genarateOptions = optionsGenarator.bind(null, props.intl.formatMessage);
+
+    this.generateOptions = optionsGenerator.bind(null, props.intl.formatMessage);
     this.selectedPeriods = intervalPeriods.filter(period => props.initialValues.selectedPeriodsValues.includes(period.value));
   }
 
   onSave = data => this.props.onSubmit({ loan_history: JSON.stringify(data) });
 
   getLastMenu = () => {
-    const { pristine, submitting } = this.props;
+    const {
+      pristine,
+      submitting,
+    } = this.props;
 
     return (
       <Button
+        data-test-loan-history-save-button
         type="submit"
         disabled={pristine || submitting}
-        id="clickable-loan-history-save-button"
         marginBottom0
       >
-        <FormattedMessage id="ui-circulation.settings.loanHistory.save" />
+        <FormattedMessage id="stripes-core.button.save" />
       </Button>
     );
   }
 
-  renderPeriod = () => {
+  renderPeriod() {
     return (
       <div
         data-test-loans-section-loan-period
@@ -64,7 +78,7 @@ class LoanHistoryForm extends Component {
         <Period
           inputValuePath="intervalValue"
           selectValuePath="intervalType"
-          intervalPeriods={this.genarateOptions(this.selectedPeriods, 'ui-circulation.settings.loanHistory.selectInterval')}
+          intervalPeriods={this.generateOptions(this.selectedPeriods, 'ui-circulation.settings.loanHistory.selectInterval')}
           inputSize={4}
           selectSize={6}
         />
@@ -74,6 +88,7 @@ class LoanHistoryForm extends Component {
 
   updateClosingTypes = types => {
     const updatedType = { label: this.renderPeriod(), value: closingTypesMap.INTERVAL };
+
     return types.map(type => (type.value === closingTypesMap.INTERVAL ? updatedType : type));
   };
 
@@ -89,7 +104,7 @@ class LoanHistoryForm extends Component {
             type="radio"
             id={`${type.value}-radio-button`}
             value={type.value}
-            labelClass={css.paddingLeft0}
+            labelClass={css.closingTypeField}
           />
         </Col>
       </Row>
@@ -97,9 +112,10 @@ class LoanHistoryForm extends Component {
 
     return (
       <div>
-        <p>
-          <FormattedMessage id="ui-circulation.settings.loanHistory.anonymize" />
-        </p>
+        <FormattedMessage
+          tagName="p"
+          id="ui-circulation.settings.loanHistory.anonymize"
+        />
         {items}
         {meta.error && <div className={css.error}>{meta.error}</div>}
       </div>
@@ -143,7 +159,7 @@ class LoanHistoryForm extends Component {
                 name="treatEnabled"
                 component={Checkbox}
                 type="checkbox"
-                normalize={v => !!v}
+                normalize={value => !!value}
               />
             </Col>
           </Row>
@@ -152,16 +168,6 @@ class LoanHistoryForm extends Component {
     );
   }
 }
-
-LoanHistoryForm.propTypes = {
-  intl: intlShape.isRequired,
-  handleSubmit: PropTypes.func.isRequired,
-  onSubmit: PropTypes.func.isRequired,
-  pristine: PropTypes.bool,
-  submitting: PropTypes.bool,
-  label: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-  initialValues: PropTypes.oneOfType([PropTypes.array]),
-};
 
 export default injectIntl(
   stripesForm({

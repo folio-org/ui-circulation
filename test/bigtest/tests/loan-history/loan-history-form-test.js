@@ -8,7 +8,7 @@ import { expect } from 'chai';
 import setupApplication from '../../helpers/setup-application';
 import LoanHistoryForm from '../../interactors/loan-history/loan-history-form';
 
-describe.only('Loan History Form', () => {
+describe('Loan History Form', () => {
   setupApplication();
 
   beforeEach(function () {
@@ -28,11 +28,11 @@ describe.only('Loan History Form', () => {
         .clickNeverRadioButton()
         .clickTreatEnabledCheckbox();
 
-      await LoanHistoryForm.save();
+      await LoanHistoryForm.saveButton.click();
     });
 
     it('form successfully saves', () => {
-      expect(LoanHistoryForm.calloutIsPresent).to.be.true;
+      expect(LoanHistoryForm.callout.successCalloutIsPresent).to.be.true;
     });
   });
 
@@ -50,7 +50,7 @@ describe.only('Loan History Form', () => {
       });
 
       it('form successfully saves', () => {
-        expect(LoanHistoryForm.calloutIsPresent).to.be.true;
+        expect(LoanHistoryForm.callout.successCalloutIsPresent).to.be.true;
       });
     });
 
@@ -61,7 +61,7 @@ describe.only('Loan History Form', () => {
       });
 
       it('form doesn\'t save', () => {
-        expect(LoanHistoryForm.calloutIsPresent).to.be.false;
+        expect(LoanHistoryForm.callout.anyCalloutIsPresent).to.be.false;
       });
     });
 
@@ -72,7 +72,7 @@ describe.only('Loan History Form', () => {
       });
 
       it('form doesn\'t save', () => {
-        expect(LoanHistoryForm.calloutIsPresent).to.be.false;
+        expect(LoanHistoryForm.callout.anyCalloutIsPresent).to.be.false;
       });
     });
   });

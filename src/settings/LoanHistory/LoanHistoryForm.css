@@ -1,14 +1,11 @@
-.intervalSelector {
-  display: -webkit-inline-box;
-  margin: 0;
-}
+@import "@folio/stripes-components/lib/variables.css";
 
-.paddingLeft0 {
+.closingTypeField {
   padding-left: 0;
 }
 
 .error {
-  color: #900;
+  color: var(--error);
 }
 
 .periodContainer [class*="formControl"] {

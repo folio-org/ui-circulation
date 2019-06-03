@@ -1,8 +1,8 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {
   FormattedMessage,
-  injectIntl
+  injectIntl,
+  intlShape,
 } from 'react-intl';
 import {
   isEmpty,
@@ -27,18 +27,22 @@ const selectedPeriodsValues = [
 class LoanHistorySettings extends React.Component {
   static propTypes = {
     stripes: stripesShape.isRequired,
-    intl: PropTypes.object.isRequired,
+    intl: intlShape.isRequired,
   };
 
   constructor(props) {
     super(props);
-    const { stripes, intl } = props;
+
+    const {
+      stripes,
+      intl,
+    } = props;
+
     this.configManager = stripes.connect(ConfigManager);
     this.formatMessage = intl.formatMessage;
   }
 
-  // eslint-disable-next-line class-methods-use-this
-  getInitialValues = settings => {
+  getInitialValues(settings) {
     const value = settings.length === 0 ? '' : settings[0].value;
     const defaultConfig = {
       closingType: '',
@@ -54,21 +58,22 @@ class LoanHistorySettings extends React.Component {
       config = defaultConfig;
     }
 
-    if (config.closingType !== closingTypesMap.INTERVAL) {
-      return defaultConfig;
-    }
-    return config;
+    return config.closingType !== closingTypesMap.INTERVAL ? defaultConfig : config;
   }
 
   validate = values => {
     const errors = {};
-    const isIntervalValueValid = isInteger(+values.intervalValue) && +values.intervalValue > 0;
+    const intervalValue = Number(values.intervalValue);
+    const isNumberValid = isInteger(intervalValue) && intervalValue > 0;
+    const isIntervalValueValid = !isNumberValid && (values.closingType === closingTypesMap.INTERVAL || !isEmpty(values.intervalValue));
 
-    if (!isIntervalValueValid && (values.closingType === closingTypesMap.INTERVAL || !isEmpty(values.intervalValue))) {
+    if (isIntervalValueValid) {
       errors.intervalValue = { _error: <FormattedMessage id="ui-circulation.settings.loanHistory.validate.intervalValue" /> };
     }
 
-    if (!values.intervalType && values.closingType === closingTypesMap.INTERVAL) {
+    const isIntervalTypeValid = !values.intervalType && values.closingType === closingTypesMap.INTERVAL;
+
+    if (isIntervalTypeValid) {
       errors.intervalType = { _error: <FormattedMessage id="ui-circulation.settings.loanHistory.validate.selectContinue" /> };
     }
 
@@ -81,10 +86,10 @@ class LoanHistorySettings extends React.Component {
         label={<FormattedMessage id="ui-circulation.settings.index.loanHistory" />}
         moduleName="LOAN_HISTORY"
         configName="loan_history"
-        getInitialValues={this.getInitialValues}
-        validate={this.validate}
         configFormComponent={LoanHistoryForm}
         stripes={this.props.stripes}
+        getInitialValues={this.getInitialValues}
+        validate={this.validate}
       />
     );
   }
