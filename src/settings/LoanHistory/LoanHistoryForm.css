@@ -1,0 +1,16 @@
+.intervalSelector {
+  display: -webkit-inline-box;
+  margin: 0;
+}
+
+.paddingLeft0 {
+  padding-left: 0;
+}
+
+.error {
+  color: #900;
+}
+
+.periodContainer [class*="formControl"] {
+  margin-bottom: 0;
+}
