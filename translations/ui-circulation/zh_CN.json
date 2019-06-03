@@ -271,7 +271,7 @@
     "settings.common.cancel": "取消",
     "settings.validate.isFromOneToHundred": "The value must be between 1 and 100",
     "settings.noticePolicy.notices.send": "Send",
-    "settings.noticePolicy.requestNotices.recallLoanee": "Recall - Loanee",
+    "settings.noticePolicy.requestNotices.recallLoanee": "Due date change",
     "settings.noticePolicy.notices.triggeringEvent": "Triggering Event",
     "settings.noticePolicy.loanNotices.checkIn": "Check in",
     "settings.noticePolicy.loanNotices.checkOut": "Check out",
