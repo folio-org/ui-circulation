@@ -297,4 +297,25 @@ export const patronNoticeCategories = [
   },
 ];
 
+export const closingTypesMap = {
+  IMMEDIATELY: 'immediately',
+  INTERVAL: 'interval',
+  NEVER: 'never',
+};
+
+export const closingTypes = [
+  {
+    value: closingTypesMap.IMMEDIATELY,
+    label: 'ui-circulation.settings.loanHistory.immediately',
+  },
+  {
+    value: closingTypesMap.INTERVAL,
+    label: '',
+  },
+  {
+    value: closingTypesMap.NEVER,
+    label: 'ui-circulation.settings.loanHistory.never',
+  },
+];
+
 export default '';

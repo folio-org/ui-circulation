@@ -12,6 +12,7 @@
 * Update to pane header to include dropdown menu for loan policies. UICIRC-226.
 * Update to pane header to include "Cancel" option in dropdown menu for notice policy. UICIRC-229.
 * Bug fixes: UICIRC-159, UICIRC-160, UICIRC-171, UICIRC-172, UICIRC-175, UICIRC-208, UICIRC-210, UICIRC-216, UICIRC-223, UICIRC-231, UICIRC-232.
+* Add anonymize closed loans settings UI. UIORG-169.
 
 ## [1.6.0](https://github.com/folio-org/ui-circulation/tree/v1.6.0) (2019-03-17)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v1.5.0...v1.6.0)

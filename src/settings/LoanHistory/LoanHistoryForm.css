@@ -1,0 +1,13 @@
+@import "@folio/stripes-components/lib/variables.css";
+
+.closingTypeField {
+  padding-left: 0;
+}
+
+.error {
+  color: var(--error);
+}
+
+.periodContainer [class*="formControl"] {
+  margin-bottom: 0;
+}

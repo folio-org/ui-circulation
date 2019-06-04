@@ -24,7 +24,7 @@ import {
   noticesIntervalPeriods,
 } from '../../../../../../constants';
 
-import optionsGenarator from '../../../../../utils/options-genarator';
+import optionsGenerator from '../../../../../utils/options-generator';
 
 import css from './NoticeCard.css';
 
@@ -49,7 +49,7 @@ class NoticeCard extends React.Component {
   constructor(props) {
     super(props);
 
-    this.generateOptions = optionsGenarator.bind(null, this.props.intl.formatMessage);
+    this.generateOptions = optionsGenerator.bind(null, this.props.intl.formatMessage);
   }
 
   onRemove = () => {

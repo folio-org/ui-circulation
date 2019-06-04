@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Route, Switch } from '@folio/stripes/core';
 
 import Settings from './settings';
+import LoanHistory from './settings/LoanHistory/LoanHistory';
 import LoanPolicySettings from './settings/LoanPolicy/LoanPolicySettings';
 import CirculationRules from './settings/CirculationRules';
 import RequestCancellationReasons from './settings/RequestCancellationReasons';
@@ -14,6 +15,12 @@ import NoticePolicySettings from './settings/NoticePolicy';
 import RequestPolicySettings from './settings/RequestPolicy';
 
 export const settingsRoutes = [
+  {
+    route: 'loan-history',
+    label: 'ui-circulation.settings.index.loanHistory',
+    component: LoanHistory,
+    perm: 'ui-circulation.settings.loan-history',
+  },
   {
     route: 'loan-policies',
     label: 'ui-circulation.settings.index.loanPolicies',
