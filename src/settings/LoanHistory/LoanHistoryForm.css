@@ -10,4 +10,8 @@
 
 .periodContainer [class*="formControl"] {
   margin-bottom: 0;
+
+  & option {
+    color: initial;
+  }
 }
