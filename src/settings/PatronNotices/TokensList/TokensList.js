@@ -51,6 +51,15 @@ class TokensList extends React.Component {
               />
             </Col>
           </Row>
+          <Row>
+            <Col xs={12}>
+              <TokensSection
+                header={<FormattedMessage id="ui-circulation.settings.patronNotices.effectiveLocationTokenHeader" />}
+                tokens={Object.keys(tokens.effectiveLocation)}
+                onSelect={onSelect}
+              />
+            </Col>
+          </Row>
         </Col>
         <Col xs={4}>
           <Row>
