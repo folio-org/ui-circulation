@@ -313,5 +313,15 @@
     "settings.staffSlips.view.previewLabel": "Vista previa de la nota de personal - {name}",
     "settings.staffSlips.form.previewLabel": "Vista previa de la hoja de aviso para el personal",
     "settings.patronNotices.denyDelete.header": "No se puede eliminar la plantilla de aviso de usuario",
-    "settings.patronNotices.denyDelete.body": "Esta plantilla de aviso de patrocinador no se puede eliminar, ya que está siendo utilizada por uno o más registros."
+    "settings.patronNotices.denyDelete.body": "Esta plantilla de aviso de patrocinador no se puede eliminar, ya que está siendo utilizada por uno o más registros.",
+    "settings.index.loanHistory": "Loan history",
+    "settings.loanHistory.validate.intervalValue": "Please enter a whole number greater than zero to continue",
+    "settings.loanHistory.validate.selectContinue": "Please select to continue",
+    "settings.loanHistory.selectInterval": "Select interval",
+    "settings.loanHistory.closedLoans": "Closed loans",
+    "settings.loanHistory.anonymize": "Anonymize closed loans",
+    "settings.loanHistory.immediately": "Immediately after loan closes",
+    "settings.loanHistory.never": "Never",
+    "settings.loanHistory.after": "after loan closes",
+    "settings.loanHistory.treat": "Treat closed loans with associated fee/fines differently"
 }

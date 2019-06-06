@@ -313,5 +313,15 @@
     "settings.staffSlips.view.previewLabel": "Pré-visualização da ficha de encaminhamento - {name}",
     "settings.staffSlips.form.previewLabel": "Pré-visualização da ficha de encaminhamento",
     "settings.patronNotices.denyDelete.header": "Não é possível excluir o modelo de aviso aos usuários",
-    "settings.patronNotices.denyDelete.body": "Este modelo de aviso aos usuários não pode ser excluído, pois está em uso por um ou mais registros."
+    "settings.patronNotices.denyDelete.body": "Este modelo de aviso aos usuários não pode ser excluído, pois está em uso por um ou mais registros.",
+    "settings.index.loanHistory": "Histórico de empréstimos",
+    "settings.loanHistory.validate.intervalValue": "Por favor, insira um número inteiro maior que zero para continuar",
+    "settings.loanHistory.validate.selectContinue": "Por favor selecione para continuar",
+    "settings.loanHistory.selectInterval": "Selecione o intervalo",
+    "settings.loanHistory.closedLoans": "Empréstimos encerrados",
+    "settings.loanHistory.anonymize": "Anonimizar empréstimos encerrados",
+    "settings.loanHistory.immediately": "Imediatamente após o encerramento do empréstimo",
+    "settings.loanHistory.never": "Nunca",
+    "settings.loanHistory.after": "após o encerramento do empréstimo",
+    "settings.loanHistory.treat": "Tratar empréstimos encerrados com taxas/multas associadas de maneira diferente"
 }
