@@ -1,5 +1,18 @@
 # Change history for ui-circulation
 
+## [1.8.0](https://github.com/folio-org/ui-circulation/tree/v1.8.0) (2019-06-10)
+[Full Changelog](https://github.com/folio-org/ui-circulation/compare/v1.7.0...v1.8.0)
+
+* Anonymize closed loans. UIORG-169.
+* Clearer select options for recall triggering events. UICIRC-252.
+* Fix localization in fixed due date schedule form. UICIRC-254.
+* Prevent deletion of patron notice template in use. UICIRC-185
+* Modal consistency for staff slips and patron notices. UICIRC-262
+* Expand user-specific token list for patron notice templates. UICIRC-247
+* Move tokens to modal to accommodate growing list of tokens. UICIRC-253.
+* Bug fix. UICIRC-255.
+* Test coverage. UICIRC-235.
+
 ## [1.7.0](https://github.com/folio-org/ui-circulation/tree/v1.7.0) (2019-05-10)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v1.6.0...v1.7.0)
 
@@ -12,7 +25,6 @@
 * Update to pane header to include dropdown menu for loan policies. UICIRC-226.
 * Update to pane header to include "Cancel" option in dropdown menu for notice policy. UICIRC-229.
 * Bug fixes: UICIRC-159, UICIRC-160, UICIRC-171, UICIRC-172, UICIRC-175, UICIRC-208, UICIRC-210, UICIRC-216, UICIRC-223, UICIRC-231, UICIRC-232.
-* Add anonymize closed loans settings UI. UIORG-169.
 
 ## [1.6.0](https://github.com/folio-org/ui-circulation/tree/v1.6.0) (2019-03-17)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v1.5.0...v1.6.0)
