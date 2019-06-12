@@ -323,5 +323,6 @@
     "settings.loanHistory.immediately": "Inmediatamente después del cierre del préstamo",
     "settings.loanHistory.never": "Nunca",
     "settings.loanHistory.after": "después de que el préstamo cierre",
-    "settings.loanHistory.treat": "Tratar diferente préstamos cerrados con multas/sanciones asociadas"
+    "settings.loanHistory.treat": "Tratar diferente préstamos cerrados con multas/sanciones asociadas",
+    "settings.patronNotices.effectiveLocationTokenHeader": "Effective location"
 }
