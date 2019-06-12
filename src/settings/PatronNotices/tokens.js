@@ -37,6 +37,12 @@ const formats = {
     'loan.numberOfRenewalsTaken': '2',
     'loan.numberOfRenewalsRemaining': '8',
   },
+  effectiveLocation: {
+    'item.effectiveLocationSpecific': 'Main Library Reserve',
+    'item.effectiveLocationLibrary': 'Main Library',
+    'item.effectiveLocationCampus': 'South Campus',
+    'item.effectiveLocationInstitution': 'Opentown University',
+  },
 };
 
 export default formats;
