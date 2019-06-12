@@ -323,5 +323,6 @@
     "settings.loanHistory.immediately": "Immediately after loan closes",
     "settings.loanHistory.never": "Never",
     "settings.loanHistory.after": "after loan closes",
-    "settings.loanHistory.treat": "Treat closed loans with associated fee/fines differently"
+    "settings.loanHistory.treat": "Treat closed loans with associated fee/fines differently",
+    "settings.patronNotices.effectiveLocationTokenHeader": "Effective location"
 }
