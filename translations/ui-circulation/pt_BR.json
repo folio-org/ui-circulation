@@ -324,5 +324,5 @@
     "settings.loanHistory.never": "Nunca",
     "settings.loanHistory.after": "após o encerramento do empréstimo",
     "settings.loanHistory.treat": "Tratar empréstimos encerrados com taxas/multas associadas de maneira diferente",
-    "settings.patronNotices.effectiveLocationTokenHeader": "Effective location"
+    "settings.patronNotices.effectiveLocationTokenHeader": "Localização efetiva"
 }
