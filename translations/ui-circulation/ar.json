@@ -324,5 +324,5 @@
     "settings.loanHistory.never": "أبدا",
     "settings.loanHistory.after": "بعد إعلاق الإعارة",
     "settings.loanHistory.treat": "التعامل مع الإعارات المغلقة ذات الرسوم/الغرامات المرتبطة بها بشكل مختلف",
-    "settings.patronNotices.effectiveLocationTokenHeader": "Effective location"
+    "settings.patronNotices.effectiveLocationTokenHeader": "الموقع الفعال"
 }
