@@ -145,14 +145,6 @@
         ]
       },
       {
-        "permissionName": "settings.circulation.enabled",
-        "displayName": "Settings (Circ): display list of settings pages",
-        "subPermissions": [
-          "settings.enabled"
-        ],
-        "visible": true
-      },
-      {
         "permissionName": "ui-circulation.settings.staff-slips",
         "displayName": "Settings (Circ): Can create, edit and remove staff slips",
         "subPermissions": [
