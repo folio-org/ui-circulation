@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ReactQuill from 'react-quill';
+import ReactQuill, { Quill } from 'react-quill';
+
 import {
   isEmpty,
   isNull,
@@ -19,6 +20,7 @@ import ControlHeader from './ControlHeader';
 import ValidationContainer from './ValidationContainer';
 
 import tokensReducer from '../../utils/tokens-reducer';
+import IndentStyle from './Attributors/indent';
 
 // eslint-disable-next-line import/no-webpack-loader-syntax
 import '!style-loader!css-loader!react-quill/dist/quill.snow.css';
@@ -43,6 +45,13 @@ class TemplateEditor extends React.Component {
 
   constructor(props) {
     super(props);
+
+    const AlignStyle = Quill.import('attributors/style/align');
+    const SizeStyle = Quill.import('attributors/style/size');
+
+    Quill.register(IndentStyle, true);
+    Quill.register(AlignStyle, true);
+    Quill.register(SizeStyle, true);
 
     this.quill = React.createRef();
 
