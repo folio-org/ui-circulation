@@ -39,6 +39,7 @@ import TextFieldInteractor from '@folio/stripes-components/lib/TextField/tests/i
   prohibitDeletion = new Interactor('[data-test-entity-in-use-modal]');
 
   templateBody = new Interactor('#template-editor');
+  indentBtn = new Interactor('[data-test-increase-indent]');
   errorContainer = new Interactor('#patron-notice-error-container');
   save = clickable('#clickable-save-patron-notice');
 

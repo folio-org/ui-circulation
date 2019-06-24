@@ -14,7 +14,7 @@ const EditorToolbar = () => {
       </span>
       <span className="ql-formats">
         <button type="button" className="ql-indent" value="-1" />
-        <button type="button" className="ql-indent" value="+1" />
+        <button type="button" data-test-increase-indent className="ql-indent" value="+1" />
       </span>
       <span className="ql-formats">
         <select className="ql-size">
