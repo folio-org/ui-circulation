@@ -28,6 +28,13 @@ import '!style-loader!css-loader!react-quill/dist/quill.snow.css';
 import '!style-loader!css-loader!./quillCustom.css';
 import css from './TemplateEditor.css';
 
+const AlignStyle = Quill.import('attributors/style/align');
+const SizeStyle = Quill.import('attributors/style/size');
+
+Quill.register(IndentStyle, true);
+Quill.register(AlignStyle, true);
+Quill.register(SizeStyle, true);
+
 class TemplateEditor extends React.Component {
   static propTypes = {
     input: PropTypes.object.isRequired,
@@ -45,13 +52,6 @@ class TemplateEditor extends React.Component {
 
   constructor(props) {
     super(props);
-
-    const AlignStyle = Quill.import('attributors/style/align');
-    const SizeStyle = Quill.import('attributors/style/size');
-
-    Quill.register(IndentStyle, true);
-    Quill.register(AlignStyle, true);
-    Quill.register(SizeStyle, true);
 
     this.quill = React.createRef();
 

@@ -4,12 +4,7 @@ const Parchment = Quill.import('parchment');
 
 class IndentAttributor extends Parchment.Attributor.Style {
   add(node, value) {
-    if (parseInt(value, 10) === 0) {
-      this.remove(node);
-      return true;
-    } else {
-      return super.add(node, `${value}em`);
-    }
+    return super.add(node, `${value}em`);
   }
 }
 
