@@ -7,9 +7,11 @@ import {
 } from 'react-intl';
 import {
   Field,
-  FieldArray,
+  getFormValues,
 } from 'redux-form';
+import { camelCase } from 'lodash';
 
+import { stripesShape } from '@folio/stripes/core';
 import stripesForm from '@folio/stripes/form';
 import {
   Button,
@@ -18,15 +20,18 @@ import {
   Pane,
   Row,
   Headline,
-  RadioButton,
 } from '@folio/stripes/components';
 
-import { Period } from '../components';
+import {
+  Period,
+  RadioButtons,
+} from '../components';
 import optionsGenerator from '../utils/options-generator';
 import {
   closingTypes,
   closingTypesMap,
   intervalPeriods,
+  closedLoansRules,
 } from '../../constants';
 
 import css from './LoanHistoryForm.css';
@@ -40,11 +45,14 @@ class LoanHistoryForm extends Component {
     submitting: PropTypes.bool,
     label: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
     initialValues: PropTypes.oneOfType([PropTypes.array]),
+    stripes: stripesShape.isRequired,
   };
 
   constructor(props) {
     super(props);
 
+    // eslint-disable-next-line react/no-unused-state
+    this.state = { checked: false };
     this.generateOptions = optionsGenerator.bind(null, props.intl.formatMessage);
     this.selectedPeriods = intervalPeriods.filter(period => props.initialValues.selectedPeriodsValues.includes(period.value));
   }
@@ -69,57 +77,50 @@ class LoanHistoryForm extends Component {
     );
   }
 
-  renderPeriod() {
+  toggleCheckbox = () => {
+    this.setState(({ checked }) => ({
+      // eslint-disable-next-line react/no-unused-state
+      checked: !checked
+    }));
+  }
+
+  getCurrentValues() {
+    const { store } = this.props.stripes;
+    const state = store.getState();
+
+    return getFormValues('loanHistoryForm')(state) || {};
+  }
+
+  renderPeriod(name) {
     return (
       <div
-        data-test-loans-section-loan-period
+        data-test-period-section
         className={css.periodContainer}
       >
         <Period
-          inputValuePath="intervalValue"
-          selectValuePath="intervalType"
+          inputValuePath={`${name}.duration`}
+          selectValuePath={`${name}.intervalId`}
           intervalPeriods={this.generateOptions(this.selectedPeriods, 'ui-circulation.settings.loanHistory.selectInterval')}
           inputSize={4}
-          selectSize={6}
+          selectSize={7}
         />
+        <div>
+          <FormattedMessage
+            id="ui-circulation.settings.loanHistory.after"
+            values={{ name: <FormattedMessage id={`ui-circulation.settings.loanHistory.${camelCase(name)}`} /> }}
+          />
+        </div>
       </div>
     );
   }
 
-  updateClosingTypes = types => {
-    const updatedType = { label: this.renderPeriod(), value: closingTypesMap.INTERVAL };
+  getClosingTypes(name) {
+    const updatedType = {
+      label: this.renderPeriod(name),
+      value: closingTypesMap.INTERVAL,
+    };
 
-    return types.map(type => (type.value === closingTypesMap.INTERVAL ? updatedType : type));
-  };
-
-  renderClosingTypes = ({ meta }) => {
-    const updatedClosingTypes = this.updateClosingTypes(closingTypes);
-    const items = updatedClosingTypes.map((type, index) => (
-      <Row key={`row-${index}`}>
-        <Col xs={12}>
-          <Field
-            component={RadioButton}
-            label={<FormattedMessage id={type.label} />}
-            name="closingType"
-            type="radio"
-            id={`${type.value}-radio-button`}
-            value={type.value}
-            labelClass={css.closingTypeField}
-          />
-        </Col>
-      </Row>
-    ));
-
-    return (
-      <div>
-        <FormattedMessage
-          tagName="p"
-          id="ui-circulation.settings.loanHistory.anonymize"
-        />
-        {items}
-        {meta.error && <div className={css.error}>{meta.error}</div>}
-      </div>
-    );
+    return closingTypes.map(type => (type.value === updatedType.value ? updatedType : type));
   }
 
   render() {
@@ -127,6 +128,8 @@ class LoanHistoryForm extends Component {
       handleSubmit,
       label,
     } = this.props;
+
+    const loanHistoryValues = this.getCurrentValues();
 
     return (
       <form
@@ -139,17 +142,23 @@ class LoanHistoryForm extends Component {
           paneTitle={label}
           lastMenu={this.getLastMenu()}
         >
-          <Headline
-            size="large"
-            margin="xx-large"
-            tag="h5"
-          >
-            <FormattedMessage id="ui-circulation.settings.loanHistory.closedLoans" />
-          </Headline>
-          <FieldArray
-            name="closingTypes"
-            component={this.renderClosingTypes}
-          />
+          <div data-test-closed-loans>
+            <Headline
+              size="large"
+              margin="xx-large"
+              tag="h5"
+            >
+              <FormattedMessage id="ui-circulation.settings.loanHistory.closedLoans" />
+            </Headline>
+            <FormattedMessage
+              tagName="p"
+              id="ui-circulation.settings.loanHistory.anonymize"
+            />
+            <RadioButtons
+              name={closedLoansRules.DEFAULT}
+              types={this.getClosingTypes(closedLoansRules.DEFAULT)}
+            />
+          </div>
           <br />
           <Row>
             <Col xs={12}>
@@ -159,10 +168,31 @@ class LoanHistoryForm extends Component {
                 name="treatEnabled"
                 component={Checkbox}
                 type="checkbox"
+                onChange={this.toggleCheckbox}
                 normalize={value => !!value}
               />
             </Col>
           </Row>
+          <br />
+          {loanHistoryValues.treatEnabled &&
+            <div data-test-closed-loans-feefine>
+              <Headline
+                size="large"
+                margin="xx-large"
+                tag="h5"
+              >
+                <FormattedMessage id="ui-circulation.settings.loanHistory.closedLoansFeesFines" />
+              </Headline>
+              <FormattedMessage
+                tagName="p"
+                id="ui-circulation.settings.loanHistory.anonymizeFeesFines"
+              />
+              <RadioButtons
+                name={closedLoansRules.WITH_FEES_FINES}
+                types={this.getClosingTypes(closedLoansRules.WITH_FEES_FINES)}
+              />
+            </div>
+          }
         </Pane>
       </form>
     );

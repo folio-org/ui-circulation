@@ -8,6 +8,10 @@
   color: var(--error);
 }
 
+.periodContainer {
+  display: flex;
+}
+
 .periodContainer [class*="formControl"] {
   margin-bottom: 0;
 
