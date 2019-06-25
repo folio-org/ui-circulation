@@ -3,6 +3,7 @@
 ## 1.9.0
 
 * Remove unnecessary permissions. Refs UIORG-150.
+* Fix display position of autocompletion popup in circulation rules editor. UICIRC-209
 
 ## [1.8.0](https://github.com/folio-org/ui-circulation/tree/v1.8.0) (2019-06-10)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v1.7.0...v1.8.0)
