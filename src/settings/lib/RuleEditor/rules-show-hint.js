@@ -54,8 +54,22 @@
     this.startPos = this.cm.getCursor('start');
     this.startLen = this.cm.getLine(this.startPos.line).length - this.cm.getSelection().length;
 
-    const self = this;
-    cm.on('cursorActivity', this.activityFunc = function () { self.cursorActivity(); });
+    this.clearCursorActivityTimeout = () => {
+      if (this.cursorActivityTimeoutId) {
+        clearTimeout(this.cursorActivityTimeoutId);
+        this.timeoutId = null;
+      }
+    }
+
+    cm.on('cursorActivity', this.activityFunc = () => {
+      this.clearCursorActivityTimeout();
+
+      // The timeout is needed to display the hint using the actual heights of the rendered lines
+      // (after updateHeightsInViewport is executed)
+      this.cursorActivityTimeoutId = setTimeout(() => {
+        this.cursorActivity()
+      }, 0);
+    });
   }
 
   const requestAnimationFrame = window.requestAnimationFrame || function (fn) {
@@ -68,6 +82,8 @@
       if (!this.active()) return;
       this.cm.state.completionActive = null;
       this.tick = null;
+
+      this.clearCursorActivityTimeout();
       this.cm.off('cursorActivity', this.activityFunc);
 
       if (this.widget && this.data) CodeMirror.signal(this.data, 'close');
