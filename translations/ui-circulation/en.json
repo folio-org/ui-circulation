@@ -283,9 +283,14 @@
   "settings.loanHistory.validate.selectContinue": "Please select to continue",
   "settings.loanHistory.selectInterval": "Select interval",
   "settings.loanHistory.closedLoans": "Closed loans",
+  "settings.loanHistory.closedLoansFeesFines": "Closed loans with associated fees/fines",
   "settings.loanHistory.anonymize": "Anonymize closed loans",
-  "settings.loanHistory.immediately": "Immediately after loan closes",
+  "settings.loanHistory.anonymizeFeesFines": "Anonymize closed loans with associated fees/fines",
+  "settings.loanHistory.immediately": "Immediately after {name} closes",
+  "settings.loanHistory.interval": "Interval",
   "settings.loanHistory.never": "Never",
-  "settings.loanHistory.after": "after loan closes",
-  "settings.loanHistory.treat": "Treat closed loans with associated fee/fines differently"
+  "settings.loanHistory.after": "after {name} closes",
+  "settings.loanHistory.treat": "Treat closed loans with associated fee/fines differently",
+  "settings.loanHistory.loan": "loan",
+  "settings.loanHistory.feeFine": "fee/fine"
 }

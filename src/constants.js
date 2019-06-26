@@ -310,12 +310,17 @@ export const closingTypes = [
   },
   {
     value: closingTypesMap.INTERVAL,
-    label: '',
+    label: 'ui-circulation.settings.loanHistory.interval',
   },
   {
     value: closingTypesMap.NEVER,
     label: 'ui-circulation.settings.loanHistory.never',
   },
 ];
+
+export const closedLoansRules = {
+  DEFAULT: 'loan',
+  WITH_FEES_FINES: 'fee/fine',
+};
 
 export default '';

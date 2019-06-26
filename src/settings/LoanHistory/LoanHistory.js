@@ -5,8 +5,8 @@ import {
   intlShape,
 } from 'react-intl';
 import {
-  isEmpty,
   isInteger,
+  setWith,
 } from 'lodash';
 
 import {
@@ -16,7 +16,10 @@ import {
 import { ConfigManager } from '@folio/stripes/smart-components';
 
 import LoanHistoryForm from './LoanHistoryForm';
-import { closingTypesMap } from '../../constants';
+import {
+  closingTypesMap,
+  closedLoansRules,
+} from '../../constants';
 
 const selectedPeriodsValues = [
   'Days',
@@ -45,9 +48,8 @@ class LoanHistorySettings extends React.Component {
   getInitialValues(settings) {
     const value = settings.length === 0 ? '' : settings[0].value;
     const defaultConfig = {
-      closingType: '',
+      closingType: {},
       treatEnabled: false,
-      intervalValue: '',
       selectedPeriodsValues
     };
     let config;
@@ -58,24 +60,30 @@ class LoanHistorySettings extends React.Component {
       config = defaultConfig;
     }
 
-    return config.closingType !== closingTypesMap.INTERVAL ? defaultConfig : config;
+    return config;
   }
 
   validate = values => {
     const errors = {};
-    const intervalValue = Number(values.intervalValue);
-    const isNumberValid = isInteger(intervalValue) && intervalValue > 0;
-    const isIntervalValueValid = !isNumberValid && (values.closingType === closingTypesMap.INTERVAL || !isEmpty(values.intervalValue));
 
-    if (isIntervalValueValid) {
-      errors.intervalValue = { _error: <FormattedMessage id="ui-circulation.settings.loanHistory.validate.intervalValue" /> };
-    }
+    Object.values(closedLoansRules).forEach(item => {
+      const durationValue = values[item] && Number(values[item].duration);
+      const isNumberValid = isInteger(durationValue) && durationValue > 0;
 
-    const isIntervalTypeValid = !values.intervalType && values.closingType === closingTypesMap.INTERVAL;
+      if (values.closingType[item] === closingTypesMap.INTERVAL && !isNumberValid) {
+        const duration = { _error: <FormattedMessage id="ui-circulation.settings.loanHistory.validate.intervalValue" /> };
 
-    if (isIntervalTypeValid) {
-      errors.intervalType = { _error: <FormattedMessage id="ui-circulation.settings.loanHistory.validate.selectContinue" /> };
-    }
+        setWith(errors, [item, 'duration'], duration);
+      }
+
+      const isIntervalIdValid = values[item] && values[item].intervalId;
+
+      if (values.closingType[item] === closingTypesMap.INTERVAL && !isIntervalIdValid) {
+        const intervalId = { _error: <FormattedMessage id="ui-circulation.settings.loanHistory.validate.selectContinue" /> };
+
+        setWith(errors, [item, 'intervalId'], intervalId);
+      }
+    });
 
     return errors;
   }
