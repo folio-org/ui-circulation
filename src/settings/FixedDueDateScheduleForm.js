@@ -145,6 +145,7 @@ class FixedDueDateScheduleForm extends React.Component {
           <Button
             id="clickable-delete-item"
             buttonStyle="danger"
+            marginBottom0
             onClick={this.beginDelete}
             disabled={confirmDelete}
           >
@@ -155,6 +156,7 @@ class FixedDueDateScheduleForm extends React.Component {
         <Button
           id="clickable-save-fixedDueDateSchedule"
           type="submit"
+          marginBottom0
           disabled={(pristine || submitting)}
         >
           {saveLabel}

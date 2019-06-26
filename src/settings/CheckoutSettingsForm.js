@@ -39,7 +39,12 @@ class CheckoutSettingsForm extends React.Component {
   getLastMenu() {
     const { pristine, submitting } = this.props;
     return (
-      <Button type="submit" disabled={(pristine || submitting)} id="clickable-savescanid">
+      <Button
+        id="clickable-savescanid"
+        type="submit"
+        marginBottom0
+        disabled={(pristine || submitting)}
+      >
         <FormattedMessage id="ui-circulation.settings.checkout.save" />
       </Button>
     );
