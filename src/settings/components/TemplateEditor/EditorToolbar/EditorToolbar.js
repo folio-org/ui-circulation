@@ -14,14 +14,14 @@ const EditorToolbar = () => {
       </span>
       <span className="ql-formats">
         <button type="button" className="ql-indent" value="-1" />
-        <button type="button" className="ql-indent" value="+1" />
+        <button type="button" data-test-increase-indent className="ql-indent" value="+1" />
       </span>
       <span className="ql-formats">
         <select className="ql-size">
-          <option value="small" />
+          <option value="10px" />
           <option selected />
-          <option value="large" />
-          <option value="huge" />
+          <option value="18px" />
+          <option value="32px" />
         </select>
       </span>
       <span className="ql-formats">

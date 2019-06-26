@@ -43,6 +43,7 @@ describe('Patron notice editor', () => {
 
       describe('Tokens modal', () => {
         beforeEach(async () => {
+          await PatronNoticeForm.indentBtn.click();
           await PatronNoticeForm.showAvailbaleTokensBtn.click();
         });
 
