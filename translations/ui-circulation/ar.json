@@ -324,5 +324,10 @@
     "settings.loanHistory.never": "أبدا",
     "settings.loanHistory.after": "بعد إعلاق الإعارة",
     "settings.loanHistory.treat": "التعامل مع الإعارات المغلقة ذات الرسوم/الغرامات المرتبطة بها بشكل مختلف",
-    "settings.patronNotices.effectiveLocationTokenHeader": "الموقع الفعال"
+    "settings.patronNotices.effectiveLocationTokenHeader": "الموقع الفعال",
+    "settings.loanHistory.closedLoansFeesFines": "الإعارات المغلقة ذات رسوم/غرامات مرتبطة بها",
+    "settings.loanHistory.anonymizeFeesFines": "عدم تعريف هوية الإعارات المغلقة ذات رسوم/غرامات مرتبطة بها",
+    "settings.loanHistory.interval": "فاصل زمني",
+    "settings.loanHistory.loan": "إعارة",
+    "settings.loanHistory.feeFine": "الرسم/الغرامة"
 }
