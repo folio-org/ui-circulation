@@ -324,5 +324,10 @@
     "settings.loanHistory.never": "Nunca",
     "settings.loanHistory.after": "después de que el préstamo cierre",
     "settings.loanHistory.treat": "Tratar diferente préstamos cerrados con multas/sanciones asociadas",
-    "settings.patronNotices.effectiveLocationTokenHeader": "Effective location"
+    "settings.patronNotices.effectiveLocationTokenHeader": "Effective location",
+    "settings.loanHistory.closedLoansFeesFines": "Closed loans with associated fees/fines",
+    "settings.loanHistory.anonymizeFeesFines": "Anonymize closed loans with associated fees/fines",
+    "settings.loanHistory.interval": "Interval",
+    "settings.loanHistory.loan": "loan",
+    "settings.loanHistory.feeFine": "fee/fine"
 }

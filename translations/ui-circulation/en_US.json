@@ -320,9 +320,14 @@
     "settings.loanHistory.selectInterval": "Select interval",
     "settings.loanHistory.closedLoans": "Closed loans",
     "settings.loanHistory.anonymize": "Anonymize closed loans",
-    "settings.loanHistory.immediately": "Immediately after loan closes",
+    "settings.loanHistory.immediately": "Immediately after {name} closes",
     "settings.loanHistory.never": "Never",
-    "settings.loanHistory.after": "after loan closes",
+    "settings.loanHistory.after": "after {name} closes",
     "settings.loanHistory.treat": "Treat closed loans with associated fee/fines differently",
-    "settings.patronNotices.effectiveLocationTokenHeader": "Effective location"
+    "settings.patronNotices.effectiveLocationTokenHeader": "Effective location",
+    "settings.loanHistory.closedLoansFeesFines": "Closed loans with associated fees/fines",
+    "settings.loanHistory.anonymizeFeesFines": "Anonymize closed loans with associated fees/fines",
+    "settings.loanHistory.interval": "Interval",
+    "settings.loanHistory.loan": "loan",
+    "settings.loanHistory.feeFine": "fee/fine"
 }

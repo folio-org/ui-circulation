@@ -320,9 +320,14 @@
     "settings.loanHistory.selectInterval": "Selecione o intervalo",
     "settings.loanHistory.closedLoans": "Empréstimos encerrados",
     "settings.loanHistory.anonymize": "Anonimizar empréstimos encerrados",
-    "settings.loanHistory.immediately": "Imediatamente após o encerramento do empréstimo",
+    "settings.loanHistory.immediately": "Imediatamente após {name} fechar",
     "settings.loanHistory.never": "Nunca",
-    "settings.loanHistory.after": "após o encerramento do empréstimo",
+    "settings.loanHistory.after": "após {name} fechar",
     "settings.loanHistory.treat": "Tratar empréstimos encerrados com taxas/multas associadas de maneira diferente",
-    "settings.patronNotices.effectiveLocationTokenHeader": "Localização efetiva"
+    "settings.patronNotices.effectiveLocationTokenHeader": "Localização efetiva",
+    "settings.loanHistory.closedLoansFeesFines": "Empréstimos fechados com taxas/multas associadas",
+    "settings.loanHistory.anonymizeFeesFines": "Anonimizar os empréstimos fechados com taxas/multas associadas",
+    "settings.loanHistory.interval": "Intervalo",
+    "settings.loanHistory.loan": "empréstimo",
+    "settings.loanHistory.feeFine": "taxa/multa"
 }
