@@ -106,7 +106,7 @@ class LoanHistoryForm extends Component {
         />
         <div>
           <FormattedMessage
-            id="ui-circulation.settings.loanHistory.after"
+            id="ui-circulation.settings.loanHistory.afterClose"
             values={{ name: <FormattedMessage id={`ui-circulation.settings.loanHistory.${camelCase(name)}`} /> }}
           />
         </div>
