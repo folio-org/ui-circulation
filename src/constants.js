@@ -306,7 +306,7 @@ export const closingTypesMap = {
 export const closingTypes = [
   {
     value: closingTypesMap.IMMEDIATELY,
-    label: 'ui-circulation.settings.loanHistory.immediately',
+    label: 'ui-circulation.settings.loanHistory.immediatelyAfterClose',
   },
   {
     value: closingTypesMap.INTERVAL,
