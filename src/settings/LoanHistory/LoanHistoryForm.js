@@ -115,12 +115,24 @@ class LoanHistoryForm extends Component {
   }
 
   getClosingTypes(name) {
-    const updatedType = {
-      label: this.renderPeriod(name),
-      value: closingTypesMap.INTERVAL,
-    };
+    return closingTypes.map(type => {
+      if (type.value !== closingTypesMap.INTERVAL) {
+        return {
+          ...type,
+          label: (
+            <FormattedMessage
+              id={type.label}
+              values={{ name }}
+            />
+          )
+        };
+      }
 
-    return closingTypes.map(type => (type.value === updatedType.value ? updatedType : type));
+      return {
+        label: this.renderPeriod(name),
+        value: closingTypesMap.INTERVAL,
+      };
+    });
   }
 
   render() {

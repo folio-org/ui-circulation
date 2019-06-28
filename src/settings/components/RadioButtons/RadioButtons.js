@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage } from 'react-intl';
 import { Field } from 'redux-form';
 
 import {
@@ -16,12 +15,7 @@ const RadioButtons = ({ name, types }) => {
         <Field
           data-test-radio-button={type.value}
           component={RadioButton}
-          label={
-            <FormattedMessage
-              id={type.label}
-              values={{ name }}
-            />
-          }
+          label={type.label}
           name={`closingType.${name}`}
           type="radio"
           id={`${type.value}-${name.replace('/', '')}-radio-button`}
