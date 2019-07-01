@@ -329,5 +329,7 @@
     "settings.loanHistory.anonymizeFeesFines": "عدم تعريف هوية الإعارات المغلقة ذات رسوم/غرامات مرتبطة بها",
     "settings.loanHistory.interval": "فاصل زمني",
     "settings.loanHistory.loan": "إعارة",
-    "settings.loanHistory.feeFine": "الرسم/الغرامة"
+    "settings.loanHistory.feeFine": "الرسم/الغرامة",
+    "settings.loanHistory.immediatelyAfterClose": "بمجرد إغلاق {name}",
+    "settings.loanHistory.afterClose": "بعد إغلاق {name}"
 }
