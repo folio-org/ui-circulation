@@ -329,5 +329,7 @@
     "settings.loanHistory.anonymizeFeesFines": "Anonimizar os empréstimos fechados com taxas/multas associadas",
     "settings.loanHistory.interval": "Intervalo",
     "settings.loanHistory.loan": "empréstimo",
-    "settings.loanHistory.feeFine": "taxa/multa"
+    "settings.loanHistory.feeFine": "taxa/multa",
+    "settings.loanHistory.immediatelyAfterClose": "Imediatamente após {name} fechar",
+    "settings.loanHistory.afterClose": "após {name} fechar"
 }

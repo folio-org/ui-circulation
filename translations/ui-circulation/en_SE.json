@@ -329,5 +329,7 @@
     "settings.loanHistory.anonymizeFeesFines": "Anonymize closed loans with associated fees/fines",
     "settings.loanHistory.interval": "Interval",
     "settings.loanHistory.loan": "loan",
-    "settings.loanHistory.feeFine": "fee/fine"
+    "settings.loanHistory.feeFine": "fee/fine",
+    "settings.loanHistory.immediatelyAfterClose": "Immediately after {name} closes",
+    "settings.loanHistory.afterClose": "after {name} closes"
 }
