@@ -30,7 +30,9 @@
       "fixed-due-date-schedules-storage": "2.0",
       "loan-policy-storage": "1.0 2.0",
       "template-engine": "2.0",
-      "patron-notice-policy-storage": "0.7"
+      "patron-notice-policy-storage": "0.7",
+      "location-units": "1.1",
+      "locations": "3.0"
     },
     "permissionSets": [
       {
@@ -117,7 +119,11 @@
           "circulation-storage.patron-notice-policies.item.get",
           "inventory-storage.material-types.item.get",
           "inventory-storage.loan-types.item.get",
-          "settings.circulation.enabled"
+          "settings.circulation.enabled",
+          "inventory-storage.location-units.institutions.collection.get",
+          "inventory-storage.location-units.campuses.collection.get",
+          "inventory-storage.location-units.libraries.collection.get",
+          "inventory-storage.locations.collection.get"
         ],
         "visible": true
       },

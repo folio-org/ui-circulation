@@ -5,6 +5,7 @@
 * Remove unnecessary permissions. Refs UIORG-150.
 * Fix display position of autocompletion popup in circulation rules editor. UICIRC-209
 * Create settings in UI for users to anonymize closed loans with fees/fines. UIORG-175.
+* Add location data fetching to circulation rules editor. UICIRC-272
 
 ## [1.8.0](https://github.com/folio-org/ui-circulation/tree/v1.8.0) (2019-06-10)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v1.7.0...v1.8.0)
