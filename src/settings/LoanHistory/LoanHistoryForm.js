@@ -7,12 +7,12 @@ import {
 } from 'react-intl';
 import {
   Field,
+  FieldArray,
   getFormValues,
 } from 'redux-form';
-import { camelCase } from 'lodash';
 
-import { stripesShape } from '@folio/stripes/core';
 import stripesForm from '@folio/stripes/form';
+import { stripesShape } from '@folio/stripes/core';
 import {
   Button,
   Checkbox,
@@ -22,19 +22,14 @@ import {
   Headline,
 } from '@folio/stripes/components';
 
-import {
-  Period,
-  RadioButtons,
-} from '../components';
+import AnonymazingTypeSelectContainer from '../components/AnonymazingTypeSelect/AnonymazingTypeSelectContainer';
+import ExceptionsList from './ExceptionsList';
 import optionsGenerator from '../utils/options-generator';
 import {
   closingTypes,
-  closingTypesMap,
   intervalPeriods,
   closedLoansRules,
 } from '../../constants';
-
-import css from './LoanHistoryForm.css';
 
 class LoanHistoryForm extends Component {
   static propTypes = {
@@ -44,7 +39,7 @@ class LoanHistoryForm extends Component {
     pristine: PropTypes.bool,
     submitting: PropTypes.bool,
     label: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-    initialValues: PropTypes.oneOfType([PropTypes.array]),
+    initialValues: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
     stripes: stripesShape.isRequired,
   };
 
@@ -91,50 +86,6 @@ class LoanHistoryForm extends Component {
     return getFormValues('loanHistoryForm')(state) || {};
   }
 
-  renderPeriod(name) {
-    return (
-      <div
-        data-test-period-section
-        className={css.periodContainer}
-      >
-        <Period
-          inputValuePath={`${name}.duration`}
-          selectValuePath={`${name}.intervalId`}
-          intervalPeriods={this.generateOptions(this.selectedPeriods, 'ui-circulation.settings.loanHistory.selectInterval')}
-          inputSize={4}
-          selectSize={7}
-        />
-        <div>
-          <FormattedMessage
-            id="ui-circulation.settings.loanHistory.afterClose"
-            values={{ name: <FormattedMessage id={`ui-circulation.settings.loanHistory.${camelCase(name)}`} /> }}
-          />
-        </div>
-      </div>
-    );
-  }
-
-  getClosingTypes(name) {
-    return closingTypes.map(type => {
-      if (type.value !== closingTypesMap.INTERVAL) {
-        return {
-          ...type,
-          label: (
-            <FormattedMessage
-              id={type.label}
-              values={{ name }}
-            />
-          )
-        };
-      }
-
-      return {
-        label: this.renderPeriod(name),
-        value: closingTypesMap.INTERVAL,
-      };
-    });
-  }
-
   render() {
     const {
       handleSubmit,
@@ -166,9 +117,10 @@ class LoanHistoryForm extends Component {
               tagName="p"
               id="ui-circulation.settings.loanHistory.anonymize"
             />
-            <RadioButtons
+            <AnonymazingTypeSelectContainer
               name={closedLoansRules.DEFAULT}
-              types={this.getClosingTypes(closedLoansRules.DEFAULT)}
+              path={closedLoansRules.DEFAULT}
+              types={closingTypes}
             />
           </div>
           <br />
@@ -199,9 +151,15 @@ class LoanHistoryForm extends Component {
                 tagName="p"
                 id="ui-circulation.settings.loanHistory.anonymizeFeesFines"
               />
-              <RadioButtons
+              <AnonymazingTypeSelectContainer
                 name={closedLoansRules.WITH_FEES_FINES}
-                types={this.getClosingTypes(closedLoansRules.WITH_FEES_FINES)}
+                path={closedLoansRules.WITH_FEES_FINES}
+                types={closingTypes}
+              />
+              <br />
+              <FieldArray
+                name="loanExceptions"
+                component={ExceptionsList}
               />
             </div>
           }

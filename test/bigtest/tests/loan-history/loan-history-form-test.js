@@ -11,7 +11,7 @@ import LoanHistoryForm from '../../interactors/loan-history/loan-history-form';
 import { closingTypesMap } from '../../../../src/constants';
 
 describe('Loan History Form', () => {
-  setupApplication();
+  setupApplication({ scenarios: ['testLoanHistory'] });
 
   beforeEach(function () {
     this.visit('/settings/circulation/loan-history');
@@ -35,7 +35,7 @@ describe('Loan History Form', () => {
         await LoanHistoryForm.clickTreatEnabledCheckbox();
       });
 
-      it('"closed loans with associated fees/fines" section is shown', () => {
+      it('section for closed loans with associated fees/fines is shown', () => {
         expect(LoanHistoryForm.feefineSection.isPresent).to.be.true;
       });
 
@@ -57,7 +57,7 @@ describe('Loan History Form', () => {
   });
 
 
-  describe('when form is loaded and "loan interval radio button" selected', () => {
+  describe('when form is loaded and radio button for loan interval is selected', () => {
     beforeEach(async () => {
       await LoanHistoryForm.whenLoaded();
       await LoanHistoryForm.loan.selectRadio(closingTypesMap.INTERVAL);
@@ -67,7 +67,7 @@ describe('Loan History Form', () => {
       expect(LoanHistoryForm.disabledSaveButton).to.be.false;
     });
 
-    describe('when "interval closing type" field completely filled', () => {
+    describe('when the interval closing type field completely filled', () => {
       beforeEach(async () => {
         await LoanHistoryForm.loan.duration.fillAndBlur('2');
         await LoanHistoryForm.loan.interval.selectAndBlur('Week(s)');
@@ -102,7 +102,7 @@ describe('Loan History Form', () => {
     });
   });
 
-  describe('when form is loaded and "fee/fine interval radio button" selected', () => {
+  describe('when form is loaded and radio button for fee/fine interval is selected', () => {
     beforeEach(async () => {
       await LoanHistoryForm.whenLoaded();
       await LoanHistoryForm.clickTreatEnabledCheckbox();
@@ -128,7 +128,7 @@ describe('Loan History Form', () => {
       });
     });
 
-    describe('when "interval closing type" field completely filled', () => {
+    describe('when the interval closing type field completely filled', () => {
       beforeEach(async () => {
         await LoanHistoryForm.feeFine.duration.fillAndBlur('2');
         await LoanHistoryForm.feeFine.interval.selectAndBlur('Week(s)');
@@ -159,6 +159,131 @@ describe('Loan History Form', () => {
 
       it('form doesn\'t save', () => {
         expect(LoanHistoryForm.callout.anyCalloutIsPresent).to.be.false;
+      });
+    });
+  });
+
+  describe('when form is loaded and checkbox for treat closed loans is checked', () => {
+    beforeEach(async () => {
+      await LoanHistoryForm.whenLoaded();
+      await LoanHistoryForm.clickTreatEnabledCheckbox();
+    });
+
+    it('button for add exception is present', () => {
+      expect(LoanHistoryForm.addExceptionButton.isPresent).to.be.true;
+    });
+
+    describe('when button for add exception is clicked', () => {
+      beforeEach(async () => {
+        await LoanHistoryForm.addExceptionButton.click();
+      });
+
+      it('exception card is shown', () => {
+        expect(LoanHistoryForm.loanException.isPresent).to.be.true;
+      });
+
+      describe('when button for delete exception is clicked', () => {
+        beforeEach(async () => {
+          await LoanHistoryForm.removeExceptionIcon.click();
+        });
+
+        it('exception card is not shown', () => {
+          expect(LoanHistoryForm.loanException.isPresent).to.be.false;
+        });
+      });
+
+      describe('when user has made changes', () => {
+        beforeEach(async () => {
+          await LoanHistoryForm.loanExceptionSection.paymentMethods(0).selectAndBlur('Cash1');
+        });
+
+        it('save button is active', () => {
+          expect(LoanHistoryForm.disabledSaveButton).to.be.false;
+        });
+      });
+
+      describe('when select radio buttons and click save button', () => {
+        beforeEach(async function () {
+          await LoanHistoryForm
+            .loanException.selectRadio(closingTypesMap.IMMEDIATELY)
+            .loanException.selectRadio(closingTypesMap.INTERVAL)
+            .loanException.selectRadio(closingTypesMap.NEVER);
+
+          await LoanHistoryForm.saveButton.click();
+        });
+
+        it('form successfully saves', () => {
+          expect(LoanHistoryForm.callout.successCalloutIsPresent).to.be.true;
+        });
+      });
+
+      describe('when radio button for interval type is selected', () => {
+        beforeEach(async () => {
+          await LoanHistoryForm.loanException.selectRadio(closingTypesMap.INTERVAL);
+        });
+
+        it('save button is active', () => {
+          expect(LoanHistoryForm.disabledSaveButton).to.be.false;
+        });
+
+        describe('when fields completely filled', () => {
+          beforeEach(async () => {
+            await LoanHistoryForm.loanException.duration.fillAndBlur('2');
+            await LoanHistoryForm.loanException.interval.selectAndBlur('Week(s)');
+            await LoanHistoryForm.saveButton.click();
+          });
+
+          it('form successfully saves', () => {
+            expect(LoanHistoryForm.callout.successCalloutIsPresent).to.be.true;
+          });
+        });
+
+        describe('when the duration value is negative', () => {
+          beforeEach(async () => {
+            await LoanHistoryForm.loanException.duration.fillAndBlur('-2');
+            await LoanHistoryForm.loanException.interval.selectAndBlur('Day(s)');
+            await LoanHistoryForm.saveButton.click();
+          });
+
+          it('form doesn\'t save', () => {
+            expect(LoanHistoryForm.callout.anyCalloutIsPresent).to.be.false;
+          });
+        });
+
+        describe('when the interval is not selected', () => {
+          beforeEach(async () => {
+            await LoanHistoryForm.loanException.duration.fillAndBlur('7');
+            await LoanHistoryForm.saveButton.click();
+          });
+
+          it('form doesn\'t save', () => {
+            expect(LoanHistoryForm.callout.anyCalloutIsPresent).to.be.false;
+          });
+        });
+      });
+    });
+
+    describe('when button for add exception is clicked twice', () => {
+      beforeEach(async () => {
+        await LoanHistoryForm
+          .addExceptionButton.click()
+          .addExceptionButton.click();
+      });
+
+      it('should have 2 exception cards', () => {
+        expect(LoanHistoryForm.loanExceptionSection.cardsCount).to.be.equal(2);
+      });
+
+      describe('when user has selected the same payment method for multiple exceptions', () => {
+        beforeEach(async () => {
+          await LoanHistoryForm.loanExceptionSection.paymentMethods(0).selectAndBlur('Cash2');
+          await LoanHistoryForm.loanExceptionSection.paymentMethods(1).selectAndBlur('Cash2');
+          await LoanHistoryForm.saveButton.click();
+        });
+
+        it('form doesn\'t save', () => {
+          expect(LoanHistoryForm.callout.anyCalloutIsPresent).to.be.false;
+        });
       });
     });
   });

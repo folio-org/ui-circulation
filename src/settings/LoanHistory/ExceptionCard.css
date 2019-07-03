@@ -1,0 +1,15 @@
+.exceptionCard {
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-top-width: 0;
+  margin: 0 15px 0 0;
+  padding: 0 10px 10px 10px;
+  width: 500px;
+}
+
+.exceptionCard:first-child {
+  border-top-width: 1px;
+}
+
+.exceptionCardHeader {
+  padding-left: 0.5rem;
+}

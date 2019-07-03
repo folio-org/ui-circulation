@@ -4,10 +4,6 @@ import {
   injectIntl,
   intlShape,
 } from 'react-intl';
-import {
-  isInteger,
-  setWith,
-} from 'lodash';
 
 import {
   stripesShape,
@@ -16,10 +12,7 @@ import {
 import { ConfigManager } from '@folio/stripes/smart-components';
 
 import LoanHistoryForm from './LoanHistoryForm';
-import {
-  closingTypesMap,
-  closedLoansRules,
-} from '../../constants';
+import { LoanHistory as validateLoanHistory } from '../Validation';
 
 const selectedPeriodsValues = [
   'Days',
@@ -63,31 +56,6 @@ class LoanHistorySettings extends React.Component {
     return config;
   }
 
-  validate = values => {
-    const errors = {};
-
-    Object.values(closedLoansRules).forEach(item => {
-      const durationValue = values[item] && Number(values[item].duration);
-      const isNumberValid = isInteger(durationValue) && durationValue > 0;
-
-      if (values.closingType[item] === closingTypesMap.INTERVAL && !isNumberValid) {
-        const duration = { _error: <FormattedMessage id="ui-circulation.settings.loanHistory.validate.intervalValue" /> };
-
-        setWith(errors, [item, 'duration'], duration);
-      }
-
-      const isIntervalIdValid = values[item] && values[item].intervalId;
-
-      if (values.closingType[item] === closingTypesMap.INTERVAL && !isIntervalIdValid) {
-        const intervalId = { _error: <FormattedMessage id="ui-circulation.settings.loanHistory.validate.selectContinue" /> };
-
-        setWith(errors, [item, 'intervalId'], intervalId);
-      }
-    });
-
-    return errors;
-  }
-
   render() {
     return (
       <this.configManager
@@ -97,7 +65,7 @@ class LoanHistorySettings extends React.Component {
         configFormComponent={LoanHistoryForm}
         stripes={this.props.stripes}
         getInitialValues={this.getInitialValues}
-        validate={this.validate}
+        validate={validateLoanHistory}
       />
     );
   }

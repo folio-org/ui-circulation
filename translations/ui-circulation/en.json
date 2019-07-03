@@ -282,6 +282,7 @@
   "settings.loanHistory.validate.intervalValue": "Please enter a whole number greater than zero to continue",
   "settings.loanHistory.validate.selectContinue": "Please select to continue",
   "settings.loanHistory.selectInterval": "Select interval",
+  "settings.loanHistory.selectPaymentMethod": "Select payment method",
   "settings.loanHistory.closedLoans": "Closed loans",
   "settings.loanHistory.closedLoansFeesFines": "Closed loans with associated fees/fines",
   "settings.loanHistory.anonymize": "Anonymize closed loans",
@@ -292,5 +293,13 @@
   "settings.loanHistory.afterClose": "after {name} closes",
   "settings.loanHistory.treat": "Treat closed loans with associated fee/fines differently",
   "settings.loanHistory.loan": "loan",
-  "settings.loanHistory.feeFine": "fee/fine"
+  "settings.loanHistory.feeFine": "fee/fine",
+  "settings.loanHistory.exceptionSectionHeader": "Exception for payment method",
+  "settings.loanHistory.paymentMethodLabel": "Setting for payment method",
+  "settings.loanHistory.addExceptionButton": "Add exception",
+  "settings.loanHistory.paymentMethod.waive": "Waive",
+  "settings.loanHistory.paymentMethod.transfer": "Transfer",
+  "settings.loanHistory.paymentMethod.replace": "Replace",
+  "settings.loanHistory.paymentMethod.pay": "Pay",
+  "settings.loanHistory.errors.paymentMethodSelected": "This payment method is already selected"
 }

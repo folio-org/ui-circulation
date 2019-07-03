@@ -32,7 +32,8 @@
       "template-engine": "2.0",
       "patron-notice-policy-storage": "0.7",
       "location-units": "1.1",
-      "locations": "3.0"
+      "locations": "3.0",
+      "feesfines": "15.0"
     },
     "permissionSets": [
       {
@@ -55,8 +56,10 @@
         "permissionName": "ui-circulation.settings.loan-history",
         "displayName": "Settings (Circ): Can view loan history",
         "subPermissions": [
-          "settings.circulation.enabled"
-        ]
+          "settings.circulation.enabled",
+          "payments.collection.get"
+        ],
+        "visible": true
       },
       {
         "permissionName": "ui-circulation.settings.loan-policies",
