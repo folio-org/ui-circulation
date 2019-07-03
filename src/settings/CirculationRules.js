@@ -15,6 +15,10 @@ const editorDefaultProps = {
     patronGroups: [],
     materialTypes: [],
     loanTypes: [],
+    locations: [],
+    institutions: [],
+    campuses: [],
+    libraries: [],
   },
   typeMapping: {
     g: 'patronGroups',
@@ -89,6 +93,46 @@ class CirculationRules extends React.Component {
       },
       resourceShouldRefresh: true,
     },
+    locations: {
+      type: 'okapi',
+      records: 'locations',
+      path: 'locations',
+      params: {
+        query: 'cql.allRecords=1 sortby name',
+        limit: '1000',
+      },
+      resourceShouldRefresh: true,
+    },
+    institutions: {
+      type: 'okapi',
+      records: 'locinsts',
+      path: 'location-units/institutions',
+      params: {
+        query: 'cql.allRecords=1 sortby name',
+        limit: '1000',
+      },
+      resourceShouldRefresh: true,
+    },
+    campuses: {
+      type: 'okapi',
+      records: 'loccamps',
+      path: 'location-units/campuses',
+      params: {
+        query: 'cql.allRecords=1 sortby name',
+        limit: '1000',
+      },
+      resourceShouldRefresh: true,
+    },
+    libraries: {
+      type: 'okapi',
+      records: 'loclibs',
+      path: 'location-units/libraries',
+      params: {
+        query: 'cql.allRecords=1 sortby name',
+        limit: '1000',
+      },
+      resourceShouldRefresh: true,
+    },
   });
 
   static propTypes = {
@@ -110,6 +154,10 @@ class CirculationRules extends React.Component {
       loanPolicies,
       requestPolicies,
       noticePolicies,
+      locations,
+      institutions,
+      campuses,
+      libraries,
     } = nextProps.resources;
 
     return !patronGroups.isPending &&
@@ -117,7 +165,11 @@ class CirculationRules extends React.Component {
       !loanTypes.isPending &&
       !loanPolicies.isPending &&
       !requestPolicies.isPending &&
-      !noticePolicies.isPending;
+      !noticePolicies.isPending &&
+      !locations.isPending &&
+      !institutions.isPending &&
+      !campuses.isPending &&
+      !libraries.isPending;
   }
 
   onSubmit(values) {
