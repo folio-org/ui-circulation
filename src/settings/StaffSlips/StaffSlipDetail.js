@@ -11,6 +11,7 @@ import {
 } from '@folio/stripes/components';
 
 import tokens from './tokens';
+import tokensReducer from '../utils/tokens-reducer';
 import { PreviewModal } from '../components';
 
 import css from './StaffSlipDetail.css';
@@ -116,7 +117,7 @@ class StaffSlipDetail extends React.Component {
             />
           }
           previewTemplate={staffSlip.template}
-          previewFormat={tokens[staffSlip.name]}
+          previewFormat={tokensReducer(tokens)}
           printable
           onClose={this.closePreviewDialog}
         />

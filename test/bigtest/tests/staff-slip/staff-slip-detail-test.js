@@ -11,14 +11,14 @@ describe('StaffSlipDetail', () => {
 
   beforeEach(function () {
     staffSlip = this.server.create('staffSlip', {
-      template: '<p>{{Item barcode}}</p>',
+      template: '<p>{{item.barcode}}</p>',
     });
 
     this.visit(`/settings/circulation/staffslips/${staffSlip.id}`);
   });
 
   it('has a staff slip template', () => {
-    expect(StaffSlipDetail.containsContent('{{Item barcode}}')).to.be.true;
+    expect(StaffSlipDetail.containsContent('{{item.barcode}}')).to.be.true;
   });
 
   describe('preview modal', () => {

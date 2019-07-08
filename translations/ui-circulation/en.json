@@ -188,6 +188,11 @@
   "settings.staffSlips.editLabel": "Edit: Staff slips - {name}",
   "settings.staffSlips.yes": "Yes",
   "settings.staffSlips.no": "No",
+  "settings.staffSlips.itemTokenHeader": "Item",
+  "settings.staffSlips.effectiveLocationTokenHeader": "Effective location",
+  "settings.staffSlips.staffSlipTokenHeader": "Staff Slip",
+  "settings.staffSlips.requestTokenHeader": "Request",
+  "settings.staffSlips.requesterTokenHeader": "Requester",
 
   "settings.requestManagement.requestManagement": "Request Management",
   "settings.requestManagement.recalls": "Recalls",
