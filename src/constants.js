@@ -320,7 +320,7 @@ export const closingTypes = [
 
 export const closedLoansRules = {
   DEFAULT: 'loan',
-  WITH_FEES_FINES: 'fee/fine',
+  WITH_FEES_FINES: 'feeFine',
 };
 
 export default '';

@@ -1,3 +1,5 @@
+import React from 'react';
+import { FormattedMessage } from 'react-intl';
 import {
   get,
   set,
@@ -21,11 +23,13 @@ export default class FormValidator {
 
     const validationRules = this.config[pathToField].rules || [];
 
-    some(validationRules, (validationRule) => {
+    some(validationRules, validationRule => {
       const validator = this.validators[validationRule];
 
       if (!validator) {
-        throw new Error(`Validation: no handler to validate - ${validationRule}`);
+        throw new Error(
+          `Validation: no handler to validate - ${validationRule}`
+        );
       }
 
       const valueToValidate = get(data, pathToField);
@@ -47,10 +51,10 @@ export default class FormValidator {
     };
   }
 
-  validate(data) {
+  validate(data, sectionKey) {
     const errors = {};
 
-    forEach(Object.keys(this.config), (pathToField) => {
+    forEach(Object.keys(this.config), pathToField => {
       const {
         isFieldValid,
         validationMessage,
@@ -60,6 +64,24 @@ export default class FormValidator {
         set(errors, pathToField, validationMessage);
       }
     });
+
+    if (data[sectionKey]) {
+      const uniqueValues = {};
+
+      forEach(data[sectionKey], ({ paymentMethod }, index) => {
+        if (paymentMethod) {
+          if (uniqueValues[paymentMethod]) {
+            set(
+              errors,
+              `${sectionKey}[${index}].paymentMethod`,
+              <FormattedMessage id="ui-circulation.settings.loanHistory.errors.paymentMethodSelected" />
+            );
+          } else {
+            uniqueValues[paymentMethod] = {};
+          }
+        }
+      });
+    }
 
     return errors;
   }

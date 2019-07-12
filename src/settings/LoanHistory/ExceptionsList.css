@@ -1,0 +1,8 @@
+.exceptionSection {
+  display: flex;
+  align-items: flex-end;
+}
+
+.exceptionAddButton {
+  margin-bottom: 6rem;
+}
