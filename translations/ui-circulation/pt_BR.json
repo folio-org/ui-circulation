@@ -331,5 +331,14 @@
     "settings.loanHistory.loan": "empréstimo",
     "settings.loanHistory.feeFine": "taxa/multa",
     "settings.loanHistory.immediatelyAfterClose": "Imediatamente após {name} fechar",
-    "settings.loanHistory.afterClose": "após {name} fechar"
+    "settings.loanHistory.afterClose": "após {name} fechar",
+    "settings.loanHistory.selectPaymentMethod": "Selecione o método de pagamento",
+    "settings.loanHistory.exceptionSectionHeader": "Exceção para método de pagamento",
+    "settings.loanHistory.paymentMethodLabel": "Configuração para o método de pagamento",
+    "settings.loanHistory.addExceptionButton": "Adicione exceção",
+    "settings.loanHistory.paymentMethod.waive": "Renunciar",
+    "settings.loanHistory.paymentMethod.transfer": "Transferir",
+    "settings.loanHistory.paymentMethod.replace": "Substituir",
+    "settings.loanHistory.paymentMethod.pay": "Pagar",
+    "settings.loanHistory.errors.paymentMethodSelected": "Este método de pagamento já está selecionado"
 }
