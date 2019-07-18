@@ -331,5 +331,14 @@
     "settings.loanHistory.loan": "loan",
     "settings.loanHistory.feeFine": "fee/fine",
     "settings.loanHistory.immediatelyAfterClose": "Immediately after {name} closes",
-    "settings.loanHistory.afterClose": "after {name} closes"
+    "settings.loanHistory.afterClose": "after {name} closes",
+    "settings.loanHistory.selectPaymentMethod": "Select payment method",
+    "settings.loanHistory.exceptionSectionHeader": "Exception for payment method",
+    "settings.loanHistory.paymentMethodLabel": "Setting for payment method",
+    "settings.loanHistory.addExceptionButton": "Add exception",
+    "settings.loanHistory.paymentMethod.waive": "Waive",
+    "settings.loanHistory.paymentMethod.transfer": "Transfer",
+    "settings.loanHistory.paymentMethod.replace": "Replace",
+    "settings.loanHistory.paymentMethod.pay": "Pay",
+    "settings.loanHistory.errors.paymentMethodSelected": "This payment method is already selected"
 }
