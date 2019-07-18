@@ -331,5 +331,14 @@
     "settings.loanHistory.loan": "إعارة",
     "settings.loanHistory.feeFine": "الرسم/الغرامة",
     "settings.loanHistory.immediatelyAfterClose": "بمجرد إغلاق {name}",
-    "settings.loanHistory.afterClose": "بعد إغلاق {name}"
+    "settings.loanHistory.afterClose": "بعد إغلاق {name}",
+    "settings.loanHistory.selectPaymentMethod": "اختر طريقة السداد",
+    "settings.loanHistory.exceptionSectionHeader": "استثناء لطريقة السداد",
+    "settings.loanHistory.paymentMethodLabel": "إعداد طريقة السداد",
+    "settings.loanHistory.addExceptionButton": "إضافة استتثناء",
+    "settings.loanHistory.paymentMethod.waive": "إعفاء",
+    "settings.loanHistory.paymentMethod.transfer": "تحويل",
+    "settings.loanHistory.paymentMethod.replace": "استبدال",
+    "settings.loanHistory.paymentMethod.pay": "سداد",
+    "settings.loanHistory.errors.paymentMethodSelected": "تم تحديد طريقة الدفع هذه بالفعل"
 }
