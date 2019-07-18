@@ -24,6 +24,7 @@ const editorDefaultProps = {
     g: 'patronGroups',
     m: 'materialTypes',
     t: 'loanTypes',
+    a: 'institutions'
   },
   policyMapping: {
     l: 'loanPolicies',
@@ -192,6 +193,7 @@ class CirculationRules extends React.Component {
       loanPolicies,
       noticePolicies,
       requestPolicies,
+      institutions,
     } = this.props.resources;
 
     return Object.assign({}, editorDefaultProps, {
@@ -201,6 +203,8 @@ class CirculationRules extends React.Component {
         patronGroups: patronGroups.records.map(g => kebabCase(g.group)),
         materialTypes: materialTypes.records.map(m => kebabCase(m.name)),
         loanTypes: loanTypes.records.map(t => kebabCase(t.name)),
+        // TODO: The codes should be normalized in the scope of https://issues.folio.org/browse/UICIRC-260
+        institutions: institutions.records.map(a => a.code),
         // policies
         loanPolicies: loanPolicies.records.map(l => kebabCase(l.name)),
         requestPolicies: requestPolicies.records.map(r => kebabCase(r.name)),
@@ -217,12 +221,15 @@ class CirculationRules extends React.Component {
       loanPolicies,
       requestPolicies,
       noticePolicies,
+      institutions,
     } = this.props.resources;
 
     return [
       ...patronGroups.records.map(r => ({ name: kebabCase(r.group), id: r.id, prefix: 'g', divider: '.' })),
       ...materialTypes.records.map(r => ({ name: kebabCase(r.name), id: r.id, prefix: 'm', divider: '.' })),
       ...loanTypes.records.map(r => ({ name: kebabCase(r.name), id: r.id, prefix: 't', divider: '.' })),
+      // TODO: The codes should be normalized in the scope of https://issues.folio.org/browse/UICIRC-260
+      ...institutions.records.map(r => ({ name: r.code, id: r.id, prefix: 'a', divider: '.' })),
       ...loanPolicies.records.map(r => ({ name: kebabCase(r.name), id: r.id, prefix: 'l', divider: '\\s' })),
       ...requestPolicies.records.map(r => ({ name: kebabCase(r.name), id: r.id, prefix: 'r', divider: '\\s' })),
       ...noticePolicies.records.map(r => ({ name: kebabCase(r.name), id: r.id, prefix: 'n', divider: '\\s' })),

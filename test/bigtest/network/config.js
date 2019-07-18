@@ -418,4 +418,20 @@ export default function config() {
       'totalRecords': 1,
     };
   });
+
+  this.get('/location-units/institutions', ({ institutions }) => {
+    return institutions.all();
+  });
+
+  this.get('/location-units/campuses', ({ campus }) => {
+    return campus.all();
+  });
+
+  this.get('/location-units/libraries', ({ libraries }) => {
+    return libraries.all();
+  });
+
+  this.get('/locations', ({ locations }) => {
+    return locations.all();
+  });
 }

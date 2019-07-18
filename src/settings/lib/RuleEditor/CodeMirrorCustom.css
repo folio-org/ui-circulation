@@ -25,7 +25,39 @@
 
 .CodeMirror-hints {
   background-color: #efefef;
+  padding: 0;
+  max-height: none;
 }
+
+.CodeMirror-hints-header {
+  margin: 2px 2px 0 2px;
+  padding: 0 14px;
+  background-color: #d7d7d7;
+  text-align: center;
+  font-weight: bold;
+}
+
+.CodeMirror-hints-subheader {
+  position: relative;
+  margin: 2px 2px 0 2px;
+  padding: 0 14px;
+  background-color: #e9e7e7;
+  text-align: center;
+  font-weight: normal;
+  border-bottom: #bebdbd solid 1px;
+  border-top: #bebdbd solid 1px;
+}
+
+.CodeMirror-hints-list ul {
+  position: relative;
+  margin: 0;
+  list-style: none;
+  padding: 2px;
+  max-height: 20em;
+  overflow: hidden;
+  overflow-y: auto;
+}
+
 .CodeMirror-hint {
   padding: 0 14px;
 }

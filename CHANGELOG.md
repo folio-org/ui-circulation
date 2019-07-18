@@ -7,6 +7,7 @@
 * Create settings in UI for users to anonymize closed loans with fees/fines. UIORG-175.
 * Add location data fetching to circulation rules editor. UICIRC-272
 * Create settings in UI for users to anonymize closed loans with fees/fines and exception for payment method. UIORG-176.
+* Integrate institution menu to circulation rules editor. UICIRC-282.
 
 ## [1.8.0](https://github.com/folio-org/ui-circulation/tree/v1.8.0) (2019-06-10)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v1.7.0...v1.8.0)
