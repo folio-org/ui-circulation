@@ -340,5 +340,10 @@
     "settings.loanHistory.paymentMethod.transfer": "Transfer",
     "settings.loanHistory.paymentMethod.replace": "Replace",
     "settings.loanHistory.paymentMethod.pay": "Pay",
-    "settings.loanHistory.errors.paymentMethodSelected": "This payment method is already selected"
+    "settings.loanHistory.errors.paymentMethodSelected": "This payment method is already selected",
+    "settings.staffSlips.itemTokenHeader": "Item",
+    "settings.staffSlips.effectiveLocationTokenHeader": "Effective location",
+    "settings.staffSlips.staffSlipTokenHeader": "Staff Slip",
+    "settings.staffSlips.requestTokenHeader": "Request",
+    "settings.staffSlips.requesterTokenHeader": "Requester"
 }
