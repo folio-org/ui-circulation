@@ -3,7 +3,27 @@
 *  Its primary responsibility is filtering the list of possibilities that's always passed through
 *  in state.nextApplicable.
 */
-import { forOwn } from 'lodash';
+import {
+  forOwn,
+  capitalize,
+  truncate,
+} from 'lodash';
+
+const locationHeadersMapping = {
+  a: 'institution',
+  b: 'campus',
+  c: 'library',
+  s: 'location',
+};
+
+const truncateOptions = {
+  length: 20,
+  omission: '...',
+};
+
+const isLocationCriteria = (criteria) => {
+  return criteria === 'a' || criteria === 'b' || criteria === 'c' || criteria === 's';
+};
 
 export default function rulesHint(Codemirror, props) {
   Codemirror.registerHelper('hint', 'rulesCMM', (cm) => {
@@ -34,6 +54,8 @@ export default function rulesHint(Codemirror, props) {
     const start = cur.ch;
     const end = start;
     const result = [];
+    let header;
+    let subheader;
 
     // new rule at the start of lines and blank lines...
     if (!rValue && (cur.ch === 0 || cur.ch === indented || token.type !== 'policy')) {
@@ -72,12 +94,24 @@ export default function rulesHint(Codemirror, props) {
     if (!rValue && keyProperty) {
       // not at beginning of line..
       if (cur.ch !== 0 && cur.ch > indented / 4 && typeMapping[keyProperty]) {
+        if (isLocationCriteria(keyProperty)) {
+          // A temp solution to remove new rule# for locations because it's displayed in wrong cases
+          // It will be fixed in the separated issue
+          if (result.length > 0) {
+            result.pop();
+          }
+
+          const translaitionKeyValue = capitalize(locationHeadersMapping[keyProperty]);
+          header = formatMessage({ id: `ui-circulation.settings.circulationRules.select${translaitionKeyValue}` });
+          subheader = formatMessage({ id: `ui-circulation.settings.circulationRules.${locationHeadersMapping[keyProperty]}` });
+        }
+
         const type = typeMapping[keyProperty];
 
         completionLists[type].forEach((selector) => {
           result.push({
             text: `${selector} `,
-            displayText: selector,
+            displayText: isLocationCriteria(keyProperty) ? truncate(selector, truncateOptions) : selector,
             className: 'rule-hint-minor',
             completeOnSingleClick: true,
           });
@@ -87,14 +121,7 @@ export default function rulesHint(Codemirror, props) {
 
     // display policy types in rValues.
     if (rValue && cur.ch > indented && !keyProperty) {
-      const text = formatMessage({ id: 'ui-circulation.settings.circulationRules.circulationPolicies' });
-
-      result.push({
-        text,
-        displayText: text,
-        className: 'rule-hint-strong',
-        inactive: true,
-      });
+      header = formatMessage({ id: 'ui-circulation.settings.circulationRules.circulationPolicies' });
 
       forOwn(policyMapping, (value, key) => {
         result.push({
@@ -124,10 +151,14 @@ export default function rulesHint(Codemirror, props) {
 
     if (result.length) {
       return {
-        list: result,
+        listDescription: {
+          subheader,
+          list: result,
+        },
         from: Codemirror.Pos(cur.line, start),
         to: Codemirror.Pos(cur.line, end),
         selectedHint: -1,
+        header,
       };
     }
 
