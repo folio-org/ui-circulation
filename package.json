@@ -37,6 +37,13 @@
     },
     "permissionSets": [
       {
+        "permissionName": "settings.circulation.enabled",
+        "displayName": "Settings (Circ): display list of settings pages",
+        "subPermissions": [
+          "settings.enabled"
+        ]
+      },
+      {
         "permissionName": "ui-circulation.settings.cancellation-reasons",
         "displayName": "Settings (Circ): Can create, edit and remove cancellation reasons",
         "subPermissions": [
@@ -48,7 +55,7 @@
           "circulation-storage.cancellation-reasons.collection.delete",
           "users.collection.get",
           "users.item.get",
-          "settings.enabled"
+          "settings.circulation.enabled"
         ],
         "visible": true
       },
@@ -56,7 +63,7 @@
         "permissionName": "ui-circulation.settings.loan-history",
         "displayName": "Settings (Circ): Can view loan history",
         "subPermissions": [
-          "settings.enabled",
+          "settings.circulation.enabled",
           "payments.collection.get"
         ],
         "visible": true
@@ -75,7 +82,7 @@
           "circulation-storage.fixed-due-date-schedules.item.get",
           "users.collection.get",
           "users.item.get",
-          "settings.enabled"
+          "settings.circulation.enabled"
         ],
         "visible": true
       },
@@ -92,7 +99,7 @@
           "templates.item.get",
           "users.collection.get",
           "users.item.get",
-          "settings.enabled"
+          "settings.circulation.enabled"
         ],
         "visible": true
       },
@@ -122,7 +129,7 @@
           "circulation-storage.patron-notice-policies.item.get",
           "inventory-storage.material-types.item.get",
           "inventory-storage.loan-types.item.get",
-          "settings.enabled",
+          "settings.circulation.enabled",
           "inventory-storage.location-units.institutions.collection.get",
           "inventory-storage.location-units.campuses.collection.get",
           "inventory-storage.location-units.libraries.collection.get",
@@ -142,7 +149,7 @@
           "circulation-storage.fixed-due-date-schedules.collection.delete",
           "users.collection.get",
           "users.item.get",
-          "settings.enabled"
+          "settings.circulation.enabled"
         ],
         "visible": true
       },
@@ -163,7 +170,7 @@
           "circulation-storage.staff-slips.item.post",
           "circulation-storage.staff-slips.item.put",
           "circulation-storage.staff-slips.item.get",
-          "settings.enabled"
+          "settings.circulation.enabled"
         ],
         "visible": true
       },
@@ -179,7 +186,7 @@
           "circulation-storage.request-policies.item.put",
           "users.collection.get",
           "users.item.get",
-          "settings.enabled"
+          "settings.circulation.enabled"
         ],
         "visible": true
       },
@@ -188,7 +195,7 @@
         "displayName": "Settings (Circ): Can create, edit and remove other settings",
         "subPermissions": [
           "configuration.all",
-          "settings.enabled"
+          "settings.circulation.enabled"
         ],
         "visible": true
       },
@@ -202,7 +209,7 @@
           "templates.item.put",
           "templates.item.delete",
           "template-request.post",
-          "settings.enabled"
+          "settings.circulation.enabled"
         ],
         "visible": true
       }
