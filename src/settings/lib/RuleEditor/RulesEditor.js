@@ -75,7 +75,7 @@ const propTypes = {
 const defaultProps = {
   typeMapping: {
     'g': 'Patron Groups',
-    'a': 'Campus',
+    'a': 'Institution',
     'b': 'Branch',
     'c': 'Collection',
     'm': 'Material Type',
@@ -93,7 +93,7 @@ function moveFocusDown(cm, handle){
     const node = widget.hints.childNodes[0];
     node.className += " " + ACTIVE_HINT_ELEMENT_CLASS;
     widget.selectedHint = 0;
-    Codemirror.signal(widget.data, "select", widget.data.list[0], node);
+    Codemirror.signal(widget.data, "select", widget.data.listDescription.list[0], node);
   } else {
     handle.moveFocus(1);
     cm.state.completionActive.widget.data.selectedHint += 1;
