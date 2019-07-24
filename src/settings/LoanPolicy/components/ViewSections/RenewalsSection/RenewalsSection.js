@@ -27,7 +27,7 @@ const RenewalsSection = (props) => {
 
   const altRenewalScheduleLabel = policy.isProfileRolling()
     ? <FormattedMessage id="ui-circulation.settings.loanPolicy.altFDDSDueDateLimit" />
-    : <FormattedMessage id="ui-circulation.settings.loanPolicy.view.altFDDSforRenewals" />;
+    : <FormattedMessage id="ui-circulation.settings.loanPolicy.altFDDSforRenewals" />;
 
   return (
     <div data-test-loan-policy-detail-renewals-section>

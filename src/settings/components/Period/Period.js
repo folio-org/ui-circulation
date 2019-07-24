@@ -82,9 +82,10 @@ class Period extends PureComponent {
             <Row className={css.label}>
               <Col xs={12}>
                 { fieldLabel && (
-                  <FormattedMessage id={fieldLabel}>
-                    {message => (required ? `${message} *` : message)}
-                  </FormattedMessage>
+                  <React.Fragment>
+                    <FormattedMessage id={fieldLabel} />
+                    { required && <span className={css.asterisk}>*</span> }
+                  </React.Fragment>
                 )}
               </Col>
             </Row>
@@ -95,6 +96,7 @@ class Period extends PureComponent {
             <div data-test-period-duration>
               <Field
                 type="number"
+                required={required}
                 name={inputValuePath}
                 component={TextField}
                 onClearField={this.onInputClear}
@@ -107,6 +109,7 @@ class Period extends PureComponent {
               <Field
                 name={selectValuePath}
                 component={Select}
+                required={required}
                 placeholder={isEmpty(selectPlaceholder) ? '' : formatMessage({ id: selectPlaceholder })}
               >
                 {intervalPeriods}

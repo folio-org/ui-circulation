@@ -80,15 +80,12 @@ class RenewalsSection extends React.Component {
           <React.Fragment>
             <div data-test-renewals-section-num-renewals-allowed>
               <Field
-                label={(
-                  <FormattedMessage id="ui-circulation.settings.loanPolicy.numRenewalsAllowed">
-                    {message => `${message} *`}
-                  </FormattedMessage>
-                )}
+                label={<FormattedMessage id="ui-circulation.settings.loanPolicy.numRenewalsAllowed" />}
                 name="renewalsPolicy.numberAllowed"
                 id="input_allowed_renewals"
                 component={TextField}
                 type="number"
+                required
                 min={0}
               />
             </div>
@@ -98,14 +95,11 @@ class RenewalsSection extends React.Component {
           <React.Fragment>
             <div data-test-renewals-section-renew-from>
               <Field
-                label={(
-                  <FormattedMessage id="ui-circulation.settings.loanPolicy.renewFrom">
-                    { message => `${message} *`}
-                  </FormattedMessage>
-                )}
+                label={<FormattedMessage id="ui-circulation.settings.loanPolicy.renewFrom" />}
                 name="renewalsPolicy.renewFromId"
                 id="select_renew_from"
                 component={Select}
+                required
               >
                 {this.generateOptions(renewFromOptions, 'ui-circulation.settings.common.pleaseSelect')}
               </Field>
@@ -145,6 +139,7 @@ class RenewalsSection extends React.Component {
               label={altRenewalScheduleLabel}
               name="renewalsPolicy.alternateFixedDueDateScheduleId"
               component={Select}
+              required={policy.isProfileFixed()}
             >
               {schedules}
             </Field>

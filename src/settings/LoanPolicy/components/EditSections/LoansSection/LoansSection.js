@@ -66,11 +66,7 @@ class LoansSection extends React.Component {
 
     const dueDateScheduleFieldLabel = policy.isProfileRolling()
       ? <FormattedMessage id="ui-circulation.settings.loanPolicy.fDDSlimit" />
-      : (
-        <FormattedMessage id="ui-circulation.settings.loanPolicy.fDDS">
-          {message => `${message} *`}
-        </FormattedMessage>
-      );
+      : <FormattedMessage id="ui-circulation.settings.loanPolicy.fDDS" />;
 
     const dueDateManagementOptions = policy.isShortTermLoan()
       ? this.generateOptions(shortTermLoansOptions, 'ui-circulation.settings.common.pleaseSelect')
@@ -94,14 +90,11 @@ class LoansSection extends React.Component {
         { policy.isLoanable() &&
           <div data-test-loans-section-loan-profile>
             <Field
-              label={(
-                <FormattedMessage id="ui-circulation.settings.loanPolicy.loanProfile">
-                  {message => `${message} *`}
-                </FormattedMessage>
-              )}
+              label={<FormattedMessage id="ui-circulation.settings.loanPolicy.loanProfile" />}
               name="loansPolicy.profileId"
               id="input_loan_profile"
               component={Select}
+              required
             >
               {this.generateOptions(loanProfileTypes, 'ui-circulation.settings.common.pleaseSelect')}
             </Field>
@@ -125,6 +118,7 @@ class LoansSection extends React.Component {
               label={dueDateScheduleFieldLabel}
               name="loansPolicy.fixedDueDateScheduleId"
               id="input_loansPolicy_fixedDueDateSchedule"
+              required={policy.isProfileFixed()}
               component={Select}
             >
               {schedules}
@@ -134,13 +128,10 @@ class LoansSection extends React.Component {
         { policy.isLoanable() &&
           <div data-test-loans-section-closed-due-date-mgmt>
             <Field
-              label={(
-                <FormattedMessage id="ui-circulation.settings.loanPolicy.closedDueDateMgmt">
-                  {message => `${message} *`}
-                </FormattedMessage>
-              )}
+              label={<FormattedMessage id="ui-circulation.settings.loanPolicy.closedDueDateMgmt" />}
               name="loansPolicy.closedLibraryDueDateManagementId"
               component={Select}
+              required
             >
               {dueDateManagementOptions}
             </Field>
