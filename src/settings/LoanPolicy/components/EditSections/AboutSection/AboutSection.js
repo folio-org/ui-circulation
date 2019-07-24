@@ -14,12 +14,9 @@ const AboutSection = () => (
     </h2>
     <div data-test-about-section-policy-name>
       <Field
-        label={(
-          <FormattedMessage id="ui-circulation.settings.loanPolicy.policyName">
-            {message => `${message} *`}
-          </FormattedMessage>
-        )}
+        label={<FormattedMessage id="ui-circulation.settings.loanPolicy.policyName" />}
         component={TextField}
+        required
         name="name"
         id="input_policy_name"
         fullWidth

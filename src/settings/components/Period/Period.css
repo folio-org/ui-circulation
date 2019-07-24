@@ -3,3 +3,9 @@
   line-height: 1.5;
   margin-bottom: 0.25rem;
 }
+
+.asterisk {
+  color: #900;
+  font-weight: bold;
+  padding: 0 0.1rem;
+}

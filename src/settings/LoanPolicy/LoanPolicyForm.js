@@ -147,6 +147,7 @@ class LoanPolicyForm extends React.Component {
 
     return (
       <form
+        noValidate
         data-test-loan-policy-form
         onSubmit={handleSubmit(this.saveForm)}
       >
