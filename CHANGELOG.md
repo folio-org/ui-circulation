@@ -1,13 +1,17 @@
 # Change history for ui-circulation
 
-## 1.9.0
+## [1.9.0](https://github.com/folio-org/ui-circulation/tree/v1.9.0) (2019-07-25)
+[Full Changelog](https://github.com/folio-org/ui-circulation/compare/v1.8.0...v1.9.0)
 
 * Remove unnecessary permissions. Refs UIORG-150.
 * Fix display position of autocompletion popup in circulation rules editor. UICIRC-209
 * Create settings in UI for users to anonymize closed loans with fees/fines. UIORG-175.
 * Add location data fetching to circulation rules editor. UICIRC-272
 * Create settings in UI for users to anonymize closed loans with fees/fines and exception for payment method. UIORG-176.
+* Refine list of tokens available for staff slip templates. UICIRC-189.
+* Expand location-specific token list for patron notice templates. UICIRC-250.
 * Integrate institution menu to circulation rules editor. UICIRC-282.
+* Other bug fixes. UICIRC-96, UICIRC-269, UICIRC-271.
 
 ## [1.8.0](https://github.com/folio-org/ui-circulation/tree/v1.8.0) (2019-06-10)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v1.7.0...v1.8.0)
