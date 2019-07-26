@@ -449,7 +449,7 @@ describe('LoanPolicyForm', () => {
             });
 
             it('should have proper label', () => {
-              expect(LoanPolicyForm.renewalsSection.numRenewalsAllowed.label).to.equal(translation['settings.loanPolicy.numRenewalsAllowed']);
+              expect(LoanPolicyForm.renewalsSection.numRenewalsAllowed.label).to.contain(translation['settings.loanPolicy.numRenewalsAllowed']);
             });
           });
 
