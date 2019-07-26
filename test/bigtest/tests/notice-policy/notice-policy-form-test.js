@@ -8,7 +8,7 @@ import {
 import translation from '../../../../translations/ui-circulation/en';
 import setupApplication from '../../helpers/setup-application';
 import NoticePolicyForm from '../../interactors/notice-policy/notice-policy-form';
-import { getRequiredLabel } from '../../helpers/messageСonverters';
+import { getRequiredLabel } from '../../helpers/messageConverters';
 
 describe('NoticePolicyForm', () => {
   setupApplication();

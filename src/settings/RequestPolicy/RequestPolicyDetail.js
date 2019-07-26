@@ -42,12 +42,6 @@ class RequestPolicyDetail extends React.Component {
     this.setState({ sections });
   };
 
-  renderItem = (requestType) => {
-    return (
-      <li key={requestType}>{requestType}</li>
-    );
-  }
-
   render() {
     const {
       initialValues: policy = {},
@@ -63,7 +57,7 @@ class RequestPolicyDetail extends React.Component {
     return (
       <div data-test-request-policy-detail>
         <Row end="xs">
-          <Col xs>
+          <Col data-test-expand-all xs>
             <ExpandAllButton
               accordionStatus={sections}
               onToggle={this.handleExpandAll}

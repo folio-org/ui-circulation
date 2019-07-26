@@ -25,4 +25,44 @@ describe('RequestPolicyDetail', () => {
       expect(RequestPolicyDetail.name).to.equal(requestPolicy.name);
     });
   });
+
+  describe('accordions', () => {
+    beforeEach(function () {
+      this.visit(`/settings/circulation/request-policies/${requestPolicy.id}`);
+    });
+
+    it('should be displayed', () => {
+      expect(RequestPolicyDetail.expandAll.isPresent).to.be.true;
+    });
+
+    describe('collapse all', () => {
+      beforeEach(async () => {
+        await RequestPolicyDetail.expandAll.click();
+      });
+
+      it('generalSection should not be displayed', () => {
+        expect(RequestPolicyDetail.generalSection.content.isHidden).to.be.true;
+      });
+
+      describe('expand all', () => {
+        beforeEach(async () => {
+          await RequestPolicyDetail.expandAll.click();
+        });
+
+        it('generalSection should be displayed', () => {
+          expect(RequestPolicyDetail.generalSection.content.isVisible).to.be.true;
+        });
+      });
+    });
+
+    describe('general section', () => {
+      beforeEach(async () => {
+        await RequestPolicyDetail.generalSection.toggleAccodion();
+      });
+
+      it('should be hidden', () => {
+        expect(RequestPolicyDetail.generalSection.name.isVisible).to.be.false;
+      });
+    });
+  });
 });
