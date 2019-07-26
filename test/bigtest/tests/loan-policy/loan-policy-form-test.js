@@ -266,7 +266,7 @@ describe('LoanPolicyForm', () => {
             });
 
             it('should have proper label', () => {
-              expect(LoanPolicyForm.loansSection.closedDueDateMgmt.label).to.equal(`${translation['settings.loanPolicy.closedDueDateMgmt']} *`);
+              expect(LoanPolicyForm.loansSection.closedDueDateMgmt.label).to.contain(translation['settings.loanPolicy.closedDueDateMgmt']);
             });
           });
 
