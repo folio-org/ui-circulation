@@ -606,7 +606,7 @@ describe('LoanPolicyForm', () => {
             });
 
             it('should have proper label', () => {
-              expect(LoanPolicyForm.renewalsSection.alternateLoanPeriodRenewals.label).to.equal(translation['settings.loanPolicy.alternateLoanPeriodRenewals']);
+              expect(LoanPolicyForm.renewalsSection.alternateLoanPeriodRenewals.label).to.contain(translation['settings.loanPolicy.alternateLoanPeriodRenewals']);
             });
           });
         });
