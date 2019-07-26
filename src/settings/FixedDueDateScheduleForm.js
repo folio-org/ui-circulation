@@ -281,7 +281,7 @@ class FixedDueDateScheduleForm extends React.Component {
                             position: 'absolute',
                             bottom: '0',
                           }}
-                          ariaLabel={ariaLabel}
+                          aria-label={ariaLabel}
                           onClick={() => { f.remove(index); }}
                         >
                           <Icon icon="trash" />
