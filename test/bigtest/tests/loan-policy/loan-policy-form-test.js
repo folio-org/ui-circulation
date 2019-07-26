@@ -495,9 +495,7 @@ describe('LoanPolicyForm', () => {
             });
 
             it('should have proper label', () => {
-              expect(LoanPolicyForm.renewalsSection.renewFrom.label).to.equal(
-                `${translation['settings.loanPolicy.renewFrom']} *`
-              );
+              expect(LoanPolicyForm.renewalsSection.renewFrom.label).to.contain(translation['settings.loanPolicy.renewFrom']);
             });
           });
 

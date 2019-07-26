@@ -543,7 +543,7 @@ describe('LoanPolicyDetail', () => {
           });
 
           it('should have a proper label', () => {
-            expect(LoanPolicyDetail.renewalsSection.renewFrom.label.text).to.equal(translation['settings.loanPolicy.renewFrom']);
+            expect(LoanPolicyDetail.renewalsSection.renewFrom.label.text).to.contain(translation['settings.loanPolicy.renewFrom']);
           });
 
           it('should have a proper value', () => {
