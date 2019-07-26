@@ -18,6 +18,10 @@ class RequestPolicySettings extends React.Component {
       type: 'okapi',
       records: 'requestPolicies',
       path: 'request-policy-storage/request-policies',
+      params: {
+        query: 'cql.allRecords=1',
+        limit: '1000',
+      },
     },
     nameUniquenessValidator: {
       type: 'okapi',

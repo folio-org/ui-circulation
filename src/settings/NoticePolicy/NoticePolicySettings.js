@@ -25,6 +25,10 @@ class NoticePolicySettings extends React.Component {
       records: 'patronNoticePolicies',
       path: 'patron-notice-policy-storage/patron-notice-policies',
       throwErrors: false,
+      params: {
+        query: 'cql.allRecords=1',
+        limit: '1000',
+      },
     },
     templates: {
       type: 'okapi',
