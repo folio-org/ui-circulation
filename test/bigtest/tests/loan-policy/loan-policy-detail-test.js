@@ -18,7 +18,7 @@ import {
   getBooleanRepresentation,
   getOptionsRepresentation,
   getPeriodRepresentation,
-} from '../../helpers/messageСonverters';
+} from '../../helpers/messageConverters';
 
 describe('LoanPolicyDetail', () => {
   setupApplication();

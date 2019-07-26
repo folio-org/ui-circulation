@@ -15,7 +15,7 @@ import LoanPolicyDetail from '../../interactors/loan-policy/loan-policy-detail';
 import {
   getRequiredLabel,
   getOptionsRepresentation,
-} from '../../helpers/messageСonverters';
+} from '../../helpers/messageConverters';
 
 describe('LoanPolicyForm', () => {
   setupApplication();
