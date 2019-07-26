@@ -22,6 +22,10 @@ class LoanPolicySettings extends React.Component {
       records: 'loanPolicies',
       perRequest: 100,
       path: 'loan-policy-storage/loan-policies',
+      params: {
+        query: 'cql.allRecords=1',
+        limit: '1000',
+      },
     },
     fixedDueDateSchedules: {
       type: 'okapi',
@@ -29,6 +33,10 @@ class LoanPolicySettings extends React.Component {
       perRequest: 100,
       path: 'fixed-due-date-schedule-storage/fixed-due-date-schedules',
       resourceShouldRefresh: true,
+      params: {
+        query: 'cql.allRecords=1',
+        limit: '1000',
+      },
     },
   });
 
