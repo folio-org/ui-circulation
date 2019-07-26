@@ -1,8 +1,7 @@
 import { beforeEach, describe, it } from '@bigtest/mocha';
 import { expect } from 'chai';
 
-// eslint-disable-next-line import/extensions, import/no-extraneous-dependencies, import/no-unresolved
-import translation from '@folio/circulation/translations/ui-circulation/en_US.json';
+import translation from '../../../../translations/ui-circulation/en';
 
 import {
   shortTermLoansOptions,

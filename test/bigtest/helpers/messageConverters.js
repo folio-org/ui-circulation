@@ -1,4 +1,4 @@
-import translation from '../../../translations/ui-circulation/en_US';
+import translation from '../../../translations/ui-circulation/en';
 import { intervalPeriods } from '../../../src/constants';
 
 export const getOptionsRepresentation = (array, value) => {

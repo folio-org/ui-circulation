@@ -5,7 +5,7 @@ import {
   it,
 } from '@bigtest/mocha';
 
-import translation from '../../../../translations/ui-circulation/en_US';
+import translation from '../../../../translations/ui-circulation/en';
 import setupApplication from '../../helpers/setup-application';
 import PatronNoticeForm from '../../interactors/patron-notice/patron-notice-form';
 
