@@ -166,7 +166,7 @@ describe('LoanPolicyForm', () => {
             });
 
             it('should have proper label', () => {
-              expect(LoanPolicyForm.loansSection.loanProfile.label).to.equal(`${translation['settings.loanPolicy.loanProfile']} *`);
+              expect(LoanPolicyForm.loansSection.loanProfile.label).to.contain(translation['settings.loanPolicy.loanProfile']);
             });
           });
 
