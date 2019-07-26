@@ -64,7 +64,7 @@ import KeyValue from '../KeyValue';
   loanNoticesSection = new LoanNoticesSection();
   requestNoticesSection = new RequestNoticesSection();
 
-  expandAll = scoped('[data-test-expand-all] button')
+  expandAll = scoped('[data-test-expand-all] button');
 }
 
 export default new NoticePolicyDetail('[data-test-notice-policy-detail]');

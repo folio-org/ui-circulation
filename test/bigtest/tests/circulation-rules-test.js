@@ -3,7 +3,7 @@ import { expect } from 'chai';
 
 import setupApplication from '../helpers/setup-application';
 import circulationRules from '../interactors/circulation-rules';
-import { toLowercaseReplaceAllSpaces } from '../helpers/messageСonverters';
+import { toLowercaseReplaceAllSpaces } from '../helpers/messageConverters';
 
 const removeDisplayedHints = () => {
   const hints = document.getElementsByClassName('CodeMirror-hints');

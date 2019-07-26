@@ -1,8 +1,7 @@
 import { beforeEach, describe, it } from '@bigtest/mocha';
 import { expect } from 'chai';
 
-// eslint-disable-next-line import/extensions, import/no-extraneous-dependencies, import/no-unresolved
-import translation from '@folio/circulation/translations/ui-circulation/en.json';
+import translation from '../../../../translations/ui-circulation/en';
 
 import {
   shortTermLoansOptions,
@@ -18,7 +17,7 @@ import {
   getBooleanRepresentation,
   getOptionsRepresentation,
   getPeriodRepresentation,
-} from '../../helpers/messageСonverters';
+} from '../../helpers/messageConverters';
 
 describe('LoanPolicyDetail', () => {
   setupApplication();
@@ -166,7 +165,7 @@ describe('LoanPolicyDetail', () => {
           });
 
           it('should have a proper label', () => {
-            expect(LoanPolicyDetail.loansSection.closedDueDateMgmt.label.text).to.equal(translation['settings.loanPolicy.closedDueDateMgmt']);
+            expect(LoanPolicyDetail.loansSection.closedDueDateMgmt.label.text).to.contain(translation['settings.loanPolicy.closedDueDateMgmt']);
           });
 
           it('should have a proper value', () => {
@@ -469,7 +468,7 @@ describe('LoanPolicyDetail', () => {
           });
 
           it('should have a proper label', () => {
-            expect(LoanPolicyDetail.renewalsSection.alternateFixedDueDateScheduleId.label.text).to.equal(translation['settings.loanPolicy.altFDDSforRenewals']);
+            expect(LoanPolicyDetail.renewalsSection.alternateFixedDueDateScheduleId.label.text).to.contain(translation['settings.loanPolicy.altFDDSforRenewals']);
           });
 
           it('should have a proper value', () => {
@@ -544,7 +543,7 @@ describe('LoanPolicyDetail', () => {
           });
 
           it('should have a proper label', () => {
-            expect(LoanPolicyDetail.renewalsSection.renewFrom.label.text).to.equal(translation['settings.loanPolicy.renewFrom']);
+            expect(LoanPolicyDetail.renewalsSection.renewFrom.label.text).to.contain(translation['settings.loanPolicy.renewFrom']);
           });
 
           it('should have a proper value', () => {
