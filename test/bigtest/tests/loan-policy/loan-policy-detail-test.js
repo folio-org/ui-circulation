@@ -468,7 +468,7 @@ describe('LoanPolicyDetail', () => {
           });
 
           it('should have a proper label', () => {
-            expect(LoanPolicyDetail.renewalsSection.alternateFixedDueDateScheduleId.label.text).to.equal(translation['settings.loanPolicy.altFDDSforRenewals']);
+            expect(LoanPolicyDetail.renewalsSection.alternateFixedDueDateScheduleId.label.text).to.contain(translation['settings.loanPolicy.altFDDSforRenewals']);
           });
 
           it('should have a proper value', () => {
