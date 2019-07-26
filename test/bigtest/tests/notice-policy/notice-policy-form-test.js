@@ -8,7 +8,6 @@ import {
 import translation from '../../../../translations/ui-circulation/en';
 import setupApplication from '../../helpers/setup-application';
 import NoticePolicyForm from '../../interactors/notice-policy/notice-policy-form';
-import { getRequiredLabel } from '../../helpers/messageConverters';
 
 describe('NoticePolicyForm', () => {
   setupApplication();
@@ -75,9 +74,7 @@ describe('NoticePolicyForm', () => {
         });
 
         it('should have proper text', () => {
-          expect(NoticePolicyForm.generalSection.policyName.text).to.equal(
-            getRequiredLabel(translation['settings.loanPolicy.policyName'])
-          );
+          expect(NoticePolicyForm.generalSection.policyName.text).to.contain(translation['settings.loanPolicy.policyName']);
         });
       });
 
@@ -131,9 +128,7 @@ describe('NoticePolicyForm', () => {
             });
 
             it('should have proper label', () => {
-              expect(NoticePolicyForm.loanNoticesSection.loanNotices(0).templateId.label).to.be.equal(
-                getRequiredLabel(translation['settings.noticePolicy.notices.template'])
-              );
+              expect(NoticePolicyForm.loanNoticesSection.loanNotices(0).templateId.label).to.contain(translation['settings.noticePolicy.notices.template']);
             });
           });
 
@@ -155,9 +150,7 @@ describe('NoticePolicyForm', () => {
             });
 
             it('should have proper label', () => {
-              expect(NoticePolicyForm.loanNoticesSection.loanNotices(0).format.label).to.be.equal(
-                getRequiredLabel(translation['settings.noticePolicy.notices.format'])
-              );
+              expect(NoticePolicyForm.loanNoticesSection.loanNotices(0).format.label).to.contain(translation['settings.noticePolicy.notices.format']);
             });
           });
 
@@ -167,9 +160,7 @@ describe('NoticePolicyForm', () => {
             });
 
             it('should have proper label', () => {
-              expect(NoticePolicyForm.loanNoticesSection.loanNotices(0).triggeringEvent.label).to.be.equal(
-                getRequiredLabel(translation['settings.noticePolicy.notices.triggeringEvent'])
-              );
+              expect(NoticePolicyForm.loanNoticesSection.loanNotices(0).triggeringEvent.label).to.contain(translation['settings.noticePolicy.notices.triggeringEvent']);
             });
           });
 
@@ -188,9 +179,7 @@ describe('NoticePolicyForm', () => {
               });
 
               it('should have proper label', () => {
-                expect(NoticePolicyForm.loanNoticesSection.loanNotices(0).frequencyLabel.text).to.be.equal(
-                  getRequiredLabel(translation['settings.noticePolicy.notices.frequency'])
-                );
+                expect(NoticePolicyForm.loanNoticesSection.loanNotices(0).frequencyLabel.text).to.contain(translation['settings.noticePolicy.notices.frequency']);
               });
             });
           });
@@ -206,9 +195,7 @@ describe('NoticePolicyForm', () => {
               });
 
               it('should have proper text', () => {
-                expect(NoticePolicyForm.loanNoticesSection.loanNotices(0).eventLabel.text).to.be.equal(
-                  getRequiredLabel(translation['settings.noticePolicy.notices.send'])
-                );
+                expect(NoticePolicyForm.loanNoticesSection.loanNotices(0).eventLabel.text).to.contain(translation['settings.noticePolicy.notices.send']);
               });
             });
 
