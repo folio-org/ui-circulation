@@ -59,8 +59,8 @@ describe('LoanPolicyDetail', () => {
       });
     });
 
-    describe('\n\tabout section\n', () => {
-      describe('loan policy:\n\t-loanable\n', () => {
+    describe('about section', () => {
+      describe('loan policy: -loanable', () => {
         beforeEach(function () {
           loanPolicy = this.server.create('loanPolicy', {
             loanable: true,
@@ -109,8 +109,8 @@ describe('LoanPolicyDetail', () => {
       });
     });
 
-    describe('\n\tloans section\n', () => {
-      describe('loan policy:\n\t-not loanable\n', () => {
+    describe('loans section', () => {
+      describe('loan policy: -not loanable', () => {
         beforeEach(function () {
           loanPolicy = this.server.create('loanPolicy', {
             loanable: false,
@@ -120,13 +120,13 @@ describe('LoanPolicyDetail', () => {
         });
 
         describe('loans section', () => {
-          it.always('should not be displayed', () => {
+          it('should not be displayed', () => {
             expect(LoanPolicyDetail.loansSection.isPresent).to.be.false;
           });
         });
       });
 
-      describe('loan policy:\n\t-loanable\n', () => {
+      describe('loan policy: -loanable', () => {
         beforeEach(function () {
           loanPolicy = this.server.create('loanPolicy', {
             loanable: true,
@@ -197,7 +197,7 @@ describe('LoanPolicyDetail', () => {
         });
       });
 
-      describe('loan policy:\n\t-loanable\n\t-rolling\n', () => {
+      describe('loan policy: -loanable -rolling ', () => {
         beforeEach(function () {
           loanPolicy = this.server.create('loanPolicy', {
             loanable: true,
@@ -240,7 +240,7 @@ describe('LoanPolicyDetail', () => {
         });
       });
 
-      describe('loan policy:\n\t-loanable\n\t-fixed\n', () => {
+      describe('loan policy: -loanable -fixed', () => {
         beforeEach(function () {
           loanPolicy = this.server.create('loanPolicy', {
             loanable: true,
@@ -254,7 +254,7 @@ describe('LoanPolicyDetail', () => {
         });
 
         describe('loan period', () => {
-          it.always('should not be displayed', () => {
+          it('should not be displayed', () => {
             expect(LoanPolicyDetail.loansSection.loanPeriod.isPresent).to.be.false;
           });
         });
@@ -274,7 +274,7 @@ describe('LoanPolicyDetail', () => {
         });
       });
 
-      describe('loan policy:\n\t-rolling\n\t-loanable\n\t-short term period\n\t-closed library due date management - beginning of the next open service point hours\n', () => {
+      describe('loan policy: -rolling -loanable -short term period -closed library due date management - beginning of the next open service point hours ', () => {
         beforeEach(function () {
           loanPolicy = this.server.create('loanPolicy', {
             loanable: true,
@@ -308,7 +308,7 @@ describe('LoanPolicyDetail', () => {
         });
       });
 
-      describe('loan policy:\n\t-rolling\n\t-loanable\n\t-long term period\n\t-closed library due date management - beginning of the next open service point hours\n', () => {
+      describe('loan policy: -rolling -loanable -long term period -closed library due date management - beginning of the next open service point hours', () => {
         beforeEach(function () {
           loanPolicy = this.server.create('loanPolicy', {
             loansPolicy: {
@@ -325,16 +325,14 @@ describe('LoanPolicyDetail', () => {
           this.visit(`/settings/circulation/loan-policies/${loanPolicy.id}`);
         });
 
-        describe('opening time offset', () => {
-          it('should not be displayed', () => {
-            expect(LoanPolicyDetail.loansSection.openingTimeOffset.isPresent).to.be.false;
-          });
+        it('opening time offset should not be displayed', () => {
+          expect(LoanPolicyDetail.loansSection.openingTimeOffset.isPresent).to.be.false;
         });
       });
     });
 
-    describe('\n\trenewals section\n', () => {
-      describe('loan policy:\n\t-non renewable\n', () => {
+    describe('renewals section', () => {
+      describe('loan policy: non renewable', () => {
         beforeEach(function () {
           loanPolicy = this.server.create('loanPolicy', {
             renewable: false,
@@ -344,13 +342,13 @@ describe('LoanPolicyDetail', () => {
         });
 
         describe('renewals section', () => {
-          it.always('should not be displayed', () => {
+          it('should not be displayed', () => {
             expect(LoanPolicyDetail.renewalsSection.isPresent).to.be.false;
           });
         });
       });
 
-      describe('loan policy:\n\t-renewable\n\t-loanable\n\t-with limited renewals\n', () => {
+      describe('loan policy: -renewable -loanable -with limited renewals ', () => {
         beforeEach(function () {
           loanPolicy = this.server.create('loanPolicy', {
             renewable: true,
@@ -379,7 +377,7 @@ describe('LoanPolicyDetail', () => {
         });
       });
 
-      describe('loan policy:\n\t-renewable\n\t-loanable\n\t-unlimited renewals\n', () => {
+      describe('loan policy: -renewable -loanable -unlimited renewals', () => {
         beforeEach(function () {
           loanPolicy = this.server.create('loanPolicy', {
             renewable: true,
@@ -393,13 +391,13 @@ describe('LoanPolicyDetail', () => {
         });
 
         describe('number renewals allowed', () => {
-          it.always('should not be displayed', () => {
+          it('should not be displayed', () => {
             expect(LoanPolicyDetail.renewalsSection.numRenewalsAllowed.isPresent).to.be.false;
           });
         });
       });
 
-      describe('loan policy:\n\t-renewable\n\t-loanable\n\t-different period\n\t-rolling\n', () => {
+      describe('loan policy: -renewable -loanable -different period -rolling', () => {
         beforeEach(function () {
           loanPolicy = this.server.create('loanPolicy', {
             renewable: true,
@@ -446,7 +444,7 @@ describe('LoanPolicyDetail', () => {
         });
       });
 
-      describe('loan policy:\n\t-renewable\n\t-loanable\n\t-different period\n\t-fixed\n', () => {
+      describe('loan policy: -renewable -loanable -different period -fixed', () => {
         beforeEach(function () {
           loanPolicy = this.server.create('loanPolicy', {
             renewable: true,
@@ -477,7 +475,7 @@ describe('LoanPolicyDetail', () => {
         });
       });
 
-      describe('loan policy:\n\t-renewable\n\t-loanable\n\t-same period\n\t-rolling\n', () => {
+      describe('loan policy: -renewable -loanable -same period -rolling', () => {
         beforeEach(function () {
           loanPolicy = this.server.create('loanPolicy', {
             renewable: true,
@@ -495,13 +493,13 @@ describe('LoanPolicyDetail', () => {
         });
 
         describe('alternate loan period renewals', () => {
-          it.always('should not be displayed', () => {
+          it('should not be displayed', () => {
             expect(LoanPolicyDetail.renewalsSection.alternateLoanPeriodRenewals.isPresent).to.be.false;
           });
         });
       });
 
-      describe('loan policy:\n\t-renewable\n\t-loanable\n', () => {
+      describe('loan policy: -renewable -loanable', () => {
         beforeEach(function () {
           loanPolicy = this.server.create('loanPolicy', {
             renewable: true,
@@ -571,8 +569,8 @@ describe('LoanPolicyDetail', () => {
       });
     });
 
-    describe('\n\trequest management section\n', () => {
-      describe('loan policy:\n\t-non loanable\n', () => {
+    describe('request management section', () => {
+      describe('loan policy: -non loanable', () => {
         beforeEach(function () {
           loanPolicy = this.server.create('loanPolicy', {
             loanable: false,
@@ -581,13 +579,13 @@ describe('LoanPolicyDetail', () => {
           this.visit(`/settings/circulation/loan-policies/${loanPolicy.id}`);
         });
         describe('request management section', () => {
-          it.always('should not be displayed', () => {
+          it('should not be displayed', () => {
             expect(LoanPolicyDetail.requestManagement.isPresent).to.be.false;
           });
         });
       });
 
-      describe('loan policy:\n\t-loanable\n', () => {
+      describe('loan policy: -loanable', () => {
         beforeEach(function () {
           loanPolicy = this.server.create('loanPolicy', {
             loanable: true,
