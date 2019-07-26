@@ -647,7 +647,7 @@ describe('LoanPolicyForm', () => {
             });
 
             it('should have proper label', () => {
-              expect(LoanPolicyForm.renewalsSection.alternateFixedDueDateSchedule.label).to.equal(
+              expect(LoanPolicyForm.renewalsSection.alternateFixedDueDateSchedule.label).to.contain(
                 translation['settings.loanPolicy.altFDDSforRenewals']
               );
             });
