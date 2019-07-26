@@ -12,7 +12,6 @@ import setupApplication from '../../helpers/setup-application';
 import LoanPolicyForm from '../../interactors/loan-policy/loan-policy-form';
 import LoanPolicyDetail from '../../interactors/loan-policy/loan-policy-detail';
 import {
-  getRequiredLabel,
   getOptionsRepresentation,
 } from '../../helpers/messageConverters';
 
@@ -99,9 +98,7 @@ describe('LoanPolicyForm', () => {
         });
 
         it('should have proper label', () => {
-          expect(LoanPolicyForm.aboutSection.policyName.label).to.equal(
-            getRequiredLabel(translation['settings.loanPolicy.policyName'])
-          );
+          expect(LoanPolicyForm.aboutSection.policyName.label).to.contain(translation['settings.loanPolicy.policyName']);
         });
       });
 
@@ -195,9 +192,7 @@ describe('LoanPolicyForm', () => {
             });
 
             it('should have proper label', () => {
-              expect(LoanPolicyForm.loansSection.loanPeriod.label).to.equal(
-                getRequiredLabel(translation['settings.loanPolicy.loanPeriod'])
-              );
+              expect(LoanPolicyForm.loansSection.loanPeriod.label).to.contain(translation['settings.loanPolicy.loanPeriod']);
             });
           });
 
@@ -249,9 +244,7 @@ describe('LoanPolicyForm', () => {
             });
 
             it('should have proper label', () => {
-              expect(LoanPolicyForm.loansSection.fixedDueDateScheduleId.label).to.equal(
-                getRequiredLabel(translation['settings.loanPolicy.fDDS'])
-              );
+              expect(LoanPolicyForm.loansSection.fixedDueDateScheduleId.label).to.contain(translation['settings.loanPolicy.fDDS']);
             });
           });
 
@@ -320,9 +313,7 @@ describe('LoanPolicyForm', () => {
             });
 
             it('should have proper label', () => {
-              expect(LoanPolicyForm.loansSection.openingTimeOffset.label).to.equal(
-                getRequiredLabel(translation['settings.loanPolicy.openingTimeOffset'])
-              );
+              expect(LoanPolicyForm.loansSection.openingTimeOffset.label).to.contain(translation['settings.loanPolicy.openingTimeOffset']);
             });
           });
         });
@@ -458,9 +449,7 @@ describe('LoanPolicyForm', () => {
             });
 
             it('should have proper label', () => {
-              expect(LoanPolicyForm.renewalsSection.numRenewalsAllowed.label).to.equal(
-                getRequiredLabel(translation['settings.loanPolicy.numRenewalsAllowed'])
-              );
+              expect(LoanPolicyForm.renewalsSection.numRenewalsAllowed.label).to.equal(translation['settings.loanPolicy.numRenewalsAllowed']);
             });
           });
 
@@ -617,9 +606,7 @@ describe('LoanPolicyForm', () => {
             });
 
             it('should have proper label', () => {
-              expect(LoanPolicyForm.renewalsSection.alternateLoanPeriodRenewals.label).to.equal(
-                getRequiredLabel(translation['settings.loanPolicy.alternateLoanPeriodRenewals'])
-              );
+              expect(LoanPolicyForm.renewalsSection.alternateLoanPeriodRenewals.label).to.equal(translation['settings.loanPolicy.alternateLoanPeriodRenewals']);
             });
           });
         });
