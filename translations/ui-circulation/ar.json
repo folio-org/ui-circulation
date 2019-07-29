@@ -341,9 +341,12 @@
     "settings.loanHistory.paymentMethod.replace": "استبدال",
     "settings.loanHistory.paymentMethod.pay": "سداد",
     "settings.loanHistory.errors.paymentMethodSelected": "تم تحديد طريقة الدفع هذه بالفعل",
-    "settings.staffSlips.itemTokenHeader": "Item",
-    "settings.staffSlips.effectiveLocationTokenHeader": "Effective location",
-    "settings.staffSlips.staffSlipTokenHeader": "Staff Slip",
-    "settings.staffSlips.requestTokenHeader": "Request",
-    "settings.staffSlips.requesterTokenHeader": "Requester"
+    "settings.staffSlips.itemTokenHeader": "المادة",
+    "settings.staffSlips.effectiveLocationTokenHeader": "الموقع الفعال",
+    "settings.staffSlips.staffSlipTokenHeader": "كعب الموظفين",
+    "settings.staffSlips.requestTokenHeader": "طلب",
+    "settings.staffSlips.requesterTokenHeader": "مقدم الطلب",
+    "settings.circulationRules.institution": "المؤسسة",
+    "settings.circulationRules.institutions": "المؤسسات",
+    "settings.circulationRules.selectInstitution": "قم بتحديد مؤسسة"
 }

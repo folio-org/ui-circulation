@@ -345,5 +345,8 @@
     "settings.staffSlips.effectiveLocationTokenHeader": "Effective location",
     "settings.staffSlips.staffSlipTokenHeader": "Staff Slip",
     "settings.staffSlips.requestTokenHeader": "Request",
-    "settings.staffSlips.requesterTokenHeader": "Requester"
+    "settings.staffSlips.requesterTokenHeader": "Requester",
+    "settings.circulationRules.institution": "Institution",
+    "settings.circulationRules.institutions": "Institutions",
+    "settings.circulationRules.selectInstitution": "Select Institution"
 }
