@@ -15,7 +15,7 @@
     "settings.loanPolicy.fDDSlimit": "Fixed due date schedule (due date limit)",
     "settings.loanPolicy.closedDueDateMgmt": "Closed library due date management",
     "settings.loanPolicy.skipClosedDates": "Skip closed dates in intervening period",
-    "settings.loanPolicy.altFDDSforRenewals": "Alternate fixed due date schedule for renewals *",
+    "settings.loanPolicy.altFDDSforRenewals": "Alternate fixed due date schedule for renewals",
     "settings.loanPolicy.altFDDSDueDateLimit": "Alternate fixed due date schedule (due date limit) for renewals",
     "settings.loanPolicy.alternateLoanPeriodExisting": "Alternate loan period for items with existing requests",
     "settings.loanPolicy.alternateLoanPeriodRenewals": "Alternate loan period for renewals",
@@ -345,5 +345,8 @@
     "settings.staffSlips.effectiveLocationTokenHeader": "Effective location",
     "settings.staffSlips.staffSlipTokenHeader": "Staff Slip",
     "settings.staffSlips.requestTokenHeader": "Request",
-    "settings.staffSlips.requesterTokenHeader": "Requester"
+    "settings.staffSlips.requesterTokenHeader": "Requester",
+    "settings.circulationRules.institution": "Institution",
+    "settings.circulationRules.institutions": "Institutions",
+    "settings.circulationRules.selectInstitution": "Select Institution"
 }

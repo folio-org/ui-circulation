@@ -15,7 +15,7 @@
     "settings.loanPolicy.fDDSlimit": "Agendamento de data de vencimento fixa (limite de data de vencimento)",
     "settings.loanPolicy.closedDueDateMgmt": "Gerenciamento de data de vencimento da biblioteca fechada",
     "settings.loanPolicy.skipClosedDates": "Ignorar datas de fechamento no período de intervenção",
-    "settings.loanPolicy.altFDDSforRenewals": "Data de vencimento fixa alternativa para renovações *",
+    "settings.loanPolicy.altFDDSforRenewals": "Data de vencimento fixa alternativa para renovações",
     "settings.loanPolicy.altFDDSDueDateLimit": "Programação de data de vencimento fixa alternativa (limite de data de vencimento) para renovações",
     "settings.loanPolicy.alternateLoanPeriodExisting": "Período de empréstimo alternativo para itens com reservas existentes",
     "settings.loanPolicy.alternateLoanPeriodRenewals": "Período de empréstimo alternativo para renovações",
@@ -345,5 +345,8 @@
     "settings.staffSlips.effectiveLocationTokenHeader": "Localização efetiva",
     "settings.staffSlips.staffSlipTokenHeader": "Ficha de encaminhamento",
     "settings.staffSlips.requestTokenHeader": "Requisição",
-    "settings.staffSlips.requesterTokenHeader": "Requerente"
+    "settings.staffSlips.requesterTokenHeader": "Requerente",
+    "settings.circulationRules.institution": "Instituição",
+    "settings.circulationRules.institutions": "Instituições",
+    "settings.circulationRules.selectInstitution": "Selecione uma Instituição"
 }
