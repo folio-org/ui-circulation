@@ -24,7 +24,9 @@ const editorDefaultProps = {
     g: 'patronGroups',
     m: 'materialTypes',
     t: 'loanTypes',
-    a: 'institutions'
+    a: 'institutions',
+    b: 'campuses',
+    c: 'libraries',
   },
   policyMapping: {
     l: 'loanPolicies',
@@ -194,6 +196,8 @@ class CirculationRules extends React.Component {
       noticePolicies,
       requestPolicies,
       institutions,
+      campuses,
+      libraries,
     } = this.props.resources;
 
     return Object.assign({}, editorDefaultProps, {
@@ -204,7 +208,23 @@ class CirculationRules extends React.Component {
         materialTypes: materialTypes.records.map(m => kebabCase(m.name)),
         loanTypes: loanTypes.records.map(t => kebabCase(t.name)),
         // TODO: The codes should be normalized in the scope of https://issues.folio.org/browse/UICIRC-260
-        institutions: institutions.records.map(a => a.code),
+        institutions: institutions.records.map(a => ({
+          id: a.id,
+          code: a.code,
+          displayCode: a.code,
+        })),
+        campuses: campuses.records.map(b => ({
+          id: b.id,
+          code: b.code,
+          displayCode: this.formatCampusDisplayCode(b),
+          parentId: b.institutionId,
+        })),
+        libraries: libraries.records.map(c => ({
+          id: c.id,
+          code: c.code,
+          displayCode: this.formatLibraryDisplayCode(c),
+          parentId: c.campusId,
+        })),
         // policies
         loanPolicies: loanPolicies.records.map(l => kebabCase(l.name)),
         requestPolicies: requestPolicies.records.map(r => kebabCase(r.name)),
@@ -212,6 +232,27 @@ class CirculationRules extends React.Component {
       },
     });
   }
+
+  formatCampusDisplayCode(campus) {
+    const { institutions } = this.props.resources;
+
+    const targetInstitution = institutions.records.find(institution => institution.id === campus.institutionId);
+
+    return `${campus.code} (${targetInstitution.code})`;
+  }
+
+  formatLibraryDisplayCode(library) {
+    const {
+      institutions,
+      campuses,
+    } = this.props.resources;
+
+    const targetCampus = campuses.records.find(campus => campus.id === library.campusId);
+    const targetInstitution = institutions.records.find(institution => institution.id === targetCampus.institutionId);
+
+    return `${library.code} (${targetInstitution.code}-${targetCampus.code})`;
+  }
+
 
   getRecords() {
     const {
@@ -222,6 +263,8 @@ class CirculationRules extends React.Component {
       requestPolicies,
       noticePolicies,
       institutions,
+      campuses,
+      libraries,
     } = this.props.resources;
 
     return [
@@ -230,6 +273,8 @@ class CirculationRules extends React.Component {
       ...loanTypes.records.map(r => ({ name: kebabCase(r.name), id: r.id, prefix: 't', divider: '.' })),
       // TODO: The codes should be normalized in the scope of https://issues.folio.org/browse/UICIRC-260
       ...institutions.records.map(r => ({ name: r.code, id: r.id, prefix: 'a', divider: '.' })),
+      ...campuses.records.map(r => ({ name: r.code, id: r.id, prefix: 'b', divider: '.' })),
+      ...libraries.records.map(r => ({ name: r.code, id: r.id, prefix: 'c', divider: '.' })),
       ...loanPolicies.records.map(r => ({ name: kebabCase(r.name), id: r.id, prefix: 'l', divider: '\\s' })),
       ...requestPolicies.records.map(r => ({ name: kebabCase(r.name), id: r.id, prefix: 'r', divider: '\\s' })),
       ...noticePolicies.records.map(r => ({ name: kebabCase(r.name), id: r.id, prefix: 'n', divider: '\\s' })),
@@ -240,7 +285,7 @@ class CirculationRules extends React.Component {
     const records = this.getRecords();
     return records.reduce((memo, r) => {
       // eslint-disable-next-line no-useless-escape
-      const re = new RegExp(`(${r.prefix}${r.divider}+)(${r.name})(?=\\s+[g\s+|m\s+|t\s+|l\s+|r\s+|n\s+|:\s*])?`, 'igm');
+      const re = new RegExp(`(\\b${r.prefix}\\b${r.divider}+)(\\b${r.name}\\b)(?=\\s+[g\s+|m\s+|t\s+|l\s+|r\s+|n\s+|:\s*])?`, 'igm');
       return memo.replace(re, `$1${r.id}`);
     }, rulesStr);
   }

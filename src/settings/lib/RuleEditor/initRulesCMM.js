@@ -32,7 +32,7 @@ const hooks = {
   }
 };
 
-const priorityKeys = ['s', 'c', 'b', 'a'];
+const locationKeys = ['s', 'c', 'b', 'a'];
 
 function processToken(stream, state, parserConfig) {
   const {
@@ -82,7 +82,7 @@ function processToken(stream, state, parserConfig) {
     return 'keyword';
   }
 
-  if (typeKeys.indexOf(cur) !== -1 || priorityKeys.indexOf(cur) !== -1) { // style types
+  if (typeKeys.indexOf(cur) !== -1 || locationKeys.indexOf(cur) !== -1) { // style types
     state.keyProperty = cur;
     return cur;
   }
@@ -98,8 +98,9 @@ function processToken(stream, state, parserConfig) {
     if (typeMapping[keyProperty]) {
       let returnClass = false;
       const val = typeMapping[keyProperty];
+      const isLocationCriteriaExists = locationKeys.includes(keyProperty) && completionLists[val].some(item => item.code === cur);
 
-      if (completionLists[val].indexOf(cur) !== -1) { // matches completion set
+      if (isLocationCriteriaExists || completionLists[val].includes(cur)) {
         returnClass = true;
       }
 

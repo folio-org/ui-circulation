@@ -12,8 +12,12 @@ import 'codemirror/addon/fold/foldcode';
 import initFoldRules from './initFoldRules';
 import 'codemirror/addon/fold/foldgutter';
 import './rules-show-hint';
-import rulesHint from './Rules-hint';
+import {
+  rulesHint,
+  initSubMenuDataFetching,
+} from './Rules-hint';
 import 'codemirror/addon/hint/css-hint';
+
 import '!style-loader!css-loader!./CodeMirrorCustom.css';
 import css from './RulesEditor.css';
 
@@ -87,37 +91,48 @@ const defaultProps = {
 // custom-handlers for working with the ever-present code hinting.
 function moveFocusDown(cm, handle){
   const ACTIVE_HINT_ELEMENT_CLASS = "CodeMirror-hint-active";
-  if (cm.state.completionActive.widget.data.selectedHint === -1) {
-    handle.data.selectedHint = 0;
-    const widget = cm.state.completionActive.widget;
-    const node = widget.hints.childNodes[0];
+  const { widget }  = cm.state.completionActive;
+  const { currentSectionIndex } = widget;
+  const currentSectionData = widget.data.sections[currentSectionIndex];
+
+  if (currentSectionData.selectedHint === -1) {
+    handle.data.sections[currentSectionIndex].selectedHint = 0;
+    const node = widget.sections[currentSectionIndex].getListNode(0);
     node.className += " " + ACTIVE_HINT_ELEMENT_CLASS;
-    widget.selectedHint = 0;
-    Codemirror.signal(widget.data, "select", widget.data.listDescription.list[0], node);
+    widget.sections[currentSectionIndex].selectedHint = 0;
+    Codemirror.signal(widget.data, "select", currentSectionData.list[0], node);
   } else {
     handle.moveFocus(1);
-    cm.state.completionActive.widget.data.selectedHint += 1;
+    currentSectionData.selectedHint += 1;
   }
 }
 
 function moveFocusUp(cm, handle) {
   const ACTIVE_HINT_ELEMENT_CLASS = "CodeMirror-hint-active";
   //if it's the first element in the list, we'll need to refocus the editor...
-  if (cm.state.completionActive.widget.data.selectedHint <= 0) {
-    const widget = cm.state.completionActive.widget;
-    const node = widget.hints.childNodes[handle.data.selectedHint];
+  const { widget } = cm.state.completionActive;
+  const { currentSectionIndex }  = widget;
+  const currentSectionData = widget.data.sections[currentSectionIndex];
+
+  if (currentSectionIndex=== 0 && currentSectionData.selectedHint <= 0) {
+    const { selectedHint } = handle.data.sections[currentSectionIndex];
+    const node = widget.sections[currentSectionIndex].getListNode(selectedHint);
+
     if (node) node.className = node.className.replace(" " + ACTIVE_HINT_ELEMENT_CLASS, "");
-    handle.data.selectedHint = -1;
-    widget.selectedHint = -1;
+
+    handle.data.sections[currentSectionIndex].selectedHint = -1;
+    widget.sections[currentSectionIndex].selectedHint = -1;
     cm.focus();
   } else {
     handle.moveFocus(-1);
-    cm.state.completionActive.widget.data.selectedHint -= 1;
+    currentSectionData.selectedHint -= 1;
   }
 }
 
 function handleEnter(cm, handle) {
-  if (handle.data.selectedHint === -1) {
+  const { currentSectionIndex } = cm.state.completionActive.widget;
+
+  if (handle.data.sections[currentSectionIndex].selectedHint === -1) {
     cm.execCommand("newlineAndIndent");
   } else {
     handle.pick();
@@ -125,7 +140,9 @@ function handleEnter(cm, handle) {
 }
 
 function handleTab(cm, handle) {
-  if (handle.data.selectedHint === -1) {
+  const { currentSectionIndex } = cm.state.completionActive.widget;
+
+  if (handle.data.sections[currentSectionIndex].selectedHint === -1) {
     if(cm.somethingSelected()) {
       cm.indentSelection("add");
       return;
@@ -280,6 +297,7 @@ class RulesEditor extends React.Component {
     this.cm = this.cmComponent.editor;
     //set up hinting
     rulesHint(Codemirror, this.props);
+    initSubMenuDataFetching(Codemirror, this.props);
 
     // prettymuch always show the auto-complete.
     this.cm.on('cursorActivity', this.showHelp);
