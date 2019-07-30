@@ -3,10 +3,13 @@ import {
   isPresent,
   action,
   computed,
-  text,
   clickable,
   property,
+  collection,
   Interactor,
+  count,
+  scoped,
+  triggerable,
 } from '@bigtest/interactor';
 
 function getEditorValue() {
@@ -29,30 +32,58 @@ function hasClass(selector, className) {
   });
 }
 
+const scrollingOffset = 3;
+
+@interactor class HintsSection {
+  subheader = scoped('.CodeMirror-hints-subheader');
+  isFirstItemActive = hasClass('.CodeMirror-hint:first-child', 'CodeMirror-hint-active');
+  isLastItemActive = hasClass('.CodeMirror-hint:last-child', 'CodeMirror-hint-active');
+  isActiveItemPresent = isPresent('.CodeMirror-hint-active');
+  items = collection('.CodeMirror-hint', scoped);
+  itemsCount = count('.CodeMirror-hint');
+
+  isScrollable = function () {
+    return this.$('ul').scrollHeight > this.$('ul').clientHeight;
+  };
+
+  getItemNode(itemIndex) {
+    return this.$(`.CodeMirror-hint:nth-child(${itemIndex + 1})`);
+  }
+
+  isScrolledToTop = function (itemIndex) {
+    return this.$('ul').scrollTop === this.getItemNode(itemIndex).offsetTop - scrollingOffset;
+  };
+
+  isScrolledToBottom = function (itemIndex) {
+    const itemNode = this.getItemNode(itemIndex);
+    const listContainer = this.$('ul');
+
+    return listContainer.scrollTop === itemNode.offsetTop + itemNode.offsetHeight - listContainer.clientHeight + scrollingOffset;
+  };
+}
+
 @interactor class Hints {
   static defaultScope = '.CodeMirror-hints';
 
-  arePresent = isPresent('.rule-hint-minor');
-  text = text('.rule-hint-minor');
+  arePresent = isPresent('.CodeMirror-hint');
+
   header = new Interactor('.CodeMirror-hints-header');
-  subheader = new Interactor('.CodeMirror-hints-subheader');
-  isActiveItemPresent = isPresent('.CodeMirror-hint-active');
-  isFirstItemActive = hasClass('.rule-hint-minor:first-child', 'CodeMirror-hint-active');
-  isLastItemActive = hasClass('.rule-hint-minor:last-child', 'CodeMirror-hint-active');
+  sections = collection('.CodeMirror-hints-list', HintsSection);
+  sectionsCount = count('.CodeMirror-hints-list');
 
   triggerItemEvent = function (event, options) {
-    return action(function (itemIndex) {
-      return this.find(`.rule-hint-minor:nth-child(${itemIndex})`)
+    return action(function (itemIndex, section = 0) {
+      return this.find(`.CodeMirror-hints-list:nth-child(${section + 1}) .CodeMirror-hint:nth-child(${itemIndex + 1})`)
         .do(($node) => {
           const defaultOptions = {
-            ancelable: true,
+            сancelable: true,
             bubbles: true
           };
 
           $node.dispatchEvent(new Event(event, { ...defaultOptions, ...options }));
         });
     });
-  }
+  };
 
   clickOnItem = this.triggerItemEvent('click');
   doubleClickOnItem = this.triggerItemEvent('dblclick');
@@ -73,9 +104,12 @@ function hasClass(selector, className) {
 
   pickHint = action(function (index = 0) {
     return this.find('.CodeMirror').do(({ CodeMirror }) => {
-      const ca = CodeMirror.state.completionActive;
-      const { widget, data } = ca;
-      widget.selectedHint = index;
+      const {
+        widget,
+        data,
+      } = CodeMirror.state.completionActive;
+      widget.sections[widget.currentSectionIndex].selectedHintIndex = index;
+
       widget.pick(data, index);
       CodeMirror.setCursor(CodeMirror.lineCount(), 0);
       CodeMirror.showHint();
@@ -95,6 +129,20 @@ function hasClass(selector, className) {
     }).run();
   });
 
+  pressKey = function (keyCode) {
+    return triggerable('textarea', 'keydown', {
+      bubbles: true,
+      cancelable: true,
+      keyCode,
+    });
+  };
+
+  pressEnter = this.pressKey(13);
+  pressTab = this.pressKey(9);
+  pressArrowDown = this.pressKey(40);
+  pressArrowUp = this.pressKey(38);
+
+  textArea = new Interactor('textarea');
   hints = new Hints();
   value = getEditorValue();
   line0 = getEditorLine(0);
