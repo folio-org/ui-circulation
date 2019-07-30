@@ -117,7 +117,7 @@ describe('CirculationRules', () => {
 
     it('should display hints with correct header', () => {
       expect(circulationRules.editor.hints.header.isPresent).to.be.true;
-      expect(circulationRules.editor.hints.header.text).to.be.equal('Select Institution');
+      expect(circulationRules.editor.hints.header.text).to.be.equal('Select institution');
     });
 
     it('should display hints with correct subheader', () => {
