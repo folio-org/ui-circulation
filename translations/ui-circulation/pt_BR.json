@@ -6,7 +6,7 @@
     "settings.index.otherSettings": "Outras configurações",
     "settings.index.staffSlips": "Ficha de encaminhamento",
     "settings.loanPolicy.entryLabel": "Política de empréstimo",
-    "settings.loanPolicy.paneTitle": "Loan Policies",
+    "settings.loanPolicy.paneTitle": "Políticas de empréstimos",
     "settings.loanPolicy.selectFDDS": "Por favor, selecione um agendamento de data de vencimento fixa",
     "settings.loanPolicy.loans": "Empréstimos",
     "settings.loanPolicy.loanPeriod": "Período de empréstimo",
@@ -28,7 +28,7 @@
     "settings.loanPolicy.renewalPeriodDifferent": "Período de renovação diferente do empréstimo original",
     "settings.loanPolicy.about": "Sobre",
     "settings.loanPolicy.policyName": "Nome da política",
-    "settings.loanPolicy.policyDescription": "Descrição da Política",
+    "settings.loanPolicy.policyDescription": "Descrição da política",
     "settings.loanPolicy.loanable": "Emprestável",
     "settings.loanPolicy.selectInterval": "Selecione o intervalo",
     "settings.loanPolicy.selectSchedule": "Selecione o agendamento",
@@ -348,5 +348,5 @@
     "settings.staffSlips.requesterTokenHeader": "Requerente",
     "settings.circulationRules.institution": "Instituição",
     "settings.circulationRules.institutions": "Instituições",
-    "settings.circulationRules.selectInstitution": "Selecione uma Instituição"
+    "settings.circulationRules.selectInstitution": "Selecione uma instituição"
 }

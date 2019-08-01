@@ -348,5 +348,5 @@
     "settings.staffSlips.requesterTokenHeader": "请求者",
     "settings.circulationRules.institution": "Institution",
     "settings.circulationRules.institutions": "Institutions",
-    "settings.circulationRules.selectInstitution": "Select Institution"
+    "settings.circulationRules.selectInstitution": "Select institution"
 }
