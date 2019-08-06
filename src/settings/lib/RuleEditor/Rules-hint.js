@@ -25,7 +25,43 @@ const isLocationCriteria = (criteria) => {
   return criteria === 'a' || criteria === 'b' || criteria === 'c' || criteria === 's';
 };
 
-export default function rulesHint(Codemirror, props) {
+const getSectionsDescriptions = (criteria) => {
+  switch (criteria) {
+    case 'a':
+      return [
+        { header: 'ui-circulation.settings.circulationRules.institution' },
+      ];
+    case 'b':
+      return [
+        { header: 'ui-circulation.settings.circulationRules.institution', childSection: 'b' },
+        { header: 'ui-circulation.settings.circulationRules.campus', selectedHintIndex: 0 },
+      ];
+    case 'c':
+      return [
+        { header: 'ui-circulation.settings.circulationRules.institution', childSection: 'b' },
+        { header: 'ui-circulation.settings.circulationRules.campus', childSection: 'c', selectedHintIndex: 0 },
+        { header: 'ui-circulation.settings.circulationRules.library', selectedHintIndex: 0 },
+      ];
+    default:
+      return [{}];
+  }
+};
+
+function getCriteriaOptions(selector, typeKey) {
+  const isLocationTypeKey = isLocationCriteria(typeKey);
+  const text = isLocationTypeKey ? selector.code : selector;
+  const displayText = isLocationTypeKey ? truncate(selector.displayCode, truncateOptions) : selector;
+
+  return {
+    text: `${text} `,
+    displayText,
+    className: 'rule-hint-minor',
+    completeOnSingleClick: true,
+    id: selector.id,
+  };
+}
+
+export function rulesHint(Codemirror, props) {
   Codemirror.registerHelper('hint', 'rulesCMM', (cm) => {
     const cur = cm.getCursor();
     const token = cm.getTokenAt(cur);
@@ -55,7 +91,7 @@ export default function rulesHint(Codemirror, props) {
     const end = start;
     const result = [];
     let header;
-    let subheader;
+    let sections = [{}];
 
     // new rule at the start of lines and blank lines...
     if (!rValue && (cur.ch === 0 || cur.ch === indented || token.type !== 'policy')) {
@@ -94,27 +130,26 @@ export default function rulesHint(Codemirror, props) {
     if (!rValue && keyProperty) {
       // not at beginning of line..
       if (cur.ch !== 0 && cur.ch > indented / 4 && typeMapping[keyProperty]) {
-        if (isLocationCriteria(keyProperty)) {
+        const isLocationKey = isLocationCriteria(keyProperty);
+
+        if (isLocationKey) {
           // A temp solution to remove new rule# for locations because it's displayed in wrong cases
           // It will be fixed in the separated issue
           if (result.length > 0) {
             result.pop();
           }
 
+          sections = getSectionsDescriptions(keyProperty);
           const translaitionKeyValue = capitalize(locationHeadersMapping[keyProperty]);
           header = formatMessage({ id: `ui-circulation.settings.circulationRules.select${translaitionKeyValue}` });
-          subheader = formatMessage({ id: `ui-circulation.settings.circulationRules.${locationHeadersMapping[keyProperty]}` });
         }
 
-        const type = typeMapping[keyProperty];
+        const institutionCriteriaKey = 'a';
+        const criteriaKeyProperty = isLocationKey ? institutionCriteriaKey : keyProperty;
+        const type = typeMapping[criteriaKeyProperty];
 
         completionLists[type].forEach((selector) => {
-          result.push({
-            text: `${selector} `,
-            displayText: isLocationCriteria(keyProperty) ? truncate(selector, truncateOptions) : selector,
-            className: 'rule-hint-minor',
-            completeOnSingleClick: true,
-          });
+          result.push(getCriteriaOptions(selector, criteriaKeyProperty));
         });
       }
     }
@@ -150,18 +185,56 @@ export default function rulesHint(Codemirror, props) {
     }
 
     if (result.length) {
+      sections.forEach(section => {
+        section.header = section.header ? formatMessage({ id: section.header }) : section.header;
+
+        if (section.selectedHintIndex === undefined) {
+          section.selectedHintIndex = -1;
+        }
+      });
+      // The first section should be always filled and other sections should be filed by request in getSubMenuData helper
+      sections[0].list = result;
+
       return {
-        listDescription: {
-          subheader,
-          list: result,
-        },
+        sections,
         from: Codemirror.Pos(cur.line, start),
         to: Codemirror.Pos(cur.line, end),
-        selectedHint: -1,
         header,
       };
     }
 
     return null;
+  });
+}
+
+export function initSubMenuDataFetching(Codemirror, props) {
+  Codemirror.registerHelper('hint', 'getSubMenuData', (cm, options) => {
+    const { intl: { formatMessage } } = props;
+    const subMenuData = [];
+    const token = cm.getTokenAt(cm.getCursor());
+    const {
+      typeMapping,
+      completionLists,
+    } = token.state.nextApplicable;
+
+    const type = typeMapping[options.childSection];
+
+    if (options.childSection && isLocationCriteria(options.childSection)) {
+      subMenuData.push({
+        text: `<${formatMessage({ id: 'ui-circulation.settings.circulationRules.any' })}>`,
+        displayText: `<${formatMessage({ id: 'ui-circulation.settings.circulationRules.any' })}>`,
+        className: 'rule-hint-minor',
+        completeOnSingleClick: true,
+        inactive: true,
+      });
+    }
+
+    completionLists[type].forEach((selector) => {
+      if (selector.parentId === options.parentId) {
+        subMenuData.push(getCriteriaOptions(selector, options.childSection));
+      }
+    });
+
+    return subMenuData;
   });
 }

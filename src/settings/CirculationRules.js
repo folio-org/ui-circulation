@@ -1,4 +1,7 @@
-import { kebabCase } from 'lodash';
+import {
+  kebabCase,
+  find,
+} from 'lodash';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
@@ -24,7 +27,9 @@ const editorDefaultProps = {
     g: 'patronGroups',
     m: 'materialTypes',
     t: 'loanTypes',
-    a: 'institutions'
+    a: 'institutions',
+    b: 'campuses',
+    c: 'libraries',
   },
   policyMapping: {
     l: 'loanPolicies',
@@ -194,6 +199,8 @@ class CirculationRules extends React.Component {
       noticePolicies,
       requestPolicies,
       institutions,
+      campuses,
+      libraries,
     } = this.props.resources;
 
     return Object.assign({}, editorDefaultProps, {
@@ -204,13 +211,42 @@ class CirculationRules extends React.Component {
         materialTypes: materialTypes.records.map(m => kebabCase(m.name)),
         loanTypes: loanTypes.records.map(t => kebabCase(t.name)),
         // TODO: The codes should be normalized in the scope of https://issues.folio.org/browse/UICIRC-260
-        institutions: institutions.records.map(a => a.code),
+        institutions: institutions.records.map(institution => ({
+          id: institution.id,
+          code: institution.code,
+          displayCode: institution.code,
+        })),
+        campuses: campuses.records.map(campus => ({
+          id: campus.id,
+          code: campus.code,
+          displayCode: this.formatCampusDisplayCode(campus, institutions),
+          parentId: campus.institutionId,
+        })),
+        libraries: libraries.records.map(library => ({
+          id: library.id,
+          code: library.code,
+          displayCode: this.formatLibraryDisplayCode(library, institutions, campuses),
+          parentId: library.campusId,
+        })),
         // policies
         loanPolicies: loanPolicies.records.map(l => kebabCase(l.name)),
         requestPolicies: requestPolicies.records.map(r => kebabCase(r.name)),
         noticePolicies: noticePolicies.records.map(n => kebabCase(n.name)),
       },
     });
+  }
+
+  formatCampusDisplayCode(campus, institutions) {
+    const targetInstitution = find(institutions.records, { id: campus.institutionId });
+
+    return `${campus.code} (${targetInstitution.code})`;
+  }
+
+  formatLibraryDisplayCode(library, institutions, campuses) {
+    const targetCampus = find(campuses.records, { id: library.campusId });
+    const targetInstitution = find(institutions.records, { id: targetCampus.institutionId });
+
+    return `${library.code} (${targetInstitution.code}-${targetCampus.code})`;
   }
 
   getRecords() {
@@ -222,6 +258,8 @@ class CirculationRules extends React.Component {
       requestPolicies,
       noticePolicies,
       institutions,
+      campuses,
+      libraries,
     } = this.props.resources;
 
     return [
@@ -230,6 +268,8 @@ class CirculationRules extends React.Component {
       ...loanTypes.records.map(r => ({ name: kebabCase(r.name), id: r.id, prefix: 't', divider: '.' })),
       // TODO: The codes should be normalized in the scope of https://issues.folio.org/browse/UICIRC-260
       ...institutions.records.map(r => ({ name: r.code, id: r.id, prefix: 'a', divider: '.' })),
+      ...campuses.records.map(r => ({ name: r.code, id: r.id, prefix: 'b', divider: '.' })),
+      ...libraries.records.map(r => ({ name: r.code, id: r.id, prefix: 'c', divider: '.' })),
       ...loanPolicies.records.map(r => ({ name: kebabCase(r.name), id: r.id, prefix: 'l', divider: '\\s' })),
       ...requestPolicies.records.map(r => ({ name: kebabCase(r.name), id: r.id, prefix: 'r', divider: '\\s' })),
       ...noticePolicies.records.map(r => ({ name: kebabCase(r.name), id: r.id, prefix: 'n', divider: '\\s' })),
@@ -240,7 +280,7 @@ class CirculationRules extends React.Component {
     const records = this.getRecords();
     return records.reduce((memo, r) => {
       // eslint-disable-next-line no-useless-escape
-      const re = new RegExp(`(${r.prefix}${r.divider}+)(${r.name})(?=\\s+[g\s+|m\s+|t\s+|l\s+|r\s+|n\s+|:\s*])?`, 'igm');
+      const re = new RegExp(`(\\b${r.prefix}\\b${r.divider}+)(\\b${r.name}\\b)(?=\\s+[g\s+|m\s+|t\s+|l\s+|r\s+|n\s+|:\s*])?`, 'igm');
       return memo.replace(re, `$1${r.id}`);
     }, rulesStr);
   }
