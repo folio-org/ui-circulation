@@ -348,5 +348,12 @@
     "settings.staffSlips.requesterTokenHeader": "مقدم الطلب",
     "settings.circulationRules.institution": "المؤسسة",
     "settings.circulationRules.institutions": "المؤسسات",
-    "settings.circulationRules.selectInstitution": "قم بتحديد مؤسسة"
+    "settings.circulationRules.selectInstitution": "قم بتحديد مؤسسة",
+    "settings.circulationRules.libraries": "المكتبات",
+    "settings.circulationRules.library": "المكتبة",
+    "settings.circulationRules.campuses": "الحرم الجامعي",
+    "settings.circulationRules.campus": "الحرم الجامعي",
+    "settings.circulationRules.any": "أي",
+    "settings.circulationRules.selectCampus": "اختر الحرم الجامعي",
+    "settings.circulationRules.selectLibrary": "اختر مكتبة"
 }
