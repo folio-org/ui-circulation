@@ -348,5 +348,12 @@
     "settings.staffSlips.requesterTokenHeader": "Requerente",
     "settings.circulationRules.institution": "Instituição",
     "settings.circulationRules.institutions": "Instituições",
-    "settings.circulationRules.selectInstitution": "Selecione uma instituição"
+    "settings.circulationRules.selectInstitution": "Selecione uma instituição",
+    "settings.circulationRules.libraries": "Bibliotecas",
+    "settings.circulationRules.library": "Biblioteca",
+    "settings.circulationRules.campuses": "Campi",
+    "settings.circulationRules.campus": "Campus",
+    "settings.circulationRules.any": "Qualquer",
+    "settings.circulationRules.selectCampus": "Selecione o campus",
+    "settings.circulationRules.selectLibrary": "Selecione a biblioteca"
 }

@@ -348,5 +348,12 @@
     "settings.staffSlips.requesterTokenHeader": "请求者",
     "settings.circulationRules.institution": "Institution",
     "settings.circulationRules.institutions": "Institutions",
-    "settings.circulationRules.selectInstitution": "Select institution"
+    "settings.circulationRules.selectInstitution": "Select institution",
+    "settings.circulationRules.libraries": "Libraries",
+    "settings.circulationRules.library": "Library",
+    "settings.circulationRules.campuses": "Campuses",
+    "settings.circulationRules.campus": "Campus",
+    "settings.circulationRules.any": "ANY",
+    "settings.circulationRules.selectCampus": "Select campus",
+    "settings.circulationRules.selectLibrary": "Select library"
 }
