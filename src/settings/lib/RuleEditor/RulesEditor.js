@@ -1,19 +1,20 @@
-/* eslint-disable */
-import _ from 'lodash';
 import React from 'react';
-import isEqual from 'lodash/isEqual';
 import PropTypes from 'prop-types';
-
+import Codemirror from 'codemirror'; // eslint-disable-line import/no-extraneous-dependencies
 import CodeMirror from 'react-codemirror2';
+import { injectIntl } from 'react-intl';
 import {
-  injectIntl,
-  intlShape,
-} from 'react-intl';
+  noop,
+  cloneDeep,
+  isEmpty,
+  isEqual,
+  get
+} from 'lodash';
 
-import Codemirror from 'codemirror';
-import 'codemirror/addon/fold/foldcode';
-import 'codemirror/addon/fold/foldgutter';
-import 'codemirror/addon/hint/css-hint';
+import 'codemirror/addon/fold/foldcode'; // eslint-disable-line import/no-extraneous-dependencies
+import 'codemirror/addon/fold/foldgutter'; // eslint-disable-line import/no-extraneous-dependencies
+import 'codemirror/addon/hint/css-hint'; // eslint-disable-line import/no-extraneous-dependencies
+
 import initRulesCMM from './initRulesCMM';
 import initFoldRules from './initFoldRules';
 import './rules-show-hint';
@@ -22,13 +23,13 @@ import {
   initSubMenuDataFetching,
 } from './Rules-hint';
 
-import '!style-loader!css-loader!./CodeMirrorCustom.css';
+import '!style-loader!css-loader!./CodeMirrorCustom.css'; // eslint-disable-line import/no-webpack-loader-syntax
 import css from './RulesEditor.css';
 
 const ACTIVE_HINT_ELEMENT_CLASS = 'CodeMirror-hint-active';
 
 const propTypes = {
-  intl: intlShape.isRequired,
+  onChange: PropTypes.func.isRequired,
 
   /*
     big collection of 'code hint' data...
@@ -44,15 +45,10 @@ const propTypes = {
   completionLists: PropTypes.object,
 
   /*
-    values that could be applied to selections of typeGroups. Defaults to:
+    values that could be applied to selections of typeGroups. Example:
     {
       'g': 'Patron Groups',
-      'a': 'Campus',
-      'b': 'Branch',
-      'c': 'Collection',
-      'm': 'Material Type',
-      's': 'Shelf',
-      't': 'Loan Type',
+      'a': 'Campus'
     }
     A value of this should be applied for each typegroup that's expected to be highlighted by the editor.
   */
@@ -82,25 +78,13 @@ const propTypes = {
   filter: PropTypes.string,
 };
 
-const defaultProps = {
-  typeMapping: {
-    'g': 'Patron Groups',
-    'a': 'Institution',
-    'b': 'Branch',
-    'c': 'Collection',
-    'm': 'Material Type',
-    's': 'Shelf',
-    't': 'Loan Type',
-  },
-};
-
-// custom-handlers for working with the ever-present code hinting.
+// custom handlers for working with the ever-present code hinting
 function moveFocusDown(cm, handle) {
   const {
     currentSectionIndex,
     data,
     sections,
-   } = cm.state.completionActive.widget;
+  } = cm.state.completionActive.widget;
   const currentSectionData = data.sections[currentSectionIndex];
 
   if (currentSectionIndex === 0 && currentSectionData.selectedHintIndex === -1) {
@@ -116,7 +100,7 @@ function moveFocusDown(cm, handle) {
 }
 
 function moveFocusUp(cm, handle) {
-  // if it's the first element in the list, we'll need to refocus the editor...
+  // refocus the editor, if it's the first element in the list
   const {
     currentSectionIndex,
     data,
@@ -127,7 +111,7 @@ function moveFocusUp(cm, handle) {
     const { selectedHintIndex } = handle.data.sections[currentSectionIndex];
     const node = sections[currentSectionIndex].getListNode(selectedHintIndex);
 
-    if (node) node.className = node.className.replace(' ' + ACTIVE_HINT_ELEMENT_CLASS, '');
+    if (node) node.className = node.className.replace(` ${ACTIVE_HINT_ELEMENT_CLASS}`, '');
 
     handle.data.sections[currentSectionIndex].selectedHintIndex = -1;
     sections[currentSectionIndex].selectedHintIndex = -1;
@@ -142,7 +126,7 @@ function handleEnter(cm, handle) {
   const { currentSectionIndex } = cm.state.completionActive.widget;
 
   if (handle.data.sections[currentSectionIndex].selectedHintIndex === -1) {
-    cm.execCommand("newlineAndIndent");
+    cm.execCommand('newlineAndIndent');
   } else {
     handle.pick();
   }
@@ -152,8 +136,9 @@ function handleTab(cm, handle) {
   const { currentSectionIndex } = cm.state.completionActive.widget;
 
   if (handle.data.sections[currentSectionIndex].selectedHintIndex === -1) {
-    if(cm.somethingSelected()) {
-      cm.indentSelection("add");
+    if (cm.somethingSelected()) {
+      cm.indentSelection('add');
+
       return;
     }
 
@@ -166,35 +151,22 @@ function handleTab(cm, handle) {
   }
 }
 
-//generate gutter graphics for folding...
-function generateOpen() {
+function createTriangle(isOpen = true) {
   const container = document.createElement('div');
-  container.style.cssText='width: 26px; height: 26px; cursor:pointer;';
-  const tri = document.createElementNS('http://www.w3.org/2000/svg','svg');
-  tri.style.cssText='width:100%; height: 100%';
-  const polygon = document.createElementNS('http://www.w3.org/2000/svg','polygon');
-  polygon.setAttribute('points', "18.7 4.8 13.4 14.1 8 4.8");
-  polygon.setAttribute('fill',"#666");
-  tri.appendChild(polygon);
-  container.appendChild(tri);
-  return container;
-}
+  const tri = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  const polygon = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
 
-function generateFolded() {
-  const container = document.createElement('div');
-  container.style.cssText='width: 26px; height: 26px; cursor:pointer;';
-  const tri = document.createElementNS('http://www.w3.org/2000/svg','svg');
-  tri.style.cssText='width:100%; height: 100%';
-  const polygon = document.createElementNS('http://www.w3.org/2000/svg','polygon');
-  polygon.setAttribute('points', "8.7 4 18 9.4 8.7 14.8");
-  polygon.setAttribute('fill',"#666");
+  container.style.cssText = 'width: 26px; height: 26px; cursor:pointer;';
+  tri.style.cssText = 'width:100%; height: 100%';
+  polygon.setAttribute('points', isOpen ? '18.7 4.8 13.4 14.1 8 4.8' : '8.7 4 18 9.4 8.7 14.8');
+  polygon.setAttribute('fill', '#666');
   tri.appendChild(polygon);
   container.appendChild(tri);
+
   return container;
 }
 
 class RulesEditor extends React.Component {
-
   constructor(props) {
     super(props);
 
@@ -202,26 +174,19 @@ class RulesEditor extends React.Component {
     initFoldRules(Codemirror);
     this.state = this.getInitialState();
 
-    this.cmComponent = null;
+    this.cmComponentRef = React.createRef();
     this.cm = null;
 
     this.editorFocused = false;
 
-    // this.updateCode = this.updateCode.bind(this);
-    this.renderError = this.renderError.bind(this);
-    this.clearErrors = this.clearErrors.bind(this);
-    this.showHelp = this.showHelp.bind(this);
-    this.filterRules = this.filterRules.bind(this);
-    this.handleFocus = this.handleFocus.bind(this);
-
-    // keep track of errWidgets for clearing later...
+    // track widgets errors for clearing later...
     this.errWidgets = [];
 
     // track sections hidden via filter...
     this.filteredSections = [];
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps(nextProps) { // eslint-disable-line react/no-deprecated, react/sort-comp
     const nextState = {};
 
     if (nextProps.typeMapping && !isEqual(nextProps.typeMapping, this.props.typeMapping)) {
@@ -236,22 +201,19 @@ class RulesEditor extends React.Component {
       nextState.completionLists = nextProps.completionLists;
     }
 
-    if (Object.keys(nextState).length > 0) {
-      this.setState((curState) => {
-        const newState = _.cloneDeep(curState);
-        Object.assign(newState.codeMirrorOptions.mode, nextState);
-        return newState;
+    if (!isEmpty(nextState)) {
+      this.setState(({ codeMirrorOptions }) => {
+        const newCodeMirrorOptions = cloneDeep(codeMirrorOptions);
+
+        return { codeMirrorOptions: Object.assign(newCodeMirrorOptions.mode, nextState) };
       });
     }
 
     if (nextProps.code !== this.props.code) {
-      this.setState(prevState =>
-        Object.assign(_.cloneDeep(prevState), { code: nextProps.code })
-      );
+      this.setState(() => ({ code: nextProps.code }));
     }
 
-    // filtering
-    if(nextProps.filter !== this.props.filter) {
+    if (nextProps.filter !== this.props.filter) {
       this.filterRules(nextProps.filter);
     }
   }
@@ -275,10 +237,10 @@ class RulesEditor extends React.Component {
       ],
     };
 
-    const openTri = generateOpen();
-    const foldedTri = generateFolded();
+    const openTri = createTriangle();
+    const foldedTri = createTriangle(false);
 
-    return  {
+    return {
       codeMirrorOptions: {
         lineNumbers: true,
         lineWrapping: true,
@@ -292,71 +254,71 @@ class RulesEditor extends React.Component {
         electricChars: true,
         foldGutter: {
           rangeFinder: Codemirror.fold.rules,
-          gutter: "rules-foldgutter",
+          gutter: 'rules-foldgutter',
           indicatorOpen: openTri,
           indicatorFolded: foldedTri,
         },
-        gutters: ["CodeMirror-linenumbers", "rules-foldgutter"],
+        gutters: ['CodeMirror-linenumbers', 'rules-foldgutter'],
       },
       code: this.props.code,
-    }
+    };
   }
 
   componentDidMount() {
-    this.cm = this.cmComponent.editor;
-    //set up hinting
+    this.cm = this.cmComponentRef.current.editor;
+
     rulesHint(Codemirror, this.props);
     initSubMenuDataFetching(Codemirror, this.props);
 
-    // prettymuch always show the auto-complete.
+    // pretty much always show the auto-complete
     this.cm.on('cursorActivity', this.showHelp);
     this.cm.on('endCompletion', this.showHelp);
-    // this.cm.on('focus', this.showHelp);
   }
 
   componentDidUpdate() {
     this.clearErrors();
     this.cm.refresh();
-    if(this.props.errors && this.props.errors.length > 0){
-      this.props.errors.forEach((err) => {
-        this.renderError(err.line, err.message);
-      })
+
+    const { errors } = this.props;
+
+    if (!isEmpty(errors)) {
+      errors.forEach(({ line, message }) => this.renderError(line, message));
     }
   }
 
-  filterRules(filter) {
-    this.filteredSections.forEach((fs) => {
-      fs.clear();
-    });
+  filterRules = filter => {
+    this.filteredSections.forEach(filteredSection => filteredSection.clear());
 
-    if ( filter === '' ) {
+    if (filter === '') {
       return;
     }
 
     // scan rows with '#'
     const res = [];
-    const re = new RegExp(filter,'i');
+    const re = new RegExp(filter, 'i');
     let found = true;
     const rng = {};
-    this.cm.eachLine((lh) => {
-      // test rule line for filer string... if
-      if(/^\s*#/.test(lh.text)){
-        if(!re.test(lh.text)){
+
+    this.cm.eachLine(line => {
+      const lineNumber = this.cm.getLineNumber(line);
+
+      // test rule line for filter string... if
+      if (/^\s*#/.test(line.text)) {
+        if (!re.test(line.text)) {
           if (found) {
-            rng.start = {line: this.cm.getLineNumber(lh)-1, ch: 0};
+            rng.start = { line: line - 1, ch: 0 };
             found = false;
           }
-        } else {
-          if(!found){
-            rng.end = {line: this.cm.getLineNumber(lh)-1, ch: lh.text.length};
-            res.push(Object.assign({}, rng));
-            found = true;
-          }
+        } else if (!found) {
+          rng.end = { line: lineNumber - 1, ch: line.text.length };
+          res.push(Object.assign({}, rng));
+          found = true;
         }
       }
-      if(this.cm.getLineNumber(lh) == this.cm.lastLine()){
-        if(!found) {
-          rng.end = {line: this.cm.getLineNumber(lh), ch: lh.text.length};
+
+      if (lineNumber === this.cm.lastLine()) {
+        if (!found) {
+          rng.end = { line: lineNumber, ch: line.text.length };
           res.push(Object.assign({}, rng));
         }
       }
@@ -364,58 +326,57 @@ class RulesEditor extends React.Component {
 
     // if filter not found, mark rows until next '#'
     res.forEach((rn) => {
-      this.filteredSections.push(this.cm.markText(rn.start, rn.end, { collapsed: true, inclusiveLeft: true, inclusiveRight: true, }));
+      this.filteredSections.push(this.cm.markText(rn.start, rn.end, { collapsed: true, inclusiveLeft: true, inclusiveRight: true }));
     });
-  }
+  };
 
-  clearErrors(){
-    this.errWidgets.forEach((w) => {
-      w.clear();
-    });
-  }
+  clearErrors = () => this.errWidgets.forEach(errWidget => errWidget.clear());
 
   // called before codemirror state is internally updated...
-  handleFocus(focused) {
-    if(!focused){
-      this.editorFocused = false;
+  handleFocus = focused => {
+    this.editorFocused = focused;
+
+    if (!this.editorFocused) {
       // if help is present when editor loses focus, hide it...
-      // except for when it loses focuse due to clicking a help option (sheesh).
-      if (!this.cm.state.focused) {
-        if( this.cm.state.completionActive && this.cm.state.completionActive.widget ) {
-          const w = this.cm.state.completionActive.widget;
-          // this.cm.state.focused = false;
-          w.close();
-        }
+      // except for when it loses focus due to clicking a help option
+      const {
+        focused: stateFocused,
+        completionActive,
+      } = this.cm.state;
+
+      const widget = get(completionActive, 'widget');
+
+      if (!stateFocused && widget) {
+        widget.close();
       }
     } else {
-      this.editorFocused = true;
       this.showHelp(this.cm);
     }
-  }
+  };
 
-  // display error in editor
-  renderError(lineNumber, errMsg) {
+  renderError = (lineNumber, errMsg) => {
     const errElement = document.createElement('div');
+
     errElement.className = 'rule-error';
     errElement.innerHTML = errMsg;
 
     this.errWidgets.push(this.cm.doc.addLineWidget(
-      lineNumber-1,
+      lineNumber - 1,
       errElement,
       {
         coverGutter: true,
         noHScroll: true,
       }
     ));
-  }
+  };
 
-  // execute hint-giving.
-  showHelp(cm) {
+  // execute hint-giving
+  showHelp = cm => {
     // return if
     // * there's already an active help dropdown
     // * if showing help has been turned off
     // * component knows the editor is in focus(updates before the actual editor knows)
-    if(cm.state.completionActive || !this.props.showAssist || !this.editorFocused) return;
+    if (cm.state.completionActive || !this.props.showAssist || !this.editorFocused) return;
 
     const hintOptions = {
       completeSingle: false,
@@ -424,41 +385,34 @@ class RulesEditor extends React.Component {
       customKeys:{
         'Up': moveFocusUp,
         'Down': moveFocusDown,
-        'PageUp': function(cm, handle) { handle.moveFocus(-handle.menuSize() + 1, true); },
-        'PageDown': function(cm, handle) { handle.moveFocus(handle.menuSize() - 1, true); },
-        'Home': function(cm, handle) { handle.setFocus(0); },
-        'End': function(cm, handle) { handle.setFocus(handle.length - 1); },
+        'PageUp': (codeMirror, handle) => { handle.moveFocus(-handle.menuSize() + 1, true); },
+        'PageDown': (codeMirror, handle) => { handle.moveFocus(handle.menuSize() - 1, true); },
+        'Home': (codeMirror, handle) => { handle.setFocus(0); },
+        'End': (codeMirror, handle) => { handle.setFocus(handle.length - 1); },
         'Enter': handleEnter,
         'Tab': handleTab,
-        'Esc': function(cm, handle) { handle.close },
+        'Esc': noop,
       }
     };
 
     Codemirror.showHint(this.cm, Codemirror.hint.rulesCMM, hintOptions);
-  }
-
-  // updateCode(newCode) {
-	// 	this.setState({
-	// 		code: newCode,
-	// 	});
-	// }
+  };
 
   render() {
-    return(
+    return (
       <CodeMirror
         className={css.codeMirrorFullScreen}
-        ref={(ref) => { this.cmComponent = ref; }}
-        value={this.state.code}
-        onFocus={(editor, event) => this.handleFocus(true)}
-        onBlur={(editor, event) => this.handleFocus(false)}
-        onChange={(editor, metadata, value) => this.props.onChange(value)}
+        ref={this.cmComponentRef}
         options={this.state.codeMirrorOptions}
+        value={this.state.code}
+        onFocus={() => this.handleFocus(true)}
+        onBlur={() => this.handleFocus(false)}
+        onChange={(editor, metadata, value) => this.props.onChange(value)}
       />
     );
   }
 }
 
 RulesEditor.propTypes = propTypes;
-RulesEditor.defaultProps = defaultProps;
 
 export default injectIntl(RulesEditor);
