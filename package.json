@@ -250,7 +250,7 @@
     "react-codemirror2": "^1.0.0",
     "react-intl": "^2.4.0",
     "react-quill": "^1.2.7",
-    "react-to-print": "^1.0.21",
+    "react-to-print": "^2.3.2",
     "redux-form": "^7.0.3"
   },
   "peerDependencies": {

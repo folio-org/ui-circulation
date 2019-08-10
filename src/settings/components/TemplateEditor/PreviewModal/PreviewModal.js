@@ -64,6 +64,7 @@ class PreviewModal extends React.Component {
           <FormattedMessage id="ui-circulation.settings.common.close" />
         </Button>
         <ReactToPrint
+          removeAfterPrint
           trigger={() => (
             <Button
               data-test-print-modal-template
