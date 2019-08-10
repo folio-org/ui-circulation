@@ -5,6 +5,7 @@
 * Retrieve 1000 elements on Settings pages instead of 10. Refs UICIRC-302.
 * Add missing tests for request policy. Part of UICIRC-293.
 * Integrate campus and library menus to circulation rules editor. Refs UICIRC-283.
+* Update `react-to-print` to accept React via `peerDependencies`. UIIN-678.
 
 ## [1.9.0](https://github.com/folio-org/ui-circulation/tree/v1.9.0) (2019-07-25)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v1.8.0...v1.9.0)
