@@ -10,7 +10,6 @@ import {
   isEqual,
   get
 } from 'lodash';
-
 import 'codemirror/addon/fold/foldcode'; // eslint-disable-line import/no-extraneous-dependencies
 import 'codemirror/addon/fold/foldgutter'; // eslint-disable-line import/no-extraneous-dependencies
 import 'codemirror/addon/hint/css-hint'; // eslint-disable-line import/no-extraneous-dependencies
@@ -22,11 +21,10 @@ import {
   rulesHint,
   initSubMenuDataFetching,
 } from './Rules-hint';
+import { ACTIVE_HINT_ELEMENT_CLASS } from '../../../constants';
 
 import '!style-loader!css-loader!./CodeMirrorCustom.css'; // eslint-disable-line import/no-webpack-loader-syntax
 import css from './RulesEditor.css';
-
-const ACTIVE_HINT_ELEMENT_CLASS = 'CodeMirror-hint-active';
 
 const propTypes = {
   onChange: PropTypes.func.isRequired,
@@ -63,15 +61,11 @@ const propTypes = {
     }
   */
   policyMapping: PropTypes.object.isRequired,
-
-  /*
-    the code that appears in the editor
-  */
-  code: PropTypes.string,
+  code: PropTypes.string, // the code that appears in the editor
   errors: PropTypes.arrayOf(
     PropTypes.shape({
-      message:PropTypes.string,
-      line:PropTypes.number,
+      message: PropTypes.string,
+      line: PropTypes.number,
     }),
   ),
   showAssist: PropTypes.bool,
@@ -85,33 +79,38 @@ function moveFocusDown(cm, handle) {
     data,
     sections,
   } = cm.state.completionActive.widget;
-  const currentSectionData = data.sections[currentSectionIndex];
+  const currentSection = data.sections[currentSectionIndex];
 
-  if (currentSectionIndex === 0 && currentSectionData.selectedHintIndex === -1) {
+  if (currentSectionIndex === 0 && currentSection.selectedHintIndex === -1) {
     handle.data.sections[currentSectionIndex].selectedHintIndex = 0;
-    const node = sections[currentSectionIndex].getListNode(0);
-    node.className += ' ' + ACTIVE_HINT_ELEMENT_CLASS;
+
+    const hintNode = sections[currentSectionIndex].getListNodeAt(0);
+
+    hintNode.className += ` ${ACTIVE_HINT_ELEMENT_CLASS}`;
     sections[currentSectionIndex].selectedHintIndex = 0;
-    Codemirror.signal(data, 'select', currentSectionData.list[0], node);
+    Codemirror.signal(data, 'select', currentSection.list[0], hintNode);
   } else {
     handle.moveFocus(1);
-    currentSectionData.selectedHintIndex += 1;
+    currentSection.selectedHintIndex += 1;
   }
 }
 
 function moveFocusUp(cm, handle) {
-  // refocus the editor, if it's the first element in the list
   const {
     currentSectionIndex,
     data,
     sections,
   } = cm.state.completionActive.widget;
 
-  if (currentSectionIndex === 0 && data.sections[currentSectionIndex].selectedHintIndex <= 0) {
-    const { selectedHintIndex } = handle.data.sections[currentSectionIndex];
-    const node = sections[currentSectionIndex].getListNode(selectedHintIndex);
+  const isFirstHint = currentSectionIndex === 0 && data.sections[currentSectionIndex].selectedHintIndex <= 0;
 
-    if (node) node.className = node.className.replace(` ${ACTIVE_HINT_ELEMENT_CLASS}`, '');
+  if (isFirstHint) {
+    const { selectedHintIndex } = handle.data.sections[currentSectionIndex];
+    const hintNode = sections[currentSectionIndex].getListNodeAt(selectedHintIndex);
+
+    if (hintNode) {
+      hintNode.className = hintNode.className.replace(` ${ACTIVE_HINT_ELEMENT_CLASS}`, '');
+    }
 
     handle.data.sections[currentSectionIndex].selectedHintIndex = -1;
     sections[currentSectionIndex].selectedHintIndex = -1;
@@ -124,8 +123,9 @@ function moveFocusUp(cm, handle) {
 
 function handleEnter(cm, handle) {
   const { currentSectionIndex } = cm.state.completionActive.widget;
+  const currentSection = handle.data.sections[currentSectionIndex];
 
-  if (handle.data.sections[currentSectionIndex].selectedHintIndex === -1) {
+  if (currentSection.selectedHintIndex === -1) {
     cm.execCommand('newlineAndIndent');
   } else {
     handle.pick();
@@ -134,18 +134,19 @@ function handleEnter(cm, handle) {
 
 function handleTab(cm, handle) {
   const { currentSectionIndex } = cm.state.completionActive.widget;
+  const currentSection = handle.data.sections[currentSectionIndex];
 
-  if (handle.data.sections[currentSectionIndex].selectedHintIndex === -1) {
+  if (currentSection.selectedHintIndex === -1) {
     if (cm.somethingSelected()) {
       cm.indentSelection('add');
 
       return;
     }
 
-    const doc = cm.getDoc();
-    const cursor = doc.getCursor(); // gets the line number in the cursor position
+    const activeDocument = cm.getDoc();
+    const cursor = activeDocument.getCursor(); // gets the line number in the cursor position
 
-    doc.replaceRange('\t', cursor); // adds a new line
+    activeDocument.replaceRange('\t', cursor); // adds a new line
   } else {
     handle.pick();
   }
@@ -153,15 +154,15 @@ function handleTab(cm, handle) {
 
 function createTriangle(isOpen = true) {
   const container = document.createElement('div');
-  const tri = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
   const polygon = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
 
   container.style.cssText = 'width: 26px; height: 26px; cursor:pointer;';
-  tri.style.cssText = 'width:100%; height: 100%';
+  svg.style.cssText = 'width:100%; height: 100%';
   polygon.setAttribute('points', isOpen ? '18.7 4.8 13.4 14.1 8 4.8' : '8.7 4 18 9.4 8.7 14.8');
   polygon.setAttribute('fill', '#666');
-  tri.appendChild(polygon);
-  container.appendChild(tri);
+  svg.appendChild(polygon);
+  container.appendChild(svg);
 
   return container;
 }
@@ -176,14 +177,9 @@ class RulesEditor extends React.Component {
 
     this.cmComponentRef = React.createRef();
     this.cm = null;
-
     this.editorFocused = false;
-
-    // track widgets errors for clearing later...
-    this.errWidgets = [];
-
-    // track sections hidden via filter...
-    this.filteredSections = [];
+    this.errWidgets = []; // track widgets errors for clearing later...
+    this.filteredSections = []; // track sections hidden via filter...
   }
 
   componentWillReceiveProps(nextProps) { // eslint-disable-line react/no-deprecated, react/sort-comp
@@ -223,24 +219,22 @@ class RulesEditor extends React.Component {
       completionLists,
       typeMapping,
       policyMapping,
+      code,
     } = this.props;
 
-    const name = 'rulesCMM';
     const modeConfig = {
-      name,
+      name: 'rulesCMM',
       completionLists,
       typeMapping,
       policyMapping,
-      keySelector: [
-        'all',
-        'rare'
-      ],
+      keySelector: ['all', 'rare'],
     };
 
     const openTri = createTriangle();
     const foldedTri = createTriangle(false);
 
     return {
+      code,
       codeMirrorOptions: {
         lineNumbers: true,
         lineWrapping: true,
@@ -252,15 +246,14 @@ class RulesEditor extends React.Component {
         rtlMoveVisually: true,
         mode: modeConfig,
         electricChars: true,
+        gutters: ['CodeMirror-linenumbers', 'rules-foldgutter'],
         foldGutter: {
           rangeFinder: Codemirror.fold.rules,
           gutter: 'rules-foldgutter',
           indicatorOpen: openTri,
           indicatorFolded: foldedTri,
-        },
-        gutters: ['CodeMirror-linenumbers', 'rules-foldgutter'],
+        }
       },
-      code: this.props.code,
     };
   }
 
@@ -271,8 +264,8 @@ class RulesEditor extends React.Component {
     initSubMenuDataFetching(Codemirror, this.props);
 
     // pretty much always show the auto-complete
-    this.cm.on('cursorActivity', this.showHelp);
-    this.cm.on('endCompletion', this.showHelp);
+    this.cm.on('cursorActivity', this.showHint);
+    this.cm.on('endCompletion', this.showHint);
   }
 
   componentDidUpdate() {
@@ -289,12 +282,10 @@ class RulesEditor extends React.Component {
   filterRules = filter => {
     this.filteredSections.forEach(filteredSection => filteredSection.clear());
 
-    if (filter === '') {
-      return;
-    }
+    if (filter === '') return;
 
     // scan rows with '#'
-    const res = [];
+    const ranges = [];
     const re = new RegExp(filter, 'i');
     let found = true;
     const rng = {};
@@ -311,7 +302,7 @@ class RulesEditor extends React.Component {
           }
         } else if (!found) {
           rng.end = { line: lineNumber - 1, ch: line.text.length };
-          res.push(Object.assign({}, rng));
+          ranges.push(Object.assign({}, rng));
           found = true;
         }
       }
@@ -319,13 +310,13 @@ class RulesEditor extends React.Component {
       if (lineNumber === this.cm.lastLine()) {
         if (!found) {
           rng.end = { line: lineNumber, ch: line.text.length };
-          res.push(Object.assign({}, rng));
+          ranges.push(Object.assign({}, rng));
         }
       }
     });
 
     // if filter not found, mark rows until next '#'
-    res.forEach((rn) => {
+    ranges.forEach((rn) => {
       this.filteredSections.push(this.cm.markText(rn.start, rn.end, { collapsed: true, inclusiveLeft: true, inclusiveRight: true }));
     });
   };
@@ -336,21 +327,23 @@ class RulesEditor extends React.Component {
   handleFocus = focused => {
     this.editorFocused = focused;
 
-    if (!this.editorFocused) {
-      // if help is present when editor loses focus, hide it...
-      // except for when it loses focus due to clicking a help option
-      const {
-        focused: stateFocused,
-        completionActive,
-      } = this.cm.state;
+    if (this.editorFocused) {
+      this.showHint(this.cm);
 
-      const widget = get(completionActive, 'widget');
+      return;
+    }
 
-      if (!stateFocused && widget) {
-        widget.close();
-      }
-    } else {
-      this.showHelp(this.cm);
+    // if help is present when editor loses focus, hide it...
+    // except for when it loses focus due to clicking a help option
+    const {
+      focused: stateFocused,
+      completionActive,
+    } = this.cm.state;
+
+    const widget = get(completionActive, 'widget');
+
+    if (!stateFocused && widget) {
+      widget.close();
     }
   };
 
@@ -360,21 +353,22 @@ class RulesEditor extends React.Component {
     errElement.className = 'rule-error';
     errElement.innerHTML = errMsg;
 
-    this.errWidgets.push(this.cm.doc.addLineWidget(
+    const error = this.cm.doc.addLineWidget(
       lineNumber - 1,
       errElement,
       {
         coverGutter: true,
         noHScroll: true,
       }
-    ));
+    );
+
+    this.errWidgets.push(error);
   };
 
-  // execute hint-giving
-  showHelp = cm => {
+  showHint = cm => {
     // return if
     // * there's already an active help dropdown
-    // * if showing help has been turned off
+    // * showing help has been turned off
     // * component knows the editor is in focus(updates before the actual editor knows)
     if (cm.state.completionActive || !this.props.showAssist || !this.editorFocused) return;
 
@@ -382,16 +376,16 @@ class RulesEditor extends React.Component {
       completeSingle: false,
       completeOnSingleClick: true,
       hideOnUnfocus: true,
-      customKeys:{
-        'Up': moveFocusUp,
-        'Down': moveFocusDown,
-        'PageUp': (codeMirror, handle) => { handle.moveFocus(-handle.menuSize() + 1, true); },
-        'PageDown': (codeMirror, handle) => { handle.moveFocus(handle.menuSize() - 1, true); },
-        'Home': (codeMirror, handle) => { handle.setFocus(0); },
-        'End': (codeMirror, handle) => { handle.setFocus(handle.length - 1); },
-        'Enter': handleEnter,
-        'Tab': handleTab,
-        'Esc': noop,
+      customKeys: {
+        Up: moveFocusUp,
+        Down: moveFocusDown,
+        PageUp: (codeMirror, handle) => { handle.moveFocus(-handle.menuSize() + 1, true); },
+        PageDown: (codeMirror, handle) => { handle.moveFocus(handle.menuSize() - 1, true); },
+        Home: (codeMirror, handle) => { handle.setFocus(0); },
+        End: (codeMirror, handle) => { handle.setFocus(handle.length - 1); },
+        Enter: handleEnter,
+        Tab: handleTab,
+        Esc: noop,
       }
     };
 

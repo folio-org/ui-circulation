@@ -323,4 +323,7 @@ export const closedLoansRules = {
   WITH_FEES_FINES: 'feeFine',
 };
 
+export const HINT_ELEMENT_CLASS = 'CodeMirror-hint';
+export const ACTIVE_HINT_ELEMENT_CLASS = `${HINT_ELEMENT_CLASS}-active`;
+
 export default '';

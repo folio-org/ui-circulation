@@ -9,6 +9,10 @@ import {
   forOwn,
   noop
 } from 'lodash';
+import {
+  ACTIVE_HINT_ELEMENT_CLASS,
+  HINT_ELEMENT_CLASS,
+} from '../../../constants';
 
 CodeMirror.registerHelper('hint', 'auto', { resolve: resolveAutoHints });
 
@@ -23,9 +27,6 @@ const defaultOptions = {
   customKeys: null,
   extraKeys: null
 };
-
-const HINT_ELEMENT_CLASS = 'CodeMirror-hint';
-const ACTIVE_HINT_ELEMENT_CLASS = 'CodeMirror-hint-active';
 
 // This is the old interface, kept around for now to stay backwards-compatible
 CodeMirror.showHint = function (cm, getHints, options) {
@@ -90,11 +91,11 @@ class Completion {
 
       // The timeout is needed to display the hint using the actual heights of the rendered lines
       // (after updateHeightsInViewport is executed)
-      this.cursorActivityTimeoutId = setTimeout(() => this.cursorActivity(), 0);
+      this.cursorActivityTimeoutId = setTimeout(this.cursorActivity, 0);
     });
   }
 
-  close() {
+  close = () => {
     if (!this.active()) return;
 
     this.cm.state.completionActive = null;
@@ -107,7 +108,7 @@ class Completion {
     if (this.widget) this.widget.close();
 
     CodeMirror.signal(this.cm, 'endCompletion', this.cm);
-  }
+  };
 
   active() {
     return this.cm.state.completionActive === this;
@@ -131,7 +132,7 @@ class Completion {
     this.close();
   }
 
-  cursorActivity() {
+  cursorActivity = () => {
     if (this.debounce) {
       cancelAnimationFrame(this.debounce);
       this.debounce = 0;
@@ -149,7 +150,7 @@ class Completion {
 
       if (this.widget) this.widget.disable();
     }
-  }
+  };
 
   update(first) {
     if (this.tick == null) return;
@@ -265,7 +266,6 @@ class Widget {
     this.completion = completion;
     this.data = data;
     this.picked = false;
-    const widget = this;
     this.currentSectionIndex = 0;
     this.isBelow = true;
     this.position = {
@@ -278,19 +278,17 @@ class Widget {
     (completion.options.container || document.body).appendChild(this.container);
     this.updatePosition();
 
-    const completions = data.sections[this.currentSectionIndex].list;
+    const completions = this.getCurrentSection(data).list;
     const cm = completion.cm;
 
     cm.addKeyMap(this.keyMap = Widget.buildKeyMap(completion, {
-      moveFocus(n, avoidWrap) {
-        const selectedHintIndex = widget.getSelectedHintInCurrentSection();
-
-        widget.changeActive(selectedHintIndex + n, avoidWrap);
+      moveFocus: (index, avoidWrap) => {
+        this.changeActive(this.getCurrentSection().selectedHintIndex + index, avoidWrap);
       },
-      setFocus(n) { widget.changeActive(n); },
-      menuSize() { return widget.calculateMenuSize(); },
-      close() { completion.close(); },
-      pick() { widget.pick(); },
+      setFocus: this.changeActive,
+      menuSize: this.calculateMenuSize,
+      pick: this.pick,
+      close: completion.close,
       length: completions.length,
       data
     }));
@@ -298,10 +296,8 @@ class Widget {
     if (completion.options.closeOnUnfocus) {
       let closingOnBlur;
 
-      cm.on('blur', this.handleBlur = function () {
-        closingOnBlur = setTimeout(() => { completion.close(); }, 100);
-      });
-      cm.on('focus', this.handleFocus = function () { clearTimeout(closingOnBlur); });
+      cm.on('blur', this.handleBlur = () => { closingOnBlur = setTimeout(completion.close, 100); });
+      cm.on('focus', this.handleFocus = () => { clearTimeout(closingOnBlur); });
     }
 
     const startScroll = cm.getScrollInfo();
@@ -323,40 +319,40 @@ class Widget {
     });
 
     CodeMirror.on(this.container, 'dblclick', e => {
-      const hint = Widget.getHintElement(this.sections[this.currentSectionIndex].listContainer, e.target);
+      const hint = Widget.getHintElement(this.getCurrentSection().listContainer, e.target);
 
       if (hint && hint.hintId != null) {
-        widget.changeActive(hint.hintId);
-        widget.pick();
+        this.changeActive(hint.hintId);
+        this.pick();
       }
     });
 
     CodeMirror.on(this.container, 'click', e => {
-      const hint = Widget.getHintElement(this.sections[this.currentSectionIndex].listContainer, e.target);
+      const hint = Widget.getHintElement(this.getCurrentSection().listContainer, e.target);
 
       if (hint && hint.hintId != null) {
-        widget.changeActive(hint.hintId);
+        this.changeActive(hint.hintId);
 
         if (completion.options.completeOnSingleClick) {
-          widget.pick();
+          this.pick();
         }
       }
     });
 
-    CodeMirror.on(this.container, 'mousedown', () => {
-      setTimeout(() => { cm.focus(); }, 20);
-    });
+    CodeMirror.on(this.container, 'mousedown', () => setTimeout(cm.focus, 20));
 
-    CodeMirror.signal(data, 'select', completions[0], this.sections[this.currentSectionIndex].getListNode(0));
+    CodeMirror.signal(data, 'select', completions[0], this.getCurrentSection().getListNodeAt(0));
 
     return true;
   }
-}
 
-Widget.prototype = {
   getSelectedHintInCurrentSection() {
-    return this.sections[this.currentSectionIndex].selectedHintIndex;
-  },
+    return this.getCurrentSection().selectedHintIndex;
+  }
+
+  getCurrentSection(context = this) {
+    return context.sections[this.currentSectionIndex];
+  }
 
   initContainers() {
     this.container = createContainer('CodeMirror-hints');
@@ -367,7 +363,7 @@ Widget.prototype = {
     }
 
     this.container.appendChild(this.sectionsContainer);
-  },
+  }
 
   initHintSections() {
     this.sections = this.data.sections.reduce((memo, section) => {
@@ -377,7 +373,7 @@ Widget.prototype = {
 
       return memo.concat(newHintSection);
     }, []);
-  },
+  }
 
   updatePosition() {
     const cm = this.completion.cm;
@@ -388,7 +384,7 @@ Widget.prototype = {
     this.container.style.left = `${this.position.left}px`;
     this.container.style.top = `${this.position.top}px`;
 
-    // If we're at the edge of the screen, then we want the menu to appear on the left of the cursor.
+    // if hint is at the edge of the screen, then the menu should appear on the left of the cursor
     const winW = window.innerWidth || Math.max(document.body.offsetWidth, document.documentElement.offsetWidth);
     const winH = window.innerHeight || Math.max(document.body.offsetHeight, document.documentElement.offsetHeight);
 
@@ -429,7 +425,7 @@ Widget.prototype = {
       this.position.left = cursorPosition.left - overlapX;
       this.container.style.left = `${this.position.left}px`;
     }
-  },
+  }
 
   close() {
     if (this.completion.widget !== this) return;
@@ -440,29 +436,30 @@ Widget.prototype = {
       this.container.parentNode.removeChild(this.container);
     }
 
-    this.completion.cm.removeKeyMap(this.keyMap);
-    const cm = this.completion.cm;
+    const {
+      cm,
+      options: { closeOnUnfocus }
+    } = this.completion;
 
-    if (this.completion.options.closeOnUnfocus) {
+    cm.removeKeyMap(this.keyMap);
+
+    if (closeOnUnfocus) {
       cm.off('blur', this.handleBlur);
       cm.off('focus', this.handleFocus);
     }
 
     cm.off('scroll', this.handleScroll);
-  },
+  }
 
   disable() {
     this.completion.cm.removeKeyMap(this.keyMap);
-
-    const widget = this;
-
-    this.keyMap = { Enter() { widget.picked = true; } };
+    this.keyMap = { Enter: () => { this.picked = true; } };
     this.completion.cm.addKeyMap(this.keyMap);
-  },
+  }
 
-  pick() {
+  pick = () => {
     const selectedHintIndex = this.getSelectedHintInCurrentSection();
-    const currentItemOptions = this.data.sections[this.currentSectionIndex].list[selectedHintIndex];
+    const currentItemOptions = this.getCurrentSection(this.data).list[selectedHintIndex];
 
     if (selectedHintIndex === -1 || currentItemOptions.inactive) return;
 
@@ -471,7 +468,7 @@ Widget.prototype = {
     } else {
       this.completion.pick(this.data, selectedHintIndex);
     }
-  },
+  };
 
   changeSection() {
     this.setupNextSectionData();
@@ -480,11 +477,11 @@ Widget.prototype = {
     const {
       list,
       selectedHintIndex,
-    } = this.data.sections[this.currentSectionIndex];
+    } = this.getCurrentSection(this.data);
 
-    this.sections[this.currentSectionIndex].setList(list, selectedHintIndex);
+    this.getCurrentSection().setList(list, selectedHintIndex);
     this.updatePosition();
-  },
+  }
 
   setupNextSectionData() {
     const {
@@ -495,10 +492,10 @@ Widget.prototype = {
     const parentId = list[this.getSelectedHintInCurrentSection()].id;
 
     nextSectionData.list = CodeMirror.hint.getSubMenuData(this.completion.cm, { childSection, parentId });
-  },
+  }
 
-  changeActive(nextActiveHintIndex, avoidWrap) {
-    const currentSection = this.sections[this.currentSectionIndex];
+  changeActive = (nextActiveHintIndex, avoidWrap) => {
+    const currentSection = this.getCurrentSection();
     const {
       selectedHintIndex,
       itemsOptions,
@@ -510,20 +507,20 @@ Widget.prototype = {
       this.data,
       'select',
       itemsOptions[selectedHintIndex],
-      currentSection.getListNode(selectedHintIndex)
+      currentSection.getListNodeAt(selectedHintIndex)
     );
-  },
+  };
 
   calculateMenuSize() {
-    return Math.floor(this.container.clientHeight / this.sections[this.currentSectionIndex].getListNode(0).offsetHeight) || 1;
+    return Math.floor(this.container.clientHeight / this.getCurrentSection().getListNodeAt(0).offsetHeight) || 1;
   }
-};
+}
 
 class HintSection {
   constructor(sectionOptions, cm) {
     this.cm = cm;
     this.container = createContainer('CodeMirror-hints-list');
-    this.selectedHintIndex = sectionOptions.selectedHintIndex || 0;
+    this.setSelectedHintIndex(sectionOptions.selectedHintIndex || 0);
     this.defaultSelectedHintIndex = this.selectedHintIndex;
     this.itemsOptions = sectionOptions.list;
 
@@ -542,11 +539,11 @@ class HintSection {
   setList(list, selectedHintIndex = -1) {
     this.clearItemsList();
     this.itemsOptions = list;
-    this.selectedHintIndex = selectedHintIndex;
+    this.setSelectedHintIndex(selectedHintIndex);
 
-    this.itemsOptions.forEach((currentListItem, i) => {
+    this.itemsOptions.forEach((currentListItem, index) => {
       const listItemElement = this.listContainer.appendChild(document.createElement('li'));
-      let className = HINT_ELEMENT_CLASS + (i !== this.selectedHintIndex ? '' : ` ${ACTIVE_HINT_ELEMENT_CLASS}`);
+      let className = HINT_ELEMENT_CLASS + (this.isSelectedByIndex(index) ? ` ${ACTIVE_HINT_ELEMENT_CLASS}` : '');
 
       if (currentListItem.className) {
         className = currentListItem.className + ` ${className}`;
@@ -560,14 +557,14 @@ class HintSection {
         listItemElement.appendChild(document.createTextNode(currentListItem.displayText || getText(currentListItem)));
       }
 
-      listItemElement.hintId = i;
+      listItemElement.hintId = index;
     });
 
     this.setupListScrollingPadding();
   }
 
   clearItemsList() {
-    this.selectedHintIndex = this.defaultSelectedHintIndex;
+    this.setSelectedHintIndex(this.defaultSelectedHintIndex);
     this.itemsOptions = [];
 
     while (this.listContainer.firstChild) {
@@ -583,7 +580,7 @@ class HintSection {
     }
   }
 
-  getListNode(index) {
+  getListNodeAt(index) {
     return this.listContainer.childNodes[index];
   }
 
@@ -596,7 +593,7 @@ class HintSection {
       nextIndex = avoidWrap ? 0 : this.itemsOptions.length - 1;
     }
 
-    if (this.selectedHintIndex === nextIndex) return;
+    if (this.isSelectedByIndex(nextIndex)) return;
 
     let node = this.listContainer.childNodes[this.selectedHintIndex];
 
@@ -604,7 +601,7 @@ class HintSection {
       node.className = node.className.replace(` ${ACTIVE_HINT_ELEMENT_CLASS}`, '');
     }
 
-    this.selectedHintIndex = nextIndex;
+    this.setSelectedHintIndex(nextIndex);
     node = this.listContainer.childNodes[this.selectedHintIndex];
     node.className += ` ${ACTIVE_HINT_ELEMENT_CLASS}`;
 
@@ -613,6 +610,14 @@ class HintSection {
     } else if (node.offsetTop + node.offsetHeight > this.listContainer.scrollTop + this.listContainer.clientHeight) {
       this.listContainer.scrollTop = node.offsetTop + node.offsetHeight - this.listContainer.clientHeight + 3;
     }
+  }
+
+  setSelectedHintIndex(index) {
+    this.selectedHintIndex = index;
+  }
+
+  isSelectedByIndex(index) {
+    return this.selectedHintIndex === index;
   }
 }
 

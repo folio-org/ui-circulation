@@ -2,6 +2,7 @@ import {
   beforeEach,
   describe,
   it,
+  afterEach,
 } from '@bigtest/mocha';
 import { expect } from 'chai';
 import { truncate } from 'lodash';
@@ -53,11 +54,13 @@ describe('CirculationRules', () => {
     campuses = await this.server.createList('campus', campusesAmount, { institutionId: institutions[0].id });
     libraries = this.server.createList('library', librariesAmount, { campusId: campuses[0].id });
 
-    removeDisplayedHints();
-
     return this.visit('/settings/circulation/rules', () => {
       expect(circulationRules.$root).to.exist;
     });
+  });
+
+  afterEach(function () {
+    removeDisplayedHints();
   });
 
   it('has rules form', () => {
@@ -204,7 +207,7 @@ describe('CirculationRules', () => {
     });
   });
 
-  describe('choosing non locating criteria - material type', () => {
+  describe('choosing non locating type - material type', () => {
     beforeEach(async function () {
       await circulationRules.editor.setValue('m ');
     });
@@ -230,7 +233,7 @@ describe('CirculationRules', () => {
     });
   });
 
-  describe('choosing criteria locating criteria - institution', () => {
+  describe('choosing type locating type - institution', () => {
     beforeEach(async function () {
       await circulationRules.editor.setValue('a ');
     });
@@ -384,7 +387,7 @@ describe('CirculationRules', () => {
     });
   });
 
-  describe('choosing criteria locating criteria - campus', () => {
+  describe('choosing type locating type - campus', () => {
     beforeEach(async function () {
       await circulationRules.editor.setValue('b ');
     });
@@ -477,7 +480,7 @@ describe('CirculationRules', () => {
     });
   });
 
-  describe('choosing criteria locating criteria - library', () => {
+  describe('choosing type locating type - library', () => {
     beforeEach(async function () {
       await circulationRules.editor.setValue('c ');
     });
