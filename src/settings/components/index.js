@@ -6,3 +6,4 @@ export { default as Period } from './Period';
 export { default as EntityInUseModal } from './EntityInUseModal';
 export { default as AnonymazingTypeSelect } from './AnonymazingTypeSelect';
 export { TemplateEditor, PreviewModal, TokensSection } from './TemplateEditor';
+export { default as Asterisk } from './Asterisk';
