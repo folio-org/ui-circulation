@@ -29,7 +29,10 @@ const ACTIVE_HINT_ELEMENT_CLASS = 'CodeMirror-hint-active';
 
 // This is the old interface, kept around for now to stay backwards-compatible
 CodeMirror.showHint = function (cm, getHints, options) {
-  if (!getHints) return cm.showHint(options);
+  if (!getHints) {
+    return cm.showHint(options);
+  }
+
   if (options && options.async) getHints.async = true;
 
   const newOpts = Object.assign({ hint: getHints }, options);
@@ -65,32 +68,32 @@ CodeMirror.defineExtension('showHint', function (initialOptions) {
   completion.update(true);
 });
 
-function Completion(cm, options) {
-  this.cm = cm;
-  this.options = options;
-  this.widget = null;
-  this.debounce = 0;
-  this.tick = 0;
-  this.startPos = this.cm.getCursor('start');
-  this.startLen = this.cm.getLine(this.startPos.line).length - this.cm.getSelection().length;
+class Completion {
+  constructor(cm, options) {
+    this.cm = cm;
+    this.options = options;
+    this.widget = null;
+    this.debounce = 0;
+    this.tick = 0;
+    this.startPos = this.cm.getCursor('start');
+    this.startLen = this.cm.getLine(this.startPos.line).length - this.cm.getSelection().length;
 
-  this.clearCursorActivityTimeout = () => {
-    if (this.cursorActivityTimeoutId) {
-      clearTimeout(this.cursorActivityTimeoutId);
-      this.timeoutId = null;
-    }
-  };
+    this.clearCursorActivityTimeout = () => {
+      if (this.cursorActivityTimeoutId) {
+        clearTimeout(this.cursorActivityTimeoutId);
+        this.timeoutId = null;
+      }
+    };
 
-  cm.on('cursorActivity', this.activityFunc = () => {
-    this.clearCursorActivityTimeout();
+    cm.on('cursorActivity', this.handleCursorActivity = () => {
+      this.clearCursorActivityTimeout();
 
-    // The timeout is needed to display the hint using the actual heights of the rendered lines
-    // (after updateHeightsInViewport is executed)
-    this.cursorActivityTimeoutId = setTimeout(() => this.cursorActivity(), 0);
-  });
-}
+      // The timeout is needed to display the hint using the actual heights of the rendered lines
+      // (after updateHeightsInViewport is executed)
+      this.cursorActivityTimeoutId = setTimeout(() => this.cursorActivity(), 0);
+    });
+  }
 
-Completion.prototype = {
   close() {
     if (!this.active()) return;
 
@@ -98,17 +101,17 @@ Completion.prototype = {
     this.tick = null;
 
     this.clearCursorActivityTimeout();
-    this.cm.off('cursorActivity', this.activityFunc);
+    this.cm.off('cursorActivity', this.handleCursorActivity);
 
     if (this.widget && this.data) CodeMirror.signal(this.data, 'close');
     if (this.widget) this.widget.close();
 
     CodeMirror.signal(this.cm, 'endCompletion', this.cm);
-  },
+  }
 
   active() {
     return this.cm.state.completionActive === this;
-  },
+  }
 
   pick(data, i) {
     const completion = data.sections[this.widget.currentSectionIndex].list[i];
@@ -116,13 +119,17 @@ Completion.prototype = {
     if (completion.hint) {
       completion.hint(this.cm, data, completion);
     } else {
-      this.cm.replaceRange(getText(completion), completion.from || data.from,
-        completion.to || data.to, 'complete');
+      this.cm.replaceRange(
+        getText(completion),
+        completion.from || data.from,
+        completion.to || data.to,
+        'complete'
+      );
     }
 
     CodeMirror.signal(data, 'pick', completion);
     this.close();
-  },
+  }
 
   cursorActivity() {
     if (this.debounce) {
@@ -142,17 +149,17 @@ Completion.prototype = {
 
       if (this.widget) this.widget.disable();
     }
-  },
+  }
 
   update(first) {
     if (this.tick == null) return;
 
-    const myTick = ++this.tick;
+    const updatedTick = ++this.tick;
 
     fetchHints(this.options.hint, this.cm, this.options, data => {
-      if (this.tick === myTick) this.finishUpdate(data, first);
+      if (this.tick === updatedTick) this.finishUpdate(data, first);
     });
-  },
+  }
 
   finishUpdate(data, first) {
     if (this.data) CodeMirror.signal(this.data, 'update');
@@ -161,7 +168,7 @@ Completion.prototype = {
 
     if (this.widget) this.widget.close();
 
-    if (data && this.data && isNewCompletion(this.data, data)) return;
+    if (data && this.data && this.isNew(this.data, data)) return;
 
     this.data = data;
 
@@ -174,19 +181,22 @@ Completion.prototype = {
       }
     }
   }
-};
 
-function isNewCompletion(old, nw) {
-  const moved = CodeMirror.cmpPos(nw.from, old.from);
+  isNew(prevValue, newValue) {
+    const moved = CodeMirror.cmpPos(newValue.from, prevValue.from) > 0;
+    const characterRangeChanged = prevValue.to.ch - prevValue.from.ch !== newValue.to.ch - newValue.from.ch;
 
-  return moved > 0 && old.to.ch - old.from.ch !== nw.to.ch - nw.from.ch;
+    return moved && characterRangeChanged;
+  }
 }
 
 function parseOptions(cm, pos, options) {
   const editor = cm.options.hintOptions;
   const parsedOptions = Object.assign({}, defaultOptions, editor, options);
 
-  if (parsedOptions.hint.resolve) parsedOptions.hint = parsedOptions.hint.resolve(cm, pos);
+  if (parsedOptions.hint.resolve) {
+    parsedOptions.hint = parsedOptions.hint.resolve(cm, pos);
+  }
 
   return parsedOptions;
 }
@@ -195,145 +205,152 @@ function getText(completion) {
   return typeof completion === 'string' ? completion : completion.text;
 }
 
-function buildKeyMap(completion, handle) {
-  const baseMap = {
-    Up() { handle.moveFocus(-1); },
-    Down() { handle.moveFocus(1); },
-    PageUp() { handle.moveFocus(-handle.menuSize() + 1, true); },
-    PageDown() { handle.moveFocus(handle.menuSize() - 1, true); },
-    Home() { handle.setFocus(0); },
-    End() { handle.setFocus(handle.length - 1); },
-    Enter: handle.pick,
-    Tab: handle.pick,
-    Esc: handle.close
-  };
-  const custom = completion.options.customKeys;
-  const ourMap = custom ? {} : baseMap;
+class Widget {
+  static buildKeyMap(completion, handle) {
+    const baseMap = {
+      Up() { handle.moveFocus(-1); },
+      Down() { handle.moveFocus(1); },
+      PageUp() { handle.moveFocus(-handle.menuSize() + 1, true); },
+      PageDown() { handle.moveFocus(handle.menuSize() - 1, true); },
+      Home() { handle.setFocus(0); },
+      End() { handle.setFocus(handle.length - 1); },
+      Enter: handle.pick,
+      Tab: handle.pick,
+      Esc: handle.close
+    };
+    const custom = completion.options.customKeys;
+    const ourMap = custom ? {} : baseMap;
 
-  function addBinding(key, val) {
-    let bound;
+    function addBinding(key, val) {
+      let bound;
 
-    if (typeof val !== 'string') {
-      bound = function (cm) { return val(cm, handle); };
-    } else if (Object.prototype.hasOwnProperty.call(baseMap, val)) {
-      // This mechanism is deprecated
-      bound = baseMap[val];
-    } else {
-      bound = val;
+      if (typeof val !== 'string') {
+        bound = function (cm) { return val(cm, handle); };
+      } else if (Object.prototype.hasOwnProperty.call(baseMap, val)) {
+        // This mechanism is deprecated
+        bound = baseMap[val];
+      } else {
+        bound = val;
+      }
+
+      ourMap[key] = bound;
     }
 
-    ourMap[key] = bound;
-  }
-
-  if (custom) {
-    forOwn(custom, (value, key) => addBinding(key, value));
-  }
-
-  const extra = completion.options.extraKeys;
-
-  if (extra) {
-    forOwn(extra, (value, key) => addBinding(key, value));
-  }
-
-  return ourMap;
-}
-
-function getHintElement(hintsContainer, targetElement) {
-  let currentSearchElement = targetElement;
-
-  while (currentSearchElement && currentSearchElement !== hintsContainer) {
-    if (currentSearchElement.nodeName.toUpperCase() === 'LI' && currentSearchElement.parentNode === hintsContainer) {
-      return currentSearchElement;
+    if (custom) {
+      forOwn(custom, (value, key) => addBinding(key, value));
     }
 
-    currentSearchElement = currentSearchElement.parentNode;
-  }
-}
+    const extra = completion.options.extraKeys;
 
-function Widget(completion, data) {
-  this.completion = completion;
-  this.data = data;
-  this.picked = false;
-  const widget = this;
-  this.currentSectionIndex = 0;
-  this.isBelow = true;
-  this.position = {
-    left: 0,
-    top: 0,
-  };
-
-  this.initContainers();
-  this.initHintSections();
-  (completion.options.container || document.body).appendChild(this.container);
-  this.updatePosition();
-
-  const completions = data.sections[this.currentSectionIndex].list;
-  const cm = completion.cm;
-
-  cm.addKeyMap(this.keyMap = buildKeyMap(completion, {
-    moveFocus(n, avoidWrap) {
-      const selectedHintIndex = widget.getSelectedHintInCurrentSection();
-
-      widget.changeActive(selectedHintIndex + n, avoidWrap);
-    },
-    setFocus(n) { widget.changeActive(n); },
-    menuSize() { return widget.screenAmount(); },
-    length: completions.length,
-    close() { completion.close(); },
-    pick() { widget.pick(); },
-    data
-  }));
-
-  if (completion.options.closeOnUnfocus) {
-    let closingOnBlur;
-    cm.on('blur', this.onBlur = function () { closingOnBlur = setTimeout(() => { completion.close(); }, 100); });
-    cm.on('focus', this.onFocus = function () { clearTimeout(closingOnBlur); });
-  }
-
-  const startScroll = cm.getScrollInfo();
-
-  cm.on('scroll', this.onScroll = () => {
-    const curScroll = cm.getScrollInfo();
-    const editor = cm.getWrapperElement().getBoundingClientRect();
-    const newTop = this.position.top + startScroll.top - curScroll.top;
-    let point = newTop - (window.pageYOffset || (document.documentElement || document.body).scrollTop);
-
-    if (!this.isBelow) point += this.container.offsetHeight;
-
-    if (point <= editor.top || point >= editor.bottom) return completion.close();
-
-    this.container.style.top = `${newTop}px`;
-    this.container.style.left = `${this.position.left + startScroll.left - curScroll.left}px`;
-  });
-
-  CodeMirror.on(this.container, 'dblclick', (e) => {
-    const hint = getHintElement(this.sections[this.currentSectionIndex].listContainer, e.target);
-
-    if (hint && hint.hintId != null) {
-      widget.changeActive(hint.hintId);
-      widget.pick();
+    if (extra) {
+      forOwn(extra, (value, key) => addBinding(key, value));
     }
-  });
 
-  CodeMirror.on(this.container, 'click', (e) => {
-    const hint = getHintElement(this.sections[this.currentSectionIndex].listContainer, e.target);
+    return ourMap;
+  }
 
-    if (hint && hint.hintId != null) {
-      widget.changeActive(hint.hintId);
+  static getHintElement(hintsContainer, targetElement) {
+    let currentSearchElement = targetElement;
 
-      if (completion.options.completeOnSingleClick) {
+    while (currentSearchElement && currentSearchElement !== hintsContainer) {
+      if (currentSearchElement.nodeName.toUpperCase() === 'LI' && currentSearchElement.parentNode === hintsContainer) {
+        return currentSearchElement;
+      }
+
+      currentSearchElement = currentSearchElement.parentNode;
+    }
+  }
+
+  constructor(completion, data) {
+    this.completion = completion;
+    this.data = data;
+    this.picked = false;
+    const widget = this;
+    this.currentSectionIndex = 0;
+    this.isBelow = true;
+    this.position = {
+      left: 0,
+      top: 0,
+    };
+
+    this.initContainers();
+    this.initHintSections();
+    (completion.options.container || document.body).appendChild(this.container);
+    this.updatePosition();
+
+    const completions = data.sections[this.currentSectionIndex].list;
+    const cm = completion.cm;
+
+    cm.addKeyMap(this.keyMap = Widget.buildKeyMap(completion, {
+      moveFocus(n, avoidWrap) {
+        const selectedHintIndex = widget.getSelectedHintInCurrentSection();
+
+        widget.changeActive(selectedHintIndex + n, avoidWrap);
+      },
+      setFocus(n) { widget.changeActive(n); },
+      menuSize() { return widget.calculateMenuSize(); },
+      close() { completion.close(); },
+      pick() { widget.pick(); },
+      length: completions.length,
+      data
+    }));
+
+    if (completion.options.closeOnUnfocus) {
+      let closingOnBlur;
+
+      cm.on('blur', this.handleBlur = function () {
+        closingOnBlur = setTimeout(() => { completion.close(); }, 100);
+      });
+      cm.on('focus', this.handleFocus = function () { clearTimeout(closingOnBlur); });
+    }
+
+    const startScroll = cm.getScrollInfo();
+
+    cm.on('scroll', this.handleScroll = () => {
+      const curScroll = cm.getScrollInfo();
+      const editor = cm.getWrapperElement().getBoundingClientRect();
+      const newTop = this.position.top + startScroll.top - curScroll.top;
+      let point = newTop - (window.pageYOffset || (document.documentElement || document.body).scrollTop);
+
+      if (!this.isBelow) point += this.container.offsetHeight;
+
+      if (point <= editor.top || point >= editor.bottom) {
+        return completion.close();
+      }
+
+      this.container.style.top = `${newTop}px`;
+      this.container.style.left = `${this.position.left + startScroll.left - curScroll.left}px`;
+    });
+
+    CodeMirror.on(this.container, 'dblclick', e => {
+      const hint = Widget.getHintElement(this.sections[this.currentSectionIndex].listContainer, e.target);
+
+      if (hint && hint.hintId != null) {
+        widget.changeActive(hint.hintId);
         widget.pick();
       }
-    }
-  });
+    });
 
-  CodeMirror.on(this.container, 'mousedown', () => {
-    setTimeout(() => { cm.focus(); }, 20);
-  });
+    CodeMirror.on(this.container, 'click', e => {
+      const hint = Widget.getHintElement(this.sections[this.currentSectionIndex].listContainer, e.target);
 
-  CodeMirror.signal(data, 'select', completions[0], this.sections[this.currentSectionIndex].getListNode(0));
+      if (hint && hint.hintId != null) {
+        widget.changeActive(hint.hintId);
 
-  return true;
+        if (completion.options.completeOnSingleClick) {
+          widget.pick();
+        }
+      }
+    });
+
+    CodeMirror.on(this.container, 'mousedown', () => {
+      setTimeout(() => { cm.focus(); }, 20);
+    });
+
+    CodeMirror.signal(data, 'select', completions[0], this.sections[this.currentSectionIndex].getListNode(0));
+
+    return true;
+  }
 }
 
 Widget.prototype = {
@@ -342,8 +359,8 @@ Widget.prototype = {
   },
 
   initContainers() {
-    this.container = createInitDiv('CodeMirror-hints');
-    this.sectionsContainer = createInitDiv('CodeMirror-hints-sections-container');
+    this.container = createContainer('CodeMirror-hints');
+    this.sectionsContainer = createContainer('CodeMirror-hints-sections-container');
 
     if (this.data.header) {
       this.container.appendChild(createHeader(this.data.header, 'CodeMirror-hints-header'));
@@ -427,11 +444,11 @@ Widget.prototype = {
     const cm = this.completion.cm;
 
     if (this.completion.options.closeOnUnfocus) {
-      cm.off('blur', this.onBlur);
-      cm.off('focus', this.onFocus);
+      cm.off('blur', this.handleBlur);
+      cm.off('focus', this.handleFocus);
     }
 
-    cm.off('scroll', this.onScroll);
+    cm.off('scroll', this.handleScroll);
   },
 
   disable() {
@@ -447,14 +464,12 @@ Widget.prototype = {
     const selectedHintIndex = this.getSelectedHintInCurrentSection();
     const currentItemOptions = this.data.sections[this.currentSectionIndex].list[selectedHintIndex];
 
-    if (selectedHintIndex === -1) return;
+    if (selectedHintIndex === -1 || currentItemOptions.inactive) return;
 
-    if (!currentItemOptions.inactive) {
-      if (this.currentSectionIndex < this.data.sections.length - 1) {
-        this.changeSection();
-      } else {
-        this.completion.pick(this.data, selectedHintIndex);
-      }
+    if (this.currentSectionIndex < this.data.sections.length - 1) {
+      this.changeSection();
+    } else {
+      this.completion.pick(this.data, selectedHintIndex);
     }
   },
 
@@ -491,34 +506,39 @@ Widget.prototype = {
 
     currentSection.changeActive(nextActiveHintIndex, avoidWrap);
 
-    CodeMirror.signal(this.data, 'select', itemsOptions[selectedHintIndex], currentSection.getListNode(selectedHintIndex));
+    CodeMirror.signal(
+      this.data,
+      'select',
+      itemsOptions[selectedHintIndex],
+      currentSection.getListNode(selectedHintIndex)
+    );
   },
 
-  screenAmount() {
+  calculateMenuSize() {
     return Math.floor(this.container.clientHeight / this.sections[this.currentSectionIndex].getListNode(0).offsetHeight) || 1;
   }
 };
 
-function HintSection(sectionOptions, cm) {
-  this.cm = cm;
-  this.container = createInitDiv('CodeMirror-hints-list');
-  this.selectedHintIndex = sectionOptions.selectedHintIndex || 0;
-  this.defaultSelectedHintIndex = this.selectedHintIndex;
-  this.itemsOptions = sectionOptions.list;
+class HintSection {
+  constructor(sectionOptions, cm) {
+    this.cm = cm;
+    this.container = createContainer('CodeMirror-hints-list');
+    this.selectedHintIndex = sectionOptions.selectedHintIndex || 0;
+    this.defaultSelectedHintIndex = this.selectedHintIndex;
+    this.itemsOptions = sectionOptions.list;
 
-  if (sectionOptions.header) {
-    this.container.appendChild(createHeader(sectionOptions.header, 'CodeMirror-hints-subheader'));
+    if (sectionOptions.header) {
+      this.container.appendChild(createHeader(sectionOptions.header, 'CodeMirror-hints-subheader'));
+    }
+
+    this.listContainer = document.createElement('ul');
+    this.container.appendChild(this.listContainer);
+
+    if (!isEmpty(get(sectionOptions, 'list'))) {
+      this.setList(sectionOptions.list, this.defaultSelectedHintIndex);
+    }
   }
 
-  this.listContainer = document.createElement('ul');
-  this.container.appendChild(this.listContainer);
-
-  if (!isEmpty(get(sectionOptions, 'list'))) {
-    this.setList(sectionOptions.list, this.defaultSelectedHintIndex);
-  }
-}
-
-HintSection.prototype = {
   setList(list, selectedHintIndex = -1) {
     this.clearItemsList();
     this.itemsOptions = list;
@@ -544,7 +564,7 @@ HintSection.prototype = {
     });
 
     this.setupListScrollingPadding();
-  },
+  }
 
   clearItemsList() {
     this.selectedHintIndex = this.defaultSelectedHintIndex;
@@ -553,7 +573,7 @@ HintSection.prototype = {
     while (this.listContainer.firstChild) {
       this.listContainer.removeChild(this.listContainer.firstChild);
     }
-  },
+  }
 
   setupListScrollingPadding() {
     if (this.listContainer.scrollHeight > this.listContainer.clientHeight + 1) {
@@ -561,11 +581,11 @@ HintSection.prototype = {
         node.style.paddingRight = `${this.cm.display.nativeBarWidth}px`;
       }
     }
-  },
+  }
 
   getListNode(index) {
     return this.listContainer.childNodes[index];
-  },
+  }
 
   changeActive(nextActiveHintIndex, avoidWrap) {
     let nextIndex = nextActiveHintIndex;
@@ -593,18 +613,18 @@ HintSection.prototype = {
     } else if (node.offsetTop + node.offsetHeight > this.listContainer.scrollTop + this.listContainer.clientHeight) {
       this.listContainer.scrollTop = node.offsetTop + node.offsetHeight - this.listContainer.clientHeight + 3;
     }
-  },
-};
+  }
+}
 
 function createHeader(text, className = '') {
-  const header = createInitDiv(className);
+  const header = createContainer(className);
 
   header.innerHTML = text;
 
   return header;
 }
 
-function createInitDiv(className = '') {
+function createContainer(className = '') {
   const divElement = document.createElement('div');
 
   divElement.className = className;
@@ -612,21 +632,27 @@ function createInitDiv(className = '') {
   return divElement;
 }
 
-function applicableHelpers(cm, helpers) {
-  if (!cm.somethingSelected()) return helpers;
+function getApplicableHelpers(cm, helpers) {
+  if (!cm.somethingSelected()) {
+    return helpers;
+  }
 
   return helpers.reduce((memo, helper) => helper.supportsSelection ? memo.concat(helper) : memo, []);
 }
 
 function fetchHints(hint, cm, options, callback) {
   if (hint.async) {
-    hint(cm, callback, options);
-  } else {
-    const result = hint(cm, options);
-
-    if (result && result.then) result.then(callback);
-    else callback(result);
+    return hint(cm, callback, options);
   }
+
+  const result = hint(cm, options);
+  const isPromise = result && result.then;
+
+  if (isPromise) {
+    return result.then(callback);
+  }
+
+  callback(result);
 }
 
 function resolveAutoHints(cm, pos) {
@@ -634,10 +660,12 @@ function resolveAutoHints(cm, pos) {
 
   if (!isEmpty(helpers)) {
     const resolved = function (codeMirror, callback, options) {
-      const app = applicableHelpers(codeMirror, helpers);
+      const app = getApplicableHelpers(codeMirror, helpers);
 
       function run(i) {
-        if (i === app.length) return callback(null);
+        if (i === app.length) {
+          return callback(null);
+        }
 
         fetchHints(app[i], codeMirror, options, result => {
           if (!isEmpty(get(result, 'sections.0.list'))) {
@@ -671,25 +699,24 @@ function resolveAutoHints(cm, pos) {
 }
 
 CodeMirror.registerHelper('hint', 'fromList', (cm, options) => {
-  const cur = cm.getCursor();
-  const token = cm.getTokenAt(cur);
-  const to = CodeMirror.Pos(cur.line, token.end);
-  let term;
-  let from;
-
-  if (token.string && /\w/.test(token.string[token.string.length - 1])) {
-    term = token.string;
-    from = CodeMirror.Pos(cur.line, token.start);
-  } else {
-    term = '';
-    from = to;
-  }
+  const cursor = cm.getCursor();
+  const tokenAtCursor = cm.getTokenAt(cursor);
+  const to = CodeMirror.Pos(cursor.line, tokenAtCursor.end);
+  const tokenAtCursorValid = tokenAtCursor.string && /\w/.test(tokenAtCursor.string[tokenAtCursor.string.length - 1]);
+  const term = tokenAtCursorValid ? tokenAtCursor.string : '';
+  const from = tokenAtCursorValid ? CodeMirror.Pos(cursor.line, tokenAtCursor.start) : to;
 
   const found = options.words.reduce((memo, word) => {
     return (word.slice(0, term.length) === term) ? memo.concat(word) : memo;
   }, []);
 
-  if (found.length) return { list: found, from, to };
+  if (!isEmpty(found)) {
+    return {
+      list: found,
+      from,
+      to
+    };
+  }
 });
 
 CodeMirror.commands.autocomplete = CodeMirror.showHint;
