@@ -6,9 +6,11 @@ import CodeMirror from 'codemirror'; // eslint-disable-line import/no-extraneous
 import {
   get,
   isEmpty,
+  isString,
   forOwn,
   noop
 } from 'lodash';
+
 import {
   ACTIVE_HINT_ELEMENT_CLASS,
   HINT_ELEMENT_CLASS,
@@ -36,9 +38,9 @@ CodeMirror.showHint = function (cm, getHints, options) {
 
   if (options && options.async) getHints.async = true;
 
-  const newOpts = Object.assign({ hint: getHints }, options);
+  const newOptions = Object.assign({ hint: getHints }, options);
 
-  return cm.showHint(newOpts);
+  return cm.showHint(newOptions);
 };
 
 CodeMirror.defineExtension('showHint', function (initialOptions) {
@@ -46,11 +48,13 @@ CodeMirror.defineExtension('showHint', function (initialOptions) {
   const selections = this.listSelections();
 
   if (selections.length > 1) return;
+
   // By default, don't allow completion when something is selected.
   // A hint function can have a `supportsSelection` property to
   // indicate that it can handle selections.
   if (this.somethingSelected()) {
     if (!options.hint.supportsSelection) return;
+
     // Don't try with cross-line selections
     for (let i = 0; i < selections.length; i++) {
       if (selections[i].head.line !== selections[i].anchor.line) return;
@@ -203,7 +207,7 @@ function parseOptions(cm, pos, options) {
 }
 
 function getText(completion) {
-  return typeof completion === 'string' ? completion : completion.text;
+  return isString(completion) ? completion : completion.text;
 }
 
 class Widget {
@@ -220,12 +224,12 @@ class Widget {
       Esc: handle.close
     };
     const custom = completion.options.customKeys;
-    const ourMap = custom ? {} : baseMap;
+    const keyMap = custom ? {} : baseMap;
 
     function addBinding(key, val) {
       let bound;
 
-      if (typeof val !== 'string') {
+      if (!isString(val)) {
         bound = function (cm) { return val(cm, handle); };
       } else if (Object.prototype.hasOwnProperty.call(baseMap, val)) {
         // This mechanism is deprecated
@@ -234,7 +238,7 @@ class Widget {
         bound = val;
       }
 
-      ourMap[key] = bound;
+      keyMap[key] = bound;
     }
 
     if (custom) {
@@ -247,7 +251,7 @@ class Widget {
       forOwn(extra, (value, key) => addBinding(key, value));
     }
 
-    return ourMap;
+    return keyMap;
   }
 
   static getHintElement(hintsContainer, targetElement) {
@@ -342,8 +346,6 @@ class Widget {
     CodeMirror.on(this.container, 'mousedown', () => setTimeout(cm.focus, 20));
 
     CodeMirror.signal(data, 'select', completions[0], this.getCurrentSection().getListNodeAt(0));
-
-    return true;
   }
 
   getSelectedHintInCurrentSection() {
@@ -543,20 +545,10 @@ class HintSection {
 
     this.itemsOptions.forEach((currentListItem, index) => {
       const listItemElement = this.listContainer.appendChild(document.createElement('li'));
-      let className = HINT_ELEMENT_CLASS + (this.isSelectedByIndex(index) ? ` ${ACTIVE_HINT_ELEMENT_CLASS}` : '');
+      const className = HINT_ELEMENT_CLASS + (this.isSelectedByIndex(index) ? ` ${ACTIVE_HINT_ELEMENT_CLASS}` : '');
 
-      if (currentListItem.className) {
-        className = currentListItem.className + ` ${className}`;
-      }
-
-      listItemElement.className = className;
-
-      if (currentListItem.render) {
-        currentListItem.render(listItemElement, this.data, currentListItem);
-      } else {
-        listItemElement.appendChild(document.createTextNode(currentListItem.displayText || getText(currentListItem)));
-      }
-
+      listItemElement.className = currentListItem.className ? `${currentListItem.className} ${className}` : className;
+      listItemElement.appendChild(document.createTextNode(currentListItem.displayText || getText(currentListItem)));
       listItemElement.hintId = index;
     });
 
@@ -585,30 +577,31 @@ class HintSection {
   }
 
   changeActive(nextActiveHintIndex, avoidWrap) {
+    const itemsOptionsSize = this.itemsOptions.length;
     let nextIndex = nextActiveHintIndex;
 
-    if (nextIndex >= this.itemsOptions.length) {
-      nextIndex = avoidWrap ? this.itemsOptions.length - 1 : 0;
+    if (nextIndex >= itemsOptionsSize) {
+      nextIndex = avoidWrap ? itemsOptionsSize - 1 : 0;
     } else if (nextIndex < 0) {
-      nextIndex = avoidWrap ? 0 : this.itemsOptions.length - 1;
+      nextIndex = avoidWrap ? 0 : itemsOptionsSize - 1;
     }
 
     if (this.isSelectedByIndex(nextIndex)) return;
 
-    let node = this.listContainer.childNodes[this.selectedHintIndex];
+    let hintNode = this.getListNodeAt(this.selectedHintIndex);
 
-    if (node) {
-      node.className = node.className.replace(` ${ACTIVE_HINT_ELEMENT_CLASS}`, '');
+    if (hintNode) {
+      hintNode.className = hintNode.className.replace(` ${ACTIVE_HINT_ELEMENT_CLASS}`, '');
     }
 
     this.setSelectedHintIndex(nextIndex);
-    node = this.listContainer.childNodes[this.selectedHintIndex];
-    node.className += ` ${ACTIVE_HINT_ELEMENT_CLASS}`;
+    hintNode = this.listContainer.childNodes[this.selectedHintIndex];
+    hintNode.className += ` ${ACTIVE_HINT_ELEMENT_CLASS}`;
 
-    if (node.offsetTop < this.listContainer.scrollTop) {
-      this.listContainer.scrollTop = node.offsetTop - 3;
-    } else if (node.offsetTop + node.offsetHeight > this.listContainer.scrollTop + this.listContainer.clientHeight) {
-      this.listContainer.scrollTop = node.offsetTop + node.offsetHeight - this.listContainer.clientHeight + 3;
+    if (hintNode.offsetTop < this.listContainer.scrollTop) {
+      this.listContainer.scrollTop = hintNode.offsetTop - 3;
+    } else if (hintNode.offsetTop + hintNode.offsetHeight > this.listContainer.scrollTop + this.listContainer.clientHeight) {
+      this.listContainer.scrollTop = hintNode.offsetTop + hintNode.offsetHeight - this.listContainer.clientHeight + 3;
     }
   }
 
@@ -642,7 +635,7 @@ function getApplicableHelpers(cm, helpers) {
     return helpers;
   }
 
-  return helpers.reduce((memo, helper) => helper.supportsSelection ? memo.concat(helper) : memo, []);
+  return helpers.filter(helper => helper.supportsSelection);
 }
 
 function fetchHints(hint, cm, options, callback) {
@@ -657,7 +650,7 @@ function fetchHints(hint, cm, options, callback) {
     return result.then(callback);
   }
 
-  callback(result);
+  return callback(result);
 }
 
 function resolveAutoHints(cm, pos) {
@@ -665,23 +658,19 @@ function resolveAutoHints(cm, pos) {
 
   if (!isEmpty(helpers)) {
     const resolved = function (codeMirror, callback, options) {
-      const app = getApplicableHelpers(codeMirror, helpers);
+      const applicableHelpers = getApplicableHelpers(codeMirror, helpers);
 
-      function run(i) {
-        if (i === app.length) {
+      function initHelpers(helperIndex) {
+        if (helperIndex === applicableHelpers.length) {
           return callback(null);
         }
 
-        fetchHints(app[i], codeMirror, options, result => {
-          if (!isEmpty(get(result, 'sections.0.list'))) {
-            callback(result);
-          } else {
-            run(i + 1);
-          }
+        fetchHints(applicableHelpers[helperIndex], codeMirror, options, result => {
+          return isEmpty(get(result, 'sections.0.list')) ? initHelpers(helperIndex + 1) : callback(result);
         });
       }
 
-      run(0);
+      initHelpers(0);
     };
 
     resolved.async = true;
@@ -710,10 +699,7 @@ CodeMirror.registerHelper('hint', 'fromList', (cm, options) => {
   const tokenAtCursorValid = tokenAtCursor.string && /\w/.test(tokenAtCursor.string[tokenAtCursor.string.length - 1]);
   const term = tokenAtCursorValid ? tokenAtCursor.string : '';
   const from = tokenAtCursorValid ? CodeMirror.Pos(cursor.line, tokenAtCursor.start) : to;
-
-  const found = options.words.reduce((memo, word) => {
-    return (word.slice(0, term.length) === term) ? memo.concat(word) : memo;
-  }, []);
+  const found = options.words.filter(word => word.slice(0, term.length) === term);
 
   if (!isEmpty(found)) {
     return {

@@ -43,7 +43,7 @@ const propTypes = {
   completionLists: PropTypes.object,
 
   /*
-    values that could be applied to selections of typeGroups. Example:
+    values that could be applied to selections of typeGroups:
     {
       'g': 'Patron Groups',
       'a': 'Campus'
@@ -178,8 +178,8 @@ class RulesEditor extends React.Component {
     this.cmComponentRef = React.createRef();
     this.cm = null;
     this.editorFocused = false;
-    this.errWidgets = []; // track widgets errors for clearing later...
-    this.filteredSections = []; // track sections hidden via filter...
+    this.errWidgets = []; // track widgets errors for clearing later
+    this.filteredSections = []; // track sections hidden via filter
   }
 
   componentWillReceiveProps(nextProps) { // eslint-disable-line react/no-deprecated, react/sort-comp
@@ -297,7 +297,7 @@ class RulesEditor extends React.Component {
       if (/^\s*#/.test(line.text)) {
         if (!re.test(line.text)) {
           if (found) {
-            rng.start = { line: line - 1, ch: 0 };
+            rng.start = { line: lineNumber - 1, ch: 0 };
             found = false;
           }
         } else if (!found) {
@@ -323,7 +323,7 @@ class RulesEditor extends React.Component {
 
   clearErrors = () => this.errWidgets.forEach(errWidget => errWidget.clear());
 
-  // called before codemirror state is internally updated...
+  // called before codemirror state is internally updated
   handleFocus = focused => {
     this.editorFocused = focused;
 
@@ -333,7 +333,7 @@ class RulesEditor extends React.Component {
       return;
     }
 
-    // if help is present when editor loses focus, hide it...
+    // if help is present when editor loses focus, hide it
     // except for when it loses focus due to clicking a help option
     const {
       focused: stateFocused,

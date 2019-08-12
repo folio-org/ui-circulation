@@ -10,6 +10,7 @@ import {
   count,
   scoped,
   triggerable,
+  fillable,
 } from '@bigtest/interactor';
 
 import { ACTIVE_HINT_ELEMENT_CLASS } from '../../../src/constants';
@@ -158,6 +159,7 @@ const scrollingOffset = 3;
   clickSaveRulesBtn = clickable('#clickable-save-loan-rules');
   isSaveButtonDisabled = property('#clickable-save-loan-rules', 'disabled');
   editor = new Editor();
+  filter = fillable('[data-test-rules-filter]');
 }
 
 export default new CirculationRules();

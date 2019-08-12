@@ -75,6 +75,16 @@ describe('CirculationRules', () => {
     expect(circulationRules.isSaveButtonDisabled).to.be.true;
   });
 
+  describe('filter rules', () => {
+    beforeEach(async function () {
+      await circulationRules.filter('term');
+    });
+
+    it('does not break the editor', () => {
+      expect(circulationRules.editorPresent).to.be.true;
+    });
+  });
+
   describe('press Enter without selected hints', () => {
     beforeEach(async function () {
       await circulationRules.editor.textArea.focus();

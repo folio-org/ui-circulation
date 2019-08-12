@@ -10,11 +10,16 @@ import {
   isEmpty,
 } from 'lodash';
 
+import {
+  RULES_TYPE,
+  LOCATION_RULES_TYPES
+} from '../../../constants';
+
 const locationHeadersMapping = {
-  a: 'institution',
-  b: 'campus',
-  c: 'library',
-  s: 'location',
+  [RULES_TYPE.INSTITUTION]: 'institution',
+  [RULES_TYPE.CAMPUS]: 'campus',
+  [RULES_TYPE.LIBRARY]: 'library',
+  [RULES_TYPE.LOCATION]: 'location',
 };
 
 const truncateOptions = {
@@ -22,25 +27,23 @@ const truncateOptions = {
   omission: '...',
 };
 
-const isLocationType = type => {
-  return type === 'a' || type === 'b' || type === 'c' || type === 's';
-};
+const isLocationType = type => LOCATION_RULES_TYPES.includes(type);
 
 const getSectionsDescriptions = type => {
   switch (type) {
-    case 'a':
+    case RULES_TYPE.INSTITUTION:
       return [
         { header: 'ui-circulation.settings.circulationRules.institution' },
       ];
-    case 'b':
+    case RULES_TYPE.CAMPUS:
       return [
-        { header: 'ui-circulation.settings.circulationRules.institution', childSection: 'b' },
+        { header: 'ui-circulation.settings.circulationRules.institution', childSection: RULES_TYPE.CAMPUS },
         { header: 'ui-circulation.settings.circulationRules.campus', selectedHintIndex: 0 },
       ];
-    case 'c':
+    case RULES_TYPE.LIBRARY:
       return [
-        { header: 'ui-circulation.settings.circulationRules.institution', childSection: 'b' },
-        { header: 'ui-circulation.settings.circulationRules.campus', childSection: 'c', selectedHintIndex: 0 },
+        { header: 'ui-circulation.settings.circulationRules.institution', childSection: RULES_TYPE.CAMPUS },
+        { header: 'ui-circulation.settings.circulationRules.campus', childSection: RULES_TYPE.LIBRARY, selectedHintIndex: 0 },
         { header: 'ui-circulation.settings.circulationRules.library', selectedHintIndex: 0 },
       ];
     default:
@@ -94,9 +97,10 @@ export function rulesHint(Codemirror, props) {
     let header;
     let sections = [{}];
 
-    // new rule at the start of lines and blank lines...
+    // new rule at the start of lines and blank lines
     if (!rValue && (cur.ch === 0 || cur.ch === indented || token.type !== 'policy')) {
       let newRuleText = '# ';
+
       // if we're in the middle of a line, a new line should be inserted, then a rule...
       if ((cur.ch !== 0 && indented > 0) || token.type === 'ruleName') {
         newRuleText = '\n\n# ';
@@ -142,13 +146,13 @@ export function rulesHint(Codemirror, props) {
           }
 
           sections = getSectionsDescriptions(keyProperty);
+
           const translationKeyValue = capitalize(locationHeadersMapping[keyProperty]);
 
           header = formatMessage({ id: `ui-circulation.settings.circulationRules.select${translationKeyValue}` });
         }
 
-        const institutionCriteriaKey = 'a';
-        const typeKeyProperty = isLocationKey ? institutionCriteriaKey : keyProperty;
+        const typeKeyProperty = isLocationKey ? RULES_TYPE.INSTITUTION : keyProperty;
         const type = typeMapping[typeKeyProperty];
 
         completionLists[type].forEach(selector => {

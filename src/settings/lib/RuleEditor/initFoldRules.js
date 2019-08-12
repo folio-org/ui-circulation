@@ -5,7 +5,7 @@ const initFoldRules = (CodeMirror) => {
     if (!/^\s*#/.test(text)) return;
 
     let lastLineInFold = null;
-    // loop through lines...
+    // loop through lines
     for (let i = start.line + 1, end = cm.lastLine(); i <= end; ++i) {
       text = cm.getLine(i);
       if (!/^\s*#/.test(text)) { // if a line doesn't begin with '#', include it..

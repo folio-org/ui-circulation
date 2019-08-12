@@ -10,6 +10,10 @@ import fetch from 'isomorphic-fetch';
 import { stripesConnect } from '@folio/stripes/core';
 
 import RulesForm from './lib/RuleEditor/RulesForm';
+import {
+  POLICY,
+  RULES_TYPE,
+} from '../constants';
 
 const editorDefaultProps = {
   // whether or not to show the 'autocomplete' widget (pro mode)
@@ -24,17 +28,17 @@ const editorDefaultProps = {
     libraries: [],
   },
   typeMapping: {
-    g: 'patronGroups',
-    m: 'materialTypes',
-    t: 'loanTypes',
-    a: 'institutions',
-    b: 'campuses',
-    c: 'libraries',
+    [RULES_TYPE.PATRON_GROUP]: 'patronGroups',
+    [RULES_TYPE.MATERIAL]: 'materialTypes',
+    [RULES_TYPE.LOAN]: 'loanTypes',
+    [RULES_TYPE.INSTITUTION]: 'institutions',
+    [RULES_TYPE.CAMPUS]: 'campuses',
+    [RULES_TYPE.LIBRARY]: 'libraries',
   },
   policyMapping: {
-    l: 'loanPolicies',
-    r: 'requestPolicies',
-    n: 'noticePolicies',
+    [POLICY.LOAN]: 'loanPolicies',
+    [POLICY.REQUEST]: 'requestPolicies',
+    [POLICY.NOTICE]: 'noticePolicies',
   },
 };
 
@@ -263,16 +267,16 @@ class CirculationRules extends React.Component {
     } = this.props.resources;
 
     return [
-      ...patronGroups.records.map(r => ({ name: kebabCase(r.group), id: r.id, prefix: 'g', divider: '.' })),
-      ...materialTypes.records.map(r => ({ name: kebabCase(r.name), id: r.id, prefix: 'm', divider: '.' })),
-      ...loanTypes.records.map(r => ({ name: kebabCase(r.name), id: r.id, prefix: 't', divider: '.' })),
+      ...patronGroups.records.map(r => ({ name: kebabCase(r.group), id: r.id, prefix: RULES_TYPE.PATRON_GROUP, divider: '.' })),
+      ...materialTypes.records.map(r => ({ name: kebabCase(r.name), id: r.id, prefix: RULES_TYPE.MATERIAL, divider: '.' })),
+      ...loanTypes.records.map(r => ({ name: kebabCase(r.name), id: r.id, prefix: RULES_TYPE.LOAN, divider: '.' })),
       // TODO: The codes should be normalized in the scope of https://issues.folio.org/browse/UICIRC-260
-      ...institutions.records.map(r => ({ name: r.code, id: r.id, prefix: 'a', divider: '.' })),
-      ...campuses.records.map(r => ({ name: r.code, id: r.id, prefix: 'b', divider: '.' })),
-      ...libraries.records.map(r => ({ name: r.code, id: r.id, prefix: 'c', divider: '.' })),
-      ...loanPolicies.records.map(r => ({ name: kebabCase(r.name), id: r.id, prefix: 'l', divider: '\\s' })),
-      ...requestPolicies.records.map(r => ({ name: kebabCase(r.name), id: r.id, prefix: 'r', divider: '\\s' })),
-      ...noticePolicies.records.map(r => ({ name: kebabCase(r.name), id: r.id, prefix: 'n', divider: '\\s' })),
+      ...institutions.records.map(r => ({ name: r.code, id: r.id, prefix: RULES_TYPE.INSTITUTION, divider: '.' })),
+      ...campuses.records.map(r => ({ name: r.code, id: r.id, prefix: RULES_TYPE.CAMPUS, divider: '.' })),
+      ...libraries.records.map(r => ({ name: r.code, id: r.id, prefix: RULES_TYPE.LIBRARY, divider: '.' })),
+      ...loanPolicies.records.map(r => ({ name: kebabCase(r.name), id: r.id, prefix: POLICY.LOAN, divider: '\\s' })),
+      ...requestPolicies.records.map(r => ({ name: kebabCase(r.name), id: r.id, prefix: POLICY.REQUEST, divider: '\\s' })),
+      ...noticePolicies.records.map(r => ({ name: kebabCase(r.name), id: r.id, prefix: POLICY.NOTICE, divider: '\\s' })),
     ];
   }
 
