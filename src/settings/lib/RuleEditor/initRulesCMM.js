@@ -3,18 +3,23 @@
 *  the circulation rules code hinting functionality.
 */
 
+import { LOCATION_RULES_TYPES } from '../../../constants';
+
 const hooks = {
   '#': (stream, state) => { // # starts a rule, followed by name of rule.
     stream.eatWhile(/[^/]/);
     state.ruleLine = true;
+
     return 'ruleName';
   },
   '/': (stream) => { // comment for rest of line after '/'
     stream.skipToEnd();
+
     return 'comment';
   },
   ',': (stream) => { // comma separators.
     stream.eatWhile(/\s/);
+
     return 'comma';
   },
   '+': (stream) => { // plus 'and'
@@ -28,11 +33,10 @@ const hooks = {
   },
   '!': (stream) => {
     stream.eatWhile(/\s/);
+
     return 'not';
   }
 };
-
-const locationKeys = ['s', 'c', 'b', 'a'];
 
 function processToken(stream, state, parserConfig) {
   const {
@@ -43,14 +47,12 @@ function processToken(stream, state, parserConfig) {
   } = parserConfig;
   const typeKeys = Object.keys(typeMapping);
   const policyKeys = Object.keys(policyMapping);
-  const keywords = [
-    'fallback-policy',
-    'priority',
-  ];
+  const keywords = ['fallback-policy', 'priority'];
 
   if (stream.sol()) {
     state.rValue = false;
     state.keyProperty = null;
+
     if (stream.eatSpace()) {
       return null;
     }
@@ -77,18 +79,22 @@ function processToken(stream, state, parserConfig) {
   stream.eatWhile(/[^\s:,+$]/);
 
   const cur = stream.current();
-  if (keywords.indexOf(cur) !== -1) { // style keywords...
+
+  if (keywords.includes(cur)) { // style keywords
     state.keyProperty = cur;
+
     return 'keyword';
   }
 
-  if (typeKeys.indexOf(cur) !== -1 || locationKeys.indexOf(cur) !== -1) { // style types
+  if (typeKeys.includes(cur) || LOCATION_RULES_TYPES.includes(cur)) { // style types
     state.keyProperty = cur;
+
     return cur;
   }
 
-  if (policyKeys.indexOf(cur) !== -1) { // style policies
+  if (policyKeys.includes(cur)) { // style policies
     state.keyProperty = cur;
+
     return cur;
   }
 
@@ -98,7 +104,7 @@ function processToken(stream, state, parserConfig) {
     if (typeMapping[keyProperty]) {
       let returnClass = false;
       const val = typeMapping[keyProperty];
-      const isLocationCriteriaExists = locationKeys.includes(keyProperty) && completionLists[val].some(item => item.code === cur);
+      const isLocationCriteriaExists = LOCATION_RULES_TYPES.includes(keyProperty) && completionLists[val].some(item => item.code === cur);
 
       if (isLocationCriteriaExists || completionLists[val].includes(cur)) {
         returnClass = true;
@@ -115,6 +121,7 @@ function processToken(stream, state, parserConfig) {
 
     if (policyMapping[keyProperty] && rValue) {
       state.keyProperty = null;
+
       return 'policy';
     }
   }
@@ -129,6 +136,7 @@ const initRulesCMM = (CodeMirror) => {
     return {
       startState() {
         const { completionLists, typeMapping, policyMapping } = parserConfig;
+
         return {
           keyProperty: null, // current defined property or typegroup, if any.
           rValue: false, // in a property or value?
@@ -163,11 +171,14 @@ const initRulesCMM = (CodeMirror) => {
 
       token(stream, state) {
         const ctx = state.context;
+
         if (stream.eol()) {
           state.keyProperty = null;
         }
+
         if (stream.sol()) {
           if (ctx.align == null) ctx.align = false;
+
           state.indented = stream.indentation();
           state.startOfLine = true;
         }

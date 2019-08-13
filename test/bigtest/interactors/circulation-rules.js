@@ -10,7 +10,10 @@ import {
   count,
   scoped,
   triggerable,
+  fillable,
 } from '@bigtest/interactor';
+
+import { ACTIVE_HINT_ELEMENT_CLASS } from '../../../src/constants';
 
 function getEditorValue() {
   return computed(function () {
@@ -36,9 +39,9 @@ const scrollingOffset = 3;
 
 @interactor class HintsSection {
   subheader = scoped('.CodeMirror-hints-subheader');
-  isFirstItemActive = hasClass('.CodeMirror-hint:first-child', 'CodeMirror-hint-active');
-  isLastItemActive = hasClass('.CodeMirror-hint:last-child', 'CodeMirror-hint-active');
-  isActiveItemPresent = isPresent('.CodeMirror-hint-active');
+  isFirstItemActive = hasClass('.CodeMirror-hint:first-child', ACTIVE_HINT_ELEMENT_CLASS);
+  isLastItemActive = hasClass('.CodeMirror-hint:last-child', ACTIVE_HINT_ELEMENT_CLASS);
+  isActiveItemPresent = isPresent(`.${ACTIVE_HINT_ELEMENT_CLASS}`);
   items = collection('.CodeMirror-hint', scoped);
   itemsCount = count('.CodeMirror-hint');
 
@@ -50,16 +53,16 @@ const scrollingOffset = 3;
     return this.$(`.CodeMirror-hint:nth-child(${itemIndex + 1})`);
   }
 
-  isScrolledToTop = function (itemIndex) {
+  isScrolledToTop(itemIndex) {
     return this.$('ul').scrollTop === this.getItemNode(itemIndex).offsetTop - scrollingOffset;
-  };
+  }
 
-  isScrolledToBottom = function (itemIndex) {
+  isScrolledToBottom(itemIndex) {
     const itemNode = this.getItemNode(itemIndex);
     const listContainer = this.$('ul');
 
     return listContainer.scrollTop === itemNode.offsetTop + itemNode.offsetHeight - listContainer.clientHeight + scrollingOffset;
-  };
+  }
 }
 
 @interactor class Hints {
@@ -76,7 +79,7 @@ const scrollingOffset = 3;
       return this.find(`.CodeMirror-hints-list:nth-child(${section + 1}) .CodeMirror-hint:nth-child(${itemIndex + 1})`)
         .do(($node) => {
           const defaultOptions = {
-            сancelable: true,
+            cancelable: true,
             bubbles: true
           };
 
@@ -156,6 +159,7 @@ const scrollingOffset = 3;
   clickSaveRulesBtn = clickable('#clickable-save-loan-rules');
   isSaveButtonDisabled = property('#clickable-save-loan-rules', 'disabled');
   editor = new Editor();
+  filter = fillable('[data-test-rules-filter]');
 }
 
 export default new CirculationRules();

@@ -7,13 +7,19 @@ import {
   forOwn,
   capitalize,
   truncate,
+  isEmpty,
 } from 'lodash';
 
+import {
+  RULES_TYPE,
+  LOCATION_RULES_TYPES
+} from '../../../constants';
+
 const locationHeadersMapping = {
-  a: 'institution',
-  b: 'campus',
-  c: 'library',
-  s: 'location',
+  [RULES_TYPE.INSTITUTION]: 'institution',
+  [RULES_TYPE.CAMPUS]: 'campus',
+  [RULES_TYPE.LIBRARY]: 'library',
+  [RULES_TYPE.LOCATION]: 'location',
 };
 
 const truncateOptions = {
@@ -21,25 +27,23 @@ const truncateOptions = {
   omission: '...',
 };
 
-const isLocationCriteria = (criteria) => {
-  return criteria === 'a' || criteria === 'b' || criteria === 'c' || criteria === 's';
-};
+const isLocationType = type => LOCATION_RULES_TYPES.includes(type);
 
-const getSectionsDescriptions = (criteria) => {
-  switch (criteria) {
-    case 'a':
+const getSectionsDescriptions = type => {
+  switch (type) {
+    case RULES_TYPE.INSTITUTION:
       return [
         { header: 'ui-circulation.settings.circulationRules.institution' },
       ];
-    case 'b':
+    case RULES_TYPE.CAMPUS:
       return [
-        { header: 'ui-circulation.settings.circulationRules.institution', childSection: 'b' },
+        { header: 'ui-circulation.settings.circulationRules.institution', childSection: RULES_TYPE.CAMPUS },
         { header: 'ui-circulation.settings.circulationRules.campus', selectedHintIndex: 0 },
       ];
-    case 'c':
+    case RULES_TYPE.LIBRARY:
       return [
-        { header: 'ui-circulation.settings.circulationRules.institution', childSection: 'b' },
-        { header: 'ui-circulation.settings.circulationRules.campus', childSection: 'c', selectedHintIndex: 0 },
+        { header: 'ui-circulation.settings.circulationRules.institution', childSection: RULES_TYPE.CAMPUS },
+        { header: 'ui-circulation.settings.circulationRules.campus', childSection: RULES_TYPE.LIBRARY, selectedHintIndex: 0 },
         { header: 'ui-circulation.settings.circulationRules.library', selectedHintIndex: 0 },
       ];
     default:
@@ -47,8 +51,8 @@ const getSectionsDescriptions = (criteria) => {
   }
 };
 
-function getCriteriaOptions(selector, typeKey) {
-  const isLocationTypeKey = isLocationCriteria(typeKey);
+function getTypeOptions(selector, typeKey) {
+  const isLocationTypeKey = isLocationType(typeKey);
   const text = isLocationTypeKey ? selector.code : selector;
   const displayText = isLocationTypeKey ? truncate(selector.displayCode, truncateOptions) : selector;
 
@@ -93,9 +97,10 @@ export function rulesHint(Codemirror, props) {
     let header;
     let sections = [{}];
 
-    // new rule at the start of lines and blank lines...
+    // new rule at the start of lines and blank lines
     if (!rValue && (cur.ch === 0 || cur.ch === indented || token.type !== 'policy')) {
       let newRuleText = '# ';
+
       // if we're in the middle of a line, a new line should be inserted, then a rule...
       if ((cur.ch !== 0 && indented > 0) || token.type === 'ruleName') {
         newRuleText = '\n\n# ';
@@ -117,6 +122,7 @@ export function rulesHint(Codemirror, props) {
     ) {
       forOwn(typeMapping, (value, key) => {
         const text = formatMessage({ id: `ui-circulation.settings.circulationRules.${value}` });
+
         result.push({
           text: `${key} `,
           displayText: `${key}: ${text}`,
@@ -126,30 +132,31 @@ export function rulesHint(Codemirror, props) {
       });
     }
 
-    // display criteria selectors if the cursor's not after a semicolon and state.keyPropery is not null...
+    // display type selectors if the cursor's not after a semicolon and state.keyPropery is not null...
     if (!rValue && keyProperty) {
       // not at beginning of line..
       if (cur.ch !== 0 && cur.ch > indented / 4 && typeMapping[keyProperty]) {
-        const isLocationKey = isLocationCriteria(keyProperty);
+        const isLocationKey = isLocationType(keyProperty);
 
         if (isLocationKey) {
           // A temp solution to remove new rule# for locations because it's displayed in wrong cases
           // It will be fixed in the separated issue
-          if (result.length > 0) {
+          if (!isEmpty(result)) {
             result.pop();
           }
 
           sections = getSectionsDescriptions(keyProperty);
-          const translaitionKeyValue = capitalize(locationHeadersMapping[keyProperty]);
-          header = formatMessage({ id: `ui-circulation.settings.circulationRules.select${translaitionKeyValue}` });
+
+          const translationKeyValue = capitalize(locationHeadersMapping[keyProperty]);
+
+          header = formatMessage({ id: `ui-circulation.settings.circulationRules.select${translationKeyValue}` });
         }
 
-        const institutionCriteriaKey = 'a';
-        const criteriaKeyProperty = isLocationKey ? institutionCriteriaKey : keyProperty;
-        const type = typeMapping[criteriaKeyProperty];
+        const typeKeyProperty = isLocationKey ? RULES_TYPE.INSTITUTION : keyProperty;
+        const type = typeMapping[typeKeyProperty];
 
-        completionLists[type].forEach((selector) => {
-          result.push(getCriteriaOptions(selector, criteriaKeyProperty));
+        completionLists[type].forEach(selector => {
+          result.push(getTypeOptions(selector, typeKeyProperty));
         });
       }
     }
@@ -173,6 +180,7 @@ export function rulesHint(Codemirror, props) {
       // not at beginning of line..
       if (cur.ch !== 0 && cur.ch > indented / 4 && policyMapping[keyProperty]) {
         const type = policyMapping[keyProperty];
+
         completionLists[type].forEach((selector) => {
           result.push({
             text: `${selector} `,
@@ -219,10 +227,12 @@ export function initSubMenuDataFetching(Codemirror, props) {
 
     const type = typeMapping[options.childSection];
 
-    if (options.childSection && isLocationCriteria(options.childSection)) {
+    if (options.childSection && isLocationType(options.childSection)) {
+      const text = `<${formatMessage({ id: 'ui-circulation.settings.circulationRules.any' })}>`;
+
       subMenuData.push({
-        text: `<${formatMessage({ id: 'ui-circulation.settings.circulationRules.any' })}>`,
-        displayText: `<${formatMessage({ id: 'ui-circulation.settings.circulationRules.any' })}>`,
+        text,
+        displayText: text,
         className: 'rule-hint-minor',
         completeOnSingleClick: true,
         inactive: true,
@@ -231,7 +241,7 @@ export function initSubMenuDataFetching(Codemirror, props) {
 
     completionLists[type].forEach((selector) => {
       if (selector.parentId === options.parentId) {
-        subMenuData.push(getCriteriaOptions(selector, options.childSection));
+        subMenuData.push(getTypeOptions(selector, options.childSection));
       }
     });
 

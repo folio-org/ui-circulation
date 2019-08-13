@@ -323,4 +323,30 @@ export const closedLoansRules = {
   WITH_FEES_FINES: 'feeFine',
 };
 
+export const HINT_ELEMENT_CLASS = 'CodeMirror-hint';
+export const ACTIVE_HINT_ELEMENT_CLASS = `${HINT_ELEMENT_CLASS}-active`;
+
+export const RULES_TYPE = {
+  INSTITUTION: 'a',
+  CAMPUS: 'b',
+  LIBRARY: 'c',
+  LOCATION: 's',
+  PATRON_GROUP: 'g',
+  MATERIAL: 'm',
+  LOAN: 't',
+};
+
+export const POLICY = {
+  LOAN: 'l',
+  REQUEST: 'r',
+  NOTICE: 'n',
+};
+
+export const LOCATION_RULES_TYPES = [
+  RULES_TYPE.INSTITUTION,
+  RULES_TYPE.CAMPUS,
+  RULES_TYPE.LIBRARY,
+  RULES_TYPE.LOCATION,
+];
+
 export default '';

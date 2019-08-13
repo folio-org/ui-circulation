@@ -1,0 +1,8 @@
+{
+  "rules": {
+    "consistent-return": "off",
+    "no-use-before-define": "off",
+    "no-confusing-arrow": "off",
+    "func-names": "off"
+  }
+}
