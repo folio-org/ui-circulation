@@ -8,7 +8,7 @@ describe('StaffSlipSettings', () => {
   setupApplication();
 
   beforeEach(function () {
-    this.server.createList('staffSlips', 3);
+    this.server.createList('staffSlip', 3);
   });
 
   describe('viewing staff slip list', () => {
