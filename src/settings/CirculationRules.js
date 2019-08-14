@@ -15,6 +15,8 @@ import {
   RULES_TYPE,
 } from '../constants';
 
+import replacer from './utils/with-dash-replacer';
+
 const editorDefaultProps = {
   // whether or not to show the 'autocomplete' widget (pro mode)
   showAssist: true,
@@ -34,6 +36,7 @@ const editorDefaultProps = {
     [RULES_TYPE.INSTITUTION]: 'institutions',
     [RULES_TYPE.CAMPUS]: 'campuses',
     [RULES_TYPE.LIBRARY]: 'libraries',
+    [RULES_TYPE.LOCATION]: 'locations',
   },
   policyMapping: {
     [POLICY.LOAN]: 'loanPolicies',
@@ -205,6 +208,7 @@ class CirculationRules extends React.Component {
       institutions,
       campuses,
       libraries,
+      locations,
     } = this.props.resources;
 
     return Object.assign({}, editorDefaultProps, {
@@ -217,20 +221,26 @@ class CirculationRules extends React.Component {
         // TODO: The codes should be normalized in the scope of https://issues.folio.org/browse/UICIRC-260
         institutions: institutions.records.map(institution => ({
           id: institution.id,
-          code: institution.code,
-          displayCode: institution.code,
+          code: replacer(institution.code),
+          displayCode: replacer(institution.code),
         })),
         campuses: campuses.records.map(campus => ({
           id: campus.id,
-          code: campus.code,
+          code: replacer(campus.code),
           displayCode: this.formatCampusDisplayCode(campus, institutions),
           parentId: campus.institutionId,
         })),
         libraries: libraries.records.map(library => ({
           id: library.id,
-          code: library.code,
+          code: replacer(library.code),
           displayCode: this.formatLibraryDisplayCode(library, institutions, campuses),
           parentId: library.campusId,
+        })),
+        locations: locations.records.map(location => ({
+          id: location.id,
+          code: replacer(location.code),
+          displayCode: this.formatLocationDisplayCode(location),
+          parentId: location.libraryId,
         })),
         // policies
         loanPolicies: loanPolicies.records.map(l => kebabCase(l.name)),
@@ -243,14 +253,18 @@ class CirculationRules extends React.Component {
   formatCampusDisplayCode(campus, institutions) {
     const targetInstitution = find(institutions.records, { id: campus.institutionId });
 
-    return `${campus.code} (${targetInstitution.code})`;
+    return `${replacer(campus.code)} (${replacer(targetInstitution.code)})`;
   }
 
   formatLibraryDisplayCode(library, institutions, campuses) {
     const targetCampus = find(campuses.records, { id: library.campusId });
     const targetInstitution = find(institutions.records, { id: targetCampus.institutionId });
 
-    return `${library.code} (${targetInstitution.code}-${targetCampus.code})`;
+    return `${replacer(library.code)} (${replacer(targetInstitution.code)}-${replacer(targetCampus.code)})`;
+  }
+
+  formatLocationDisplayCode(location) {
+    return `${replacer(location.code)} (${location.name})`;
   }
 
   getRecords() {
@@ -264,6 +278,7 @@ class CirculationRules extends React.Component {
       institutions,
       campuses,
       libraries,
+      locations,
     } = this.props.resources;
 
     return [
@@ -274,6 +289,7 @@ class CirculationRules extends React.Component {
       ...institutions.records.map(r => ({ name: r.code, id: r.id, prefix: RULES_TYPE.INSTITUTION, divider: '.' })),
       ...campuses.records.map(r => ({ name: r.code, id: r.id, prefix: RULES_TYPE.CAMPUS, divider: '.' })),
       ...libraries.records.map(r => ({ name: r.code, id: r.id, prefix: RULES_TYPE.LIBRARY, divider: '.' })),
+      ...locations.records.map(r => ({ name: r.code, id: r.id, prefix: RULES_TYPE.LOCATION, divider: '.' })),
       ...loanPolicies.records.map(r => ({ name: kebabCase(r.name), id: r.id, prefix: POLICY.LOAN, divider: '\\s' })),
       ...requestPolicies.records.map(r => ({ name: kebabCase(r.name), id: r.id, prefix: POLICY.REQUEST, divider: '\\s' })),
       ...noticePolicies.records.map(r => ({ name: kebabCase(r.name), id: r.id, prefix: POLICY.NOTICE, divider: '\\s' })),

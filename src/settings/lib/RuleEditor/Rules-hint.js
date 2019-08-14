@@ -46,6 +46,13 @@ const getSectionsDescriptions = type => {
         { header: 'ui-circulation.settings.circulationRules.campus', childSection: RULES_TYPE.LIBRARY, selectedHintIndex: 0 },
         { header: 'ui-circulation.settings.circulationRules.library', selectedHintIndex: 0 },
       ];
+    case RULES_TYPE.LOCATION:
+      return [
+        { header: 'ui-circulation.settings.circulationRules.institution', childSection: RULES_TYPE.CAMPUS },
+        { header: 'ui-circulation.settings.circulationRules.campus', childSection: RULES_TYPE.LIBRARY, selectedHintIndex: 0 },
+        { header: 'ui-circulation.settings.circulationRules.library', childSection: RULES_TYPE.LOCATION, selectedHintIndex: 0 },
+        { header: 'ui-circulation.settings.circulationRules.location', selectedHintIndex: 0 },
+      ];
     default:
       return [{}];
   }
