@@ -343,7 +343,7 @@ class Widget {
       }
     });
 
-    CodeMirror.on(this.container, 'mousedown', () => setTimeout(cm.focus, 20));
+    CodeMirror.on(this.container, 'mousedown', () => setTimeout(() => cm.focus(), 20));
 
     CodeMirror.signal(data, 'select', completions[0], this.getCurrentSection().getListNodeAt(0));
   }
