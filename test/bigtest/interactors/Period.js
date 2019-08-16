@@ -1,14 +1,15 @@
 import {
   interactor,
   text,
+  scoped,
 } from '@bigtest/interactor';
 
 import TextFieldInteractor from '@folio/stripes-components/lib/TextField/tests/interactor';
 import SelectInteractor from '@folio/stripes-components/lib/Select/tests/interactor';
 
 export default interactor(class Period {
-  duration = new TextFieldInteractor('[data-test-period-duration]');
-  interval = new SelectInteractor('[data-test-period-interval]');
+  duration = scoped('[data-test-period-duration]', TextFieldInteractor);
+  interval = scoped('[data-test-period-interval]', SelectInteractor);
   label = text('[data-test-period-label]');
 
   // in case of using existing interactors first input on the page is selected, cause they are not scoped

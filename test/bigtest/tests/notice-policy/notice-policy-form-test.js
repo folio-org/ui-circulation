@@ -9,7 +9,7 @@ import translation from '../../../../translations/ui-circulation/en';
 import setupApplication from '../../helpers/setup-application';
 import NoticePolicyForm from '../../interactors/notice-policy/notice-policy-form';
 
-describe('NoticePolicyForm', () => {
+describe.only('NoticePolicyForm', () => {
   setupApplication();
 
   describe('accordions', () => {
@@ -385,31 +385,36 @@ describe('NoticePolicyForm', () => {
             });
 
             describe('sendEveryLabel', () => {
-              describe('-Frequency: recurring', () => {
+              describe('-triggering event: Due date', () => {
                 beforeEach(async () => {
                   await NoticePolicyForm.loanNoticesSection.loanNotices(0).triggeringEvent.selectAndBlur('Loan due date/time');
                   await NoticePolicyForm.loanNoticesSection.loanNotices(0).sendHow.selectAndBlur('Before');
-                  await NoticePolicyForm.loanNoticesSection.loanNotices(0).frequency.selectAndBlur('Recurring');
                 });
 
-                it('should be displayed', () => {
-                  expect(NoticePolicyForm.loanNoticesSection.loanNotices(0).sendEveryLabel.isPresent).to.be.true;
+                describe('-Frequency: recurring', () => {
+                  beforeEach(async () => {
+                    await NoticePolicyForm.loanNoticesSection.loanNotices(0).frequency.selectAndBlur('Recurring');
+                  });
+
+                  it('should be displayed', () => {
+                    expect(NoticePolicyForm.loanNoticesSection.loanNotices(0).sendEveryLabel.isPresent).to.be.true;
+                  });
+
+                  it('should have proper text', () => {
+                    expect(NoticePolicyForm.loanNoticesSection.loanNotices(0).sendEveryLabel.text).to.be.equal(
+                      translation['settings.noticePolicy.notices.andEvery']
+                    );
+                  });
                 });
 
-                it('should have proper text', () => {
-                  expect(NoticePolicyForm.loanNoticesSection.loanNotices(0).sendEveryLabel.text).to.be.equal(
-                    translation['settings.noticePolicy.notices.andEvery']
-                  );
-                });
-              });
+                describe('-Frequency: one time', () => {
+                  beforeEach(async () => {
+                    await NoticePolicyForm.loanNoticesSection.loanNotices(0).frequency.selectAndBlur('One Time');
+                  });
 
-              describe('-Frequency: one time', () => {
-                beforeEach(async () => {
-                  await NoticePolicyForm.loanNoticesSection.loanNotices(0).frequency.selectAndBlur('One Time');
-                });
-
-                it('should not be displayed', () => {
-                  expect(NoticePolicyForm.loanNoticesSection.loanNotices(0).sendEveryLabel.isPresent).to.be.false;
+                  it('should not be displayed', () => {
+                    expect(NoticePolicyForm.loanNoticesSection.loanNotices(0).sendEveryLabel.isPresent).to.be.false;
+                  });
                 });
               });
             });
