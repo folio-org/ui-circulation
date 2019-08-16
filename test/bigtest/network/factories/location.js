@@ -6,6 +6,6 @@ import {
 
 export default Factory.extend({
   id: faker.random.uuid,
-  name: faker.hacker.noun(),
-  code: faker.hacker.abbreviation(),
+  name: faker.hacker.noun,
+  code: faker.hacker.abbreviation,
 });
