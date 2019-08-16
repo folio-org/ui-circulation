@@ -9,7 +9,7 @@ import translation from '../../../../translations/ui-circulation/en';
 import setupApplication from '../../helpers/setup-application';
 import NoticePolicyForm from '../../interactors/notice-policy/notice-policy-form';
 
-describe.only('NoticePolicyForm', () => {
+describe('NoticePolicyForm', () => {
   setupApplication();
 
   describe('accordions', () => {

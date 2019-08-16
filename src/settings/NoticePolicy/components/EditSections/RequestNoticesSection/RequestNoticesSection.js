@@ -7,7 +7,6 @@ import { Accordion } from '@folio/stripes/components';
 
 import NoticesList from '../components';
 import {
-  noticesSendEvent,
   requestNoticesTriggeringEvents,
   requestTimeBasedEventsIds,
 } from '../../../../../constants';
