@@ -172,6 +172,7 @@ describe('NoticePolicyForm', () => {
             describe('-triggering event: Due date', () => {
               beforeEach(async () => {
                 await NoticePolicyForm.loanNoticesSection.loanNotices(0).triggeringEvent.selectAndBlur('Loan due date/time');
+                await NoticePolicyForm.loanNoticesSection.loanNotices(0).sendHow.selectAndBlur('Before');
               });
 
               it('should be displayed', () => {
@@ -329,6 +330,7 @@ describe('NoticePolicyForm', () => {
               describe('-triggering event: Due date', () => {
                 beforeEach(async () => {
                   await NoticePolicyForm.loanNoticesSection.loanNotices(0).triggeringEvent.selectAndBlur('Loan due date/time');
+                  await NoticePolicyForm.loanNoticesSection.loanNotices(0).sendHow.selectAndBlur('Before');
                 });
 
                 describe('-Frequency: recurring', () => {
@@ -357,6 +359,7 @@ describe('NoticePolicyForm', () => {
               describe('-triggering event: Due date', () => {
                 beforeEach(async () => {
                   await NoticePolicyForm.loanNoticesSection.loanNotices(0).triggeringEvent.selectAndBlur('Loan due date/time');
+                  await NoticePolicyForm.loanNoticesSection.loanNotices(0).sendHow.selectAndBlur('Before');
                 });
 
                 describe('-Frequency: recurring', () => {
@@ -385,6 +388,7 @@ describe('NoticePolicyForm', () => {
               describe('-Frequency: recurring', () => {
                 beforeEach(async () => {
                   await NoticePolicyForm.loanNoticesSection.loanNotices(0).triggeringEvent.selectAndBlur('Loan due date/time');
+                  await NoticePolicyForm.loanNoticesSection.loanNotices(0).sendHow.selectAndBlur('Before');
                   await NoticePolicyForm.loanNoticesSection.loanNotices(0).frequency.selectAndBlur('Recurring');
                 });
 
@@ -401,7 +405,6 @@ describe('NoticePolicyForm', () => {
 
               describe('-Frequency: one time', () => {
                 beforeEach(async () => {
-                  await NoticePolicyForm.loanNoticesSection.loanNotices(0).triggeringEvent.selectAndBlur('Loan due date/time');
                   await NoticePolicyForm.loanNoticesSection.loanNotices(0).frequency.selectAndBlur('One Time');
                 });
 

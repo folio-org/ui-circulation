@@ -9,10 +9,11 @@ import {
 
 import {
   Col,
-  Row,
-  IconButton,
-  Select,
   Checkbox,
+  IconButton,
+  Label,
+  Row,
+  Select,
 } from '@folio/stripes/components';
 
 import Period from '../../../../../components/Period';
@@ -172,9 +173,9 @@ class NoticeCard extends React.Component {
                       xs={12}
                       data-test-notice-card-event-label
                     >
-                      <FormattedMessage id="ui-circulation.settings.noticePolicy.notices.send">
-                        {message => `${message} *`}
-                      </FormattedMessage>
+                      <Label required>
+                        <FormattedMessage id="ui-circulation.settings.noticePolicy.notices.send" />
+                      </Label>
                     </Col>
                   </Row>
                   <Row>
@@ -224,9 +225,9 @@ class NoticeCard extends React.Component {
                           xs={12}
                           data-test-notice-card-frequency-label
                         >
-                          <FormattedMessage id="ui-circulation.settings.noticePolicy.notices.frequency">
-                            {message => `${message} *`}
-                          </FormattedMessage>
+                          <Label required>
+                            <FormattedMessage id="ui-circulation.settings.noticePolicy.notices.frequency" />
+                          </Label>
                         </Col>
                       </Row>
                       <Row>
