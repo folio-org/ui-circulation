@@ -20,7 +20,6 @@ import Period from '../../../../../components/Period';
 import {
   noticesFormats,
   noticesFrequency,
-  noticesSendEvent,
   noticesIntervalPeriods,
 } from '../../../../../../constants';
 
@@ -40,6 +39,10 @@ class NoticeCard extends React.Component {
       label: PropTypes.string.isRequired,
     })).isRequired,
     triggeringEvents: PropTypes.arrayOf(PropTypes.shape({
+      value: PropTypes.string.isRequired,
+      label: PropTypes.string.isRequired,
+    })).isRequired,
+    sendEvents: PropTypes.arrayOf(PropTypes.shape({
       value: PropTypes.string.isRequired,
       label: PropTypes.string.isRequired,
     })).isRequired,
@@ -64,11 +67,12 @@ class NoticeCard extends React.Component {
   render() {
     const {
       intl,
+      notice,
       noticeIndex,
       pathToNotice,
-      notice,
-      timeBasedEventsIds,
+      sendEvents,
       templates,
+      timeBasedEventsIds,
       triggeringEvents,
     } = this.props;
 
@@ -116,11 +120,8 @@ class NoticeCard extends React.Component {
                 >
                   <Field
                     name={`${pathToNotice}.templateId`}
-                    label={(
-                      <FormattedMessage id="ui-circulation.settings.noticePolicy.notices.template">
-                        {message => `${message} *`}
-                      </FormattedMessage>
-                    )}
+                    label={<FormattedMessage id="ui-circulation.settings.noticePolicy.notices.template" />}
+                    required
                     component={Select}
                     dataOptions={templates}
                     placeholder={blankPlaceholder}
@@ -140,11 +141,8 @@ class NoticeCard extends React.Component {
                 >
                   <Field
                     name={`${pathToNotice}.format`}
-                    label={(
-                      <FormattedMessage id="ui-circulation.settings.noticePolicy.notices.format">
-                        {message => `${message} *`}
-                      </FormattedMessage>
-                    )}
+                    label={<FormattedMessage id="ui-circulation.settings.noticePolicy.notices.format" />}
+                    required
                     component={Select}
                     placeholder={blankPlaceholder}
                   >
@@ -158,11 +156,8 @@ class NoticeCard extends React.Component {
                 >
                   <Field
                     name={`${pathToNotice}.sendOptions.sendWhen`}
-                    label={(
-                      <FormattedMessage id="ui-circulation.settings.noticePolicy.notices.triggeringEvent">
-                        {message => `${message} *`}
-                      </FormattedMessage>
-                    )}
+                    label={<FormattedMessage id="ui-circulation.settings.noticePolicy.notices.triggeringEvent" />}
+                    required
                     component={Select}
                     placeholder={blankPlaceholder}
                   >
@@ -193,7 +188,7 @@ class NoticeCard extends React.Component {
                         component={Select}
                         placeholder={blankPlaceholder}
                       >
-                        {this.generateOptions(noticesSendEvent)}
+                        {this.generateOptions(sendEvents)}
                       </Field>
                     </Col>
                     {notice.sendOptions.isBeforeOrAfter() && (
@@ -220,61 +215,62 @@ class NoticeCard extends React.Component {
                           />
                         </Col>
                       </React.Fragment>
-                    )
-                    }
+                    )}
                   </Row>
-                  <React.Fragment>
-                    <Row>
-                      <Col
-                        xs={12}
-                        data-test-notice-card-frequency-label
-                      >
-                        <FormattedMessage id="ui-circulation.settings.noticePolicy.notices.frequency">
-                          {message => `${message} *`}
-                        </FormattedMessage>
-                      </Col>
-                    </Row>
-                    <Row>
-                      <Col
-                        xs={4}
-                        className={css.noticeField}
-                        data-test-notice-card-frequency
-                      >
-                        <Field
-                          name={`${pathToNotice}.frequency`}
-                          component={Select}
-                          placeholder={blankPlaceholder}
+                  { notice.sendOptions.isFrequencyAvailable() && (
+                    <React.Fragment>
+                      <Row>
+                        <Col
+                          xs={12}
+                          data-test-notice-card-frequency-label
                         >
-                          {this.generateOptions(noticesFrequency)}
-                        </Field>
-                      </Col>
-                      {notice.isRecurring() && (
-                        <React.Fragment>
-                          <Col
-                            xs={2}
-                            className={`${css.cardText} ${css.cardTextWithotLabel}`}
-                            data-test-notice-card-send-every-label
+                          <FormattedMessage id="ui-circulation.settings.noticePolicy.notices.frequency">
+                            {message => `${message} *`}
+                          </FormattedMessage>
+                        </Col>
+                      </Row>
+                      <Row>
+                        <Col
+                          xs={4}
+                          className={css.noticeField}
+                          data-test-notice-card-frequency
+                        >
+                          <Field
+                            name={`${pathToNotice}.frequency`}
+                            component={Select}
+                            placeholder={blankPlaceholder}
                           >
-                            <FormattedMessage id="ui-circulation.settings.noticePolicy.notices.andEvery" />
-                          </Col>
-                          <Col
-                            xs={6}
-                            className={css.noticeField}
-                            data-test-notice-card-send-every
-                          >
-                            <Period
-                              inputSize={6}
-                              selectSize={6}
-                              selectPlaceholder="ui-circulation.settings.common.blankPlaceholder"
-                              inputValuePath={`${pathToNotice}.sendOptions.sendEvery.duration`}
-                              selectValuePath={`${pathToNotice}.sendOptions.sendEvery.intervalId`}
-                              intervalPeriods={this.generateOptions(noticesIntervalPeriods)}
-                            />
-                          </Col>
-                        </React.Fragment>
-                      )}
-                    </Row>
-                  </React.Fragment>
+                            {this.generateOptions(noticesFrequency)}
+                          </Field>
+                        </Col>
+                        {notice.isRecurring() && (
+                          <React.Fragment>
+                            <Col
+                              xs={2}
+                              className={`${css.cardText} ${css.cardTextWithotLabel}`}
+                              data-test-notice-card-send-every-label
+                            >
+                              <FormattedMessage id="ui-circulation.settings.noticePolicy.notices.andEvery" />
+                            </Col>
+                            <Col
+                              xs={6}
+                              className={css.noticeField}
+                              data-test-notice-card-send-every
+                            >
+                              <Period
+                                inputSize={6}
+                                selectSize={6}
+                                selectPlaceholder="ui-circulation.settings.common.blankPlaceholder"
+                                inputValuePath={`${pathToNotice}.sendOptions.sendEvery.duration`}
+                                selectValuePath={`${pathToNotice}.sendOptions.sendEvery.intervalId`}
+                                intervalPeriods={this.generateOptions(noticesIntervalPeriods)}
+                              />
+                            </Col>
+                          </React.Fragment>
+                        )}
+                      </Row>
+                    </React.Fragment>
+                  )}
                 </React.Fragment>
               )}
               <Row>

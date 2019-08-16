@@ -7,6 +7,7 @@ import { Accordion } from '@folio/stripes/components';
 
 import NoticesList from '../components';
 import {
+  noticesSendEvent,
   requestNoticesTriggeringEvents,
   requestTimeBasedEventsIds,
 } from '../../../../../constants';
@@ -31,11 +32,11 @@ class RequestNoticesSection extends React.Component {
     } = this.props;
 
     const props = {
-      sectionKey: 'requestNotices',
       policy,
+      sectionKey: 'requestNotices',
       templates,
-      triggeringEvents: requestNoticesTriggeringEvents,
       timeBasedEventsIds: values(requestTimeBasedEventsIds),
+      triggeringEvents: requestNoticesTriggeringEvents,
     };
 
     return (
