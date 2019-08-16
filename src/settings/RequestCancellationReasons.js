@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 
 import { ControlledVocab } from '@folio/stripes/smart-components';
 import { stripesConnect } from '@folio/stripes/core';
-
+import { Label } from '@folio/stripes/components';
 
 class RequestCancellationReasons extends React.Component {
   static propTypes = {
@@ -30,7 +30,11 @@ class RequestCancellationReasons extends React.Component {
         visibleFields={['name', 'description', 'publicDescription']}
         hiddenFields={['lastUpdated', 'numberOfObjects']}
         columnMapping={{
-          name: <FormattedMessage id="ui-circulation.settings.cancelReasons.labelShort" />,
+          name: (
+            <Label required>
+              <FormattedMessage id="ui-circulation.settings.cancelReasons.labelShort" />
+            </Label>
+          ),
           description: <FormattedMessage id="ui-circulation.settings.cancelReasons.descriptionInternal" />,
           publicDescription: <FormattedMessage id="ui-circulation.settings.cancelReasons.descriptionPublic" />,
         }}

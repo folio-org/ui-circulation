@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { stripesShape } from '@folio/stripes/core';
-import { Button, Checkbox, Col, Pane, Row, Select, TextField } from '@folio/stripes/components';
+import { Button, Checkbox, Col, Pane, Row, Select, TextField, Label } from '@folio/stripes/components';
 import stripesForm from '@folio/stripes/form';
 import { Field, FieldArray, getFormValues } from 'redux-form';
 
@@ -81,8 +81,10 @@ class CheckoutSettingsForm extends React.Component {
 
     return (
       <div>
-        <p className={css.label}>
-          <FormattedMessage id="ui-circulation.settings.checkout.patronIds" />
+        <p>
+          <Label required>
+            <FormattedMessage id="ui-circulation.settings.checkout.patronIds" />
+          </Label>
         </p>
         {items}
         {meta.error && <div className={css.error}>{meta.error}</div>}
