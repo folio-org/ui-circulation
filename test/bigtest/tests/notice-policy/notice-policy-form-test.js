@@ -452,6 +452,34 @@ describe('NoticePolicyForm', () => {
         it('should have 1 notice cards', () => {
           expect(NoticePolicyForm.requestNoticesSection.hasCards).to.be.true;
         });
+
+        describe('frequency', () => {
+          describe('-triggering event: Request expiration', () => {
+            beforeEach(async () => {
+              await NoticePolicyForm.requestNoticesSection.requestNotices(0).triggeringEvent.selectAndBlur('Request expiration');
+            });
+
+            describe('-send how: Before', () => {
+              beforeEach(async () => {
+                await NoticePolicyForm.requestNoticesSection.requestNotices(0).sendHow.selectAndBlur('Before');
+              });
+
+              it('should be displayed', () => {
+                expect(NoticePolicyForm.requestNoticesSection.requestNotices(0).frequency.hasSelect).to.be.true;
+              });
+            });
+
+            describe('-send how: Upon/At', () => {
+              beforeEach(async () => {
+                await NoticePolicyForm.requestNoticesSection.requestNotices(0).sendHow.selectAndBlur('Upon/At');
+              });
+
+              it('should not be displayed', () => {
+                expect(NoticePolicyForm.requestNoticesSection.requestNotices(0).frequency.hasSelect).to.be.false;
+              });
+            });
+          });
+        });
       });
 
       describe('add two cards', () => {
