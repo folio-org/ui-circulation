@@ -6,8 +6,6 @@ import { ControlledVocab } from '@folio/stripes/smart-components';
 import { stripesConnect } from '@folio/stripes/core';
 import { Label } from '@folio/stripes/components';
 
-import css from './RequestCancellationReasons.css';
-
 class RequestCancellationReasons extends React.Component {
   static propTypes = {
     stripes: PropTypes.shape({
@@ -33,10 +31,7 @@ class RequestCancellationReasons extends React.Component {
         hiddenFields={['lastUpdated', 'numberOfObjects']}
         columnMapping={{
           name: (
-            <Label
-              className={css.header}
-              required
-            >
+            <Label required>
               <FormattedMessage id="ui-circulation.settings.cancelReasons.labelShort" />
             </Label>
           ),
