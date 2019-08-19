@@ -355,5 +355,8 @@
     "settings.circulationRules.campus": "Campus",
     "settings.circulationRules.any": "ANY",
     "settings.circulationRules.selectCampus": "Select campus",
-    "settings.circulationRules.selectLibrary": "Select library"
+    "settings.circulationRules.selectLibrary": "Select library",
+    "settings.circulationRules.locations": "Locations",
+    "settings.circulationRules.location": "Location",
+    "settings.circulationRules.selectLocation": "Select location"
 }

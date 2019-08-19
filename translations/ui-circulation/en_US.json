@@ -68,7 +68,7 @@
     "settings.checkout.paneTitle": "Other settings",
     "settings.checkout.validate.selectContinue": "Please select to continue",
     "settings.checkout.save": "Save",
-    "settings.checkout.patronIds": "Patron id(s) for checkout scanning *",
+    "settings.checkout.patronIds": "Patron id(s) for checkout scanning",
     "settings.checkout.audioAlerts": "Enable audio alerts",
     "settings.checkout.no": "No",
     "settings.checkout.yes": "Yes",
@@ -95,7 +95,7 @@
     "settings.loanPolicy.generalInformation": "General information",
     "settings.cancelReasons.label": "Request cancellation reasons",
     "settings.cancelReasons.labelSingular": "Request cancellation reason",
-    "settings.cancelReasons.labelShort": "Cancel reason*",
+    "settings.cancelReasons.labelShort": "Cancel reason",
     "settings.cancelReasons.descriptionInternal": "Description (internal)",
     "settings.cancelReasons.descriptionPublic": "Description (public)",
     "settings.staffSlips.previewLabel": "Preview of staff slip - Hold",
@@ -355,5 +355,8 @@
     "settings.circulationRules.campus": "Campus",
     "settings.circulationRules.any": "ANY",
     "settings.circulationRules.selectCampus": "Select campus",
-    "settings.circulationRules.selectLibrary": "Select library"
+    "settings.circulationRules.selectLibrary": "Select library",
+    "settings.circulationRules.locations": "Locations",
+    "settings.circulationRules.location": "Location",
+    "settings.circulationRules.selectLocation": "Select location"
 }
