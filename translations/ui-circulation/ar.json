@@ -355,5 +355,8 @@
     "settings.circulationRules.campus": "الحرم الجامعي",
     "settings.circulationRules.any": "أي",
     "settings.circulationRules.selectCampus": "اختر الحرم الجامعي",
-    "settings.circulationRules.selectLibrary": "اختر مكتبة"
+    "settings.circulationRules.selectLibrary": "اختر مكتبة",
+    "settings.circulationRules.locations": "المواقع",
+    "settings.circulationRules.location": "الموقع",
+    "settings.circulationRules.selectLocation": "اختر الموقع"
 }

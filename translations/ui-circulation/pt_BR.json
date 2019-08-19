@@ -68,7 +68,7 @@
     "settings.checkout.paneTitle": "Outras configurações",
     "settings.checkout.validate.selectContinue": "Por favor selecione para continuar",
     "settings.checkout.save": "Salvar",
-    "settings.checkout.patronIds": "ID(s) de cliente para o escaneamento de empréstimo *",
+    "settings.checkout.patronIds": "ID(s) de cliente para o escaneamento de empréstimo",
     "settings.checkout.audioAlerts": "Ativar alertas de áudio",
     "settings.checkout.no": "Não",
     "settings.checkout.yes": "Sim",
@@ -95,7 +95,7 @@
     "settings.loanPolicy.generalInformation": "Informação geral",
     "settings.cancelReasons.label": "Motivos de cancelamento da solicitação de compra",
     "settings.cancelReasons.labelSingular": "Motivo de cancelamento da solicitação de compra",
-    "settings.cancelReasons.labelShort": "Motivo do cancelamento*",
+    "settings.cancelReasons.labelShort": "Motivo do cancelamento",
     "settings.cancelReasons.descriptionInternal": "Descrição (interna)",
     "settings.cancelReasons.descriptionPublic": "Descrição (pública)",
     "settings.staffSlips.previewLabel": "Pré-visualização da ficha de encaminhamento",
@@ -355,5 +355,8 @@
     "settings.circulationRules.campus": "Campus",
     "settings.circulationRules.any": "Qualquer",
     "settings.circulationRules.selectCampus": "Selecione o campus",
-    "settings.circulationRules.selectLibrary": "Selecione a biblioteca"
+    "settings.circulationRules.selectLibrary": "Selecione a biblioteca",
+    "settings.circulationRules.locations": "Localizações",
+    "settings.circulationRules.location": "Localização",
+    "settings.circulationRules.selectLocation": "Selecione a localização"
 }
