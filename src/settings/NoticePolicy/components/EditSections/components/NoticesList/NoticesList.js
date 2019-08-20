@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
-import { filter } from 'lodash';
 
 import {
   Button,
@@ -13,7 +12,8 @@ import NoticeCard from '../NoticeCard';
 
 import {
   noticesSendEvent,
-  noticesSendEventMap,
+  requestTimeBasedEventsIds,
+  requestTimeBasedNoticesSendEvent,
 } from '../../../../../../constants';
 
 import css from './NoticesList.css';
@@ -56,8 +56,8 @@ class NoticesList extends React.Component {
       <React.Fragment>
         {fields.map((pathToNotice, noticeIndex) => {
           const notice = policy[sectionKey][noticeIndex];
-          const sendEvents = notice.sendOptions.isRequestExpirationEventSelected()
-            ? filter(noticesSendEvent, (item) => item.value !== noticesSendEventMap.AFTER)
+          const sendEvents = notice.sendOptions.isTimeBasedEventSelected(Object.values(requestTimeBasedEventsIds))
+            ? requestTimeBasedNoticesSendEvent
             : noticesSendEvent;
 
           return (
