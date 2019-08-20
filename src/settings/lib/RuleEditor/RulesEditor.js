@@ -21,7 +21,6 @@ import {
   rulesHint,
   initSubMenuDataFetching,
 } from './Rules-hint';
-import { ACTIVE_HINT_ELEMENT_CLASS } from '../../../constants';
 
 import '!style-loader!css-loader!./CodeMirrorCustom.css'; // eslint-disable-line import/no-webpack-loader-syntax
 import css from './RulesEditor.css';
@@ -73,83 +72,42 @@ const propTypes = {
 };
 
 // custom handlers for working with the ever-present code hinting
-function moveFocusDown(cm, handle) {
-  const {
-    currentSectionIndex,
-    data,
-    sections,
-  } = cm.state.completionActive.widget;
-  const currentSection = data.sections[currentSectionIndex];
-
-  if (currentSectionIndex === 0 && currentSection.selectedHintIndex === -1) {
-    handle.data.sections[currentSectionIndex].selectedHintIndex = 0;
-
-    const hintNode = sections[currentSectionIndex].getListNodeAt(0);
-
-    hintNode.className += ` ${ACTIVE_HINT_ELEMENT_CLASS}`;
-    sections[currentSectionIndex].selectedHintIndex = 0;
-    Codemirror.signal(data, 'select', currentSection.list[0], hintNode);
-  } else {
-    handle.moveFocus(1);
-    currentSection.selectedHintIndex += 1;
-  }
-}
-
-function moveFocusUp(cm, handle) {
-  const {
-    currentSectionIndex,
-    data,
-    sections,
-  } = cm.state.completionActive.widget;
-
-  const isFirstHint = currentSectionIndex === 0 && data.sections[currentSectionIndex].selectedHintIndex <= 0;
-
-  if (isFirstHint) {
-    const { selectedHintIndex } = handle.data.sections[currentSectionIndex];
-    const hintNode = sections[currentSectionIndex].getListNodeAt(selectedHintIndex);
-
-    if (hintNode) {
-      hintNode.className = hintNode.className.replace(` ${ACTIVE_HINT_ELEMENT_CLASS}`, '');
-    }
-
-    handle.data.sections[currentSectionIndex].selectedHintIndex = -1;
-    sections[currentSectionIndex].selectedHintIndex = -1;
-    cm.focus();
-  } else {
-    handle.moveFocus(-1);
-    data.sections[currentSectionIndex].selectedHintIndex -= 1;
-  }
-}
+const moveFocus = value => (cm, handle) => handle.moveFocus(value);
 
 function handleEnter(cm, handle) {
+  if (selectHint(cm, handle)) {
+    return;
+  }
+
+  cm.execCommand('newlineAndIndent');
+}
+
+function selectHint(cm, handle) {
   const { currentSectionIndex } = cm.state.completionActive.widget;
   const currentSection = handle.data.sections[currentSectionIndex];
 
-  if (currentSection.selectedHintIndex === -1) {
-    cm.execCommand('newlineAndIndent');
-  } else {
+  if (currentSection.selectedHintIndex !== -1) {
     handle.pick();
+
+    return true;
   }
 }
 
 function handleTab(cm, handle) {
-  const { currentSectionIndex } = cm.state.completionActive.widget;
-  const currentSection = handle.data.sections[currentSectionIndex];
-
-  if (currentSection.selectedHintIndex === -1) {
-    if (cm.somethingSelected()) {
-      cm.indentSelection('add');
-
-      return;
-    }
-
-    const activeDocument = cm.getDoc();
-    const cursor = activeDocument.getCursor(); // gets the line number in the cursor position
-
-    activeDocument.replaceRange('\t', cursor); // adds a new line
-  } else {
-    handle.pick();
+  if (selectHint(cm, handle)) {
+    return;
   }
+
+  if (cm.somethingSelected()) {
+    cm.indentSelection('add');
+
+    return;
+  }
+
+  const activeDocument = cm.getDoc();
+  const cursor = activeDocument.getCursor(); // gets the line number in the cursor position
+
+  activeDocument.replaceRange('\t', cursor); // adds a new line
 }
 
 function createTriangle(isOpen = true) {
@@ -376,8 +334,8 @@ class RulesEditor extends React.Component {
       completeSingle: false,
       hideOnUnfocus: true,
       customKeys: {
-        Up: moveFocusUp,
-        Down: moveFocusDown,
+        Up: moveFocus(-1),
+        Down: moveFocus(1),
         PageUp: (codeMirror, handle) => { handle.moveFocus(-handle.menuSize() + 1, true); },
         PageDown: (codeMirror, handle) => { handle.moveFocus(handle.menuSize() - 1, true); },
         Home: (codeMirror, handle) => { handle.setFocus(0); },

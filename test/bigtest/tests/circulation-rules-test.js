@@ -127,8 +127,8 @@ describe('CirculationRules', () => {
           await circulationRules.editor.pressArrowUp();
         });
 
-        it('should not contain active items', () => {
-          expect(circulationRules.editor.hints.sections(0).isActiveItemPresent).to.be.false;
+        it('should contain active items', () => {
+          expect(circulationRules.editor.hints.sections(0).isActiveItemPresent).to.be.true;
         });
       });
 
