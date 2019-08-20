@@ -71,6 +71,16 @@ const propTypes = {
   filter: PropTypes.string,
 };
 
+function handleBackspace(cm) {
+  const { widget } = cm.state.completionActive;
+
+  if (widget.currentSectionIndex < 1) {
+    return cm.deleteH(-1, 'char');
+  }
+
+  widget.moveToPreviousSectionInCurrentSectionsList();
+}
+
 // custom handlers for working with the ever-present code hinting
 const moveFocus = value => (cm, handle) => handle.moveFocus(value);
 
@@ -342,6 +352,7 @@ class RulesEditor extends React.Component {
         End: (codeMirror, handle) => { handle.setFocus(handle.length - 1); },
         Enter: handleEnter,
         Tab: handleTab,
+        Backspace: handleBackspace,
         Esc: noop,
       }
     };
