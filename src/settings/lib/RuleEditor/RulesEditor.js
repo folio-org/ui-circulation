@@ -374,7 +374,6 @@ class RulesEditor extends React.Component {
 
     const hintOptions = {
       completeSingle: false,
-      completeOnSingleClick: true,
       hideOnUnfocus: true,
       customKeys: {
         Up: moveFocusUp,

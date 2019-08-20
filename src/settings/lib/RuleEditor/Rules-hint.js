@@ -67,7 +67,6 @@ function getTypeOptions(selector, typeKey) {
     text: `${text} `,
     displayText,
     className: 'rule-hint-minor',
-    completeOnSingleClick: true,
     id: selector.id,
   };
 }
@@ -117,7 +116,6 @@ export function rulesHint(Codemirror, props) {
         text: newRuleText,
         displayText: formatMessage({ id: 'ui-circulation.settings.circulationRules.newRule' }),
         className: 'rule-hint-major',
-        completeOnSingleClick: true,
       });
     }
 
@@ -134,7 +132,6 @@ export function rulesHint(Codemirror, props) {
           text: `${key} `,
           displayText: `${key}: ${text}`,
           className: 'rule-hint-minor',
-          completeOnSingleClick: true,
         });
       });
     }
@@ -177,7 +174,6 @@ export function rulesHint(Codemirror, props) {
           text: `${key} `,
           displayText: formatMessage({ id: `ui-circulation.settings.circulationRules.${value}` }),
           className: 'rule-hint-minor',
-          completeOnSingleClick: true,
         });
       });
     }
@@ -193,7 +189,6 @@ export function rulesHint(Codemirror, props) {
             text: `${selector} `,
             displayText: selector,
             className: 'rule-hint-minor',
-            completeOnSingleClick: true,
           });
         });
       }
@@ -241,7 +236,6 @@ export function initSubMenuDataFetching(Codemirror, props) {
         text,
         displayText: text,
         className: 'rule-hint-minor',
-        completeOnSingleClick: true,
         inactive: true,
       });
     }

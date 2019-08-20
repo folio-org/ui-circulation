@@ -24,7 +24,6 @@ const defaultOptions = {
   alignWithWord: true,
   closeCharacters: /[\s()[]{};:>,]/,
   closeOnUnfocus: true,
-  completeOnSingleClick: true,
   container: null,
   customKeys: null,
   extraKeys: null
@@ -322,24 +321,12 @@ class Widget {
       this.container.style.left = `${this.position.left + startScroll.left - curScroll.left}px`;
     });
 
-    CodeMirror.on(this.container, 'dblclick', e => {
-      const hint = Widget.getHintElement(this.getCurrentSection().listContainer, e.target);
-
-      if (hint && hint.hintId != null) {
-        this.changeActive(hint.hintId);
-        this.pick();
-      }
-    });
-
     CodeMirror.on(this.container, 'click', e => {
       const hint = Widget.getHintElement(this.getCurrentSection().listContainer, e.target);
 
       if (hint && hint.hintId != null) {
         this.changeActive(hint.hintId);
-
-        if (completion.options.completeOnSingleClick) {
-          this.pick();
-        }
+        this.pick();
       }
     });
 

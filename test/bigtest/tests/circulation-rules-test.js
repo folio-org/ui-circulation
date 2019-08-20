@@ -715,16 +715,6 @@ describe('CirculationRules', () => {
         expect(circulationRules.editor.value).to.equal('m book: l ');
       });
     });
-
-    describe('click on the first item in policies list', () => {
-      beforeEach(async () => {
-        await circulationRules.editor.hints.doubleClickOnItem(0);
-      });
-
-      it('should choose loan policy type', () => {
-        expect(circulationRules.editor.value).to.equal('m book: l ');
-      });
-    });
   });
 
   describe('choosing loan policy', () => {
