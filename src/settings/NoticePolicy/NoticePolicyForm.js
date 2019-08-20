@@ -118,6 +118,7 @@ class NoticePolicyForm extends React.Component {
     return (
       <form
         data-test-notice-policy-form
+        noValidate
         onSubmit={handleSubmit(this.saveForm)}
       >
         <Paneset isRoot>

@@ -288,6 +288,7 @@
   "settings.noticePolicy.requestNotices.pagingRequest": "Page",
   "settings.noticePolicy.requestNotices.available": "Available",
   "settings.noticePolicy.requestNotices.holdExpiration": "Hold expiration",
+  "settings.noticePolicy.requestNotices.requestExpiration": "Request expiration",
   "settings.noticePolicy.requestNotices.requestCancelation": "Cancel",
   "settings.noticePolicy.notices.triggeringEvent": "Triggering event",
   "settings.noticePolicy.loanNotices.dueDate": "Loan due date/time",

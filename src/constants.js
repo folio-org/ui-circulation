@@ -224,6 +224,7 @@ export const requestUserInitiatedEventsIds = {
 
 export const requestTimeBasedEventsIds = {
   HOLD_EXPIRATION: 'Hold Expiration',
+  REQUEST_EXPIRATION: 'Request expiration',
 };
 
 export const requestItemStateChangeEventsIds = {
@@ -258,6 +259,10 @@ export const requestNoticesTriggeringEvents = [
   {
     value: requestItemStateChangeEventsIds.AVAILABLE,
     label: 'ui-circulation.settings.noticePolicy.requestNotices.available',
+  },
+  {
+    value: requestTimeBasedEventsIds.REQUEST_EXPIRATION,
+    label: 'ui-circulation.settings.noticePolicy.requestNotices.requestExpiration',
   },
 ];
 

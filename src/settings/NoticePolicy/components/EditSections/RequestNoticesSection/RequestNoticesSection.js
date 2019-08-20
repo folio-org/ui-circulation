@@ -31,11 +31,11 @@ class RequestNoticesSection extends React.Component {
     } = this.props;
 
     const props = {
-      sectionKey: 'requestNotices',
       policy,
+      sectionKey: 'requestNotices',
       templates,
-      triggeringEvents: requestNoticesTriggeringEvents,
       timeBasedEventsIds: values(requestTimeBasedEventsIds),
+      triggeringEvents: requestNoticesTriggeringEvents,
     };
 
     return (
