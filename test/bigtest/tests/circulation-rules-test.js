@@ -494,6 +494,43 @@ describe('CirculationRules', () => {
     });
   });
 
+  describe('backspace button', () => {
+    beforeEach(async () => {
+      await circulationRules.editor.setValueWithoutShowingHint('b ');
+      await circulationRules.editor.textArea.focus();
+    });
+
+    describe('with reset to previous section behaviour', () => {
+      beforeEach(async () => {
+        // select first institute
+        await circulationRules.editor.hints.clickOnItem(0);
+
+        // reset selection
+        await circulationRules.editor.pressBackspace();
+
+        // select first institute
+        await circulationRules.editor.hints.clickOnItem(0);
+
+        // select first campus
+        await circulationRules.editor.hints.clickOnItem(1, 1);
+      });
+
+      it('should be treated properly', () => {
+        expect(circulationRules.editor.value).to.equal(`b ${replacer(campuses[campusesAmount - 1].code)} `);
+      });
+    });
+
+    describe('with normal behaviour', () => {
+      beforeEach(async () => {
+        await circulationRules.editor.pressBackspace();
+      });
+
+      it('should remove characters in editor', () => {
+        expect(circulationRules.editor.value).to.equal('b');
+      });
+    });
+  });
+
   describe('choosing type locating type - library', () => {
     beforeEach(async () => {
       await circulationRules.editor.setValue('c ');
@@ -670,7 +707,8 @@ describe('CirculationRules', () => {
 
   describe('choosing policy type', () => {
     beforeEach(async () => {
-      await circulationRules.editor.setValue('m book: ');
+      await circulationRules.editor.setValueWithoutShowingHint('m book: ');
+      await circulationRules.editor.textArea.focus();
     });
 
     describe('press enter on the selected item', () => {

@@ -105,6 +105,15 @@ const scrollingOffset = 3;
     }).run();
   });
 
+  setValueWithoutShowingHint = action(function (value) {
+    return this.find('.CodeMirror').do(({ CodeMirror }) => {
+      CodeMirror.doc.setValue(value);
+      CodeMirror.setCursor(CodeMirror.lineCount(), 0);
+
+      return CodeMirror;
+    }).run();
+  });
+
   pickHint = action(function (index = 0) {
     return this.find('.CodeMirror').do(({ CodeMirror }) => {
       const {
@@ -144,6 +153,7 @@ const scrollingOffset = 3;
   pressTab = this.pressKey(9);
   pressArrowDown = this.pressKey(40);
   pressArrowUp = this.pressKey(38);
+  pressBackspace = this.pressKey(8);
 
   textArea = new Interactor('textarea');
   hints = new Hints();
