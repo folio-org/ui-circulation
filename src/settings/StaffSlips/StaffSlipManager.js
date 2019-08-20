@@ -3,14 +3,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { EntryManager } from '@folio/stripes/smart-components';
-import { stripesConnect } from '@folio/stripes/core';
+import {
+  stripesConnect,
+  IntlConsumer,
+} from '@folio/stripes/core';
 
 import StaffSlipDetail from './StaffSlipDetail';
 import StaffSlipForm from './StaffSlipForm';
 
 class StaffSlipManager extends React.Component {
   static propTypes = {
-    label: PropTypes.string.isRequired,
     resources: PropTypes.shape({
       entries: PropTypes.shape({
         records: PropTypes.arrayOf(PropTypes.object),
@@ -53,26 +55,29 @@ class StaffSlipManager extends React.Component {
     const {
       mutator,
       resources,
-      label,
     } = this.props;
 
     return (
-      <EntryManager
-        {...this.props}
-        parentMutator={mutator}
-        entryList={sortBy((resources.entries || {}).records || [], ['name'])}
-        detailComponent={StaffSlipDetail}
-        paneTitle={label}
-        entryLabel={label}
-        entryFormComponent={StaffSlipForm}
-        validate={this.validate}
-        nameKey="name"
-        permissions={{
-          put: 'ui-circulation.settings.staff-slips',
-          post: 'ui-circulation.settings.staff-slips.post',
-          delete: 'ui-circulation.settings.staff-slips.delete'
-        }}
-      />
+      <IntlConsumer>
+        {(intl) => (
+          <EntryManager
+            {...this.props}
+            parentMutator={mutator}
+            entryList={sortBy((resources.entries || {}).records || [], ['name'])}
+            detailComponent={StaffSlipDetail}
+            paneTitle={<FormattedMessage id="ui-circulation.settings.index.staffSlips" />}
+            entryLabel={intl.formatMessage({ id: 'ui-circulation.settings.staffSlips.staffSlipTokenHeader' })}
+            entryFormComponent={StaffSlipForm}
+            validate={this.validate}
+            nameKey="name"
+            permissions={{
+              put: 'ui-circulation.settings.staff-slips',
+              post: 'ui-circulation.settings.staff-slips.post',
+              delete: 'ui-circulation.settings.staff-slips.delete'
+            }}
+          />
+        )}
+      </IntlConsumer>
     );
   }
 }

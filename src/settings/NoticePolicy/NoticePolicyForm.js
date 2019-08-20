@@ -148,6 +148,7 @@ class NoticePolicyForm extends React.Component {
               metadata={policy.metadata}
               connect={stripes.connect}
               onToggle={this.handleSectionToggle}
+              isPolicyActive={policy.active}
             />
             <LoanNoticesSection
               isOpen={sections.loanNotices}
