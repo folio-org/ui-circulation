@@ -358,5 +358,6 @@
     "settings.circulationRules.selectLibrary": "Selecione a biblioteca",
     "settings.circulationRules.locations": "Localizações",
     "settings.circulationRules.location": "Localização",
-    "settings.circulationRules.selectLocation": "Selecione a localização"
+    "settings.circulationRules.selectLocation": "Selecione a localização",
+    "settings.noticePolicy.requestNotices.requestExpiration": "Request expiration"
 }
