@@ -89,26 +89,19 @@ const scrollingOffset = 3;
   };
 
   clickOnItem = this.triggerItemEvent('click');
-  doubleClickOnItem = this.triggerItemEvent('dblclick');
 }
 
 @interactor class Editor {
   static defaultScope = '.react-codemirror2';
 
-  setValue = action(function (value) {
+  setValue = action(function (value, showHint = true) {
     return this.find('.CodeMirror').do(({ CodeMirror }) => {
       CodeMirror.doc.setValue(value);
       CodeMirror.setCursor(CodeMirror.lineCount(), 0);
-      CodeMirror.showHint();
 
-      return CodeMirror;
-    }).run();
-  });
-
-  setValueWithoutShowingHint = action(function (value) {
-    return this.find('.CodeMirror').do(({ CodeMirror }) => {
-      CodeMirror.doc.setValue(value);
-      CodeMirror.setCursor(CodeMirror.lineCount(), 0);
+      if (showHint) {
+        CodeMirror.showHint();
+      }
 
       return CodeMirror;
     }).run();

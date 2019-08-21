@@ -20,6 +20,14 @@ const removeDisplayedHints = () => {
   }
 };
 
+const getEditorHintSection = sectionIndex => circulationRules.editor.hints.sections(sectionIndex);
+
+// shows hints with custom 'customKeys' handlers like 'handleBackspace' attached
+const showHintsWithAttachedCustomKeysHandlers = async editorValue => {
+  await circulationRules.editor.setValue(editorValue, false);
+  await circulationRules.editor.textArea.focus();
+};
+
 describe('CirculationRules', () => {
   setupApplication();
 
@@ -27,8 +35,9 @@ describe('CirculationRules', () => {
   let requestPolicies;
   let patronNoticePolicies;
   let institutions;
-  let campuses;
-  let libraries;
+  let campuses1;
+  let campuses2;
+  let libraries1;
   let locations;
 
   const shortInstitutionCode = 'INST';
@@ -51,12 +60,15 @@ describe('CirculationRules', () => {
     loanPolicies = await this.server.createList('loanPolicy', 3);
     requestPolicies = await this.server.createList('requestPolicy', 3);
     patronNoticePolicies = await this.server.createList('patronNoticePolicy', 3);
-    const institutionsWithShortCode = this.server.createList('institution', 1, { code: shortInstitutionCode });
-    institutions = await this.server.createList('institution', institutionsAmount - 1, { code: longInstitutionCode });
-    institutions.unshift(...institutionsWithShortCode);
-    campuses = await this.server.createList('campus', campusesAmount, { institutionId: institutions[0].id, code: '|campCode >|' });
-    libraries = await this.server.createList('library', librariesAmount, { campusId: campuses[0].id, code: '|libCode *|libCode *' });
-    locations = await this.server.createList('location', locationsAmount, { libraryId: libraries[0].id, code: '=locateCode|', name: 'A-location' });
+    const institutionsWithShortCode1 = this.server.createList('institution', 1, { code: `${shortInstitutionCode}1` });
+    const institutionsWithShortCode2 = this.server.createList('institution', 1, { code: `${shortInstitutionCode}2` });
+    institutions = await this.server.createList('institution', institutionsAmount - 2, { code: longInstitutionCode });
+    institutions.unshift(...institutionsWithShortCode1, ...institutionsWithShortCode2);
+    campuses1 = await this.server.createList('campus', campusesAmount, { institutionId: institutions[0].id, code: '|campCode >|' });
+    campuses2 = await this.server.createList('campus', 1, { institutionId: institutions[1].id, code: 'campCode2' });
+    libraries1 = await this.server.createList('library', librariesAmount, { campusId: campuses1[0].id, code: '|libCode *|libCode *' });
+    await this.server.createList('library', 1, { campusId: campuses2[0].id, code: 'libCode2' });
+    locations = await this.server.createList('location', locationsAmount, { libraryId: libraries1[0].id, code: '=locateCode|', name: 'A-location' });
 
     return this.visit('/settings/circulation/rules', () => {
       expect(circulationRules.$root).to.exist;
@@ -67,40 +79,40 @@ describe('CirculationRules', () => {
     removeDisplayedHints();
   });
 
-  it('has rules form', () => {
+  it('should have rules form', () => {
     expect(circulationRules.formPresent).to.be.true;
   });
 
-  it('has rules editor', () => {
+  it('should have rules editor', () => {
     expect(circulationRules.editorPresent).to.be.true;
   });
 
-  it('is save button disabled without changes', () => {
+  it('should have disabled save button when there is no changes', () => {
     expect(circulationRules.isSaveButtonDisabled).to.be.true;
   });
 
-  describe('filter rules', () => {
+  describe('rules filtering', () => {
     beforeEach(async () => {
       await circulationRules.filter('term');
     });
 
-    it('does not break the editor', () => {
+    it('should not break the editor', () => {
       expect(circulationRules.editorPresent).to.be.true;
     });
   });
 
-  describe('press Enter without selected hints', () => {
+  describe('pressing Enter button without selected hints', () => {
     beforeEach(async () => {
       await circulationRules.editor.textArea.focus();
       await circulationRules.editor.pressEnter();
     });
 
-    it('should add new line symbol', () => {
+    it('should add a new line symbol', () => {
       expect(circulationRules.editor.value).to.equal('\n');
     });
   });
 
-  describe('focus the editor', () => {
+  describe('focusing the editor', () => {
     beforeEach(async () => {
       await circulationRules.editor.textArea.focus();
     });
@@ -109,54 +121,50 @@ describe('CirculationRules', () => {
       expect(circulationRules.editor.hints.arePresent).to.be.true;
     });
 
-    describe('press down arrow key', () => {
+    describe('pressing down arrow key', () => {
       beforeEach(async () => {
         await circulationRules.editor.pressArrowDown();
       });
 
-      it('should contain the active item', () => {
-        expect(circulationRules.editor.hints.sections(0).isActiveItemPresent).to.be.true;
-      });
-
-      it('the first item should be selected', () => {
+      it('should make the first item selected', () => {
         expect(circulationRules.editor.hints.sections(0).isFirstItemActive).to.be.true;
       });
 
-      describe('press up arrow key', () => {
+      describe('pressing up arrow key', () => {
         beforeEach(async () => {
           await circulationRules.editor.pressArrowUp();
         });
 
-        it('should contain active items', () => {
+        it('should make the first item active', () => {
           expect(circulationRules.editor.hints.sections(0).isActiveItemPresent).to.be.true;
         });
       });
 
-      describe('move selection to the last item', () => {
+      describe('moving selection to the last item', () => {
         beforeEach(async () => {
           const hintsCount = circulationRules.editor.hints.sections(0).itemsCount;
           circulationRules.editor.changeActiveItem(hintsCount - 1);
         });
 
-        it('the last item should be active', () => {
+        it('should make it active', () => {
           expect(circulationRules.editor.hints.sections(0).isLastItemActive).to.be.true;
         });
 
-        describe('press down arrow key', () => {
+        describe('pressing down arrow key', () => {
           beforeEach(async () => {
             await circulationRules.editor.pressArrowDown();
           });
 
-          it('the first item should be active', () => {
+          it('should make the first item active', () => {
             expect(circulationRules.editor.hints.sections(0).isFirstItemActive).to.be.true;
           });
 
-          describe('press up arrow key', () => {
+          describe('pressing up arrow key', () => {
             beforeEach(async () => {
               await circulationRules.editor.pressArrowUp();
             });
 
-            it('the last item should be active', () => {
+            it('should make the last item active', () => {
               expect(circulationRules.editor.hints.sections(0).isLastItemActive).to.be.true;
             });
           });
@@ -165,34 +173,34 @@ describe('CirculationRules', () => {
     });
   });
 
-  describe('press Tab without selected hints', () => {
+  describe('pressing Tab without selected hints', () => {
     beforeEach(async () => {
       await circulationRules.editor.textArea.focus();
       await circulationRules.editor.pressTab();
     });
 
-    it('should add tab symbol', () => {
+    it('should a add tab symbol', () => {
       expect(circulationRules.editor.value).to.equal('\t');
     });
   });
 
   describe('entering circulation rule into editor', () => {
     beforeEach(async () => {
-      await circulationRules.editor.setValue('m book: l example-loan-policy');
+      await showHintsWithAttachedCustomKeysHandlers('m book: l example-loan-policy');
     });
 
-    it('should set new circulation rule', () => {
+    it('should update the editor value', () => {
       expect(circulationRules.editor.value).to.equal('m book: l example-loan-policy');
     });
 
-    it('is save button enabled after changes', () => {
+    it('should enable save button', () => {
       expect(circulationRules.isSaveButtonDisabled).to.be.false;
     });
   });
 
   describe('entering item type', () => {
     beforeEach(async () => {
-      await circulationRules.editor.setValue('m book: ');
+      await showHintsWithAttachedCustomKeysHandlers('m book: ');
     });
 
     it('should display hints menu', () => {
@@ -223,10 +231,10 @@ describe('CirculationRules', () => {
 
   describe('choosing non locating type - material type', () => {
     beforeEach(async () => {
-      await circulationRules.editor.setValue('m ');
+      await showHintsWithAttachedCustomKeysHandlers('m ');
     });
 
-    it('should display hints with list of material types', () => {
+    it('should display material types hints list', () => {
       expect(circulationRules.editor.hints.arePresent).to.be.true;
     });
 
@@ -242,17 +250,17 @@ describe('CirculationRules', () => {
       expect(circulationRules.editor.hints.sections(0).subheader.isPresent).to.be.false;
     });
 
-    it('the section should not be scrollable by default', () => {
+    it('should have the section which is non scrollable by default', () => {
       expect(circulationRules.editor.hints.sections(0).isScrollable()).to.be.false;
     });
   });
 
   describe('choosing type locating type - institution', () => {
     beforeEach(async () => {
-      await circulationRules.editor.setValue('a ');
+      await showHintsWithAttachedCustomKeysHandlers('a ');
     });
 
-    it('should display hints with list of institutions codes', () => {
+    it('should display institutions codes hints list', () => {
       expect(circulationRules.editor.hints.arePresent).to.be.true;
     });
 
@@ -270,100 +278,84 @@ describe('CirculationRules', () => {
     });
 
     it('should truncate long locations codes', () => {
-      expect(circulationRules.editor.hints.sections(0).items(1).text).to.equal(truncatedInstitutionCode);
+      expect(circulationRules.editor.hints.sections(0).items(2).text).to.equal(truncatedInstitutionCode);
     });
 
-    it('the section should be scrollable where there are a lot of items', () => {
+    it('should have the section scrollable as it has many items', () => {
       expect(circulationRules.editor.hints.sections(0).isScrollable()).to.be.true;
     });
 
-    describe('active the first list item', () => {
+    describe('activating the first list item', () => {
       beforeEach(async () => {
         await circulationRules.editor.changeActiveItem(0);
       });
 
-      it('should contain the active item', () => {
+      it('should make the first item active', () => {
         expect(circulationRules.editor.hints.sections(0).isActiveItemPresent).to.be.true;
       });
     });
 
-    describe('select the last item', () => {
+    describe('selecting the last item', () => {
       beforeEach(async () => {
         await circulationRules.editor.changeActiveItem(institutionsAmount - 4);
       });
 
-      it('the container should be scrolled down to the item', () => {
+      it('should scroll the container down to the item', () => {
         expect(circulationRules.editor.hints.sections(0).isScrolledToBottom(institutionsAmount - 4)).to.be.true;
       });
 
-      describe('select the second item', () => {
+      describe('selecting the second item', () => {
         beforeEach(async () => {
           await circulationRules.editor.changeActiveItem(1);
         });
 
-        it('the container should be scrolled top to the item', () => {
+        it('should scroll the container to the second item', () => {
           expect(circulationRules.editor.hints.sections(0).isScrolledToTop(1)).to.be.true;
         });
       });
     });
 
-    describe('active item with index, that is greater than the list length, without wrapping avoiding', () => {
+    describe('activating item with index, that is greater than the list length, without wrapping avoiding', () => {
       beforeEach(async () => {
         await circulationRules.editor.changeActiveItem(institutionsAmount + 1);
       });
 
-      it('should contain the active item', () => {
-        expect(circulationRules.editor.hints.sections(0).isActiveItemPresent).to.be.true;
-      });
-
-      it('the fist item should be active', () => {
+      it('should make the first item active', () => {
         expect(circulationRules.editor.hints.sections(0).isFirstItemActive).to.be.true;
       });
     });
 
-    describe('active item with index, that is greater than the list length, with wrapping avoiding', () => {
+    describe('activating item with index greater than the list length, with wrapping avoiding', () => {
       beforeEach(async () => {
         await circulationRules.editor.changeActiveItem(institutionsAmount + 1, true);
       });
 
-      it('should contain the active item', () => {
-        expect(circulationRules.editor.hints.sections(0).isActiveItemPresent).to.be.true;
-      });
-
-      it('the last item should be active', () => {
+      it('should make the last item active', () => {
         expect(circulationRules.editor.hints.sections(0).isLastItemActive).to.be.true;
       });
     });
 
-    describe('active item with negative index without wrapping avoiding', () => {
+    describe('activating item with negative index without wrapping avoiding', () => {
       beforeEach(async () => {
         await circulationRules.editor.changeActiveItem(-1);
       });
 
-      it('should contain the active item', () => {
-        expect(circulationRules.editor.hints.sections(0).isActiveItemPresent).to.be.true;
-      });
-
-      it('the last item should be active', () => {
+      it('should make the last item active', () => {
         expect(circulationRules.editor.hints.sections(0).isLastItemActive).to.be.true;
       });
     });
 
-    describe('active item with negative index with wrapping avoiding', () => {
+    describe('activating item with negative index with wrapping avoiding', () => {
       beforeEach(async () => {
         await circulationRules.editor.changeActiveItem(-1, true);
       });
 
-      it('should contain the active item', () => {
-        expect(circulationRules.editor.hints.sections(0).isActiveItemPresent).to.be.true;
-      });
-
-      it('the first item should be active', () => {
+      it('should make the first item active', () => {
         expect(circulationRules.editor.hints.sections(0).isFirstItemActive).to.be.true;
       });
     });
 
-    describe('pick an institution with long name', () => {
+    describe('picking an institution with long name', () => {
       beforeEach(async () => {
         await circulationRules.editor.changeActiveItem(0);
         await circulationRules.editor.pickHint(0);
@@ -376,25 +368,25 @@ describe('CirculationRules', () => {
       });
     });
 
-    describe('click on header', () => {
+    describe('clicking on header', () => {
       beforeEach(async () => {
         await circulationRules.editor.changeActiveItem(0);
         await circulationRules.editor.hints.header.click();
       });
 
-      it('should not handle clicks on header', () => {
+      it('should not change hints state', () => {
         expect(circulationRules.editor.hints.arePresent).to.be.true;
         expect(circulationRules.editor.hints.sections(0).isFirstItemActive).to.be.true;
       });
     });
 
-    describe('click on subheader', () => {
+    describe('clicking on subheader', () => {
       beforeEach(async () => {
         await circulationRules.editor.changeActiveItem(0);
         await circulationRules.editor.hints.sections(0).subheader.click();
       });
 
-      it('should not handle clicks on subheaders', () => {
+      it('should not change hints state', () => {
         expect(circulationRules.editor.hints.arePresent).to.be.true;
         expect(circulationRules.editor.hints.sections(0).isFirstItemActive).to.be.true;
       });
@@ -403,10 +395,10 @@ describe('CirculationRules', () => {
 
   describe('choosing type locating type - campus', () => {
     beforeEach(async () => {
-      await circulationRules.editor.setValue('b ');
+      await showHintsWithAttachedCustomKeysHandlers('b ');
     });
 
-    it('should display hints with list to select campus codes', () => {
+    it('should display campus codes hints list', () => {
       expect(circulationRules.editor.hints.arePresent).to.be.true;
     });
 
@@ -415,7 +407,7 @@ describe('CirculationRules', () => {
       expect(circulationRules.editor.hints.header.text).to.equal('Select campus');
     });
 
-    it('should display 2 hints sections', () => {
+    it('should display two hints sections', () => {
       expect(circulationRules.editor.hints.sectionsCount).to.equal(2);
     });
 
@@ -424,119 +416,156 @@ describe('CirculationRules', () => {
       expect(circulationRules.editor.hints.sections(1).subheader.text).to.equal('Campus');
     });
 
-    it('the first section should be filled by default', () => {
+    it('should display the first section filled by default', () => {
       expect(circulationRules.editor.hints.sections(0).items().length).to.equal(institutionsAmount);
     });
 
-    it('the second section should be empty by default', () => {
+    it('should display the second section filled by default', () => {
       expect(circulationRules.editor.hints.sections(1).items().length).to.equal(0);
     });
 
-    it('the first section should not contain a special value ANY', () => {
+    it('should display the second section without the special value ANY', () => {
       expect(circulationRules.editor.hints.sections(0).items(0).text).to.equal(institutions[0].code);
     });
 
-    describe('pick an institution that contains campuses', () => {
+    describe('picking an institution that contains campuses', () => {
       beforeEach(async () => {
         await circulationRules.editor.hints.clickOnItem(0);
       });
 
-      it('the second section should be filled by campuses codes', () => {
+      it('should display the second section filled with campuses codes', () => {
         expect(circulationRules.editor.hints.sections(1).items().length).to.equal(campusesAmount + 1);
       });
 
-      it('the editor value should not be changed', () => {
+      it('should not change the editor value', () => {
         expect(circulationRules.editor.value).to.equal('b ');
       });
 
-      it('the second section should contain a special value ANY', () => {
+      it('should display the second section with the special value ANY', () => {
         expect(circulationRules.editor.hints.sections(1).items(0).text).to.equal('<ANY>');
       });
 
-      it('the first item of the second section should be selected by default', () => {
-        expect(circulationRules.editor.hints.sections(1).isFirstItemActive).to.be.true;
-      });
-
-      it('the selected item of the first section should be highlighted', () => {
+      it('should have the first item selected in the first section', () => {
         expect(circulationRules.editor.hints.sections(0).isFirstItemActive).to.be.true;
       });
 
-      it('the values should be formatted and truncated', () => {
-        const fullValue = `${replacer(campuses[0].code)} (${institutions[0].code})`;
+      it('should have the first item selected by default in the second section', () => {
+        expect(circulationRules.editor.hints.sections(1).isFirstItemActive).to.be.true;
+      });
+
+      it('should have formatted and truncated values in the second section', () => {
+        const fullValue = `${replacer(campuses1[0].code)} (${institutions[0].code})`;
         const truncatedValue = truncate(fullValue, truncateOptions);
 
         expect(circulationRules.editor.hints.sections(1).items(1).text).to.equal(truncatedValue);
       });
 
-      describe('move selection in the second section to the last item', () => {
+      describe('moving selection in the second section to the last item', () => {
         beforeEach(async () => {
           await circulationRules.editor.changeActiveItem(campusesAmount);
         });
 
-        it('the last item of the second section should be selected', () => {
+        it('should make the last item of the second section selected', () => {
           expect(circulationRules.editor.hints.sections(1).isLastItemActive).to.be.true;
         });
 
-        it('the selection of the first section should not be changed', () => {
+        it('should not change the selection of the first section', () => {
           expect(circulationRules.editor.hints.sections(0).isFirstItemActive).to.be.true;
         });
 
-        describe('select selected item in the second section', () => {
+        describe('selecting active item in the second section', () => {
           beforeEach(async () => {
             await circulationRules.editor.pickHint(campusesAmount);
           });
 
-          it('the campus code should be added to the editor value', () => {
-            expect(circulationRules.editor.value).to.equal(`b ${replacer(campuses[campusesAmount - 1].code)} `);
+          it('should add the campus code to the editor', () => {
+            expect(circulationRules.editor.value).to.equal(`b ${replacer(campuses1[campusesAmount - 1].code)} `);
           });
         });
       });
     });
   });
 
-  describe('backspace button', () => {
+  describe('navigating between sections', () => {
     beforeEach(async () => {
-      await circulationRules.editor.setValueWithoutShowingHint('b ');
-      await circulationRules.editor.textArea.focus();
+      await showHintsWithAttachedCustomKeysHandlers('b ');
     });
 
-    describe('with reset to previous section behaviour', () => {
-      beforeEach(async () => {
-        // select first institute
-        await circulationRules.editor.hints.clickOnItem(0);
+    describe('clicking Backspace button', () => {
+      describe('with reset to previous section behaviour', () => {
+        beforeEach(async () => {
+          // select first institution
+          await circulationRules.editor.hints.clickOnItem(0);
 
-        // reset selection
-        await circulationRules.editor.pressBackspace();
+          // undo institution selection
+          await circulationRules.editor.pressBackspace();
 
-        // select first institute
-        await circulationRules.editor.hints.clickOnItem(0);
+          // select first institution
+          await circulationRules.editor.hints.clickOnItem(0);
 
-        // select first campus
-        await circulationRules.editor.hints.clickOnItem(1, 1);
+          // select first campus
+          await circulationRules.editor.hints.clickOnItem(1, 1);
+        });
+
+        it('should work', () => {
+          expect(circulationRules.editor.value).to.equal(`b ${replacer(campuses1[campusesAmount - 1].code)} `);
+        });
       });
 
-      it('should be treated properly', () => {
-        expect(circulationRules.editor.value).to.equal(`b ${replacer(campuses[campusesAmount - 1].code)} `);
+      describe('with normal behaviour', () => {
+        beforeEach(async () => {
+          await circulationRules.editor.pressBackspace();
+        });
+
+        it('should remove characters in editor', () => {
+          expect(circulationRules.editor.value).to.equal('b');
+        });
       });
     });
 
-    describe('with normal behaviour', () => {
-      beforeEach(async () => {
-        await circulationRules.editor.pressBackspace();
+    describe('selection hint items with a mouse button', () => {
+      describe('clicking on different hint items', () => {
+        beforeEach(async () => {
+          // select first institution
+          await circulationRules.editor.hints.clickOnItem(0);
+
+          // select second institution
+          await circulationRules.editor.hints.clickOnItem(1);
+
+          // select first campus in second institution
+          await circulationRules.editor.hints.clickOnItem(1, 1);
+        });
+
+        it('should work', () => {
+          expect(circulationRules.editor.value).to.equal(`b ${replacer(campuses2[0].code)} `);
+        });
       });
 
-      it('should remove characters in editor', () => {
-        expect(circulationRules.editor.value).to.equal('b');
+      describe('clicking on the same hint item', () => {
+        beforeEach(async () => {
+          // select second institution
+          await circulationRules.editor.hints.clickOnItem(1);
+
+          // select the same institution (the item still should be selected)
+          await circulationRules.editor.hints.clickOnItem(1);
+
+          // select first campus in second institution
+          await circulationRules.editor.hints.clickOnItem(1, 1);
+        });
+
+        it('should work', () => {
+          expect(circulationRules.editor.value).to.equal(`b ${replacer(campuses2[0].code)} `);
+        });
       });
     });
   });
 
   describe('choosing type locating type - library', () => {
     beforeEach(async () => {
-      await circulationRules.editor.setValue('c ');
+      await showHintsWithAttachedCustomKeysHandlers('c ');
     });
 
-    it('should display hints with list to select library codes', () => {
+    it('should display library codes hints list', () => {
       expect(circulationRules.editor.hints.arePresent).to.be.true;
     });
 
@@ -555,55 +584,55 @@ describe('CirculationRules', () => {
       expect(circulationRules.editor.hints.sections(2).subheader.text).to.equal('Library');
     });
 
-    it('the first section should be filled by default', () => {
+    it('should display the first section filled by default', () => {
       expect(circulationRules.editor.hints.sections(0).items().length).to.equal(institutionsAmount);
     });
 
-    it('the second and the third sections should be empty by default', () => {
+    it('should have other sections empty by default', () => {
       expect(circulationRules.editor.hints.sections(1).items().length).to.equal(0);
       expect(circulationRules.editor.hints.sections(2).items().length).to.equal(0);
     });
 
-    describe('click on the first institution', () => {
+    describe('clicking on the first institution', () => {
       beforeEach(async () => {
         await circulationRules.editor.hints.clickOnItem(0);
       });
 
-      it('the second section (campus) section should be filled', () => {
+      it('should make the second section (campus) filled', () => {
         expect(circulationRules.editor.hints.sections(1).items().length).to.equal(campusesAmount + 1);
       });
 
-      it('the third section (library) should be empty', () => {
+      it('should affect third section (library) which should be empty', () => {
         expect(circulationRules.editor.hints.sections(2).items().length).to.equal(0);
       });
 
-      describe('click on the first campus', () => {
+      describe('clicking on the first campus', () => {
         beforeEach(async () => {
           await circulationRules.editor.hints.clickOnItem(1, 1);
         });
 
-        it('the third section (library) should be filled', () => {
+        it('should make the third section (library) filled', () => {
           expect(circulationRules.editor.hints.sections(2).items().length).to.equal(librariesAmount + 1);
         });
 
-        it('the first item of the third section should be selected by default', () => {
+        it('should make the first item selected by default in the third section', () => {
           expect(circulationRules.editor.hints.sections(2).isFirstItemActive).to.be.true;
         });
 
-        it('the values should be formatted and truncated', () => {
-          const fullValue = `${replacer(libraries[0].code)} (${institutions[0].code}-${replacer(campuses[0].code)})`;
+        it('should have formatted and truncated values in the third section', () => {
+          const fullValue = `${replacer(libraries1[0].code)} (${institutions[0].code}-${replacer(campuses1[0].code)})`;
           const truncatedValue = truncate(fullValue, truncateOptions);
 
           expect(circulationRules.editor.hints.sections(2).items(1).text).to.equal(truncatedValue);
         });
 
-        describe('click on the first library', () => {
+        describe('clicking on the first library', () => {
           beforeEach(async () => {
             await circulationRules.editor.hints.clickOnItem(1, 2);
           });
 
-          it('the library code should be added to the editor value', () => {
-            expect(circulationRules.editor.value).to.equal(`c ${replacer(libraries[0].code)} `);
+          it('should add library code to the editor value', () => {
+            expect(circulationRules.editor.value).to.equal(`c ${replacer(libraries1[0].code)} `);
           });
         });
       });
@@ -611,15 +640,13 @@ describe('CirculationRules', () => {
   });
 
   describe('choosing type locating type - location', () => {
-    const rulesEditor = circulationRules.editor;
-    const editorHints = rulesEditor.hints;
-    const getEditorHintSection = sectionIndex => editorHints.sections(sectionIndex);
+    const editorHints = circulationRules.editor.hints;
 
     beforeEach(async () => {
-      await rulesEditor.setValue('s ');
+      await showHintsWithAttachedCustomKeysHandlers('s ');
     });
 
-    it('should display hints with list to select location codes', () => {
+    it('should display location codes hints list ', () => {
       expect(editorHints.arePresent).to.be.true;
     });
 
@@ -639,65 +666,65 @@ describe('CirculationRules', () => {
       expect(getEditorHintSection(3).subheader.text).to.equal('Location');
     });
 
-    it('the first section should be filled by default', () => {
+    it('should display the first section filled by default', () => {
       expect(getEditorHintSection(0).items().length).to.equal(institutionsAmount);
     });
 
-    it('other sections should be empty by default', () => {
+    it('should have other sections empty by default', () => {
       expect(getEditorHintSection(1).items().length).to.equal(0);
       expect(getEditorHintSection(2).items().length).to.equal(0);
       expect(getEditorHintSection(3).items().length).to.equal(0);
     });
 
-    describe('click on the first institution', () => {
+    describe('clicking on the first institution', () => {
       beforeEach(async () => {
         await editorHints.clickOnItem(0);
       });
 
-      it('the second section (campus) section should be filled', () => {
+      it('should make the second section (campus) filled', () => {
         expect(getEditorHintSection(1).items().length).to.equal(campusesAmount + 1);
       });
 
-      describe('click on the first campus', () => {
+      describe('clicking on the first campus', () => {
         beforeEach(async () => {
           await editorHints.clickOnItem(1, 1);
         });
 
-        it('the third section (library) section should be filled', () => {
+        it('should make the third section (library) filled', () => {
           expect(getEditorHintSection(2).items().length).to.equal(librariesAmount + 1);
         });
 
-        describe('click on the first library', () => {
+        describe('clicking on the first library', () => {
           beforeEach(async () => {
             await editorHints.clickOnItem(1, 2);
           });
 
-          it('the fourth section (location) should be filled', () => {
+          it('should make the fourth section (location) filled', () => {
             expect(getEditorHintSection(3).items().length).to.equal(locationsAmount + 1);
           });
 
-          it('the fourth section should contain a special value ANY', () => {
+          it('should display the fourth section with the special value ANY', () => {
             expect(getEditorHintSection(3).items(0).text).to.equal('<ANY>');
           });
 
-          it('the first item of the fourth section should be selected by default', () => {
+          it('should have the first item selected by default in the fourth section', () => {
             expect(getEditorHintSection(3).isFirstItemActive).to.be.true;
           });
 
-          it('the values should be formatted and truncated', () => {
+          it('should have formatted and truncated values in the fourth section', () => {
             const fullValue = `${replacer(locations[0].code)} (${locations[0].name})`;
             const truncatedValue = truncate(fullValue, truncateOptions);
 
             expect(getEditorHintSection(3).items(1).text).to.equal(truncatedValue);
           });
 
-          describe('click on the first location', () => {
+          describe('clicking on the first location', () => {
             beforeEach(async () => {
               await editorHints.clickOnItem(locationsAmount, 3);
             });
 
-            it('the location code should be added to the editor value', () => {
-              expect(rulesEditor.value).to.equal(`s ${replacer(locations[locationsAmount - 1].code)} `);
+            it('should add the location code to the editor', () => {
+              expect(circulationRules.editor.value).to.equal(`s ${replacer(locations[locationsAmount - 1].code)} `);
             });
           });
         });
@@ -707,11 +734,10 @@ describe('CirculationRules', () => {
 
   describe('choosing policy type', () => {
     beforeEach(async () => {
-      await circulationRules.editor.setValueWithoutShowingHint('m book: ');
-      await circulationRules.editor.textArea.focus();
+      await showHintsWithAttachedCustomKeysHandlers('m book: ');
     });
 
-    describe('press enter on the selected item', () => {
+    describe('pressing Enter button on the selected item', () => {
       beforeEach(async () => {
         await circulationRules.editor.changeActiveItem(0);
         await circulationRules.editor.pressEnter();
@@ -722,7 +748,7 @@ describe('CirculationRules', () => {
       });
     });
 
-    describe('press tab on the selected item', () => {
+    describe('pressing tab on the selected item', () => {
       beforeEach(async () => {
         await circulationRules.editor.changeActiveItem(0);
         await circulationRules.editor.pressTab();
@@ -733,7 +759,7 @@ describe('CirculationRules', () => {
       });
     });
 
-    describe('pick loan policy type', () => {
+    describe('picking loan policy type', () => {
       beforeEach(async () => {
         await circulationRules.editor.changeActiveItem(0);
         await circulationRules.editor.pickHint(0);
@@ -744,7 +770,7 @@ describe('CirculationRules', () => {
       });
     });
 
-    describe('click on first item in policies list', () => {
+    describe('clicking on first item in policies list', () => {
       beforeEach(async () => {
         await circulationRules.editor.hints.clickOnItem(0);
       });
@@ -758,9 +784,11 @@ describe('CirculationRules', () => {
   describe('choosing loan policy', () => {
     beforeEach(async () => {
       await circulationRules.editor.setValue('m book: ');
+
       // choose policy type
       await circulationRules.editor.changeActiveItem(0);
       await circulationRules.editor.pickHint(0);
+
       // choose loan policy
       await circulationRules.editor.changeActiveItem(0);
       await circulationRules.editor.pickHint(0);
@@ -776,9 +804,11 @@ describe('CirculationRules', () => {
   describe('choosing fallback policy', () => {
     beforeEach(async () => {
       await circulationRules.editor.setValue('fallback-policy: ');
+
       // choose policy type
       await circulationRules.editor.changeActiveItem(0);
       await circulationRules.editor.pickHint(0);
+
       // choose loan policy
       await circulationRules.editor.changeActiveItem(0);
       await circulationRules.editor.pickHint(0);
