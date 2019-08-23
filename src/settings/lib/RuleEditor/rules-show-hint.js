@@ -16,6 +16,9 @@ import {
   HINT_ELEMENT_CLASS,
 } from '../../../constants';
 
+const HINT_SECTIONS_CONTAINER = 'CodeMirror-hints-sections-container';
+const HINT_SECTION_CONTAINER = 'CodeMirror-hints-list';
+
 CodeMirror.registerHelper('hint', 'auto', { resolve: resolveAutoHints });
 
 const defaultOptions = {
@@ -24,7 +27,6 @@ const defaultOptions = {
   alignWithWord: true,
   closeCharacters: /[\s()[]{};:>,]/,
   closeOnUnfocus: true,
-  completeOnSingleClick: true,
   container: null,
   customKeys: null,
   extraKeys: null
@@ -254,16 +256,15 @@ class Widget {
     return keyMap;
   }
 
-  static getHintElement(hintsContainer, targetElement) {
-    let currentSearchElement = targetElement;
+  static getHintElement(targetElement) {
+    return targetElement.closest(`.${HINT_ELEMENT_CLASS}`);
+  }
 
-    while (currentSearchElement && currentSearchElement !== hintsContainer) {
-      if (currentSearchElement.nodeName.toUpperCase() === 'LI' && currentSearchElement.parentNode === hintsContainer) {
-        return currentSearchElement;
-      }
+  static getHintSectionIndex(targetElement) {
+    const hintSections = targetElement.closest(`.${HINT_SECTIONS_CONTAINER}`);
+    const hintSection = targetElement.closest(`.${HINT_SECTION_CONTAINER}`);
 
-      currentSearchElement = currentSearchElement.parentNode;
-    }
+    return Array.from(hintSections.children).indexOf(hintSection);
   }
 
   constructor(completion, data) {
@@ -322,25 +323,8 @@ class Widget {
       this.container.style.left = `${this.position.left + startScroll.left - curScroll.left}px`;
     });
 
-    CodeMirror.on(this.container, 'dblclick', e => {
-      const hint = Widget.getHintElement(this.getCurrentSection().listContainer, e.target);
-
-      if (hint && hint.hintId != null) {
-        this.changeActive(hint.hintId);
-        this.pick();
-      }
-    });
-
     CodeMirror.on(this.container, 'click', e => {
-      const hint = Widget.getHintElement(this.getCurrentSection().listContainer, e.target);
-
-      if (hint && hint.hintId != null) {
-        this.changeActive(hint.hintId);
-
-        if (completion.options.completeOnSingleClick) {
-          this.pick();
-        }
-      }
+      this.handleSectionHintClick(e.target);
     });
 
     CodeMirror.on(this.container, 'mousedown', () => setTimeout(() => cm.focus(), 20));
@@ -348,17 +332,61 @@ class Widget {
     CodeMirror.signal(data, 'select', completions[0], this.getCurrentSection().getListNodeAt(0));
   }
 
+  handleSectionHintClick(targetElement) {
+    const hint = Widget.getHintElement(targetElement);
+    const hintExists = hint && hint.hintId != null;
+
+    if (!hintExists) return;
+
+    const currentSectionIndex = Widget.getHintSectionIndex(targetElement);
+    const nextSectionIndex = currentSectionIndex + 1;
+    const isNextSectionEmpty = isEmpty(get(this.getSectionAt(nextSectionIndex), 'itemsOptions'));
+    const isSameHint = hint.hintId === this.getSectionAt(currentSectionIndex).selectedHintIndex;
+
+    if (isSameHint && !isNextSectionEmpty) return;
+
+    const isLastSection = currentSectionIndex === this.sections.length - 1;
+    const isSectionChanged = currentSectionIndex !== this.currentSectionIndex;
+
+    if (isSectionChanged && !isLastSection) {
+      this.currentSectionIndex = currentSectionIndex;
+      this.resetSectionsInCurrentSectionsListFrom(nextSectionIndex);
+    }
+
+    this.changeActive(hint.hintId);
+    this.pick();
+  }
+
+  resetSectionsInCurrentSectionsListFrom(index) {
+    this.sections.slice(index).forEach(section => section.clearItemsList());
+    this.data.sections.slice(index).forEach(section => {
+      section.selectedHintIndex = 0;
+    });
+  }
+
+  moveToPreviousSectionInCurrentSectionsList() {
+    const currentSection = this.getCurrentSection();
+
+    this.getCurrentSection(this.data).selectedHintIndex = 0;
+    currentSection.clearItemsList();
+    this.currentSectionIndex -= 1;
+  }
+
   getSelectedHintInCurrentSection() {
     return this.getCurrentSection().selectedHintIndex;
   }
 
   getCurrentSection(context = this) {
-    return context.sections[this.currentSectionIndex];
+    return this.getSectionAt(this.currentSectionIndex, context);
+  }
+
+  getSectionAt(index = this.currentSectionIndex, context = this) {
+    return context.sections[index];
   }
 
   initContainers() {
     this.container = createContainer('CodeMirror-hints');
-    this.sectionsContainer = createContainer('CodeMirror-hints-sections-container');
+    this.sectionsContainer = createContainer(HINT_SECTIONS_CONTAINER);
 
     if (this.data.header) {
       this.container.appendChild(createHeader(this.data.header, 'CodeMirror-hints-header'));
@@ -489,8 +517,8 @@ class Widget {
     const {
       childSection,
       list,
-    } = this.data.sections[this.currentSectionIndex];
-    const nextSectionData = this.data.sections[this.currentSectionIndex + 1];
+    } = this.getCurrentSection(this.data);
+    const nextSectionData = this.getSectionAt(this.currentSectionIndex + 1, this.data);
     const parentId = list[this.getSelectedHintInCurrentSection()].id;
 
     nextSectionData.list = CodeMirror.hint.getSubMenuData(this.completion.cm, { childSection, parentId });
@@ -498,18 +526,19 @@ class Widget {
 
   changeActive = (nextActiveHintIndex, avoidWrap) => {
     const currentSection = this.getCurrentSection();
-    const {
-      selectedHintIndex,
-      itemsOptions,
-    } = currentSection;
+    const { itemsOptions } = currentSection;
+    const nextHintIndex = currentSection.calculateNextHintIndex(nextActiveHintIndex, avoidWrap);
 
-    currentSection.changeActive(nextActiveHintIndex, avoidWrap);
+    if (currentSection.isSelectedByIndex(nextHintIndex)) return;
+
+    this.getCurrentSection(this.data).selectedHintIndex = nextHintIndex;
+    currentSection.changeActive(nextHintIndex);
 
     CodeMirror.signal(
       this.data,
       'select',
-      itemsOptions[selectedHintIndex],
-      currentSection.getListNodeAt(selectedHintIndex)
+      itemsOptions[nextHintIndex],
+      currentSection.getListNodeAt(nextHintIndex)
     );
   };
 
@@ -521,7 +550,7 @@ class Widget {
 class HintSection {
   constructor(sectionOptions, cm) {
     this.cm = cm;
-    this.container = createContainer('CodeMirror-hints-list');
+    this.container = createContainer(HINT_SECTION_CONTAINER);
     this.setSelectedHintIndex(sectionOptions.selectedHintIndex || 0);
     this.defaultSelectedHintIndex = this.selectedHintIndex;
     this.itemsOptions = sectionOptions.list;
@@ -556,6 +585,7 @@ class HintSection {
   }
 
   clearItemsList() {
+    this.defaultSelectedHintIndex = 0;
     this.setSelectedHintIndex(this.defaultSelectedHintIndex);
     this.itemsOptions = [];
 
@@ -576,7 +606,7 @@ class HintSection {
     return this.listContainer.childNodes[index];
   }
 
-  changeActive(nextActiveHintIndex, avoidWrap) {
+  calculateNextHintIndex(nextActiveHintIndex, avoidWrap) {
     const itemsOptionsSize = this.itemsOptions.length;
     let nextIndex = nextActiveHintIndex;
 
@@ -586,8 +616,10 @@ class HintSection {
       nextIndex = avoidWrap ? 0 : itemsOptionsSize - 1;
     }
 
-    if (this.isSelectedByIndex(nextIndex)) return;
+    return nextIndex;
+  }
 
+  changeActive(nextIndex) {
     let hintNode = this.getListNodeAt(this.selectedHintIndex);
 
     if (hintNode) {
