@@ -358,5 +358,6 @@
     "settings.circulationRules.selectLibrary": "اختر مكتبة",
     "settings.circulationRules.locations": "المواقع",
     "settings.circulationRules.location": "الموقع",
-    "settings.circulationRules.selectLocation": "اختر الموقع"
+    "settings.circulationRules.selectLocation": "اختر الموقع",
+    "settings.noticePolicy.requestNotices.requestExpiration": "انتهاء الطلب"
 }
