@@ -177,6 +177,17 @@ export const noticesSendEvent = [
   },
 ];
 
+export const requestTimeBasedNoticesSendEvent = [
+  {
+    value: noticesSendEventMap.UPON,
+    label: 'ui-circulation.settings.noticePolicy.notices.upon',
+  },
+  {
+    value: noticesSendEventMap.BEFORE,
+    label: 'ui-circulation.settings.noticePolicy.notices.before',
+  },
+];
+
 export const noticesIntervalPeriods = [
   ...intervalPeriods,
   {

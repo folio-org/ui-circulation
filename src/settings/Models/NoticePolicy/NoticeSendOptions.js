@@ -1,11 +1,11 @@
 import {
   includes,
   isEqual,
-  isUndefined,
 } from 'lodash';
 
 import { Period } from '../common';
 import {
+  loanTimeBasedEventsIds,
   noticesSendEventMap,
   requestTimeBasedEventsIds,
 } from '../../../constants';
@@ -27,12 +27,11 @@ export default class NoticeSendOptions {
        || isEqual(this.sendHow, noticesSendEventMap.BEFORE);
   }
 
-  isRequestExpirationEventSelected() {
-    return isEqual(this.sendWhen, requestTimeBasedEventsIds.REQUEST_EXPIRATION);
-  }
-
   isFrequencyAvailable() {
-    return (this.isRequestExpirationEventSelected() && isEqual(this.sendHow, noticesSendEventMap.BEFORE))
-      || (!this.isRequestExpirationEventSelected() && !isUndefined(this.sendHow));
+    const timeBasedEventsIds = [
+      ...Object.values(requestTimeBasedEventsIds),
+      ...Object.values(loanTimeBasedEventsIds),
+    ];
+    return this.isTimeBasedEventSelected(timeBasedEventsIds) && this.isBeforeOrAfter();
   }
 }
