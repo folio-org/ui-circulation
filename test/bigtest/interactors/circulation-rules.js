@@ -44,6 +44,14 @@ const scrollingOffset = 3;
   isActiveItemPresent = isPresent(`.${ACTIVE_HINT_ELEMENT_CLASS}`);
   items = collection('.CodeMirror-hint', scoped);
   itemsCount = count('.CodeMirror-hint');
+  completionButton = scoped('.CodeMirror-hint-section-button');
+  isCompletionButtonHidden = hasClass('.CodeMirror-hint-section-button-container', 'hidden');
+  isCompletionButtonDisabled = hasClass('.CodeMirror-hint-section-button', 'disabled');
+  hasCheckBoxes = isPresent('input[type="checkbox"]');
+
+  isCheckBoxChecked = function (itemIndex) {
+    return this.$(`.CodeMirror-hint:nth-child(${itemIndex + 1}) input[type="checkbox"]`).checked;
+  }
 
   isScrollable = function () {
     return this.$('ul').scrollHeight > this.$('ul').clientHeight;

@@ -229,7 +229,7 @@ describe('CirculationRules', () => {
     });
   });
 
-  describe('choosing non locating type - material type', () => {
+  describe('choosing non locating criteria type - material type', () => {
     beforeEach(async () => {
       await showHintsWithAttachedCustomKeysHandlers('m ');
     });
@@ -255,7 +255,7 @@ describe('CirculationRules', () => {
     });
   });
 
-  describe('choosing type locating type - institution', () => {
+  describe('choosing locating criteria type - institution', () => {
     beforeEach(async () => {
       await showHintsWithAttachedCustomKeysHandlers('a ');
     });
@@ -393,7 +393,7 @@ describe('CirculationRules', () => {
     });
   });
 
-  describe('choosing type locating type - campus', () => {
+  describe('choosing locating criteria type - campus', () => {
     beforeEach(async () => {
       await showHintsWithAttachedCustomKeysHandlers('b ');
     });
@@ -491,7 +491,7 @@ describe('CirculationRules', () => {
       await showHintsWithAttachedCustomKeysHandlers('b ');
     });
 
-    describe('clicking Backspace button', () => {
+    describe('pressing Backspace button', () => {
       describe('with reset to previous section behaviour', () => {
         beforeEach(async () => {
           // select first institution
@@ -560,7 +560,7 @@ describe('CirculationRules', () => {
     });
   });
 
-  describe('choosing type locating type - library', () => {
+  describe('choosing locating criteria type - library', () => {
     beforeEach(async () => {
       await showHintsWithAttachedCustomKeysHandlers('c ');
     });
@@ -639,7 +639,7 @@ describe('CirculationRules', () => {
     });
   });
 
-  describe('choosing type locating type - location', () => {
+  describe('choosing locating criteria type - location', () => {
     const editorHints = circulationRules.editor.hints;
 
     beforeEach(async () => {
@@ -674,6 +674,17 @@ describe('CirculationRules', () => {
       expect(getEditorHintSection(1).items().length).to.equal(0);
       expect(getEditorHintSection(2).items().length).to.equal(0);
       expect(getEditorHintSection(3).items().length).to.equal(0);
+    });
+
+    it('should not contain completion buttons by default in the first three sections', () => {
+      expect(getEditorHintSection(0).completionButton.isPresent).to.equal(false);
+      expect(getEditorHintSection(1).completionButton.isPresent).to.equal(false);
+      expect(getEditorHintSection(2).completionButton.isPresent).to.equal(false);
+    });
+
+    it('should contain hidden completion button by default in the fourth section', () => {
+      expect(getEditorHintSection(3).completionButton.isPresent).to.equal(true);
+      expect(getEditorHintSection(3).isCompletionButtonHidden).to.equal(true);
     });
 
     describe('clicking on the first institution', () => {
@@ -711,6 +722,27 @@ describe('CirculationRules', () => {
             expect(getEditorHintSection(3).isFirstItemActive).to.be.true;
           });
 
+          it('should contain and show the completion button only in the fourth section', () => {
+            expect(getEditorHintSection(0).completionButton.isPresent).to.equal(false);
+            expect(getEditorHintSection(1).completionButton.isPresent).to.equal(false);
+            expect(getEditorHintSection(2).completionButton.isPresent).to.equal(false);
+            expect(getEditorHintSection(3).completionButton.isPresent).to.equal(true);
+            expect(getEditorHintSection(3).isCompletionButtonHidden).to.equal(false);
+          });
+
+          it('should disable the completion button by default', () => {
+            expect(getEditorHintSection(3).isCompletionButtonDisabled).to.equal(true);
+          });
+
+          it('should contain unchecked checkboxes only in the fourth section', () => {
+            expect(getEditorHintSection(0).hasCheckBoxes).to.equal(false);
+            expect(getEditorHintSection(1).hasCheckBoxes).to.equal(false);
+            expect(getEditorHintSection(2).hasCheckBoxes).to.equal(false);
+            expect(getEditorHintSection(3).hasCheckBoxes).to.equal(true);
+            expect(getEditorHintSection(3).isCheckBoxChecked(locationsAmount - 1)).to.equal(false);
+            expect(getEditorHintSection(3).isCheckBoxChecked(locationsAmount)).to.equal(false);
+          });
+
           it('should have formatted and truncated values in the fourth section', () => {
             const fullValue = `${replacer(locations[0].code)} (${locations[0].name})`;
             const truncatedValue = truncate(fullValue, truncateOptions);
@@ -718,13 +750,97 @@ describe('CirculationRules', () => {
             expect(getEditorHintSection(3).items(1).text).to.equal(truncatedValue);
           });
 
-          describe('clicking on the first location', () => {
+          describe('pressing Enter on the last location', () => {
             beforeEach(async () => {
+              await circulationRules.editor.pressArrowUp();
+              await circulationRules.editor.pressEnter();
+            });
+
+            it('should check the last item in the fourth section', () => {
+              expect(getEditorHintSection(3).isCheckBoxChecked(locationsAmount)).to.equal(true);
+            });
+
+            describe('pressing Enter on the last location', () => {
+              beforeEach(async () => {
+                await circulationRules.editor.pressEnter();
+              });
+
+              it('should uncheck the last item in the fourth section', () => {
+                expect(getEditorHintSection(3).isCheckBoxChecked(locationsAmount)).to.equal(false);
+              });
+
+              it('should disable the completion button', () => {
+                expect(getEditorHintSection(3).isCompletionButtonDisabled).to.equal(true);
+              });
+            });
+          });
+
+          describe('clicking on the last two locations', () => {
+            beforeEach(async () => {
+              await editorHints.clickOnItem(locationsAmount - 1, 3);
               await editorHints.clickOnItem(locationsAmount, 3);
             });
 
-            it('should add the location code to the editor', () => {
-              expect(circulationRules.editor.value).to.equal(`s ${replacer(locations[locationsAmount - 1].code)} `);
+            it('should check the last two items in the fourth section', () => {
+              expect(getEditorHintSection(3).isCheckBoxChecked(locationsAmount - 1)).to.equal(true);
+              expect(getEditorHintSection(3).isCheckBoxChecked(locationsAmount)).to.equal(true);
+            });
+
+            it('should enable the completion button', () => {
+              expect(getEditorHintSection(3).isCompletionButtonDisabled).to.equal(false);
+            });
+
+            it('should not add any codes to input field on click on location items', () => {
+              expect(circulationRules.editor.value).to.equal('s ');
+            });
+
+            describe('clicking on the completion button', () => {
+              beforeEach(async () => {
+                await getEditorHintSection(3).completionButton.click();
+              });
+
+              it('should add the location codes of selected items to the editor', () => {
+                const locationCodesString = `${replacer(locations[locationsAmount - 1].code)} ${replacer(locations[locationsAmount - 2].code)}`;
+
+                expect(circulationRules.editor.value).to.equal(`s ${locationCodesString} `);
+              });
+            });
+
+            describe('pressing Backspace button', () => {
+              beforeEach(async () => {
+                await circulationRules.editor.pressBackspace();
+              });
+
+              it('should hide and disable the completion button in the fourth section', () => {
+                expect(getEditorHintSection(3).isCompletionButtonHidden).to.equal(true);
+                expect(getEditorHintSection(3).isCompletionButtonDisabled).to.equal(true);
+              });
+            });
+
+            describe('changing the selected institution to clear the location list', () => {
+              beforeEach(async () => {
+                await editorHints.clickOnItem(1);
+              });
+
+              it('should hide and disable the completion button in the fourth section', () => {
+                expect(getEditorHintSection(3).isCompletionButtonHidden).to.equal(true);
+                expect(getEditorHintSection(3).isCompletionButtonDisabled).to.equal(true);
+              });
+            });
+
+            describe('clicking on the last location', () => {
+              beforeEach(async () => {
+                await editorHints.clickOnItem(locationsAmount, 3);
+              });
+
+              it('should uncheck the last item in the fourth section', () => {
+                expect(getEditorHintSection(3).isCheckBoxChecked(locationsAmount)).to.equal(false);
+              });
+
+              it('should not change the completion button state', () => {
+                expect(getEditorHintSection(3).isCompletionButtonHidden).to.equal(false);
+                expect(getEditorHintSection(3).isCompletionButtonDisabled).to.equal(false);
+              });
             });
           });
         });
