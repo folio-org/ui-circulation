@@ -258,7 +258,7 @@
     "settings.noticePolicy.requestNotices.holdExpiration": "Hold expiration",
     "settings.noticePolicy.requestNotices.requestCancelation": "Request cancellation",
     "settings.index.circulationRules": "Circulation rules",
-    "settings.circulationRules.paneTitle": "Circulation rules Editor",
+    "settings.circulationRules.paneTitle": "Circulation rules editor",
     "settings.circulationRules.rulesUpdated": "Rules were successfully updated.",
     "settings.circulationRules.newRule": "New rule (#)",
     "settings.circulationRules.patronGroups": "Patron groups",
