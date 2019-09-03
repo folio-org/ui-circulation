@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import ReactQuill, { Quill } from 'react-quill';
 
 import {
-  isEmpty,
   isNull,
   forEach,
+  includes,
 } from 'lodash';
 
 import {
@@ -111,11 +111,17 @@ class TemplateEditor extends React.Component {
     this.quill.current.focus();
   };
 
-  insertTokens = (tokens = []) => {
-    if (isEmpty(tokens)) {
-      return;
-    }
+  insertTokens = (tokens = {}) => {
+    forEach(tokens, (tokensGroup) => {
+      if (tokensGroup.isLoopSelected) {
+        this.insertRepeatingTokens(tokensGroup.tokens, tokensGroup.tag);
+      } else {
+        this.insertRegualarTokens(tokensGroup.tokens);
+      }
+    });
+  };
 
+  insertRegualarTokens = (tokens) => {
     let tags = '';
 
     forEach(tokens, (token) => {
@@ -124,6 +130,32 @@ class TemplateEditor extends React.Component {
 
     const editor = this.quill.current.getEditor();
     const { index: cursorPosition } = editor.getSelection();
+    editor.insertText(cursorPosition, tags);
+    this.setState({ cursorPosition: cursorPosition + tags.length });
+  };
+
+  insertRepeatingTokens = (tokens, tag) => {
+    let tags = '';
+    const startTag = `{{#${tag}}}`;
+    const endTag = `{{/${tag}}}`;
+
+    const editor = this.quill.current.getEditor();
+    const editorContent = editor.getText();
+    const loopExists = includes(editorContent, startTag) && includes(editorContent, endTag);
+
+    if (loopExists) {
+      forEach(tokens, (token) => {
+        tags += `{{${token}}}\n`;
+      });
+    } else {
+      tags = `${startTag}`;
+      forEach(tokens, (token) => {
+        tags += `\n{{${token}}}`;
+      });
+      tags += `\n${endTag}`;
+    }
+
+    const cursorPosition = loopExists ? editorContent.indexOf(endTag) : editor.getSelection().index;
     editor.insertText(cursorPosition, tags);
     this.setState({ cursorPosition: cursorPosition + tags.length });
   };

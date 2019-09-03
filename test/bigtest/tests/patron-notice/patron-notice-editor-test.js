@@ -43,7 +43,6 @@ describe('Patron notice editor', () => {
 
       describe('Tokens modal', () => {
         beforeEach(async () => {
-          await PatronNoticeForm.indentBtn.click();
           await PatronNoticeForm.showAvailbaleTokensBtn.click();
         });
 
@@ -52,7 +51,7 @@ describe('Patron notice editor', () => {
         });
 
         it('should display list of tokens', () => {
-          expect(PatronNoticeForm.tokensModal.availbaleTokens.isPresent).to.be.true;
+          expect(PatronNoticeForm.tokensModal.availbaleTokens(0).isPresent).to.be.true;
         });
 
         it('should display cancel button', () => {
@@ -65,7 +64,7 @@ describe('Patron notice editor', () => {
 
         describe('Enable add tokens button', () => {
           beforeEach(async () => {
-            await PatronNoticeForm.tokensModal.availbaleTokens.items(0).click();
+            await PatronNoticeForm.tokensModal.availbaleTokens(0).items(0).click();
           });
 
           it('should enable button', () => {
@@ -75,7 +74,7 @@ describe('Patron notice editor', () => {
 
         describe('Pick token', () => {
           beforeEach(async () => {
-            await PatronNoticeForm.tokensModal.availbaleTokens.items(0).click();
+            await PatronNoticeForm.tokensModal.availbaleTokens(0).items(0).click();
             await PatronNoticeForm.tokensModal.addTokensBtn.click();
           });
 
@@ -90,7 +89,31 @@ describe('Patron notice editor', () => {
           });
 
           it('shound not display tokens modal', () => {
-            expect(PatronNoticeForm.tokensModal.availbaleTokens.isPresent).to.be.false;
+            expect(PatronNoticeForm.tokensModal.availbaleTokens(0).isPresent).to.be.false;
+          });
+        });
+
+        describe('Uncheck token', () => {
+          beforeEach(async () => {
+            await PatronNoticeForm.tokensModal.availbaleTokens(0).items(0).click();
+            await PatronNoticeForm.tokensModal.availbaleTokens(0).items(0).click();
+          });
+
+          it('should enable button', () => {
+            expect(PatronNoticeForm.tokensModal.isAddTokenBtnDisabled).to.be.true;
+          });
+        });
+
+        describe('Multiple tokens', () => {
+          beforeEach(async () => {
+            await PatronNoticeForm.templateCategory.selectAndBlur(translation['settings.patronNotices.categories.loan']);
+            await PatronNoticeForm.tokensModal.multipleTokens.click();
+            await PatronNoticeForm.tokensModal.availbaleTokens(1).items(0).click();
+            await PatronNoticeForm.tokensModal.addTokensBtn.click();
+          });
+
+          it('should insert loop with token into editor', () => {
+            expect(PatronNoticeForm.templateBody.text).to.equal('{{#loans}}{{loan.dueDate}}{{/loans}}');
           });
         });
       });

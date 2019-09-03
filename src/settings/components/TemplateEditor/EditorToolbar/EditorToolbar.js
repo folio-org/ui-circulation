@@ -19,7 +19,7 @@ const EditorToolbar = () => {
       <span className="ql-formats">
         <select className="ql-size">
           <option value="10px" />
-          <option selected />
+          <option defaultValue />
           <option value="18px" />
           <option value="32px" />
         </select>

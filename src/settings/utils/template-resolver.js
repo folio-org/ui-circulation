@@ -1,8 +1,8 @@
-export default function (str) {
-  return (o) => {
-    return str.replace(/{{([^{}]*)}}/g, (a, b) => {
-      const r = o[b];
-      return typeof r === 'string' || typeof r === 'number' ? r : a;
+export default function (templateStr) {
+  return (tokensList) => {
+    return templateStr.replace(/{{([^{}]*)}}/g, (tag, tokenName) => {
+      const tokenValue = tokensList[tokenName];
+      return typeof tokenValue === 'string' || typeof r === 'number' ? tokenValue : '';
     });
   };
 }
