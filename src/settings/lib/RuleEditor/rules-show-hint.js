@@ -120,21 +120,29 @@ class Completion {
     return this.cm.state.completionActive === this;
   }
 
-  pick(data, i) {
-    const completion = data.sections[this.widget.currentSectionIndex].list[i];
+  pick(data, pickedItemIndex) {
+    const completion = data.sections[this.widget.currentSectionIndex].list[pickedItemIndex];
+    const from = completion.from || data.from;
+    const to = completion.to || data.to;
 
-    if (completion.hint) {
-      completion.hint(this.cm, data, completion);
-    } else {
-      this.cm.replaceRange(
-        getText(completion),
-        completion.from || data.from,
-        completion.to || data.to,
-        'complete'
-      );
-    }
-
+    this.cm.replaceRange(getText(completion), from, to, 'complete');
     CodeMirror.signal(data, 'pick', completion);
+    this.close();
+  }
+
+  multiplePick(data, selectedItemsIds) {
+    const {
+      from,
+      to,
+      sections,
+    } = data;
+
+    const completions = sections[this.widget.currentSectionIndex].list;
+    const pickedCompletions = completions.filter(completion => selectedItemsIds.includes(completion.id));
+    const codesText = pickedCompletions.map(getText).join('');
+
+    pickedCompletions.forEach(completion => { CodeMirror.signal(data, 'pick', completion); });
+    this.cm.replaceRange(codesText, from, to, 'complete');
     this.close();
   }
 
@@ -323,6 +331,8 @@ class Widget {
       this.container.style.left = `${this.position.left + startScroll.left - curScroll.left}px`;
     });
 
+    CodeMirror.on(cm, 'multiplePick', this.handleMultiplePick);
+
     CodeMirror.on(this.container, 'click', e => {
       this.handleSectionHintClick(e.target);
     });
@@ -348,13 +358,29 @@ class Widget {
     const isLastSection = currentSectionIndex === this.sections.length - 1;
     const isSectionChanged = currentSectionIndex !== this.currentSectionIndex;
 
+    if (isSectionChanged && this.getCurrentSection(this.data).isMultipleSelection) {
+      const currentSection = this.getCurrentSection();
+
+      currentSection.setCompletionButtonVisibility(false);
+      currentSection.setCompletionButtonEnabling(false);
+    }
+
     if (isSectionChanged && !isLastSection) {
       this.currentSectionIndex = currentSectionIndex;
       this.resetSectionsInCurrentSectionsListFrom(nextSectionIndex);
     }
 
     this.changeActive(hint.hintId);
-    this.pick();
+
+    const isCheckBoxHint = targetElement.type === 'checkbox';
+
+    if (!isCheckBoxHint) {
+      this.pick();
+    }
+  }
+
+  handleMultiplePick = selectedItemsIds => {
+    this.completion.multiplePick(this.data, selectedItemsIds);
   }
 
   resetSectionsInCurrentSectionsListFrom(index) {
@@ -366,8 +392,14 @@ class Widget {
 
   moveToPreviousSectionInCurrentSectionsList() {
     const currentSection = this.getCurrentSection();
+    const currentSectionData = this.getCurrentSection(this.data);
 
-    this.getCurrentSection(this.data).selectedHintIndex = 0;
+    if (currentSectionData.isMultipleSelection) {
+      currentSection.setCompletionButtonEnabling(false);
+      currentSection.setCompletionButtonVisibility(false);
+    }
+
+    currentSectionData.selectedHintIndex = 0;
     currentSection.clearItemsList();
     this.currentSectionIndex -= 1;
   }
@@ -397,12 +429,20 @@ class Widget {
 
   initHintSections() {
     this.sections = this.data.sections.reduce((memo, section) => {
-      const newHintSection = new HintSection(section, this.completion.cm);
+      const newHintSection = this.createSection(section, this.completion.cm);
 
       this.sectionsContainer.appendChild(newHintSection.container);
 
       return memo.concat(newHintSection);
     }, []);
+  }
+
+  createSection(sectionOptions, cm) {
+    if (sectionOptions.isMultipleSelection) {
+      return new MultipleSelectionHintSection(sectionOptions, cm);
+    }
+
+    return new HintSection(sectionOptions, cm);
   }
 
   updatePosition() {
@@ -479,6 +519,7 @@ class Widget {
     }
 
     cm.off('scroll', this.handleScroll);
+    CodeMirror.off(cm, 'multiplePick', this.handleMultiplePick);
   }
 
   disable() {
@@ -489,11 +530,14 @@ class Widget {
 
   pick = () => {
     const selectedHintIndex = this.getSelectedHintInCurrentSection();
-    const currentItemOptions = this.getCurrentSection(this.data).list[selectedHintIndex];
+    const currentSectionData = this.getCurrentSection(this.data);
+    const currentItemOptions = currentSectionData.list[selectedHintIndex];
 
     if (selectedHintIndex === -1 || currentItemOptions.inactive) return;
 
-    if (this.currentSectionIndex < this.data.sections.length - 1) {
+    if (currentSectionData.isMultipleSelection && !isAnyItem(currentItemOptions.id)) {
+      this.sections[this.currentSectionIndex].checkItem();
+    } else if (this.currentSectionIndex < this.data.sections.length - 1) {
       this.changeSection();
     } else {
       this.completion.pick(this.data, selectedHintIndex);
@@ -573,15 +617,28 @@ class HintSection {
     this.setSelectedHintIndex(selectedHintIndex);
 
     this.itemsOptions.forEach((currentListItem, index) => {
-      const listItemElement = this.listContainer.appendChild(document.createElement('li'));
-      const className = HINT_ELEMENT_CLASS + (this.isSelectedByIndex(index) ? ` ${ACTIVE_HINT_ELEMENT_CLASS}` : '');
-
-      listItemElement.className = currentListItem.className ? `${currentListItem.className} ${className}` : className;
-      listItemElement.appendChild(document.createTextNode(currentListItem.displayText || getText(currentListItem)));
-      listItemElement.hintId = index;
+      this.listContainer.appendChild(this.createListItem(currentListItem, index));
     });
 
     this.setupListScrollingPadding();
+  }
+
+  createListItem(itemOptions, index) {
+    const listItemElement = document.createElement('li');
+    const className = HINT_ELEMENT_CLASS + (this.isSelectedByIndex(index) ? ` ${ACTIVE_HINT_ELEMENT_CLASS}` : '');
+
+    listItemElement.className = itemOptions.className ? `${itemOptions.className} ${className}` : className;
+
+    const displayText = itemOptions.displayText || getText(itemOptions);
+
+    listItemElement.appendChild(this.createListItemContent(displayText, itemOptions));
+    listItemElement.hintId = index;
+
+    return listItemElement;
+  }
+
+  createListItemContent(displayText) {
+    return document.createTextNode(displayText);
   }
 
   clearItemsList() {
@@ -646,6 +703,92 @@ class HintSection {
   }
 }
 
+class MultipleSelectionHintSection extends HintSection {
+  constructor(sectionOptions, cm) {
+    super(sectionOptions, cm);
+
+    this.container.classList.add('CodeMirror-hints-multiple-selection');
+    this.initCompletionButton(sectionOptions.buttonText);
+  }
+
+  initCompletionButton(buttonText) {
+    this.buttonContainer = createContainer('CodeMirror-hint-section-button-container');
+    this.completionButton = document.createElement('button');
+    this.completionButton.className = 'CodeMirror-hint-section-button';
+    this.completionButton.innerHTML = buttonText;
+    this.completionButton.onclick = this.handleButtonClick;
+
+    this.setCompletionButtonVisibility(false);
+    this.buttonContainer.appendChild(this.completionButton);
+    this.container.appendChild(this.buttonContainer);
+  }
+
+  handleButtonClick = () => {
+    CodeMirror.signal(this.cm, 'multiplePick', this.getCheckedItemsIds());
+  }
+
+  createListItemContent(displayText, itemOptions) {
+    if (isAnyItem(itemOptions.id)) {
+      return super.createListItemContent(displayText, itemOptions);
+    }
+
+    const checkBoxContainer = createContainer('CodeMirror-checkbox-container');
+    const labelElement = document.createElement('label');
+
+    labelElement.innerHTML = displayText;
+
+    const checkBoxInput = document.createElement('input');
+
+    checkBoxInput.id = itemOptions.id;
+    checkBoxInput.type = 'checkbox';
+    checkBoxContainer.appendChild(checkBoxInput);
+    checkBoxContainer.appendChild(labelElement);
+
+    checkBoxInput.onchange = () => this.setCompletionButtonEnabling(this.hasSelectedItems());
+
+    return checkBoxContainer;
+  }
+
+  checkItem() {
+    const checkBox = this.getItemCheckBox(this.selectedHintIndex);
+
+    checkBox.checked = !checkBox.checked;
+
+    this.setCompletionButtonEnabling(this.hasSelectedItems());
+  }
+
+  setCompletionButtonVisibility(isVisible) {
+    this.buttonContainer.classList.toggle('hidden', !isVisible);
+  }
+
+  setCompletionButtonEnabling(isEnabled) {
+    this.completionButton.classList.toggle('disabled', !isEnabled);
+  }
+
+  getItemCheckBox(hintIndex) {
+    return this.getListNodeAt(hintIndex).getElementsByTagName('input')[0];
+  }
+
+  hasSelectedItems() {
+    return !isEmpty(this.getCheckedItemsIds());
+  }
+
+  getCheckedItemsIds() {
+    const checkBoxes = this.listContainer.getElementsByTagName('input');
+
+    return Array.from(checkBoxes)
+      .filter(checkBox => checkBox.checked)
+      .map(checkBox => checkBox.id);
+  }
+
+  setList(list, selectedHintIndex = -1) {
+    super.setList(list, selectedHintIndex);
+
+    this.setCompletionButtonVisibility(list.length > 1);
+    this.setCompletionButtonEnabling(this.hasSelectedItems());
+  }
+}
+
 function createHeader(text, className = '') {
   const header = createContainer(className);
 
@@ -660,6 +803,10 @@ function createContainer(className = '') {
   divElement.className = className;
 
   return divElement;
+}
+
+function isAnyItem(itemId) {
+  return itemId && itemId.includes('any');
 }
 
 function getApplicableHelpers(cm, helpers) {

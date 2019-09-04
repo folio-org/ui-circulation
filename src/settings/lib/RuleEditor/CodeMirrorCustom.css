@@ -58,6 +58,66 @@
   width: 100%;
 }
 
+.CodeMirror-checkbox-container input,
+.CodeMirror-checkbox-container label {
+  cursor: pointer;
+}
+
+.CodeMirror-checkbox-container label {
+  padding-left: 5px;
+  user-select: none;
+}
+
+.CodeMirror-hint-section-button-container {
+  padding: 2px;
+}
+
+.CodeMirror-hint-section-button-container.hidden {
+  display: none;
+}
+
+.CodeMirror-hint-section-button {
+  padding: 0 15px;
+  text-align: center;
+  -webkit-appearance: none;
+  cursor: pointer;
+  border-radius: 3px;
+  border: 1px solid #070;
+  color: #fff;
+  transition: background-color 0.25s, color 0.25s, opacity 0.07s;
+  background-color: #070;
+  white-space: nowrap;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  outline: 0;
+  opacity: 1;
+  font-weight: 1;
+  font-size: 12px;
+  font-family: inherit;
+  min-height: 1.5em;
+  width: 100%;
+}
+
+.CodeMirror-hint-section-button.disabled {
+  background-color: #ccc;
+  border-color: #ccc;
+  color: rgba(0, 0, 0, 0.62);
+  transition: background-color 0.25s, color 0.25s, opacity ease-in-out 500ms;
+  pointer-events: none;
+}
+
+.CodeMirror-hint-section-button:hover {
+  opacity: 0.9;
+}
+
+.CodeMirror-hint-section-button:active {
+  opacity: 1;
+  border: none;
+}
+
 .CodeMirror-hints-list ul {
   position: relative;
   margin: 0;
@@ -68,12 +128,16 @@
   overflow-y: auto;
 }
 
+.CodeMirror-hints-list.CodeMirror-hints-multiple-selection ul {
+  max-height: 18em;
+}
+
 .CodeMirror-hint {
   padding: 0 14px;
+}
 
-  &:hover {
-    background-color: #d7d7d7;
-  }
+.CodeMirror-hint:hover {
+  background-color: #d7d7d7;
 }
 
 .rule-hint-major {

@@ -51,7 +51,7 @@ const getSectionsDescriptions = type => {
         { header: 'ui-circulation.settings.circulationRules.institution', childSection: RULES_TYPE.CAMPUS },
         { header: 'ui-circulation.settings.circulationRules.campus', childSection: RULES_TYPE.LIBRARY, selectedHintIndex: 0 },
         { header: 'ui-circulation.settings.circulationRules.library', childSection: RULES_TYPE.LOCATION, selectedHintIndex: 0 },
-        { header: 'ui-circulation.settings.circulationRules.location', selectedHintIndex: 0 },
+        { header: 'ui-circulation.settings.circulationRules.location', selectedHintIndex: 0, isMultipleSelection: true },
       ];
     default:
       return [{}];
@@ -201,6 +201,10 @@ export function rulesHint(Codemirror, props) {
         if (section.selectedHintIndex === undefined) {
           section.selectedHintIndex = -1;
         }
+
+        if (section.isMultipleSelection) {
+          section.buttonText = formatMessage({ id: 'ui-circulation.settings.circulationRules.done' });
+        }
       });
       // The first section should be always filled and other sections should be filed by request in getSubMenuData helper
       sections[0].list = result;
@@ -237,6 +241,7 @@ export function initSubMenuDataFetching(Codemirror, props) {
         displayText: text,
         className: 'rule-hint-minor',
         inactive: true,
+        id: `any${options.childSection}`,
       });
     }
 
