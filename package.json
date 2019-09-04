@@ -212,6 +212,21 @@
           "settings.circulation.enabled"
         ],
         "visible": true
+      },
+      {
+        "permissionName": "ui-circulation.settings.overdue-fines-policies",
+        "displayName": "Settings (Circ): Can create, edit and remove overdue fine policies",
+        "subPermissions": [
+          "overdue-fines-policies.item.post",
+          "overdue-fines-policies.item.put",
+          "overdue-fines-policies.item.delete",
+          "overdue-fines-policies.collection.get",
+          "overdue-fines-policies.item.get",
+          "users.collection.get",
+          "users.item.get",
+          "settings.circulation.enabled"
+        ],
+        "visible": true
       }
     ]
   },

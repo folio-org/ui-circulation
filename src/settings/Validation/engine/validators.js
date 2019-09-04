@@ -4,9 +4,11 @@ import { FormattedMessage } from 'react-intl';
 import {
   isNotEmpty,
   isIntegerGreaterThanZero,
+  isIntegerGreaterThanOrEqualToZero,
   isPositiveNumber,
   isInInterval,
   isNotEmptyEditor,
+  isOverdueFindGreaterThan,
 } from './handlers';
 
 export default {
@@ -22,6 +24,10 @@ export default {
     validate: isIntegerGreaterThanZero,
     message: <FormattedMessage id="ui-circulation.settings.validate.greaterThanZero" />,
   },
+  isIntegerGreaterThanOrEqualToZero: {
+    validate: isIntegerGreaterThanOrEqualToZero,
+    message: <FormattedMessage id="ui-circulation.settings.validate.greaterThanOrEqualToZero" />,
+  },
   isPositiveNumber: {
     validate: isPositiveNumber,
     message: <FormattedMessage id="ui-circulation.settings.validate.isPositiveNumber" />,
@@ -33,5 +39,9 @@ export default {
   isNotEmptyEditor: {
     validate: isNotEmptyEditor,
     message: <FormattedMessage id="ui-circulation.settings.validate.fillIn" />,
+  },
+  isOverdueFindGreaterThan: {
+    validate: isOverdueFindGreaterThan,
+    message: <FormattedMessage id="ui-circulation.settings.validate.greaterThanZero" />,
   },
 };

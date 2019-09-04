@@ -2,18 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getFormValues } from 'redux-form';
+import stripesForm from '@folio/stripes/form';
+import { stripesShape } from '@folio/stripes/core';
 import {
   FormattedMessage,
   injectIntl,
-  intlShape,
 } from 'react-intl';
-import {
-  sortBy,
-  get,
-} from 'lodash';
-
-import stripesForm from '@folio/stripes/form';
-import { stripesShape } from '@folio/stripes/core';
 
 import {
   Accordion,
@@ -23,16 +17,13 @@ import {
   Paneset,
 } from '@folio/stripes/components';
 
-import LoanPolicy from '../Models/LoanPolicy';
-import { normalize } from './utils/normalize';
+import FinePolicy from '../Models/FinePolicy';
 
-import { HeaderPane } from './components';
+import HeaderPane from '../LoanPolicy/components/HeaderPane/HeaderPane';
 
 import {
-  AboutSection,
-  LoansSection,
-  RenewalsSection,
-  RequestManagementSection,
+  FinesSection,
+  AboutSection
 } from './components/EditSections';
 
 import {
@@ -40,15 +31,11 @@ import {
   Metadata,
 } from '../components';
 
-class LoanPolicyForm extends React.Component {
+class FinePolicyForm extends React.Component {
   static propTypes = {
-    intl: intlShape.isRequired,
     stripes: stripesShape.isRequired,
     pristine: PropTypes.bool,
     submitting: PropTypes.bool,
-    parentResources: PropTypes.shape({
-      fixedDueDateSchedules: PropTypes.object,
-    }).isRequired,
     policy: PropTypes.object,
     initialValues: PropTypes.object,
     permissions: PropTypes.object.isRequired,
@@ -68,8 +55,7 @@ class LoanPolicyForm extends React.Component {
     confirmDelete: false,
     sections: {
       generalSection: true,
-      recallsSection: true,
-      holdsSection: false,
+      fineSection: true,
     },
   };
 
@@ -85,38 +71,16 @@ class LoanPolicyForm extends React.Component {
     this.setState({ sections });
   };
 
-  generateScheduleOptions = () => {
-    const {
-      intl: {
-        formatMessage,
-      },
-    } = this.props;
-    const records = get(this.props, 'parentResources.fixedDueDateSchedules.records', []);
-    const sortedSchedules = sortBy(records, ['name']);
-
-    const placeholder = (
-      <option value="" key="x">
-        {formatMessage({ id: 'ui-circulation.settings.loanPolicy.selectSchedule' })}
-      </option>
-    );
-
-    const schedules = sortedSchedules.map(({ id, name }) => {
-      return (
-        <option
-          value={id}
-          key={id}
-        >
-          {name}
-        </option>
-      );
-    });
-
-    return [placeholder, ...schedules];
-  };
-
-  saveForm = (loanPolicy) => {
-    const policy = normalize(loanPolicy);
-    this.props.onSave(policy);
+  saveForm = (finePolicy) => {
+    if ((finePolicy.overdueFine !== undefined && Number(finePolicy.overdueFine.quantity) === 0) ||
+      (finePolicy.overdueFine !== undefined && finePolicy.overdueFine.quantity === '')) {
+      delete finePolicy.overdueFine;
+    }
+    if ((finePolicy.overdueRecallFine !== undefined && Number(finePolicy.overdueRecallFine.quantity) === 0) ||
+      (finePolicy.overdueRecallFine !== undefined && finePolicy.overdueRecallFine.quantity === '')) {
+      delete finePolicy.overdueRecallFine;
+    }
+    this.props.onSave(finePolicy);
   };
 
   changeDeleteState = (confirmDelete) => {
@@ -143,12 +107,11 @@ class LoanPolicyForm extends React.Component {
     } = this.state;
 
     const editMode = Boolean(policy.id);
-    const schedules = this.generateScheduleOptions();
 
     return (
       <form
         noValidate
-        data-test-loan-policy-form
+        data-test-fine-policy-form
         onSubmit={handleSubmit(this.saveForm)}
       >
         <Paneset isRoot>
@@ -160,7 +123,7 @@ class LoanPolicyForm extends React.Component {
             permissions={permissions}
             onCancel={onCancel}
             onRemove={this.changeDeleteState}
-            createEntryLabel={<FormattedMessage id="ui-circulation.settings.loanPolicy.createEntryLabel" />}
+            createEntryLabel={<FormattedMessage id="ui-circulation.settings.finePolicy.createEntryLabel" />}
           >
             <React.Fragment>
               <Row end="xs">
@@ -177,7 +140,7 @@ class LoanPolicyForm extends React.Component {
               <Accordion
                 id="generalSection"
                 open={sections.generalSection}
-                label={<FormattedMessage id="ui-circulation.settings.loanPolicy.generalInformation" />}
+                label={<FormattedMessage id="ui-circulation.settings.finePolicy.generalInformation" />}
                 onToggle={this.handleSectionToggle}
               >
                 <Metadata
@@ -185,20 +148,10 @@ class LoanPolicyForm extends React.Component {
                   metadata={policy.metadata}
                 />
                 <AboutSection />
-                <LoansSection
-                  policy={policy}
-                  schedules={schedules}
-                  change={change}
-                />
-                <RenewalsSection
-                  policy={policy}
-                  schedules={schedules}
-                  change={change}
-                />
-                <RequestManagementSection
-                  policy={policy}
-                  holdsSectionOpen={sections.holdsSection}
-                  recallsSectionOpen={sections.recallsSection}
+                <FinesSection
+                  initialValues={initialValues}
+                  policy
+                  fineSectionOpen={sections.fineSection}
                   accordionOnToggle={this.handleSectionToggle}
                   change={change}
                 />
@@ -208,8 +161,8 @@ class LoanPolicyForm extends React.Component {
                   isOpen={confirmDelete}
                   triggerSubmitSucceeded
                   policyName={policy.name}
-                  formName="loanPolicyForm"
-                  deleteEntityKey="ui-circulation.settings.noticePolicy.deleteLoanPolicy"
+                  formName="finePolicyForm"
+                  deleteEntityKey="ui-circulation.settings.finePolicy.deletefinePolicy"
                   initialValues={initialValues}
                   onCancel={this.changeDeleteState}
                   onRemove={onRemove}
@@ -224,13 +177,14 @@ class LoanPolicyForm extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  policy: new LoanPolicy(getFormValues('loanPolicyForm')(state)),
+  policy: new FinePolicy(getFormValues('finePolicyForm')(state)),
 });
 
-const connectedLoanPolicyForm = connect(mapStateToProps)(injectIntl(LoanPolicyForm));
+
+const connectedFinePolicyForm = connect(mapStateToProps)(injectIntl(FinePolicyForm));
 
 export default stripesForm({
-  form: 'loanPolicyForm',
+  form: 'finePolicyForm',
   navigationCheck: true,
   enableReinitialize: true,
-})(connectedLoanPolicyForm);
+})(connectedFinePolicyForm);
