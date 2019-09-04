@@ -160,6 +160,7 @@ class LoanPolicyForm extends React.Component {
             permissions={permissions}
             onCancel={onCancel}
             onRemove={this.changeDeleteState}
+            createEntryLabel={<FormattedMessage id="ui-circulation.settings.loanPolicy.createEntryLabel" />}
           >
             <React.Fragment>
               <Row end="xs">
