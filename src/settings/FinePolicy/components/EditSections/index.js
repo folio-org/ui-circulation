@@ -1,2 +1,2 @@
 export { default as FinesSection } from './FinesSection';
-export { default as AboutSection } from './AboutSection';
+export { default as OverdueAboutSection } from './OverdueAboutSection';

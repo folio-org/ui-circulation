@@ -23,7 +23,7 @@ import HeaderPane from '../LoanPolicy/components/HeaderPane/HeaderPane';
 
 import {
   FinesSection,
-  AboutSection
+  OverdueAboutSection,
 } from './components/EditSections';
 
 import {
@@ -54,7 +54,7 @@ class FinePolicyForm extends React.Component {
   state = {
     confirmDelete: false,
     sections: {
-      generalSection: true,
+      overdueGeneralSection: true,
       fineSection: true,
     },
   };
@@ -83,7 +83,7 @@ class FinePolicyForm extends React.Component {
     this.props.onSave(finePolicy);
   };
 
-  changeDeleteState = (confirmDelete) => {
+  changeOverdueDeleteState = (confirmDelete) => {
     this.setState({ confirmDelete });
   };
 
@@ -106,7 +106,7 @@ class FinePolicyForm extends React.Component {
       confirmDelete,
     } = this.state;
 
-    const editMode = Boolean(policy.id);
+    const overdueEditMode = Boolean(policy.id);
 
     return (
       <form
@@ -116,13 +116,13 @@ class FinePolicyForm extends React.Component {
       >
         <Paneset isRoot>
           <HeaderPane
-            editMode={editMode}
+            editMode={overdueEditMode}
             entryTitle={policy.name}
             pristine={pristine}
             submitting={submitting}
             permissions={permissions}
             onCancel={onCancel}
-            onRemove={this.changeDeleteState}
+            onRemove={this.changeOverdueDeleteState}
             createEntryLabel={<FormattedMessage id="ui-circulation.settings.finePolicy.createEntryLabel" />}
           >
             <React.Fragment>
@@ -138,16 +138,16 @@ class FinePolicyForm extends React.Component {
                 </Col>
               </Row>
               <Accordion
-                id="generalSection"
-                open={sections.generalSection}
+                id="overdueGeneralSection"
                 label={<FormattedMessage id="ui-circulation.settings.finePolicy.generalInformation" />}
+                open={sections.overdueGeneralSection}
                 onToggle={this.handleSectionToggle}
               >
                 <Metadata
                   connect={stripes.connect}
                   metadata={policy.metadata}
                 />
-                <AboutSection />
+                <OverdueAboutSection />
                 <FinesSection
                   initialValues={initialValues}
                   policy
@@ -156,7 +156,7 @@ class FinePolicyForm extends React.Component {
                   change={change}
                 />
               </Accordion>
-              {editMode &&
+              {overdueEditMode &&
                 <DeleteConfirmationModal
                   isOpen={confirmDelete}
                   triggerSubmitSucceeded
@@ -164,7 +164,7 @@ class FinePolicyForm extends React.Component {
                   formName="finePolicyForm"
                   deleteEntityKey="ui-circulation.settings.finePolicy.deletefinePolicy"
                   initialValues={initialValues}
-                  onCancel={this.changeDeleteState}
+                  onCancel={this.changeOverdueDeleteState}
                   onRemove={onRemove}
                 />
               }
