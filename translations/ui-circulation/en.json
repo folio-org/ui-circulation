@@ -86,6 +86,7 @@
   "settings.circulationRules.selectCampus": "Select campus",
   "settings.circulationRules.selectLibrary": "Select library",
   "settings.circulationRules.selectLocation": "Select location",
+  "settings.circulationRules.done": "Done",
   "settings.circulationRules.loanPolicies": "Loan policies",
   "settings.circulationRules.requestPolicies": "Request policies",
   "settings.circulationRules.noticePolicies": "Patron notice policies",
