@@ -8,7 +8,7 @@ import {
   KeyValue,
 } from '@folio/stripes/components';
 
-const AboutSection = (props) => {
+const OverdueAboutSection = (props) => {
   const { getValue } = props;
 
   return (
@@ -37,8 +37,8 @@ const AboutSection = (props) => {
   );
 };
 
-AboutSection.propTypes = {
+OverdueAboutSection.propTypes = {
   getValue: PropTypes.func.isRequired,
 };
 
-export default AboutSection;
+export default OverdueAboutSection;

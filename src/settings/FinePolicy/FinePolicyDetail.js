@@ -18,7 +18,7 @@ import {
 
 import {
   FinesSection,
-  AboutSection,
+  OverdueAboutSection,
 } from './components/ViewSections';
 
 import { Metadata } from '../components';
@@ -97,7 +97,7 @@ class FinePolicyDetail extends React.Component {
             connect={connect}
             metadata={finePolicy.metadata}
           />
-          <AboutSection getValue={this.getValue} />
+          <OverdueAboutSection getValue={this.getValue} />
           <FinesSection
             policy={finePolicy}
             getCheckboxValue={this.getCheckboxValue}

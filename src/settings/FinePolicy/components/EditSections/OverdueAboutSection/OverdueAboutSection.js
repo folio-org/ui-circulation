@@ -9,7 +9,7 @@ import {
   TextArea,
 } from '@folio/stripes/components';
 
-const AboutSection = () => (
+const OverdueAboutSection = () => (
   <div data-test-fine-policy-form-about-section>
     <Row>
       <Col xs={3} data-test-about-section-policy-name>
@@ -35,4 +35,4 @@ const AboutSection = () => (
   </div>
 );
 
-export default AboutSection;
+export default OverdueAboutSection;
