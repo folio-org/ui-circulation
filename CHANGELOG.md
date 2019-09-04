@@ -8,6 +8,7 @@
 * Update `react-to-print` to accept React via `peerDependencies`. UIIN-678.
 * Normalize a non alpha-numeric characters from Location Codes in circulation rules editor. Refs UICIRC-260.
 * Add backward moving feature to organization hierarchy menus in circulation rules editor. Refs UICIRC-285.
+* Add CRUD and BigTest Fee/Fine Overdue Fine Policies. Refs UIU-1146.
 
 ## [1.9.0](https://github.com/folio-org/ui-circulation/tree/v1.9.0) (2019-07-25)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v1.8.0...v1.9.0)
