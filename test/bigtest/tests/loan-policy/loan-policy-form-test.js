@@ -32,20 +32,16 @@ describe('LoanPolicyForm', () => {
         await LoanPolicyForm.expandAll.click();
       });
 
-      it('aboutSection should not be displayed', () => {
-        expect(LoanPolicyForm.aboutSection.isHidden).to.be.true;
+      it('general section accordion should be collapsed', () => {
+        expect(LoanPolicyForm.generalSectionAccordion.isOpen).to.be.false;
       });
 
-      it('loansSection should not be displayed', () => {
-        expect(LoanPolicyForm.loansSection.isHidden).to.be.true;
+      it('recalls section accordion should be collapsed', () => {
+        expect(LoanPolicyForm.recallsSectionAccordion.isOpen).to.be.false;
       });
 
-      it('renewalsSection should not be displayed', () => {
-        expect(LoanPolicyForm.renewalsSection.isHidden).to.be.true;
-      });
-
-      it('requestManagement should not be displayed', () => {
-        expect(LoanPolicyForm.requestManagementSection.isHidden).to.be.true;
+      it('holds section accordion should be collapsed', () => {
+        expect(LoanPolicyForm.holdsSectionAccordion.isOpen).to.be.false;
       });
 
       describe('expand all', () => {
@@ -53,21 +49,17 @@ describe('LoanPolicyForm', () => {
           await LoanPolicyForm.expandAll.click();
         });
 
-        it('aboutSection should be displayed', () => {
-          expect(LoanPolicyForm.aboutSection.isVisible).to.be.true;
+        it('general section accordion should be expanded', () => {
+          expect(LoanPolicyForm.generalSectionAccordion.isOpen).to.be.true;
         });
 
-        it('loansSection should be displayed', () => {
-          expect(LoanPolicyForm.loansSection.isVisible).to.be.true;
+        it('recalls section accordion should be expanded', () => {
+          expect(LoanPolicyForm.recallsSectionAccordion.isOpen).to.be.true;
         });
 
-        it('renewalsSection should be displayed', () => {
-          expect(LoanPolicyForm.renewalsSection.isVisible).to.be.true;
+        it('holds section accordion should be expanded', () => {
+          expect(LoanPolicyForm.holdsSectionAccordion.isOpen).to.be.true;
         });
-
-        it('requestManagement should be displayed', () => {
-          expect(LoanPolicyForm.requestManagementSection.isVisible).to.be.true;
-        }).timeout(3000);
       });
     });
   });

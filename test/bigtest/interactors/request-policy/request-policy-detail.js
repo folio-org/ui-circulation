@@ -4,18 +4,9 @@ import {
   text,
   Interactor,
   scoped,
-  clickable
 } from '@bigtest/interactor';
 
-import KeyValue from '../KeyValue';
-
-@interactor class GeneralSection {
-  static defaultScope = ('#general');
-
-  name = new KeyValue('[data-request-policy-name] div');
-  content = scoped('[class^="content-"]');
-  toggleAccodion = clickable('button');
-}
+import { AccordionInteractor } from '@folio/stripes-components/lib/Accordion/tests/interactor';
 
 @interactor class RequestPolicyDetail {
   hasName = isPresent('[data-request-policy-name]');
@@ -26,7 +17,7 @@ import KeyValue from '../KeyValue';
   entityInUseConfirm = new Interactor('[data-test-prohibit-delete-modal-close-button]');
 
   expandAll = scoped('[data-test-expand-all] button');
-  generalSection = new GeneralSection();
+  generalSectionAccordion = new AccordionInteractor('#general');
 }
 
 export default new RequestPolicyDetail('[data-test-request-policy-detail]');
