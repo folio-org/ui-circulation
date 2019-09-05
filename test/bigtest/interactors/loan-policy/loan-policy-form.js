@@ -8,6 +8,7 @@ import {
 import TextFieldInteractor from '@folio/stripes-components/lib/TextField/tests/interactor';
 import CheckboxInteractor from '@folio/stripes-components/lib/Checkbox/tests/interactor';
 import SelectInteractor from '@folio/stripes-components/lib/Select/tests/interactor';
+import { AccordionInteractor } from '@folio/stripes-components/lib/Accordion/tests/interactor';
 
 import Period from '../Period';
 
@@ -76,6 +77,10 @@ import Period from '../Period';
   expandAll = scoped('[data-test-expand-all] button');
   cancelEditingLoanPolicy = new Interactor('[data-test-cancel-loan-policy-form-action]');
   cancelEditingLoanPolicyModal = new Interactor('#cancel-editing-confirmation');
+
+  generalSectionAccordion = new AccordionInteractor('#generalSection');
+  recallsSectionAccordion = new AccordionInteractor('#recallsSection');
+  holdsSectionAccordion = new AccordionInteractor('#holdsSection');
 
   save = clickable('#clickable-save-entry');
 }
