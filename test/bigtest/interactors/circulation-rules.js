@@ -44,6 +44,14 @@ const scrollingOffset = 3;
   isActiveItemPresent = isPresent(`.${ACTIVE_HINT_ELEMENT_CLASS}`);
   items = collection('.CodeMirror-hint', scoped);
   itemsCount = count('.CodeMirror-hint');
+  completionButton = scoped('.CodeMirror-hint-section-button');
+  isCompletionButtonHidden = hasClass('.CodeMirror-hint-section-button-container', 'hidden');
+  isCompletionButtonDisabled = hasClass('.CodeMirror-hint-section-button', 'disabled');
+  hasCheckBoxes = isPresent('input[type="checkbox"]');
+
+  isCheckBoxChecked = function (itemIndex) {
+    return this.$(`.CodeMirror-hint:nth-child(${itemIndex + 1}) input[type="checkbox"]`).checked;
+  }
 
   isScrollable = function () {
     return this.$('ul').scrollHeight > this.$('ul').clientHeight;
@@ -89,17 +97,19 @@ const scrollingOffset = 3;
   };
 
   clickOnItem = this.triggerItemEvent('click');
-  doubleClickOnItem = this.triggerItemEvent('dblclick');
 }
 
 @interactor class Editor {
   static defaultScope = '.react-codemirror2';
 
-  setValue = action(function (value) {
+  setValue = action(function (value, showHint = true) {
     return this.find('.CodeMirror').do(({ CodeMirror }) => {
       CodeMirror.doc.setValue(value);
       CodeMirror.setCursor(CodeMirror.lineCount(), 0);
-      CodeMirror.showHint();
+
+      if (showHint) {
+        CodeMirror.showHint();
+      }
 
       return CodeMirror;
     }).run();
@@ -144,6 +154,7 @@ const scrollingOffset = 3;
   pressTab = this.pressKey(9);
   pressArrowDown = this.pressKey(40);
   pressArrowUp = this.pressKey(38);
+  pressBackspace = this.pressKey(8);
 
   textArea = new Interactor('textarea');
   hints = new Hints();

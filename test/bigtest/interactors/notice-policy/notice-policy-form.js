@@ -50,6 +50,7 @@ import Period from '../Period';
   hasCards = isPresent('[data-test-notice-card]');
   cardsCount = count('[data-test-notice-card]');
   loanNotices = collection('[data-test-notice-card]', NoticeCard);
+  requestNotices = collection('data-test-notice-card', NoticeCard);
   content = scoped('[class^="content-"]');
 
   addCard() {

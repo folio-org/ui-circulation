@@ -13,6 +13,7 @@ import {
 
 import {
   Col,
+  Label,
   Row,
   Select,
   TextField,
@@ -79,13 +80,12 @@ class Period extends PureComponent {
       <React.Fragment>
         {fieldLabel && (
           <div data-test-period-label>
-            <Row className={css.label}>
+            <Row className={css.periodLabel}>
               <Col xs={12}>
                 { fieldLabel && (
-                  <React.Fragment>
+                  <Label required={required}>
                     <FormattedMessage id={fieldLabel} />
-                    { required && <span className={css.asterisk}>*</span> }
-                  </React.Fragment>
+                  </Label>
                 )}
               </Col>
             </Row>

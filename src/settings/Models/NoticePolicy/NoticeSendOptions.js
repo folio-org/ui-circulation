@@ -1,10 +1,14 @@
 import {
-  isEqual,
   includes,
+  isEqual,
 } from 'lodash';
 
 import { Period } from '../common';
-import { noticesSendEventMap } from '../../../constants';
+import {
+  loanTimeBasedEventsIds,
+  noticesSendEventMap,
+  requestTimeBasedEventsIds,
+} from '../../../constants';
 
 export default class NoticeSendOptions {
   constructor(options = {}) {
@@ -21,5 +25,13 @@ export default class NoticeSendOptions {
   isBeforeOrAfter() {
     return isEqual(this.sendHow, noticesSendEventMap.AFTER)
        || isEqual(this.sendHow, noticesSendEventMap.BEFORE);
+  }
+
+  isFrequencyAvailable() {
+    const timeBasedEventsIds = [
+      ...Object.values(requestTimeBasedEventsIds),
+      ...Object.values(loanTimeBasedEventsIds),
+    ];
+    return this.isTimeBasedEventSelected(timeBasedEventsIds) && this.isBeforeOrAfter();
   }
 }
