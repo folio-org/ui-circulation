@@ -10,7 +10,6 @@ import StaffSlipForm from './StaffSlipForm';
 
 class StaffSlipManager extends React.Component {
   static propTypes = {
-    label: PropTypes.string.isRequired,
     resources: PropTypes.shape({
       entries: PropTypes.shape({
         records: PropTypes.arrayOf(PropTypes.object),
@@ -53,26 +52,29 @@ class StaffSlipManager extends React.Component {
     const {
       mutator,
       resources,
-      label,
     } = this.props;
 
     return (
-      <EntryManager
-        {...this.props}
-        parentMutator={mutator}
-        entryList={sortBy((resources.entries || {}).records || [], ['name'])}
-        detailComponent={StaffSlipDetail}
-        paneTitle={label}
-        entryLabel={label}
-        entryFormComponent={StaffSlipForm}
-        validate={this.validate}
-        nameKey="name"
-        permissions={{
-          put: 'ui-circulation.settings.staff-slips',
-          post: 'ui-circulation.settings.staff-slips.post',
-          delete: 'ui-circulation.settings.staff-slips.delete'
-        }}
-      />
+      <FormattedMessage id="ui-circulation.settings.staffSlips.staffSlipTokenHeader">
+        {(entryLabel) => (
+          <EntryManager
+            {...this.props}
+            parentMutator={mutator}
+            entryList={sortBy((resources.entries || {}).records || [], ['name'])}
+            detailComponent={StaffSlipDetail}
+            paneTitle={<FormattedMessage id="ui-circulation.settings.index.staffSlips" />}
+            entryLabel={entryLabel}
+            entryFormComponent={StaffSlipForm}
+            validate={this.validate}
+            nameKey="name"
+            permissions={{
+              put: 'ui-circulation.settings.staff-slips',
+              post: 'ui-circulation.settings.staff-slips.post',
+              delete: 'ui-circulation.settings.staff-slips.delete'
+            }}
+          />
+        )}
+      </FormattedMessage>
     );
   }
 }
