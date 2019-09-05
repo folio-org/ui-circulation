@@ -3,10 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { EntryManager } from '@folio/stripes/smart-components';
-import {
-  stripesConnect,
-  IntlConsumer,
-} from '@folio/stripes/core';
+import { stripesConnect } from '@folio/stripes/core';
 
 import StaffSlipDetail from './StaffSlipDetail';
 import StaffSlipForm from './StaffSlipForm';
@@ -58,15 +55,15 @@ class StaffSlipManager extends React.Component {
     } = this.props;
 
     return (
-      <IntlConsumer>
-        {(intl) => (
+      <FormattedMessage id="ui-circulation.settings.staffSlips.staffSlipTokenHeader">
+        {(entryLabel) => (
           <EntryManager
             {...this.props}
             parentMutator={mutator}
             entryList={sortBy((resources.entries || {}).records || [], ['name'])}
             detailComponent={StaffSlipDetail}
             paneTitle={<FormattedMessage id="ui-circulation.settings.index.staffSlips" />}
-            entryLabel={intl.formatMessage({ id: 'ui-circulation.settings.staffSlips.staffSlipTokenHeader' })}
+            entryLabel={entryLabel}
             entryFormComponent={StaffSlipForm}
             validate={this.validate}
             nameKey="name"
@@ -77,7 +74,7 @@ class StaffSlipManager extends React.Component {
             }}
           />
         )}
-      </IntlConsumer>
+      </FormattedMessage>
     );
   }
 }
