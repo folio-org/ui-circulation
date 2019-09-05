@@ -41,7 +41,7 @@ describe('RequestPolicyDetail', () => {
       });
 
       it('generalSection should not be displayed', () => {
-        expect(RequestPolicyDetail.generalSection.content.isHidden).to.be.true;
+        expect(RequestPolicyDetail.generalSectionAccordion.isOpen).to.be.false;
       });
 
       describe('expand all', () => {
@@ -50,18 +50,8 @@ describe('RequestPolicyDetail', () => {
         });
 
         it('generalSection should be displayed', () => {
-          expect(RequestPolicyDetail.generalSection.content.isVisible).to.be.true;
+          expect(RequestPolicyDetail.generalSectionAccordion.isOpen).to.be.true;
         });
-      });
-    });
-
-    describe('general section', () => {
-      beforeEach(async () => {
-        await RequestPolicyDetail.generalSection.toggleAccodion();
-      });
-
-      it('should be hidden', () => {
-        expect(RequestPolicyDetail.generalSection.name.isVisible).to.be.false;
       });
     });
   });

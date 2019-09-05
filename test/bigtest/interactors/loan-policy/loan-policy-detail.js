@@ -3,7 +3,9 @@ import {
   scoped,
 } from '@bigtest/interactor';
 
+import { AccordionInteractor } from '@folio/stripes-components/lib/Accordion/tests/interactor';
 import KeyValue from '../KeyValue';
+
 
 @interactor class AboutSection {
   static defaultScope = ('[data-test-loan-policy-detail-about-section]');
@@ -58,7 +60,7 @@ import KeyValue from '../KeyValue';
   renewalsSection = new RenewalsSection();
   requestManagement = new RequestManagementSection();
 
-  content = scoped('[class^="content-"]');
+  generalInformationAccordion = new AccordionInteractor('#generalInformation');
   expandAll = scoped('[data-test-expand-all] button')
 }
 
