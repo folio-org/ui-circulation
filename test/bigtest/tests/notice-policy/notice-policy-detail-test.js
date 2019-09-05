@@ -33,15 +33,15 @@ describe('NoticePolicyDetail', () => {
         });
 
         it('generalSection should not be displayed', () => {
-          expect(NoticePolicyDetail.generalSection.content.isHidden).to.be.true;
+          expect(NoticePolicyDetail.generalSectionAccordion.isOpen).to.be.false;
         });
 
         it('loanNoticesSection should not be displayed', () => {
-          expect(NoticePolicyDetail.loanNoticesSection.content.isHidden).to.be.true;
+          expect(NoticePolicyDetail.loanNoticesSectionAccordion.isOpen).to.be.false;
         });
 
         it('requestNoticesSection should not be displayed', () => {
-          expect(NoticePolicyDetail.requestNoticesSection.content.isHidden).to.be.true;
+          expect(NoticePolicyDetail.requestNoticesSectionAccordion.isOpen).to.be.false;
         });
 
         describe('expand all', () => {
@@ -50,15 +50,15 @@ describe('NoticePolicyDetail', () => {
           });
 
           it('generalSection should be displayed', () => {
-            expect(NoticePolicyDetail.generalSection.content.isVisible).to.be.true;
+            expect(NoticePolicyDetail.generalSectionAccordion.isOpen).to.be.true;
           });
 
           it('loanNoticesSection should be displayed', () => {
-            expect(NoticePolicyDetail.loanNoticesSection.content.isVisible).to.be.true;
+            expect(NoticePolicyDetail.loanNoticesSectionAccordion.isOpen).to.be.true;
           });
 
           it('requestNoticesSection should be displayed', () => {
-            expect(NoticePolicyDetail.requestNoticesSection.content.isVisible).to.be.true;
+            expect(NoticePolicyDetail.requestNoticesSectionAccordion.isOpen).to.be.true;
           });
         });
       });

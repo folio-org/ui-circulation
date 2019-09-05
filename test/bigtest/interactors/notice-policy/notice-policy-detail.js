@@ -7,6 +7,7 @@ import {
   scoped,
 } from '@bigtest/interactor';
 
+import { AccordionInteractor } from '@folio/stripes-components/lib/Accordion/tests/interactor';
 import KeyValue from '../KeyValue';
 
 @interactor class NoticeCard {
@@ -36,7 +37,6 @@ import KeyValue from '../KeyValue';
   name = new KeyValue('[data-notice-policy-name] div');
   description = new KeyValue('[data-notice-policy-description] div');
   active = new KeyValue('[data-notice-policy-active] div');
-  content = scoped('[class^="content-"]');
 }
 
 @interactor class LoanNoticesSection {
@@ -44,7 +44,6 @@ import KeyValue from '../KeyValue';
 
   hasCards = isPresent('[data-test-notice-card]');
   cardsCount = count('[data-test-notice-card]');
-  content = scoped('[class^="content-"]');
 
   loanNotices = collection('[data-test-notice-card]', NoticeCard);
 }
@@ -54,12 +53,15 @@ import KeyValue from '../KeyValue';
 
   hasCards = isPresent('[data-test-notice-card]');
   cardsCount = count('[data-test-notice-card]');
-  content = scoped('[class^="content-"]');
 
   requestNotices = collection('[data-test-notice-card]', NoticeCard);
 }
 
 @interactor class NoticePolicyDetail {
+  generalSectionAccordion = new AccordionInteractor('#generalInformation');
+  loanNoticesSectionAccordion = new AccordionInteractor('#loanNotices');
+  requestNoticesSectionAccordion = new AccordionInteractor('#requestNotices');
+
   generalSection = new GeneralSection();
   loanNoticesSection = new LoanNoticesSection();
   requestNoticesSection = new RequestNoticesSection();

@@ -10,6 +10,7 @@ import {
 
 import TextFieldInteractor from '@folio/stripes-components/lib/TextField/tests/interactor';
 import DatepickerInteractor from '@folio/stripes-components/lib/Datepicker/tests/interactor';
+import { AccordionInteractor } from '@folio/stripes-components/lib/Accordion/tests/interactor';
 
 @interactor class GeneralSection {
   static defaultScope = ('[data-test-fdds-form-general-section]');
@@ -44,6 +45,8 @@ import DatepickerInteractor from '@folio/stripes-components/lib/Datepicker/tests
 
   generalSection = new GeneralSection();
   scheduleSection = new ScheduleSection();
+  generalSectionAccordion = new AccordionInteractor('#generalInformation');
+  scheduleSectionAccordion = new AccordionInteractor('#schedule');
   fillName = fillable('#input_schedule_name');
   fillDescription = fillable('[name="description"]');
   clickSave = clickable('#clickable-save-fixedDueDateSchedule');
