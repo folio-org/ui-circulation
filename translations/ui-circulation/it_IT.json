@@ -356,7 +356,8 @@
     "settings.circulationRules.any": "QUALSIASI",
     "settings.circulationRules.selectCampus": "Seleziona sede",
     "settings.circulationRules.selectLibrary": "Seleziona biblioteca",
-    "settings.circulationRules.locations": "Locations",
-    "settings.circulationRules.location": "Location",
-    "settings.circulationRules.selectLocation": "Select location"
+    "settings.circulationRules.locations": "Sezioni",
+    "settings.circulationRules.location": "Sezione",
+    "settings.circulationRules.selectLocation": "Seleziona sezione",
+    "settings.noticePolicy.requestNotices.requestExpiration": "Scadenza della richiesta"
 }

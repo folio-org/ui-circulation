@@ -218,7 +218,6 @@ class CirculationRules extends React.Component {
         patronGroups: patronGroups.records.map(g => kebabCase(g.group)),
         materialTypes: materialTypes.records.map(m => kebabCase(m.name)),
         loanTypes: loanTypes.records.map(t => kebabCase(t.name)),
-        // TODO: The codes should be normalized in the scope of https://issues.folio.org/browse/UICIRC-260
         institutions: institutions.records.map(institution => ({
           id: institution.id,
           code: replacer(institution.code),
@@ -285,11 +284,10 @@ class CirculationRules extends React.Component {
       ...patronGroups.records.map(r => ({ name: kebabCase(r.group), id: r.id, prefix: RULES_TYPE.PATRON_GROUP, divider: '.' })),
       ...materialTypes.records.map(r => ({ name: kebabCase(r.name), id: r.id, prefix: RULES_TYPE.MATERIAL, divider: '.' })),
       ...loanTypes.records.map(r => ({ name: kebabCase(r.name), id: r.id, prefix: RULES_TYPE.LOAN, divider: '.' })),
-      // TODO: The codes should be normalized in the scope of https://issues.folio.org/browse/UICIRC-260
-      ...institutions.records.map(r => ({ name: r.code, id: r.id, prefix: RULES_TYPE.INSTITUTION, divider: '.' })),
-      ...campuses.records.map(r => ({ name: r.code, id: r.id, prefix: RULES_TYPE.CAMPUS, divider: '.' })),
-      ...libraries.records.map(r => ({ name: r.code, id: r.id, prefix: RULES_TYPE.LIBRARY, divider: '.' })),
-      ...locations.records.map(r => ({ name: r.code, id: r.id, prefix: RULES_TYPE.LOCATION, divider: '.' })),
+      ...institutions.records.map(r => ({ name: replacer(r.code), id: r.id, prefix: RULES_TYPE.INSTITUTION, divider: '.' })),
+      ...campuses.records.map(r => ({ name: replacer(r.code), id: r.id, prefix: RULES_TYPE.CAMPUS, divider: '.' })),
+      ...libraries.records.map(r => ({ name: replacer(r.code), id: r.id, prefix: RULES_TYPE.LIBRARY, divider: '.' })),
+      ...locations.records.map(r => ({ name: replacer(r.code), id: r.id, prefix: RULES_TYPE.LOCATION, divider: '.' })),
       ...loanPolicies.records.map(r => ({ name: kebabCase(r.name), id: r.id, prefix: POLICY.LOAN, divider: '\\s' })),
       ...requestPolicies.records.map(r => ({ name: kebabCase(r.name), id: r.id, prefix: POLICY.REQUEST, divider: '\\s' })),
       ...noticePolicies.records.map(r => ({ name: kebabCase(r.name), id: r.id, prefix: POLICY.NOTICE, divider: '\\s' })),

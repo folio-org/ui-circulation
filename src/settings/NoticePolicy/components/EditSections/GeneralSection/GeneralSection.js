@@ -46,11 +46,8 @@ class GeneralSection extends React.Component {
             <Field
               id="notice_policy_name"
               name="name"
-              label={(
-                <FormattedMessage id="ui-circulation.settings.noticePolicy.policyName">
-                  {message => `${message} *`}
-                </FormattedMessage>
-              )}
+              label={<FormattedMessage id="ui-circulation.settings.noticePolicy.policyName" />}
+              required
               component={TextField}
             />
           </div>

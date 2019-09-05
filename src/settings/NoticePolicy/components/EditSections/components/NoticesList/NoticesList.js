@@ -10,6 +10,12 @@ import {
 
 import NoticeCard from '../NoticeCard';
 
+import {
+  noticesSendEvent,
+  requestTimeBasedEventsIds,
+  requestTimeBasedNoticesSendEvent,
+} from '../../../../../../constants';
+
 import css from './NoticesList.css';
 
 class NoticesList extends React.Component {
@@ -50,13 +56,17 @@ class NoticesList extends React.Component {
       <React.Fragment>
         {fields.map((pathToNotice, noticeIndex) => {
           const notice = policy[sectionKey][noticeIndex];
+          const sendEvents = notice.sendOptions.isTimeBasedEventSelected(Object.values(requestTimeBasedEventsIds))
+            ? requestTimeBasedNoticesSendEvent
+            : noticesSendEvent;
 
           return (
             <NoticeCard
               key={pathToNotice}
+              notice={notice}
               noticeIndex={noticeIndex}
               pathToNotice={pathToNotice}
-              notice={notice}
+              sendEvents={sendEvents}
               timeBasedEventsIds={timeBasedEventsIds}
               templates={templates}
               triggeringEvents={triggeringEvents}
