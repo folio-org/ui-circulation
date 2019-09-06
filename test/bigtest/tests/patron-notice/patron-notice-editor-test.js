@@ -108,7 +108,7 @@ describe('Patron notice editor', () => {
           beforeEach(async () => {
             await PatronNoticeForm.templateCategory.selectAndBlur(translation['settings.patronNotices.categories.loan']);
             await PatronNoticeForm.tokensModal.multipleTokens.click();
-            await PatronNoticeForm.tokensModal.availbaleTokens(1).items(0).click();
+            await PatronNoticeForm.tokensModal.availbaleTokens(2).items(0).click();
             await PatronNoticeForm.tokensModal.addTokensBtn.click();
           });
 

@@ -170,6 +170,7 @@
   "settings.patronNotices.addToken": "Add token",
   "settings.patronNotices.itemTokenHeader": "Item",
   "settings.patronNotices.userTokenHeader": "User",
+  "settings.patronNotices.feeFineTokenHeader": "Fee/Fine",
   "settings.patronNotices.requestTokenHeader": "Request",
   "settings.patronNotices.loanTokenHeader": "Loan",
   "settings.patronNotices.form.previewHeader": "Preview of patron notice template",

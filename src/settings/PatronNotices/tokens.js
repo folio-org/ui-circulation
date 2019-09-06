@@ -43,6 +43,17 @@ const formats = {
     'item.effectiveLocationCampus': 'South Campus',
     'item.effectiveLocationInstitution': 'Opentown University',
   },
+  feeFine: {
+    'fee.owner': 'Main Library',
+    'fee.type': 'Locker rental',
+    'fee.amount': '$15.00',
+    'fee.actionType': 'Payment',
+    'fee.actionAmount': '$5.00',
+    'fee.actionDateTime': 'Aug 5, 2019',
+    'fee.balance': '$10.00',
+    'fee.actionAdditionalInfo': 'Additional information regarding the fee/fine',
+    'fee.reasonForCancellation': 'Fee/fine cancelation reason',
+  },
 };
 
 export default formats;
