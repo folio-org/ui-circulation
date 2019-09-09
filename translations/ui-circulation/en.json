@@ -177,6 +177,9 @@
   "settings.patronNotices.denyDelete.header": "Cannot delete Patron notice template",
   "settings.patronNotices.denyDelete.body": "This Patron notice template cannot be deleted, as it is in use by one or more records.",
   "settings.patronNotices.effectiveLocationTokenHeader": "Effective location",
+  "settings.patronNotices.multipleLoans": "Multiple loans",
+  "settings.patronNotices.multipleRequests": "Multiple requests",
+  "settings.patronNotices.multipleFeesFines": "Multiple fees/fines",
 
   "settings.staffSlips.label": "Staff slips",
   "settings.staffSlips.name": "Name",

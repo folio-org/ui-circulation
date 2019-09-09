@@ -8,6 +8,7 @@ import {
 } from '@bigtest/interactor';
 
 import TextFieldInteractor from '@folio/stripes-components/lib/TextField/tests/interactor';
+import SelectInteractor from '@folio/stripes-components/lib/Select/tests/interactor';
 
 @interactor class AvailableTokens {
   items = collection('input[type="checkbox"]');
@@ -18,7 +19,8 @@ import TextFieldInteractor from '@folio/stripes-components/lib/TextField/tests/i
 
   addTokensBtn = scoped('[data-test-add-tokens]');
   cancelBtn = scoped('[data-test-close-tokens-modal]');
-  availbaleTokens = scoped('[data-test-available-tokens]', AvailableTokens);
+  availbaleTokens = collection('[data-test-available-tokens]', AvailableTokens);
+  multipleTokens = scoped('[data-test-multiple-tokens]');
 
   isAddTokenBtnDisabled = property('[data-test-add-tokens]', 'disabled');
 }
@@ -38,6 +40,7 @@ import TextFieldInteractor from '@folio/stripes-components/lib/TextField/tests/i
   cancelEditingPatronNoticeTempateModal = new Interactor('#cancel-editing-confirmation');
   prohibitDeletion = new Interactor('[data-test-entity-in-use-modal]');
 
+  templateCategory = new SelectInteractor('[data-test-template-category]');
   templateBody = new Interactor('#template-editor');
   indentBtn = new Interactor('[data-test-increase-indent]');
   errorContainer = new Interactor('#patron-notice-error-container');
