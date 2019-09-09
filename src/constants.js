@@ -244,20 +244,20 @@ export const requestItemStateChangeEventsIds = {
 
 export const requestNoticesTriggeringEvents = [
   {
-    value: requestUserInitiatedEventsIds.RECALL_LOANEE,
-    label: 'ui-circulation.settings.noticePolicy.requestNotices.recallLoanee',
+    value: requestItemStateChangeEventsIds.AVAILABLE,
+    label: 'ui-circulation.settings.noticePolicy.requestNotices.available',
   },
   {
-    value: requestUserInitiatedEventsIds.RECALL_REQUEST,
-    label: 'ui-circulation.settings.noticePolicy.requestNotices.recallRequest',
+    value: requestUserInitiatedEventsIds.PAGE,
+    label: 'ui-circulation.settings.noticePolicy.requestNotices.pagingRequest',
   },
   {
     value: requestUserInitiatedEventsIds.HOLD,
     label: 'ui-circulation.settings.noticePolicy.requestNotices.holdRequest',
   },
   {
-    value: requestUserInitiatedEventsIds.PAGE,
-    label: 'ui-circulation.settings.noticePolicy.requestNotices.pagingRequest',
+    value: requestUserInitiatedEventsIds.RECALL_REQUEST,
+    label: 'ui-circulation.settings.noticePolicy.requestNotices.recallRequest',
   },
   {
     value: requestUserInitiatedEventsIds.CANCEL,
@@ -268,12 +268,12 @@ export const requestNoticesTriggeringEvents = [
     label: 'ui-circulation.settings.noticePolicy.requestNotices.holdExpiration',
   },
   {
-    value: requestItemStateChangeEventsIds.AVAILABLE,
-    label: 'ui-circulation.settings.noticePolicy.requestNotices.available',
-  },
-  {
     value: requestTimeBasedEventsIds.REQUEST_EXPIRATION,
     label: 'ui-circulation.settings.noticePolicy.requestNotices.requestExpiration',
+  },
+  {
+    value: requestUserInitiatedEventsIds.RECALL_LOANEE,
+    label: 'ui-circulation.settings.noticePolicy.requestNotices.recallLoanee',
   },
 ];
 
