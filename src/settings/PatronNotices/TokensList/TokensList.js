@@ -54,24 +54,12 @@ class TokensList extends React.Component {
     return (
       <Row>
         <Col xs={4}>
-          <TokensSection
-            section="item"
-            header={<FormattedMessage id="ui-circulation.settings.patronNotices.itemTokenHeader" />}
-            tokens={Object.keys(tokens.item)}
-            onLoopSelect={onLoopSelect}
-            onSectionInit={onSectionInit}
-            onTokenSelect={onTokenSelect}
-          />
-        </Col>
-        <Col xs={4}>
           <Row>
             <Col xs={12}>
               <TokensSection
-                section="loan"
-                disabled={this.disableSection([patronNoticeCategoryIds.LOAN, patronNoticeCategoryIds.REQUEST])}
-                header={<FormattedMessage id="ui-circulation.settings.patronNotices.loanTokenHeader" />}
-                tokens={Object.keys(tokens.loan)}
-                loopConfig={this.loansLoopConfig}
+                section="item"
+                header={<FormattedMessage id="ui-circulation.settings.patronNotices.itemTokenHeader" />}
+                tokens={Object.keys(tokens.item)}
                 onLoopSelect={onLoopSelect}
                 onSectionInit={onSectionInit}
                 onTokenSelect={onTokenSelect}
@@ -95,6 +83,20 @@ class TokensList extends React.Component {
           <Row>
             <Col xs={12}>
               <TokensSection
+                section="loan"
+                disabled={this.disableSection([patronNoticeCategoryIds.LOAN, patronNoticeCategoryIds.REQUEST])}
+                header={<FormattedMessage id="ui-circulation.settings.patronNotices.loanTokenHeader" />}
+                tokens={Object.keys(tokens.loan)}
+                loopConfig={this.loansLoopConfig}
+                onLoopSelect={onLoopSelect}
+                onSectionInit={onSectionInit}
+                onTokenSelect={onTokenSelect}
+              />
+            </Col>
+          </Row>
+          <Row>
+            <Col xs={12}>
+              <TokensSection
                 section="request"
                 disabled={this.disableSection([patronNoticeCategoryIds.REQUEST])}
                 header={<FormattedMessage id="ui-circulation.settings.patronNotices.requestTokenHeader" />}
@@ -106,12 +108,27 @@ class TokensList extends React.Component {
               />
             </Col>
           </Row>
+        </Col>
+        <Col xs={4}>
           <Row>
             <Col xs={12}>
               <TokensSection
                 section="user"
                 header={<FormattedMessage id="ui-circulation.settings.patronNotices.userTokenHeader" />}
                 tokens={Object.keys(tokens.user)}
+                onLoopSelect={onLoopSelect}
+                onSectionInit={onSectionInit}
+                onTokenSelect={onTokenSelect}
+              />
+            </Col>
+          </Row>
+          <Row>
+            <Col xs={12}>
+              <TokensSection
+                section="user"
+                disabled={this.disableSection([patronNoticeCategoryIds.FEE_FINE_ACTION, patronNoticeCategoryIds.FEE_FINE_CHARGE])}
+                header={<FormattedMessage id="ui-circulation.settings.patronNotices.feeFineTokenHeader" />}
+                tokens={Object.keys(tokens.feeFine)}
                 onLoopSelect={onLoopSelect}
                 onSectionInit={onSectionInit}
                 onTokenSelect={onTokenSelect}
