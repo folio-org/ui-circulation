@@ -12,40 +12,48 @@ import { TokensSection } from '../../components';
 class TokensList extends React.Component {
   static propTypes = {
     tokens: PropTypes.object.isRequired,
-    onSelect: PropTypes.func.isRequired,
+    onSectionInit: PropTypes.func.isRequired,
+    onTokenSelect: PropTypes.func.isRequired,
   };
 
   render() {
     const {
       tokens,
-      onSelect,
+      onSectionInit,
+      onTokenSelect,
     } = this.props;
 
     return (
       <Row>
         <Col xs={4}>
           <TokensSection
+            section="item"
             header={<FormattedMessage id="ui-circulation.settings.staffSlips.itemTokenHeader" />}
             tokens={Object.keys(tokens.item)}
-            onSelect={onSelect}
+            onSectionInit={onSectionInit}
+            onTokenSelect={onTokenSelect}
           />
         </Col>
         <Col xs={4}>
           <Row>
             <Col xs={12}>
               <TokensSection
+                section="effectiveLocation"
                 header={<FormattedMessage id="ui-circulation.settings.staffSlips.effectiveLocationTokenHeader" />}
                 tokens={Object.keys(tokens.effectiveLocation)}
-                onSelect={onSelect}
+                onSectionInit={onSectionInit}
+                onTokenSelect={onTokenSelect}
               />
             </Col>
           </Row>
           <Row>
             <Col xs={12}>
               <TokensSection
+                section="staffSlip"
                 header={<FormattedMessage id="ui-circulation.settings.staffSlips.staffSlipTokenHeader" />}
                 tokens={Object.keys(tokens.staffSlip)}
-                onSelect={onSelect}
+                onSectionInit={onSectionInit}
+                onTokenSelect={onTokenSelect}
               />
             </Col>
           </Row>
@@ -54,18 +62,22 @@ class TokensList extends React.Component {
           <Row>
             <Col xs={12}>
               <TokensSection
+                section="request"
                 header={<FormattedMessage id="ui-circulation.settings.staffSlips.requestTokenHeader" />}
                 tokens={Object.keys(tokens.request)}
-                onSelect={onSelect}
+                onSectionInit={onSectionInit}
+                onTokenSelect={onTokenSelect}
               />
             </Col>
           </Row>
           <Row>
             <Col xs={12}>
               <TokensSection
+                section="requester"
                 header={<FormattedMessage id="ui-circulation.settings.staffSlips.requesterTokenHeader" />}
                 tokens={Object.keys(tokens.requester)}
-                onSelect={onSelect}
+                onSectionInit={onSectionInit}
+                onTokenSelect={onTokenSelect}
               />
             </Col>
           </Row>

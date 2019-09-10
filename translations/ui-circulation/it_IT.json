@@ -359,5 +359,10 @@
     "settings.circulationRules.locations": "Sezioni",
     "settings.circulationRules.location": "Sezione",
     "settings.circulationRules.selectLocation": "Seleziona sezione",
-    "settings.noticePolicy.requestNotices.requestExpiration": "Scadenza della richiesta"
+    "settings.noticePolicy.requestNotices.requestExpiration": "Scadenza della richiesta",
+    "settings.circulationRules.done": "Done",
+    "settings.patronNotices.multipleLoans": "Multiple loans",
+    "settings.patronNotices.multipleRequests": "Multiple requests",
+    "settings.patronNotices.multipleFeesFines": "Multiple fees/fines",
+    "settings.patronNotices.feeFineTokenHeader": "Fee/Fine"
 }

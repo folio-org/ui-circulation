@@ -313,25 +313,27 @@ class PatronNoticeForm extends React.Component {
             </Row>
             <Row>
               <Col xs={8}>
-                <Field
-                  label={<FormattedMessage id="ui-circulation.settings.patronNotices.notice.category" />}
-                  name="category"
-                  component={Select}
-                  fullWidth
-                >
-                  {categoryOptions.map(({ labelTranslationPath, value, selected }) => (
-                    <FormattedMessage id={labelTranslationPath}>
-                      {translatedLabel => (
-                        <option
-                          value={value}
-                          selected={selected}
-                        >
-                          {translatedLabel}
-                        </option>
-                      )}
-                    </FormattedMessage>
-                  ))}
-                </Field>
+                <div data-test-template-category>
+                  <Field
+                    label={<FormattedMessage id="ui-circulation.settings.patronNotices.notice.category" />}
+                    name="category"
+                    component={Select}
+                    fullWidth
+                  >
+                    {categoryOptions.map(({ labelTranslationPath, value, selected }) => (
+                      <FormattedMessage id={labelTranslationPath}>
+                        {translatedLabel => (
+                          <option
+                            value={value}
+                            selected={selected}
+                          >
+                            {translatedLabel}
+                          </option>
+                        )}
+                      </FormattedMessage>
+                    ))}
+                  </Field>
+                </div>
               </Col>
             </Row>
             <AccordionSet accordionStatus={this.state.accordions} onToggle={this.onToggleSection}>

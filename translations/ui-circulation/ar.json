@@ -359,5 +359,10 @@
     "settings.circulationRules.locations": "المواقع",
     "settings.circulationRules.location": "الموقع",
     "settings.circulationRules.selectLocation": "اختر الموقع",
-    "settings.noticePolicy.requestNotices.requestExpiration": "انتهاء الطلب"
+    "settings.noticePolicy.requestNotices.requestExpiration": "انتهاء الطلب",
+    "settings.circulationRules.done": "تم",
+    "settings.patronNotices.multipleLoans": "Multiple loans",
+    "settings.patronNotices.multipleRequests": "Multiple requests",
+    "settings.patronNotices.multipleFeesFines": "Multiple fees/fines",
+    "settings.patronNotices.feeFineTokenHeader": "Fee/Fine"
 }

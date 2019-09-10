@@ -25,11 +25,11 @@ describe('FddsForm', () => {
       });
 
       it('aboutSection should not be displayed', () => {
-        expect(FddsForm.generalSection.isHidden).to.be.true;
+        expect(FddsForm.generalSectionAccordion.isOpen).to.be.false;
       });
 
       it('scheduleSection should not be displayed', () => {
-        expect(FddsForm.scheduleSection.isHidden).to.be.true;
+        expect(FddsForm.scheduleSectionAccordion.isOpen).to.be.false;
       });
 
       describe('expand all', () => {
@@ -38,11 +38,11 @@ describe('FddsForm', () => {
         });
 
         it('aboutSection should be displayed', () => {
-          expect(FddsForm.generalSection.isVisible).to.be.true;
+          expect(FddsForm.generalSectionAccordion.isOpen).to.be.true;
         });
 
         it('scheduleSection should be displayed', () => {
-          expect(FddsForm.scheduleSection.isVisible).to.be.true;
+          expect(FddsForm.scheduleSectionAccordion.isOpen).to.be.true;
         });
       });
     });
