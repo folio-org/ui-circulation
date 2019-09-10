@@ -56,9 +56,9 @@ class FinePolicySettings extends React.Component {
     } = this.props;
 
     const permissions = {
-      put: 'ui-circulation.settings.fine-policies',
-      post: 'ui-circulation.settings.fine-policies',
-      delete: 'ui-circulation.settings.fine-policies',
+      put: 'ui-circulation.settings.overdue-fines-policies',
+      post: 'ui-circulation.settings.overdue-fines-policies',
+      delete: 'ui-circulation.settings.overdue-fines-policies',
     };
 
     const entryList = sortBy((resources.finePolicies || {}).records, ['name']);
