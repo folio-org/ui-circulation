@@ -1,6 +1,7 @@
 # Change history for ui-circulation
 
-## 1.10.0 (IN PROGRESS)
+## [1.10.0](https://github.com/folio-org/ui-circulation/tree/v1.10.0) (2019-09-11)
+[Full Changelog](https://github.com/folio-org/ui-circulation/compare/v1.9.0...v1.10.0)
 
 * Retrieve 1000 elements on Settings pages instead of 10. Refs UICIRC-302.
 * Add missing tests for request policy. Part of UICIRC-293.
