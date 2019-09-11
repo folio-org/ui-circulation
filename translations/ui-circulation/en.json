@@ -303,6 +303,7 @@
   "settings.noticePolicy.requestNotices.requestCancelation": "Cancel request",
   "settings.noticePolicy.notices.triggeringEvent": "Triggering event",
   "settings.noticePolicy.loanNotices.dueDate": "Loan due date/time",
+  "settings.noticePolicy.loanNotices.manualDueDateChange": "Loan due date change",
   "settings.noticePolicy.loanNotices.renewed": "Item renewed",
   "settings.noticePolicy.loanNotices.checkIn": "Check in",
   "settings.noticePolicy.loanNotices.checkOut": "Check out",

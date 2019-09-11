@@ -200,6 +200,7 @@ export const loanUserInitiatedEventsIds = {
   CHECK_IN: 'Check in',
   CHECK_OUT: 'Check out',
   RENEWED: 'Renewed',
+  MANUAL_DUE_DATE_CHANGE: 'Manual due date change',
 };
 
 export const loanTimeBasedEventsIds = {
@@ -222,6 +223,10 @@ export const loanNoticesTriggeringEvents = [
   {
     value: loanTimeBasedEventsIds.DUE_DATE,
     label: 'ui-circulation.settings.noticePolicy.loanNotices.dueDate',
+  },
+  {
+    value: loanUserInitiatedEventsIds.MANUAL_DUE_DATE_CHANGE,
+    label: 'ui-circulation.settings.noticePolicy.loanNotices.manualDueDateChange',
   },
 ];
 
