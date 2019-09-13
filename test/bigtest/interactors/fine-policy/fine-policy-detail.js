@@ -33,7 +33,7 @@ import KeyValue from '../KeyValue';
   finesSection = new FinesSection();
 
   overdueDetails = new AccordionInteractor('#fineSection');
-  content = scoped('[class^="content-"]');
+  content = new AccordionInteractor('#generalInformation');
   expandAll = scoped('[data-test-expand-all] button')
 }
 

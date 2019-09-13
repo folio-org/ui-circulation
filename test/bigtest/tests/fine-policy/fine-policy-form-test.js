@@ -25,11 +25,11 @@ describe('FinePolicyForm', () => {
       });
 
       it('aboutSection should not be displayed', () => {
-        expect(FinePolicyForm.aboutSection.isHidden).to.be.true;
+        expect(FinePolicyForm.generalAccordion.isOpen).to.be.false;
       });
 
       it('overdueFineSection should not be displayed', () => {
-        expect(FinePolicyForm.overdueFineSection.isHidden).to.be.true;
+        expect(FinePolicyForm.overdueAccordion.isOpen).to.be.false;
       });
 
       describe('expand all', () => {
@@ -38,11 +38,11 @@ describe('FinePolicyForm', () => {
         });
 
         it('aboutSection should be displayed', () => {
-          expect(FinePolicyForm.aboutSection.isVisible).to.be.true;
+          expect(FinePolicyForm.generalAccordion.isOpen).to.be.true;
         });
 
         it('overdueFineSection should be displayed', () => {
-          expect(FinePolicyForm.overdueFineSection.isVisible).to.be.true;
+          expect(FinePolicyForm.overdueAccordion.isOpen).to.be.true;
         }).timeout(3000);
       });
     });

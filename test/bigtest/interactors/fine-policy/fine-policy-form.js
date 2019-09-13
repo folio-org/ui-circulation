@@ -12,7 +12,6 @@ import { AccordionInteractor } from '@folio/stripes-components/lib/Accordion/tes
 @interactor class AboutSection {
   static defaultScope = ('[data-test-fine-policy-form-about-section]');
 
-  header = scoped('[data-test-about-section-header]');
   policyName = new TextFieldInteractor('[data-test-about-section-policy-name]');
   policyDescription = new TextFieldInteractor('[data-test-about-section-policy-description]');
   policyNameValue = scoped('#input-policy-name');
@@ -48,9 +47,11 @@ import { AccordionInteractor } from '@folio/stripes-components/lib/Accordion/tes
     return this.when(() => this.aboutSection.scoped('#input-policy-name').value === policyName);
   }
 
+
   aboutSection = new AboutSection();
   overdueFineSection = new OverdueFineSection();
 
+  generalAccordion = new AccordionInteractor('#overdueGeneralSection');
   overdueAccordion = new AccordionInteractor('#fineSection');
   deleteFinePolicy = new Interactor('[data-test-delete-loan-policy-form-action]');
   deleteFinePolicyModal = new Interactor('#delete-item-confirmation');

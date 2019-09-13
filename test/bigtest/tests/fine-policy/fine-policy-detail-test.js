@@ -29,7 +29,7 @@ describe('FinePolicyDetail', () => {
         });
 
         it('content should be hidden', () => {
-          expect(FinePolicyDetail.content.isHidden).to.be.true;
+          expect(FinePolicyDetail.content.isOpen).to.be.false;
         });
 
         describe('expand all', () => {
@@ -38,7 +38,7 @@ describe('FinePolicyDetail', () => {
           });
 
           it('content should be visible', () => {
-            expect(FinePolicyDetail.content.isVisible).to.be.true;
+            expect(FinePolicyDetail.content.isOpen).to.be.true;
           });
         });
       });
