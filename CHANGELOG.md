@@ -1,5 +1,11 @@
 # Change history for ui-circulation
 
+## [1.11.0](https://github.com/folio-org/ui-circulation/tree/v1.13.0) (2019-09-13)
+[Full Changelog](https://github.com/folio-org/ui-circulation/compare/v1.10.0...v1.11.0)
+
+* CRUD for overdue fine policies. Refs UICIRC-1146
+* Rearrange settings page. Refs UICIRC-1146
+
 ## [1.10.0](https://github.com/folio-org/ui-circulation/tree/v1.10.0) (2019-09-11)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v1.9.0...v1.10.0)
 
