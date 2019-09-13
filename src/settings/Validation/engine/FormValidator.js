@@ -25,7 +25,6 @@ export default class FormValidator {
 
     some(validationRules, validationRule => {
       const validator = this.validators[validationRule];
-
       if (!validator) {
         throw new Error(
           `Validation: no handler to validate - ${validationRule}`
@@ -67,7 +66,6 @@ export default class FormValidator {
 
     if (data[sectionKey]) {
       const uniqueValues = {};
-
       forEach(data[sectionKey], ({ paymentMethod }, index) => {
         if (paymentMethod) {
           if (uniqueValues[paymentMethod]) {

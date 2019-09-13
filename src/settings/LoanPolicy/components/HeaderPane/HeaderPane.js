@@ -24,6 +24,8 @@ class HeaderPane extends React.Component {
     children: PropTypes.node.isRequired,
     onCancel: PropTypes.func.isRequired,
     onRemove: PropTypes.func.isRequired,
+    fineSection: PropTypes.bool,
+    createEntryLabel: PropTypes.object,
   };
 
   static defaultProps = {
@@ -54,11 +56,12 @@ class HeaderPane extends React.Component {
     const {
       editMode,
       entryTitle,
+      createEntryLabel,
     } = this.props;
 
     return editMode
       ? entryTitle
-      : <FormattedMessage id="ui-circulation.settings.loanPolicy.createEntryLabel" />;
+      : createEntryLabel;
   };
 
   renderActionMenuItems = ({ onToggle }) => {
@@ -118,7 +121,7 @@ class HeaderPane extends React.Component {
         firstMenu={this.renderCancelButton()}
         lastMenu={this.renderSaveButton()}
         paneTitle={this.renderPanelTitle()}
-        {... editMode ? { actionMenu: this.renderActionMenuItems } : {}}
+        {...editMode ? { actionMenu: this.renderActionMenuItems } : {}}
       >
         {children}
       </Pane>
