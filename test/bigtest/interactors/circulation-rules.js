@@ -11,6 +11,7 @@ import {
   scoped,
   triggerable,
   fillable,
+
 } from '@bigtest/interactor';
 
 import { ACTIVE_HINT_ELEMENT_CLASS } from '../../../src/constants';
@@ -48,9 +49,14 @@ const scrollingOffset = 3;
   isCompletionButtonHidden = hasClass('.CodeMirror-hint-section-button-container', 'hidden');
   isCompletionButtonDisabled = hasClass('.CodeMirror-hint-section-button', 'disabled');
   hasCheckBoxes = isPresent('input[type="checkbox"]');
+  filterInput = scoped('input[type="text"]');
 
   isCheckBoxChecked = function (itemIndex) {
     return this.$(`.CodeMirror-hint:nth-child(${itemIndex + 1}) input[type="checkbox"]`).checked;
+  }
+
+  getShownItemsCount = function () {
+    return this.itemsCount - this.$$('.CodeMirror-hint.hidden').length;
   }
 
   isScrollable = function () {
@@ -168,6 +174,7 @@ const scrollingOffset = 3;
   formPresent = isPresent('[data-test-circulation-rules-form]');
   editorPresent = isPresent('.react-codemirror2');
   clickSaveRulesBtn = clickable('#clickable-save-loan-rules');
+  filterInputField = new Interactor('[data-test-rules-filter]');
   isSaveButtonDisabled = property('#clickable-save-loan-rules', 'disabled');
   editor = new Editor();
   filter = fillable('[data-test-rules-filter]');

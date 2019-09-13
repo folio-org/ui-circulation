@@ -309,8 +309,18 @@ class Widget {
     if (completion.options.closeOnUnfocus) {
       let closingOnBlur;
 
-      cm.on('blur', this.handleBlur = () => { closingOnBlur = setTimeout(completion.close, 100); });
+      cm.on('blur', this.handleBlur = (cmInstance, e) => {
+        const { relatedTarget } = e;
+
+        if (!relatedTarget || !isChildTextInputField(this.container, relatedTarget)) {
+          closingOnBlur = setTimeout(completion.close, 100);
+        }
+      });
       cm.on('focus', this.handleFocus = () => { clearTimeout(closingOnBlur); });
+
+      CodeMirror.on(cm, 'blurHintInput', this.handleInputBlur = () => {
+        closingOnBlur = setTimeout(completion.close, 100);
+      });
     }
 
     const startScroll = cm.getScrollInfo();
@@ -337,8 +347,11 @@ class Widget {
       this.handleSectionHintClick(e.target);
     });
 
-    CodeMirror.on(this.container, 'mousedown', () => setTimeout(() => cm.focus(), 20));
-
+    CodeMirror.on(this.container, 'mousedown', (e) => {
+      if (e.target && !isChildTextInputField(this.container, e.target)) {
+        setTimeout(() => cm.focus(), 20);
+      }
+    });
     CodeMirror.signal(data, 'select', completions[0], this.getCurrentSection().getListNodeAt(0));
   }
 
@@ -516,6 +529,7 @@ class Widget {
     if (closeOnUnfocus) {
       cm.off('blur', this.handleBlur);
       cm.off('focus', this.handleFocus);
+      CodeMirror.off(cm, 'blurHintInput', this.handleInputBlur);
     }
 
     cm.off('scroll', this.handleScroll);
@@ -600,7 +614,7 @@ class HintSection {
     this.itemsOptions = sectionOptions.list;
 
     if (sectionOptions.header) {
-      this.container.appendChild(createHeader(sectionOptions.header, 'CodeMirror-hints-subheader'));
+      this.initHeader(sectionOptions.header);
     }
 
     this.listContainer = document.createElement('ul');
@@ -609,6 +623,12 @@ class HintSection {
     if (!isEmpty(get(sectionOptions, 'list'))) {
       this.setList(sectionOptions.list, this.defaultSelectedHintIndex);
     }
+  }
+
+  initHeader(headerText) {
+    this.header = createHeader(headerText, 'CodeMirror-hints-subheader');
+
+    this.container.appendChild(this.header);
   }
 
   setList(list, selectedHintIndex = -1) {
@@ -664,7 +684,7 @@ class HintSection {
   }
 
   calculateNextHintIndex(nextActiveHintIndex, avoidWrap) {
-    const itemsOptionsSize = this.itemsOptions.length;
+    const itemsOptionsSize = this.listNodes.length;
     let nextIndex = nextActiveHintIndex;
 
     if (nextIndex >= itemsOptionsSize) {
@@ -680,12 +700,12 @@ class HintSection {
     let hintNode = this.getListNodeAt(this.selectedHintIndex);
 
     if (hintNode) {
-      hintNode.className = hintNode.className.replace(` ${ACTIVE_HINT_ELEMENT_CLASS}`, '');
+      hintNode.classList.toggle(ACTIVE_HINT_ELEMENT_CLASS, false);
     }
 
     this.setSelectedHintIndex(nextIndex);
-    hintNode = this.listContainer.childNodes[this.selectedHintIndex];
-    hintNode.className += ` ${ACTIVE_HINT_ELEMENT_CLASS}`;
+    hintNode = this.getListNodeAt(this.selectedHintIndex);
+    hintNode.classList.toggle(ACTIVE_HINT_ELEMENT_CLASS, true);
 
     if (hintNode.offsetTop < this.listContainer.scrollTop) {
       this.listContainer.scrollTop = hintNode.offsetTop - 3;
@@ -696,6 +716,10 @@ class HintSection {
 
   setSelectedHintIndex(index) {
     this.selectedHintIndex = index;
+  }
+
+  get listNodes() {
+    return Array.from(this.listContainer.childNodes);
   }
 
   isSelectedByIndex(index) {
@@ -709,6 +733,62 @@ class MultipleSelectionHintSection extends HintSection {
 
     this.container.classList.add('CodeMirror-hints-multiple-selection');
     this.initCompletionButton(sectionOptions.buttonText);
+
+    if (!this.header) {
+      this.initHeader('');
+    }
+
+    this.initFilterField(sectionOptions.filterPlaceholder);
+  }
+
+  initFilterField(filterPlaceholder) {
+    this.filterInput = document.createElement('input');
+    this.filterInput.type = 'text';
+    this.filterInput.placeholder = filterPlaceholder;
+    this.filterInput.id = 'filter-locations-input';
+    this.filterInput.oninput = this.handleFilterInputChange;
+    this.filterInput.onblur = this.handleFilterInputBlur;
+
+    this.header.appendChild(this.filterInput);
+  }
+
+
+  handleFilterInputBlur = () => {
+    CodeMirror.signal(this.cm, 'blurHintInput');
+  }
+
+  handleFilterInputChange = () => {
+    if (isEmpty(this.itemsOptions)) return;
+
+    this.clearItemsActivation();
+    this.filterItems(this.filterInput.value);
+    this.changeActive(this.defaultSelectedHintIndex);
+  }
+
+  clearItemsActivation() {
+    super.listNodes.forEach(listNode => {
+      listNode.classList.toggle(ACTIVE_HINT_ELEMENT_CLASS, false);
+    });
+  }
+
+  filterItems(filterValue) {
+    if (isEmpty(this.itemsOptions)) return;
+
+    const filteredItems = this.itemsOptions.filter(itemOptions => {
+      return itemOptions.displayText.toLowerCase().includes(filterValue.toLowerCase());
+    });
+
+    const itemsIdsToDisplay = filteredItems.map(itemOptions => itemOptions.id);
+
+    super.listNodes.forEach((listNode) => {
+      const checkboxField = listNode.querySelector('input');
+
+      if (checkboxField) {
+        const isDisplayed = itemsIdsToDisplay.includes(checkboxField.id);
+
+        listNode.classList.toggle('hidden', !isDisplayed);
+      }
+    });
   }
 
   initCompletionButton(buttonText) {
@@ -782,10 +862,32 @@ class MultipleSelectionHintSection extends HintSection {
   }
 
   setList(list, selectedHintIndex = -1) {
+    this.updateSectionWidth();
+
     super.setList(list, selectedHintIndex);
 
+    this.filterItems(this.filterInput.value);
     this.setCompletionButtonVisibility(list.length > 1);
     this.setCompletionButtonEnabling(this.hasSelectedItems());
+  }
+
+  updateSectionWidth() {
+    const headerStyle = getComputedStyle(this.header);
+
+    this.listContainer.style.width = headerStyle.width;
+    this.listContainer.style.margin = headerStyle.margin;
+  }
+
+  get listNodes() {
+    return this.getDisplayedNodes();
+  }
+
+  getListNodeAt(index) {
+    return this.getDisplayedNodes()[index];
+  }
+
+  getDisplayedNodes() {
+    return Array.from(this.listContainer.childNodes).filter(element => !element.classList.contains('hidden'));
   }
 }
 
@@ -807,6 +909,14 @@ function createContainer(className = '') {
 
 function isAnyItem(itemId) {
   return itemId && itemId.includes('any');
+}
+
+function isChildTextInputField(container, element) {
+  return isTextInputField(element) && container.contains(element);
+}
+
+function isTextInputField(element) {
+  return element && element.tagName.toLowerCase() === 'input' && element.type === 'text';
 }
 
 function getApplicableHelpers(cm, helpers) {

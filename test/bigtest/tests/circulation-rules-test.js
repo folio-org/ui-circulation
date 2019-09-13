@@ -68,7 +68,9 @@ describe('CirculationRules', () => {
     campuses2 = await this.server.createList('campus', 1, { institutionId: institutions[1].id, code: 'campCode2' });
     libraries1 = await this.server.createList('library', librariesAmount, { campusId: campuses1[0].id, code: '|libCode *|libCode *' });
     await this.server.createList('library', 1, { campusId: campuses2[0].id, code: 'libCode2' });
-    locations = await this.server.createList('location', locationsAmount, { libraryId: libraries1[0].id, code: '=locateCode|', name: 'A-location' });
+    locations = await this.server.createList('location', locationsAmount - 1, { libraryId: libraries1[0].id, code: '=locateCode|', name: 'A-location' });
+    const filterTestLocation = this.server.createList('location', 1, { libraryId: libraries1[0].id, code: 'testFilterItemCode', name: 'testFilterItemName' });
+    locations.push(...filterTestLocation);
 
     return this.visit('/settings/circulation/rules', () => {
       expect(circulationRules.$root).to.exist;
@@ -687,6 +689,42 @@ describe('CirculationRules', () => {
       expect(getEditorHintSection(3).isCompletionButtonHidden).to.equal(true);
     });
 
+    describe('filling the filter field and moving the fourth section ', () => {
+      beforeEach(async () => {
+        await getEditorHintSection(3).filterInput.focus();
+        await getEditorHintSection(3).filterInput.fill('ItemCode');
+        await editorHints.clickOnItem(0);
+        await editorHints.clickOnItem(1, 1);
+        await editorHints.clickOnItem(1, 2);
+      });
+
+      it('should contain ANY item and one location', () => {
+        expect(getEditorHintSection(3).items(0).text).to.equal('<ANY>');
+        expect(getEditorHintSection(3).items(1).text).not.to.equal('<ANY>');
+        expect(getEditorHintSection(3).getShownItemsCount()).to.equal(2);
+      });
+
+      describe('focusing the rules filter field', () => {
+        beforeEach(async () => {
+          await circulationRules.filterInputField.focus();
+        });
+
+        it('should hide hints menu', () => {
+          expect(editorHints.arePresent).to.equal(false);
+        });
+      });
+
+      describe('clicking on hints menu header', () => {
+        beforeEach(async () => {
+          await circulationRules.editor.hints.header.click();
+        });
+
+        it('should not hide hints menu', () => {
+          expect(editorHints.arePresent).to.equal(true);
+        });
+      });
+    });
+
     describe('clicking on the first institution', () => {
       beforeEach(async () => {
         await editorHints.clickOnItem(0);
@@ -730,6 +768,13 @@ describe('CirculationRules', () => {
             expect(getEditorHintSection(3).isCompletionButtonHidden).to.equal(false);
           });
 
+          it('should contain items filter only in the fourth section', () => {
+            expect(getEditorHintSection(0).filterInput.isPresent).to.equal(false);
+            expect(getEditorHintSection(1).filterInput.isPresent).to.equal(false);
+            expect(getEditorHintSection(2).filterInput.isPresent).to.equal(false);
+            expect(getEditorHintSection(3).filterInput.isPresent).to.equal(true);
+          });
+
           it('should disable the completion button by default', () => {
             expect(getEditorHintSection(3).isCompletionButtonDisabled).to.equal(true);
           });
@@ -743,11 +788,55 @@ describe('CirculationRules', () => {
             expect(getEditorHintSection(3).isCheckBoxChecked(locationsAmount)).to.equal(false);
           });
 
-          it('should have formatted and truncated values in the fourth section', () => {
-            const fullValue = `${replacer(locations[0].code)} (${locations[0].name})`;
-            const truncatedValue = truncate(fullValue, truncateOptions);
+          it('should formatted and not truncated values in the fourth section', () => {
+            const formattedValue = `${replacer(locations[0].code)} (${locations[0].name})`;
 
-            expect(getEditorHintSection(3).items(1).text).to.equal(truncatedValue);
+            expect(getEditorHintSection(3).items(1).text).to.equal(formattedValue);
+          });
+
+          describe('focusing the filter input field', () => {
+            beforeEach(async () => {
+              await getEditorHintSection(3).filterInput.focus();
+            });
+
+            it('should not close a hint if focus moved to the filter input', () => {
+              expect(editorHints.isPresent).to.equal(true);
+            });
+
+            describe('typing a text, that is not presented in items, to the filter input field', () => {
+              beforeEach(async () => {
+                await getEditorHintSection(3).filterInput.fill(Math.random());
+              });
+
+              it('should contain only ANY item', () => {
+                expect(getEditorHintSection(3).getShownItemsCount()).to.equal(1);
+                expect(getEditorHintSection(3).items(0).text).to.equal('<ANY>');
+              });
+            });
+
+            describe('typing a part of code to the filter input', () => {
+              beforeEach(async () => {
+                await getEditorHintSection(3).filterInput.fill('ItemCode');
+              });
+
+              it('should contain ANY item and one location', () => {
+                expect(getEditorHintSection(3).items(0).text).to.equal('<ANY>');
+                expect(getEditorHintSection(3).items(1).text).not.to.equal('<ANY>');
+                expect(getEditorHintSection(3).getShownItemsCount()).to.equal(2);
+              });
+            });
+
+            describe('typing a part of name to the filter input', () => {
+              beforeEach(async () => {
+                await getEditorHintSection(3).filterInput.fill('ItemName');
+              });
+
+              it('should contain ANY item and one location', () => {
+                expect(getEditorHintSection(3).items(0).text).to.equal('<ANY>');
+                expect(getEditorHintSection(3).items(1).text).not.to.equal('<ANY>');
+                expect(getEditorHintSection(3).getShownItemsCount()).to.equal(2);
+              });
+            });
           });
 
           describe('pressing Enter on the last location', () => {
@@ -800,7 +889,7 @@ describe('CirculationRules', () => {
               });
 
               it('should add the location codes of selected items to the editor', () => {
-                const locationCodesString = `${replacer(locations[locationsAmount - 1].code)} ${replacer(locations[locationsAmount - 2].code)}`;
+                const locationCodesString = `${replacer(locations[locationsAmount - 2].code)} ${replacer(locations[locationsAmount - 1].code)}`;
 
                 expect(circulationRules.editor.value).to.equal(`s ${locationCodesString} `);
               });
