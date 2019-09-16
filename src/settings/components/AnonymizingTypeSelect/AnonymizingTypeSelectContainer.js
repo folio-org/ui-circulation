@@ -6,7 +6,7 @@ import {
   FormattedMessage,
 } from 'react-intl';
 
-import AnonymazingTypeSelect from './AnonymazingTypeSelect';
+import AnonymizingTypeSelect from './AnonymizingTypeSelect';
 import { Period } from '..';
 import optionsGenerator from '../../utils/options-generator';
 import {
@@ -14,7 +14,7 @@ import {
   intervalPeriods,
 } from '../../../constants';
 
-import css from './AnonymazingTypeSelectContainer.css';
+import css from './AnonymizingTypeSelectContainer.css';
 
 const selectedPeriodsValues = [
   'Days',
@@ -22,7 +22,7 @@ const selectedPeriodsValues = [
   'Months',
 ];
 
-class AnonymazingTypeSelectContainer extends Component {
+class AnonymizingTypeSelectContainer extends Component {
   static propTypes = {
     intl: intlShape.isRequired,
     name: PropTypes.string.isRequired,
@@ -87,7 +87,7 @@ class AnonymazingTypeSelectContainer extends Component {
     } = this.props;
 
     return (
-      <AnonymazingTypeSelect
+      <AnonymizingTypeSelect
         name={path}
         types={this.getClosingTypes(name, path)}
       />
@@ -95,4 +95,4 @@ class AnonymazingTypeSelectContainer extends Component {
   }
 }
 
-export default injectIntl(AnonymazingTypeSelectContainer);
+export default injectIntl(AnonymizingTypeSelectContainer);

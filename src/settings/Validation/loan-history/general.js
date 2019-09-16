@@ -6,6 +6,7 @@ import {
 export default function (data) {
   return Object.values(closedLoansRules).reduce((config, item) => {
     const isClosingTypeIntervalSelected = data.closingType[item] === closingTypesMap.INTERVAL;
+    const isAnyClosingTypeFeeFineSelected = data.treatEnabled && !data.closingType.feeFine;
     const ruleConfig = {
       [`${item}.duration`]: {
         rules: ['isNotEmpty', 'isIntegerGreaterThanZero', 'isFromOneToHundred'],
@@ -14,6 +15,10 @@ export default function (data) {
       [`${item}.intervalId`]: {
         rules: ['isNotEmptySelect'],
         shouldValidate: isClosingTypeIntervalSelected,
+      },
+      'feeFineSelected': {
+        rules: ['isNotEmptySelect'],
+        shouldValidate: isAnyClosingTypeFeeFineSelected,
       },
     };
 

@@ -4,5 +4,5 @@ export { default as DeleteConfirmationModal } from './DeleteConfirmationModal';
 export { default as Metadata } from './Metadata';
 export { default as Period } from './Period';
 export { default as EntityInUseModal } from './EntityInUseModal';
-export { default as AnonymazingTypeSelect } from './AnonymazingTypeSelect';
+export { default as AnonymizingTypeSelect } from './AnonymizingTypeSelect';
 export { TemplateEditor, PreviewModal, TokensSection } from './TemplateEditor';
