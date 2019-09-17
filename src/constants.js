@@ -201,6 +201,7 @@ export const loanUserInitiatedEventsIds = {
   CHECK_OUT: 'Check out',
   RENEWED: 'Renewed',
   MANUAL_DUE_DATE_CHANGE: 'Manual due date change',
+  ITEM_RECALLED: 'Item recalled',
 };
 
 export const loanTimeBasedEventsIds = {
@@ -228,18 +229,21 @@ export const loanNoticesTriggeringEvents = [
     value: loanUserInitiatedEventsIds.MANUAL_DUE_DATE_CHANGE,
     label: 'ui-circulation.settings.noticePolicy.loanNotices.manualDueDateChange',
   },
+  {
+    value: loanUserInitiatedEventsIds.ITEM_RECALLED,
+    label: 'ui-circulation.settings.noticePolicy.loanNotices.itemRecalled',
+  },
 ];
 
 export const requestUserInitiatedEventsIds = {
   RECALL_REQUEST: 'Recall request',
-  RECALL_LOANEE: 'Recall loanee',
   HOLD: 'Hold request',
   PAGE: 'Paging request',
   CANCEL: 'Request cancellation'
 };
 
 export const requestTimeBasedEventsIds = {
-  HOLD_EXPIRATION: 'Hold Expiration',
+  HOLD_EXPIRATION: 'Hold expiration',
   REQUEST_EXPIRATION: 'Request expiration',
 };
 
@@ -275,10 +279,6 @@ export const requestNoticesTriggeringEvents = [
   {
     value: requestTimeBasedEventsIds.REQUEST_EXPIRATION,
     label: 'ui-circulation.settings.noticePolicy.requestNotices.requestExpiration',
-  },
-  {
-    value: requestUserInitiatedEventsIds.RECALL_LOANEE,
-    label: 'ui-circulation.settings.noticePolicy.requestNotices.recallLoanee',
   },
 ];
 
