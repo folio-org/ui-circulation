@@ -149,7 +149,7 @@ class FixedDueDateScheduleForm extends React.Component {
             onClick={this.beginDelete}
             disabled={confirmDelete}
           >
-            <FormattedMessage id="ui-circulation.settings.staffSlips.delete" />
+            <FormattedMessage id="stripes-core.button.delete" />
           </Button>
         </IfPermission>
         }

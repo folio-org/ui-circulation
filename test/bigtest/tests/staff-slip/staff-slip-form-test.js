@@ -30,7 +30,6 @@ describe('StaffSlipForm', () => {
       await StaffSlipForm
         .fillDescription('updated request policy description')
         .fillEditor('<p>{{Item barcode}}</p>')
-        .clickActiveCheckbox()
         .save();
     });
 

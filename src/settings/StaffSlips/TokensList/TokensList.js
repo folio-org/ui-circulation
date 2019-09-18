@@ -73,6 +73,17 @@ class TokensList extends React.Component {
           <Row>
             <Col xs={12}>
               <TokensSection
+                section="requestDeliveryAddress"
+                header={<FormattedMessage id="ui-circulation.settings.staffSlips.requestDeliveryAddressTokenHeader" />}
+                tokens={Object.keys(tokens.requestDeliveryAddress)}
+                onSectionInit={onSectionInit}
+                onTokenSelect={onTokenSelect}
+              />
+            </Col>
+          </Row>
+          <Row>
+            <Col xs={12}>
+              <TokensSection
                 section="requester"
                 header={<FormattedMessage id="ui-circulation.settings.staffSlips.requesterTokenHeader" />}
                 tokens={Object.keys(tokens.requester)}
