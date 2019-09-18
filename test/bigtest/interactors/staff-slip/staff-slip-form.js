@@ -16,10 +16,8 @@ import {
   descValue = value('#input-staff-slip-description');
 
   hasSaveButton = isPresent('#clickable-save-staff-slip');
-  hasActiveCheckbox = isPresent('#input-staff-slip-active');
 
   fillDescription = fillable('#input-staff-slip-description');
-  clickActiveCheckbox = clickable('#input-staff-slip-active');
   fillEditor = fillable('#template-editor');
 
   save = clickable('#clickable-save-staff-slip');

@@ -32,6 +32,15 @@ const formats = {
     'request.holdShelfExpirationDate': 'Mar 31, 2020 23:59',
     'request.requestID': '987321654',
   },
+  requestDeliveryAddress: {
+    'request.deliveryAddressType': 'Office',
+    'requester.addressLine1': '123 Campus Drive',
+    'requester.addressLine2': '226 Classroom Building, Box 12345',
+    'requester.city': 'Los Angeles',
+    'requester.stateProvRegion': 'CA',
+    'requester.zipPostalCode': '90048',
+    'requester.country': 'USA',
+  },
   requester: {
     'requester.firstName': 'James',
     'requester.lastName': 'Smith',
