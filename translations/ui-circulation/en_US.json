@@ -399,5 +399,7 @@
     "settings.finePolicy.week": "week",
     "settings.finePolicy.month": "month",
     "settings.finePolicy.year": "year",
-    "settings.finePolicy.lostItemFeePolicies": "Lost item fee policies"
+    "settings.finePolicy.lostItemFeePolicies": "Lost item fee policies",
+    "settings.circulationRules.filterOptionsList": "Filter options list",
+    "settings.staffSlips.requestDeliveryAddressTokenHeader": "Request delivery address"
 }
