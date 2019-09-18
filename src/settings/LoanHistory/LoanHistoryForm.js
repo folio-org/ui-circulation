@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {
   injectIntl,
-  intlShape,
   FormattedMessage,
 } from 'react-intl';
 import {
@@ -22,24 +21,22 @@ import {
   Headline,
 } from '@folio/stripes/components';
 
-import AnonymazingTypeSelectContainer from '../components/AnonymazingTypeSelect/AnonymazingTypeSelectContainer';
+import AnonymizingTypeSelectContainer from '../components/AnonymizingTypeSelect/AnonymizingTypeSelectContainer';
 import ExceptionsList from './ExceptionsList';
-import optionsGenerator from '../utils/options-generator';
 import {
   closingTypes,
-  intervalPeriods,
   closedLoansRules,
 } from '../../constants';
 
+import css from './LoanHistoryForm.css';
+
 class LoanHistoryForm extends Component {
   static propTypes = {
-    intl: intlShape.isRequired,
     handleSubmit: PropTypes.func.isRequired,
     onSubmit: PropTypes.func.isRequired,
     pristine: PropTypes.bool,
     submitting: PropTypes.bool,
     label: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-    initialValues: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
     stripes: stripesShape.isRequired,
   };
 
@@ -48,8 +45,6 @@ class LoanHistoryForm extends Component {
 
     // eslint-disable-next-line react/no-unused-state
     this.state = { checked: false };
-    this.generateOptions = optionsGenerator.bind(null, props.intl.formatMessage);
-    this.selectedPeriods = intervalPeriods.filter(period => props.initialValues.selectedPeriodsValues.includes(period.value));
   }
 
   onSave = data => this.props.onSubmit({ loan_history: JSON.stringify(data) });
@@ -117,7 +112,7 @@ class LoanHistoryForm extends Component {
               tagName="p"
               id="ui-circulation.settings.loanHistory.anonymize"
             />
-            <AnonymazingTypeSelectContainer
+            <AnonymizingTypeSelectContainer
               name={closedLoansRules.DEFAULT}
               path={closedLoansRules.DEFAULT}
               types={closingTypes}
@@ -151,12 +146,18 @@ class LoanHistoryForm extends Component {
                 tagName="p"
                 id="ui-circulation.settings.loanHistory.anonymizeFeesFines"
               />
-              <AnonymazingTypeSelectContainer
+              <AnonymizingTypeSelectContainer
                 name={closedLoansRules.WITH_FEES_FINES}
                 path={closedLoansRules.WITH_FEES_FINES}
                 types={closingTypes}
               />
               <br />
+              <Field
+                name="feeFineSelected"
+                component={({ meta }) => {
+                  return meta.touched && <span className={css.error}>{meta.error}</span>;
+                }}
+              />
               <FieldArray
                 name="loanExceptions"
                 component={ExceptionsList}

@@ -15,7 +15,7 @@ import {
   Select,
 } from '@folio/stripes/components';
 
-import AnonymazingTypeSelectContainer from '../components/AnonymazingTypeSelect/AnonymazingTypeSelectContainer';
+import AnonymizingTypeSelectContainer from '../components/AnonymizingTypeSelect/AnonymizingTypeSelectContainer';
 import {
   closingTypes,
   closedLoansRules,
@@ -105,7 +105,7 @@ class ExceptionCard extends Component {
               />
             </Col>
           </Row>
-          <AnonymazingTypeSelectContainer
+          <AnonymizingTypeSelectContainer
             name={closedLoansRules.WITH_FEES_FINES}
             path={pathToException}
             types={closingTypes}
