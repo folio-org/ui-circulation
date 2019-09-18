@@ -66,7 +66,7 @@ const TokensModal = (props) => {
         marginBottom0
         onClick={onClose}
       >
-        <FormattedMessage id="ui-circulation.settings.common.cancel" />
+        <FormattedMessage id="stripes-core.button.cancel" />
       </Button>
       <Button
         data-test-add-tokens

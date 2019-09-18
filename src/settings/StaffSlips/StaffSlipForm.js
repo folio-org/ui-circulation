@@ -4,7 +4,6 @@ import { FormattedMessage } from 'react-intl';
 
 import {
   Button,
-  Checkbox,
   Col,
   Icon,
   IconButton,
@@ -50,7 +49,7 @@ class StaffSlipForm extends React.Component {
   addFirstMenu() {
     return (
       <PaneMenu>
-        <FormattedMessage id="ui-circulation.settings.staffSlips.closeStaffSlipDialog">
+        <FormattedMessage id="stripes-core.button.close">
           {ariaLabel => (
             <IconButton
               id="clickable-close-staff-slip"
@@ -68,7 +67,7 @@ class StaffSlipForm extends React.Component {
     const { pristine, submitting, initialValues } = this.props;
     const edit = initialValues && initialValues.id;
     const saveLabel = edit
-      ? <FormattedMessage id="ui-circulation.settings.staffSlips.saveAndClose" />
+      ? <FormattedMessage id="stripes-core.button.save" />
       : <FormattedMessage id="ui-circulation.settings.staffSlips.createStaffSlip" />;
 
     return (
@@ -125,18 +124,6 @@ class StaffSlipForm extends React.Component {
                 <KeyValue
                   label={<FormattedMessage id="ui-circulation.settings.staffSlips.name" />}
                   value={(initialValues || {}).name}
-                />
-              </Col>
-            </Row>
-            <Row>
-              <Col xs={8}>
-                <Field
-                  label={<FormattedMessage id="ui-circulation.settings.staffSlips.active" />}
-                  name="active"
-                  id="input-staff-slip-active"
-                  type="checkbox"
-                  component={Checkbox}
-                  disabled={disabled}
                 />
               </Col>
             </Row>

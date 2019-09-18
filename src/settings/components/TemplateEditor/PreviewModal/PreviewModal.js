@@ -61,7 +61,7 @@ class PreviewModal extends React.Component {
           marginBottom0
           onClick={onClose}
         >
-          <FormattedMessage id="ui-circulation.settings.common.close" />
+          <FormattedMessage id="stripes-core.button.close" />
         </Button>
         <ReactToPrint
           removeAfterPrint
