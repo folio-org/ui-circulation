@@ -87,6 +87,7 @@
   "settings.circulationRules.selectLibrary": "Select library",
   "settings.circulationRules.selectLocation": "Select location",
   "settings.circulationRules.done": "Done",
+  "settings.circulationRules.filterOptionsList": "Filter options list",
   "settings.circulationRules.loanPolicies": "Loan policies",
   "settings.circulationRules.requestPolicies": "Request policies",
   "settings.circulationRules.noticePolicies": "Patron notice policies",

@@ -45,6 +45,36 @@
   font-weight: normal;
   border-bottom: #bebdbd solid 1px;
   border-top: #bebdbd solid 1px;
+  height: 20px;
+  padding-top: 4px;
+}
+
+.CodeMirror-hints-multiple-selection .CodeMirror-hints-subheader {
+  display: flex;
+  text-align: left;
+  padding-top: 3px;
+  height: 20px;
+  padding-right: 0px;
+  white-space: nowrap;
+  padding-left: 5px;
+}
+
+.CodeMirror-hints-multiple-selection .CodeMirror-hints-subheader input {
+  overflow: hidden;
+  float: left;
+  margin-left: 5px;
+  margin-top: -4px;
+  height: 20px;
+  min-width: 150px;
+  padding: 0 5px;
+  border-width: 2px;
+}
+
+.CodeMirror-hints-multiple-selection .CodeMirror-hints-subheader input:focus {
+  border: 1px solid #2b75bb;
+  padding: 0 6px;
+  box-shadow: inset 0 0 0 2px rgba(37, 118, 195, 0.3);
+  outline: none;
 }
 
 .CodeMirror-hints-sections-container {
@@ -56,6 +86,16 @@
   display: flex;
   flex-direction: column;
   width: 100%;
+}
+
+.CodeMirror-checkbox-container {
+  width: 100%;
+  height: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline-block;
+  vertical-align: top;
 }
 
 .CodeMirror-checkbox-container input,
@@ -128,8 +168,18 @@
   overflow-y: auto;
 }
 
+.CodeMirror-hints-list ul li.hidden {
+  display: none;
+}
+
+.CodeMirror-hints-list ul li {
+  height: 12px;
+}
+
 .CodeMirror-hints-list.CodeMirror-hints-multiple-selection ul {
   max-height: 18em;
+  padding-left: 0;
+  padding-right: 0;
 }
 
 .CodeMirror-hint {

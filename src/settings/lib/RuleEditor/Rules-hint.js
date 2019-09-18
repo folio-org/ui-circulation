@@ -58,10 +58,9 @@ const getSectionsDescriptions = type => {
   }
 };
 
-function getTypeOptions(selector, typeKey) {
-  const isLocationTypeKey = isLocationType(typeKey);
-  const text = isLocationTypeKey ? selector.code : selector;
-  const displayText = isLocationTypeKey ? truncate(selector.displayCode, truncateOptions) : selector;
+function getItemOptions(selector, typeKey) {
+  const text = isLocationType(typeKey) ? selector.code : selector;
+  const displayText = getDisplayText(selector, typeKey);
 
   return {
     text: `${text} `,
@@ -69,6 +68,14 @@ function getTypeOptions(selector, typeKey) {
     className: 'rule-hint-minor',
     id: selector.id,
   };
+}
+
+function getDisplayText(selector, typeKey) {
+  if (isLocationType(typeKey)) {
+    return typeKey !== RULES_TYPE.LOCATION ? truncate(selector.displayCode, truncateOptions) : selector.displayCode;
+  }
+
+  return selector;
 }
 
 export function rulesHint(Codemirror, props) {
@@ -160,7 +167,7 @@ export function rulesHint(Codemirror, props) {
         const type = typeMapping[typeKeyProperty];
 
         completionLists[type].forEach(selector => {
-          result.push(getTypeOptions(selector, typeKeyProperty));
+          result.push(getItemOptions(selector, typeKeyProperty));
         });
       }
     }
@@ -204,6 +211,7 @@ export function rulesHint(Codemirror, props) {
 
         if (section.isMultipleSelection) {
           section.buttonText = formatMessage({ id: 'ui-circulation.settings.circulationRules.done' });
+          section.filterPlaceholder = formatMessage({ id: 'ui-circulation.settings.circulationRules.filterOptionsList' });
         }
       });
       // The first section should be always filled and other sections should be filed by request in getSubMenuData helper
@@ -247,7 +255,7 @@ export function initSubMenuDataFetching(Codemirror, props) {
 
     completionLists[type].forEach((selector) => {
       if (selector.parentId === options.parentId) {
-        subMenuData.push(getTypeOptions(selector, options.childSection));
+        subMenuData.push(getItemOptions(selector, options.childSection));
       }
     });
 
