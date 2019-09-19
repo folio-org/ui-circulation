@@ -108,7 +108,7 @@ class StaffSlipForm extends React.Component {
 
   render() {
     const { stripes, handleSubmit, initialValues } = this.props;
-    const disabled = !stripes.hasPerm('settings.organization.enabled');
+    const disabled = !stripes.hasPerm('settings.organizations.enabled');
 
     return (
       <form id="form-staff-slip" onSubmit={handleSubmit(this.save)}>
