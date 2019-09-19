@@ -291,7 +291,6 @@
   "settings.noticePolicy.notices.upon": "Upon/At",
 
   "settings.noticePolicy.requestNotices.recallRequest": "Recall request",
-  "settings.noticePolicy.requestNotices.recallLoanee": "Due date change",
   "settings.noticePolicy.requestNotices.holdRequest": "Hold request",
   "settings.noticePolicy.requestNotices.pagingRequest": "Page request",
   "settings.noticePolicy.requestNotices.available": "Awaiting pickup",
@@ -301,6 +300,7 @@
   "settings.noticePolicy.notices.triggeringEvent": "Triggering event",
   "settings.noticePolicy.loanNotices.dueDate": "Loan due date/time",
   "settings.noticePolicy.loanNotices.manualDueDateChange": "Loan due date change",
+  "settings.noticePolicy.loanNotices.itemRecalled": "Item recalled",
   "settings.noticePolicy.loanNotices.renewed": "Item renewed",
   "settings.noticePolicy.loanNotices.checkIn": "Check in",
   "settings.noticePolicy.loanNotices.checkOut": "Check out",
