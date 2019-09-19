@@ -401,5 +401,6 @@
     "settings.finePolicy.year": "year",
     "settings.finePolicy.lostItemFeePolicies": "Lost item fee policies",
     "settings.circulationRules.filterOptionsList": "Filter options list",
-    "settings.staffSlips.requestDeliveryAddressTokenHeader": "Request delivery address"
+    "settings.staffSlips.requestDeliveryAddressTokenHeader": "Request delivery address",
+    "settings.noticePolicy.loanNotices.itemRecalled": "Item recalled"
 }

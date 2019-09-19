@@ -401,5 +401,6 @@
     "settings.finePolicy.year": "سنة",
     "settings.finePolicy.lostItemFeePolicies": "سياسات رسوم المواد المفقودة",
     "settings.circulationRules.filterOptionsList": "Filter options list",
-    "settings.staffSlips.requestDeliveryAddressTokenHeader": "Request delivery address"
+    "settings.staffSlips.requestDeliveryAddressTokenHeader": "Request delivery address",
+    "settings.noticePolicy.loanNotices.itemRecalled": "Item recalled"
 }
