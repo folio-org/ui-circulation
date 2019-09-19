@@ -383,7 +383,7 @@ class Widget {
       this.resetSectionsInCurrentSectionsListFrom(nextSectionIndex);
     }
 
-    this.changeActive(hint.hintId);
+    this.changeActive(this.getCurrentSection().listNodes.indexOf(hint));
 
     const isCheckBoxHint = targetElement.type === 'checkbox';
 
