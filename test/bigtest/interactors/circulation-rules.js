@@ -108,12 +108,17 @@ const scrollingOffset = 3;
 @interactor class Editor {
   static defaultScope = '.react-codemirror2';
 
-  setValue = action(function (value, showHint = true) {
+  setValue = action(function (value, overrideOptions) {
+    const defaultOptions = { showHint: true, append: false };
+    const options = Object.assign(defaultOptions, overrideOptions);
+
     return this.find('.CodeMirror').do(({ CodeMirror }) => {
-      CodeMirror.doc.setValue(value);
+      const resultValue = options.append ? CodeMirror.doc.getValue() + value : value;
+
+      CodeMirror.doc.setValue(resultValue);
       CodeMirror.setCursor(CodeMirror.lineCount(), 0);
 
-      if (showHint) {
+      if (options.showHint) {
         CodeMirror.showHint();
       }
 

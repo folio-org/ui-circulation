@@ -187,7 +187,9 @@ class CirculationRules extends React.Component {
 
   onSubmit(values) {
     const rules = values.rules.replace(/\t/g, '    ');
+
     this.save(rules);
+    this.setState({ rules: values.rules });
   }
 
   getRules() {
@@ -351,7 +353,7 @@ class CirculationRules extends React.Component {
       return (<div />);
     }
 
-    const rules = this.getRules();
+    const rules = this.state.rules || this.getRules();
     const editorProps = this.getEditorProps();
 
     return (
