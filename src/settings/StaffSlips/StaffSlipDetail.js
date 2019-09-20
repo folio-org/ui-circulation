@@ -53,10 +53,6 @@ class StaffSlipDetail extends React.Component {
 
     const parsedEmailTemplate = this.parser.parseWithInstructions(staffSlip.template, () => true, this.rules);
 
-    const isActiveValue = staffSlip.active
-      ? <FormattedMessage id="ui-circulation.settings.staffSlips.yes" />
-      : <FormattedMessage id="ui-circulation.settings.staffSlips.no" />;
-
     return (
       <div data-test-staff-slip-details>
         <Row>
@@ -67,14 +63,6 @@ class StaffSlipDetail extends React.Component {
                 value={staffSlip.name}
               />
             </div>
-          </Col>
-        </Row>
-        <Row>
-          <Col xs={12}>
-            <KeyValue
-              label={<FormattedMessage id="ui-circulation.settings.staffSlips.active" />}
-              value={isActiveValue}
-            />
           </Col>
         </Row>
         <Row>
