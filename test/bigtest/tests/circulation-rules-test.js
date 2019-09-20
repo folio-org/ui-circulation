@@ -24,7 +24,7 @@ const getEditorHintSection = sectionIndex => circulationRules.editor.hints.secti
 
 // shows hints with custom 'customKeys' handlers like 'handleBackspace' attached
 const showHintsWithAttachedCustomKeysHandlers = async editorValue => {
-  await circulationRules.editor.setValue(editorValue, false);
+  await circulationRules.editor.setValue(editorValue, { showHint: false });
   await circulationRules.editor.textArea.focus();
 };
 
@@ -1031,15 +1031,18 @@ describe('CirculationRules', () => {
     let lPolicy;
     let rPolicy;
     let nPolicy;
+    let lName;
+    let rName;
+    let nName;
 
     beforeEach(async function () {
       lPolicy = loanPolicies[0];
       rPolicy = requestPolicies[0];
       nPolicy = patronNoticePolicies[0];
 
-      const lName = toLowercaseReplaceAllSpaces(lPolicy.name);
-      const rName = toLowercaseReplaceAllSpaces(rPolicy.name);
-      const nName = toLowercaseReplaceAllSpaces(nPolicy.name);
+      lName = toLowercaseReplaceAllSpaces(lPolicy.name);
+      rName = toLowercaseReplaceAllSpaces(rPolicy.name);
+      nName = toLowercaseReplaceAllSpaces(nPolicy.name);
 
       this.server.put('/circulation/rules', (_, request) => {
         const params = JSON.parse(request.requestBody);
@@ -1053,6 +1056,26 @@ describe('CirculationRules', () => {
 
     it('should choose loan policy as a fallback', () => {
       expect(savedRules).to.equal(`m 1a54b431-2e4f-452d-9cae-9cee66c9a892 5ee11d91-f7e8-481d-b079-65d708582ccc: l ${lPolicy.id} r ${rPolicy.id} n ${nPolicy.id}`);
+    });
+
+    describe('changing circulation rules', () => {
+      beforeEach(async function () {
+        await circulationRules.editor.setValue(`\nm book text: l ${lName} r ${rName} n ${nName}`, { append: true });
+      });
+
+      it('should enable save button', () => {
+        expect(circulationRules.isSaveButtonDisabled).to.be.false;
+      });
+
+      describe('clicking save button', () => {
+        beforeEach(async function () {
+          await circulationRules.clickSaveRulesBtn();
+        });
+
+        it('should disable save button upon succesfull save', () => {
+          expect(circulationRules.isSaveButtonDisabled).to.be.true;
+        });
+      });
     });
   });
 });
