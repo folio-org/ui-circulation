@@ -1,5 +1,6 @@
 .ql-editor {
   min-height: 100px !important;
+  resize: vertical; 
 }
 
 .ql-token {

@@ -3,3 +3,8 @@
   border-color: #900;
   background-color: rgba(153, 0, 0, 0.050000000000000044);
 }
+
+.editor {
+  resize: vertical;
+  overflow: auto;
+}
