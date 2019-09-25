@@ -549,8 +549,12 @@ class Widget {
 
     if (selectedHintIndex === -1 || currentItemOptions.inactive) return;
 
-    if (currentSectionData.isMultipleSelection && !isAnyItem(currentItemOptions.id)) {
-      this.sections[this.currentSectionIndex].checkItem();
+    if (currentSectionData.isMultipleSelection) {
+      const currentSection = this.getCurrentSection();
+
+      if (!isEmpty(currentSection.listNodes) && !isAnyItem(currentItemOptions.id)) {
+        currentSection.checkItem();
+      }
     } else if (this.currentSectionIndex < this.data.sections.length - 1) {
       this.changeSection();
     } else {
@@ -560,26 +564,44 @@ class Widget {
 
   changeSection() {
     this.setupNextSectionData();
-    this.currentSectionIndex++;
+    const nextSectionData = this.getSectionAt(this.currentSectionIndex + 1, this.data);
 
-    const {
-      list,
-      selectedHintIndex,
-    } = this.getCurrentSection(this.data);
+    if (!isEmpty(nextSectionData.list)) {
+      this.currentSectionIndex++;
 
-    this.getCurrentSection().setList(list, selectedHintIndex);
-    this.updatePosition();
+      const {
+        list,
+        selectedHintIndex,
+      } = this.getCurrentSection(this.data);
+
+      this.getCurrentSection().setList(list, selectedHintIndex);
+      this.updatePosition();
+    }
   }
 
   setupNextSectionData() {
-    const {
+    const { childSection } = this.getCurrentSection(this.data);
+    const nextSectionIndex = this.currentSectionIndex + 1;
+    const nextSectionData = this.getSectionAt(nextSectionIndex, this.data);
+    const isLastSection = nextSectionIndex === this.sections.length - 1;
+    const options = {
       childSection,
-      list,
-    } = this.getCurrentSection(this.data);
-    const nextSectionData = this.getSectionAt(this.currentSectionIndex + 1, this.data);
-    const parentId = list[this.getSelectedHintInCurrentSection()].id;
+      parentIds: this.selectionsIds,
+      isLastSection,
+    };
 
-    nextSectionData.list = CodeMirror.hint.getSubMenuData(this.completion.cm, { childSection, parentId });
+    nextSectionData.list = CodeMirror.hint.getSubMenuData(this.completion.cm, options);
+  }
+
+  get selectionsIds() {
+    const { list } = this.getCurrentSection(this.data);
+    const selectionId = list[this.getSelectedHintInCurrentSection()].id;
+
+    if (isAnyItem(selectionId)) {
+      return list.filter(listItem => listItem.id !== selectionId).map(listItem => listItem.id);
+    }
+
+    return [selectionId];
   }
 
   changeActive = (nextActiveHintIndex, avoidWrap) => {
@@ -705,6 +727,9 @@ class HintSection {
 
     this.setSelectedHintIndex(nextIndex);
     hintNode = this.getListNodeAt(this.selectedHintIndex);
+
+    if (!hintNode) return;
+
     hintNode.classList.toggle(ACTIVE_HINT_ELEMENT_CLASS, true);
 
     if (hintNode.offsetTop < this.listContainer.scrollTop) {
@@ -866,7 +891,10 @@ class MultipleSelectionHintSection extends HintSection {
 
     super.setList(list, selectedHintIndex);
 
-    this.filterItems(this.filterInput.value);
+    if (this.filterInput.value) {
+      this.handleFilterInputChange();
+    }
+
     this.setCompletionButtonVisibility(list.length > 1);
     this.setCompletionButtonEnabling(this.hasSelectedItems());
   }

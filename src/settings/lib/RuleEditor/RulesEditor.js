@@ -94,9 +94,12 @@ function handleEnter(cm, handle) {
 
 function selectHint(cm, handle) {
   const { currentSectionIndex } = cm.state.completionActive.widget;
-  const currentSection = handle.data.sections[currentSectionIndex];
+  const {
+    selectedHintIndex,
+    list,
+  } = handle.data.sections[currentSectionIndex];
 
-  if (currentSection.selectedHintIndex !== -1) {
+  if (selectedHintIndex !== -1 && selectedHintIndex < list.length) {
     handle.pick();
 
     return true;

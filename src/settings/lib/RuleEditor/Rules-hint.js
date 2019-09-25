@@ -241,20 +241,21 @@ export function initSubMenuDataFetching(Codemirror, props) {
 
     const type = typeMapping[options.childSection];
 
-    if (options.childSection && isLocationType(options.childSection)) {
+    const hasAnyItem = options.childSection && isLocationType(options.childSection) && !options.isLastSection;
+
+    if (hasAnyItem) {
       const text = `<${formatMessage({ id: 'ui-circulation.settings.circulationRules.any' })}>`;
 
       subMenuData.push({
         text,
         displayText: text,
         className: 'rule-hint-minor',
-        inactive: true,
         id: `any${options.childSection}`,
       });
     }
 
     completionLists[type].forEach((selector) => {
-      if (selector.parentId === options.parentId) {
+      if (options.parentIds.includes(selector.parentId)) {
         subMenuData.push(getItemOptions(selector, options.childSection));
       }
     });
