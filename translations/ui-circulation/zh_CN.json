@@ -363,7 +363,7 @@
     "settings.circulationRules.done": "完成",
     "settings.patronNotices.multipleLoans": "多个借阅",
     "settings.patronNotices.multipleRequests": "多个请求",
-    "settings.patronNotices.multipleFeesFines": "多个收费/罚款",
+    "settings.patronNotices.multipleFeesFines": "多个费用/罚款",
     "settings.patronNotices.feeFineTokenHeader": "费用/罚款",
     "settings.noticePolicy.loanNotices.manualDueDateChange": "Loan due date change",
     "settings.index.general": "General",
