@@ -114,10 +114,7 @@ class PreviewModal extends React.Component {
         size="medium"
         footer={this.renderFooter()}
       >
-        <div
-          className="ql-editor"
-          ref={this.editorRef}
-        >
+        <div ref={this.editorRef}>
           {contentComponent}
         </div>
       </Modal>

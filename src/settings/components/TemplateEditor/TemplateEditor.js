@@ -197,6 +197,7 @@ class TemplateEditor extends React.Component {
                   <EditorToolbar />
                   <ReactQuill
                     id="template-editor"
+                    className={css.editor}
                     value={value}
                     ref={this.quill}
                     modules={this.modules}
