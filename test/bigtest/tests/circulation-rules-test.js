@@ -38,6 +38,7 @@ describe('CirculationRules', () => {
   let campuses1;
   let campuses2;
   let libraries1;
+  let libraries2;
   let locations;
 
   const shortInstitutionCode = 'INST';
@@ -68,6 +69,7 @@ describe('CirculationRules', () => {
     campuses2 = await this.server.createList('campus', 1, { institutionId: institutions[1].id, code: 'campCode2' });
     libraries1 = await this.server.createList('library', librariesAmount, { campusId: campuses1[0].id, code: '|libCode *|libCode *' });
     await this.server.createList('library', 1, { campusId: campuses2[0].id, code: 'libCode2' });
+    libraries2 = await this.server.createList('library', librariesAmount, { campusId: campuses1[1].id });
     locations = await this.server.createList('location', locationsAmount - 1, { libraryId: libraries1[0].id, code: '=locateCode|', name: 'A-location' });
     const filterTestLocation = this.server.createList('location', 1, { libraryId: libraries1[0].id, code: 'testFilterItemCode', name: 'testFilterItemName' });
     locations.push(...filterTestLocation);
@@ -426,8 +428,16 @@ describe('CirculationRules', () => {
       expect(circulationRules.editor.hints.sections(1).items().length).to.equal(0);
     });
 
-    it('should display the second section without the special value ANY', () => {
-      expect(circulationRules.editor.hints.sections(0).items(0).text).to.equal(institutions[0].code);
+    describe('picking an institution that doesn\'t contains campuses and press arrow up', () => {
+      beforeEach(async () => {
+        await circulationRules.editor.pressArrowUp();
+        await circulationRules.editor.pressEnter();
+        await circulationRules.editor.pressArrowDown();
+      });
+
+      it('should interact with the first section and select the first item', () => {
+        expect(getEditorHintSection(0).isFirstItemActive).to.equal(true);
+      });
     });
 
     describe('picking an institution that contains campuses', () => {
@@ -436,15 +446,16 @@ describe('CirculationRules', () => {
       });
 
       it('should display the second section filled with campuses codes', () => {
-        expect(circulationRules.editor.hints.sections(1).items().length).to.equal(campusesAmount + 1);
+        expect(circulationRules.editor.hints.sections(1).items().length).to.equal(campusesAmount);
       });
 
       it('should not change the editor value', () => {
         expect(circulationRules.editor.value).to.equal('b ');
       });
 
-      it('should display the second section with the special value ANY', () => {
-        expect(circulationRules.editor.hints.sections(1).items(0).text).to.equal('<ANY>');
+      it('should display sections without the special value ANY', () => {
+        expect(circulationRules.editor.hints.sections(0).items(0).text).not.to.equal('<ANY>');
+        expect(circulationRules.editor.hints.sections(1).items(0).text).not.to.equal('<ANY>');
       });
 
       it('should have the first item selected in the first section', () => {
@@ -464,7 +475,7 @@ describe('CirculationRules', () => {
 
       describe('moving selection in the second section to the last item', () => {
         beforeEach(async () => {
-          await circulationRules.editor.changeActiveItem(campusesAmount);
+          await circulationRules.editor.changeActiveItem(campusesAmount - 1);
         });
 
         it('should make the last item of the second section selected', () => {
@@ -477,7 +488,7 @@ describe('CirculationRules', () => {
 
         describe('selecting active item in the second section', () => {
           beforeEach(async () => {
-            await circulationRules.editor.pickHint(campusesAmount);
+            await circulationRules.editor.pickHint(campusesAmount - 1);
           });
 
           it('should add the campus code to the editor', () => {
@@ -506,7 +517,7 @@ describe('CirculationRules', () => {
           await circulationRules.editor.hints.clickOnItem(0);
 
           // select first campus
-          await circulationRules.editor.hints.clickOnItem(1, 1);
+          await circulationRules.editor.hints.clickOnItem(0, 1);
         });
 
         it('should work', () => {
@@ -535,7 +546,7 @@ describe('CirculationRules', () => {
           await circulationRules.editor.hints.clickOnItem(1);
 
           // select first campus in second institution
-          await circulationRules.editor.hints.clickOnItem(1, 1);
+          await circulationRules.editor.hints.clickOnItem(0, 1);
         });
 
         it('should work', () => {
@@ -552,7 +563,7 @@ describe('CirculationRules', () => {
           await circulationRules.editor.hints.clickOnItem(1);
 
           // select first campus in second institution
-          await circulationRules.editor.hints.clickOnItem(1, 1);
+          await circulationRules.editor.hints.clickOnItem(0, 1);
         });
 
         it('should work', () => {
@@ -608,13 +619,29 @@ describe('CirculationRules', () => {
         expect(circulationRules.editor.hints.sections(2).items().length).to.equal(0);
       });
 
+      describe('clicking on the ANY item', () => {
+        beforeEach(async () => {
+          await circulationRules.editor.hints.clickOnItem(0, 1);
+        });
+
+        it('should make the third section (library) filled by libraries from all added campsuses', () => {
+          expect(circulationRules.editor.hints.sections(2).items().length).to.equal(libraries1.length + libraries2.length);
+        });
+      });
+
       describe('clicking on the first campus', () => {
         beforeEach(async () => {
           await circulationRules.editor.hints.clickOnItem(1, 1);
         });
 
+        it('should display the special value ANY only in the second section', () => {
+          expect(circulationRules.editor.hints.sections(0).items(0).text).not.to.equal('<ANY>');
+          expect(circulationRules.editor.hints.sections(1).items(0).text).to.equal('<ANY>');
+          expect(circulationRules.editor.hints.sections(2).items(0).text).not.to.equal('<ANY>');
+        });
+
         it('should make the third section (library) filled', () => {
-          expect(circulationRules.editor.hints.sections(2).items().length).to.equal(librariesAmount + 1);
+          expect(circulationRules.editor.hints.sections(2).items().length).to.equal(librariesAmount);
         });
 
         it('should make the first item selected by default in the third section', () => {
@@ -698,10 +725,9 @@ describe('CirculationRules', () => {
         await editorHints.clickOnItem(1, 2);
       });
 
-      it('should contain ANY item and one location', () => {
-        expect(getEditorHintSection(3).items(0).text).to.equal('<ANY>');
+      it('should contain only one location', () => {
         expect(getEditorHintSection(3).items(1).text).not.to.equal('<ANY>');
-        expect(getEditorHintSection(3).getShownItemsCount()).to.equal(2);
+        expect(getEditorHintSection(3).getShownItemsCount()).to.equal(1);
       });
 
       describe('focusing the rules filter field', () => {
@@ -749,11 +775,14 @@ describe('CirculationRules', () => {
           });
 
           it('should make the fourth section (location) filled', () => {
-            expect(getEditorHintSection(3).items().length).to.equal(locationsAmount + 1);
+            expect(getEditorHintSection(3).items().length).to.equal(locationsAmount);
           });
 
-          it('should display the fourth section with the special value ANY', () => {
-            expect(getEditorHintSection(3).items(0).text).to.equal('<ANY>');
+          it('should display sections with the special value ANY in the second and the third sections', () => {
+            expect(getEditorHintSection(0).items(0).text).not.to.equal('<ANY>');
+            expect(getEditorHintSection(1).items(0).text).to.equal('<ANY>');
+            expect(getEditorHintSection(2).items(0).text).to.equal('<ANY>');
+            expect(getEditorHintSection(3).items(0).text).not.to.equal('<ANY>');
           });
 
           it('should have the first item selected by default in the fourth section', () => {
@@ -784,8 +813,8 @@ describe('CirculationRules', () => {
             expect(getEditorHintSection(1).hasCheckBoxes).to.equal(false);
             expect(getEditorHintSection(2).hasCheckBoxes).to.equal(false);
             expect(getEditorHintSection(3).hasCheckBoxes).to.equal(true);
+            expect(getEditorHintSection(3).isCheckBoxChecked(locationsAmount - 2)).to.equal(false);
             expect(getEditorHintSection(3).isCheckBoxChecked(locationsAmount - 1)).to.equal(false);
-            expect(getEditorHintSection(3).isCheckBoxChecked(locationsAmount)).to.equal(false);
           });
 
           it('should formatted and not truncated values in the fourth section', () => {
@@ -808,9 +837,8 @@ describe('CirculationRules', () => {
                 await getEditorHintSection(3).filterInput.fill(Math.random());
               });
 
-              it('should contain only ANY item', () => {
-                expect(getEditorHintSection(3).getShownItemsCount()).to.equal(1);
-                expect(getEditorHintSection(3).items(0).text).to.equal('<ANY>');
+              it('should not contain items', () => {
+                expect(getEditorHintSection(3).getShownItemsCount()).to.equal(0);
               });
             });
 
@@ -819,10 +847,9 @@ describe('CirculationRules', () => {
                 await getEditorHintSection(3).filterInput.fill('ItemCode');
               });
 
-              it('should contain ANY item and one location', () => {
-                expect(getEditorHintSection(3).items(0).text).to.equal('<ANY>');
-                expect(getEditorHintSection(3).items(1).text).not.to.equal('<ANY>');
-                expect(getEditorHintSection(3).getShownItemsCount()).to.equal(2);
+              it('should contain only one location', () => {
+                expect(getEditorHintSection(3).items(0).text).not.to.equal('<ANY>');
+                expect(getEditorHintSection(3).getShownItemsCount()).to.equal(1);
               });
             });
 
@@ -831,10 +858,9 @@ describe('CirculationRules', () => {
                 await getEditorHintSection(3).filterInput.fill('ItemName');
               });
 
-              it('should contain ANY item and one location', () => {
-                expect(getEditorHintSection(3).items(0).text).to.equal('<ANY>');
-                expect(getEditorHintSection(3).items(1).text).not.to.equal('<ANY>');
-                expect(getEditorHintSection(3).getShownItemsCount()).to.equal(2);
+              it('should contain only one location', () => {
+                expect(getEditorHintSection(3).items(0).text).not.to.equal('<ANY>');
+                expect(getEditorHintSection(3).getShownItemsCount()).to.equal(1);
               });
             });
           });
@@ -846,7 +872,7 @@ describe('CirculationRules', () => {
             });
 
             it('should check the last item in the fourth section', () => {
-              expect(getEditorHintSection(3).isCheckBoxChecked(locationsAmount)).to.equal(true);
+              expect(getEditorHintSection(3).isCheckBoxChecked(locationsAmount - 1)).to.equal(true);
             });
 
             describe('pressing Enter on the last location', () => {
@@ -855,7 +881,7 @@ describe('CirculationRules', () => {
               });
 
               it('should uncheck the last item in the fourth section', () => {
-                expect(getEditorHintSection(3).isCheckBoxChecked(locationsAmount)).to.equal(false);
+                expect(getEditorHintSection(3).isCheckBoxChecked(locationsAmount - 1)).to.equal(false);
               });
 
               it('should disable the completion button', () => {
@@ -866,13 +892,13 @@ describe('CirculationRules', () => {
 
           describe('clicking on the last two locations', () => {
             beforeEach(async () => {
+              await editorHints.clickOnItem(locationsAmount - 2, 3);
               await editorHints.clickOnItem(locationsAmount - 1, 3);
-              await editorHints.clickOnItem(locationsAmount, 3);
             });
 
             it('should check the last two items in the fourth section', () => {
+              expect(getEditorHintSection(3).isCheckBoxChecked(locationsAmount - 2)).to.equal(true);
               expect(getEditorHintSection(3).isCheckBoxChecked(locationsAmount - 1)).to.equal(true);
-              expect(getEditorHintSection(3).isCheckBoxChecked(locationsAmount)).to.equal(true);
             });
 
             it('should enable the completion button', () => {
@@ -919,11 +945,11 @@ describe('CirculationRules', () => {
 
             describe('clicking on the last location', () => {
               beforeEach(async () => {
-                await editorHints.clickOnItem(locationsAmount, 3);
+                await editorHints.clickOnItem(locationsAmount - 1, 3);
               });
 
               it('should uncheck the last item in the fourth section', () => {
-                expect(getEditorHintSection(3).isCheckBoxChecked(locationsAmount)).to.equal(false);
+                expect(getEditorHintSection(3).isCheckBoxChecked(locationsAmount - 1)).to.equal(false);
               });
 
               it('should not change the completion button state', () => {

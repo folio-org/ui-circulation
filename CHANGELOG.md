@@ -2,9 +2,10 @@
 
 ## 1.12.0 (IN PROGRESS)
 
-* Add location items filtering into the circulation rules editor menu. Refs UICIRC-314
+* Add location items filtering into the circulation rules editor menu. Refs UICIRC-314.
 * Validate for closed loans and fines/fees in loan history settings. Refs UITEN-42.
 * Fix incorrect save button behavior in Circulation Rules Editor. Refs UICIRC-296.
+* Add handling of the special item Any for intermediate menus. Refs UICIRC-334.
 
 ## [1.11.0](https://github.com/folio-org/ui-circulation/tree/v1.13.0) (2019-09-13)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v1.10.0...v1.11.0)
