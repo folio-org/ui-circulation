@@ -45,6 +45,8 @@ const checkNoticeHiddenFields = (sectionKey, policy) => {
 
     if (!notice.sendOptions.isBeforeOrAfter()) {
       unset(noticePolicy, `[${sectionKey}][${index}].sendOptions.sendBy`);
+      unset(noticePolicy, `[${sectionKey}][${index}].sendOptions.sendEvery`);
+      unset(noticePolicy, `[${sectionKey}][${index}].frequency`);
     }
 
     if (!notice.isRecurring()) {
