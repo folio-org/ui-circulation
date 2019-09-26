@@ -184,51 +184,53 @@ class NoticeCard extends React.Component {
                   </KeyValue>
                 </Col>
               </Row>
-              <Row>
-                <Col
-                  xs={12}
-                  className={css.fieldLabel}
-                  data-test-notice-card-frequency-label
-                >
-                  <KeyValue label={<FormattedMessage id={`${translationNamespace}.notices.frequency`} />}>
-                    <Row>
-                      <Col
-                        xs={4}
-                        data-test-notice-card-frequency
-                      >
-                        <KeyValue>
-                          {this.getTranslatedDropdownValue('frequency', noticesFrequency)}
-                        </KeyValue>
-                      </Col>
-                      {notice.isRecurring() && (
-                        <React.Fragment>
-                          <Col xs={3}>
-                            <KeyValue>
-                              <FormattedMessage id={`${translationNamespace}.notices.andEvery`} />
-                            </KeyValue>
-                          </Col>
-                          <Col
-                            xs={1}
-                            data-test-notice-card-send-every-duration
-                          >
-                            <KeyValue>
-                              {get(notice, 'sendOptions.sendEvery.duration')}
-                            </KeyValue>
-                          </Col>
-                          <Col
-                            xs={4}
-                            data-test-notice-card-send-every-interval-id
-                          >
-                            <KeyValue>
-                              {this.getTranslatedDropdownValue('sendOptions.sendEvery.intervalId', noticesIntervalPeriods)}
-                            </KeyValue>
-                          </Col>
-                        </React.Fragment>
-                      )}
-                    </Row>
-                  </KeyValue>
-                </Col>
-              </Row>
+              {notice.sendOptions.isFrequencyAvailable() && (
+                <Row>
+                  <Col
+                    xs={12}
+                    className={css.fieldLabel}
+                    data-test-notice-card-frequency-label
+                  >
+                    <KeyValue label={<FormattedMessage id={`${translationNamespace}.notices.frequency`} />}>
+                      <Row>
+                        <Col
+                          xs={4}
+                          data-test-notice-card-frequency
+                        >
+                          <KeyValue>
+                            {this.getTranslatedDropdownValue('frequency', noticesFrequency)}
+                          </KeyValue>
+                        </Col>
+                        {notice.isRecurring() && (
+                          <React.Fragment>
+                            <Col xs={3}>
+                              <KeyValue>
+                                <FormattedMessage id={`${translationNamespace}.notices.andEvery`} />
+                              </KeyValue>
+                            </Col>
+                            <Col
+                              xs={1}
+                              data-test-notice-card-send-every-duration
+                            >
+                              <KeyValue>
+                                {get(notice, 'sendOptions.sendEvery.duration')}
+                              </KeyValue>
+                            </Col>
+                            <Col
+                              xs={4}
+                              data-test-notice-card-send-every-interval-id
+                            >
+                              <KeyValue>
+                                {this.getTranslatedDropdownValue('sendOptions.sendEvery.intervalId', noticesIntervalPeriods)}
+                              </KeyValue>
+                            </Col>
+                          </React.Fragment>
+                        )}
+                      </Row>
+                    </KeyValue>
+                  </Col>
+                </Row>
+              )}
             </React.Fragment>
           )}
           <Row>
