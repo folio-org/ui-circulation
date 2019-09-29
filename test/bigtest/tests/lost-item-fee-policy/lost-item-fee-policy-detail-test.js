@@ -4,7 +4,7 @@ import { expect } from 'chai';
 import setupApplication from '../../helpers/setup-application';
 import LostItemFeePolicyDetail from '../../interactors/lost-item-fee-policy/lost-item-fee-policy-detail';
 
-describe.only('LostItemFeePolicyDetail', () => {
+describe('LostItemFeePolicyDetail', () => {
   setupApplication({ scenarios: ['testLostItemFeePolicy'] });
 
   let lostItemPolicy;
