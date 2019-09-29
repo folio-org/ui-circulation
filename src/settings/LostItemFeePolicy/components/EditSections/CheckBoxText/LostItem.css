@@ -1,0 +1,8 @@
+.periodContainer {
+   display:  flex;
+   border: 10rem;
+  }
+.col{
+    padding:0 5px;
+}
+  
