@@ -355,7 +355,6 @@
   "settings.finePolicy.month": "month",
   "settings.finePolicy.year": "year",
 
-  "settings.finePolicy.lostItemFeePolicies": "Lost item fee policies",
   "settings.lostItemFee.entryLabel": "Lost item fee policies",
   "settings.lostItemFee.paneTitle": "Lost item fee policies",
   "settings.lostItemFee.lostItemSection": "Lost item fee",
