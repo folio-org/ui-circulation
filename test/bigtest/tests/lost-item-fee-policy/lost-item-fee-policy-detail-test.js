@@ -111,7 +111,7 @@ describe('LostItemFeePolicyDetail', () => {
           });
 
           describe('lost item fee section', () => {
-            it('should not be displayed', () => {
+            it('should be displayed', () => {
               expect(LostItemFeePolicyDetail.expandAll.isPresent).to.be.true;
             });
           });
