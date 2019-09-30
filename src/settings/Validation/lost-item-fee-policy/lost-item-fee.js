@@ -29,7 +29,7 @@ export default function (l) {
       shouldValidate: l.hasValue('lostItemProcessingFee'),
     },
     'lostItemChargeFeeFine.duration': {
-      rules: ['isNotEmpty', 'isIntegerGreaterThanOrEqualToZero'],
+      rules: ['isNotEmptyLostItem', 'isIntegerGreaterThanOrEqualToZero'],
       shouldValidate: l.isRquiredLostItemCharge(),
     },
     'lostItemChargeFeeFine.intervalId': {
