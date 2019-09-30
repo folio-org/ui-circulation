@@ -81,7 +81,7 @@ class Circulation extends Component {
             perm: 'ui-circulation.settings.overdue-fines-policies',
           },
           {
-            route: 'lost-item-fee-fine-policy',
+            route: 'lost-item-fee-policy',
             label: <FormattedMessage id="ui-circulation.settings.lostItemFee.paneTitle" />,
             component: LostItemFeePolicySettings,
             perm: 'ui-circulation.settings.lost-item-fees-policies',
