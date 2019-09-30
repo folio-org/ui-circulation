@@ -52,7 +52,7 @@ describe('LostItemFeePolicyDetail', () => {
         });
 
 
-        describe('lost item fee policy name', () => {
+        describe('Show the view section', () => {
           it('should be displayed', () => {
             expect(LostItemFeePolicyDetail.aboutSection.policyName.isPresent).to.be.true;
           });
@@ -83,36 +83,35 @@ describe('LostItemFeePolicyDetail', () => {
         });
 
         describe('lost item fee section', () => {
-          it('should not be displayed', () => {
+          it('should be displayed', () => {
             expect(LostItemFeePolicyDetail.lostItemSection.isPresent).to.be.true;
           });
         });
       });
     });
-    describe('lost item fee section', () => {
-      describe('lost item fee policy', () => {
+    describe('Show lost item fee section and delete one policy', () => {
+      describe('List lost item fee policy', () => {
         beforeEach(function () {
           lostItemPolicy = this.server.create('lostItemFeePolicy');
-
           this.visit(`/settings/circulation/lost-item-fee-policy/${lostItemPolicy.id}`);
         });
 
         describe('lost item fee section', () => {
-          it('should not be displayed', () => {
+          it('should be displayed', () => {
             expect(LostItemFeePolicyDetail.lostItemSection.isPresent).to.be.true;
           });
         });
       });
 
-      describe('lost item fee section', () => {
-        describe('lost item fee policy', () => {
+      describe('Delete lost item fee policy', () => {
+        describe('Do delete', () => {
           beforeEach(function () {
             LostItemFeePolicyDetail.deleteLostItemFeePolicy.click();
           });
 
-          describe('lost item fee section', () => {
-            it('should be displayed', () => {
-              expect(LostItemFeePolicyDetail.expandAll.isPresent).to.be.true;
+          describe('Show view section', () => {
+            it('should not be displayed', () => {
+              expect(LostItemFeePolicyDetail.expandAll.isPresent).to.be.false;
             });
           });
         });
