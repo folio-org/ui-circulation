@@ -1,5 +1,5 @@
 import React from 'react';
-import get from 'lodash/get';
+import { get } from 'lodash';
 import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
 import {
