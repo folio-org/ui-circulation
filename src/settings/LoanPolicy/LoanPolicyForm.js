@@ -69,7 +69,7 @@ class LoanPolicyForm extends React.Component {
     sections: {
       generalSection: true,
       recallsSection: true,
-      holdsSection: false,
+      holdsSection: true,
     },
   };
 

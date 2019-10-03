@@ -7,6 +7,7 @@
 * Fix incorrect save button behavior in Circulation Rules Editor. Refs UICIRC-296.
 * Add handling of the special item Any for intermediate menus. Refs UICIRC-334.
 * Add full hierarchial path to location codes that are used in the input field of the circulation rules editor. Refs UICIRC-333.
+* Fix loan policy holds section. Refs UICIRC-349.
 
 ## [1.11.0](https://github.com/folio-org/ui-circulation/tree/v1.13.0) (2019-09-13)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v1.10.0...v1.11.0)
