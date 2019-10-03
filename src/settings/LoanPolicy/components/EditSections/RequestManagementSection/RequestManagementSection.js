@@ -15,7 +15,10 @@ import {
 
 import optionsGenerator from '../../../../utils/options-generator';
 import { Period } from '../../../../components';
-import { intervalPeriods, loanProfileMap } from '../../../../../constants';
+import {
+  intervalPeriods,
+  loanProfileMap,
+} from '../../../../../constants';
 
 class RequestManagementSection extends React.Component {
   static propTypes = {
@@ -103,7 +106,8 @@ class RequestManagementSection extends React.Component {
           </div>
           <br />
           {
-            get(policy, 'loansPolicy.profileId') === loanProfileMap.ROLLING && get(policy, 'requestManagement.holds.renewItemsWithRequest') &&
+            get(policy, 'loansPolicy.profileId') === loanProfileMap.ROLLING &&
+            get(policy, 'requestManagement.holds.renewItemsWithRequest') &&
             <div data-test-request-management-section-alternate-renewal-loan-period>
               <Period
                 fieldLabel="ui-circulation.settings.requestManagement.alternateRenewalLoanPeriod"
