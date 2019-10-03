@@ -895,7 +895,7 @@ class MultipleSelectionHintSection extends HintSection {
       this.handleFilterInputChange();
     }
 
-    this.setCompletionButtonVisibility(list.length > 1);
+    this.setCompletionButtonVisibility(list.length > 0);
     this.setCompletionButtonEnabling(this.hasSelectedItems());
   }
 
