@@ -5,8 +5,12 @@ import {
   uniqBy,
   get,
 } from 'lodash';
+import { arrayRemove } from 'redux-form';
 
-import { stripesConnect } from '@folio/stripes/core';
+import {
+  stripesConnect,
+  stripesShape,
+} from '@folio/stripes/core';
 import { Button } from '@folio/stripes/components';
 
 import ExceptionCard from './ExceptionCard';
@@ -28,6 +32,7 @@ class ExceptionsList extends Component {
     resources: PropTypes.shape({
       paymentMethods: PropTypes.object,
     }).isRequired,
+    stripes: stripesShape.isRequired,
   }
 
   handleAddField = () => {
@@ -35,7 +40,13 @@ class ExceptionsList extends Component {
   };
 
   handleRemoveField = index => {
-    this.props.fields.remove(index);
+    const {
+      fields,
+      stripes,
+    } = this.props;
+
+    stripes.store.dispatch(arrayRemove('loanHistoryForm', 'closingType.loanExceptions', index));
+    fields.remove(index);
   };
 
   render() {
