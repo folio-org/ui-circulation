@@ -1,11 +1,12 @@
-import {
-  kebabCase,
-  find,
-} from 'lodash';
+import { kebabCase } from 'lodash';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
-import { Callout, Paneset, Pane } from '@folio/stripes/components';
+import {
+  Callout,
+  Paneset,
+  Pane,
+} from '@folio/stripes/components';
 import fetch from 'isomorphic-fetch';
 import { stripesConnect } from '@folio/stripes/core';
 
@@ -16,6 +17,7 @@ import {
 } from '../constants';
 
 import replacer from './utils/with-dash-replacer';
+import * as formatter from './utils/location-code-formatters';
 
 const editorDefaultProps = {
   // whether or not to show the 'autocomplete' widget (pro mode)
@@ -227,20 +229,20 @@ class CirculationRules extends React.Component {
         })),
         campuses: campuses.records.map(campus => ({
           id: campus.id,
-          code: replacer(campus.code),
-          displayCode: this.formatCampusDisplayCode(campus, institutions),
+          code: formatter.formatCampusCode(campus, institutions),
+          displayCode: formatter.formatCampusDisplayCode(campus, institutions),
           parentId: campus.institutionId,
         })),
         libraries: libraries.records.map(library => ({
           id: library.id,
-          code: replacer(library.code),
-          displayCode: this.formatLibraryDisplayCode(library, institutions, campuses),
+          code: formatter.formatLibraryCode(library, institutions, campuses),
+          displayCode: formatter.formatLibraryDisplayCode(library, institutions, campuses),
           parentId: library.campusId,
         })),
         locations: locations.records.map(location => ({
           id: location.id,
-          code: replacer(location.code),
-          displayCode: this.formatLocationDisplayCode(location),
+          code: formatter.formatLocationCode(location, institutions, campuses, libraries),
+          displayCode: formatter.formatLocationDisplayCode(location),
           parentId: location.libraryId,
         })),
         // policies
@@ -249,23 +251,6 @@ class CirculationRules extends React.Component {
         noticePolicies: noticePolicies.records.map(n => kebabCase(n.name)),
       },
     });
-  }
-
-  formatCampusDisplayCode(campus, institutions) {
-    const targetInstitution = find(institutions.records, { id: campus.institutionId });
-
-    return `${replacer(campus.code)} (${replacer(targetInstitution.code)})`;
-  }
-
-  formatLibraryDisplayCode(library, institutions, campuses) {
-    const targetCampus = find(campuses.records, { id: library.campusId });
-    const targetInstitution = find(institutions.records, { id: targetCampus.institutionId });
-
-    return `${replacer(library.code)} (${replacer(targetInstitution.code)}-${replacer(targetCampus.code)})`;
-  }
-
-  formatLocationDisplayCode(location) {
-    return `${replacer(location.code)} (${location.name})`;
   }
 
   getRecords() {
@@ -287,9 +272,24 @@ class CirculationRules extends React.Component {
       ...materialTypes.records.map(r => ({ name: kebabCase(r.name), id: r.id, prefix: RULES_TYPE.MATERIAL, divider: '.' })),
       ...loanTypes.records.map(r => ({ name: kebabCase(r.name), id: r.id, prefix: RULES_TYPE.LOAN, divider: '.' })),
       ...institutions.records.map(r => ({ name: replacer(r.code), id: r.id, prefix: RULES_TYPE.INSTITUTION, divider: '.' })),
-      ...campuses.records.map(r => ({ name: replacer(r.code), id: r.id, prefix: RULES_TYPE.CAMPUS, divider: '.' })),
-      ...libraries.records.map(r => ({ name: replacer(r.code), id: r.id, prefix: RULES_TYPE.LIBRARY, divider: '.' })),
-      ...locations.records.map(r => ({ name: replacer(r.code), id: r.id, prefix: RULES_TYPE.LOCATION, divider: '.' })),
+      ...campuses.records.map(r => ({
+        name: formatter.formatCampusCode(r, institutions),
+        id: r.id,
+        prefix: RULES_TYPE.CAMPUS,
+        divider: '.'
+      })),
+      ...libraries.records.map(r => ({
+        name: formatter.formatLibraryCode(r, institutions, campuses),
+        id: r.id,
+        prefix: RULES_TYPE.LIBRARY,
+        divider: '.'
+      })),
+      ...locations.records.map(r => ({
+        name: formatter.formatLocationCode(r, institutions, campuses, libraries),
+        id: r.id,
+        prefix: RULES_TYPE.LOCATION,
+        divider: '.'
+      })),
       ...loanPolicies.records.map(r => ({ name: kebabCase(r.name), id: r.id, prefix: POLICY.LOAN, divider: '\\s' })),
       ...requestPolicies.records.map(r => ({ name: kebabCase(r.name), id: r.id, prefix: POLICY.REQUEST, divider: '\\s' })),
       ...noticePolicies.records.map(r => ({ name: kebabCase(r.name), id: r.id, prefix: POLICY.NOTICE, divider: '\\s' })),

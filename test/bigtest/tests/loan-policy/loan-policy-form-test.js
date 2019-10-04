@@ -807,6 +807,12 @@ describe('LoanPolicyForm', () => {
 
         describe('alternate renewal loan period', () => {
           describe('loan policy:\n\t\t-loanable\n', () => {
+            beforeEach(async () => {
+              await LoanPolicyForm
+                .requestManagementSection.renewItemsWithRequest.clickInput()
+                .loansSection.loanProfile.selectAndBlur(translation['settings.loanPolicy.profileType.rolling']);
+            });
+
             it('should be displayed', () => {
               expect(LoanPolicyForm.requestManagementSection.alternateRenewalLoanPeriod.isPresent).to.be.true;
             });

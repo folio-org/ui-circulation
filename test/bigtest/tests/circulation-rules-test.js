@@ -491,8 +491,10 @@ describe('CirculationRules', () => {
             await circulationRules.editor.pickHint(campusesAmount - 1);
           });
 
-          it('should add the campus code to the editor', () => {
-            expect(circulationRules.editor.value).to.equal(`b ${replacer(campuses1[campusesAmount - 1].code)} `);
+          it('should add full hierarchical path with campus code to the editor', () => {
+            const code = `${replacer(institutions[0].code)}>${replacer(campuses1[campusesAmount - 1].code)}`;
+
+            expect(circulationRules.editor.value).to.equal(`b ${code} `);
           });
         });
       });
@@ -521,7 +523,9 @@ describe('CirculationRules', () => {
         });
 
         it('should work', () => {
-          expect(circulationRules.editor.value).to.equal(`b ${replacer(campuses1[campusesAmount - 1].code)} `);
+          const code = `${replacer(institutions[0].code)}>${replacer(campuses1[campusesAmount - 1].code)}`;
+
+          expect(circulationRules.editor.value).to.equal(`b ${code} `);
         });
       });
 
@@ -550,7 +554,9 @@ describe('CirculationRules', () => {
         });
 
         it('should work', () => {
-          expect(circulationRules.editor.value).to.equal(`b ${replacer(campuses2[0].code)} `);
+          const code = `${replacer(institutions[1].code)}>${replacer(campuses2[0].code)}`;
+
+          expect(circulationRules.editor.value).to.equal(`b ${code} `);
         });
       });
 
@@ -567,7 +573,9 @@ describe('CirculationRules', () => {
         });
 
         it('should work', () => {
-          expect(circulationRules.editor.value).to.equal(`b ${replacer(campuses2[0].code)} `);
+          const code = `${replacer(institutions[1].code)}>${replacer(campuses2[0].code)}`;
+
+          expect(circulationRules.editor.value).to.equal(`b ${code} `);
         });
       });
     });
@@ -660,8 +668,10 @@ describe('CirculationRules', () => {
             await circulationRules.editor.hints.clickOnItem(1, 2);
           });
 
-          it('should add library code to the editor value', () => {
-            expect(circulationRules.editor.value).to.equal(`c ${replacer(libraries1[0].code)} `);
+          it('should add full hierarchial path with library code to the editor value', () => {
+            const code = `${replacer(institutions[0].code)}>${replacer(campuses1[0].code)}>${replacer(libraries1[0].code)}`;
+
+            expect(circulationRules.editor.value).to.equal(`c ${code} `);
           });
         });
       });
@@ -915,9 +925,11 @@ describe('CirculationRules', () => {
               });
 
               it('should add the location codes of selected items to the editor', () => {
-                const locationCodesString = `${replacer(locations[locationsAmount - 2].code)} ${replacer(locations[locationsAmount - 1].code)}`;
+                const hierarchicalPath = `${replacer(institutions[0].code)}>${replacer(campuses1[0].code)}>${replacer(libraries1[0].code)}`;
+                const locationCode1 = `${hierarchicalPath}>${replacer(locations[locationsAmount - 2].code)}`;
+                const locationCode2 = `${hierarchicalPath}>${replacer(locations[locationsAmount - 1].code)}`;
 
-                expect(circulationRules.editor.value).to.equal(`s ${locationCodesString} `);
+                expect(circulationRules.editor.value).to.equal(`s ${locationCode1} ${locationCode2} `);
               });
             });
 
