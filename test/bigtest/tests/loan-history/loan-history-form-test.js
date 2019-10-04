@@ -121,18 +121,48 @@ describe('Loan History Form', () => {
       });
     });
 
-    describe('selecting any radio button and clicking save button', () => {
+    describe('selecting any radio button', () => {
       beforeEach(async () => {
         await LoanHistoryForm
           .feeFine.selectRadio(closingTypesMap.IMMEDIATELY)
           .feeFine.selectRadio(closingTypesMap.INTERVAL)
           .feeFine.selectRadio(closingTypesMap.NEVER);
-
-        await LoanHistoryForm.saveButton.click();
       });
 
-      it('should save form successfully', () => {
-        expect(LoanHistoryForm.callout.successCalloutIsPresent).to.be.true;
+      describe('unchecking the checkbox', () => {
+        beforeEach(async () => {
+          await LoanHistoryForm.clickTreatEnabledCheckbox();
+        });
+
+        it('should disappear section for closed loans with associated fees/fines', () => {
+          expect(LoanHistoryForm.feefineSection.isPresent).to.be.false;
+        });
+
+        describe('when checkbox is checked', () => {
+          beforeEach(async () => {
+            await LoanHistoryForm.clickTreatEnabledCheckbox();
+          });
+
+          it('should display section for closed loans with associated fees/fines', () => {
+            expect(LoanHistoryForm.feefineSection.isPresent).to.be.true;
+          });
+
+          it('no radio button should be selected', () => {
+            const isChecked = LoanHistoryForm.feeFine.closingTypes().some(item => item.isChecked);
+
+            expect(isChecked).to.be.false;
+          });
+        });
+      });
+
+      describe('clicking save button', () => {
+        beforeEach(async () => {
+          await LoanHistoryForm.saveButton.click();
+        });
+
+        it('should save form successfully', () => {
+          expect(LoanHistoryForm.callout.successCalloutIsPresent).to.be.true;
+        });
       });
     });
 
@@ -217,18 +247,38 @@ describe('Loan History Form', () => {
         });
       });
 
-      describe('selecting any closing type radio button and clicking save button', () => {
+      describe('selecting any closing type radio button', () => {
         beforeEach(async () => {
+          await LoanHistoryForm.loan.selectRadio(closingTypesMap.IMMEDIATELY);
+
           await LoanHistoryForm
             .loanException.selectRadio(closingTypesMap.IMMEDIATELY)
             .loanException.selectRadio(closingTypesMap.INTERVAL)
             .loanException.selectRadio(closingTypesMap.NEVER);
-
-          await LoanHistoryForm.saveButton.click();
         });
 
-        it('should save form successfully', () => {
-          expect(LoanHistoryForm.callout.successCalloutIsPresent).to.be.true;
+        describe('clicking save button', () => {
+          beforeEach(async () => {
+            await LoanHistoryForm.saveButton.click();
+          });
+
+          it('should save form successfully', () => {
+            expect(LoanHistoryForm.callout.successCalloutIsPresent).to.be.true;
+          });
+        });
+
+        describe('unchecking the checkbox', () => {
+          beforeEach(async () => {
+            await LoanHistoryForm.clickTreatEnabledCheckbox();
+          });
+
+          it('should disappear section for closed loans with associated fees/fines', () => {
+            expect(LoanHistoryForm.feefineSection.isPresent).to.be.false;
+          });
+
+          it('save button should be active', () => {
+            expect(LoanHistoryForm.disabledSaveButton).to.be.false;
+          });
         });
       });
 
