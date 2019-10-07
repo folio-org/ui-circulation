@@ -8,6 +8,8 @@ import {
   Field,
   FieldArray,
   getFormValues,
+  arrayRemoveAll,
+  change,
 } from 'redux-form';
 
 import stripesForm from '@folio/stripes/form';
@@ -27,11 +29,13 @@ import {
   closingTypes,
   closedLoansRules,
 } from '../../constants';
+import { normalize } from './utils/normalize';
 
 import css from './LoanHistoryForm.css';
 
 class LoanHistoryForm extends Component {
   static propTypes = {
+    dispatch: PropTypes.func.isRequired,
     handleSubmit: PropTypes.func.isRequired,
     onSubmit: PropTypes.func.isRequired,
     pristine: PropTypes.bool,
@@ -47,7 +51,16 @@ class LoanHistoryForm extends Component {
     this.state = { checked: false };
   }
 
-  onSave = data => this.props.onSubmit({ loan_history: JSON.stringify(data) });
+  onSave = data => {
+    const {
+      dispatch,
+      onSubmit,
+    } = this.props;
+
+    const normalizedData = normalize({ data, dispatch });
+
+    onSubmit({ loan_history: JSON.stringify(normalizedData) });
+  };
 
   getLastMenu = () => {
     const {
@@ -67,7 +80,16 @@ class LoanHistoryForm extends Component {
     );
   }
 
+  // Due to the issue https://github.com/erikras/redux-form/issues/4101
+  // the multiple actions should be dispatched instead of single one ('clearFields')
   toggleCheckbox = () => {
+    const { dispatch } = this.props;
+
+    dispatch(change('loanHistoryForm', 'closingType.feeFine', null));
+    dispatch(change('loanHistoryForm', 'closingType.loanExceptions', []));
+    dispatch(change('loanHistoryForm', 'feeFine', {}));
+    dispatch(arrayRemoveAll('loanHistoryForm', 'loanExceptions'));
+
     this.setState(({ checked }) => ({
       // eslint-disable-next-line react/no-unused-state
       checked: !checked

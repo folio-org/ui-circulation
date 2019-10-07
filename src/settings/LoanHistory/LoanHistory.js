@@ -42,11 +42,11 @@ class LoanHistorySettings extends React.Component {
     const value = settings.length === 0 ? '' : settings[0].value;
     const defaultConfig = {
       closingType: {
-        loans: null,
+        loan: null,
         feeFine: null,
       },
       treatEnabled: false,
-      selectedPeriodsValues
+      selectedPeriodsValues,
     };
     let config;
 
