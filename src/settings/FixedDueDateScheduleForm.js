@@ -22,6 +22,7 @@ import {
   IconButton,
   Pane,
   PaneMenu,
+  PaneFooter,
   Paneset,
   Row,
   TextArea,
@@ -125,43 +126,51 @@ class FixedDueDateScheduleForm extends React.Component {
     );
   }
 
-  saveLastMenu() {
+  renderFooter() {
     const {
       pristine,
       submitting,
       initialValues,
+      onCancel,
     } = this.props;
 
     const { confirmDelete } = this.state;
     const edit = initialValues && initialValues.id;
-    const saveLabel = edit
-      ? <FormattedMessage id="ui-circulation.settings.fDDSform.saveSchedule" />
-      : <FormattedMessage id="ui-circulation.settings.fDDSform.createSchedule" />;
 
     return (
-      <PaneMenu>
-        {edit &&
-        <IfPermission perm="ui-circulation.settings.circulation-rules">
+      <PaneFooter>
+        <div className={css.footerContent}>
           <Button
-            id="clickable-delete-item"
-            buttonStyle="danger"
+            id="clickable-cancel-fixedDueDateSchedule"
+            onClick={onCancel}
             marginBottom0
-            onClick={this.beginDelete}
-            disabled={confirmDelete}
           >
-            <FormattedMessage id="stripes-core.button.delete" />
+            <FormattedMessage id="ui-circulation.settings.fDDSform.cancel" />
           </Button>
-        </IfPermission>
-        }
-        <Button
-          id="clickable-save-fixedDueDateSchedule"
-          type="submit"
-          marginBottom0
-          disabled={(pristine || submitting)}
-        >
-          {saveLabel}
-        </Button>
-      </PaneMenu>
+          {edit &&
+          <IfPermission perm="ui-circulation.settings.circulation-rules">
+            <Button
+              id="clickable-delete-item"
+              buttonStyle="danger"
+              marginBottom0
+              onClick={this.beginDelete}
+              disabled={confirmDelete}
+            >
+              <FormattedMessage id="stripes-core.button.delete" />
+            </Button>
+          </IfPermission>
+          }
+          <Button
+            id="clickable-save-fixedDueDateSchedule"
+            type="submit"
+            marginBottom0
+            buttonStyle="primary"
+            disabled={(pristine || submitting)}
+          >
+            <FormattedMessage id="ui-circulation.settings.fDDSform.saveSchedule" />
+          </Button>
+        </div>
+      </PaneFooter>
     );
   }
 
@@ -196,7 +205,7 @@ class FixedDueDateScheduleForm extends React.Component {
             <Button
               type="button"
               data-test-add-schedule
-              onClick={() => fields.unshift({})}
+              onClick={() => fields.push({})}
             >
               <Icon icon="plus-sign">
                 <FormattedMessage id="ui-circulation.settings.fDDSform.new" />
@@ -322,7 +331,7 @@ class FixedDueDateScheduleForm extends React.Component {
           <Pane
             defaultWidth="100%"
             firstMenu={this.addFirstMenu()}
-            lastMenu={this.saveLastMenu()}
+            footer={this.renderFooter()}
             paneTitle={this.renderPaneTitle()}
           >
             <div>
