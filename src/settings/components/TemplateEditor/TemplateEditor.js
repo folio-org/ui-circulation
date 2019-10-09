@@ -61,7 +61,10 @@ class TemplateEditor extends React.Component {
         handlers: {
           token: this.openTokenDialog,
         }
-      }
+      },
+      clipboard: {
+        matchVisual: false,
+      },
     };
 
     this.state = {
