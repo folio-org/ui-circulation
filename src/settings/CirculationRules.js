@@ -7,7 +7,6 @@ import {
   Paneset,
   Pane,
 } from '@folio/stripes/components';
-import fetch from 'isomorphic-fetch';
 import { stripesConnect } from '@folio/stripes/core';
 
 import RulesForm from './lib/RuleEditor/RulesForm';
@@ -152,7 +151,11 @@ class CirculationRules extends React.Component {
 
   static propTypes = {
     resources: PropTypes.object.isRequired,
-    stripes: PropTypes.object.isRequired,
+    mutator: PropTypes.shape({
+      circulationRules: PropTypes.shape({
+        PUT: PropTypes.func.isRequired
+      })
+    })
   };
 
   constructor(props) {
@@ -313,29 +316,13 @@ class CirculationRules extends React.Component {
     }, rulesStr);
   }
 
-  // TODO: refactor to use mutator after PUT is changed on the server or stripes-connect supports
-  // custom PUT requests without the id attached to the end of the URL.
   save(rules) {
-    const {
-      stripes,
-    } = this.props;
-
-    const headers = Object.assign({}, {
-      'X-Okapi-Tenant': stripes.okapi.tenant,
-      'X-Okapi-Token': stripes.store.getState().okapi.token,
-      'Content-Type': 'application/json',
-    });
-
+    const { mutator: { circulationRules: { PUT } } } = this.props;
     const rulesAsText = this.convertNamesToIds(rules);
-    const body = JSON.stringify({ rulesAsText });
-    const options = {
-      method: 'PUT',
-      headers,
-      body,
-    };
 
     this.setState({ errors: null });
-    return fetch(`${stripes.okapi.url}/circulation/rules`, options).then((resp) => {
+
+    return PUT({ rulesAsText }).then((resp) => {
       if (resp.status >= 400) {
         resp.json().then(json => this.setState({ errors: [json] }));
       } else if (this.callout) {
