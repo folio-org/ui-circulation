@@ -6,7 +6,7 @@ const formats = {
     'item.barcode': '<Barcode>31924001521792</Barcode>',
     'item.callNumber': 'TK7871.15.F4 S67 1988',
     'item.callNumberPrefix': 'New & Noteworthy',
-    'item.callNumberSuffix': 'item.callNumberSuffix',
+    'item.callNumberSuffix': 'Handbook',
     'item.copy': 'c.2',
     'item.enumeration': 'no.1-3',
     'item.volume': 'v.27',
