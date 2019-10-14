@@ -60,7 +60,6 @@
     "settings.fDDSform.close": "Bezár",
     "settings.fDDSform.closeLabel": "Válassza a fix lejárati dátum ütemtervek párbeszédablakát",
     "settings.fDDSform.saveSchedule": "Ütemterv mentése",
-    "settings.fDDSform.createSchedule": "Ütemterv létrehozása",
     "settings.checkout.paneTitle": "További beállitások",
     "settings.checkout.validate.selectContinue": "Kérem, válasszon a továbblépéshez",
     "settings.checkout.save": "Mentés",
@@ -335,5 +334,6 @@
     "settings.finePolicy.lostItemFeePolicies": "Lost item fee policies",
     "settings.circulationRules.filterOptionsList": "Filter options list",
     "settings.staffSlips.requestDeliveryAddressTokenHeader": "Request delivery address",
-    "settings.noticePolicy.loanNotices.itemRecalled": "Item recalled"
+    "settings.noticePolicy.loanNotices.itemRecalled": "Item recalled",
+    "settings.fDDSform.cancel": "Cancel"
 }

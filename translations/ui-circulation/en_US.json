@@ -334,5 +334,6 @@
     "settings.finePolicy.lostItemFeePolicies": "Lost item fee policies",
     "settings.circulationRules.filterOptionsList": "Filter options list",
     "settings.staffSlips.requestDeliveryAddressTokenHeader": "Request delivery address",
-    "settings.noticePolicy.loanNotices.itemRecalled": "Item recalled"
+    "settings.noticePolicy.loanNotices.itemRecalled": "Item recalled",
+    "settings.fDDSform.cancel": "Cancel"
 }

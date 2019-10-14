@@ -60,7 +60,6 @@
     "settings.fDDSform.close": "إغلاق",
     "settings.fDDSform.closeLabel": "إغلاق المربع الحواري لجدول تاريخ الاستحقاق الثابت",
     "settings.fDDSform.saveSchedule": "حفظ الجدول",
-    "settings.fDDSform.createSchedule": "إنشاء جدول",
     "settings.checkout.paneTitle": "إعدادات أخرى",
     "settings.checkout.validate.selectContinue": "يرجى التحديد للمتابعة",
     "settings.checkout.save": "حفظ",
@@ -335,5 +334,6 @@
     "settings.finePolicy.lostItemFeePolicies": "سياسات رسوم المواد المفقودة",
     "settings.circulationRules.filterOptionsList": "قائمة خيارات التنقيح",
     "settings.staffSlips.requestDeliveryAddressTokenHeader": "طلب عنوان التسليم",
-    "settings.noticePolicy.loanNotices.itemRecalled": "تم استدعاء المادة"
+    "settings.noticePolicy.loanNotices.itemRecalled": "تم استدعاء المادة",
+    "settings.fDDSform.cancel": "إلغاء"
 }
