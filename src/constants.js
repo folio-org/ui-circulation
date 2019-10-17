@@ -386,6 +386,20 @@ export const POLICY = {
   NOTICE: 'n',
 };
 
+export const EDITOR_KEYWORD = {
+  FALLBACK_POLICY: 'fallback-policy',
+  PRIORITY: 'priority'
+};
+
+export const EDITOR_SPECIAL_SYMBOL = {
+  HASH: '#',
+  SLASH: '/',
+  COMMA: ',',
+  PLUS: '+',
+  COLON: ':',
+  NEGATION: '!',
+};
+
 export const LOCATION_RULES_TYPES = [
   RULES_TYPE.INSTITUTION,
   RULES_TYPE.CAMPUS,

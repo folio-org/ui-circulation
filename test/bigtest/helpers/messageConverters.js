@@ -22,7 +22,3 @@ export const getPeriodRepresentation = (period) => {
 };
 
 export const getRequiredLabel = (text) => `${text} *`;
-
-export const toLowercaseReplaceAllSpaces = (text, newSubstr = '-') => text.toLowerCase()
-  .split(' ')
-  .join(newSubstr);
