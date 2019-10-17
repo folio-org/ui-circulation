@@ -60,7 +60,6 @@
     "settings.fDDSform.close": "Chiudi",
     "settings.fDDSform.closeLabel": "Chiudi finestra Schedulazione con data di scadenza fissa",
     "settings.fDDSform.saveSchedule": "Salva schedulazione",
-    "settings.fDDSform.createSchedule": "Crea schedulazione",
     "settings.checkout.paneTitle": "Altre impostazioni",
     "settings.checkout.validate.selectContinue": "Seleziona per continuare",
     "settings.checkout.save": "Salva",
@@ -335,5 +334,6 @@
     "settings.finePolicy.lostItemFeePolicies": "Politiche tariffa per item smarriti",
     "settings.circulationRules.filterOptionsList": "Filtra lista opzioni",
     "settings.staffSlips.requestDeliveryAddressTokenHeader": "Request delivery address",
-    "settings.noticePolicy.loanNotices.itemRecalled": "Item recalled"
+    "settings.noticePolicy.loanNotices.itemRecalled": "Item recalled",
+    "settings.fDDSform.cancel": "Cancel"
 }

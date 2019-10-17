@@ -3,35 +3,39 @@
 *  the circulation rules code hinting functionality.
 */
 
-import { LOCATION_RULES_TYPES } from '../../../constants';
+import {
+  LOCATION_RULES_TYPES,
+  EDITOR_KEYWORD,
+  EDITOR_SPECIAL_SYMBOL,
+} from '../../../constants';
 
 const hooks = {
-  '#': (stream, state) => { // # starts a rule, followed by name of rule.
+  [EDITOR_SPECIAL_SYMBOL.HASH]: (stream, state) => { // # starts a rule, followed by name of rule.
     stream.eatWhile(/[^/]/);
     state.ruleLine = true;
 
     return 'ruleName';
   },
-  '/': (stream) => { // comment for rest of line after '/'
+  [EDITOR_SPECIAL_SYMBOL.SLASH]: (stream) => { // comment for rest of line after '/'
     stream.skipToEnd();
 
     return 'comment';
   },
-  ',': (stream) => { // comma separators.
+  [EDITOR_SPECIAL_SYMBOL.COMMA]: (stream) => { // comma separators.
     stream.eatWhile(/\s/);
 
     return 'comma';
   },
-  '+': (stream) => { // plus 'and'
+  [EDITOR_SPECIAL_SYMBOL.PLUS]: (stream) => { // plus 'and'
     stream.eatWhile(/\s/);
     return 'and';
   },
-  ':': (stream, state) => { // separate l-value from r-value
+  [EDITOR_SPECIAL_SYMBOL.COLON]: (stream, state) => { // separate l-value from r-value
     stream.eatWhile(/\s/);
     state.rValue = true;
     state.keyProperty = null;
   },
-  '!': (stream) => {
+  [EDITOR_SPECIAL_SYMBOL.NEGATION]: (stream) => {
     stream.eatWhile(/\s/);
 
     return 'not';
@@ -47,7 +51,7 @@ function processToken(stream, state, parserConfig) {
   } = parserConfig;
   const typeKeys = Object.keys(typeMapping);
   const policyKeys = Object.keys(policyMapping);
-  const keywords = ['fallback-policy', 'priority'];
+  const keywords = [...Object.values(EDITOR_KEYWORD)];
 
   if (stream.sol()) {
     state.rValue = false;

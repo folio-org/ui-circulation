@@ -60,7 +60,6 @@
     "settings.fDDSform.close": "Cerrar",
     "settings.fDDSform.closeLabel": "Cerrar el Cuadro de diálogo del Calendario de Fecha de Vencimiento Fijo",
     "settings.fDDSform.saveSchedule": "Guardar Horario",
-    "settings.fDDSform.createSchedule": "Crear horario",
     "settings.checkout.paneTitle": "Otros ajustes",
     "settings.checkout.validate.selectContinue": "Por favor, seleccione continuar",
     "settings.checkout.save": "Guardar",
@@ -335,5 +334,6 @@
     "settings.finePolicy.lostItemFeePolicies": "Políticas de tarifas de artículos perdidos",
     "settings.circulationRules.filterOptionsList": "Lista de opciones de filtro",
     "settings.staffSlips.requestDeliveryAddressTokenHeader": "Solicitar dirección de entrega",
-    "settings.noticePolicy.loanNotices.itemRecalled": "Artículo retirado"
+    "settings.noticePolicy.loanNotices.itemRecalled": "Artículo retirado",
+    "settings.fDDSform.cancel": "Cancel"
 }
