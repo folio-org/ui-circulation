@@ -227,6 +227,21 @@
           "settings.circulation.enabled"
         ],
         "visible": true
+      },
+      {
+        "permissionName": "ui-circulation.settings.lost-item-fees-policies",
+        "displayName": "Settings (Circ): Can create, edit and remove lost item fee policies",
+        "subPermissions": [
+          "lost-item-fees-policies.item.post",
+          "lost-item-fees-policies.item.put",
+          "lost-item-fees-policies.item.delete",
+          "lost-item-fees-policies.collection.get",
+          "lost-item-fees-policies.item.get",
+          "users.collection.get",
+          "users.item.get",
+          "settings.circulation.enabled"
+        ],
+        "visible": true
       }
     ]
   },

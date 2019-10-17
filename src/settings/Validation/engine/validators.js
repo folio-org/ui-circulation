@@ -20,6 +20,10 @@ export default {
     validate: isNotEmpty,
     message: <FormattedMessage id="ui-circulation.settings.validate.select" />,
   },
+  isNotEmptyLostItem: {
+    validate: isNotEmpty,
+    message: <FormattedMessage id="ui-circulation.settings.validate.lostItem" />,
+  },
   isIntegerGreaterThanZero: {
     validate: isIntegerGreaterThanZero,
     message: <FormattedMessage id="ui-circulation.settings.validate.greaterThanZero" />,
