@@ -5,11 +5,13 @@ import {
   afterEach,
 } from '@bigtest/mocha';
 import { expect } from 'chai';
-import { truncate } from 'lodash';
+import {
+  truncate,
+  kebabCase,
+} from 'lodash';
 
 import setupApplication from '../helpers/setup-application';
 import circulationRules from '../interactors/circulation-rules';
-import { toLowercaseReplaceAllSpaces } from '../helpers/messageConverters';
 import replacer from '../../../src/settings/utils/with-dash-replacer';
 
 const removeDisplayedHints = () => {
@@ -1039,7 +1041,7 @@ describe('CirculationRules', () => {
 
     it('should choose loan policy', () => {
       expect(circulationRules.editor.value).to.equal(
-        `m book: l ${toLowercaseReplaceAllSpaces(loanPolicies[0].name)} `
+        `m book: l ${kebabCase(loanPolicies[0].name)} `
       );
     });
   });
@@ -1059,7 +1061,7 @@ describe('CirculationRules', () => {
 
     it('should choose loan policy as a fallback', () => {
       expect(circulationRules.editor.value).to.equal(
-        `fallback-policy: l ${toLowercaseReplaceAllSpaces(loanPolicies[0].name)} `
+        `fallback-policy: l ${kebabCase(loanPolicies[0].name)} `
       );
     });
   });
@@ -1078,9 +1080,9 @@ describe('CirculationRules', () => {
       rPolicy = requestPolicies[0];
       nPolicy = patronNoticePolicies[0];
 
-      lName = toLowercaseReplaceAllSpaces(lPolicy.name);
-      rName = toLowercaseReplaceAllSpaces(rPolicy.name);
-      nName = toLowercaseReplaceAllSpaces(nPolicy.name);
+      lName = kebabCase(lPolicy.name);
+      rName = kebabCase(rPolicy.name);
+      nName = kebabCase(nPolicy.name);
 
       this.server.put('/circulation/rules', (_, request) => {
         const params = JSON.parse(request.requestBody);

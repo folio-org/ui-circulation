@@ -14,9 +14,12 @@ import {
   POLICY,
   RULES_TYPE,
 } from '../constants';
-
 import replacer from './utils/with-dash-replacer';
 import * as formatter from './utils/location-code-formatters';
+import {
+  convertIdsToNames,
+  convertNamesToIds,
+} from './utils/rules-string-convertors';
 
 const editorDefaultProps = {
   // whether or not to show the 'autocomplete' widget (pro mode)
@@ -201,7 +204,7 @@ class CirculationRules extends React.Component {
     const rules = (this.props.resources.circulationRules || {}).records || [];
     const rulesStr = (rules.length) ? rules[0].rulesAsText : '';
 
-    return this.convertIdsToNames(rulesStr.replace('    ', '\t'));
+    return convertIdsToNames(rulesStr.replace('    ', '\t'), this.getRecords());
   }
 
   getEditorProps() {
@@ -270,55 +273,49 @@ class CirculationRules extends React.Component {
       locations,
     } = this.props.resources;
 
-    return [
-      ...patronGroups.records.map(r => ({ name: kebabCase(r.group), id: r.id, prefix: RULES_TYPE.PATRON_GROUP, divider: '.' })),
-      ...materialTypes.records.map(r => ({ name: kebabCase(r.name), id: r.id, prefix: RULES_TYPE.MATERIAL, divider: '.' })),
-      ...loanTypes.records.map(r => ({ name: kebabCase(r.name), id: r.id, prefix: RULES_TYPE.LOAN, divider: '.' })),
-      ...institutions.records.map(r => ({ name: replacer(r.code), id: r.id, prefix: RULES_TYPE.INSTITUTION, divider: '.' })),
-      ...campuses.records.map(r => ({
-        name: formatter.formatCampusCode(r, institutions),
-        id: r.id,
-        prefix: RULES_TYPE.CAMPUS,
-        divider: '.'
-      })),
-      ...libraries.records.map(r => ({
-        name: formatter.formatLibraryCode(r, institutions, campuses),
-        id: r.id,
-        prefix: RULES_TYPE.LIBRARY,
-        divider: '.'
-      })),
-      ...locations.records.map(r => ({
-        name: formatter.formatLocationCode(r, institutions, campuses, libraries),
-        id: r.id,
-        prefix: RULES_TYPE.LOCATION,
-        divider: '.'
-      })),
-      ...loanPolicies.records.map(r => ({ name: kebabCase(r.name), id: r.id, prefix: POLICY.LOAN, divider: '\\s' })),
-      ...requestPolicies.records.map(r => ({ name: kebabCase(r.name), id: r.id, prefix: POLICY.REQUEST, divider: '\\s' })),
-      ...noticePolicies.records.map(r => ({ name: kebabCase(r.name), id: r.id, prefix: POLICY.NOTICE, divider: '\\s' })),
-    ];
-  }
+    const reduceHandler = (memo, code, id) => {
+      memo[code] = id;
 
-  convertNamesToIds(rulesStr) {
-    const records = this.getRecords();
-    return records.reduce((memo, r) => {
-      // eslint-disable-next-line no-useless-escape
-      const re = new RegExp(`(\\b${r.prefix}\\b${r.divider}+)(\\b${r.name}\\b)(?=\\s+[g\s+|m\s+|t\s+|l\s+|r\s+|n\s+|:\s*])?`, 'igm');
-      return memo.replace(re, `$1${r.id}`);
-    }, rulesStr);
-  }
+      return memo;
+    };
 
-  convertIdsToNames(rulesStr) {
-    const records = this.getRecords();
-    return records.reduce((memo, r) => {
-      const re = new RegExp(r.id, 'g');
-      return memo.replace(re, r.name);
-    }, rulesStr);
+    return {
+      [RULES_TYPE.PATRON_GROUP]: patronGroups.records.reduce((memo, patronGroup) => {
+        return reduceHandler(memo, kebabCase(patronGroup.group), patronGroup.id);
+      }, {}),
+      [RULES_TYPE.MATERIAL]: materialTypes.records.reduce((memo, materialType) => {
+        return reduceHandler(memo, kebabCase(materialType.name), materialType.id);
+      }, {}),
+      [RULES_TYPE.LOAN]: loanTypes.records.reduce((memo, loanType) => {
+        return reduceHandler(memo, kebabCase(loanType.name), loanType.id);
+      }, {}),
+      [RULES_TYPE.INSTITUTION]: institutions.records.reduce((memo, institution) => {
+        return reduceHandler(memo, replacer(institution.code), institution.id);
+      }, {}),
+      [RULES_TYPE.CAMPUS]: campuses.records.reduce((memo, campus) => {
+        return reduceHandler(memo, formatter.formatCampusCode(campus, institutions), campus.id);
+      }, {}),
+      [RULES_TYPE.LIBRARY]: libraries.records.reduce((memo, library) => {
+        return reduceHandler(memo, formatter.formatLibraryCode(library, institutions, campuses), library.id);
+      }, {}),
+      [RULES_TYPE.LOCATION]: locations.records.reduce((memo, location) => {
+        return reduceHandler(memo, formatter.formatLocationCode(location, institutions, campuses, libraries), location.id);
+      }, {}),
+      [POLICY.LOAN]: loanPolicies.records.reduce((memo, loanPolicy) => {
+        return reduceHandler(memo, kebabCase(loanPolicy.name), loanPolicy.id);
+      }, {}),
+      [POLICY.REQUEST]: requestPolicies.records.reduce((memo, requestPolicy) => {
+        return reduceHandler(memo, kebabCase(requestPolicy.name), requestPolicy.id);
+      }, {}),
+      [POLICY.NOTICE]: noticePolicies.records.reduce((memo, noticePolicy) => {
+        return reduceHandler(memo, kebabCase(noticePolicy.name), noticePolicy.id);
+      }, {}),
+    };
   }
 
   save(rules) {
     const { mutator: { circulationRules: { PUT } } } = this.props;
-    const rulesAsText = this.convertNamesToIds(rules);
+    const rulesAsText = convertNamesToIds(rules, this.getRecords());
 
     this.setState({ errors: null });
 

@@ -18,7 +18,7 @@ export const getPeriod = {
 
 export default Factory.extend({
   id: () => faker.random.uuid(),
-  name: () => faker.hacker.noun(),
+  name: () => faker.hacker.noun() + faker.random.uuid(),
   description: () => faker.company.catchPhrase(),
   loanable: () => faker.random.boolean(),
   loansPolicy: {
