@@ -14,8 +14,8 @@ describe('LostItemFeePolicySettings', () => {
   });
 
   describe('viewing lost item fee policy list', () => {
-    beforeEach(function () {
-      this.visit('/settings/circulation/lost-item-fee-policy');
+    beforeEach(async function () {
+      await this.visit('/settings/circulation/lost-item-fee-policy');
     });
 
     it('has a lost item fee policy list', () => {

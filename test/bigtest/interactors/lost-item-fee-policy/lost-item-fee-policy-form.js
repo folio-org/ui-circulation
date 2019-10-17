@@ -54,7 +54,9 @@ import Period from '../Period';
   aboutSection = new AboutSection();
   lostItemFeeSection = new LostItemFeeSection();
 
-  overdueAccordion = new AccordionInteractor('#lostItemFeeSectionOpen');
+  generalInformationAccordion = new AccordionInteractor('#lostItemFeegeneralSection');
+  lostItemFeeAccordion = new AccordionInteractor('#lostItemFeeSectionOpen');
+
   deleteLostItemPolicy = new Interactor('[data-test-delete-loan-policy-form-action]');
   deleteLostItemPolicyModal = new Interactor('#delete-item-confirmation');
   deleteLostItemPolicyCancel= new Interactor('[data-test-confirmation-modal-cancel-button]');

@@ -5,12 +5,12 @@ import setupApplication from '../../helpers/setup-application';
 import LostItemFeePolicyForm from '../../interactors/lost-item-fee-policy/lost-item-fee-policy-form';
 import LostItemFeePolicyDetail from '../../interactors/lost-item-fee-policy/lost-item-fee-policy-detail';
 
-describe('LostItemFeePolicyForm', () => {
+describe('Lost Item Fee Policy Form', () => {
   setupApplication({ scenarios: ['testLostItemFeePolicy'] });
 
   describe('accordions', () => {
-    beforeEach(function () {
-      this.visit('/settings/circulation/lost-item-fee-policy?layer=add');
+    beforeEach(async function () {
+      await this.visit('/settings/circulation/lost-item-fee-policy?layer=add');
     });
 
     it('should be displayed', () => {
@@ -19,17 +19,15 @@ describe('LostItemFeePolicyForm', () => {
 
     describe('collapse all', () => {
       beforeEach(async () => {
-        await LostItemFeePolicyForm.overdueAccordion.clickHeader()
-          .overdueAccordion.clickHeader()
-          .expandAll.click();
+        await LostItemFeePolicyForm.expandAll.click();
       });
 
       it('aboutSection should not be displayed', () => {
-        expect(LostItemFeePolicyForm.aboutSection.isHidden).to.be.true;
+        expect(LostItemFeePolicyForm.generalInformationAccordion.isOpen).to.be.false;
       });
 
       it('overdueFineSection should not be displayed', () => {
-        expect(LostItemFeePolicyForm.lostItemFeeSection.isHidden).to.be.true;
+        expect(LostItemFeePolicyForm.lostItemFeeAccordion.isOpen).to.be.false;
       });
 
       describe('expand all', () => {
@@ -38,19 +36,19 @@ describe('LostItemFeePolicyForm', () => {
         });
 
         it('aboutSection should be displayed', () => {
-          expect(LostItemFeePolicyForm.aboutSection.isVisible).to.be.true;
+          expect(LostItemFeePolicyForm.generalInformationAccordion.isOpen).to.be.true;
         });
 
         it('overdueFineSection should be displayed', () => {
-          expect(LostItemFeePolicyForm.lostItemFeeSection.isVisible).to.be.true;
+          expect(LostItemFeePolicyForm.lostItemFeeAccordion.isOpen).to.be.true;
         }).timeout(3000);
       });
     });
   });
 
   describe('create a new lost item fee policy', () => {
-    beforeEach(function () {
-      this.visit('/settings/circulation/lost-item-fee-policy?layer=add');
+    beforeEach(async function () {
+      await this.visit('/settings/circulation/lost-item-fee-policy?layer=add');
     });
 
     describe('filling form and saving new policy', () => {
@@ -71,8 +69,8 @@ describe('LostItemFeePolicyForm', () => {
   });
 
   describe('create a new lost item fee policy with all values', () => {
-    beforeEach(function () {
-      this.visit('/settings/circulation/lost-item-fee-policy?layer=add');
+    beforeEach(async function () {
+      await this.visit('/settings/circulation/lost-item-fee-policy?layer=add');
     });
 
     describe('filling form and saving new policy', () => {

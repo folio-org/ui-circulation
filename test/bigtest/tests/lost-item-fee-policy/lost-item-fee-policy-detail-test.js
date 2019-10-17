@@ -11,10 +11,10 @@ describe('LostItemFeePolicyDetail', () => {
 
   describe('viewing lost item fee policy', () => {
     describe('accordions', () => {
-      beforeEach(function () {
+      beforeEach(async function () {
         lostItemPolicy = this.server.create('lostItemFeePolicy');
 
-        this.visit(`/settings/circulation/lost-item-fee-policy/${lostItemPolicy.id}`);
+        await this.visit(`/settings/circulation/lost-item-fee-policy/${lostItemPolicy.id}`);
       });
 
       it('should be displayed', () => {
@@ -28,7 +28,7 @@ describe('LostItemFeePolicyDetail', () => {
         });
 
         it('content should be hidden', () => {
-          expect(LostItemFeePolicyDetail.content.isHidden).to.be.true;
+          expect(LostItemFeePolicyDetail.lostItemDetails.isOpen).to.be.false;
         });
 
         describe('expand all', () => {
@@ -37,7 +37,7 @@ describe('LostItemFeePolicyDetail', () => {
           });
 
           it('content should be visible', () => {
-            expect(LostItemFeePolicyDetail.content.isVisible).to.be.true;
+            expect(LostItemFeePolicyDetail.lostItemDetails.isOpen).to.be.true;
           });
         });
       });
@@ -45,10 +45,10 @@ describe('LostItemFeePolicyDetail', () => {
 
     describe('about section', () => {
       describe('lost item fee policy', () => {
-        beforeEach(function () {
+        beforeEach(async function () {
           lostItemPolicy = this.server.create('lostItemFeePolicy');
 
-          this.visit(`/settings/circulation/lost-item-fee-policy/${lostItemPolicy.id}`);
+          await this.visit(`/settings/circulation/lost-item-fee-policy/${lostItemPolicy.id}`);
         });
 
 
@@ -76,10 +76,10 @@ describe('LostItemFeePolicyDetail', () => {
 
     describe('lost item fee section', () => {
       describe('lost item fee policy', () => {
-        beforeEach(function () {
+        beforeEach(async function () {
           lostItemPolicy = this.server.create('lostItemFeePolicy');
 
-          this.visit(`/settings/circulation/lost-item-fee-policy/${lostItemPolicy.id}`);
+          await this.visit(`/settings/circulation/lost-item-fee-policy/${lostItemPolicy.id}`);
         });
 
         describe('lost item fee section', () => {
@@ -91,9 +91,9 @@ describe('LostItemFeePolicyDetail', () => {
     });
     describe('Show lost item fee section and delete one policy', () => {
       describe('List lost item fee policy', () => {
-        beforeEach(function () {
+        beforeEach(async function () {
           lostItemPolicy = this.server.create('lostItemFeePolicy');
-          this.visit(`/settings/circulation/lost-item-fee-policy/${lostItemPolicy.id}`);
+          await this.visit(`/settings/circulation/lost-item-fee-policy/${lostItemPolicy.id}`);
         });
 
         describe('lost item fee section', () => {
