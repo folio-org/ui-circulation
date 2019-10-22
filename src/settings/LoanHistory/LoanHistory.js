@@ -44,7 +44,11 @@ class LoanHistorySettings extends React.Component {
       closingType: {
         loan: null,
         feeFine: null,
+        loanExceptions: [],
       },
+      loan: {},
+      feeFine: {},
+      loanExceptions: [],
       treatEnabled: false,
       selectedPeriodsValues,
     };
