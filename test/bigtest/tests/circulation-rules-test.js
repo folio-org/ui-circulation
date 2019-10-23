@@ -738,8 +738,8 @@ describe('CirculationRules', () => {
       });
 
       it('should contain only one location', () => {
-        expect(getEditorHintSection(3).items(1).text).not.to.equal('<ANY>');
-        expect(getEditorHintSection(3).getShownItemsCount()).to.equal(1);
+        expect(getEditorHintSection(3).items(0).text.includes('ItemCode')).to.be.true;
+        expect(getEditorHintSection(3).itemsCount).to.equal(1);
       });
 
       describe('focusing the rules filter field', () => {
@@ -785,6 +785,11 @@ describe('CirculationRules', () => {
           beforeEach(async () => {
             await editorHints.clickOnItem(1, 2);
           });
+
+          it('should not highlight anything if the filter value is empty', () => {
+            expect(getEditorHintSection(3).hasHighlightedItems).to.be.false;
+          });
+
 
           it('should make the fourth section (location) filled', () => {
             expect(getEditorHintSection(3).items().length).to.equal(locationsAmount);
@@ -850,7 +855,7 @@ describe('CirculationRules', () => {
               });
 
               it('should not contain items', () => {
-                expect(getEditorHintSection(3).getShownItemsCount()).to.equal(0);
+                expect(getEditorHintSection(3).itemsCount).to.equal(0);
               });
             });
 
@@ -860,8 +865,27 @@ describe('CirculationRules', () => {
               });
 
               it('should contain only one location', () => {
-                expect(getEditorHintSection(3).items(0).text).not.to.equal('<ANY>');
-                expect(getEditorHintSection(3).getShownItemsCount()).to.equal(1);
+                expect(getEditorHintSection(3).items(0).text.includes('ItemCode')).to.be.true;
+                expect(getEditorHintSection(3).itemsCount).to.equal(1);
+              });
+
+              it('should highlight filter query', () => {
+                expect(getEditorHintSection(3).hasHighlightedItems).to.be.true;
+                expect(getEditorHintSection(3).isHighlightedFilterValue(0, 'ItemCode')).to.be.true;
+              });
+
+              describe('clearing locations filter value ', () => {
+                beforeEach(async () => {
+                  await getEditorHintSection(3).filterInput.fill('');
+                });
+
+                it('should display all locations', () => {
+                  expect(getEditorHintSection(3).itemsCount).to.equal(locationsAmount);
+                });
+
+                it('should not contain highlighted items', () => {
+                  expect(getEditorHintSection(3).hasHighlightedItems).to.be.false;
+                });
               });
             });
 
@@ -871,8 +895,13 @@ describe('CirculationRules', () => {
               });
 
               it('should contain only one location', () => {
-                expect(getEditorHintSection(3).items(0).text).not.to.equal('<ANY>');
-                expect(getEditorHintSection(3).getShownItemsCount()).to.equal(1);
+                expect(getEditorHintSection(3).items(0).text.includes('ItemName')).to.be.true;
+                expect(getEditorHintSection(3).itemsCount).to.equal(1);
+              });
+
+              it('should highlight filter value', () => {
+                expect(getEditorHintSection(3).hasHighlightedItems).to.be.true;
+                expect(getEditorHintSection(3).isHighlightedFilterValue(0, 'ItemName')).to.be.true;
               });
             });
           });
