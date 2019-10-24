@@ -55,6 +55,7 @@ class CirculationRules extends React.Component {
       type: 'okapi',
       path: 'circulation/rules',
       resourceShouldRefresh: true,
+      throwErrors: false,
     },
     patronGroups: {
       type: 'okapi',
@@ -319,11 +320,13 @@ class CirculationRules extends React.Component {
 
     this.setState({ errors: null });
 
-    return PUT({ rulesAsText }).then((resp) => {
-      if (resp.status >= 400) {
-        resp.json().then(json => this.setState({ errors: [json] }));
-      } else if (this.callout) {
+    PUT({ rulesAsText }).then(() => {
+      if (this.callout) {
         this.callout.sendCallout({ message: <FormattedMessage id="ui-circulation.settings.circulationRules.rulesUpdated" /> });
+      }
+    }).catch((resp) => {
+      if (resp.status && resp.status > 400) {
+        resp.json().then(json => this.setState({ errors: [json] }));
       }
     });
   }
