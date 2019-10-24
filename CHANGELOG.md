@@ -13,6 +13,7 @@
 * Fix data replacement issues in the circulation rules editor. Refs UICIRC-305.
 * Add BigTest and CRUD Fee/Fine Lost Item Fee Policies. Refs UIU-1156.
 * Add filter value match highlighting to the location menu of the circulation rules editor. Refs UICIRC-318.
+* Fix validation error message display in the circulation rules editor. Refs UICIRC-377.
 
 ## [1.11.0](https://github.com/folio-org/ui-circulation/tree/v1.13.0) (2019-09-13)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v1.10.0...v1.11.0)

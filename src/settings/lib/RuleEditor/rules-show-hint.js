@@ -121,7 +121,8 @@ class Completion {
   }
 
   pick(data, pickedItemIndex) {
-    const completion = data.sections[this.widget.currentSectionIndex].list[pickedItemIndex];
+    const currentSectionIndex = this.widget ? this.widget.currentSectionIndex : 0;
+    const completion = data.sections[currentSectionIndex].list[pickedItemIndex];
     const from = completion.from || data.from;
     const to = completion.to || data.to;
 

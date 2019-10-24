@@ -171,6 +171,7 @@ const scrollingOffset = 3;
   pressBackspace = this.pressKey(8);
 
   textArea = new Interactor('textarea');
+  errorMessage = new Interactor('.rule-error');
   hints = new Hints();
   value = getEditorValue();
   line0 = getEditorLine(0);

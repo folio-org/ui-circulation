@@ -9,6 +9,7 @@ import {
   truncate,
   kebabCase,
 } from 'lodash';
+import { Response } from '@bigtest/mirage';
 
 import setupApplication from '../helpers/setup-application';
 import circulationRules from '../interactors/circulation-rules';
@@ -1141,10 +1142,32 @@ describe('CirculationRules', () => {
           await circulationRules.clickSaveRulesBtn();
         });
 
-        it('should disable save button upon succesfull save', () => {
+        it('should disable save button upon successful save', () => {
           expect(circulationRules.isSaveButtonDisabled).to.be.true;
         });
       });
+    });
+  });
+
+  describe('saving invalid circulation rules', () => {
+    const errorMessage = 'mismatched input \' \' expecting {\'priority\', NEWLINE}';
+
+    beforeEach(async function () {
+      this.server.put('/circulation/rules', () => {
+        return new Response(422, {}, {
+          'message' : errorMessage,
+          'line' : 1,
+          'column' : 1,
+        });
+      });
+
+      await circulationRules.editor.setValue(' ');
+      await circulationRules.clickSaveRulesBtn();
+    });
+
+    it('should display formatted error message', () => {
+      expect(circulationRules.editor.errorMessage.isPresent).to.be.true;
+      expect(circulationRules.editor.errorMessage.text).to.equal(errorMessage);
     });
   });
 });
