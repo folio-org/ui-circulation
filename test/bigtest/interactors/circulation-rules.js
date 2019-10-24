@@ -40,11 +40,12 @@ const scrollingOffset = 3;
 
 @interactor class HintsSection {
   subheader = scoped('.CodeMirror-hints-subheader');
-  isFirstItemActive = hasClass('.CodeMirror-hint:first-child', ACTIVE_HINT_ELEMENT_CLASS);
-  isLastItemActive = hasClass('.CodeMirror-hint:last-child', ACTIVE_HINT_ELEMENT_CLASS);
+  isFirstItemActive = hasClass('.CodeMirror-hint:not(.hidden):first-child', ACTIVE_HINT_ELEMENT_CLASS);
+  isLastItemActive = hasClass('.CodeMirror-hint:not(.hidden):last-child', ACTIVE_HINT_ELEMENT_CLASS);
   isActiveItemPresent = isPresent(`.${ACTIVE_HINT_ELEMENT_CLASS}`);
-  items = collection('.CodeMirror-hint', scoped);
-  itemsCount = count('.CodeMirror-hint');
+  items = collection('.CodeMirror-hint:not(.hidden)', scoped);
+  itemsCount = count('.CodeMirror-hint:not(.hidden)');
+  hasHighlightedItems = isPresent('.CodeMirror-hint:not(.hidden) span', scoped);
   completionButton = scoped('.CodeMirror-hint-section-button');
   isCompletionButtonHidden = hasClass('.CodeMirror-hint-section-button-container', 'hidden');
   isCompletionButtonDisabled = hasClass('.CodeMirror-hint-section-button', 'disabled');
@@ -55,8 +56,10 @@ const scrollingOffset = 3;
     return this.$(`.CodeMirror-hint:nth-child(${itemIndex + 1}) input[type="checkbox"]`).checked;
   }
 
-  getShownItemsCount = function () {
-    return this.itemsCount - this.$$('.CodeMirror-hint.hidden').length;
+  isHighlightedFilterValue = function (itemIndex, filterValue = '') {
+    const itemText = this.items(itemIndex).$('span').innerText;
+
+    return itemText.toLowerCase() === filterValue.toLowerCase();
   }
 
   isScrollable = function () {

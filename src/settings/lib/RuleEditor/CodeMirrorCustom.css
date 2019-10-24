@@ -108,6 +108,10 @@
   user-select: none;
 }
 
+.CodeMirror-checkbox-container label span.highlight {
+  font-weight: bold;
+}
+
 .CodeMirror-hint-section-button-container {
   padding: 2px;
 }

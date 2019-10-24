@@ -805,15 +805,29 @@ class MultipleSelectionHintSection extends HintSection {
 
     const itemsIdsToDisplay = filteredItems.map(itemOptions => itemOptions.id);
 
-    super.listNodes.forEach((listNode) => {
+    super.listNodes.forEach((listNode, index) => {
       const checkboxField = listNode.querySelector('input');
+      const checkBoxLabel = listNode.querySelector('label');
 
       if (checkboxField) {
         const isDisplayed = itemsIdsToDisplay.includes(checkboxField.id);
 
         listNode.classList.toggle('hidden', !isDisplayed);
       }
+
+      if (checkBoxLabel) {
+        const { displayText } = this.itemsOptions[index];
+
+        checkBoxLabel.innerHTML = filterValue ? this.highlightFilterValue(displayText, filterValue) : displayText;
+      }
     });
+  }
+
+  highlightFilterValue(displayText, filterValue) {
+    const escapedFilterValue = filterValue.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const filterRegExp = new RegExp(escapedFilterValue, 'gi');
+
+    return displayText.replace(filterRegExp, (match) => `<span class="highlight">${match}</span>`);
   }
 
   initCompletionButton(buttonText) {
