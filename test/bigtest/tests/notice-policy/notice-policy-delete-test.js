@@ -4,7 +4,7 @@ import NoticePolicyForm from '../../interactors/notice-policy/notice-policy-form
 import NoticePolicyDetail from '../../interactors/notice-policy/notice-policy-detail';
 import setupApplication from '../../helpers/setup-application';
 
-describe('NoticePolicyDelete', () => {
+describe.skip('NoticePolicyDelete', () => {
   setupApplication();
 
   describe('deleting an existing notice policy', () => {

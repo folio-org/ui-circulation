@@ -70,13 +70,13 @@ import Period from '../Period';
   deleteNoticePolicyModal = new Interactor('#delete-item-confirmation');
   deleteNoticePolicyCancel= new Interactor('[data-test-confirmation-modal-cancel-button]');
   deleteNoticePolicyConfirm = new Interactor('[data-test-confirmation-modal-confirm-button]');
-  cancelEditingNoticePolicy = new Interactor('[data-test-cancel-user-form-action]');
+  cancelEditingNoticePolicy = new Interactor('#footer-cancel-entity');
   cancelEditingNoticePolicyModal = new Interactor('#cancel-editing-confirmation');
   generalSectionAccordion = new AccordionInteractor('#general');
   loanNoticesSectionAccordion = new AccordionInteractor('#loanNotices');
   requestNoticesSectionAccordion = new AccordionInteractor('#requestNotices');
 
-  save = clickable('#clickable-save-entry');
+  save = clickable('#footer-save-entity');
   expandAll = scoped('[data-test-expand-all] button')
 }
 
