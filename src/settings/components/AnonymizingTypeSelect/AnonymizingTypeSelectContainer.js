@@ -1,10 +1,14 @@
-import React, { Component } from 'react';
+import React, {
+  Component,
+  Fragment,
+} from 'react';
 import PropTypes from 'prop-types';
 import {
   injectIntl,
   intlShape,
   FormattedMessage,
 } from 'react-intl';
+import { Field } from 'redux-form';
 
 import AnonymizingTypeSelect from './AnonymizingTypeSelect';
 import { Period } from '..';
@@ -87,10 +91,18 @@ class AnonymizingTypeSelectContainer extends Component {
     } = this.props;
 
     return (
-      <AnonymizingTypeSelect
-        name={path}
-        types={this.getClosingTypes(name, path)}
-      />
+      <Fragment>
+        <AnonymizingTypeSelect
+          name={path}
+          types={this.getClosingTypes(name, path)}
+        />
+        <Field
+          name={`${path}Selected`}
+          component={({ meta }) => {
+            return meta.touched && <span className={css.error}>{meta.error}</span>;
+          }}
+        />
+      </Fragment>
     );
   }
 }
