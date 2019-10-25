@@ -30,22 +30,35 @@ import {
   TemplateEditor,
 } from '../components';
 
-async function asyncValidate(values, dispatch, props) {
-  if (!values.name) {
-    return Promise.resolve();
+/**
+ * on-blur validation checks that the name of the patron notice
+ * is unique.
+ *
+ * redux-form requires that the rejected Promises have the form
+ * { field: "error message" }
+ * hence the eslint-disable-next-line comments since ESLint is picky
+ * about the format of rejected promises.
+ *
+ * @see https://redux-form.com/7.3.0/examples/asyncchangevalidation/
+ */
+function asyncValidate(values, dispatch, props) {
+  if (values.name !== undefined) {
+    return new Promise((resolve, reject) => {
+      const uv = props.uniquenessValidator.nameUniquenessValidator;
+      const query = `(name="${values.name}")`;
+      uv.reset();
+      uv.GET({ params: { query } }).then((notices) => {
+        const matchedNotice = find(notices, ['name', values.name]);
+        if (matchedNotice && matchedNotice.id !== values.id) {
+          // eslint-disable-next-line prefer-promise-reject-errors
+          reject({ name: <FormattedMessage id="ui-circulation.settings.patronNotices.errors.nameExists" /> });
+        } else {
+          resolve();
+        }
+      });
+    });
   }
-
-  const validator = props.uniquenessValidator.nameUniquenessValidator;
-  const query = `(name="${values.name}")`;
-  validator.reset();
-  const notices = await validator.GET({ params: { query } });
-  const matchedNotice = find(notices, ['name', values.name]);
-  if (matchedNotice && matchedNotice.id !== values.id) {
-    const error = { name: <FormattedMessage id="ui-circulation.settings.patronNotices.errors.nameExists" /> };
-    return Promise.reject(error);
-  } else {
-    return Promise.resolve();
-  }
+  return new Promise(resolve => resolve());
 }
 
 class PatronNoticeForm extends React.Component {

@@ -5,7 +5,6 @@ import {
   clickable,
   collection,
   property,
-  hasClass,
 } from '@bigtest/interactor';
 
 import TextFieldInteractor from '@folio/stripes-components/lib/TextField/tests/interactor';
@@ -35,7 +34,6 @@ import { AccordionInteractor } from '@folio/stripes-components/lib/Accordion/tes
   }
 
   templateName = new TextFieldInteractor('[data-test-patron-notice-template-name]');
-  hasTemplateNameError = hasClass('div[role="alert"]');
   templateCategory = new SelectInteractor('[data-test-template-category]');
   templateBody = new Interactor('#template-editor');
   indentBtn = new Interactor('[data-test-increase-indent]');

@@ -29,15 +29,5 @@ describe('Patron Notice Form', () => {
         expect(PatronNoticeForm.emaillSectionAccordion.isOpen).to.be.false;
       });
     });
-
-    describe('template name validation on blur', () => {
-      beforeEach(async () => {
-        await PatronNoticeForm.templateName.fillAndBlur('Random value');
-      });
-
-      it('should be displayed', () => {
-        expect(PatronNoticeForm.hasTemplateNameError).to.be.false;
-      });
-    });
   });
 });
