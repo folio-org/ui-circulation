@@ -8,7 +8,7 @@ import {
 import setupApplication from '../../helpers/setup-application';
 import PatronNoticeForm from '../../interactors/patron-notice/patron-notice-form';
 
-describe.only('Patron Notice Form', () => {
+describe('Patron Notice Form', () => {
   setupApplication();
 
   describe('viewing patron notice form', () => {
