@@ -6,9 +6,9 @@ import {
 } from '@bigtest/mocha';
 
 import setupApplication from '../../helpers/setup-application';
-import patronNoticeForm from '../../interactors/patron-notice/patron-notice-form';
+import PatronNoticeForm from '../../interactors/patron-notice/patron-notice-form';
 
-describe('Patron Notice Form', () => {
+describe.only('Patron Notice Form', () => {
   setupApplication();
 
   describe('viewing patron notice form', () => {
@@ -17,16 +17,26 @@ describe('Patron Notice Form', () => {
     });
 
     it('should be displayed', () => {
-      expect(patronNoticeForm.isPresent).to.be.true;
+      expect(PatronNoticeForm.isPresent).to.be.true;
     });
 
     describe('email template accordion', () => {
       beforeEach(async () => {
-        await patronNoticeForm.emaillSectionAccordion.clickHeader();
+        await PatronNoticeForm.emaillSectionAccordion.clickHeader();
       });
 
       it('should not be displayed', () => {
-        expect(patronNoticeForm.emaillSectionAccordion.isOpen).to.be.false;
+        expect(PatronNoticeForm.emaillSectionAccordion.isOpen).to.be.false;
+      });
+    });
+
+    describe('template name validation on blur', () => {
+      beforeEach(async () => {
+        await PatronNoticeForm.templateName.fillAndBlur('Random value');
+      });
+
+      it('should be displayed', () => {
+        expect(PatronNoticeForm.hasTemplateNameError).to.be.false;
       });
     });
   });

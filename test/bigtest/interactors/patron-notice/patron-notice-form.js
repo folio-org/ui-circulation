@@ -4,7 +4,8 @@ import {
   Interactor,
   clickable,
   collection,
-  property
+  property,
+  hasClass,
 } from '@bigtest/interactor';
 
 import TextFieldInteractor from '@folio/stripes-components/lib/TextField/tests/interactor';
@@ -33,14 +34,8 @@ import { AccordionInteractor } from '@folio/stripes-components/lib/Accordion/tes
     return this.when(() => this.templateName.isPresent);
   }
 
-  expandAll = scoped('[data-test-expand-all] button');
   templateName = new TextFieldInteractor('[data-test-patron-notice-template-name]');
-  deletePatronNoticeTemplate = new Interactor('[data-test-delete-patron-notice-form-action]');
-  deletePatronNoticeTemplateModal = new Interactor('#delete-item-confirmation');
-  cancelEditingPatronNoticeTemplate = new Interactor('[data-test-cancel-patron-notice-form-action]');
-  cancelEditingPatronNoticeTempateModal = new Interactor('#cancel-editing-confirmation');
-  prohibitDeletion = new Interactor('[data-test-entity-in-use-modal]');
-
+  hasTemplateNameError = hasClass('div[role="alert"]');
   templateCategory = new SelectInteractor('[data-test-template-category]');
   templateBody = new Interactor('#template-editor');
   indentBtn = new Interactor('[data-test-increase-indent]');
