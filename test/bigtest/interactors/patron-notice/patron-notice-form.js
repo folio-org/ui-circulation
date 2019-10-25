@@ -44,7 +44,7 @@ import SelectInteractor from '@folio/stripes-components/lib/Select/tests/interac
   templateBody = new Interactor('#template-editor');
   indentBtn = new Interactor('[data-test-increase-indent]');
   errorContainer = new Interactor('#patron-notice-error-container');
-  save = clickable('#clickable-save-patron-notice');
+  save = clickable('#footer-save-entity');
 
   showAvailbaleTokensBtn = new Interactor('[data-test-teplate-editor-tokens]');
   tokensModal = new TokensModal();

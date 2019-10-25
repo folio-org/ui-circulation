@@ -8,3 +8,9 @@
   display: inline-block;
   margin-bottom: 0.5rem;
 }
+
+.required {
+  color: #900;
+  font-weight: bold;
+  padding: 0 0.1rem;
+}

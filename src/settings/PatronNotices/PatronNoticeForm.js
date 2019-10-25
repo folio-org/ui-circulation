@@ -1,253 +1,131 @@
 import React from 'react';
-import {
-  FormattedMessage,
-} from 'react-intl';
 import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
+import { FormattedMessage } from 'react-intl';
 import {
-  cloneDeep,
   find,
   sortBy,
-  noop,
 } from 'lodash';
 
 import {
   Accordion,
   AccordionSet,
-  Button,
   Checkbox,
   Col,
-  ConfirmationModal,
-  IconButton,
   Pane,
-  PaneMenu,
   Paneset,
   Row,
   Select,
   TextArea,
   TextField,
-  Icon,
 } from '@folio/stripes/components';
 import stripesForm from '@folio/stripes/form';
-import { IfPermission } from '@folio/stripes/core';
 
-import { TemplateEditor } from '../components';
 import tokens from './tokens';
-import { patronNoticeCategories } from '../../constants';
 import TokensList from './TokensList';
-import EntityInUseModal from '../components/EntityInUseModal';
+import { patronNoticeCategories } from '../../constants';
+import {
+  CancelButton,
+  FooterPane,
+  TemplateEditor,
+} from '../components';
 
-/**
- * on-blur validation checks that the name of the patron notice
- * is unique.
- *
- * redux-form requires that the rejected Promises have the form
- * { field: "error message" }
- * hence the eslint-disable-next-line comments since ESLint is picky
- * about the format of rejected promises.
- *
- * @see https://redux-form.com/7.3.0/examples/asyncchangevalidation/
- */
-function asyncValidate(values, dispatch, props) {
-  if (values.name !== undefined) {
-    return new Promise((resolve, reject) => {
-      const uv = props.uniquenessValidator.nameUniquenessValidator;
-      const query = `(name="${values.name}")`;
-      uv.reset();
-      uv.GET({ params: { query } }).then((notices) => {
-        const matchedNotice = find(notices, ['name', values.name]);
-        if (matchedNotice && matchedNotice.id !== values.id) {
-          // eslint-disable-next-line prefer-promise-reject-errors
-          reject({ name: <FormattedMessage id="ui-circulation.settings.patronNotices.errors.nameExists" /> });
-        } else {
-          resolve();
-        }
-      });
-    });
+async function asyncValidate(values, dispatch, props) {
+  if (!values.name) {
+    return Promise.resolve();
   }
-  return new Promise(resolve => resolve());
+
+  const validator = props.uniquenessValidator.nameUniquenessValidator;
+  const query = `(name="${values.name}")`;
+  validator.reset();
+  const notices = await validator.GET({ params: { query } });
+  const matchedNotice = find(notices, ['name', values.name]);
+  if (matchedNotice && matchedNotice.id !== values.id) {
+    const error = { name: <FormattedMessage id="ui-circulation.settings.patronNotices.errors.nameExists" /> };
+    return Promise.reject(error);
+  } else {
+    return Promise.resolve();
+  }
 }
 
 class PatronNoticeForm extends React.Component {
   static propTypes = {
-    handleSubmit: PropTypes.func.isRequired,
     initialValues: PropTypes.object,
-    isEntryInUse: PropTypes.func,
-    onCancel: PropTypes.func,
-    onRemove: PropTypes.func,
-    onSave: PropTypes.func,
-    pristine: PropTypes.bool,
-    submitting: PropTypes.bool,
-    permissions: PropTypes.object.isRequired,
+    pristine: PropTypes.bool.isRequired,
+    submitting: PropTypes.bool.isRequired,
+    handleSubmit: PropTypes.func.isRequired,
+    onCancel: PropTypes.func.isRequired,
+    onSave: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
-    isEntryInUse: noop,
+    initialValues: {},
   };
 
-  constructor(props) {
-    super(props);
+  state = {
+    accordions: {
+      'email-template': true,
+    }
+  };
 
-    this.state = {
-      accordions: {
-        'email-template': true,
-        // 'sms-template': true,
-        // 'print-template': true,
-      },
-      confirming: false,
-      showEntityInUseModal: false,
-    };
-
-    this.onToggleSection = this.onToggleSection.bind(this);
-    this.save = this.save.bind(this);
-    this.showConfirm = this.showConfirm.bind(this);
-    this.hideConfirm = this.hideConfirm.bind(this);
-    this.confirmDelete = this.confirmDelete.bind(this);
-  }
-
-  onToggleSection({ id }) {
-    this.setState((curState) => {
-      const newState = cloneDeep(curState);
-      newState.accordions[id] = !curState.accordions[id];
-      return newState;
+  onToggleSection = ({ id }) => {
+    this.setState((state) => {
+      const sections = { ...state.sections };
+      sections[id] = !sections[id];
+      return { sections };
     });
   }
 
-  save(data) {
+  onSave = (data) => {
     this.props.onSave(data);
-  }
-
-  showConfirm() {
-    this.setState({
-      confirming: true,
-    });
-  }
-
-  hideConfirm() {
-    this.setState({
-      confirming: false,
-    });
-  }
-
-  confirmDelete() {
-    this.props.onRemove(this.props.initialValues);
-  }
-
-  changeEntityInUseState = (showEntityInUseModal) => {
-    this.setState({ showEntityInUseModal });
   };
 
   renderCLoseIcon() {
+    const { onCancel } = this.props;
+
     return (
-      <PaneMenu>
-        <FormattedMessage id="ui-circulation.settings.patronNotices.closeDialog">
-          {ariaLabel => (
-            <IconButton
-              id="clickable-close-patron-notice"
-              onClick={this.props.onCancel}
-              icon="times"
-              aria-label={ariaLabel}
-            />
-          )}
-        </FormattedMessage>
-      </PaneMenu>
+      <CancelButton
+        labelKey="ui-circulation.settings.patronNotices.closeDialog"
+        onCancel={onCancel}
+      />
     );
   }
 
   renderPaneTitle() {
-    const { initialValues } = this.props;
-    const notice = initialValues || {};
-
-    // If there's an ID, this is editing an existing notice
-    if (notice.id) {
-      return (
-        <FormattedMessage
-          id="ui-circulation.settings.patronNotices.editLabel"
-          values={{ name: notice.name }}
-        />
-      );
-    }
-
-    return <FormattedMessage id="ui-circulation.settings.patronNotices.newLabel" />;
-  }
-
-  renderSaveMenu() {
-    const { pristine, submitting, initialValues } = this.props;
-    const editing = initialValues && initialValues.id;
-    const saveLabel = editing
-      ? <FormattedMessage id="ui-circulation.settings.patronNotices.saveLabel" />
-      : <FormattedMessage id="ui-circulation.settings.patronNotices.saveNewLabel" />;
-
-    return (
-      <PaneMenu>
-        <Button
-          id="clickable-save-patron-notice"
-          type="submit"
-          buttonStyle="primary paneHeaderNewButton"
-          marginBottom0
-          disabled={(pristine || submitting)}
-        >
-          {saveLabel}
-        </Button>
-      </PaneMenu>
-    );
-  }
-
-  renderActionMenuItems = ({ onToggle }) => {
     const {
-      initialValues,
-      permissions,
-      isEntryInUse,
+      initialValues: notice = {}
+    } = this.props;
+
+    return notice.id
+      ? notice.name
+      : <FormattedMessage id="ui-circulation.settings.patronNotices.newLabel" />;
+  }
+
+  renderFooterPane() {
+    const {
+      pristine,
+      submitting,
       onCancel,
     } = this.props;
 
-    const isTemplateInUse = isEntryInUse(initialValues.id);
-
-    const handleDeleteClick = () => {
-      if (isTemplateInUse) {
-        this.changeEntityInUseState(true);
-      } else {
-        this.showConfirm();
-      }
-      onToggle();
-    };
-
-    const handleCancelClick = (e) => {
-      onCancel(e);
-      onToggle();
-    };
-
     return (
-      <React.Fragment>
-        <Button
-          data-test-cancel-patron-notice-form-action
-          buttonStyle="dropdownItem"
-          onClick={handleCancelClick}
-        >
-          <Icon icon="times">
-            <FormattedMessage id="ui-circulation.settings.common.cancel" />
-          </Icon>
-        </Button>
-        <IfPermission perm={permissions.delete}>
-          <Button
-            data-test-delete-patron-notice-form-action
-            buttonStyle="dropdownItem"
-            onClick={handleDeleteClick}
-          >
-            <Icon icon="trash">
-              <FormattedMessage id="ui-circulation.settings.common.delete" />
-            </Icon>
-          </Button>
-        </IfPermission>
-      </React.Fragment>
+      <FooterPane
+        pristine={pristine}
+        submitting={submitting}
+        onCancel={onCancel}
+      />
     );
-  };
+  }
 
   render() {
-    const { showEntityInUseModal } = this.state;
-    const { handleSubmit, initialValues = {} } = this.props;
+    const {
+      handleSubmit,
+      initialValues,
+    } = this.props;
+
     const category = initialValues && initialValues.category;
     const isActive = initialValues && initialValues.active;
+
     const sortedCategories = sortBy(patronNoticeCategories, ['label']);
     const categoryOptions = sortedCategories.map(({ label, id }) => ({
       labelTranslationPath: label,
@@ -255,21 +133,19 @@ class PatronNoticeForm extends React.Component {
       selected: category === id
     }));
 
-    const editMode = Boolean(initialValues.id);
-
     return (
       <form
         id="form-patron-notice"
+        noValidate
         data-test-patron-notice-form
-        onSubmit={handleSubmit(this.save)}
+        onSubmit={handleSubmit(this.onSave)}
       >
         <Paneset isRoot>
           <Pane
             defaultWidth="100%"
             paneTitle={this.renderPaneTitle()}
             firstMenu={this.renderCLoseIcon()}
-            lastMenu={this.renderSaveMenu()}
-            {... editMode ? { actionMenu: this.renderActionMenuItems } : {}}
+            footer={this.renderFooterPane()}
           >
             <Row>
               <Col
@@ -277,12 +153,9 @@ class PatronNoticeForm extends React.Component {
                 data-test-patron-notice-template-name
               >
                 <Field
-                  label={
-                    <FormattedMessage id="ui-circulation.settings.patronNotices.notice.name">
-                      {(message) => `${message} *`}
-                    </FormattedMessage>
-                  }
+                  label={<FormattedMessage id="ui-circulation.settings.patronNotices.notice.name" />}
                   name="name"
+                  required
                   id="input-patron-notice-name"
                   component={TextField}
                 />
@@ -344,25 +217,19 @@ class PatronNoticeForm extends React.Component {
                 <Row>
                   <Col xs={8}>
                     <Field
-                      label={
-                        <FormattedMessage id="ui-circulation.settings.patronNotices.subject">
-                          {(message) => `${message} *`}
-                        </FormattedMessage>
-                      }
-                      name="localizedTemplates.en.header"
                       id="input-patron-notice-subject"
                       component={TextField}
+                      required
+                      label={<FormattedMessage id="ui-circulation.settings.patronNotices.subject" />}
+                      name="localizedTemplates.en.header"
                     />
                   </Col>
                 </Row>
                 <Row>
                   <Col xs={8}>
                     <Field
-                      label={
-                        <FormattedMessage id="ui-circulation.settings.patronNotices.body">
-                          {(message) => `${message} *`}
-                        </FormattedMessage>
-                      }
+                      label={<FormattedMessage id="ui-circulation.settings.patronNotices.body" />}
+                      required
                       name="localizedTemplates.en.body"
                       id="input-email-template-body"
                       component={TemplateEditor}
@@ -380,22 +247,6 @@ class PatronNoticeForm extends React.Component {
                   <FormattedMessage id="ui-circulation.settings.patronNotices.predefinedWarning" />
                 </Col>
               </Row>
-            }
-            <ConfirmationModal
-              id="delete-item-confirmation"
-              open={this.state.confirming}
-              heading={<FormattedMessage id="ui-circulation.settings.patronNotices.deleteHeading" />}
-              message={<FormattedMessage id="ui-circulation.settings.patronNotices.deleteConfirm" />}
-              onConfirm={this.confirmDelete}
-              onCancel={this.hideConfirm}
-            />
-            { editMode &&
-              <EntityInUseModal
-                isOpen={showEntityInUseModal}
-                labelTranslationKey="ui-circulation.settings.patronNotices.denyDelete.header"
-                contentTranslationKey="ui-circulation.settings.patronNotices.denyDelete.body"
-                onClose={this.changeEntityInUseState}
-              />
             }
           </Pane>
         </Paneset>
