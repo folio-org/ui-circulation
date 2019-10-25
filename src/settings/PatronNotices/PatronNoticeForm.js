@@ -70,9 +70,9 @@ class PatronNoticeForm extends React.Component {
 
   onToggleSection = ({ id }) => {
     this.setState((state) => {
-      const sections = { ...state.sections };
-      sections[id] = !sections[id];
-      return { sections };
+      const accordions = { ...state.accordions };
+      accordions[id] = !accordions[id];
+      return { accordions };
     });
   }
 

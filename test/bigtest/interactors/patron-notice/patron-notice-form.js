@@ -9,6 +9,7 @@ import {
 
 import TextFieldInteractor from '@folio/stripes-components/lib/TextField/tests/interactor';
 import SelectInteractor from '@folio/stripes-components/lib/Select/tests/interactor';
+import { AccordionInteractor } from '@folio/stripes-components/lib/Accordion/tests/interactor';
 
 @interactor class AvailableTokens {
   items = collection('input[type="checkbox"]');
@@ -48,6 +49,7 @@ import SelectInteractor from '@folio/stripes-components/lib/Select/tests/interac
 
   showAvailbaleTokensBtn = new Interactor('[data-test-teplate-editor-tokens]');
   tokensModal = new TokensModal();
+  emaillSectionAccordion = new AccordionInteractor('#email-template');
 }
 
 export default new PatronNoticeForm();
