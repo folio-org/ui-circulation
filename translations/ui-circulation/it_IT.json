@@ -112,7 +112,6 @@
     "settings.patronNotices.body": "Corpo",
     "settings.patronNotices.errors.nameExists": "Esiste già un avviso utente con questo nome",
     "settings.patronNotices.closeDialog": "Chiudi",
-    "settings.patronNotices.editLabel": "Avvisi utente | {nome}",
     "settings.patronNotices.newLabel": "Nuovo avviso utente",
     "settings.patronNotices.saveLabel": "Salva",
     "settings.patronNotices.saveNewLabel": "Salva nuovo",

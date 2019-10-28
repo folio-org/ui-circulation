@@ -112,7 +112,6 @@
     "settings.patronNotices.body": "正文",
     "settings.patronNotices.errors.nameExists": "相同名称的读者通知已存在",
     "settings.patronNotices.closeDialog": "关闭",
-    "settings.patronNotices.editLabel": "读者通知| {name}",
     "settings.patronNotices.newLabel": "新读者通知",
     "settings.patronNotices.saveLabel": "保存",
     "settings.patronNotices.saveNewLabel": "新建保存",
