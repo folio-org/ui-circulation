@@ -112,7 +112,6 @@
     "settings.patronNotices.body": "المتن",
     "settings.patronNotices.errors.nameExists": "يوجد بالفعل إخطار للمستفيد يحمل هذا الاسم",
     "settings.patronNotices.closeDialog": "إغلاق",
-    "settings.patronNotices.editLabel": "إخطارات المستفيدين | {name}",
     "settings.patronNotices.newLabel": "إخطار مستفيد جديد",
     "settings.patronNotices.saveLabel": "حفظ",
     "settings.patronNotices.saveNewLabel": "حفظ الجديد",
