@@ -44,10 +44,12 @@ class TemplateEditor extends React.Component {
     tokensList: PropTypes.func.isRequired,
     previewModalHeader: PropTypes.node.isRequired,
     printable: PropTypes.bool,
+    required: PropTypes.bool,
   };
 
   static defaultProps = {
     printable: false,
+    required: false,
   };
 
   constructor(props) {
@@ -179,6 +181,7 @@ class TemplateEditor extends React.Component {
       },
       previewModalHeader,
       printable,
+      required
     } = this.props;
 
     const invalid = (touched || submitFailed) && !valid && !showTokensDialog;
@@ -189,6 +192,7 @@ class TemplateEditor extends React.Component {
           <Col xs={12}>
             <ControlHeader
               label={label}
+              required={required}
               onPreviewClick={this.openPreviewDialog}
             />
             <Row>

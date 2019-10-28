@@ -165,7 +165,6 @@
   "settings.patronNotices.body": "Body",
   "settings.patronNotices.errors.nameExists": "A patron notice with this name already exists",
   "settings.patronNotices.closeDialog": "Close",
-  "settings.patronNotices.editLabel": "Patron notices | {name}",
   "settings.patronNotices.newLabel": "New patron notice",
   "settings.patronNotices.saveLabel": "Save",
   "settings.patronNotices.saveNewLabel": "Save new",
