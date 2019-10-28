@@ -139,8 +139,8 @@ class LostItemFeePolicyForm extends React.Component {
                   policy={policy}
                   change={change}
                   initialValues={initialValues}
+                  lostItemFeeSectionOpen={sections.lostItemFeeSectionOpen}
                   accordionOnToggle={this.handleSectionToggle}
-                  lostItemFeeSectionOpen={sections.lostItemFeeSectionOpen}  
                 />
               </Accordion>
             </div>
