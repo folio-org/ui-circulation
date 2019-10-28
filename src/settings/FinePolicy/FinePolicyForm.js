@@ -19,8 +19,6 @@ import {
 
 import FinePolicy from '../Models/FinePolicy';
 
-import HeaderPane from '../LoanPolicy/components/HeaderPane/HeaderPane';
-
 import {
   FinesSection,
   OverdueAboutSection,
@@ -28,6 +26,7 @@ import {
 
 import {
   DeleteConfirmationModal,
+  HeaderPane,
   Metadata,
 } from '../components';
 
