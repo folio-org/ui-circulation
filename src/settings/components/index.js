@@ -7,3 +7,4 @@ export { default as EntityInUseModal } from './EntityInUseModal';
 export { default as AnonymizingTypeSelect } from './AnonymizingTypeSelect';
 export { TemplateEditor, PreviewModal, TokensSection } from './TemplateEditor';
 export { default as FooterPane } from './FooterPane';
+export { default as HeaderPane } from './HeaderPane';

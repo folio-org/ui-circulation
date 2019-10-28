@@ -21,8 +21,6 @@ import {
 import LostItemFeePolicy from '../Models/LostItemFeePolicy';
 import { checkInvalid } from './utils/normalize';
 
-import HeaderPane from '../LoanPolicy/components/HeaderPane/HeaderPane';
-
 import {
   LostItemFeeAboutSection,
   LostItemFeeSection,
@@ -30,6 +28,7 @@ import {
 
 import {
   DeleteConfirmationModal,
+  HeaderPane,
   Metadata,
 } from '../components';
 

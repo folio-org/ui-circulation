@@ -9,10 +9,8 @@ import {
   Pane,
 } from '@folio/stripes/components';
 
-import {
-  CancelButton,
-  SaveButton,
-} from '../../../components';
+import CancelButton from '../CancelButton';
+import SaveButton from '../SaveButton';
 
 class HeaderPane extends React.Component {
   static propTypes = {
