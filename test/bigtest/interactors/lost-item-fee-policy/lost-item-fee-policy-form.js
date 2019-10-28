@@ -57,21 +57,14 @@ import Period from '../Period';
   generalInformationAccordion = new AccordionInteractor('#lostItemFeegeneralSection');
   lostItemFeeAccordion = new AccordionInteractor('#lostItemFeeSectionOpen');
 
-  deleteLostItemPolicy = new Interactor('[data-test-delete-loan-policy-form-action]');
-  deleteLostItemPolicyModal = new Interactor('#delete-item-confirmation');
-  deleteLostItemPolicyCancel= new Interactor('[data-test-confirmation-modal-cancel-button]');
-  deleteLostItemPolicyConfirm = new Interactor('[data-test-confirmation-modal-confirm-button]');
-  deleteCancel = new Interactor('[data-test-cancel-loan-policy-form-action]');
   expandAll = scoped('[data-test-expand-all] button');
-  cancelEditingLostItemPolicy = new Interactor('[data-test-cancel-loan-policy-form-action]');
+  cancelEditingLostItemPolicy = new Interactor('#footer-cancel-entity');
   cancelEditingLostItemPolicyModal = new Interactor('#cancel-editing-confirmation');
 
-  deleteLostItemMenu = new Interactor('#dropdown-clickable-delete-item');
-  deleteLostItemConfirmModal = new Interactor('#clickable-delete-item-confirmation-confirm');
   buttonNew = new Button('#clickable-create-entry');
   deleteLostItemCancelModal = new Button('#dropdown-clickable-cancel-item');
 
-  save = clickable('#clickable-save-entry');
+  save = clickable('#footer-save-entity');
 }
 
 export default new LostItemFeePolicyForm();

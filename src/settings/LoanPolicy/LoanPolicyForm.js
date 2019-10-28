@@ -51,12 +51,10 @@ class LoanPolicyForm extends React.Component {
     }).isRequired,
     policy: PropTypes.object,
     initialValues: PropTypes.object,
-    permissions: PropTypes.object.isRequired,
     change: PropTypes.func.isRequired,
     handleSubmit: PropTypes.func.isRequired,
     onSave: PropTypes.func.isRequired,
     onCancel: PropTypes.func.isRequired,
-    onRemove: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
