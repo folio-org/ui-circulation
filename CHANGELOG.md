@@ -16,6 +16,7 @@
 * Fix validation error message display in the circulation rules editor. Refs UICIRC-377.
 * Validate the creation of the settings in the Anonymize closed loans section. Refs UITEN-58.
 * Create/Edit loan policy | Move Save/Cancel buttons to the footer Refs UICIRC-372.
+* Add the overdue fine policies menu to the circulation rules editor. Refs UICIRC-353.
 
 ## [1.11.0](https://github.com/folio-org/ui-circulation/tree/v1.13.0) (2019-09-13)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v1.10.0...v1.11.0)

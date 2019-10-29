@@ -384,6 +384,7 @@ export const POLICY = {
   LOAN: 'l',
   REQUEST: 'r',
   NOTICE: 'n',
+  OVERDUE_FINE: 'o',
 };
 
 export const EDITOR_KEYWORD = {

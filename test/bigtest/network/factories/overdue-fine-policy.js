@@ -5,7 +5,7 @@ import {
 
 export default Factory.extend({
   id: () => faker.random.uuid(),
-  name: () => faker.hacker.noun(),
+  name: () => faker.hacker.noun() + faker.random.uuid(),
   description: () => faker.company.catchPhrase(),
   countClosed: () => faker.random.boolean(),
   forgiveOverdueFine: () => faker.random.boolean(),

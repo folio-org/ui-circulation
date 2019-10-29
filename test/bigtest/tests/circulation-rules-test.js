@@ -43,6 +43,7 @@ describe('CirculationRules', () => {
   let libraries1;
   let libraries2;
   let locations;
+  let overdueFinePolicy;
 
   const shortInstitutionCode = 'INST';
   const longInstitutionCode = '/TESTCODE TESTCODE TESTCODE TESTCODE';
@@ -64,6 +65,7 @@ describe('CirculationRules', () => {
     loanPolicies = await this.server.createList('loanPolicy', 3);
     requestPolicies = await this.server.createList('requestPolicy', 3);
     patronNoticePolicies = await this.server.createList('patronNoticePolicy', 3);
+    overdueFinePolicy = await this.server.createList('overdueFinePolicy', 1);
     const institutionsWithShortCode1 = this.server.createList('institution', 1, { code: `${shortInstitutionCode}1` });
     const institutionsWithShortCode2 = this.server.createList('institution', 1, { code: `${shortInstitutionCode}2` });
     institutions = await this.server.createList('institution', institutionsAmount - 2, { code: longInstitutionCode });
@@ -1101,18 +1103,22 @@ describe('CirculationRules', () => {
     let lPolicy;
     let rPolicy;
     let nPolicy;
+    let oPolicy;
     let lName;
     let rName;
     let nName;
+    let oName;
 
     beforeEach(async function () {
       lPolicy = loanPolicies[0];
       rPolicy = requestPolicies[0];
       nPolicy = patronNoticePolicies[0];
+      oPolicy = overdueFinePolicy[0];
 
       lName = kebabCase(lPolicy.name);
       rName = kebabCase(rPolicy.name);
       nName = kebabCase(nPolicy.name);
+      oName = kebabCase(oPolicy.name);
 
       this.server.put('/circulation/rules', (_, request) => {
         const params = JSON.parse(request.requestBody);
@@ -1120,12 +1126,12 @@ describe('CirculationRules', () => {
         return params;
       });
 
-      await circulationRules.editor.setValue(`m book dvd: l ${lName} r ${rName} n ${nName}`);
+      await circulationRules.editor.setValue(`m book dvd: l ${lName} r ${rName} n ${nName} o ${oName}`);
       await circulationRules.clickSaveRulesBtn();
     });
 
     it('should choose loan policy as a fallback', () => {
-      expect(savedRules).to.equal(`m 1a54b431-2e4f-452d-9cae-9cee66c9a892 5ee11d91-f7e8-481d-b079-65d708582ccc: l ${lPolicy.id} r ${rPolicy.id} n ${nPolicy.id}`);
+      expect(savedRules).to.equal(`m 1a54b431-2e4f-452d-9cae-9cee66c9a892 5ee11d91-f7e8-481d-b079-65d708582ccc: l ${lPolicy.id} r ${rPolicy.id} n ${nPolicy.id} o ${oPolicy.id}`);
     });
 
     describe('changing circulation rules', () => {
