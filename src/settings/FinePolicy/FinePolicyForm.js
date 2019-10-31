@@ -14,6 +14,7 @@ import {
   ExpandAllButton,
   Col,
   Row,
+  Pane,
   Paneset,
 } from '@folio/stripes/components';
 
@@ -25,8 +26,8 @@ import {
 } from './components/EditSections';
 
 import {
-  DeleteConfirmationModal,
-  HeaderPane,
+  CancelButton,
+  FooterPane,
   Metadata,
 } from '../components';
 
@@ -37,12 +38,10 @@ class FinePolicyForm extends React.Component {
     submitting: PropTypes.bool,
     policy: PropTypes.object,
     initialValues: PropTypes.object,
-    permissions: PropTypes.object.isRequired,
     change: PropTypes.func.isRequired,
     handleSubmit: PropTypes.func.isRequired,
     onSave: PropTypes.func.isRequired,
     onCancel: PropTypes.func.isRequired,
-    onRemove: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
@@ -51,7 +50,6 @@ class FinePolicyForm extends React.Component {
   };
 
   state = {
-    confirmDelete: false,
     sections: {
       overdueGeneralSection: true,
       fineSection: true,
@@ -82,30 +80,29 @@ class FinePolicyForm extends React.Component {
     this.props.onSave(finePolicy);
   };
 
-  changeOverdueDeleteState = (confirmDelete) => {
-    this.setState({ confirmDelete });
-  };
-
   render() {
     const {
       pristine,
       policy,
-      permissions,
       initialValues,
       stripes,
       submitting,
       handleSubmit,
       change,
       onCancel,
-      onRemove,
     } = this.props;
 
-    const {
-      sections,
-      confirmDelete,
-    } = this.state;
+    const { sections } = this.state;
 
-    const overdueEditMode = Boolean(policy.id);
+    const panelTitle = policy.id
+      ? policy.name
+      : <FormattedMessage id="ui-circulation.settings.loanPolicy.createEntryLabel" />;
+
+    const footerPaneProps = {
+      pristine,
+      submitting,
+      onCancel,
+    };
 
     return (
       <form
@@ -114,15 +111,11 @@ class FinePolicyForm extends React.Component {
         onSubmit={handleSubmit(this.saveForm)}
       >
         <Paneset isRoot>
-          <HeaderPane
-            editMode={overdueEditMode}
-            entryTitle={policy.name}
-            pristine={pristine}
-            submitting={submitting}
-            permissions={permissions}
-            onCancel={onCancel}
-            onRemove={this.changeOverdueDeleteState}
-            createEntryLabel={<FormattedMessage id="ui-circulation.settings.finePolicy.createEntryLabel" />}
+          <Pane
+            defaultWidth="100%"
+            paneTitle={panelTitle}
+            firstMenu={<CancelButton onCancel={onCancel} />}
+            footer={<FooterPane {...footerPaneProps} />}
           >
             <React.Fragment>
               <Row end="xs">
@@ -155,20 +148,8 @@ class FinePolicyForm extends React.Component {
                   change={change}
                 />
               </Accordion>
-              {overdueEditMode &&
-                <DeleteConfirmationModal
-                  isOpen={confirmDelete}
-                  triggerSubmitSucceeded
-                  policyName={policy.name}
-                  formName="finePolicyForm"
-                  deleteEntityKey="ui-circulation.settings.finePolicy.deletefinePolicy"
-                  initialValues={initialValues}
-                  onCancel={this.changeOverdueDeleteState}
-                  onRemove={onRemove}
-                />
-              }
             </React.Fragment>
-          </HeaderPane>
+          </Pane>
         </Paneset>
       </form>
     );
