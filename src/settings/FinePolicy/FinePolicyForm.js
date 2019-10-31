@@ -96,7 +96,7 @@ class FinePolicyForm extends React.Component {
 
     const panelTitle = policy.id
       ? policy.name
-      : <FormattedMessage id="ui-circulation.settings.loanPolicy.createEntryLabel" />;
+      : <FormattedMessage id="ui-circulation.settings.finePolicy.createEntryLabel" />;
 
     const footerPaneProps = {
       pristine,

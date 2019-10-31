@@ -86,7 +86,10 @@ class NoticePolicyForm extends React.Component {
     const { sections } = this.state;
 
     const patronNoticeTemplates = get(this.props, 'parentResources.templates.records', []);
-    const panelTitle = policy.id ? policy.name : <FormattedMessage id="ui-circulation.settings.noticePolicy.createEntryLabel" />;
+    const panelTitle = policy.id
+      ? policy.name
+      : <FormattedMessage id="ui-circulation.settings.noticePolicy.createEntryLabel" />;
+
     const footerPaneProps = {
       pristine,
       submitting,
