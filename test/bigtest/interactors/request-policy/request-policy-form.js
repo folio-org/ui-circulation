@@ -1,6 +1,5 @@
 import {
   interactor,
-  Interactor,
   isPresent,
   fillable,
   clickable,
@@ -16,18 +15,14 @@ import {
   hasName = isPresent('#request_policy_name');
   nameValue = value('#request_policy_name');
   hasDescription = isPresent('#request_policy_description');
-  hasSaveButton = isPresent('#clickable-save-entry');
+  hasSaveButton = isPresent('#footer-save-entity');
   hasHoldCheckbox = isPresent('#hold-checkbox');
 
   fillName = fillable('#request_policy_name');
   fillDescription = fillable('#request_policy_description');
   clickHoldCheckbox = clickable('#hold-checkbox');
 
-  deleteRequestPolicy = new Interactor('[data-test-delete-user-form-action]');
-  entityInUseModal = new Interactor('[data-test-entity-in-use-modal]');
-  entityInUseConfirm = new Interactor('[data-test-entity-in-use-modal-close]');
-
-  save = clickable('#clickable-save-entry');
+  save = clickable('#footer-save-entity');
 }
 
 export default new RequestPolicyForm('[data-test-request-policy-form]');

@@ -3,13 +3,9 @@ import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 
 import {
-  Button,
   Col,
-  Icon,
-  IconButton,
   KeyValue,
   Pane,
-  PaneMenu,
   Paneset,
   Row,
   TextArea
@@ -19,15 +15,18 @@ import stripesForm from '@folio/stripes/form';
 import { Field } from 'redux-form';
 
 import tokens from './tokens';
-
-import { TemplateEditor } from '../components';
 import TokensList from './TokensList';
+
+import {
+  CancelButton,
+  FooterPane,
+  TemplateEditor,
+} from '../components';
 
 class StaffSlipForm extends React.Component {
   static propTypes = {
     stripes: PropTypes.shape({
       hasPerm: PropTypes.func.isRequired,
-      connect: PropTypes.func.isRequired,
     }).isRequired,
     initialValues: PropTypes.object,
     handleSubmit: PropTypes.func.isRequired,
@@ -37,97 +36,56 @@ class StaffSlipForm extends React.Component {
     submitting: PropTypes.bool,
   };
 
-  constructor(props) {
-    super(props);
-    this.save = this.save.bind(this);
-  }
+  static defaultProps = {
+    initialValues: {},
+  };
 
-  save(data) {
+  onSave = (data) => {
     this.props.onSave(data);
   }
 
-  addFirstMenu() {
-    return (
-      <PaneMenu>
-        <FormattedMessage id="stripes-core.button.close">
-          {ariaLabel => (
-            <IconButton
-              id="clickable-close-staff-slip"
-              onClick={this.props.onCancel}
-              icon="times"
-              aria-label={ariaLabel}
-            />
-          )}
-        </FormattedMessage>
-      </PaneMenu>
-    );
-  }
-
-  saveLastMenu() {
-    const { pristine, submitting, initialValues } = this.props;
-    const edit = initialValues && initialValues.id;
-    const saveLabel = edit
-      ? <FormattedMessage id="stripes-core.button.save" />
-      : <FormattedMessage id="ui-circulation.settings.staffSlips.createStaffSlip" />;
-
-    return (
-      <PaneMenu>
-        <Button
-          id="clickable-save-staff-slip"
-          type="submit"
-          buttonStyle="primary paneHeaderNewButton"
-          marginBottom0
-          disabled={(pristine || submitting)}
-        >
-          {saveLabel}
-        </Button>
-      </PaneMenu>
-    );
-  }
-
-  renderPaneTitle() {
+  render() {
     const {
-      initialValues: staffSlip = {},
+      stripes,
+      handleSubmit,
+      initialValues,
+      pristine,
+      submitting,
+      onCancel,
     } = this.props;
 
-    if (staffSlip.id) {
-      return (
-        <div>
-          <Icon size="small" icon="edit" />
-          <span>
-            <FormattedMessage
-              id="ui-circulation.settings.staffSlips.editLabel"
-              values={{ name: staffSlip.name }}
-            />
-          </span>
-        </div>
-      );
-    }
-    return <FormattedMessage id="ui-circulation.settings.staffSlips.new" />;
-  }
-
-  render() {
-    const { stripes, handleSubmit, initialValues } = this.props;
     const disabled = !stripes.hasPerm('settings.organizations.enabled');
+    const panelTitle = initialValues.id
+      ? initialValues.name
+      : <FormattedMessage id="ui-circulation.settings.staffSlips.new" />;
+
+    const footerPaneProps = {
+      pristine,
+      submitting,
+      onCancel,
+    };
 
     return (
-      <form id="form-staff-slip" onSubmit={handleSubmit(this.save)}>
+      <form
+        id="form-staff-slip"
+        noValidate
+        onSubmit={handleSubmit(this.onSave)}
+      >
         <Paneset isRoot>
           <Pane
             defaultWidth="100%"
-            firstMenu={this.addFirstMenu()}
-            lastMenu={this.saveLastMenu()}
-            paneTitle={this.renderPaneTitle()}
+            paneTitle={panelTitle}
+            firstMenu={<CancelButton onCancel={onCancel} />}
+            footer={<FooterPane {...footerPaneProps} />}
           >
             <Row>
               <Col xs={8}>
                 <KeyValue
                   label={<FormattedMessage id="ui-circulation.settings.staffSlips.name" />}
-                  value={(initialValues || {}).name}
+                  value={initialValues.name}
                 />
               </Col>
             </Row>
-            <br />
             <Row>
               <Col xs={8}>
                 <Field
