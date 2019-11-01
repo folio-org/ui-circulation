@@ -369,5 +369,6 @@
     "settings.lostItemFee.years": "ano(s)",
     "settings.lostItemFee.editLabel": "Editar - {name}",
     "settings.lostItemFee.late": "atrasado",
-    "settings.lostItemFee.deleteFeePolicy": "Excluir política de taxa de itens perdidos"
+    "settings.lostItemFee.deleteFeePolicy": "Excluir política de taxa de itens perdidos",
+    "settings.circulationRules.overdueFinePolicies": "Políticas de multas em atraso"
 }
