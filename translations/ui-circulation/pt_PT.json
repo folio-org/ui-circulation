@@ -369,5 +369,6 @@
     "settings.lostItemFee.years": "years(s)",
     "settings.lostItemFee.editLabel": "Edit - {name}",
     "settings.lostItemFee.late": "late",
-    "settings.lostItemFee.deleteFeePolicy": "Delete lost item fee policy"
+    "settings.lostItemFee.deleteFeePolicy": "Delete lost item fee policy",
+    "settings.circulationRules.overdueFinePolicies": "Overdue fine policies"
 }

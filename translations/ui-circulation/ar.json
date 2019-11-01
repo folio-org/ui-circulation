@@ -369,5 +369,6 @@
     "settings.lostItemFee.years": "سنة",
     "settings.lostItemFee.editLabel": "تحرير - {name}",
     "settings.lostItemFee.late": "متأخر",
-    "settings.lostItemFee.deleteFeePolicy": "حذف سياسة رسم المادة المفقودة"
+    "settings.lostItemFee.deleteFeePolicy": "حذف سياسة رسم المادة المفقودة",
+    "settings.circulationRules.overdueFinePolicies": "سياسات غرامات التأخير"
 }

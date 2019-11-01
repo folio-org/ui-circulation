@@ -369,5 +369,6 @@
     "settings.lostItemFee.years": "年",
     "settings.lostItemFee.editLabel": "編輯- {name}",
     "settings.lostItemFee.late": "晚的",
-    "settings.lostItemFee.deleteFeePolicy": "刪除遺失物品費用政策"
+    "settings.lostItemFee.deleteFeePolicy": "刪除遺失物品費用政策",
+    "settings.circulationRules.overdueFinePolicies": "Overdue fine policies"
 }
