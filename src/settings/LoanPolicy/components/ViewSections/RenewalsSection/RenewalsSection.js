@@ -40,6 +40,16 @@ const RenewalsSection = (props) => {
       </Row>
       <Row>
         <Col xs={12}>
+          <div data-test-renewals-section-renewable>
+            <KeyValue
+              label={<FormattedMessage id="ui-circulation.settings.loanPolicy.renewable" />}
+              value={getCheckboxValue('renewable')}
+            />
+          </div>
+        </Col>
+      </Row>
+      <Row>
+        <Col xs={12}>
           <div data-test-renewals-section-unlimited-renewals>
             <KeyValue
               label={<FormattedMessage id="ui-circulation.settings.loanPolicy.unlimitedRenewals" />}
@@ -48,14 +58,14 @@ const RenewalsSection = (props) => {
           </div>
         </Col>
       </Row>
-      { policy.isRenewable() && !policy.isUnlimitedRenewals() &&
+      { (!policy.isRenewable() || (policy.isRenewable() && !policy.isUnlimitedRenewals())) &&
         <div>
           <Row>
             <Col xs={12}>
               <div data-test-renewals-section-number-renewals-allowed>
                 <KeyValue
                   label={<FormattedMessage id="ui-circulation.settings.loanPolicy.numRenewalsAllowed" />}
-                  value={getValue('renewalsPolicy.numberAllowed')}
+                  value={getValue('renewalsPolicy.numberAllowed') || '-'}
                 />
               </div>
             </Col>
