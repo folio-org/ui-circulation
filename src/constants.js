@@ -72,6 +72,14 @@ export const intervalPeriodsLower = [
   },
 ];
 
+export const anonymizingIntervals = [
+  intervalIdsMap.MINUTES,
+  intervalIdsMap.HOURS,
+  intervalIdsMap.DAYS,
+  intervalIdsMap.WEEKS,
+  intervalIdsMap.MONTHS,
+];
+
 export const loanProfileMap = {
   FIXED: 'Fixed',
   ROLLING: 'Rolling',

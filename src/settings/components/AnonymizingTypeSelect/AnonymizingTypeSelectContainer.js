@@ -16,15 +16,10 @@ import optionsGenerator from '../../utils/options-generator';
 import {
   closingTypesMap,
   intervalPeriods,
+  anonymizingIntervals,
 } from '../../../constants';
 
 import css from './AnonymizingTypeSelectContainer.css';
-
-const selectedPeriodsValues = [
-  'Days',
-  'Weeks',
-  'Months',
-];
 
 class AnonymizingTypeSelectContainer extends Component {
   static propTypes = {
@@ -38,7 +33,7 @@ class AnonymizingTypeSelectContainer extends Component {
     super(props);
 
     this.generateOptions = optionsGenerator.bind(null, props.intl.formatMessage);
-    this.selectedPeriods = intervalPeriods.filter(period => selectedPeriodsValues.includes(period.value));
+    this.selectedPeriods = intervalPeriods.filter(period => anonymizingIntervals.includes(period.value));
   }
 
   renderPeriod(name, path) {
