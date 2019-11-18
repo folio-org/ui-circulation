@@ -65,7 +65,7 @@ class CirculationRules extends React.Component {
       params: {
         limit: '100',
       },
-      resourceShouldRefresh: true,
+      accumulate: true,
     },
     materialTypes: {
       type: 'okapi',
@@ -74,7 +74,7 @@ class CirculationRules extends React.Component {
         limit: '100',
       },
       records: 'mtypes',
-      resourceShouldRefresh: true,
+      accumulate: true,
     },
     loanTypes: {
       type: 'okapi',
@@ -83,7 +83,7 @@ class CirculationRules extends React.Component {
         limit: '100',
       },
       records: 'loantypes',
-      resourceShouldRefresh: true,
+      accumulate: true,
     },
     loanPolicies: {
       type: 'okapi',
@@ -92,7 +92,7 @@ class CirculationRules extends React.Component {
       params: {
         limit: '100',
       },
-      resourceShouldRefresh: true,
+      accumulate: true,
     },
     requestPolicies: {
       type: 'okapi',
@@ -101,7 +101,7 @@ class CirculationRules extends React.Component {
       params: {
         limit: '100',
       },
-      resourceShouldRefresh: true,
+      accumulate: true,
     },
     noticePolicies: {
       type: 'okapi',
@@ -110,7 +110,7 @@ class CirculationRules extends React.Component {
       params: {
         limit: '100',
       },
-      resourceShouldRefresh: true,
+      accumulate: true,
     },
     overdueFinePolicies: {
       type: 'okapi',
@@ -119,7 +119,7 @@ class CirculationRules extends React.Component {
       params: {
         limit: '1000',
       },
-      resourceShouldRefresh: true,
+      accumulate: true,
     },
     locations: {
       type: 'okapi',
@@ -129,7 +129,7 @@ class CirculationRules extends React.Component {
         query: 'cql.allRecords=1 sortby name',
         limit: '1000',
       },
-      resourceShouldRefresh: true,
+      accumulate: true,
     },
     institutions: {
       type: 'okapi',
@@ -139,7 +139,7 @@ class CirculationRules extends React.Component {
         query: 'cql.allRecords=1 sortby name',
         limit: '1000',
       },
-      resourceShouldRefresh: true,
+      accumulate: true,
     },
     campuses: {
       type: 'okapi',
@@ -149,7 +149,7 @@ class CirculationRules extends React.Component {
         query: 'cql.allRecords=1 sortby name',
         limit: '1000',
       },
-      resourceShouldRefresh: true,
+      accumulate: true,
     },
     libraries: {
       type: 'okapi',
@@ -159,7 +159,7 @@ class CirculationRules extends React.Component {
         query: 'cql.allRecords=1 sortby name',
         limit: '1000',
       },
-      resourceShouldRefresh: true,
+      accumulate: true,
     },
   });
 
@@ -168,14 +168,88 @@ class CirculationRules extends React.Component {
     mutator: PropTypes.shape({
       circulationRules: PropTypes.shape({
         PUT: PropTypes.func.isRequired
-      })
+      }),
+      patronGroups: PropTypes.shape({
+        GET: PropTypes.func.isRequired,
+        reset: PropTypes.func.isRequired,
+      }),
+      materialTypes: PropTypes.shape({
+        GET: PropTypes.func.isRequired,
+        reset: PropTypes.func.isRequired,
+      }),
+      loanTypes: PropTypes.shape({
+        GET: PropTypes.func.isRequired,
+        reset: PropTypes.func.isRequired,
+      }),
+      loanPolicies: PropTypes.shape({
+        GET: PropTypes.func.isRequired,
+        reset: PropTypes.func.isRequired,
+      }),
+      requestPolicies: PropTypes.shape({
+        GET: PropTypes.func.isRequired,
+        reset: PropTypes.func.isRequired,
+      }),
+      noticePolicies: PropTypes.shape({
+        GET: PropTypes.func.isRequired,
+        reset: PropTypes.func.isRequired,
+      }),
+      overdueFinePolicies: PropTypes.shape({
+        GET: PropTypes.func.isRequired,
+        reset: PropTypes.func.isRequired,
+      }),
+      institutions: PropTypes.shape({
+        GET: PropTypes.func.isRequired,
+        reset: PropTypes.func.isRequired,
+      }),
+      locations: PropTypes.shape({
+        GET: PropTypes.func.isRequired,
+        reset: PropTypes.func.isRequired,
+      }),
+      campuses: PropTypes.shape({
+        GET: PropTypes.func.isRequired,
+        reset: PropTypes.func.isRequired,
+      }),
+      libraries: PropTypes.shape({
+        GET: PropTypes.func.isRequired,
+        reset: PropTypes.func.isRequired,
+      }),
     })
   };
 
   constructor(props) {
     super(props);
     this.onSubmit = this.onSubmit.bind(this);
-    this.state = {};
+
+    this.state = {
+      isLoading: true,
+    };
+  }
+
+  componentDidMount() {
+    this.fetchResourcesData();
+  }
+
+  async fetchResourcesData() {
+    const { mutator } = this.props;
+
+    const requestPromises = [];
+    const resourcesFields = [
+      ...Object.values(editorDefaultProps.typeMapping),
+      ...Object.values(editorDefaultProps.policyMapping)
+    ];
+
+    resourcesFields.forEach((resourceField) => {
+      const resourceMutator = mutator[resourceField];
+
+      resourceMutator.reset();
+      requestPromises.push(resourceMutator.GET());
+    });
+
+    await Promise.all(requestPromises);
+
+    this.setState({
+      isLoading: false,
+    });
   }
 
   shouldComponentUpdate(nextProps) {
@@ -346,11 +420,9 @@ class CirculationRules extends React.Component {
   }
 
   render() {
-    const {
-      resources: { loanTypes },
-    } = this.props;
+    const { isLoading } = this.state;
 
-    if (!loanTypes) {
+    if (isLoading) {
       return (<div />);
     }
 
