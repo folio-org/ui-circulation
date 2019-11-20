@@ -1,4 +1,7 @@
-import { kebabCase } from 'lodash';
+import {
+  kebabCase,
+  get,
+} from 'lodash';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
@@ -193,6 +196,9 @@ class CirculationRules extends React.Component {
       libraries,
     } = nextProps.resources;
 
+
+    console.log('should shouldComponentUpdate', institutions);
+
     return !patronGroups.isPending &&
       !materialTypes.isPending &&
       !loanTypes.isPending &&
@@ -347,10 +353,10 @@ class CirculationRules extends React.Component {
 
   render() {
     const {
-      resources: { loanTypes },
+      resources,
     } = this.props;
 
-    if (!loanTypes) {
+    if (!get(resources, 'loanTypes.hasLoaded', false)) {
       return (<div />);
     }
 
