@@ -196,9 +196,6 @@ class CirculationRules extends React.Component {
       libraries,
     } = nextProps.resources;
 
-
-    console.log('should shouldComponentUpdate', institutions);
-
     return !patronGroups.isPending &&
       !materialTypes.isPending &&
       !loanTypes.isPending &&
