@@ -40,6 +40,9 @@ const CheckBoxText = (props) => (
       <div className={css.periodContainer}>
         <div data-test-charge-type-another className={css.col}>
           <Field
+            label={<FormattedMessage
+              id="ui-circulation.settings.lostItemFee.setCost"
+            />}
             name="chargeAmountItem.chargeType"
             component={RadioButton}
             value="anotherCost"

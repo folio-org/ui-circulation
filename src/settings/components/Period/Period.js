@@ -33,6 +33,7 @@ class Period extends PureComponent {
     fieldLabel: PropTypes.string,
     selectPlaceholder: PropTypes.string,
     changeFormValue: PropTypes.func,
+    intervalPeriodsSuffix: PropTypes.string,
   };
 
   static defaultProps = {
@@ -42,6 +43,7 @@ class Period extends PureComponent {
     fieldLabel: '',
     selectPlaceholder: '',
     changeFormValue: noop,
+    intervalPeriodsSuffix: '',
   };
 
   onInputClear = () => {
@@ -71,6 +73,7 @@ class Period extends PureComponent {
       required,
       inputSize,
       selectSize,
+      intervalPeriodsSuffix,
       intl: {
         formatMessage,
       }
@@ -116,6 +119,15 @@ class Period extends PureComponent {
               </Field>
             </div>
           </Col>
+          { intervalPeriodsSuffix && (
+            <Col xs={selectSize}>
+              <div data-test-period-interval-suffix>
+                <Label>
+                  <FormattedMessage id={intervalPeriodsSuffix} />
+                </Label>
+              </div>
+            </Col>
+          )}
         </Row>
       </React.Fragment>
     );
