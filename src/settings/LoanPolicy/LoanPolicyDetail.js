@@ -157,6 +157,7 @@ class LoanPolicyDetail extends React.Component {
             getDropdownValue={this.getDropdownValue}
             getPeriodValue={this.getPeriodValue}
             getScheduleValue={this.getScheduleValue}
+            getValue={this.getValue}
           />
           <RenewalsSection
             isVisible={loanPolicy.loanable}
