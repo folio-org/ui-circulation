@@ -50,7 +50,7 @@ export default {
     message: <FormattedMessage id="ui-circulation.settings.validate.greaterThanZero" />,
   },
   isItemLimitIsInInterval: {
-    validate: isInIntervalOrNull.bind(null, 1, 9999),
+    validate: value => isInIntervalOrNull(1, 9999, value),
     message: <FormattedMessage id="ui-circulation.settings.validate.itemLimitInterval" />,
   }
 };

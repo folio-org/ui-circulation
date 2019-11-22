@@ -16,7 +16,7 @@ export const isPositiveNumber = (value) => isInteger(value) && value >= 0;
 
 export const isInInterval = (min, max, value) => value >= min && value <= max;
 
-export const isInIntervalOrNull = (min, max, value) => !value || (value >= min && value <= max);
+export const isInIntervalOrNull = (min, max, value) => !value || isInInterval(min, max, value);
 
 export const isNotEmptyEditor = (value = '') => {
   const plainText = value.replace(/<\/?[^>]+(>|$)/g, '');

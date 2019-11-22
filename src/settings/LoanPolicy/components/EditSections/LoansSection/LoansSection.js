@@ -1,5 +1,5 @@
 import { get } from 'lodash';
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
 import {
@@ -153,7 +153,7 @@ class LoansSection extends React.Component {
           </div>
         }
         { policy.isLoanable() &&
-          <div>
+          <Fragment>
             <div data-test-loans-section-grace-period>
               <Period
                 fieldLabel="ui-circulation.settings.loanPolicy.gracePeriod"
@@ -175,7 +175,7 @@ class LoansSection extends React.Component {
                 />
               </Col>
             </Row>
-          </div>
+          </Fragment>
         }
         <hr />
       </div>
