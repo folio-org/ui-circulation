@@ -20,6 +20,10 @@ describe('LoanPolicyEdit', () => {
       expect(LoanPolicyForm.aboutSection.policyNameValue.value).to.equal(testLoanPolicySettings.name);
     });
 
+    it('item limit should be same as in testLoanPolicy scenario', () => {
+      expect(LoanPolicyDetail.loansSection.itemLimit.value.text).to.equal('22');
+    });
+
     describe('updating an existing loan policy', () => {
       beforeEach(async function () {
         await LoanPolicyForm.aboutSection.policyNameValue.fill(newLoanPolicyName).save();
