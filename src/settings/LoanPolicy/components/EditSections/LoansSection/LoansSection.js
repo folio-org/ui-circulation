@@ -1,5 +1,5 @@
 import { get } from 'lodash';
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
 import {
@@ -11,6 +11,9 @@ import {
 import {
   Checkbox,
   Select,
+  TextField,
+  Row,
+  Col,
 } from '@folio/stripes/components';
 
 import { Period } from '../../../../components';
@@ -150,15 +153,29 @@ class LoansSection extends React.Component {
           </div>
         }
         { policy.isLoanable() &&
-          <div data-test-loans-section-grace-period>
-            <Period
-              fieldLabel="ui-circulation.settings.loanPolicy.gracePeriod"
-              inputValuePath="loansPolicy.gracePeriod.duration"
-              selectValuePath="loansPolicy.gracePeriod.intervalId"
-              intervalPeriods={this.generateOptions(intervalPeriods, 'ui-circulation.settings.loanPolicy.selectInterval')}
-              changeFormValue={change}
-            />
-          </div>
+          <Fragment>
+            <div data-test-loans-section-grace-period>
+              <Period
+                fieldLabel="ui-circulation.settings.loanPolicy.gracePeriod"
+                inputValuePath="loansPolicy.gracePeriod.duration"
+                selectValuePath="loansPolicy.gracePeriod.intervalId"
+                intervalPeriods={this.generateOptions(intervalPeriods, 'ui-circulation.settings.loanPolicy.selectInterval')}
+                changeFormValue={change}
+              />
+            </div>
+            <Row>
+              <Col xs={2}>
+                <Field
+                  data-test-loans-section-item-limit
+                  label={<FormattedMessage id="ui-circulation.settings.loanPolicy.itemLimit" />}
+                  component={TextField}
+                  name="loansPolicy.itemLimit"
+                  id="input_item_limit"
+                  type="number"
+                />
+              </Col>
+            </Row>
+          </Fragment>
         }
         <hr />
       </div>

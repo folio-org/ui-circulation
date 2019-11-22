@@ -32,6 +32,7 @@ import Period from '../Period';
   closedDueDateMgmt = new SelectInteractor('[data-test-loans-section-closed-due-date-mgmt]');
   openingTimeOffset = new Period('[data-test-loans-section-opening-time-offset]');
   gracePeriod = new Period('[data-test-loans-section-grace-period]');
+  itemLimit = new TextFieldInteractor('[data-test-loans-section-item-limit]');
 }
 
 @interactor class RenewalsSection {

@@ -196,6 +196,10 @@ describe('LoanPolicyForm', () => {
             it('should not be displayed', () => {
               expect(LoanPolicyForm.loansSection.loanPeriod.isPresent).to.be.false;
             });
+
+            it('should present field Item Limit', () => {
+              expect(LoanPolicyForm.loansSection.itemLimit.isPresent).to.be.true;
+            });
           });
 
           describe('loan policy:\n\t\tnot loanable\n', () => {
@@ -205,6 +209,7 @@ describe('LoanPolicyForm', () => {
 
             it('should not be displayed', () => {
               expect(LoanPolicyForm.loansSection.loanPeriod.isPresent).to.be.false;
+              expect(LoanPolicyForm.loansSection.itemLimit.isPresent).to.be.false;
             });
           });
         });
