@@ -114,7 +114,10 @@ class PreviewModal extends React.Component {
         size="medium"
         footer={this.renderFooter()}
       >
-        <div ref={this.editorRef}>
+        <div
+          className="editor-preview"
+          ref={this.editorRef}
+        >
           {contentComponent}
         </div>
       </Modal>
