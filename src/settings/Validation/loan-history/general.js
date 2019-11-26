@@ -1,24 +1,21 @@
-import {
-  closedLoansRules,
-  closingTypesMap,
-} from '../../../constants';
+import { reduce } from 'lodash';
+
+import { closedLoansRules } from '../../../constants';
 
 export default function (data) {
-  return Object.values(closedLoansRules).reduce((config, item) => {
-    const isClosingTypeIntervalSelected = data.closingType[item] === closingTypesMap.INTERVAL;
-    const isAnyClosingTypeFeeFineSelected = data.treatEnabled && !data.closingType.feeFine;
+  return reduce(closedLoansRules, (config, item) => {
     const ruleConfig = {
       [`${item}.duration`]: {
         rules: ['isNotEmpty', 'isIntegerGreaterThanZero', 'isFromOneToHundred'],
-        shouldValidate: isClosingTypeIntervalSelected,
+        shouldValidate: data.isClosingTypeIntervalSelected(item),
       },
       [`${item}.intervalId`]: {
         rules: ['isNotEmptySelect'],
-        shouldValidate: isClosingTypeIntervalSelected,
+        shouldValidate: data.isClosingTypeIntervalSelected(item),
       },
-      'feeFineSelected': {
+      [`${item}Selected`]: {
         rules: ['isNotEmptySelect'],
-        shouldValidate: isAnyClosingTypeFeeFineSelected,
+        shouldValidate: data.isAnyClosingTypeSelected(item),
       },
     };
 

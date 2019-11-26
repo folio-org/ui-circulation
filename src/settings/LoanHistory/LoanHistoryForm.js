@@ -31,8 +31,6 @@ import {
 } from '../../constants';
 import { normalize } from './utils/normalize';
 
-import css from './LoanHistoryForm.css';
-
 class LoanHistoryForm extends Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
@@ -172,13 +170,6 @@ class LoanHistoryForm extends Component {
                 name={closedLoansRules.WITH_FEES_FINES}
                 path={closedLoansRules.WITH_FEES_FINES}
                 types={closingTypes}
-              />
-              <br />
-              <Field
-                name="feeFineSelected"
-                component={({ meta }) => {
-                  return meta.touched && <span className={css.error}>{meta.error}</span>;
-                }}
               />
               <FieldArray
                 name="loanExceptions"

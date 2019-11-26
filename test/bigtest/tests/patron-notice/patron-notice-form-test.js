@@ -6,9 +6,9 @@ import {
 } from '@bigtest/mocha';
 
 import setupApplication from '../../helpers/setup-application';
-import patronNoticeForm from '../../interactors/patron-notice/patron-notice-form';
+import PatronNoticeForm from '../../interactors/patron-notice/patron-notice-form';
 
-describe('patronNoticeDetail', () => {
+describe('Patron Notice Form', () => {
   setupApplication();
 
   describe('viewing patron notice form', () => {
@@ -17,7 +17,17 @@ describe('patronNoticeDetail', () => {
     });
 
     it('should be displayed', () => {
-      expect(patronNoticeForm.isPresent).to.be.true;
+      expect(PatronNoticeForm.isPresent).to.be.true;
+    });
+
+    describe('email template accordion', () => {
+      beforeEach(async () => {
+        await PatronNoticeForm.emaillSectionAccordion.clickHeader();
+      });
+
+      it('should not be displayed', () => {
+        expect(PatronNoticeForm.emaillSectionAccordion.isOpen).to.be.false;
+      });
     });
   });
 });

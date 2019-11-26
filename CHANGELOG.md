@@ -11,6 +11,14 @@
 * Clean up Loan history model. Refs UITEN-57.
 * Clean up unused dependencies.
 * Fix data replacement issues in the circulation rules editor. Refs UICIRC-305.
+* Add BigTest and CRUD Fee/Fine Lost Item Fee Policies. Refs UIU-1156.
+* Add filter value match highlighting to the location menu of the circulation rules editor. Refs UICIRC-318.
+* Fix validation error message display in the circulation rules editor. Refs UICIRC-377.
+* Validate the creation of the settings in the Anonymize closed loans section. Refs UITEN-58.
+* Create/Edit loan policy | Move Save/Cancel buttons to the footer Refs UICIRC-372.
+* Lost item fee policies |  Create/Edit Request policies | Move Save/Cancel buttons to the footer UICIRC-370
+* Add the overdue fine policies menu to the circulation rules editor. Refs UICIRC-353.
+* Add minutes and hours support to the loan history form. Refs UICIRC-388.
 
 ## [1.11.0](https://github.com/folio-org/ui-circulation/tree/v1.13.0) (2019-09-13)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v1.10.0...v1.11.0)

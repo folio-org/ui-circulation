@@ -28,17 +28,7 @@ import css from './RulesEditor.css';
 const propTypes = {
   onChange: PropTypes.func.isRequired,
 
-  /*
-    big collection of 'code hint' data...
-    all the possible named values/selectors from all of the system categories (typeGroups)...
-    'Patron Groups',
-    'Campus',
-    'Branch',
-    'Collection',
-    'Material Type',
-    'Shelf',
-    'Loan Type'
-  */
+  // collection of 'code hint' data: all the possible named values/selectors from all of the system categories (typeGroups)
   completionLists: PropTypes.object,
 
   /*

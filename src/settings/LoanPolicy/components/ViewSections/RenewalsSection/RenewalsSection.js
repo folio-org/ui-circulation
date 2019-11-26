@@ -40,14 +40,26 @@ const RenewalsSection = (props) => {
       </Row>
       <Row>
         <Col xs={12}>
-          <div data-test-renewals-section-unlimited-renewals>
+          <div data-test-renewals-section-renewable>
             <KeyValue
-              label={<FormattedMessage id="ui-circulation.settings.loanPolicy.unlimitedRenewals" />}
-              value={getCheckboxValue('renewalsPolicy.unlimited')}
+              label={<FormattedMessage id="ui-circulation.settings.loanPolicy.renewable" />}
+              value={getCheckboxValue('renewable')}
             />
           </div>
         </Col>
       </Row>
+      { policy.isRenewable() &&
+        <Row>
+          <Col xs={12}>
+            <div data-test-renewals-section-unlimited-renewals>
+              <KeyValue
+                label={<FormattedMessage id="ui-circulation.settings.loanPolicy.unlimitedRenewals" />}
+                value={getCheckboxValue('renewalsPolicy.unlimited')}
+              />
+            </div>
+          </Col>
+        </Row>
+      }
       { policy.isRenewable() && !policy.isUnlimitedRenewals() &&
         <div>
           <Row>
@@ -62,26 +74,30 @@ const RenewalsSection = (props) => {
           </Row>
         </div>
       }
-      <Row>
-        <Col xs={12}>
-          <div data-test-renewals-section-renew-from>
-            <KeyValue
-              label={<FormattedMessage id="ui-circulation.settings.loanPolicy.renewFrom" />}
-              value={getDropdownValue('renewalsPolicy.renewFromId', renewFromOptions)}
-            />
-          </div>
-        </Col>
-      </Row>
-      <Row>
-        <Col xs={12}>
-          <div data-test-renewals-section-renewal-period-different>
-            <KeyValue
-              label={<FormattedMessage id="ui-circulation.settings.loanPolicy.renewalPeriodDifferent" />}
-              value={getCheckboxValue('renewalsPolicy.differentPeriod')}
-            />
-          </div>
-        </Col>
-      </Row>
+      { policy.isRenewable() &&
+        <React.Fragment>
+          <Row>
+            <Col xs={12}>
+              <div data-test-renewals-section-renew-from>
+                <KeyValue
+                  label={<FormattedMessage id="ui-circulation.settings.loanPolicy.renewFrom" />}
+                  value={getDropdownValue('renewalsPolicy.renewFromId', renewFromOptions)}
+                />
+              </div>
+            </Col>
+          </Row>
+          <Row>
+            <Col xs={12}>
+              <div data-test-renewals-section-renewal-period-different>
+                <KeyValue
+                  label={<FormattedMessage id="ui-circulation.settings.loanPolicy.renewalPeriodDifferent" />}
+                  value={getCheckboxValue('renewalsPolicy.differentPeriod')}
+                />
+              </div>
+            </Col>
+          </Row>
+        </React.Fragment>
+      }
       { policy.isRenewable() && policy.isDifferentPeriod() && policy.isProfileRolling() &&
       <div>
         <Row>

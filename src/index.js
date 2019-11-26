@@ -6,7 +6,7 @@ import { stripesShape } from '@folio/stripes/core';
 import LoanHistory from './settings/LoanHistory/LoanHistory';
 import LoanPolicySettings from './settings/LoanPolicy/LoanPolicySettings';
 import FinePolicySettings from './settings/FinePolicy/FinePolicySettings';
-import LostItemFeePoliciesSettings from './settings/LostItemsFeePoliciesSettings';
+import LostItemFeePolicySettings from './settings/LostItemFeePolicy/LostItemFeePolicySettings';
 import CirculationRules from './settings/CirculationRules';
 import RequestCancellationReasons from './settings/RequestCancellationReasons';
 import CheckoutSettings from './settings/CheckoutSettings';
@@ -78,13 +78,13 @@ class Circulation extends Component {
             route: 'fine-policies',
             label: <FormattedMessage id="ui-circulation.settings.finePolicy.paneTitle" />,
             component: FinePolicySettings,
-            perm: 'ui-circulation.settings.loan-policies',
+            perm: 'ui-circulation.settings.overdue-fines-policies',
           },
           {
-            route: 'lost-item-fee-fine-policies',
-            label: <FormattedMessage id="ui-circulation.settings.finePolicy.lostItemFeePolicies" />,
-            component: LostItemFeePoliciesSettings,
-            perm: 'ui-circulation.settings.loan-policies',
+            route: 'lost-item-fee-policy',
+            label: <FormattedMessage id="ui-circulation.settings.lostItemFee.paneTitle" />,
+            component: LostItemFeePolicySettings,
+            perm: 'ui-circulation.settings.lost-item-fees-policies',
           },
         ],
       },

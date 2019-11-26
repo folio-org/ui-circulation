@@ -1,3 +1,5 @@
+@import "@folio/stripes-components/lib/variables.css";
+
 .periodContainer {
   display: flex;
 }
@@ -8,4 +10,10 @@
   & option {
     color: initial;
   }
+}
+
+.error {
+  color: var(--error);
+  display: inline-block;
+  margin-top: var(--gutter);
 }

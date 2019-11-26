@@ -1,17 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { getFormValues } from 'redux-form';
-import {
-  get,
-  noop,
-} from 'lodash';
+import { get } from 'lodash';
 
 import stripesForm from '@folio/stripes/form';
 import { stripesShape } from '@folio/stripes/core';
 import {
   Col,
   Row,
+  Pane,
   Paneset,
   ExpandAllButton,
 } from '@folio/stripes/components';
@@ -19,44 +18,36 @@ import {
 import normalize from './utils/normalize';
 import getTemplates from './utils/get-templates';
 import { NoticePolicy } from '../Models/NoticePolicy';
-import { DeleteConfirmationModal } from '../components';
 import {
-  HeaderPane,
+  FooterPane,
+  CancelButton,
+} from '../components';
+import {
   GeneralSection,
   LoanNoticesSection,
   FeeFineNoticesSection,
   RequestNoticesSection,
 } from './components';
 
-import EntityInUseModal from '../components/EntityInUseModal';
-
 class NoticePolicyForm extends React.Component {
   static propTypes = {
     stripes: stripesShape.isRequired,
+    policy: PropTypes.object,
     pristine: PropTypes.bool.isRequired,
     submitting: PropTypes.bool.isRequired,
-    policy: PropTypes.object,
-    initialValues: PropTypes.object,
-    isEntryInUse: PropTypes.func,
     parentResources: PropTypes.shape({
       templates: PropTypes.object,
     }).isRequired,
-    permissions: PropTypes.object.isRequired,
     onSave: PropTypes.func.isRequired,
     onCancel: PropTypes.func.isRequired,
-    onRemove: PropTypes.func.isRequired,
     handleSubmit: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
     policy: {},
-    initialValues: {},
-    isEntryInUse: noop,
   };
 
   state = {
-    showEntityInUseModal: false,
-    showDeleteConfirmation: false,
     sections: {
       general: true,
       loanNotices: true,
@@ -82,38 +73,28 @@ class NoticePolicyForm extends React.Component {
     this.props.onSave(policy);
   };
 
-  changeDeleteState = (showDeleteConfirmation) => {
-    this.setState({ showDeleteConfirmation });
-  };
-
-  changeEntityInUseState = (showEntityInUseModal) => {
-    this.setState({ showEntityInUseModal });
-  };
-
   render() {
     const {
-      pristine,
       policy,
-      initialValues,
       stripes,
-      permissions,
+      pristine,
       submitting,
-      isEntryInUse,
       handleSubmit,
       onCancel,
-      onRemove,
     } = this.props;
 
+    const { sections } = this.state;
+
     const patronNoticeTemplates = get(this.props, 'parentResources.templates.records', []);
+    const panelTitle = policy.id
+      ? policy.name
+      : <FormattedMessage id="ui-circulation.settings.noticePolicy.createEntryLabel" />;
 
-    const {
-      sections,
-      showDeleteConfirmation,
-      showEntityInUseModal,
-    } = this.state;
-
-    const editMode = Boolean(policy.id);
-    const isPolicyInUse = isEntryInUse(policy.id);
+    const footerPaneProps = {
+      pristine,
+      submitting,
+      onCancel,
+    };
 
     return (
       <form
@@ -122,16 +103,11 @@ class NoticePolicyForm extends React.Component {
         onSubmit={handleSubmit(this.saveForm)}
       >
         <Paneset isRoot>
-          <HeaderPane
-            editMode={editMode}
-            policyInUse={isPolicyInUse}
-            submitting={submitting}
-            permissions={permissions}
-            pristine={pristine}
-            entryTitle={policy.name}
-            onCancel={onCancel}
-            showDeleteConfirmationModal={this.changeDeleteState}
-            showEntityInUseModal={this.changeEntityInUseState}
+          <Pane
+            defaultWidth="100%"
+            paneTitle={panelTitle}
+            firstMenu={<CancelButton onCancel={onCancel} />}
+            footer={<FooterPane {...footerPaneProps} />}
           >
             <Row end="xs">
               <Col
@@ -167,25 +143,7 @@ class NoticePolicyForm extends React.Component {
               isOpen={sections.feeFineNotices}
               onToggle={this.handleSectionToggle}
             />
-            { editMode &&
-              <DeleteConfirmationModal
-                isOpen={showDeleteConfirmation}
-                policyName={policy.name}
-                deleteEntityKey="ui-circulation.settings.noticePolicy.deleteLoanPolicy"
-                initialValues={initialValues}
-                onCancel={this.changeDeleteState}
-                onRemove={onRemove}
-              />
-            }
-            { editMode &&
-              <EntityInUseModal
-                isOpen={showEntityInUseModal}
-                labelTranslationKey="ui-circulation.settings.noticePolicy.denyDelete.header"
-                contentTranslationKey="ui-circulation.settings.noticePolicy.denyDelete.body"
-                onClose={this.changeEntityInUseState}
-              />
-            }
-          </HeaderPane>
+          </Pane>
         </Paneset>
       </form>
     );

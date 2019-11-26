@@ -195,6 +195,20 @@ describe('LoanPolicyDetail', () => {
             expect(LoanPolicyDetail.loansSection.gracePeriod.value.text).to.equal(period);
           });
         });
+
+        describe('item limit', () => {
+          it('should be displayed', () => {
+            expect(LoanPolicyDetail.loansSection.itemLimit.isPresent).to.be.true;
+          });
+
+          it('should have a proper label', () => {
+            expect(LoanPolicyDetail.loansSection.itemLimit.label.text).to.equal(translation['settings.loanPolicy.itemLimit']);
+          });
+
+          it('should have a proper value', () => {
+            expect(LoanPolicyDetail.loansSection.itemLimit.value.text).to.equal('-');
+          });
+        });
       });
 
       describe('loan policy: -loanable -rolling ', () => {

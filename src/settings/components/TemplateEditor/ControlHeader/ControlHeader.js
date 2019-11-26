@@ -10,7 +10,7 @@ import {
 
 import css from './ControlHeader.css';
 
-const ControlHeader = ({ label, onPreviewClick }) => {
+const ControlHeader = ({ label, onPreviewClick, required }) => {
   return (
     <Row bottom="xs">
       <Col xs={9}>
@@ -19,6 +19,7 @@ const ControlHeader = ({ label, onPreviewClick }) => {
           className={css.label}
         >
           {label}
+          {required && <span className={css.required}>*</span>}
         </label>
       </Col>
       <Col xs={3}>
@@ -39,6 +40,7 @@ const ControlHeader = ({ label, onPreviewClick }) => {
 
 ControlHeader.propTypes = {
   label: PropTypes.node.isRequired,
+  required: PropTypes.bool.isRequired,
   onPreviewClick: PropTypes.func.isRequired,
 };
 

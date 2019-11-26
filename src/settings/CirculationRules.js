@@ -1,4 +1,7 @@
-import { kebabCase } from 'lodash';
+import {
+  kebabCase,
+  get,
+} from 'lodash';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
@@ -46,6 +49,7 @@ const editorDefaultProps = {
     [POLICY.LOAN]: 'loanPolicies',
     [POLICY.REQUEST]: 'requestPolicies',
     [POLICY.NOTICE]: 'noticePolicies',
+    [POLICY.OVERDUE_FINE]: 'overdueFinePolicies',
   },
 };
 
@@ -55,6 +59,7 @@ class CirculationRules extends React.Component {
       type: 'okapi',
       path: 'circulation/rules',
       resourceShouldRefresh: true,
+      throwErrors: false,
     },
     patronGroups: {
       type: 'okapi',
@@ -107,6 +112,15 @@ class CirculationRules extends React.Component {
       path: 'patron-notice-policy-storage/patron-notice-policies',
       params: {
         limit: '100',
+      },
+      resourceShouldRefresh: true,
+    },
+    overdueFinePolicies: {
+      type: 'okapi',
+      records: 'overdueFinePolicies',
+      path: 'overdue-fines-policies',
+      params: {
+        limit: '1000',
       },
       resourceShouldRefresh: true,
     },
@@ -175,6 +189,7 @@ class CirculationRules extends React.Component {
       loanPolicies,
       requestPolicies,
       noticePolicies,
+      overdueFinePolicies,
       locations,
       institutions,
       campuses,
@@ -187,6 +202,7 @@ class CirculationRules extends React.Component {
       !loanPolicies.isPending &&
       !requestPolicies.isPending &&
       !noticePolicies.isPending &&
+      !overdueFinePolicies.isPending &&
       !locations.isPending &&
       !institutions.isPending &&
       !campuses.isPending &&
@@ -215,6 +231,7 @@ class CirculationRules extends React.Component {
       loanPolicies,
       noticePolicies,
       requestPolicies,
+      overdueFinePolicies,
       institutions,
       campuses,
       libraries,
@@ -255,6 +272,7 @@ class CirculationRules extends React.Component {
         loanPolicies: loanPolicies.records.map(l => kebabCase(l.name)),
         requestPolicies: requestPolicies.records.map(r => kebabCase(r.name)),
         noticePolicies: noticePolicies.records.map(n => kebabCase(n.name)),
+        overdueFinePolicies: overdueFinePolicies.records.map(o => kebabCase(o.name)),
       },
     });
   }
@@ -267,6 +285,7 @@ class CirculationRules extends React.Component {
       loanPolicies,
       requestPolicies,
       noticePolicies,
+      overdueFinePolicies,
       institutions,
       campuses,
       libraries,
@@ -277,6 +296,10 @@ class CirculationRules extends React.Component {
       memo[code] = id;
 
       return memo;
+    };
+
+    const reducePolicyHandler = (memo, policy) => {
+      return reduceHandler(memo, kebabCase(policy.name), policy.id);
     };
 
     return {
@@ -301,15 +324,10 @@ class CirculationRules extends React.Component {
       [RULES_TYPE.LOCATION]: locations.records.reduce((memo, location) => {
         return reduceHandler(memo, formatter.formatLocationCode(location, institutions, campuses, libraries), location.id);
       }, {}),
-      [POLICY.LOAN]: loanPolicies.records.reduce((memo, loanPolicy) => {
-        return reduceHandler(memo, kebabCase(loanPolicy.name), loanPolicy.id);
-      }, {}),
-      [POLICY.REQUEST]: requestPolicies.records.reduce((memo, requestPolicy) => {
-        return reduceHandler(memo, kebabCase(requestPolicy.name), requestPolicy.id);
-      }, {}),
-      [POLICY.NOTICE]: noticePolicies.records.reduce((memo, noticePolicy) => {
-        return reduceHandler(memo, kebabCase(noticePolicy.name), noticePolicy.id);
-      }, {}),
+      [POLICY.LOAN]: loanPolicies.records.reduce(reducePolicyHandler, {}),
+      [POLICY.REQUEST]: requestPolicies.records.reduce(reducePolicyHandler, {}),
+      [POLICY.NOTICE]: noticePolicies.records.reduce(reducePolicyHandler, {}),
+      [POLICY.OVERDUE_FINE]: overdueFinePolicies.records.reduce(reducePolicyHandler, {}),
     };
   }
 
@@ -319,21 +337,23 @@ class CirculationRules extends React.Component {
 
     this.setState({ errors: null });
 
-    return PUT({ rulesAsText }).then((resp) => {
-      if (resp.status >= 400) {
-        resp.json().then(json => this.setState({ errors: [json] }));
-      } else if (this.callout) {
+    PUT({ rulesAsText }).then(() => {
+      if (this.callout) {
         this.callout.sendCallout({ message: <FormattedMessage id="ui-circulation.settings.circulationRules.rulesUpdated" /> });
+      }
+    }).catch((resp) => {
+      if (resp.status && resp.status > 400) {
+        resp.json().then(json => this.setState({ errors: [json] }));
       }
     });
   }
 
   render() {
     const {
-      resources: { loanTypes },
+      resources,
     } = this.props;
 
-    if (!loanTypes) {
+    if (!get(resources, 'loanTypes.hasLoaded', false)) {
       return (<div />);
     }
 

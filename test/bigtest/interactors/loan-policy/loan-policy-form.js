@@ -32,6 +32,7 @@ import Period from '../Period';
   closedDueDateMgmt = new SelectInteractor('[data-test-loans-section-closed-due-date-mgmt]');
   openingTimeOffset = new Period('[data-test-loans-section-opening-time-offset]');
   gracePeriod = new Period('[data-test-loans-section-grace-period]');
+  itemLimit = new TextFieldInteractor('[data-test-loans-section-item-limit]');
 }
 
 @interactor class RenewalsSection {
@@ -70,19 +71,15 @@ import Period from '../Period';
   renewalsSection = new RenewalsSection();
   requestManagementSection = new RequestManagementSection();
 
-  deleteLoanPolicy = new Interactor('[data-test-delete-loan-policy-form-action]');
-  deleteLoanPolicyModal = new Interactor('#delete-item-confirmation');
-  deleteLoanPolicyCancel= new Interactor('[data-test-confirmation-modal-cancel-button]');
-  deleteLoanPolicyConfirm = new Interactor('[data-test-confirmation-modal-confirm-button]');
   expandAll = scoped('[data-test-expand-all] button');
-  cancelEditingLoanPolicy = new Interactor('[data-test-cancel-loan-policy-form-action]');
+  cancelEditingLoanPolicy = new Interactor('#footer-cancel-entity');
   cancelEditingLoanPolicyModal = new Interactor('#cancel-editing-confirmation');
 
   generalSectionAccordion = new AccordionInteractor('#generalSection');
   recallsSectionAccordion = new AccordionInteractor('#recallsSection');
   holdsSectionAccordion = new AccordionInteractor('#holdsSection');
 
-  save = clickable('#clickable-save-entry');
+  save = clickable('#footer-save-entity');
 }
 
 export default new LoanPolicyForm();

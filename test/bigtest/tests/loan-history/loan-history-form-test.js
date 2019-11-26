@@ -121,7 +121,7 @@ describe('Loan History Form', () => {
       });
     });
 
-    describe('selecting any radio button', () => {
+    describe('selecting any radio button in fees/fines section', () => {
       beforeEach(async () => {
         await LoanHistoryForm
           .feeFine.selectRadio(closingTypesMap.IMMEDIATELY)
@@ -160,14 +160,26 @@ describe('Loan History Form', () => {
           await LoanHistoryForm.saveButton.click();
         });
 
+        it('should not save the form', () => {
+          expect(LoanHistoryForm.callout.anyCalloutIsPresent).to.be.false;
+        });
+      });
+
+      describe('selecting any radio button in default section and clicking save button', () => {
+        beforeEach(async () => {
+          await LoanHistoryForm.loan.selectRadio(closingTypesMap.IMMEDIATELY);
+          await LoanHistoryForm.saveButton.click();
+        });
+
         it('should save form successfully', () => {
           expect(LoanHistoryForm.callout.successCalloutIsPresent).to.be.true;
         });
       });
     });
 
-    describe('selecting radio button for fee/fine interval', () => {
+    describe('selecting any radio button in default section and radio button for fee/fine interval', () => {
       beforeEach(async () => {
+        await LoanHistoryForm.loan.selectRadio(closingTypesMap.IMMEDIATELY);
         await LoanHistoryForm.feeFine.selectRadio(closingTypesMap.INTERVAL);
       });
 
@@ -210,6 +222,7 @@ describe('Loan History Form', () => {
   describe('loading the form and selecting treat checkbox', () => {
     beforeEach(async () => {
       await LoanHistoryForm.whenLoaded();
+      await LoanHistoryForm.loan.selectRadio(closingTypesMap.IMMEDIATELY);
       await LoanHistoryForm.clickTreatEnabledCheckbox();
       await LoanHistoryForm.feeFine.selectRadio(closingTypesMap.IMMEDIATELY);
     });
@@ -249,8 +262,6 @@ describe('Loan History Form', () => {
 
       describe('selecting any closing type radio button', () => {
         beforeEach(async () => {
-          await LoanHistoryForm.loan.selectRadio(closingTypesMap.IMMEDIATELY);
-
           await LoanHistoryForm
             .loanException.selectRadio(closingTypesMap.IMMEDIATELY)
             .loanException.selectRadio(closingTypesMap.INTERVAL)

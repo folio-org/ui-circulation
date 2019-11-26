@@ -14,6 +14,7 @@ export default (server) => {
         duration: 1,
         intervalId: 'Hours',
       },
+      itemLimit: 22,
       closedLibraryDueDateManagementId: CURRENT_DUE_DATE_TIME,
     },
     renewalsPolicy: {

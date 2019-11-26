@@ -49,6 +49,37 @@ export const intervalPeriods = [
   },
 ];
 
+export const intervalPeriodsLower = [
+  {
+    value: intervalIdsMap.MINUTES,
+    label: 'ui-circulation.settings.lostItemFee.minutes',
+  },
+  {
+    value: intervalIdsMap.HOURS,
+    label: 'ui-circulation.settings.lostItemFee.hours',
+  },
+  {
+    value: intervalIdsMap.DAYS,
+    label: 'ui-circulation.settings.lostItemFee.days',
+  },
+  {
+    value: intervalIdsMap.WEEKS,
+    label: 'ui-circulation.settings.lostItemFee.weeks',
+  },
+  {
+    value: intervalIdsMap.MONTHS,
+    label: 'ui-circulation.settings.lostItemFee.months',
+  },
+];
+
+export const anonymizingIntervals = [
+  intervalIdsMap.MINUTES,
+  intervalIdsMap.HOURS,
+  intervalIdsMap.DAYS,
+  intervalIdsMap.WEEKS,
+  intervalIdsMap.MONTHS,
+];
+
 export const loanProfileMap = {
   FIXED: 'Fixed',
   ROLLING: 'Rolling',
@@ -361,6 +392,7 @@ export const POLICY = {
   LOAN: 'l',
   REQUEST: 'r',
   NOTICE: 'n',
+  OVERDUE_FINE: 'o',
 };
 
 export const EDITOR_KEYWORD = {

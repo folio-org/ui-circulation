@@ -53,15 +53,11 @@ import { AccordionInteractor } from '@folio/stripes-components/lib/Accordion/tes
 
   generalAccordion = new AccordionInteractor('#overdueGeneralSection');
   overdueAccordion = new AccordionInteractor('#fineSection');
-  deleteFinePolicy = new Interactor('[data-test-delete-loan-policy-form-action]');
-  deleteFinePolicyModal = new Interactor('#delete-item-confirmation');
-  deleteFinePolicyCancel= new Interactor('[data-test-confirmation-modal-cancel-button]');
-  deleteFinePolicyConfirm = new Interactor('[data-test-confirmation-modal-confirm-button]');
   expandAll = scoped('[data-test-expand-all] button');
-  cancelEditingFinePolicy = new Interactor('[data-test-cancel-loan-policy-form-action]');
+  cancelEditingFinePolicy = new Interactor('#footer-cancel-entity');
   cancelEditingFinePolicyModal = new Interactor('#cancel-editing-confirmation');
 
-  save = clickable('#clickable-save-entry');
+  save = clickable('#footer-save-entity');
 }
 
 export default new FinePolicyForm();

@@ -21,6 +21,7 @@ const LoansSection = (props) => {
     getPeriodValue,
     getDropdownValue,
     getScheduleValue,
+    getValue,
   } = props;
 
   if (!isVisible) {
@@ -112,6 +113,16 @@ const LoansSection = (props) => {
           </div>
         </Col>
       </Row>
+      <Row>
+        <Col xs={12}>
+          <div data-test-loans-section-item-limit>
+            <KeyValue
+              label={<FormattedMessage id="ui-circulation.settings.loanPolicy.itemLimit" />}
+              value={getValue('loansPolicy.itemLimit') || '-'}
+            />
+          </div>
+        </Col>
+      </Row>
       <hr />
     </div>
   );
@@ -123,6 +134,7 @@ LoansSection.propTypes = {
   getDropdownValue: PropTypes.func.isRequired,
   getPeriodValue: PropTypes.func.isRequired,
   getScheduleValue: PropTypes.func.isRequired,
+  getValue: PropTypes.func.isRequired,
 };
 
 export default LoansSection;

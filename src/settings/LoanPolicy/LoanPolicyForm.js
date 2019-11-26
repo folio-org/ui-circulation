@@ -8,8 +8,8 @@ import {
   intlShape,
 } from 'react-intl';
 import {
-  sortBy,
   get,
+  sortBy,
 } from 'lodash';
 
 import stripesForm from '@folio/stripes/form';
@@ -20,13 +20,12 @@ import {
   ExpandAllButton,
   Col,
   Row,
+  Pane,
   Paneset,
 } from '@folio/stripes/components';
 
 import LoanPolicy from '../Models/LoanPolicy';
 import { normalize } from './utils/normalize';
-
-import { HeaderPane } from './components';
 
 import {
   AboutSection,
@@ -36,7 +35,8 @@ import {
 } from './components/EditSections';
 
 import {
-  DeleteConfirmationModal,
+  CancelButton,
+  FooterPane,
   Metadata,
 } from '../components';
 
@@ -51,12 +51,10 @@ class LoanPolicyForm extends React.Component {
     }).isRequired,
     policy: PropTypes.object,
     initialValues: PropTypes.object,
-    permissions: PropTypes.object.isRequired,
     change: PropTypes.func.isRequired,
     handleSubmit: PropTypes.func.isRequired,
     onSave: PropTypes.func.isRequired,
     onCancel: PropTypes.func.isRequired,
-    onRemove: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
@@ -65,7 +63,6 @@ class LoanPolicyForm extends React.Component {
   };
 
   state = {
-    confirmDelete: false,
     sections: {
       generalSection: true,
       recallsSection: true,
@@ -119,31 +116,26 @@ class LoanPolicyForm extends React.Component {
     this.props.onSave(policy);
   };
 
-  changeDeleteState = (confirmDelete) => {
-    this.setState({ confirmDelete });
-  };
-
   render() {
     const {
       pristine,
       policy,
-      permissions,
-      initialValues,
       stripes,
       submitting,
       handleSubmit,
       change,
       onCancel,
-      onRemove,
     } = this.props;
 
-    const {
-      sections,
-      confirmDelete,
-    } = this.state;
+    const { sections } = this.state;
 
-    const editMode = Boolean(policy.id);
     const schedules = this.generateScheduleOptions();
+    const panelTitle = policy.id ? policy.name : <FormattedMessage id="ui-circulation.settings.loanPolicy.createEntryLabel" />;
+    const footerPaneProps = {
+      pristine,
+      submitting,
+      onCancel,
+    };
 
     return (
       <form
@@ -152,71 +144,53 @@ class LoanPolicyForm extends React.Component {
         onSubmit={handleSubmit(this.saveForm)}
       >
         <Paneset isRoot>
-          <HeaderPane
-            editMode={editMode}
-            entryTitle={policy.name}
-            pristine={pristine}
-            submitting={submitting}
-            permissions={permissions}
-            onCancel={onCancel}
-            onRemove={this.changeDeleteState}
-            createEntryLabel={<FormattedMessage id="ui-circulation.settings.loanPolicy.createEntryLabel" />}
+          <Pane
+            defaultWidth="100%"
+            paneTitle={panelTitle}
+            firstMenu={<CancelButton onCancel={onCancel} />}
+            footer={<FooterPane {...footerPaneProps} />}
           >
-            <React.Fragment>
-              <Row end="xs">
-                <Col
-                  data-test-expand-all
-                  xs
-                >
-                  <ExpandAllButton
-                    accordionStatus={sections}
-                    onToggle={this.handleExpandAll}
-                  />
-                </Col>
-              </Row>
-              <Accordion
-                id="generalSection"
-                open={sections.generalSection}
-                label={<FormattedMessage id="ui-circulation.settings.loanPolicy.generalInformation" />}
-                onToggle={this.handleSectionToggle}
+            <Row end="xs">
+              <Col
+                data-test-expand-all
+                xs
               >
-                <Metadata
-                  connect={stripes.connect}
-                  metadata={policy.metadata}
+                <ExpandAllButton
+                  accordionStatus={sections}
+                  onToggle={this.handleExpandAll}
                 />
-                <AboutSection />
-                <LoansSection
-                  policy={policy}
-                  schedules={schedules}
-                  change={change}
-                />
-                <RenewalsSection
-                  policy={policy}
-                  schedules={schedules}
-                  change={change}
-                />
-                <RequestManagementSection
-                  policy={policy}
-                  holdsSectionOpen={sections.holdsSection}
-                  recallsSectionOpen={sections.recallsSection}
-                  accordionOnToggle={this.handleSectionToggle}
-                  change={change}
-                />
-              </Accordion>
-              {editMode &&
-                <DeleteConfirmationModal
-                  isOpen={confirmDelete}
-                  triggerSubmitSucceeded
-                  policyName={policy.name}
-                  formName="loanPolicyForm"
-                  deleteEntityKey="ui-circulation.settings.noticePolicy.deleteLoanPolicy"
-                  initialValues={initialValues}
-                  onCancel={this.changeDeleteState}
-                  onRemove={onRemove}
-                />
-              }
-            </React.Fragment>
-          </HeaderPane>
+              </Col>
+            </Row>
+            <Accordion
+              id="generalSection"
+              open={sections.generalSection}
+              label={<FormattedMessage id="ui-circulation.settings.loanPolicy.generalInformation" />}
+              onToggle={this.handleSectionToggle}
+            >
+              <Metadata
+                connect={stripes.connect}
+                metadata={policy.metadata}
+              />
+              <AboutSection />
+              <LoansSection
+                policy={policy}
+                schedules={schedules}
+                change={change}
+              />
+              <RenewalsSection
+                policy={policy}
+                schedules={schedules}
+                change={change}
+              />
+              <RequestManagementSection
+                policy={policy}
+                holdsSectionOpen={sections.holdsSection}
+                recallsSectionOpen={sections.recallsSection}
+                accordionOnToggle={this.handleSectionToggle}
+                change={change}
+              />
+            </Accordion>
+          </Pane>
         </Paneset>
       </form>
     );
