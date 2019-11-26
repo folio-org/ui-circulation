@@ -370,5 +370,7 @@
     "settings.lostItemFee.editLabel": "Editar - {name}",
     "settings.lostItemFee.late": "atrasado",
     "settings.lostItemFee.deleteFeePolicy": "Excluir política de taxa de itens perdidos",
-    "settings.circulationRules.overdueFinePolicies": "Políticas de multas em atraso"
+    "settings.circulationRules.overdueFinePolicies": "Políticas de multas em atraso",
+    "settings.loanPolicy.itemLimit": "Limite de itens",
+    "settings.validate.itemLimitInterval": "O limite do item deve ser > 0, = < 9999 ou em branco"
 }

@@ -92,7 +92,11 @@ class StaffSlipDetail extends React.Component {
           </Col>
         </Row>
         <Row>
-          <Col xs={12} data-test-staff-slip-content>
+          <Col
+            xs={12}
+            className="editor-preview"
+            data-test-staff-slip-content
+          >
             {parsedEmailTemplate}
           </Col>
         </Row>

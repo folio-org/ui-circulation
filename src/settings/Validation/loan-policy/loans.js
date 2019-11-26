@@ -32,5 +32,9 @@ export default function (loanPolicy) {
       rules: ['isNotEmpty'],
       shouldValidate: loanPolicy.isOpeningTimeOffsetActive(),
     },
+    'loansPolicy.itemLimit': {
+      rules: ['isItemLimitIsInInterval'],
+      shouldValidate: true,
+    },
   };
 }

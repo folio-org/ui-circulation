@@ -66,6 +66,7 @@
   "settings.loanPolicy.longTermLoan.currentDueDate": "Keep the current due date",
   "settings.loanPolicy.longTermLoan.endOfThePreviousOpenDay": "Move to the end of the previous open day",
   "settings.loanPolicy.longTermLoan.endOfTheNextOpenDay": "Move to the end of the next open day",
+  "settings.loanPolicy.itemLimit": "Item limit",
 
   "settings.circulationRules.paneTitle": "Circulation rules editor",
   "settings.circulationRules.rulesUpdated": "Rules were successfully updated.",
@@ -101,6 +102,7 @@
   "settings.validate.isPositiveNumber": "The value must be greater or equal 0",
   "settings.validate.isFromOneToHundred": "The value must be between 1 and 100",
   "settings.validate.lostItem": "This field is required if there is a possibility of no fee/fine being charged for a lost item",
+  "settings.validate.itemLimitInterval": "Item limit must be > 0, =< 9999 or blank",
 
   "settings.fDDS.validate.overlappingDateRange": "Date range {num1} cannot overlap with date range {num2}",
   "settings.fDDS.validate.uniqueName": "Please enter a unique name.",
