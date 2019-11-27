@@ -25,3 +25,5 @@ export const isNotEmptyEditor = (value = '') => {
 };
 
 export const isOverdueFindGreaterThan = (value) => isInteger(value) && value > 0;
+
+export const isOverdueRecallGreaterThan = (value) => isInteger(value) && value > 0;

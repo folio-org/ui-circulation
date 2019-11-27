@@ -10,6 +10,7 @@ import {
   isInIntervalOrNull,
   isNotEmptyEditor,
   isOverdueFindGreaterThan,
+  isOverdueRecallGreaterThan,
 } from './handlers';
 
 export default {
@@ -47,6 +48,10 @@ export default {
   },
   isOverdueFindGreaterThan: {
     validate: isOverdueFindGreaterThan,
+    message: <FormattedMessage id="ui-circulation.settings.validate.greaterThanZero" />,
+  },
+  isOverdueRecallGreaterThan: {
+    validate: isOverdueRecallGreaterThan,
     message: <FormattedMessage id="ui-circulation.settings.validate.greaterThanZero" />,
   },
   isItemLimitIsInInterval: {
