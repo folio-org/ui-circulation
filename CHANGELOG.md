@@ -20,6 +20,7 @@
 * Add the overdue fine policies menu to the circulation rules editor. Refs UICIRC-353.
 * Add minutes and hours support to the loan history form. Refs UICIRC-388.
 * Update structure of the circulation rules editor tests. Refs UICIRC-382.
+* Add the lost item fee policies menu to the circulation rules editor. Refs UICIRC-341.
 
 ## [1.11.0](https://github.com/folio-org/ui-circulation/tree/v1.13.0) (2019-09-13)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v1.10.0...v1.11.0)

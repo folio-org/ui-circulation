@@ -51,6 +51,7 @@ describe('Circulation rules editor: policies hints', () => {
       expect(circulationRules.editor.hints.sections(0).items(1).text).to.equal('Request policies');
       expect(circulationRules.editor.hints.sections(0).items(2).text).to.equal('Patron notice policies');
       expect(circulationRules.editor.hints.sections(0).items(3).text).to.equal('Overdue fine policies');
+      expect(circulationRules.editor.hints.sections(0).items(4).text).to.equal('Lost item fee policies');
     });
 
     it('should display the correct header for the policy types hint menu', () => {
