@@ -8,11 +8,11 @@ import { expect } from 'chai';
 import {
   convertIdsToNames,
   convertNamesToIds,
-} from '../../../src/settings/utils/rules-string-convertors';
+} from '../../../../src/settings/utils/rules-string-convertors';
 import {
   RULES_TYPE,
   POLICY,
-} from '../../../src/constants';
+} from '../../../../src/constants';
 
 describe('Rules string convertors', () => {
   const generateCode = (type, number) => {
