@@ -22,6 +22,7 @@ describe('Circulation rules editor: pane UI', () => {
   let requestPolicies;
   let patronNoticePolicies;
   let overdueFinePolicy;
+  let lostItemFeePolicy;
 
   beforeEach(async function () {
     this.server.get('/circulation/rules', {
@@ -33,6 +34,7 @@ describe('Circulation rules editor: pane UI', () => {
     requestPolicies = await this.server.createList('requestPolicy', 3);
     patronNoticePolicies = await this.server.createList('patronNoticePolicy', 3);
     overdueFinePolicy = await this.server.createList('overdueFinePolicy', 3);
+    lostItemFeePolicy = await this.server.createList('lostItemFeePolicy', 3);
 
     return this.visit('/settings/circulation/rules', () => {
       expect(circulationRules.$root).to.exist;
@@ -108,21 +110,25 @@ describe('Circulation rules editor: pane UI', () => {
     let rPolicy;
     let nPolicy;
     let oPolicy;
+    let iPolicy;
     let lName;
     let rName;
     let nName;
     let oName;
+    let iName;
 
     beforeEach(async function () {
       lPolicy = loanPolicies[0];
       rPolicy = requestPolicies[0];
       nPolicy = patronNoticePolicies[0];
       oPolicy = overdueFinePolicy[0];
+      iPolicy = lostItemFeePolicy[0];
 
       lName = kebabCase(lPolicy.name);
       rName = kebabCase(rPolicy.name);
       nName = kebabCase(nPolicy.name);
       oName = kebabCase(oPolicy.name);
+      iName = kebabCase(iPolicy.name);
 
       this.server.put('/circulation/rules', (_, request) => {
         const params = JSON.parse(request.requestBody);
@@ -131,12 +137,12 @@ describe('Circulation rules editor: pane UI', () => {
         return params;
       });
 
-      await circulationRules.editor.setValue(`m book dvd: l ${lName} r ${rName} n ${nName} o ${oName}`);
+      await circulationRules.editor.setValue(`m book dvd: l ${lName} r ${rName} n ${nName} o ${oName} i ${iName}`);
       await circulationRules.clickSaveRulesBtn();
     });
 
     it('should choose loan policy as a fallback', () => {
-      expect(savedRules).to.equal(`m 1a54b431-2e4f-452d-9cae-9cee66c9a892 5ee11d91-f7e8-481d-b079-65d708582ccc: l ${lPolicy.id} r ${rPolicy.id} n ${nPolicy.id} o ${oPolicy.id}`);
+      expect(savedRules).to.equal(`m 1a54b431-2e4f-452d-9cae-9cee66c9a892 5ee11d91-f7e8-481d-b079-65d708582ccc: l ${lPolicy.id} r ${rPolicy.id} n ${nPolicy.id} o ${oPolicy.id} i ${iPolicy.id}`);
     });
 
     describe('changing circulation rules', () => {

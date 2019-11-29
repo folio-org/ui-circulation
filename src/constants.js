@@ -393,6 +393,7 @@ export const POLICY = {
   REQUEST: 'r',
   NOTICE: 'n',
   OVERDUE_FINE: 'o',
+  LOST_ITEM_FEE: 'i',
 };
 
 export const EDITOR_KEYWORD = {
