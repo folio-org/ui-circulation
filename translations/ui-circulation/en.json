@@ -94,6 +94,7 @@
   "settings.circulationRules.noticePolicies": "Patron notice policies",
   "settings.circulationRules.circulationPolicies": "Circulation policies",
   "settings.circulationRules.overdueFinePolicies": "Overdue fine policies",
+  "settings.circulationRules.lostItemFeePolicies": "Lost item fee policies",
 
   "settings.validate.fillIn": "Please fill this in to continue",
   "settings.validate.select": "Please make a selection",
