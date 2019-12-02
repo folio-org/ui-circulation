@@ -238,7 +238,7 @@ class LostItemFeeSection extends React.Component {
               selectValuePath="feesFinesShallRefunded.intervalId"
               intervalPeriods={this.generateOptions(intervalPeriodsLower, 'ui-circulation.settings.lostItemFee.selectInterval')}
               changeFormValue={change}
-              late="ui-circulation.settings.lostItemFee.late"
+              intervalPeriodsSuffix="ui-circulation.settings.lostItemFee.late"
             />
           </div>
         </Accordion>
