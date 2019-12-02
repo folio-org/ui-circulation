@@ -23,4 +23,3 @@ export const isNotEmptyEditor = (value = '') => {
 
   return !isEmpty(plainText);
 };
-export const isOverdueGreaterThan = (value) => isInteger(value) && value > 0;
