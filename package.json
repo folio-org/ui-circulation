@@ -285,8 +285,5 @@
   "peerDependencies": {
     "@folio/stripes": "^2.6.0",
     "react": "*"
-  },
-  "resolutions": {
-    "fake-xml-http-request": "2.0.0"
   }
 }
