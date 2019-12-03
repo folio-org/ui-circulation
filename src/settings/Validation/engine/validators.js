@@ -9,7 +9,6 @@ import {
   isInInterval,
   isInIntervalOrNull,
   isNotEmptyEditor,
-  isOverdueFindGreaterThan,
 } from './handlers';
 
 export default {
@@ -44,10 +43,6 @@ export default {
   isNotEmptyEditor: {
     validate: isNotEmptyEditor,
     message: <FormattedMessage id="ui-circulation.settings.validate.fillIn" />,
-  },
-  isOverdueFindGreaterThan: {
-    validate: isOverdueFindGreaterThan,
-    message: <FormattedMessage id="ui-circulation.settings.validate.greaterThanZero" />,
   },
   isItemLimitIsInInterval: {
     validate: value => isInIntervalOrNull(1, 9999, value),
