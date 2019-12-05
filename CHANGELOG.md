@@ -1,6 +1,7 @@
 # Change history for ui-circulation
 
-## 1.12.0 (IN PROGRESS)
+## [1.12.0](https://github.com/folio-org/ui-circulation/tree/v1.12.0) (2019-12-06)
+[Full Changelog](https://github.com/folio-org/ui-circulation/compare/v1.11.0...v1.12.0)
 
 * Add location items filtering into the circulation rules editor menu. Refs UICIRC-314.
 * Validate for closed loans and fines/fees in loan history settings. Refs UITEN-42.
@@ -21,8 +22,28 @@
 * Add minutes and hours support to the loan history form. Refs UICIRC-388.
 * Update structure of the circulation rules editor tests. Refs UICIRC-382.
 * Add the lost item fee policies menu to the circulation rules editor. Refs UICIRC-341.
+* Add "lastCheckedInDateTime" and remove "lastScannedServicePoint" tokens for staff slips. Refs UICIRC-291.
+* View/edit request delivery slip. Refs UICIRC-316.
+* Tokens for request delivery slip. Refs UICIRC-319.
+* Request delivery slip preview. Refs UICIRC-320.
+* Recall notice trigger update. Refs UICIRC-279.
+* Update the circulation API to support changes to the rule editor. Refs UICIRC-336.
+* Allow user to resize text area for notice and staff slip templates. Refs UICIRC-295.
+* Fix the impact of the API change as per MODINVSTOR-315 for ui-circulation. Refs UICIRC-348.
+* Staff slip preview for token item.callNumberSuffix isn't working. Refs UICIRC-355.
+* Create/Edit Patron notice policies | Move Save/Cancel buttons to the footer. Refs UICIRC-367.
+* Create/Edit Patron notice templates| Move Save/Cancel buttons to the footer. Refs UICIRC-368.
+* Create/Edit Request policies | Move Save/Cancel buttons to the footer. Refs UICIRC-369.
+* Lost item fee policies |  Create/Edit Request policies | Move Save/Cancel buttons to the footer. Refs UICIRC-370.
+* Create/Edit Overdue fine policy| Move Save/Cancel buttons to the footer. Refs UICIRC-371.
+* Create/Edit loan policy | Move Save/Cancel buttons to the footer. Refs UICIRC-372.
+* Loan policy: Renewals section not displaying in view when Renewable = N. Refs UICIRC-350.
+* Add date/time tokens to patron notice templates. Refs UICIRC-384.
+* Add Item Limit to Loan Policy. Refs UICIRC-390.
+* Overdue fine policy: Validation field incorrect for overdue recall fine. Refs UIU-1232.
+* Lost item fee policy: Words "late" and "Set cost" missing on entry of new policy. Refs UIU-1315.
 
-## [1.11.0](https://github.com/folio-org/ui-circulation/tree/v1.13.0) (2019-09-13)
+## [1.11.0](https://github.com/folio-org/ui-circulation/tree/v1.11.0) (2019-09-13)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v1.10.0...v1.11.0)
 
 * CRUD for overdue fine policies. Refs UICIRC-1146
