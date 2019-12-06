@@ -13,7 +13,6 @@ import { ConfigManager } from '@folio/stripes/smart-components';
 
 import LoanHistoryForm from './LoanHistoryForm';
 import { LoanHistory as validateLoanHistory } from '../Validation';
-import { anonymizingIntervals } from '../../constants';
 
 class LoanHistorySettings extends React.Component {
   static propTypes = {
@@ -45,7 +44,6 @@ class LoanHistorySettings extends React.Component {
       feeFine: {},
       loanExceptions: [],
       treatEnabled: false,
-      selectedPeriodsValues: anonymizingIntervals,
     };
     let config;
 

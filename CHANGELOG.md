@@ -42,6 +42,7 @@
 * Add Item Limit to Loan Policy. Refs UICIRC-390.
 * Overdue fine policy: Validation field incorrect for overdue recall fine. Refs UIU-1232.
 * Lost item fee policy: Words "late" and "Set cost" missing on entry of new policy. Refs UIU-1315.
+* Remove periods values from default config in `<LoanHistory>`, handle CSS issue when the loan history form is being submitted and add tests for anonymizing intervals. Refs UICIRC-405.
 
 ## [1.11.0](https://github.com/folio-org/ui-circulation/tree/v1.11.0) (2019-09-13)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v1.10.0...v1.11.0)
