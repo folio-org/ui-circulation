@@ -3,6 +3,7 @@
 ## [1.13.0] (IN PROGRESS)
 
 * Provide two options for barcode tokens on staff slips. Refs UICIRC-393.
+* Add hold shelf exp and request exp date/time tokens to patron notice templates. UICIRC-396.
 
 ## [1.12.0](https://github.com/folio-org/ui-circulation/tree/v1.12.0) (2019-12-06)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v1.11.0...v1.12.0)
