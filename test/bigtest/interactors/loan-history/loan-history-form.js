@@ -21,6 +21,7 @@ import CalloutInteractor from '@folio/stripes-components/lib/Callout/tests/inter
 
   duration = scoped('[data-test-period-duration]', TextFieldInteractor);
   interval = scoped('[data-test-period-interval]', SelectInteractor);
+  intervalSelector = scoped('[data-test-period-interval] select');
   closingTypes = collection('label', RadioButtonInteractor);
 }
 
