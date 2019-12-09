@@ -372,5 +372,7 @@
     "settings.lostItemFee.deleteFeePolicy": "حذف سياسة رسم المادة المفقودة",
     "settings.circulationRules.overdueFinePolicies": "سياسات غرامات التأخير",
     "settings.loanPolicy.itemLimit": "حد المادة",
-    "settings.validate.itemLimitInterval": "يجب يكون حد المادة > 0، =<9999 أو فارغًا"
+    "settings.validate.itemLimitInterval": "يجب يكون حد المادة > 0، =<9999 أو فارغًا",
+    "settings.lostItemFee.setCost": "ضبط التكلفة",
+    "settings.circulationRules.lostItemFeePolicies": "سياسات رسوم المواد المفقودة"
 }

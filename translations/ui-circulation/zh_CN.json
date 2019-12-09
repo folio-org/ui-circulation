@@ -234,7 +234,7 @@
     "settings.requestPolicy.cannotDelete.message": "此请求政策由流通规则使用，不能删除",
     "settings.common.close": "关闭",
     "settings.noticePolicy.denyDelete.header": "无法删除读者通知",
-    "settings.noticePolicy.denyDelete.body": "无法删除此通知政策，因为它正由一个或多个记录使用。",
+    "settings.noticePolicy.denyDelete.body": "本通知政策无法删除，因为它正由一个或多个记录使用。",
     "settings.patronNotices.addToken": "添加令牌",
     "settings.patronNotices.itemTokenHeader": "单件",
     "settings.common.print": "打印",
@@ -331,7 +331,7 @@
     "settings.finePolicy.month": "月",
     "settings.finePolicy.year": "年",
     "settings.circulationRules.filterOptionsList": "筛选选项清单",
-    "settings.staffSlips.requestDeliveryAddressTokenHeader": "要求送货地址",
+    "settings.staffSlips.requestDeliveryAddressTokenHeader": "请求交付地址",
     "settings.noticePolicy.loanNotices.itemRecalled": "召回的单件",
     "settings.fDDSform.cancel": "取消",
     "settings.validate.lostItem": "如果可能对遗失单件不收取任何费用/罚款，则必须填写此字段",
@@ -370,7 +370,9 @@
     "settings.lostItemFee.editLabel": "编辑- {name}",
     "settings.lostItemFee.late": "晚的",
     "settings.lostItemFee.deleteFeePolicy": "删除遗失单件费用政策",
-    "settings.circulationRules.overdueFinePolicies": "Overdue fine policies",
-    "settings.loanPolicy.itemLimit": "Item limit",
-    "settings.validate.itemLimitInterval": "Item limit must be > 0, =< 9999 or blank"
+    "settings.circulationRules.overdueFinePolicies": "逾期罚款政策",
+    "settings.loanPolicy.itemLimit": "单件限制",
+    "settings.validate.itemLimitInterval": "单件限制必须> 0，= < 9999或空白",
+    "settings.lostItemFee.setCost": "设定费用",
+    "settings.circulationRules.lostItemFeePolicies": "遗失单件费用政策"
 }
