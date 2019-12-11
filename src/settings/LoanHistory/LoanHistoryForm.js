@@ -31,6 +31,7 @@ import {
   closedLoansRules,
 } from '../../constants';
 import { normalize } from './utils/normalize';
+
 import css from './LoanHistoryForm.css';
 
 class LoanHistoryForm extends Component {

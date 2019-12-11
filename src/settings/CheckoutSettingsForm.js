@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
+import {
+  Field,
+  FieldArray,
+  getFormValues,
+} from 'redux-form';
+
 import { stripesShape } from '@folio/stripes/core';
 import {
   Button,
@@ -14,13 +20,9 @@ import {
   PaneFooter,
 } from '@folio/stripes/components';
 import stripesForm from '@folio/stripes/form';
-import {
-  Field,
-  FieldArray,
-  getFormValues,
-} from 'redux-form';
 
 import { patronIdentifierTypes } from '../constants';
+
 import css from './CheckoutSettingsForm.css';
 
 class CheckoutSettingsForm extends Component {
