@@ -2,6 +2,8 @@
 
 ## [1.13.0] (IN PROGRESS)
 
+* Settings > Circulation > Loan history | Move Save button to the footer. Refs UICIRC-375.
+* Settings > Circulation > Other Settings | Move Save button to the footer. Refs UICIRC-374.
 * Provide two options for barcode tokens on staff slips. Refs UICIRC-393.
 * Add hold shelf exp and request exp date/time tokens to patron notice templates. UICIRC-396.
 

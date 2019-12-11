@@ -8,3 +8,6 @@
 .hidden{
   display: none;
 }
+.checkoutForm {
+  height: 100%;
+}
