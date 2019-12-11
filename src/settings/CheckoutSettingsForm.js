@@ -67,7 +67,7 @@ class CheckoutSettingsForm extends Component {
             id="clickable-savescanid"
             type="submit"
             buttonStyle="primary paneHeaderNewButton"
-            disabled={(pristine || submitting)}
+            disabled={pristine || submitting}
             marginBottom0
           >
             <FormattedMessage id="ui-circulation.settings.checkout.save" />
