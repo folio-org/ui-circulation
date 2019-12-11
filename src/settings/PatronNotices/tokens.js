@@ -24,8 +24,10 @@ const formats = {
   },
   request: {
     'request.servicePointPickup': 'Circulation Desk - Main Library',
-    'request.requestExpirationDate': 'Jun 30, 2020 23:59',
-    'request.holdShelfExpirationDate': 'Mar 31, 2020 23:59',
+    'request.requestExpirationDate': 'Mar 31 30, 2020',
+    'request.requestExpirationDateTime': 'Mar 31, 2020 23:59',
+    'request.holdShelfExpirationDate': 'Jun 30, 2020',
+    'request.holdShelfExpirationDateTime': 'Jun 30, 2020 23:59',
     'request.reasonForCancellation': 'Item not available',
     'request.additionalInfo': 'Additional information regarding the request cancellation',
   },
