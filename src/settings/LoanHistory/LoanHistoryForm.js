@@ -21,6 +21,7 @@ import {
   Pane,
   Row,
   Headline,
+  PaneFooter,
 } from '@folio/stripes/components';
 
 import AnonymizingTypeSelectContainer from '../components/AnonymizingTypeSelect/AnonymizingTypeSelectContainer';
@@ -30,6 +31,8 @@ import {
   closedLoansRules,
 } from '../../constants';
 import { normalize } from './utils/normalize';
+
+import css from './LoanHistoryForm.css';
 
 class LoanHistoryForm extends Component {
   static propTypes = {
@@ -60,21 +63,25 @@ class LoanHistoryForm extends Component {
     onSubmit({ loan_history: JSON.stringify(normalizedData) });
   };
 
-  getLastMenu = () => {
+  renderFooter = () => {
     const {
       pristine,
       submitting,
     } = this.props;
 
     return (
-      <Button
-        data-test-loan-history-save-button
-        type="submit"
-        disabled={pristine || submitting}
-        marginBottom0
-      >
-        <FormattedMessage id="stripes-core.button.save" />
-      </Button>
+      <PaneFooter
+        renderEnd={(
+          <Button
+            data-test-loan-history-save-button
+            type="submit"
+            disabled={pristine || submitting}
+            marginBottom0
+          >
+            <FormattedMessage id="stripes-core.button.save" />
+          </Button>
+        )}
+      />
     );
   }
 
@@ -112,13 +119,14 @@ class LoanHistoryForm extends Component {
     return (
       <form
         id="loan-history-form"
+        className={css.loanHistoryForm}
         onSubmit={handleSubmit(this.onSave)}
       >
         <Pane
           defaultWidth="fill"
           fluidContentWidth
           paneTitle={label}
-          lastMenu={this.getLastMenu()}
+          footer={this.renderFooter()}
         >
           <div data-test-closed-loans>
             <Headline
