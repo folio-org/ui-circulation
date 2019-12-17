@@ -75,6 +75,7 @@ class LoanHistoryForm extends Component {
           <Button
             data-test-loan-history-save-button
             type="submit"
+            buttonStyle="primary paneHeaderNewButton"
             disabled={pristine || submitting}
             marginBottom0
           >
