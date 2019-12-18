@@ -6,7 +6,7 @@
 * Add hold shelf exp and request exp date/time tokens to patron notice templates. UICIRC-396.
 * Settings > Circulation > Other Settings | Move Save button to the footer. Refs UICIRC-374.
 * Settings > Circulation > Loan history | Move Save button to the footer. Refs UICIRC-375.
-* Settings > Circulation > Lost item fee policy | increase fee fields box size. Refs UICIRC-402.
+* Settings > Circulation > Lost item fee policy | increase fee fields box width. Refs UICIRC-402.
 
 ## [1.12.0](https://github.com/folio-org/ui-circulation/tree/v1.12.0) (2019-12-06)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v1.11.0...v1.12.0)
