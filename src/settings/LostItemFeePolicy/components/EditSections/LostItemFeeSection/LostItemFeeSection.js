@@ -91,7 +91,7 @@ class LostItemFeeSection extends React.Component {
             </Col>
           </Row>
           <Row>
-            <Col xs={1} data-test-lost-item-processing-fee>
+            <Col xs={2} data-test-lost-item-processing-fee>
               <Field
                 name="lostItemProcessingFee"
                 id="lost-item-processing-fee"
@@ -181,7 +181,7 @@ class LostItemFeeSection extends React.Component {
             </Col>
           </Row>
           <Row>
-            <Col xs={1} data-test-replacement-processing-fee>
+            <Col xs={2} data-test-replacement-processing-fee>
               <Field
                 name="replacementProcessingFee"
                 id="replacement-processing-fee"
