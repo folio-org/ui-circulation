@@ -173,7 +173,7 @@
     "settings.common.no": "No",
     "settings.noticePolicy.addNotice": "Add notice",
     "settings.noticePolicy.countableNotice": "Notice {counter}",
-    "settings.noticePolicy.loanNotices.dueDate": "Due date",
+    "settings.noticePolicy.loanNotices.dueDate": "Loan due date/time",
     "settings.noticePolicy.loanNotices.renewed": "Item renewed",
     "settings.requestPolicy.errors.nameExists": "A request policy with this name already exists",
     "settings.noticePolicy.notices.via": "via",
