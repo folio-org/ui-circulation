@@ -96,7 +96,7 @@
     "settings.staffSlips.print": "Print",
     "settings.staffSlips.editLabel": "Edit: staff slips - {name}",
     "settings.loanPolicy.openingTimeOffset": "Opening time offset",
-    "settings.index.patronNotices": "Patron notices",
+    "settings.index.patronNotices": "Patron notice templates",
     "settings.patronNotices.categories.feeFineAction": "Fee/fine action",
     "settings.patronNotices.categories.feeFineCharge": "Fee/fine charge",
     "settings.patronNotices.categories.loan": "Loan",
