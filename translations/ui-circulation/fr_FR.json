@@ -189,7 +189,7 @@
     "settings.noticePolicy.notices.after": "Après",
     "settings.noticePolicy.notices.upon": "Upon/At",
     "settings.noticePolicy.requestNotices.recallRequest": "Demande de rappel",
-    "settings.noticePolicy.requestNotices.holdRequest": "Hold request",
+    "settings.noticePolicy.requestNotices.holdRequest": "Demande de réservation",
     "settings.noticePolicy.requestNotices.pagingRequest": "Page request",
     "settings.noticePolicy.requestNotices.available": "En attente de retrait",
     "settings.noticePolicy.requestNotices.holdExpiration": "Expiration rayon d'attente",
