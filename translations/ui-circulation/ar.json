@@ -1,7 +1,7 @@
 {
     "settings.index.paneTitle": "الإعارة",
     "settings.index.loanPolicies": "سياسات الإعارة",
-    "settings.index.fdds": "جدوال تاريخ الاستحقاق المثبتة",
+    "settings.index.fdds": "جداول تاريخ الاستحقاق المثبتة",
     "settings.index.otherSettings": "إعدادات أخرى",
     "settings.index.staffSlips": "كشوف الموظفين",
     "settings.loanPolicy.entryLabel": "سياسة الإعارة",
@@ -36,7 +36,7 @@
     "settings.fDDS.validate.oneScheduleMin": "يجب إدخال جدول زمني واحد على الأقل",
     "settings.fDDS.validate.toDate": "يجب أن يكون التاريخ بعد تاريخ منذ",
     "settings.fDDS.validate.onOrAfter": "يجب أن يكون تاريخ الاستحقاق في أو بعد تاريخ ",
-    "settings.fDDS.paneTitle": "جدوال تاريخ الاستحقاق المثبتة",
+    "settings.fDDS.paneTitle": "جداول تاريخ الاستحقاق المثبتة",
     "settings.fDDS.deleteDisabled": "لا يمكن حذف الجدول الزمني إذا كان مستخدمًا بواسطة سياسة إعارة أو أكثر. ",
     "settings.fDDS.successfulDelete": "تم {deleted}. جدول تاريخ الاستحقاق المثبت {name} بنجاح.",
     "settings.fDDS.successfulDeleteVerb": "حذف",
@@ -371,6 +371,8 @@
     "settings.lostItemFee.late": "متأخر",
     "settings.lostItemFee.deleteFeePolicy": "حذف سياسة رسم المادة المفقودة",
     "settings.circulationRules.overdueFinePolicies": "سياسات غرامات التأخير",
-    "settings.loanPolicy.itemLimit": "Item limit",
-    "settings.validate.itemLimitInterval": "Item limit must be > 0, =< 9999 or blank"
+    "settings.loanPolicy.itemLimit": "حد المادة",
+    "settings.validate.itemLimitInterval": "يجب يكون حد المادة > 0، =<9999 أو فارغًا",
+    "settings.lostItemFee.setCost": "ضبط التكلفة",
+    "settings.circulationRules.lostItemFeePolicies": "سياسات رسوم المواد المفقودة"
 }

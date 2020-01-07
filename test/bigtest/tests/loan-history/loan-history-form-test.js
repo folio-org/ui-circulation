@@ -4,11 +4,23 @@ import {
   it,
 } from '@bigtest/mocha';
 import { expect } from 'chai';
+import { forEach } from 'lodash';
 
 import setupApplication from '../../helpers/setup-application';
 import LoanHistoryForm from '../../interactors/loan-history/loan-history-form';
 
-import { closingTypesMap } from '../../../../src/constants';
+import {
+  closingTypesMap,
+  intervalIdsMap,
+} from '../../../../src/constants';
+
+const intervals = {
+  MINUTES: 'Minute(s)',
+  HOURS: 'Hour(s)',
+  DAYS: 'Day(s)',
+  WEEKS: 'Week(s)',
+  MONTHS: 'Month(s)',
+};
 
 describe('Loan History Form', () => {
   setupApplication({ scenarios: ['testLoanHistory'] });
@@ -64,6 +76,18 @@ describe('Loan History Form', () => {
 
     it('save button should be active', () => {
       expect(LoanHistoryForm.disabledSaveButton).to.be.false;
+    });
+
+    forEach(intervals, (value, key) => {
+      describe('selecting interval', () => {
+        beforeEach(async () => {
+          await LoanHistoryForm.loan.interval.selectAndBlur(value);
+        });
+
+        it(`interval ${value} should be present`, () => {
+          expect(LoanHistoryForm.loan.intervalSelector.value).to.be.equal(intervalIdsMap[key]);
+        });
+      });
     });
 
     describe('filling completely the interval closing type fields', () => {

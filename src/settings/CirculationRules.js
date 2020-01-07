@@ -50,6 +50,7 @@ const editorDefaultProps = {
     [POLICY.REQUEST]: 'requestPolicies',
     [POLICY.NOTICE]: 'noticePolicies',
     [POLICY.OVERDUE_FINE]: 'overdueFinePolicies',
+    [POLICY.LOST_ITEM_FEE]: 'lostItemFeePolicies',
   },
 };
 
@@ -124,6 +125,15 @@ class CirculationRules extends React.Component {
       },
       resourceShouldRefresh: true,
     },
+    lostItemFeePolicies: {
+      type: 'okapi',
+      records: 'lostItemFeePolicies',
+      path: 'lost-item-fees-policies',
+      params: {
+        limit: '1000',
+      },
+      resourceShouldRefresh: true,
+    },
     locations: {
       type: 'okapi',
       records: 'locations',
@@ -190,6 +200,7 @@ class CirculationRules extends React.Component {
       requestPolicies,
       noticePolicies,
       overdueFinePolicies,
+      lostItemFeePolicies,
       locations,
       institutions,
       campuses,
@@ -203,6 +214,7 @@ class CirculationRules extends React.Component {
       !requestPolicies.isPending &&
       !noticePolicies.isPending &&
       !overdueFinePolicies.isPending &&
+      !lostItemFeePolicies.isPending &&
       !locations.isPending &&
       !institutions.isPending &&
       !campuses.isPending &&
@@ -232,6 +244,7 @@ class CirculationRules extends React.Component {
       noticePolicies,
       requestPolicies,
       overdueFinePolicies,
+      lostItemFeePolicies,
       institutions,
       campuses,
       libraries,
@@ -273,6 +286,7 @@ class CirculationRules extends React.Component {
         requestPolicies: requestPolicies.records.map(r => kebabCase(r.name)),
         noticePolicies: noticePolicies.records.map(n => kebabCase(n.name)),
         overdueFinePolicies: overdueFinePolicies.records.map(o => kebabCase(o.name)),
+        lostItemFeePolicies: lostItemFeePolicies.records.map(i => kebabCase(i.name)),
       },
     });
   }
@@ -286,6 +300,7 @@ class CirculationRules extends React.Component {
       requestPolicies,
       noticePolicies,
       overdueFinePolicies,
+      lostItemFeePolicies,
       institutions,
       campuses,
       libraries,
@@ -328,6 +343,7 @@ class CirculationRules extends React.Component {
       [POLICY.REQUEST]: requestPolicies.records.reduce(reducePolicyHandler, {}),
       [POLICY.NOTICE]: noticePolicies.records.reduce(reducePolicyHandler, {}),
       [POLICY.OVERDUE_FINE]: overdueFinePolicies.records.reduce(reducePolicyHandler, {}),
+      [POLICY.LOST_ITEM_FEE]: lostItemFeePolicies.records.reduce(reducePolicyHandler, {}),
     };
   }
 

@@ -1,26 +1,44 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
+import {
+  Field,
+  FieldArray,
+  getFormValues,
+} from 'redux-form';
+
 import { stripesShape } from '@folio/stripes/core';
-import { Button, Checkbox, Col, Pane, Row, Select, TextField, Label } from '@folio/stripes/components';
+import {
+  Button,
+  Checkbox,
+  Col,
+  Pane,
+  Row,
+  Select,
+  TextField,
+  Label,
+  PaneFooter,
+} from '@folio/stripes/components';
 import stripesForm from '@folio/stripes/form';
-import { Field, FieldArray, getFormValues } from 'redux-form';
 
 import { patronIdentifierTypes } from '../constants';
+
 import css from './CheckoutSettingsForm.css';
 
-class CheckoutSettingsForm extends React.Component {
+class CheckoutSettingsForm extends Component {
   constructor(props) {
     super(props);
-    this.onSave = this.onSave.bind(this);
-    this.renderList = this.renderList.bind(this);
-    this.getLastMenu = this.getLastMenu.bind(this);
-    this.handleCheckoutTimeout = this.handleCheckoutTimeout.bind(this);
+
     this.state = { checked: false };
   }
 
-  onSave(data) {
-    const { idents, audioAlertsEnabled, checkoutTimeout, checkoutTimeoutDuration } = data;
+  onSave = data => {
+    const {
+      idents,
+      audioAlertsEnabled,
+      checkoutTimeout,
+      checkoutTimeoutDuration,
+    } = data;
     const values = idents.reduce((vals, ident, index) => {
       if (ident) vals.push(patronIdentifierTypes[index].key);
       return vals;
@@ -36,34 +54,44 @@ class CheckoutSettingsForm extends React.Component {
     this.props.onSubmit({ other_settings: otherSettings });
   }
 
-  getLastMenu() {
-    const { pristine, submitting } = this.props;
+  renderFooter = () => {
+    const {
+      pristine,
+      submitting,
+    } = this.props;
+
     return (
-      <Button
-        id="clickable-savescanid"
-        type="submit"
-        marginBottom0
-        disabled={(pristine || submitting)}
-      >
-        <FormattedMessage id="ui-circulation.settings.checkout.save" />
-      </Button>
+      <PaneFooter
+        renderEnd={(
+          <Button
+            id="clickable-savescanid"
+            type="submit"
+            buttonStyle="primary paneHeaderNewButton"
+            disabled={pristine || submitting}
+            marginBottom0
+          >
+            <FormattedMessage id="ui-circulation.settings.checkout.save" />
+          </Button>
+        )}
+      />
     );
   }
 
-  handleCheckoutTimeout() {
+  handleCheckoutTimeout = () => {
     this.setState(({ checked }) => ({
       checked: !checked
     }));
   }
 
-  getCurrentValues() {
+  getCurrentValues = () => {
     const { store } = this.props.stripes;
     const state = store.getState();
+
     return getFormValues('checkoutForm')(state) || {};
   }
 
   // eslint-disable-next-line class-methods-use-this
-  renderList({ fields, meta }) {
+  renderList = ({ fields, meta }) => {
     const items = patronIdentifierTypes.map((iden, index) => (
       <Row key={`row-${index}`}>
         <Col xs={12}>
@@ -100,10 +128,23 @@ class CheckoutSettingsForm extends React.Component {
 
     const checkoutValues = this.getCurrentValues();
     const hidden = this.state.checked ? '' : 'hidden';
+
     return (
-      <form id="checkout-form" onSubmit={handleSubmit(this.onSave)}>
-        <Pane defaultWidth="fill" fluidContentWidth paneTitle={label} lastMenu={this.getLastMenu()}>
-          <FieldArray name="idents" component={this.renderList} />
+      <form
+        id="checkout-form"
+        className={css.checkoutForm}
+        onSubmit={handleSubmit(this.onSave)}
+      >
+        <Pane
+          defaultWidth="fill"
+          fluidContentWidth
+          paneTitle={label}
+          footer={this.renderFooter()}
+        >
+          <FieldArray
+            name="idents"
+            component={this.renderList}
+          />
           <br />
           <Row>
             <Col xs={12}>

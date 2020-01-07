@@ -5,45 +5,28 @@ import {
   afterEach,
 } from '@bigtest/mocha';
 import { expect } from 'chai';
+import { truncate } from 'lodash';
+
+import setupApplication from '../../../helpers/setup-application';
+import circulationRules from '../../../interactors/circulation-rules-editor/pane';
+import replacer from '../../../../../src/settings/utils/with-dash-replacer';
 import {
-  truncate,
-  kebabCase,
-} from 'lodash';
-import { Response } from '@bigtest/mirage';
-
-import setupApplication from '../helpers/setup-application';
-import circulationRules from '../interactors/circulation-rules';
-import replacer from '../../../src/settings/utils/with-dash-replacer';
-
-const removeDisplayedHints = () => {
-  const hints = document.getElementsByClassName('CodeMirror-hints');
-
-  for (let i = 0; i < hints.length; i++) {
-    hints[i].parentNode.removeChild(hints[i]);
-  }
-};
+  showHintsWithAttachedCustomKeysHandlers,
+  removeDisplayedHints,
+} from '../utils';
 
 const getEditorHintSection = sectionIndex => circulationRules.editor.hints.sections(sectionIndex);
 
-// shows hints with custom 'customKeys' handlers like 'handleBackspace' attached
-const showHintsWithAttachedCustomKeysHandlers = async editorValue => {
-  await circulationRules.editor.setValue(editorValue, { showHint: false });
-  await circulationRules.editor.textArea.focus();
-};
-
-describe('CirculationRules', () => {
+describe('Circulation rules editor: criteria hints', () => {
   setupApplication();
 
-  let loanPolicies;
-  let requestPolicies;
-  let patronNoticePolicies;
   let institutions;
   let campuses1;
   let campuses2;
   let libraries1;
   let libraries2;
   let locations;
-  let overdueFinePolicy;
+
 
   const shortInstitutionCode = 'INST';
   const longInstitutionCode = '/TESTCODE TESTCODE TESTCODE TESTCODE';
@@ -58,14 +41,6 @@ describe('CirculationRules', () => {
   };
 
   beforeEach(async function () {
-    this.server.get('/circulation/rules', {
-      'id' : '4c70f818-2edc-4cf8-aa27-16c14c5c7b58',
-      'rulesAsText': ''
-    });
-    loanPolicies = await this.server.createList('loanPolicy', 3);
-    requestPolicies = await this.server.createList('requestPolicy', 3);
-    patronNoticePolicies = await this.server.createList('patronNoticePolicy', 3);
-    overdueFinePolicy = await this.server.createList('overdueFinePolicy', 1);
     const institutionsWithShortCode1 = this.server.createList('institution', 1, { code: `${shortInstitutionCode}1` });
     const institutionsWithShortCode2 = this.server.createList('institution', 1, { code: `${shortInstitutionCode}2` });
     institutions = await this.server.createList('institution', institutionsAmount - 2, { code: longInstitutionCode });
@@ -88,163 +63,13 @@ describe('CirculationRules', () => {
     removeDisplayedHints();
   });
 
-  it('should have rules form', () => {
-    expect(circulationRules.formPresent).to.be.true;
-  });
-
-  it('should have rules editor', () => {
-    expect(circulationRules.editorPresent).to.be.true;
-  });
-
-  it('should have disabled save button when there is no changes', () => {
-    expect(circulationRules.isSaveButtonDisabled).to.be.true;
-  });
-
-  describe('rules filtering', () => {
-    beforeEach(async () => {
-      await circulationRules.filter('term');
-    });
-
-    it('should not break the editor', () => {
-      expect(circulationRules.editorPresent).to.be.true;
-    });
-  });
-
-  describe('pressing Enter button without selected hints', () => {
-    beforeEach(async () => {
-      await circulationRules.editor.textArea.focus();
-      await circulationRules.editor.pressEnter();
-    });
-
-    it('should add a new line symbol', () => {
-      expect(circulationRules.editor.value).to.equal('\n');
-    });
-  });
-
-  describe('focusing the editor', () => {
-    beforeEach(async () => {
-      await circulationRules.editor.textArea.focus();
-    });
-
-    it('should open hints menu', () => {
-      expect(circulationRules.editor.hints.arePresent).to.be.true;
-    });
-
-    describe('pressing down arrow key', () => {
-      beforeEach(async () => {
-        await circulationRules.editor.pressArrowDown();
-      });
-
-      it('should make the first item selected', () => {
-        expect(circulationRules.editor.hints.sections(0).isFirstItemActive).to.be.true;
-      });
-
-      describe('pressing up arrow key', () => {
-        beforeEach(async () => {
-          await circulationRules.editor.pressArrowUp();
-        });
-
-        it('should make the first item active', () => {
-          expect(circulationRules.editor.hints.sections(0).isActiveItemPresent).to.be.true;
-        });
-      });
-
-      describe('moving selection to the last item', () => {
-        beforeEach(async () => {
-          const hintsCount = circulationRules.editor.hints.sections(0).itemsCount;
-          circulationRules.editor.changeActiveItem(hintsCount - 1);
-        });
-
-        it('should make it active', () => {
-          expect(circulationRules.editor.hints.sections(0).isLastItemActive).to.be.true;
-        });
-
-        describe('pressing down arrow key', () => {
-          beforeEach(async () => {
-            await circulationRules.editor.pressArrowDown();
-          });
-
-          it('should make the first item active', () => {
-            expect(circulationRules.editor.hints.sections(0).isFirstItemActive).to.be.true;
-          });
-
-          describe('pressing up arrow key', () => {
-            beforeEach(async () => {
-              await circulationRules.editor.pressArrowUp();
-            });
-
-            it('should make the last item active', () => {
-              expect(circulationRules.editor.hints.sections(0).isLastItemActive).to.be.true;
-            });
-          });
-        });
-      });
-    });
-  });
-
-  describe('pressing Tab without selected hints', () => {
-    beforeEach(async () => {
-      await circulationRules.editor.textArea.focus();
-      await circulationRules.editor.pressTab();
-    });
-
-    it('should a add tab symbol', () => {
-      expect(circulationRules.editor.value).to.equal('\t');
-    });
-  });
-
-  describe('entering circulation rule into editor', () => {
-    beforeEach(async () => {
-      await showHintsWithAttachedCustomKeysHandlers('m book: l example-loan-policy');
-    });
-
-    it('should update the editor value', () => {
-      expect(circulationRules.editor.value).to.equal('m book: l example-loan-policy');
-    });
-
-    it('should enable save button', () => {
-      expect(circulationRules.isSaveButtonDisabled).to.be.false;
-    });
-  });
-
-  describe('entering item type', () => {
-    beforeEach(async () => {
-      await showHintsWithAttachedCustomKeysHandlers('m book: ');
-    });
-
-    it('should display hints menu', () => {
-      expect(circulationRules.editor.hints.arePresent).to.be.true;
-    });
-
-    it('should display only one hint section', () => {
-      expect(circulationRules.editor.hints.sectionsCount).to.equal(1);
-    });
-
-    it('should display policy types menu', () => {
-      expect(circulationRules.editor.hints.sections(0).items(0).text).to.equal('Loan policies');
-    });
-
-    it('should display the correct header for the policy types list', () => {
-      expect(circulationRules.editor.hints.header.isPresent).to.be.true;
-      expect(circulationRules.editor.hints.header.text).to.equal('Circulation policies');
-    });
-
-    it('should not display the subheader for the policy types list', () => {
-      expect(circulationRules.editor.hints.sections(0).subheader.isPresent).to.be.false;
-    });
-
-    it('should not contain active items in hints menu by default', () => {
-      expect(circulationRules.editor.hints.sections(0).isActiveItemPresent).to.be.false;
-    });
-  });
-
   describe('choosing non locating criteria type - material type', () => {
     beforeEach(async () => {
-      await showHintsWithAttachedCustomKeysHandlers('m ');
+      await showHintsWithAttachedCustomKeysHandlers(circulationRules.editor, 'm ');
     });
 
     it('should display material types hints list', () => {
-      expect(circulationRules.editor.hints.arePresent).to.be.true;
+      expect(circulationRules.editor.hints.hasItems).to.be.true;
     });
 
     it('should not display header', () => {
@@ -266,11 +91,11 @@ describe('CirculationRules', () => {
 
   describe('choosing locating criteria type - institution', () => {
     beforeEach(async () => {
-      await showHintsWithAttachedCustomKeysHandlers('a ');
+      await showHintsWithAttachedCustomKeysHandlers(circulationRules.editor, 'a ');
     });
 
     it('should display institutions codes hints list', () => {
-      expect(circulationRules.editor.hints.arePresent).to.be.true;
+      expect(circulationRules.editor.hints.hasItems).to.be.true;
     });
 
     it('should display hints with correct header', () => {
@@ -288,80 +113,6 @@ describe('CirculationRules', () => {
 
     it('should truncate long locations codes', () => {
       expect(circulationRules.editor.hints.sections(0).items(2).text).to.equal(truncatedInstitutionCode);
-    });
-
-    it('should have the section scrollable as it has many items', () => {
-      expect(circulationRules.editor.hints.sections(0).isScrollable()).to.be.true;
-    });
-
-    describe('activating the first list item', () => {
-      beforeEach(async () => {
-        await circulationRules.editor.changeActiveItem(0);
-      });
-
-      it('should make the first item active', () => {
-        expect(circulationRules.editor.hints.sections(0).isActiveItemPresent).to.be.true;
-      });
-    });
-
-    describe('selecting the last item', () => {
-      beforeEach(async () => {
-        await circulationRules.editor.changeActiveItem(institutionsAmount - 4);
-      });
-
-      it('should scroll the container down to the item', () => {
-        expect(circulationRules.editor.hints.sections(0).isScrolledToBottom(institutionsAmount - 4)).to.be.true;
-      });
-
-      describe('selecting the second item', () => {
-        beforeEach(async () => {
-          await circulationRules.editor.changeActiveItem(1);
-        });
-
-        it('should scroll the container to the second item', () => {
-          expect(circulationRules.editor.hints.sections(0).isScrolledToTop(1)).to.be.true;
-        });
-      });
-    });
-
-    describe('activating item with index, that is greater than the list length, without wrapping avoiding', () => {
-      beforeEach(async () => {
-        await circulationRules.editor.changeActiveItem(institutionsAmount + 1);
-      });
-
-      it('should make the first item active', () => {
-        expect(circulationRules.editor.hints.sections(0).isFirstItemActive).to.be.true;
-      });
-    });
-
-    describe('activating item with index greater than the list length, with wrapping avoiding', () => {
-      beforeEach(async () => {
-        await circulationRules.editor.changeActiveItem(institutionsAmount + 1, true);
-      });
-
-      it('should make the last item active', () => {
-        expect(circulationRules.editor.hints.sections(0).isLastItemActive).to.be.true;
-      });
-    });
-
-    describe('activating item with negative index without wrapping avoiding', () => {
-      beforeEach(async () => {
-        await circulationRules.editor.changeActiveItem(-1);
-      });
-
-      it('should make the last item active', () => {
-        expect(circulationRules.editor.hints.sections(0).isLastItemActive).to.be.true;
-      });
-    });
-
-    describe('activating item with negative index with wrapping avoiding', () => {
-      beforeEach(async () => {
-        await circulationRules.editor.changeActiveItem(-1, true);
-      });
-
-      it('should make the first item active', () => {
-        expect(circulationRules.editor.hints.sections(0).isFirstItemActive).to.be.true;
-      });
     });
 
     describe('picking an institution with long name', () => {
@@ -384,7 +135,7 @@ describe('CirculationRules', () => {
       });
 
       it('should not change hints state', () => {
-        expect(circulationRules.editor.hints.arePresent).to.be.true;
+        expect(circulationRules.editor.hints.hasItems).to.be.true;
         expect(circulationRules.editor.hints.sections(0).isFirstItemActive).to.be.true;
       });
     });
@@ -396,7 +147,7 @@ describe('CirculationRules', () => {
       });
 
       it('should not change hints state', () => {
-        expect(circulationRules.editor.hints.arePresent).to.be.true;
+        expect(circulationRules.editor.hints.hasItems).to.be.true;
         expect(circulationRules.editor.hints.sections(0).isFirstItemActive).to.be.true;
       });
     });
@@ -404,11 +155,11 @@ describe('CirculationRules', () => {
 
   describe('choosing locating criteria type - campus', () => {
     beforeEach(async () => {
-      await showHintsWithAttachedCustomKeysHandlers('b ');
+      await showHintsWithAttachedCustomKeysHandlers(circulationRules.editor, 'b ');
     });
 
     it('should display campus codes hints list', () => {
-      expect(circulationRules.editor.hints.arePresent).to.be.true;
+      expect(circulationRules.editor.hints.hasItems).to.be.true;
     });
 
     it('should display hints with correct header', () => {
@@ -506,93 +257,13 @@ describe('CirculationRules', () => {
     });
   });
 
-  describe('navigating between sections', () => {
-    beforeEach(async () => {
-      await showHintsWithAttachedCustomKeysHandlers('b ');
-    });
-
-    describe('pressing Backspace button', () => {
-      describe('with reset to previous section behaviour', () => {
-        beforeEach(async () => {
-          // select first institution
-          await circulationRules.editor.hints.clickOnItem(0);
-
-          // undo institution selection
-          await circulationRules.editor.pressBackspace();
-
-          // select first institution
-          await circulationRules.editor.hints.clickOnItem(0);
-
-          // select first campus
-          await circulationRules.editor.hints.clickOnItem(0, 1);
-        });
-
-        it('should work', () => {
-          const code = `${replacer(institutions[0].code)}>${replacer(campuses1[campusesAmount - 1].code)}`;
-
-          expect(circulationRules.editor.value).to.equal(`b ${code} `);
-        });
-      });
-
-      describe('with normal behaviour', () => {
-        beforeEach(async () => {
-          await circulationRules.editor.pressBackspace();
-        });
-
-        it('should remove characters in editor', () => {
-          expect(circulationRules.editor.value).to.equal('b');
-        });
-      });
-    });
-
-    describe('selection hint items with a mouse button', () => {
-      describe('clicking on different hint items', () => {
-        beforeEach(async () => {
-          // select first institution
-          await circulationRules.editor.hints.clickOnItem(0);
-
-          // select second institution
-          await circulationRules.editor.hints.clickOnItem(1);
-
-          // select first campus in second institution
-          await circulationRules.editor.hints.clickOnItem(0, 1);
-        });
-
-        it('should work', () => {
-          const code = `${replacer(institutions[1].code)}>${replacer(campuses2[0].code)}`;
-
-          expect(circulationRules.editor.value).to.equal(`b ${code} `);
-        });
-      });
-
-      describe('clicking on the same hint item', () => {
-        beforeEach(async () => {
-          // select second institution
-          await circulationRules.editor.hints.clickOnItem(1);
-
-          // select the same institution (the item still should be selected)
-          await circulationRules.editor.hints.clickOnItem(1);
-
-          // select first campus in second institution
-          await circulationRules.editor.hints.clickOnItem(0, 1);
-        });
-
-        it('should work', () => {
-          const code = `${replacer(institutions[1].code)}>${replacer(campuses2[0].code)}`;
-
-          expect(circulationRules.editor.value).to.equal(`b ${code} `);
-        });
-      });
-    });
-  });
-
   describe('choosing locating criteria type - library', () => {
     beforeEach(async () => {
-      await showHintsWithAttachedCustomKeysHandlers('c ');
+      await showHintsWithAttachedCustomKeysHandlers(circulationRules.editor, 'c ');
     });
 
     it('should display library codes hints list', () => {
-      expect(circulationRules.editor.hints.arePresent).to.be.true;
+      expect(circulationRules.editor.hints.hasItems).to.be.true;
     });
 
     it('should display hints with correct header', () => {
@@ -687,11 +358,11 @@ describe('CirculationRules', () => {
     const editorHints = circulationRules.editor.hints;
 
     beforeEach(async () => {
-      await showHintsWithAttachedCustomKeysHandlers('s ');
+      await showHintsWithAttachedCustomKeysHandlers(circulationRules.editor, 's ');
     });
 
     it('should display location codes hints list ', () => {
-      expect(editorHints.arePresent).to.be.true;
+      expect(editorHints.hasItems).to.be.true;
     });
 
     it('should display hints with correct header', () => {
@@ -751,7 +422,7 @@ describe('CirculationRules', () => {
         });
 
         it('should hide hints menu', () => {
-          expect(editorHints.arePresent).to.equal(false);
+          expect(editorHints.hasItems).to.equal(false);
         });
       });
 
@@ -761,7 +432,7 @@ describe('CirculationRules', () => {
         });
 
         it('should not hide hints menu', () => {
-          expect(editorHints.arePresent).to.equal(true);
+          expect(editorHints.hasItems).to.equal(true);
         });
       });
     });
@@ -1006,174 +677,6 @@ describe('CirculationRules', () => {
           });
         });
       });
-    });
-  });
-
-  describe('choosing policy type', () => {
-    beforeEach(async () => {
-      await showHintsWithAttachedCustomKeysHandlers('m book: ');
-    });
-
-    describe('pressing Enter button on the selected item', () => {
-      beforeEach(async () => {
-        await circulationRules.editor.changeActiveItem(0);
-        await circulationRules.editor.pressEnter();
-      });
-
-      it('should choose loan policy type', () => {
-        expect(circulationRules.editor.value).to.equal('m book: l ');
-      });
-    });
-
-    describe('pressing tab on the selected item', () => {
-      beforeEach(async () => {
-        await circulationRules.editor.changeActiveItem(0);
-        await circulationRules.editor.pressTab();
-      });
-
-      it('should choose loan policy type', () => {
-        expect(circulationRules.editor.value).to.equal('m book: l ');
-      });
-    });
-
-    describe('picking loan policy type', () => {
-      beforeEach(async () => {
-        await circulationRules.editor.changeActiveItem(0);
-        await circulationRules.editor.pickHint(0);
-      });
-
-      it('should choose loan policy type', () => {
-        expect(circulationRules.editor.value).to.equal('m book: l ');
-      });
-    });
-
-    describe('clicking on first item in policies list', () => {
-      beforeEach(async () => {
-        await circulationRules.editor.hints.clickOnItem(0);
-      });
-
-      it('should choose loan policy type', () => {
-        expect(circulationRules.editor.value).to.equal('m book: l ');
-      });
-    });
-  });
-
-  describe('choosing loan policy', () => {
-    beforeEach(async () => {
-      await circulationRules.editor.setValue('m book: ');
-
-      // choose policy type
-      await circulationRules.editor.changeActiveItem(0);
-      await circulationRules.editor.pickHint(0);
-
-      // choose loan policy
-      await circulationRules.editor.changeActiveItem(0);
-      await circulationRules.editor.pickHint(0);
-    });
-
-    it('should choose loan policy', () => {
-      expect(circulationRules.editor.value).to.equal(
-        `m book: l ${kebabCase(loanPolicies[0].name)} `
-      );
-    });
-  });
-
-  describe('choosing fallback policy', () => {
-    beforeEach(async () => {
-      await circulationRules.editor.setValue('fallback-policy: ');
-
-      // choose policy type
-      await circulationRules.editor.changeActiveItem(0);
-      await circulationRules.editor.pickHint(0);
-
-      // choose loan policy
-      await circulationRules.editor.changeActiveItem(0);
-      await circulationRules.editor.pickHint(0);
-    });
-
-    it('should choose loan policy as a fallback', () => {
-      expect(circulationRules.editor.value).to.equal(
-        `fallback-policy: l ${kebabCase(loanPolicies[0].name)} `
-      );
-    });
-  });
-
-  describe('saving circulation rules', () => {
-    let savedRules;
-    let lPolicy;
-    let rPolicy;
-    let nPolicy;
-    let oPolicy;
-    let lName;
-    let rName;
-    let nName;
-    let oName;
-
-    beforeEach(async function () {
-      lPolicy = loanPolicies[0];
-      rPolicy = requestPolicies[0];
-      nPolicy = patronNoticePolicies[0];
-      oPolicy = overdueFinePolicy[0];
-
-      lName = kebabCase(lPolicy.name);
-      rName = kebabCase(rPolicy.name);
-      nName = kebabCase(nPolicy.name);
-      oName = kebabCase(oPolicy.name);
-
-      this.server.put('/circulation/rules', (_, request) => {
-        const params = JSON.parse(request.requestBody);
-        savedRules = params.rulesAsText;
-        return params;
-      });
-
-      await circulationRules.editor.setValue(`m book dvd: l ${lName} r ${rName} n ${nName} o ${oName}`);
-      await circulationRules.clickSaveRulesBtn();
-    });
-
-    it('should choose loan policy as a fallback', () => {
-      expect(savedRules).to.equal(`m 1a54b431-2e4f-452d-9cae-9cee66c9a892 5ee11d91-f7e8-481d-b079-65d708582ccc: l ${lPolicy.id} r ${rPolicy.id} n ${nPolicy.id} o ${oPolicy.id}`);
-    });
-
-    describe('changing circulation rules', () => {
-      beforeEach(async function () {
-        await circulationRules.editor.setValue(`\nm book text: l ${lName} r ${rName} n ${nName}`, { append: true });
-      });
-
-      it('should enable save button', () => {
-        expect(circulationRules.isSaveButtonDisabled).to.be.false;
-      });
-
-      describe('clicking save button', () => {
-        beforeEach(async function () {
-          await circulationRules.clickSaveRulesBtn();
-        });
-
-        it('should disable save button upon successful save', () => {
-          expect(circulationRules.isSaveButtonDisabled).to.be.true;
-        });
-      });
-    });
-  });
-
-  describe('saving invalid circulation rules', () => {
-    const errorMessage = 'mismatched input \' \' expecting {\'priority\', NEWLINE}';
-
-    beforeEach(async function () {
-      this.server.put('/circulation/rules', () => {
-        return new Response(422, {}, {
-          'message' : errorMessage,
-          'line' : 1,
-          'column' : 1,
-        });
-      });
-
-      await circulationRules.editor.setValue(' ');
-      await circulationRules.clickSaveRulesBtn();
-    });
-
-    it('should display formatted error message', () => {
-      expect(circulationRules.editor.errorMessage.isPresent).to.be.true;
-      expect(circulationRules.editor.errorMessage.text).to.equal(errorMessage);
     });
   });
 });

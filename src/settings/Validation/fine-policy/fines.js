@@ -24,5 +24,9 @@ export default function (finePolicy) {
       rules: ['isIntegerGreaterThanZero'],
       shouldValidate: finePolicy.isRequiredMaxValue(),
     },
+    'maxOverdueRecallFine': {
+      rules: ['isIntegerGreaterThanZero'],
+      shouldValidate: finePolicy.isRequiredMaxRecallOverdueFine(),
+    },
   };
 }

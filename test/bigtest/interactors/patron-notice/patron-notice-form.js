@@ -30,7 +30,7 @@ import { AccordionInteractor } from '@folio/stripes-components/lib/Accordion/tes
   static defaultScope = ('[data-test-patron-notice-form]');
 
   whenLoaded() {
-    return this.when(() => this.templateName.isPresent);
+    return this.when(() => this.templateName.isPresent).timeout(5000);
   }
 
   templateName = new TextFieldInteractor('[data-test-patron-notice-template-name]');

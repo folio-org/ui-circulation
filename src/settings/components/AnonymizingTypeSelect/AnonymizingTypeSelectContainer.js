@@ -94,7 +94,7 @@ class AnonymizingTypeSelectContainer extends Component {
         <Field
           name={`${path}Selected`}
           component={({ meta }) => {
-            return meta.touched && <span className={css.error}>{meta.error}</span>;
+            return meta.touched && meta.error ? <span className={css.error}>{meta.error}</span> : null;
           }}
         />
       </Fragment>
