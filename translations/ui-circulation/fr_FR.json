@@ -296,7 +296,7 @@
     "settings.patronNotices.multipleRequests": "Demandes-réservations multiples",
     "settings.patronNotices.multipleFeesFines": "Frais et amendes multiples",
     "settings.patronNotices.feeFineTokenHeader": "frais / amende",
-    "settings.noticePolicy.loanNotices.manualDueDateChange": "Loan due date change",
+    "settings.noticePolicy.loanNotices.manualDueDateChange": "Modification de la date d'échéance du prêt",
     "settings.index.general": "Général",
     "settings.index.loans": "Prêts",
     "settings.index.feesFines": "frais / amende",
