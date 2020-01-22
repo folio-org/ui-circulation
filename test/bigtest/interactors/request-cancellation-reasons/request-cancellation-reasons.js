@@ -9,4 +9,4 @@ import {
   rcCount = count('[class^="editListRow---"]');
 }
 
-export default new RCReasons('form');
+export default new RCReasons({ scope: 'form', timeout: 5000 });
