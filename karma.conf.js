@@ -7,8 +7,8 @@ module.exports = (config) => {
     files: [
       { pattern: testIndex, watched: true },
     ],
-
-    preprocessors
+    preprocessors,
+    client: { captureConsole: false },
   };
 
   config.set(configuration);

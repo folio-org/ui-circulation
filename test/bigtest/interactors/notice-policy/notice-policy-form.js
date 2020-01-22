@@ -76,4 +76,4 @@ import Period from '../Period';
   expandAll = scoped('[data-test-expand-all] button')
 }
 
-export default new NoticePolicyForm();
+export default new NoticePolicyForm({ timeout: 5000 });

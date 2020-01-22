@@ -69,4 +69,7 @@ import KeyValue from '../KeyValue';
   expandAll = scoped('[data-test-expand-all] button');
 }
 
-export default new NoticePolicyDetail('[data-test-notice-policy-detail]');
+export default new NoticePolicyDetail({
+  scope: '[data-test-notice-policy-detail]',
+  timeout: 5000,
+});
