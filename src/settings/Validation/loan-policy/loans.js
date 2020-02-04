@@ -17,8 +17,13 @@ export default function (loanPolicy) {
       shouldValidate: loanPolicy.isProfileRolling(),
     },
     'loansPolicy.gracePeriod.duration': {
-      rules: ['isIntegerGreaterThanZero'],
+      rules: ['isNotEmpty', 'isIntegerGreaterThanZero'],
       shouldValidate: loanPolicy.hasValue('loansPolicy.gracePeriod.duration')
+        || loanPolicy.isIntervalSelected('loansPolicy.gracePeriod.intervalId'),
+    },
+    'loansPolicy.gracePeriod.intervalId': {
+      rules: ['isNotEmptySelect'],
+      shouldValidate: loanPolicy.hasValue('loansPolicy.gracePeriod.duration'),
     },
     'loansPolicy.fixedDueDateScheduleId': {
       rules: ['isNotEmptySelect'],
