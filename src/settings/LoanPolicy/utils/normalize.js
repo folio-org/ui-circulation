@@ -22,8 +22,6 @@ const checkInvalidPeriods = (policy) => {
     'requestManagement.recalls.minimumGuaranteedLoanPeriod',
     'requestManagement.holds.alternateCheckoutLoanPeriod',
     'requestManagement.holds.alternateRenewalLoanPeriod',
-    'requestManagement.pages.alternateCheckoutLoanPeriod',
-    'requestManagement.pages.alternateRenewalLoanPeriod',
   ];
 
   forEach(periodsList, (path) => {
@@ -106,7 +104,7 @@ const checkRenewable = (policy) => {
 
 const checkRequestManagementSection = (policy) => {
   const loanPolicy = cloneDeep(policy);
-  const sections = ['recalls', 'holds', 'pages'];
+  const sections = ['recalls', 'holds'];
 
   forEach(sections, (sectionName) => {
     const pathToSection = `requestManagement.${sectionName}`;

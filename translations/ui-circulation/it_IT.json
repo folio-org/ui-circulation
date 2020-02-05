@@ -311,7 +311,7 @@
     "settings.finePolicy.overdueFinePolicyName": "Nome della politica multa scaduta",
     "settings.finePolicy.description": "Descrizione",
     "settings.finePolicy.selectInterval": "Seleziona intervallo",
-    "settings.finePolicy.countClosedDHM": "Count closed days/hours/minutes",
+    "settings.finePolicy.countClosedDHM": "Conta i giorni/ora/minuti di chiusura",
     "settings.finePolicy.maximumOverdueFine": "Limite massimo per multa scaduta",
     "settings.finePolicy.forgiveOverdueFine": "Cancella multa scaduta in caso di rinnovo dell'item",
     "settings.finePolicy.overdueRecallFine": "Richiamo multa scaduta",

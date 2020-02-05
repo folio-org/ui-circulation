@@ -45,4 +45,4 @@ import { AccordionInteractor } from '@folio/stripes-components/lib/Accordion/tes
   emaillSectionAccordion = new AccordionInteractor('#email-template');
 }
 
-export default new PatronNoticeForm();
+export default new PatronNoticeForm({ timeout: 5000 });
