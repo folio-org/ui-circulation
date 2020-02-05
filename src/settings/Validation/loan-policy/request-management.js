@@ -1,26 +1,16 @@
+import buildPeriodValidationConfig from './utils';
+
 const recalls = (loanPolicy) => {
   return {
-    'requestManagement.recalls.recallReturnInterval.duration': {
-      rules: ['isIntegerGreaterThanZero'],
-      shouldValidate: loanPolicy.hasValue('requestManagement.recalls.recallReturnInterval.duration'),
-    },
-    'requestManagement.recalls.minimumGuaranteedLoanPeriod.duration': {
-      rules: ['isIntegerGreaterThanZero'],
-      shouldValidate: loanPolicy.hasValue('requestManagement.recalls.minimumGuaranteedLoanPeriod.duration'),
-    },
+    ...buildPeriodValidationConfig(loanPolicy, 'requestManagement.recalls.recallReturnInterval'),
+    ...buildPeriodValidationConfig(loanPolicy, 'requestManagement.recalls.minimumGuaranteedLoanPeriod'),
   };
 };
 
 const holds = (loanPolicy) => {
   return {
-    'requestManagement.holds.alternateCheckoutLoanPeriod.duration': {
-      rules: ['isIntegerGreaterThanZero'],
-      shouldValidate: loanPolicy.hasValue('requestManagement.holds.alternateCheckoutLoanPeriod.duration'),
-    },
-    'requestManagement.holds.alternateRenewalLoanPeriod.duration': {
-      rules: ['isIntegerGreaterThanZero'],
-      shouldValidate: loanPolicy.hasValue('requestManagement.holds.alternateRenewalLoanPeriod.duration'),
-    },
+    ...buildPeriodValidationConfig(loanPolicy, 'requestManagement.holds.alternateCheckoutLoanPeriod'),
+    ...buildPeriodValidationConfig(loanPolicy, 'requestManagement.holds.alternateRenewalLoanPeriod'),
   };
 };
 

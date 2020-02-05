@@ -40,6 +40,10 @@ export default class LoanPolicy {
     return isNumber(value);
   }
 
+  isIntervalSelected(pathToValue) {
+    return Boolean(get(this, pathToValue));
+  }
+
   isShortTermLoan() {
     const profileId = get(this, 'loansPolicy.profileId');
     const intervalId = get(this, 'loansPolicy.period.intervalId');

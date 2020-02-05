@@ -1,3 +1,5 @@
+import buildPeriodValidationConfig from './utils';
+
 export default function (loanPolicy) {
   return {
     'loansPolicy.profileId': {
@@ -16,10 +18,6 @@ export default function (loanPolicy) {
       rules: ['isNotEmptySelect'],
       shouldValidate: loanPolicy.isProfileRolling(),
     },
-    'loansPolicy.gracePeriod.duration': {
-      rules: ['isIntegerGreaterThanZero'],
-      shouldValidate: loanPolicy.hasValue('loansPolicy.gracePeriod.duration')
-    },
     'loansPolicy.fixedDueDateScheduleId': {
       rules: ['isNotEmptySelect'],
       shouldValidate: loanPolicy.isProfileFixed(),
@@ -36,5 +34,6 @@ export default function (loanPolicy) {
       rules: ['isItemLimitIsInInterval'],
       shouldValidate: true,
     },
+    ...buildPeriodValidationConfig(loanPolicy, 'loansPolicy.gracePeriod')
   };
 }
