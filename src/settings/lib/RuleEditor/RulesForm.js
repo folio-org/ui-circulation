@@ -22,7 +22,11 @@ class RulesForm extends React.Component {
     editorProps: PropTypes.object,
   };
 
-  state = { ruleFilter: '' };
+  constructor(props) {
+    super(props);
+
+    this.state = { ruleFilter: '' };
+  }
 
   filterRules = (e) => {
     this.setState({ ruleFilter: e.target.value });

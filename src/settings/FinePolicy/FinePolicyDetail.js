@@ -34,12 +34,16 @@ class FinePolicyDetail extends React.Component {
     initialValues: {},
   };
 
-  state = {
-    sections: {
-      generalInformation: true,
-      fineSection: true,
-    },
-  };
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      sections: {
+        generalInformation: true,
+        fineSection: true,
+      },
+    };
+  }
 
   handleExpandAll = (sections) => {
     this.setState({ sections });

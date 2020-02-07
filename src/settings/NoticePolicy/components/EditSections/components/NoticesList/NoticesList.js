@@ -53,7 +53,7 @@ class NoticesList extends React.Component {
     } = this.props;
 
     return (
-      <React.Fragment>
+      <>
         {fields.map((pathToNotice, noticeIndex) => {
           const notice = policy[sectionKey][noticeIndex];
           const sendEvents = notice.sendOptions.isTimeBasedEventSelected(Object.values(requestTimeBasedEventsIds))
@@ -89,7 +89,7 @@ class NoticesList extends React.Component {
             </Button>
           </Col>
         </Row>
-      </React.Fragment>
+      </>
     );
   }
 }

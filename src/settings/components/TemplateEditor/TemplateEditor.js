@@ -190,7 +190,7 @@ class TemplateEditor extends React.Component {
     const invalid = (touched || submitFailed) && !valid && !showTokensDialog;
 
     return (
-      <React.Fragment>
+      <>
         <Row>
           <Col xs={12}>
             <ControlHeader
@@ -232,7 +232,7 @@ class TemplateEditor extends React.Component {
           onAdd={this.insertTokens}
           onCancel={this.closeTokenDialog}
         />
-      </React.Fragment>
+      </>
     );
   }
 }

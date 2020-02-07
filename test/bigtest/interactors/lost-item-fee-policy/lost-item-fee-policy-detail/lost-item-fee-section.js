@@ -1,18 +1,6 @@
-import {
-  interactor,
-  scoped,
-  Interactor,
-} from '@bigtest/interactor';
-import { AccordionInteractor } from '@folio/stripes-components/lib/Accordion/tests/interactor';
+import { interactor } from '@bigtest/interactor';
 
-import KeyValue from '../KeyValue';
-
-@interactor class AboutSection {
-  static defaultScope = ('[data-test-fine-policy-detail-about-section]');
-
-  policyName = new KeyValue('[data-test-about-section-policy-name] div');
-  policyDescription = new KeyValue('[data-test-about-section-policy-description] div');
-}
+import KeyValue from '../../KeyValue';
 
 @interactor class LostItemFeeSection {
   static defaultScope = ('[data-test-lost-item-policy-detail-fee-section]');
@@ -32,17 +20,4 @@ import KeyValue from '../KeyValue';
   returnedMoreThan = new KeyValue('[data-test-returned-more-than] div');
 }
 
-
-@interactor class LostItemFeePolicyDetail {
-  static defaultScope = ('[data-test-lost-item-fee-policy-detail]');
-
-  aboutSection = new AboutSection();
-  lostItemSection = new LostItemFeeSection();
-  deleteLostItemFeePolicy = new Interactor('#dropdown-clickable-delete-item');
-
-  lostItemDetails = new AccordionInteractor('#lostItemFeeSectionOpen');
-  content = scoped('[class^="content-"]');
-  expandAll = scoped('[data-test-expand-all] button')
-}
-
-export default new LostItemFeePolicyDetail();
+export default LostItemFeeSection;

@@ -263,7 +263,7 @@ class RulesEditor extends React.Component {
           }
         } else if (!found) {
           rng.end = { line: lineNumber - 1, ch: line.text.length };
-          ranges.push(Object.assign({}, rng));
+          ranges.push({ ...rng });
           found = true;
         }
       }
@@ -271,7 +271,7 @@ class RulesEditor extends React.Component {
       if (lineNumber === this.cm.lastLine()) {
         if (!found) {
           rng.end = { line: lineNumber, ch: line.text.length };
-          ranges.push(Object.assign({}, rng));
+          ranges.push({ ...rng });
         }
       }
     });

@@ -37,7 +37,7 @@ const OverdueFinesSection = (props) => {
         </Col>
         <Col>
           <div data-test-quantity-interval-label>
-            {<FormattedMessage id="ui-circulation.settings.finePolicy.per" />}
+            <FormattedMessage id="ui-circulation.settings.finePolicy.per" />
           </div>
         </Col>
         <Col xs={2}>

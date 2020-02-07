@@ -58,8 +58,7 @@ const RenewalsSection = (props) => {
               />
             </div>
           </Col>
-        </Row>
-      }
+        </Row>}
       { policy.isRenewable() && !policy.isUnlimitedRenewals() &&
         <div>
           <Row>
@@ -72,10 +71,9 @@ const RenewalsSection = (props) => {
               </div>
             </Col>
           </Row>
-        </div>
-      }
+        </div>}
       { policy.isRenewable() &&
-        <React.Fragment>
+        <>
           <Row>
             <Col xs={12}>
               <div data-test-renewals-section-renew-from>
@@ -96,8 +94,7 @@ const RenewalsSection = (props) => {
               </div>
             </Col>
           </Row>
-        </React.Fragment>
-      }
+        </>}
       { policy.isRenewable() && policy.isDifferentPeriod() && policy.isProfileRolling() &&
       <div>
         <Row>
@@ -110,8 +107,7 @@ const RenewalsSection = (props) => {
             </div>
           </Col>
         </Row>
-      </div>
-      }
+      </div>}
       { policy.isRenewable() && policy.isDifferentPeriod() &&
         <div>
           <Row>
@@ -124,8 +120,7 @@ const RenewalsSection = (props) => {
               </div>
             </Col>
           </Row>
-        </div>
-      }
+        </div>}
       <hr />
     </div>
   );

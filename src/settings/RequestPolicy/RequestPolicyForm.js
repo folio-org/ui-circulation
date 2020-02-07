@@ -38,11 +38,15 @@ class RequestPolicyForm extends React.Component {
     policy: {},
   };
 
-  state = {
-    sections: {
-      general: true,
-    },
-  };
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      sections: {
+        general: true,
+      },
+    };
+  }
 
   handleSectionToggle = ({ id }) => {
     this.setState((state) => {
@@ -100,7 +104,7 @@ class RequestPolicyForm extends React.Component {
             firstMenu={<CancelButton onCancel={onCancel} />}
             footer={<FooterPane {...footerPaneProps} />}
           >
-            <React.Fragment>
+            <>
               <Row end="xs">
                 <Col xs>
                   <ExpandAllButton
@@ -115,7 +119,7 @@ class RequestPolicyForm extends React.Component {
                 connect={stripes.connect}
                 onToggle={this.handleSectionToggle}
               />
-            </React.Fragment>
+            </>
           </Pane>
         </Paneset>
       </form>

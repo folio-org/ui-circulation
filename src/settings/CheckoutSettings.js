@@ -28,7 +28,7 @@ class CheckoutSettings extends React.Component {
     let config;
 
     try {
-      config = Object.assign({}, defaultConfig, JSON.parse(value));
+      config = { ...defaultConfig, ...JSON.parse(value) };
     } catch (e) {
       config = defaultConfig;
     }

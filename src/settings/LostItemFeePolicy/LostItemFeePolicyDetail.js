@@ -43,12 +43,16 @@ class LostItemFeePolicyDetail extends React.Component {
     initialValues: {},
   };
 
-  state = {
-    sections: {
-      LostItemFeeGeneralInformation: true,
-      lostItemFeeSectionOpen: true,
-    },
-  };
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      sections: {
+        LostItemFeeGeneralInformation: true,
+        lostItemFeeSectionOpen: true,
+      },
+    };
+  }
 
   handleExpandAll = (sections) => {
     this.setState({ sections });

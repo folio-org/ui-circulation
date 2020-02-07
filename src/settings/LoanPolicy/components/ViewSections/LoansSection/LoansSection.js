@@ -63,8 +63,7 @@ const LoansSection = (props) => {
               </div>
             </Col>
           </Row>
-        </div>
-      }
+        </div>}
       { (policy.isProfileRolling() || policy.isProfileFixed()) &&
         <div>
           <Row>
@@ -77,8 +76,7 @@ const LoansSection = (props) => {
               </div>
             </Col>
           </Row>
-        </div>
-      }
+        </div>}
       <Row>
         <Col xs={12}>
           <div data-test-loans-section-closed-due-date-mgmte>
@@ -101,8 +99,7 @@ const LoansSection = (props) => {
             </div>
           </Col>
         </Row>
-      </div>
-      }
+      </div>}
       <Row>
         <Col xs={12}>
           <div data-test-loans-section-grace-period>

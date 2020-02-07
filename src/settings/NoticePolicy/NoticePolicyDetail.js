@@ -27,14 +27,18 @@ class NoticePolicyDetail extends React.Component {
     }).isRequired,
   };
 
-  state = {
-    sections: {
-      generalInformation: true,
-      loanNotices: true,
-      requestNotices: true,
-      feeFineNotices: false,
-    },
-  };
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      sections: {
+        generalInformation: true,
+        loanNotices: true,
+        requestNotices: true,
+        feeFineNotices: false,
+      },
+    };
+  }
 
   handleExpandAll = (sections) => {
     this.setState({ sections });

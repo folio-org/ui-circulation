@@ -53,13 +53,17 @@ class LostItemFeePolicyForm extends React.Component {
     initialValues: {},
   };
 
-  state = {
-    sections: {
-      lostItemFeegeneralSection: true,
-      LostItemFeeSection: true,
-      lostItemFeeSectionOpen: true,
-    },
-  };
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      sections: {
+        lostItemFeegeneralSection: true,
+        LostItemFeeSection: true,
+        lostItemFeeSectionOpen: true,
+      },
+    };
+  }
 
   handleSectionToggle = ({ id }) => {
     this.setState((state) => {

@@ -49,12 +49,16 @@ class FinePolicyForm extends React.Component {
     initialValues: {},
   };
 
-  state = {
-    sections: {
-      overdueGeneralSection: true,
-      fineSection: true,
-    },
-  };
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      sections: {
+        overdueGeneralSection: true,
+        fineSection: true,
+      },
+    };
+  }
 
   handleSectionToggle = ({ id }) => {
     this.setState((state) => {
@@ -117,7 +121,7 @@ class FinePolicyForm extends React.Component {
             firstMenu={<CancelButton onCancel={onCancel} />}
             footer={<FooterPane {...footerPaneProps} />}
           >
-            <React.Fragment>
+            <>
               <Row end="xs">
                 <Col
                   data-test-expand-all
@@ -148,7 +152,7 @@ class FinePolicyForm extends React.Component {
                   change={change}
                 />
               </Accordion>
-            </React.Fragment>
+            </>
           </Pane>
         </Paneset>
       </form>

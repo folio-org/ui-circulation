@@ -184,8 +184,7 @@ class LoanHistoryForm extends Component {
                 name="loanExceptions"
                 component={ExceptionsList}
               />
-            </div>
-          }
+            </div>}
         </Pane>
       </form>
     );

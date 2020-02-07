@@ -75,11 +75,15 @@ class PatronNoticeForm extends React.Component {
     initialValues: {},
   };
 
-  state = {
-    accordions: {
-      'email-template': true,
-    }
-  };
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      accordions: {
+        'email-template': true,
+      }
+    };
+  }
 
   onToggleSection = ({ id }) => {
     this.setState((state) => {
@@ -259,8 +263,7 @@ class PatronNoticeForm extends React.Component {
                 <Col xs={8}>
                   <FormattedMessage id="ui-circulation.settings.patronNotices.predefinedWarning" />
                 </Col>
-              </Row>
-            }
+              </Row>}
           </Pane>
         </Paneset>
       </form>

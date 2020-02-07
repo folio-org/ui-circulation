@@ -74,7 +74,7 @@ class PatronNoticeDetail extends React.Component {
       : <FormattedMessage id="ui-circulation.settings.patronNotices.no" />;
 
     return (
-      <React.Fragment>
+      <>
         <Row>
           <Col xs={12}>
             <div data-test-staff-slip-name>
@@ -118,7 +118,7 @@ class PatronNoticeDetail extends React.Component {
             label={<FormattedMessage id="ui-circulation.settings.patronNotices.email" />}
           >
             { emailTemplate &&
-              <React.Fragment>
+              <>
                 <Row>
                   <Col xs={8}>
                     <KeyValue
@@ -140,8 +140,7 @@ class PatronNoticeDetail extends React.Component {
                     />
                   </Col>
                 </Row>
-              </React.Fragment>
-            }
+              </>}
           </Accordion>
         </AccordionSet>
         <PreviewModal
@@ -156,7 +155,7 @@ class PatronNoticeDetail extends React.Component {
           previewFormat={tokensReducer(tokens)}
           onClose={this.closePreviewDialog}
         />
-      </React.Fragment>
+      </>
     );
   }
 }

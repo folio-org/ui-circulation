@@ -104,8 +104,7 @@ class FixedDueDateScheduleDetail extends React.Component {
         >
           <section className={css.accordionSection}>
             {(fixedDueDateSchedule.metadata && fixedDueDateSchedule.metadata.createdDate) &&
-              <this.cViewMetaData metadata={fixedDueDateSchedule.metadata} />
-            }
+              <this.cViewMetaData metadata={fixedDueDateSchedule.metadata} />}
             <Row>
               <Col xs={12}>
                 <KeyValue

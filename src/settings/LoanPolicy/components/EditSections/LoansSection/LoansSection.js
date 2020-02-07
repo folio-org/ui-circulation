@@ -1,5 +1,5 @@
 import { get } from 'lodash';
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
 import {
@@ -101,8 +101,7 @@ class LoansSection extends React.Component {
             >
               {this.generateOptions(loanProfileTypes, 'ui-circulation.settings.common.pleaseSelect')}
             </Field>
-          </div>
-        }
+          </div>}
         { policy.isProfileRolling() &&
           <div data-test-loans-section-loan-period>
             <Period
@@ -113,8 +112,7 @@ class LoansSection extends React.Component {
               changeFormValue={change}
               required
             />
-          </div>
-        }
+          </div>}
         { (policy.isProfileRolling() || policy.isProfileFixed()) &&
           <div data-test-loans-section-fixed-due-date-schedule-id>
             <Field
@@ -126,8 +124,7 @@ class LoansSection extends React.Component {
             >
               {schedules}
             </Field>
-          </div>
-        }
+          </div>}
         { policy.isLoanable() &&
           <div data-test-loans-section-closed-due-date-mgmt>
             <Field
@@ -138,8 +135,7 @@ class LoansSection extends React.Component {
             >
               {dueDateManagementOptions}
             </Field>
-          </div>
-        }
+          </div>}
         { policy.isOpeningTimeOffsetActive() &&
           <div data-test-loans-section-opening-time-offset>
             <Period
@@ -150,10 +146,9 @@ class LoansSection extends React.Component {
               changeFormValue={change}
               required
             />
-          </div>
-        }
+          </div>}
         { policy.isLoanable() &&
-          <Fragment>
+          <>
             <div data-test-loans-section-grace-period>
               <Period
                 fieldLabel="ui-circulation.settings.loanPolicy.gracePeriod"
@@ -175,8 +170,7 @@ class LoansSection extends React.Component {
                 />
               </Col>
             </Row>
-          </Fragment>
-        }
+          </>}
         <hr />
       </div>
     );

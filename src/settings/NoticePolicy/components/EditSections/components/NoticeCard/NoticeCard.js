@@ -167,7 +167,7 @@ class NoticeCard extends React.Component {
                 </Col>
               </Row>
               {notice.sendOptions.isTimeBasedEventSelected(timeBasedEventsIds) && (
-                <React.Fragment>
+                <>
                   <Row>
                     <Col
                       xs={12}
@@ -193,7 +193,7 @@ class NoticeCard extends React.Component {
                       </Field>
                     </Col>
                     {notice.sendOptions.isBeforeOrAfter() && (
-                      <React.Fragment>
+                      <>
                         <Col
                           xs={2}
                           className={`${css.cardText} ${css.cardTextWithotLabel}`}
@@ -215,11 +215,11 @@ class NoticeCard extends React.Component {
                             intervalPeriods={this.generateOptions(noticesIntervalPeriods)}
                           />
                         </Col>
-                      </React.Fragment>
+                      </>
                     )}
                   </Row>
                   { notice.sendOptions.isFrequencyAvailable() && (
-                    <React.Fragment>
+                    <>
                       <Row>
                         <Col
                           xs={12}
@@ -245,7 +245,7 @@ class NoticeCard extends React.Component {
                           </Field>
                         </Col>
                         {notice.isRecurring() && (
-                          <React.Fragment>
+                          <>
                             <Col
                               xs={2}
                               className={`${css.cardText} ${css.cardTextWithotLabel}`}
@@ -267,12 +267,12 @@ class NoticeCard extends React.Component {
                                 intervalPeriods={this.generateOptions(noticesIntervalPeriods)}
                               />
                             </Col>
-                          </React.Fragment>
+                          </>
                         )}
                       </Row>
-                    </React.Fragment>
+                    </>
                   )}
-                </React.Fragment>
+                </>
               )}
               <Row>
                 <Col

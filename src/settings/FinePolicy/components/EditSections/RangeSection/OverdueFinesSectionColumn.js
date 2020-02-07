@@ -48,8 +48,7 @@ const OverdueFinesSectionColumn = (props) => {
                   { value: true, label: formatMessage({ id: 'ui-circulation.settings.finePolicy.yes' }) },
                   { value: false, label: formatMessage({ id: 'ui-circulation.settings.finePolicy.no' }) },
                 ]}
-              />
-            }
+              />}
           </div>
         </Col>
       </Row>
