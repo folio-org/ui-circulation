@@ -44,13 +44,17 @@ class LoanPolicyDetail extends React.Component {
     initialValues: {},
   };
 
-  state = {
-    sections: {
-      generalInformation: true,
-      recalls: true,
-      holds: true,
-    },
-  };
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      sections: {
+        generalInformation: true,
+        recalls: true,
+        holds: true,
+      },
+    };
+  }
 
   handleExpandAll = (sections) => {
     this.setState({ sections });

@@ -251,7 +251,7 @@ class CirculationRules extends React.Component {
       locations,
     } = this.props.resources;
 
-    return Object.assign({}, editorDefaultProps, {
+    return { ...editorDefaultProps,
       errors: this.state.errors,
       completionLists: {
         // types
@@ -287,8 +287,7 @@ class CirculationRules extends React.Component {
         noticePolicies: noticePolicies.records.map(n => kebabCase(n.name)),
         overdueFinePolicies: overdueFinePolicies.records.map(o => kebabCase(o.name)),
         lostItemFeePolicies: lostItemFeePolicies.records.map(i => kebabCase(i.name)),
-      },
-    });
+      } };
   }
 
   getRecords() {

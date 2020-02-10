@@ -1,7 +1,4 @@
-import React, {
-  Component,
-  Fragment,
-} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {
   injectIntl,
@@ -86,7 +83,7 @@ class AnonymizingTypeSelectContainer extends Component {
     } = this.props;
 
     return (
-      <Fragment>
+      <>
         <AnonymizingTypeSelect
           name={path}
           types={this.getClosingTypes(name, path)}
@@ -97,7 +94,7 @@ class AnonymizingTypeSelectContainer extends Component {
             return meta.touched && meta.error ? <span className={css.error}>{meta.error}</span> : null;
           }}
         />
-      </Fragment>
+      </>
     );
   }
 }

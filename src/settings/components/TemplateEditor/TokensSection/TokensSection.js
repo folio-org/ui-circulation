@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { noop } from 'lodash';
 
@@ -74,7 +74,7 @@ class TokensSection extends Component {
     } = this.props;
 
     return (
-      <Fragment>
+      <>
         <div className={css.categoryHeader}>
           {header}
         </div>
@@ -95,7 +95,7 @@ class TokensSection extends Component {
             );
           })}
           { enabled && (
-            <Fragment>
+            <>
               <hr />
               <Checkbox
                 data-test-multiple-tokens
@@ -104,10 +104,10 @@ class TokensSection extends Component {
                 disabled={disabled}
                 onChange={this.onLoopChange}
               />
-            </Fragment>
+            </>
           )}
         </ul>
-      </Fragment>
+      </>
     );
   }
 }

@@ -174,8 +174,7 @@ class CheckoutSettingsForm extends Component {
                   <FormattedMessage id="ui-circulation.settings.checkout.minutes" />
                 </Col>
               </div>
-            </Row>
-          }
+            </Row>}
           <br />
           <Row>
             <Col xs={12}>

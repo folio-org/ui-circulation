@@ -62,13 +62,17 @@ class LoanPolicyForm extends React.Component {
     initialValues: {},
   };
 
-  state = {
-    sections: {
-      generalSection: true,
-      recallsSection: true,
-      holdsSection: true,
-    },
-  };
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      sections: {
+        generalSection: true,
+        recallsSection: true,
+        holdsSection: true,
+      },
+    };
+  }
 
   handleSectionToggle = ({ id }) => {
     this.setState((state) => {

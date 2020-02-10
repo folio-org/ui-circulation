@@ -42,12 +42,12 @@ class GeneralSection extends React.Component {
     ));
 
     return (
-      <React.Fragment>
+      <>
         <p>
           <FormattedMessage id="ui-circulation.settings.requestPolicy.policyTypes" />
         </p>
         {items}
-      </React.Fragment>
+      </>
     );
   }
 

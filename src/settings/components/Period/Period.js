@@ -80,7 +80,7 @@ class Period extends PureComponent {
     } = this.props;
 
     return (
-      <React.Fragment>
+      <>
         {fieldLabel && (
           <div data-test-period-label>
             <Row className={css.periodLabel}>
@@ -129,7 +129,7 @@ class Period extends PureComponent {
             </Col>
           )}
         </Row>
-      </React.Fragment>
+      </>
     );
   }
 }

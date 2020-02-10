@@ -24,11 +24,15 @@ class RequestPolicyDetail extends React.Component {
     initialValues: {},
   };
 
-  state = {
-    sections: {
-      general: true,
-    },
-  };
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      sections: {
+        general: true,
+      },
+    };
+  }
 
   handleSectionToggle = ({ id }) => {
     this.setState((state) => {

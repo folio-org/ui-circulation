@@ -80,7 +80,7 @@ class PreviewModal extends React.Component {
     );
 
     const footer = (
-      <React.Fragment>
+      <>
         <Button
           buttonStyle="primary"
           marginBottom0
@@ -88,7 +88,7 @@ class PreviewModal extends React.Component {
         >
           <FormattedMessage id="ui-circulation.settings.common.close" />
         </Button>
-      </React.Fragment>
+      </>
     );
 
     return printable ? printableFooter : footer;

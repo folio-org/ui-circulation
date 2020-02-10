@@ -47,14 +47,18 @@ class NoticePolicyForm extends React.Component {
     policy: {},
   };
 
-  state = {
-    sections: {
-      general: true,
-      loanNotices: true,
-      requestNotices: true,
-      feeFineNotices: false,
-    },
-  };
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      sections: {
+        general: true,
+        loanNotices: true,
+        requestNotices: true,
+        feeFineNotices: false,
+      },
+    };
+  }
 
   handleSectionToggle = ({ id }) => {
     this.setState((state) => {

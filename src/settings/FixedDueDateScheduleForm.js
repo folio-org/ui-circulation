@@ -158,8 +158,7 @@ class FixedDueDateScheduleForm extends React.Component {
             >
               <FormattedMessage id="stripes-core.button.delete" />
             </Button>
-          </IfPermission>
-          }
+          </IfPermission>}
           <Button
             id="clickable-save-fixedDueDateSchedule"
             type="submit"
@@ -357,8 +356,7 @@ class FixedDueDateScheduleForm extends React.Component {
                   className={css.accordionSection}
                 >
                   {(initialValues && initialValues.metadata && initialValues.metadata.createdDate) &&
-                  <this.cViewMetaData metadata={initialValues.metadata} />
-                  }
+                  <this.cViewMetaData metadata={initialValues.metadata} />}
                   <div
                     className={css.smformItem}
                     data-test-general-section-name

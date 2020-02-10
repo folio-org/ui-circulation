@@ -169,7 +169,7 @@ class LostItemFeeSection extends React.Component {
             <Col xs={1} data-test-replaced-lost-item>
               <Field
                 name="replacedLostItemProcessingFee"
-                id="returnedLostItemProcessingFee"
+                id="replacedLostItemProcessingFee"
                 component={Select}
                 dataOptions={selectValues}
               />

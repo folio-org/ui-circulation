@@ -1,30 +1,14 @@
 import {
   interactor,
-  scoped,
   Interactor,
   clickable,
-  collection,
-  property,
 } from '@bigtest/interactor';
 
 import TextFieldInteractor from '@folio/stripes-components/lib/TextField/tests/interactor';
 import SelectInteractor from '@folio/stripes-components/lib/Select/tests/interactor';
 import { AccordionInteractor } from '@folio/stripes-components/lib/Accordion/tests/interactor';
 
-@interactor class AvailableTokens {
-  items = collection('input[type="checkbox"]');
-}
-
-@interactor class TokensModal {
-  defaultScope = '[data-test-template-editor-tokens-modal]';
-
-  addTokensBtn = scoped('[data-test-add-tokens]');
-  cancelBtn = scoped('[data-test-close-tokens-modal]');
-  availbaleTokens = collection('[data-test-available-tokens]', AvailableTokens);
-  multipleTokens = scoped('[data-test-multiple-tokens]');
-
-  isAddTokenBtnDisabled = property('[data-test-add-tokens]', 'disabled');
-}
+import TokensModal from './tokens-modal';
 
 @interactor class PatronNoticeForm {
   static defaultScope = ('[data-test-patron-notice-form]');

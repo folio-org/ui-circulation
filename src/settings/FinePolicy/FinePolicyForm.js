@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import stripesForm from '@folio/stripes/form';
-import { stripesShape } from '@folio/stripes/core';
 import {
   FormattedMessage,
   injectIntl,
@@ -31,30 +30,26 @@ import {
   Metadata,
 } from '../components';
 
+import formShape from '../utils/form-shape';
+
 class FinePolicyForm extends React.Component {
-  static propTypes = {
-    stripes: stripesShape.isRequired,
-    pristine: PropTypes.bool,
-    submitting: PropTypes.bool,
-    policy: PropTypes.object,
-    initialValues: PropTypes.object,
-    change: PropTypes.func.isRequired,
-    handleSubmit: PropTypes.func.isRequired,
-    onSave: PropTypes.func.isRequired,
-    onCancel: PropTypes.func.isRequired,
-  };
+  static propTypes = formShape;
 
   static defaultProps = {
     policy: {},
     initialValues: {},
   };
 
-  state = {
-    sections: {
-      overdueGeneralSection: true,
-      fineSection: true,
-    },
-  };
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      sections: {
+        overdueGeneralSection: true,
+        fineSection: true,
+      },
+    };
+  }
 
   handleSectionToggle = ({ id }) => {
     this.setState((state) => {
@@ -117,7 +112,7 @@ class FinePolicyForm extends React.Component {
             firstMenu={<CancelButton onCancel={onCancel} />}
             footer={<FooterPane {...footerPaneProps} />}
           >
-            <React.Fragment>
+            <>
               <Row end="xs">
                 <Col
                   data-test-expand-all
@@ -148,7 +143,7 @@ class FinePolicyForm extends React.Component {
                   change={change}
                 />
               </Accordion>
-            </React.Fragment>
+            </>
           </Pane>
         </Paneset>
       </form>

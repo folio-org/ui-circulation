@@ -74,10 +74,9 @@ class RenewalsSection extends React.Component {
               type="checkbox"
               normalize={v => !!v}
             />
-          </div>
-        }
+          </div>}
         { policy.isRenewable() && !policy.isUnlimitedRenewals() &&
-          <React.Fragment>
+          <>
             <div data-test-renewals-section-num-renewals-allowed>
               <Field
                 label={<FormattedMessage id="ui-circulation.settings.loanPolicy.numRenewalsAllowed" />}
@@ -89,10 +88,9 @@ class RenewalsSection extends React.Component {
                 min={0}
               />
             </div>
-          </React.Fragment>
-        }
+          </>}
         { policy.isRenewable() && policy.isProfileRolling() &&
-          <React.Fragment>
+          <>
             <div data-test-renewals-section-renew-from>
               <Field
                 label={<FormattedMessage id="ui-circulation.settings.loanPolicy.renewFrom" />}
@@ -104,8 +102,7 @@ class RenewalsSection extends React.Component {
                 {this.generateOptions(renewFromOptions, 'ui-circulation.settings.common.pleaseSelect')}
               </Field>
             </div>
-          </React.Fragment>
-        }
+          </>}
         { policy.isRenewable() &&
           <div data-test-renewals-section-renewal-period-different>
             <Field
@@ -116,10 +113,9 @@ class RenewalsSection extends React.Component {
               type="checkbox"
               normalize={v => !!v}
             />
-          </div>
-        }
+          </div>}
         { policy.isRenewable() && policy.isDifferentPeriod() && policy.isProfileRolling() &&
-          <React.Fragment>
+          <>
             <br />
             <div data-test-renewals-section-alternate-loan-period-renewals>
               <Period
@@ -131,8 +127,7 @@ class RenewalsSection extends React.Component {
                 required
               />
             </div>
-          </React.Fragment>
-        }
+          </>}
         { policy.isRenewable() && policy.isDifferentPeriod() &&
           <div data-test-renewals-alternate-fixed-due-date-schedule>
             <Field
@@ -143,8 +138,7 @@ class RenewalsSection extends React.Component {
             >
               {schedules}
             </Field>
-          </div>
-        }
+          </div>}
         <hr />
       </div>
     );

@@ -2,6 +2,8 @@
 // CodeMirror, copyright (c) by Marijn Haverbeke and others
 // Distributed under an MIT license: http://codemirror.net/LICENSE
 
+/* eslint-disable max-classes-per-file */
+
 import CodeMirror from 'codemirror'; // eslint-disable-line import/no-extraneous-dependencies
 import {
   get,
@@ -40,7 +42,7 @@ CodeMirror.showHint = function (cm, getHints, options) {
 
   if (options && options.async) getHints.async = true;
 
-  const newOptions = Object.assign({ hint: getHints }, options);
+  const newOptions = { hint: getHints, ...options };
 
   return cm.showHint(newOptions);
 };
@@ -208,7 +210,7 @@ class Completion {
 
 function parseOptions(cm, pos, options) {
   const editor = cm.options.hintOptions;
-  const parsedOptions = Object.assign({}, defaultOptions, editor, options);
+  const parsedOptions = { ...defaultOptions, ...editor, ...options };
 
   if (parsedOptions.hint.resolve) {
     parsedOptions.hint = parsedOptions.hint.resolve(cm, pos);
