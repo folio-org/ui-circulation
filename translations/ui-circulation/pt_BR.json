@@ -359,7 +359,7 @@
     "settings.lostItemFee.lostItemChargeOverdueBased": "Cobrança em atraso com base na data de retorno até o máximo (se aplicável)",
     "settings.lostItemFee.lostItemRemoveOverdueFines": "Não cobrar atrasos",
     "settings.lostItemFee.actualCost": "Custo real",
-    "settings.lostItemFee.otherCost": "Outro custo {name}",
+    "settings.lostItemFee.otherCost": "Definir custo de {name}",
     "settings.lostItemFee.selectInterval": "Selecione o intervalo",
     "settings.lostItemFee.minutes": "minuto(s)",
     "settings.lostItemFee.hours": "hora(s)",
