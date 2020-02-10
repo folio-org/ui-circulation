@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import stripesForm from '@folio/stripes/form';
-import { stripesShape } from '@folio/stripes/core';
 import {
   FormattedMessage,
   injectIntl,
@@ -31,18 +30,10 @@ import {
   Metadata,
 } from '../components';
 
+import formShape from '../utils/form-shape';
+
 class FinePolicyForm extends React.Component {
-  static propTypes = {
-    stripes: stripesShape.isRequired,
-    pristine: PropTypes.bool,
-    submitting: PropTypes.bool,
-    policy: PropTypes.object,
-    initialValues: PropTypes.object,
-    change: PropTypes.func.isRequired,
-    handleSubmit: PropTypes.func.isRequired,
-    onSave: PropTypes.func.isRequired,
-    onCancel: PropTypes.func.isRequired,
-  };
+  static propTypes = formShape;
 
   static defaultProps = {
     policy: {},
