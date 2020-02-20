@@ -9,6 +9,7 @@
 * Settings > Circulation > Loan history | Move Save button to the footer. Refs UICIRC-375.
 * Settings > Circulation > Lost item fee policy | increase fee fields box width. Refs UICIRC-402.
 * Update circulation okapiInterface to version `9.0`. Part of UICIRC-411.
+* Add translations for aria-label values in EditorToolbar(WYSIWYG). Refs UICIRC-421.
 
 ## [1.12.0](https://github.com/folio-org/ui-circulation/tree/v1.12.0) (2019-12-06)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v1.11.0...v1.12.0)
