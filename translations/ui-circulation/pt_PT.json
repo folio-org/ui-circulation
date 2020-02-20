@@ -374,5 +374,21 @@
     "settings.loanPolicy.itemLimit": "Item limit",
     "settings.validate.itemLimitInterval": "Item limit must be > 0, =< 9999 or blank",
     "settings.lostItemFee.setCost": "Set cost",
-    "settings.circulationRules.lostItemFeePolicies": "Lost item fee policies"
+    "settings.circulationRules.lostItemFeePolicies": "Lost item fee policies",
+    "settings.editorToolbar.text.bold": "bold",
+    "settings.editorToolbar.text.italic": "italic",
+    "settings.editorToolbar.text.underline": "underline",
+    "settings.editorToolbar.list.ordered": "ordered list",
+    "settings.editorToolbar.list.bugllet": "bugllet list",
+    "settings.editorToolbar.indent.decrease": "decrease indent",
+    "settings.editorToolbar.indent.increase": "increase indent",
+    "settings.editorToolbar.size.small": "small",
+    "settings.editorToolbar.size.normal": "normal",
+    "settings.editorToolbar.size.large": "large",
+    "settings.editorToolbar.size.huge": "huge",
+    "settings.editorToolbar.align.noAlign": "no align",
+    "settings.editorToolbar.align.center": "center",
+    "settings.editorToolbar.align.right": "right",
+    "settings.editorToolbar.align.justify": "justify",
+    "settings.editorToolbar.link": "link"
 }
