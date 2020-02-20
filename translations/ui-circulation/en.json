@@ -399,7 +399,7 @@
   "settings.editorToolbar.text.italic": "italic",
   "settings.editorToolbar.text.underline": "underline",
   "settings.editorToolbar.list.ordered": "ordered list",
-  "settings.editorToolbar.list.bugllet": "bugllet list",
+  "settings.editorToolbar.list.bullet": "bullet list",
   "settings.editorToolbar.indent.decrease": "decrease indent",
   "settings.editorToolbar.indent.increase": "increase indent",
   "settings.editorToolbar.size.small": "small",
