@@ -37,7 +37,7 @@ const EditorToolbar = ({
         />
         <button
           type="button"
-          aria-label={formatMessage({ id: 'ui-circulation.settings.editorToolbar.list.bugllet' })}
+          aria-label={formatMessage({ id: 'ui-circulation.settings.editorToolbar.list.bullet' })}
           className="ql-list"
           value="bullet"
         />
