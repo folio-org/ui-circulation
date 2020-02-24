@@ -379,7 +379,6 @@
     "settings.editorToolbar.text.italic": "corsivo",
     "settings.editorToolbar.text.underline": "underline",
     "settings.editorToolbar.list.ordered": "lista ordinata",
-    "settings.editorToolbar.list.bugllet": "elenco puntato",
     "settings.editorToolbar.indent.decrease": "diminuisci rientro",
     "settings.editorToolbar.indent.increase": "aumenta rientro",
     "settings.editorToolbar.size.small": "piccolo",
@@ -390,5 +389,6 @@
     "settings.editorToolbar.align.center": "centro",
     "settings.editorToolbar.align.right": "a destra",
     "settings.editorToolbar.align.justify": "giustifica",
-    "settings.editorToolbar.link": "collegamento"
+    "settings.editorToolbar.link": "collegamento",
+    "settings.editorToolbar.list.bullet": "elenco puntato"
 }
