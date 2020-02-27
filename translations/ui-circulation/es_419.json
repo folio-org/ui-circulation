@@ -379,7 +379,6 @@
     "settings.editorToolbar.text.italic": "itálica",
     "settings.editorToolbar.text.underline": "underline",
     "settings.editorToolbar.list.ordered": "ordered list",
-    "settings.editorToolbar.list.bugllet": "bugllet list",
     "settings.editorToolbar.indent.decrease": "decrease indent",
     "settings.editorToolbar.indent.increase": "increase indent",
     "settings.editorToolbar.size.small": "pequeño",
@@ -390,5 +389,6 @@
     "settings.editorToolbar.align.center": "centrar",
     "settings.editorToolbar.align.right": "derecha",
     "settings.editorToolbar.align.justify": "justificar",
-    "settings.editorToolbar.link": "link"
+    "settings.editorToolbar.link": "link",
+    "settings.editorToolbar.list.bullet": "bullet list"
 }
