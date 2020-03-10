@@ -108,7 +108,7 @@ class LostItemFeePolicyForm extends React.Component {
             firstMenu={<CancelButton onCancel={onCancel} />}
             footer={<FooterPane {...footerPaneProps} />}
           >
-            <div className={css.accordionSection}>
+            <>
               <Row end="xs">
                 <Col
                   data-test-expand-all
@@ -139,7 +139,7 @@ class LostItemFeePolicyForm extends React.Component {
                   accordionOnToggle={this.handleSectionToggle}
                 />
               </Accordion>
-            </div>
+            </>
           </Pane>
         </Paneset>
       </form>
