@@ -39,6 +39,7 @@ class CheckoutSettingsForm extends Component {
       checkoutTimeout,
       checkoutTimeoutDuration,
     } = data;
+
     const values = idents.reduce((vals, ident, index) => {
       if (ident) vals.push(patronIdentifierTypes[index].key);
       return vals;
@@ -48,7 +49,7 @@ class CheckoutSettingsForm extends Component {
       audioAlertsEnabled: audioAlertsEnabled === 'true',
       prefPatronIdentifier: values.join(','),
       checkoutTimeout,
-      checkoutTimeoutDuration,
+      checkoutTimeoutDuration: parseInt(checkoutTimeoutDuration, 10),
     });
 
     this.props.onSubmit({ other_settings: otherSettings });
