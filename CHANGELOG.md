@@ -11,6 +11,7 @@
 * Update circulation okapiInterface to version `9.0`. Part of UICIRC-411.
 * Add translations for aria-label values in EditorToolbar(WYSIWYG). Refs UICIRC-421.
 * Migrate to `stripes` `v3.0.0` and move `react-intl` to peerDependencies.
+* Remove extraneous accordion styling from lost-item fee-fine form.
 
 ## [1.12.0](https://github.com/folio-org/ui-circulation/tree/v1.12.0) (2019-12-06)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v1.11.0...v1.12.0)
