@@ -1,6 +1,7 @@
 # Change history for ui-circulation
 
-## 2.0.0 (IN PROGRESS)
+## 2.0.0 (https://github.com/folio-org/ui-circulation/tree/v2.0.0) (2019-03-13)
+[Full Changelog](https://github.com/folio-org/ui-circulation/compare/v1.12.0...v2.0.0)
 
 * Provide two options for barcode tokens on staff slips. Refs UICIRC-393.
 * Add hold shelf exp and request exp date/time tokens to patron notice templates. UICIRC-396.
@@ -12,6 +13,9 @@
 * Add translations for aria-label values in EditorToolbar(WYSIWYG). Refs UICIRC-421.
 * Migrate to `stripes` `v3.0.0` and move `react-intl` to peerDependencies.
 * Remove extraneous accordion styling from lost-item fee-fine form.
+* Loan policy: Data silently fails to save when interval is missing. Refs UICIRC-327.
+* Security update eslint to >= 6.2.1 or eslint-util >= 1.4.1. Refs UICIRC-414.
+* Should use Integer not String for checkout timeout value. Refs UICIRC-435.
 
 ## [1.12.0](https://github.com/folio-org/ui-circulation/tree/v1.12.0) (2019-12-06)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v1.11.0...v1.12.0)
