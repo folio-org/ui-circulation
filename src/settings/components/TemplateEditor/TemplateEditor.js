@@ -30,10 +30,13 @@ import css from './TemplateEditor.css';
 
 const AlignStyle = Quill.import('attributors/style/align');
 const SizeStyle = Quill.import('attributors/style/size');
+const Block = Quill.import('blots/block');
+Block.tagName = 'DIV';
 
 Quill.register(IndentStyle, true);
 Quill.register(AlignStyle, true);
 Quill.register(SizeStyle, true);
+Quill.register(Block, true);
 
 class TemplateEditor extends React.Component {
   static propTypes = {
