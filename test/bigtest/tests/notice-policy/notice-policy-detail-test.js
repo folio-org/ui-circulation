@@ -266,12 +266,50 @@ describe('NoticePolicyDetail', () => {
     });
 
     describe('notice card', () => {
+      describe('notice policy with inactive template', () => {
+        let patronNoticeTemplate;
+        let noticePolicy;
+
+        beforeEach(function () {
+          patronNoticeTemplate = this.server.create('templates', { category: 'Loan', active: false });
+          noticePolicy = this.server.create('patronNoticePolicy', {
+            active: true,
+            loanNotices: [{
+              name: 'mockName',
+              templateId: patronNoticeTemplate.id,
+              templateName: 'mockTemplateName',
+              format: 'Email',
+              frequency: 'Recurring',
+              realTime: true,
+              sendOptions: {
+                sendHow: 'After',
+                sendWhen: 'Due date',
+                sendBy: {
+                  duration: 2,
+                  intervalId: 'Hours'
+                },
+                sendEvery: {
+                  duration: 2,
+                  intervalId: 'Hours'
+                }
+              }
+            }],
+          });
+
+          this.visit(`/settings/circulation/notice-policies/${noticePolicy.id}`);
+        });
+
+        it('templateId should have no value', () => {
+          expect(NoticePolicyDetail.loanNoticesSection.loanNotices(0).templateId.value.text).to.equal('');
+        });
+      });
+
       describe('random notice policy', () => {
         let patronNoticeTemplate;
         let noticePolicy;
 
         beforeEach(function () {
-          patronNoticeTemplate = this.server.create('templates', { category: 'Loan' });
+          patronNoticeTemplate = this.server.create('templates', { category: 'Loan', active: true });
           noticePolicy = this.server.create('patronNoticePolicy', {
             active: true,
             loanNotices: [{
