@@ -8,9 +8,18 @@ import RequestPolicyDetail from '../../interactors/request-policy/request-policy
 describe('RequestPolicyForm', () => {
   setupApplication();
 
-  describe('create a new policy request', () => {
+  describe('displaying a request policy', () => {
+    let requestPolicy;
+
     beforeEach(function () {
-      this.visit('/settings/circulation/request-policies?layer=add');
+      requestPolicy = this.server.create('requestPolicy', {
+        name: 'Request policy 20',
+        description: 'Request policy 1 desc',
+      });
+    });
+
+    beforeEach(async function () {
+      await this.visit(`/settings/circulation/request-policies/${requestPolicy.id}?layer=edit`);
     });
 
     it('has a request policy name field', () => {
@@ -29,41 +38,12 @@ describe('RequestPolicyForm', () => {
       expect(RequestPolicyForm.hasHoldCheckbox).to.be.true;
     });
 
-    describe('filling form and saving new policy', () => {
-      beforeEach(async function () {
-        await RequestPolicyForm
-          .fillName('new request policy')
-          .fillDescription('test request policy description')
-          .clickHoldCheckbox()
-          .save();
-      });
-
-      it('renders updated policy name', function () {
-        expect(RequestPolicyDetail.name).to.equal('new request policy');
-      });
-    });
-  });
-
-  describe('updating an existing request policy', () => {
-    let requestPolicy;
-
-    beforeEach(function () {
-      requestPolicy = this.server.create('requestPolicy', {
-        name: 'Request policy 20',
-        description: 'Request policy 1 desc',
-      });
-    });
-
-    beforeEach(async function () {
-      await this.visit(`/settings/circulation/request-policies/${requestPolicy.id}?layer=edit`);
-    });
-
     it('has a request policy name field', () => {
       expect(RequestPolicyForm.nameValue).to.equal(requestPolicy.name);
     });
   });
 
-  describe('saving updated policy', () => {
+  describe('saving policy', () => {
     let requestPolicy;
 
     beforeEach(function () {
@@ -85,6 +65,7 @@ describe('RequestPolicyForm', () => {
       await RequestPolicyForm
         .fillName('updated policy name')
         .fillDescription('updated request policy description')
+        .clickHoldCheckbox()
         .save();
     });
 
