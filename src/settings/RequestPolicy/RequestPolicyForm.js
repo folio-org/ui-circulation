@@ -1,11 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { getFormValues } from 'redux-form';
+import { find } from 'lodash';
 import { FormattedMessage } from 'react-intl';
 
-import stripesForm from '@folio/stripes/form';
-import { stripesShape } from '@folio/stripes/core';
+import stripesFinalForm from '@folio/stripes/final-form';
 import {
   Col,
   ExpandAllButton,
@@ -14,10 +12,9 @@ import {
   Row,
 } from '@folio/stripes/components';
 
-import asyncValidate from '../Validation/request-policy/unique-name';
 import RequestPolicy from '../Models/RequestPolicy';
+import { RequestPolicy as validateRequestPolicy } from '../Validation';
 import { GeneralSection } from './components';
-import { requestPolicyTypes } from '../../constants';
 import {
   CancelButton,
   FooterPane,
@@ -25,17 +22,18 @@ import {
 
 class RequestPolicyForm extends React.Component {
   static propTypes = {
-    stripes: stripesShape.isRequired,
+    form: PropTypes.object.isRequired,
+    initialValues: PropTypes.object,
+    okapi: PropTypes.object.isRequired,
     pristine: PropTypes.bool.isRequired,
+    stripes: PropTypes.object.isRequired,
     submitting: PropTypes.bool.isRequired,
-    policy: PropTypes.object,
-    onSave: PropTypes.func.isRequired,
     onCancel: PropTypes.func.isRequired,
     handleSubmit: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
-    policy: {},
+    initialValues: {},
   };
 
   constructor(props) {
@@ -60,19 +58,45 @@ class RequestPolicyForm extends React.Component {
     this.setState({ sections });
   };
 
-  saveForm = (data) => {
-    const requestTypes = data.requestTypes.reduce((acc, type, index) => {
-      if (type) acc.push(requestPolicyTypes[index]);
-      return acc;
-    }, []);
+  checkUniqueName = (name) => {
+    const { okapi } = this.props;
 
-    this.props.onSave({ ...data, requestTypes });
+    return fetch(`${okapi.url}/request-policy-storage/request-policies?query=(name=="${name}")`,
+      {
+        headers: {
+          'X-Okapi-Tenant': okapi.tenant,
+          'X-Okapi-Token': okapi.token,
+          'Content-Type': 'application/json',
+        }
+      });
+  };
+
+  validate = async (name) => {
+    const { form: { getFieldState } } = this.props;
+
+    let error;
+    const field = getFieldState('name');
+
+    if (name && field.dirty) {
+      try {
+        const response = await this.checkUniqueName(name);
+        const { requestPolicies = [] } = await response.json();
+        const matchedPolicy = find(requestPolicies, ['name', name]);
+        if (matchedPolicy && matchedPolicy.id !== this.props.initialValues.id) {
+          error = <FormattedMessage id="ui-circulation.settings.requestPolicy.errors.nameExists" />;
+        }
+      } catch (e) {
+        throw new Error(e);
+      }
+    }
+
+    return error;
   };
 
   render() {
     const {
+      form: { getState },
       pristine,
-      policy,
       stripes,
       submitting,
       handleSubmit,
@@ -80,6 +104,9 @@ class RequestPolicyForm extends React.Component {
     } = this.props;
 
     const { sections } = this.state;
+
+    const { values = {} } = getState();
+    const policy = new RequestPolicy(values);
 
     const panelTitle = policy.id
       ? policy.name
@@ -95,7 +122,7 @@ class RequestPolicyForm extends React.Component {
       <form
         noValidate
         data-test-request-policy-form
-        onSubmit={handleSubmit(this.saveForm)}
+        onSubmit={handleSubmit}
       >
         <Paneset isRoot>
           <Pane
@@ -117,6 +144,7 @@ class RequestPolicyForm extends React.Component {
                 isOpen={sections.general}
                 metadata={policy.metadata}
                 connect={stripes.connect}
+                validateName={this.validate}
                 onToggle={this.handleSectionToggle}
               />
             </>
@@ -127,16 +155,8 @@ class RequestPolicyForm extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  policy: new RequestPolicy(getFormValues('requestPolicyForm')(state)),
-});
-
-const connectedRequestPolicyForm = connect(mapStateToProps)(RequestPolicyForm);
-
-export default stripesForm({
-  form: 'requestPolicyForm',
+export default stripesFinalForm({
   navigationCheck: true,
-  enableReinitialize: true,
-  asyncValidate,
-  asyncBlurFields: ['name'],
-})(connectedRequestPolicyForm);
+  validateOnBlur: true,
+  validate: validateRequestPolicy,
+})(RequestPolicyForm);

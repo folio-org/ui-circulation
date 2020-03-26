@@ -1,9 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  Field,
-  FieldArray,
-} from 'redux-form';
+import { Field } from 'react-final-form';
+import { FieldArray } from 'react-final-form-arrays';
 import { FormattedMessage } from 'react-intl';
 
 import {
@@ -24,6 +22,7 @@ class GeneralSection extends React.Component {
     onToggle: PropTypes.func.isRequired,
     metadata: PropTypes.object.isRequired,
     connect: PropTypes.func.isRequired,
+    validateName: PropTypes.func.isRequired,
   };
 
   renderTypes = () => {
@@ -56,6 +55,7 @@ class GeneralSection extends React.Component {
       isOpen,
       metadata,
       connect,
+      validateName,
       onToggle,
     } = this.props;
 
@@ -76,6 +76,7 @@ class GeneralSection extends React.Component {
           required
           label={<FormattedMessage id="ui-circulation.settings.requestPolicy.policyName" />}
           component={TextField}
+          validate={validateName}
         />
 
         <Field
