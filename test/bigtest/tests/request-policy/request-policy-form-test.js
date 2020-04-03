@@ -34,16 +34,42 @@ describe('RequestPolicyForm', () => {
       expect(RequestPolicyForm.hasSaveButton).to.be.true;
     });
 
-    it('has a hold checkbox', () => {
+    it('has a request types checkboxes', () => {
       expect(RequestPolicyForm.hasHoldCheckbox).to.be.true;
+      expect(RequestPolicyForm.pageCheckbox.isPresent).to.be.true;
+      expect(RequestPolicyForm.recallCheckbox.isPresent).to.be.true;
     });
 
     it('has a request policy name field', () => {
       expect(RequestPolicyForm.nameValue).to.equal(requestPolicy.name);
     });
+
+    describe('toggle accordion', () => {
+      beforeEach(function () {
+        this.visit('/settings/circulation/request-policies?layer=add');
+      });
+
+      beforeEach(async () => {
+        await RequestPolicyForm.generalAccordionToggleButton.click();
+      });
+
+      it('generalSection should not be displayed', () => {
+        expect(RequestPolicyForm.generalSectionAccordion.isOpen).to.be.false;
+      });
+
+      describe('expand all', () => {
+        beforeEach(async () => {
+          await RequestPolicyForm.generalAccordionToggleButton.click();
+        });
+
+        it('generalSection should be displayed', () => {
+          expect(RequestPolicyForm.generalSectionAccordion.isOpen).to.be.true;
+        });
+      });
+    });
   });
 
-  describe('saving policy', () => {
+  describe('saving form', () => {
     let requestPolicy;
 
     beforeEach(function () {
@@ -61,7 +87,7 @@ describe('RequestPolicyForm', () => {
       await RequestPolicyForm.whenLoaded();
     });
 
-    beforeEach(async function () {
+    beforeEach(async () => {
       await RequestPolicyForm
         .fillName('updated policy name')
         .fillDescription('updated request policy description')

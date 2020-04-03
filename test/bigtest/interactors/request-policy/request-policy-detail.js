@@ -4,6 +4,7 @@ import {
   text,
   Interactor,
   scoped,
+  collection,
 } from '@bigtest/interactor';
 
 import { AccordionInteractor } from '@folio/stripes-components/lib/Accordion/tests/interactor';
@@ -18,6 +19,8 @@ import { AccordionInteractor } from '@folio/stripes-components/lib/Accordion/tes
 
   expandAll = scoped('[data-test-expand-all] button');
   generalSectionAccordion = new AccordionInteractor('#general');
+  generalAccordionToggleButton = scoped('#accordion-toggle-button-general');
+  requestTypes = collection('[data-test-request-types-list] ul li');
 }
 
 export default new RequestPolicyDetail('[data-test-request-policy-detail]');
