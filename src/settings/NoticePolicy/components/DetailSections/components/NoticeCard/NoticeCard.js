@@ -20,7 +20,6 @@ import {
 import {
   noticesFormats,
   noticesFrequency,
-  noticesSendEvent,
   noticesIntervalPeriods,
 } from '../../../../../../constants';
 
@@ -28,10 +27,14 @@ import css from './NoticeCard.css';
 
 class NoticeCard extends React.Component {
   static propTypes = {
-    intl: intlShape.isRequired,
     index: PropTypes.number.isRequired,
+    intl: intlShape.isRequired,
     notice: PropTypes.object.isRequired,
-    timeBasedEventsIds: PropTypes.arrayOf(PropTypes.string).isRequired,
+    sendEvents: PropTypes.arrayOf(PropTypes.shape({
+      value: PropTypes.string.isRequired,
+      label: PropTypes.string.isRequired,
+    })).isRequired,
+    sendEventTriggeringIds: PropTypes.arrayOf(PropTypes.string).isRequired,
     templates: PropTypes.arrayOf(PropTypes.shape({
       value: PropTypes.string.isRequired,
       label: PropTypes.string.isRequired,
@@ -73,7 +76,8 @@ class NoticeCard extends React.Component {
     const {
       index,
       notice,
-      timeBasedEventsIds,
+      sendEvents,
+      sendEventTriggeringIds,
       templates,
       triggeringEvents,
     } = this.props;
@@ -138,7 +142,7 @@ class NoticeCard extends React.Component {
               />
             </Col>
           </Row>
-          { notice.sendOptions.isTimeBasedEventSelected(timeBasedEventsIds) && (
+          { notice.sendOptions.isSendOptionsAvailable(sendEventTriggeringIds) && (
             <>
               <Row>
                 <Col
@@ -149,7 +153,7 @@ class NoticeCard extends React.Component {
                     <Row>
                       <Col xs={4}>
                         <KeyValue data-test-notice-card-send-how>
-                          {this.getTranslatedDropdownValue('sendOptions.sendHow', noticesSendEvent)}
+                          {this.getTranslatedDropdownValue('sendOptions.sendHow', sendEvents)}
                         </KeyValue>
                       </Col>
                       {notice.sendOptions.isBeforeOrAfter() && (
@@ -184,7 +188,7 @@ class NoticeCard extends React.Component {
                   </KeyValue>
                 </Col>
               </Row>
-              {notice.sendOptions.isFrequencyAvailable() && (
+              {notice.sendOptions.isFrequencyAvailable(sendEventTriggeringIds) && (
                 <Row>
                   <Col
                     xs={12}

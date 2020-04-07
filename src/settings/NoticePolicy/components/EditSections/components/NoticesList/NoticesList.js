@@ -10,19 +10,17 @@ import {
 
 import NoticeCard from '../NoticeCard';
 
-import {
-  noticesSendEvent,
-  requestTimeBasedEventsIds,
-  requestTimeBasedNoticesSendEvent,
-} from '../../../../../../constants';
-
 import css from './NoticesList.css';
 
 class NoticesList extends React.Component {
   static propTypes = {
-    sectionKey: PropTypes.string.isRequired,
-    policy: PropTypes.object.isRequired,
     fields: PropTypes.object.isRequired,
+    policy: PropTypes.object.isRequired,
+    sectionKey: PropTypes.string.isRequired,
+    sendEvents: PropTypes.arrayOf(PropTypes.shape({
+      value: PropTypes.string.isRequired,
+      label: PropTypes.string.isRequired,
+    })).isRequired,
     templates: PropTypes.arrayOf(PropTypes.shape({
       value: PropTypes.string.isRequired,
       label: PropTypes.string.isRequired,
@@ -31,15 +29,15 @@ class NoticesList extends React.Component {
       value: PropTypes.string.isRequired,
       label: PropTypes.string.isRequired,
     })).isRequired,
-    timeBasedEventsIds: PropTypes.arrayOf(PropTypes.string).isRequired,
-  };
-
-  onRemoveField = (index) => {
-    this.props.fields.remove(index);
+    sendEventTriggeringIds: PropTypes.arrayOf(PropTypes.string).isRequired,
   };
 
   onAddField = () => {
     this.props.fields.push({});
+  };
+
+  onRemoveField = (index) => {
+    this.props.fields.remove(index);
   };
 
   render() {
@@ -47,18 +45,16 @@ class NoticesList extends React.Component {
       sectionKey,
       fields,
       policy,
+      sendEvents,
+      sendEventTriggeringIds,
       templates,
       triggeringEvents,
-      timeBasedEventsIds,
     } = this.props;
 
     return (
       <>
         {fields.map((pathToNotice, noticeIndex) => {
           const notice = policy[sectionKey][noticeIndex];
-          const sendEvents = notice.sendOptions.isTimeBasedEventSelected(Object.values(requestTimeBasedEventsIds))
-            ? requestTimeBasedNoticesSendEvent
-            : noticesSendEvent;
 
           return (
             <NoticeCard
@@ -67,7 +63,7 @@ class NoticesList extends React.Component {
               noticeIndex={noticeIndex}
               pathToNotice={pathToNotice}
               sendEvents={sendEvents}
-              timeBasedEventsIds={timeBasedEventsIds}
+              sendEventTriggeringIds={sendEventTriggeringIds}
               templates={templates}
               triggeringEvents={triggeringEvents}
               onRemoveNotice={this.onRemoveField}

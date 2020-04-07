@@ -9,6 +9,7 @@ import NoticesList from '../components';
 import {
   loanNoticesTriggeringEvents,
   loanTimeBasedEventsIds,
+  noticesSendEvents,
 } from '../../../../../constants';
 
 class LoanNoticesSection extends React.Component {
@@ -33,9 +34,10 @@ class LoanNoticesSection extends React.Component {
     const props = {
       sectionKey: 'loanNotices',
       policy,
+      sendEvents: noticesSendEvents,
+      sendEventTriggeringIds: values(loanTimeBasedEventsIds),
       templates,
       triggeringEvents: loanNoticesTriggeringEvents,
-      timeBasedEventsIds: values(loanTimeBasedEventsIds),
     };
 
     return (

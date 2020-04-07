@@ -9,14 +9,10 @@ import {
 import { Notice } from '../../Models/NoticePolicy';
 
 import {
+  feeFineEventsIds,
   loanTimeBasedEventsIds,
   requestTimeBasedEventsIds
 } from '../../../constants';
-
-const timeBasedEventsIds = [
-  ...values(loanTimeBasedEventsIds),
-  ...values(requestTimeBasedEventsIds),
-];
 
 const setNoticeDefaults = (sectionKey, policy) => {
   const noticePolicy = cloneDeep(policy);
@@ -30,13 +26,13 @@ const setNoticeDefaults = (sectionKey, policy) => {
   return noticePolicy;
 };
 
-const checkNoticeHiddenFields = (sectionKey, policy) => {
+const checkNoticeHiddenFields = (sectionKey, allowedIds, policy) => {
   const noticePolicy = cloneDeep(policy);
 
   forEach(noticePolicy[sectionKey], (item, index) => {
     const notice = new Notice(item);
 
-    if (!notice.sendOptions.isTimeBasedEventSelected(timeBasedEventsIds)) {
+    if (!notice.sendOptions.isSendOptionsAvailable(allowedIds)) {
       unset(noticePolicy, `[${sectionKey}][${index}].sendOptions.sendEvery`);
       unset(noticePolicy, `[${sectionKey}][${index}].sendOptions.sendBy`);
       unset(noticePolicy, `[${sectionKey}][${index}].sendOptions.sendHow`);
@@ -70,9 +66,11 @@ const filter = (entity, ...callbacks) => {
 export default (entity) => {
   const callbacks = [
     setNoticeDefaults.bind(null, 'loanNotices'),
-    checkNoticeHiddenFields.bind(null, 'loanNotices'),
+    checkNoticeHiddenFields.bind(null, 'loanNotices', values(loanTimeBasedEventsIds)),
     setNoticeDefaults.bind(null, 'requestNotices'),
-    checkNoticeHiddenFields.bind(null, 'requestNotices'),
+    checkNoticeHiddenFields.bind(null, 'requestNotices', values(requestTimeBasedEventsIds)),
+    setNoticeDefaults.bind(null, 'feeFineNotices'),
+    checkNoticeHiddenFields.bind(null, 'feeFineNotices', values(feeFineEventsIds)),
   ];
 
   return filter(entity, ...callbacks);

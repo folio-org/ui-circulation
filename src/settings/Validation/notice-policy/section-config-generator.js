@@ -1,25 +1,12 @@
-import {
-  reduce,
-  values,
-} from 'lodash';
+import { reduce } from 'lodash';
 
-import {
-  loanTimeBasedEventsIds,
-  requestTimeBasedEventsIds
-} from '../../../constants';
-
-const timeBasedEventsIds = [
-  ...values(loanTimeBasedEventsIds),
-  ...values(requestTimeBasedEventsIds),
-];
-
-export default function (policy, sectionKey) {
+export default function (policy, sectionKey, allowedIds) {
   return reduce(policy[sectionKey], (config, notice, index) => {
     const isRecurringSelected = notice.isRecurring();
     const isBeforeOrAfterSelected = notice.sendOptions.isBeforeOrAfter();
-    const isTimeBasedEventSelected = notice.sendOptions.isTimeBasedEventSelected(timeBasedEventsIds);
+    const isSendOptionsAvailable = notice.sendOptions.isSendOptionsAvailable(allowedIds);
 
-    const loanNoticeConfig = {
+    const noticeConfig = {
       [`${sectionKey}[${index}].templateId`]: {
         rules: ['isNotEmptySelect'],
         shouldValidate: true,
@@ -34,30 +21,30 @@ export default function (policy, sectionKey) {
       },
       [`${sectionKey}[${index}].sendOptions.sendHow`]: {
         rules: ['isNotEmptySelect'],
-        shouldValidate: isTimeBasedEventSelected,
+        shouldValidate: isSendOptionsAvailable,
       },
       [`${sectionKey}[${index}].sendOptions.sendBy.duration`]: {
         rules: ['isNotEmpty', 'isIntegerGreaterThanZero', 'isFromOneToHundred'],
-        shouldValidate: isTimeBasedEventSelected && isBeforeOrAfterSelected,
+        shouldValidate: isSendOptionsAvailable && isBeforeOrAfterSelected,
       },
       [`${sectionKey}[${index}].sendOptions.sendBy.intervalId`]: {
         rules: ['isNotEmptySelect'],
-        shouldValidate: isTimeBasedEventSelected && isBeforeOrAfterSelected,
+        shouldValidate: isSendOptionsAvailable && isBeforeOrAfterSelected,
       },
       [`${sectionKey}[${index}].frequency`]: {
         rules: ['isNotEmptySelect'],
-        shouldValidate: isTimeBasedEventSelected,
+        shouldValidate: isSendOptionsAvailable,
       },
       [`${sectionKey}[${index}].sendOptions.sendEvery.duration`]: {
         rules: ['isNotEmpty', 'isIntegerGreaterThanZero', 'isFromOneToHundred'],
-        shouldValidate: isTimeBasedEventSelected && isRecurringSelected,
+        shouldValidate: isSendOptionsAvailable && isRecurringSelected,
       },
       [`${sectionKey}[${index}].sendOptions.sendEvery.intervalId`]: {
         rules: ['isNotEmptySelect'],
-        shouldValidate: isTimeBasedEventSelected && isRecurringSelected,
+        shouldValidate: isSendOptionsAvailable && isRecurringSelected,
       },
     };
 
-    return { ...config, ...loanNoticeConfig };
+    return { ...config, ...noticeConfig };
   }, {});
 }
