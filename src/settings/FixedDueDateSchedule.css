@@ -1,8 +1,4 @@
-:root{
-  --bg: #fcfcfc;
-  --bgHover: color(var(--bg) contrast(100%) blend(var(--bg) 90%));
-  --error: #900;
-}
+@import "@folio/stripes-components/lib/variables.css";
 
 .accordionSection{
   max-width:700px;
@@ -32,39 +28,22 @@
 }
 .scheduleItemContent {
   padding: 6px 14px;
-  background-color: color(var(--bg) blend(var(--bgHover) 20%));
+  background-color: color(var(--bg) blend(var(--bg-hover) 20%));
   width: 100%;
 }
 
 
 .scheduleHeader {
-  background-color: var(--bgHover);
+  background-color: var(--bg-hover);
   display: flex;
   justify-content: flex-start;
   align-items: center;
   padding: 0 14px;
   min-height: 30px;
 
-  & h1 {
-    font-size: 1.3rem;
-  }
-
-  & h2 {
-    font-size: 1.2 rem;
-  }
-
-  & h3 {
-    font-size: 1rem;
-  }
-
   & h4 {
-    font-size: 0.9rem;
+    font-size: var(--font-size-medium);
     margin: 0 0 0 0;
-  }
-
-  & h5,
-  & h6 {
-    font-size: 0.8rem;
   }
 }
 

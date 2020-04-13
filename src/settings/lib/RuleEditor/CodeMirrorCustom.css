@@ -1,5 +1,6 @@
 @import "~codemirror/lib/codemirror.css";
 @import "~codemirror/addon/hint/show-hint.css";
+@import "~@folio/stripes-components/lib/variables.css";
 
 /*Editor styles */
 .CodeMirror {
@@ -34,7 +35,7 @@
   padding: 0 14px;
   background-color: #d7d7d7;
   text-align: center;
-  font-weight: bold;
+  font-weight: var(--text-weight-medium);
 }
 
 .CodeMirror-hints-subheader {
@@ -42,7 +43,7 @@
   padding: 0 14px;
   background-color: #e9e7e7;
   text-align: center;
-  font-weight: normal;
+  font-weight: var(--text-weight-regular);
   border-bottom: #bebdbd solid 1px;
   border-top: #bebdbd solid 1px;
   height: 20px;
@@ -109,7 +110,7 @@
 }
 
 .CodeMirror-checkbox-container label span.highlight {
-  font-weight: bold;
+  font-weight: var(--text-weight-medium);
 }
 
 .CodeMirror-hint-section-button-container {
@@ -138,8 +139,8 @@
   text-decoration: none;
   outline: 0;
   opacity: 1;
-  font-weight: 1;
-  font-size: 12px;
+  font-weight: var(--text-weight-headline-addition-factor);
+  font-size: var(--font-size-small);
   font-family: inherit;
   min-height: 1.5em;
   width: 100%;
@@ -199,7 +200,7 @@
 }
 
 .rule-hint-strong {
-  font-weight: bold;
+  font-weight: var(--text-weight-medium);
   background-color: #d7d7d7;
 }
 
@@ -240,7 +241,7 @@
 
 .cm-rule,
 .cm-ruleName {
-  font-weight: bold;
+  font-weight: var(--text-weight-medium);
 }
 
 .cm-a,
@@ -354,6 +355,6 @@
 .rule-error {
   background: #f87171;
   color: #600;
-  font-weight: bold;
+  font-weight: var(--text-weight-medium);
   padding: 1px 55px;
 }

@@ -1,5 +1,7 @@
+@import "@folio/stripes-components/lib/variables.css";
+
 .categoryHeader {
-  font-weight: bold;
+  font-weight: var(--text-weight-medium);
 }
 
 .tokensList {
