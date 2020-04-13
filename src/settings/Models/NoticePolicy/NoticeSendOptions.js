@@ -4,11 +4,7 @@ import {
 } from 'lodash';
 
 import { Period } from '../common';
-import {
-  loanTimeBasedEventsIds,
-  noticesSendEventMap,
-  requestTimeBasedEventsIds,
-} from '../../../constants';
+import { noticesSendEventMap } from '../../../constants';
 
 export default class NoticeSendOptions {
   constructor(options = {}) {
@@ -18,8 +14,8 @@ export default class NoticeSendOptions {
     this.sendEvery = new Period(options.sendEvery);
   }
 
-  isTimeBasedEventSelected(timeBasedEventsIds = []) {
-    return includes(timeBasedEventsIds, this.sendWhen);
+  isSendOptionsAvailable(allowedIds = []) {
+    return includes(allowedIds, this.sendWhen);
   }
 
   isBeforeOrAfter() {
@@ -27,11 +23,7 @@ export default class NoticeSendOptions {
        || isEqual(this.sendHow, noticesSendEventMap.BEFORE);
   }
 
-  isFrequencyAvailable() {
-    const timeBasedEventsIds = [
-      ...Object.values(requestTimeBasedEventsIds),
-      ...Object.values(loanTimeBasedEventsIds),
-    ];
-    return this.isTimeBasedEventSelected(timeBasedEventsIds) && this.isBeforeOrAfter();
+  isFrequencyAvailable(allowedIds = []) {
+    return this.isSendOptionsAvailable(allowedIds) && this.isBeforeOrAfter();
   }
 }

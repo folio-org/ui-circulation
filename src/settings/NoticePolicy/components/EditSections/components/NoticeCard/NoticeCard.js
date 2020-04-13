@@ -31,19 +31,19 @@ import css from './NoticeCard.css';
 class NoticeCard extends React.Component {
   static propTypes = {
     intl: intlShape.isRequired,
+    notice: PropTypes.object.isRequired,
     noticeIndex: PropTypes.number.isRequired,
     pathToNotice: PropTypes.string.isRequired,
-    notice: PropTypes.object.isRequired,
-    timeBasedEventsIds: PropTypes.arrayOf(PropTypes.string).isRequired,
+    sendEvents: PropTypes.arrayOf(PropTypes.shape({
+      value: PropTypes.string.isRequired,
+      label: PropTypes.string.isRequired,
+    })).isRequired,
+    sendEventTriggeringIds: PropTypes.arrayOf(PropTypes.string).isRequired,
     templates: PropTypes.arrayOf(PropTypes.shape({
       value: PropTypes.string.isRequired,
       label: PropTypes.string.isRequired,
     })).isRequired,
     triggeringEvents: PropTypes.arrayOf(PropTypes.shape({
-      value: PropTypes.string.isRequired,
-      label: PropTypes.string.isRequired,
-    })).isRequired,
-    sendEvents: PropTypes.arrayOf(PropTypes.shape({
       value: PropTypes.string.isRequired,
       label: PropTypes.string.isRequired,
     })).isRequired,
@@ -72,8 +72,8 @@ class NoticeCard extends React.Component {
       noticeIndex,
       pathToNotice,
       sendEvents,
+      sendEventTriggeringIds,
       templates,
-      timeBasedEventsIds,
       triggeringEvents,
     } = this.props;
 
@@ -166,7 +166,7 @@ class NoticeCard extends React.Component {
                   </Field>
                 </Col>
               </Row>
-              {notice.sendOptions.isTimeBasedEventSelected(timeBasedEventsIds) && (
+              {notice.sendOptions.isSendOptionsAvailable(sendEventTriggeringIds) && (
                 <>
                   <Row>
                     <Col
@@ -218,7 +218,7 @@ class NoticeCard extends React.Component {
                       </>
                     )}
                   </Row>
-                  { notice.sendOptions.isFrequencyAvailable() && (
+                  { notice.sendOptions.isFrequencyAvailable(sendEventTriggeringIds) && (
                     <>
                       <Row>
                         <Col

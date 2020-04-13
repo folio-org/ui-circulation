@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import {
@@ -8,7 +7,6 @@ import {
 } from 'react-intl';
 
 import stripesForm from '@folio/stripes/form';
-import { stripesShape } from '@folio/stripes/core';
 
 import {
   Accordion,
@@ -34,8 +32,6 @@ import {
 } from '../components';
 
 import formShape from '../utils/form-shape';
-
-import css from './LostItemFee.css';
 
 class LostItemFeePolicyForm extends React.Component {
   static propTypes = formShape;

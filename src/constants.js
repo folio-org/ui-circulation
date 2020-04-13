@@ -193,7 +193,7 @@ export const noticesFrequency = [
   },
 ];
 
-export const noticesSendEvent = [
+export const noticesSendEvents = [
   {
     value: noticesSendEventMap.UPON,
     label: 'ui-circulation.settings.noticePolicy.notices.upon',
@@ -208,7 +208,7 @@ export const noticesSendEvent = [
   },
 ];
 
-export const requestTimeBasedNoticesSendEvent = [
+export const requestTimeBasedNoticesSendEvents = [
   {
     value: noticesSendEventMap.UPON,
     label: 'ui-circulation.settings.noticePolicy.notices.upon',
@@ -216,6 +216,17 @@ export const requestTimeBasedNoticesSendEvent = [
   {
     value: noticesSendEventMap.BEFORE,
     label: 'ui-circulation.settings.noticePolicy.notices.before',
+  },
+];
+
+export const feeFinesNoticesSendEvents = [
+  {
+    value: noticesSendEventMap.UPON,
+    label: 'ui-circulation.settings.noticePolicy.notices.upon',
+  },
+  {
+    value: noticesSendEventMap.AFTER,
+    label: 'ui-circulation.settings.noticePolicy.notices.after',
   },
 ];
 
@@ -323,6 +334,7 @@ export const patronNoticeCategoryIds = {
   REQUEST: 'Request',
   FEE_FINE_CHARGE: 'FeeFineCharge',
   FEE_FINE_ACTION: 'FeeFineAction',
+  AUTOMATED_FEE_FINE: 'AutomatedFeeFine',
   OTHER: 'Other',
 };
 
@@ -342,6 +354,10 @@ export const patronNoticeCategories = [
   {
     id: patronNoticeCategoryIds.FEE_FINE_ACTION,
     label: 'ui-circulation.settings.patronNotices.categories.feeFineAction',
+  },
+  {
+    id: patronNoticeCategoryIds.AUTOMATED_FEE_FINE,
+    label: 'ui-circulation.settings.patronNotices.categories.automatedFeeFineAction',
   },
   {
     id: patronNoticeCategoryIds.OTHER,
@@ -415,6 +431,22 @@ export const LOCATION_RULES_TYPES = [
   RULES_TYPE.CAMPUS,
   RULES_TYPE.LIBRARY,
   RULES_TYPE.LOCATION,
+];
+
+export const feeFineEventsIds = {
+  RETURNED: 'Overdue fine returned',
+  RENEWED: 'Overdue fine renewed',
+};
+
+export const feeFineNoticesTriggeringEvents = [
+  {
+    value: feeFineEventsIds.RETURNED,
+    label: 'ui-circulation.settings.noticePolicy.feeFineNotices.returned',
+  },
+  {
+    value: feeFineEventsIds.RENEWED,
+    label: 'ui-circulation.settings.noticePolicy.feeFineNotices.renewed',
+  },
 ];
 
 export default '';

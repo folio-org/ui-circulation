@@ -10,6 +10,7 @@ import { Accordion } from '@folio/stripes/components';
 
 import NoticeCard from '../components';
 import {
+  noticesSendEvents,
   loanTimeBasedEventsIds,
   loanNoticesTriggeringEvents,
 } from '../../../../../constants';
@@ -46,7 +47,8 @@ class LoanNoticesSection extends React.Component {
               key={index}
               index={index}
               notice={notice}
-              timeBasedEventsIds={values(loanTimeBasedEventsIds)}
+              sendEvents={noticesSendEvents}
+              sendEventTriggeringIds={values(loanTimeBasedEventsIds)}
               templates={templates}
               triggeringEvents={loanNoticesTriggeringEvents}
             />
