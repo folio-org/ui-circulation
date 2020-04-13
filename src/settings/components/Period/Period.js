@@ -19,8 +19,6 @@ import {
   TextField,
 } from '@folio/stripes/components';
 
-import css from './Period.css';
-
 class Period extends PureComponent {
   static propTypes = {
     intl: intlShape.isRequired,
@@ -83,7 +81,7 @@ class Period extends PureComponent {
       <>
         {fieldLabel && (
           <div data-test-period-label>
-            <Row className={css.periodLabel}>
+            <Row>
               <Col xs={12}>
                 { fieldLabel && (
                   <Label required={required}>

@@ -13,6 +13,8 @@ import stripesForm from '@folio/stripes/form';
 
 import RulesField from './RulesField';
 
+import styles from './RulesEditor.css';
+
 class RulesForm extends React.Component {
   static propTypes = {
     pristine: PropTypes.bool.isRequired,
@@ -42,17 +44,11 @@ class RulesForm extends React.Component {
 
     const { ruleFilter } = this.state;
 
-    const containerStyle = {
-      height: '100%',
-      display: 'flex',
-      flexDirection: 'column',
-    };
-
     return (
       <form
         id="form-loan-rules"
         data-test-circulation-rules-form
-        style={containerStyle}
+        className={styles.circulationRulesForm}
         onSubmit={handleSubmit}
       >
         <Row end="xs">
