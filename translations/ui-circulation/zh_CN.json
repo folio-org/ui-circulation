@@ -271,7 +271,7 @@
     "settings.loanHistory.paymentMethod.transfer": "转移",
     "settings.loanHistory.paymentMethod.replace": "更换",
     "settings.loanHistory.paymentMethod.pay": "支付",
-    "settings.loanHistory.errors.paymentMethodSelected": "已选择此付款方式",
+    "settings.loanHistory.errors.paymentMethodSelected": "已选择此支付方式",
     "settings.staffSlips.itemTokenHeader": "单件",
     "settings.staffSlips.effectiveLocationTokenHeader": "有效馆藏地",
     "settings.staffSlips.staffSlipTokenHeader": "员工单",
@@ -390,5 +390,8 @@
     "settings.editorToolbar.align.right": "靠右",
     "settings.editorToolbar.align.justify": "证明",
     "settings.editorToolbar.link": "链接",
-    "settings.editorToolbar.list.bullet": "项目符号列表"
+    "settings.editorToolbar.list.bullet": "项目符号列表",
+    "settings.patronNotices.categories.automatedFeeFineAction": "自动的费用/罚款",
+    "settings.noticePolicy.feeFineNotices.returned": "逾期罚款，已退还",
+    "settings.noticePolicy.feeFineNotices.renewed": "逾期罚款，已续期"
 }

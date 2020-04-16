@@ -390,5 +390,8 @@
     "settings.editorToolbar.align.right": "alinhar à direita",
     "settings.editorToolbar.align.justify": "justificar",
     "settings.editorToolbar.link": "link",
-    "settings.editorToolbar.list.bullet": "lista de marcadores"
+    "settings.editorToolbar.list.bullet": "lista de marcadores",
+    "settings.patronNotices.categories.automatedFeeFineAction": "Taxa/multa automatizada",
+    "settings.noticePolicy.feeFineNotices.returned": "Multa por atraso, devolvida",
+    "settings.noticePolicy.feeFineNotices.renewed": "Multa por atraso, renovada"
 }

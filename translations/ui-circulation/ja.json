@@ -30,7 +30,7 @@
     "settings.loanPolicy.loanable": "Loanable",
     "settings.loanPolicy.selectInterval": "Select interval",
     "settings.loanPolicy.selectSchedule": "スケジュールを選択",
-    "settings.validate.fillIn": "続行するにはこれを入力してください",
+    "settings.validate.fillIn": "続行するには入力してください",
     "settings.fDDS.validate.overlappingDateRange": "Date range {num1} cannot overlap with date range {num2}",
     "settings.fDDS.validate.uniqueName": "一意の名前を入力してください。",
     "settings.fDDS.validate.oneScheduleMin": "少なくとも1つのスケジュールを入力する必要があります",
@@ -79,7 +79,7 @@
     "settings.staffSlips.preview": "プレビュー",
     "settings.staffSlips.untitledStaffSlip": "Staff slip name",
     "settings.staffSlips.deleteStaffSlipMessage": "The staff slip <strong>{name}</strong> will be <strong>deleted</strong>.",
-    "settings.staffSlips.validation.required": "Please fill this in to continue",
+    "settings.staffSlips.validation.required": "続行するには入力してください",
     "settings.index.requestCancellationReasons": "キャンセルの理由をリクエストする",
     "settings.loanPolicy.generalInformation": "General information",
     "settings.cancelReasons.label": "キャンセルの理由をリクエストする",
@@ -87,7 +87,7 @@
     "settings.cancelReasons.labelShort": "キャンセル理由",
     "settings.cancelReasons.descriptionInternal": "説明（内部向け）",
     "settings.cancelReasons.descriptionPublic": "説明（公開）",
-    "meta.title": "Circulation",
+    "meta.title": "貸出",
     "settings.loanPolicy.yes": "Yes",
     "settings.loanPolicy.no": "No",
     "settings.fDDS.editLabel": "Edit: {name}",
@@ -390,5 +390,8 @@
     "settings.editorToolbar.align.right": "right",
     "settings.editorToolbar.align.justify": "justify",
     "settings.editorToolbar.link": "link",
-    "settings.editorToolbar.list.bullet": "bullet list"
+    "settings.editorToolbar.list.bullet": "bullet list",
+    "settings.patronNotices.categories.automatedFeeFineAction": "Automated fee/fine",
+    "settings.noticePolicy.feeFineNotices.returned": "Overdue fine, returned",
+    "settings.noticePolicy.feeFineNotices.renewed": "Overdue fine, renewed"
 }
