@@ -390,5 +390,8 @@
     "settings.editorToolbar.align.right": "droite",
     "settings.editorToolbar.align.justify": "Justifier",
     "settings.editorToolbar.link": "Lien",
-    "settings.editorToolbar.list.bullet": "liste à puces"
+    "settings.editorToolbar.list.bullet": "liste à puces",
+    "settings.patronNotices.categories.automatedFeeFineAction": "Automated fee/fine",
+    "settings.noticePolicy.feeFineNotices.returned": "Overdue fine, returned",
+    "settings.noticePolicy.feeFineNotices.renewed": "Overdue fine, renewed"
 }
