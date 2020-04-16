@@ -390,5 +390,8 @@
     "settings.editorToolbar.align.right": "اليمين",
     "settings.editorToolbar.align.justify": "ترتيب",
     "settings.editorToolbar.link": "رابط",
-    "settings.editorToolbar.list.bullet": "قائمة منقوطة"
+    "settings.editorToolbar.list.bullet": "قائمة منقوطة",
+    "settings.patronNotices.categories.automatedFeeFineAction": "رسم/غرامة مؤتمتة",
+    "settings.noticePolicy.feeFineNotices.returned": "غرامة تأخير، تمت الإعادة",
+    "settings.noticePolicy.feeFineNotices.renewed": "غرامة تأخير، تم التجديد"
 }
