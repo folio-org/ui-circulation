@@ -141,7 +141,7 @@
     "settings.noticePolicy.entryLabel": "Patron notice policy",
     "settings.noticePolicy.paneTitle": "Patron notice policies",
     "settings.common.closeEntryDialog": "Close entry dialog",
-    "settings.common.saveAndClose": "Save & close",
+    "settings.common.saveAndClose": "保存して閉じる",
     "settings.common.deleteMessage": "{name} will be {removed}.",
     "settings.common.removed": "removed",
     "settings.common.delete": "Delete",
