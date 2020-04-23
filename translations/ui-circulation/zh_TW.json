@@ -391,7 +391,7 @@
     "settings.editorToolbar.align.justify": "justify",
     "settings.editorToolbar.link": "link",
     "settings.editorToolbar.list.bullet": "bullet list",
-    "settings.patronNotices.categories.automatedFeeFineAction": "Automated fee/fine",
-    "settings.noticePolicy.feeFineNotices.returned": "Overdue fine, returned",
-    "settings.noticePolicy.feeFineNotices.renewed": "Overdue fine, renewed"
+    "settings.patronNotices.categories.automatedFeeFineAction": "系統產生的費用 / 罰款",
+    "settings.noticePolicy.feeFineNotices.returned": "逾期罰款，已歸還",
+    "settings.noticePolicy.feeFineNotices.renewed": "逾期罰款，已續借"
 }
