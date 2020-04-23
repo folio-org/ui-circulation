@@ -11,6 +11,7 @@ import { Accordion } from '@folio/stripes/components';
 import NoticeCard from '../components';
 import {
   requestTimeBasedEventsIds,
+  requestTimeBasedNoticesSendEvents,
   requestNoticesTriggeringEvents,
 } from '../../../../../constants';
 
@@ -46,7 +47,8 @@ class RequestNoticesSection extends React.Component {
               key={index}
               index={index}
               notice={notice}
-              timeBasedEventsIds={values(requestTimeBasedEventsIds)}
+              sendEvents={requestTimeBasedNoticesSendEvents}
+              sendEventTriggeringIds={values(requestTimeBasedEventsIds)}
               templates={templates}
               triggeringEvents={requestNoticesTriggeringEvents}
             />

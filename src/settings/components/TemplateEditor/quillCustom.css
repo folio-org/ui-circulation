@@ -1,6 +1,8 @@
+@import "~@folio/stripes-components/lib/variables.css";
+
 .ql-editor {
   min-height: 100px !important;
-  resize: vertical; 
+  resize: vertical;
 }
 
 .ql-token {
@@ -17,7 +19,7 @@
   content: 'Small';
 }
 .ql-picker.ql-size .ql-picker-item[data-value="10px"]::before {
-  font-size: 10px;
+  font-size: var(--font-size-x-small);
 }
 
 .ql-picker.ql-size .ql-picker-label[data-value="18px"]::before,
@@ -25,7 +27,7 @@
   content: 'Large';
 }
 .ql-picker.ql-size .ql-picker-item[data-value="18px"]::before {
-  font-size: 18px;
+  font-size: var(--font-size-large);
 }
 
 .ql-picker.ql-size .ql-picker-label[data-value="32px"]::before,
@@ -33,5 +35,5 @@
   content: 'Huge';
 }
 .ql-picker.ql-size .ql-picker-item[data-value="32px"]::before {
-  font-size: 32px;
+  font-size: var(--font-size-xx-large);
 }

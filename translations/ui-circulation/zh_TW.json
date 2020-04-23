@@ -390,5 +390,8 @@
     "settings.editorToolbar.align.right": "right",
     "settings.editorToolbar.align.justify": "justify",
     "settings.editorToolbar.link": "link",
-    "settings.editorToolbar.list.bullet": "bullet list"
+    "settings.editorToolbar.list.bullet": "bullet list",
+    "settings.patronNotices.categories.automatedFeeFineAction": "系統產生的費用 / 罰款",
+    "settings.noticePolicy.feeFineNotices.returned": "逾期罰款，已歸還",
+    "settings.noticePolicy.feeFineNotices.renewed": "逾期罰款，已續借"
 }

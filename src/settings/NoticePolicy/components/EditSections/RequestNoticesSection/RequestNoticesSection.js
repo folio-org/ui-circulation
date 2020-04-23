@@ -9,6 +9,7 @@ import NoticesList from '../components';
 import {
   requestNoticesTriggeringEvents,
   requestTimeBasedEventsIds,
+  requestTimeBasedNoticesSendEvents,
 } from '../../../../../constants';
 
 class RequestNoticesSection extends React.Component {
@@ -33,8 +34,9 @@ class RequestNoticesSection extends React.Component {
     const props = {
       policy,
       sectionKey: 'requestNotices',
+      sendEvents: requestTimeBasedNoticesSendEvents,
+      sendEventTriggeringIds: values(requestTimeBasedEventsIds),
       templates,
-      timeBasedEventsIds: values(requestTimeBasedEventsIds),
       triggeringEvents: requestNoticesTriggeringEvents,
     };
 

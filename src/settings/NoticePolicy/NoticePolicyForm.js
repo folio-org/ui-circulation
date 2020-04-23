@@ -29,6 +29,8 @@ import {
   RequestNoticesSection,
 } from './components';
 
+import { patronNoticeCategoryIds } from '../../constants';
+
 class NoticePolicyForm extends React.Component {
   static propTypes = {
     stripes: stripesShape.isRequired,
@@ -55,7 +57,7 @@ class NoticePolicyForm extends React.Component {
         general: true,
         loanNotices: true,
         requestNotices: true,
-        feeFineNotices: false,
+        feeFineNotices: true,
       },
     };
   }
@@ -134,17 +136,19 @@ class NoticePolicyForm extends React.Component {
             <LoanNoticesSection
               isOpen={sections.loanNotices}
               policy={policy}
-              templates={getTemplates(patronNoticeTemplates, 'Loan')}
+              templates={getTemplates(patronNoticeTemplates, patronNoticeCategoryIds.LOAN)}
               onToggle={this.handleSectionToggle}
             />
             <RequestNoticesSection
               isOpen={sections.requestNotices}
               policy={policy}
-              templates={getTemplates(patronNoticeTemplates, 'Request')}
+              templates={getTemplates(patronNoticeTemplates, patronNoticeCategoryIds.REQUEST)}
               onToggle={this.handleSectionToggle}
             />
             <FeeFineNoticesSection
               isOpen={sections.feeFineNotices}
+              policy={policy}
+              templates={getTemplates(patronNoticeTemplates, patronNoticeCategoryIds.AUTOMATED_FEE_FINE)}
               onToggle={this.handleSectionToggle}
             />
           </Pane>

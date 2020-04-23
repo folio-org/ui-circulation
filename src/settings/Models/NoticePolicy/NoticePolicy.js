@@ -22,5 +22,11 @@ export default class NoticePolicy {
 
       return [...requestNotices, rn];
     }, []) : [];
+
+    this.feeFineNotices = policy.feeFineNotices ? policy.feeFineNotices.reduce((feeFineNotices, feeFineNotice) => {
+      const ffn = new Notice(feeFineNotice);
+
+      return [...feeFineNotices, ffn];
+    }, []) : [];
   }
 }

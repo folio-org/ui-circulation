@@ -18,6 +18,8 @@ import {
 
 import getTemplates from './utils/get-templates';
 
+import { patronNoticeCategoryIds } from '../../constants';
+
 class NoticePolicyDetail extends React.Component {
   static propTypes= {
     initialValues: PropTypes.object.isRequired,
@@ -35,7 +37,7 @@ class NoticePolicyDetail extends React.Component {
         generalInformation: true,
         loanNotices: true,
         requestNotices: true,
-        feeFineNotices: false,
+        feeFineNotices: true,
       },
     };
   }
@@ -99,18 +101,19 @@ class NoticePolicyDetail extends React.Component {
         <LoanNoticesSection
           isOpen={loanNotices}
           policy={noticePolicy}
-          templates={getTemplates(patronNoticeTemplates, 'Loan')}
+          templates={getTemplates(patronNoticeTemplates, patronNoticeCategoryIds.LOAN)}
           onToggle={this.handleSectionToggle}
         />
         <RequestNoticesSection
           isOpen={requestNotices}
           policy={noticePolicy}
-          templates={getTemplates(patronNoticeTemplates, 'Request')}
+          templates={getTemplates(patronNoticeTemplates, patronNoticeCategoryIds.REQUEST)}
           onToggle={this.handleSectionToggle}
         />
         <FeeFineNoticesSection
           isOpen={feeFineNotices}
           policy={noticePolicy}
+          templates={getTemplates(patronNoticeTemplates, patronNoticeCategoryIds.AUTOMATED_FEE_FINE)}
           onToggle={this.handleSectionToggle}
         />
       </div>

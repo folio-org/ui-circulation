@@ -390,5 +390,8 @@
     "settings.editorToolbar.align.right": "right",
     "settings.editorToolbar.align.justify": "justify",
     "settings.editorToolbar.link": "link",
-    "settings.editorToolbar.list.bullet": "bullet list"
+    "settings.editorToolbar.list.bullet": "bullet list",
+    "settings.patronNotices.categories.automatedFeeFineAction": "Автоматизированная оплата",
+    "settings.noticePolicy.feeFineNotices.returned": "Неоплаченный штраф, возвращён",
+    "settings.noticePolicy.feeFineNotices.renewed": "Неоплаченный штраф, продлён"
 }

@@ -1,3 +1,5 @@
+@import "@folio/stripes-components/lib/variables.css";
+
 .notice {
   border: 1px solid rgba(0, 0, 0, 0.2);
   margin: 10px;
@@ -7,26 +9,26 @@
 .noticeContainer {
   padding: 10px 20px;
 }
-  
+
 .header {
   padding: 0.15rem;
-  font-weight: 600;
+  font-weight: var(--text-weight-medium);
   background-color: #e6e6e6;
 }
-  
+
 .headerTitle {
   padding: 5px 10px;
 }
-  
+
 .headerIcon {
-  text-align: right;  
+  text-align: right;
 }
-  
+
 .noticeField {
   padding-top: 5px;
   padding-bottom: 5px;
 }
-  
+
 .cardText {
   display: flex;
   justify-content: center;
@@ -37,7 +39,7 @@
 .cardTextWithotLabel {
   padding-bottom: 20px;
 }
-  
+
 .fieldLabel {
   padding-left: 20px;
 }
