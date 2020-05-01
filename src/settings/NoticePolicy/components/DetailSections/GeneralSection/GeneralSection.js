@@ -80,11 +80,16 @@ const GeneralSection = (props) => {
 GeneralSection.propTypes = {
   metadata: PropTypes.object.isRequired,
   isOpen: PropTypes.bool.isRequired,
-  isPolicyActive: PropTypes.bool.isRequired,
+  isPolicyActive: PropTypes.bool,
   policyName: PropTypes.string.isRequired,
-  policyDescription: PropTypes.string.isRequired,
+  policyDescription: PropTypes.string,
   connect: PropTypes.func.isRequired,
   onToggle: PropTypes.func.isRequired,
+};
+
+GeneralSection.defaultProps = {
+  policyDescription: '',
+  isPolicyActive: false,
 };
 
 export default GeneralSection;
