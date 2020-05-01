@@ -149,7 +149,7 @@
   "settings.checkout.audioAlerts": "Enable audio alerts",
   "settings.checkout.no": "No",
   "settings.checkout.yes": "Yes",
-  "settings.checkout.timeout": "Automatically end checkout session after period of inactivity",
+  "settings.checkout.checkin.timeout": "Automatically end check in and check out session after period of inactivity",
   "settings.checkout.minutes": "minutes",
   "settings.checkout.validate.timeoutDuration": "Please enter a whole number greater than zero to continue",
   "settings.checkout.filterRules": "filter rules",
