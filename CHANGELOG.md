@@ -4,6 +4,7 @@
 
 * New/Edit Patron notice policy: do not display inactive loan and request notice templates in the dropdown. Refs UICIRC-418.
 * Overdue fee/fine notices. Refs UICIRC-451.
+* Purge `intlShape` in prep for `react-intl` `v4` migration. Refs STRIPES-672.
 
 ## 2.0.0 (https://github.com/folio-org/ui-circulation/tree/v2.0.0) (2019-03-13)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v1.12.0...v2.0.0)

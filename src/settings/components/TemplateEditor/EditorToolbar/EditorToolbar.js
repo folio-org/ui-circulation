@@ -1,7 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
   injectIntl,
-  intlShape,
 } from 'react-intl';
 
 const EditorToolbar = ({
@@ -124,7 +124,7 @@ const EditorToolbar = ({
 };
 
 EditorToolbar.propTypes = {
-  intl: intlShape.isRequired,
+  intl: PropTypes.object,
 };
 
 export default injectIntl(EditorToolbar);

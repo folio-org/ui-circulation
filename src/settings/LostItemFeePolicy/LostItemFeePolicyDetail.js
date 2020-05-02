@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {
   injectIntl,
-  intlShape,
   FormattedMessage,
 } from 'react-intl';
 
@@ -31,7 +30,7 @@ import { intervalPeriodsLower } from '../../constants';
 
 class LostItemFeePolicyDetail extends React.Component {
   static propTypes = {
-    intl: intlShape.isRequired,
+    intl: PropTypes.object,
     initialValues: PropTypes.object,
     stripes: stripesShape.isRequired,
     parentResources: PropTypes.shape({

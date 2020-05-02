@@ -2,7 +2,6 @@ import React from 'react';
 import { Field } from 'redux-form';
 import PropTypes from 'prop-types';
 import {
-  intlShape,
 } from 'react-intl';
 
 import {
@@ -61,7 +60,7 @@ OverdueFinesSectionColumn.propTypes = {
   label: PropTypes.object,
   name: PropTypes.string,
   component: PropTypes.string,
-  intl: intlShape.isRequired,
+  intl: PropTypes.object,
   onBlurField: PropTypes.func,
 };
 

@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
 import {
-  intlShape,
   injectIntl,
   FormattedMessage,
 } from 'react-intl';
@@ -30,7 +29,7 @@ import css from './NoticeCard.css';
 
 class NoticeCard extends React.Component {
   static propTypes = {
-    intl: intlShape.isRequired,
+    intl: PropTypes.object,
     notice: PropTypes.object.isRequired,
     noticeIndex: PropTypes.number.isRequired,
     pathToNotice: PropTypes.string.isRequired,

@@ -4,7 +4,6 @@ import { sortBy } from 'lodash';
 import {
   FormattedMessage,
   injectIntl,
-  intlShape,
 } from 'react-intl';
 
 import { EntryManager } from '@folio/stripes/smart-components';
@@ -41,7 +40,7 @@ class LoanPolicySettings extends React.Component {
   });
 
   static propTypes = {
-    intl: intlShape.isRequired,
+    intl: PropTypes.object,
     resources: PropTypes.shape({
       loanPolicies: PropTypes.object,
       fixedDueDateSchedules: PropTypes.object,
