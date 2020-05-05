@@ -150,7 +150,7 @@ class CheckoutSettingsForm extends Component {
           <Row>
             <Col xs={12}>
               <Field
-                label={<FormattedMessage id="ui-circulation.settings.checkout.timeout" />}
+                label={<FormattedMessage id="ui-circulation.settings.checkout.checkin.timeout" />}
                 id="checkoutTimeout"
                 name="checkoutTimeout"
                 component={Checkbox}
