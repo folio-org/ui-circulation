@@ -37,7 +37,7 @@
     "settings.fDDS.validate.toDate": "La date de fin doit être postérieure à la date de début",
     "settings.fDDS.validate.onOrAfter": "La date d'échéance doit être ce jour ou après",
     "settings.fDDS.paneTitle": "Planification dates de retour",
-    "settings.fDDS.deleteDisabled": "Schedule cannot be deleted when used by one or more loan policies.",
+    "settings.fDDS.deleteDisabled": "Le calendrier ne peut pas être supprimé lorsqu'il est utilisé par une ou plusieurs politiques de prêt.",
     "settings.fDDS.successfulDelete": "Le calendrier d'échéance fixe {name} a bien été {deleted} .",
     "settings.fDDS.successfulDeleteVerb": "Supprimé",
     "settings.fDDS.edit": "Modifier",
@@ -67,7 +67,6 @@
     "settings.checkout.audioAlerts": "Activer les alertes audio",
     "settings.checkout.no": "Non",
     "settings.checkout.yes": "Oui",
-    "settings.checkout.timeout": "Mettre fin automatiquement à la session après une période d'inactivité de",
     "settings.checkout.minutes": "minutes",
     "settings.checkout.validate.timeoutDuration": "Veuillez saisir un nombre entier supérieur à zéro pour continuer",
     "settings.staffSlips.label": "Bordereau/ticket pour le personnel",
@@ -393,5 +392,6 @@
     "settings.editorToolbar.list.bullet": "liste à puces",
     "settings.patronNotices.categories.automatedFeeFineAction": "Automated fee/fine",
     "settings.noticePolicy.feeFineNotices.returned": "Overdue fine, returned",
-    "settings.noticePolicy.feeFineNotices.renewed": "Overdue fine, renewed"
+    "settings.noticePolicy.feeFineNotices.renewed": "Overdue fine, renewed",
+    "settings.checkout.checkin.timeout": "Automatically end check in and check out session after period of inactivity"
 }

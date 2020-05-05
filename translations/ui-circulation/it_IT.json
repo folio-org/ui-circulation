@@ -67,7 +67,6 @@
     "settings.checkout.audioAlerts": "Abilita avvisi audio",
     "settings.checkout.no": "No",
     "settings.checkout.yes": "Si",
-    "settings.checkout.timeout": "Termina automaticamente la sessione di prestito dopo il periodo di inattività",
     "settings.checkout.minutes": "minuti",
     "settings.checkout.validate.timeoutDuration": "Inserisci un numero intero maggiore di zero per continuare",
     "settings.staffSlips.label": "Ricevute per lo staff",
@@ -391,7 +390,8 @@
     "settings.editorToolbar.align.justify": "giustifica",
     "settings.editorToolbar.link": "collegamento",
     "settings.editorToolbar.list.bullet": "elenco puntato",
-    "settings.patronNotices.categories.automatedFeeFineAction": "Automated fee/fine",
+    "settings.patronNotices.categories.automatedFeeFineAction": "Tariffa/multa automatica",
     "settings.noticePolicy.feeFineNotices.returned": "Overdue fine, returned",
-    "settings.noticePolicy.feeFineNotices.renewed": "Overdue fine, renewed"
+    "settings.noticePolicy.feeFineNotices.renewed": "Overdue fine, renewed",
+    "settings.checkout.checkin.timeout": "Automatically end check in and check out session after period of inactivity"
 }
