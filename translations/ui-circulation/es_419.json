@@ -67,7 +67,6 @@
     "settings.checkout.audioAlerts": "Habilitar alertas de audio",
     "settings.checkout.no": "No",
     "settings.checkout.yes": "Sí",
-    "settings.checkout.timeout": "Automáticamente termine la sesión de comprobación después del período de inactividad",
     "settings.checkout.minutes": "minutos",
     "settings.checkout.validate.timeoutDuration": "Por favor, introduzca un número entero mayor que cero para continuar",
     "settings.staffSlips.label": "Recibos de personal",
@@ -393,5 +392,6 @@
     "settings.editorToolbar.list.bullet": "bullet list",
     "settings.patronNotices.categories.automatedFeeFineAction": "Automated fee/fine",
     "settings.noticePolicy.feeFineNotices.returned": "Overdue fine, returned",
-    "settings.noticePolicy.feeFineNotices.renewed": "Overdue fine, renewed"
+    "settings.noticePolicy.feeFineNotices.renewed": "Overdue fine, renewed",
+    "settings.checkout.checkin.timeout": "Automatically end check in and check out session after period of inactivity"
 }

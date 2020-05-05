@@ -67,7 +67,6 @@
     "settings.checkout.audioAlerts": "Hallható figyelmeztetések engedélyezése",
     "settings.checkout.no": "Nem",
     "settings.checkout.yes": "Igen",
-    "settings.checkout.timeout": "Kiadási munkamenet automatikus befejezése inaktivív idő után",
     "settings.checkout.minutes": "percek",
     "settings.checkout.validate.timeoutDuration": "A folytatáshoz adjon meg egy 0-nál nagyobb egész számot",
     "settings.staffSlips.label": "Személyzeti nyomtatvány",
@@ -393,5 +392,6 @@
     "settings.editorToolbar.list.bullet": "bullet list",
     "settings.patronNotices.categories.automatedFeeFineAction": "Automated fee/fine",
     "settings.noticePolicy.feeFineNotices.returned": "Overdue fine, returned",
-    "settings.noticePolicy.feeFineNotices.renewed": "Overdue fine, renewed"
+    "settings.noticePolicy.feeFineNotices.renewed": "Overdue fine, renewed",
+    "settings.checkout.checkin.timeout": "Automatically end check in and check out session after period of inactivity"
 }
