@@ -67,7 +67,6 @@
     "settings.checkout.audioAlerts": "音声アラートを有効にする",
     "settings.checkout.no": "いいえ",
     "settings.checkout.yes": "はい",
-    "settings.checkout.timeout": "非アクティブな期間の後にチェックアウトセッションを自動的に終了する",
     "settings.checkout.minutes": "分",
     "settings.checkout.validate.timeoutDuration": "続行するには、ゼロより大きい整数を入力してください",
     "settings.staffSlips.label": "Staff slips",
@@ -393,5 +392,6 @@
     "settings.editorToolbar.list.bullet": "bullet list",
     "settings.patronNotices.categories.automatedFeeFineAction": "Automated fee/fine",
     "settings.noticePolicy.feeFineNotices.returned": "Overdue fine, returned",
-    "settings.noticePolicy.feeFineNotices.renewed": "Overdue fine, renewed"
+    "settings.noticePolicy.feeFineNotices.renewed": "Overdue fine, renewed",
+    "settings.checkout.checkin.timeout": "Automatically end check in and check out session after period of inactivity"
 }

@@ -67,7 +67,6 @@
     "settings.checkout.audioAlerts": "启用声音提醒",
     "settings.checkout.no": "否",
     "settings.checkout.yes": "是",
-    "settings.checkout.timeout": "在一段时间不活动后自动结束借出会话",
     "settings.checkout.minutes": "分钟",
     "settings.checkout.validate.timeoutDuration": "请输入大于零的整数以继续",
     "settings.staffSlips.label": "员工单",
@@ -393,5 +392,6 @@
     "settings.editorToolbar.list.bullet": "项目符号列表",
     "settings.patronNotices.categories.automatedFeeFineAction": "自动的费用/罚款",
     "settings.noticePolicy.feeFineNotices.returned": "逾期罚款，已退还",
-    "settings.noticePolicy.feeFineNotices.renewed": "逾期罚款，已续期"
+    "settings.noticePolicy.feeFineNotices.renewed": "逾期罚款，已续期",
+    "settings.checkout.checkin.timeout": "Automatically end check in and check out session after period of inactivity"
 }

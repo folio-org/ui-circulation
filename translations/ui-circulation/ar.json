@@ -67,7 +67,6 @@
     "settings.checkout.audioAlerts": "تفعيل التنبيهات الصوتية",
     "settings.checkout.no": "لا",
     "settings.checkout.yes": "نعم",
-    "settings.checkout.timeout": "قم تلقائيا بإنهاء جلسة الإعارة بعد فترة من عدم النشاط",
     "settings.checkout.minutes": "دقائق",
     "settings.checkout.validate.timeoutDuration": "يرجى إدخال رقمًا كاملًا أكبر من صفر للمتابعة",
     "settings.staffSlips.label": "كشوف الموظفين",
@@ -393,5 +392,6 @@
     "settings.editorToolbar.list.bullet": "قائمة منقوطة",
     "settings.patronNotices.categories.automatedFeeFineAction": "رسم/غرامة مؤتمتة",
     "settings.noticePolicy.feeFineNotices.returned": "غرامة تأخير، تمت الإعادة",
-    "settings.noticePolicy.feeFineNotices.renewed": "غرامة تأخير، تم التجديد"
+    "settings.noticePolicy.feeFineNotices.renewed": "غرامة تأخير، تم التجديد",
+    "settings.checkout.checkin.timeout": "Automatically end check in and check out session after period of inactivity"
 }
