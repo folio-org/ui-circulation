@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
 import {
   injectIntl,
-  intlShape,
   FormattedMessage,
 } from 'react-intl';
 
@@ -22,7 +21,7 @@ import {
 
 class RequestManagementSection extends React.Component {
   static propTypes = {
-    intl: intlShape.isRequired,
+    intl: PropTypes.object,
     policy: PropTypes.object.isRequired,
     holdsSectionOpen: PropTypes.bool.isRequired,
     recallsSectionOpen: PropTypes.bool.isRequired,

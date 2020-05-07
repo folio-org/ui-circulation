@@ -7,7 +7,6 @@ import {
 import {
   FormattedMessage,
   injectIntl,
-  intlShape,
 } from 'react-intl';
 
 import { EntryManager } from '@folio/stripes/smart-components';
@@ -47,7 +46,7 @@ class NoticePolicySettings extends React.Component {
   });
 
   static propTypes = {
-    intl: intlShape.isRequired,
+    intl: PropTypes.object,
     resources: PropTypes.shape({
       patronNoticePolicies: PropTypes.object,
       templates: PropTypes.object,

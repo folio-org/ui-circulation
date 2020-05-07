@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
 import {
-  intlShape,
   injectIntl,
   FormattedMessage,
 } from 'react-intl';
@@ -25,7 +24,7 @@ import css from './ExceptionCard.css';
 
 class ExceptionCard extends Component {
   static propTypes = {
-    intl: intlShape.isRequired,
+    intl: PropTypes.object,
     pathToException: PropTypes.string.isRequired,
     paymentMethods: PropTypes.arrayOf(PropTypes.shape({
       value: PropTypes.string.isRequired,

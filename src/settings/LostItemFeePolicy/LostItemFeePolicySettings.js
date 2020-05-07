@@ -4,7 +4,6 @@ import { sortBy } from 'lodash';
 import {
   FormattedMessage,
   injectIntl,
-  intlShape,
 } from 'react-intl';
 
 import { EntryManager } from '@folio/stripes/smart-components';
@@ -31,7 +30,7 @@ class LostItemFeePolicySettings extends React.Component {
   });
 
   static propTypes = {
-    intl: intlShape.isRequired,
+    intl: PropTypes.object,
     resources: PropTypes.shape({
       lostItemFeePolicies: PropTypes.object,
     }).isRequired,

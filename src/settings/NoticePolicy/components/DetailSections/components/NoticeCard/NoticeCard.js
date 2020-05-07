@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  intlShape,
   injectIntl,
   FormattedMessage
 } from 'react-intl';
@@ -28,7 +27,7 @@ import css from './NoticeCard.css';
 class NoticeCard extends React.Component {
   static propTypes = {
     index: PropTypes.number.isRequired,
-    intl: intlShape.isRequired,
+    intl: PropTypes.object,
     notice: PropTypes.object.isRequired,
     sendEvents: PropTypes.arrayOf(PropTypes.shape({
       value: PropTypes.string.isRequired,

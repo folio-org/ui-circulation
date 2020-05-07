@@ -1,8 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
   FormattedMessage,
   injectIntl,
-  intlShape,
 } from 'react-intl';
 
 import {
@@ -17,7 +17,7 @@ import { LoanHistory as validateLoanHistory } from '../Validation';
 class LoanHistorySettings extends React.Component {
   static propTypes = {
     stripes: stripesShape.isRequired,
-    intl: intlShape.isRequired,
+    intl: PropTypes.object,
   };
 
   constructor(props) {

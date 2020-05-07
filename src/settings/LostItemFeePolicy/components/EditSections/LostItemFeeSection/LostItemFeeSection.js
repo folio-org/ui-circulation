@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
 import {
   injectIntl,
-  intlShape,
   FormattedMessage,
 } from 'react-intl';
 
@@ -28,7 +27,7 @@ import optionsGenerator from '../../../../utils/options-generator';
 
 class LostItemFeeSection extends React.Component {
   static propTypes = {
-    intl: intlShape.isRequired,
+    intl: PropTypes.object,
     change: PropTypes.func.isRequired,
     lostItemFeeSectionOpen: PropTypes.bool.isRequired,
     accordionOnToggle: PropTypes.func.isRequired,

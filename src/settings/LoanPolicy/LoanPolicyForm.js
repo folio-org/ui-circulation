@@ -5,7 +5,6 @@ import { getFormValues } from 'redux-form';
 import {
   FormattedMessage,
   injectIntl,
-  intlShape,
 } from 'react-intl';
 import {
   get,
@@ -42,7 +41,7 @@ import {
 
 class LoanPolicyForm extends React.Component {
   static propTypes = {
-    intl: intlShape.isRequired,
+    intl: PropTypes.object,
     stripes: stripesShape.isRequired,
     pristine: PropTypes.bool,
     submitting: PropTypes.bool,
