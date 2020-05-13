@@ -1,5 +1,9 @@
 # Change history for ui-circulation
 
+## [3.0.0] (IN PROGRESS)
+
+* Upgrade to `stripes` `4.0`, `react-intl` `4.5`. Refs STRIPES-672.
+
 ## [2.1.0] (IN PROGRESS)
 
 * New/Edit Patron notice policy: do not display inactive loan and request notice templates in the dropdown. Refs UICIRC-418.
