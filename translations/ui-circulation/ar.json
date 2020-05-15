@@ -393,5 +393,5 @@
     "settings.patronNotices.categories.automatedFeeFineAction": "رسم/غرامة مؤتمتة",
     "settings.noticePolicy.feeFineNotices.returned": "غرامة تأخير، تمت الإعادة",
     "settings.noticePolicy.feeFineNotices.renewed": "غرامة تأخير، تم التجديد",
-    "settings.checkout.checkin.timeout": "Automatically end check in and check out session after period of inactivity"
+    "settings.checkout.checkin.timeout": "قم تلقائيا بإنهاء جلسة الرد والإعارة بعد فترة من عدم النشاط"
 }
