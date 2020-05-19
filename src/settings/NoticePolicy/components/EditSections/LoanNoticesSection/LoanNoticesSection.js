@@ -20,6 +20,7 @@ class LoanNoticesSection extends React.Component {
       value: PropTypes.string.isRequired,
       label: PropTypes.string.isRequired,
     })).isRequired,
+    getNotificationContent: PropTypes.func.isRequired,
     onToggle: PropTypes.func.isRequired,
   };
 
@@ -28,6 +29,7 @@ class LoanNoticesSection extends React.Component {
       isOpen,
       policy,
       templates,
+      getNotificationContent,
       onToggle,
     } = this.props;
 
@@ -38,6 +40,7 @@ class LoanNoticesSection extends React.Component {
       sendEventTriggeringIds: values(loanTimeBasedEventsIds),
       templates,
       triggeringEvents: loanNoticesTriggeringEvents,
+      getNotificationContent,
     };
 
     return (

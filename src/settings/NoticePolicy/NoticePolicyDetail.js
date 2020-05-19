@@ -8,6 +8,7 @@ import {
   Row,
 } from '@folio/stripes/components';
 
+import getNoticeDescription from './utils/notice-description';
 import { NoticePolicy } from '../Models/NoticePolicy';
 import {
   GeneralSection,
@@ -102,18 +103,21 @@ class NoticePolicyDetail extends React.Component {
           isOpen={loanNotices}
           policy={noticePolicy}
           templates={getTemplates(patronNoticeTemplates, patronNoticeCategoryIds.LOAN)}
+          getNotificationContent={getNoticeDescription}
           onToggle={this.handleSectionToggle}
         />
         <RequestNoticesSection
           isOpen={requestNotices}
           policy={noticePolicy}
           templates={getTemplates(patronNoticeTemplates, patronNoticeCategoryIds.REQUEST)}
+          getNotificationContent={getNoticeDescription}
           onToggle={this.handleSectionToggle}
         />
         <FeeFineNoticesSection
           isOpen={feeFineNotices}
           policy={noticePolicy}
           templates={getTemplates(patronNoticeTemplates, patronNoticeCategoryIds.AUTOMATED_FEE_FINE)}
+          getNotificationContent={getNoticeDescription}
           onToggle={this.handleSectionToggle}
         />
       </div>

@@ -14,13 +14,12 @@ import {
   requestTimeBasedEventsIds
 } from '../../../constants';
 
-const setNoticeDefaults = (sectionKey, policy) => {
+const setRealTimeFlag = (sectionKey, policy) => {
   const noticePolicy = cloneDeep(policy);
+  const isTrueSet = value => value === 'true';
 
   forEach(noticePolicy[sectionKey], (notice) => {
-    if (isUndefined(notice.realTime)) {
-      notice.realTime = false;
-    }
+    notice.realTime = isUndefined(notice.realTime) ? false : isTrueSet(notice.realTime);
   });
 
   return noticePolicy;
@@ -65,11 +64,11 @@ const filter = (entity, ...callbacks) => {
 
 export default (entity) => {
   const callbacks = [
-    setNoticeDefaults.bind(null, 'loanNotices'),
+    setRealTimeFlag.bind(null, 'loanNotices'),
     checkNoticeHiddenFields.bind(null, 'loanNotices', values(loanTimeBasedEventsIds)),
-    setNoticeDefaults.bind(null, 'requestNotices'),
+    setRealTimeFlag.bind(null, 'requestNotices'),
     checkNoticeHiddenFields.bind(null, 'requestNotices', values(requestTimeBasedEventsIds)),
-    setNoticeDefaults.bind(null, 'feeFineNotices'),
+    setRealTimeFlag.bind(null, 'feeFineNotices'),
     checkNoticeHiddenFields.bind(null, 'feeFineNotices', values(feeFineEventsIds)),
   ];
 

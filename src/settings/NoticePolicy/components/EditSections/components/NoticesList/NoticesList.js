@@ -30,6 +30,7 @@ class NoticesList extends React.Component {
       label: PropTypes.string.isRequired,
     })).isRequired,
     sendEventTriggeringIds: PropTypes.arrayOf(PropTypes.string).isRequired,
+    getNotificationContent: PropTypes.func,
   };
 
   onAddField = () => {
@@ -42,6 +43,7 @@ class NoticesList extends React.Component {
 
   render() {
     const {
+      getNotificationContent,
       sectionKey,
       fields,
       policy,
@@ -66,6 +68,7 @@ class NoticesList extends React.Component {
               sendEventTriggeringIds={sendEventTriggeringIds}
               templates={templates}
               triggeringEvents={triggeringEvents}
+              getNotificationContent={getNotificationContent}
               onRemoveNotice={this.onRemoveField}
             />
           );

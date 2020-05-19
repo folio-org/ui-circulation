@@ -4,7 +4,10 @@ import {
 } from 'lodash';
 
 import { Period } from '../common';
-import { noticesSendEventMap } from '../../../constants';
+import {
+  loanTimeBasedEventsIds,
+  noticesSendEventMap,
+} from '../../../constants';
 
 export default class NoticeSendOptions {
   constructor(options = {}) {
@@ -25,5 +28,9 @@ export default class NoticeSendOptions {
 
   isFrequencyAvailable(allowedIds = []) {
     return this.isSendOptionsAvailable(allowedIds) && this.isBeforeOrAfter();
+  }
+
+  isLoanDueDateTimeSelected() {
+    return isEqual(this.sendWhen, loanTimeBasedEventsIds.DUE_DATE);
   }
 }
