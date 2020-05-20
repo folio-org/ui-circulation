@@ -51,8 +51,8 @@ class NoticeCard extends React.Component {
   getDropdownValue = (pathToValue, items) => {
     const { notice } = this.props;
 
-    const seletedValue = get(notice, pathToValue);
-    const selectedItem = find(items, (item) => item.value === seletedValue);
+    const selectedValue = get(notice, pathToValue);
+    const selectedItem = find(items, (item) => item.value === selectedValue);
 
     return selectedItem ? selectedItem.label : null;
   };
@@ -68,9 +68,9 @@ class NoticeCard extends React.Component {
   getRealTimeMessage = (pathToValue) => {
     const { notice } = this.props;
 
-    const seletedValue = get(notice, pathToValue);
+    const selectedValue = get(notice, pathToValue);
 
-    return seletedValue
+    return selectedValue
       ? <FormattedMessage id="ui-circulation.settings.noticePolicy.notices.send.shortTerm" />
       : <FormattedMessage id="ui-circulation.settings.noticePolicy.notices.send.longTerm" />;
   };

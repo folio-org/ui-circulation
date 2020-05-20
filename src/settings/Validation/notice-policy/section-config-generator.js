@@ -6,6 +6,7 @@ export default function (policy, sectionKey, allowedIds) {
     const isBeforeOrAfterSelected = notice.sendOptions.isBeforeOrAfter();
     const isSendOptionsAvailable = notice.sendOptions.isSendOptionsAvailable(allowedIds);
     const isLoanDueDateTimeSelected = notice.sendOptions.isLoanDueDateTimeSelected();
+    const isFrequencyAvailable = notice.sendOptions.isFrequencyAvailable(allowedIds);
 
     const noticeConfig = {
       [`${sectionKey}[${index}].templateId`]: {
@@ -34,7 +35,7 @@ export default function (policy, sectionKey, allowedIds) {
       },
       [`${sectionKey}[${index}].frequency`]: {
         rules: ['isNotEmptySelect'],
-        shouldValidate: isSendOptionsAvailable,
+        shouldValidate: isFrequencyAvailable,
       },
       [`${sectionKey}[${index}].sendOptions.sendEvery.duration`]: {
         rules: ['isNotEmpty', 'isIntegerGreaterThanZero', 'isFromOneToHundred'],
@@ -45,7 +46,7 @@ export default function (policy, sectionKey, allowedIds) {
         shouldValidate: isSendOptionsAvailable && isRecurringSelected,
       },
       [`${sectionKey}[${index}].realTime`]: {
-        rules: ['isNotEmptySelect'],
+        rules: ['isSelected'],
         shouldValidate: isLoanDueDateTimeSelected,
       },
     };

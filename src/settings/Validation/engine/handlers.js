@@ -2,6 +2,7 @@ import {
   isEmpty,
   isNumber,
   isInteger,
+  isUndefined
 } from 'lodash';
 
 export const isNotEmpty = (value) => {
@@ -23,3 +24,5 @@ export const isNotEmptyEditor = (value = '') => {
 
   return !isEmpty(plainText);
 };
+
+export const isSelected = (value) => !isUndefined(value);

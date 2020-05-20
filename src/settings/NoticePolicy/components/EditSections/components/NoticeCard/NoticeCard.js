@@ -281,7 +281,10 @@ class NoticeCard extends React.Component {
               <Row>
                 <Col xs={12}>
                   { notice.sendOptions.isLoanDueDateTimeSelected() && (
-                    <Field name={`${pathToNotice}.realTime`} component={RadioButtonGroup}>
+                    <Field
+                      name={`${pathToNotice}.realTime`}
+                      component={RadioButtonGroup}
+                    >
                       <RadioButton
                         label={<FormattedMessage id="ui-circulation.settings.noticePolicy.notices.send.longTerm" />}
                         value="false"
