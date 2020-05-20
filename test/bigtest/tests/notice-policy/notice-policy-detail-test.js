@@ -428,24 +428,6 @@ describe('NoticePolicyDetail', () => {
             );
           });
         });
-
-        describe('real Time', () => {
-          it('should be displayed', () => {
-            expect(NoticePolicyDetail.loanNoticesSection.loanNotices(0).realTime.isPresent).to.be.true;
-          });
-
-          it('should have a proper value', () => {
-            expect(NoticePolicyDetail.loanNoticesSection.loanNotices(0).realTime.value.text).to.equal(
-              getBooleanRepresentation(noticePolicy.loanNotices[0].realTime)
-            );
-          });
-
-          it('should have a proper label', () => {
-            expect(NoticePolicyDetail.loanNoticesSection.loanNotices(0).realTime.label.text).to.equal(
-              translation['settings.noticePolicy.notices.realTime']
-            );
-          });
-        });
       });
 
       describe('send every', () => {

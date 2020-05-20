@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { isEmpty, get } from 'lodash';
 import { Field } from 'redux-form';
 import {
   injectIntl,
@@ -8,11 +9,13 @@ import {
 
 import {
   Col,
-  Checkbox,
   IconButton,
   Label,
+  MessageBanner,
   Row,
   Select,
+  RadioButton,
+  RadioButtonGroup
 } from '@folio/stripes/components';
 
 import Period from '../../../../../components/Period';
@@ -24,6 +27,7 @@ import {
 } from '../../../../../../constants';
 
 import optionsGenerator from '../../../../../utils/options-generator';
+import getNotificationContent from '../../../../utils/notice-description';
 
 import css from './NoticeCard.css';
 
@@ -77,6 +81,7 @@ class NoticeCard extends React.Component {
     } = this.props;
 
     const blankPlaceholder = intl.formatMessage({ id: 'ui-circulation.settings.common.blankPlaceholder' });
+    const notificationKey = getNotificationContent(notice?.sendOptions?.sendWhen);
 
     return (
       <Row data-test-notice-card>
@@ -274,18 +279,30 @@ class NoticeCard extends React.Component {
                 </>
               )}
               <Row>
-                <Col
-                  xs={12}
-                  className={css.noticeField}
-                  data-test-notice-card-real-time
-                >
-                  <Field
-                    name={`${pathToNotice}.realTime`}
-                    label={<FormattedMessage id="ui-circulation.settings.noticePolicy.notices.realTime" />}
-                    component={Checkbox}
-                    type="checkbox"
-                    normalize={v => !!v}
-                  />
+                <Col xs={12}>
+                  { notice.sendOptions.isLoanDueDateTimeSelected() && (
+                    <Field
+                      name={`${pathToNotice}.realTime`}
+                      component={RadioButtonGroup}
+                    >
+                      <RadioButton
+                        label={<FormattedMessage id="ui-circulation.settings.noticePolicy.notices.send.longTerm" />}
+                        value="false"
+                      />
+                      <RadioButton
+                        label={<FormattedMessage id="ui-circulation.settings.noticePolicy.notices.send.shortTerm" />}
+                        value="true"
+                      />
+                    </Field>
+                  )}
+                </Col>
+              </Row>
+              <Row>
+                <Col xs={12}>
+                  { !isEmpty(notificationKey) && (
+                    <MessageBanner type="warning">
+                      <FormattedMessage id={notificationKey} />
+                    </MessageBanner>) }
                 </Col>
               </Row>
             </Col>
