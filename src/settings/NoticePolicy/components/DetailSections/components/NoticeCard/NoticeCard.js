@@ -24,6 +24,8 @@ import {
   noticesIntervalPeriods,
 } from '../../../../../../constants';
 
+import getNotificationContent from '../../../../utils/notice-description';
+
 import css from './NoticeCard.css';
 
 class NoticeCard extends React.Component {
@@ -44,7 +46,6 @@ class NoticeCard extends React.Component {
       value: PropTypes.string.isRequired,
       label: PropTypes.string.isRequired,
     })).isRequired,
-    getNotificationContent: PropTypes.func.isRequired,
   };
 
   getDropdownValue = (pathToValue, items) => {
@@ -82,7 +83,6 @@ class NoticeCard extends React.Component {
       sendEventTriggeringIds,
       templates,
       triggeringEvents,
-      getNotificationContent,
     } = this.props;
 
     const translationNamespace = 'ui-circulation.settings.noticePolicy';

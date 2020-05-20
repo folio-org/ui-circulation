@@ -16,7 +16,6 @@ import {
 } from '@folio/stripes/components';
 
 import normalize from './utils/normalize';
-import getNoticeDescription from './utils/notice-description';
 import getTemplates from './utils/get-templates';
 import { NoticePolicy } from '../Models/NoticePolicy';
 import {
@@ -138,21 +137,18 @@ class NoticePolicyForm extends React.Component {
               isOpen={sections.loanNotices}
               policy={policy}
               templates={getTemplates(patronNoticeTemplates, patronNoticeCategoryIds.LOAN)}
-              getNotificationContent={getNoticeDescription}
               onToggle={this.handleSectionToggle}
             />
             <RequestNoticesSection
               isOpen={sections.requestNotices}
               policy={policy}
               templates={getTemplates(patronNoticeTemplates, patronNoticeCategoryIds.REQUEST)}
-              getNotificationContent={getNoticeDescription}
               onToggle={this.handleSectionToggle}
             />
             <FeeFineNoticesSection
               isOpen={sections.feeFineNotices}
               policy={policy}
               templates={getTemplates(patronNoticeTemplates, patronNoticeCategoryIds.AUTOMATED_FEE_FINE)}
-              getNotificationContent={getNoticeDescription}
               onToggle={this.handleSectionToggle}
             />
           </Pane>

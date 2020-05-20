@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { isEmpty } from 'lodash';
+import { isEmpty, get } from 'lodash';
 import { Field } from 'redux-form';
 import {
   injectIntl,
@@ -27,6 +27,7 @@ import {
 } from '../../../../../../constants';
 
 import optionsGenerator from '../../../../../utils/options-generator';
+import getNotificationContent from '../../../../utils/notice-description';
 
 import css from './NoticeCard.css';
 
@@ -49,7 +50,6 @@ class NoticeCard extends React.Component {
       value: PropTypes.string.isRequired,
       label: PropTypes.string.isRequired,
     })).isRequired,
-    getNotificationContent: PropTypes.func.isRequired,
     onRemoveNotice: PropTypes.func.isRequired,
   };
 
@@ -78,7 +78,6 @@ class NoticeCard extends React.Component {
       sendEventTriggeringIds,
       templates,
       triggeringEvents,
-      getNotificationContent,
     } = this.props;
 
     const blankPlaceholder = intl.formatMessage({ id: 'ui-circulation.settings.common.blankPlaceholder' });
@@ -285,12 +284,10 @@ class NoticeCard extends React.Component {
                     <Field name={`${pathToNotice}.realTime`} component={RadioButtonGroup}>
                       <RadioButton
                         label={<FormattedMessage id="ui-circulation.settings.noticePolicy.notices.send.longTerm" />}
-                        id="long-term"
                         value="false"
                       />
                       <RadioButton
                         label={<FormattedMessage id="ui-circulation.settings.noticePolicy.notices.send.shortTerm" />}
-                        id="short-term"
                         value="true"
                       />
                     </Field>

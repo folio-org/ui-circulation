@@ -23,7 +23,6 @@ class FeeFineNoticesSection extends React.Component {
       value: PropTypes.string.isRequired,
       label: PropTypes.string.isRequired,
     })).isRequired,
-    getNotificationContent: PropTypes.func.isRequired,
     onToggle: PropTypes.func.isRequired,
   };
 
@@ -32,7 +31,6 @@ class FeeFineNoticesSection extends React.Component {
       isOpen,
       policy,
       templates,
-      getNotificationContent,
       onToggle,
     } = this.props;
 
@@ -52,7 +50,6 @@ class FeeFineNoticesSection extends React.Component {
             sendEventTriggeringIds={values(feeFineEventsIds)}
             templates={templates}
             triggeringEvents={feeFineNoticesTriggeringEvents}
-            getNotificationContent={getNotificationContent}
           />
         ))}
       </Accordion>
