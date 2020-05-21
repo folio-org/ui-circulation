@@ -180,7 +180,6 @@
     "settings.noticePolicy.notices.template": "模板",
     "settings.noticePolicy.notices.format": "格式",
     "settings.noticePolicy.notices.frequency": "频率",
-    "settings.noticePolicy.notices.realTime": "实时发送",
     "settings.noticePolicy.notices.email": "电子邮件",
     "settings.noticePolicy.notices.oneTime": "一次性",
     "settings.noticePolicy.notices.recurring": "定期",
@@ -393,5 +392,9 @@
     "settings.patronNotices.categories.automatedFeeFineAction": "自动的费用/罚款",
     "settings.noticePolicy.feeFineNotices.returned": "逾期罚款，已退还",
     "settings.noticePolicy.feeFineNotices.renewed": "逾期罚款，已续期",
-    "settings.checkout.checkin.timeout": "Automatically end check in and check out session after period of inactivity"
+    "settings.checkout.checkin.timeout": "Automatically end check in and check out session after period of inactivity",
+    "settings.noticePolicy.notices.postponed.notification": "Always sent at the end of a session and loans are bundled into a single notice for each patron.",
+    "settings.noticePolicy.notices.realTime.notification": "Always sent when event is triggered.",
+    "settings.noticePolicy.notices.send.longTerm": "Send overnight with multiple loans/items by patron. Useful for long-term loans.",
+    "settings.noticePolicy.notices.send.shortTerm": "Send throughout the day without multiple loans/items. Useful for short-term loans."
 }
