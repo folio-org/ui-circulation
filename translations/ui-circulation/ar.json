@@ -180,7 +180,6 @@
     "settings.noticePolicy.notices.template": "قالب",
     "settings.noticePolicy.notices.format": "تنسيق",
     "settings.noticePolicy.notices.frequency": "التواتر",
-    "settings.noticePolicy.notices.realTime": "إرسال بالوقت الحقيقي",
     "settings.noticePolicy.notices.email": "البريد الإلكتروني",
     "settings.noticePolicy.notices.oneTime": "مرة واحدة",
     "settings.noticePolicy.notices.recurring": "متكرر",
@@ -393,5 +392,9 @@
     "settings.patronNotices.categories.automatedFeeFineAction": "رسم/غرامة مؤتمتة",
     "settings.noticePolicy.feeFineNotices.returned": "غرامة تأخير، تمت الإعادة",
     "settings.noticePolicy.feeFineNotices.renewed": "غرامة تأخير، تم التجديد",
-    "settings.checkout.checkin.timeout": "قم تلقائيا بإنهاء جلسة الرد والإعارة بعد فترة من عدم النشاط"
+    "settings.checkout.checkin.timeout": "قم تلقائيا بإنهاء جلسة الرد والإعارة بعد فترة من عدم النشاط",
+    "settings.noticePolicy.notices.postponed.notification": "يتم إرساله دائمًا في نهاية الجلسة ويتم تجميع الإعارات في إخطار واحد لكل مستفيد.",
+    "settings.noticePolicy.notices.realTime.notification": "يتم إرساله دائمًا عند تشغيل الحدث.",
+    "settings.noticePolicy.notices.send.longTerm": "إرسال ليلاً بإعارات/مواد متعددة بواسطة المستفيد. مفيد للإعارات طويلة الأجل.",
+    "settings.noticePolicy.notices.send.shortTerm": "إرسال على مدار اليوم بدون إعارات/مواد متعددة. مفيد للإعارات قصيرة الأجل."
 }

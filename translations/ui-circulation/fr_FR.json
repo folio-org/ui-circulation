@@ -146,9 +146,9 @@
     "settings.common.delete": "Supprimer",
     "settings.noticePolicy.saveAndClose": "Sauvegarder",
     "settings.noticePolicy.generalInformation": "Informations générales",
-    "settings.noticePolicy.loanNotices": "Loan notices",
+    "settings.noticePolicy.loanNotices": "Loan notices - sent to borrower",
     "settings.noticePolicy.feeFineNotices": "Avis de frais / amendes",
-    "settings.noticePolicy.requestNotices": "Request notices",
+    "settings.noticePolicy.requestNotices": "Request notices - sent to requester",
     "settings.noticePolicy.createEntryLabel": "Nouvelle politique de notification aux adhérents",
     "settings.noticePolicy.editEntryLabel": "Modifier la politique de notification adhérent",
     "settings.noticePolicy.deleteLoanPolicy": "Supprimer la politique de notification adhérent",
@@ -180,7 +180,6 @@
     "settings.noticePolicy.notices.template": "Modèle",
     "settings.noticePolicy.notices.format": "Format",
     "settings.noticePolicy.notices.frequency": "Fréquence",
-    "settings.noticePolicy.notices.realTime": "Envoyer en temps réel",
     "settings.noticePolicy.notices.email": "Email",
     "settings.noticePolicy.notices.oneTime": "Une fois",
     "settings.noticePolicy.notices.recurring": "Recurring",
@@ -393,5 +392,9 @@
     "settings.patronNotices.categories.automatedFeeFineAction": "Automated fee/fine",
     "settings.noticePolicy.feeFineNotices.returned": "Overdue fine, returned",
     "settings.noticePolicy.feeFineNotices.renewed": "Overdue fine, renewed",
-    "settings.checkout.checkin.timeout": "Automatically end check in and check out session after period of inactivity"
+    "settings.checkout.checkin.timeout": "Automatically end check in and check out session after period of inactivity",
+    "settings.noticePolicy.notices.postponed.notification": "Always sent at the end of a session and loans are bundled into a single notice for each patron.",
+    "settings.noticePolicy.notices.realTime.notification": "Always sent when event is triggered.",
+    "settings.noticePolicy.notices.send.longTerm": "Send overnight with multiple loans/items by patron. Useful for long-term loans.",
+    "settings.noticePolicy.notices.send.shortTerm": "Send throughout the day without multiple loans/items. Useful for short-term loans."
 }

@@ -146,9 +146,9 @@
     "settings.common.delete": "Excluir",
     "settings.noticePolicy.saveAndClose": "Salvar",
     "settings.noticePolicy.generalInformation": "Informações gerais",
-    "settings.noticePolicy.loanNotices": "Avisos de empréstimo",
+    "settings.noticePolicy.loanNotices": "Avisos de empréstimo - enviados ao usuário",
     "settings.noticePolicy.feeFineNotices": "Avisos de taxa/multa",
-    "settings.noticePolicy.requestNotices": "Avisos de pedido de compra",
+    "settings.noticePolicy.requestNotices": "Solicitar avisos - enviados ao solicitante",
     "settings.noticePolicy.createEntryLabel": "Nova política de avisos aos usuários",
     "settings.noticePolicy.editEntryLabel": "Editar política de avisos aos usuários",
     "settings.noticePolicy.deleteLoanPolicy": "Excluir política de avisos aos usuários",
@@ -180,7 +180,6 @@
     "settings.noticePolicy.notices.template": "Modelo",
     "settings.noticePolicy.notices.format": "Formato",
     "settings.noticePolicy.notices.frequency": "Frequência",
-    "settings.noticePolicy.notices.realTime": "Enviar em tempo real",
     "settings.noticePolicy.notices.email": "E-mail",
     "settings.noticePolicy.notices.oneTime": "Uma vez",
     "settings.noticePolicy.notices.recurring": "Recorrente",
@@ -393,5 +392,9 @@
     "settings.patronNotices.categories.automatedFeeFineAction": "Taxa/multa automatizada",
     "settings.noticePolicy.feeFineNotices.returned": "Multa por atraso, devolvida",
     "settings.noticePolicy.feeFineNotices.renewed": "Multa por atraso, renovada",
-    "settings.checkout.checkin.timeout": "Terminar automaticamente a sessão de devolução e empréstimo após o período de inatividade"
+    "settings.checkout.checkin.timeout": "Terminar automaticamente a sessão de devolução e empréstimo após o período de inatividade",
+    "settings.noticePolicy.notices.postponed.notification": "Always sent at the end of a session and loans are bundled into a single notice for each patron.",
+    "settings.noticePolicy.notices.realTime.notification": "Sempre enviado quando o evento é acionado.",
+    "settings.noticePolicy.notices.send.longTerm": "Send overnight with multiple loans/items by patron. Useful for long-term loans.",
+    "settings.noticePolicy.notices.send.shortTerm": "Send throughout the day without multiple loans/items. Useful for short-term loans."
 }
