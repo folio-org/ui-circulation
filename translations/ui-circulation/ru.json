@@ -146,7 +146,7 @@
     "settings.common.delete": "Delete",
     "settings.noticePolicy.saveAndClose": "Save",
     "settings.noticePolicy.generalInformation": "General information",
-    "settings.noticePolicy.loanNotices": "Loan notices - sent to borrower",
+    "settings.noticePolicy.loanNotices": "Уведомления о книговыдаче - отправлено инициатору",
     "settings.noticePolicy.feeFineNotices": "Fee/fine notices",
     "settings.noticePolicy.requestNotices": "Запросы об уведомлениях - отправлено инициатору",
     "settings.noticePolicy.createEntryLabel": "New patron notice policy",
