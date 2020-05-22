@@ -3,6 +3,7 @@
 ## [3.0.0] (IN PROGRESS)
 
 * Upgrade to `stripes` `4.0`, `react-intl` `4.5`. Refs STRIPES-672.
+* Extend fee/fine tokens available for notices. Refs UICIRC-458.
 
 ## [2.1.0] (IN PROGRESS)
 

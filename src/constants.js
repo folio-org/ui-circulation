@@ -359,10 +359,6 @@ export const patronNoticeCategories = [
     id: patronNoticeCategoryIds.AUTOMATED_FEE_FINE,
     label: 'ui-circulation.settings.patronNotices.categories.automatedFeeFineAction',
   },
-  {
-    id: patronNoticeCategoryIds.OTHER,
-    label: 'ui-circulation.settings.patronNotices.categories.other',
-  },
 ];
 
 export const closingTypesMap = {
