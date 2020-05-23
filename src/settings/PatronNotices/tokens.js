@@ -50,16 +50,23 @@ const formats = {
     'item.effectiveLocationCampus': 'South Campus',
     'item.effectiveLocationInstitution': 'Opentown University',
   },
-  feeFine: {
-    'fee.owner': 'Main Library',
-    'fee.type': 'Locker rental',
-    'fee.amount': '$15.00',
-    'fee.actionType': 'Payment',
-    'fee.actionAmount': '$5.00',
-    'fee.actionDateTime': 'Aug 5, 2019',
-    'fee.balance': '$10.00',
-    'fee.actionAdditionalInfo': 'Additional information regarding the fee/fine',
-    'fee.reasonForCancellation': 'Fee/fine cancelation reason',
+  feeFineCharge: {
+    'feeCharge.owner': 'Main Library',
+    'feeCharge.type': 'Damaged Item',
+    'feeCharge.paymentStatus': 'Outstanding',
+    'feeCharge.date': 'Jun 30, 2020',
+    'feeCharge.dateTime': 'Jun 30, 2020 11:00',
+    'feeCharge.amount': '$15.00',
+    'feeCharge.remainingAmount': '$5.00',
+    'feeCharge.additionalInfo': 'This is a text field intended to provide additional information for the patron regarding the fee/fine.'
+  },
+  feeFineAction: {
+    'feeAction.type': 'Waived partially',
+    'feeAction.date': 'Jul 10, 2020',
+    'feeAction.dateTime': 'Jul 10, 2020 8:00',
+    'feeAction.amount': '$5.00',
+    'feeAction.remainingAmount': '$10.00',
+    'feeAction.additionalInfo': 'Cost to repair less than expected.',
   },
 };
 

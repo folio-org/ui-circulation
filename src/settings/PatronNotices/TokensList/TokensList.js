@@ -35,6 +35,12 @@ class TokensList extends React.Component {
       label: <FormattedMessage id="ui-circulation.settings.patronNotices.multipleRequests" />,
       tag: 'requests',
     };
+
+    this.feeFineActionLoopConfig = {
+      enabled: true,
+      label: <FormattedMessage id="ui-circulation.settings.patronNotices.multipleFeeFineActions" />,
+      tag: 'feeActions',
+    };
   }
 
   disableSection = (allowedCategories = []) => {
@@ -60,7 +66,6 @@ class TokensList extends React.Component {
                 section="item"
                 header={<FormattedMessage id="ui-circulation.settings.patronNotices.itemTokenHeader" />}
                 tokens={Object.keys(tokens.item)}
-                onLoopSelect={onLoopSelect}
                 onSectionInit={onSectionInit}
                 onTokenSelect={onTokenSelect}
               />
@@ -72,7 +77,6 @@ class TokensList extends React.Component {
                 section="effectiveLocation"
                 header={<FormattedMessage id="ui-circulation.settings.patronNotices.effectiveLocationTokenHeader" />}
                 tokens={Object.keys(tokens.effectiveLocation)}
-                onLoopSelect={onLoopSelect}
                 onSectionInit={onSectionInit}
                 onTokenSelect={onTokenSelect}
               />
@@ -84,7 +88,13 @@ class TokensList extends React.Component {
             <Col xs={12}>
               <TokensSection
                 section="loan"
-                disabled={this.disableSection([patronNoticeCategoryIds.LOAN, patronNoticeCategoryIds.REQUEST])}
+                disabled={this.disableSection([
+                  patronNoticeCategoryIds.LOAN,
+                  patronNoticeCategoryIds.REQUEST,
+                  patronNoticeCategoryIds.AUTOMATED_FEE_FINE,
+                  patronNoticeCategoryIds.FEE_FINE_CHARGE,
+                  patronNoticeCategoryIds.FEE_FINE_ACTION,
+                ])}
                 header={<FormattedMessage id="ui-circulation.settings.patronNotices.loanTokenHeader" />}
                 tokens={Object.keys(tokens.loan)}
                 loopConfig={this.loansLoopConfig}
@@ -116,6 +126,22 @@ class TokensList extends React.Component {
                 section="user"
                 header={<FormattedMessage id="ui-circulation.settings.patronNotices.userTokenHeader" />}
                 tokens={Object.keys(tokens.user)}
+                onSectionInit={onSectionInit}
+                onTokenSelect={onTokenSelect}
+              />
+            </Col>
+          </Row>
+          <Row>
+            <Col xs={12}>
+              <TokensSection
+                section="feeFineCharge"
+                disabled={this.disableSection([
+                  patronNoticeCategoryIds.AUTOMATED_FEE_FINE,
+                  patronNoticeCategoryIds.FEE_FINE_CHARGE,
+                  patronNoticeCategoryIds.FEE_FINE_ACTION,
+                ])}
+                header={<FormattedMessage id="ui-circulation.settings.patronNotices.feeFineChargeTokenHeader" />}
+                tokens={Object.keys(tokens.feeFineCharge)}
                 onLoopSelect={onLoopSelect}
                 onSectionInit={onSectionInit}
                 onTokenSelect={onTokenSelect}
@@ -125,10 +151,11 @@ class TokensList extends React.Component {
           <Row>
             <Col xs={12}>
               <TokensSection
-                section="user"
-                disabled={this.disableSection([patronNoticeCategoryIds.FEE_FINE_ACTION, patronNoticeCategoryIds.FEE_FINE_CHARGE])}
-                header={<FormattedMessage id="ui-circulation.settings.patronNotices.feeFineTokenHeader" />}
-                tokens={Object.keys(tokens.feeFine)}
+                section="feeFineAction"
+                disabled={this.disableSection([patronNoticeCategoryIds.FEE_FINE_ACTION])}
+                header={<FormattedMessage id="ui-circulation.settings.patronNotices.feeFineActionTokenHeader" />}
+                tokens={Object.keys(tokens.feeFineAction)}
+                loopConfig={this.feeFineActionLoopConfig}
                 onLoopSelect={onLoopSelect}
                 onSectionInit={onSectionInit}
                 onTokenSelect={onTokenSelect}
