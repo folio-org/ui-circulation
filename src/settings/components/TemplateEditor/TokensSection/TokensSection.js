@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { noop } from 'lodash';
+import {
+  noop,
+  isEmpty,
+} from 'lodash';
 
 import { Checkbox } from '@folio/stripes/components';
 
@@ -9,7 +12,7 @@ import css from './TokensSection.css';
 class TokensSection extends Component {
   static propTypes = {
     section: PropTypes.string.isRequired,
-    selectedCategory: PropTypes.string.isRequired,
+    selectedCategory: PropTypes.string,
     header: PropTypes.node,
     tokens: PropTypes.arrayOf(PropTypes.object).isRequired,
     loopConfig: PropTypes.shape({
@@ -29,8 +32,15 @@ class TokensSection extends Component {
       label: null,
       tag: null,
     },
+    selectedCategory: '',
     onLoopSelect: noop,
   };
+
+  constructor(props) {
+    super(props);
+
+    this.disableLoop = true;
+  }
 
   componentDidMount() {
     const {
@@ -62,7 +72,6 @@ class TokensSection extends Component {
 
   render() {
     const {
-      section,
       selectedCategory,
       header,
       tokens,
@@ -72,8 +81,6 @@ class TokensSection extends Component {
         tag,
       }
     } = this.props;
-
-    const isSectionActive = section.toLowerCase() === selectedCategory.toLowerCase();
 
     return (
       <>
@@ -85,8 +92,12 @@ class TokensSection extends Component {
           className={css.tokensList}
         >
           {tokens.map(({ token, allowedFor }) => {
-            const disabled = !allowedFor.includes(selectedCategory);
+            const disabled = !isEmpty(selectedCategory) && !allowedFor.includes(selectedCategory);
             const labelClass = disabled ? css.disabledItem : '';
+
+            if (!disabled) {
+              this.disableLoop = false;
+            }
 
             return (
               <li key={token}>
@@ -105,10 +116,10 @@ class TokensSection extends Component {
               <hr />
               <Checkbox
                 data-test-multiple-tokens
-                labelClass={!isSectionActive ? css.disabledItem : ''}
+                labelClass={this.disableLoop ? css.disabledItem : ''}
                 value={tag}
                 label={<strong>{label}</strong>}
-                disabled={!isSectionActive}
+                disabled={this.disableLoop}
                 onChange={this.onLoopChange}
               />
             </>

@@ -327,6 +327,8 @@ export const requestNoticesTriggeringEvents = [
 export const staffSlipMap = {
   HOLD: 'Hold',
   TRANSIT: 'Transit',
+  PICK_SLIP: 'Pick slip',
+  REQUEST_DELIVERY: 'Request delivery'
 };
 
 export const patronNoticeCategoryIds = {

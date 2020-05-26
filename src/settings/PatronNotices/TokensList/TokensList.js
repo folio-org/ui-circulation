@@ -42,12 +42,6 @@ class TokensList extends React.Component {
     };
   }
 
-  /* disableSection = (allowedCategories = []) => {
-    const { selectedCategory } = this.props;
-
-    return !allowedCategories.includes(selectedCategory);
-  }; */
-
   render() {
     const {
       selectedCategory,
