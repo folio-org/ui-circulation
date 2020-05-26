@@ -4,6 +4,7 @@
 
 * Upgrade to `stripes` `4.0`, `react-intl` `4.5`. Refs STRIPES-672.
 * Extend fee/fine tokens available for notices. Refs UICIRC-458.
+* Grey out unavailable tokens on patron notice template token modal. Refs UICIRC-459.
 
 ## [2.1.0] (IN PROGRESS)
 

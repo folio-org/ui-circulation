@@ -29,7 +29,7 @@ class TokensList extends React.Component {
           <TokensSection
             section="item"
             header={<FormattedMessage id="ui-circulation.settings.staffSlips.itemTokenHeader" />}
-            tokens={Object.keys(tokens.item)}
+            tokens={tokens.item}
             onSectionInit={onSectionInit}
             onTokenSelect={onTokenSelect}
           />
@@ -40,7 +40,7 @@ class TokensList extends React.Component {
               <TokensSection
                 section="effectiveLocation"
                 header={<FormattedMessage id="ui-circulation.settings.staffSlips.effectiveLocationTokenHeader" />}
-                tokens={Object.keys(tokens.effectiveLocation)}
+                tokens={tokens.effectiveLocation}
                 onSectionInit={onSectionInit}
                 onTokenSelect={onTokenSelect}
               />
@@ -51,7 +51,7 @@ class TokensList extends React.Component {
               <TokensSection
                 section="staffSlip"
                 header={<FormattedMessage id="ui-circulation.settings.staffSlips.staffSlipTokenHeader" />}
-                tokens={Object.keys(tokens.staffSlip)}
+                tokens={tokens.staffSlip}
                 onSectionInit={onSectionInit}
                 onTokenSelect={onTokenSelect}
               />
@@ -64,7 +64,7 @@ class TokensList extends React.Component {
               <TokensSection
                 section="request"
                 header={<FormattedMessage id="ui-circulation.settings.staffSlips.requestTokenHeader" />}
-                tokens={Object.keys(tokens.request)}
+                tokens={tokens.request}
                 onSectionInit={onSectionInit}
                 onTokenSelect={onTokenSelect}
               />
@@ -75,7 +75,7 @@ class TokensList extends React.Component {
               <TokensSection
                 section="requestDeliveryAddress"
                 header={<FormattedMessage id="ui-circulation.settings.staffSlips.requestDeliveryAddressTokenHeader" />}
-                tokens={Object.keys(tokens.requestDeliveryAddress)}
+                tokens={tokens.requestDeliveryAddress}
                 onSectionInit={onSectionInit}
                 onTokenSelect={onTokenSelect}
               />
@@ -86,7 +86,7 @@ class TokensList extends React.Component {
               <TokensSection
                 section="requester"
                 header={<FormattedMessage id="ui-circulation.settings.staffSlips.requesterTokenHeader" />}
-                tokens={Object.keys(tokens.requester)}
+                tokens={tokens.requester}
                 onSectionInit={onSectionInit}
                 onTokenSelect={onTokenSelect}
               />

@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { noop } from 'lodash';
+import {
+  noop,
+  isEmpty,
+} from 'lodash';
 
 import { Checkbox } from '@folio/stripes/components';
 
@@ -9,9 +12,9 @@ import css from './TokensSection.css';
 class TokensSection extends Component {
   static propTypes = {
     section: PropTypes.string.isRequired,
-    disabled: PropTypes.bool,
+    selectedCategory: PropTypes.string,
     header: PropTypes.node,
-    tokens: PropTypes.arrayOf(PropTypes.string).isRequired,
+    tokens: PropTypes.arrayOf(PropTypes.object).isRequired,
     loopConfig: PropTypes.shape({
       enabled: PropTypes.bool,
       label: PropTypes.node,
@@ -23,15 +26,21 @@ class TokensSection extends Component {
   };
 
   static defaultProps = {
-    disabled: false,
     header: null,
     loopConfig: {
       enabled: false,
       label: null,
       tag: null,
     },
+    selectedCategory: '',
     onLoopSelect: noop,
   };
+
+  constructor(props) {
+    super(props);
+
+    this.disableLoop = true;
+  }
 
   componentDidMount() {
     const {
@@ -63,7 +72,7 @@ class TokensSection extends Component {
 
   render() {
     const {
-      disabled,
+      selectedCategory,
       header,
       tokens,
       loopConfig: {
@@ -82,10 +91,18 @@ class TokensSection extends Component {
           data-test-available-tokens
           className={css.tokensList}
         >
-          {tokens.map((token) => {
+          {tokens.map(({ token, allowedFor }) => {
+            const disabled = !isEmpty(selectedCategory) && !allowedFor.includes(selectedCategory);
+            const labelClass = disabled ? css.disabledItem : '';
+
+            if (!disabled) {
+              this.disableLoop = false;
+            }
+
             return (
               <li key={token}>
                 <Checkbox
+                  labelClass={`${css.tokenLabel} ${labelClass}`}
                   value={token}
                   label={token}
                   disabled={disabled}
@@ -99,9 +116,10 @@ class TokensSection extends Component {
               <hr />
               <Checkbox
                 data-test-multiple-tokens
+                labelClass={this.disableLoop ? css.disabledItem : ''}
                 value={tag}
                 label={<strong>{label}</strong>}
-                disabled={disabled}
+                disabled={this.disableLoop}
                 onChange={this.onLoopChange}
               />
             </>
