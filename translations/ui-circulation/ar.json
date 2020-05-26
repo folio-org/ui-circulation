@@ -99,7 +99,6 @@
     "settings.patronNotices.categories.feeFineAction": "إجراء الرسم/الغرامة",
     "settings.patronNotices.categories.feeFineCharge": "فرض رسم/غرامة",
     "settings.patronNotices.categories.loan": "الإعارة",
-    "settings.patronNotices.categories.other": "أخرى",
     "settings.patronNotices.categories.request": "طلب",
     "settings.patronNotices.notice.name": "الاسم",
     "settings.patronNotices.notice.active": "نشط",
@@ -292,8 +291,6 @@
     "settings.circulationRules.done": "تم",
     "settings.patronNotices.multipleLoans": "إعارات متعددة",
     "settings.patronNotices.multipleRequests": "طلبات متعددة",
-    "settings.patronNotices.multipleFeesFines": "رسوم/غرامات متعددة",
-    "settings.patronNotices.feeFineTokenHeader": "الرسم/الغرامة",
     "settings.noticePolicy.loanNotices.manualDueDateChange": "تغيير تاريخ استحقاق الإعارة",
     "settings.index.general": "عام",
     "settings.index.loans": "إعارات",
@@ -396,5 +393,9 @@
     "settings.noticePolicy.notices.postponed.notification": "يتم إرساله دائمًا في نهاية الجلسة ويتم تجميع الإعارات في إخطار واحد لكل مستفيد.",
     "settings.noticePolicy.notices.realTime.notification": "يتم إرساله دائمًا عند تشغيل الحدث.",
     "settings.noticePolicy.notices.send.longTerm": "إرسال ليلاً بإعارات/مواد متعددة بواسطة المستفيد. مفيد للإعارات طويلة الأجل.",
-    "settings.noticePolicy.notices.send.shortTerm": "إرسال على مدار اليوم بدون إعارات/مواد متعددة. مفيد للإعارات قصيرة الأجل."
+    "settings.noticePolicy.notices.send.shortTerm": "إرسال على مدار اليوم بدون إعارات/مواد متعددة. مفيد للإعارات قصيرة الأجل.",
+    "settings.patronNotices.feeFineChargeTokenHeader": "تكاليف الرسوم/الغرامات",
+    "settings.patronNotices.feeFineActionTokenHeader": "إجراء الرسوم/الغرامات",
+    "settings.patronNotices.multipleFeeFineActions": "عدة إجراءات للغرامات/الرسوم",
+    "settings.patronNotices.multipleFeeFineCharges": "عدة تكاليف للغرامات/الرسوم"
 }
