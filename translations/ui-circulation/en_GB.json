@@ -99,7 +99,6 @@
     "settings.patronNotices.categories.feeFineAction": "Fee/fine action",
     "settings.patronNotices.categories.feeFineCharge": "Fee/fine charge",
     "settings.patronNotices.categories.loan": "Loan",
-    "settings.patronNotices.categories.other": "Other",
     "settings.patronNotices.categories.request": "Request",
     "settings.patronNotices.notice.name": "Name",
     "settings.patronNotices.notice.active": "Active",
@@ -292,8 +291,6 @@
     "settings.circulationRules.done": "Done",
     "settings.patronNotices.multipleLoans": "Multiple loans",
     "settings.patronNotices.multipleRequests": "Multiple requests",
-    "settings.patronNotices.multipleFeesFines": "Multiple fees/fines",
-    "settings.patronNotices.feeFineTokenHeader": "Fee/Fine",
     "settings.noticePolicy.loanNotices.manualDueDateChange": "Loan due date change",
     "settings.index.general": "General",
     "settings.index.loans": "Loans",
@@ -396,5 +393,9 @@
     "settings.noticePolicy.notices.postponed.notification": "Always sent at the end of a session and loans are bundled into a single notice for each patron.",
     "settings.noticePolicy.notices.realTime.notification": "Always sent when event is triggered.",
     "settings.noticePolicy.notices.send.longTerm": "Send overnight with multiple loans/items by patron. Useful for long-term loans.",
-    "settings.noticePolicy.notices.send.shortTerm": "Send throughout the day without multiple loans/items. Useful for short-term loans."
+    "settings.noticePolicy.notices.send.shortTerm": "Send throughout the day without multiple loans/items. Useful for short-term loans.",
+    "settings.patronNotices.feeFineChargeTokenHeader": "Fee/Fine Charge",
+    "settings.patronNotices.feeFineActionTokenHeader": "Fee/Fine Action",
+    "settings.patronNotices.multipleFeeFineActions": "Multiple fee/fine actions",
+    "settings.patronNotices.multipleFeeFineCharges": "Multiple fee/fine charges"
 }

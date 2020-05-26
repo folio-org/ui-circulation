@@ -96,10 +96,9 @@
     "settings.staffSlips.editLabel": "Edit: staff slips - {name}",
     "settings.loanPolicy.openingTimeOffset": "Opening time offset",
     "settings.index.patronNotices": "Patron notice templates",
-    "settings.patronNotices.categories.feeFineAction": "Fee/fine action",
-    "settings.patronNotices.categories.feeFineCharge": "Fee/fine charge",
+    "settings.patronNotices.categories.feeFineAction": "Fee/fine action (pay, waive, refund, transfer or cancel in error)",
+    "settings.patronNotices.categories.feeFineCharge": "Оплата в ручном режиме",
     "settings.patronNotices.categories.loan": "Loan",
-    "settings.patronNotices.categories.other": "Другое",
     "settings.patronNotices.categories.request": "Запрос",
     "settings.patronNotices.notice.name": "Name",
     "settings.patronNotices.notice.active": "Активный",
@@ -292,8 +291,6 @@
     "settings.circulationRules.done": "Готово",
     "settings.patronNotices.multipleLoans": "Multiple loans",
     "settings.patronNotices.multipleRequests": "Multiple requests",
-    "settings.patronNotices.multipleFeesFines": "Multiple fees/fines",
-    "settings.patronNotices.feeFineTokenHeader": "Плата/Штраф",
     "settings.noticePolicy.loanNotices.manualDueDateChange": "Loan due date change",
     "settings.index.general": "Общие",
     "settings.index.loans": "Кредиты",
@@ -396,5 +393,9 @@
     "settings.noticePolicy.notices.postponed.notification": "Always sent at the end of a session and loans are bundled into a single notice for each patron.",
     "settings.noticePolicy.notices.realTime.notification": "Всегда отправляется при срабатывании события.",
     "settings.noticePolicy.notices.send.longTerm": "Send overnight with multiple loans/items by patron. Useful for long-term loans.",
-    "settings.noticePolicy.notices.send.shortTerm": "Send throughout the day without multiple loans/items. Useful for short-term loans."
+    "settings.noticePolicy.notices.send.shortTerm": "Send throughout the day without multiple loans/items. Useful for short-term loans.",
+    "settings.patronNotices.feeFineChargeTokenHeader": "Взимание платы",
+    "settings.patronNotices.feeFineActionTokenHeader": "Операция с оплатой",
+    "settings.patronNotices.multipleFeeFineActions": "Многократные операции с оплатой",
+    "settings.patronNotices.multipleFeeFineCharges": "Многократное взимание платы"
 }

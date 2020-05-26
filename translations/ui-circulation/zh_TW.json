@@ -97,9 +97,8 @@
     "settings.loanPolicy.openingTimeOffset": "开放时间抵消",
     "settings.index.patronNotices": "讀者通知範本",
     "settings.patronNotices.categories.feeFineAction": "费用/罚款操作",
-    "settings.patronNotices.categories.feeFineCharge": "费用/罚款",
+    "settings.patronNotices.categories.feeFineCharge": "費用 / 罰款：人工收費",
     "settings.patronNotices.categories.loan": "借阅",
-    "settings.patronNotices.categories.other": "其他",
     "settings.patronNotices.categories.request": "預約",
     "settings.patronNotices.notice.name": "名稱",
     "settings.patronNotices.notice.active": "啟用",
@@ -292,8 +291,6 @@
     "settings.circulationRules.done": "完成",
     "settings.patronNotices.multipleLoans": "多个借阅",
     "settings.patronNotices.multipleRequests": "多筆預約",
-    "settings.patronNotices.multipleFeesFines": "多个费用/罚款",
-    "settings.patronNotices.feeFineTokenHeader": "費用 / 罰款",
     "settings.noticePolicy.loanNotices.manualDueDateChange": "Loan due date change",
     "settings.index.general": "General",
     "settings.index.loans": "Loans",
@@ -396,5 +393,9 @@
     "settings.noticePolicy.notices.postponed.notification": "Always sent at the end of a session and loans are bundled into a single notice for each patron.",
     "settings.noticePolicy.notices.realTime.notification": "Always sent when event is triggered.",
     "settings.noticePolicy.notices.send.longTerm": "Send overnight with multiple loans/items by patron. Useful for long-term loans.",
-    "settings.noticePolicy.notices.send.shortTerm": "Send throughout the day without multiple loans/items. Useful for short-term loans."
+    "settings.noticePolicy.notices.send.shortTerm": "Send throughout the day without multiple loans/items. Useful for short-term loans.",
+    "settings.patronNotices.feeFineChargeTokenHeader": "Fee/Fine Charge",
+    "settings.patronNotices.feeFineActionTokenHeader": "Fee/Fine Action",
+    "settings.patronNotices.multipleFeeFineActions": "Multiple fee/fine actions",
+    "settings.patronNotices.multipleFeeFineCharges": "Multiple fee/fine charges"
 }
