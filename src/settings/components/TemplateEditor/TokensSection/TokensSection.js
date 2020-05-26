@@ -9,9 +9,9 @@ import css from './TokensSection.css';
 class TokensSection extends Component {
   static propTypes = {
     section: PropTypes.string.isRequired,
-    disabled: PropTypes.bool,
+    selectedCategory: PropTypes.string.isRequired,
     header: PropTypes.node,
-    tokens: PropTypes.arrayOf(PropTypes.string).isRequired,
+    tokens: PropTypes.arrayOf(PropTypes.object).isRequired,
     loopConfig: PropTypes.shape({
       enabled: PropTypes.bool,
       label: PropTypes.node,
@@ -23,7 +23,6 @@ class TokensSection extends Component {
   };
 
   static defaultProps = {
-    disabled: false,
     header: null,
     loopConfig: {
       enabled: false,
@@ -63,7 +62,8 @@ class TokensSection extends Component {
 
   render() {
     const {
-      disabled,
+      section,
+      selectedCategory,
       header,
       tokens,
       loopConfig: {
@@ -72,6 +72,8 @@ class TokensSection extends Component {
         tag,
       }
     } = this.props;
+
+    const isSectionActive = section.toLowerCase() === selectedCategory.toLowerCase();
 
     return (
       <>
@@ -82,10 +84,14 @@ class TokensSection extends Component {
           data-test-available-tokens
           className={css.tokensList}
         >
-          {tokens.map((token) => {
+          {tokens.map(({ token, allowedFor }) => {
+            const disabled = !allowedFor.includes(selectedCategory);
+            const labelClass = disabled ? css.disabledItem : '';
+
             return (
               <li key={token}>
                 <Checkbox
+                  labelClass={`${css.tokenLabel} ${labelClass}`}
                   value={token}
                   label={token}
                   disabled={disabled}
@@ -99,9 +105,10 @@ class TokensSection extends Component {
               <hr />
               <Checkbox
                 data-test-multiple-tokens
+                labelClass={!isSectionActive ? css.disabledItem : ''}
                 value={tag}
                 label={<strong>{label}</strong>}
-                disabled={disabled}
+                disabled={!isSectionActive}
                 onChange={this.onLoopChange}
               />
             </>

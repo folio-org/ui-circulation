@@ -1,73 +1,300 @@
+import { patronNoticeCategoryIds } from '../../constants';
+
 const formats = {
-  item: {
-    'item.title': 'The Wines of Italy',
-    'item.primaryContributor': 'Thomas, George B.',
-    'item.allContributors': 'Finney, Ross L.; Weir, Maurice D.',
-    'item.barcode': '31924001521792',
-    'item.barcodeImage': '<Barcode>31924001521792</Barcode>',
-    'item.callNumber': 'TK7871.15.F4 S67 1988',
-    'item.callNumberPrefix': 'New & Noteworthy',
-    'item.callNumberSuffix': 'Handbook',
-    'item.enumeration': 'no.1-3',
-    'item.volume': 'v. 27',
-    'item.chronology': '1964-1967 (Board)',
-    'item.yearCaption': 'Convention photographs 1911-1960',
-    'item.materialType': 'Serial',
-    'item.copy': 'c.2',
-    'item.numberOfPieces': '7',
-    'item.descriptionOfPieces': '7 maps in pocket',
-  },
-  user: {
-    'user.firstName': 'John',
-    'user.lastName': 'Smith',
-    'user.middleName': 'Adam',
-    'user.barcode': '456123789',
-    'user.barcodeImage': '<Barcode>456123789</Barcode>',
-  },
-  request: {
-    'request.servicePointPickup': 'Circulation Desk - Main Library',
-    'request.requestExpirationDate': 'Mar 31 30, 2020',
-    'request.requestExpirationDateTime': 'Mar 31, 2020 23:59',
-    'request.holdShelfExpirationDate': 'Jun 30, 2020',
-    'request.holdShelfExpirationDateTime': 'Jun 30, 2020 23:59',
-    'request.reasonForCancellation': 'Item not available',
-    'request.additionalInfo': 'Additional information regarding the request cancellation',
-  },
-  loan: {
-    'loan.dueDate': 'Dec 31, 2019',
-    'loan.dueDateTime': 'Dec 31, 2019 22:00',
-    'loan.initialBorrowDate': 'Jan 1, 2019',
-    'loan.initialBorrowDateTime': 'Jan 1, 2019 11:00',
-    'loan.checkedInDate': 'Dec 15, 2019',
-    'loan.checkedInDateTime': 'Dec 15, 2019 13:24',
-    'loan.numberOfRenewalsAllowed': '10',
-    'loan.numberOfRenewalsTaken': '2',
-    'loan.numberOfRenewalsRemaining': '8',
-  },
-  effectiveLocation: {
-    'item.effectiveLocationSpecific': 'Main Library Reserve',
-    'item.effectiveLocationLibrary': 'Main Library',
-    'item.effectiveLocationCampus': 'South Campus',
-    'item.effectiveLocationInstitution': 'Opentown University',
-  },
-  feeFineCharge: {
-    'feeCharge.owner': 'Main Library',
-    'feeCharge.type': 'Damaged Item',
-    'feeCharge.paymentStatus': 'Outstanding',
-    'feeCharge.date': 'Jun 30, 2020',
-    'feeCharge.dateTime': 'Jun 30, 2020 11:00',
-    'feeCharge.amount': '$15.00',
-    'feeCharge.remainingAmount': '$5.00',
-    'feeCharge.additionalInfo': 'This is a text field intended to provide additional information for the patron regarding the fee/fine.'
-  },
-  feeFineAction: {
-    'feeAction.type': 'Waived partially',
-    'feeAction.date': 'Jul 10, 2020',
-    'feeAction.dateTime': 'Jul 10, 2020 8:00',
-    'feeAction.amount': '$5.00',
-    'feeAction.remainingAmount': '$10.00',
-    'feeAction.additionalInfo': 'Cost to repair less than expected.',
-  },
+  item: [
+    {
+      token: 'item.title',
+      previewValue: 'The Wines of Italy',
+      allowedFor: [...Object.values(patronNoticeCategoryIds)],
+    },
+    {
+      token: 'item.primaryContributor',
+      previewValue: 'Thomas, George B.',
+      allowedFor: [...Object.values(patronNoticeCategoryIds)],
+    },
+    {
+      token: 'item.primaryContributor',
+      previewValue: 'Thomas, George B.',
+      allowedFor: [...Object.values(patronNoticeCategoryIds)],
+    },
+    {
+      token: 'item.allContributors',
+      previewValue: 'Finney, Ross L.; Weir, Maurice D.',
+      allowedFor: [...Object.values(patronNoticeCategoryIds)],
+    },
+    {
+      token: 'item.barcode',
+      previewValue: '31924001521792',
+      allowedFor: [...Object.values(patronNoticeCategoryIds)],
+    },
+    {
+      token: 'item.barcodeImage',
+      previewValue: '<Barcode>31924001521792</Barcode>',
+      allowedFor: [...Object.values(patronNoticeCategoryIds)],
+    },
+    {
+      token: 'item.callNumber',
+      previewValue: 'TK7871.15.F4 S67 1988',
+      allowedFor: [...Object.values(patronNoticeCategoryIds)],
+    },
+    {
+      token: 'item.callNumberPrefix',
+      previewValue: 'New & Noteworthy',
+      allowedFor: [...Object.values(patronNoticeCategoryIds)],
+    },
+    {
+      token: 'item.callNumberSuffix',
+      previewValue: 'Handbook',
+      allowedFor: [...Object.values(patronNoticeCategoryIds)],
+    },
+    {
+      token: 'item.enumeration',
+      previewValue: 'no.1-3',
+      allowedFor: [...Object.values(patronNoticeCategoryIds)],
+    },
+    {
+      token: 'item.volume',
+      previewValue: 'v. 27',
+      allowedFor: [...Object.values(patronNoticeCategoryIds)],
+    },
+    {
+      token: 'item.chronology',
+      previewValue: '1964-1967 (Board)',
+      allowedFor: [...Object.values(patronNoticeCategoryIds)],
+    },
+    {
+      token: 'item.yearCaption',
+      previewValue: 'Convention photographs 1911-1960',
+      allowedFor: [...Object.values(patronNoticeCategoryIds)],
+    },
+    {
+      token: 'item.materialType',
+      previewValue: 'Serial',
+      allowedFor: [...Object.values(patronNoticeCategoryIds)],
+    },
+    {
+      token: 'item.copy',
+      previewValue: 'c.2',
+      allowedFor: [...Object.values(patronNoticeCategoryIds)],
+    },
+    {
+      token: 'item.numberOfPieces',
+      previewValue: '7',
+      allowedFor: [...Object.values(patronNoticeCategoryIds)],
+    },
+    {
+      token: 'item.descriptionOfPieces',
+      previewValue: '7 maps in pocket',
+      allowedFor: [...Object.values(patronNoticeCategoryIds)],
+    },
+  ],
+  user: [
+    {
+      token: 'user.firstName',
+      previewValue: 'John',
+      allowedFor: [...Object.values(patronNoticeCategoryIds)],
+    },
+    {
+      token: 'user.lastName',
+      previewValue: 'Smith',
+      allowedFor: [...Object.values(patronNoticeCategoryIds)],
+    },
+    {
+      token: 'user.middleName',
+      previewValue: 'Adam',
+      allowedFor: [...Object.values(patronNoticeCategoryIds)],
+    },
+    {
+      token: 'user.barcode',
+      previewValue: '456123789',
+      allowedFor: [...Object.values(patronNoticeCategoryIds)],
+    },
+    {
+      token: 'user.barcodeImage',
+      previewValue: '<Barcode>456123789</Barcode>',
+      allowedFor: [...Object.values(patronNoticeCategoryIds)],
+    },
+  ],
+  request: [
+    {
+      token: 'request.servicePointPickup',
+      previewValue: 'Circulation Desk - Main Library',
+      allowedFor: [patronNoticeCategoryIds.REQUEST],
+    },
+    {
+      token: 'request.requestExpirationDate',
+      previewValue: 'Mar 31 30, 2020',
+      allowedFor: [patronNoticeCategoryIds.REQUEST],
+    },
+    {
+      token: 'request.requestExpirationDateTime',
+      previewValue: 'Mar 31, 2020 23:59',
+      allowedFor: [patronNoticeCategoryIds.REQUEST],
+    },
+    {
+      token: 'request.holdShelfExpirationDate',
+      previewValue: 'Jun 30, 2020',
+      allowedFor: [patronNoticeCategoryIds.REQUEST],
+    },
+    {
+      token: 'request.holdShelfExpirationDateTime',
+      previewValue: 'Jun 30, 2020 23:59',
+      allowedFor: [patronNoticeCategoryIds.REQUEST],
+    },
+    {
+      token: 'request.reasonForCancellation',
+      previewValue: 'Item not available',
+      allowedFor: [patronNoticeCategoryIds.REQUEST],
+    },
+    {
+      token: 'request.additionalInfo',
+      previewValue: 'Additional information regarding the request cancellation',
+      allowedFor: [patronNoticeCategoryIds.REQUEST],
+    },
+  ],
+  loan: [
+    {
+      token: 'loan.dueDate',
+      previewValue: 'Dec 31, 2019',
+      allowedFor: [patronNoticeCategoryIds.LOAN],
+    },
+    {
+      token: 'loan.dueDateTime',
+      previewValue: 'Dec 31, 2019 22:00',
+      allowedFor: [patronNoticeCategoryIds.LOAN],
+    },
+    {
+      token: 'loan.initialBorrowDate',
+      previewValue: 'Jan 1, 2019',
+      allowedFor: [patronNoticeCategoryIds.LOAN],
+    },
+    {
+      token: 'loan.initialBorrowDateTime',
+      previewValue: 'Jan 1, 2019 11:00',
+      allowedFor: [patronNoticeCategoryIds.LOAN],
+    },
+    {
+      token: 'loan.checkedInDate',
+      previewValue: 'Dec 15, 2019',
+      allowedFor: [patronNoticeCategoryIds.LOAN],
+    },
+    {
+      token: 'loan.checkedInDateTime',
+      previewValue: 'Dec 15, 2019 13:24',
+      allowedFor: [patronNoticeCategoryIds.LOAN],
+    },
+    {
+      token: 'loan.numberOfRenewalsAllowed',
+      previewValue: '10',
+      allowedFor: [patronNoticeCategoryIds.LOAN],
+    },
+    {
+      token: 'loan.numberOfRenewalsTaken',
+      previewValue: '2',
+      allowedFor: [patronNoticeCategoryIds.LOAN],
+    },
+    {
+      token: 'loan.numberOfRenewalsRemaining',
+      previewValue: '8',
+      allowedFor: [patronNoticeCategoryIds.LOAN],
+    },
+  ],
+  effectiveLocation: [
+    {
+      token: 'item.effectiveLocationSpecific',
+      previewValue: 'Main Library Reserve',
+      allowedFor: [...Object.values(patronNoticeCategoryIds)],
+    },
+    {
+      token: 'item.effectiveLocationLibrary',
+      previewValue: 'Main Library',
+      allowedFor: [...Object.values(patronNoticeCategoryIds)],
+    },
+    {
+      token: 'item.effectiveLocationCampus',
+      previewValue: 'South Campus',
+      allowedFor: [...Object.values(patronNoticeCategoryIds)],
+    },
+    {
+      token: 'item.effectiveLocationInstitution',
+      previewValue: 'Opentown University',
+      allowedFor: [...Object.values(patronNoticeCategoryIds)],
+    },
+  ],
+  feeFineCharge: [
+    {
+      token: 'feeCharge.owner',
+      previewValue: 'Main Library',
+      allowedFor: [patronNoticeCategoryIds.FEE_FINE_CHARGE],
+    },
+    {
+      token: 'feeCharge.type',
+      previewValue: 'Damaged Item',
+      allowedFor: [patronNoticeCategoryIds.FEE_FINE_CHARGE],
+    },
+    {
+      token: 'feeCharge.paymentStatus',
+      previewValue: 'Outstanding',
+      allowedFor: [patronNoticeCategoryIds.FEE_FINE_CHARGE],
+    },
+    {
+      token: 'feeCharge.date',
+      previewValue: 'Jun 30, 2020',
+      allowedFor: [patronNoticeCategoryIds.FEE_FINE_CHARGE],
+    },
+    {
+      token: 'feeCharge.dateTime',
+      previewValue: 'Jun 30, 2020 11:00',
+      allowedFor: [patronNoticeCategoryIds.FEE_FINE_CHARGE],
+    },
+    {
+      token: 'feeCharge.amount',
+      previewValue: '$15.00',
+      allowedFor: [patronNoticeCategoryIds.FEE_FINE_CHARGE],
+    },
+    {
+      token: 'feeCharge.remainingAmount',
+      previewValue: '$5.00',
+      allowedFor: [patronNoticeCategoryIds.FEE_FINE_CHARGE],
+    },
+    {
+      token: 'feeCharge.additionalInfo',
+      previewValue: 'This is a text field intended to provide additional information for the patron regarding the fee/fine.',
+      allowedFor: [patronNoticeCategoryIds.FEE_FINE_CHARGE],
+    },
+  ],
+  feeFineAction: [
+    {
+      token: 'feeAction.type',
+      previewValue: 'Waived partially',
+      allowedFor: [patronNoticeCategoryIds.FEE_FINE_ACTION],
+    },
+    {
+      token: 'feeAction.date',
+      previewValue: 'Jul 10, 2020',
+      allowedFor: [patronNoticeCategoryIds.FEE_FINE_ACTION],
+    },
+    {
+      token: 'feeAction.dateTime',
+      previewValue: 'Jul 10, 2020 8:00',
+      allowedFor: [patronNoticeCategoryIds.FEE_FINE_ACTION],
+    },
+    {
+      token: 'feeAction.amount',
+      previewValue: '$5.00',
+      allowedFor: [patronNoticeCategoryIds.FEE_FINE_ACTION],
+    },
+    {
+      token: 'feeAction.remainingAmount',
+      previewValue: '$10.00',
+      allowedFor: [patronNoticeCategoryIds.FEE_FINE_ACTION],
+    },
+    {
+      token: 'feeAction.additionalInfo',
+      previewValue: 'Cost to repair less than expected.',
+      allowedFor: [patronNoticeCategoryIds.FEE_FINE_ACTION],
+    },
+  ],
 };
 
 export default formats;

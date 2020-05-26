@@ -100,10 +100,10 @@ const TokensModal = (props) => {
 
 TokensModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
-  tokens: PropTypes.object.isRequired,
   list: PropTypes.func.isRequired,
-  onCancel: PropTypes.func.isRequired,
+  tokens: PropTypes.object.isRequired,
   onAdd: PropTypes.func.isRequired,
+  onCancel: PropTypes.func.isRequired,
 };
 
 export default TokensModal;

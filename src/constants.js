@@ -335,7 +335,6 @@ export const patronNoticeCategoryIds = {
   FEE_FINE_CHARGE: 'FeeFineCharge',
   FEE_FINE_ACTION: 'FeeFineAction',
   AUTOMATED_FEE_FINE: 'AutomatedFeeFine',
-  OTHER: 'Other',
 };
 
 export const patronNoticeCategories = [
