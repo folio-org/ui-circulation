@@ -5,145 +5,82 @@ const formats = {
     {
       token: 'item.title',
       previewValue: 'The Wines of Italy',
-      allowedFor: [
-        patronNoticeCategoryIds.LOAN,
-        patronNoticeCategoryIds.REQUEST,
-        patronNoticeCategoryIds.AUTOMATED_FEE_FINE,
-        patronNoticeCategoryIds.FEE_FINE_CHARGE,
-        patronNoticeCategoryIds.FEE_FINE_ACTION,
-      ],
+      allowedFor: [...Object.values(patronNoticeCategoryIds)],
     },
     {
       token: 'item.primaryContributor',
       previewValue: 'Thomas, George B.',
-      allowedFor: [patronNoticeCategoryIds.LOAN, patronNoticeCategoryIds.REQUEST],
+      allowedFor: [...Object.values(patronNoticeCategoryIds)],
     },
     {
       token: 'item.allContributors',
       previewValue: 'Finney, Ross L.; Weir, Maurice D.',
-      allowedFor: [
-        patronNoticeCategoryIds.LOAN,
-        patronNoticeCategoryIds.REQUEST,
-        patronNoticeCategoryIds.AUTOMATED_FEE_FINE,
-        patronNoticeCategoryIds.FEE_FINE_CHARGE,
-        patronNoticeCategoryIds.FEE_FINE_ACTION,
-      ],
+      allowedFor: [...Object.values(patronNoticeCategoryIds)],
     },
     {
       token: 'item.barcode',
       previewValue: '31924001521792',
-      allowedFor: [
-        patronNoticeCategoryIds.LOAN,
-        patronNoticeCategoryIds.REQUEST,
-        patronNoticeCategoryIds.AUTOMATED_FEE_FINE,
-        patronNoticeCategoryIds.FEE_FINE_CHARGE,
-        patronNoticeCategoryIds.FEE_FINE_ACTION,
-      ],
+      allowedFor: [...Object.values(patronNoticeCategoryIds)],
     },
     {
       token: 'item.barcodeImage',
       previewValue: '<Barcode>31924001521792</Barcode>',
-      allowedFor: [
-        patronNoticeCategoryIds.LOAN,
-        patronNoticeCategoryIds.REQUEST,
-        patronNoticeCategoryIds.AUTOMATED_FEE_FINE,
-        patronNoticeCategoryIds.FEE_FINE_CHARGE,
-        patronNoticeCategoryIds.FEE_FINE_ACTION,
-      ],
+      allowedFor: [...Object.values(patronNoticeCategoryIds)],
     },
     {
       token: 'item.callNumber',
       previewValue: 'TK7871.15.F4 S67 1988',
-      allowedFor: [
-        patronNoticeCategoryIds.LOAN,
-        patronNoticeCategoryIds.REQUEST,
-        patronNoticeCategoryIds.AUTOMATED_FEE_FINE,
-        patronNoticeCategoryIds.FEE_FINE_CHARGE,
-        patronNoticeCategoryIds.FEE_FINE_ACTION,
-      ],
+      allowedFor: [...Object.values(patronNoticeCategoryIds)],
     },
     {
       token: 'item.callNumberPrefix',
       previewValue: 'New & Noteworthy',
-      allowedFor: [
-        patronNoticeCategoryIds.LOAN,
-        patronNoticeCategoryIds.REQUEST,
-      ],
+      allowedFor: [...Object.values(patronNoticeCategoryIds)],
     },
     {
       token: 'item.callNumberSuffix',
       previewValue: 'Handbook',
-      allowedFor: [
-        patronNoticeCategoryIds.LOAN,
-        patronNoticeCategoryIds.REQUEST
-      ],
+      allowedFor: [...Object.values(patronNoticeCategoryIds)],
     },
     {
       token: 'item.enumeration',
       previewValue: 'no.1-3',
-      allowedFor: [
-        patronNoticeCategoryIds.LOAN,
-        patronNoticeCategoryIds.REQUEST,
-      ],
+      allowedFor: [...Object.values(patronNoticeCategoryIds)],
     },
     {
       token: 'item.volume',
       previewValue: 'v. 27',
-      allowedFor: [
-        patronNoticeCategoryIds.LOAN,
-        patronNoticeCategoryIds.REQUEST,
-      ],
+      allowedFor: [...Object.values(patronNoticeCategoryIds)],
     },
     {
       token: 'item.chronology',
       previewValue: '1964-1967 (Board)',
-      allowedFor: [
-        patronNoticeCategoryIds.LOAN,
-        patronNoticeCategoryIds.REQUEST,
-      ],
+      allowedFor: [...Object.values(patronNoticeCategoryIds)],
     },
     {
       token: 'item.yearCaption',
       previewValue: 'Convention photographs 1911-1960',
-      allowedFor: [
-        patronNoticeCategoryIds.LOAN,
-        patronNoticeCategoryIds.REQUEST,
-      ],
+      allowedFor: [...Object.values(patronNoticeCategoryIds)],
     },
     {
       token: 'item.materialType',
       previewValue: 'Serial',
-      allowedFor: [
-        patronNoticeCategoryIds.LOAN,
-        patronNoticeCategoryIds.REQUEST,
-        patronNoticeCategoryIds.AUTOMATED_FEE_FINE,
-        patronNoticeCategoryIds.FEE_FINE_CHARGE,
-        patronNoticeCategoryIds.FEE_FINE_ACTION,
-      ],
+      allowedFor: [...Object.values(patronNoticeCategoryIds)],
     },
     {
       token: 'item.copy',
       previewValue: 'c.2',
-      allowedFor: [
-        patronNoticeCategoryIds.LOAN,
-        patronNoticeCategoryIds.REQUEST,
-      ],
+      allowedFor: [...Object.values(patronNoticeCategoryIds)],
     },
     {
       token: 'item.numberOfPieces',
       previewValue: '7',
-      allowedFor: [
-        patronNoticeCategoryIds.LOAN,
-        patronNoticeCategoryIds.REQUEST,
-      ],
+      allowedFor: [...Object.values(patronNoticeCategoryIds)],
     },
     {
       token: 'item.descriptionOfPieces',
       previewValue: '7 maps in pocket',
-      allowedFor: [
-        patronNoticeCategoryIds.LOAN,
-        patronNoticeCategoryIds.REQUEST,
-      ],
+      allowedFor: [...Object.values(patronNoticeCategoryIds)],
     },
   ],
   user: [
@@ -234,12 +171,22 @@ const formats = {
     {
       token: 'loan.initialBorrowDate',
       previewValue: 'Jan 1, 2019',
-      allowedFor: [patronNoticeCategoryIds.LOAN],
+      allowedFor: [
+        patronNoticeCategoryIds.LOAN,
+        patronNoticeCategoryIds.AUTOMATED_FEE_FINE,
+        patronNoticeCategoryIds.FEE_FINE_CHARGE,
+        patronNoticeCategoryIds.FEE_FINE_ACTION,
+      ],
     },
     {
       token: 'loan.initialBorrowDateTime',
       previewValue: 'Jan 1, 2019 11:00',
-      allowedFor: [patronNoticeCategoryIds.LOAN],
+      allowedFor: [
+        patronNoticeCategoryIds.LOAN,
+        patronNoticeCategoryIds.AUTOMATED_FEE_FINE,
+        patronNoticeCategoryIds.FEE_FINE_CHARGE,
+        patronNoticeCategoryIds.FEE_FINE_ACTION,
+      ],
     },
     {
       token: 'loan.checkedInDate',
@@ -264,51 +211,54 @@ const formats = {
     {
       token: 'loan.numberOfRenewalsAllowed',
       previewValue: '10',
-      allowedFor: [patronNoticeCategoryIds.LOAN],
+      allowedFor: [
+        patronNoticeCategoryIds.LOAN,
+        patronNoticeCategoryIds.AUTOMATED_FEE_FINE,
+        patronNoticeCategoryIds.FEE_FINE_CHARGE,
+        patronNoticeCategoryIds.FEE_FINE_ACTION,
+      ],
     },
     {
       token: 'loan.numberOfRenewalsTaken',
       previewValue: '2',
-      allowedFor: [patronNoticeCategoryIds.LOAN],
+      allowedFor: [
+        patronNoticeCategoryIds.LOAN,
+        patronNoticeCategoryIds.AUTOMATED_FEE_FINE,
+        patronNoticeCategoryIds.FEE_FINE_CHARGE,
+        patronNoticeCategoryIds.FEE_FINE_ACTION,
+      ],
     },
     {
       token: 'loan.numberOfRenewalsRemaining',
       previewValue: '8',
-      allowedFor: [patronNoticeCategoryIds.LOAN],
+      allowedFor: [
+        patronNoticeCategoryIds.LOAN,
+        patronNoticeCategoryIds.AUTOMATED_FEE_FINE,
+        patronNoticeCategoryIds.FEE_FINE_CHARGE,
+        patronNoticeCategoryIds.FEE_FINE_ACTION,
+      ],
     },
   ],
   effectiveLocation: [
     {
       token: 'item.effectiveLocationSpecific',
       previewValue: 'Main Library Reserve',
-      allowedFor: [
-        patronNoticeCategoryIds.LOAN,
-        patronNoticeCategoryIds.REQUEST,
-      ],
+      allowedFor: [...Object.values(patronNoticeCategoryIds)],
     },
     {
       token: 'item.effectiveLocationLibrary',
       previewValue: 'Main Library',
-      allowedFor: [
-        patronNoticeCategoryIds.LOAN,
-        patronNoticeCategoryIds.REQUEST,
-      ],
+      allowedFor: [...Object.values(patronNoticeCategoryIds)],
     },
     {
       token: 'item.effectiveLocationCampus',
       previewValue: 'South Campus',
-      allowedFor: [
-        patronNoticeCategoryIds.LOAN,
-        patronNoticeCategoryIds.REQUEST,
-      ],
+      allowedFor: [...Object.values(patronNoticeCategoryIds)],
     },
     {
       token: 'item.effectiveLocationInstitution',
       previewValue: 'Opentown University',
-      allowedFor: [
-        patronNoticeCategoryIds.LOAN,
-        patronNoticeCategoryIds.REQUEST,
-      ],
+      allowedFor: [...Object.values(patronNoticeCategoryIds)],
     },
   ],
   feeFineCharge: [
@@ -389,50 +339,32 @@ const formats = {
     {
       token: 'feeAction.type',
       previewValue: 'Waived partially',
-      allowedFor: [
-        patronNoticeCategoryIds.FEE_FINE_ACTION,
-        patronNoticeCategoryIds.AUTOMATED_FEE_FINE,
-      ],
+      allowedFor: [patronNoticeCategoryIds.FEE_FINE_ACTION],
     },
     {
       token: 'feeAction.date',
       previewValue: 'Jul 10, 2020',
-      allowedFor: [
-        patronNoticeCategoryIds.FEE_FINE_ACTION,
-        patronNoticeCategoryIds.AUTOMATED_FEE_FINE,
-      ],
+      allowedFor: [patronNoticeCategoryIds.FEE_FINE_ACTION],
     },
     {
       token: 'feeAction.dateTime',
       previewValue: 'Jul 10, 2020 8:00',
-      allowedFor: [
-        patronNoticeCategoryIds.FEE_FINE_ACTION,
-        patronNoticeCategoryIds.AUTOMATED_FEE_FINE,
-      ],
+      allowedFor: [patronNoticeCategoryIds.FEE_FINE_ACTION],
     },
     {
       token: 'feeAction.amount',
       previewValue: '$5.00',
-      allowedFor: [
-        patronNoticeCategoryIds.FEE_FINE_ACTION,
-        patronNoticeCategoryIds.AUTOMATED_FEE_FINE,
-      ],
+      allowedFor: [patronNoticeCategoryIds.FEE_FINE_ACTION],
     },
     {
       token: 'feeAction.remainingAmount',
       previewValue: '$10.00',
-      allowedFor: [
-        patronNoticeCategoryIds.FEE_FINE_ACTION,
-        patronNoticeCategoryIds.AUTOMATED_FEE_FINE,
-      ],
+      allowedFor: [patronNoticeCategoryIds.FEE_FINE_ACTION],
     },
     {
       token: 'feeAction.additionalInfo',
       previewValue: 'Cost to repair less than expected.',
-      allowedFor: [
-        patronNoticeCategoryIds.FEE_FINE_ACTION,
-        patronNoticeCategoryIds.AUTOMATED_FEE_FINE,
-      ],
+      allowedFor: [patronNoticeCategoryIds.FEE_FINE_ACTION],
     },
   ],
 };
