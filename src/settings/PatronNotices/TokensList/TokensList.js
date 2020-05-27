@@ -29,12 +29,6 @@ class TokensList extends React.Component {
       tag: 'loans',
     };
 
-    this.requestsLoopConfig = {
-      enabled: true,
-      label: <FormattedMessage id="ui-circulation.settings.patronNotices.multipleRequests" />,
-      tag: 'requests',
-    };
-
     this.feeFineActionLoopConfig = {
       enabled: true,
       label: <FormattedMessage id="ui-circulation.settings.patronNotices.multipleFeeFineActions" />,
@@ -101,8 +95,6 @@ class TokensList extends React.Component {
                 selectedCategory={selectedCategory}
                 header={<FormattedMessage id="ui-circulation.settings.patronNotices.requestTokenHeader" />}
                 tokens={tokens.request}
-                loopConfig={this.requestsLoopConfig}
-                onLoopSelect={onLoopSelect}
                 onSectionInit={onSectionInit}
                 onTokenSelect={onTokenSelect}
               />
