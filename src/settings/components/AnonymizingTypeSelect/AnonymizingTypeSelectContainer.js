@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {
   injectIntl,
-  intlShape,
   FormattedMessage,
 } from 'react-intl';
 import { Field } from 'redux-form';
@@ -20,7 +19,7 @@ import css from './AnonymizingTypeSelectContainer.css';
 
 class AnonymizingTypeSelectContainer extends Component {
   static propTypes = {
-    intl: intlShape.isRequired,
+    intl: PropTypes.object,
     name: PropTypes.string.isRequired,
     path: PropTypes.string.isRequired,
     types: PropTypes.arrayOf(PropTypes.object).isRequired,

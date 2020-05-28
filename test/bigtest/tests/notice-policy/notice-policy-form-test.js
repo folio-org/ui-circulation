@@ -418,18 +418,6 @@ describe('NoticePolicyForm', () => {
                 });
               });
             });
-
-            describe('real time', () => {
-              it('should be displayed', () => {
-                expect(NoticePolicyForm.loanNoticesSection.loanNotices(0).realTime.isPresent).to.be.true;
-              });
-
-              it('should have proper label', () => {
-                expect(NoticePolicyForm.loanNoticesSection.loanNotices(0).realTime.text).to.be.equal(
-                  translation['settings.noticePolicy.notices.realTime']
-                );
-              });
-            });
           });
         });
       });

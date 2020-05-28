@@ -14,13 +14,18 @@ import {
   requestTimeBasedEventsIds
 } from '../../../constants';
 
-const setNoticeDefaults = (sectionKey, policy) => {
+const setRealTimeFlag = (sectionKey, policy) => {
   const noticePolicy = cloneDeep(policy);
+  const isTrueSet = value => value === 'true';
+  const sendInRealTime = [
+    ...Object.values(requestTimeBasedEventsIds),
+    ...Object.values(feeFineEventsIds),
+  ];
 
   forEach(noticePolicy[sectionKey], (notice) => {
-    if (isUndefined(notice.realTime)) {
-      notice.realTime = false;
-    }
+    notice.realTime = isUndefined(notice.realTime)
+      ? sendInRealTime.includes(notice?.sendOptions?.sendWhen)
+      : isTrueSet(notice.realTime);
   });
 
   return noticePolicy;
@@ -48,6 +53,10 @@ const checkNoticeHiddenFields = (sectionKey, allowedIds, policy) => {
     if (!notice.isRecurring()) {
       unset(noticePolicy, `[${sectionKey}][${index}].sendOptions.sendEvery`);
     }
+
+    if (!notice.sendOptions.isLoanDueDateTimeSelected()) {
+      unset(noticePolicy, `[${sectionKey}][${index}].realTime`);
+    }
   });
 
   return noticePolicy;
@@ -65,12 +74,12 @@ const filter = (entity, ...callbacks) => {
 
 export default (entity) => {
   const callbacks = [
-    setNoticeDefaults.bind(null, 'loanNotices'),
     checkNoticeHiddenFields.bind(null, 'loanNotices', values(loanTimeBasedEventsIds)),
-    setNoticeDefaults.bind(null, 'requestNotices'),
+    setRealTimeFlag.bind(null, 'loanNotices'),
     checkNoticeHiddenFields.bind(null, 'requestNotices', values(requestTimeBasedEventsIds)),
-    setNoticeDefaults.bind(null, 'feeFineNotices'),
+    setRealTimeFlag.bind(null, 'requestNotices'),
     checkNoticeHiddenFields.bind(null, 'feeFineNotices', values(feeFineEventsIds)),
+    setRealTimeFlag.bind(null, 'feeFineNotices'),
   ];
 
   return filter(entity, ...callbacks);

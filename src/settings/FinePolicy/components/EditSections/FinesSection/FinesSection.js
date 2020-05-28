@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {
   injectIntl,
-  intlShape,
   FormattedMessage,
 } from 'react-intl';
 
@@ -22,7 +21,7 @@ import css from '../../../FineSection.css';
 
 class FinesSection extends React.Component {
   static propTypes = {
-    intl: intlShape.isRequired,
+    intl: PropTypes.object,
     fineSectionOpen: PropTypes.bool.isRequired,
     accordionOnToggle: PropTypes.func.isRequired,
   };

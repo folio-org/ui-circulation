@@ -327,6 +327,8 @@ export const requestNoticesTriggeringEvents = [
 export const staffSlipMap = {
   HOLD: 'Hold',
   TRANSIT: 'Transit',
+  PICK_SLIP: 'Pick slip',
+  REQUEST_DELIVERY: 'Request delivery'
 };
 
 export const patronNoticeCategoryIds = {
@@ -335,7 +337,6 @@ export const patronNoticeCategoryIds = {
   FEE_FINE_CHARGE: 'FeeFineCharge',
   FEE_FINE_ACTION: 'FeeFineAction',
   AUTOMATED_FEE_FINE: 'AutomatedFeeFine',
-  OTHER: 'Other',
 };
 
 export const patronNoticeCategories = [
@@ -358,10 +359,6 @@ export const patronNoticeCategories = [
   {
     id: patronNoticeCategoryIds.AUTOMATED_FEE_FINE,
     label: 'ui-circulation.settings.patronNotices.categories.automatedFeeFineAction',
-  },
-  {
-    id: patronNoticeCategoryIds.OTHER,
-    label: 'ui-circulation.settings.patronNotices.categories.other',
   },
 ];
 

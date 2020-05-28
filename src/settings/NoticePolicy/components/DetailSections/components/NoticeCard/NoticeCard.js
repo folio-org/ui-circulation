@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  intlShape,
   injectIntl,
   FormattedMessage
 } from 'react-intl';
@@ -9,12 +8,14 @@ import {
   find,
   get,
   isNull,
+  isEmpty,
 } from 'lodash';
 
 import {
   Col,
   Row,
   KeyValue,
+  MessageBanner,
 } from '@folio/stripes/components';
 
 import {
@@ -23,12 +24,14 @@ import {
   noticesIntervalPeriods,
 } from '../../../../../../constants';
 
+import getNotificationContent from '../../../../utils/notice-description';
+
 import css from './NoticeCard.css';
 
 class NoticeCard extends React.Component {
   static propTypes = {
     index: PropTypes.number.isRequired,
-    intl: intlShape.isRequired,
+    intl: PropTypes.object,
     notice: PropTypes.object.isRequired,
     sendEvents: PropTypes.arrayOf(PropTypes.shape({
       value: PropTypes.string.isRequired,
@@ -48,8 +51,8 @@ class NoticeCard extends React.Component {
   getDropdownValue = (pathToValue, items) => {
     const { notice } = this.props;
 
-    const seletedValue = get(notice, pathToValue);
-    const selectedItem = find(items, (item) => item.value === seletedValue);
+    const selectedValue = get(notice, pathToValue);
+    const selectedItem = find(items, (item) => item.value === selectedValue);
 
     return selectedItem ? selectedItem.label : null;
   };
@@ -62,14 +65,14 @@ class NoticeCard extends React.Component {
     return isNull(translationKey) ? null : intl.formatMessage({ id: translationKey });
   };
 
-  getCheckboxValue = (pathToValue) => {
+  getRealTimeMessage = (pathToValue) => {
     const { notice } = this.props;
 
-    const seletedValue = get(notice, pathToValue);
+    const selectedValue = get(notice, pathToValue);
 
-    return seletedValue
-      ? <FormattedMessage id="ui-circulation.settings.common.yes" />
-      : <FormattedMessage id="ui-circulation.settings.common.no" />;
+    return selectedValue
+      ? <FormattedMessage id="ui-circulation.settings.noticePolicy.notices.send.shortTerm" />
+      : <FormattedMessage id="ui-circulation.settings.noticePolicy.notices.send.longTerm" />;
   };
 
   render() {
@@ -83,6 +86,7 @@ class NoticeCard extends React.Component {
     } = this.props;
 
     const translationNamespace = 'ui-circulation.settings.noticePolicy';
+    const notificationKey = getNotificationContent(notice?.sendOptions?.sendWhen);
 
     return (
       <Row data-test-notice-card>
@@ -241,14 +245,21 @@ class NoticeCard extends React.Component {
             <Col
               xs={12}
               className={css.noticeField}
-              data-test-notice-card-real-time
             >
-              <KeyValue
-                label={<FormattedMessage id={`${translationNamespace}.notices.realTime`} />}
-                value={this.getCheckboxValue('realTime')}
-              />
+              { notice.sendOptions.isLoanDueDateTimeSelected() && (
+                <strong>{this.getRealTimeMessage('realTime')}</strong>
+              )}
             </Col>
           </Row>
+          <Row>
+            <Col xs={12}>
+              { !isEmpty(notificationKey) && (
+                <MessageBanner type="warning">
+                  <FormattedMessage id={notificationKey} />
+                </MessageBanner>) }
+            </Col>
+          </Row>
+          <br />
         </Col>
       </Row>
     );

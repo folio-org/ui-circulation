@@ -9,6 +9,7 @@ import {
   isInInterval,
   isInIntervalOrNull,
   isNotEmptyEditor,
+  isSelected,
 } from './handlers';
 
 export default {
@@ -47,5 +48,9 @@ export default {
   isItemLimitIsInInterval: {
     validate: value => isInIntervalOrNull(1, 9999, value),
     message: <FormattedMessage id="ui-circulation.settings.validate.itemLimitInterval" />,
-  }
+  },
+  isSelected: {
+    validate: isSelected,
+    message: <FormattedMessage id="ui-circulation.settings.validate.fillIn" />,
+  },
 };

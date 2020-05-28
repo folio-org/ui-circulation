@@ -4,7 +4,6 @@ import { sortBy } from 'lodash';
 import {
   FormattedMessage,
   injectIntl,
-  intlShape,
 } from 'react-intl';
 
 import { EntryManager } from '@folio/stripes/smart-components';
@@ -32,7 +31,7 @@ class FinePolicySettings extends React.Component {
   });
 
   static propTypes = {
-    intl: intlShape.isRequired,
+    intl: PropTypes.object,
     resources: PropTypes.shape({
       finePolicies: PropTypes.object,
       fixedDueDateSchedules: PropTypes.object,

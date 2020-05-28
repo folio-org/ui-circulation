@@ -257,16 +257,17 @@
     "@bigtest/mocha": "^0.5.2",
     "@bigtest/react": "^0.1.2",
     "@folio/eslint-config-stripes": "^5.1.0",
-    "@folio/stripes": "^3.0.0",
+    "@folio/stripes": "^4.0.0",
     "@folio/stripes-cli": "^1.11.0",
-    "@folio/stripes-components": "^6.0.0",
-    "@folio/stripes-core": "^4.0.0",
+    "@folio/stripes-components": "^7.0.0",
+    "@folio/stripes-core": "^5.0.0",
     "babel-eslint": "^10.0.3",
     "chai": "^4.2.0",
     "core-js": "^3.6.4",
     "eslint": "^6.2.1",
     "react": "^16.6.0",
     "react-dom": "^16.6.0",
+    "react-intl": "^4.5.3",
     "react-redux": "~5.1.1",
     "react-router-dom": "^4.0.0",
     "redux": "~4.0.0",
@@ -276,7 +277,7 @@
   "dependencies": {
     "html-to-react": "^1.3.3",
     "lodash": "^4.17.4",
-    "moment": "^2.19.1",
+    "moment": "^2.25.3",
     "prop-types": "^15.5.10",
     "react-barcode": "^1.3.2",
     "react-codemirror2": "^1.0.0",
@@ -289,8 +290,8 @@
     "react-final-form-arrays": "^3.1.0"
   },
   "peerDependencies": {
-    "@folio/stripes": "^3.0.0",
+    "@folio/stripes": "^4.0.0",
     "react": "*",
-    "react-intl": "^2.4.0"
+    "react-intl": "^4.5.3"
   }
 }
