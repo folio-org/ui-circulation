@@ -318,7 +318,7 @@ const formats = {
     },
     {
       token: 'feeCharge.remainingAmount',
-      previewValue: '$5.00',
+      previewValue: '$10.00',
       allowedFor: [
         patronNoticeCategoryIds.FEE_FINE_CHARGE,
         patronNoticeCategoryIds.AUTOMATED_FEE_FINE,
