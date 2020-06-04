@@ -15,7 +15,7 @@
     "settings.loanPolicy.closedDueDateMgmt": "Gestion des dates de fermeture de la bibliothèque",
     "settings.loanPolicy.altFDDSforRenewals": "Calendrier alternatif d'échéance fixe pour les renouvellements",
     "settings.loanPolicy.altFDDSDueDateLimit": "Calendrier alternatif d'échéance fixe (date limite) pour les renouvellements",
-    "settings.loanPolicy.alternateLoanPeriodExisting": "Alternate loan period for items with existing requests",
+    "settings.loanPolicy.alternateLoanPeriodExisting": "Autre période de prêt pour les articles avec des demandes existantes",
     "settings.loanPolicy.alternateLoanPeriodRenewals": "Autre période de prêt pour les renouvellements",
     "settings.loanPolicy.gracePeriod": "Période de grâce",
     "settings.loanPolicy.renewals": "Renouvellements",
@@ -397,5 +397,5 @@
     "settings.patronNotices.feeFineChargeTokenHeader": "Facturation/facturer frais / amende",
     "settings.patronNotices.feeFineActionTokenHeader": "Action-Frais/amende",
     "settings.patronNotices.multipleFeeFineActions": "Actions multiples-Frais/amende",
-    "settings.patronNotices.multipleFeeFineCharges": "Multiple fee/fine charges"
+    "settings.patronNotices.multipleFeeFineCharges": "Frais multiples / amendes"
 }
