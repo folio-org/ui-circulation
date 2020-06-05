@@ -7,6 +7,7 @@
 * Grey out unavailable tokens on patron notice template token modal. Refs UICIRC-459.
 * Use `UNSAFE_` prefix for deprecated React methods. We know, we know. Refs UICIRC-431.
 * Fixed Due Date Schedule - Dates on Edit/Create and View out of sync. Refs UICIRC-460.
+* Incorrect footer displaying for circulation settings. Refs UICIRC-469.
 
 ## [2.1.0] (IN PROGRESS)
 

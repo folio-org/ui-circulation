@@ -23,6 +23,8 @@ import {
   TemplateEditor,
 } from '../components';
 
+import css from './StaffSlipForm.css';
+
 class StaffSlipForm extends React.Component {
   static propTypes = {
     stripes: PropTypes.shape({
@@ -68,6 +70,7 @@ class StaffSlipForm extends React.Component {
     return (
       <form
         id="form-staff-slip"
+        className={css.staffSlipForm}
         noValidate
         onSubmit={handleSubmit(this.onSave)}
       >
