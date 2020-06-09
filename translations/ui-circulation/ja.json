@@ -59,7 +59,6 @@
     "settings.fDDSform.remove": "削除",
     "settings.fDDSform.close": "閉じる",
     "settings.fDDSform.closeLabel": "Close fixed due date schedule dialog",
-    "settings.fDDSform.saveSchedule": "保存",
     "settings.checkout.paneTitle": "その他の設定",
     "settings.checkout.validate.selectContinue": "続行するには選択してください",
     "settings.checkout.save": "保存",
