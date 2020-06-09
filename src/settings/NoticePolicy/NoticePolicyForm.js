@@ -31,6 +31,8 @@ import {
 
 import { patronNoticeCategoryIds } from '../../constants';
 
+import css from './NoticePolicyForm.css';
+
 class NoticePolicyForm extends React.Component {
   static propTypes = {
     stripes: stripesShape.isRequired,
@@ -105,6 +107,7 @@ class NoticePolicyForm extends React.Component {
     return (
       <form
         data-test-notice-policy-form
+        className={css.noticePolicyForm}
         noValidate
         onSubmit={handleSubmit(this.saveForm)}
       >

@@ -30,6 +30,8 @@ import {
   TemplateEditor,
 } from '../components';
 
+import css from './PatronNoticeForm.css';
+
 /**
  * on-blur validation checks that the name of the patron notice
  * is unique.
@@ -153,6 +155,7 @@ class PatronNoticeForm extends React.Component {
     return (
       <form
         id="form-patron-notice"
+        className={css.patronNoticeForm}
         noValidate
         data-test-patron-notice-form
         onSubmit={handleSubmit(this.onSave)}

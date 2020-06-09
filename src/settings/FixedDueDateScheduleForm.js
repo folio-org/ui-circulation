@@ -143,6 +143,7 @@ class FixedDueDateScheduleForm extends React.Component {
           <Button
             id="clickable-cancel-fixedDueDateSchedule"
             onClick={onCancel}
+            buttonStyle="default mega"
             marginBottom0
           >
             <FormattedMessage id="ui-circulation.settings.fDDSform.cancel" />
@@ -151,7 +152,7 @@ class FixedDueDateScheduleForm extends React.Component {
           <IfPermission perm="ui-circulation.settings.circulation-rules">
             <Button
               id="clickable-delete-item"
-              buttonStyle="danger"
+              buttonStyle="danger mega"
               marginBottom0
               onClick={this.beginDelete}
               disabled={confirmDelete}
@@ -163,10 +164,10 @@ class FixedDueDateScheduleForm extends React.Component {
             id="clickable-save-fixedDueDateSchedule"
             type="submit"
             marginBottom0
-            buttonStyle="primary"
+            buttonStyle="primary mega"
             disabled={(pristine || submitting)}
           >
-            <FormattedMessage id="ui-circulation.settings.fDDSform.saveSchedule" />
+            <FormattedMessage id="ui-circulation.settings.common.saveAndClose" />
           </Button>
         </div>
       </PaneFooter>
@@ -323,6 +324,7 @@ class FixedDueDateScheduleForm extends React.Component {
     return (
       <form
         id="form-fixedDueDateSchedule"
+        className={css.fixedDueDateScheduleForm}
         onSubmit={handleSubmit(this.saveSet)}
         data-test-fdds-form
       >
