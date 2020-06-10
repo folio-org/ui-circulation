@@ -1,20 +1,18 @@
 # Change history for ui-circulation
 
-## [3.0.0] (IN PROGRESS)
+## 3.0.0 (https://github.com/folio-org/ui-circulation/tree/v3.0.0) (2019-06-10)
+[Full Changelog](https://github.com/folio-org/ui-circulation/compare/v2.0.0...v3.0.0)
 
+* New/Edit Patron notice policy: do not display inactive loan and request notice templates in the dropdown. Refs UICIRC-418.
+* Overdue fee/fine notices. Refs UICIRC-451.
+* Update `moment` to `^2.25.3` to avoid `2.25.x` bugs. Refs STRIPES-678.
+* Purge `intlShape` in prep for `react-intl` `v4` migration. Refs STRIPES-672.
 * Upgrade to `stripes` `4.0`, `react-intl` `4.5`. Refs STRIPES-672.
 * Extend fee/fine tokens available for notices. Refs UICIRC-458.
 * Grey out unavailable tokens on patron notice template token modal. Refs UICIRC-459.
 * Use `UNSAFE_` prefix for deprecated React methods. We know, we know. Refs UICIRC-431.
 * Fixed Due Date Schedule - Dates on Edit/Create and View out of sync. Refs UICIRC-460.
 * Incorrect footer displaying for circulation settings. Refs UICIRC-469.
-
-## [2.1.0] (IN PROGRESS)
-
-* New/Edit Patron notice policy: do not display inactive loan and request notice templates in the dropdown. Refs UICIRC-418.
-* Overdue fee/fine notices. Refs UICIRC-451.
-* Update `moment` to `^2.25.3` to avoid `2.25.x` bugs. Refs STRIPES-678.
-* Purge `intlShape` in prep for `react-intl` `v4` migration. Refs STRIPES-672.
 
 ## 2.0.0 (https://github.com/folio-org/ui-circulation/tree/v2.0.0) (2019-03-13)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v1.12.0...v2.0.0)
