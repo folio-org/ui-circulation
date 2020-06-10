@@ -135,7 +135,6 @@
   "settings.fDDSform.close": "Close",
   "settings.fDDSform.cancel": "Cancel",
   "settings.fDDSform.closeLabel": "Close fixed due date schedule dialog",
-  "settings.fDDSform.saveSchedule": "Save",
   "settings.cancelReasons.label": "Request cancellation reasons",
   "settings.cancelReasons.labelSingular": "Request cancellation reason",
   "settings.cancelReasons.labelShort": "Cancel reason",

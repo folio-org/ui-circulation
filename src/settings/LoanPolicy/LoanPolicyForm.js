@@ -39,6 +39,8 @@ import {
   Metadata,
 } from '../components';
 
+import css from './LoanPolicyForm.css';
+
 class LoanPolicyForm extends React.Component {
   static propTypes = {
     intl: PropTypes.object,
@@ -143,6 +145,7 @@ class LoanPolicyForm extends React.Component {
     return (
       <form
         noValidate
+        className={css.loanPolicyForm}
         data-test-loan-policy-form
         onSubmit={handleSubmit(this.saveForm)}
       >

@@ -31,6 +31,8 @@ import {
 
 import formShape from '../utils/form-shape';
 
+import css from './FineSection.css';
+
 class FinePolicyForm extends React.Component {
   static propTypes = formShape;
 
@@ -101,6 +103,7 @@ class FinePolicyForm extends React.Component {
     return (
       <form
         noValidate
+        className={css.finePolicyForm}
         data-test-fine-policy-form
         onSubmit={handleSubmit(this.saveForm)}
       >

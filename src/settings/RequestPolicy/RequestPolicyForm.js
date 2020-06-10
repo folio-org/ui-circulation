@@ -20,6 +20,8 @@ import {
   FooterPane,
 } from '../components';
 
+import css from './RequestPolicyForm.css';
+
 class RequestPolicyForm extends React.Component {
   static propTypes = {
     form: PropTypes.object.isRequired,
@@ -121,6 +123,7 @@ class RequestPolicyForm extends React.Component {
     return (
       <form
         noValidate
+        className={css.requestPolicyForm}
         data-test-request-policy-form
         onSubmit={handleSubmit}
       >

@@ -76,13 +76,13 @@ class FixedDueDateScheduleDetail extends React.Component {
           </Row>
           <Row key={index + 2}>
             <Col xs={4}>
-              <FormattedDate value={schedule.from} />
+              <FormattedDate value={schedule.from} timeZone="UTC" />
             </Col>
             <Col xs={4}>
-              <FormattedDate value={schedule.to} />
+              <FormattedDate value={schedule.to} timeZone="UTC" />
             </Col>
             <Col xs={4}>
-              <FormattedDate value={schedule.due} />
+              <FormattedDate value={schedule.due} timeZone="UTC" />
             </Col>
           </Row>
         </div>

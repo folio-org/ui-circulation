@@ -143,7 +143,7 @@ class RulesEditor extends React.Component {
     this.filteredSections = []; // track sections hidden via filter
   }
 
-  componentWillReceiveProps(nextProps) { // eslint-disable-line react/no-deprecated, react/sort-comp
+  UNSAFE_componentWillReceiveProps(nextProps) {
     const nextState = {};
 
     if (nextProps.typeMapping && !isEqual(nextProps.typeMapping, this.props.typeMapping)) {
