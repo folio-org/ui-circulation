@@ -78,19 +78,16 @@ class GeneralSection extends React.Component {
           component={TextField}
           validate={validateName}
         />
-
         <Field
           id="request_policy_description"
           name="description"
           label={<FormattedMessage id="ui-circulation.settings.requestPolicy.policyDescription" />}
           component={TextArea}
         />
-
         <FieldArray
           name="requestTypes"
           component={this.renderTypes}
         />
-
       </Accordion>
     );
   }

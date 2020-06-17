@@ -76,6 +76,7 @@ describe('RequestPolicyForm', () => {
       requestPolicy = this.server.create('requestPolicy', {
         name: 'Request policy',
         description: 'Request policy 1 desc',
+        requestTypes: ['Hold', 'Page']
       });
     });
 
@@ -91,7 +92,6 @@ describe('RequestPolicyForm', () => {
       await RequestPolicyForm
         .fillName('updated policy name')
         .fillDescription('updated request policy description')
-        .clickHoldCheckbox()
         .save();
     });
 
