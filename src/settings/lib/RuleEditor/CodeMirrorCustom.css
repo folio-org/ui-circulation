@@ -22,6 +22,7 @@
 
 .CodeMirror-linenumber {
   width: 19px;
+  color: #4d4d4d;
 }
 
 .CodeMirror-hints {
@@ -276,7 +277,7 @@
 
 .cm-b,
 .cm-b-selector {
-  color: #aabc68;
+  color: #647232;
 }
 
 .cm-b:before {
@@ -285,7 +286,7 @@
 
 .cm-c,
 .cm-c-selector {
-  color: chocolate;
+  color: #d22d1e;
 }
 
 .cm-c:before {
@@ -321,7 +322,7 @@
 
 .cm-t,
 .cm-t-selector {
-  color: teal;
+  color: #006c6c;
 }
 
 .cm-t:before {
