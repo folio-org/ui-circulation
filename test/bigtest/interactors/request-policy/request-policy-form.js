@@ -3,8 +3,11 @@ import {
   isPresent,
   fillable,
   clickable,
-  value
+  value,
+  scoped,
 } from '@bigtest/interactor';
+
+import { AccordionInteractor } from '@folio/stripes-components/lib/Accordion/tests/interactor';
 
 @interactor class RequestPolicyForm {
   isLoaded = isPresent('[value="Request policy"]');
@@ -17,6 +20,10 @@ import {
   hasDescription = isPresent('#request_policy_description');
   hasSaveButton = isPresent('#footer-save-entity');
   hasHoldCheckbox = isPresent('#hold-checkbox');
+  pageCheckbox = scoped('#page-checkbox');
+  recallCheckbox = scoped('#recall-checkbox');
+  generalSectionAccordion = new AccordionInteractor('#general');
+  generalAccordionToggleButton = scoped('#accordion-toggle-button-general');
 
   fillName = fillable('#request_policy_name');
   fillDescription = fillable('#request_policy_description');

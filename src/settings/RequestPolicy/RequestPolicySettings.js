@@ -8,8 +8,9 @@ import { stripesConnect } from '@folio/stripes/core';
 
 import RequestPolicyDetail from './RequestPolicyDetail';
 import RequestPolicyForm from './RequestPolicyForm';
-import { RequestPolicy as validateRequestPolicy } from '../Validation';
 import RequestPolicy from '../Models/RequestPolicy';
+import normalize from './utils/normalize';
+
 import { requestPolicyTypes } from '../../constants';
 
 class RequestPolicySettings extends React.Component {
@@ -22,13 +23,6 @@ class RequestPolicySettings extends React.Component {
         query: 'cql.allRecords=1',
         limit: '1000',
       },
-    },
-    nameUniquenessValidator: {
-      type: 'okapi',
-      records: 'requestPolicies',
-      accumulate: 'true',
-      path: 'request-policy-storage/request-policies',
-      fetch: false,
     },
     circulationRules: {
       type: 'okapi',
@@ -59,15 +53,14 @@ class RequestPolicySettings extends React.Component {
     });
 
     return { ...values, requestTypes };
-  }
+  };
 
   isPolicyInUse = (policyId) => {
     const { resources } = this.props;
     const circulationRules = get(resources, 'circulationRules.records[0].rulesAsText', '');
 
     return circulationRules.match(policyId);
-  }
-
+  };
 
   render() {
     const {
@@ -100,7 +93,7 @@ class RequestPolicySettings extends React.Component {
         nameKey="name"
         enableDetailsActionMenu
         permissions={permissions}
-        validate={validateRequestPolicy}
+        onBeforeSave={normalize}
         defaultEntry={RequestPolicy.defaultPolicy()}
         isEntryInUse={this.isPolicyInUse}
         prohibitItemDelete={{
