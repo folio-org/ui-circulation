@@ -1,5 +1,9 @@
 # Change history for ui-circulation
 
+## 3.1.0 (IN PROGRESS)
+
+* Accessibility work with color contrast. Refs UICIRC-463.
+
 ## 3.0.0 (https://github.com/folio-org/ui-circulation/tree/v3.0.0) (2019-06-10)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v2.0.0...v3.0.0)
 
