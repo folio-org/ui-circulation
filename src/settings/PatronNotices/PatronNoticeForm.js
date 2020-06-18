@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Field } from 'redux-form';
+import { Field } from 'react-final-form';
 import { FormattedMessage } from 'react-intl';
 import {
   find,
@@ -19,7 +19,7 @@ import {
   TextArea,
   TextField,
 } from '@folio/stripes/components';
-import stripesForm from '@folio/stripes/form';
+import stripesFinalForm from '@folio/stripes/final-form';
 
 import tokens from './tokens';
 import TokensList from './TokensList';
@@ -29,6 +29,8 @@ import {
   FooterPane,
   TemplateEditor,
 } from '../components';
+
+import { PatronNoticeTemplate as validatePatronNoticeTemplate } from '../Validation';
 
 import css from './PatronNoticeForm.css';
 
@@ -65,12 +67,14 @@ function asyncValidate(values, dispatch, props) {
 
 class PatronNoticeForm extends React.Component {
   static propTypes = {
+    intl: PropTypes.object,
     initialValues: PropTypes.object,
+    form: PropTypes.object.isRequired,
     pristine: PropTypes.bool.isRequired,
     submitting: PropTypes.bool.isRequired,
+    parentMutator: PropTypes.object.isRequired,
     handleSubmit: PropTypes.func.isRequired,
     onCancel: PropTypes.func.isRequired,
-    onSave: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
@@ -87,6 +91,31 @@ class PatronNoticeForm extends React.Component {
     };
   }
 
+  validateName = async (name) => {
+    const {
+      form: { getFieldState },
+      parentMutator: { nameUniquenessValidator: { GET } }
+    } = this.props;
+
+    let error;
+    const field = getFieldState('name');
+
+    if (name && field.dirty) {
+      try {
+        const response = await GET(name);
+        const { patronNotices = [] } = await response.json();
+        const matchedNotice = find(patronNotices, ['name', name]);
+        if (matchedNotice && matchedNotice.id !== this.props.initialValues.id) {
+          error = <FormattedMessage id="ui-circulation.settings.requestPolicy.errors.nameExists" />;
+        }
+      } catch (e) {
+        throw new Error(e);
+      }
+    }
+
+    return error;
+  };
+
   onToggleSection = ({ id }) => {
     this.setState((state) => {
       const accordions = { ...state.accordions };
@@ -94,10 +123,6 @@ class PatronNoticeForm extends React.Component {
       return { accordions };
     });
   }
-
-  onSave = (data) => {
-    this.props.onSave(data);
-  };
 
   renderCLoseIcon() {
     const { onCancel } = this.props;
@@ -140,16 +165,17 @@ class PatronNoticeForm extends React.Component {
     const {
       handleSubmit,
       initialValues,
+      intl: { formatMessage },
+      form: { getFieldState }
     } = this.props;
 
-    const category = initialValues && initialValues.category;
     const isActive = initialValues && initialValues.active;
+    const category = getFieldState('category')?.value;
 
     const sortedCategories = sortBy(patronNoticeCategories, ['label']);
     const categoryOptions = sortedCategories.map(({ label, id }) => ({
-      labelTranslationPath: label,
+      label: formatMessage({ id: label }),
       value: id,
-      selected: category === id
     }));
 
     return (
@@ -158,7 +184,7 @@ class PatronNoticeForm extends React.Component {
         className={css.patronNoticeForm}
         noValidate
         data-test-patron-notice-form
-        onSubmit={handleSubmit(this.onSave)}
+        onSubmit={handleSubmit}
       >
         <Paneset isRoot>
           <Pane
@@ -178,6 +204,7 @@ class PatronNoticeForm extends React.Component {
                   required
                   id="input-patron-notice-name"
                   component={TextField}
+                  validate={this.validateName}
                 />
               </Col>
             </Row>
@@ -189,7 +216,6 @@ class PatronNoticeForm extends React.Component {
                   id="input-patron-notice-active"
                   component={Checkbox}
                   defaultChecked={isActive}
-                  normalize={v => !!v}
                 />
               </Col>
             </Row>
@@ -212,20 +238,8 @@ class PatronNoticeForm extends React.Component {
                     name="category"
                     component={Select}
                     fullWidth
-                  >
-                    {categoryOptions.map(({ labelTranslationPath, value, selected }) => (
-                      <FormattedMessage id={labelTranslationPath}>
-                        {translatedLabel => (
-                          <option
-                            value={value}
-                            selected={selected}
-                          >
-                            {translatedLabel}
-                          </option>
-                        )}
-                      </FormattedMessage>
-                    ))}
-                  </Field>
+                    dataOptions={categoryOptions}
+                  />
                 </div>
               </Col>
             </Row>
@@ -256,12 +270,13 @@ class PatronNoticeForm extends React.Component {
                       tokens={tokens}
                       tokensList={TokensList}
                       previewModalHeader={<FormattedMessage id="ui-circulation.settings.patronNotices.form.previewHeader" />}
+                      selectedCategory={category}
                     />
                   </Col>
                 </Row>
               </Accordion>
             </AccordionSet>
-            { initialValues && initialValues.predefined &&
+            { initialValues.predefined &&
               <Row>
                 <Col xs={8}>
                   <FormattedMessage id="ui-circulation.settings.patronNotices.predefinedWarning" />
@@ -274,10 +289,12 @@ class PatronNoticeForm extends React.Component {
   }
 }
 
-export default stripesForm({
-  form: 'patronNoticeForm',
+export default stripesFinalForm({
   navigationCheck: true,
-  enableReinitialize: false,
-  asyncValidate,
-  asyncBlurFields: ['name'],
+  validate: validatePatronNoticeTemplate,
+  validateOnBlur: true,
+  subscription: {
+    values: true,
+  },
+  keepDirtyOnReinitialize: true,
 })(PatronNoticeForm);

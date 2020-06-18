@@ -48,11 +48,13 @@ class TemplateEditor extends React.Component {
     previewModalHeader: PropTypes.node.isRequired,
     printable: PropTypes.bool,
     required: PropTypes.bool,
+    selectedCategory: PropTypes.string,
   };
 
   static defaultProps = {
     printable: false,
     required: false,
+    selectedCategory: '',
   };
 
   constructor(props) {
@@ -187,7 +189,8 @@ class TemplateEditor extends React.Component {
       },
       previewModalHeader,
       printable,
-      required
+      required,
+      selectedCategory,
     } = this.props;
 
     const invalid = (touched || submitFailed) && !valid && !showTokensDialog;
@@ -232,6 +235,7 @@ class TemplateEditor extends React.Component {
           isOpen={showTokensDialog}
           tokens={tokens}
           list={tokensList}
+          selectedCategory={selectedCategory}
           onAdd={this.insertTokens}
           onCancel={this.closeTokenDialog}
         />

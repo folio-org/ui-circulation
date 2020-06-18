@@ -1,7 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { getFormValues } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
 
 import {
@@ -147,10 +145,4 @@ class TokensList extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  const patronNotice = getFormValues('patronNoticeForm')(state);
-
-  return { selectedCategory: patronNotice.category };
-};
-
-export default connect(mapStateToProps)(TokensList);
+export default TokensList;

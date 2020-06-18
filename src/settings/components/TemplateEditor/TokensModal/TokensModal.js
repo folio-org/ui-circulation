@@ -28,6 +28,7 @@ const TokensModal = (props) => {
     isOpen,
     tokens,
     list: List,
+    selectedCategory,
     onCancel,
     onAdd,
   } = props;
@@ -89,6 +90,7 @@ const TokensModal = (props) => {
       footer={footer}
     >
       <List
+        selectedCategory={selectedCategory}
         tokens={tokens}
         onLoopSelect={onLoopSelect}
         onSectionInit={onSectionInit}
@@ -102,6 +104,7 @@ TokensModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   list: PropTypes.func.isRequired,
   tokens: PropTypes.object.isRequired,
+  selectedCategory: PropTypes.string.isRequired,
   onAdd: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,
 };

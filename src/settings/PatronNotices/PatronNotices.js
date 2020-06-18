@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, injectIntl } from 'react-intl';
 import {
   sortBy,
   get,
@@ -17,7 +17,8 @@ import { PatronNoticeTemplate as validatePatronNoticeTemplate } from '../Validat
 
 class PatronNotices extends React.Component {
   static propTypes = {
-    label: PropTypes.string.isRequired,
+    intl: PropTypes.object,
+    label: PropTypes.object.isRequired,
     resources: PropTypes.shape({
       entries: PropTypes.shape({
         records: PropTypes.arrayOf(PropTypes.object),
@@ -35,9 +36,6 @@ class PatronNotices extends React.Component {
         DELETE: PropTypes.func,
       }),
     }).isRequired,
-    stripes: PropTypes.shape({
-      intl: PropTypes.object.isRequired,
-    }),
   };
 
   static manifest = Object.freeze({
@@ -99,7 +97,7 @@ class PatronNotices extends React.Component {
         entryList={sortBy((this.props.resources.entries || {}).records || [], ['name'])}
         detailComponent={PatronNoticeDetail}
         paneTitle={this.props.label}
-        entryLabel={this.props.label}
+        entryLabel={this.props.intl.formatMessage({ id : 'ui-circulation.settings.index.patronNotices' })}
         entryFormComponent={PatronNoticeForm}
         defaultEntry={{
           active: true,
@@ -128,4 +126,4 @@ class PatronNotices extends React.Component {
   }
 }
 
-export default stripesConnect(PatronNotices);
+export default injectIntl(stripesConnect(PatronNotices));
