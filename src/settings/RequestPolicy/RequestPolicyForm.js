@@ -60,7 +60,7 @@ class RequestPolicyForm extends React.Component {
     this.setState({ sections });
   };
 
-  checkUniqueName = (name) => {
+  getPoliciesByName = (name) => {
     const { okapi } = this.props;
 
     return fetch(`${okapi.url}/request-policy-storage/request-policies?query=(name=="${name}")`,
@@ -81,7 +81,7 @@ class RequestPolicyForm extends React.Component {
 
     if (name && field.dirty) {
       try {
-        const response = await this.checkUniqueName(name);
+        const response = await this.getPoliciesByName(name);
         const { requestPolicies = [] } = await response.json();
         const matchedPolicy = find(requestPolicies, ['name', name]);
         if (matchedPolicy && matchedPolicy.id !== this.props.initialValues.id) {
