@@ -32,5 +32,5 @@ export const isSelected = (value) => !isUndefined(value);
 
 export const isGreaterOrEqualThanPassedField = (fieldToCompare, value, model) => {
   const valueToCompare = get(model, fieldToCompare);
-  return value >= valueToCompare;
+  return parseInt(value, 10) >= parseInt(valueToCompare, 10);
 };
