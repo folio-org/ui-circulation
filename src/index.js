@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { FormattedMessage } from 'react-intl';
+import PropTypes from 'prop-types';
+import { FormattedMessage, injectIntl } from 'react-intl';
 import { Settings } from '@folio/stripes/smart-components';
 import { stripesShape } from '@folio/stripes/core';
 
@@ -19,6 +20,7 @@ import RequestPolicySettings from './settings/RequestPolicy';
 class Circulation extends Component {
   static propTypes = {
     stripes: stripesShape.isRequired,
+    intl: PropTypes.object.isRequired,
   }
 
   constructor(props) {
@@ -100,7 +102,7 @@ class Circulation extends Component {
           },
           {
             route: 'patron-notices',
-            label: <FormattedMessage id="ui-circulation.settings.index.patronNotices" />,
+            label: this.props.intl.formatMessage({ id: 'ui-circulation.settings.index.patronNotices' }),
             component: PatronNotices,
             perm: 'ui-circulation.settings.notice-templates',
           },
@@ -143,4 +145,4 @@ class Circulation extends Component {
   }
 }
 
-export default Circulation;
+export default injectIntl(Circulation);

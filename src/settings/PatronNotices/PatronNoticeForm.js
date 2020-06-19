@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Field } from 'react-final-form';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, injectIntl } from 'react-intl';
 import {
   find,
   sortBy,
@@ -34,45 +34,14 @@ import { PatronNoticeTemplate as validatePatronNoticeTemplate } from '../Validat
 
 import css from './PatronNoticeForm.css';
 
-/**
- * on-blur validation checks that the name of the patron notice
- * is unique.
- *
- * redux-form requires that the rejected Promises have the form
- * { field: "error message" }
- * hence the eslint-disable-next-line comments since ESLint is picky
- * about the format of rejected promises.
- *
- * @see https://redux-form.com/7.3.0/examples/asyncchangevalidation/
- */
-function asyncValidate(values, dispatch, props) {
-  if (values.name !== undefined) {
-    return new Promise((resolve, reject) => {
-      const uv = props.uniquenessValidator.nameUniquenessValidator;
-      const query = `(name="${values.name}")`;
-      uv.reset();
-      uv.GET({ params: { query } }).then((notices) => {
-        const matchedNotice = find(notices, ['name', values.name]);
-        if (matchedNotice && matchedNotice.id !== values.id) {
-          // eslint-disable-next-line prefer-promise-reject-errors
-          reject({ name: <FormattedMessage id="ui-circulation.settings.patronNotices.errors.nameExists" /> });
-        } else {
-          resolve();
-        }
-      });
-    });
-  }
-  return new Promise(resolve => resolve());
-}
-
 class PatronNoticeForm extends React.Component {
   static propTypes = {
-    intl: PropTypes.object,
+    intl: PropTypes.object.isRequired,
+    okapi: PropTypes.object.isRequired,
     initialValues: PropTypes.object,
     form: PropTypes.object.isRequired,
     pristine: PropTypes.bool.isRequired,
     submitting: PropTypes.bool.isRequired,
-    parentMutator: PropTypes.object.isRequired,
     handleSubmit: PropTypes.func.isRequired,
     onCancel: PropTypes.func.isRequired,
   };
@@ -91,10 +60,25 @@ class PatronNoticeForm extends React.Component {
     };
   }
 
+  getTemplatesByName = (name) => {
+    const { okapi } = this.props;
+
+    return fetch(`${okapi.url}/templates?query=(name=="${name}")`,
+      {
+        headers: {
+          'X-Okapi-Tenant': okapi.tenant,
+          'X-Okapi-Token': okapi.token,
+          'Content-Type': 'application/json',
+        }
+      });
+  };
+
   validateName = async (name) => {
     const {
-      form: { getFieldState },
-      parentMutator: { nameUniquenessValidator: { GET } }
+      form: {
+        getFieldState,
+      },
+      initialValues,
     } = this.props;
 
     let error;
@@ -102,11 +86,11 @@ class PatronNoticeForm extends React.Component {
 
     if (name && field.dirty) {
       try {
-        const response = await GET(name);
-        const { patronNotices = [] } = await response.json();
-        const matchedNotice = find(patronNotices, ['name', name]);
-        if (matchedNotice && matchedNotice.id !== this.props.initialValues.id) {
-          error = <FormattedMessage id="ui-circulation.settings.requestPolicy.errors.nameExists" />;
+        const response = await this.getTemplatesByName(name);
+        const { templates = [] } = await response.json();
+        const matchedTemplate = find(templates, ['name', name]);
+        if (matchedTemplate && matchedTemplate.id !== initialValues.id) {
+          error = <FormattedMessage id="ui-circulation.settings.patronNotices.errors.nameExists" />;
         }
       } catch (e) {
         throw new Error(e);
@@ -293,8 +277,6 @@ export default stripesFinalForm({
   navigationCheck: true,
   validate: validatePatronNoticeTemplate,
   validateOnBlur: true,
-  subscription: {
-    values: true,
-  },
+  subscription: { values: true },
   keepDirtyOnReinitialize: true,
-})(PatronNoticeForm);
+})(injectIntl(PatronNoticeForm));

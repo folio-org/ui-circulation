@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage, injectIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import {
   sortBy,
   get,
@@ -13,12 +13,10 @@ import { stripesConnect } from '@folio/stripes/core';
 import PatronNoticeDetail from './PatronNoticeDetail';
 import PatronNoticeForm from './PatronNoticeForm';
 import { patronNoticeCategories } from '../../constants';
-import { PatronNoticeTemplate as validatePatronNoticeTemplate } from '../Validation';
 
 class PatronNotices extends React.Component {
   static propTypes = {
-    intl: PropTypes.object,
-    label: PropTypes.object.isRequired,
+    label: PropTypes.string.isRequired,
     resources: PropTypes.shape({
       entries: PropTypes.shape({
         records: PropTypes.arrayOf(PropTypes.object),
@@ -48,13 +46,6 @@ class PatronNotices extends React.Component {
       },
       recordsRequired: 50,
       perRequest: 50,
-    },
-    nameUniquenessValidator: {
-      type: 'okapi',
-      records: 'templates',
-      accumulate: 'true',
-      path: 'templates',
-      fetch: false,
     },
     patronNoticePolicies: {
       type: 'okapi',
@@ -97,7 +88,7 @@ class PatronNotices extends React.Component {
         entryList={sortBy((this.props.resources.entries || {}).records || [], ['name'])}
         detailComponent={PatronNoticeDetail}
         paneTitle={this.props.label}
-        entryLabel={this.props.intl.formatMessage({ id : 'ui-circulation.settings.index.patronNotices' })}
+        entryLabel={this.props.label}
         entryFormComponent={PatronNoticeForm}
         defaultEntry={{
           active: true,
@@ -111,10 +102,8 @@ class PatronNotices extends React.Component {
           post: 'ui-circulation.settings.notice-templates',
           delete: 'ui-circulation.settings.notice-templates',
         }}
-        uniquenessValidator={this.props.mutator}
         enableDetailsActionMenu
         editElement="both"
-        validate={validatePatronNoticeTemplate}
         isEntryInUse={this.isTemplateInUse}
         prohibitItemDelete={{
           close: <FormattedMessage id="ui-circulation.settings.common.close" />,
@@ -126,4 +115,4 @@ class PatronNotices extends React.Component {
   }
 }
 
-export default injectIntl(stripesConnect(PatronNotices));
+export default stripesConnect(PatronNotices);
