@@ -45,16 +45,4 @@ export default class FinePolicy {
     const value = get(this, 'overdueRecallFine.quantity');
     return value > 0;
   }
-
-  isRequiredMaxValue() {
-    const value = get(this, 'maxOverdueFine');
-    const overdueFine = get(this, 'overdueFine.quantity');
-    return overdueFine > 0 && value <= 0;
-  }
-
-  isRequiredMaxRecallOverdueFine() {
-    const value = get(this, 'maxOverdueRecallFine');
-    const overdueRecallFine = get(this, 'overdueRecallFine.quantity');
-    return overdueRecallFine > 0 && value <= 0;
-  }
 }

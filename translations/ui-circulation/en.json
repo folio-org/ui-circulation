@@ -361,6 +361,8 @@
   "settings.finePolicy.week": "week",
   "settings.finePolicy.month": "month",
   "settings.finePolicy.year": "year",
+  "settings.finePolicy.validate.maximumOverdueFine": "Maximum overdue fine must be greater than or equal to Overdue fine",
+  "settings.finePolicy.validate.maximumRecallOverdueFine": "Maximum overdue recall fine must be greater than or equal to Overdue recall fine",
 
   "settings.lostItemFee.entryLabel": "Lost item fee policies",
   "settings.lostItemFee.paneTitle": "Lost item fee policies",

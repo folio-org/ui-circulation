@@ -10,6 +10,8 @@ import {
   isInIntervalOrNull,
   isNotEmptyEditor,
   isSelected,
+  isGreaterOrEqualThanPassedField,
+  isStringGreaterThanOrEqualToZero,
 } from './handlers';
 
 export default {
@@ -28,6 +30,10 @@ export default {
   isIntegerGreaterThanZero: {
     validate: isIntegerGreaterThanZero,
     message: <FormattedMessage id="ui-circulation.settings.validate.greaterThanZero" />,
+  },
+  isStringGreaterThanOrEqualToZero: {
+    validate: isStringGreaterThanOrEqualToZero,
+    message: <FormattedMessage id="ui-circulation.settings.validate.greaterThanOrEqualToZero" />,
   },
   isIntegerGreaterThanOrEqualToZero: {
     validate: isIntegerGreaterThanOrEqualToZero,
@@ -53,4 +59,12 @@ export default {
     validate: isSelected,
     message: <FormattedMessage id="ui-circulation.settings.validate.fillIn" />,
   },
+  isGreaterThanOverdueFine: {
+    validate: isGreaterOrEqualThanPassedField.bind(null, 'overdueFine.quantity'),
+    message: <FormattedMessage id="ui-circulation.settings.finePolicy.validate.maximumOverdueFine" />,
+  },
+  isGreaterThanOverdueRecallFine: {
+    validate: isGreaterOrEqualThanPassedField.bind(null, 'overdueRecallFine.quantity'),
+    message: <FormattedMessage id="ui-circulation.settings.finePolicy.validate.maximumRecallOverdueFine" />,
+  }
 };
