@@ -38,6 +38,10 @@ export default (server) => {
 
   server.create('overdueFinePolicy', {
     id: testFinePolicySettings.id,
-    name: testFinePolicySettings.name
+    name: testFinePolicySettings.name,
+    overdueFine: { quantity: 2, intervalId: 'day' },
+    maxOverdueFine: 2,
+    overdueRecallFine: { quantity: 2, intervalId: 'day' },
+    maxOverdueRecallFine: 3
   });
 };
