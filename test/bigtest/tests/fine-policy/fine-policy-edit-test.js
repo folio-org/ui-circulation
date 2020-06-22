@@ -5,7 +5,7 @@ import FinePolicyDetail from '../../interactors/fine-policy/fine-policy-detail';
 import setupApplication from '../../helpers/setup-application';
 import testFinePolicySettings from '../../constants/testFinePolicySettings';
 
-describe.only('FinePolicyEdit', () => {
+describe('FinePolicyEdit', () => {
   setupApplication({ scenarios: ['testFinePolicy'] });
 
   describe('updating an existing fine policy', () => {

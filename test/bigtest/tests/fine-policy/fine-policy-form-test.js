@@ -59,6 +59,8 @@ describe('FinePolicyForm', () => {
       beforeEach(async function () {
         await FinePolicyForm
           .aboutSection.policyName.fillAndBlur(newFinePolicyName)
+          .overdueFineSection.overdue.quantity.fillAndBlur(1)
+          .overdueFineSection.overdue.interval.selectAndBlur('minute')
           .save();
       });
 
@@ -97,10 +99,10 @@ describe('FinePolicyForm', () => {
       beforeEach(async function () {
         await FinePolicyForm
           .aboutSection.policyName.fillAndBlur(newFinePolicyName)
-          .overdueFineSection.overdue.quantity.fillValue('0.00')
+          .overdueFineSection.overdue.quantity.fillValue('1.00')
           .overdueFineSection.overdue.quantity.blurInput()
           .overdueFineSection.overdue.interval.selectAndBlur('day')
-          .overdueFineSection.maxOverdue.fillAndBlur('0')
+          .overdueFineSection.maxOverdue.fillAndBlur('1')
           .overdueFineSection.maxOverdue.blurInput()
           .save();
       });

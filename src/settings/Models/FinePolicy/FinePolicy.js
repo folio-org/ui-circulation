@@ -33,8 +33,12 @@ export default class FinePolicy {
 
   hasValue(pathToValue) {
     const value = get(this, pathToValue);
-    return value < 0;
+    return value > 0;
   }
+
+  isIntervalSelected = (pathToValue) => {
+    return Boolean(get(this, pathToValue));
+  };
 
   isOverdueFine() {
     const value = get(this, 'overdueFine.quantity');

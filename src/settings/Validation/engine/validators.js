@@ -12,6 +12,9 @@ import {
   isSelected,
   isGreaterOrEqualThanPassedField,
   isStringGreaterThanOrEqualToZero,
+  isStringGreaterThanZero,
+  isFineExists,
+  isMaximumFineValueValid,
 } from './handlers';
 
 export default {
@@ -66,5 +69,25 @@ export default {
   isGreaterThanOverdueRecallFine: {
     validate: isGreaterOrEqualThanPassedField.bind(null, 'overdueRecallFine.quantity'),
     message: <FormattedMessage id="ui-circulation.settings.finePolicy.validate.maximumRecallOverdueFine" />,
-  }
+  },
+  isFineExists: {
+    validate: isFineExists,
+    message: <FormattedMessage id="ui-circulation.settings.finePolicy.validate.fineRequired" />,
+  },
+  hasOverdueFineInterval: {
+    validate: isStringGreaterThanZero,
+    message: <FormattedMessage id="ui-circulation.settings.finePolicy.validate.hasOverdueFineInterval" />
+  },
+  hasOverdueRecallFineInterval: {
+    validate: isStringGreaterThanZero,
+    message: <FormattedMessage id="ui-circulation.settings.finePolicy.validate.hasOverdueRecallFineInterval" />
+  },
+  isMaximumOverdueFineValid: {
+    validate: isMaximumFineValueValid.bind(null, 'overdueFine.quantity'),
+    message: <FormattedMessage id="ui-circulation.settings.finePolicy.validate.invalidMaximumOverdueFine" />
+  },
+  isMaximumOverdueRecallFineValid: {
+    validate: isMaximumFineValueValid.bind(null, 'overdueRecallFine.quantity'),
+    message: <FormattedMessage id="ui-circulation.settings.finePolicy.validate.invalidMaximumRecallOverdueFine" />
+  },
 };
