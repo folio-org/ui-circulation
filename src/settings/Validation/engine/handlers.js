@@ -42,7 +42,7 @@ export const isMaximumFineValueValid = (fieldToCompare, value, model) => {
   return parseInt(value, 10) > 0 && parseInt(valueToCompare, 10) !== 0;
 };
 
-export const isFineExists = (value, model) => {
+export const hasFine = (value, model) => {
   const overdueFine = get(model, 'overdueFine.quantity');
   const overdueRecallFine = get(model, 'overdueRecallFine.quantity');
 

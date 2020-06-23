@@ -5,7 +5,7 @@ export default function (finePolicy) {
       shouldValidate: true,
     },
     'overdueFine.quantity': {
-      rules: ['isFineExists', 'hasOverdueFineInterval'],
+      rules: ['hasFine', 'hasOverdueFineInterval'],
       shouldValidate: (!finePolicy.isOverdueFine() && !finePolicy.isOverdueRecallFine())
         || finePolicy.isIntervalSelected('overdueFine.intervalId'),
     },
@@ -14,7 +14,7 @@ export default function (finePolicy) {
       shouldValidate: finePolicy.isOverdueFine(),
     },
     'overdueRecallFine.quantity': {
-      rules: ['isFineExists', 'hasOverdueRecallFineInterval'],
+      rules: ['hasFine', 'hasOverdueRecallFineInterval'],
       shouldValidate: (!finePolicy.isOverdueFine() && !finePolicy.isOverdueRecallFine())
         || finePolicy.isIntervalSelected('overdueRecallFine.intervalId'),
     },
