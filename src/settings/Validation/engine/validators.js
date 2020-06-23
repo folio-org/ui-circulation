@@ -10,6 +10,11 @@ import {
   isInIntervalOrNull,
   isNotEmptyEditor,
   isSelected,
+  isGreaterOrEqualThanPassedField,
+  isStringGreaterThanOrEqualToZero,
+  isStringGreaterThanZero,
+  hasFine,
+  isMaximumFineValueValid,
 } from './handlers';
 
 export default {
@@ -28,6 +33,10 @@ export default {
   isIntegerGreaterThanZero: {
     validate: isIntegerGreaterThanZero,
     message: <FormattedMessage id="ui-circulation.settings.validate.greaterThanZero" />,
+  },
+  isStringGreaterThanOrEqualToZero: {
+    validate: isStringGreaterThanOrEqualToZero,
+    message: <FormattedMessage id="ui-circulation.settings.validate.greaterThanOrEqualToZero" />,
   },
   isIntegerGreaterThanOrEqualToZero: {
     validate: isIntegerGreaterThanOrEqualToZero,
@@ -52,5 +61,33 @@ export default {
   isSelected: {
     validate: isSelected,
     message: <FormattedMessage id="ui-circulation.settings.validate.fillIn" />,
+  },
+  isGreaterThanOverdueFine: {
+    validate: isGreaterOrEqualThanPassedField.bind(null, 'overdueFine.quantity'),
+    message: <FormattedMessage id="ui-circulation.settings.finePolicy.validate.maximumOverdueFine" />,
+  },
+  isGreaterThanOverdueRecallFine: {
+    validate: isGreaterOrEqualThanPassedField.bind(null, 'overdueRecallFine.quantity'),
+    message: <FormattedMessage id="ui-circulation.settings.finePolicy.validate.maximumRecallOverdueFine" />,
+  },
+  hasFine: {
+    validate: hasFine,
+    message: <FormattedMessage id="ui-circulation.settings.finePolicy.validate.fineRequired" />,
+  },
+  hasOverdueFineInterval: {
+    validate: isStringGreaterThanZero,
+    message: <FormattedMessage id="ui-circulation.settings.finePolicy.validate.hasOverdueFineInterval" />
+  },
+  hasOverdueRecallFineInterval: {
+    validate: isStringGreaterThanZero,
+    message: <FormattedMessage id="ui-circulation.settings.finePolicy.validate.hasOverdueRecallFineInterval" />
+  },
+  isMaximumOverdueFineValid: {
+    validate: isMaximumFineValueValid.bind(null, 'overdueFine.quantity'),
+    message: <FormattedMessage id="ui-circulation.settings.finePolicy.validate.invalidMaximumOverdueFine" />
+  },
+  isMaximumOverdueRecallFineValid: {
+    validate: isMaximumFineValueValid.bind(null, 'overdueRecallFine.quantity'),
+    message: <FormattedMessage id="ui-circulation.settings.finePolicy.validate.invalidMaximumRecallOverdueFine" />
   },
 };

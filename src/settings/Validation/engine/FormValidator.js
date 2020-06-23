@@ -33,7 +33,7 @@ export default class FormValidator {
 
       const valueToValidate = get(data, pathToField);
       const isValid = this.config[pathToField].shouldValidate
-        ? validator.validate(valueToValidate)
+        ? validator.validate(valueToValidate, data)
         : true;
 
       if (!isValid) {

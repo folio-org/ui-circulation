@@ -33,8 +33,12 @@ export default class FinePolicy {
 
   hasValue(pathToValue) {
     const value = get(this, pathToValue);
-    return value < 0;
+    return value > 0;
   }
+
+  isIntervalSelected = (pathToValue) => {
+    return Boolean(get(this, pathToValue));
+  };
 
   isOverdueFine() {
     const value = get(this, 'overdueFine.quantity');
@@ -44,17 +48,5 @@ export default class FinePolicy {
   isOverdueRecallFine() {
     const value = get(this, 'overdueRecallFine.quantity');
     return value > 0;
-  }
-
-  isRequiredMaxValue() {
-    const value = get(this, 'maxOverdueFine');
-    const overdueFine = get(this, 'overdueFine.quantity');
-    return overdueFine > 0 && value <= 0;
-  }
-
-  isRequiredMaxRecallOverdueFine() {
-    const value = get(this, 'maxOverdueRecallFine');
-    const overdueRecallFine = get(this, 'overdueRecallFine.quantity');
-    return overdueRecallFine > 0 && value <= 0;
   }
 }

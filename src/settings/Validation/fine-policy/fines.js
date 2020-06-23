@@ -5,28 +5,30 @@ export default function (finePolicy) {
       shouldValidate: true,
     },
     'overdueFine.quantity': {
-      rules: ['isIntegerGreaterThanOrEqualToZero'],
-      shouldValidate: finePolicy.hasValue('overdueFine.quantity'),
+      rules: ['hasFine', 'hasOverdueFineInterval'],
+      shouldValidate: (!finePolicy.isOverdueFine() && !finePolicy.isOverdueRecallFine())
+        || finePolicy.isIntervalSelected('overdueFine.intervalId'),
     },
     'overdueFine.intervalId': {
       rules: ['isNotEmptySelect'],
       shouldValidate: finePolicy.isOverdueFine(),
     },
     'overdueRecallFine.quantity': {
-      rules: ['isIntegerGreaterThanOrEqualToZero'],
-      shouldValidate: finePolicy.hasValue('overdueRecallFine.quantity'),
+      rules: ['hasFine', 'hasOverdueRecallFineInterval'],
+      shouldValidate: (!finePolicy.isOverdueFine() && !finePolicy.isOverdueRecallFine())
+        || finePolicy.isIntervalSelected('overdueRecallFine.intervalId'),
     },
     'overdueRecallFine.intervalId': {
       rules: ['isNotEmptySelect'],
       shouldValidate: finePolicy.isOverdueRecallFine(),
     },
     'maxOverdueFine': {
-      rules: ['isIntegerGreaterThanZero'],
-      shouldValidate: finePolicy.isRequiredMaxValue(),
+      rules: ['isStringGreaterThanOrEqualToZero', 'isMaximumOverdueFineValid', 'isGreaterThanOverdueFine'],
+      shouldValidate: finePolicy.hasValue('maxOverdueFine'),
     },
     'maxOverdueRecallFine': {
-      rules: ['isIntegerGreaterThanZero'],
-      shouldValidate: finePolicy.isRequiredMaxRecallOverdueFine(),
+      rules: ['isStringGreaterThanOrEqualToZero', 'isMaximumOverdueRecallFineValid', 'isGreaterThanOverdueRecallFine'],
+      shouldValidate: finePolicy.hasValue('maxOverdueRecallFine'),
     },
   };
 }
