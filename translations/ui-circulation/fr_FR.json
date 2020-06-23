@@ -396,5 +396,12 @@
     "settings.patronNotices.feeFineChargeTokenHeader": "Facturation/facturer frais / amende",
     "settings.patronNotices.feeFineActionTokenHeader": "Action-Frais/amende",
     "settings.patronNotices.multipleFeeFineActions": "Actions multiples-Frais/amende",
-    "settings.patronNotices.multipleFeeFineCharges": "Frais multiples / amendes"
+    "settings.patronNotices.multipleFeeFineCharges": "Frais multiples / amendes",
+    "settings.finePolicy.validate.maximumOverdueFine": "Maximum overdue fine must be greater than or equal to Overdue fine",
+    "settings.finePolicy.validate.maximumRecallOverdueFine": "Maximum overdue recall fine must be greater than or equal to Overdue recall fine",
+    "settings.finePolicy.validate.fineRequired": "Please enter an overdue fine and/or overdue recall fine",
+    "settings.finePolicy.validate.hasOverdueFineInterval": "Overdue fine must be greater than 0 if interval set",
+    "settings.finePolicy.validate.hasOverdueRecallFineInterval": "Overdue recall fine must be greater than 0 if interval set",
+    "settings.finePolicy.validate.invalidMaximumOverdueFine": "Please enter an overdue fine amount or set maximum overdue fine to 0",
+    "settings.finePolicy.validate.invalidMaximumRecallOverdueFine": "Please enter an overdue recall fine amount or set maximum overdue recall fine to 0"
 }

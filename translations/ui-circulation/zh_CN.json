@@ -396,5 +396,12 @@
     "settings.patronNotices.feeFineChargeTokenHeader": "费用/罚款收取",
     "settings.patronNotices.feeFineActionTokenHeader": "费用/罚款操作",
     "settings.patronNotices.multipleFeeFineActions": "多个费用/罚款操作",
-    "settings.patronNotices.multipleFeeFineCharges": "多个费用/罚款收取"
+    "settings.patronNotices.multipleFeeFineCharges": "多个费用/罚款收取",
+    "settings.finePolicy.validate.maximumOverdueFine": "Maximum overdue fine must be greater than or equal to Overdue fine",
+    "settings.finePolicy.validate.maximumRecallOverdueFine": "Maximum overdue recall fine must be greater than or equal to Overdue recall fine",
+    "settings.finePolicy.validate.fineRequired": "Please enter an overdue fine and/or overdue recall fine",
+    "settings.finePolicy.validate.hasOverdueFineInterval": "Overdue fine must be greater than 0 if interval set",
+    "settings.finePolicy.validate.hasOverdueRecallFineInterval": "Overdue recall fine must be greater than 0 if interval set",
+    "settings.finePolicy.validate.invalidMaximumOverdueFine": "Please enter an overdue fine amount or set maximum overdue fine to 0",
+    "settings.finePolicy.validate.invalidMaximumRecallOverdueFine": "Please enter an overdue recall fine amount or set maximum overdue recall fine to 0"
 }
