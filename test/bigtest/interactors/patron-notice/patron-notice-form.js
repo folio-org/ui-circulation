@@ -2,6 +2,11 @@ import {
   interactor,
   Interactor,
   clickable,
+  isPresent,
+  text,
+  fillable,
+  focusable,
+  blurrable,
 } from '@bigtest/interactor';
 
 import TextFieldInteractor from '@folio/stripes-components/lib/TextField/tests/interactor';
@@ -23,6 +28,12 @@ import TokensModal from './tokens-modal';
   indentBtn = new Interactor('[data-test-increase-indent]');
   errorContainer = new Interactor('#patron-notice-error-container');
   save = clickable('#footer-save-entity');
+  hasValidationError = isPresent('[class^="feedbackError---"]');
+  validationMessage = text('[class^="feedbackError---"]');
+
+  fillName = fillable('#input-patron-notice-name');
+  focusName = focusable('#input-patron-notice-name');
+  blurName = blurrable('#input-patron-notice-name');
 
   showAvailbaleTokensBtn = new Interactor('[data-test-teplate-editor-tokens]');
   tokensModal = new TokensModal();
