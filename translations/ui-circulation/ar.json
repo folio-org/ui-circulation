@@ -77,7 +77,6 @@
     "settings.staffSlips.preview": "معاينة",
     "settings.staffSlips.untitledStaffSlip": "اسم كشف الموظفين",
     "settings.staffSlips.deleteStaffSlipMessage": "سيتم <strong>حذف</strong> <strong>{name}</strong> كشف الموظفين",
-    "settings.staffSlips.validation.required": "يرجى ملء هذا للمتابعة",
     "settings.index.requestCancellationReasons": "طلب أسباب الإلغاء",
     "settings.loanPolicy.generalInformation": "معلومات عامة",
     "settings.cancelReasons.label": "طلب أسباب الإلغاء",
@@ -396,5 +395,12 @@
     "settings.patronNotices.feeFineChargeTokenHeader": "تكاليف الرسوم/الغرامات",
     "settings.patronNotices.feeFineActionTokenHeader": "إجراء الرسوم/الغرامات",
     "settings.patronNotices.multipleFeeFineActions": "عدة إجراءات للغرامات/الرسوم",
-    "settings.patronNotices.multipleFeeFineCharges": "عدة تكاليف للغرامات/الرسوم"
+    "settings.patronNotices.multipleFeeFineCharges": "عدة تكاليف للغرامات/الرسوم",
+    "settings.finePolicy.validate.maximumOverdueFine": "يجب أن يكون الحد الأقصى لغرامة التأخير أكبر من أو مساوي لغرامة التأخير",
+    "settings.finePolicy.validate.maximumRecallOverdueFine": "يجب أن يكون الحد الأقصى لغرامة الاسترداد المتأخر أكبر من أو مساوي لغرامة الاسترداد المتأخر",
+    "settings.finePolicy.validate.fineRequired": "يرجى إدخال غرامة تأخير و/أو غرامة استرداد متأخر",
+    "settings.finePolicy.validate.hasOverdueFineInterval": "يجب أن تكون غرامة التأخير أكبر من 0 إذا تم تعيين فاصل زمني",
+    "settings.finePolicy.validate.hasOverdueRecallFineInterval": "يجب أن تكون غرامة الاسترداد المتأخر أكبر من 0 إذا تم تعيين فاصل زمني",
+    "settings.finePolicy.validate.invalidMaximumOverdueFine": "يرجى إدخال مبلغ غرامة التأخير أو تعيين الحد الأقصى لغرامة التأخير إلى 0",
+    "settings.finePolicy.validate.invalidMaximumRecallOverdueFine": "يرجى إدخال مبلغ غرامة الاسترداد المتأخر أو تعيين الحد الأقصى لغرامة الاسترداد المتأخر إلى 0"
 }

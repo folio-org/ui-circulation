@@ -77,7 +77,6 @@
     "settings.staffSlips.preview": "Предварительный просмотр",
     "settings.staffSlips.untitledStaffSlip": "Название бланка выдачи",
     "settings.staffSlips.deleteStaffSlipMessage": "Бланк выдачи <strong>{имя}</strong> будет <strong>удалён</strong>",
-    "settings.staffSlips.validation.required": "Пожалуйста, заполните это, чтобы продолжить",
     "settings.index.requestCancellationReasons": "Причины отмены запроса",
     "settings.loanPolicy.generalInformation": "Общая информация",
     "settings.cancelReasons.label": "Причины отмены запроса",
@@ -125,7 +124,7 @@
     "settings.loanPolicy.removed": "удален",
     "settings.validate.greaterThanZero": "Значение должно быть целым и больше 0",
     "settings.validate.isPositiveNumber": "Значение должно быть больше или равно 0",
-    "settings.requestManagement.requestManagement": "Request management",
+    "settings.requestManagement.requestManagement": "Управление запросами",
     "settings.requestManagement.recalls": "Recalls",
     "settings.requestManagement.recallReturnInterval": "Recall return interval",
     "settings.requestManagement.alternateGracePeriod": "Alternate grace period for recalled items",
@@ -396,5 +395,12 @@
     "settings.patronNotices.feeFineChargeTokenHeader": "Взимание платы",
     "settings.patronNotices.feeFineActionTokenHeader": "Операция с оплатой",
     "settings.patronNotices.multipleFeeFineActions": "Многократные операции с оплатой",
-    "settings.patronNotices.multipleFeeFineCharges": "Многократное взимание платы"
+    "settings.patronNotices.multipleFeeFineCharges": "Многократное взимание платы",
+    "settings.finePolicy.validate.maximumOverdueFine": "Maximum overdue fine must be greater than or equal to Overdue fine",
+    "settings.finePolicy.validate.maximumRecallOverdueFine": "Maximum overdue recall fine must be greater than or equal to Overdue recall fine",
+    "settings.finePolicy.validate.fineRequired": "Please enter an overdue fine and/or overdue recall fine",
+    "settings.finePolicy.validate.hasOverdueFineInterval": "Overdue fine must be greater than 0 if interval set",
+    "settings.finePolicy.validate.hasOverdueRecallFineInterval": "Overdue recall fine must be greater than 0 if interval set",
+    "settings.finePolicy.validate.invalidMaximumOverdueFine": "Please enter an overdue fine amount or set maximum overdue fine to 0",
+    "settings.finePolicy.validate.invalidMaximumRecallOverdueFine": "Please enter an overdue recall fine amount or set maximum overdue recall fine to 0"
 }
