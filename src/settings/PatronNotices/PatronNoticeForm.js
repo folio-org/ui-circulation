@@ -75,11 +75,15 @@ class PatronNoticeForm extends React.Component {
   };
 
   validateName = memoize(async (name) => {
-    const { initialValues } = this.props;
+    const {
+      initialValues,
+      form,
+    } = this.props;
 
     let error;
+    const field = form.getFieldState('name');
 
-    if (name) {
+    if (name && field.dirty) {
       try {
         const response = await this.getTemplatesByName(name);
         const { templates = [] } = await response.json();
