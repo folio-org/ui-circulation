@@ -77,7 +77,6 @@
     "settings.staffSlips.preview": "Visualizar",
     "settings.staffSlips.untitledStaffSlip": "Nome da ficha de encaminhamento",
     "settings.staffSlips.deleteStaffSlipMessage": "A ficha de encaminhamento <strong>{name}</strong> será <strong> excluída</strong>.",
-    "settings.staffSlips.validation.required": "Por favor, preencha isto para continuar",
     "settings.index.requestCancellationReasons": "Motivos de cancelamento da solicitação de compra",
     "settings.loanPolicy.generalInformation": "Informação geral",
     "settings.cancelReasons.label": "Motivos de cancelamento da solicitação de compra",
@@ -396,5 +395,12 @@
     "settings.patronNotices.feeFineChargeTokenHeader": "Pagamento de taxa/multa",
     "settings.patronNotices.feeFineActionTokenHeader": "Ação de taxa/multa",
     "settings.patronNotices.multipleFeeFineActions": "Múltiplas ações de taxa/multa",
-    "settings.patronNotices.multipleFeeFineCharges": "Múltiplos pagamentos de taxas/multas"
+    "settings.patronNotices.multipleFeeFineCharges": "Múltiplos pagamentos de taxas/multas",
+    "settings.finePolicy.validate.maximumOverdueFine": "Valor máximo para a multa por atraso deve ser maior que zero ou igual ao valor da multa",
+    "settings.finePolicy.validate.maximumRecallOverdueFine": "Maximum overdue recall fine must be greater than or equal to Overdue recall fine",
+    "settings.finePolicy.validate.fineRequired": "Insira uma multa vencida e/ou multa de recall vencida",
+    "settings.finePolicy.validate.hasOverdueFineInterval": "A multa vencida deve ser maior que 0 se o intervalo estiver definido",
+    "settings.finePolicy.validate.hasOverdueRecallFineInterval": "Overdue recall fine must be greater than 0 if interval set",
+    "settings.finePolicy.validate.invalidMaximumOverdueFine": "Por favor, informe um valor para a multa por atraso ou fixe o valor máximo da multa em atraso em 0",
+    "settings.finePolicy.validate.invalidMaximumRecallOverdueFine": "Por favor, informe um valor para a multa por recall ou fixe o valor máximo da multa por recall em 0"
 }

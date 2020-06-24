@@ -77,7 +77,6 @@
     "settings.staffSlips.preview": "預覽",
     "settings.staffSlips.untitledStaffSlip": "员购单名称",
     "settings.staffSlips.deleteStaffSlipMessage": "员工单{name} <strong> {name} </strong>将<strong>删除</strong> 。",
-    "settings.staffSlips.validation.required": "请填写此内容以继续",
     "settings.index.requestCancellationReasons": "取消預約的原因",
     "settings.loanPolicy.generalInformation": "概况",
     "settings.cancelReasons.label": "取消預約的原因",
@@ -396,5 +395,12 @@
     "settings.patronNotices.feeFineChargeTokenHeader": "Fee/Fine Charge",
     "settings.patronNotices.feeFineActionTokenHeader": "Fee/Fine Action",
     "settings.patronNotices.multipleFeeFineActions": "Multiple fee/fine actions",
-    "settings.patronNotices.multipleFeeFineCharges": "Multiple fee/fine charges"
+    "settings.patronNotices.multipleFeeFineCharges": "Multiple fee/fine charges",
+    "settings.finePolicy.validate.maximumOverdueFine": "Maximum overdue fine must be greater than or equal to Overdue fine",
+    "settings.finePolicy.validate.maximumRecallOverdueFine": "Maximum overdue recall fine must be greater than or equal to Overdue recall fine",
+    "settings.finePolicy.validate.fineRequired": "Please enter an overdue fine and/or overdue recall fine",
+    "settings.finePolicy.validate.hasOverdueFineInterval": "Overdue fine must be greater than 0 if interval set",
+    "settings.finePolicy.validate.hasOverdueRecallFineInterval": "Overdue recall fine must be greater than 0 if interval set",
+    "settings.finePolicy.validate.invalidMaximumOverdueFine": "Please enter an overdue fine amount or set maximum overdue fine to 0",
+    "settings.finePolicy.validate.invalidMaximumRecallOverdueFine": "Please enter an overdue recall fine amount or set maximum overdue recall fine to 0"
 }
