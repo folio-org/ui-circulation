@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Field } from 'redux-form';
-import { FormattedMessage } from 'react-intl';
+import { Field } from 'react-final-form';
+import { FormattedMessage, injectIntl } from 'react-intl';
 import {
   find,
   sortBy,
+  memoize,
 } from 'lodash';
 
 import {
@@ -19,7 +20,7 @@ import {
   TextArea,
   TextField,
 } from '@folio/stripes/components';
-import stripesForm from '@folio/stripes/form';
+import stripesFinalForm from '@folio/stripes/final-form';
 
 import tokens from './tokens';
 import TokensList from './TokensList';
@@ -30,47 +31,20 @@ import {
   TemplateEditor,
 } from '../components';
 
-import css from './PatronNoticeForm.css';
+import { PatronNoticeTemplate as validatePatronNoticeTemplate } from '../Validation';
 
-/**
- * on-blur validation checks that the name of the patron notice
- * is unique.
- *
- * redux-form requires that the rejected Promises have the form
- * { field: "error message" }
- * hence the eslint-disable-next-line comments since ESLint is picky
- * about the format of rejected promises.
- *
- * @see https://redux-form.com/7.3.0/examples/asyncchangevalidation/
- */
-function asyncValidate(values, dispatch, props) {
-  if (values.name !== undefined) {
-    return new Promise((resolve, reject) => {
-      const uv = props.uniquenessValidator.nameUniquenessValidator;
-      const query = `(name="${values.name}")`;
-      uv.reset();
-      uv.GET({ params: { query } }).then((notices) => {
-        const matchedNotice = find(notices, ['name', values.name]);
-        if (matchedNotice && matchedNotice.id !== values.id) {
-          // eslint-disable-next-line prefer-promise-reject-errors
-          reject({ name: <FormattedMessage id="ui-circulation.settings.patronNotices.errors.nameExists" /> });
-        } else {
-          resolve();
-        }
-      });
-    });
-  }
-  return new Promise(resolve => resolve());
-}
+import css from './PatronNoticeForm.css';
 
 class PatronNoticeForm extends React.Component {
   static propTypes = {
+    intl: PropTypes.object.isRequired,
+    okapi: PropTypes.object.isRequired,
     initialValues: PropTypes.object,
+    form: PropTypes.object.isRequired,
     pristine: PropTypes.bool.isRequired,
     submitting: PropTypes.bool.isRequired,
     handleSubmit: PropTypes.func.isRequired,
     onCancel: PropTypes.func.isRequired,
-    onSave: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
@@ -87,6 +61,44 @@ class PatronNoticeForm extends React.Component {
     };
   }
 
+  getTemplatesByName = (name) => {
+    const { okapi } = this.props;
+
+    return fetch(`${okapi.url}/templates?query=(name=="${name}")`,
+      {
+        headers: {
+          'X-Okapi-Tenant': okapi.tenant,
+          'X-Okapi-Token': okapi.token,
+          'Content-Type': 'application/json',
+        }
+      });
+  };
+
+  validateName = memoize(async (name) => {
+    const {
+      initialValues,
+      form,
+    } = this.props;
+
+    let error;
+    const field = form.getFieldState('name');
+
+    if (name && field.dirty) {
+      try {
+        const response = await this.getTemplatesByName(name);
+        const { templates = [] } = await response.json();
+        const matchedTemplate = find(templates, ['name', name]);
+        if (matchedTemplate && matchedTemplate.id !== initialValues.id) {
+          error = <FormattedMessage id="ui-circulation.settings.patronNotices.errors.nameExists" />;
+        }
+      } catch (e) {
+        throw new Error(e);
+      }
+    }
+
+    return error;
+  });
+
   onToggleSection = ({ id }) => {
     this.setState((state) => {
       const accordions = { ...state.accordions };
@@ -94,10 +106,6 @@ class PatronNoticeForm extends React.Component {
       return { accordions };
     });
   }
-
-  onSave = (data) => {
-    this.props.onSave(data);
-  };
 
   renderCLoseIcon() {
     const { onCancel } = this.props;
@@ -140,16 +148,17 @@ class PatronNoticeForm extends React.Component {
     const {
       handleSubmit,
       initialValues,
+      intl: { formatMessage },
+      form: { getFieldState }
     } = this.props;
 
-    const category = initialValues && initialValues.category;
     const isActive = initialValues && initialValues.active;
+    const category = getFieldState('category')?.value;
 
     const sortedCategories = sortBy(patronNoticeCategories, ['label']);
     const categoryOptions = sortedCategories.map(({ label, id }) => ({
-      labelTranslationPath: label,
+      label: formatMessage({ id: label }),
       value: id,
-      selected: category === id
     }));
 
     return (
@@ -158,7 +167,7 @@ class PatronNoticeForm extends React.Component {
         className={css.patronNoticeForm}
         noValidate
         data-test-patron-notice-form
-        onSubmit={handleSubmit(this.onSave)}
+        onSubmit={handleSubmit}
       >
         <Paneset isRoot>
           <Pane
@@ -178,6 +187,7 @@ class PatronNoticeForm extends React.Component {
                   required
                   id="input-patron-notice-name"
                   component={TextField}
+                  validate={this.validateName}
                 />
               </Col>
             </Row>
@@ -189,7 +199,6 @@ class PatronNoticeForm extends React.Component {
                   id="input-patron-notice-active"
                   component={Checkbox}
                   defaultChecked={isActive}
-                  normalize={v => !!v}
                 />
               </Col>
             </Row>
@@ -212,20 +221,8 @@ class PatronNoticeForm extends React.Component {
                     name="category"
                     component={Select}
                     fullWidth
-                  >
-                    {categoryOptions.map(({ labelTranslationPath, value, selected }) => (
-                      <FormattedMessage id={labelTranslationPath}>
-                        {translatedLabel => (
-                          <option
-                            value={value}
-                            selected={selected}
-                          >
-                            {translatedLabel}
-                          </option>
-                        )}
-                      </FormattedMessage>
-                    ))}
-                  </Field>
+                    dataOptions={categoryOptions}
+                  />
                 </div>
               </Col>
             </Row>
@@ -256,12 +253,13 @@ class PatronNoticeForm extends React.Component {
                       tokens={tokens}
                       tokensList={TokensList}
                       previewModalHeader={<FormattedMessage id="ui-circulation.settings.patronNotices.form.previewHeader" />}
+                      selectedCategory={category}
                     />
                   </Col>
                 </Row>
               </Accordion>
             </AccordionSet>
-            { initialValues && initialValues.predefined &&
+            { initialValues.predefined &&
               <Row>
                 <Col xs={8}>
                   <FormattedMessage id="ui-circulation.settings.patronNotices.predefinedWarning" />
@@ -274,10 +272,9 @@ class PatronNoticeForm extends React.Component {
   }
 }
 
-export default stripesForm({
-  form: 'patronNoticeForm',
+export default stripesFinalForm({
   navigationCheck: true,
-  enableReinitialize: false,
-  asyncValidate,
-  asyncBlurFields: ['name'],
-})(PatronNoticeForm);
+  validate: validatePatronNoticeTemplate,
+  validateOnBlur: true,
+  subscription: { values: true },
+})(injectIntl(PatronNoticeForm));

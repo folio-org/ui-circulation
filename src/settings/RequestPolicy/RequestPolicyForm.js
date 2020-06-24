@@ -1,7 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { find } from 'lodash';
 import { FormattedMessage } from 'react-intl';
+import {
+  find,
+  memoize,
+} from 'lodash';
 
 import stripesFinalForm from '@folio/stripes/final-form';
 import {
@@ -73,18 +76,21 @@ class RequestPolicyForm extends React.Component {
       });
   };
 
-  validate = async (name) => {
-    const { form: { getFieldState } } = this.props;
+  validate = memoize(async (name) => {
+    const {
+      initialValues,
+      form,
+    } = this.props;
 
     let error;
-    const field = getFieldState('name');
+    const field = form.getFieldState('name');
 
     if (name && field.dirty) {
       try {
         const response = await this.getPoliciesByName(name);
         const { requestPolicies = [] } = await response.json();
         const matchedPolicy = find(requestPolicies, ['name', name]);
-        if (matchedPolicy && matchedPolicy.id !== this.props.initialValues.id) {
+        if (matchedPolicy && matchedPolicy.id !== initialValues.id) {
           error = <FormattedMessage id="ui-circulation.settings.requestPolicy.errors.nameExists" />;
         }
       } catch (e) {
@@ -93,7 +99,7 @@ class RequestPolicyForm extends React.Component {
     }
 
     return error;
-  };
+  });
 
   render() {
     const {
