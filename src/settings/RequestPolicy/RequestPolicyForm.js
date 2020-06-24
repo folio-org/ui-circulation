@@ -1,7 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { find } from 'lodash';
 import { FormattedMessage } from 'react-intl';
+import {
+  find,
+  memoize,
+} from 'lodash';
 
 import stripesFinalForm from '@folio/stripes/final-form';
 import {
@@ -73,7 +76,7 @@ class RequestPolicyForm extends React.Component {
       });
   };
 
-  validate = async (name) => {
+  validate = memoize(async (name) => {
     const { form: { getFieldState } } = this.props;
 
     let error;
@@ -93,7 +96,7 @@ class RequestPolicyForm extends React.Component {
     }
 
     return error;
-  };
+  });
 
   render() {
     const {

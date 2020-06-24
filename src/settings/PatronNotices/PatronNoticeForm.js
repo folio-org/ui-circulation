@@ -5,6 +5,7 @@ import { FormattedMessage, injectIntl } from 'react-intl';
 import {
   find,
   sortBy,
+  memoize,
 } from 'lodash';
 
 import {
@@ -73,7 +74,7 @@ class PatronNoticeForm extends React.Component {
       });
   };
 
-  validateName = async (name) => {
+  validateName = memoize(async (name) => {
     const {
       form: {
         getFieldState,
@@ -98,7 +99,7 @@ class PatronNoticeForm extends React.Component {
     }
 
     return error;
-  };
+  });
 
   onToggleSection = ({ id }) => {
     this.setState((state) => {
@@ -278,5 +279,4 @@ export default stripesFinalForm({
   validate: validatePatronNoticeTemplate,
   validateOnBlur: true,
   subscription: { values: true },
-  keepDirtyOnReinitialize: true,
 })(injectIntl(PatronNoticeForm));
