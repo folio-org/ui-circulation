@@ -61,6 +61,7 @@ describe('FinePolicyForm', () => {
           .aboutSection.policyName.fillAndBlur(newFinePolicyName)
           .overdueFineSection.overdue.quantity.fillAndBlur(1)
           .overdueFineSection.overdue.interval.selectAndBlur('minute')
+          .overdueFineSection.maxOverdue.fillAndBlur('11.99')
           .save();
       });
 
