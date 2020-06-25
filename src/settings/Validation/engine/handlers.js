@@ -39,7 +39,7 @@ export const isGreaterOrEqualThanPassedField = (fieldToCompare, value, model) =>
 
 export const isMaximumFineValueValid = (fieldToCompare, value, model) => {
   const valueToCompare = get(model, fieldToCompare);
-  return parseInt(value, 10) > 0 && parseInt(valueToCompare, 10) !== 0;
+  return parseInt(value, 10) > 0 && parseInt(valueToCompare, 10) > 0;
 };
 
 export const hasFine = (value, model) => {
