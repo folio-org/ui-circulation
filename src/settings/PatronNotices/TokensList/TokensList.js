@@ -26,12 +26,6 @@ class TokensList extends React.Component {
       label: <FormattedMessage id="ui-circulation.settings.patronNotices.multipleLoans" />,
       tag: 'loans',
     };
-
-    this.feeFineActionLoopConfig = {
-      enabled: true,
-      label: <FormattedMessage id="ui-circulation.settings.patronNotices.multipleFeeFineActions" />,
-      tag: 'feeActions',
-    };
   }
 
   render() {
@@ -119,7 +113,6 @@ class TokensList extends React.Component {
                 selectedCategory={selectedCategory}
                 header={<FormattedMessage id="ui-circulation.settings.patronNotices.feeFineChargeTokenHeader" />}
                 tokens={tokens.feeFineCharge}
-                onLoopSelect={onLoopSelect}
                 onSectionInit={onSectionInit}
                 onTokenSelect={onTokenSelect}
               />
@@ -132,8 +125,6 @@ class TokensList extends React.Component {
                 selectedCategory={selectedCategory}
                 header={<FormattedMessage id="ui-circulation.settings.patronNotices.feeFineActionTokenHeader" />}
                 tokens={tokens.feeFineAction}
-                loopConfig={this.feeFineActionLoopConfig}
-                onLoopSelect={onLoopSelect}
                 onSectionInit={onSectionInit}
                 onTokenSelect={onTokenSelect}
               />
