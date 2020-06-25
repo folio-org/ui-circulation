@@ -290,7 +290,7 @@ const formats = {
       ],
     },
     {
-      token: 'feeCharge.date',
+      token: 'feeCharge.chargeDate',
       previewValue: 'Jun 30, 2020',
       allowedFor: [
         patronNoticeCategoryIds.FEE_FINE_CHARGE,
@@ -299,7 +299,7 @@ const formats = {
       ],
     },
     {
-      token: 'feeCharge.dateTime',
+      token: 'feeCharge.chargeDateTime',
       previewValue: 'Jun 30, 2020 11:00',
       allowedFor: [
         patronNoticeCategoryIds.FEE_FINE_CHARGE,
@@ -330,7 +330,6 @@ const formats = {
       previewValue: 'This is a text field intended to provide additional information for the patron regarding the fee/fine.',
       allowedFor: [
         patronNoticeCategoryIds.FEE_FINE_CHARGE,
-        patronNoticeCategoryIds.AUTOMATED_FEE_FINE,
         patronNoticeCategoryIds.FEE_FINE_ACTION,
       ],
     },
@@ -342,12 +341,12 @@ const formats = {
       allowedFor: [patronNoticeCategoryIds.FEE_FINE_ACTION],
     },
     {
-      token: 'feeAction.date',
+      token: 'feeAction.actionDate',
       previewValue: 'Jul 10, 2020',
       allowedFor: [patronNoticeCategoryIds.FEE_FINE_ACTION],
     },
     {
-      token: 'feeAction.dateTime',
+      token: 'feeAction.actionDateTime',
       previewValue: 'Jul 10, 2020 8:00',
       allowedFor: [patronNoticeCategoryIds.FEE_FINE_ACTION],
     },
