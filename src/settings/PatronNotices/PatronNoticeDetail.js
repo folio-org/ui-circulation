@@ -12,10 +12,9 @@ import {
   KeyValue,
   Row
 } from '@folio/stripes/components';
+import { PreviewModal, tokensReducer } from '@folio/stripes-template-editor';
 
 import tokens from './tokens';
-import { PreviewModal } from '../components';
-import tokensReducer from '../utils/tokens-reducer';
 
 class PatronNoticeDetail extends React.Component {
   static propTypes = {

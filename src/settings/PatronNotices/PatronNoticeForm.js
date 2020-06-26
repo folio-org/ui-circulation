@@ -21,6 +21,7 @@ import {
   TextField,
 } from '@folio/stripes/components';
 import stripesFinalForm from '@folio/stripes/final-form';
+import { TemplateEditor } from '@folio/stripes-template-editor';
 
 import tokens from './tokens';
 import TokensList from './TokensList';
@@ -28,7 +29,6 @@ import { patronNoticeCategories } from '../../constants';
 import {
   CancelButton,
   FooterPane,
-  TemplateEditor,
 } from '../components';
 
 import { PatronNoticeTemplate as validatePatronNoticeTemplate } from '../Validation';

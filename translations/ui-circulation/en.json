@@ -405,23 +405,6 @@
   "settings.lostItemFee.late": "late",
   "settings.lostItemFee.deleteFeePolicy": "Delete lost item fee policy",
 
-  "settings.editorToolbar.text.bold": "bold",
-  "settings.editorToolbar.text.italic": "italic",
-  "settings.editorToolbar.text.underline": "underline",
-  "settings.editorToolbar.list.ordered": "ordered list",
-  "settings.editorToolbar.list.bullet": "bullet list",
-  "settings.editorToolbar.indent.decrease": "decrease indent",
-  "settings.editorToolbar.indent.increase": "increase indent",
-  "settings.editorToolbar.size.small": "small",
-  "settings.editorToolbar.size.normal": "normal",
-  "settings.editorToolbar.size.large": "large",
-  "settings.editorToolbar.size.huge": "huge",
-  "settings.editorToolbar.align.noAlign": "no align",
-  "settings.editorToolbar.align.center": "center",
-  "settings.editorToolbar.align.right": "right",
-  "settings.editorToolbar.align.justify": "justify",
-  "settings.editorToolbar.link": "link",
-
   "settings.noticePolicy.feeFineNotices.returned": "Overdue fine, returned",
   "settings.noticePolicy.feeFineNotices.renewed": "Overdue fine, renewed"
 }

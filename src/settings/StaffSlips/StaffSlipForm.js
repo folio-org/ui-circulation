@@ -13,6 +13,7 @@ import {
 
 import stripesFinalForm from '@folio/stripes/final-form';
 import { Field } from 'react-final-form';
+import { TemplateEditor } from '@folio/stripes-template-editor';
 
 import tokens from './tokens';
 import TokensList from './TokensList';
@@ -20,7 +21,6 @@ import TokensList from './TokensList';
 import {
   CancelButton,
   FooterPane,
-  TemplateEditor,
 } from '../components';
 
 import css from './StaffSlipForm.css';

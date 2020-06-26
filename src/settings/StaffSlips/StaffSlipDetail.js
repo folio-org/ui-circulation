@@ -9,11 +9,9 @@ import {
   KeyValue,
   Row,
 } from '@folio/stripes/components';
+import { PreviewModal, tokensReducer } from '@folio/stripes-template-editor';
 
 import tokens from './tokens';
-import tokensReducer from '../utils/tokens-reducer';
-import { PreviewModal } from '../components';
-
 import css from './StaffSlipDetail.css';
 
 class StaffSlipDetail extends React.Component {
