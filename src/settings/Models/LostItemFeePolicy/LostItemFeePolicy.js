@@ -1,5 +1,6 @@
 import {
   get,
+  isNumber,
 } from 'lodash';
 
 import { LostItem, Metadata, ChargeAmount } from '../common';
@@ -9,12 +10,12 @@ export default class LostItemFeePolicy {
     return {
       chargeAmountItem: { chargeType: 'actualCost' },
       lostItemProcessingFee: 0.00,
-      chargeAmountItemPatron: true,
-      chargeAmountItemSystem: true,
-      returnedLostItemProcessingFee: true,
-      replacedLostItemProcessingFee: true,
+      chargeAmountItemPatron: 'true',
+      chargeAmountItemSystem: 'true',
+      returnedLostItemProcessingFee: 'true',
+      replacedLostItemProcessingFee: 'true',
       replacementProcessingFee: 0.00,
-      replacementAllowed: true,
+      replacementAllowed: 'true',
       lostItemReturned: 'Charge',
     };
   }
@@ -41,12 +42,20 @@ export default class LostItemFeePolicy {
 
   hasValue(pathToValue) {
     const value = get(this, pathToValue);
-    return value < 0;
+
+    return isNumber(value);
   }
 
-  hasDuration(pathToValue) {
+  hasPassedValue(pathToValue, expectedValue) {
     const value = get(this, pathToValue);
-    return value > 0;
+
+    return value === expectedValue;
+  }
+
+  hasPositiveValue(pathToValue) {
+    const value = get(this, pathToValue);
+
+    return parseInt(value, 10) > 0;
   }
 
   isRquiredLostItemCharge() {
