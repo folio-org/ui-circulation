@@ -13,7 +13,6 @@ import {
   isGreaterOrEqualThanPassedField,
   isStringGreaterThanOrEqualToZero,
   isStringGreaterThanZero,
-  hasFine,
   isMaximumFineValueValid,
 } from './handlers';
 
@@ -69,10 +68,6 @@ export default {
   isGreaterThanOverdueRecallFine: {
     validate: isGreaterOrEqualThanPassedField.bind(null, 'overdueRecallFine.quantity'),
     message: <FormattedMessage id="ui-circulation.settings.finePolicy.validate.maximumRecallOverdueFine" />,
-  },
-  hasFine: {
-    validate: hasFine,
-    message: <FormattedMessage id="ui-circulation.settings.finePolicy.validate.fineRequired" />,
   },
   hasOverdueFineInterval: {
     validate: isStringGreaterThanZero,

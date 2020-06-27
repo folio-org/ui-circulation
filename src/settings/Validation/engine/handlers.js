@@ -41,10 +41,3 @@ export const isMaximumFineValueValid = (fieldToCompare, value, model) => {
   const valueToCompare = get(model, fieldToCompare);
   return parseInt(value, 10) > 0 && parseInt(valueToCompare, 10) > 0;
 };
-
-export const hasFine = (value, model) => {
-  const overdueFine = get(model, 'overdueFine.quantity');
-  const overdueRecallFine = get(model, 'overdueRecallFine.quantity');
-
-  return parseInt(overdueFine, 10) > 0 || parseInt(overdueRecallFine, 10) > 0;
-};
