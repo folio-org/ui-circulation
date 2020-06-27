@@ -5,18 +5,16 @@ export default function (finePolicy) {
       shouldValidate: true,
     },
     'overdueFine.quantity': {
-      rules: ['hasFine', 'hasOverdueFineInterval'],
-      shouldValidate: (!finePolicy.isOverdueFine() && !finePolicy.isOverdueRecallFine())
-        || finePolicy.isIntervalSelected('overdueFine.intervalId'),
+      rules: ['hasOverdueFineInterval'],
+      shouldValidate: finePolicy.isIntervalSelected('overdueFine.intervalId'),
     },
     'overdueFine.intervalId': {
       rules: ['isNotEmptySelect'],
       shouldValidate: finePolicy.isOverdueFine(),
     },
     'overdueRecallFine.quantity': {
-      rules: ['hasFine', 'hasOverdueRecallFineInterval'],
-      shouldValidate: (!finePolicy.isOverdueFine() && !finePolicy.isOverdueRecallFine())
-        || finePolicy.isIntervalSelected('overdueRecallFine.intervalId'),
+      rules: ['hasOverdueRecallFineInterval'],
+      shouldValidate: finePolicy.isIntervalSelected('overdueRecallFine.intervalId'),
     },
     'overdueRecallFine.intervalId': {
       rules: ['isNotEmptySelect'],
