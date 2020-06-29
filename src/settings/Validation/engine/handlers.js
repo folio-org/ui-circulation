@@ -42,9 +42,22 @@ export const isMaximumFineValueValid = (fieldToCompare, value, model) => {
   return parseInt(value, 10) > 0 && parseInt(valueToCompare, 10) > 0;
 };
 
-export const hasFine = (value, model) => {
-  const overdueFine = get(model, 'overdueFine.quantity');
-  const overdueRecallFine = get(model, 'overdueRecallFine.quantity');
 
-  return parseInt(overdueFine, 10) > 0 || parseInt(overdueRecallFine, 10) > 0;
+export const hasNoChargeLostItemProcessingFee = (value, model) => {
+  const chargeAmountItemPatron = get(model, 'chargeAmountItemPatron');
+  const chargeAmountItemSystem = get(model, 'chargeAmountItemSystem');
+
+  return chargeAmountItemPatron !== 'false' || chargeAmountItemSystem !== 'false';
+};
+
+export const hasLostItemProcessingFeeValue = (value, model) => {
+  const lostItemProcessingFee = get(model, 'lostItemProcessingFee');
+
+  return parseInt(lostItemProcessingFee, 10) > 0;
+};
+
+export const hasPositivereplacementAllowed = (value, model) => {
+  const replacementAllowed = get(model, 'replacementAllowed');
+
+  return replacementAllowed === 'true';
 };

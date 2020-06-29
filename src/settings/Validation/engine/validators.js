@@ -13,8 +13,10 @@ import {
   isGreaterOrEqualThanPassedField,
   isStringGreaterThanOrEqualToZero,
   isStringGreaterThanZero,
-  hasFine,
   isMaximumFineValueValid,
+  hasNoChargeLostItemProcessingFee,
+  hasLostItemProcessingFeeValue,
+  hasPositivereplacementAllowed,
 } from './handlers';
 
 export default {
@@ -70,10 +72,6 @@ export default {
     validate: isGreaterOrEqualThanPassedField.bind(null, 'overdueRecallFine.quantity'),
     message: <FormattedMessage id="ui-circulation.settings.finePolicy.validate.maximumRecallOverdueFine" />,
   },
-  hasFine: {
-    validate: hasFine,
-    message: <FormattedMessage id="ui-circulation.settings.finePolicy.validate.fineRequired" />,
-  },
   hasOverdueFineInterval: {
     validate: isStringGreaterThanZero,
     message: <FormattedMessage id="ui-circulation.settings.finePolicy.validate.hasOverdueFineInterval" />
@@ -89,5 +87,37 @@ export default {
   isMaximumOverdueRecallFineValid: {
     validate: isMaximumFineValueValid.bind(null, 'overdueRecallFine.quantity'),
     message: <FormattedMessage id="ui-circulation.settings.finePolicy.validate.invalidMaximumRecallOverdueFine" />
+  },
+  hasPatronBilledAfterAgedToLostValue : {
+    validate: isNotEmpty,
+    message: <FormattedMessage id="ui-circulation.settings.lostItemFee.validate.hasPatronBilledAfterAgedToLostValue" />
+  },
+  hasItemsAgedToLostAfterOverdueValue: {
+    validate: isNotEmpty,
+    message: <FormattedMessage id="ui-circulation.settings.lostItemFee.validate.hasItemsAgedToLostAfterOverdueValue" />
+  },
+  hasPositiveLostItemProcessingFeeValue: {
+    validate: isStringGreaterThanZero,
+    message: <FormattedMessage id="ui-circulation.settings.lostItemFee.validate.hasPositiveLostItemProcessingFeeValue" />
+  },
+  hasNoChargeLostItemProcessingFee: {
+    validate: hasNoChargeLostItemProcessingFee,
+    message: <FormattedMessage id="ui-circulation.settings.lostItemFee.validate.hasNoChargeLostItemProcessingFee" />
+  },
+  hasLostItemProcessingFeeValue: {
+    validate: hasLostItemProcessingFeeValue,
+    message: <FormattedMessage id="ui-circulation.settings.lostItemFee.validate.hasLostItemProcessingFeeValue" />
+  },
+  hasPositiveReplacementProcessingFee: {
+    validate: hasPositivereplacementAllowed,
+    message: <FormattedMessage id="ui-circulation.settings.lostItemFee.validate.hasPositiveReplacementProcessingFee" />
+  },
+  hasReplacedLostItemProcessingFee: {
+    validate: hasPositivereplacementAllowed,
+    message: <FormattedMessage id="ui-circulation.settings.lostItemFee.validate.hasReplacedLostItemProcessingFee" />
+  },
+  chargeAmountItemSystemSelected: {
+    validate: isNotEmpty,
+    message: <FormattedMessage id="ui-circulation.settings.lostItemFee.validate.chargeAmountItemSystemSelected" />
   },
 };

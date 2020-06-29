@@ -133,7 +133,6 @@ class LostItemFeeSection extends React.Component {
               />
             </Col>
           </Row>
-
           <div data-test-lost-item-charge-fee>
             <Period
               fieldLabel="ui-circulation.settings.lostItemFee.lostItemChargeFeeFine"
@@ -143,7 +142,6 @@ class LostItemFeeSection extends React.Component {
               changeFormValue={change}
             />
           </div>
-
           <Row>
             <Col xs={5}>
               <FormattedMessage id="ui-circulation.settings.lostItemFee.returnedLostItemProcessingFee" />
@@ -154,6 +152,46 @@ class LostItemFeeSection extends React.Component {
               <Field
                 name="returnedLostItemProcessingFee"
                 id="returnedLostItemProcessingFee"
+                component={Select}
+                dataOptions={selectValues}
+              />
+            </Col>
+          </Row>
+          <Row>
+            <Col xs={5}>
+              <FormattedMessage id="ui-circulation.settings.lostItemFee.lostItemReturned" />
+            </Col>
+          </Row>
+          <Row>
+            <Col xs={7} data-test-lost-item-returned-charge>
+              <Field
+                id="lost-item-returned"
+                name="lostItemReturned"
+                component={RadioButtonGroup}
+              >
+                <RadioButton
+                  label={<FormattedMessage id="ui-circulation.settings.lostItemFee.lostItemChargeOverdueBased" />}
+                  id="Charge"
+                  value="Charge"
+                />
+                <RadioButton
+                  label={<FormattedMessage id="ui-circulation.settings.lostItemFee.lostItemRemoveOverdueFines" />}
+                  id="Remove"
+                  value="Remove"
+                />
+              </Field>
+            </Col>
+          </Row>
+          <Row>
+            <Col xs={5}>
+              <FormattedMessage id="ui-circulation.settings.lostItemFee.replacementAllowed" />
+            </Col>
+          </Row>
+          <Row>
+            <Col xs={1} data-test-replacement-allowed>
+              <Field
+                name="replacementAllowed"
+                id="replacementAllowed"
                 component={Select}
                 dataOptions={selectValues}
               />
@@ -189,48 +227,7 @@ class LostItemFeeSection extends React.Component {
               />
             </Col>
           </Row>
-          <Row>
-            <Col xs={5}>
-              <FormattedMessage id="ui-circulation.settings.lostItemFee.replacementAllowed" />
-            </Col>
-          </Row>
-          <Row>
-            <Col xs={1} data-test-replacement-allowed>
-              <Field
-                name="replacementAllowed"
-                id="replacementAllowed"
-                component={Select}
-                dataOptions={selectValues}
-              />
-            </Col>
-          </Row>
-          <Row>
-            <Col xs={5}>
-              <FormattedMessage id="ui-circulation.settings.lostItemFee.lostItemReturned" />
-            </Col>
-          </Row>
-          <Row>
-            <Col xs={7} data-test-lost-item-returned-charge>
-              <Field
-                id="lost-item-returned"
-                name="lostItemReturned"
-                component={RadioButtonGroup}
-              >
-                <RadioButton
-                  label={<FormattedMessage id="ui-circulation.settings.lostItemFee.lostItemChargeOverdueBased" />}
-                  id="Charge"
-                  value="Charge"
-                />
-                <RadioButton
-                  label={<FormattedMessage id="ui-circulation.settings.lostItemFee.lostItemRemoveOverdueFines" />}
-                  id="Remove"
-                  value="Remove"
-                />
-              </Field>
-            </Col>
-          </Row>
           <div data-test-fees-fines-shall-refunded>
-            <br />
             <Period
               fieldLabel="ui-circulation.settings.lostItemFee.feesFinesShallRefunded"
               inputValuePath="feesFinesShallRefunded.duration"

@@ -57,8 +57,10 @@ describe('Lost Item Fee Policy Form', () => {
       beforeEach(async function () {
         await LostItemFeePolicyForm
           .aboutSection.policyName.fillAndBlur(newLostItemPolicyName)
+          .lostItemFeeSection.lostItemFee.fillAndBlur(1)
           .lostItemFeeSection.closeLoanAfter.fillAndBlurDuration(5)
           .lostItemFeeSection.closeLoanAfter.selectAndBlurInterval('hour(s)')
+          .lostItemFeeSection.lostBySystem.selectAndBlur('No')
           .save();
       });
 
@@ -111,8 +113,10 @@ describe('Lost Item Fee Policy Form', () => {
       beforeEach(async function () {
         await LostItemFeePolicyForm
           .aboutSection.policyName.fillAndBlur(newFinePolicyName)
+          .lostItemFeeSection.lostItemFee.fillAndBlur(5)
           .lostItemFeeSection.closeLoanAfter.fillAndBlurDuration(5)
           .lostItemFeeSection.closeLoanAfter.selectAndBlurInterval('hour(s)')
+          .lostItemFeeSection.lostBySystem.selectAndBlur('No')
           .save();
       });
 
