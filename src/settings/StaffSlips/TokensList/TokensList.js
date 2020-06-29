@@ -6,8 +6,7 @@ import {
   Col,
   Row,
 } from '@folio/stripes/components';
-
-import { TokensSection } from '../../components';
+import { TokensSection } from '@folio/stripes-template-editor';
 
 class TokensList extends React.Component {
   static propTypes = {
