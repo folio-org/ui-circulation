@@ -17,6 +17,8 @@ import {
   hasNoChargeLostItemProcessingFee,
   hasLostItemProcessingFeeValue,
   hasPositivereplacementAllowed,
+  hasPatronBilledAfterAgedToLostValue,
+  hasChargeAmountItemSystemSelected,
 } from './handlers';
 
 export default {
@@ -89,7 +91,7 @@ export default {
     message: <FormattedMessage id="ui-circulation.settings.finePolicy.validate.invalidMaximumRecallOverdueFine" />
   },
   hasPatronBilledAfterAgedToLostValue : {
-    validate: isNotEmpty,
+    validate: hasPatronBilledAfterAgedToLostValue,
     message: <FormattedMessage id="ui-circulation.settings.lostItemFee.validate.hasPatronBilledAfterAgedToLostValue" />
   },
   hasItemsAgedToLostAfterOverdueValue: {
@@ -117,7 +119,7 @@ export default {
     message: <FormattedMessage id="ui-circulation.settings.lostItemFee.validate.hasReplacedLostItemProcessingFee" />
   },
   chargeAmountItemSystemSelected: {
-    validate: isNotEmpty,
+    validate: hasChargeAmountItemSystemSelected,
     message: <FormattedMessage id="ui-circulation.settings.lostItemFee.validate.chargeAmountItemSystemSelected" />
   },
 };

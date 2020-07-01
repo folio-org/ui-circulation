@@ -42,7 +42,6 @@ export const isMaximumFineValueValid = (fieldToCompare, value, model) => {
   return parseInt(value, 10) > 0 && parseInt(valueToCompare, 10) > 0;
 };
 
-
 export const hasNoChargeLostItemProcessingFee = (value, model) => {
   const chargeAmountItemPatron = get(model, 'chargeAmountItemPatron');
   const chargeAmountItemSystem = get(model, 'chargeAmountItemSystem');
@@ -60,4 +59,16 @@ export const hasPositivereplacementAllowed = (value, model) => {
   const replacementAllowed = get(model, 'replacementAllowed');
 
   return replacementAllowed === 'true';
+};
+
+export const hasPatronBilledAfterAgedToLostValue = (value, model) => {
+  const patronBilledAfterAgedToLostValue = get(model, 'patronBilledAfterAgedLost.duration');
+
+  return (isNotEmpty(patronBilledAfterAgedToLostValue) && isNotEmpty(value)) || !isNotEmpty(patronBilledAfterAgedToLostValue);
+};
+
+export const hasChargeAmountItemSystemSelected = (value, model) => {
+  const chargeAmountItemSystem = get(model, 'chargeAmountItemSystem');
+
+  return (chargeAmountItemSystem === 'true' && isNotEmpty(value)) || chargeAmountItemSystem !== 'true';
 };
