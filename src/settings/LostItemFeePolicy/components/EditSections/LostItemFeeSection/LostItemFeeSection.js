@@ -96,6 +96,7 @@ class LostItemFeeSection extends React.Component {
                 id="lost-item-processing-fee"
                 component={TextField}
                 type="number"
+                onBlur={this.onBlur}
               />
             </Col>
           </Row>
@@ -224,6 +225,7 @@ class LostItemFeeSection extends React.Component {
                 id="replacement-processing-fee"
                 component={TextField}
                 type="number"
+                onBlur={this.onBlur}
               />
             </Col>
           </Row>
