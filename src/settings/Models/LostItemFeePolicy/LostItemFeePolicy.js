@@ -10,12 +10,12 @@ export default class LostItemFeePolicy {
     return {
       chargeAmountItem: { chargeType: 'actualCost' },
       lostItemProcessingFee: 0.00,
-      chargeAmountItemPatron: 'true',
-      chargeAmountItemSystem: 'true',
-      returnedLostItemProcessingFee: 'true',
-      replacedLostItemProcessingFee: 'true',
+      chargeAmountItemPatron: true,
+      chargeAmountItemSystem: true,
+      returnedLostItemProcessingFee: true,
+      replacedLostItemProcessingFee: true,
       replacementProcessingFee: 0.00,
-      replacementAllowed: 'true',
+      replacementAllowed: true,
       lostItemReturned: 'Charge',
     };
   }

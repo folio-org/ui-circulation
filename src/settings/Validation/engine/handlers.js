@@ -46,7 +46,7 @@ export const hasNoChargeLostItemProcessingFee = (value, model) => {
   const chargeAmountItemPatron = get(model, 'chargeAmountItemPatron');
   const chargeAmountItemSystem = get(model, 'chargeAmountItemSystem');
 
-  return chargeAmountItemPatron !== 'false' || chargeAmountItemSystem !== 'false';
+  return chargeAmountItemPatron || chargeAmountItemSystem;
 };
 
 export const hasLostItemProcessingFeeValue = (value, model) => {
@@ -58,7 +58,7 @@ export const hasLostItemProcessingFeeValue = (value, model) => {
 export const hasPositivereplacementAllowed = (value, model) => {
   const replacementAllowed = get(model, 'replacementAllowed');
 
-  return replacementAllowed === 'true';
+  return replacementAllowed;
 };
 
 export const hasPatronBilledAfterAgedToLostValue = (value, model) => {
@@ -70,5 +70,5 @@ export const hasPatronBilledAfterAgedToLostValue = (value, model) => {
 export const hasChargeAmountItemSystemSelected = (value, model) => {
   const chargeAmountItemSystem = get(model, 'chargeAmountItemSystem');
 
-  return (chargeAmountItemSystem === 'true' && isNotEmpty(value)) || chargeAmountItemSystem !== 'true';
+  return (chargeAmountItemSystem && isNotEmpty(value)) || !chargeAmountItemSystem;
 };
