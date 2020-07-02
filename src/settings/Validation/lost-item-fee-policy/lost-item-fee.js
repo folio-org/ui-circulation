@@ -6,7 +6,7 @@ export default function (l) {
     },
     'itemAgedLostOverdue.duration': {
       rules: ['chargeAmountItemSystemSelected', 'hasPatronBilledAfterAgedToLostValue', 'isIntegerGreaterThanOrEqualToZero'],
-      shouldValidate: l.hasValue('patronBilledAfterAgedLost.duration') || l.hasPassedValue('chargeAmountItemSystem', 'true') || l.hasValue('itemAgedLostOverdue.duration'),
+      shouldValidate: l.hasValue('patronBilledAfterAgedLost.duration') || l.hasPassedValue('chargeAmountItemSystem', true) || l.hasValue('itemAgedLostOverdue.duration'),
     },
     'itemAgedLostOverdue.intervalId': {
       rules: ['isNotEmptySelect'],
@@ -26,11 +26,11 @@ export default function (l) {
     },
     'lostItemProcessingFee': {
       rules: ['hasPositiveLostItemProcessingFeeValue'],
-      shouldValidate: l.hasPassedValue('chargeAmountItemPatron', 'true') || l.hasPassedValue('chargeAmountItemSystem', 'true') || l.hasValue('lostItemProcessingFee'),
+      shouldValidate: l.hasPassedValue('chargeAmountItemPatron', true) || l.hasPassedValue('chargeAmountItemSystem', true) || l.hasValue('lostItemProcessingFee'),
     },
     'returnedLostItemProcessingFee': {
       rules: ['hasLostItemProcessingFeeValue'],
-      shouldValidate: l.hasPassedValue('returnedLostItemProcessingFee', 'true'),
+      shouldValidate: l.hasPassedValue('returnedLostItemProcessingFee', true),
     },
     'chargeAmountItemPatron': {
       rules: ['hasNoChargeLostItemProcessingFee'],
@@ -54,7 +54,7 @@ export default function (l) {
     },
     'replacedLostItemProcessingFee': {
       rules: ['hasReplacedLostItemProcessingFee'],
-      shouldValidate: l.hasPassedValue('replacedLostItemProcessingFee', 'true'),
+      shouldValidate: l.hasPassedValue('replacedLostItemProcessingFee', true),
     },
     'feesFinesShallRefunded.duration': {
       rules: ['isIntegerGreaterThanOrEqualToZero'],

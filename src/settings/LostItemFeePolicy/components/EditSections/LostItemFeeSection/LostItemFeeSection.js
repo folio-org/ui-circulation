@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
+import { isBoolean } from 'lodash';
 import {
   injectIntl,
   FormattedMessage,
@@ -42,6 +43,10 @@ class LostItemFeeSection extends React.Component {
   onBlur = (e) => {
     const chargeAmountItem = parseFloat(e.target.value || 0.00).toFixed(2);
     e.target.value = chargeAmountItem;
+  };
+
+  convertToBoolean = (value) => {
+    return isBoolean(value) ? value : value === 'true';
   };
 
   render() {
@@ -114,6 +119,7 @@ class LostItemFeeSection extends React.Component {
                 id="charge-amount-item-patron"
                 component={Select}
                 dataOptions={selectValues}
+                normalize={this.convertToBoolean}
               />
             </Col>
           </Row>
@@ -131,6 +137,7 @@ class LostItemFeeSection extends React.Component {
                 id="charge-amount-item-system"
                 component={Select}
                 dataOptions={selectValues}
+                normalize={this.convertToBoolean}
               />
             </Col>
           </Row>
@@ -155,6 +162,7 @@ class LostItemFeeSection extends React.Component {
                 id="returnedLostItemProcessingFee"
                 component={Select}
                 dataOptions={selectValues}
+                normalize={this.convertToBoolean}
               />
             </Col>
           </Row>
@@ -195,6 +203,7 @@ class LostItemFeeSection extends React.Component {
                 id="replacementAllowed"
                 component={Select}
                 dataOptions={selectValues}
+                normalize={this.convertToBoolean}
               />
             </Col>
           </Row>
@@ -210,6 +219,7 @@ class LostItemFeeSection extends React.Component {
                 id="replacedLostItemProcessingFee"
                 component={Select}
                 dataOptions={selectValues}
+                normalize={this.convertToBoolean}
               />
             </Col>
           </Row>
