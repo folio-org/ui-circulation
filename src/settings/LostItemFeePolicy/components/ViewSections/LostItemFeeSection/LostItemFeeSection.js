@@ -116,7 +116,7 @@ const LostItemFeeSection = (props) => {
           <Col xs={12}>
             <div data-test-close-loan-after>
               <KeyValue
-                label={<FormattedMessage id="ui-circulation.settings.lostItemFee.lostItemChargeFeeFine" />}
+                label={<FormattedMessage id="ui-circulation.settings.lostItemFee.lostItemNotChargeFeeFine" />}
                 value={getPeriodValue('lostItemChargeFeeFine')}
               />
             </div>
