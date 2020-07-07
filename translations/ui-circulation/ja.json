@@ -340,7 +340,6 @@
     "settings.lostItemFee.lostItemProcessingFee": "紛失物処理手数料",
     "settings.lostItemFee.chargeAmountItemPatron": "利用者によって紛失が申告されたアイテムの場合、紛失した品目処理手数料を請求する",
     "settings.lostItemFee.chargeAmountItemSystem": "アイテムがシステムによって紛失となった場合、紛失したアイテムの処理手数料を請求する",
-    "settings.lostItemFee.lostItemChargeFeeFine": "手数料/罰金を請求しない遺失物の場合は、次の期間後に貸し出しを終了します。",
     "settings.lostItemFee.returnedLostItemProcessingFee": "紛失したアイテムが返却された場合は、紛失処理手数料を削除します。",
     "settings.lostItemFee.replacedLostItemProcessingFee": "紛失したアイテムを交換した場合は、紛失処理手数料を削除します。",
     "settings.lostItemFee.replacementProcessFee": "交換手数料",
@@ -393,5 +392,6 @@
     "settings.lostItemFee.validate.hasLostItemProcessingFeeValue": "Lost item processing fee must be > 0 for this selection",
     "settings.lostItemFee.validate.hasPositiveReplacementProcessingFee": "Replacement processing fee cannot be > 0 unless replacement allowed selected",
     "settings.lostItemFee.validate.hasReplacedLostItemProcessingFee": "Cannot be selected unless replacement allowed also selected",
-    "settings.lostItemFee.validate.chargeAmountItemSystemSelected": "Entry required if charge lost item processing fee if item aged to lost by system selected"
+    "settings.lostItemFee.validate.chargeAmountItemSystemSelected": "Entry required if charge lost item processing fee if item aged to lost by system selected",
+    "settings.lostItemFee.lostItemNotChargeFeeFine": "For lost items not charged a fee/fine, scrub the loan after"
 }

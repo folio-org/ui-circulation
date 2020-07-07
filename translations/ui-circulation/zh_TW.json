@@ -340,7 +340,6 @@
     "settings.lostItemFee.lostItemProcessingFee": "Lost item processing fee",
     "settings.lostItemFee.chargeAmountItemPatron": "Charge lost item processing fee if item declared lost by patron",
     "settings.lostItemFee.chargeAmountItemSystem": "Charge lost item processing fee if item aged to lost by system",
-    "settings.lostItemFee.lostItemChargeFeeFine": "For lost items not charged a fee/fine, close the loan after",
     "settings.lostItemFee.returnedLostItemProcessingFee": "如果遺失物以替換，則免除遺失物處理費",
     "settings.lostItemFee.replacedLostItemProcessingFee": "如果遺失物以替換，則免除遺失物處理費",
     "settings.lostItemFee.replacementProcessFee": "替換處理費",
@@ -393,5 +392,6 @@
     "settings.lostItemFee.validate.hasLostItemProcessingFeeValue": "Lost item processing fee must be > 0 for this selection",
     "settings.lostItemFee.validate.hasPositiveReplacementProcessingFee": "Replacement processing fee cannot be > 0 unless replacement allowed selected",
     "settings.lostItemFee.validate.hasReplacedLostItemProcessingFee": "Cannot be selected unless replacement allowed also selected",
-    "settings.lostItemFee.validate.chargeAmountItemSystemSelected": "Entry required if charge lost item processing fee if item aged to lost by system selected"
+    "settings.lostItemFee.validate.chargeAmountItemSystemSelected": "Entry required if charge lost item processing fee if item aged to lost by system selected",
+    "settings.lostItemFee.lostItemNotChargeFeeFine": "For lost items not charged a fee/fine, scrub the loan after"
 }

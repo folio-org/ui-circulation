@@ -340,7 +340,6 @@
     "settings.lostItemFee.lostItemProcessingFee": "Taxa de processamento de itens perdidos",
     "settings.lostItemFee.chargeAmountItemPatron": "Cobrar taxa de processamento de itens perdidos se o item for declarado perdido pelo usuário",
     "settings.lostItemFee.chargeAmountItemSystem": "Cobrar taxa de processamento de itens perdidos se o item tiver tempo de ser reconhecido como perdido pelo sistema",
-    "settings.lostItemFee.lostItemChargeFeeFine": "Para itens perdidos sem cobrança de taxa/multa, feche o empréstimo depois",
     "settings.lostItemFee.returnedLostItemProcessingFee": "Se o item perdido for devolvido, remova a taxa de processamento de itens perdidos",
     "settings.lostItemFee.replacedLostItemProcessingFee": "Se o item perdido for reposto, remova a taxa de processamento de itens perdidos",
     "settings.lostItemFee.replacementProcessFee": "Taxa de processamento de reposição",
@@ -393,5 +392,6 @@
     "settings.lostItemFee.validate.hasLostItemProcessingFeeValue": "A taxa de processamento de itens perdidos deve ser maior que 0 para esta seleção",
     "settings.lostItemFee.validate.hasPositiveReplacementProcessingFee": "A taxa de processamento de substituição não pode ser maior que 0, a menos que a substituição permitida tenha sido selecionada",
     "settings.lostItemFee.validate.hasReplacedLostItemProcessingFee": "Não pode ser selecionado, a menos que a substituição permitida também tenha sido selecionada",
-    "settings.lostItemFee.validate.chargeAmountItemSystemSelected": "Informação obrigatória se cobrar taxa de processamento de itens perdidos se o item for perdido ou perdido pelo sistema selecionado"
+    "settings.lostItemFee.validate.chargeAmountItemSystemSelected": "Informação obrigatória se cobrar taxa de processamento de itens perdidos se o item for perdido ou perdido pelo sistema selecionado",
+    "settings.lostItemFee.lostItemNotChargeFeeFine": "For lost items not charged a fee/fine, scrub the loan after"
 }

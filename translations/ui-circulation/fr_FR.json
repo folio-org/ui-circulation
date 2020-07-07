@@ -340,7 +340,6 @@
     "settings.lostItemFee.lostItemProcessingFee": "Frais de traitement d'objets perdus",
     "settings.lostItemFee.chargeAmountItemPatron": "Facturer des frais de perte si l'article est déclaré perdu par l'utilisateur",
     "settings.lostItemFee.chargeAmountItemSystem": "Charge lost item processing fee if item aged to lost by system",
-    "settings.lostItemFee.lostItemChargeFeeFine": "For lost items not charged a fee/fine, close the loan after",
     "settings.lostItemFee.returnedLostItemProcessingFee": "Si l'article perdu est retourné, supprimer les frais de traitement de l'article perdu",
     "settings.lostItemFee.replacedLostItemProcessingFee": "Si l'article perdu est remplacé, supprimer les frais pour article perdu.",
     "settings.lostItemFee.replacementProcessFee": "Frais de traitement de remplacement",
@@ -393,5 +392,6 @@
     "settings.lostItemFee.validate.hasLostItemProcessingFeeValue": "Lost item processing fee must be > 0 for this selection",
     "settings.lostItemFee.validate.hasPositiveReplacementProcessingFee": "Replacement processing fee cannot be > 0 unless replacement allowed selected",
     "settings.lostItemFee.validate.hasReplacedLostItemProcessingFee": "Cannot be selected unless replacement allowed also selected",
-    "settings.lostItemFee.validate.chargeAmountItemSystemSelected": "Entry required if charge lost item processing fee if item aged to lost by system selected"
+    "settings.lostItemFee.validate.chargeAmountItemSystemSelected": "Entry required if charge lost item processing fee if item aged to lost by system selected",
+    "settings.lostItemFee.lostItemNotChargeFeeFine": "For lost items not charged a fee/fine, scrub the loan after"
 }
