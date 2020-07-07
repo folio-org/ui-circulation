@@ -340,7 +340,6 @@
     "settings.lostItemFee.lostItemProcessingFee": "رسم معالجة مادة مفقودة",
     "settings.lostItemFee.chargeAmountItemPatron": "فرض رسم معالجة مادة مفقودة إذا أعلن المستفيد فقدان المادة",
     "settings.lostItemFee.chargeAmountItemSystem": "فرض رسم معالجة مادة مفقودة إذا أصبحت المادة مفقودة وفقًا للنظام",
-    "settings.lostItemFee.lostItemChargeFeeFine": "بالنسبة للمواد المفقودة التي لم يتم فرض غرامة/رسم لها، قم بإعلاق الإعارة بعد",
     "settings.lostItemFee.returnedLostItemProcessingFee": "إذا تمت إعادة المادة المفقودة، قم بإزالة رسم معالجة المادة المفقودة",
     "settings.lostItemFee.replacedLostItemProcessingFee": "إذا تم استبدال المادة المفقودة، قم بإزالة رسم معالجة المادة المفقودة",
     "settings.lostItemFee.replacementProcessFee": "رسم معالجة الاستبدال",
@@ -393,5 +392,6 @@
     "settings.lostItemFee.validate.hasLostItemProcessingFeeValue": "يجب أن يكون رسم معالجة المادة المفقودة > 0 لهذا التحديد",
     "settings.lostItemFee.validate.hasPositiveReplacementProcessingFee": "لا يمكن أن يكون رسم معالجة الاستبدال > 0 إلا عند تحديد الاستبدال مسموح",
     "settings.lostItemFee.validate.hasReplacedLostItemProcessingFee": "لا يمكن تحديده إلا إذا تم تحديد الاستبدال مسموح أيضاً",
-    "settings.lostItemFee.validate.chargeAmountItemSystemSelected": "الإدخال مطلوب إذا تم تحديد فرض رسم معالجة مادة مفقودة إذا تقادمت المادة إلى مفقودة وفقًا للنظام"
+    "settings.lostItemFee.validate.chargeAmountItemSystemSelected": "الإدخال مطلوب إذا تم تحديد فرض رسم معالجة مادة مفقودة إذا تقادمت المادة إلى مفقودة وفقًا للنظام",
+    "settings.lostItemFee.lostItemNotChargeFeeFine": "بالنسبة للمواد المفقودة التي لم يتم فرض غرامة/رسم لها، قم بإغلاق الإعارة بعد"
 }
