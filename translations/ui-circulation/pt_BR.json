@@ -393,5 +393,5 @@
     "settings.lostItemFee.validate.hasPositiveReplacementProcessingFee": "A taxa de processamento de substituição não pode ser maior que 0, a menos que a substituição permitida tenha sido selecionada",
     "settings.lostItemFee.validate.hasReplacedLostItemProcessingFee": "Não pode ser selecionado, a menos que a substituição permitida também tenha sido selecionada",
     "settings.lostItemFee.validate.chargeAmountItemSystemSelected": "Informação obrigatória se cobrar taxa de processamento de itens perdidos se o item for perdido ou perdido pelo sistema selecionado",
-    "settings.lostItemFee.lostItemNotChargeFeeFine": "For lost items not charged a fee/fine, scrub the loan after"
+    "settings.lostItemFee.lostItemNotChargeFeeFine": "Para itens perdidos sem cobrança de taxa/multa, limpe o empréstimo após"
 }
