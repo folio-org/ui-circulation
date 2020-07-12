@@ -6,7 +6,7 @@ import {
 } from '@bigtest/mocha';
 import { expect } from 'chai';
 import { kebabCase } from 'lodash';
-import { Response } from '@bigtest/mirage';
+import { Response } from 'miragejs';
 
 import setupApplication from '../../helpers/setup-application';
 import circulationRules from '../../interactors/circulation-rules-editor/pane';
