@@ -53,7 +53,6 @@ const OverdueFinesSectionColumn = (props) => {
       </Row>
     </div>
 
-
   );
 };
 OverdueFinesSectionColumn.propTypes = {
@@ -63,6 +62,5 @@ OverdueFinesSectionColumn.propTypes = {
   intl: PropTypes.object,
   onBlurField: PropTypes.func,
 };
-
 
 export default OverdueFinesSectionColumn;

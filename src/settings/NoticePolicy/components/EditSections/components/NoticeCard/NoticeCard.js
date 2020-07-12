@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { isEmpty, get } from 'lodash';
+import { isEmpty } from 'lodash';
 import { Field } from 'redux-form';
 import {
   injectIntl,

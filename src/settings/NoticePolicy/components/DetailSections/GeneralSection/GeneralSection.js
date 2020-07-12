@@ -76,7 +76,6 @@ const GeneralSection = (props) => {
   );
 };
 
-
 GeneralSection.propTypes = {
   metadata: PropTypes.object.isRequired,
   isOpen: PropTypes.bool.isRequired,

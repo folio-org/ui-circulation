@@ -5,9 +5,7 @@ import {
   unset,
 } from 'lodash';
 
-
 import { LostItem } from '../../Models/common';
-
 
 // eslint-disable-next-line import/prefer-default-export
 export function checkInvalid(policy) {

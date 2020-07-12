@@ -157,7 +157,6 @@ const mapStateToProps = (state) => ({
   policy: new FinePolicy(getFormValues('finePolicyForm')(state)),
 });
 
-
 const connectedFinePolicyForm = connect(mapStateToProps)(injectIntl(FinePolicyForm));
 
 export default stripesForm({

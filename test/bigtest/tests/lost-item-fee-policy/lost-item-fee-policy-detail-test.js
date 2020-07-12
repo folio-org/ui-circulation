@@ -51,7 +51,6 @@ describe('LostItemFeePolicyDetail', () => {
           await this.visit(`/settings/circulation/lost-item-fee-policy/${lostItemPolicy.id}`);
         });
 
-
         describe('Show the view section', () => {
           it('should be displayed', () => {
             expect(LostItemFeePolicyDetail.aboutSection.policyName.isPresent).to.be.true;

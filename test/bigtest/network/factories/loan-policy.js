@@ -8,7 +8,6 @@ import { // eslint-disable-line import/no-extraneous-dependencies
   longTermLoansOptions,
 } from '@folio/circulation/src/constants'; // eslint-disable-line  import/no-unresolved
 
-
 export const getPeriod = {
   duration: () => faker.random.number(),
   intervalId: () => faker.random.arrayElement(intervalPeriods).value,

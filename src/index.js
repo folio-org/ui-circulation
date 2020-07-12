@@ -110,7 +110,6 @@ class Circulation extends Component {
         ],
       },
 
-
       {
         label: <FormattedMessage id="ui-circulation.settings.index.request" />,
         pages: [
@@ -132,7 +131,6 @@ class Circulation extends Component {
       },
     ];
   }
-
 
   render() {
     return (

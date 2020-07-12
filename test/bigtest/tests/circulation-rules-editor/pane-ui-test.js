@@ -57,7 +57,6 @@ describe('Circulation rules editor: pane UI', () => {
     expect(circulationRules.isSaveButtonDisabled).to.be.true;
   });
 
-
   describe('rules filtering', () => {
     beforeEach(async () => {
       await circulationRules.filter('term');

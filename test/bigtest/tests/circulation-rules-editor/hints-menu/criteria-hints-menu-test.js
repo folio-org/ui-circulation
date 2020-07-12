@@ -27,7 +27,6 @@ describe('Circulation rules editor: criteria hints', () => {
   let libraries2;
   let locations;
 
-
   const shortInstitutionCode = 'INST';
   const longInstitutionCode = '/TESTCODE TESTCODE TESTCODE TESTCODE';
   const truncatedInstitutionCode = 'TESTCODE-TESTCODE...';
@@ -463,7 +462,6 @@ describe('Circulation rules editor: criteria hints', () => {
           it('should not highlight anything if the filter value is empty', () => {
             expect(getEditorHintSection(3).hasHighlightedItems).to.be.false;
           });
-
 
           it('should make the fourth section (location) filled', () => {
             expect(getEditorHintSection(3).items().length).to.equal(locationsAmount);
