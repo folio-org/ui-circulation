@@ -1,0 +1,18 @@
+@import "@folio/stripes-components/lib/variables.css";
+
+.preview {
+  justify-content: flex-end;
+  padding-right: 5px;
+  margin-bottom: 5px;
+}
+
+.label {
+  display: inline-block;
+  margin-bottom: 0.5rem;
+}
+
+.required {
+  color: var(--error);
+  font-weight: var(--text-weight-medium);
+  padding: 0 0.1rem;
+}

@@ -1,0 +1,39 @@
+@import "~@folio/stripes-components/lib/variables.css";
+
+.ql-editor {
+  min-height: 100px !important;
+  resize: vertical;
+}
+
+.ql-token {
+  font-weight: 500;
+  padding-bottom: 5px;
+}
+
+.ql-toolbar {
+  border-bottom: none !important;
+}
+
+.ql-picker.ql-size .ql-picker-label[data-value="10px"]::before,
+.ql-picker.ql-size .ql-picker-item[data-value="10px"]::before {
+  content: 'Small';
+}
+.ql-picker.ql-size .ql-picker-item[data-value="10px"]::before {
+  font-size: var(--font-size-x-small);
+}
+
+.ql-picker.ql-size .ql-picker-label[data-value="18px"]::before,
+.ql-picker.ql-size .ql-picker-item[data-value="18px"]::before {
+  content: 'Large';
+}
+.ql-picker.ql-size .ql-picker-item[data-value="18px"]::before {
+  font-size: var(--font-size-large);
+}
+
+.ql-picker.ql-size .ql-picker-label[data-value="32px"]::before,
+.ql-picker.ql-size .ql-picker-item[data-value="32px"]::before {
+  content: 'Huge';
+}
+.ql-picker.ql-size .ql-picker-item[data-value="32px"]::before {
+  font-size: var(--font-size-xx-large);
+}
