@@ -1,5 +1,10 @@
+import { inflections } from 'inflected';
+
 // typical mirage config export
 export default function config() {
+  inflections('en', function (inflect) {
+    inflect.irregular('campus', 'campus');
+  });
   this.get('/circulation/rules', {
     'id' : '4c70f818-2edc-4cf8-aa27-16c14c5c7b58',
     'rulesAsText': 'priority: t, s, c, b, a, m, g\nfallback-policy: m 1a54b431-2e4f-452d-9cae-9cee66c9a892 :l d9cd0bed-1b49-4b5e-a7bd-064b8d177231 r 1a29c562-d725-4a28-a071-24fdfd23a990 n 1e5cb907-2dfd-4529-a8d8-0ba1cd86dd87 o 1e5cb907-2dfd-4529-a8d8-0ba1cd86dd89 i 1e5cb907-2dfd-4529-a8d8-0ba1cd86dd91'
