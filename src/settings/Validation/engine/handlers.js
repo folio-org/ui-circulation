@@ -6,6 +6,8 @@ import {
   isUndefined
 } from 'lodash';
 
+import moment from 'moment';
+
 export const isNotEmpty = (value) => {
   return isNumber(value) || !isEmpty(value);
 };
@@ -71,4 +73,18 @@ export const hasChargeAmountItemSystemSelected = (value, model) => {
   const chargeAmountItemSystem = get(model, 'chargeAmountItemSystem');
 
   return (chargeAmountItemSystem && isNotEmpty(value)) || !chargeAmountItemSystem;
+};
+
+export const isToBeforeFrom = (value, model, { pathToSection }) => {
+  const to = moment(value);
+  const from = moment(get(model, `${pathToSection}.from`));
+
+  return to.isAfter(from);
+};
+
+export const isDueAfterTo = (value, model, { pathToSection }) => {
+  const due = moment(value);
+  const to = moment(get(model, `${pathToSection}.to`));
+
+  return due.isSameOrAfter(to);
 };

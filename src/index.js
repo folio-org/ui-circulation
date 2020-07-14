@@ -11,7 +11,7 @@ import LostItemFeePolicySettings from './settings/LostItemFeePolicy/LostItemFeeP
 import CirculationRules from './settings/CirculationRules';
 import RequestCancellationReasons from './settings/RequestCancellationReasons';
 import CheckoutSettings from './settings/CheckoutSettings';
-import FixedDueDateScheduleManager from './settings/FixedDueDateScheduleManager';
+import FixedDueDateScheduleManager from './settings/FixedDueDateSchedule/FixedDueDateScheduleManager';
 import PatronNotices from './settings/PatronNotices';
 import StaffSlips from './settings/StaffSlips';
 import NoticePolicySettings from './settings/NoticePolicy';

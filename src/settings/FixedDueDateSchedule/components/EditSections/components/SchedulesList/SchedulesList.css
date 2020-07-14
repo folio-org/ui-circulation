@@ -1,0 +1,10 @@
+@import "@folio/stripes-components/lib/variables.css";
+
+.scheduleError {
+  color: var(--error);
+  margin-bottom: 5px;
+}
+
+.btnContainer {
+  text-align: right;
+}
