@@ -197,39 +197,6 @@ class RulesEditor extends React.Component {
     this.cm.on('endCompletion', this.showHint);
   }
 
-  // eslint-disable-next-line camelcase
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    const nextState = {};
-
-    if (nextProps.typeMapping && !isEqual(nextProps.typeMapping, this.props.typeMapping)) {
-      nextState.typeMapping = nextProps.typeMapping;
-    }
-
-    if (nextProps.policyMapping && !isEqual(nextProps.policyMapping, this.props.policyMapping)) {
-      nextState.policyMapping = nextProps.policyMapping;
-    }
-
-    if (nextProps.completionLists && !isEqual(nextProps.completionLists, this.props.completionLists)) {
-      nextState.completionLists = nextProps.completionLists;
-    }
-
-    if (!isEmpty(nextState)) {
-      this.setState(({ codeMirrorOptions }) => {
-        const newCodeMirrorOptions = cloneDeep(codeMirrorOptions);
-
-        return { codeMirrorOptions: Object.assign(newCodeMirrorOptions.mode, nextState) };
-      });
-    }
-
-    if (nextProps.code !== this.props.code) {
-      this.setState(() => ({ code: nextProps.code }));
-    }
-
-    if (nextProps.filter !== this.props.filter) {
-      this.filterRules(nextProps.filter);
-    }
-  }
-
   componentDidUpdate() {
     this.clearErrors();
     this.cm.refresh();
