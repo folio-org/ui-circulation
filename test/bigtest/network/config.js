@@ -4,6 +4,8 @@ import { inflections } from 'inflected';
 export default function config() {
   inflections('en', function (inflect) {
     inflect.irregular('campus', 'campus');
+    inflect.irregular('templates', 'templates');
+    inflect.irregular('payments', 'payments');
   });
   this.get('/circulation/rules', {
     'id' : '4c70f818-2edc-4cf8-aa27-16c14c5c7b58',
