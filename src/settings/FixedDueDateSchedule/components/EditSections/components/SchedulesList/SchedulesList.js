@@ -69,7 +69,7 @@ class SchedulesList extends React.Component {
         { fields.map((schedule, index) => {
           return (
             <ScheduleCard
-              key={fields.value[index].key || uniqueId('schedule_')}
+              key={fields.value[index].key}
               pathToSchedule={schedule}
               scheduleIndex={index}
               onRemoveSchedule={this.onRemoveField}
