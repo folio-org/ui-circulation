@@ -280,7 +280,7 @@
     "sinon": "^7.2.2"
   },
   "dependencies": {
-    "@folio/stripes-template-editor": "./stripes-template-editor",
+    "@folio/stripes-template-editor": "^1.0.0",
     "final-form": "^4.18.2",
     "final-form-arrays": "^3.0.1",
     "html-to-react": "^1.3.3",
