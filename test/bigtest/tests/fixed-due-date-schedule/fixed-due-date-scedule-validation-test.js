@@ -42,4 +42,42 @@ describe('Fixed Due Date Schedule Validation', () => {
       expect(FddsForm.validationMessage).to.equal(translation['settings.fDDS.validate.uniqueName']);
     });
   });
+
+  describe('Schedules overlappng error', () => {
+    let schedule;
+
+    beforeEach(async function () {
+      schedule = await this.server.create('fixed-due-date-schedule', {
+        schedules: [
+          {
+            from: '07/14/2020',
+            to: '07/15/2020',
+            due: '07/15/2020',
+          },
+          {
+            from: '07/14/2020',
+            to: '07/15/2020',
+            due: '07/15/2020',
+          },
+        ]
+      });
+    });
+
+    beforeEach(async function () {
+      this.visit(`settings/circulation/fixed-due-date-schedules/${schedule.id}?layer=edit`);
+    });
+
+    beforeEach(async function () {
+      await FddsForm.whenLoaded();
+    });
+
+    beforeEach(async () => {
+      await FddsForm.fillName('test');
+      await FddsForm.clickSave();
+    });
+
+    it('has validation error', () => {
+      expect(FddsForm.hasSchedulesArrayError).to.be.true;
+    });
+  });
 });
