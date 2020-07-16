@@ -194,7 +194,7 @@
     "settings.circulationRules.rulesUpdated": "Rules were successfully updated.",
     "settings.circulationRules.newRule": "New rule (#)",
     "settings.circulationRules.patronGroups": "Patron groups",
-    "settings.circulationRules.materialTypes": "Material types",
+    "settings.circulationRules.materialTypes": "Materialarten",
     "settings.circulationRules.loanTypes": "Loan types",
     "settings.circulationRules.loanPolicies": "Loan policies",
     "settings.circulationRules.requestPolicies": "Request policies",
