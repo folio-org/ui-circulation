@@ -2,13 +2,13 @@
 
 ## 3.1.0 (IN PROGRESS)
 
-* Refactor `bigtest/mirage` to `mirageje`.
 * Accessibility work with color contrast. Refs UICIRC-463.
 * Able to set Overdue Fine Max to value less than Overdue Fine. Refs UICIRC-475.
 * Fee/Fine Overdue Fine Policies: Additional validation not in original user story. Refs UICIRC-476.
 * Adjust UI for fee/fine notice token options on templates. Refs UICIRC-479.
 * Lost item fee policy: Additional validation not in original user story. Refs UICIRC-478.
 * Lost item fee policy: Handle processing fees same as fee amount. Refs UICIRC-482.
+* Refactor `bigtest/mirage` to `miragejs`.
 
 ## 3.0.0 (https://github.com/folio-org/ui-circulation/tree/v3.0.0) (2019-06-10)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v2.0.0...v3.0.0)
