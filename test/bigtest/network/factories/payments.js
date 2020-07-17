@@ -1,4 +1,4 @@
-import { Factory } from 'miragejs';
+import { Factory, trait } from 'miragejs';
 import faker from 'faker';
 
 export default Factory.extend({
@@ -14,14 +14,11 @@ export default Factory.extend({
   },
 
   // eslint-disable-next-line quote-props
-  withAccounts: {
-    extension: {
-      afterCreate(payments, server) {
-        const owner = server.create('owner');
-        payments.update('ownerId', owner.id);
-        payments.save();
-      }
-    },
-    __isTrait__: true
-  }
+  withAccounts: trait({
+    afterCreate(payments, server) {
+      const owner = server.create('owner');
+      payments.update('ownerId', owner.id);
+      payments.save();
+    }
+  })
 });

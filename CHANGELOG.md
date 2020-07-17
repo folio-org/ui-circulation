@@ -2,6 +2,7 @@
 
 ## 3.1.0 (IN PROGRESS)
 
+* Refactor `bigtest/mirage` to `mirageje`.
 * Accessibility work with color contrast. Refs UICIRC-463.
 * Able to set Overdue Fine Max to value less than Overdue Fine. Refs UICIRC-475.
 * Fee/Fine Overdue Fine Policies: Additional validation not in original user story. Refs UICIRC-476.
