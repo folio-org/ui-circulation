@@ -22,6 +22,7 @@ export default class FormValidator {
     let validationMessage = null;
 
     const validationRules = this.config[pathToField].rules || [];
+    const additionalData = this.config[pathToField].additionalData;
 
     some(validationRules, validationRule => {
       const validator = this.validators[validationRule];
@@ -33,7 +34,7 @@ export default class FormValidator {
 
       const valueToValidate = get(data, pathToField);
       const isValid = this.config[pathToField].shouldValidate
-        ? validator.validate(valueToValidate, data)
+        ? validator.validate(valueToValidate, data, additionalData)
         : true;
 
       if (!isValid) {
@@ -80,7 +81,6 @@ export default class FormValidator {
         }
       });
     }
-
     return errors;
   }
 }

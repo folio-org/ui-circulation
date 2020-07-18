@@ -1,0 +1,26 @@
+@import "@folio/stripes-components/lib/variables.css";
+
+.scheduleItem {
+  border-color: #999;
+  border-width: 1px;
+  border-style: solid;
+  width: 100%;
+  margin-bottom: 25px;
+}
+
+.scheduleHeader {
+  background-color: var(--bg-hover);
+  padding: 5px;
+  min-height: 30px;
+  font-weight: var(--text-weight-medium);
+}
+
+.scheduleItemContent {
+  padding: 6px 14px;
+  width: 100%;
+}
+
+.headerIcon {
+  text-align: right;
+  color: var(--color-text);
+}

@@ -5,3 +5,4 @@ export { default as NoticePolicy } from './notice-policy';
 export { default as RequestPolicy } from './request-policy';
 export { default as PatronNoticeTemplate } from './patron-notice-template';
 export { default as LostItemFeePolicy } from './lost-item-fee-policy';
+export { default as FixedDueDateSchedule } from './fixed-due-date-schedule';
