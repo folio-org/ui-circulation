@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Field } from 'redux-form';
+import { Field } from 'react-final-form';
 import { FormattedMessage } from 'react-intl';
 
 import {
@@ -59,7 +59,6 @@ class GeneralSection extends React.Component {
               className={styles.checkbox}
               label={<FormattedMessage id="ui-circulation.settings.noticePolicy.active" />}
               component={Checkbox}
-              normalize={v => !!v}
             />
           </div>
           <div data-test-general-section-policy-description>

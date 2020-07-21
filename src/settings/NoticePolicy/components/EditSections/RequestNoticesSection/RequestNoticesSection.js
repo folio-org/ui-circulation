@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
-import { FieldArray } from 'redux-form';
+import { FieldArray } from 'react-final-form-arrays';
 import { values } from 'lodash';
 import { Accordion } from '@folio/stripes/components';
 
@@ -31,15 +31,6 @@ class RequestNoticesSection extends React.Component {
       onToggle,
     } = this.props;
 
-    const props = {
-      policy,
-      sectionKey: 'requestNotices',
-      sendEvents: requestTimeBasedNoticesSendEvents,
-      sendEventTriggeringIds: values(requestTimeBasedEventsIds),
-      templates,
-      triggeringEvents: requestNoticesTriggeringEvents,
-    };
-
     return (
       <div data-test-notice-policy-form-request-notices-section>
         <Accordion
@@ -49,9 +40,14 @@ class RequestNoticesSection extends React.Component {
           onToggle={onToggle}
         >
           <FieldArray
-            name={props.sectionKey}
+            name="requestNotices"
+            sectionKey="requestNotices"
             component={NoticesList}
-            props={props}
+            policy={policy}
+            sendEvents={requestTimeBasedNoticesSendEvents}
+            sendEventTriggeringIds={values(requestTimeBasedEventsIds)}
+            templates={templates}
+            triggeringEvents={requestNoticesTriggeringEvents}
           />
         </Accordion>
       </div>
