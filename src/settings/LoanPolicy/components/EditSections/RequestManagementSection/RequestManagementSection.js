@@ -1,7 +1,7 @@
 import React from 'react';
 import { get } from 'lodash';
 import PropTypes from 'prop-types';
-import { Field } from 'redux-form';
+import { Field } from 'react-final-form';
 import {
   injectIntl,
   FormattedMessage,
@@ -13,7 +13,7 @@ import {
 } from '@folio/stripes/components';
 
 import optionsGenerator from '../../../../utils/options-generator';
-import { Period } from '../../../../components';
+import Period from '../Period';
 import {
   intervalPeriods,
   loanProfileMap,
@@ -21,7 +21,7 @@ import {
 
 class RequestManagementSection extends React.Component {
   static propTypes = {
-    intl: PropTypes.object,
+    intl: PropTypes.object.isRequired,
     policy: PropTypes.object.isRequired,
     holdsSectionOpen: PropTypes.bool.isRequired,
     recallsSectionOpen: PropTypes.bool.isRequired,
@@ -100,7 +100,6 @@ class RequestManagementSection extends React.Component {
               id="requestManagement.holds.renewItemsWithRequest"
               component={Checkbox}
               type="checkbox"
-              normalize={v => !!v}
             />
           </div>
           <br />

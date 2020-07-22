@@ -1,7 +1,7 @@
 import { get } from 'lodash';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Field } from 'redux-form';
+import { Field } from 'react-final-form';
 import {
   injectIntl,
   FormattedMessage,
@@ -15,7 +15,7 @@ import {
   Col,
 } from '@folio/stripes/components';
 
-import { Period } from '../../../../components';
+import Period from '../Period';
 import {
   loanProfileTypes,
   intervalPeriods,
@@ -27,7 +27,7 @@ import optionsGenerator from '../../../../utils/options-generator';
 
 class LoansSection extends React.Component {
   static propTypes = {
-    intl: PropTypes.object,
+    intl: PropTypes.object.isRequired,
     policy: PropTypes.object.isRequired,
     schedules: PropTypes.arrayOf(PropTypes.node).isRequired,
     change: PropTypes.func.isRequired,
@@ -86,7 +86,6 @@ class LoansSection extends React.Component {
             name="loanable"
             component={Checkbox}
             type="checkbox"
-            normalize={v => !!v}
           />
         </div>
         { policy.isLoanable() &&

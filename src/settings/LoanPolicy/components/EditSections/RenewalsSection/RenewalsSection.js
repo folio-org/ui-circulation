@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Field } from 'redux-form';
+import { Field } from 'react-final-form';
 import {
   injectIntl,
   FormattedMessage,
@@ -13,7 +13,7 @@ import {
 } from '@folio/stripes/components';
 
 import optionsGenerator from '../../../../utils/options-generator';
-import { Period } from '../../../../components';
+import Period from '../Period';
 import {
   intervalPeriods,
   renewFromOptions,
@@ -60,7 +60,6 @@ class RenewalsSection extends React.Component {
             component={Checkbox}
             type="checkbox"
             id="renewable"
-            normalize={v => !!v}
           />
         </div>
         { policy.isRenewable() &&
@@ -71,7 +70,6 @@ class RenewalsSection extends React.Component {
               id="renewalsPolicy.unlimited"
               component={Checkbox}
               type="checkbox"
-              normalize={v => !!v}
             />
           </div>}
         { policy.isRenewable() && !policy.isUnlimitedRenewals() &&
@@ -110,7 +108,6 @@ class RenewalsSection extends React.Component {
               id="renewalsPolicy.differentPeriod"
               component={Checkbox}
               type="checkbox"
-              normalize={v => !!v}
             />
           </div>}
         { policy.isRenewable() && policy.isDifferentPeriod() && policy.isProfileRolling() &&
