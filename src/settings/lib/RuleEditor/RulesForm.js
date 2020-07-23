@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Field } from 'redux-form';
+import { Field } from 'react-final-form';
 import { FormattedMessage } from 'react-intl';
 
 import {
@@ -9,7 +9,7 @@ import {
   Button,
   TextField
 } from '@folio/stripes/components';
-import stripesForm from '@folio/stripes/form';
+import stripesFinalForm from '@folio/stripes/final-form';
 
 import RulesField from './RulesField';
 
@@ -91,8 +91,4 @@ class RulesForm extends React.Component {
   }
 }
 
-export default stripesForm({
-  form: 'rulesForm',
-  navigationCheck: true,
-  enableReinitialize: true,
-})(RulesForm);
+export default stripesFinalForm({ navigationCheck: true })(RulesForm);
