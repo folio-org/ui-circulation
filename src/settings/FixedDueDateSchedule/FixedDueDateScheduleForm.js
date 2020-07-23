@@ -48,7 +48,6 @@ class FixedDueDateScheduleForm extends React.Component {
     pristine: PropTypes.bool.isRequired,
     submitting: PropTypes.bool.isRequired,
     okapi: PropTypes.object.isRequired,
-    form: PropTypes.object.isRequired,
   };
 
   static defaultProps = {
@@ -82,15 +81,11 @@ class FixedDueDateScheduleForm extends React.Component {
   };
 
   validateName = memoize(async (name) => {
-    const {
-      initialValues,
-      form,
-    } = this.props;
+    const { initialValues } = this.props;
 
     let error;
-    const field = form.getFieldState('name');
 
-    if (name && field.dirty) {
+    if (name) {
       try {
         const response = await this.getScheduleByName(name);
         const { fixedDueDateSchedules = [] } = await response.json();
@@ -344,6 +339,5 @@ class FixedDueDateScheduleForm extends React.Component {
 
 export default stripesFinalForm({
   navigationCheck: true,
-  validateOnBlur: true,
   validate: validateFixedDueDateSchedule,
 })(FixedDueDateScheduleForm);
