@@ -16,9 +16,9 @@ export const isIntegerGreaterThanZero = (value) => isInteger(value) && value > 0
 
 export const isIntegerGreaterThanOrEqualToZero = (value) => isInteger(value) && value >= 0;
 
-export const isStringGreaterThanZero = (value) => isIntegerGreaterThanZero(parseInt(value, 10));
+export const isStringGreaterThanZero = (value) => isIntegerGreaterThanZero(Number(value));
 
-export const isStringGreaterThanOrEqualToZero = (value) => isIntegerGreaterThanOrEqualToZero(parseInt(value, 10));
+export const isStringGreaterThanOrEqualToZero = (value) => isIntegerGreaterThanOrEqualToZero(Number(value));
 
 export const isPositiveNumber = (value) => isInteger(value) && value >= 0;
 
