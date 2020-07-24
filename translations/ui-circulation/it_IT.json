@@ -325,7 +325,7 @@
     "settings.finePolicy.year": "anno",
     "settings.circulationRules.filterOptionsList": "Filtra lista opzioni",
     "settings.staffSlips.requestDeliveryAddressTokenHeader": "Richiedi indirizzo di consegna",
-    "settings.noticePolicy.loanNotices.itemRecalled": "Item richiamato",
+    "settings.noticePolicy.loanNotices.itemRecalled": "Item Richiesto",
     "settings.fDDSform.cancel": "Annulla",
     "settings.validate.lostItem": "This field is required if there is a possibility of no fee/fine being charged for a lost item",
     "settings.lostItemFee.entryLabel": "Politiche tariffa per item smarriti",

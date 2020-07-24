@@ -77,15 +77,11 @@ class RequestPolicyForm extends React.Component {
   };
 
   validate = memoize(async (name) => {
-    const {
-      initialValues,
-      form,
-    } = this.props;
+    const { initialValues } = this.props;
 
     let error;
-    const field = form.getFieldState('name');
 
-    if (name && field.dirty) {
+    if (name) {
       try {
         const response = await this.getPoliciesByName(name);
         const { requestPolicies = [] } = await response.json();
@@ -166,6 +162,5 @@ class RequestPolicyForm extends React.Component {
 
 export default stripesFinalForm({
   navigationCheck: true,
-  validateOnBlur: true,
   validate: validateRequestPolicy,
 })(RequestPolicyForm);

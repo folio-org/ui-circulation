@@ -156,6 +156,5 @@ class NoticePolicyForm extends React.Component {
 export default stripesFinalForm({
   navigationCheck: true,
   validate: validateNoticePolicy,
-  validateOnBlur: true,
   subscription: { values: true },
 })(NoticePolicyForm);
