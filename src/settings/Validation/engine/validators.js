@@ -19,6 +19,8 @@ import {
   hasPositivereplacementAllowed,
   hasPatronBilledAfterAgedToLostValue,
   hasChargeAmountItemSystemSelected,
+  isToBeforeFrom,
+  isDueAfterTo,
 } from './handlers';
 
 export default {
@@ -121,5 +123,17 @@ export default {
   chargeAmountItemSystemSelected: {
     validate: hasChargeAmountItemSystemSelected,
     message: <FormattedMessage id="ui-circulation.settings.lostItemFee.validate.chargeAmountItemSystemSelected" />
+  },
+  isToBeforeFrom: {
+    validate: isToBeforeFrom,
+    message: <FormattedMessage id="ui-circulation.settings.fDDS.validate.toDate" />
+  },
+  isDueAfterTo: {
+    validate: isDueAfterTo,
+    message: <FormattedMessage id="ui-circulation.settings.fDDS.validate.onOrAfter" />
+  },
+  hasPositiveCheckoutTimeoutDuration: {
+    validate: isIntegerGreaterThanZero,
+    message: <FormattedMessage id="ui-circulation.settings.checkout.validate.timeoutDuration" />
   },
 };

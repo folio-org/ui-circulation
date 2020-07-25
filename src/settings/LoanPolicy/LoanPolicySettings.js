@@ -12,7 +12,7 @@ import { stripesConnect } from '@folio/stripes/core';
 import LoanPolicyDetail from './LoanPolicyDetail';
 import LoanPolicyForm from './LoanPolicyForm';
 import LoanPolicy from '../Models/LoanPolicy';
-import { LoanPolicy as validateLoanPolicy } from '../Validation';
+import { normalize } from './utils/normalize';
 
 class LoanPolicySettings extends React.Component {
   static manifest = Object.freeze({
@@ -40,7 +40,7 @@ class LoanPolicySettings extends React.Component {
   });
 
   static propTypes = {
-    intl: PropTypes.object,
+    intl: PropTypes.object.isRequired,
     resources: PropTypes.shape({
       loanPolicies: PropTypes.object,
       fixedDueDateSchedules: PropTypes.object,
@@ -86,7 +86,7 @@ class LoanPolicySettings extends React.Component {
         paneTitle={<FormattedMessage id="ui-circulation.settings.loanPolicy.paneTitle" />}
         entryLabel={formatMessage({ id: 'ui-circulation.settings.loanPolicy.entryLabel' })}
         defaultEntry={LoanPolicy.defaultLoanPolicy()}
-        validate={validateLoanPolicy}
+        onBeforeSave={normalize}
       />
     );
   }

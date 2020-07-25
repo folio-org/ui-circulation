@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
-import { FieldArray } from 'redux-form';
+import { FieldArray } from 'react-final-form-arrays';
 import { values } from 'lodash';
 import { Accordion } from '@folio/stripes/components';
 
@@ -31,15 +31,6 @@ class FeeFineNoticesSection extends React.Component {
       onToggle,
     } = this.props;
 
-    const props = {
-      policy,
-      sectionKey: 'feeFineNotices',
-      sendEvents: feeFinesNoticesSendEvents,
-      sendEventTriggeringIds: values(feeFineEventsIds),
-      templates,
-      triggeringEvents: feeFineNoticesTriggeringEvents,
-    };
-
     return (
       <Accordion
         id="feeFineNotices"
@@ -48,9 +39,14 @@ class FeeFineNoticesSection extends React.Component {
         onToggle={onToggle}
       >
         <FieldArray
-          name={props.sectionKey}
+          name="feeFineNotices"
+          sectionKey="feeFineNotices"
           component={NoticesList}
-          props={props}
+          policy={policy}
+          sendEvents={feeFinesNoticesSendEvents}
+          sendEventTriggeringIds={values(feeFineEventsIds)}
+          templates={templates}
+          triggeringEvents={feeFineNoticesTriggeringEvents}
         />
       </Accordion>
     );

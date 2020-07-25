@@ -75,15 +75,11 @@ class PatronNoticeForm extends React.Component {
   };
 
   validateName = memoize(async (name) => {
-    const {
-      initialValues,
-      form,
-    } = this.props;
+    const { initialValues } = this.props;
 
     let error;
-    const field = form.getFieldState('name');
 
-    if (name && field.dirty) {
+    if (name) {
       try {
         const response = await this.getTemplatesByName(name);
         const { templates = [] } = await response.json();
@@ -275,6 +271,5 @@ class PatronNoticeForm extends React.Component {
 export default stripesFinalForm({
   navigationCheck: true,
   validate: validatePatronNoticeTemplate,
-  validateOnBlur: true,
   subscription: { values: true },
 })(injectIntl(PatronNoticeForm));

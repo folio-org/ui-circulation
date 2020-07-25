@@ -1,7 +1,10 @@
 import {
   interactor,
-  isPresent
+  isPresent,
+  scoped,
 } from '@bigtest/interactor';
+
+import { AccordionInteractor } from '@folio/stripes-components/lib/Accordion/tests/interactor';
 
 import { contains } from '../helpers';
 
@@ -12,6 +15,8 @@ import { contains } from '../helpers';
   }
 
   containsContent = contains('#generalInformation');
+  generalInformationAccordion = new AccordionInteractor('#generalInformation');
+  expandAll = scoped('[data-tast-expand-button]')
 }
 
 export default new FddsDetail('#date-test-fixed-due-date-schedule-detail');

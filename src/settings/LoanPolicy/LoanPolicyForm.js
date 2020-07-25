@@ -1,7 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { getFormValues } from 'redux-form';
 import {
   FormattedMessage,
   injectIntl,
@@ -11,7 +9,7 @@ import {
   sortBy,
 } from 'lodash';
 
-import stripesForm from '@folio/stripes/form';
+import stripesFinalForm from '@folio/stripes/final-form';
 import { stripesShape } from '@folio/stripes/core';
 
 import {
@@ -24,7 +22,6 @@ import {
 } from '@folio/stripes/components';
 
 import LoanPolicy from '../Models/LoanPolicy';
-import { normalize } from './utils/normalize';
 
 import {
   AboutSection,
@@ -39,27 +36,27 @@ import {
   Metadata,
 } from '../components';
 
+import { LoanPolicy as validateLoanPolicy } from '../Validation';
+
 import css from './LoanPolicyForm.css';
 
 class LoanPolicyForm extends React.Component {
   static propTypes = {
-    intl: PropTypes.object,
+    intl: PropTypes.object.isRequired,
+    form: PropTypes.object.isRequired,
     stripes: stripesShape.isRequired,
     pristine: PropTypes.bool,
     submitting: PropTypes.bool,
     parentResources: PropTypes.shape({
       fixedDueDateSchedules: PropTypes.object,
     }).isRequired,
-    policy: PropTypes.object,
     initialValues: PropTypes.object,
-    change: PropTypes.func.isRequired,
     handleSubmit: PropTypes.func.isRequired,
     onSave: PropTypes.func.isRequired,
     onCancel: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
-    policy: {},
     initialValues: {},
   };
 
@@ -116,23 +113,23 @@ class LoanPolicyForm extends React.Component {
     return [placeholder, ...schedules];
   };
 
-  saveForm = (loanPolicy) => {
-    const policy = normalize(loanPolicy);
-    this.props.onSave(policy);
-  };
-
   render() {
     const {
       pristine,
-      policy,
       stripes,
       submitting,
       handleSubmit,
-      change,
+      form: {
+        change,
+        getState,
+      },
       onCancel,
     } = this.props;
 
     const { sections } = this.state;
+
+    const { values } = getState();
+    const policy = new LoanPolicy(values);
 
     const schedules = this.generateScheduleOptions();
     const panelTitle = policy.id ? policy.name : <FormattedMessage id="ui-circulation.settings.loanPolicy.createEntryLabel" />;
@@ -147,7 +144,7 @@ class LoanPolicyForm extends React.Component {
         noValidate
         className={css.loanPolicyForm}
         data-test-loan-policy-form
-        onSubmit={handleSubmit(this.saveForm)}
+        onSubmit={handleSubmit}
       >
         <Paneset isRoot>
           <Pane
@@ -203,14 +200,8 @@ class LoanPolicyForm extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  policy: new LoanPolicy(getFormValues('loanPolicyForm')(state)),
-});
-
-const connectedLoanPolicyForm = connect(mapStateToProps)(injectIntl(LoanPolicyForm));
-
-export default stripesForm({
-  form: 'loanPolicyForm',
+export default stripesFinalForm({
   navigationCheck: true,
-  enableReinitialize: true,
-})(connectedLoanPolicyForm);
+  validate: validateLoanPolicy,
+  subscription: { values: true },
+})(injectIntl(LoanPolicyForm));

@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
+  cloneDeep,
   get,
+  forEach,
   sortBy,
 } from 'lodash';
 import {
@@ -14,8 +16,8 @@ import { stripesConnect } from '@folio/stripes/core';
 
 import NoticePolicyDetail from './NoticePolicyDetail';
 import NoticePolicyForm from './NoticePolicyForm';
+import normalize from './utils/normalize';
 import { NoticePolicy } from '../Models/NoticePolicy';
-import { NoticePolicy as validateNoticePolicy } from '../Validation';
 
 class NoticePolicySettings extends React.Component {
   static manifest = Object.freeze({
@@ -69,6 +71,16 @@ class NoticePolicySettings extends React.Component {
     return circulationRules.rulesAsText.includes(policyId);
   };
 
+  parseInitialValues = (entity) => {
+    const policy = cloneDeep(entity);
+
+    forEach(policy?.loanNotices || [], (loanNotice) => {
+      loanNotice.realTime = loanNotice.realTime.toString();
+    });
+
+    return policy;
+  };
+
   render() {
     const {
       resources,
@@ -100,7 +112,6 @@ class NoticePolicySettings extends React.Component {
         entryFormComponent={NoticePolicyForm}
         paneTitle={<FormattedMessage id="ui-circulation.settings.noticePolicy.paneTitle" />}
         entryLabel={formatMessage({ id: 'ui-circulation.settings.noticePolicy.entryLabel' })}
-        validate={validateNoticePolicy}
         defaultEntry={NoticePolicy.defaultNoticePolicy()}
         isEntryInUse={this.isPolicyInUse}
         prohibitItemDelete={{
@@ -108,6 +119,8 @@ class NoticePolicySettings extends React.Component {
           label: <FormattedMessage id="ui-circulation.settings.noticePolicy.denyDelete.header" />,
           message: <FormattedMessage id="ui-circulation.settings.noticePolicy.denyDelete.body" />,
         }}
+        parseInitialValues={this.parseInitialValues}
+        onBeforeSave={normalize}
       />
     );
   }

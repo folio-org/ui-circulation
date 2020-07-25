@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { isEmpty } from 'lodash';
-import { Field } from 'redux-form';
+import { Field } from 'react-final-form';
 import {
   injectIntl,
   FormattedMessage,
@@ -15,10 +15,9 @@ import {
   Row,
   Select,
   RadioButton,
-  RadioButtonGroup
 } from '@folio/stripes/components';
 
-import Period from '../../../../../components/Period';
+import Period from '../Period';
 
 import {
   noticesFormats,
@@ -281,19 +280,22 @@ class NoticeCard extends React.Component {
               <Row>
                 <Col xs={12}>
                   { notice.sendOptions.isLoanDueDateTimeSelected() && (
-                    <Field
-                      name={`${pathToNotice}.realTime`}
-                      component={RadioButtonGroup}
-                    >
-                      <RadioButton
+                    <>
+                      <Field
+                        name={`${pathToNotice}.realTime`}
+                        component={RadioButton}
+                        type="radio"
                         label={<FormattedMessage id="ui-circulation.settings.noticePolicy.notices.send.longTerm" />}
                         value="false"
                       />
-                      <RadioButton
+                      <Field
+                        name={`${pathToNotice}.realTime`}
+                        component={RadioButton}
+                        type="radio"
                         label={<FormattedMessage id="ui-circulation.settings.noticePolicy.notices.send.shortTerm" />}
                         value="true"
                       />
-                    </Field>
+                    </>
                   )}
                 </Col>
               </Row>

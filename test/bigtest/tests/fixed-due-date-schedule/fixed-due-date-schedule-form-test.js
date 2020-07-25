@@ -46,6 +46,32 @@ describe('FddsForm', () => {
         });
       });
     });
+
+    describe('general information accordion', () => {
+      it('should be displayed', () => {
+        expect(FddsForm.generalSectionAccordion.isPresent).to.be.true;
+      });
+
+      describe('collapse accordion', () => {
+        beforeEach(async () => {
+          await FddsForm.generalSectionAccordion.clickHeader();
+        });
+
+        it('accordion should be closed', () => {
+          expect(FddsForm.generalSectionAccordion.isOpen).to.be.false;
+        });
+
+        describe('expand accordion', () => {
+          beforeEach(async () => {
+            await FddsForm.generalSectionAccordion.clickHeader();
+          });
+
+          it('accordion should be open', () => {
+            expect(FddsForm.generalSectionAccordion.isOpen).to.be.true;
+          });
+        });
+      });
+    });
   });
 
   describe('general section', () => {
@@ -119,7 +145,7 @@ describe('FddsForm', () => {
 
         it('should have proper text', () => {
           expect(FddsForm.scheduleSection.schedules(0).dateFrom.text).to.equal(
-            translation['settings.fDDSform.dateFrom']
+            `${translation['settings.fDDSform.dateFrom']}*`
           );
         });
       });
@@ -131,7 +157,7 @@ describe('FddsForm', () => {
 
         it('should have proper text', () => {
           expect(FddsForm.scheduleSection.schedules(0).dateTo.text).to.equal(
-            translation['settings.fDDSform.dateTo']
+            `${translation['settings.fDDSform.dateTo']}*`
           );
         });
       });
@@ -143,7 +169,7 @@ describe('FddsForm', () => {
 
         it('should have proper text', () => {
           expect(FddsForm.scheduleSection.schedules(0).dueDate.text).to.equal(
-            translation['settings.fDDSform.dueDate']
+            `${translation['settings.fDDSform.dueDate']}*`
           );
         });
       });
@@ -168,20 +194,16 @@ describe('FddsForm', () => {
         expect(FddsForm.scheduleSection.schedulesCount).to.equal(2);
       });
 
-      describe('first schedule', () => {
-        it('should have proper text', () => {
-          expect(FddsForm.scheduleSection.schedules(0).dateRange.text).to.equal(
-            `${translation['settings.fDDSform.dateRange']} 1`
-          );
-        });
+      it('should have proper text', () => {
+        expect(FddsForm.scheduleSection.schedules(0).dateRange.text).to.equal(
+          `${translation['settings.fDDSform.dateRange']} 1`
+        );
       });
 
-      describe('second schedule', () => {
-        it('should have proper text', () => {
-          expect(FddsForm.scheduleSection.schedules(1).dateRange.text).to.equal(
-            `${translation['settings.fDDSform.dateRange']} 2`
-          );
-        });
+      it('should have proper text', () => {
+        expect(FddsForm.scheduleSection.schedules(1).dateRange.text).to.equal(
+          `${translation['settings.fDDSform.dateRange']} 2`
+        );
       });
     });
   });
@@ -206,6 +228,7 @@ describe('FddsForm', () => {
 
       describe('deleting additional schedule', () => {
         beforeEach(async () => {
+          await FddsForm.scheduleSection.addSchedule.click();
           await FddsForm.scheduleSection.schedules(1).remove.click();
         });
 
@@ -237,6 +260,40 @@ describe('FddsForm', () => {
 
     it('saived ffds', () => {
       expect(FddsDetail.containsContent('new schedule')).to.be.true;
+    });
+  });
+
+  describe('delete existing fdds', () => {
+    let fdds;
+
+    beforeEach(async function () {
+      fdds = this.server.create('fixedDueDateSchedule');
+      this.visit(`/settings/circulation/fixed-due-date-schedules/${fdds.id}?layer=edit`);
+      await FddsForm.clickDelete();
+    });
+
+    it('should show confirmation modal', () => {
+      expect(FddsForm.deleteConfirmationModal.isPresent).to.be.true;
+    });
+
+    describe('click cancel button', () => {
+      beforeEach(async function () {
+        await FddsForm.deleteConfirmationModal.clickCancel();
+      });
+
+      it('should hide confirmation modal', () => {
+        expect(FddsForm.deleteConfirmationModal.isPresent).to.be.false;
+      });
+    });
+
+    describe('click delete button', () => {
+      beforeEach(async function () {
+        await FddsForm.deleteConfirmationModal.clickDelete();
+      });
+
+      it('should hide confirmation modal', () => {
+        expect(FddsDetail.isPresent).to.be.true;
+      });
     });
   });
 });

@@ -1,11 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
-import { connect } from 'react-redux';
-import { getFormValues } from 'redux-form';
 import { get } from 'lodash';
 
-import stripesForm from '@folio/stripes/form';
+import stripesFinalForm from '@folio/stripes/final-form';
 import { stripesShape } from '@folio/stripes/core';
 import {
   Col,
@@ -15,7 +13,6 @@ import {
   ExpandAllButton,
 } from '@folio/stripes/components';
 
-import normalize from './utils/normalize';
 import getTemplates from './utils/get-templates';
 import { NoticePolicy } from '../Models/NoticePolicy';
 import {
@@ -29,14 +26,16 @@ import {
   RequestNoticesSection,
 } from './components';
 
+import { NoticePolicy as validateNoticePolicy } from '../Validation';
+
 import { patronNoticeCategoryIds } from '../../constants';
 
 import css from './NoticePolicyForm.css';
 
 class NoticePolicyForm extends React.Component {
   static propTypes = {
+    form: PropTypes.object.isRequired,
     stripes: stripesShape.isRequired,
-    policy: PropTypes.object,
     pristine: PropTypes.bool.isRequired,
     submitting: PropTypes.bool.isRequired,
     parentResources: PropTypes.shape({
@@ -45,10 +44,6 @@ class NoticePolicyForm extends React.Component {
     onSave: PropTypes.func.isRequired,
     onCancel: PropTypes.func.isRequired,
     handleSubmit: PropTypes.func.isRequired,
-  };
-
-  static defaultProps = {
-    policy: {},
   };
 
   constructor(props) {
@@ -76,14 +71,9 @@ class NoticePolicyForm extends React.Component {
     this.setState({ sections });
   };
 
-  saveForm = (noticePolicy) => {
-    const policy = normalize(noticePolicy);
-    this.props.onSave(policy);
-  };
-
   render() {
     const {
-      policy,
+      form: { getState },
       stripes,
       pristine,
       submitting,
@@ -92,6 +82,8 @@ class NoticePolicyForm extends React.Component {
     } = this.props;
 
     const { sections } = this.state;
+    const { values } = getState();
+    const policy = new NoticePolicy(values);
 
     const patronNoticeTemplates = get(this.props, 'parentResources.templates.records', []);
     const panelTitle = policy.id
@@ -109,7 +101,7 @@ class NoticePolicyForm extends React.Component {
         data-test-notice-policy-form
         className={css.noticePolicyForm}
         noValidate
-        onSubmit={handleSubmit(this.saveForm)}
+        onSubmit={handleSubmit}
       >
         <Paneset isRoot>
           <Pane
@@ -161,14 +153,8 @@ class NoticePolicyForm extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  policy: new NoticePolicy(getFormValues('noticePolicyForm')(state)),
-});
-
-const connectedLoanPolicyForm = connect(mapStateToProps)(NoticePolicyForm);
-
-export default stripesForm({
-  form: 'noticePolicyForm',
+export default stripesFinalForm({
   navigationCheck: true,
-  enableReinitialize: false,
-})(connectedLoanPolicyForm);
+  validate: validateNoticePolicy,
+  subscription: { values: true },
+})(NoticePolicyForm);
