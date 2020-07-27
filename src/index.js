@@ -10,7 +10,7 @@ import FinePolicySettings from './settings/FinePolicy/FinePolicySettings';
 import LostItemFeePolicySettings from './settings/LostItemFeePolicy/LostItemFeePolicySettings';
 import CirculationRules from './settings/CirculationRules';
 import RequestCancellationReasons from './settings/RequestCancellationReasons';
-import CheckoutSettings from './settings/CheckoutSettings';
+import CheckoutSettings from './settings/CheckoutSettings/CheckoutSettings';
 import FixedDueDateScheduleManager from './settings/FixedDueDateSchedule/FixedDueDateScheduleManager';
 import PatronNotices from './settings/PatronNotices';
 import StaffSlips from './settings/StaffSlips';

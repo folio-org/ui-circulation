@@ -61,7 +61,7 @@ describe('FinePolicyForm', () => {
           .aboutSection.policyName.fillAndBlur(newFinePolicyName)
           .overdueFineSection.overdue.quantity.fillAndBlur(1)
           .overdueFineSection.overdue.interval.selectAndBlur('minute')
-          .overdueFineSection.maxOverdue.fillAndBlur('11.99')
+          .overdueFineSection.maxOverdue.fillAndBlur('11')
           .save();
       });
 
@@ -85,7 +85,7 @@ describe('FinePolicyForm', () => {
           .overdueFineSection.overdue.quantity.fillValue('9')
           .overdueFineSection.overdue.quantity.blurInput()
           .overdueFineSection.overdue.interval.selectAndBlur('day')
-          .overdueFineSection.maxOverdue.fillAndBlur('11.99')
+          .overdueFineSection.maxOverdue.fillAndBlur('11')
           .save();
       });
 
