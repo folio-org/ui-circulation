@@ -379,7 +379,7 @@
     "settings.patronNotices.feeFineActionTokenHeader": "Операция с оплатой",
     "settings.patronNotices.multipleFeeFineActions": "Многократные операции с оплатой",
     "settings.patronNotices.multipleFeeFineCharges": "Многократное взимание платы",
-    "settings.finePolicy.validate.maximumOverdueFine": "Maximum overdue fine must be greater than or equal to Overdue fine",
+    "settings.finePolicy.validate.maximumOverdueFine": "Максимальный штраф за несвоевременный возврат должен быть больше или равен штрафу за несвоевременный возврат",
     "settings.finePolicy.validate.maximumRecallOverdueFine": "Maximum overdue recall fine must be greater than or equal to Overdue recall fine",
     "settings.finePolicy.validate.hasOverdueFineInterval": "Размер пени за несвоевременный возврат должен быть больше 0, если установлен срок возврата",
     "settings.finePolicy.validate.hasOverdueRecallFineInterval": "Размер пени за несвоевременный возврат должен быть больше 0, если установлен срок возврата",
