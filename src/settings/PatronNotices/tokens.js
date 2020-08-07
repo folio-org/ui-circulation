@@ -154,7 +154,6 @@ const formats = {
       allowedFor: [
         patronNoticeCategoryIds.LOAN,
         patronNoticeCategoryIds.AUTOMATED_FEE_FINE,
-        patronNoticeCategoryIds.FEE_FINE_CHARGE,
         patronNoticeCategoryIds.FEE_FINE_ACTION,
       ],
     },
@@ -164,7 +163,6 @@ const formats = {
       allowedFor: [
         patronNoticeCategoryIds.LOAN,
         patronNoticeCategoryIds.AUTOMATED_FEE_FINE,
-        patronNoticeCategoryIds.FEE_FINE_CHARGE,
         patronNoticeCategoryIds.FEE_FINE_ACTION,
       ],
     },
@@ -174,7 +172,6 @@ const formats = {
       allowedFor: [
         patronNoticeCategoryIds.LOAN,
         patronNoticeCategoryIds.AUTOMATED_FEE_FINE,
-        patronNoticeCategoryIds.FEE_FINE_CHARGE,
         patronNoticeCategoryIds.FEE_FINE_ACTION,
       ],
     },
@@ -184,7 +181,6 @@ const formats = {
       allowedFor: [
         patronNoticeCategoryIds.LOAN,
         patronNoticeCategoryIds.AUTOMATED_FEE_FINE,
-        patronNoticeCategoryIds.FEE_FINE_CHARGE,
         patronNoticeCategoryIds.FEE_FINE_ACTION,
       ],
     },
@@ -194,7 +190,6 @@ const formats = {
       allowedFor: [
         patronNoticeCategoryIds.LOAN,
         patronNoticeCategoryIds.AUTOMATED_FEE_FINE,
-        patronNoticeCategoryIds.FEE_FINE_CHARGE,
         patronNoticeCategoryIds.FEE_FINE_ACTION,
       ],
     },
@@ -204,7 +199,6 @@ const formats = {
       allowedFor: [
         patronNoticeCategoryIds.LOAN,
         patronNoticeCategoryIds.AUTOMATED_FEE_FINE,
-        patronNoticeCategoryIds.FEE_FINE_CHARGE,
         patronNoticeCategoryIds.FEE_FINE_ACTION,
       ],
     },
@@ -214,7 +208,6 @@ const formats = {
       allowedFor: [
         patronNoticeCategoryIds.LOAN,
         patronNoticeCategoryIds.AUTOMATED_FEE_FINE,
-        patronNoticeCategoryIds.FEE_FINE_CHARGE,
         patronNoticeCategoryIds.FEE_FINE_ACTION,
       ],
     },
@@ -224,7 +217,6 @@ const formats = {
       allowedFor: [
         patronNoticeCategoryIds.LOAN,
         patronNoticeCategoryIds.AUTOMATED_FEE_FINE,
-        patronNoticeCategoryIds.FEE_FINE_CHARGE,
         patronNoticeCategoryIds.FEE_FINE_ACTION,
       ],
     },
@@ -234,7 +226,6 @@ const formats = {
       allowedFor: [
         patronNoticeCategoryIds.LOAN,
         patronNoticeCategoryIds.AUTOMATED_FEE_FINE,
-        patronNoticeCategoryIds.FEE_FINE_CHARGE,
         patronNoticeCategoryIds.FEE_FINE_ACTION,
       ],
     },
