@@ -12,7 +12,7 @@ import { stripesConnect } from '@folio/stripes/core';
 import FinePolicy from '../Models/FinePolicy';
 import FinePolicyDetail from './FinePolicyDetail';
 import FinePolicyForm from './FinePolicyForm';
-import { FinePolicy as validateFinePolicy } from '../Validation';
+import normalize from './utils/normalize';
 
 class FinePolicySettings extends React.Component {
   static manifest = Object.freeze({
@@ -45,6 +45,20 @@ class FinePolicySettings extends React.Component {
     }).isRequired,
   };
 
+  parseInitialValues = (init = {}) => ({
+    ...init,
+    maxOverdueFine: parseFloat(init.maxOverdueFine).toFixed(2),
+    maxOverdueRecallFine: parseFloat(init.maxOverdueRecallFine).toFixed(2),
+    overdueFine: {
+      ...init.overdueFine,
+      quantity: parseFloat((init.overdueFine || {}).quantity || 0).toFixed(2)
+    },
+    overdueRecallFine: {
+      ...init.overdueRecallFine,
+      quantity: parseFloat((init.overdueRecallFine || {}).quantity || 0).toFixed(2)
+    }
+  });
+
   render() {
     const {
       resources,
@@ -61,19 +75,6 @@ class FinePolicySettings extends React.Component {
     };
 
     const entryList = sortBy((resources.finePolicies || {}).records, ['name']);
-    const parseInitialValues = (init = {}) => ({
-      ...init,
-      maxOverdueFine: parseFloat(init.maxOverdueFine).toFixed(2),
-      maxOverdueRecallFine: parseFloat(init.maxOverdueRecallFine).toFixed(2),
-      overdueFine: {
-        ...init.overdueFine,
-        quantity: parseFloat((init.overdueFine || {}).quantity || 0).toFixed(2)
-      },
-      overdueRecallFine: {
-        ...init.overdueRecallFine,
-        quantity: parseFloat((init.overdueRecallFine || {}).quantity || 0).toFixed(2)
-      }
-    });
 
     return (
       <EntryManager
@@ -83,7 +84,7 @@ class FinePolicySettings extends React.Component {
         entryList={entryList}
         parentMutator={mutator}
         permissions={permissions}
-        parseInitialValues={parseInitialValues}
+        parseInitialValues={this.parseInitialValues}
         parentResources={resources}
         detailComponent={FinePolicyDetail}
         enableDetailsActionMenu
@@ -91,7 +92,7 @@ class FinePolicySettings extends React.Component {
         paneTitle={<FormattedMessage id="ui-circulation.settings.finePolicy.paneTitle" />}
         entryLabel={formatMessage({ id: 'ui-circulation.settings.finePolicy.entryLabel' })}
         defaultEntry={FinePolicy.defaultFinePolicy()}
-        validate={validateFinePolicy}
+        onBeforeSave={normalize}
       />
     );
   }
