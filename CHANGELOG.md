@@ -1,11 +1,16 @@
 # Change history for ui-circulation
 
-## 3.0.1 (https://github.com/folio-org/ui-circulation/tree/v3.0.1) (2019-07-03)
+## 3.0.2 (https://github.com/folio-org/ui-circulation/tree/v3.0.2) (2020-08-12)
+[Full Changelog](https://github.com/folio-org/ui-circulation/compare/v3.0.1...v3.0.2)
+
+* Loan tokens should be unavailable (and greyed out) for manual fee/fine charge category. Refs UICIRC-494.
+
+## 3.0.1 (https://github.com/folio-org/ui-circulation/tree/v3.0.1) (2020-07-03)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v3.0.0...v3.0.1)
 
 * Adjust UI for fee/fine notice token options on templates. Refs UICIRC-479.
 
-## 3.0.0 (https://github.com/folio-org/ui-circulation/tree/v3.0.0) (2019-06-10)
+## 3.0.0 (https://github.com/folio-org/ui-circulation/tree/v3.0.0) (2020-06-10)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v2.0.0...v3.0.0)
 
 * New/Edit Patron notice policy: do not display inactive loan and request notice templates in the dropdown. Refs UICIRC-418.
