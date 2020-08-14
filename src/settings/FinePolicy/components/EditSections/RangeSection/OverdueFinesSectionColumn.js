@@ -1,8 +1,6 @@
 import React from 'react';
-import { Field } from 'redux-form';
 import PropTypes from 'prop-types';
-import {
-} from 'react-intl';
+import { Field } from 'react-final-form';
 
 import {
   Col,
@@ -16,9 +14,7 @@ const OverdueFinesSectionColumn = (props) => {
     label,
     component,
     name,
-    intl: {
-      formatMessage,
-    }
+    intl: { formatMessage }
   } = props;
 
   return (
