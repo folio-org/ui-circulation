@@ -28,7 +28,7 @@ import { AccordionInteractor } from '@folio/stripes-components/lib/Accordion/tes
   pageCheckbox = scoped('#page-checkbox');
   recallCheckbox = scoped('#recall-checkbox');
   generalSectionAccordion = new AccordionInteractor('#generalSection');
-  generalAccordionToggleButton = scoped('#accordion-toggle-button-general');
+  generalAccordionToggleButton = scoped('#accordion-toggle-button-generalSection');
 
   fillName = fillable('#request_policy_name');
   focusName = focusable('#request_policy_name');
