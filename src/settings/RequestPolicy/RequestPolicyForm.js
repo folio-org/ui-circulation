@@ -150,6 +150,7 @@ class RequestPolicyForm extends React.Component {
                 onToggle={this.handleSectionToggle}
               >
                 <GeneralSection
+                  id="generalSection"
                   isOpen={sections.generalSection}
                   metadata={policy.metadata}
                   connect={stripes.connect}
