@@ -36,7 +36,7 @@ class PatronNoticeDetail extends React.Component {
 
     this.state = {
       accordions: {
-        'email-template': true,
+        'email-template-detail': true,
       },
       openPreview: false,
     };
@@ -113,7 +113,7 @@ class PatronNoticeDetail extends React.Component {
           onToggle={this.onToggleSection}
         >
           <Accordion
-            id="email-template"
+            id="email-template-detail"
             label={<FormattedMessage id="ui-circulation.settings.patronNotices.email" />}
           >
             { emailTemplate &&

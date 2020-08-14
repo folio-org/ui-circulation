@@ -4,8 +4,6 @@ import TextFieldInteractor from '@folio/stripes-components/lib/TextField/tests/i
 import CheckboxInteractor from '@folio/stripes-components/lib/Checkbox/tests/interactor';
 
 @interactor class GeneralSection {
-  static defaultScope = ('[data-test-notice-policy-form-general-section]');
-
   policyName = new TextFieldInteractor('[data-test-general-section-policy-name]');
   active = new CheckboxInteractor('[data-test-general-section-active]');
   policyDescription = new TextFieldInteractor('[data-test-general-section-policy-description]');

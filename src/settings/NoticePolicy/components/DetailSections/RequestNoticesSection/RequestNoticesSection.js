@@ -23,7 +23,6 @@ class RequestNoticesSection extends React.Component {
       value: PropTypes.string.isRequired,
       label: PropTypes.string.isRequired,
     })).isRequired,
-    onToggle: PropTypes.func.isRequired,
   };
 
   render() {
@@ -31,30 +30,27 @@ class RequestNoticesSection extends React.Component {
       isOpen,
       policy,
       templates,
-      onToggle,
     } = this.props;
 
     return (
-      <div data-test-notice-policy-detail-request-notices-section>
-        <Accordion
-          id="requestNotices"
-          open={isOpen}
-          label={<FormattedMessage id="ui-circulation.settings.noticePolicy.requestNotices" />}
-          onToggle={onToggle}
-        >
-          {map(policy.requestNotices, (notice, index) => (
-            <NoticeCard
-              key={index}
-              index={index}
-              notice={notice}
-              sendEvents={requestTimeBasedNoticesSendEvents}
-              sendEventTriggeringIds={values(requestTimeBasedEventsIds)}
-              templates={templates}
-              triggeringEvents={requestNoticesTriggeringEvents}
-            />
-          ))}
-        </Accordion>
-      </div>
+      <Accordion
+        data-test-notice-policy-detail-request-notices-section
+        id="viewRequestNotices"
+        open={isOpen}
+        label={<FormattedMessage id="ui-circulation.settings.noticePolicy.requestNotices" />}
+      >
+        {map(policy.requestNotices, (notice, index) => (
+          <NoticeCard
+            key={index}
+            index={index}
+            notice={notice}
+            sendEvents={requestTimeBasedNoticesSendEvents}
+            sendEventTriggeringIds={values(requestTimeBasedEventsIds)}
+            templates={templates}
+            triggeringEvents={requestNoticesTriggeringEvents}
+          />
+        ))}
+      </Accordion>
     );
   }
 }

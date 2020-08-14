@@ -21,7 +21,7 @@ import OverdueFineSection from './overdue-fine-section';
   overdueFineSection = new OverdueFineSection();
 
   generalAccordion = new AccordionInteractor('#overdueGeneralSection');
-  overdueAccordion = new AccordionInteractor('#fineSection');
+  overdueAccordion = new AccordionInteractor('#editFineSection');
   expandAll = scoped('[data-test-expand-all] button');
   cancelEditingFinePolicy = new Interactor('#footer-cancel-entity');
   cancelEditingFinePolicyModal = new Interactor('#cancel-editing-confirmation');

@@ -59,6 +59,7 @@ const propTypes = {
   ),
   showAssist: PropTypes.bool,
   filter: PropTypes.string,
+  intl: PropTypes.object.isRequired,
 };
 
 function handleBackspace(cm) {
@@ -143,38 +144,6 @@ class RulesEditor extends React.Component {
     this.filteredSections = []; // track sections hidden via filter
   }
 
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    const nextState = {};
-
-    if (nextProps.typeMapping && !isEqual(nextProps.typeMapping, this.props.typeMapping)) {
-      nextState.typeMapping = nextProps.typeMapping;
-    }
-
-    if (nextProps.policyMapping && !isEqual(nextProps.policyMapping, this.props.policyMapping)) {
-      nextState.policyMapping = nextProps.policyMapping;
-    }
-
-    if (nextProps.completionLists && !isEqual(nextProps.completionLists, this.props.completionLists)) {
-      nextState.completionLists = nextProps.completionLists;
-    }
-
-    if (!isEmpty(nextState)) {
-      this.setState(({ codeMirrorOptions }) => {
-        const newCodeMirrorOptions = cloneDeep(codeMirrorOptions);
-
-        return { codeMirrorOptions: Object.assign(newCodeMirrorOptions.mode, nextState) };
-      });
-    }
-
-    if (nextProps.code !== this.props.code) {
-      this.setState(() => ({ code: nextProps.code }));
-    }
-
-    if (nextProps.filter !== this.props.filter) {
-      this.filterRules(nextProps.filter);
-    }
-  }
-
   getInitialState() {
     const {
       completionLists,
@@ -219,6 +188,8 @@ class RulesEditor extends React.Component {
   }
 
   componentDidMount() {
+    const { intl: { formatMessage } } = this.props;
+
     this.cm = this.cmComponentRef.current.editor;
 
     rulesHint(Codemirror, this.props);
@@ -227,6 +198,39 @@ class RulesEditor extends React.Component {
     // pretty much always show the auto-complete
     this.cm.on('cursorActivity', this.showHint);
     this.cm.on('endCompletion', this.showHint);
+    this.cm.display.input.textarea.ariaLabel = formatMessage({ id: 'ui-circulation.settings.circulationRules.label' });
+  }
+
+  UNSAFE_componentWillReceiveProps(nextProps) {
+    const nextState = {};
+
+    if (nextProps.typeMapping && !isEqual(nextProps.typeMapping, this.props.typeMapping)) {
+      nextState.typeMapping = nextProps.typeMapping;
+    }
+
+    if (nextProps.policyMapping && !isEqual(nextProps.policyMapping, this.props.policyMapping)) {
+      nextState.policyMapping = nextProps.policyMapping;
+    }
+
+    if (nextProps.completionLists && !isEqual(nextProps.completionLists, this.props.completionLists)) {
+      nextState.completionLists = nextProps.completionLists;
+    }
+
+    if (!isEmpty(nextState)) {
+      this.setState(({ codeMirrorOptions }) => {
+        const newCodeMirrorOptions = cloneDeep(codeMirrorOptions);
+
+        return { codeMirrorOptions: Object.assign(newCodeMirrorOptions.mode, nextState) };
+      });
+    }
+
+    if (nextProps.code !== this.props.code) {
+      this.setState(() => ({ code: nextProps.code }));
+    }
+
+    if (nextProps.filter !== this.props.filter) {
+      this.filterRules(nextProps.filter);
+    }
   }
 
   componentDidUpdate() {

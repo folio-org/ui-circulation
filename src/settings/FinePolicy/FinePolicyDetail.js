@@ -11,6 +11,7 @@ import {
 import { stripesShape } from '@folio/stripes/core';
 import {
   Accordion,
+  AccordionSet,
   Col,
   Row,
   ExpandAllButton,
@@ -40,7 +41,7 @@ class FinePolicyDetail extends React.Component {
     this.state = {
       sections: {
         generalInformation: true,
-        fineSection: true,
+        viewFineSection: true,
       },
     };
   }
@@ -50,8 +51,7 @@ class FinePolicyDetail extends React.Component {
   };
 
   handleSectionToggle = ({ id }) => {
-    this.setState((state) => {
-      const sections = { ...state.sections };
+    this.setState(({ sections }) => {
       sections[id] = !sections[id];
       return { sections };
     });
@@ -91,24 +91,27 @@ class FinePolicyDetail extends React.Component {
             />
           </Col>
         </Row>
-        <Accordion
-          id="generalInformation"
-          label={<FormattedMessage id="ui-circulation.settings.finePolicy.generalInformation" />}
-          open={sections.generalInformation}
+        <AccordionSet
+          accordionStatus={sections}
           onToggle={this.handleSectionToggle}
         >
-          <Metadata
-            connect={connect}
-            metadata={finePolicy.metadata}
-          />
-          <OverdueAboutSection getValue={this.getValue} />
+          <Accordion
+            id="generalInformation"
+            label={<FormattedMessage id="ui-circulation.settings.finePolicy.generalInformation" />}
+            open={sections.generalInformation}
+          >
+            <Metadata
+              connect={connect}
+              metadata={finePolicy.metadata}
+            />
+            <OverdueAboutSection getValue={this.getValue} />
+          </Accordion>
           <FinesSection
             policy={finePolicy}
             getCheckboxValue={this.getCheckboxValue}
-            fineSectionOpen={sections.fineSection}
-            accordionOnToggle={this.handleSectionToggle}
+            fineSectionOpen={sections.viewFineSection}
           />
-        </Accordion>
+        </AccordionSet>
       </div>
     );
   }

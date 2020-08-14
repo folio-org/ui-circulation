@@ -8,7 +8,6 @@ import {
 import translation from '../../../../translations/ui-circulation/en';
 import setupApplication from '../../helpers/setup-application';
 import NoticePolicyDetail from '../../interactors/notice-policy/notice-policy-detail';
-import { getBooleanRepresentation } from '../../helpers/messageConverters';
 
 describe('NoticePolicyDetail', () => {
   setupApplication();

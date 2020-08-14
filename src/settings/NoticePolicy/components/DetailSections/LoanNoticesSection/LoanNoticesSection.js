@@ -23,7 +23,6 @@ class LoanNoticesSection extends React.Component {
       value: PropTypes.string.isRequired,
       label: PropTypes.string.isRequired,
     })).isRequired,
-    onToggle: PropTypes.func.isRequired,
   };
 
   render() {
@@ -31,30 +30,27 @@ class LoanNoticesSection extends React.Component {
       isOpen,
       policy,
       templates,
-      onToggle,
     } = this.props;
 
     return (
-      <div data-test-notice-policy-detail-loan-notices-section>
-        <Accordion
-          id="loanNotices"
-          open={isOpen}
-          label={<FormattedMessage id="ui-circulation.settings.noticePolicy.loanNotices" />}
-          onToggle={onToggle}
-        >
-          {map(policy.loanNotices, (notice, index) => (
-            <NoticeCard
-              key={index}
-              index={index}
-              notice={notice}
-              sendEvents={noticesSendEvents}
-              sendEventTriggeringIds={values(loanTimeBasedEventsIds)}
-              templates={templates}
-              triggeringEvents={loanNoticesTriggeringEvents}
-            />
-          ))}
-        </Accordion>
-      </div>
+      <Accordion
+        data-test-notice-policy-detail-loan-notices-section
+        id="viewLoanNotices"
+        open={isOpen}
+        label={<FormattedMessage id="ui-circulation.settings.noticePolicy.loanNotices" />}
+      >
+        {map(policy.loanNotices, (notice, index) => (
+          <NoticeCard
+            key={index}
+            index={index}
+            notice={notice}
+            sendEvents={noticesSendEvents}
+            sendEventTriggeringIds={values(loanTimeBasedEventsIds)}
+            templates={templates}
+            triggeringEvents={loanNoticesTriggeringEvents}
+          />
+        ))}
+      </Accordion>
     );
   }
 }

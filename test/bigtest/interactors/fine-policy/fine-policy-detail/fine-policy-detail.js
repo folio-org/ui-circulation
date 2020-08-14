@@ -14,7 +14,7 @@ import AboutSection from './about-section';
   aboutSection = new AboutSection();
   finesSection = new FinesSection();
 
-  overdueDetails = new AccordionInteractor('#fineSection');
+  overdueDetails = new AccordionInteractor('#viewFineSection');
   content = new AccordionInteractor('#generalInformation');
   expandAll = scoped('[data-test-expand-all] button')
 }

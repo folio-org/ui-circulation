@@ -9,6 +9,7 @@ import {
 
 import {
   Accordion,
+  AccordionSet,
   ExpandAllButton,
   Col,
   Row,
@@ -47,14 +48,13 @@ class FinePolicyForm extends React.Component {
     this.state = {
       sections: {
         overdueGeneralSection: true,
-        fineSection: true,
+        editFineSection: true,
       },
     };
   }
 
   handleSectionToggle = ({ id }) => {
-    this.setState((state) => {
-      const sections = { ...state.sections };
+    this.setState(({ sections }) => {
       sections[id] = !sections[id];
       return { sections };
     });
@@ -126,25 +126,28 @@ class FinePolicyForm extends React.Component {
                   />
                 </Col>
               </Row>
-              <Accordion
-                id="overdueGeneralSection"
-                label={<FormattedMessage id="ui-circulation.settings.finePolicy.generalInformation" />}
-                open={sections.overdueGeneralSection}
+              <AccordionSet
+                accordionStatus={sections}
                 onToggle={this.handleSectionToggle}
               >
-                <Metadata
-                  connect={stripes.connect}
-                  metadata={policy.metadata}
-                />
-                <OverdueAboutSection />
+                <Accordion
+                  id="overdueGeneralSection"
+                  label={<FormattedMessage id="ui-circulation.settings.finePolicy.generalInformation" />}
+                  open={sections.overdueGeneralSection}
+                >
+                  <Metadata
+                    connect={stripes.connect}
+                    metadata={policy.metadata}
+                  />
+                  <OverdueAboutSection />
+                </Accordion>
                 <FinesSection
                   initialValues={initialValues}
                   policy
-                  fineSectionOpen={sections.fineSection}
-                  accordionOnToggle={this.handleSectionToggle}
+                  fineSectionOpen={sections.editFineSection}
                   change={change}
                 />
-              </Accordion>
+              </AccordionSet>
             </>
           </Pane>
         </Paneset>

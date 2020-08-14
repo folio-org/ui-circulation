@@ -22,7 +22,7 @@ import LostItemFeeSection from './lost-item-fee-section';
   lostItemFeeSection = new LostItemFeeSection();
 
   generalInformationAccordion = new AccordionInteractor('#lostItemFeegeneralSection');
-  lostItemFeeAccordion = new AccordionInteractor('#lostItemFeeSectionOpen');
+  lostItemFeeAccordion = new AccordionInteractor('#editLostItemFeeSection');
 
   expandAll = scoped('[data-test-expand-all] button');
   cancelEditingLostItemPolicy = new Interactor('#footer-cancel-entity');
