@@ -43,76 +43,77 @@ class FinesSection extends React.Component {
     const intervalP = this.generateOptions(intervalPeriods, 'ui-circulation.settings.finePolicy.selectInterval');
 
     return (
-      <Accordion
-        data-test-fine-policy-form-overdue-fines-section
-        id="editFineSection"
-        open={fineSectionOpen}
-        label={<FormattedMessage id="ui-circulation.settings.finePolicy.overdueFine" />}
-      >
-        <section className={css.accordionSection}>
-          <div data-test-fine-section-overdue>
-            <OverdueFinesSection
-              label={<FormattedMessage id="ui-circulation.settings.finePolicy.overdueFine" />}
-              name="overdueFine.quantity"
-              period="overdueFine.intervalId"
-              intervalPeriods={intervalP}
-              onBlurField={this.onBlurField}
-              data="overdue-fine-quantity"
-              intl={intl}
-            />
-          </div>
-          <div data-test-fine-section-count-closed>
-            <OverdueFinesSectionColumn
-              label={<FormattedMessage id="ui-circulation.settings.finePolicy.countClosedDHM" />}
-              name="countClosed"
-              intl={intl}
-            />
-          </div>
-          <div data-test-fine-section-max-overdue>
-            <OverdueFinesSectionColumn
-              label={<FormattedMessage id="ui-circulation.settings.finePolicy.maximumOverdueFine" />}
-              name="maxOverdueFine"
-              component="TextField"
-              onBlurField={this.onBlurField}
-              intl={intl}
-            />
-          </div>
-          <div data-test-fine-section-forgive-overdue>
-            <OverdueFinesSectionColumn
-              label={<FormattedMessage id="ui-circulation.settings.finePolicy.forgiveOverdueFine" />}
-              name="forgiveOverdueFine"
-              intl={intl}
-            />
-          </div>
-          <div data-test-fine-section-overdue-recall>
-            <OverdueFinesSection
-              label={<FormattedMessage id="ui-circulation.settings.finePolicy.overdueRecallFine" />}
-              name="overdueRecallFine.quantity"
-              period="overdueRecallFine.intervalId"
-              intervalPeriods={intervalP}
-              onBlurField={this.onBlurField}
-              data="overdue-recall-fine-quantity"
-              intl={intl}
-            />
-          </div>
-          <div data-test-fine-section-grace-period-recall>
-            <OverdueFinesSectionColumn
-              label={<FormattedMessage id="ui-circulation.settings.finePolicy.ignoreGracePeriodsRecalls" />}
-              name="gracePeriodRecall"
-              intl={intl}
-            />
-          </div>
-          <div data-test-fine-section-max-overdue-recall>
-            <OverdueFinesSectionColumn
-              label={<FormattedMessage id="ui-circulation.settings.finePolicy.maximumRecallOverdueFine" />}
-              name="maxOverdueRecallFine"
-              component="TextField"
-              onBlurField={this.onBlurField}
-              intl={intl}
-            />
-          </div>
-        </section>
-      </Accordion>
+      <div data-test-fine-policy-form-overdue-fines-section>
+        <Accordion
+          id="editFineSection"
+          open={fineSectionOpen}
+          label={<FormattedMessage id="ui-circulation.settings.finePolicy.overdueFine" />}
+        >
+          <section className={css.accordionSection}>
+            <div data-test-fine-section-overdue>
+              <OverdueFinesSection
+                label={<FormattedMessage id="ui-circulation.settings.finePolicy.overdueFine" />}
+                name="overdueFine.quantity"
+                period="overdueFine.intervalId"
+                intervalPeriods={intervalP}
+                onBlurField={this.onBlurField}
+                data="overdue-fine-quantity"
+                intl={intl}
+              />
+            </div>
+            <div data-test-fine-section-count-closed>
+              <OverdueFinesSectionColumn
+                label={<FormattedMessage id="ui-circulation.settings.finePolicy.countClosedDHM" />}
+                name="countClosed"
+                intl={intl}
+              />
+            </div>
+            <div data-test-fine-section-max-overdue>
+              <OverdueFinesSectionColumn
+                label={<FormattedMessage id="ui-circulation.settings.finePolicy.maximumOverdueFine" />}
+                name="maxOverdueFine"
+                component="TextField"
+                onBlurField={this.onBlurField}
+                intl={intl}
+              />
+            </div>
+            <div data-test-fine-section-forgive-overdue>
+              <OverdueFinesSectionColumn
+                label={<FormattedMessage id="ui-circulation.settings.finePolicy.forgiveOverdueFine" />}
+                name="forgiveOverdueFine"
+                intl={intl}
+              />
+            </div>
+            <div data-test-fine-section-overdue-recall>
+              <OverdueFinesSection
+                label={<FormattedMessage id="ui-circulation.settings.finePolicy.overdueRecallFine" />}
+                name="overdueRecallFine.quantity"
+                period="overdueRecallFine.intervalId"
+                intervalPeriods={intervalP}
+                onBlurField={this.onBlurField}
+                data="overdue-recall-fine-quantity"
+                intl={intl}
+              />
+            </div>
+            <div data-test-fine-section-grace-period-recall>
+              <OverdueFinesSectionColumn
+                label={<FormattedMessage id="ui-circulation.settings.finePolicy.ignoreGracePeriodsRecalls" />}
+                name="gracePeriodRecall"
+                intl={intl}
+              />
+            </div>
+            <div data-test-fine-section-max-overdue-recall>
+              <OverdueFinesSectionColumn
+                label={<FormattedMessage id="ui-circulation.settings.finePolicy.maximumRecallOverdueFine" />}
+                name="maxOverdueRecallFine"
+                component="TextField"
+                onBlurField={this.onBlurField}
+                intl={intl}
+              />
+            </div>
+          </section>
+        </Accordion>
+      </div>
     );
   }
 }

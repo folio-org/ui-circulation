@@ -160,7 +160,7 @@ class LostItemFeeSection extends React.Component {
         <Row>
           <Col xs={1} data-test-returned-lost-item>
             <Field
-              aria-label={formatMessage({ id: 'ui-circulation.settings.lostItemFee.fee' })}
+              aria-label={formatMessage({ id: 'ui-circulation.settings.lostItemFee.lostItemProcessingFee' })}
               name="returnedLostItemProcessingFee"
               id="returnedLostItemProcessingFee"
               component={Select}

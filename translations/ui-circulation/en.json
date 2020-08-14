@@ -388,7 +388,6 @@
   "settings.lostItemFee.chargeAmount.patron": "Charge amount item by patron",
   "settings.lostItemFee.chargeAmount.system": "Charge amount item by system",
   "settings.lostItemFee.returned": "Lost item returned",
-  "settings.lostItemFee.fee": "Lost item processing fee",
   "settings.lostItemFee.lostItemProcessingFee": "Lost item processing fee",
   "settings.lostItemFee.chargeAmountItemPatron": "Charge lost item processing fee if item declared lost by patron",
   "settings.lostItemFee.chargeAmountItemSystem": "Charge lost item processing fee if item aged to lost by system",

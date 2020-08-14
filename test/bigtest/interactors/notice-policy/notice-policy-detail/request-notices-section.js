@@ -8,6 +8,8 @@ import {
 import NoticeCard from './notice-card';
 
 @interactor class RequestNoticesSection {
+  static defaultScope = ('[data-test-notice-policy-detail-request-notices-section]');
+
   hasCards = isPresent('[data-test-notice-card]');
   cardsCount = count('[data-test-notice-card]');
 

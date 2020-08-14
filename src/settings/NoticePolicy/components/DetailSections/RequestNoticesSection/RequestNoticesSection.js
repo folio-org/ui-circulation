@@ -33,24 +33,25 @@ class RequestNoticesSection extends React.Component {
     } = this.props;
 
     return (
-      <Accordion
-        data-test-notice-policy-detail-request-notices-section
-        id="viewRequestNotices"
-        open={isOpen}
-        label={<FormattedMessage id="ui-circulation.settings.noticePolicy.requestNotices" />}
-      >
-        {map(policy.requestNotices, (notice, index) => (
-          <NoticeCard
-            key={index}
-            index={index}
-            notice={notice}
-            sendEvents={requestTimeBasedNoticesSendEvents}
-            sendEventTriggeringIds={values(requestTimeBasedEventsIds)}
-            templates={templates}
-            triggeringEvents={requestNoticesTriggeringEvents}
-          />
-        ))}
-      </Accordion>
+      <div data-test-notice-policy-detail-request-notices-section>
+        <Accordion
+          id="viewRequestNotices"
+          open={isOpen}
+          label={<FormattedMessage id="ui-circulation.settings.noticePolicy.requestNotices" />}
+        >
+          {map(policy.requestNotices, (notice, index) => (
+            <NoticeCard
+              key={index}
+              index={index}
+              notice={notice}
+              sendEvents={requestTimeBasedNoticesSendEvents}
+              sendEventTriggeringIds={values(requestTimeBasedEventsIds)}
+              templates={templates}
+              triggeringEvents={requestNoticesTriggeringEvents}
+            />
+          ))}
+        </Accordion>
+      </div>
     );
   }
 }

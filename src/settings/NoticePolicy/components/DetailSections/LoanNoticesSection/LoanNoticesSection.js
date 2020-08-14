@@ -33,24 +33,25 @@ class LoanNoticesSection extends React.Component {
     } = this.props;
 
     return (
-      <Accordion
-        data-test-notice-policy-detail-loan-notices-section
-        id="viewLoanNotices"
-        open={isOpen}
-        label={<FormattedMessage id="ui-circulation.settings.noticePolicy.loanNotices" />}
-      >
-        {map(policy.loanNotices, (notice, index) => (
-          <NoticeCard
-            key={index}
-            index={index}
-            notice={notice}
-            sendEvents={noticesSendEvents}
-            sendEventTriggeringIds={values(loanTimeBasedEventsIds)}
-            templates={templates}
-            triggeringEvents={loanNoticesTriggeringEvents}
-          />
-        ))}
-      </Accordion>
+      <div data-test-notice-policy-detail-loan-notices-section>
+        <Accordion
+          id="viewLoanNotices"
+          open={isOpen}
+          label={<FormattedMessage id="ui-circulation.settings.noticePolicy.loanNotices" />}
+        >
+          {map(policy.loanNotices, (notice, index) => (
+            <NoticeCard
+              key={index}
+              index={index}
+              notice={notice}
+              sendEvents={noticesSendEvents}
+              sendEventTriggeringIds={values(loanTimeBasedEventsIds)}
+              templates={templates}
+              triggeringEvents={loanNoticesTriggeringEvents}
+            />
+          ))}
+        </Accordion>
+      </div>
     );
   }
 }

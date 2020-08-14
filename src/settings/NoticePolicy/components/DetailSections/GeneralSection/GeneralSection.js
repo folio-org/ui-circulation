@@ -26,50 +26,51 @@ const GeneralSection = (props) => {
     : <FormattedMessage id="ui-circulation.settings.loanPolicy.no" />;
 
   return (
-    <Accordion
-      data-test-notice-policy-detail-general-section
-      open={isOpen}
-      id="generalInformation"
-      label={<FormattedMessage id="ui-circulation.settings.loanPolicy.generalInformation" />}
-    >
-      <Metadata
-        connect={connect}
-        metadata={metadata}
-      />
-      <Row>
-        <Col
-          xs={12}
-          data-notice-policy-name
-        >
-          <KeyValue
-            label={<FormattedMessage id="ui-circulation.settings.noticePolicy.policyName" />}
-            value={policyName}
-          />
-        </Col>
-      </Row>
-      <Row>
-        <Col
-          xs={12}
-          data-notice-policy-active
-        >
-          <KeyValue
-            label={<FormattedMessage id="ui-circulation.settings.noticePolicy.active" />}
-            value={active}
-          />
-        </Col>
-      </Row>
-      <Row>
-        <Col
-          xs={12}
-          data-notice-policy-description
-        >
-          <KeyValue
-            label={<FormattedMessage id="ui-circulation.settings.loanPolicy.policyDescription" />}
-            value={policyDescription}
-          />
-        </Col>
-      </Row>
-    </Accordion>
+    <div data-test-notice-policy-detail-general-section>
+      <Accordion
+        open={isOpen}
+        id="generalInformation"
+        label={<FormattedMessage id="ui-circulation.settings.loanPolicy.generalInformation" />}
+      >
+        <Metadata
+          connect={connect}
+          metadata={metadata}
+        />
+        <Row>
+          <Col
+            xs={12}
+            data-notice-policy-name
+          >
+            <KeyValue
+              label={<FormattedMessage id="ui-circulation.settings.noticePolicy.policyName" />}
+              value={policyName}
+            />
+          </Col>
+        </Row>
+        <Row>
+          <Col
+            xs={12}
+            data-notice-policy-active
+          >
+            <KeyValue
+              label={<FormattedMessage id="ui-circulation.settings.noticePolicy.active" />}
+              value={active}
+            />
+          </Col>
+        </Row>
+        <Row>
+          <Col
+            xs={12}
+            data-notice-policy-description
+          >
+            <KeyValue
+              label={<FormattedMessage id="ui-circulation.settings.loanPolicy.policyDescription" />}
+              value={policyDescription}
+            />
+          </Col>
+        </Row>
+      </Accordion>
+    </div>
   );
 };
 
