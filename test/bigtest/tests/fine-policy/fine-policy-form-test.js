@@ -16,43 +16,13 @@ describe('FinePolicyForm', () => {
     expect(FinePolicyForm.expandAll.isPresent).to.be.true;
   });
 
-  describe('collapse all', () => {
-    beforeEach(async () => {
-      await FinePolicyForm.overdueAccordion.clickHeader()
-        .overdueAccordion.clickHeader()
-        .expandAll.click();
-    });
-
-    it('aboutSection should not be displayed', () => {
-      expect(FinePolicyForm.generalAccordion.isOpen).to.be.false;
-    });
-
-    it('overdueFineSection should not be displayed', () => {
-      expect(FinePolicyForm.overdueAccordion.isOpen).to.be.false;
-    });
-
-    describe('expand all', () => {
-      beforeEach(async () => {
-        await FinePolicyForm.expandAll.click();
-      });
-
-      it('aboutSection should be displayed', () => {
-        expect(FinePolicyForm.generalAccordion.isOpen).to.be.true;
-      });
-
-      it('overdueFineSection should be displayed', () => {
-        expect(FinePolicyForm.overdueAccordion.isOpen).to.be.true;
-      }).timeout(3000);
-    });
-  });
-
   describe('create a new fine policy', () => {
     const newFinePolicyName = 'new fine policy';
 
     beforeEach(async function () {
       await FinePolicyForm
         .aboutSection.policyName.fillAndBlur(newFinePolicyName)
-        .overdueFineSection.overdue.quantity.fillAndBlur(1)
+        .overdueFineSection.overdue.quantity.fillAndBlur('1')
         .overdueFineSection.overdue.interval.selectAndBlur('minute')
         .overdueFineSection.maxOverdue.fillAndBlur('11')
         .save();
@@ -97,6 +67,36 @@ describe('FinePolicyForm', () => {
 
     it('renders updated policy name', function () {
       expect(FinePolicyDetail.aboutSection.policyName.value.text).to.equal(newFinePolicyName);
+    });
+  });
+
+  describe('collapse all', () => {
+    beforeEach(async () => {
+      await FinePolicyForm.overdueAccordion.clickHeader()
+        .overdueAccordion.clickHeader()
+        .expandAll.click();
+    });
+
+    it('aboutSection should not be displayed', () => {
+      expect(FinePolicyForm.generalAccordion.isOpen).to.be.false;
+    });
+
+    it('overdueFineSection should not be displayed', () => {
+      expect(FinePolicyForm.overdueAccordion.isOpen).to.be.false;
+    });
+
+    describe('expand all', () => {
+      beforeEach(async () => {
+        await FinePolicyForm.expandAll.click();
+      });
+
+      it('aboutSection should be displayed', () => {
+        expect(FinePolicyForm.generalAccordion.isOpen).to.be.true;
+      });
+
+      it('overdueFineSection should be displayed', () => {
+        expect(FinePolicyForm.overdueAccordion.isOpen).to.be.true;
+      }).timeout(3000);
     });
   });
 });
