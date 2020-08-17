@@ -86,9 +86,6 @@ describe('RequestPolicyForm', () => {
 
     beforeEach(async () => {
       await RequestPolicyForm.whenLoaded();
-    });
-
-    beforeEach(async () => {
       await RequestPolicyForm
         .fillName('updated policy name')
         .fillDescription('updated request policy description')
