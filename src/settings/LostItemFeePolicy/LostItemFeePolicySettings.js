@@ -1,6 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { sortBy } from 'lodash';
+import {
+  isBoolean,
+  sortBy,
+} from 'lodash';
 import {
   FormattedMessage,
   injectIntl,
@@ -12,7 +15,7 @@ import { stripesConnect } from '@folio/stripes/core';
 import LostItemFeePolicyDetail from './LostItemFeePolicyDetail';
 import LostItemFeePolicyForm from './LostItemFeePolicyForm';
 import LostItemFeePolicy from '../Models/LostItemFeePolicy';
-import { LostItemFeePolicy as validateLostItemFeePolicy } from '../Validation';
+import normalize from './utils/normalize';
 
 class LostItemFeePolicySettings extends React.Component {
   static manifest = Object.freeze({
@@ -43,23 +46,8 @@ class LostItemFeePolicySettings extends React.Component {
     }).isRequired,
   };
 
-  render() {
-    const {
-      resources,
-      mutator,
-      intl: {
-        formatMessage,
-      },
-    } = this.props;
-
-    const permissions = {
-      put: 'ui-circulation.settings.lost-item-fees-policies',
-      post: 'ui-circulation.settings.lost-item-fees-policies',
-      delete: 'ui-circulation.settings.lost-item-fees-policies',
-    };
-
-    const entryList = sortBy((resources.lostItemFeePolicies || {}).records, ['name']);
-    const parseInitialValues = (init = {}) => ({
+  parseInitialValues = (init = {}) => {
+    /* return {
       ...init,
       lostItemProcessingFee: parseFloat(init.lostItemProcessingFee).toFixed(2),
       replacementProcessingFee: parseFloat(init.replacementProcessingFee).toFixed(2),
@@ -71,7 +59,31 @@ class LostItemFeePolicySettings extends React.Component {
           ? init.chargeAmountItem.chargeType
           : '',
       }
-    });
+    }; */
+
+    const policy = { ...init };
+    for (const key in policy) {
+      if (isBoolean(policy[key])) {
+        policy[key] = policy[key].toString();
+      }
+    }
+    return policy;
+  };
+
+  render() {
+    const {
+      resources,
+      mutator,
+      intl: { formatMessage },
+    } = this.props;
+
+    const permissions = {
+      put: 'ui-circulation.settings.lost-item-fees-policies',
+      post: 'ui-circulation.settings.lost-item-fees-policies',
+      delete: 'ui-circulation.settings.lost-item-fees-policies',
+    };
+
+    const entryList = sortBy((resources.lostItemFeePolicies || {}).records, ['name']);
 
     return (
       <EntryManager
@@ -81,7 +93,7 @@ class LostItemFeePolicySettings extends React.Component {
         entryList={entryList}
         parentMutator={mutator}
         permissions={permissions}
-        parseInitialValues={parseInitialValues}
+        parseInitialValues={this.parseInitialValues}
         parentResources={resources}
         detailComponent={LostItemFeePolicyDetail}
         enableDetailsActionMenu
@@ -89,7 +101,7 @@ class LostItemFeePolicySettings extends React.Component {
         paneTitle={<FormattedMessage id="ui-circulation.settings.lostItemFee.paneTitle" />}
         entryLabel={formatMessage({ id: 'ui-circulation.settings.lostItemFee.entryLabel' })}
         defaultEntry={LostItemFeePolicy.defaultLostItemFeePolicy()}
-        validate={validateLostItemFeePolicy}
+        onBeforeSave={normalize}
       />
     );
   }
