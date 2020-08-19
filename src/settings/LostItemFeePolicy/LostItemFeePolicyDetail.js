@@ -14,6 +14,7 @@ import {
 import { stripesShape } from '@folio/stripes/core';
 import {
   Accordion,
+  AccordionSet,
   Col,
   Row,
   ExpandAllButton,
@@ -48,7 +49,7 @@ class LostItemFeePolicyDetail extends React.Component {
     this.state = {
       sections: {
         LostItemFeeGeneralInformation: true,
-        lostItemFeeSectionOpen: true,
+        viewLostItemFeeSection: true,
       },
     };
   }
@@ -58,8 +59,7 @@ class LostItemFeePolicyDetail extends React.Component {
   };
 
   handleSectionToggle = ({ id }) => {
-    this.setState((state) => {
-      const sections = { ...state.sections };
+    this.setState(({ sections }) => {
       sections[id] = !sections[id];
       return { sections };
     });
@@ -113,25 +113,28 @@ class LostItemFeePolicyDetail extends React.Component {
             />
           </Col>
         </Row>
-        <Accordion
-          id="LostItemFeeGeneralInformation"
-          label={<FormattedMessage id="ui-circulation.settings.lostItemFee.generalInformation" />}
-          open={sections.LostItemFeeGeneralInformation}
+        <AccordionSet
+          accordionStatus={sections}
           onToggle={this.handleSectionToggle}
         >
-          <Metadata
-            connect={connect}
-            metadata={policy.metadata}
-          />
-          <LostItemFeeAboutSection getValue={this.getPathToValue} />
+          <Accordion
+            id="LostItemFeeGeneralInformation"
+            label={<FormattedMessage id="ui-circulation.settings.lostItemFee.generalInformation" />}
+            open={sections.LostItemFeeGeneralInformation}
+          >
+            <Metadata
+              connect={connect}
+              metadata={policy.metadata}
+            />
+            <LostItemFeeAboutSection getValue={this.getPathToValue} />
+          </Accordion>
           <LostItemFeeSection
             policy={LostItemFeePolicy}
-            lostItemFeeSectionOpen={sections.lostItemFeeSectionOpen}
-            accordionOnToggle={this.handleSectionToggle}
+            viewLostItemFeeSection={sections.viewLostItemFeeSection}
             getPeriodValue={this.getPeriod}
             formatMessage={formatMessage}
           />
-        </Accordion>
+        </AccordionSet>
       </div>
     );
   }

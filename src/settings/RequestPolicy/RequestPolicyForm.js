@@ -8,6 +8,7 @@ import {
 
 import stripesFinalForm from '@folio/stripes/final-form';
 import {
+  AccordionSet,
   Col,
   ExpandAllButton,
   Pane,
@@ -46,14 +47,13 @@ class RequestPolicyForm extends React.Component {
 
     this.state = {
       sections: {
-        general: true,
+        generalSection: true,
       },
     };
   }
 
   handleSectionToggle = ({ id }) => {
-    this.setState((state) => {
-      const sections = { ...state.sections };
+    this.setState(({ sections }) => {
       sections[id] = !sections[id];
       return { sections };
     });
@@ -145,13 +145,18 @@ class RequestPolicyForm extends React.Component {
                   />
                 </Col>
               </Row>
-              <GeneralSection
-                isOpen={sections.general}
-                metadata={policy.metadata}
-                connect={stripes.connect}
-                validateName={this.validate}
+              <AccordionSet
+                accordionStatus={sections}
                 onToggle={this.handleSectionToggle}
-              />
+              >
+                <GeneralSection
+                  id="generalSection"
+                  isOpen={sections.generalSection}
+                  metadata={policy.metadata}
+                  connect={stripes.connect}
+                  validateName={this.validate}
+                />
+              </AccordionSet>
             </>
           </Pane>
         </Paneset>

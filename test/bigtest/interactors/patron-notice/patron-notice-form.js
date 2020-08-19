@@ -37,7 +37,7 @@ import TokensModal from './tokens-modal';
 
   showAvailbaleTokensBtn = new Interactor('[data-test-teplate-editor-tokens]');
   tokensModal = new TokensModal();
-  emaillSectionAccordion = new AccordionInteractor('#email-template');
+  emaillSectionAccordion = new AccordionInteractor('#email-template-form');
 }
 
 export default new PatronNoticeForm({ timeout: 5000 });

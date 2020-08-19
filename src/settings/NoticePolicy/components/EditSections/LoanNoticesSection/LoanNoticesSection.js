@@ -20,7 +20,6 @@ class LoanNoticesSection extends React.Component {
       value: PropTypes.string.isRequired,
       label: PropTypes.string.isRequired,
     })).isRequired,
-    onToggle: PropTypes.func.isRequired,
   };
 
   render() {
@@ -28,16 +27,14 @@ class LoanNoticesSection extends React.Component {
       isOpen,
       policy,
       templates,
-      onToggle,
     } = this.props;
 
     return (
       <div data-test-notice-policy-form-loan-notices-section>
         <Accordion
-          id="loanNotices"
+          id="editLoanNotices"
           open={isOpen}
           label={<FormattedMessage id="ui-circulation.settings.noticePolicy.loanNotices" />}
-          onToggle={onToggle}
         >
           <FieldArray
             name="loanNotices"

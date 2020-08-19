@@ -8,6 +8,7 @@
 * Adjust UI for fee/fine notice token options on templates. Refs UICIRC-479.
 * Lost item fee policy: Additional validation not in original user story. Refs UICIRC-478.
 * Lost item fee policy: Handle processing fees same as fee amount. Refs UICIRC-482.
+* Fix of accessibility errors. Refs UICIRC-464.
 * Increment `@folio/stripes` to `v5`, `react-router` to `v5.2`.
 
 ## 3.0.0 (https://github.com/folio-org/ui-circulation/tree/v3.0.0) (2019-06-10)

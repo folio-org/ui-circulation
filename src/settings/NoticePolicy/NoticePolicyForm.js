@@ -6,6 +6,7 @@ import { get } from 'lodash';
 import stripesFinalForm from '@folio/stripes/final-form';
 import { stripesShape } from '@folio/stripes/core';
 import {
+  AccordionSet,
   Col,
   Row,
   Pane,
@@ -52,16 +53,15 @@ class NoticePolicyForm extends React.Component {
     this.state = {
       sections: {
         general: true,
-        loanNotices: true,
-        requestNotices: true,
-        feeFineNotices: true,
+        editLoanNotices: true,
+        editRequestNotices: true,
+        editFeeFineNotices: true,
       },
     };
   }
 
   handleSectionToggle = ({ id }) => {
-    this.setState((state) => {
-      const sections = { ...state.sections };
+    this.setState(({ sections }) => {
       sections[id] = !sections[id];
       return { sections };
     });
@@ -121,31 +121,32 @@ class NoticePolicyForm extends React.Component {
                 />
               </Col>
             </Row>
-            <GeneralSection
-              isOpen={sections.general}
-              metadata={policy.metadata}
-              connect={stripes.connect}
+            <AccordionSet
+              accordionStatus={sections}
               onToggle={this.handleSectionToggle}
-              isPolicyActive={policy.active}
-            />
-            <LoanNoticesSection
-              isOpen={sections.loanNotices}
-              policy={policy}
-              templates={getTemplates(patronNoticeTemplates, patronNoticeCategoryIds.LOAN)}
-              onToggle={this.handleSectionToggle}
-            />
-            <RequestNoticesSection
-              isOpen={sections.requestNotices}
-              policy={policy}
-              templates={getTemplates(patronNoticeTemplates, patronNoticeCategoryIds.REQUEST)}
-              onToggle={this.handleSectionToggle}
-            />
-            <FeeFineNoticesSection
-              isOpen={sections.feeFineNotices}
-              policy={policy}
-              templates={getTemplates(patronNoticeTemplates, patronNoticeCategoryIds.AUTOMATED_FEE_FINE)}
-              onToggle={this.handleSectionToggle}
-            />
+            >
+              <GeneralSection
+                isOpen={sections.general}
+                metadata={policy.metadata}
+                connect={stripes.connect}
+                isPolicyActive={policy.active}
+              />
+              <LoanNoticesSection
+                isOpen={sections.loanNotices}
+                policy={policy}
+                templates={getTemplates(patronNoticeTemplates, patronNoticeCategoryIds.LOAN)}
+              />
+              <RequestNoticesSection
+                isOpen={sections.requestNotices}
+                policy={policy}
+                templates={getTemplates(patronNoticeTemplates, patronNoticeCategoryIds.REQUEST)}
+              />
+              <FeeFineNoticesSection
+                isOpen={sections.feeFineNotices}
+                policy={policy}
+                templates={getTemplates(patronNoticeTemplates, patronNoticeCategoryIds.AUTOMATED_FEE_FINE)}
+              />
+            </AccordionSet>
           </Pane>
         </Paneset>
       </form>

@@ -95,6 +95,7 @@ class Period extends PureComponent {
           <Col xs={inputSize}>
             <div data-test-period-duration>
               <Field
+                aria-label={formatMessage({ id: 'ui-circulation.settings.finePolicy.duration' })}
                 type="number"
                 required={required}
                 name={inputValuePath}
@@ -107,6 +108,7 @@ class Period extends PureComponent {
           <Col xs={selectSize}>
             <div data-test-period-interval>
               <Field
+                aria-label={formatMessage({ id: 'ui-circulation.settings.finePolicy.interval' })}
                 name={selectValuePath}
                 component={Select}
                 required={required}

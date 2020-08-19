@@ -15,6 +15,7 @@ import {
 } from '@folio/stripes/core';
 import {
   Accordion,
+  AccordionSet,
   Button,
   Col,
   ConfirmationModal,
@@ -102,8 +103,7 @@ class FixedDueDateScheduleForm extends React.Component {
   });
 
   handleSectionToggle = ({ id }) => {
-    this.setState((state) => {
-      const sections = { ...state.sections };
+    this.setState(({ sections }) => {
       sections[id] = !sections[id];
       return { sections };
     });
@@ -265,60 +265,63 @@ class FixedDueDateScheduleForm extends React.Component {
                   />
                 </Col>
               </Row>
-              <Accordion
-                id="generalInformation"
-                open={sections.generalInformation}
-                label={<FormattedMessage id="ui-circulation.settings.fDDSform.about" />}
+              <AccordionSet
+                accordionStatus={sections}
                 onToggle={this.handleSectionToggle}
               >
-                <section
-                  className={css.accordionSection}
-                  data-test-fdds-form-general-section
+                <Accordion
+                  id="generalInformation"
+                  open={sections.generalInformation}
+                  label={<FormattedMessage id="ui-circulation.settings.fDDSform.about" />}
                 >
-                  {(initialValues.metadata && initialValues.metadata.createdDate) && (
-                    <this.cViewMetaData metadata={initialValues.metadata} />
-                  )}
-                  <div
-                    className={css.smformItem}
-                    data-test-general-section-name
+                  <section
+                    className={css.accordionSection}
+                    data-test-fdds-form-general-section
                   >
-                    <Field
-                      id="input_schedule_name"
-                      autoFocus
-                      component={TextField}
-                      fullWidth
-                      label={<FormattedMessage id="ui-circulation.settings.fDDSform.name" />}
-                      name="name"
-                      required
-                      validate={this.validateName}
-                    />
-                  </div>
-                  <div data-test-general-section-description>
-                    <Field
-                      name="description"
-                      component={TextArea}
-                      fullWidth
-                      label={<FormattedMessage id="ui-circulation.settings.fDDSform.description" />}
-                    />
-                  </div>
-                </section>
-              </Accordion>
-              <Accordion
-                open={sections.schedule}
-                id="schedule"
-                onToggle={this.handleSectionToggle}
-                label={<FormattedMessage id="ui-circulation.settings.fDDSform.schedule" />}
-              >
-                <section
-                  className={css.accordionSection}
-                  data-test-fdds-form-schedule-section
+                    {(initialValues.metadata && initialValues.metadata.createdDate) && (
+                      <this.cViewMetaData metadata={initialValues.metadata} />
+                    )}
+                    <div
+                      className={css.smformItem}
+                      data-test-general-section-name
+                    >
+                      <Field
+                        id="input_schedule_name"
+                        autoFocus
+                        component={TextField}
+                        fullWidth
+                        label={<FormattedMessage id="ui-circulation.settings.fDDSform.name" />}
+                        name="name"
+                        required
+                        validate={this.validateName}
+                      />
+                    </div>
+                    <div data-test-general-section-description>
+                      <Field
+                        name="description"
+                        component={TextArea}
+                        fullWidth
+                        label={<FormattedMessage id="ui-circulation.settings.fDDSform.description" />}
+                      />
+                    </div>
+                  </section>
+                </Accordion>
+                <Accordion
+                  open={sections.schedule}
+                  id="schedule"
+                  label={<FormattedMessage id="ui-circulation.settings.fDDSform.schedule" />}
                 >
-                  <FieldArray
-                    component={ScheduleList}
-                    name="schedules"
-                  />
-                </section>
-              </Accordion>
+                  <section
+                    className={css.accordionSection}
+                    data-test-fdds-form-schedule-section
+                  >
+                    <FieldArray
+                      component={ScheduleList}
+                      name="schedules"
+                    />
+                  </section>
+                </Accordion>
+              </AccordionSet>
               <ConfirmationModal
                 id="deletefixedduedateschedule-confirmation"
                 buttonStyle="danger"

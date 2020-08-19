@@ -29,6 +29,7 @@ const OverdueFinesSectionColumn = (props) => {
           <div>
             {component === 'TextField' ?
               <Field
+                aria-label={formatMessage({ id: 'ui-circulation.settings.finePolicy.quantity' })}
                 name={name}
                 type="number"
                 hasClearIcon={false}
@@ -37,6 +38,7 @@ const OverdueFinesSectionColumn = (props) => {
               />
               :
               <Field
+                aria-label={formatMessage({ id: 'ui-circulation.settings.finePolicy.select' })}
                 name={name}
                 component={Select}
                 dataOptions={[

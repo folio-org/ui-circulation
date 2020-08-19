@@ -10,6 +10,7 @@ import stripesForm from '@folio/stripes/form';
 
 import {
   Accordion,
+  AccordionSet,
   ExpandAllButton,
   Col,
   Row,
@@ -50,14 +51,13 @@ class LostItemFeePolicyForm extends React.Component {
       sections: {
         lostItemFeegeneralSection: true,
         LostItemFeeSection: true,
-        lostItemFeeSectionOpen: true,
+        editLostItemFeeSection: true,
       },
     };
   }
 
   handleSectionToggle = ({ id }) => {
-    this.setState((state) => {
-      const sections = { ...state.sections };
+    this.setState(({ sections }) => {
       sections[id] = !sections[id];
       return { sections };
     });
@@ -119,25 +119,27 @@ class LostItemFeePolicyForm extends React.Component {
                   />
                 </Col>
               </Row>
-              <Accordion
-                id="lostItemFeegeneralSection"
-                label={<FormattedMessage id="ui-circulation.settings.lostItemFee.generalInformation" />}
-                open={sections.lostItemFeegeneralSection}
+              <AccordionSet
                 onToggle={this.handleSectionToggle}
               >
-                <Metadata
-                  connect={stripes.connect}
-                  metadata={policy.metadata}
-                />
-                <LostItemFeeAboutSection />
+                <Accordion
+                  id="lostItemFeegeneralSection"
+                  label={<FormattedMessage id="ui-circulation.settings.lostItemFee.generalInformation" />}
+                  open={sections.lostItemFeegeneralSection}
+                >
+                  <Metadata
+                    connect={stripes.connect}
+                    metadata={policy.metadata}
+                  />
+                  <LostItemFeeAboutSection />
+                </Accordion>
                 <LostItemFeeSection
                   policy={policy}
                   change={change}
                   initialValues={initialValues}
-                  lostItemFeeSectionOpen={sections.lostItemFeeSectionOpen}
-                  accordionOnToggle={this.handleSectionToggle}
+                  lostItemFeeSectionOpen={sections.editLostItemFeeSection}
                 />
-              </Accordion>
+              </AccordionSet>
             </>
           </Pane>
         </Paneset>
