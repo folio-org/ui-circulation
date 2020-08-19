@@ -1,6 +1,6 @@
 # Change history for ui-circulation
 
-## 3.1.0 (IN PROGRESS)
+## 4.0.0 (IN PROGRESS)
 
 * Accessibility work with color contrast. Refs UICIRC-463.
 * Able to set Overdue Fine Max to value less than Overdue Fine. Refs UICIRC-475.
@@ -9,6 +9,7 @@
 * Lost item fee policy: Additional validation not in original user story. Refs UICIRC-478.
 * Lost item fee policy: Handle processing fees same as fee amount. Refs UICIRC-482.
 * Fix of accessibility errors. Refs UICIRC-464.
+* Increment `@folio/stripes` to `v5`, `react-router` to `v5.2`.
 * Refactor `bigtest/mirage` to `miragejs`.
 
 ## 3.0.0 (https://github.com/folio-org/ui-circulation/tree/v3.0.0) (2019-06-10)
