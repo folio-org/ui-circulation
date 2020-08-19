@@ -5,6 +5,7 @@ import { stripesShape } from '@folio/stripes/core';
 import { FormattedMessage } from 'react-intl';
 import {
   Accordion,
+  AccordionSet,
   Col,
   Row,
   KeyValue,
@@ -35,8 +36,7 @@ class RequestPolicyDetail extends React.Component {
   }
 
   handleSectionToggle = ({ id }) => {
-    this.setState((state) => {
-      const sections = { ...state.sections };
+    this.setState(({ sections }) => {
       sections[id] = !sections[id];
       return { sections };
     });
@@ -68,49 +68,53 @@ class RequestPolicyDetail extends React.Component {
             />
           </Col>
         </Row>
-        <Accordion
-          open={sections.general}
-          id="general"
+        <AccordionSet
+          accordionStatus={sections}
           onToggle={this.handleSectionToggle}
-          label={<FormattedMessage id="ui-circulation.settings.requestPolicy.generalInformation" />}
         >
-          <Metadata
-            connect={stripes.connect}
-            metadata={policy.metadata}
-          />
+          <Accordion
+            open={sections.general}
+            id="general"
+            label={<FormattedMessage id="ui-circulation.settings.requestPolicy.generalInformation" />}
+          >
+            <Metadata
+              connect={stripes.connect}
+              metadata={policy.metadata}
+            />
 
-          <Row>
-            <Col xs={12} data-request-policy-name>
-              <KeyValue
-                label={<FormattedMessage id="ui-circulation.settings.requestPolicy.policyName" />}
-                value={policy.name}
-              />
-            </Col>
-          </Row>
-          <br />
-          <Row>
-            <Col xs={12}>
-              <KeyValue
-                label={<FormattedMessage id="ui-circulation.settings.requestPolicy.policyDescription" />}
-                value={get(policy, 'description', '-')}
-              />
-            </Col>
-          </Row>
-          <Row>
-            <Col xs={12}>
-              <KeyValue
-                label={<FormattedMessage id="ui-circulation.settings.requestPolicy.policyTypes" />}
-              >
-                <div data-test-request-types-list>
-                  <List
-                    items={requestTypes}
-                    itemFormatter={requestType => <li key={requestType}>{requestType}</li>}
-                  />
-                </div>
-              </KeyValue>
-            </Col>
-          </Row>
-        </Accordion>
+            <Row>
+              <Col xs={12} data-request-policy-name>
+                <KeyValue
+                  label={<FormattedMessage id="ui-circulation.settings.requestPolicy.policyName" />}
+                  value={policy.name}
+                />
+              </Col>
+            </Row>
+            <br />
+            <Row>
+              <Col xs={12}>
+                <KeyValue
+                  label={<FormattedMessage id="ui-circulation.settings.requestPolicy.policyDescription" />}
+                  value={get(policy, 'description', '-')}
+                />
+              </Col>
+            </Row>
+            <Row>
+              <Col xs={12}>
+                <KeyValue
+                  label={<FormattedMessage id="ui-circulation.settings.requestPolicy.policyTypes" />}
+                >
+                  <div data-test-request-types-list>
+                    <List
+                      items={requestTypes}
+                      itemFormatter={requestType => <li key={requestType}>{requestType}</li>}
+                    />
+                  </div>
+                </KeyValue>
+              </Col>
+            </Row>
+          </Accordion>
+        </AccordionSet>
       </div>
     );
   }

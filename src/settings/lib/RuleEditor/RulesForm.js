@@ -57,6 +57,7 @@ class RulesForm extends React.Component {
               {placeholder => (
                 <TextField
                   data-test-rules-filter
+                  aria-label={placeholder}
                   value={ruleFilter}
                   validationEnabled={false}
                   placeholder={placeholder}

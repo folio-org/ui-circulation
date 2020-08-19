@@ -20,7 +20,6 @@ class RequestNoticesSection extends React.Component {
       value: PropTypes.string.isRequired,
       label: PropTypes.string.isRequired,
     })).isRequired,
-    onToggle: PropTypes.func.isRequired,
   };
 
   render() {
@@ -28,16 +27,14 @@ class RequestNoticesSection extends React.Component {
       isOpen,
       policy,
       templates,
-      onToggle,
     } = this.props;
 
     return (
       <div data-test-notice-policy-form-request-notices-section>
         <Accordion
-          id="requestNotices"
+          id="editRequestNotices"
           open={isOpen}
           label={<FormattedMessage id="ui-circulation.settings.noticePolicy.requestNotices" />}
-          onToggle={onToggle}
         >
           <FieldArray
             name="requestNotices"

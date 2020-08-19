@@ -11,8 +11,8 @@ import RequestNoticesSection from './request-notices-section';
 
 @interactor class NoticePolicyDetail {
   generalSectionAccordion = new AccordionInteractor('#generalInformation');
-  loanNoticesSectionAccordion = new AccordionInteractor('#loanNotices');
-  requestNoticesSectionAccordion = new AccordionInteractor('#requestNotices');
+  loanNoticesSectionAccordion = new AccordionInteractor('#viewLoanNotices');
+  requestNoticesSectionAccordion = new AccordionInteractor('#viewRequestNotices');
 
   generalSection = new GeneralSection();
   loanNoticesSection = new LoanNoticesSection();

@@ -16,7 +16,7 @@ import LostItemFeeSection from './lost-item-fee-section';
   lostItemSection = new LostItemFeeSection();
   deleteLostItemFeePolicy = new Interactor('#dropdown-clickable-delete-item');
 
-  lostItemDetails = new AccordionInteractor('#lostItemFeeSectionOpen');
+  lostItemDetails = new AccordionInteractor('#viewLostItemFeeSection');
   content = scoped('[class^="content-"]');
   expandAll = scoped('[data-test-expand-all] button')
 }

@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage } from 'react-intl';
+import {
+  FormattedMessage,
+  injectIntl,
+} from 'react-intl';
 import { Field } from 'react-final-form';
 import { FieldArray } from 'react-final-form-arrays';
 
@@ -81,6 +84,7 @@ class CheckoutSettingsForm extends Component {
       handleSubmit,
       label,
       form: { getState },
+      intl: { formatMessage },
     } = this.props;
 
     const { values: checkoutValues } = getState();
@@ -120,6 +124,7 @@ class CheckoutSettingsForm extends Component {
               <div className={css.indentSection}>
                 <Col xs={5}>
                   <Field
+                    aria-label={formatMessage({ id: 'ui-circulation.settings.checkout.timeout.duration' })}
                     id="checkoutTimeoutDuration"
                     type="number"
                     component={TextField}
@@ -156,6 +161,7 @@ class CheckoutSettingsForm extends Component {
 }
 
 CheckoutSettingsForm.propTypes = {
+  intl: PropTypes.object.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   pristine: PropTypes.bool,
   submitting: PropTypes.bool,
@@ -163,8 +169,8 @@ CheckoutSettingsForm.propTypes = {
   form: PropTypes.object.isRequired,
 };
 
-export default stripesFinalForm({
+export default injectIntl(stripesFinalForm({
   navigationCheck: true,
   validate: validateCheckoutSettings,
   subscription: { values: true },
-})(CheckoutSettingsForm);
+})(CheckoutSettingsForm));

@@ -14,7 +14,6 @@ const FinesSection = (props) => {
     policy,
     getCheckboxValue,
     fineSectionOpen,
-    accordionOnToggle,
   } = props;
 
   const { overdueFine, overdueRecallFine } = policy;
@@ -22,10 +21,9 @@ const FinesSection = (props) => {
   return (
     <div data-test-fine-policy-detail-fines-section>
       <Accordion
-        id="fineSection"
+        id="viewFineSection"
         label={<FormattedMessage id="ui-circulation.settings.finePolicy.overdueFine" />}
         open={fineSectionOpen}
-        onToggle={accordionOnToggle}
       >
         <Row>
           <Col xs={12}>
@@ -107,7 +105,6 @@ FinesSection.propTypes = {
   policy: PropTypes.object.isRequired,
   getCheckboxValue: PropTypes.func.isRequired,
   fineSectionOpen: PropTypes.bool.isRequired,
-  accordionOnToggle: PropTypes.func,
 };
 
 export default FinesSection;

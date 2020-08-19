@@ -16,7 +16,6 @@ const GeneralSection = (props) => {
     isOpen,
     connect,
     metadata,
-    onToggle,
     policyName,
     isPolicyActive,
     policyDescription,
@@ -32,7 +31,6 @@ const GeneralSection = (props) => {
         open={isOpen}
         id="generalInformation"
         label={<FormattedMessage id="ui-circulation.settings.loanPolicy.generalInformation" />}
-        onToggle={onToggle}
       >
         <Metadata
           connect={connect}
@@ -84,7 +82,6 @@ GeneralSection.propTypes = {
   policyName: PropTypes.string.isRequired,
   policyDescription: PropTypes.string,
   connect: PropTypes.func.isRequired,
-  onToggle: PropTypes.func.isRequired,
 };
 
 GeneralSection.defaultProps = {

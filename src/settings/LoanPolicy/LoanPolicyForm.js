@@ -14,6 +14,7 @@ import { stripesShape } from '@folio/stripes/core';
 
 import {
   Accordion,
+  AccordionSet,
   ExpandAllButton,
   Col,
   Row,
@@ -73,8 +74,7 @@ class LoanPolicyForm extends React.Component {
   }
 
   handleSectionToggle = ({ id }) => {
-    this.setState((state) => {
-      const sections = { ...state.sections };
+    this.setState(({ sections }) => {
       sections[id] = !sections[id];
       return { sections };
     });
@@ -164,35 +164,37 @@ class LoanPolicyForm extends React.Component {
                 />
               </Col>
             </Row>
-            <Accordion
-              id="generalSection"
-              open={sections.generalSection}
-              label={<FormattedMessage id="ui-circulation.settings.loanPolicy.generalInformation" />}
-              onToggle={this.handleSectionToggle}
-            >
-              <Metadata
-                connect={stripes.connect}
-                metadata={policy.metadata}
-              />
-              <AboutSection />
-              <LoansSection
-                policy={policy}
-                schedules={schedules}
-                change={change}
-              />
-              <RenewalsSection
-                policy={policy}
-                schedules={schedules}
-                change={change}
-              />
-              <RequestManagementSection
-                policy={policy}
-                holdsSectionOpen={sections.holdsSection}
-                recallsSectionOpen={sections.recallsSection}
-                accordionOnToggle={this.handleSectionToggle}
-                change={change}
-              />
-            </Accordion>
+            <AccordionSet>
+              <Accordion
+                id="generalSection"
+                open={sections.generalSection}
+                label={<FormattedMessage id="ui-circulation.settings.loanPolicy.generalInformation" />}
+                onToggle={this.handleSectionToggle}
+              >
+                <Metadata
+                  connect={stripes.connect}
+                  metadata={policy.metadata}
+                />
+                <AboutSection />
+                <LoansSection
+                  policy={policy}
+                  schedules={schedules}
+                  change={change}
+                />
+                <RenewalsSection
+                  policy={policy}
+                  schedules={schedules}
+                  change={change}
+                />
+                <RequestManagementSection
+                  policy={policy}
+                  holdsSectionOpen={sections.holdsSection}
+                  recallsSectionOpen={sections.recallsSection}
+                  accordionOnToggle={this.handleSectionToggle}
+                  change={change}
+                />
+              </Accordion>
+            </AccordionSet>
           </Pane>
         </Paneset>
       </form>
