@@ -18,7 +18,6 @@ class GeneralSection extends React.Component {
   static propTypes = {
     isOpen: PropTypes.bool.isRequired,
     metadata: PropTypes.object.isRequired,
-    onToggle: PropTypes.func.isRequired,
     connect: PropTypes.func.isRequired,
   };
 
@@ -27,7 +26,6 @@ class GeneralSection extends React.Component {
       isOpen,
       metadata,
       connect,
-      onToggle,
     } = this.props;
 
     return (
@@ -36,7 +34,6 @@ class GeneralSection extends React.Component {
           id="general"
           open={isOpen}
           label={<FormattedMessage id="ui-circulation.settings.noticePolicy.generalInformation" />}
-          onToggle={onToggle}
         >
           <Metadata
             connect={connect}

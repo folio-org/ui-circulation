@@ -78,17 +78,12 @@ describe('RequestPolicyForm', () => {
         description: 'Request policy 1 desc',
         requestTypes: ['Hold', 'Page']
       });
-    });
 
-    beforeEach(function () {
       this.visit(`/settings/circulation/request-policies/${requestPolicy.id}?layer=edit`);
     });
 
     beforeEach(async () => {
       await RequestPolicyForm.whenLoaded();
-    });
-
-    beforeEach(async () => {
       await RequestPolicyForm
         .fillName('updated policy name')
         .fillDescription('updated request policy description')

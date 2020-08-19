@@ -5,9 +5,7 @@ import {
   FormattedMessage,
 } from 'react-intl';
 
-import {
-  Accordion,
-} from '@folio/stripes/components';
+import { Accordion } from '@folio/stripes/components';
 
 import {
   intervalPeriods,
@@ -23,7 +21,6 @@ class FinesSection extends React.Component {
   static propTypes = {
     intl: PropTypes.object,
     fineSectionOpen: PropTypes.bool.isRequired,
-    accordionOnToggle: PropTypes.func.isRequired,
   };
 
   constructor(props) {
@@ -39,7 +36,6 @@ class FinesSection extends React.Component {
 
   render() {
     const {
-      accordionOnToggle,
       fineSectionOpen,
       intl,
     } = this.props;
@@ -49,9 +45,8 @@ class FinesSection extends React.Component {
     return (
       <div data-test-fine-policy-form-overdue-fines-section>
         <Accordion
-          id="fineSection"
+          id="editFineSection"
           open={fineSectionOpen}
-          onToggle={accordionOnToggle}
           label={<FormattedMessage id="ui-circulation.settings.finePolicy.overdueFine" />}
         >
           <section className={css.accordionSection}>

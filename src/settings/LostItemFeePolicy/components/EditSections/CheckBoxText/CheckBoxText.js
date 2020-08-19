@@ -4,6 +4,7 @@ import { Field } from 'redux-form';
 
 import {
   FormattedMessage,
+  injectIntl,
 } from 'react-intl';
 
 import {
@@ -51,6 +52,7 @@ const CheckBoxText = (props) => (
         </div>
         <div data-test-charge-amount className={css.col}>
           <Field
+            aria-label={props.intl.formatMessage({ id: 'ui-circulation.settings.lostItemFee.chargeAmount' })}
             name="chargeAmountItem.amount"
             onBlur={props.onBlur}
             component={TextField}
@@ -61,7 +63,8 @@ const CheckBoxText = (props) => (
   </div>);
 
 CheckBoxText.propTypes = {
+  intl: PropTypes.object.isRequired,
   onBlur: PropTypes.func,
 };
 
-export default CheckBoxText;
+export default injectIntl(CheckBoxText);
