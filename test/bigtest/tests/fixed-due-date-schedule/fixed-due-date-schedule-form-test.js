@@ -113,7 +113,7 @@ describe('FddsForm', () => {
       this.visit('/settings/circulation/fixed-due-date-schedules?layer=add');
     });
 
-    describe('add schedule', () => {
+    describe('add schedule button', () => {
       it('should be displayed', () => {
         expect(FddsForm.scheduleSection.addSchedule.isPresent).to.be.true;
       });
@@ -126,7 +126,7 @@ describe('FddsForm', () => {
     });
 
     describe('schedule', () => {
-      describe('date range', () => {
+      describe('date range header', () => {
         it('should be displayed', () => {
           expect(FddsForm.scheduleSection.schedules(0).dateRange.isPresent).to.be.true;
         });
@@ -144,7 +144,7 @@ describe('FddsForm', () => {
         });
 
         it('should have proper text', () => {
-          expect(FddsForm.scheduleSection.schedules(0).dateFrom.text).to.equal(
+          expect(FddsForm.scheduleSection.schedules(0).dateFrom.labelText).to.equal(
             `${translation['settings.fDDSform.dateFrom']}*`
           );
         });
@@ -156,7 +156,7 @@ describe('FddsForm', () => {
         });
 
         it('should have proper text', () => {
-          expect(FddsForm.scheduleSection.schedules(0).dateTo.text).to.equal(
+          expect(FddsForm.scheduleSection.schedules(0).dateTo.labelText).to.equal(
             `${translation['settings.fDDSform.dateTo']}*`
           );
         });
@@ -168,7 +168,7 @@ describe('FddsForm', () => {
         });
 
         it('should have proper text', () => {
-          expect(FddsForm.scheduleSection.schedules(0).dueDate.text).to.equal(
+          expect(FddsForm.scheduleSection.schedules(0).dueDate.labelText).to.equal(
             `${translation['settings.fDDSform.dueDate']}*`
           );
         });
