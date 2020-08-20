@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Field } from 'react-final-form';
-import { isBoolean, isNumber } from 'lodash';
+import { isNumber } from 'lodash';
 import {
   injectIntl,
   FormattedMessage,
@@ -36,10 +36,6 @@ class LostItemFeeSection extends React.Component {
 
   formatNumber = (value) => {
     return isNumber(Number(value)) ? parseFloat(value).toFixed(2) : value;
-  };
-
-  convertToBoolean = (value) => {
-    return isBoolean(value) ? value : value === 'true';
   };
 
   render() {
@@ -185,6 +181,7 @@ class LostItemFeeSection extends React.Component {
               value="Remove"
               type="radio"
             />
+              <br />
           </Col>
         </Row>
         <Row>

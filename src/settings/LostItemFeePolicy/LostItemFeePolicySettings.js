@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {
   isBoolean,
+  isUndefined,
   sortBy,
 } from 'lodash';
 import {
@@ -47,26 +48,33 @@ class LostItemFeePolicySettings extends React.Component {
   };
 
   parseInitialValues = (init = {}) => {
-    /* return {
-      ...init,
-      lostItemProcessingFee: parseFloat(init.lostItemProcessingFee).toFixed(2),
-      replacementProcessingFee: parseFloat(init.replacementProcessingFee).toFixed(2),
-      chargeAmountItem: {
-        amount: init.chargeAmountItem && init.chargeAmountItem.amount
-          ? parseFloat(init.chargeAmountItem.amount).toFixed(2)
-          : '0.00',
-        chargeType: init.chargeAmountItem && init.chargeAmountItem.chargeType
-          ? init.chargeAmountItem.chargeType
-          : '',
-      }
-    }; */
-
     const policy = { ...init };
+
     for (const key in policy) {
       if (isBoolean(policy[key])) {
         policy[key] = policy[key].toString();
       }
     }
+
+    if (!isUndefined(init.lostItemProcessingFee)) {
+      policy.lostItemProcessingFee = parseFloat(init.lostItemProcessingFee).toFixed(2);
+    }
+
+    if (!isUndefined(init.replacementProcessingFee)) {
+      policy.replacementProcessingFee = parseFloat(init.replacementProcessingFee).toFixed(2);
+    }
+
+    if (init.chargeAmountItem) {
+      policy.chargeAmountItem = {
+        amount: init.chargeAmountItem.amount
+          ? parseFloat(init.chargeAmountItem.amount).toFixed(2)
+          : '0.00',
+        chargeType: init.chargeAmountItem.chargeType
+          ? init.chargeAmountItem.chargeType
+          : '',
+      };
+    }
+
     return policy;
   };
 

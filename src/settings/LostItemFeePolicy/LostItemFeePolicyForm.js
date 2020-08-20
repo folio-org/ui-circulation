@@ -29,6 +29,8 @@ import {
   Metadata,
 } from '../components';
 
+import { transformModelBooleans } from './utils/normalize';
+
 import css from './LostItemFee.css';
 
 class LostItemFeePolicyForm extends React.Component {
@@ -152,5 +154,5 @@ class LostItemFeePolicyForm extends React.Component {
 
 export default stripesFinalForm({
   navigationCheck: true,
-  validate: validateLostItemFeePolicy,
+  validate: model => validateLostItemFeePolicy(transformModelBooleans(model)),
 })(LostItemFeePolicyForm);
