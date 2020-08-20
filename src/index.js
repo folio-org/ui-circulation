@@ -4,7 +4,7 @@ import { FormattedMessage, injectIntl } from 'react-intl';
 import { Settings } from '@folio/stripes/smart-components';
 import { stripesShape } from '@folio/stripes/core';
 
-import LoanHistory from './settings/LoanHistory/LoanHistory';
+import LoanHistorySettings from './settings/LoanHistory/LoanHistorySettings';
 import LoanPolicySettings from './settings/LoanPolicy/LoanPolicySettings';
 import FinePolicySettings from './settings/FinePolicy/FinePolicySettings';
 import LostItemFeePolicySettings from './settings/LostItemFeePolicy/LostItemFeePolicySettings';
@@ -62,7 +62,7 @@ class Circulation extends Component {
           {
             route: 'loan-history',
             label: <FormattedMessage id="ui-circulation.settings.index.loanHistory" />,
-            component: LoanHistory,
+            component: LoanHistorySettings,
             perm: 'ui-circulation.settings.loan-history',
           },
           {
