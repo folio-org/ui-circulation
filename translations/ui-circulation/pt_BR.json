@@ -393,5 +393,17 @@
     "settings.lostItemFee.validate.hasPositiveReplacementProcessingFee": "A taxa de processamento de substituição não pode ser maior que 0, a menos que a substituição permitida tenha sido selecionada",
     "settings.lostItemFee.validate.hasReplacedLostItemProcessingFee": "Não pode ser selecionado, a menos que a substituição permitida também tenha sido selecionada",
     "settings.lostItemFee.validate.chargeAmountItemSystemSelected": "Informação obrigatória se cobrar taxa de processamento de itens perdidos se o item for perdido ou perdido pelo sistema selecionado",
-    "settings.lostItemFee.lostItemNotChargeFeeFine": "Para itens perdidos sem cobrança de taxa/multa, limpe o empréstimo após"
+    "settings.lostItemFee.lostItemNotChargeFeeFine": "Para itens perdidos sem cobrança de taxa/multa, limpe o empréstimo após",
+    "settings.circulationRules.label": "Rules",
+    "settings.circulationRules.overdueFine.quantity": "Overdue fine quantity",
+    "settings.circulationRules.overdueFine.period": "Overdue fine period",
+    "settings.checkout.timeout.duration": "Timeout duration",
+    "settings.finePolicy.duration": "Period duration",
+    "settings.finePolicy.interval": "Period interval",
+    "settings.finePolicy.select": "Overdue fine select",
+    "settings.finePolicy.quantity": "Overdue fine quantity",
+    "settings.lostItemFee.chargeAmount": "Charge amount",
+    "settings.lostItemFee.chargeAmount.patron": "Charge amount item by patron",
+    "settings.lostItemFee.chargeAmount.system": "Charge amount item by system",
+    "settings.lostItemFee.returned": "Lost item returned"
 }
