@@ -48,8 +48,8 @@ class LostItemFeeSection extends React.Component {
     } = this.props;
 
     const selectValues = [
-      { value: 'true', label: intl.formatMessage({ id: 'ui-circulation.settings.lostItemFee.yes' }) },
-      { value: 'false', label: intl.formatMessage({ id: 'ui-circulation.settings.lostItemFee.no' }) },
+      { value: 'true', label: formatMessage({ id: 'ui-circulation.settings.lostItemFee.yes' }) },
+      { value: 'false', label: formatMessage({ id: 'ui-circulation.settings.lostItemFee.no' }) },
     ];
 
     return (
@@ -181,7 +181,7 @@ class LostItemFeeSection extends React.Component {
               value="Remove"
               type="radio"
             />
-              <br />
+            <br />
           </Col>
         </Row>
         <Row>
