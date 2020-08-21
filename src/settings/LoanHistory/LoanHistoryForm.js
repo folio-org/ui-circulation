@@ -124,7 +124,7 @@ class LoanHistoryForm extends Component {
               <Headline
                 size="large"
                 margin="xx-large"
-                tag="h5"
+                tag="h3"
               >
                 <FormattedMessage id="ui-circulation.settings.loanHistory.closedLoansFeesFines" />
               </Headline>

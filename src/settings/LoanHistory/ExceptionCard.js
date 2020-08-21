@@ -90,6 +90,7 @@ class ExceptionCard extends Component {
               data-test-payment-method-selector
             >
               <Field
+                aria-label={intl.formatMessage({ id: 'ui-circulation.settings.loanHistory.paymentMethodSelect' })}
                 name={`${pathToException}.paymentMethod`}
                 component={Select}
               >

@@ -77,7 +77,7 @@ describe('FddsForm', () => {
       it('should be displayed', () => {
         expect(FddsForm.generalSection.isPresent).to.be.true;
       });
-  
+
       it('should be displayed name', () => {
         expect(FddsForm.generalSection.name.isPresent).to.be.true;
       });
@@ -87,7 +87,7 @@ describe('FddsForm', () => {
           `${translation['settings.fDDSform.name']}*`
         );
       });
-  
+
       it('should be displayed description', () => {
         expect(FddsForm.generalSection.description.isPresent).to.be.true;
       });
@@ -164,22 +164,22 @@ describe('FddsForm', () => {
         it('should be one schedule', () => {
           expect(FddsForm.scheduleSection.schedulesCount).to.equal(1);
         });
-    
+
         describe('adding additional schedule', () => {
           beforeEach(async () => {
             await FddsForm.scheduleSection.addSchedule.click();
           });
-    
+
           it('should be two schedules', () => {
             expect(FddsForm.scheduleSection.schedulesCount).to.equal(2);
           });
-    
+
           it('should have proper text', () => {
             expect(FddsForm.scheduleSection.schedules(0).dateRange.text).to.equal(
               `${translation['settings.fDDSform.dateRange']} 1`
             );
           });
-    
+
           it('should have proper text', () => {
             expect(FddsForm.scheduleSection.schedules(1).dateRange.text).to.equal(
               `${translation['settings.fDDSform.dateRange']} 2`
@@ -192,26 +192,26 @@ describe('FddsForm', () => {
         it('should be one schedule', () => {
           expect(FddsForm.scheduleSection.schedulesCount).to.equal(1);
         });
-    
+
         describe('adding additional schedule', () => {
           beforeEach(async () => {
             await FddsForm.scheduleSection.addSchedule.click();
           });
-    
+
           it('should be two schedules', () => {
             expect(FddsForm.scheduleSection.schedulesCount).to.equal(2);
           });
-    
+
           describe('deleting additional schedule', () => {
             beforeEach(async () => {
               await FddsForm.scheduleSection.addSchedule.click();
               await FddsForm.scheduleSection.schedules(1).remove.click();
             });
-    
+
             it('should be one schedule', () => {
               expect(FddsForm.scheduleSection.schedulesCount).to.equal(1);
             });
-    
+
             it('should have proper text', () => {
               expect(FddsForm.scheduleSection.schedules(0).dateRange.text).to.equal(
                 `${translation['settings.fDDSform.dateRange']} 1`
