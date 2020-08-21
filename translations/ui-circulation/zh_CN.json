@@ -393,5 +393,17 @@
     "settings.lostItemFee.validate.hasPositiveReplacementProcessingFee": "除非选择允许替换，否则更换处理费不能>0",
     "settings.lostItemFee.validate.hasReplacedLostItemProcessingFee": "除非也选允许替换，否则无法选择",
     "settings.lostItemFee.validate.chargeAmountItemSystemSelected": "如果已选若单件老化被系统视为遗失则收取遗失单件处理费，则需要输入",
-    "settings.lostItemFee.lostItemNotChargeFeeFine": "对于未收取费用/罚款的遗失单件，请在之后清算借阅"
+    "settings.lostItemFee.lostItemNotChargeFeeFine": "对于未收取费用/罚款的遗失单件，请在之后清算借阅",
+    "settings.circulationRules.label": "Rules",
+    "settings.circulationRules.overdueFine.quantity": "Overdue fine quantity",
+    "settings.circulationRules.overdueFine.period": "Overdue fine period",
+    "settings.checkout.timeout.duration": "Timeout duration",
+    "settings.finePolicy.duration": "Period duration",
+    "settings.finePolicy.interval": "Period interval",
+    "settings.finePolicy.select": "Overdue fine select",
+    "settings.finePolicy.quantity": "Overdue fine quantity",
+    "settings.lostItemFee.chargeAmount": "Charge amount",
+    "settings.lostItemFee.chargeAmount.patron": "Charge amount item by patron",
+    "settings.lostItemFee.chargeAmount.system": "Charge amount item by system",
+    "settings.lostItemFee.returned": "Lost item returned"
 }
