@@ -14,7 +14,6 @@ import { ConfigManager } from '@folio/stripes/smart-components';
 
 import normalize from './utils/normalize';
 import LoanHistoryForm from './LoanHistoryForm';
-// import { LoanHistory as validateLoanHistory } from '../Validation';
 
 class LoanHistorySettings extends React.Component {
   static propTypes = {

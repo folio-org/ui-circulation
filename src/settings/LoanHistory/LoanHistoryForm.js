@@ -26,6 +26,7 @@ import {
   closingTypes,
   closedLoansRules,
 } from '../../constants';
+import { LoanHistory as validateLoanHistorySettings } from '../Validation';
 
 import css from './LoanHistoryForm.css';
 
@@ -150,6 +151,7 @@ class LoanHistoryForm extends Component {
 export default injectIntl(stripesFinalForm({
   initialValuesEqual: (a, b) => isEqual(a, b),
   navigationCheck: true,
+  validate: validateLoanHistorySettings,
   subscription: { values: true },
   mutators: { setFieldData }
 })(LoanHistoryForm));
