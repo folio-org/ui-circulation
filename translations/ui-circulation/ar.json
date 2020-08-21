@@ -393,5 +393,17 @@
     "settings.lostItemFee.validate.hasPositiveReplacementProcessingFee": "لا يمكن أن يكون رسم معالجة الاستبدال > 0 إلا عند تحديد الاستبدال مسموح",
     "settings.lostItemFee.validate.hasReplacedLostItemProcessingFee": "لا يمكن تحديده إلا إذا تم تحديد الاستبدال مسموح أيضاً",
     "settings.lostItemFee.validate.chargeAmountItemSystemSelected": "الإدخال مطلوب إذا تم تحديد فرض رسم معالجة مادة مفقودة إذا تقادمت المادة إلى مفقودة وفقًا للنظام",
-    "settings.lostItemFee.lostItemNotChargeFeeFine": "بالنسبة للمواد المفقودة التي لم يتم فرض غرامة/رسم لها، قم بإغلاق الإعارة بعد"
+    "settings.lostItemFee.lostItemNotChargeFeeFine": "بالنسبة للمواد المفقودة التي لم يتم فرض غرامة/رسم لها، قم بإغلاق الإعارة بعد",
+    "settings.circulationRules.label": "القواعد",
+    "settings.circulationRules.overdueFine.quantity": "مبلغ غرامة التأخير",
+    "settings.circulationRules.overdueFine.period": "مدة غرامة التأخير",
+    "settings.checkout.timeout.duration": "مدة المهلة",
+    "settings.finePolicy.duration": "المدة",
+    "settings.finePolicy.interval": "مدة الفاصل الزمني",
+    "settings.finePolicy.select": "تحديد غرامة التأخير",
+    "settings.finePolicy.quantity": "مبلغ غرامة التأخير",
+    "settings.lostItemFee.chargeAmount": "فرض مبلغ",
+    "settings.lostItemFee.chargeAmount.patron": "فرض مبلغ لمادة بواسطة المستفيد",
+    "settings.lostItemFee.chargeAmount.system": "فرض مبلغ لمادة بواسطة النظام",
+    "settings.lostItemFee.returned": "تمت إعادة مادة مفقودة"
 }
