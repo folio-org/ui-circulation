@@ -8,7 +8,7 @@ describe('Request Cancellation reasons', () => {
   setupApplication();
 
   beforeEach(function () {
-    this.server.createList('cancellationReasons', 3);
+    this.server.createList('cancellationReason', 3);
   });
 
   describe('viewing cancellation reason list', () => {

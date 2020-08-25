@@ -1,4 +1,5 @@
-import { Factory, faker, trait } from '@bigtest/mirage';
+import { Factory, trait } from 'miragejs';
+import faker from 'faker';
 
 export default Factory.extend({
   id: () => faker.random.uuid(),
@@ -16,7 +17,6 @@ export default Factory.extend({
   withAccounts: trait({
     afterCreate(payments, server) {
       const owner = server.create('owner');
-
       payments.update('ownerId', owner.id);
       payments.save();
     }

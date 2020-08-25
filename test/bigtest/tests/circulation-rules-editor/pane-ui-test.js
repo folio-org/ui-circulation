@@ -6,7 +6,7 @@ import {
 } from '@bigtest/mocha';
 import { expect } from 'chai';
 import { kebabCase } from 'lodash';
-import { Response } from '@bigtest/mirage';
+import { Response } from 'miragejs';
 
 import setupApplication from '../../helpers/setup-application';
 import circulationRules from '../../interactors/circulation-rules-editor/pane';
@@ -56,7 +56,6 @@ describe('Circulation rules editor: pane UI', () => {
   it('should have disabled save button when there is no changes', () => {
     expect(circulationRules.isSaveButtonDisabled).to.be.true;
   });
-
 
   describe('rules filtering', () => {
     beforeEach(async () => {
