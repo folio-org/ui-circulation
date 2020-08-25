@@ -1,7 +1,5 @@
-import {
-  Factory,
-  faker,
-} from '@bigtest/mirage';
+import { Factory } from 'miragejs';
+import faker from 'faker';
 
 import { // eslint-disable-line import/no-extraneous-dependencies
   intervalPeriods,
@@ -9,7 +7,6 @@ import { // eslint-disable-line import/no-extraneous-dependencies
   renewFromOptions,
   longTermLoansOptions,
 } from '@folio/circulation/src/constants'; // eslint-disable-line  import/no-unresolved
-
 
 export const getPeriod = {
   duration: () => faker.random.number(),

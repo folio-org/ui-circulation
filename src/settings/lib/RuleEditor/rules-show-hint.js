@@ -780,7 +780,6 @@ class MultipleSelectionHintSection extends HintSection {
     this.header.appendChild(this.filterInput);
   }
 
-
   handleFilterInputBlur = () => {
     CodeMirror.signal(this.cm, 'blurHintInput');
   }

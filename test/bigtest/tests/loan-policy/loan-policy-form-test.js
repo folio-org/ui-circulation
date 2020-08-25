@@ -540,7 +540,6 @@ describe('LoanPolicyForm', () => {
             });
           });
 
-
           describe('loan policy:\n\t\t-loanable\n\t\t-not renewable\n', () => {
             beforeEach(async () => {
               await LoanPolicyForm.renewalsSection.renewable.clickAndBlur();

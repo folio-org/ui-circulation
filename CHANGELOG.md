@@ -10,6 +10,7 @@
 * Lost item fee policy: Handle processing fees same as fee amount. Refs UICIRC-482.
 * Fix of accessibility errors. Refs UICIRC-464.
 * Increment `@folio/stripes` to `v5`, `react-router` to `v5.2`.
+* Refactor `bigtest/mirage` to `miragejs`.
 
 ## 3.0.0 (https://github.com/folio-org/ui-circulation/tree/v3.0.0) (2019-06-10)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v2.0.0...v3.0.0)

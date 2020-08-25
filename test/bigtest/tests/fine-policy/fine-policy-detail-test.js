@@ -4,7 +4,6 @@ import { expect } from 'chai';
 import setupApplication from '../../helpers/setup-application';
 import FinePolicyDetail from '../../interactors/fine-policy/fine-policy-detail';
 
-
 describe('FinePolicyDetail', () => {
   setupApplication({ scenarios: ['testFinePolicy'] });
 
@@ -51,7 +50,6 @@ describe('FinePolicyDetail', () => {
 
           this.visit(`/settings/circulation/fine-policies/${finePolicy.id}`);
         });
-
 
         describe('fine policy name', () => {
           it('should be displayed', () => {
