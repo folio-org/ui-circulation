@@ -126,7 +126,7 @@ class LostItemFeeSection extends React.Component {
         </Row>
         <Row>
           <Col xs={5}>
-            <FormattedMessage id="ui-circulation.settings.lostItemFee.chargeAmount.patron">
+            <FormattedMessage id="ui-circulation.settings.lostItemFee.chargeAmountItemSystem">
               {(message) => <option value="true">{`${message} ?`}</option>}
             </FormattedMessage>
           </Col>
