@@ -365,7 +365,7 @@
     "settings.circulationRules.overdueFinePolicies": "超期罚款政策",
     "settings.loanPolicy.itemLimit": "单件限制",
     "settings.validate.itemLimitInterval": "单件限制必须> 0，= < 9999或空白",
-    "settings.lostItemFee.setCost": "设定费用",
+    "settings.lostItemFee.setCost": "设置费用",
     "settings.circulationRules.lostItemFeePolicies": "遗失单件费用政策",
     "settings.patronNotices.categories.automatedFeeFineAction": "自动的费用/罚款收取或调整",
     "settings.noticePolicy.feeFineNotices.returned": "超期罚款，已退还",

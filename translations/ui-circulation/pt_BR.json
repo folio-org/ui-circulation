@@ -395,15 +395,15 @@
     "settings.lostItemFee.validate.chargeAmountItemSystemSelected": "Informação obrigatória se cobrar taxa de processamento de itens perdidos se o item for perdido ou perdido pelo sistema selecionado",
     "settings.lostItemFee.lostItemNotChargeFeeFine": "Para itens perdidos sem cobrança de taxa/multa, limpe o empréstimo após",
     "settings.circulationRules.label": "Regras",
-    "settings.circulationRules.overdueFine.quantity": "Overdue fine quantity",
-    "settings.circulationRules.overdueFine.period": "Overdue fine period",
+    "settings.circulationRules.overdueFine.quantity": "Quantidade de multa em atraso",
+    "settings.circulationRules.overdueFine.period": "Período de multa em atraso",
     "settings.checkout.timeout.duration": "Duração do tempo limite",
     "settings.finePolicy.duration": "Duração do período",
     "settings.finePolicy.interval": "Intervalo de período",
-    "settings.finePolicy.select": "Overdue fine select",
-    "settings.finePolicy.quantity": "Overdue fine quantity",
+    "settings.finePolicy.select": "Seleção de multa em atraso",
+    "settings.finePolicy.quantity": "Quantidade de multa em atraso",
     "settings.lostItemFee.chargeAmount": "Valor da carga",
-    "settings.lostItemFee.chargeAmount.patron": "Charge amount item by patron",
-    "settings.lostItemFee.chargeAmount.system": "Charge amount item by system",
-    "settings.lostItemFee.returned": "Lost item returned"
+    "settings.lostItemFee.chargeAmount.patron": "Item de valor de cobrança por cliente",
+    "settings.lostItemFee.chargeAmount.system": "Quantidade de cobrança item por sistema",
+    "settings.lostItemFee.returned": "Item perdido devolvido"
 }
