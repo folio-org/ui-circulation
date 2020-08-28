@@ -62,7 +62,7 @@ class FixedDueDateScheduleForm extends React.Component {
     this.state = {
       confirmDelete: false,
       sections: {
-        generalInformation: true,
+        generalFixedDueDate: true,
         schedule: true,
       },
     };
@@ -270,8 +270,8 @@ class FixedDueDateScheduleForm extends React.Component {
                 onToggle={this.handleSectionToggle}
               >
                 <Accordion
-                  id="generalInformation"
-                  open={sections.generalInformation}
+                  id="generalFixedDueDate"
+                  open={sections.generalFixedDueDate}
                   label={<FormattedMessage id="ui-circulation.settings.fDDSform.about" />}
                 >
                   <section

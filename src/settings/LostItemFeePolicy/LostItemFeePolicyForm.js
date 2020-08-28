@@ -49,7 +49,7 @@ class LostItemFeePolicyForm extends React.Component {
 
     this.state = {
       sections: {
-        lostItemFeegeneralSection: true,
+        lostItemFeeFormGeneralSection: true,
         LostItemFeeSection: true,
         editLostItemFeeSection: true,
       },
@@ -123,9 +123,9 @@ class LostItemFeePolicyForm extends React.Component {
                 onToggle={this.handleSectionToggle}
               >
                 <Accordion
-                  id="lostItemFeegeneralSection"
+                  id="lostItemFeeFormGeneralSection"
                   label={<FormattedMessage id="ui-circulation.settings.lostItemFee.generalInformation" />}
-                  open={sections.lostItemFeegeneralSection}
+                  open={sections.lostItemFeeFormGeneralSection}
                 >
                   <Metadata
                     connect={stripes.connect}

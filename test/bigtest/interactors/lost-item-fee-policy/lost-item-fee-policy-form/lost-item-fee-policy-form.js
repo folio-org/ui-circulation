@@ -21,7 +21,7 @@ import LostItemFeeSection from './lost-item-fee-section';
   aboutSection = new AboutSection();
   lostItemFeeSection = new LostItemFeeSection();
 
-  generalInformationAccordion = new AccordionInteractor('#lostItemFeegeneralSection');
+  generalInformationAccordion = new AccordionInteractor('#lostItemFeeFormGeneralSection');
   lostItemFeeAccordion = new AccordionInteractor('#editLostItemFeeSection');
 
   expandAll = scoped('[data-test-expand-all] button');

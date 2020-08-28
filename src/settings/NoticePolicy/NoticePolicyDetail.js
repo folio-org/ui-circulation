@@ -35,7 +35,7 @@ class NoticePolicyDetail extends React.Component {
 
     this.state = {
       sections: {
-        generalInformation: true,
+        generalNoticePolicy: true,
         viewLoanNotices: true,
         viewRequestNotices: true,
         viewFeeFineNotices: true,
@@ -68,7 +68,7 @@ class NoticePolicyDetail extends React.Component {
     } = this.props;
 
     const {
-      generalInformation,
+      generalNoticePolicy,
       viewLoanNotices,
       viewFeeFineNotices,
       viewRequestNotices,
@@ -94,7 +94,7 @@ class NoticePolicyDetail extends React.Component {
           onToggle={this.handleSectionToggle}
         >
           <GeneralSection
-            isOpen={generalInformation}
+            isOpen={generalNoticePolicy}
             isPolicyActive={policy.active}
             policyName={policy.name}
             policyDescription={policy.description}

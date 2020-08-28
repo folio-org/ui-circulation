@@ -28,7 +28,7 @@ import RequestManagementSection from './request-management-section';
   cancelEditingLoanPolicy = new Interactor('#footer-cancel-entity');
   cancelEditingLoanPolicyModal = new Interactor('#cancel-editing-confirmation');
 
-  generalSectionAccordion = new AccordionInteractor('#generalSection');
+  generalSectionAccordion = new AccordionInteractor('#generalLoanPolicyForm');
   recallsSectionAccordion = new AccordionInteractor('#recallsSection');
   holdsSectionAccordion = new AccordionInteractor('#holdsSection');
 

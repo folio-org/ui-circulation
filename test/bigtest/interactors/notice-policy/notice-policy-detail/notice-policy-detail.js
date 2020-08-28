@@ -10,7 +10,7 @@ import LoanNoticesSection from './loan-notices-section';
 import RequestNoticesSection from './request-notices-section';
 
 @interactor class NoticePolicyDetail {
-  generalSectionAccordion = new AccordionInteractor('#generalInformation');
+  generalSectionAccordion = new AccordionInteractor('#generalNoticePolicy');
   loanNoticesSectionAccordion = new AccordionInteractor('#viewLoanNotices');
   requestNoticesSectionAccordion = new AccordionInteractor('#viewRequestNotices');
 

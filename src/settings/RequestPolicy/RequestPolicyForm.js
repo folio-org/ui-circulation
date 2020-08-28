@@ -47,7 +47,7 @@ class RequestPolicyForm extends React.Component {
 
     this.state = {
       sections: {
-        generalSection: true,
+        generalRequestPolicyForm: true,
       },
     };
   }
@@ -150,8 +150,8 @@ class RequestPolicyForm extends React.Component {
                 onToggle={this.handleSectionToggle}
               >
                 <GeneralSection
-                  id="generalSection"
-                  isOpen={sections.generalSection}
+                  id="generalRequestPolicyForm"
+                  isOpen={sections.generalRequestPolicyForm}
                   metadata={policy.metadata}
                   connect={stripes.connect}
                   validateName={this.validate}
