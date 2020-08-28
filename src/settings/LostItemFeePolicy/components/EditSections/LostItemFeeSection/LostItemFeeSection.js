@@ -145,7 +145,7 @@ class LostItemFeeSection extends React.Component {
         </Row>
         <div data-test-lost-item-charge-fee>
           <Period
-            fieldLabel="ui-circulation.settings.lostItemFee.lostItemNotChargeFeeFine"
+            fieldLabel="ui-circulation.settings.lostItemFee.lostItemNotChargeFeesFine"
             inputValuePath="lostItemChargeFeeFine.duration"
             selectValuePath="lostItemChargeFeeFine.intervalId"
             intervalPeriods={this.generateOptions(intervalPeriodsLower, 'ui-circulation.settings.lostItemFee.selectInterval')}
