@@ -59,7 +59,7 @@ class GeneralSection extends React.Component {
 
     return (
       <Accordion
-        id="generalSection"
+        id="generalRequestPolicyForm"
         open={isOpen}
         label={<FormattedMessage id="ui-circulation.settings.requestPolicy.generalInformation" />}
       >

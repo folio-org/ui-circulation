@@ -66,7 +66,7 @@ class LoanPolicyForm extends React.Component {
 
     this.state = {
       sections: {
-        generalSection: true,
+        generalLoanPolicyForm: true,
         recallsSection: true,
         holdsSection: true,
       },
@@ -166,8 +166,8 @@ class LoanPolicyForm extends React.Component {
             </Row>
             <AccordionSet>
               <Accordion
-                id="generalSection"
-                open={sections.generalSection}
+                id="generalLoanPolicyForm"
+                open={sections.generalLoanPolicyForm}
                 label={<FormattedMessage id="ui-circulation.settings.loanPolicy.generalInformation" />}
                 onToggle={this.handleSectionToggle}
               >

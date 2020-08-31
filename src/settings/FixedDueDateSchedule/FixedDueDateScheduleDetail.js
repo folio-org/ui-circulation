@@ -34,7 +34,7 @@ class FixedDueDateScheduleDetail extends React.Component {
     this.cViewMetaData = props.stripes.connect(ViewMetaData);
     this.state = {
       sections: {
-        generalSection: true,
+        generalFixedDueDateScheduleDetail: true,
         fixedDueDateSchedule: true,
       },
     };
@@ -70,8 +70,8 @@ class FixedDueDateScheduleDetail extends React.Component {
           onToggle={this.handleSectionToggle}
         >
           <Accordion
-            id="generalSection"
-            open={sections.generalSection}
+            id="generalFixedDueDateScheduleDetail"
+            open={sections.generalFixedDueDateScheduleDetail}
             label={<FormattedMessage id="ui-circulation.settings.fDDSform.about" />}
           >
             <section className={css.accordionSection}>

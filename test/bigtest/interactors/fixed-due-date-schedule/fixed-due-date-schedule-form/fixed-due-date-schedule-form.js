@@ -26,7 +26,7 @@ import DeleteConfirmationModal from './delete-confirmation-modal';
   generalSection = new GeneralSection();
   scheduleSection = new ScheduleSection();
   deleteConfirmationModal = new DeleteConfirmationModal();
-  generalSectionAccordion = new AccordionInteractor('#generalInformation');
+  generalSectionAccordion = new AccordionInteractor('#generalFixedDueDate');
   scheduleSectionAccordion = new AccordionInteractor('#schedule');
   fillName = fillable('#input_schedule_name');
   focusName = focusable('#input_schedule_name');

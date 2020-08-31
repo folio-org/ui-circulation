@@ -116,7 +116,7 @@ class LostItemFeeSection extends React.Component {
         </Row>
         <Row>
           <Col xs={5}>
-            <FormattedMessage id="ui-circulation.settings.lostItemFee.chargeAmount.patron">
+            <FormattedMessage id="ui-circulation.settings.lostItemFee.chargeAmountItemSystem">
               {(message) => <option value="true">{`${message} ?`}</option>}
             </FormattedMessage>
           </Col>
@@ -134,7 +134,7 @@ class LostItemFeeSection extends React.Component {
         </Row>
         <div data-test-lost-item-charge-fee>
           <Period
-            fieldLabel="ui-circulation.settings.lostItemFee.lostItemNotChargeFeeFine"
+            fieldLabel="ui-circulation.settings.lostItemFee.lostItemNotChargeFeesFine"
             inputValuePath="lostItemChargeFeeFine.duration"
             selectValuePath="lostItemChargeFeeFine.intervalId"
             intervalPeriods={this.generateOptions(intervalPeriodsLower, 'ui-circulation.settings.lostItemFee.selectInterval')}
