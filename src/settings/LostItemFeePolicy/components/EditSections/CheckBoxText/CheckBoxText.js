@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Field } from 'redux-form';
-
+import { Field } from 'react-final-form';
 import {
   FormattedMessage,
   injectIntl,
@@ -24,38 +23,44 @@ const CheckBoxText = (props) => (
       </Col>
     </Row>
     <Row>
-      <div data-test-charge-type-actual className={css.col}>
+      <div
+        data-test-charge-type-actual
+        className={css.col}
+      >
         <Field
-          label={<FormattedMessage
-            id="ui-circulation.settings.lostItemFee.actualCost"
-          />}
+          label={<FormattedMessage id="ui-circulation.settings.lostItemFee.actualCost" />}
           name="chargeAmountItem.chargeType"
           component={RadioButton}
           value="actualCost"
           type="radio"
         />
       </div>
-
     </Row>
     <Row>
       <div className={css.periodContainer}>
-        <div data-test-charge-type-another className={css.col}>
+        <div
+          data-test-charge-type-another
+          className={css.col}
+        >
           <Field
-            label={<FormattedMessage
-              id="ui-circulation.settings.lostItemFee.setCost"
-            />}
+            label={<FormattedMessage id="ui-circulation.settings.lostItemFee.setCost" />}
             name="chargeAmountItem.chargeType"
             component={RadioButton}
             value="anotherCost"
             type="radio"
           />
         </div>
-        <div data-test-charge-amount className={css.col}>
+        <div
+          data-test-charge-amount
+          className={css.col}
+        >
           <Field
             aria-label={props.intl.formatMessage({ id: 'ui-circulation.settings.lostItemFee.chargeAmount' })}
             name="chargeAmountItem.amount"
-            onBlur={props.onBlur}
             component={TextField}
+            type="number"
+            formatOnBlur
+            format={props.onBlur}
           />
         </div>
       </div>

@@ -15,7 +15,7 @@ import {
   Col,
 } from '@folio/stripes/components';
 
-import Period from '../Period';
+import Period from '../../../../components/Period';
 import {
   loanProfileTypes,
   intervalPeriods,

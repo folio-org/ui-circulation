@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Field } from 'redux-form';
+import { Field } from 'react-final-form';
 import {
   injectIntl,
   FormattedMessage,
@@ -90,6 +90,7 @@ class ExceptionCard extends Component {
               data-test-payment-method-selector
             >
               <Field
+                aria-label={intl.formatMessage({ id: 'ui-circulation.settings.loanHistory.paymentMethodSelect' })}
                 name={`${pathToException}.paymentMethod`}
                 component={Select}
               >
