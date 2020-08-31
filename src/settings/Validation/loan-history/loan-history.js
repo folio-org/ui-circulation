@@ -13,5 +13,5 @@ export default function (data) {
 
   const formValidator = new FormValidator(config);
 
-  return formValidator.validate(formData, sectionKey);
+  return formValidator.validate(formData);
 }

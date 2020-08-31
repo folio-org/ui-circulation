@@ -4,7 +4,7 @@ import {
   injectIntl,
   FormattedMessage,
 } from 'react-intl';
-import { Field } from 'redux-form';
+import { Field } from 'react-final-form';
 
 import AnonymizingTypeSelect from './AnonymizingTypeSelect';
 import { Period } from '..';

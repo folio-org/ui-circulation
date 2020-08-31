@@ -1,9 +1,10 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { FormattedMessage } from 'react-intl';
 import {
-  FormattedMessage,
-  injectIntl,
-} from 'react-intl';
+  head,
+  isEmpty,
+  cloneDeep,
+} from 'lodash';
 
 import {
   stripesShape,
@@ -11,29 +12,23 @@ import {
 } from '@folio/stripes/core';
 import { ConfigManager } from '@folio/stripes/smart-components';
 
+import normalize from './utils/normalize';
 import LoanHistoryForm from './LoanHistoryForm';
-import { LoanHistory as validateLoanHistory } from '../Validation';
 
 class LoanHistorySettings extends React.Component {
   static propTypes = {
     stripes: stripesShape.isRequired,
-    intl: PropTypes.object,
   };
 
   constructor(props) {
     super(props);
 
-    const {
-      stripes,
-      intl,
-    } = props;
-
-    this.configManager = stripes.connect(ConfigManager);
-    this.formatMessage = intl.formatMessage;
+    this.configManager = props.stripes.connect(ConfigManager);
   }
 
   getInitialValues(settings) {
-    const value = settings.length === 0 ? '' : settings[0].value;
+    let config;
+    const value = isEmpty(settings) ? '' : head(settings).value;
     const defaultConfig = {
       closingType: {
         loan: null,
@@ -45,7 +40,6 @@ class LoanHistorySettings extends React.Component {
       loanExceptions: [],
       treatEnabled: false,
     };
-    let config;
 
     try {
       config = { ...defaultConfig, ...JSON.parse(value) };
@@ -53,7 +47,24 @@ class LoanHistorySettings extends React.Component {
       config = defaultConfig;
     }
 
-    return config;
+    return { ...config };
+  }
+
+  normalizeData = (value) => {
+    const { closingType, loan, feeFine, loanExceptions, treatEnabled } = normalize(value);
+    const loanHistorySettings = {
+      closingType: cloneDeep(closingType),
+      loan,
+      feeFine,
+      loanExceptions,
+      treatEnabled
+    };
+
+    loanHistorySettings.closingType.feeFine = treatEnabled
+      ? loanHistorySettings.closingType.feeFine
+      : null;
+
+    return JSON.stringify(loanHistorySettings);
   }
 
   render() {
@@ -65,10 +76,10 @@ class LoanHistorySettings extends React.Component {
         configFormComponent={LoanHistoryForm}
         stripes={this.props.stripes}
         getInitialValues={this.getInitialValues}
-        validate={validateLoanHistory}
+        onBeforeSave={this.normalizeData}
       />
     );
   }
 }
 
-export default injectIntl(withStripes(LoanHistorySettings));
+export default withStripes(LoanHistorySettings);

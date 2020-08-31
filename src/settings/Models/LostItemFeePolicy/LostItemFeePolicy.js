@@ -66,6 +66,6 @@ export default class LostItemFeePolicy {
     const lostByPatron = get(this, 'chargeAmountItemPatron');
     const lostBySystem = get(this, 'chargeAmountItemSystem');
 
-    return (value < 0) || !((chargeAmount > 0 && chargeType === 'anotherCost') || (processingFee > 0 && lostByPatron !== 'false' && lostBySystem !== 'false'));
+    return (value < 0) || !((chargeAmount > 0 && chargeType === 'anotherCost') || (processingFee > 0 && lostByPatron && lostBySystem));
   }
 }

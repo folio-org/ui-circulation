@@ -1,5 +1,3 @@
-import React from 'react';
-import { FormattedMessage } from 'react-intl';
 import {
   get,
   set,
@@ -51,7 +49,7 @@ export default class FormValidator {
     };
   }
 
-  validate(data, sectionKey) {
+  validate(data) {
     const errors = {};
 
     forEach(Object.keys(this.config), pathToField => {
@@ -65,22 +63,6 @@ export default class FormValidator {
       }
     });
 
-    if (data[sectionKey]) {
-      const uniqueValues = {};
-      forEach(data[sectionKey], ({ paymentMethod }, index) => {
-        if (paymentMethod) {
-          if (uniqueValues[paymentMethod]) {
-            set(
-              errors,
-              `${sectionKey}[${index}].paymentMethod`,
-              <FormattedMessage id="ui-circulation.settings.loanHistory.errors.paymentMethodSelected" />
-            );
-          } else {
-            uniqueValues[paymentMethod] = {};
-          }
-        }
-      });
-    }
     return errors;
   }
 }

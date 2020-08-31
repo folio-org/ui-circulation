@@ -330,6 +330,7 @@
   "settings.loanHistory.feeFine": "fee/fine",
   "settings.loanHistory.exceptionSectionHeader": "Exception for payment method",
   "settings.loanHistory.paymentMethodLabel": "Setting for payment method",
+  "settings.loanHistory.paymentMethodSelect": "Payment method select",
   "settings.loanHistory.addExceptionButton": "Add exception",
   "settings.loanHistory.paymentMethod.waive": "Waive",
   "settings.loanHistory.paymentMethod.transfer": "Transfer",
