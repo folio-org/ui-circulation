@@ -29,7 +29,7 @@ const GeneralSection = (props) => {
     <div data-test-notice-policy-detail-general-section>
       <Accordion
         open={isOpen}
-        id="generalInformation"
+        id="generalNoticePolicy"
         label={<FormattedMessage id="ui-circulation.settings.loanPolicy.generalInformation" />}
       >
         <Metadata

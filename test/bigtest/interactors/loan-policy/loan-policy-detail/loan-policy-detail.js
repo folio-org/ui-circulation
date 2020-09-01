@@ -18,7 +18,7 @@ import RequestManagementSection from './request-management-section';
   renewalsSection = new RenewalsSection();
   requestManagement = new RequestManagementSection();
 
-  generalInformationAccordion = new AccordionInteractor('#generalInformation');
+  generalInformationAccordion = new AccordionInteractor('#generalLoanPolicyDetail');
   expandAll = scoped('[data-test-expand-all] button')
 }
 

@@ -40,7 +40,7 @@ class FinePolicyDetail extends React.Component {
 
     this.state = {
       sections: {
-        generalInformation: true,
+        generalFeePolicy: true,
         viewFineSection: true,
       },
     };
@@ -96,9 +96,9 @@ class FinePolicyDetail extends React.Component {
           onToggle={this.handleSectionToggle}
         >
           <Accordion
-            id="generalInformation"
+            id="generalFeePolicy"
             label={<FormattedMessage id="ui-circulation.settings.finePolicy.generalInformation" />}
-            open={sections.generalInformation}
+            open={sections.generalFeePolicy}
           >
             <Metadata
               connect={connect}

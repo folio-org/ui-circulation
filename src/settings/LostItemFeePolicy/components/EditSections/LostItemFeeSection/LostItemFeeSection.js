@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Field } from 'redux-form';
-import { isBoolean } from 'lodash';
+import { Field } from 'react-final-form';
+import { isNumber } from 'lodash';
 import {
   injectIntl,
   FormattedMessage,
@@ -12,19 +12,14 @@ import {
   Col,
   Row,
   RadioButton,
-  RadioButtonGroup,
   Select,
   TextField,
 } from '@folio/stripes/components';
 
-import { Period } from '../../../../components';
-import {
-  intervalPeriodsLower,
-} from '../../../../../constants';
-
 import CheckBoxText from '../CheckBoxText/CheckBoxText';
-
 import optionsGenerator from '../../../../utils/options-generator';
+import { Period } from '../../../../components';
+import { intervalPeriodsLower } from '../../../../../constants';
 
 class LostItemFeeSection extends React.Component {
   static propTypes = {
@@ -39,13 +34,8 @@ class LostItemFeeSection extends React.Component {
     this.generateOptions = optionsGenerator.bind(null, this.props.intl.formatMessage);
   }
 
-  onBlur = (e) => {
-    const chargeAmountItem = parseFloat(e.target.value || 0.00).toFixed(2);
-    e.target.value = chargeAmountItem;
-  };
-
-  convertToBoolean = (value) => {
-    return isBoolean(value) ? value : value === 'true';
+  formatNumber = (value) => {
+    return isNumber(Number(value)) ? parseFloat(value).toFixed(2) : value;
   };
 
   render() {
@@ -58,8 +48,8 @@ class LostItemFeeSection extends React.Component {
     } = this.props;
 
     const selectValues = [
-      { value: true, label: formatMessage({ id: 'ui-circulation.settings.lostItemFee.yes' }) },
-      { value: false, label: formatMessage({ id: 'ui-circulation.settings.lostItemFee.no' }) },
+      { value: 'true', label: formatMessage({ id: 'ui-circulation.settings.lostItemFee.yes' }) },
+      { value: 'false', label: formatMessage({ id: 'ui-circulation.settings.lostItemFee.no' }) },
     ];
 
     return (
@@ -87,7 +77,7 @@ class LostItemFeeSection extends React.Component {
             changeFormValue={change}
           />
         </div>
-        <CheckBoxText onBlur={this.onBlur} />
+        <CheckBoxText onBlur={this.formatNumber} />
         <Row>
           <Col xs={5}>
             <FormattedMessage id="ui-circulation.settings.lostItemFee.lostItemProcessingFee" />
@@ -101,7 +91,8 @@ class LostItemFeeSection extends React.Component {
               id="lost-item-processing-fee"
               component={TextField}
               type="number"
-              onBlur={this.onBlur}
+              formatOnBlur
+              format={this.formatNumber}
             />
           </Col>
         </Row>
@@ -120,13 +111,12 @@ class LostItemFeeSection extends React.Component {
               id="charge-amount-item-patron"
               component={Select}
               dataOptions={selectValues}
-              normalize={this.convertToBoolean}
             />
           </Col>
         </Row>
         <Row>
           <Col xs={5}>
-            <FormattedMessage id="ui-circulation.settings.lostItemFee.chargeAmount.patron">
+            <FormattedMessage id="ui-circulation.settings.lostItemFee.chargeAmountItemSystem">
               {(message) => <option value="true">{`${message} ?`}</option>}
             </FormattedMessage>
           </Col>
@@ -139,13 +129,12 @@ class LostItemFeeSection extends React.Component {
               id="charge-amount-item-system"
               component={Select}
               dataOptions={selectValues}
-              normalize={this.convertToBoolean}
             />
           </Col>
         </Row>
         <div data-test-lost-item-charge-fee>
           <Period
-            fieldLabel="ui-circulation.settings.lostItemFee.lostItemNotChargeFeeFine"
+            fieldLabel="ui-circulation.settings.lostItemFee.lostItemNotChargeFeesFine"
             inputValuePath="lostItemChargeFeeFine.duration"
             selectValuePath="lostItemChargeFeeFine.intervalId"
             intervalPeriods={this.generateOptions(intervalPeriodsLower, 'ui-circulation.settings.lostItemFee.selectInterval')}
@@ -165,7 +154,6 @@ class LostItemFeeSection extends React.Component {
               id="returnedLostItemProcessingFee"
               component={Select}
               dataOptions={selectValues}
-              normalize={this.convertToBoolean}
             />
           </Col>
         </Row>
@@ -178,21 +166,22 @@ class LostItemFeeSection extends React.Component {
           <Col xs={7} data-test-lost-item-returned-charge>
             <Field
               aria-label={formatMessage({ id: 'ui-circulation.settings.lostItemFee.returned' })}
-              id="lost-item-returned"
+              label={<FormattedMessage id="ui-circulation.settings.lostItemFee.lostItemChargeOverdueBased" />}
               name="lostItemReturned"
-              component={RadioButtonGroup}
-            >
-              <RadioButton
-                label={<FormattedMessage id="ui-circulation.settings.lostItemFee.lostItemChargeOverdueBased" />}
-                id="Charge"
-                value="Charge"
-              />
-              <RadioButton
-                label={<FormattedMessage id="ui-circulation.settings.lostItemFee.lostItemRemoveOverdueFines" />}
-                id="Remove"
-                value="Remove"
-              />
-            </Field>
+              component={RadioButton}
+              id="Charge"
+              value="Charge"
+              type="radio"
+            />
+            <Field
+              label={<FormattedMessage id="ui-circulation.settings.lostItemFee.lostItemRemoveOverdueFines" />}
+              name="lostItemReturned"
+              id="Remove"
+              component={RadioButton}
+              value="Remove"
+              type="radio"
+            />
+            <br />
           </Col>
         </Row>
         <Row>
@@ -208,7 +197,6 @@ class LostItemFeeSection extends React.Component {
               id="replacementAllowed"
               component={Select}
               dataOptions={selectValues}
-              normalize={this.convertToBoolean}
             />
           </Col>
         </Row>
@@ -225,7 +213,6 @@ class LostItemFeeSection extends React.Component {
               id="replacedLostItemProcessingFee"
               component={Select}
               dataOptions={selectValues}
-              normalize={this.convertToBoolean}
             />
           </Col>
         </Row>
@@ -242,7 +229,8 @@ class LostItemFeeSection extends React.Component {
               id="replacement-processing-fee"
               component={TextField}
               type="number"
-              onBlur={this.onBlur}
+              formatOnBlur
+              format={this.formatNumber}
             />
           </Col>
         </Row>
