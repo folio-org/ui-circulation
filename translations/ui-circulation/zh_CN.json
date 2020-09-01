@@ -393,7 +393,6 @@
     "settings.lostItemFee.validate.hasPositiveReplacementProcessingFee": "除非选择允许替换，否则更换处理费不能>0",
     "settings.lostItemFee.validate.hasReplacedLostItemProcessingFee": "除非也选允许替换，否则无法选择",
     "settings.lostItemFee.validate.chargeAmountItemSystemSelected": "如果已选若单件超期太久被系统视为遗失则收取遗失单件处理费，则需要输入",
-    "settings.lostItemFee.lostItemNotChargeFeeFine": "对于未收取费用/罚款的遗失单件，请在之后清算借阅",
     "settings.circulationRules.label": "规则",
     "settings.circulationRules.overdueFine.quantity": "超期罚款数量",
     "settings.circulationRules.overdueFine.period": "超期罚款期",
@@ -405,5 +404,7 @@
     "settings.lostItemFee.chargeAmount": "收费金额",
     "settings.lostItemFee.chargeAmount.patron": "按读者收费金额单件",
     "settings.lostItemFee.chargeAmount.system": "按系统收费金额单件",
-    "settings.lostItemFee.returned": "遗失单件归还"
+    "settings.lostItemFee.returned": "遗失单件归还",
+    "settings.loanHistory.paymentMethodSelect": "Payment method select",
+    "settings.lostItemFee.lostItemNotChargeFeesFine": "For lost items not charged a fee/fine, close the loan after"
 }

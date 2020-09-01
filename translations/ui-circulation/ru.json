@@ -393,7 +393,6 @@
     "settings.lostItemFee.validate.hasPositiveReplacementProcessingFee": "Плата за замену не может быть > 0, если уже выбрана доступная замена",
     "settings.lostItemFee.validate.hasReplacedLostItemProcessingFee": "Невозможно выбрать, если уже выбрана доступная замена",
     "settings.lostItemFee.validate.chargeAmountItemSystemSelected": "Entry required if charge lost item processing fee if item aged to lost by system selected",
-    "settings.lostItemFee.lostItemNotChargeFeeFine": "For lost items not charged a fee/fine, scrub the loan after",
     "settings.circulationRules.label": "Rules",
     "settings.circulationRules.overdueFine.quantity": "Overdue fine quantity",
     "settings.circulationRules.overdueFine.period": "Overdue fine period",
@@ -405,5 +404,7 @@
     "settings.lostItemFee.chargeAmount": "Charge amount",
     "settings.lostItemFee.chargeAmount.patron": "Charge amount item by patron",
     "settings.lostItemFee.chargeAmount.system": "Charge amount item by system",
-    "settings.lostItemFee.returned": "Lost item returned"
+    "settings.lostItemFee.returned": "Lost item returned",
+    "settings.loanHistory.paymentMethodSelect": "Payment method select",
+    "settings.lostItemFee.lostItemNotChargeFeesFine": "For lost items not charged a fee/fine, close the loan after"
 }
