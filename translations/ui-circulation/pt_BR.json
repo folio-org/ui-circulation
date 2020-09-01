@@ -393,7 +393,6 @@
     "settings.lostItemFee.validate.hasPositiveReplacementProcessingFee": "A taxa de processamento de substituição não pode ser maior que 0, a menos que a substituição permitida tenha sido selecionada",
     "settings.lostItemFee.validate.hasReplacedLostItemProcessingFee": "Não pode ser selecionado, a menos que a substituição permitida também tenha sido selecionada",
     "settings.lostItemFee.validate.chargeAmountItemSystemSelected": "Informação obrigatória se cobrar taxa de processamento de itens perdidos se o item for perdido ou perdido pelo sistema selecionado",
-    "settings.lostItemFee.lostItemNotChargeFeeFine": "Para itens perdidos sem cobrança de taxa/multa, limpe o empréstimo após",
     "settings.circulationRules.label": "Regras",
     "settings.circulationRules.overdueFine.quantity": "Quantidade de multa em atraso",
     "settings.circulationRules.overdueFine.period": "Período de multa em atraso",
@@ -405,5 +404,7 @@
     "settings.lostItemFee.chargeAmount": "Valor da carga",
     "settings.lostItemFee.chargeAmount.patron": "Item de valor de cobrança por cliente",
     "settings.lostItemFee.chargeAmount.system": "Quantidade de cobrança item por sistema",
-    "settings.lostItemFee.returned": "Item perdido devolvido"
+    "settings.lostItemFee.returned": "Item perdido devolvido",
+    "settings.loanHistory.paymentMethodSelect": "Selecionar método de pagamento",
+    "settings.lostItemFee.lostItemNotChargeFeesFine": "Para itens perdidos sem cobrança de taxa/multa, feche o empréstimo depois"
 }
