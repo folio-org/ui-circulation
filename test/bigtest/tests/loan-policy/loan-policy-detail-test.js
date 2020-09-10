@@ -120,8 +120,8 @@ describe('LoanPolicyDetail', () => {
         });
 
         describe('loans section', () => {
-          it('should not be displayed', () => {
-            expect(LoanPolicyDetail.loansSection.isPresent).to.be.false;
+          it('should be displayed', () => {
+            expect(LoanPolicyDetail.loansSection.isPresent).to.be.true;
           });
         });
       });

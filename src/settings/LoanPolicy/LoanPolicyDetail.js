@@ -156,11 +156,11 @@ class LoanPolicyDetail extends React.Component {
             />
             <AboutSection getValue={this.getValue} />
             <LoansSection
-              isVisible={loanPolicy.loanable}
               policy={loanPolicy}
               getDropdownValue={this.getDropdownValue}
               getPeriodValue={this.getPeriodValue}
               getScheduleValue={this.getScheduleValue}
+              getCheckboxValue={this.getCheckboxValue}
               getValue={this.getValue}
             />
             <RenewalsSection

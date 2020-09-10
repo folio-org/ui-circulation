@@ -11,6 +11,7 @@
 * Fix of accessibility errors. Refs UICIRC-464.
 * Increment `@folio/stripes` to `v5`, `react-router` to `v5.2`.
 * Refactor `bigtest/mirage` to `miragejs`.
+* Display loans section when `loanable` is set to `No`. Fixes UICIRC-392.
 
 ## 3.0.0 (https://github.com/folio-org/ui-circulation/tree/v3.0.0) (2019-06-10)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v2.0.0...v3.0.0)
