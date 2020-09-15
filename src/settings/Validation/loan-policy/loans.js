@@ -8,7 +8,7 @@ export default function (loanPolicy) {
     },
     'loansPolicy.closedLibraryDueDateManagementId': {
       rules: ['isNotEmpty'],
-      shouldValidate: true,
+      shouldValidate: loanPolicy.isLoanable(),
     },
     'loansPolicy.period.duration': {
       rules: ['isNotEmpty', 'isIntegerGreaterThanZero'],
