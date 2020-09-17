@@ -4,7 +4,7 @@ export default function (loanPolicy) {
   return {
     'loansPolicy.profileId': {
       rules: ['isNotEmpty'],
-      shouldValidate: true,
+      shouldValidate: loanPolicy.isLoanable(),
     },
     'loansPolicy.closedLibraryDueDateManagementId': {
       rules: ['isNotEmpty'],

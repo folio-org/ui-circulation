@@ -14,7 +14,7 @@ export default function (loanPolicy) {
     },
     'renewalsPolicy.numberAllowed': {
       rules: ['isNotEmpty'],
-      shouldValidate: loanPolicy.isNumberOfRenewalsAllowedActive(),
+      shouldValidate: loanPolicy.isLoanable() && loanPolicy.isNumberOfRenewalsAllowedActive(),
     },
     'renewalsPolicy.renewFromId': {
       rules: ['isNotEmptySelect'],
