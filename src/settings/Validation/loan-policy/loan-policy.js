@@ -16,8 +16,5 @@ export default function (policy) {
   };
 
   const formValidator = new FormValidator(config);
-
-  const result = formValidator.validate(policy);
-  console.log('result', result);
-  return result;
+  return formValidator.validate(policy);
 }
