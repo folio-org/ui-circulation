@@ -426,5 +426,18 @@
   "settings.lostItemFee.validate.chargeAmountItemSystemSelected": "Entry required if charge lost item processing fee if item aged to lost by system selected",
 
   "settings.noticePolicy.feeFineNotices.returned": "Overdue fine, returned",
-  "settings.noticePolicy.feeFineNotices.renewed": "Overdue fine, renewed"
+  "settings.noticePolicy.feeFineNotices.renewed": "Overdue fine, renewed",
+
+  "permission.settings.cancellation-reasons": "Settings (Circ): Can create, edit and remove cancellation reasons",
+  "permission.settings.loan-history": "Settings (Circ): Can view loan history",
+  "permission.settings.loan-policies": "Settings (Circ): Can create, edit and remove loan policies",
+  "permission.settings.notice-policies": "Settings (Circ): Can create, edit and remove notice policies",
+  "permission.settings.circulation-rules": "Settings (Circ): Can create, edit and remove circulation rules",
+  "permission.settings.fixed-due-date-schedules": "Settings (Circ): Can create, edit and remove fixed due date schedules",
+  "permission.settings.staff-slips": "Settings (Circ): Can create, edit and remove staff slips",
+  "permission.settings.request-policies": "Settings (Circ): Can create, edit and remove request policies",
+  "permission.settings.other-settings": "Settings (Circ): Can create, edit and remove other settings",
+  "permission.settings.notice-templates": "Settings (Circ): Can create, edit and remove patron notice templates",
+  "permission.settings.overdue-fines-policies": "Settings (Circ): Can create, edit and remove overdue fine policies",
+  "permission.settings.lost-item-fees-policies": "Settings (Circ): Can create, edit and remove lost item fee policies"
 }
