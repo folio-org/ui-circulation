@@ -38,7 +38,7 @@
     "settings.fDDS.validate.onOrAfter": "La data di scadenza deve essere il o dopo la data di restituzione",
     "settings.fDDS.paneTitle": "Schedulazioni con data di scadenza fissa",
     "settings.fDDS.deleteDisabled": "La schedulazione non può essere eliminata se utilizzata da una o più politiche di prestito.",
-    "settings.fDDS.successfulDelete": "La schedulazione con data di scadenza fissa {nome} è stata {eliminata} con successo",
+    "settings.fDDS.successfulDelete": "La schedulazione con data di scadenza fissa {name} è stata {deleted} con successo",
     "settings.fDDS.successfulDeleteVerb": "eliminata",
     "settings.fDDS.edit": "Modifica",
     "settings.fDDSform.delete": "Elimina",

@@ -370,7 +370,7 @@
     "settings.patronNotices.categories.automatedFeeFineAction": "Automated fee/fine charge or adjustment",
     "settings.noticePolicy.feeFineNotices.returned": "Overdue fine, returned",
     "settings.noticePolicy.feeFineNotices.renewed": "Overdue fine, renewed",
-    "settings.checkout.checkin.timeout": "Automatically end check in and check out session after period of inactivity",
+    "settings.checkout.checkin.timeout": "Terminar automáticamente la sesión de préstamo y devolución después de un período de inactividad",
     "settings.noticePolicy.notices.postponed.notification": "Always sent at the end of a session and loans are bundled into a single notice for each patron.",
     "settings.noticePolicy.notices.realTime.notification": "Always sent when event is triggered.",
     "settings.noticePolicy.notices.send.longTerm": "Send overnight with multiple loans/items by patron. Useful for long-term loans.",
