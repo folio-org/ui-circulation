@@ -34,7 +34,7 @@ class LostItemFeeSection extends React.Component {
     this.generateOptions = optionsGenerator.bind(null, this.props.intl.formatMessage);
   }
 
-  formatNumber = (value) => {
+  formatNumber = (value = 0) => {
     return isNumber(Number(value)) ? parseFloat(value).toFixed(2) : value;
   };
 
