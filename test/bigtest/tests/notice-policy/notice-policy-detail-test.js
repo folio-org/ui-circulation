@@ -299,7 +299,7 @@ describe('NoticePolicyDetail', () => {
         });
 
         it('templateId should have no value', () => {
-          expect(NoticePolicyDetail.loanNoticesSection.loanNotices(0).templateId.value.text).to.equal('');
+          expect(NoticePolicyDetail.loanNoticesSection.loanNotices(0).templateId.value.text).to.equal('-');
         });
       });
 
