@@ -13,8 +13,8 @@ export default function (l) {
       shouldValidate: l.hasValue('itemAgedLostOverdue.duration'),
     },
     'patronBilledAfterAgedLost.duration': {
-      rules: ['hasItemsAgedToLostAfterOverdueValue', 'isIntegerGreaterThanOrEqualToZero'],
-      shouldValidate: l.hasValue('itemAgedLostOverdue.duration') || l.hasValue('patronBilledAfterAgedLost.duration'),
+      rules: ['isIntegerGreaterThanOrEqualToZero'],
+      shouldValidate: l.hasValue('patronBilledAfterAgedLost.duration'),
     },
     'patronBilledAfterAgedLost.intervalId': {
       rules: ['isNotEmptySelect'],
