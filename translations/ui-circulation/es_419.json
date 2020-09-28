@@ -370,7 +370,7 @@
     "settings.patronNotices.categories.automatedFeeFineAction": "Automated fee/fine charge or adjustment",
     "settings.noticePolicy.feeFineNotices.returned": "Overdue fine, returned",
     "settings.noticePolicy.feeFineNotices.renewed": "Overdue fine, renewed",
-    "settings.checkout.checkin.timeout": "Automatically end check in and check out session after period of inactivity",
+    "settings.checkout.checkin.timeout": "Terminar automáticamente la sesión de préstamo y devolución después de un período de inactividad",
     "settings.noticePolicy.notices.postponed.notification": "Always sent at the end of a session and loans are bundled into a single notice for each patron.",
     "settings.noticePolicy.notices.realTime.notification": "Always sent when event is triggered.",
     "settings.noticePolicy.notices.send.longTerm": "Send overnight with multiple loans/items by patron. Useful for long-term loans.",
@@ -406,5 +406,17 @@
     "settings.lostItemFee.chargeAmount.system": "Charge amount item by system",
     "settings.lostItemFee.returned": "Lost item returned",
     "settings.loanHistory.paymentMethodSelect": "Método de pago seleccionado",
-    "settings.lostItemFee.lostItemNotChargeFeesFine": "Para los artículos perdidos que no se les cobra una cuota/multa, cierre el préstamo después"
+    "settings.lostItemFee.lostItemNotChargeFeesFine": "Para los artículos perdidos que no se les cobra una cuota/multa, cierre el préstamo después",
+    "permission.settings.cancellation-reasons": "Settings (Circ): Can create, edit and remove cancellation reasons",
+    "permission.settings.loan-history": "Settings (Circ): Can view loan history",
+    "permission.settings.loan-policies": "Settings (Circ): Can create, edit and remove loan policies",
+    "permission.settings.notice-policies": "Settings (Circ): Can create, edit and remove notice policies",
+    "permission.settings.circulation-rules": "Settings (Circ): Can create, edit and remove circulation rules",
+    "permission.settings.fixed-due-date-schedules": "Settings (Circ): Can create, edit and remove fixed due date schedules",
+    "permission.settings.staff-slips": "Settings (Circ): Can create, edit and remove staff slips",
+    "permission.settings.request-policies": "Settings (Circ): Can create, edit and remove request policies",
+    "permission.settings.other-settings": "Settings (Circ): Can create, edit and remove other settings",
+    "permission.settings.notice-templates": "Settings (Circ): Can create, edit and remove patron notice templates",
+    "permission.settings.overdue-fines-policies": "Settings (Circ): Can create, edit and remove overdue fine policies",
+    "permission.settings.lost-item-fees-policies": "Settings (Circ): Can create, edit and remove lost item fee policies"
 }

@@ -405,6 +405,18 @@
     "settings.lostItemFee.chargeAmount.patron": "按读者收费金额单件",
     "settings.lostItemFee.chargeAmount.system": "按系统收费金额单件",
     "settings.lostItemFee.returned": "遗失单件归还",
-    "settings.loanHistory.paymentMethodSelect": "Payment method select",
-    "settings.lostItemFee.lostItemNotChargeFeesFine": "For lost items not charged a fee/fine, close the loan after"
+    "settings.loanHistory.paymentMethodSelect": "付款方式选择",
+    "settings.lostItemFee.lostItemNotChargeFeesFine": "对于未收取费用/罚款的遗失单件，在……之后关闭借阅",
+    "permission.settings.cancellation-reasons": "设置（流通）：可以创建、编辑和移除取消原因",
+    "permission.settings.loan-history": "设置（流通）：可以查看借阅历史",
+    "permission.settings.loan-policies": "设置（流通）：可以创建、编辑和移除借阅政策",
+    "permission.settings.notice-policies": "设置（流通）：可以创建、编辑和移除通知政策",
+    "permission.settings.circulation-rules": "设置（流通）：可以创建、编辑和移除流通规则",
+    "permission.settings.fixed-due-date-schedules": "设置（流通）：可以创建、编辑和移除固定到期日时间表",
+    "permission.settings.staff-slips": "设置（流通）：可以创建、编辑和移除员工单",
+    "permission.settings.request-policies": "设置（流通）：可以创建、编辑和移除请求政策",
+    "permission.settings.other-settings": "设置（流通）：可以创建、编辑和移除其他设置",
+    "permission.settings.notice-templates": "设置（流通）：可以创建、编辑和移除读者通知模板",
+    "permission.settings.overdue-fines-policies": "设置（流通）：可以创建、编辑和移除过期罚款政策",
+    "permission.settings.lost-item-fees-policies": "设置（流通）：可以创建、编辑和移除遗失单件费用政策"
 }

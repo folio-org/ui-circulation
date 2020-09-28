@@ -406,5 +406,17 @@
     "settings.lostItemFee.chargeAmount.system": "Charge amount item by system",
     "settings.lostItemFee.returned": "Lost item returned",
     "settings.loanHistory.paymentMethodSelect": "Sélectionnez le mode de paiement",
-    "settings.lostItemFee.lostItemNotChargeFeesFine": "For lost items not charged a fee/fine, close the loan after"
+    "settings.lostItemFee.lostItemNotChargeFeesFine": "For lost items not charged a fee/fine, close the loan after",
+    "permission.settings.cancellation-reasons": "Settings (Circ): Can create, edit and remove cancellation reasons",
+    "permission.settings.loan-history": "Settings (Circ): Can view loan history",
+    "permission.settings.loan-policies": "Settings (Circ): Can create, edit and remove loan policies",
+    "permission.settings.notice-policies": "Settings (Circ): Can create, edit and remove notice policies",
+    "permission.settings.circulation-rules": "Settings (Circ): Can create, edit and remove circulation rules",
+    "permission.settings.fixed-due-date-schedules": "Settings (Circ): Can create, edit and remove fixed due date schedules",
+    "permission.settings.staff-slips": "Settings (Circ): Can create, edit and remove staff slips",
+    "permission.settings.request-policies": "Settings (Circ): Can create, edit and remove request policies",
+    "permission.settings.other-settings": "Settings (Circ): Can create, edit and remove other settings",
+    "permission.settings.notice-templates": "Settings (Circ): Can create, edit and remove patron notice templates",
+    "permission.settings.overdue-fines-policies": "Settings (Circ): Can create, edit and remove overdue fine policies",
+    "permission.settings.lost-item-fees-policies": "Settings (Circ): Can create, edit and remove lost item fee policies"
 }
