@@ -406,5 +406,17 @@
     "settings.lostItemFee.chargeAmount.system": "Quantidade de cobrança item por sistema",
     "settings.lostItemFee.returned": "Item perdido devolvido",
     "settings.loanHistory.paymentMethodSelect": "Selecionar método de pagamento",
-    "settings.lostItemFee.lostItemNotChargeFeesFine": "Para itens perdidos sem cobrança de taxa/multa, feche o empréstimo depois"
+    "settings.lostItemFee.lostItemNotChargeFeesFine": "Para itens perdidos sem cobrança de taxa/multa, feche o empréstimo depois",
+    "permission.settings.cancellation-reasons": "Configurações (Circulação): Pode criar, editar e remover motivos de cancelamento",
+    "permission.settings.loan-history": "Configurações (Circulação): Pode visualizar o histórico de empréstimos",
+    "permission.settings.loan-policies": "Configurações (Circulação): Pode criar, editar e remover políticas de empréstimo",
+    "permission.settings.notice-policies": "Configurações (Circulação): Pode criar, editar e remover políticas de aviso",
+    "permission.settings.circulation-rules": "Configurações (Circulação): Pode criar, editar e remover regras de circulação",
+    "permission.settings.fixed-due-date-schedules": "Configurações (Circulação): Pode criar, editar e remover programações de datas de vencimento fixas",
+    "permission.settings.staff-slips": "Configurações (Circulação): Pode criar, editar e remover fichas de encaminhamento",
+    "permission.settings.request-policies": "Configurações (Circulação): Pode criar, editar e remover políticas de requisições",
+    "permission.settings.other-settings": "Configurações (Circulação): Pode criar, editar e remover outras configurações",
+    "permission.settings.notice-templates": "Configurações (Circulação): Pode criar, editar e remover modelos de aviso aos usuários",
+    "permission.settings.overdue-fines-policies": "Configurações (Circulação): Pode criar, editar e remover políticas de multas por atraso",
+    "permission.settings.lost-item-fees-policies": "Configurações (Circulação): Pode criar, editar e remover políticas de taxas de itens perdidos"
 }
