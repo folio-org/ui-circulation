@@ -96,10 +96,6 @@ export default {
     validate: hasPatronBilledAfterAgedToLostValue,
     message: <FormattedMessage id="ui-circulation.settings.lostItemFee.validate.hasPatronBilledAfterAgedToLostValue" />
   },
-  hasItemsAgedToLostAfterOverdueValue: {
-    validate: isNotEmpty,
-    message: <FormattedMessage id="ui-circulation.settings.lostItemFee.validate.hasItemsAgedToLostAfterOverdueValue" />
-  },
   hasPositiveLostItemProcessingFeeValue: {
     validate: isStringGreaterThanZero,
     message: <FormattedMessage id="ui-circulation.settings.lostItemFee.validate.hasPositiveLostItemProcessingFeeValue" />
