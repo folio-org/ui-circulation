@@ -386,7 +386,6 @@
     "settings.finePolicy.validate.invalidMaximumOverdueFine": "请输入超期罚款金额或将最高过期罚款设置为0",
     "settings.finePolicy.validate.invalidMaximumRecallOverdueFine": "请输入超期召回罚款金额或将最高超期召回罚款设置为0",
     "settings.lostItemFee.validate.hasPatronBilledAfterAgedToLostValue": "如果已选在超期太久视为遗失间隔后向读者收费，则需要输入",
-    "settings.lostItemFee.validate.hasItemsAgedToLostAfterOverdueValue": "如果已选超期间隔后单件超期太久视为遗失，则需要输入",
     "settings.lostItemFee.validate.hasPositiveLostItemProcessingFeeValue": "如果已选对声称遗失或超期太久视为遗失的收取遗失单件处理费，则需要输入",
     "settings.lostItemFee.validate.hasNoChargeLostItemProcessingFee": "遗失单件处理费不能>0，除已选择非对声称遗失或超期太久视为遗失的收取遗失单件处理费",
     "settings.lostItemFee.validate.hasLostItemProcessingFeeValue": "对于此选择，遗失单件处理费必须>0",
