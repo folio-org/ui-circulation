@@ -386,7 +386,6 @@
     "settings.finePolicy.validate.invalidMaximumOverdueFine": "يرجى إدخال مبلغ غرامة التأخير أو تعيين الحد الأقصى لغرامة التأخير إلى 0",
     "settings.finePolicy.validate.invalidMaximumRecallOverdueFine": "يرجى إدخال مبلغ غرامة الاسترداد المتأخر أو تعيين الحد الأقصى لغرامة الاسترداد المتأخر إلى 0",
     "settings.lostItemFee.validate.hasPatronBilledAfterAgedToLostValue": "الإدخال مطلوب إذا تم تحديد تغريم المستفيد بعد تقادم إلى الفقد",
-    "settings.lostItemFee.validate.hasItemsAgedToLostAfterOverdueValue": "الإدخال مطلوب إذا تم تحديد إعلان المادة مفقودة بعد تقادم مدة التأخير",
     "settings.lostItemFee.validate.hasPositiveLostItemProcessingFeeValue": "الإدخال مطلوب إذا تم تحديد فرض رسم معالجة مادة مفقودة لمادة تقادمت إلى الفقد",
     "settings.lostItemFee.validate.hasNoChargeLostItemProcessingFee": "لا يمكن أن يكون رسم معالجة المادة المفقودة > 0 إلا عند فرض رسم معالجة مادة مفقودة لمادة تم الإعلان عن فقدها أو تقادمت إلى الفقد",
     "settings.lostItemFee.validate.hasLostItemProcessingFeeValue": "يجب أن يكون رسم معالجة المادة المفقودة > 0 لهذا التحديد",

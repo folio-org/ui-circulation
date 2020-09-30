@@ -386,7 +386,6 @@
     "settings.finePolicy.validate.invalidMaximumOverdueFine": "Пожалуйста, введите размер пени за несвоевременный возврат или установите максимум пени 0",
     "settings.finePolicy.validate.invalidMaximumRecallOverdueFine": "Пожалуйста, введите размер пени за несвоевременный возврат или установите максимум пени 0",
     "settings.lostItemFee.validate.hasPatronBilledAfterAgedToLostValue": "Entry required if patron billed after aged to lost interval is selected",
-    "settings.lostItemFee.validate.hasItemsAgedToLostAfterOverdueValue": "Entry required if items aged to lost after overdue interval is selected",
     "settings.lostItemFee.validate.hasPositiveLostItemProcessingFeeValue": "Entry required if charging lost item processing fee for declared lost or aged to lost selected",
     "settings.lostItemFee.validate.hasNoChargeLostItemProcessingFee": "Lost item processing fee cannot be > 0 unless charging lost item processing fee for declared lost or aged to lost selected",
     "settings.lostItemFee.validate.hasLostItemProcessingFeeValue": "Lost item processing fee must be > 0 for this selection",
