@@ -100,7 +100,6 @@ class LostItemFeePolicyForm extends React.Component {
     return (
       <form
         noValidate
-        className={css.lostItemFeePolicyForm}
         data-test-lost-item-fee-policy-form
         onSubmit={handleSubmit}
       >

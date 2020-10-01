@@ -8,6 +8,8 @@ import {
 
 import moment from 'moment';
 
+import LostItemFeePolicy from '../../Models/LostItemFeePolicy';
+
 export const isNotEmpty = (value) => {
   return isNumber(value) || !isEmpty(value);
 };
@@ -54,13 +56,20 @@ export const hasNoChargeLostItemProcessingFee = (value, model) => {
 export const hasLostItemProcessingFeeValue = (value, model) => {
   const lostItemProcessingFee = get(model, 'lostItemProcessingFee');
 
-  return parseInt(lostItemProcessingFee, 10) > 0;
+  return parseFloat(lostItemProcessingFee, 10) > 0;
 };
 
-export const hasPositivereplacementAllowed = (value, model) => {
+export const hasPositiveReplacementAllowed = (value, model) => {
   const replacementAllowed = get(model, 'replacementAllowed');
 
   return replacementAllowed;
+};
+
+export const hasReplacedLostItemProcessingFee = (value, model) => {
+  const replacementAllowed = get(model, 'replacementAllowed');
+  const lostItemProcessingFee = get(model, 'lostItemProcessingFee');
+
+  return value && replacementAllowed && parseFloat(lostItemProcessingFee, 10) > 0;
 };
 
 export const hasPatronBilledAfterAgedToLostValue = (value, model) => {
@@ -87,4 +96,26 @@ export const isDueAfterTo = (value, model, { pathToSection }) => {
   const to = moment(get(model, `${pathToSection}.to`));
 
   return due.isSameOrAfter(to);
+};
+
+export const isRquiredLostItemCharge = (value, model) => {
+  const lostItemFeePolicy = new LostItemFeePolicy(model);
+
+  return (!lostItemFeePolicy.isRquiredLostItemCharge() && !isNotEmpty(value))
+    || (!lostItemFeePolicy.isRquiredLostItemCharge() && isNotEmpty(value))
+    || (lostItemFeePolicy.isRquiredLostItemCharge() && isNotEmpty(value));
+};
+
+export const hasPositiveItemsAgedToLostAfterOverdueAmount = (value, model) => {
+  const chargeType = get(model, 'chargeAmountItem.chargeType');
+  const lostBySystem = get(model, 'chargeAmountItemSystem');
+
+  return chargeType === 'anotherCost' && (lostBySystem || (!isUndefined(value) && parseFloat(value, 10) > 0));
+};
+
+export const hasPositiveLostItemProcessingFeeAndItemsAgedToLostAfterOverdue = (value, model) => {
+  const lostItemProcessingFee = get(model, 'lostItemProcessingFee');
+  const itemAgedToLost = get(model, 'itemAgedLostOverdue.duration');
+
+  return value && parseFloat(lostItemProcessingFee, 10) > 0 && parseInt(itemAgedToLost, 10) > 0;
 };

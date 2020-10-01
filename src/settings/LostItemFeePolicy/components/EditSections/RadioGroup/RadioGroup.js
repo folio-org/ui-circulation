@@ -8,39 +8,44 @@ import {
 
 import {
   Col,
+  Label,
   RadioButton,
   Row,
   TextField,
 } from '@folio/stripes/components';
 
-import css from './LostItem.css';
-
-const CheckBoxText = (props) => (
-  <div>
-    <Row>
-      <Col xs={2}>
-        <FormattedMessage id="ui-circulation.settings.lostItemFee.chargeAmountItem" />
-      </Col>
-    </Row>
-    <Row>
-      <div
-        data-test-charge-type-actual
-        className={css.col}
-      >
-        <Field
-          label={<FormattedMessage id="ui-circulation.settings.lostItemFee.actualCost" />}
-          name="chargeAmountItem.chargeType"
-          component={RadioButton}
-          value="actualCost"
-          type="radio"
-        />
-      </div>
-    </Row>
-    <Row>
-      <div className={css.periodContainer}>
-        <div
+const RadioGroup = (props) => (
+  <Row>
+    <Col xs={4}>
+      <Row>
+        <Col xs={6}>
+          <Label
+            htmlFor="chargeAmount"
+            id="chargeAmount-label"
+          >
+            <FormattedMessage id="ui-circulation.settings.lostItemFee.chargeAmountItem" />
+          </Label>
+        </Col>
+      </Row>
+      <Row>
+        <Col
+          xs={3}
+          data-test-charge-type-actual
+        >
+          <Field
+            label={<FormattedMessage id="ui-circulation.settings.lostItemFee.actualCost" />}
+            name="chargeAmountItem.chargeType"
+            component={RadioButton}
+            id="chargeAmount"
+            value="actualCost"
+            type="radio"
+          />
+        </Col>
+      </Row>
+      <Row>
+        <Col
+          xs={2}
           data-test-charge-type-another
-          className={css.col}
         >
           <Field
             label={<FormattedMessage id="ui-circulation.settings.lostItemFee.setCost" />}
@@ -49,10 +54,10 @@ const CheckBoxText = (props) => (
             value="anotherCost"
             type="radio"
           />
-        </div>
-        <div
+        </Col>
+        <Col
+          xs={6}
           data-test-charge-amount
-          className={css.col}
         >
           <Field
             aria-label={props.intl.formatMessage({ id: 'ui-circulation.settings.lostItemFee.chargeAmount' })}
@@ -62,14 +67,15 @@ const CheckBoxText = (props) => (
             formatOnBlur
             format={props.onBlur}
           />
-        </div>
-      </div>
-    </Row>
-  </div>);
+        </Col>
+      </Row>
+    </Col>
+  </Row>
+);
 
-CheckBoxText.propTypes = {
+RadioGroup.propTypes = {
   intl: PropTypes.object.isRequired,
   onBlur: PropTypes.func,
 };
 
-export default injectIntl(CheckBoxText);
+export default injectIntl(RadioGroup);
