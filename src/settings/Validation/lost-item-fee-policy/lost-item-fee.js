@@ -38,7 +38,7 @@ export default function (l) {
     },
     'chargeAmountItemSystem': {
       rules: ['hasPositiveItemsAgedToLostAfterOverdueAmount', 'hasPositiveLostItemProcessingFeeAndItemsAgedToLostAfterOverdue'],
-      shouldValidate: l.hasPassedValue('chargeAmountItemSystem', true) || (l.hasPassedValue('chargeAmountItem.chargeType', 'anotherCost') && l.hasPositiveValue('itemAgedLostOverdue.duration')) //l.hasPositiveValue('lostItemProcessingFee'),
+      shouldValidate: l.hasPassedValue('chargeAmountItemSystem', true) || (l.hasPassedValue('chargeAmountItem.chargeType', 'anotherCost') && l.hasPositiveValue('itemAgedLostOverdue.duration')),
     },
     'lostItemChargeFeeFine.duration': {
       rules: ['isNotEmptyLostItem', 'hasAmount', 'isIntegerGreaterThanOrEqualToZero'],

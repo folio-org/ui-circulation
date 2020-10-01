@@ -31,8 +31,6 @@ import {
 
 import { transformModelBooleans } from './utils/normalize';
 
-import css from './LostItemFee.css';
-
 class LostItemFeePolicyForm extends React.Component {
   static propTypes = {
     stripes: stripesShape.isRequired,
