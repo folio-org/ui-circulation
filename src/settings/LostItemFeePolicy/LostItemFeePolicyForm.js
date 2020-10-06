@@ -31,8 +31,6 @@ import {
 
 import { transformModelBooleans } from './utils/normalize';
 
-import css from './LostItemFee.css';
-
 class LostItemFeePolicyForm extends React.Component {
   static propTypes = {
     stripes: stripesShape.isRequired,
@@ -100,7 +98,6 @@ class LostItemFeePolicyForm extends React.Component {
     return (
       <form
         noValidate
-        className={css.lostItemFeePolicyForm}
         data-test-lost-item-fee-policy-form
         onSubmit={handleSubmit}
       >

@@ -47,82 +47,85 @@ describe('Lost Item Fee Policy Form', () => {
   });
 
   describe('create a new lost item fee policy', () => {
-    beforeEach(async function () {
-      await this.visit('/settings/circulation/lost-item-fee-policy?layer=add');
+    const newLostItemPolicyName = 'new lost policy';
+
+    beforeEach(function () {
+      this.visit('/settings/circulation/lost-item-fee-policy?layer=add');
     });
 
-    describe('filling form and saving new policy', () => {
-      const newLostItemPolicyName = 'new lost policy';
+    beforeEach(async function () {
+      await LostItemFeePolicyForm
+        .aboutSection.policyName.fillAndBlur(newLostItemPolicyName)
+        .lostItemFeeSection.closeLoanAfter.fillAndBlurDuration(5)
+        .lostItemFeeSection.closeLoanAfter.selectAndBlurInterval('hour(s)')
+        .save();
+    });
 
-      beforeEach(async function () {
-        await LostItemFeePolicyForm
-          .aboutSection.policyName.fillAndBlur(newLostItemPolicyName)
-          .lostItemFeeSection.lostItemFee.fillAndBlur(1)
-          .lostItemFeeSection.closeLoanAfter.fillAndBlurDuration(5)
-          .lostItemFeeSection.closeLoanAfter.selectAndBlurInterval('hour(s)')
-          .lostItemFeeSection.lostBySystem.selectAndBlur('No')
-          .save();
-      });
-
-      it('renders updated policy name', function () {
-        expect(LostItemFeePolicyDetail.aboutSection.policyName.value.text).to.equal(newLostItemPolicyName);
-      });
+    it('renders updated policy name', function () {
+      expect(LostItemFeePolicyDetail.aboutSection.policyName.value.text).to.equal(newLostItemPolicyName);
     });
   });
 
   describe('create a new lost item fee policy with all values', () => {
+    const newFinePolicyName = 'new lost policy2';
+
+    beforeEach(function () {
+      this.visit('/settings/circulation/lost-item-fee-policy?layer=add');
+    });
+
     beforeEach(async function () {
-      await this.visit('/settings/circulation/lost-item-fee-policy?layer=add');
+      await LostItemFeePolicyForm
+        .aboutSection.policyName.fillAndBlur(newFinePolicyName)
+        .lostItemFeeSection.itemsAged.fillAndBlurDuration(5)
+        .lostItemFeeSection.itemsAged.selectAndBlurInterval('hour(s)')
+        .lostItemFeeSection.patronBilled.fillAndBlurDuration(5)
+        .lostItemFeeSection.patronBilled.selectAndBlurInterval('hour(s)')
+        .lostItemFeeSection.chargeAmountAnother.clickAndBlur()
+        .lostItemFeeSection.chargeAmount.fillAndBlur(5)
+        .lostItemFeeSection.lostItemFee.fillAndBlur(5)
+        .lostItemFeeSection.lostByPatron.selectAndBlur('Yes')
+        .lostItemFeeSection.lostBySystem.selectAndBlur('Yes')
+        .lostItemFeeSection.closeLoanAfter.fillAndBlurDuration(5)
+        .lostItemFeeSection.closeLoanAfter.selectAndBlurInterval('hour(s)')
+        .lostItemFeeSection.itemReturned.selectAndBlur('No')
+        .lostItemFeeSection.itemReplaced.selectAndBlur('No')
+        .lostItemFeeSection.replacementFee.fillAndBlur(5)
+        .lostItemFeeSection.replacementAllowed.selectAndBlur('Yes')
+        .lostItemFeeSection.lostItemReturnedCharge.clickAndBlur()
+        .lostItemFeeSection.returnedMoreThan.fillAndBlurDuration(5)
+        .lostItemFeeSection.returnedMoreThan.selectAndBlurInterval('hour(s)')
+        .save();
     });
 
-    describe('filling form and saving new policy', () => {
-      const newFinePolicyName = 'new lost policy2';
+    it('renders updated policy name', function () {
+      expect(LostItemFeePolicyDetail.aboutSection.policyName.value.text).to.equal(newFinePolicyName);
+    });
+  });
 
-      beforeEach(async function () {
-        await LostItemFeePolicyForm
-          .aboutSection.policyName.fillAndBlur(newFinePolicyName)
-          .lostItemFeeSection.itemsAged.fillAndBlurDuration(5)
-          .lostItemFeeSection.itemsAged.selectAndBlurInterval('hour(s)')
-          .lostItemFeeSection.patronBilled.fillAndBlurDuration(5)
-          .lostItemFeeSection.patronBilled.selectAndBlurInterval('hour(s)')
-          .lostItemFeeSection.chargeAmountAnother.clickAndBlur()
-          .lostItemFeeSection.chargeAmount.fillAndBlur(5)
-          .lostItemFeeSection.lostItemFee.fillAndBlur(5)
-          .lostItemFeeSection.lostByPatron.selectAndBlur('Yes')
-          .lostItemFeeSection.lostBySystem.selectAndBlur('Yes')
-          .lostItemFeeSection.closeLoanAfter.fillAndBlurDuration(5)
-          .lostItemFeeSection.closeLoanAfter.selectAndBlurInterval('hour(s)')
-          .lostItemFeeSection.itemReturned.selectAndBlur('No')
-          .lostItemFeeSection.itemReplaced.selectAndBlur('No')
-          .lostItemFeeSection.replacementFee.fillAndBlur(5)
-          .lostItemFeeSection.replacementAllowed.selectAndBlur('Yes')
-          .lostItemFeeSection.lostItemReturnedCharge.clickAndBlur()
-          .lostItemFeeSection.returnedMoreThan.fillAndBlurDuration(5)
-          .lostItemFeeSection.returnedMoreThan.selectAndBlurInterval('hour(s)')
-          .save();
-      });
+  describe('create a new lost item fee policy with part of values', () => {
+    const newFinePolicyName = 'new lost policy3';
 
-      it('renders updated policy name', function () {
-        expect(LostItemFeePolicyDetail.aboutSection.policyName.value.text).to.equal(newFinePolicyName);
-      });
+    beforeEach(function () {
+      this.visit('/settings/circulation/lost-item-fee-policy?layer=add');
     });
 
-    describe('filling form and saving new policy', () => {
-      const newFinePolicyName = 'new lost policy3';
+    beforeEach(async function () {
+      await LostItemFeePolicyForm
+        .aboutSection.policyName.fillAndBlur(newFinePolicyName)
+        .lostItemFeeSection.itemsAged.fillAndBlurDuration(5)
+        .lostItemFeeSection.itemsAged.selectAndBlurInterval('hour(s)')
+        .lostItemFeeSection.patronBilled.fillAndBlurDuration(5)
+        .lostItemFeeSection.patronBilled.selectAndBlurInterval('hour(s)')
+        .lostItemFeeSection.chargeAmountActual.clickAndBlur()
+        .lostItemFeeSection.lostItemFee.fillAndBlur(2)
+        .lostItemFeeSection.lostByPatron.selectAndBlur('Yes')
+        .lostItemFeeSection.closeLoanAfter.fillAndBlurDuration(5)
+        .lostItemFeeSection.closeLoanAfter.selectAndBlurInterval('hour(s)')
+        .save();
+    });
 
-      beforeEach(async function () {
-        await LostItemFeePolicyForm
-          .aboutSection.policyName.fillAndBlur(newFinePolicyName)
-          .lostItemFeeSection.lostItemFee.fillAndBlur(5)
-          .lostItemFeeSection.closeLoanAfter.fillAndBlurDuration(5)
-          .lostItemFeeSection.closeLoanAfter.selectAndBlurInterval('hour(s)')
-          .lostItemFeeSection.lostBySystem.selectAndBlur('No')
-          .save();
-      });
-
-      it('renders updated policy name', function () {
-        expect(LostItemFeePolicyDetail.aboutSection.policyName.value.text).to.equal(newFinePolicyName);
-      });
+    it('renders updated policy name', function () {
+      expect(LostItemFeePolicyDetail.aboutSection.policyName.value.text).to.equal(newFinePolicyName);
     });
   });
 });

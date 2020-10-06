@@ -16,11 +16,15 @@ import {
   isMaximumFineValueValid,
   hasNoChargeLostItemProcessingFee,
   hasLostItemProcessingFeeValue,
-  hasPositivereplacementAllowed,
+  hasPositiveReplacementAllowed,
   hasPatronBilledAfterAgedToLostValue,
   hasChargeAmountItemSystemSelected,
   isToBeforeFrom,
   isDueAfterTo,
+  isRquiredLostItemCharge,
+  hasPositiveItemsAgedToLostAfterOverdueAmount,
+  hasPositiveLostItemProcessingFeeAndItemsAgedToLostAfterOverdue,
+  hasReplacedLostItemProcessingFee,
 } from './handlers';
 
 export default {
@@ -33,7 +37,7 @@ export default {
     message: <FormattedMessage id="ui-circulation.settings.validate.select" />,
   },
   isNotEmptyLostItem: {
-    validate: isNotEmpty,
+    validate: isRquiredLostItemCharge,
     message: <FormattedMessage id="ui-circulation.settings.validate.lostItem" />,
   },
   isIntegerGreaterThanZero: {
@@ -108,12 +112,16 @@ export default {
     validate: hasLostItemProcessingFeeValue,
     message: <FormattedMessage id="ui-circulation.settings.lostItemFee.validate.hasLostItemProcessingFeeValue" />
   },
+  hasPositiveLostItemProcessingFeeAndItemsAgedToLostAfterOverdue: {
+    validate: hasPositiveLostItemProcessingFeeAndItemsAgedToLostAfterOverdue,
+    message: <FormattedMessage id="ui-circulation.settings.lostItemFee.validate.hasPositiveLostItemProcessingFeeAndItemsAgedToLostAfterOverdue" />
+  },
   hasPositiveReplacementProcessingFee: {
-    validate: hasPositivereplacementAllowed,
+    validate: hasPositiveReplacementAllowed,
     message: <FormattedMessage id="ui-circulation.settings.lostItemFee.validate.hasPositiveReplacementProcessingFee" />
   },
   hasReplacedLostItemProcessingFee: {
-    validate: hasPositivereplacementAllowed,
+    validate: hasReplacedLostItemProcessingFee,
     message: <FormattedMessage id="ui-circulation.settings.lostItemFee.validate.hasReplacedLostItemProcessingFee" />
   },
   chargeAmountItemSystemSelected: {
@@ -131,5 +139,13 @@ export default {
   hasPositiveCheckoutTimeoutDuration: {
     validate: isIntegerGreaterThanZero,
     message: <FormattedMessage id="ui-circulation.settings.checkout.validate.timeoutDuration" />
+  },
+  hasAmount: {
+    validate: isNotEmpty,
+    message: <FormattedMessage id="ui-circulation.settings.lostItemFee.validate.emptyAmount" />
+  },
+  hasPositiveItemsAgedToLostAfterOverdueAmount: {
+    validate: hasPositiveItemsAgedToLostAfterOverdueAmount,
+    message: <FormattedMessage id="ui-circulation.settings.lostItemFee.validate.hasPositiveItemsAgedToLostAfterOverdueAmount" />
   },
 };
