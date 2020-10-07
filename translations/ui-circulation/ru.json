@@ -327,7 +327,7 @@
     "settings.staffSlips.requestDeliveryAddressTokenHeader": "Request delivery address",
     "settings.noticePolicy.loanNotices.itemRecalled": "Item recalled",
     "settings.fDDSform.cancel": "Отмена",
-    "settings.validate.lostItem": "This field is required if there is a possibility of no fee/fine being charged for a lost item",
+    "settings.validate.lostItem": "Required if there is a possibility of no fee/fine being charged for a lost item",
     "settings.lostItemFee.entryLabel": "Правила оплаты утерянного экземпляра",
     "settings.lostItemFee.paneTitle": "Правила оплаты утерянного экземпляра",
     "settings.lostItemFee.lostItemSection": "Lost item fee",
@@ -385,10 +385,10 @@
     "settings.finePolicy.validate.hasOverdueRecallFineInterval": "Размер пени за несвоевременный возврат должен быть больше 0, если установлен срок возврата",
     "settings.finePolicy.validate.invalidMaximumOverdueFine": "Пожалуйста, введите размер пени за несвоевременный возврат или установите максимум пени 0",
     "settings.finePolicy.validate.invalidMaximumRecallOverdueFine": "Пожалуйста, введите размер пени за несвоевременный возврат или установите максимум пени 0",
-    "settings.lostItemFee.validate.hasPatronBilledAfterAgedToLostValue": "Entry required if patron billed after aged to lost interval is selected",
+    "settings.lostItemFee.validate.hasPatronBilledAfterAgedToLostValue": "Entry required if 'Patron billed after aged to lost' amount entered",
     "settings.lostItemFee.validate.hasPositiveLostItemProcessingFeeValue": "Entry required if charging lost item processing fee for declared lost or aged to lost selected",
-    "settings.lostItemFee.validate.hasNoChargeLostItemProcessingFee": "Lost item processing fee cannot be > 0 unless charging lost item processing fee for declared lost or aged to lost selected",
-    "settings.lostItemFee.validate.hasLostItemProcessingFeeValue": "Lost item processing fee must be > 0 for this selection",
+    "settings.lostItemFee.validate.hasNoChargeLostItemProcessingFee": "'Lost item processing fee' cannot be > 0 unless 'Charge lost item processing fee if item declared lost by patron ?' and/or 'Charge lost item processing fee if item aged to lost by system ?' is 'Yes'",
+    "settings.lostItemFee.validate.hasLostItemProcessingFeeValue": "'Lost item processing fee' must be > 0 for this selection",
     "settings.lostItemFee.validate.hasPositiveReplacementProcessingFee": "Плата за замену не может быть > 0, если уже выбрана доступная замена",
     "settings.lostItemFee.validate.hasReplacedLostItemProcessingFee": "Невозможно выбрать, если уже выбрана доступная замена",
     "settings.lostItemFee.validate.chargeAmountItemSystemSelected": "Entry required if charge lost item processing fee if item aged to lost by system selected",
@@ -417,5 +417,8 @@
     "permission.settings.other-settings": "Settings (Circ): Can create, edit and remove other settings",
     "permission.settings.notice-templates": "Settings (Circ): Can create, edit and remove patron notice templates",
     "permission.settings.overdue-fines-policies": "Settings (Circ): Can create, edit and remove overdue fine policies",
-    "permission.settings.lost-item-fees-policies": "Settings (Circ): Can create, edit and remove lost item fee policies"
+    "permission.settings.lost-item-fees-policies": "Settings (Circ): Can create, edit and remove lost item fee policies",
+    "settings.lostItemFee.validate.hasPositiveLostItemProcessingFeeAndItemsAgedToLostAfterOverdue": "'Lost item processing fee' must be > 0 and 'Items aged to lost after overdue' amount must be > 0 for this selection",
+    "settings.lostItemFee.validate.emptyAmount": "Please enter amount",
+    "settings.lostItemFee.validate.hasPositiveItemsAgedToLostAfterOverdueAmount": "'Set cost' must be > 0 OR 'Charge lost item processing fee if item aged to lost by system?' must be 'Yes' if 'Items aged to lost after overdue' is > 0"
 }

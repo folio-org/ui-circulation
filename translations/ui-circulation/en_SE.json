@@ -417,5 +417,8 @@
     "permission.settings.other-settings": "Settings (Circ): Can create, edit and remove other settings",
     "permission.settings.notice-templates": "Settings (Circ): Can create, edit and remove patron notice templates",
     "permission.settings.overdue-fines-policies": "Settings (Circ): Can create, edit and remove overdue fine policies",
-    "permission.settings.lost-item-fees-policies": "Settings (Circ): Can create, edit and remove lost item fee policies"
+    "permission.settings.lost-item-fees-policies": "Settings (Circ): Can create, edit and remove lost item fee policies",
+    "settings.lostItemFee.validate.hasPositiveLostItemProcessingFeeAndItemsAgedToLostAfterOverdue": "'Lost item processing fee' must be > 0 and 'Items aged to lost after overdue' amount must be > 0 for this selection",
+    "settings.lostItemFee.validate.emptyAmount": "Please enter amount",
+    "settings.lostItemFee.validate.hasPositiveItemsAgedToLostAfterOverdueAmount": "'Set cost' must be > 0 OR 'Charge lost item processing fee if item aged to lost by system?' must be 'Yes' if 'Items aged to lost after overdue' is > 0"
 }
