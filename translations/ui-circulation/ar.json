@@ -187,7 +187,7 @@
     "settings.noticePolicy.requestNotices.holdRequest": "طلب حجز",
     "settings.noticePolicy.requestNotices.pagingRequest": "طلب الصفحة",
     "settings.noticePolicy.requestNotices.available": "في انتظار الالتقاط",
-    "settings.noticePolicy.requestNotices.holdExpiration": "إخفاء الانتهاء",
+    "settings.noticePolicy.requestNotices.holdExpiration": "انتهاء صلاحية الحجز على الرف",
     "settings.noticePolicy.requestNotices.requestCancelation": "إلغاء الطلب",
     "settings.index.circulationRules": "قواعد الإعارة",
     "settings.circulationRules.paneTitle": "محرر قواعد الإعارة",
@@ -269,7 +269,7 @@
     "settings.loanHistory.errors.paymentMethodSelected": "تم تحديد طريقة الدفع هذه بالفعل",
     "settings.staffSlips.itemTokenHeader": "المادة",
     "settings.staffSlips.effectiveLocationTokenHeader": "الموقع النشط",
-    "settings.staffSlips.staffSlipTokenHeader": "كعب الموظفين",
+    "settings.staffSlips.staffSlipTokenHeader": "كشف الموظفين",
     "settings.staffSlips.requestTokenHeader": "طلب",
     "settings.staffSlips.requesterTokenHeader": "مقدم الطلب",
     "settings.circulationRules.institution": "المؤسسة",
@@ -412,10 +412,13 @@
     "permission.settings.notice-policies": "الإعدادات (الإعارة): إمكانية إنشاء، وتحرير، وإزالة سياسات الإخطار",
     "permission.settings.circulation-rules": "الإعدادات (الإعارة): إمكانية إنشاء، وتحرير، وإزالة قواعد الإعارة",
     "permission.settings.fixed-due-date-schedules": "الإعدادات (الإعارة): إمكانية إنشاء، وتحرير، وإزالة جداول تواريخ الاستحقاق الثابتة",
-    "permission.settings.staff-slips": "الإعدادات (الإعارة): إمكانية إنشاء، وتحرير، وإزالة كعوب الموظفين",
+    "permission.settings.staff-slips": "الإعدادات (الإعارة): إمكانية إنشاء، وتحرير، وإزالة كشوف الموظفين",
     "permission.settings.request-policies": "الإعدادات (الإعارة): إمكانية إنشاء، وتحرير، وإزالة سياسات الطلب",
     "permission.settings.other-settings": "الإعدادات (الإعارة): إمكانية إنشاء، وتحرير، وإزالة الإعدادات الأخرى",
     "permission.settings.notice-templates": "الإعدادات (الإعارة): إمكانية إنشاء، وتحرير، وإزالة قوالب إخطار المستفيد",
     "permission.settings.overdue-fines-policies": "الإعدادات (الإعارة): إمكانية إنشاء، وتحرير، وإزالة سياسات غرامات التأخير",
-    "permission.settings.lost-item-fees-policies": "الإعدادات (الإعارة): إمكانية إنشاء، وتحرير، وإزالة سياسات رسوم المواد المفقودة"
+    "permission.settings.lost-item-fees-policies": "الإعدادات (الإعارة): إمكانية إنشاء، وتحرير، وإزالة سياسات رسوم المواد المفقودة",
+    "settings.lostItemFee.validate.hasPositiveLostItemProcessingFeeAndItemsAgedToLostAfterOverdue": "'Lost item processing fee' must be > 0 and 'Items aged to lost after overdue' amount must be > 0 for this selection",
+    "settings.lostItemFee.validate.emptyAmount": "الرجاء إدخال المبلغ",
+    "settings.lostItemFee.validate.hasPositiveItemsAgedToLostAfterOverdueAmount": "'Set cost' must be > 0 OR 'Charge lost item processing fee if item aged to lost by system?' must be 'Yes' if 'Items aged to lost after overdue' is > 0"
 }

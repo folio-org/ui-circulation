@@ -417,5 +417,8 @@
     "permission.settings.other-settings": "Configurações (Circulação): Pode criar, editar e remover outras configurações",
     "permission.settings.notice-templates": "Configurações (Circulação): Pode criar, editar e remover modelos de aviso aos usuários",
     "permission.settings.overdue-fines-policies": "Configurações (Circulação): Pode criar, editar e remover políticas de multas por atraso",
-    "permission.settings.lost-item-fees-policies": "Configurações (Circulação): Pode criar, editar e remover políticas de taxas de itens perdidos"
+    "permission.settings.lost-item-fees-policies": "Configurações (Circulação): Pode criar, editar e remover políticas de taxas de itens perdidos",
+    "settings.lostItemFee.validate.hasPositiveLostItemProcessingFeeAndItemsAgedToLostAfterOverdue": "'Lost item processing fee' must be > 0 and 'Items aged to lost after overdue' amount must be > 0 for this selection",
+    "settings.lostItemFee.validate.emptyAmount": "Please enter amount",
+    "settings.lostItemFee.validate.hasPositiveItemsAgedToLostAfterOverdueAmount": "'Set cost' must be > 0 OR 'Charge lost item processing fee if item aged to lost by system?' must be 'Yes' if 'Items aged to lost after overdue' is > 0"
 }

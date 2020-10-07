@@ -417,5 +417,8 @@
     "permission.settings.other-settings": "设置（流通）：可以创建、编辑和移除其他设置",
     "permission.settings.notice-templates": "设置（流通）：可以创建、编辑和移除读者通知模板",
     "permission.settings.overdue-fines-policies": "设置（流通）：可以创建、编辑和移除过期罚款政策",
-    "permission.settings.lost-item-fees-policies": "设置（流通）：可以创建、编辑和移除遗失单件费用政策"
+    "permission.settings.lost-item-fees-policies": "设置（流通）：可以创建、编辑和移除遗失单件费用政策",
+    "settings.lostItemFee.validate.hasPositiveLostItemProcessingFeeAndItemsAgedToLostAfterOverdue": "'Lost item processing fee' must be > 0 and 'Items aged to lost after overdue' amount must be > 0 for this selection",
+    "settings.lostItemFee.validate.emptyAmount": "Please enter amount",
+    "settings.lostItemFee.validate.hasPositiveItemsAgedToLostAfterOverdueAmount": "'Set cost' must be > 0 OR 'Charge lost item processing fee if item aged to lost by system?' must be 'Yes' if 'Items aged to lost after overdue' is > 0"
 }
