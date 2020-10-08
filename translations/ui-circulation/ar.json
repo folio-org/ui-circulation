@@ -418,7 +418,7 @@
     "permission.settings.notice-templates": "الإعدادات (الإعارة): إمكانية إنشاء، وتحرير، وإزالة قوالب إخطار المستفيد",
     "permission.settings.overdue-fines-policies": "الإعدادات (الإعارة): إمكانية إنشاء، وتحرير، وإزالة سياسات غرامات التأخير",
     "permission.settings.lost-item-fees-policies": "الإعدادات (الإعارة): إمكانية إنشاء، وتحرير، وإزالة سياسات رسوم المواد المفقودة",
-    "settings.lostItemFee.validate.hasPositiveLostItemProcessingFeeAndItemsAgedToLostAfterOverdue": "'Lost item processing fee' must be > 0 and 'Items aged to lost after overdue' amount must be > 0 for this selection",
+    "settings.lostItemFee.validate.hasPositiveLostItemProcessingFeeAndItemsAgedToLostAfterOverdue": "يجب أن يكون 'رسم معالجة المادة المفقودة > 0 وأن يكون مبلغ 'تأخرت المادة وتم اعتبارها مفقودة' > 0 لهذا التحديد",
     "settings.lostItemFee.validate.emptyAmount": "الرجاء إدخال المبلغ",
-    "settings.lostItemFee.validate.hasPositiveItemsAgedToLostAfterOverdueAmount": "'Set cost' must be > 0 OR 'Charge lost item processing fee if item aged to lost by system?' must be 'Yes' if 'Items aged to lost after overdue' is > 0"
+    "settings.lostItemFee.validate.hasPositiveItemsAgedToLostAfterOverdueAmount": "يجب أن تكون 'ضبط التكلفة' > 0 أو أن يكون 'فرض رسم معالجة مادة مفقودة إذا تأخرت المادة وتم اعتبارها مفقودة بواسطة النظام؟' 'نعم' إذا كان 'تأخرت المادة وتم اعتبارها مفقودة' > 0"
 }
