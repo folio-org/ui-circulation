@@ -327,7 +327,7 @@
     "settings.staffSlips.requestDeliveryAddressTokenHeader": "Adresse de livraison de la demande",
     "settings.noticePolicy.loanNotices.itemRecalled": "Article rappelé",
     "settings.fDDSform.cancel": "Annuler",
-    "settings.validate.lostItem": "Ce champ est obligatoire en cas de non-facturation de frais / amende pour objet perdu",
+    "settings.validate.lostItem": "Requis s'il y a une possibilité qu'aucun frais / amende ne soit facturé pour un objet perdu",
     "settings.lostItemFee.entryLabel": "Politiques relatives aux frais pour objets perdus",
     "settings.lostItemFee.paneTitle": "Politiques relatives aux frais pour objets perdus",
     "settings.lostItemFee.lostItemSection": "Frais pour objet perdu",
