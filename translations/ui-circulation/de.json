@@ -413,7 +413,7 @@
     "permission.settings.circulation-rules": "Settings (Circ): Can create, edit and remove circulation rules",
     "permission.settings.fixed-due-date-schedules": "Settings (Circ): Can create, edit and remove fixed due date schedules",
     "permission.settings.staff-slips": "Settings (Circ): Can create, edit and remove staff slips",
-    "permission.settings.request-policies": "Settings (Circ): Can create, edit and remove request policies",
+    "permission.settings.request-policies": "Bestandsanfragen",
     "permission.settings.other-settings": "Settings (Circ): Can create, edit and remove other settings",
     "permission.settings.notice-templates": "Settings (Circ): Can create, edit and remove patron notice templates",
     "permission.settings.overdue-fines-policies": "Settings (Circ): Can create, edit and remove overdue fine policies",
