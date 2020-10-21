@@ -151,7 +151,7 @@
     "settings.noticePolicy.deleteLoanPolicy": "Elimina politica avvisi utente",
     "settings.noticePolicy.policyName": "Nome della politica",
     "settings.noticePolicy.policyDescription": "Descrizione della politica",
-    "settings.noticePolicy.active": "Attiva",
+    "settings.noticePolicy.active": "Attivo",
     "settings.index.requestPolicies": "Politiche richieste",
     "settings.requestPolicy.paneTitle": "Politiche richieste",
     "settings.requestPolicy.entryLabel": "Politica richieste",
