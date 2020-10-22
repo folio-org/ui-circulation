@@ -27,6 +27,7 @@ import {
   hasReplacementAllowedAndPositiveLostItemPolicyFee,
   hasPositiveLostItemProcessingFeeAndInvalidItemsAgedToLostAfterOverdue,
   hasReplacementAllowedAndNegativeLostItemPolicyFee,
+  hasNegativeReplacementAllowedAndPositiveLostItemPolicyFee,
 } from './handlers';
 
 export default {
@@ -130,6 +131,10 @@ export default {
     validate: hasReplacementAllowedAndNegativeLostItemPolicyFee,
     message: <FormattedMessage id="ui-circulation.settings.lostItemFee.validate.hasReplacementAllowedAndNegativeLostItemPolicyFee" />
   },
+  hasNegativeReplacementAllowedAndPositiveLostItemPolicyFee: {
+    validate: hasNegativeReplacementAllowedAndPositiveLostItemPolicyFee,
+    message: <FormattedMessage id="ui-circulation.settings.lostItemFee.validate.hasLostItemProcessingFeeValue" />
+  },
   chargeAmountItemSystemSelected: {
     validate: hasChargeAmountItemSystemSelected,
     message: <FormattedMessage id="ui-circulation.settings.lostItemFee.validate.chargeAmountItemSystemSelected" />
@@ -156,6 +161,6 @@ export default {
   },
   hasInvalidLostItemPolicyFee: {
     validate: hasPositiveLostItemProcessingFeeAndInvalidItemsAgedToLostAfterOverdue,
-    message: <FormattedMessage id="ui-circulation.settings.lostItemFee.validate.hasInvalidLostItemPolicyFee" />
+    message: <FormattedMessage id="ui-circulation.settings.lostItemFee.validate.hasLostItemProcessingFeeValue" />
   }
 };

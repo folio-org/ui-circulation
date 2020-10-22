@@ -38,7 +38,7 @@ export default function (l) {
     },
     'chargeAmountItemSystem': {
       rules: ['hasPositiveLostItemProcessingFeeAndItemsAgedToLostAfterOverdue', 'hasInvalidLostItemPolicyFee'],
-      shouldValidate: (l.hasPassedValue('chargeAmountItemSystem', true) && !l.hasPositiveValue('lostItemProcessingFee') && !l.hasPositiveValue('itemAgedLostOverdue.duration')) || (l.hasPassedValue('chargeAmountItemSystem', true) && !l.hasPositiveValue('lostItemProcessingFee') && l.hasPositiveValue('itemAgedLostOverdue.duration')) /* || (l.hasPassedValue('chargeAmountItem.chargeType', 'anotherCost') && l.hasPositiveValue('itemAgedLostOverdue.duration'))*/,
+      shouldValidate: (l.hasPassedValue('chargeAmountItemSystem', true) && !l.hasPositiveValue('lostItemProcessingFee') && !l.hasPositiveValue('itemAgedLostOverdue.duration')) || (l.hasPassedValue('chargeAmountItemSystem', true) && !l.hasPositiveValue('lostItemProcessingFee') && l.hasPositiveValue('itemAgedLostOverdue.duration')),
     },
     'lostItemChargeFeeFine.duration': {
       rules: ['isNotEmptyLostItem', 'hasAmount', 'isIntegerGreaterThanOrEqualToZero'],
@@ -53,7 +53,7 @@ export default function (l) {
       shouldValidate: l.hasPositiveValue('replacementProcessingFee') || l.hasValue('replacementProcessingFee'),
     },
     'replacedLostItemProcessingFee': {
-      rules: ['hasReplacementAllowedAndPositiveLostItemPolicyFee', 'hasReplacementAllowedAndNegativeLostItemPolicyFee'],
+      rules: ['hasReplacementAllowedAndPositiveLostItemPolicyFee', 'hasReplacementAllowedAndNegativeLostItemPolicyFee', 'hasNegativeReplacementAllowedAndPositiveLostItemPolicyFee'],
       shouldValidate: l.hasPassedValue('replacedLostItemProcessingFee', true),
     },
     'feesFinesShallRefunded.duration': {
