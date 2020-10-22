@@ -71,14 +71,31 @@ export const hasReplacementAllowedAndPositiveLostItemPolicyFee = (value, model) 
 
   const hasVaidLostItemProcessingFee = parseFloat(lostItemProcessingFee, 10) > 0;
 
-  return value && ((replacementAllowed && hasVaidLostItemProcessingFee) || (!replacementAllowed && hasVaidLostItemProcessingFee));
+  return value && (
+    (replacementAllowed && hasVaidLostItemProcessingFee)
+    || (!replacementAllowed && hasVaidLostItemProcessingFee)
+    || (replacementAllowed && !hasVaidLostItemProcessingFee)
+  );
 };
 
 export const hasReplacementAllowedAndNegativeLostItemPolicyFee = (value, model) => {
   const replacementAllowed = get(model, 'replacementAllowed');
   const lostItemProcessingFee = get(model, 'lostItemProcessingFee');
 
-  return value && replacementAllowed && parseFloat(lostItemProcessingFee, 10) > 0;
+  return value && (
+    (replacementAllowed && parseFloat(lostItemProcessingFee, 10) === 0)
+    || (replacementAllowed && parseFloat(lostItemProcessingFee, 10) > 0)
+  );
+};
+
+export const hasNegativeReplacementAllowedAndPositiveLostItemPolicyFee = (value, model) => {
+  const replacementAllowed = get(model, 'replacementAllowed');
+  const lostItemProcessingFee = get(model, 'lostItemProcessingFee');
+
+  return value && (
+    (!replacementAllowed && parseFloat(lostItemProcessingFee, 10) > 0)
+    || (replacementAllowed && parseFloat(lostItemProcessingFee, 10) > 0)
+  );
 };
 
 export const hasPatronBilledAfterAgedToLostValue = (value, model) => {
