@@ -24,7 +24,10 @@ import {
   isRquiredLostItemCharge,
   hasPositiveItemsAgedToLostAfterOverdueAmount,
   hasPositiveLostItemProcessingFeeAndItemsAgedToLostAfterOverdue,
-  hasReplacedLostItemProcessingFee,
+  hasReplacementAllowedAndPositiveLostItemPolicyFee,
+  hasPositiveLostItemProcessingFeeAndInvalidItemsAgedToLostAfterOverdue,
+  hasReplacementAllowedAndNegativeLostItemPolicyFee,
+  hasNegativeReplacementAllowedAndPositiveLostItemPolicyFee,
 } from './handlers';
 
 export default {
@@ -120,9 +123,17 @@ export default {
     validate: hasPositiveReplacementAllowed,
     message: <FormattedMessage id="ui-circulation.settings.lostItemFee.validate.hasPositiveReplacementProcessingFee" />
   },
-  hasReplacedLostItemProcessingFee: {
-    validate: hasReplacedLostItemProcessingFee,
-    message: <FormattedMessage id="ui-circulation.settings.lostItemFee.validate.hasReplacedLostItemProcessingFee" />
+  hasReplacementAllowedAndPositiveLostItemPolicyFee: {
+    validate: hasReplacementAllowedAndPositiveLostItemPolicyFee,
+    message: <FormattedMessage id="ui-circulation.settings.lostItemFee.validate.hasReplacementAllowedAndPositiveLostItemPolicyFee" />
+  },
+  hasReplacementAllowedAndNegativeLostItemPolicyFee: {
+    validate: hasReplacementAllowedAndNegativeLostItemPolicyFee,
+    message: <FormattedMessage id="ui-circulation.settings.lostItemFee.validate.hasReplacementAllowedAndNegativeLostItemPolicyFee" />
+  },
+  hasNegativeReplacementAllowedAndPositiveLostItemPolicyFee: {
+    validate: hasNegativeReplacementAllowedAndPositiveLostItemPolicyFee,
+    message: <FormattedMessage id="ui-circulation.settings.lostItemFee.validate.hasLostItemProcessingFeeValue" />
   },
   chargeAmountItemSystemSelected: {
     validate: hasChargeAmountItemSystemSelected,
@@ -148,4 +159,8 @@ export default {
     validate: hasPositiveItemsAgedToLostAfterOverdueAmount,
     message: <FormattedMessage id="ui-circulation.settings.lostItemFee.validate.hasPositiveItemsAgedToLostAfterOverdueAmount" />
   },
+  hasInvalidLostItemPolicyFee: {
+    validate: hasPositiveLostItemProcessingFeeAndInvalidItemsAgedToLostAfterOverdue,
+    message: <FormattedMessage id="ui-circulation.settings.lostItemFee.validate.hasLostItemProcessingFeeValue" />
+  }
 };
