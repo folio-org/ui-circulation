@@ -21,11 +21,11 @@ export default function (finePolicy) {
       shouldValidate: finePolicy.isOverdueRecallFine(),
     },
     'maxOverdueFine': {
-      rules: ['isStringGreaterThanOrEqualToZero', 'isGreaterThanOverdueFine', 'isMaximumOverdueFineValid'],
+      rules: ['isFloatGreaterThanOrEqualToZero', 'isGreaterThanOverdueFine', 'isMaximumOverdueFineValid'],
       shouldValidate: finePolicy.isOverdueFine() || finePolicy.hasValue('maxOverdueFine'),
     },
     'maxOverdueRecallFine': {
-      rules: ['isStringGreaterThanOrEqualToZero', 'isGreaterThanOverdueRecallFine', 'isMaximumOverdueRecallFineValid'],
+      rules: ['isFloatGreaterThanOrEqualToZero', 'isGreaterThanOverdueRecallFine', 'isMaximumOverdueRecallFineValid'],
       shouldValidate: finePolicy.isOverdueRecallFine() || finePolicy.hasValue('maxOverdueRecallFine'),
     },
   };

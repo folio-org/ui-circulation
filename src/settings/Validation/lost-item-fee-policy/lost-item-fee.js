@@ -49,7 +49,7 @@ export default function (l) {
       shouldValidate: l.hasValue('lostItemChargeFeeFine.duration'),
     },
     'replacementProcessingFee': {
-      rules: ['hasPositiveReplacementProcessingFee', 'isStringGreaterThanOrEqualToZero'],
+      rules: ['hasPositiveReplacementProcessingFee', 'isFloatGreaterThanOrEqualToZero'],
       shouldValidate: l.hasPositiveValue('replacementProcessingFee') || l.hasValue('replacementProcessingFee'),
     },
     'replacedLostItemProcessingFee': {
