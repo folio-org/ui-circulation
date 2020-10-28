@@ -72,6 +72,7 @@
   "settings.circulationRules.label": "Rules",
   "settings.circulationRules.rulesUpdated": "Rules were successfully updated.",
   "settings.circulationRules.newRule": "New rule (#)",
+  "settings.circulationRules.all": "All",
   "settings.circulationRules.patronGroups": "Patron groups",
   "settings.circulationRules.materialTypes": "Material types",
   "settings.circulationRules.loanTypes": "Loan types",
