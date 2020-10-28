@@ -113,17 +113,26 @@ export function rulesHint(Codemirror, props) {
     // new rule at the start of lines and blank lines
     if (!rValue && (cur.ch === 0 || cur.ch === indented || token.type !== 'policy')) {
       let newRuleText = '# ';
+      let allRuleText = 'all ';
 
       // if we're in the middle of a line, a new line should be inserted, then a rule...
       if ((cur.ch !== 0 && indented > 0) || token.type === 'ruleName') {
         newRuleText = '\n\n# ';
+        allRuleText = '\n\nall ';
       }
 
-      result.push({
-        text: newRuleText,
-        displayText: formatMessage({ id: 'ui-circulation.settings.circulationRules.newRule' }),
-        className: 'rule-hint-major',
-      });
+      result.push(
+        {
+          text: allRuleText,
+          displayText: formatMessage({ id: 'ui-circulation.settings.circulationRules.all' }),
+          className: 'rule-hint-major',
+        },
+        {
+          text: newRuleText,
+          displayText: formatMessage({ id: 'ui-circulation.settings.circulationRules.newRule' }),
+          className: 'rule-hint-major',
+        }
+      );
     }
 
     // typegroups happen at the beginning of lines or if property is meta.
@@ -150,10 +159,10 @@ export function rulesHint(Codemirror, props) {
         const isLocationKey = isLocationType(keyProperty);
 
         if (isLocationKey) {
-          // A temp solution to remove new rule# for locations because it's displayed in wrong cases
+          // A temp solution to remove new and all rules for locations because it's displayed in wrong cases
           // It will be fixed in the separated issue
           if (!isEmpty(result)) {
-            result.pop();
+            result.splice(0, 2);
           }
 
           sections = getSectionsDescriptions(keyProperty);
