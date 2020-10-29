@@ -11,8 +11,8 @@ import {
   isNotEmptyEditor,
   isSelected,
   isGreaterOrEqualThanPassedField,
-  isStringGreaterThanOrEqualToZero,
-  isStringGreaterThanZero,
+  isFloatGreaterThanOrEqualToZero,
+  isFloatGreaterThanZero,
   isMaximumFineValueValid,
   hasNoChargeLostItemProcessingFee,
   hasLostItemProcessingFeeValue,
@@ -47,8 +47,8 @@ export default {
     validate: isIntegerGreaterThanZero,
     message: <FormattedMessage id="ui-circulation.settings.validate.greaterThanZero" />,
   },
-  isStringGreaterThanOrEqualToZero: {
-    validate: isStringGreaterThanOrEqualToZero,
+  isFloatGreaterThanOrEqualToZero: {
+    validate: isFloatGreaterThanOrEqualToZero,
     message: <FormattedMessage id="ui-circulation.settings.validate.greaterThanOrEqualToZero" />,
   },
   isIntegerGreaterThanOrEqualToZero: {
@@ -84,11 +84,11 @@ export default {
     message: <FormattedMessage id="ui-circulation.settings.finePolicy.validate.maximumRecallOverdueFine" />,
   },
   hasOverdueFineInterval: {
-    validate: isStringGreaterThanZero,
+    validate: isFloatGreaterThanZero,
     message: <FormattedMessage id="ui-circulation.settings.finePolicy.validate.hasOverdueFineInterval" />
   },
   hasOverdueRecallFineInterval: {
-    validate: isStringGreaterThanZero,
+    validate: isFloatGreaterThanZero,
     message: <FormattedMessage id="ui-circulation.settings.finePolicy.validate.hasOverdueRecallFineInterval" />
   },
   isMaximumOverdueFineValid: {
@@ -104,7 +104,7 @@ export default {
     message: <FormattedMessage id="ui-circulation.settings.lostItemFee.validate.hasPatronBilledAfterAgedToLostValue" />
   },
   hasPositiveLostItemProcessingFeeValue: {
-    validate: isStringGreaterThanZero,
+    validate: isFloatGreaterThanZero,
     message: <FormattedMessage id="ui-circulation.settings.lostItemFee.validate.hasPositiveLostItemProcessingFeeValue" />
   },
   hasNoChargeLostItemProcessingFee: {
