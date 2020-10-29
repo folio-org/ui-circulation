@@ -1,5 +1,10 @@
 # Change history for ui-circulation
 
+## 5.0.0 (IN PROGRESS)
+
+* Keyword all - allowed by backend. Refs UICIRC-506.
+* Unable to enter decimal places on Overdue Fines Policy on Honeysuckle and Snapshot Dev. Refs UICIRC-514.
+
 ## 4.0.0 (https://github.com/folio-org/ui-circulation/tree/v4.0.0) (2020-10-13)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v3.0.0...v4.0.0)
 
