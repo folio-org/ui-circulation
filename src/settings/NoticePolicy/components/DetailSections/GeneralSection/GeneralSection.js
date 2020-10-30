@@ -16,7 +16,6 @@ const GeneralSection = (props) => {
     isOpen,
     connect,
     metadata,
-    onToggle,
     policyName,
     isPolicyActive,
     policyDescription,
@@ -30,9 +29,8 @@ const GeneralSection = (props) => {
     <div data-test-notice-policy-detail-general-section>
       <Accordion
         open={isOpen}
-        id="generalInformation"
+        id="generalNoticePolicy"
         label={<FormattedMessage id="ui-circulation.settings.loanPolicy.generalInformation" />}
-        onToggle={onToggle}
       >
         <Metadata
           connect={connect}
@@ -76,7 +74,6 @@ const GeneralSection = (props) => {
   );
 };
 
-
 GeneralSection.propTypes = {
   metadata: PropTypes.object.isRequired,
   isOpen: PropTypes.bool.isRequired,
@@ -84,7 +81,6 @@ GeneralSection.propTypes = {
   policyName: PropTypes.string.isRequired,
   policyDescription: PropTypes.string,
   connect: PropTypes.func.isRequired,
-  onToggle: PropTypes.func.isRequired,
 };
 
 GeneralSection.defaultProps = {

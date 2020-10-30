@@ -13,6 +13,7 @@ import {
 import { stripesShape } from '@folio/stripes/core';
 import {
   Accordion,
+  AccordionSet,
   Col,
   Row,
   ExpandAllButton,
@@ -48,7 +49,7 @@ class LoanPolicyDetail extends React.Component {
 
     this.state = {
       sections: {
-        generalInformation: true,
+        generalLoanPolicyDetail: true,
         recalls: true,
         holds: true,
       },
@@ -60,8 +61,7 @@ class LoanPolicyDetail extends React.Component {
   };
 
   handleSectionToggle = ({ id }) => {
-    this.setState((state) => {
-      const sections = { ...state.sections };
+    this.setState(({ sections }) => {
       sections[id] = !sections[id];
       return { sections };
     });
@@ -143,43 +143,45 @@ class LoanPolicyDetail extends React.Component {
             />
           </Col>
         </Row>
-        <Accordion
-          id="generalInformation"
-          label={<FormattedMessage id="ui-circulation.settings.loanPolicy.generalInformation" />}
-          open={sections.generalInformation}
-          onToggle={this.handleSectionToggle}
-        >
-          <Metadata
-            connect={connect}
-            metadata={policy.metadata}
-          />
-          <AboutSection getValue={this.getValue} />
-          <LoansSection
-            isVisible={loanPolicy.loanable}
-            policy={loanPolicy}
-            getDropdownValue={this.getDropdownValue}
-            getPeriodValue={this.getPeriodValue}
-            getScheduleValue={this.getScheduleValue}
-            getValue={this.getValue}
-          />
-          <RenewalsSection
-            isVisible={loanPolicy.loanable}
-            policy={loanPolicy}
-            getValue={this.getValue}
-            getDropdownValue={this.getDropdownValue}
-            getPeriodValue={this.getPeriodValue}
-            getCheckboxValue={this.getCheckboxValue}
-            getScheduleValue={this.getScheduleValue}
-          />
-          <RequestManagementSection
-            isVisible={policy.loanable}
-            isRecallsOpen={sections.recalls}
-            isHoldsOpen={sections.holds}
-            getPeriodValue={this.getPeriodValue}
-            getCheckboxValue={this.getCheckboxValue}
-            onSectionToggle={this.handleSectionToggle}
-          />
-        </Accordion>
+        <AccordionSet>
+          <Accordion
+            id="generalLoanPolicyDetail"
+            label={<FormattedMessage id="ui-circulation.settings.loanPolicy.generalInformation" />}
+            open={sections.generalLoanPolicyDetail}
+            onToggle={this.handleSectionToggle}
+          >
+            <Metadata
+              connect={connect}
+              metadata={policy.metadata}
+            />
+            <AboutSection getValue={this.getValue} />
+            <LoansSection
+              policy={loanPolicy}
+              getDropdownValue={this.getDropdownValue}
+              getPeriodValue={this.getPeriodValue}
+              getScheduleValue={this.getScheduleValue}
+              getCheckboxValue={this.getCheckboxValue}
+              getValue={this.getValue}
+            />
+            <RenewalsSection
+              isVisible={loanPolicy.loanable}
+              policy={loanPolicy}
+              getValue={this.getValue}
+              getDropdownValue={this.getDropdownValue}
+              getPeriodValue={this.getPeriodValue}
+              getCheckboxValue={this.getCheckboxValue}
+              getScheduleValue={this.getScheduleValue}
+            />
+            <RequestManagementSection
+              isVisible={policy.loanable}
+              isRecallsOpen={sections.recalls}
+              isHoldsOpen={sections.holds}
+              getPeriodValue={this.getPeriodValue}
+              getCheckboxValue={this.getCheckboxValue}
+              onSectionToggle={this.handleSectionToggle}
+            />
+          </Accordion>
+        </AccordionSet>
       </div>
     );
   }

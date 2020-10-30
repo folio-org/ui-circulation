@@ -16,16 +16,36 @@ import {
 
 const LoansSection = (props) => {
   const {
-    isVisible,
     policy,
     getPeriodValue,
     getDropdownValue,
     getScheduleValue,
+    getCheckboxValue,
     getValue,
   } = props;
 
-  if (!isVisible) {
-    return null;
+  if (!policy.loanable) {
+    return (
+      <div data-test-loan-policy-detail-loans-section>
+        <Row>
+          <Col xs={12}>
+            <h2 data-test-loans-section-header>
+              <FormattedMessage id="ui-circulation.settings.loanPolicy.loans" />
+            </h2>
+          </Col>
+        </Row>
+        <Row>
+          <Col xs={12}>
+            <div data-test-renewals-section-loanable>
+              <KeyValue
+                label={<FormattedMessage id="ui-circulation.settings.loanPolicy.loanable" />}
+                value={getCheckboxValue('loanable')}
+              />
+            </div>
+          </Col>
+        </Row>
+      </div>
+    );
   }
 
   const dueDateScheduleFieldLabel = policy.isProfileRolling()
@@ -126,11 +146,11 @@ const LoansSection = (props) => {
 };
 
 LoansSection.propTypes = {
-  isVisible: PropTypes.bool.isRequired,
   policy: PropTypes.object.isRequired,
   getDropdownValue: PropTypes.func.isRequired,
   getPeriodValue: PropTypes.func.isRequired,
   getScheduleValue: PropTypes.func.isRequired,
+  getCheckboxValue: PropTypes.func.isRequired,
   getValue: PropTypes.func.isRequired,
 };
 

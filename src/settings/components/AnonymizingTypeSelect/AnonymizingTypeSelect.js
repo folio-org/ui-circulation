@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Field } from 'redux-form';
+import { Field } from 'react-final-form';
 
 import {
   Col,
@@ -13,7 +13,7 @@ const AnonymizingTypeSelect = ({ name, types }) => {
     <Row key={`row-${index}`}>
       <Col xs={12}>
         <Field
-          data-test-radio-button={type.value}
+          data-test-radio-button
           component={RadioButton}
           label={type.label}
           name={`closingType.${name}`}

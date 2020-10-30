@@ -8,7 +8,6 @@ import {
 import translation from '../../../../translations/ui-circulation/en';
 import setupApplication from '../../helpers/setup-application';
 import NoticePolicyDetail from '../../interactors/notice-policy/notice-policy-detail';
-import { getBooleanRepresentation } from '../../helpers/messageConverters';
 
 describe('NoticePolicyDetail', () => {
   setupApplication();
@@ -300,7 +299,7 @@ describe('NoticePolicyDetail', () => {
         });
 
         it('templateId should have no value', () => {
-          expect(NoticePolicyDetail.loanNoticesSection.loanNotices(0).templateId.value.text).to.equal('');
+          expect(NoticePolicyDetail.loanNoticesSection.loanNotices(0).templateId.value.text).to.equal('-');
         });
       });
 

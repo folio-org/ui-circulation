@@ -19,7 +19,6 @@ import { requestPolicyTypes } from '../../../../../constants';
 class GeneralSection extends React.Component {
   static propTypes = {
     isOpen: PropTypes.bool.isRequired,
-    onToggle: PropTypes.func.isRequired,
     metadata: PropTypes.object.isRequired,
     connect: PropTypes.func.isRequired,
     validateName: PropTypes.func.isRequired,
@@ -56,15 +55,13 @@ class GeneralSection extends React.Component {
       metadata,
       connect,
       validateName,
-      onToggle,
     } = this.props;
 
     return (
       <Accordion
-        id="general"
+        id="generalRequestPolicyForm"
         open={isOpen}
         label={<FormattedMessage id="ui-circulation.settings.requestPolicy.generalInformation" />}
-        onToggle={onToggle}
       >
         <Metadata
           connect={connect}

@@ -12,8 +12,11 @@ describe('LostItemFeePolicyEdit', () => {
   describe('updating an existing lost item fee policy', () => {
     const newLoanPolicyName = 'updated lost item fee policy';
 
-    beforeEach(async function () {
-      await this.visit(`/settings/circulation/lost-item-fee-policy/${testLostItemFeePolicySettings.id}?layer=edit`);
+    beforeEach(function () {
+      this.visit(`/settings/circulation/lost-item-fee-policy/${testLostItemFeePolicySettings.id}?layer=edit`);
+    });
+
+    beforeEach(async () => {
       await LostItemFeePolicyForm.whenLoaded(testLostItemFeePolicySettings.name);
     });
 
@@ -25,6 +28,7 @@ describe('LostItemFeePolicyEdit', () => {
       beforeEach(async function () {
         await LostItemFeePolicyForm
           .aboutSection.policyNameValue.fill(newLoanPolicyName)
+          .lostItemFeeSection.lostItemFee.fill('0')
           .lostItemFeeSection.replacementAllowed.selectAndBlur('Yes')
           .save();
       });

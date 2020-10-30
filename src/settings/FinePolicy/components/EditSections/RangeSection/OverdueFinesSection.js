@@ -14,7 +14,7 @@ import {
 } from '@folio/stripes/components';
 
 const OverdueFinesSection = (props) => {
-  const { label, name, period, intervalPeriods, onBlurField, data } = props;
+  const { label, name, period, intervalPeriods, onBlurField, data, intl: { formatMessage } } = props;
   const test = `data-test-quantity-${data}`;
   return (
     <div>
@@ -27,6 +27,7 @@ const OverdueFinesSection = (props) => {
         <Col xs={2}>
           <div id={test}>
             <Field
+              aria-label={formatMessage({ id: 'ui-circulation.settings.circulationRules.overdueFine.quantity' })}
               name={name}
               type="number"
               hasClearIcon={false}
@@ -43,6 +44,7 @@ const OverdueFinesSection = (props) => {
         <Col xs={2}>
           <div data-test-quantity-interval>
             <Field
+              aria-label={formatMessage({ id: 'ui-circulation.settings.circulationRules.overdueFine.period' })}
               name={period}
               component={Select}
             >
@@ -56,6 +58,7 @@ const OverdueFinesSection = (props) => {
   );
 };
 OverdueFinesSection.propTypes = {
+  intl: PropTypes.object.isRequired,
   label: PropTypes.object,
   name: PropTypes.string,
   period: PropTypes.string,

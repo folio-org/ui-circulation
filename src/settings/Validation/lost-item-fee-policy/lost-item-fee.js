@@ -5,60 +5,60 @@ export default function (l) {
       shouldValidate: true,
     },
     'itemAgedLostOverdue.duration': {
-      rules: ['chargeAmountItemSystemSelected', 'hasPatronBilledAfterAgedToLostValue', 'isIntegerGreaterThanOrEqualToZero'],
-      shouldValidate: l.hasValue('patronBilledAfterAgedLost.duration') || l.hasPassedValue('chargeAmountItemSystem', true) || l.hasValue('itemAgedLostOverdue.duration'),
+      rules: ['chargeAmountItemSystemSelected', 'hasPatronBilledAfterAgedToLostValue', 'hasAmount', 'isIntegerGreaterThanOrEqualToZero'],
+      shouldValidate: l.hasInterval('itemAgedLostOverdue.intervalId') || l.hasValue('patronBilledAfterAgedLost.duration') || l.hasPassedValue('chargeAmountItemSystem', true) || l.hasValue('itemAgedLostOverdue.duration'),
     },
     'itemAgedLostOverdue.intervalId': {
       rules: ['isNotEmptySelect'],
       shouldValidate: l.hasValue('itemAgedLostOverdue.duration'),
     },
     'patronBilledAfterAgedLost.duration': {
-      rules: ['hasItemsAgedToLostAfterOverdueValue', 'isIntegerGreaterThanOrEqualToZero'],
-      shouldValidate: l.hasValue('itemAgedLostOverdue.duration') || l.hasValue('patronBilledAfterAgedLost.duration'),
+      rules: ['hasAmount', 'isIntegerGreaterThanOrEqualToZero'],
+      shouldValidate: l.hasInterval('patronBilledAfterAgedLost.intervalId') || l.hasValue('patronBilledAfterAgedLost.duration'),
     },
     'patronBilledAfterAgedLost.intervalId': {
       rules: ['isNotEmptySelect'],
       shouldValidate: l.hasValue('patronBilledAfterAgedLost.duration'),
     },
     'chargeAmountItem.amount': {
-      rules: ['isIntegerGreaterThanOrEqualToZero'],
-      shouldValidate: l.hasValue('chargeAmountItem.amount'),
+      rules: ['hasPositiveItemsAgedToLostAfterOverdueAmount'],
+      shouldValidate: l.hasPassedValue('chargeAmountItem.chargeType', 'anotherCost') && l.hasPositiveValue('itemAgedLostOverdue.duration'),
     },
     'lostItemProcessingFee': {
-      rules: ['hasPositiveLostItemProcessingFeeValue'],
-      shouldValidate: l.hasPassedValue('chargeAmountItemPatron', true) || l.hasPassedValue('chargeAmountItemSystem', true) || l.hasValue('lostItemProcessingFee'),
+      rules: ['hasPositiveLostItemProcessingFeeValue', 'hasNoChargeLostItemProcessingFee'],
+      shouldValidate: l.hasPassedValue('chargeAmountItemPatron', true) || l.hasPassedValue('chargeAmountItemSystem', true) || l.hasValue('lostItemProcessingFee') || l.hasPositiveValue('lostItemProcessingFee'),
     },
     'returnedLostItemProcessingFee': {
       rules: ['hasLostItemProcessingFeeValue'],
       shouldValidate: l.hasPassedValue('returnedLostItemProcessingFee', true),
     },
     'chargeAmountItemPatron': {
-      rules: ['hasNoChargeLostItemProcessingFee'],
-      shouldValidate: l.hasPositiveValue('lostItemProcessingFee'),
+      rules: ['hasLostItemProcessingFeeValue'],
+      shouldValidate: l.hasPassedValue('chargeAmountItemPatron', true),
     },
     'chargeAmountItemSystem': {
-      rules: ['hasNoChargeLostItemProcessingFee'],
-      shouldValidate: l.hasPositiveValue('lostItemProcessingFee'),
+      rules: ['hasPositiveLostItemProcessingFeeAndItemsAgedToLostAfterOverdue', 'hasInvalidLostItemPolicyFee'],
+      shouldValidate: (l.hasPassedValue('chargeAmountItemSystem', true) && !l.hasPositiveValue('lostItemProcessingFee') && !l.hasPositiveValue('itemAgedLostOverdue.duration')) || (l.hasPassedValue('chargeAmountItemSystem', true) && !l.hasPositiveValue('lostItemProcessingFee') && l.hasPositiveValue('itemAgedLostOverdue.duration')),
     },
     'lostItemChargeFeeFine.duration': {
-      rules: ['isNotEmptyLostItem', 'isIntegerGreaterThanOrEqualToZero'],
-      shouldValidate: l.isRquiredLostItemCharge(),
+      rules: ['isNotEmptyLostItem', 'hasAmount', 'isIntegerGreaterThanOrEqualToZero'],
+      shouldValidate: l.isRquiredLostItemCharge() || l.hasInterval('lostItemChargeFeeFine.intervalId')
     },
     'lostItemChargeFeeFine.intervalId': {
       rules: ['isNotEmptySelect'],
       shouldValidate: l.hasValue('lostItemChargeFeeFine.duration'),
     },
     'replacementProcessingFee': {
-      rules: ['hasPositiveReplacementProcessingFee', 'isStringGreaterThanOrEqualToZero'],
+      rules: ['hasPositiveReplacementProcessingFee', 'isFloatGreaterThanOrEqualToZero'],
       shouldValidate: l.hasPositiveValue('replacementProcessingFee') || l.hasValue('replacementProcessingFee'),
     },
     'replacedLostItemProcessingFee': {
-      rules: ['hasReplacedLostItemProcessingFee'],
+      rules: ['hasReplacementAllowedAndPositiveLostItemPolicyFee', 'hasReplacementAllowedAndNegativeLostItemPolicyFee', 'hasNegativeReplacementAllowedAndPositiveLostItemPolicyFee'],
       shouldValidate: l.hasPassedValue('replacedLostItemProcessingFee', true),
     },
     'feesFinesShallRefunded.duration': {
-      rules: ['isIntegerGreaterThanOrEqualToZero'],
-      shouldValidate: l.hasValue('feesFinesShallRefunded.duration'),
+      rules: ['hasAmount', 'isIntegerGreaterThanOrEqualToZero'],
+      shouldValidate: l.hasInterval('feesFinesShallRefunded.intervalId') || l.hasValue('feesFinesShallRefunded.duration'),
     },
     'feesFinesShallRefunded.intervalId': {
       rules: ['isNotEmptySelect'],

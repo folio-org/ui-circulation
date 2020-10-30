@@ -20,7 +20,6 @@ class FeeFineNoticesSection extends React.Component {
       value: PropTypes.string.isRequired,
       label: PropTypes.string.isRequired,
     })).isRequired,
-    onToggle: PropTypes.func.isRequired,
   };
 
   render() {
@@ -28,15 +27,13 @@ class FeeFineNoticesSection extends React.Component {
       isOpen,
       policy,
       templates,
-      onToggle,
     } = this.props;
 
     return (
       <Accordion
-        id="feeFineNotices"
+        id="editFeeFineNotices"
         open={isOpen}
         label={<FormattedMessage id="ui-circulation.settings.noticePolicy.feeFineNotices" />}
-        onToggle={onToggle}
       >
         <FieldArray
           name="feeFineNotices"

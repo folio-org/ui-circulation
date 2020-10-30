@@ -9,13 +9,13 @@ import { AccordionInteractor } from '@folio/stripes-components/lib/Accordion/tes
 import { contains } from '../helpers';
 
 @interactor class FddsDetail {
-  isLoaded = isPresent('#generalInformation');
+  isLoaded = isPresent('#generalFixedDueDateScheduleDetail');
   whenLoaded() {
     return this.when(() => this.isLoaded);
   }
 
-  containsContent = contains('#generalInformation');
-  generalInformationAccordion = new AccordionInteractor('#generalInformation');
+  containsContent = contains('#generalFixedDueDateScheduleDetail');
+  generalInformationAccordion = new AccordionInteractor('#generalFixedDueDateScheduleDetail');
   expandAll = scoped('[data-tast-expand-button]')
 }
 

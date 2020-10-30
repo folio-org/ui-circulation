@@ -23,8 +23,8 @@ import NoticesSection from './notices-section';
   cancelEditingNoticePolicy = new Interactor('#footer-cancel-entity');
   cancelEditingNoticePolicyModal = new Interactor('#cancel-editing-confirmation');
   generalSectionAccordion = new AccordionInteractor('#general');
-  loanNoticesSectionAccordion = new AccordionInteractor('#loanNotices');
-  requestNoticesSectionAccordion = new AccordionInteractor('#requestNotices');
+  loanNoticesSectionAccordion = new AccordionInteractor('#editLoanNotices');
+  requestNoticesSectionAccordion = new AccordionInteractor('#editRequestNotices');
 
   save = clickable('#footer-save-entity');
   expandAll = scoped('[data-test-expand-all] button')

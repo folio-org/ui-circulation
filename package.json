@@ -1,6 +1,6 @@
 {
   "name": "@folio/circulation",
-  "version": "3.0.0",
+  "version": "4.0.0",
   "description": "Circulation manager",
   "repository": "folio-org/ui-circulation",
   "publishConfig": {
@@ -25,7 +25,9 @@
         "title": "Circulation"
       }
     ],
-    "stripesDeps": ["@folio/stripes-template-editor"],
+    "stripesDeps": [
+      "@folio/stripes-template-editor"
+    ],
     "okapiInterfaces": {
       "circulation": "9.0",
       "configuration": "2.0",
@@ -254,24 +256,25 @@
   },
   "devDependencies": {
     "@bigtest/interactor": "^0.9.1",
-    "@bigtest/mirage": "^0.0.1",
     "@bigtest/mocha": "^0.5.2",
     "@bigtest/react": "^0.1.2",
     "@folio/eslint-config-stripes": "^5.1.0",
-    "@folio/stripes": "^4.0.0",
-    "@folio/stripes-cli": "^1.11.0",
-    "@folio/stripes-components": "^7.0.0",
-    "@folio/stripes-core": "^5.0.0",
+    "@folio/stripes": "^5.0.0",
+    "@folio/stripes-cli": "^1.18.0",
+    "@folio/stripes-components": "^8.0.0",
+    "@folio/stripes-core": "^6.0.0",
     "babel-eslint": "^10.0.3",
     "chai": "^4.2.0",
     "core-js": "^3.6.4",
     "eslint": "^6.2.1",
+    "faker": "^4.1.0",
+    "inflected": "^2.0.4",
+    "miragejs": "^0.1.40",
     "react": "^16.6.0",
     "react-dom": "^16.6.0",
-    "react-intl": "^4.5.3",
+    "react-intl": "^5.7.0",
     "react-redux": "~5.1.1",
-    "react-router-dom": "^4.0.0",
-    "redux": "~4.0.0",
+    "react-router-dom": "^5.2.0",
     "regenerator-runtime": "^0.13.3",
     "sinon": "^7.2.2"
   },
@@ -282,15 +285,15 @@
     "moment": "^2.25.3",
     "prop-types": "^15.5.10",
     "react-codemirror2": "^1.0.0",
-    "redux-form": "^7.0.3",
     "final-form": "^4.18.2",
     "final-form-arrays": "^3.0.1",
+    "final-form-set-field-data": "^1.0.2",
     "react-final-form": "^6.3.0",
     "react-final-form-arrays": "^3.1.0"
   },
   "peerDependencies": {
-    "@folio/stripes": "^4.0.0",
+    "@folio/stripes": "^5.0.0",
     "react": "*",
-    "react-intl": "^4.5.3"
+    "react-intl": "^5.7.0"
   }
 }

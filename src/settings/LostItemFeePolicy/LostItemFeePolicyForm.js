@@ -1,15 +1,13 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { getFormValues } from 'redux-form';
-import {
-  FormattedMessage,
-  injectIntl,
-} from 'react-intl';
+import PropTypes from 'prop-types';
+import { FormattedMessage } from 'react-intl';
 
-import stripesForm from '@folio/stripes/form';
+import { stripesShape } from '@folio/stripes/core';
+import stripesFinalForm from '@folio/stripes/final-form';
 
 import {
   Accordion,
+  AccordionSet,
   ExpandAllButton,
   Col,
   Row,
@@ -18,7 +16,7 @@ import {
 } from '@folio/stripes/components';
 
 import LostItemFeePolicy from '../Models/LostItemFeePolicy';
-import { checkInvalid } from './utils/normalize';
+import { LostItemFeePolicy as validateLostItemFeePolicy } from '../Validation';
 
 import {
   LostItemFeeAboutSection,
@@ -31,15 +29,20 @@ import {
   Metadata,
 } from '../components';
 
-import formShape from '../utils/form-shape';
-
-import css from './LostItemFee.css';
+import { transformModelBooleans } from './utils/normalize';
 
 class LostItemFeePolicyForm extends React.Component {
-  static propTypes = formShape;
+  static propTypes = {
+    stripes: stripesShape.isRequired,
+    pristine: PropTypes.bool.isRequired,
+    submitting: PropTypes.bool.isRequired,
+    initialValues: PropTypes.object,
+    form: PropTypes.object.isRequired,
+    handleSubmit: PropTypes.func.isRequired,
+    onCancel: PropTypes.func.isRequired,
+  };
 
   static defaultProps = {
-    policy: {},
     initialValues: {},
   };
 
@@ -48,16 +51,15 @@ class LostItemFeePolicyForm extends React.Component {
 
     this.state = {
       sections: {
-        lostItemFeegeneralSection: true,
+        lostItemFeeFormGeneralSection: true,
         LostItemFeeSection: true,
-        lostItemFeeSectionOpen: true,
+        editLostItemFeeSection: true,
       },
     };
   }
 
   handleSectionToggle = ({ id }) => {
-    this.setState((state) => {
-      const sections = { ...state.sections };
+    this.setState(({ sections }) => {
       sections[id] = !sections[id];
       return { sections };
     });
@@ -67,24 +69,24 @@ class LostItemFeePolicyForm extends React.Component {
     this.setState({ sections });
   };
 
-  saveForm = (lostItemFeePolicy) => {
-    const lostItemFee = checkInvalid(lostItemFeePolicy);
-    this.props.onSave(lostItemFee);
-  };
-
   render() {
     const {
       pristine,
-      policy,
       initialValues,
       stripes,
       submitting,
       handleSubmit,
-      change,
+      form: {
+        change,
+        getState,
+      },
       onCancel,
     } = this.props;
 
     const { sections } = this.state;
+
+    const { values } = getState();
+    const policy = new LostItemFeePolicy(values);
 
     const panelTitle = policy.id ? policy.name : <FormattedMessage id="ui-circulation.settings.lostItemFee.entryLabel" />;
     const footerPaneProps = {
@@ -96,9 +98,8 @@ class LostItemFeePolicyForm extends React.Component {
     return (
       <form
         noValidate
-        className={css.lostItemFeePolicyForm}
         data-test-lost-item-fee-policy-form
-        onSubmit={handleSubmit(this.saveForm)}
+        onSubmit={handleSubmit}
       >
         <Paneset isRoot>
           <Pane
@@ -119,25 +120,27 @@ class LostItemFeePolicyForm extends React.Component {
                   />
                 </Col>
               </Row>
-              <Accordion
-                id="lostItemFeegeneralSection"
-                label={<FormattedMessage id="ui-circulation.settings.lostItemFee.generalInformation" />}
-                open={sections.lostItemFeegeneralSection}
+              <AccordionSet
                 onToggle={this.handleSectionToggle}
               >
-                <Metadata
-                  connect={stripes.connect}
-                  metadata={policy.metadata}
-                />
-                <LostItemFeeAboutSection />
+                <Accordion
+                  id="lostItemFeeFormGeneralSection"
+                  label={<FormattedMessage id="ui-circulation.settings.lostItemFee.generalInformation" />}
+                  open={sections.lostItemFeeFormGeneralSection}
+                >
+                  <Metadata
+                    connect={stripes.connect}
+                    metadata={policy.metadata}
+                  />
+                  <LostItemFeeAboutSection />
+                </Accordion>
                 <LostItemFeeSection
                   policy={policy}
                   change={change}
                   initialValues={initialValues}
-                  lostItemFeeSectionOpen={sections.lostItemFeeSectionOpen}
-                  accordionOnToggle={this.handleSectionToggle}
+                  lostItemFeeSectionOpen={sections.editLostItemFeeSection}
                 />
-              </Accordion>
+              </AccordionSet>
             </>
           </Pane>
         </Paneset>
@@ -146,14 +149,7 @@ class LostItemFeePolicyForm extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  policy: new LostItemFeePolicy(getFormValues('LostItemFeePolicyForm')(state)),
-});
-
-const connectedLostItemFeePolicyForm = connect(mapStateToProps)(injectIntl(LostItemFeePolicyForm));
-
-export default stripesForm({
-  form: 'LostItemFeePolicyForm',
+export default stripesFinalForm({
   navigationCheck: true,
-  enableReinitialize: true,
-})(connectedLostItemFeePolicyForm);
+  validate: model => validateLostItemFeePolicy(transformModelBooleans(model)),
+})(LostItemFeePolicyForm);

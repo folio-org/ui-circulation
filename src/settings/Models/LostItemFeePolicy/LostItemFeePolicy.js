@@ -1,6 +1,7 @@
 import {
   get,
   isNumber,
+  isUndefined,
 } from 'lodash';
 
 import { LostItem, Metadata, ChargeAmount } from '../common';
@@ -8,14 +9,14 @@ import { LostItem, Metadata, ChargeAmount } from '../common';
 export default class LostItemFeePolicy {
   static defaultLostItemFeePolicy() {
     return {
-      chargeAmountItem: { chargeType: 'actualCost' },
+      chargeAmountItem: { chargeType: 'anotherCost' },
       lostItemProcessingFee: 0.00,
-      chargeAmountItemPatron: true,
-      chargeAmountItemSystem: true,
-      returnedLostItemProcessingFee: true,
-      replacedLostItemProcessingFee: true,
+      chargeAmountItemPatron: false,
+      chargeAmountItemSystem: false,
+      returnedLostItemProcessingFee: false,
+      replacedLostItemProcessingFee: false,
       replacementProcessingFee: 0.00,
-      replacementAllowed: true,
+      replacementAllowed: false,
       lostItemReturned: 'Charge',
     };
   }
@@ -46,6 +47,12 @@ export default class LostItemFeePolicy {
     return isNumber(value);
   }
 
+  hasInterval(pathToValue) {
+    const value = get(this, pathToValue);
+
+    return !isUndefined(value);
+  }
+
   hasPassedValue(pathToValue, expectedValue) {
     const value = get(this, pathToValue);
 
@@ -59,13 +66,11 @@ export default class LostItemFeePolicy {
   }
 
   isRquiredLostItemCharge() {
-    const value = get(this, 'lostItemChargeFeeFine.duration');
     const chargeType = get(this, 'chargeAmountItem.chargeType');
     const chargeAmount = get(this, 'chargeAmountItem.amount');
-    const processingFee = get(this, 'lostItemProcessingFee');
     const lostByPatron = get(this, 'chargeAmountItemPatron');
     const lostBySystem = get(this, 'chargeAmountItemSystem');
 
-    return (value < 0) || !((chargeAmount > 0 && chargeType === 'anotherCost') || (processingFee > 0 && lostByPatron !== 'false' && lostBySystem !== 'false'));
+    return (chargeType === 'actualCost' || (chargeType === 'anotherCost' && chargeAmount === '0.00')) && (!lostByPatron || !lostBySystem);
   }
 }

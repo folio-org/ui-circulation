@@ -40,7 +40,6 @@ function convertNamesToIdsInLine(line, records, itemsTypes) {
   let currentType = '';
   let currentWord = '';
 
-
   for (let i = 0; i < line.length; i++) {
     const currentCharacter = line[i];
 

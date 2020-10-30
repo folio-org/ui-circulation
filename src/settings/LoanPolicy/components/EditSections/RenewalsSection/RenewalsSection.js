@@ -13,7 +13,7 @@ import {
 } from '@folio/stripes/components';
 
 import optionsGenerator from '../../../../utils/options-generator';
-import Period from '../Period';
+import Period from '../../../../components/Period';
 import {
   intervalPeriods,
   renewFromOptions,

@@ -11,14 +11,11 @@ describe('RequestPolicyForm', () => {
   describe('displaying a request policy', () => {
     let requestPolicy;
 
-    beforeEach(function () {
+    beforeEach(async function () {
       requestPolicy = this.server.create('requestPolicy', {
         name: 'Request policy 20',
         description: 'Request policy 1 desc',
       });
-    });
-
-    beforeEach(async function () {
       await this.visit(`/settings/circulation/request-policies/${requestPolicy.id}?layer=edit`);
     });
 
@@ -45,11 +42,8 @@ describe('RequestPolicyForm', () => {
     });
 
     describe('toggle accordion', () => {
-      beforeEach(function () {
-        this.visit('/settings/circulation/request-policies?layer=add');
-      });
-
-      beforeEach(async () => {
+      beforeEach(async function () {
+        await this.visit('/settings/circulation/request-policies?layer=add');
         await RequestPolicyForm.generalAccordionToggleButton.click();
       });
 
@@ -72,23 +66,15 @@ describe('RequestPolicyForm', () => {
   describe('saving form', () => {
     let requestPolicy;
 
-    beforeEach(function () {
+    beforeEach(async function () {
       requestPolicy = this.server.create('requestPolicy', {
         name: 'Request policy',
         description: 'Request policy 1 desc',
         requestTypes: ['Hold', 'Page']
       });
-    });
 
-    beforeEach(function () {
-      this.visit(`/settings/circulation/request-policies/${requestPolicy.id}?layer=edit`);
-    });
-
-    beforeEach(async () => {
+      await this.visit(`/settings/circulation/request-policies/${requestPolicy.id}?layer=edit`);
       await RequestPolicyForm.whenLoaded();
-    });
-
-    beforeEach(async () => {
       await RequestPolicyForm
         .fillName('updated policy name')
         .fillDescription('updated request policy description')

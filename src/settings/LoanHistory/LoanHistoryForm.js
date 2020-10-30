@@ -4,16 +4,12 @@ import {
   injectIntl,
   FormattedMessage,
 } from 'react-intl';
-import {
-  Field,
-  FieldArray,
-  getFormValues,
-  arrayRemoveAll,
-  change,
-} from 'redux-form';
+import { Field } from 'react-final-form';
+import { FieldArray } from 'react-final-form-arrays';
+import setFieldData from 'final-form-set-field-data';
+import { isEqual } from 'lodash';
 
-import stripesForm from '@folio/stripes/form';
-import { stripesShape } from '@folio/stripes/core';
+import stripesFinalForm from '@folio/stripes/final-form';
 import {
   Button,
   Checkbox,
@@ -30,37 +26,17 @@ import {
   closingTypes,
   closedLoansRules,
 } from '../../constants';
-import { normalize } from './utils/normalize';
+import { LoanHistory as validateLoanHistorySettings } from '../Validation';
 
 import css from './LoanHistoryForm.css';
 
 class LoanHistoryForm extends Component {
   static propTypes = {
-    dispatch: PropTypes.func.isRequired,
     handleSubmit: PropTypes.func.isRequired,
-    onSubmit: PropTypes.func.isRequired,
     pristine: PropTypes.bool,
     submitting: PropTypes.bool,
     label: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-    stripes: stripesShape.isRequired,
-  };
-
-  constructor(props) {
-    super(props);
-
-    // eslint-disable-next-line react/no-unused-state
-    this.state = { checked: false };
-  }
-
-  onSave = data => {
-    const {
-      dispatch,
-      onSubmit,
-    } = this.props;
-
-    const normalizedData = normalize({ data, dispatch });
-
-    onSubmit({ loan_history: JSON.stringify(normalizedData) });
+    form: PropTypes.object.isRequired,
   };
 
   renderFooter = () => {
@@ -86,42 +62,21 @@ class LoanHistoryForm extends Component {
     );
   }
 
-  // Due to the issue https://github.com/erikras/redux-form/issues/4101
-  // the multiple actions should be dispatched instead of single one ('clearFields')
-  toggleCheckbox = () => {
-    const { dispatch } = this.props;
-
-    dispatch(change('loanHistoryForm', 'closingType.feeFine', null));
-    dispatch(change('loanHistoryForm', 'closingType.loanExceptions', []));
-    dispatch(change('loanHistoryForm', 'feeFine', {}));
-    dispatch(arrayRemoveAll('loanHistoryForm', 'loanExceptions'));
-
-    this.setState(({ checked }) => ({
-      // eslint-disable-next-line react/no-unused-state
-      checked: !checked
-    }));
-  }
-
-  getCurrentValues() {
-    const { store } = this.props.stripes;
-    const state = store.getState();
-
-    return getFormValues('loanHistoryForm')(state) || {};
-  }
-
   render() {
     const {
       handleSubmit,
       label,
+      form: { getState },
     } = this.props;
 
-    const loanHistoryValues = this.getCurrentValues();
+    const { values: loanHistoryValues } = getState();
 
     return (
       <form
         id="loan-history-form"
         className={css.loanHistoryForm}
-        onSubmit={handleSubmit(this.onSave)}
+        noValidate
+        onSubmit={handleSubmit}
       >
         <Pane
           defaultWidth="fill"
@@ -133,7 +88,7 @@ class LoanHistoryForm extends Component {
             <Headline
               size="large"
               margin="xx-large"
-              tag="h5"
+              tag="h3"
             >
               <FormattedMessage id="ui-circulation.settings.loanHistory.closedLoans" />
             </Headline>
@@ -150,15 +105,17 @@ class LoanHistoryForm extends Component {
           <br />
           <Row>
             <Col xs={12}>
-              <Field
-                label={<FormattedMessage id="ui-circulation.settings.loanHistory.treat" />}
-                id="treatEnabled-checkbox"
-                name="treatEnabled"
-                component={Checkbox}
-                type="checkbox"
-                onChange={this.toggleCheckbox}
-                normalize={value => !!value}
-              />
+              <Field name="treatEnabled" type="checkbox">
+                {(props) => (
+                  <Checkbox
+                    checked={props.input.checked}
+                    id="treatEnabled-checkbox"
+                    label={<FormattedMessage id="ui-circulation.settings.loanHistory.treat" />}
+                    onChange={e => props.input.onChange(e)}
+                    type="checkbox"
+                  />
+                )}
+              </Field>
             </Col>
           </Row>
           <br />
@@ -167,7 +124,7 @@ class LoanHistoryForm extends Component {
               <Headline
                 size="large"
                 margin="xx-large"
-                tag="h5"
+                tag="h3"
               >
                 <FormattedMessage id="ui-circulation.settings.loanHistory.closedLoansFeesFines" />
               </Headline>
@@ -191,10 +148,10 @@ class LoanHistoryForm extends Component {
   }
 }
 
-export default injectIntl(
-  stripesForm({
-    form: 'loanHistoryForm',
-    navigationCheck: true,
-    enableReinitialize: true,
-  })(LoanHistoryForm)
-);
+export default injectIntl(stripesFinalForm({
+  initialValuesEqual: (a, b) => isEqual(a, b),
+  navigationCheck: true,
+  validate: validateLoanHistorySettings,
+  subscription: { values: true },
+  mutators: { setFieldData }
+})(LoanHistoryForm));

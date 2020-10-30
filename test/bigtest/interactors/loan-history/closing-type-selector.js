@@ -16,7 +16,7 @@ import SelectInteractor from '@folio/stripes-components/lib/Select/tests/interac
   duration = scoped('[data-test-period-duration]', TextFieldInteractor);
   interval = scoped('[data-test-period-interval]', SelectInteractor);
   intervalSelector = scoped('[data-test-period-interval] select');
-  closingTypes = collection('label', RadioButtonInteractor);
+  closingTypes = collection('[data-test-closed-loans-feefine]', RadioButtonInteractor);
 }
 
 export default ClosingTypeSelector;

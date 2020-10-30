@@ -6,6 +6,7 @@ import {
   Col,
   ExpandAllButton,
   Row,
+  AccordionSet,
 } from '@folio/stripes/components';
 
 import { NoticePolicy } from '../Models/NoticePolicy';
@@ -34,10 +35,10 @@ class NoticePolicyDetail extends React.Component {
 
     this.state = {
       sections: {
-        generalInformation: true,
-        loanNotices: true,
-        requestNotices: true,
-        feeFineNotices: true,
+        generalNoticePolicy: true,
+        viewLoanNotices: true,
+        viewRequestNotices: true,
+        viewFeeFineNotices: true,
       },
     };
   }
@@ -47,8 +48,7 @@ class NoticePolicyDetail extends React.Component {
   };
 
   handleSectionToggle = ({ id }) => {
-    this.setState((state) => {
-      const sections = { ...state.sections };
+    this.setState(({ sections }) => {
       sections[id] = !sections[id];
       return { sections };
     });
@@ -68,10 +68,10 @@ class NoticePolicyDetail extends React.Component {
     } = this.props;
 
     const {
-      generalInformation,
-      loanNotices,
-      feeFineNotices,
-      requestNotices,
+      generalNoticePolicy,
+      viewLoanNotices,
+      viewFeeFineNotices,
+      viewRequestNotices,
     } = this.state.sections;
 
     const noticePolicy = new NoticePolicy(policy);
@@ -89,33 +89,34 @@ class NoticePolicyDetail extends React.Component {
             />
           </Col>
         </Row>
-        <GeneralSection
-          isOpen={generalInformation}
-          isPolicyActive={policy.active}
-          policyName={policy.name}
-          policyDescription={policy.description}
-          metadata={policy.metadata}
-          connect={connect}
+        <AccordionSet
+          accordionStatus={this.state.sections}
           onToggle={this.handleSectionToggle}
-        />
-        <LoanNoticesSection
-          isOpen={loanNotices}
-          policy={noticePolicy}
-          templates={getTemplates(patronNoticeTemplates, patronNoticeCategoryIds.LOAN)}
-          onToggle={this.handleSectionToggle}
-        />
-        <RequestNoticesSection
-          isOpen={requestNotices}
-          policy={noticePolicy}
-          templates={getTemplates(patronNoticeTemplates, patronNoticeCategoryIds.REQUEST)}
-          onToggle={this.handleSectionToggle}
-        />
-        <FeeFineNoticesSection
-          isOpen={feeFineNotices}
-          policy={noticePolicy}
-          templates={getTemplates(patronNoticeTemplates, patronNoticeCategoryIds.AUTOMATED_FEE_FINE)}
-          onToggle={this.handleSectionToggle}
-        />
+        >
+          <GeneralSection
+            isOpen={generalNoticePolicy}
+            isPolicyActive={policy.active}
+            policyName={policy.name}
+            policyDescription={policy.description}
+            metadata={policy.metadata}
+            connect={connect}
+          />
+          <LoanNoticesSection
+            isOpen={viewLoanNotices}
+            policy={noticePolicy}
+            templates={getTemplates(patronNoticeTemplates, patronNoticeCategoryIds.LOAN)}
+          />
+          <RequestNoticesSection
+            isOpen={viewRequestNotices}
+            policy={noticePolicy}
+            templates={getTemplates(patronNoticeTemplates, patronNoticeCategoryIds.REQUEST)}
+          />
+          <FeeFineNoticesSection
+            isOpen={viewFeeFineNotices}
+            policy={noticePolicy}
+            templates={getTemplates(patronNoticeTemplates, patronNoticeCategoryIds.AUTOMATED_FEE_FINE)}
+          />
+        </AccordionSet>
       </div>
     );
   }

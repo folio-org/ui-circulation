@@ -13,7 +13,6 @@ const LostItemFeeSection = (props) => {
   const {
     policy,
     lostItemFeeSectionOpen,
-    accordionOnToggle,
     getPeriodValue,
   } = props;
 
@@ -47,10 +46,9 @@ const LostItemFeeSection = (props) => {
   return (
     <div data-test-lost-item-policy-detail-fee-section>
       <Accordion
-        id="lostItemFeeSectionOpen"
+        id="viewLostItemFeeSection"
         label={<FormattedMessage id="ui-circulation.settings.lostItemFee.lostItemSection" />}
         open={lostItemFeeSectionOpen}
-        onToggle={accordionOnToggle}
       >
         <Row>
           <Col xs={12}>
@@ -116,7 +114,7 @@ const LostItemFeeSection = (props) => {
           <Col xs={12}>
             <div data-test-close-loan-after>
               <KeyValue
-                label={<FormattedMessage id="ui-circulation.settings.lostItemFee.lostItemNotChargeFeeFine" />}
+                label={<FormattedMessage id="ui-circulation.settings.lostItemFee.lostItemNotChargeFeesFine" />}
                 value={getPeriodValue('lostItemChargeFeeFine')}
               />
             </div>
@@ -192,7 +190,6 @@ const LostItemFeeSection = (props) => {
 LostItemFeeSection.propTypes = {
   policy: PropTypes.object.isRequired,
   lostItemFeeSectionOpen: PropTypes.bool.isRequired,
-  accordionOnToggle: PropTypes.func.isRequired,
   getPeriodValue: PropTypes.func.isRequired,
   formatMessage: PropTypes.func.isRequired,
 };

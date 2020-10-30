@@ -72,61 +72,35 @@ describe('FddsForm', () => {
         });
       });
     });
-  });
 
-  describe('general section', () => {
-    beforeEach(function () {
-      this.visit('/settings/circulation/fixed-due-date-schedules?layer=add');
-    });
-
-    it('should be displayed', () => {
-      expect(FddsForm.generalSection.isPresent).to.be.true;
-    });
-
-    describe('name', () => {
+    describe('general section', () => {
       it('should be displayed', () => {
+        expect(FddsForm.generalSection.isPresent).to.be.true;
+      });
+
+      it('should be displayed name', () => {
         expect(FddsForm.generalSection.name.isPresent).to.be.true;
       });
 
-      it('should have proper label', () => {
+      it('should have proper name label', () => {
         expect(FddsForm.generalSection.name.label).to.equal(
           `${translation['settings.fDDSform.name']}*`
         );
       });
-    });
 
-    describe('description', () => {
-      it('should be displayed', () => {
+      it('should be displayed description', () => {
         expect(FddsForm.generalSection.description.isPresent).to.be.true;
       });
 
-      it('should have proper label', () => {
+      it('should have proper description label', () => {
         expect(FddsForm.generalSection.description.label).to.equal(
           translation['settings.fDDSform.description']
         );
       });
     });
-  });
-
-  describe('schedule section', () => {
-    beforeEach(function () {
-      this.visit('/settings/circulation/fixed-due-date-schedules?layer=add');
-    });
-
-    describe('add schedule', () => {
-      it('should be displayed', () => {
-        expect(FddsForm.scheduleSection.addSchedule.isPresent).to.be.true;
-      });
-
-      it('should have proper text', () => {
-        expect(FddsForm.scheduleSection.addSchedule.text).to.equal(
-          translation['settings.fDDSform.new']
-        );
-      });
-    });
 
     describe('schedule', () => {
-      describe('date range', () => {
+      describe('date range header', () => {
         it('should be displayed', () => {
           expect(FddsForm.scheduleSection.schedules(0).dateRange.isPresent).to.be.true;
         });
@@ -144,7 +118,7 @@ describe('FddsForm', () => {
         });
 
         it('should have proper text', () => {
-          expect(FddsForm.scheduleSection.schedules(0).dateFrom.text).to.equal(
+          expect(FddsForm.scheduleSection.schedules(0).dateFrom.labelText).to.equal(
             `${translation['settings.fDDSform.dateFrom']}*`
           );
         });
@@ -156,7 +130,7 @@ describe('FddsForm', () => {
         });
 
         it('should have proper text', () => {
-          expect(FddsForm.scheduleSection.schedules(0).dateTo.text).to.equal(
+          expect(FddsForm.scheduleSection.schedules(0).dateTo.labelText).to.equal(
             `${translation['settings.fDDSform.dateTo']}*`
           );
         });
@@ -168,78 +142,82 @@ describe('FddsForm', () => {
         });
 
         it('should have proper text', () => {
-          expect(FddsForm.scheduleSection.schedules(0).dueDate.text).to.equal(
+          expect(FddsForm.scheduleSection.schedules(0).dueDate.labelText).to.equal(
             `${translation['settings.fDDSform.dueDate']}*`
           );
         });
       });
-    });
-  });
 
-  describe('schedules creation', () => {
-    beforeEach(function () {
-      this.visit('/settings/circulation/fixed-due-date-schedules?layer=add');
-    });
-
-    it('should be one schedule', () => {
-      expect(FddsForm.scheduleSection.schedulesCount).to.equal(1);
-    });
-
-    describe('adding additional schedule', () => {
-      beforeEach(async () => {
-        await FddsForm.scheduleSection.addSchedule.click();
-      });
-
-      it('should be two schedules', () => {
-        expect(FddsForm.scheduleSection.schedulesCount).to.equal(2);
-      });
-
-      it('should have proper text', () => {
-        expect(FddsForm.scheduleSection.schedules(0).dateRange.text).to.equal(
-          `${translation['settings.fDDSform.dateRange']} 1`
-        );
-      });
-
-      it('should have proper text', () => {
-        expect(FddsForm.scheduleSection.schedules(1).dateRange.text).to.equal(
-          `${translation['settings.fDDSform.dateRange']} 2`
-        );
-      });
-    });
-  });
-
-  describe('schedules deletion', () => {
-    beforeEach(function () {
-      this.visit('/settings/circulation/fixed-due-date-schedules?layer=add');
-    });
-
-    it('should be one schedule', () => {
-      expect(FddsForm.scheduleSection.schedulesCount).to.equal(1);
-    });
-
-    describe('adding additional schedule', () => {
-      beforeEach(async () => {
-        await FddsForm.scheduleSection.addSchedule.click();
-      });
-
-      it('should be two schedules', () => {
-        expect(FddsForm.scheduleSection.schedulesCount).to.equal(2);
-      });
-
-      describe('deleting additional schedule', () => {
-        beforeEach(async () => {
-          await FddsForm.scheduleSection.addSchedule.click();
-          await FddsForm.scheduleSection.schedules(1).remove.click();
+      describe('schedule section', () => {
+        it('should be displayed add schedule button', () => {
+          expect(FddsForm.scheduleSection.addSchedule.isPresent).to.be.true;
         });
 
+        it('should have proper text', () => {
+          expect(FddsForm.scheduleSection.addSchedule.text).to.equal(
+            translation['settings.fDDSform.new']
+          );
+        });
+      });
+
+      describe('schedules creation', () => {
         it('should be one schedule', () => {
           expect(FddsForm.scheduleSection.schedulesCount).to.equal(1);
         });
 
-        it('should have proper text', () => {
-          expect(FddsForm.scheduleSection.schedules(0).dateRange.text).to.equal(
-            `${translation['settings.fDDSform.dateRange']} 1`
-          );
+        describe('adding additional schedule', () => {
+          beforeEach(async () => {
+            await FddsForm.scheduleSection.addSchedule.click();
+          });
+
+          it('should be two schedules', () => {
+            expect(FddsForm.scheduleSection.schedulesCount).to.equal(2);
+          });
+
+          it('should have proper text', () => {
+            expect(FddsForm.scheduleSection.schedules(0).dateRange.text).to.equal(
+              `${translation['settings.fDDSform.dateRange']} 1`
+            );
+          });
+
+          it('should have proper text', () => {
+            expect(FddsForm.scheduleSection.schedules(1).dateRange.text).to.equal(
+              `${translation['settings.fDDSform.dateRange']} 2`
+            );
+          });
+        });
+      });
+
+      describe('schedules deletion', () => {
+        it('should be one schedule', () => {
+          expect(FddsForm.scheduleSection.schedulesCount).to.equal(1);
+        });
+
+        describe('adding additional schedule', () => {
+          beforeEach(async () => {
+            await FddsForm.scheduleSection.addSchedule.click();
+          });
+
+          it('should be two schedules', () => {
+            expect(FddsForm.scheduleSection.schedulesCount).to.equal(2);
+          });
+
+          describe('deleting additional schedule', () => {
+            beforeEach(async () => {
+              await FddsForm.scheduleSection.addSchedule.click();
+              await FddsForm.scheduleSection.schedules(1).remove.click();
+            });
+
+            it('should be one schedule', () => {
+              expect(FddsForm.scheduleSection.schedulesCount).to.equal(1);
+            });
+
+            it('should have proper text', () => {
+              expect(FddsForm.scheduleSection.schedules(0).dateRange.text).to.equal(
+                `${translation['settings.fDDSform.dateRange']} 1`
+              );
+            });
+          });
         });
       });
     });

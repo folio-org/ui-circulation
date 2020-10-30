@@ -1,6 +1,12 @@
 # Change history for ui-circulation
 
-## 3.1.0 (IN PROGRESS)
+## 5.0.0 (IN PROGRESS)
+
+* Keyword all - allowed by backend. Refs UICIRC-506.
+* Unable to enter decimal places on Overdue Fines Policy on Honeysuckle and Snapshot Dev. Refs UICIRC-514.
+
+## 4.0.0 (https://github.com/folio-org/ui-circulation/tree/v4.0.0) (2020-10-13)
+[Full Changelog](https://github.com/folio-org/ui-circulation/compare/v3.0.0...v4.0.0)
 
 * Accessibility work with color contrast. Refs UICIRC-463.
 * Able to set Overdue Fine Max to value less than Overdue Fine. Refs UICIRC-475.
@@ -8,8 +14,30 @@
 * Adjust UI for fee/fine notice token options on templates. Refs UICIRC-479.
 * Lost item fee policy: Additional validation not in original user story. Refs UICIRC-478.
 * Lost item fee policy: Handle processing fees same as fee amount. Refs UICIRC-482.
+* Fix of accessibility errors. Refs UICIRC-464.
+* Increment `@folio/stripes` to `v5`, `react-router` to `v5.2`.
+* Refactor `bigtest/mirage` to `miragejs`.
+* Display loans section when `loanable` is set to `No`. Fixes UICIRC-392.
+* Localized permission names. Refs UICIRC-504.
+* Fix of Lost item fee displays as `Set cost of NaN`. Refs UICIRC-500.
+* Incorrect error validation for 'Patron billed after aged to lost' on Lost Item Fee Policy. Refs UICIRC-499.
+* In circulation rule editor last line cannot be seen. Refs UICIRC-456.
+* Migrate Request policy form to react-final-form. Refs UICIRC-438.
+* Migrate Staff slips form to react-final-form. Refs UICIRC-446.
+* Migrate Patron notice template form to react-final-form. Refs UICIRC-439.
+* Change "...close the loan after" to "...scrub the loan after" in Lost Item Fee Policy. Refs UICIRC-485.
+* Migrate fixed due date schedule form to react-final-form. Refs UICIRC-445.
+* Migrate patron notice policy form to react-final-form. Refs UICIRC-440.
+* Migrate Loan policy form to react-final-form. Refs UICIRC-443.
+* Move circulation rules form to react-final-from. UICIRC-448.
+* Migrate other settings form to react-final-from. UICIRC-447.
+* Loan tokens should be unavailable (and greyed out) for manual fee/fine charge category. Refs UICIRC-494.
+* Move Overdue fine policy form to react-final-form. Refs UICIRC-442.
+* Move Lost item fee policy form to react-final-form. Refs UICIRC-441.
+* Move Loan history form to react-final-form. Refs UICIRC-444.
+* Modify default values and validation for 'Lost item fee policy. Refs UICIRC-502.
 
-## 3.0.0 (https://github.com/folio-org/ui-circulation/tree/v3.0.0) (2019-06-10)
+## 3.0.0 (https://github.com/folio-org/ui-circulation/tree/v3.0.0) (2020-06-10)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v2.0.0...v3.0.0)
 
 * New/Edit Patron notice policy: do not display inactive loan and request notice templates in the dropdown. Refs UICIRC-418.
@@ -23,7 +51,7 @@
 * Fixed Due Date Schedule - Dates on Edit/Create and View out of sync. Refs UICIRC-460.
 * Incorrect footer displaying for circulation settings. Refs UICIRC-469.
 
-## 2.0.0 (https://github.com/folio-org/ui-circulation/tree/v2.0.0) (2019-03-13)
+## 2.0.0 (https://github.com/folio-org/ui-circulation/tree/v2.0.0) (2020-03-13)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v1.12.0...v2.0.0)
 
 * Provide two options for barcode tokens on staff slips. Refs UICIRC-393.

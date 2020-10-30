@@ -3,6 +3,7 @@ import {
   interactor,
   scoped,
   Interactor,
+  collection,
 } from '@bigtest/interactor';
 
 import { AccordionInteractor } from '@folio/stripes-components/lib/Accordion/tests/interactor';
@@ -21,8 +22,8 @@ import LostItemFeeSection from './lost-item-fee-section';
   aboutSection = new AboutSection();
   lostItemFeeSection = new LostItemFeeSection();
 
-  generalInformationAccordion = new AccordionInteractor('#lostItemFeegeneralSection');
-  lostItemFeeAccordion = new AccordionInteractor('#lostItemFeeSectionOpen');
+  generalInformationAccordion = new AccordionInteractor('#lostItemFeeFormGeneralSection');
+  lostItemFeeAccordion = new AccordionInteractor('#editLostItemFeeSection');
 
   expandAll = scoped('[data-test-expand-all] button');
   cancelEditingLostItemPolicy = new Interactor('#footer-cancel-entity');
@@ -30,6 +31,7 @@ import LostItemFeeSection from './lost-item-fee-section';
 
   buttonNew = new Button('#clickable-create-entry');
   deleteLostItemCancelModal = new Button('#dropdown-clickable-cancel-item');
+  validationError = collection('[class^="feedbackError---"]');
 
   save = clickable('#footer-save-entity');
 }
