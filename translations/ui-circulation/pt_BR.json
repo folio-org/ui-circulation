@@ -295,7 +295,7 @@
     "settings.index.feesFines": "Taxa/multa",
     "settings.index.patronNoticesSettings": "Avisos ao usuário",
     "settings.index.request": "Requisições",
-    "settings.validate.greaterThanOrEqualToZero": "O valor deve ser inteiro e maior ou igual a 0",
+    "settings.validate.greaterThanOrEqualToZero": "O valor deve ser maior ou igual a 0",
     "settings.finePolicy.entryLabel": "Políticas de multas em atraso",
     "settings.finePolicy.paneTitle": "Políticas de multas em atraso",
     "settings.finePolicy.overdueFine": "Multa por atraso",
@@ -386,12 +386,11 @@
     "settings.finePolicy.validate.invalidMaximumOverdueFine": "Por favor, informe um valor para a multa por atraso ou fixe o valor máximo da multa em atraso em 0",
     "settings.finePolicy.validate.invalidMaximumRecallOverdueFine": "Por favor, informe um valor para a multa por recall ou fixe o valor máximo da multa por recall em 0",
     "settings.lostItemFee.validate.hasPatronBilledAfterAgedToLostValue": "A entrada é obrigatória se o valor 'Cliente faturado após a idade até a perda' for inserido",
-    "settings.lostItemFee.validate.hasPositiveLostItemProcessingFeeValue": "Informação obrigatória se a cobrança da taxa de processamento de itens perdidos for declarada perdida ou envelhecida a perdida selecionada",
+    "settings.lostItemFee.validate.hasPositiveLostItemProcessingFeeValue": "A entrada necessária se 'Cobrar taxa de processamento de item perdido se o item for declarado perdido pelo usuário?' ou 'Cobrar taxa de processamento de item perdido se o item tiver tempo para ser considerado perdido pelo sistema?' selecionado",
     "settings.lostItemFee.validate.hasNoChargeLostItemProcessingFee": "'Taxa de processamento de item perdido' não pode ser maior que 0, a menos que 'Cobrar taxa de processamento de item perdido se o item for declarado perdido pelo usuário?' e / ou 'Cobrar taxa de processamento de item perdido se o item envelhecer até ser perdido pelo sistema?' for 'Sim'",
     "settings.lostItemFee.validate.hasLostItemProcessingFeeValue": "'A taxa de processamento de itens perdidos' deve ser maior que 0 para esta seleção",
     "settings.lostItemFee.validate.hasPositiveReplacementProcessingFee": "'Taxa de processamento de substituição' não pode ser maior que 0, a menos que 'Substituição permitida' seja 'Sim",
-    "settings.lostItemFee.validate.hasReplacedLostItemProcessingFee": "'Taxa de processamento de item perdido' deve ser maior que 0 e 'Substituição permitida' deve ser 'Sim' para esta seleção",
-    "settings.lostItemFee.validate.chargeAmountItemSystemSelected": "Informação obrigatória se cobrar taxa de processamento de itens perdidos se o item for perdido ou perdido pelo sistema selecionado",
+    "settings.lostItemFee.validate.chargeAmountItemSystemSelected": "A entrada é necessária se 'Cobrar taxa de processamento de item perdido se item tiver tempo para ser considerado perdido pelo sistema' selecionado",
     "settings.circulationRules.label": "Regras",
     "settings.circulationRules.overdueFine.quantity": "Quantidade de multa em atraso",
     "settings.circulationRules.overdueFine.period": "Período de multa em atraso",
@@ -420,5 +419,8 @@
     "permission.settings.lost-item-fees-policies": "Configurações (Circulação): Pode criar, editar e remover políticas de taxas de itens perdidos",
     "settings.lostItemFee.validate.hasPositiveLostItemProcessingFeeAndItemsAgedToLostAfterOverdue": "'Taxa de processamento de item perdido' deve ser > 0 e o valor de 'Itens perdidos após o vencimento' deve ser > 0 para esta seleção",
     "settings.lostItemFee.validate.emptyAmount": "Por favor, insira o valor",
-    "settings.lostItemFee.validate.hasPositiveItemsAgedToLostAfterOverdueAmount": "'Definir custo' deve ser > 0 OU 'Cobrar taxa de processamento de item perdido se o item envelhecer até ser perdido pelo sistema?' deve ser 'Sim' se 'Itens vencidos e perdidos após o vencimento' for > 0"
+    "settings.lostItemFee.validate.hasPositiveItemsAgedToLostAfterOverdueAmount": "'Definir custo' deve ser > 0 OU 'Cobrar taxa de processamento de item perdido se o item envelhecer até ser perdido pelo sistema?' deve ser 'Sim' se 'Itens vencidos e perdidos após o vencimento' for > 0",
+    "settings.lostItemFee.validate.hasReplacementAllowedAndPositiveLostItemPolicyFee": "'Taxa de processamento de item perdido' deve ser maior que 0 e 'Substituição permitida' deve ser 'Sim' para esta seleção",
+    "settings.lostItemFee.validate.hasReplacementAllowedAndNegativeLostItemPolicyFee": "'Substituição permitida' deve ser 'Sim' para esta seleção",
+    "settings.circulationRules.all": "Todos"
 }

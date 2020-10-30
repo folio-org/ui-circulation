@@ -386,12 +386,11 @@
     "settings.finePolicy.validate.invalidMaximumOverdueFine": "Please enter an overdue fine amount or set maximum overdue fine to 0",
     "settings.finePolicy.validate.invalidMaximumRecallOverdueFine": "Please enter an overdue recall fine amount or set maximum overdue recall fine to 0",
     "settings.lostItemFee.validate.hasPatronBilledAfterAgedToLostValue": "Entry required if 'Patron billed after aged to lost' amount entered",
-    "settings.lostItemFee.validate.hasPositiveLostItemProcessingFeeValue": "Entry required if charging lost item processing fee for declared lost or aged to lost selected",
+    "settings.lostItemFee.validate.hasPositiveLostItemProcessingFeeValue": "Entry required if 'Charge lost item processing fee if item declared lost by patron?' or 'Charge lost item processing fee if item aged to lost by system?' selected",
     "settings.lostItemFee.validate.hasNoChargeLostItemProcessingFee": "'Lost item processing fee' cannot be > 0 unless 'Charge lost item processing fee if item declared lost by patron ?' and/or 'Charge lost item processing fee if item aged to lost by system ?' is 'Yes'",
     "settings.lostItemFee.validate.hasLostItemProcessingFeeValue": "'Lost item processing fee' must be > 0 for this selection",
     "settings.lostItemFee.validate.hasPositiveReplacementProcessingFee": "'Replacement processing fee' cannot be > 0 unless 'Replacement allowed' is 'Yes",
-    "settings.lostItemFee.validate.hasReplacedLostItemProcessingFee": "'Lost item processing fee' must be > 0 and 'Replacement allowed' must be 'Yes' for this selection",
-    "settings.lostItemFee.validate.chargeAmountItemSystemSelected": "Entry required if charge lost item processing fee if item aged to lost by system selected",
+    "settings.lostItemFee.validate.chargeAmountItemSystemSelected": "Entry required if 'Charge lost item processing fee if item aged to lost by system' selected",
     "settings.circulationRules.label": "Rules",
     "settings.circulationRules.overdueFine.quantity": "Overdue fine quantity",
     "settings.circulationRules.overdueFine.period": "Overdue fine period",
@@ -420,5 +419,8 @@
     "permission.settings.lost-item-fees-policies": "Configuración (Circ): puede crear, editar y eliminar políticas de tarifas de artículos perdidos",
     "settings.lostItemFee.validate.hasPositiveLostItemProcessingFeeAndItemsAgedToLostAfterOverdue": "La 'tarifa de procesamiento de artículos perdidos' debe ser > 0 y el monto de 'Artículos perdidos después de vencidos' debe ser > 0 para esta selección",
     "settings.lostItemFee.validate.emptyAmount": "Por favor, introduzca un valor",
-    "settings.lostItemFee.validate.hasPositiveItemsAgedToLostAfterOverdueAmount": "'Set cost' debe ser > 0 O 'Cargo perdido tasa de procesamiento de artículos si el artículo envejecido a perdido por el sistema?' debe ser 'Sí' si 'Artículos envejecidos a perdidos después de que se haya vencido' es > 0"
+    "settings.lostItemFee.validate.hasPositiveItemsAgedToLostAfterOverdueAmount": "'Set cost' debe ser > 0 O 'Cargo perdido tasa de procesamiento de artículos si el artículo envejecido a perdido por el sistema?' debe ser 'Sí' si 'Artículos envejecidos a perdidos después de que se haya vencido' es > 0",
+    "settings.lostItemFee.validate.hasReplacementAllowedAndPositiveLostItemPolicyFee": "'Lost item processing fee' must be > 0 and 'Replacement allowed' must be 'Yes' for this selection",
+    "settings.lostItemFee.validate.hasReplacementAllowedAndNegativeLostItemPolicyFee": "'Replacement allowed' must be 'Yes' for this selection",
+    "settings.circulationRules.all": "All"
 }
