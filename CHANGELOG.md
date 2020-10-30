@@ -4,6 +4,7 @@
 
 * Keyword all - allowed by backend. Refs UICIRC-506.
 * Unable to enter decimal places on Overdue Fines Policy on Honeysuckle and Snapshot Dev. Refs UICIRC-514.
+* Update version of `feesfines` okapi interface to `v16.0`.
 
 ## 4.0.0 (https://github.com/folio-org/ui-circulation/tree/v4.0.0) (2020-10-13)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v3.0.0...v4.0.0)
