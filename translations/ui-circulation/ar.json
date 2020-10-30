@@ -94,7 +94,7 @@
     "settings.staffSlips.editLabel": "تحرير: كشوف الموظفين - {name}",
     "settings.loanPolicy.openingTimeOffset": "تعديل وقت الافتتاح",
     "settings.index.patronNotices": "قوالب إخطار المستفيد",
-    "settings.patronNotices.categories.feeFineAction": "إجراء الرسم/الغرامة",
+    "settings.patronNotices.categories.feeFineAction": "إجراء الرسوم/الغرامات (دفع، إعفاء، استرداد أموال، تحويل أو إلغاء في حالة الخطأ)",
     "settings.patronNotices.categories.feeFineCharge": "فرض رسم/غرامة يدوية",
     "settings.patronNotices.categories.loan": "الإعارة",
     "settings.patronNotices.categories.request": "طلب",
@@ -367,7 +367,7 @@
     "settings.validate.itemLimitInterval": "يجب يكون حد المادة > 0، =<9999 أو فارغًا",
     "settings.lostItemFee.setCost": "ضبط التكلفة",
     "settings.circulationRules.lostItemFeePolicies": "سياسات رسوم المواد المفقودة",
-    "settings.patronNotices.categories.automatedFeeFineAction": "رسم/غرامة مؤتمتة",
+    "settings.patronNotices.categories.automatedFeeFineAction": "فرض أو تعديل رسم/غرامة مؤتمتة",
     "settings.noticePolicy.feeFineNotices.returned": "غرامة تأخير، تمت الإعادة",
     "settings.noticePolicy.feeFineNotices.renewed": "غرامة تأخير، تم التجديد",
     "settings.checkout.checkin.timeout": "قم تلقائيا بإنهاء جلسة الرد والإعارة بعد فترة من عدم النشاط",
@@ -388,9 +388,8 @@
     "settings.lostItemFee.validate.hasPatronBilledAfterAgedToLostValue": "الإدخال مطلوب إذا تم تحديد تغريم المستفيد بعد تقادم إلى الفقد",
     "settings.lostItemFee.validate.hasPositiveLostItemProcessingFeeValue": "الإدخال مطلوب إذا تم تحديد فرض رسم معالجة مادة مفقودة لمادة تقادمت إلى الفقد",
     "settings.lostItemFee.validate.hasNoChargeLostItemProcessingFee": "لا يمكن أن يكون رسم معالجة المادة المفقودة > 0 إلا عند فرض رسم معالجة مادة مفقودة لمادة تم الإعلان عن فقدها أو تقادمت إلى الفقد",
-    "settings.lostItemFee.validate.hasLostItemProcessingFeeValue": "يجب أن يكون رسم معالجة المادة المفقودة > 0 لهذا التحديد",
+    "settings.lostItemFee.validate.hasLostItemProcessingFeeValue": "يجب أن يكون 'رسم معالجة المادة الضائعة' > 0 لهذا التحديد",
     "settings.lostItemFee.validate.hasPositiveReplacementProcessingFee": "لا يمكن أن يكون رسم معالجة الاستبدال > 0 إلا عند تحديد الاستبدال مسموح",
-    "settings.lostItemFee.validate.hasReplacedLostItemProcessingFee": "لا يمكن تحديده إلا إذا تم تحديد الاستبدال مسموح أيضاً",
     "settings.lostItemFee.validate.chargeAmountItemSystemSelected": "الإدخال مطلوب إذا تم تحديد فرض رسم معالجة مادة مفقودة إذا تقادمت المادة إلى مفقودة وفقًا للنظام",
     "settings.circulationRules.label": "القواعد",
     "settings.circulationRules.overdueFine.quantity": "مبلغ غرامة التأخير",
@@ -420,5 +419,8 @@
     "permission.settings.lost-item-fees-policies": "الإعدادات (الإعارة): إمكانية إنشاء، وتحرير، وإزالة سياسات رسوم المواد المفقودة",
     "settings.lostItemFee.validate.hasPositiveLostItemProcessingFeeAndItemsAgedToLostAfterOverdue": "يجب أن يكون 'رسم معالجة المادة المفقودة > 0 وأن يكون مبلغ 'تأخرت المادة وتم اعتبارها مفقودة' > 0 لهذا التحديد",
     "settings.lostItemFee.validate.emptyAmount": "الرجاء إدخال المبلغ",
-    "settings.lostItemFee.validate.hasPositiveItemsAgedToLostAfterOverdueAmount": "يجب أن تكون 'ضبط التكلفة' > 0 أو أن يكون 'فرض رسم معالجة مادة مفقودة إذا تأخرت المادة وتم اعتبارها مفقودة بواسطة النظام؟' 'نعم' إذا كان 'تأخرت المادة وتم اعتبارها مفقودة' > 0"
+    "settings.lostItemFee.validate.hasPositiveItemsAgedToLostAfterOverdueAmount": "يجب أن تكون 'ضبط التكلفة' > 0 أو أن يكون 'فرض رسم معالجة مادة مفقودة إذا تأخرت المادة وتم اعتبارها مفقودة بواسطة النظام؟' 'نعم' إذا كان 'تأخرت المادة وتم اعتبارها مفقودة' > 0",
+    "settings.lostItemFee.validate.hasReplacementAllowedAndPositiveLostItemPolicyFee": "يجب أن يكون 'ؤسم معالجة المادة الضائعة' > 0 وأن يكون 'مسموح بالاستبدال' 'نعم' لهذا التحديد",
+    "settings.lostItemFee.validate.hasReplacementAllowedAndNegativeLostItemPolicyFee": "يجب أن يكون 'مسموح بالاستبدال' 'نعم' لهذا التحديد",
+    "settings.circulationRules.all": "الكل"
 }
