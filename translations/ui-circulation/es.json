@@ -422,5 +422,5 @@
     "settings.lostItemFee.validate.hasPositiveItemsAgedToLostAfterOverdueAmount": "'Set cost' debe ser > 0 O 'Cargo perdido tasa de procesamiento de artículos si el artículo envejecido a perdido por el sistema?' debe ser 'Sí' si 'Artículos envejecidos a perdidos después de que se haya vencido' es > 0",
     "settings.lostItemFee.validate.hasReplacementAllowedAndPositiveLostItemPolicyFee": "'Lost item processing fee' must be > 0 and 'Replacement allowed' must be 'Yes' for this selection",
     "settings.lostItemFee.validate.hasReplacementAllowedAndNegativeLostItemPolicyFee": "'Replacement allowed' must be 'Yes' for this selection",
-    "settings.circulationRules.all": "All"
+    "settings.circulationRules.all": "Todo"
 }
