@@ -120,7 +120,7 @@ export function rulesHint(Codemirror, props) {
       if ((cur.ch !== 0 && indented > 0) || token.type === 'ruleName') {
         newRuleText = '\n\n# ';
         allRuleText = '\n\nall ';
-        allRuleText = '\n\n! ';
+        notRuleText = '\n\n! ';
       }
 
       result.push(
