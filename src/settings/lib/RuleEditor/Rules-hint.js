@@ -114,14 +114,21 @@ export function rulesHint(Codemirror, props) {
     if (!rValue && (cur.ch === 0 || cur.ch === indented || token.type !== 'policy')) {
       let newRuleText = '# ';
       let allRuleText = 'all ';
+      let notRuleText = '! ';
 
       // if we're in the middle of a line, a new line should be inserted, then a rule...
       if ((cur.ch !== 0 && indented > 0) || token.type === 'ruleName') {
         newRuleText = '\n\n# ';
         allRuleText = '\n\nall ';
+        notRuleText = '\n\n! ';
       }
 
       result.push(
+        {
+          text: notRuleText,
+          displayText: formatMessage({ id: 'ui-circulation.settings.circulationRules.not' }),
+          className: 'rule-hint-major',
+        },
         {
           text: allRuleText,
           displayText: formatMessage({ id: 'ui-circulation.settings.circulationRules.all' }),
@@ -159,10 +166,10 @@ export function rulesHint(Codemirror, props) {
         const isLocationKey = isLocationType(keyProperty);
 
         if (isLocationKey) {
-          // A temp solution to remove new and all rules for locations because it's displayed in wrong cases
+          // A temp solution to remove new, all and not rules for locations because it's displayed in wrong cases
           // It will be fixed in the separated issue
           if (!isEmpty(result)) {
-            result.splice(0, 2);
+            result.splice(0, 3);
           }
 
           sections = getSectionsDescriptions(keyProperty);
