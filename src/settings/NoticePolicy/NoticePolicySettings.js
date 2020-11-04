@@ -37,7 +37,7 @@ class NoticePolicySettings extends React.Component {
       path: 'templates',
       params: {
         query: 'cql.allRecords=1 AND category=""',
-        limit: '100',
+        limit: '1000',
       },
     },
     circulationRules: {
