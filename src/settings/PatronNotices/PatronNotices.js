@@ -44,8 +44,8 @@ class PatronNotices extends React.Component {
       params: {
         query: 'cql.allRecords=1 AND category=""',
       },
-      recordsRequired: 50,
-      perRequest: 50,
+      recordsRequired: 1000,
+      perRequest: 1000,
     },
     patronNoticePolicies: {
       type: 'okapi',
