@@ -208,7 +208,7 @@
     "settings.noticePolicy.loanNotices.checkOut": "Emprestar",
     "settings.noticePolicy.notices.andEvery": "e todo",
     "settings.loanPolicy.profileType.fixed": "Fixo",
-    "settings.loanPolicy.profileType.rolling": "Rolando",
+    "settings.loanPolicy.profileType.rolling": "Contínuo",
     "settings.loanPolicy.renewFrom.systemDate": "Data do sistema",
     "settings.loanPolicy.renewFrom.currentDueDate": "Data de vencimento atual",
     "settings.loanPolicy.shortTermLoan.currentDueDateTime": "Mantenha a data/hora de vencimento atual",
@@ -422,5 +422,6 @@
     "settings.lostItemFee.validate.hasPositiveItemsAgedToLostAfterOverdueAmount": "'Definir custo' deve ser > 0 OU 'Cobrar taxa de processamento de item perdido se o item envelhecer até ser perdido pelo sistema?' deve ser 'Sim' se 'Itens vencidos e perdidos após o vencimento' for > 0",
     "settings.lostItemFee.validate.hasReplacementAllowedAndPositiveLostItemPolicyFee": "'Taxa de processamento de item perdido' deve ser maior que 0 e 'Substituição permitida' deve ser 'Sim' para esta seleção",
     "settings.lostItemFee.validate.hasReplacementAllowedAndNegativeLostItemPolicyFee": "'Substituição permitida' deve ser 'Sim' para esta seleção",
-    "settings.circulationRules.all": "Todos"
+    "settings.circulationRules.all": "Todos",
+    "settings.circulationRules.not": "! (não)"
 }
