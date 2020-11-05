@@ -422,5 +422,6 @@
     "settings.lostItemFee.validate.hasPositiveItemsAgedToLostAfterOverdueAmount": "“设置费用”必须>0或“如果超期太久被系统视为遗失则收取遗失单件处理费吗？”必须为“是”，如果“超期太久视为遗失的单件”> 0",
     "settings.lostItemFee.validate.hasReplacementAllowedAndPositiveLostItemPolicyFee": "对于此选择，“遗失单件处理费”必须> 0，并且“允许更换”必须为“是”",
     "settings.lostItemFee.validate.hasReplacementAllowedAndNegativeLostItemPolicyFee": "对于此选择，“允许替换”必须为“是”",
-    "settings.circulationRules.all": "所有"
+    "settings.circulationRules.all": "所有",
+    "settings.circulationRules.not": "! (not)"
 }
