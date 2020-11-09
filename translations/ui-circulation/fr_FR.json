@@ -423,5 +423,5 @@
     "settings.lostItemFee.validate.hasReplacementAllowedAndPositiveLostItemPolicyFee": "'Lost item processing fee' must be > 0 and 'Replacement allowed' must be 'Yes' for this selection",
     "settings.lostItemFee.validate.hasReplacementAllowedAndNegativeLostItemPolicyFee": "«Le remplacement autorisé» doit être «Oui» pour cette sélection",
     "settings.circulationRules.all": "Tout",
-    "settings.circulationRules.not": "! (not)"
+    "settings.circulationRules.not": "! (ne pas)"
 }
