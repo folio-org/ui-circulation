@@ -335,11 +335,11 @@
     "settings.lostItemFee.lostItemFeePolicyName": "Nome della politica tariffa per item smarriti",
     "settings.lostItemFee.description": "Descrizione",
     "settings.lostItemFee.itemeAgedLostOverdue": "Item dichiarato perso da utente dopo richiesta restituzione",
-    "settings.lostItemFee.patronBilledAfterAgedLost": "Patron billed after aged to lost",
+    "settings.lostItemFee.patronBilledAfterAgedLost": "L'utente ha pagato la multa per item dichiarato perso",
     "settings.lostItemFee.chargeAmountItem": "Importo addebito per item",
     "settings.lostItemFee.lostItemProcessingFee": "Tarffa di gestione per item smarrito",
     "settings.lostItemFee.chargeAmountItemPatron": "Se l'item è dichiarato perso dall'utente, addebita la tariffa di gestione per item smarrtito",
-    "settings.lostItemFee.chargeAmountItemSystem": "Charge lost item processing fee if item aged to lost by system",
+    "settings.lostItemFee.chargeAmountItemSystem": "Addebitare la multa per gli item dichiati persi dal sistema",
     "settings.lostItemFee.returnedLostItemProcessingFee": "Se l'item smarrito viene restituito, rimuovere la tariffa di gestione dell'item smarrito",
     "settings.lostItemFee.replacedLostItemProcessingFee": "Se l'item smarrito viene sostituito, rimuovere la tariffa di gestione dell'item smarrito",
     "settings.lostItemFee.replacementProcessFee": "Tariffa di gestione della sostituzione",
@@ -423,5 +423,5 @@
     "settings.lostItemFee.validate.hasReplacementAllowedAndPositiveLostItemPolicyFee": "'Lost item processing fee' must be > 0 and 'Replacement allowed' must be 'Yes' for this selection",
     "settings.lostItemFee.validate.hasReplacementAllowedAndNegativeLostItemPolicyFee": "\"Sostituzione consentita\" deve essere \"Sì\" per questa selezione",
     "settings.circulationRules.all": "Tutto",
-    "settings.circulationRules.not": "!(not)"
+    "settings.circulationRules.not": "! (not)"
 }
