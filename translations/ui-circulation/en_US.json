@@ -295,7 +295,7 @@
     "settings.index.feesFines": "Fee/fine",
     "settings.index.patronNoticesSettings": "Patron notices",
     "settings.index.request": "Requests",
-    "settings.validate.greaterThanOrEqualToZero": "The value must be integer and greater than or equal to 0",
+    "settings.validate.greaterThanOrEqualToZero": "The value must greater than or equal to 0",
     "settings.finePolicy.entryLabel": "Overdue fine policies",
     "settings.finePolicy.paneTitle": "Overdue fine policies",
     "settings.finePolicy.overdueFine": "Overdue fine",
