@@ -14,8 +14,13 @@ import {
 } from '@folio/stripes/components';
 
 const OverdueFinesSection = (props) => {
-  const { label, name, period, intervalPeriods, onBlurField, data, intl: { formatMessage } } = props;
+  const { label, name, period, intervalPeriods, data, intl: { formatMessage } } = props;
   const test = `data-test-quantity-${data}`;
+
+  const formatNumber = (value = 0) => {
+    return parseFloat(value).toFixed(2);
+  };
+
   return (
     <div>
       <Row>
@@ -32,7 +37,8 @@ const OverdueFinesSection = (props) => {
               type="number"
               hasClearIcon={false}
               component={TextField}
-              onBlur={onBlurField}
+              formatOnBlur
+              format={formatNumber}
             />
           </div>
         </Col>
@@ -64,7 +70,6 @@ OverdueFinesSection.propTypes = {
   period: PropTypes.string,
   data: PropTypes.string,
   intervalPeriods: PropTypes.arrayOf(PropTypes.node),
-  onBlurField: PropTypes.func,
 };
 
 export default injectIntl(OverdueFinesSection);

@@ -17,6 +17,10 @@ const OverdueFinesSectionColumn = (props) => {
     intl: { formatMessage }
   } = props;
 
+  const formatNumber = (value = 0) => {
+    return parseFloat(value).toFixed(2);
+  };
+
   return (
     <div>
       <Row>
@@ -34,7 +38,8 @@ const OverdueFinesSectionColumn = (props) => {
                 type="number"
                 hasClearIcon={false}
                 component={TextField}
-                onBlur={props.onBlurField}
+                formatOnBlur
+                format={formatNumber}
               />
               :
               <Field
@@ -58,7 +63,6 @@ OverdueFinesSectionColumn.propTypes = {
   name: PropTypes.string,
   component: PropTypes.string,
   intl: PropTypes.object,
-  onBlurField: PropTypes.func,
 };
 
 export default OverdueFinesSectionColumn;
