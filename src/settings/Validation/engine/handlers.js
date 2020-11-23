@@ -46,12 +46,13 @@ export const isSelected = (value) => !isUndefined(value);
 
 export const isGreaterOrEqualThanPassedField = (fieldToCompare, value, model) => {
   const valueToCompare = get(model, fieldToCompare);
-  return parseInt(value, 10) >= parseInt(valueToCompare, 10);
+
+  return parseFloat(value, 10) >= parseFloat(valueToCompare, 10);
 };
 
 export const isMaximumFineValueValid = (fieldToCompare, value, model) => {
   const valueToCompare = get(model, fieldToCompare);
-  return parseInt(value, 10) > 0 && parseInt(valueToCompare, 10) > 0;
+  return parseFloat(value, 10) > 0 && parseFloat(valueToCompare, 10) > 0;
 };
 
 export const hasNoChargeLostItemProcessingFee = (value, model) => {

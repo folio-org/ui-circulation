@@ -29,11 +29,6 @@ class FinesSection extends React.Component {
     this.generateOptions = optionsGenerator.bind(null, this.props.intl.formatMessage);
   }
 
-  onBlurField = (e) => {
-    const amount = parseFloat(e.target.value || 0.00).toFixed(2);
-    e.target.value = amount;
-  };
-
   render() {
     const {
       fineSectionOpen,
@@ -56,7 +51,6 @@ class FinesSection extends React.Component {
                 name="overdueFine.quantity"
                 period="overdueFine.intervalId"
                 intervalPeriods={intervalP}
-                onBlurField={this.onBlurField}
                 data="overdue-fine-quantity"
                 intl={intl}
               />
@@ -73,7 +67,6 @@ class FinesSection extends React.Component {
                 label={<FormattedMessage id="ui-circulation.settings.finePolicy.maximumOverdueFine" />}
                 name="maxOverdueFine"
                 component="TextField"
-                onBlurField={this.onBlurField}
                 intl={intl}
               />
             </div>
@@ -90,7 +83,6 @@ class FinesSection extends React.Component {
                 name="overdueRecallFine.quantity"
                 period="overdueRecallFine.intervalId"
                 intervalPeriods={intervalP}
-                onBlurField={this.onBlurField}
                 data="overdue-recall-fine-quantity"
                 intl={intl}
               />
@@ -107,7 +99,6 @@ class FinesSection extends React.Component {
                 label={<FormattedMessage id="ui-circulation.settings.finePolicy.maximumRecallOverdueFine" />}
                 name="maxOverdueRecallFine"
                 component="TextField"
-                onBlurField={this.onBlurField}
                 intl={intl}
               />
             </div>
