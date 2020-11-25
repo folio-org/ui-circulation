@@ -20,6 +20,7 @@ const checkInvalidPeriods = (policy) => {
     'renewalsPolicy.period',
     'requestManagement.recalls.recallReturnInterval',
     'requestManagement.recalls.minimumGuaranteedLoanPeriod',
+    'requestManagement.recalls.alternateRecallReturnInterval',
     'requestManagement.holds.alternateCheckoutLoanPeriod',
     'requestManagement.holds.alternateRenewalLoanPeriod',
   ];

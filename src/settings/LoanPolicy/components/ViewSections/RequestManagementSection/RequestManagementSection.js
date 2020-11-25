@@ -54,6 +54,26 @@ const RequestManagementSection = (props) => {
             </div>
           </Col>
         </Row>
+        <Row>
+          <Col xs={12}>
+            <div data-test-request-management-section-recalls-extend-overdue-loans>
+              <KeyValue
+                label={<FormattedMessage id="ui-circulation.settings.requestManagement.allowRecallsToExtendOverdueLoans" />}
+                value={getCheckboxValue('requestManagement.recalls.allowRecallsToExtendOverdueLoans')}
+              />
+            </div>
+          </Col>
+        </Row>
+        <Row>
+          <Col xs={12}>
+            <div data-test-request-management-section-alternate-recall-return-interval>
+              <KeyValue
+                label={<FormattedMessage id="ui-circulation.settings.requestManagement.alternateRecallReturnInterval" />}
+                value={getPeriodValue('requestManagement.recalls.alternateRecallReturnInterval')}
+              />
+            </div>
+          </Col>
+        </Row>
       </Accordion>
       <Accordion
         id="holds"

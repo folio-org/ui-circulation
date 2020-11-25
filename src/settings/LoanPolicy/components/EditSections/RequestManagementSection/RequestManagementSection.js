@@ -77,6 +77,29 @@ class RequestManagementSection extends React.Component {
               changeFormValue={change}
             />
           </div>
+          <div data-test-request-management-section-recalls-extend-overdue-loans>
+            <Field
+              label={<FormattedMessage id="ui-circulation.settings.requestManagement.allowRecallsToExtendOverdueLoans" />}
+              name="requestManagement.recalls.allowRecallsToExtendOverdueLoans"
+              id="requestManagement.recalls.allowRecallsToExtendOverdueLoans"
+              component={Checkbox}
+              type="checkbox"
+            />
+          </div>
+          <br />
+          {
+            policy.isProfileRolling() &&
+            policy.requestManagement?.recalls?.allowRecallsToExtendOverdueLoans &&
+            <div data-test-request-management-section-alternate-recall-return-interval>
+              <Period
+                fieldLabel="ui-circulation.settings.requestManagement.alternateRecallReturnInterval"
+                inputValuePath="requestManagement.recalls.alternateRecallReturnInterval.duration"
+                selectValuePath="requestManagement.recalls.alternateRecallReturnInterval.intervalId"
+                intervalPeriods={this.generateOptions(intervalPeriods, 'ui-circulation.settings.loanPolicy.selectInterval')}
+                changeFormValue={change}
+              />
+            </div>
+          }
         </Accordion>
         <Accordion
           id="holdsSection"

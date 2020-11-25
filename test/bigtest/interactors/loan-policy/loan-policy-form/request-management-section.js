@@ -13,6 +13,8 @@ import Period from '../../Period';
   header = scoped('[data-test-renewals-request-management-section-header]');
   recallReturnInterval = new Period('[data-test-request-management-section-recall-return-interval]');
   minimumGuaranteedLoanPeriod = new Period('[data-test-request-management-section-minimum-guaranteed-loan-period]');
+  recallsExtendOverdueLoans = new CheckboxInteractor('[data-test-request-management-section-recalls-extend-overdue-loans]');
+  alternateRecallReturnInterval = new Period('[data-test-request-management-section-alternate-recall-return-interval]');
   alternateCheckoutLoanPeriod = new Period('[data-test-request-management-section-alternate-checkout-loan-period]');
   renewItemsWithRequest = new CheckboxInteractor('[data-test-request-management-section-renew-items-with-request]');
   alternateRenewalLoanPeriod = new Period('[data-test-request-management-section-alternate-renewal-loan-period]');

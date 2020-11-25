@@ -758,6 +758,40 @@ describe('LoanPolicyForm', () => {
             });
           });
         });
+
+        describe('recalls extend overdue loans checkbox', () => {
+          it('should be displayed', () => {
+            expect(LoanPolicyForm.requestManagementSection.recallsExtendOverdueLoans.isPresent).to.be.true;
+          });
+
+          it('should be unchecked', () => {
+            expect(LoanPolicyForm.requestManagementSection.recallsExtendOverdueLoans.isChecked).to.be.false;
+          });
+
+          it('should has proper label', () => {
+            expect(LoanPolicyForm.requestManagementSection.recallsExtendOverdueLoans.text).to.equal(
+              translation['settings.requestManagement.allowRecallsToExtendOverdueLoans']
+            );
+          });
+
+          describe('alternate recall return interval', () => {
+            beforeEach(async () => {
+              await LoanPolicyForm
+                .requestManagementSection.recallsExtendOverdueLoans.clickAndBlur()
+                .loansSection.loanProfile.selectAndBlur(translation['settings.loanPolicy.profileType.rolling']);
+            });
+
+            it('should be displayed', () => {
+              expect(LoanPolicyForm.requestManagementSection.alternateRecallReturnInterval.isPresent).to.be.true;
+            });
+
+            it('should have proper label', () => {
+              expect(LoanPolicyForm.requestManagementSection.alternateRecallReturnInterval.label).to.equal(
+                translation['settings.requestManagement.alternateRecallReturnInterval']
+              );
+            });
+          });
+        });
       });
 
       describe('holds', () => {
