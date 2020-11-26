@@ -4,6 +4,7 @@ const recalls = (loanPolicy) => {
   return {
     ...buildPeriodValidationConfig(loanPolicy, 'requestManagement.recalls.recallReturnInterval'),
     ...buildPeriodValidationConfig(loanPolicy, 'requestManagement.recalls.minimumGuaranteedLoanPeriod'),
+    ...buildPeriodValidationConfig(loanPolicy, 'requestManagement.recalls.alternateRecallReturnInterval'),
   };
 };
 

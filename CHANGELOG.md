@@ -6,6 +6,7 @@
 * Unable to enter decimal places on Overdue Fines Policy on Honeysuckle and Snapshot Dev. Refs UICIRC-514.
 * Update version of `feesfines` okapi interface to `v16.0`.
 * Modifier ! (not) - preceding value entered for a criteria, means any value except. Refs UICIRC-507.
+* Add `Allow recalls to extend overdue loans` setting. Refs UICIRC-525.
 
 ## 4.0.0 (https://github.com/folio-org/ui-circulation/tree/v4.0.0) (2020-10-13)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v3.0.0...v4.0.0)
