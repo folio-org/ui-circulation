@@ -143,6 +143,7 @@ describe('Circulation rules editor: criteria hints', () => {
       beforeEach(async () => {
         await circulationRules.editor.changeActiveItem(0);
         await circulationRules.editor.hints.sections(0).subheader.click();
+
       });
 
       it('should not change hints state', () => {
@@ -154,7 +155,7 @@ describe('Circulation rules editor: criteria hints', () => {
 
   describe('choosing locating criteria type - campus', () => {
     beforeEach(async () => {
-      await showHintsWithAttachedCustomKeysHandlers(circulationRules.editor, 'b ');
+      await showHintsWithAttachedCustomKeysHandlers(circulationRules.editor, 'b');
     });
 
     it('should display campus codes hints list', () => {
@@ -205,7 +206,7 @@ describe('Circulation rules editor: criteria hints', () => {
       });
 
       it('should not change the editor value', () => {
-        expect(circulationRules.editor.value).to.equal('b ');
+        expect(circulationRules.editor.value).to.equal('b');
       });
 
       it('should display sections without the special value ANY', () => {
@@ -243,7 +244,8 @@ describe('Circulation rules editor: criteria hints', () => {
 
         describe('selecting active item in the second section', () => {
           beforeEach(async () => {
-            await circulationRules.editor.pickHint(campusesAmount - 1);
+            await circulationRules.editor.hints.clickOnItem(campusesAmount - 1, 1);
+            await getEditorHintSection(1).completionButton.click();
           });
 
           it('should add full hierarchical path with campus code to the editor', () => {
@@ -258,7 +260,7 @@ describe('Circulation rules editor: criteria hints', () => {
 
   describe('choosing locating criteria type - library', () => {
     beforeEach(async () => {
-      await showHintsWithAttachedCustomKeysHandlers(circulationRules.editor, 'c ');
+      await showHintsWithAttachedCustomKeysHandlers(circulationRules.editor, 'c');
     });
 
     it('should display library codes hints list', () => {
@@ -340,7 +342,8 @@ describe('Circulation rules editor: criteria hints', () => {
 
         describe('clicking on the first library', () => {
           beforeEach(async () => {
-            await circulationRules.editor.hints.clickOnItem(1, 2);
+            await circulationRules.editor.hints.clickOnItem(0, 2);
+            await getEditorHintSection(2).completionButton.click();
           });
 
           it('should add full hierarchial path with library code to the editor value', () => {
@@ -357,7 +360,7 @@ describe('Circulation rules editor: criteria hints', () => {
     const editorHints = circulationRules.editor.hints;
 
     beforeEach(async () => {
-      await showHintsWithAttachedCustomKeysHandlers(circulationRules.editor, 's ');
+      await showHintsWithAttachedCustomKeysHandlers(circulationRules.editor, 's');
     });
 
     it('should display location codes hints list ', () => {
@@ -619,7 +622,7 @@ describe('Circulation rules editor: criteria hints', () => {
             });
 
             it('should not add any codes to input field on click on location items', () => {
-              expect(circulationRules.editor.value).to.equal('s ');
+              expect(circulationRules.editor.value).to.equal('s');
             });
 
             describe('clicking on the completion button', () => {

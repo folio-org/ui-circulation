@@ -17,7 +17,7 @@ import {
   ACTIVE_HINT_ELEMENT_CLASS,
   HINT_ELEMENT_CLASS,
 } from '../../../constants';
-import { addSpaceToCMRules } from './utils';
+import addIndentToCMRules from './utils';
 
 const HINT_SECTIONS_CONTAINER = 'CodeMirror-hints-sections-container';
 const HINT_SECTION_CONTAINER = 'CodeMirror-hints-list';
@@ -146,7 +146,7 @@ class Completion {
     const codesText = pickedCompletions.map(getText).join('');
 
     pickedCompletions.forEach(completion => { CodeMirror.signal(data, 'pick', completion); });
-    this.cm.replaceRange(addSpaceToCMRules(codesText, 'before'), from, to, 'complete');
+    this.cm.replaceRange(addIndentToCMRules(codesText, 'before'), from, to, 'complete');
     this.close();
   }
 
@@ -671,7 +671,7 @@ class HintSection {
 
   createListItem(itemOptions, index) {
     const listItemElement = document.createElement('li');
-    const className = HINT_ELEMENT_CLASS + (this.isSelectedByIndex(index) ? addSpaceToCMRules(ACTIVE_HINT_ELEMENT_CLASS, 'before') : '');
+    const className = HINT_ELEMENT_CLASS + (this.isSelectedByIndex(index) ? addIndentToCMRules(ACTIVE_HINT_ELEMENT_CLASS, 'before') : '');
 
     listItemElement.className = itemOptions.className ? `${itemOptions.className} ${className}` : className;
 

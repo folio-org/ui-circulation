@@ -1,4 +1,4 @@
-export const addSpaceToCMRules = (rule, position) => {
+const addIndentToCMRules = (rule, position) => {
   switch (position) {
     case 'before':
       return ` ${rule}`;
@@ -8,3 +8,5 @@ export const addSpaceToCMRules = (rule, position) => {
       return rule;
   }
 };
+
+export default addIndentToCMRules;
