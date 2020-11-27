@@ -143,7 +143,6 @@ describe('Circulation rules editor: criteria hints', () => {
       beforeEach(async () => {
         await circulationRules.editor.changeActiveItem(0);
         await circulationRules.editor.hints.sections(0).subheader.click();
-
       });
 
       it('should not change hints state', () => {

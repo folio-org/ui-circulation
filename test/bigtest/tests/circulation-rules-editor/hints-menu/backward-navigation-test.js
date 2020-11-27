@@ -39,7 +39,7 @@ describe('Circulation rules editor -> hints menu: backward navigation between mu
 
   describe('navigating between sections', () => {
     beforeEach(async () => {
-      await showHintsWithAttachedCustomKeysHandlers(circulationRules.editor, 'b ');
+      await showHintsWithAttachedCustomKeysHandlers(circulationRules.editor, 'b');
     });
 
     describe('pressing Backspace button', () => {
@@ -72,7 +72,7 @@ describe('Circulation rules editor -> hints menu: backward navigation between mu
         });
 
         it('should remove characters in editor', () => {
-          expect(circulationRules.editor.value).to.equal('b');
+          expect(circulationRules.editor.value).to.equal('');
         });
       });
     });
