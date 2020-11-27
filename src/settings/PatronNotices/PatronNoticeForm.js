@@ -81,7 +81,7 @@ class PatronNoticeForm extends React.Component {
 
     if (name) {
       try {
-        const response = await this.getTemplatesByName(name.toLowerCase());
+        const response = await this.getTemplatesByName(name);
         const { templates = [] } = await response.json();
         const matchedTemplate = find(templates, template => {
           return template.name.toLowerCase() === name.toLowerCase();
