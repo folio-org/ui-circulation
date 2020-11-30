@@ -1,4 +1,4 @@
-const addIndentToCMRules = (rule, position) => {
+const addIndentToEditorRules = (rule, position) => {
   switch (position) {
     case 'before':
       return ` ${rule}`;
@@ -9,4 +9,4 @@ const addIndentToCMRules = (rule, position) => {
   }
 };
 
-export default addIndentToCMRules;
+export default addIndentToEditorRules;

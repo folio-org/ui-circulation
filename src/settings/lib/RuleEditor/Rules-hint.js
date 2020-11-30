@@ -14,7 +14,7 @@ import {
   RULES_TYPE,
   LOCATION_RULES_TYPES
 } from '../../../constants';
-import addIndentToCMRules from './utils';
+import addIndentToEditorRules from './utils';
 
 const locationHeadersMapping = {
   [RULES_TYPE.INSTITUTION]: 'institution',
@@ -64,7 +64,7 @@ function getItemOptions(selector, typeKey) {
   const displayText = getDisplayText(selector, typeKey);
 
   return {
-    text: addIndentToCMRules(text, 'after'),
+    text: addIndentToEditorRules(text, 'after'),
     displayText,
     className: 'rule-hint-minor',
     id: selector.id,
@@ -153,7 +153,7 @@ export function rulesHint(Codemirror, props) {
         const text = formatMessage({ id: `ui-circulation.settings.circulationRules.${value}` });
 
         result.push({
-          text: addIndentToCMRules(key, 'after'),
+          text: addIndentToEditorRules(key, 'after'),
           displayText: `${key}: ${text}`,
           className: 'rule-hint-minor',
         });
@@ -195,7 +195,7 @@ export function rulesHint(Codemirror, props) {
 
       forOwn(policyMapping, (value, key) => {
         result.push({
-          text: addIndentToCMRules(key, 'after'),
+          text: addIndentToEditorRules(key, 'after'),
           displayText: formatMessage({ id: `ui-circulation.settings.circulationRules.${value}` }),
           className: 'rule-hint-minor',
         });
@@ -210,7 +210,7 @@ export function rulesHint(Codemirror, props) {
 
         completionLists[type].forEach((selector) => {
           result.push({
-            text: addIndentToCMRules(selector, 'after'),
+            text: addIndentToEditorRules(selector, 'after'),
             displayText: selector,
             className: 'rule-hint-minor',
           });
