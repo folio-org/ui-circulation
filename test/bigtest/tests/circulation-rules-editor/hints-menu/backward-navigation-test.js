@@ -14,6 +14,8 @@ import {
   removeDisplayedHints,
 } from '../utils';
 
+const getEditorHintSection = sectionIndex => circulationRules.editor.hints.sections(sectionIndex);
+
 describe('Circulation rules editor -> hints menu: backward navigation between multiple sections ', () => {
   setupApplication();
 
@@ -37,7 +39,7 @@ describe('Circulation rules editor -> hints menu: backward navigation between mu
 
   describe('navigating between sections', () => {
     beforeEach(async () => {
-      await showHintsWithAttachedCustomKeysHandlers(circulationRules.editor, 'b ');
+      await showHintsWithAttachedCustomKeysHandlers(circulationRules.editor, 'b');
     });
 
     describe('pressing Backspace button', () => {
@@ -54,6 +56,7 @@ describe('Circulation rules editor -> hints menu: backward navigation between mu
 
           // select first campus
           await circulationRules.editor.hints.clickOnItem(0, 1);
+          await getEditorHintSection(1).completionButton.click();
         });
 
         it('should insert the right campus code', () => {
@@ -69,7 +72,7 @@ describe('Circulation rules editor -> hints menu: backward navigation between mu
         });
 
         it('should remove characters in editor', () => {
-          expect(circulationRules.editor.value).to.equal('b');
+          expect(circulationRules.editor.value).to.equal('');
         });
       });
     });
@@ -85,6 +88,7 @@ describe('Circulation rules editor -> hints menu: backward navigation between mu
 
           // select first campus in second institution
           await circulationRules.editor.hints.clickOnItem(0, 1);
+          await getEditorHintSection(1).completionButton.click();
         });
 
         it('should insert the right campus code', () => {
@@ -104,6 +108,7 @@ describe('Circulation rules editor -> hints menu: backward navigation between mu
 
           // select first campus in second institution
           await circulationRules.editor.hints.clickOnItem(0, 1);
+          await getEditorHintSection(1).completionButton.click();
         });
 
         it('should insert the right campus code', () => {

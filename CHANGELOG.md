@@ -8,6 +8,7 @@
 * Modifier ! (not) - preceding value entered for a criteria, means any value except. Refs UICIRC-507.
 * Add `Allow recalls to extend overdue loans` setting. Refs UICIRC-525.
 * Duplicate patron notice template names allowed - case is not considered in validation. Refs UICIRC-528.
+* Circ rules editor does not generate space as expected when adding criteria to multiple criteria rule. Refs UICIRC-488.
 
 ## 4.0.0 (https://github.com/folio-org/ui-circulation/tree/v4.0.0) (2020-10-13)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v3.0.0...v4.0.0)

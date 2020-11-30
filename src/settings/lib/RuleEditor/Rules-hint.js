@@ -14,6 +14,7 @@ import {
   RULES_TYPE,
   LOCATION_RULES_TYPES
 } from '../../../constants';
+import addIndentToEditorRules from './utils';
 
 const locationHeadersMapping = {
   [RULES_TYPE.INSTITUTION]: 'institution',
@@ -38,13 +39,13 @@ const getSectionsDescriptions = type => {
     case RULES_TYPE.CAMPUS:
       return [
         { header: 'ui-circulation.settings.circulationRules.institution', childSection: RULES_TYPE.CAMPUS },
-        { header: 'ui-circulation.settings.circulationRules.campus', selectedHintIndex: 0 },
+        { header: 'ui-circulation.settings.circulationRules.campus', selectedHintIndex: 0, isMultipleSelection: true },
       ];
     case RULES_TYPE.LIBRARY:
       return [
         { header: 'ui-circulation.settings.circulationRules.institution', childSection: RULES_TYPE.CAMPUS },
         { header: 'ui-circulation.settings.circulationRules.campus', childSection: RULES_TYPE.LIBRARY, selectedHintIndex: 0 },
-        { header: 'ui-circulation.settings.circulationRules.library', selectedHintIndex: 0 },
+        { header: 'ui-circulation.settings.circulationRules.library', selectedHintIndex: 0, isMultipleSelection: true },
       ];
     case RULES_TYPE.LOCATION:
       return [
@@ -63,7 +64,7 @@ function getItemOptions(selector, typeKey) {
   const displayText = getDisplayText(selector, typeKey);
 
   return {
-    text: `${text} `,
+    text: addIndentToEditorRules(text, 'after'),
     displayText,
     className: 'rule-hint-minor',
     id: selector.id,
@@ -152,7 +153,7 @@ export function rulesHint(Codemirror, props) {
         const text = formatMessage({ id: `ui-circulation.settings.circulationRules.${value}` });
 
         result.push({
-          text: `${key} `,
+          text: addIndentToEditorRules(key, 'after'),
           displayText: `${key}: ${text}`,
           className: 'rule-hint-minor',
         });
@@ -194,7 +195,7 @@ export function rulesHint(Codemirror, props) {
 
       forOwn(policyMapping, (value, key) => {
         result.push({
-          text: `${key} `,
+          text: addIndentToEditorRules(key, 'after'),
           displayText: formatMessage({ id: `ui-circulation.settings.circulationRules.${value}` }),
           className: 'rule-hint-minor',
         });
@@ -209,7 +210,7 @@ export function rulesHint(Codemirror, props) {
 
         completionLists[type].forEach((selector) => {
           result.push({
-            text: `${selector} `,
+            text: addIndentToEditorRules(selector, 'after'),
             displayText: selector,
             className: 'rule-hint-minor',
           });
