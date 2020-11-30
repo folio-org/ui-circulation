@@ -83,7 +83,9 @@ class PatronNoticeForm extends React.Component {
       try {
         const response = await this.getTemplatesByName(name);
         const { templates = [] } = await response.json();
-        const matchedTemplate = find(templates, ['name', name]);
+        const matchedTemplate = find(templates, template => {
+          return template.name.toLowerCase() === name.toLowerCase();
+        });
         if (matchedTemplate && matchedTemplate.id !== initialValues.id) {
           error = <FormattedMessage id="ui-circulation.settings.patronNotices.errors.nameExists" />;
         }
