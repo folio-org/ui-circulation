@@ -106,6 +106,8 @@ const checkRenewable = (policy) => {
 const checkRequestManagementSection = (policy) => {
   const loanPolicy = cloneDeep(policy);
   const sections = ['recalls', 'holds'];
+  const isAllowedRecalls = get(loanPolicy, 'requestManagement.recalls.allowRecallsToExtendOverdueLoans');
+  const isAllowedRenewal = get(loanPolicy, 'requestManagement.holds.renewItemsWithRequest');
 
   forEach(sections, (sectionName) => {
     const pathToSection = `requestManagement.${sectionName}`;
@@ -117,6 +119,14 @@ const checkRequestManagementSection = (policy) => {
 
   if (isEmpty(get(loanPolicy, 'requestManagement'))) {
     unset(loanPolicy, 'requestManagement');
+  }
+
+  if (!isAllowedRecalls) {
+    unset(loanPolicy, 'requestManagement.recalls.alternateRecallReturnInterval');
+  }
+
+  if (!isAllowedRenewal) {
+    unset(loanPolicy, 'requestManagement.holds.alternateRenewalLoanPeriod');
   }
 
   return loanPolicy;
