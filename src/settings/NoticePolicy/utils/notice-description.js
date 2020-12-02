@@ -1,5 +1,5 @@
 import {
-  feeFineEventsIds,
+  timeBasedFeeFineEventsIds,
   loanUserInitiatedEventsIds,
   requestItemStateChangeEventsIds,
   requestUserInitiatedEventsIds,
@@ -21,7 +21,7 @@ export default (eventId) => {
     requestItemStateChangeEventsIds.AVAILABLE,
     ...Object.values(requestUserInitiatedEventsIds),
     ...Object.values(requestTimeBasedEventsIds),
-    ...Object.values(feeFineEventsIds),
+    ...Object.values(timeBasedFeeFineEventsIds),
   ];
 
   if (postponedEvents.includes(eventId)) {

@@ -310,6 +310,7 @@
   "settings.noticePolicy.requestNotices.requestCancelation": "Cancel request",
   "settings.noticePolicy.notices.triggeringEvent": "Triggering event",
   "settings.noticePolicy.loanNotices.dueDate": "Loan due date/time",
+  "settings.noticePolicy.loanNotices.agedToLost": "Item aged to lost",
   "settings.noticePolicy.loanNotices.manualDueDateChange": "Loan due date change",
   "settings.noticePolicy.loanNotices.itemRecalled": "Item recalled",
   "settings.noticePolicy.loanNotices.renewed": "Item renewed",
@@ -434,6 +435,9 @@
 
   "settings.noticePolicy.feeFineNotices.returned": "Overdue fine, returned",
   "settings.noticePolicy.feeFineNotices.renewed": "Overdue fine, renewed",
+  "settings.noticePolicy.feeFineNotices.atl.fineCharged": "Aged to lost - fine charged",
+  "settings.noticePolicy.feeFineNotices.atl.itemReturned": "Aged to lost & item returned - fine adjusted",
+  "settings.noticePolicy.feeFineNotices.atl.itemReplaced": "Aged to lost & item replaced - fine adjusted",
 
   "permission.settings.cancellation-reasons": "Settings (Circ): Can create, edit and remove cancellation reasons",
   "permission.settings.loan-history": "Settings (Circ): Can view loan history",

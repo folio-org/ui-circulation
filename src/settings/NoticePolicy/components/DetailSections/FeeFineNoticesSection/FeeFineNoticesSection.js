@@ -11,8 +11,8 @@ import { Accordion } from '@folio/stripes/components';
 import NoticeCard from '../components';
 import {
   feeFineNoticesTriggeringEvents,
-  feeFineEventsIds,
-  feeFinesNoticesSendEvents,
+  timeBasedFeeFineEventsIds,
+  uponAndAfterSendEvents,
 } from '../../../../../constants';
 
 class FeeFineNoticesSection extends React.Component {
@@ -43,8 +43,8 @@ class FeeFineNoticesSection extends React.Component {
             index={index}
             key={index}
             notice={notice}
-            sendEvents={feeFinesNoticesSendEvents}
-            sendEventTriggeringIds={values(feeFineEventsIds)}
+            sendEvents={uponAndAfterSendEvents}
+            sendEventTriggeringIds={values(timeBasedFeeFineEventsIds)}
             templates={templates}
             triggeringEvents={feeFineNoticesTriggeringEvents}
           />

@@ -208,7 +208,7 @@ export const noticesSendEvents = [
   },
 ];
 
-export const requestTimeBasedNoticesSendEvents = [
+export const uponAndBeforeSendEvents = [
   {
     value: noticesSendEventMap.UPON,
     label: 'ui-circulation.settings.noticePolicy.notices.upon',
@@ -219,7 +219,7 @@ export const requestTimeBasedNoticesSendEvents = [
   },
 ];
 
-export const feeFinesNoticesSendEvents = [
+export const uponAndAfterSendEvents = [
   {
     value: noticesSendEventMap.UPON,
     label: 'ui-circulation.settings.noticePolicy.notices.upon',
@@ -248,6 +248,7 @@ export const loanUserInitiatedEventsIds = {
 
 export const loanTimeBasedEventsIds = {
   DUE_DATE: 'Due date',
+  AGED_TO_LOST: 'Aged to lost'
 };
 
 export const loanNoticesTriggeringEvents = [
@@ -274,6 +275,10 @@ export const loanNoticesTriggeringEvents = [
   {
     value: loanUserInitiatedEventsIds.ITEM_RECALLED,
     label: 'ui-circulation.settings.noticePolicy.loanNotices.itemRecalled',
+  },
+  {
+    value: loanTimeBasedEventsIds.AGED_TO_LOST,
+    label: 'ui-circulation.settings.noticePolicy.loanNotices.agedToLost',
   },
 ];
 
@@ -430,19 +435,46 @@ export const LOCATION_RULES_TYPES = [
   RULES_TYPE.LOCATION,
 ];
 
+export const timeBasedFeeFineEventsIds = {
+  RETURNED: 'Overdue fine returned',
+  RENEWED: 'Overdue fine renewed',
+  ATL_FINE_CHARGED: 'Aged to lost - fine charged',
+};
+
+export const userInitiatedTimeBasedFeeFineEventsIds = {
+  ATL_FINE_ITEM_RETURNED: 'Aged to lost & item returned - fine adjusted',
+  ATL_FINE_ITEM_REPLACED: 'Aged to lost & item replaced - fine adjusted',
+};
+
+// TODO DELETE?
 export const feeFineEventsIds = {
   RETURNED: 'Overdue fine returned',
   RENEWED: 'Overdue fine renewed',
+  ATL_FINE_CHARGED: 'Aged to lost - fine charged',
+  ATL_FINE_ITEM_RETURNED: 'Aged to lost & item returned - fine adjusted',
+  ATL_FINE_ITEM_REPLACED: 'Aged to lost & item replaced - fine adjusted',
 };
 
 export const feeFineNoticesTriggeringEvents = [
   {
-    value: feeFineEventsIds.RETURNED,
+    value: timeBasedFeeFineEventsIds.RETURNED,
     label: 'ui-circulation.settings.noticePolicy.feeFineNotices.returned',
   },
   {
-    value: feeFineEventsIds.RENEWED,
+    value: timeBasedFeeFineEventsIds.RENEWED,
     label: 'ui-circulation.settings.noticePolicy.feeFineNotices.renewed',
+  },
+  {
+    value: timeBasedFeeFineEventsIds.ATL_FINE_CHARGED,
+    label: 'ui-circulation.settings.noticePolicy.feeFineNotices.atl.fineCharged',
+  },
+  {
+    value: userInitiatedTimeBasedFeeFineEventsIds.ATL_FINE_ITEM_RETURNED,
+    label: 'ui-circulation.settings.noticePolicy.feeFineNotices.atl.itemReturned',
+  },
+  {
+    value: userInitiatedTimeBasedFeeFineEventsIds.ATL_FINE_ITEM_REPLACED,
+    label: 'ui-circulation.settings.noticePolicy.feeFineNotices.atl.itemReplaced',
   },
 ];
 

@@ -17,10 +17,6 @@ class NoticesList extends React.Component {
     fields: PropTypes.object.isRequired,
     policy: PropTypes.object.isRequired,
     sectionKey: PropTypes.string.isRequired,
-    sendEvents: PropTypes.arrayOf(PropTypes.shape({
-      value: PropTypes.string.isRequired,
-      label: PropTypes.string.isRequired,
-    })).isRequired,
     templates: PropTypes.arrayOf(PropTypes.shape({
       value: PropTypes.string.isRequired,
       label: PropTypes.string.isRequired,
@@ -30,6 +26,7 @@ class NoticesList extends React.Component {
       label: PropTypes.string.isRequired,
     })).isRequired,
     sendEventTriggeringIds: PropTypes.arrayOf(PropTypes.string).isRequired,
+    getSendEvents: PropTypes.func.isRequired,
   };
 
   onAddField = () => {
@@ -45,7 +42,7 @@ class NoticesList extends React.Component {
       sectionKey,
       fields,
       policy,
-      sendEvents,
+      getSendEvents,
       sendEventTriggeringIds,
       templates,
       triggeringEvents,
@@ -55,6 +52,7 @@ class NoticesList extends React.Component {
       <>
         {fields.map((pathToNotice, noticeIndex) => {
           const notice = policy[sectionKey][noticeIndex];
+          const sendEvents = getSendEvents(notice?.sendOptions?.sendWhen);
 
           return (
             <NoticeCard

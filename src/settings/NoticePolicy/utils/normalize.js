@@ -9,7 +9,7 @@ import {
 import { Notice } from '../../Models/NoticePolicy';
 
 import {
-  feeFineEventsIds,
+  timeBasedFeeFineEventsIds,
   loanTimeBasedEventsIds,
   requestTimeBasedEventsIds
 } from '../../../constants';
@@ -19,7 +19,7 @@ const setRealTimeFlag = (sectionKey, policy) => {
   const isTrueSet = value => value === 'true';
   const sendInRealTime = [
     ...Object.values(requestTimeBasedEventsIds),
-    ...Object.values(feeFineEventsIds),
+    ...Object.values(timeBasedFeeFineEventsIds),
   ];
 
   forEach(noticePolicy[sectionKey], (notice) => {

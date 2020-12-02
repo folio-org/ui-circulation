@@ -8,8 +8,8 @@ import { Accordion } from '@folio/stripes/components';
 import NoticesList from '../components';
 import {
   feeFineNoticesTriggeringEvents,
-  feeFineEventsIds,
-  feeFinesNoticesSendEvents,
+  timeBasedFeeFineEventsIds,
+  uponAndAfterSendEvents,
 } from '../../../../../constants';
 
 class FeeFineNoticesSection extends React.Component {
@@ -21,6 +21,10 @@ class FeeFineNoticesSection extends React.Component {
       label: PropTypes.string.isRequired,
     })).isRequired,
   };
+
+  getSendEvents = () => {
+    return uponAndAfterSendEvents;
+  }
 
   render() {
     const {
@@ -40,8 +44,8 @@ class FeeFineNoticesSection extends React.Component {
           sectionKey="feeFineNotices"
           component={NoticesList}
           policy={policy}
-          sendEvents={feeFinesNoticesSendEvents}
-          sendEventTriggeringIds={values(feeFineEventsIds)}
+          getSendEvents={this.getSendEvents}
+          sendEventTriggeringIds={values(timeBasedFeeFineEventsIds)}
           templates={templates}
           triggeringEvents={feeFineNoticesTriggeringEvents}
         />
