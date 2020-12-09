@@ -88,7 +88,6 @@ class RequestManagementSection extends React.Component {
           </div>
           <br />
           {
-            policy.isProfileRolling() &&
             policy.requestManagement?.recalls?.allowRecallsToExtendOverdueLoans &&
             <div data-test-request-management-section-alternate-recall-return-interval>
               <Period

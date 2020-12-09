@@ -775,20 +775,40 @@ describe('LoanPolicyForm', () => {
           });
 
           describe('alternate recall return interval', () => {
-            beforeEach(async () => {
-              await LoanPolicyForm
-                .requestManagementSection.recallsExtendOverdueLoans.clickAndBlur()
-                .loansSection.loanProfile.selectAndBlur(translation['settings.loanPolicy.profileType.rolling']);
+            describe('when select Fixed option for loan profile', () => {
+              beforeEach(async () => {
+                await LoanPolicyForm
+                  .requestManagementSection.recallsExtendOverdueLoans.clickAndBlur()
+                  .loansSection.loanProfile.selectAndBlur(translation['settings.loanPolicy.profileType.fixed']);
+              });
+
+              it('should be displayed', () => {
+                expect(LoanPolicyForm.requestManagementSection.alternateRecallReturnInterval.isPresent).to.be.true;
+              });
+
+              it('should have proper label', () => {
+                expect(LoanPolicyForm.requestManagementSection.alternateRecallReturnInterval.label).to.equal(
+                  translation['settings.requestManagement.alternateRecallReturnInterval']
+                );
+              });
             });
 
-            it('should be displayed', () => {
-              expect(LoanPolicyForm.requestManagementSection.alternateRecallReturnInterval.isPresent).to.be.true;
-            });
+            describe('when select Rolling option for loan profile', () => {
+              beforeEach(async () => {
+                await LoanPolicyForm
+                  .requestManagementSection.recallsExtendOverdueLoans.clickAndBlur()
+                  .loansSection.loanProfile.selectAndBlur(translation['settings.loanPolicy.profileType.rolling']);
+              });
 
-            it('should have proper label', () => {
-              expect(LoanPolicyForm.requestManagementSection.alternateRecallReturnInterval.label).to.equal(
-                translation['settings.requestManagement.alternateRecallReturnInterval']
-              );
+              it('should be displayed', () => {
+                expect(LoanPolicyForm.requestManagementSection.alternateRecallReturnInterval.isPresent).to.be.true;
+              });
+
+              it('should have proper label', () => {
+                expect(LoanPolicyForm.requestManagementSection.alternateRecallReturnInterval.label).to.equal(
+                  translation['settings.requestManagement.alternateRecallReturnInterval']
+                );
+              });
             });
           });
         });
