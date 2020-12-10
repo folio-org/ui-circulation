@@ -15,6 +15,7 @@ const AboutSection = () => (
     <div data-test-about-section-policy-name>
       <Field
         label={<FormattedMessage id="ui-circulation.settings.loanPolicy.policyName" />}
+        autoFocus
         component={TextField}
         required
         name="name"
