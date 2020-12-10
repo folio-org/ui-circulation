@@ -78,7 +78,7 @@ export default (entity) => {
     setRealTimeFlag.bind(null, 'loanNotices'),
     checkNoticeHiddenFields.bind(null, 'requestNotices', values(requestTimeBasedEventsIds)),
     setRealTimeFlag.bind(null, 'requestNotices'),
-    checkNoticeHiddenFields.bind(null, 'feeFineNotices', values(feeFineEventsIds)),
+    checkNoticeHiddenFields.bind(null, 'feeFineNotices', values(timeBasedFeeFineEventsIds)),
     setRealTimeFlag.bind(null, 'feeFineNotices'),
   ];
 

@@ -132,17 +132,17 @@ class NoticePolicyForm extends React.Component {
                 isPolicyActive={policy.active}
               />
               <LoanNoticesSection
-                isOpen={sections.loanNotices}
+                isOpen={sections.editLoanNotices}
                 policy={policy}
                 templates={getTemplates(patronNoticeTemplates, patronNoticeCategoryIds.LOAN)}
               />
               <RequestNoticesSection
-                isOpen={sections.requestNotices}
+                isOpen={sections.editRequestNotices}
                 policy={policy}
                 templates={getTemplates(patronNoticeTemplates, patronNoticeCategoryIds.REQUEST)}
               />
               <FeeFineNoticesSection
-                isOpen={sections.feeFineNotices}
+                isOpen={sections.editFeeFineNotices}
                 policy={policy}
                 templates={getTemplates(patronNoticeTemplates, patronNoticeCategoryIds.AUTOMATED_FEE_FINE)}
               />
