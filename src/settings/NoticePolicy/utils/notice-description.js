@@ -42,7 +42,7 @@ export default (eventId) => {
   }
 
   if (conditionalEvents.includes(eventId)) {
-    messageKey = 'ui-circulation.settings.noticePolicy.notices.conditional.notification'
+    messageKey = 'ui-circulation.settings.noticePolicy.notices.conditional.notification';
   }
 
   return messageKey;
