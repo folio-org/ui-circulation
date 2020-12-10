@@ -1,6 +1,8 @@
 import {
-  feeFineEventsIds,
+  timeBasedFeeFineEventsIds,
+  userInitiatedTimeBasedFeeFineEventsIds,
   loanUserInitiatedEventsIds,
+  loanTimeBasedEventsIds,
   requestItemStateChangeEventsIds,
   requestUserInitiatedEventsIds,
   requestTimeBasedEventsIds,
@@ -21,7 +23,14 @@ export default (eventId) => {
     requestItemStateChangeEventsIds.AVAILABLE,
     ...Object.values(requestUserInitiatedEventsIds),
     ...Object.values(requestTimeBasedEventsIds),
-    ...Object.values(feeFineEventsIds),
+    timeBasedFeeFineEventsIds.RENEWED,
+    timeBasedFeeFineEventsIds.RETURNED,
+    userInitiatedTimeBasedFeeFineEventsIds.ATL_FINE_ITEM_RETURNED,
+  ];
+
+  const conditionalEvents = [
+    timeBasedFeeFineEventsIds.ATL_FINE_CHARGED,
+    loanTimeBasedEventsIds.AGED_TO_LOST,
   ];
 
   if (postponedEvents.includes(eventId)) {
@@ -30,6 +39,10 @@ export default (eventId) => {
 
   if (realTimeEvents.includes(eventId)) {
     messageKey = 'ui-circulation.settings.noticePolicy.notices.realTime.notification';
+  }
+
+  if (conditionalEvents.includes(eventId)) {
+    messageKey = 'ui-circulation.settings.noticePolicy.notices.conditional.notification';
   }
 
   return messageKey;

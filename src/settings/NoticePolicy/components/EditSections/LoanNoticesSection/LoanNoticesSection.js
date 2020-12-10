@@ -10,6 +10,7 @@ import {
   loanNoticesTriggeringEvents,
   loanTimeBasedEventsIds,
   noticesSendEvents,
+  uponAndAfterSendEvents,
 } from '../../../../../constants';
 
 class LoanNoticesSection extends React.Component {
@@ -21,6 +22,10 @@ class LoanNoticesSection extends React.Component {
       label: PropTypes.string.isRequired,
     })).isRequired,
   };
+
+  getSendEvents = (triggeringEvent) => {
+    return triggeringEvent === loanTimeBasedEventsIds.AGED_TO_LOST ? uponAndAfterSendEvents : noticesSendEvents;
+  }
 
   render() {
     const {
@@ -42,7 +47,7 @@ class LoanNoticesSection extends React.Component {
             component={NoticesList}
             policy={policy}
             templates={templates}
-            sendEvents={noticesSendEvents}
+            getSendEvents={this.getSendEvents}
             sendEventTriggeringIds={values(loanTimeBasedEventsIds)}
             triggeringEvents={loanNoticesTriggeringEvents}
           />

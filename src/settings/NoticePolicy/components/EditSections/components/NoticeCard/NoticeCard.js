@@ -212,6 +212,7 @@ class NoticeCard extends React.Component {
                           <Period
                             inputSize={6}
                             selectSize={6}
+                            inputPlaceholder={1}
                             selectPlaceholder="ui-circulation.settings.common.blankPlaceholder"
                             inputValuePath={`${pathToNotice}.sendOptions.sendBy.duration`}
                             selectValuePath={`${pathToNotice}.sendOptions.sendBy.intervalId`}
@@ -264,6 +265,7 @@ class NoticeCard extends React.Component {
                               <Period
                                 inputSize={6}
                                 selectSize={6}
+                                inputPlaceholder={1}
                                 selectPlaceholder="ui-circulation.settings.common.blankPlaceholder"
                                 inputValuePath={`${pathToNotice}.sendOptions.sendEvery.duration`}
                                 selectValuePath={`${pathToNotice}.sendOptions.sendEvery.intervalId`}

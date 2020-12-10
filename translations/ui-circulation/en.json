@@ -298,6 +298,7 @@
   "settings.noticePolicy.notices.upon": "Upon/At",
   "settings.noticePolicy.notices.postponed.notification": "Always sent at the end of a session and loans are bundled into a single notice for each patron.",
   "settings.noticePolicy.notices.realTime.notification": "Always sent when event is triggered.",
+  "settings.noticePolicy.notices.conditional.notification": "Always sent when event is triggered and send conditions are met.",
   "settings.noticePolicy.notices.send.longTerm": "Send overnight with multiple loans/items by patron. Useful for long-term loans.",
   "settings.noticePolicy.notices.send.shortTerm": "Send throughout the day without multiple loans/items. Useful for short-term loans.",
 
@@ -310,6 +311,7 @@
   "settings.noticePolicy.requestNotices.requestCancelation": "Cancel request",
   "settings.noticePolicy.notices.triggeringEvent": "Triggering event",
   "settings.noticePolicy.loanNotices.dueDate": "Loan due date/time",
+  "settings.noticePolicy.loanNotices.agedToLost": "Item aged to lost",
   "settings.noticePolicy.loanNotices.manualDueDateChange": "Loan due date change",
   "settings.noticePolicy.loanNotices.itemRecalled": "Item recalled",
   "settings.noticePolicy.loanNotices.renewed": "Item renewed",
@@ -434,6 +436,8 @@
 
   "settings.noticePolicy.feeFineNotices.returned": "Overdue fine, returned",
   "settings.noticePolicy.feeFineNotices.renewed": "Overdue fine, renewed",
+  "settings.noticePolicy.feeFineNotices.atl.fineCharged": "Lost item fee(s) charged",
+  "settings.noticePolicy.feeFineNotices.atl.itemReturned": "Lost item returned - fee(s) adjusted",
 
   "permission.settings.cancellation-reasons": "Settings (Circ): Can create, edit and remove cancellation reasons",
   "permission.settings.loan-history": "Settings (Circ): Can view loan history",

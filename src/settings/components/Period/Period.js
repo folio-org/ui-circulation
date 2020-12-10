@@ -28,6 +28,7 @@ class Period extends PureComponent {
     inputSize: PropTypes.number,
     selectSize: PropTypes.number,
     fieldLabel: PropTypes.string,
+    inputPlaceholder: PropTypes.string,
     selectPlaceholder: PropTypes.string,
     changeFormValue: PropTypes.func,
     intervalPeriodsSuffix: PropTypes.string,
@@ -38,6 +39,7 @@ class Period extends PureComponent {
     inputSize: 2,
     selectSize: 2,
     fieldLabel: '',
+    inputPlaceholder: '',
     selectPlaceholder: '',
     changeFormValue: noop,
     intervalPeriodsSuffix: '',
@@ -66,6 +68,7 @@ class Period extends PureComponent {
       inputValuePath,
       selectValuePath,
       intervalPeriods,
+      inputPlaceholder,
       selectPlaceholder,
       required,
       inputSize,
@@ -102,6 +105,7 @@ class Period extends PureComponent {
                 component={TextField}
                 onClearField={this.onInputClear}
                 parse={this.transformInputValue}
+                placeholder={inputPlaceholder}
               />
             </div>
           </Col>

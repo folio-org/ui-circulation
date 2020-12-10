@@ -9,7 +9,7 @@ import NoticesList from '../components';
 import {
   requestNoticesTriggeringEvents,
   requestTimeBasedEventsIds,
-  requestTimeBasedNoticesSendEvents,
+  uponAndBeforeSendEvents,
 } from '../../../../../constants';
 
 class RequestNoticesSection extends React.Component {
@@ -21,6 +21,10 @@ class RequestNoticesSection extends React.Component {
       label: PropTypes.string.isRequired,
     })).isRequired,
   };
+
+  getSendEvents = () => {
+    return uponAndBeforeSendEvents;
+  }
 
   render() {
     const {
@@ -41,7 +45,7 @@ class RequestNoticesSection extends React.Component {
             sectionKey="requestNotices"
             component={NoticesList}
             policy={policy}
-            sendEvents={requestTimeBasedNoticesSendEvents}
+            getSendEvents={this.getSendEvents}
             sendEventTriggeringIds={values(requestTimeBasedEventsIds)}
             templates={templates}
             triggeringEvents={requestNoticesTriggeringEvents}
