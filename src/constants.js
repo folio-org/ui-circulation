@@ -443,16 +443,6 @@ export const timeBasedFeeFineEventsIds = {
 
 export const userInitiatedTimeBasedFeeFineEventsIds = {
   ATL_FINE_ITEM_RETURNED: 'Aged to lost & item returned - fine adjusted',
-  ATL_FINE_ITEM_REPLACED: 'Aged to lost & item replaced - fine adjusted',
-};
-
-// TODO DELETE?
-export const feeFineEventsIds = {
-  RETURNED: 'Overdue fine returned',
-  RENEWED: 'Overdue fine renewed',
-  ATL_FINE_CHARGED: 'Aged to lost - fine charged',
-  ATL_FINE_ITEM_RETURNED: 'Aged to lost & item returned - fine adjusted',
-  ATL_FINE_ITEM_REPLACED: 'Aged to lost & item replaced - fine adjusted',
 };
 
 export const feeFineNoticesTriggeringEvents = [
@@ -471,10 +461,6 @@ export const feeFineNoticesTriggeringEvents = [
   {
     value: userInitiatedTimeBasedFeeFineEventsIds.ATL_FINE_ITEM_RETURNED,
     label: 'ui-circulation.settings.noticePolicy.feeFineNotices.atl.itemReturned',
-  },
-  {
-    value: userInitiatedTimeBasedFeeFineEventsIds.ATL_FINE_ITEM_REPLACED,
-    label: 'ui-circulation.settings.noticePolicy.feeFineNotices.atl.itemReplaced',
   },
 ];
 
