@@ -146,6 +146,11 @@ const formats = {
       previewValue: '987321654',
       allowedFor: [...Object.values(staffSlipMap)]
     },
+    {
+      token: 'request.patronComments',
+      previewValue: 'Please deliver to the History building for Professor McCoy.',
+      allowedFor: [...Object.values(staffSlipMap)]
+    },
   ],
   requestDeliveryAddress: [
     {
