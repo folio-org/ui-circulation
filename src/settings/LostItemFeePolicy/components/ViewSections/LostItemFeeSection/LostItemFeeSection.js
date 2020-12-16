@@ -72,6 +72,26 @@ const LostItemFeeSection = (props) => {
         </Row>
         <Row>
           <Col xs={12}>
+            <div data-test-item-recalled-aged>
+              <KeyValue
+                label={<FormattedMessage id="ui-circulation.settings.lostItemFee.itemRecalledAgedLostOverdue" />}
+                value={getPeriodValue('itemAgedLostOverdue')}
+              />
+            </div>
+          </Col>
+        </Row>
+        <Row>
+          <Col xs={12}>
+            <div data-test-patron-billed-recalled>
+              <KeyValue
+                label={<FormattedMessage id="ui-circulation.settings.lostItemFee.patronBilledAfterRecalledAgedLost" />}
+                value={getPeriodValue('patronBilledAfterAgedLost')}
+              />
+            </div>
+          </Col>
+        </Row>
+        <Row>
+          <Col xs={12}>
             <div data-test-charge-amount>
               <KeyValue
                 label={<FormattedMessage id="ui-circulation.settings.lostItemFee.chargeAmountItem" />}

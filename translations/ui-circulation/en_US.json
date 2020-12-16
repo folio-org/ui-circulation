@@ -336,6 +336,8 @@
     "settings.lostItemFee.description": "Description",
     "settings.lostItemFee.itemeAgedLostOverdue": "Items aged to lost after overdue",
     "settings.lostItemFee.patronBilledAfterAgedLost": "Patron billed after aged to lost",
+    "settings.lostItemFee.itemRecalledAgedLostOverdue": "Recalled items aged to lost after overdue",
+    "settings.lostItemFee.patronBilledAfterRecalledAgedLost": "Patron billed for recall after aged to lost",
     "settings.lostItemFee.chargeAmountItem": "Charge amount for item",
     "settings.lostItemFee.lostItemProcessingFee": "Lost item processing fee",
     "settings.lostItemFee.chargeAmountItemPatron": "Charge lost item processing fee if item declared lost by patron",
