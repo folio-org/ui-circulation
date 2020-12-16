@@ -10,6 +10,7 @@
 * Duplicate patron notice template names allowed - case is not considered in validation. Refs UICIRC-528.
 * Circ rules editor does not generate space as expected when adding criteria to multiple criteria rule. Refs UICIRC-488.
 * Add aged to lost triggers to notice policy. Refs UICIRC-515.
+* Add a staff slips token for patron comments. Refs UICIRC-523.
 
 ## 4.0.0 (https://github.com/folio-org/ui-circulation/tree/v4.0.0) (2020-10-13)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v3.0.0...v4.0.0)
