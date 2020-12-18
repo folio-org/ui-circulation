@@ -2,6 +2,7 @@ import {
   isUndefined,
   cloneDeep,
   forEach,
+  set,
   values,
   unset,
 } from 'lodash';
@@ -11,7 +12,8 @@ import { Notice } from '../../Models/NoticePolicy';
 import {
   timeBasedFeeFineEventsIds,
   loanTimeBasedEventsIds,
-  requestTimeBasedEventsIds
+  requestTimeBasedEventsIds,
+  userInitiatedTimeBasedFeeFineEventsIds,
 } from '../../../constants';
 
 const setRealTimeFlag = (sectionKey, policy) => {
@@ -20,12 +22,29 @@ const setRealTimeFlag = (sectionKey, policy) => {
   const sendInRealTime = [
     ...Object.values(requestTimeBasedEventsIds),
     ...Object.values(timeBasedFeeFineEventsIds),
+    loanTimeBasedEventsIds.AGED_TO_LOST,
+    userInitiatedTimeBasedFeeFineEventsIds.ATL_FINE_ITEM_RETURNED,
   ];
 
   forEach(noticePolicy[sectionKey], (notice) => {
     notice.realTime = isUndefined(notice.realTime)
       ? sendInRealTime.includes(notice?.sendOptions?.sendWhen)
       : isTrueSet(notice.realTime);
+  });
+
+  return noticePolicy;
+};
+
+export const setSendHowValue = (sectionKey, policy) => {
+  const noticePolicy = cloneDeep(policy);
+  const allowedStatues = [
+    userInitiatedTimeBasedFeeFineEventsIds.ATL_FINE_ITEM_RETURNED,
+  ];
+
+  forEach(noticePolicy[sectionKey], (notice) => {
+    if (allowedStatues.includes(notice.sendOptions.sendWhen)) {
+      set(notice, 'sendOptions.sendHow', 'Upon At');
+    }
   });
 
   return noticePolicy;
@@ -80,6 +99,7 @@ export default (entity) => {
     setRealTimeFlag.bind(null, 'requestNotices'),
     checkNoticeHiddenFields.bind(null, 'feeFineNotices', values(timeBasedFeeFineEventsIds)),
     setRealTimeFlag.bind(null, 'feeFineNotices'),
+    setSendHowValue.bind(null, 'feeFineNotices'),
   ];
 
   return filter(entity, ...callbacks);

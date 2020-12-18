@@ -4,7 +4,6 @@ import { Field } from 'react-final-form';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import {
   find,
-  sortBy,
   memoize,
 } from 'lodash';
 
@@ -153,8 +152,7 @@ class PatronNoticeForm extends React.Component {
     const isActive = initialValues && initialValues.active;
     const category = getFieldState('category')?.value;
 
-    const sortedCategories = sortBy(patronNoticeCategories, ['label']);
-    const categoryOptions = sortedCategories.map(({ label, id }) => ({
+    const categoryOptions = patronNoticeCategories.map(({ label, id }) => ({
       label: formatMessage({ id: label }),
       value: id,
     }));

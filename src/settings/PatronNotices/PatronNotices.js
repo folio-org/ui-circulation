@@ -79,7 +79,7 @@ class PatronNotices extends React.Component {
   };
 
   render() {
-    const [{ id: defaultCategory }] = sortBy(patronNoticeCategories, ['label']);
+    const [{ id: defaultCategory }] = patronNoticeCategories;
 
     return (
       <EntryManager
