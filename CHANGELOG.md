@@ -11,6 +11,7 @@
 * Circ rules editor does not generate space as expected when adding criteria to multiple criteria rule. Refs UICIRC-488.
 * Add aged to lost triggers to notice policy. Refs UICIRC-515.
 * Add a staff slips token for patron comments. Refs UICIRC-523.
+* Add fee/fine action tokens to template with fee/fine charge or adjustment. Refs UICIRC-537.
 
 ## 4.0.0 (https://github.com/folio-org/ui-circulation/tree/v4.0.0) (2020-10-13)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v3.0.0...v4.0.0)

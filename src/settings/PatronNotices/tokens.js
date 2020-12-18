@@ -329,32 +329,50 @@ const formats = {
     {
       token: 'feeAction.type',
       previewValue: 'Waived partially',
-      allowedFor: [patronNoticeCategoryIds.FEE_FINE_ACTION],
+      allowedFor: [
+        patronNoticeCategoryIds.FEE_FINE_ACTION,
+        patronNoticeCategoryIds.AUTOMATED_FEE_FINE,
+      ],
     },
     {
       token: 'feeAction.actionDate',
       previewValue: 'Jul 10, 2020',
-      allowedFor: [patronNoticeCategoryIds.FEE_FINE_ACTION],
+      allowedFor: [
+        patronNoticeCategoryIds.FEE_FINE_ACTION,
+        patronNoticeCategoryIds.AUTOMATED_FEE_FINE,
+      ],
     },
     {
       token: 'feeAction.actionDateTime',
       previewValue: 'Jul 10, 2020 8:00',
-      allowedFor: [patronNoticeCategoryIds.FEE_FINE_ACTION],
+      allowedFor: [
+        patronNoticeCategoryIds.FEE_FINE_ACTION,
+        patronNoticeCategoryIds.AUTOMATED_FEE_FINE,
+      ],
     },
     {
       token: 'feeAction.amount',
       previewValue: '$5.00',
-      allowedFor: [patronNoticeCategoryIds.FEE_FINE_ACTION],
+      allowedFor: [
+        patronNoticeCategoryIds.FEE_FINE_ACTION,
+        patronNoticeCategoryIds.AUTOMATED_FEE_FINE,
+      ],
     },
     {
       token: 'feeAction.remainingAmount',
       previewValue: '$10.00',
-      allowedFor: [patronNoticeCategoryIds.FEE_FINE_ACTION],
+      allowedFor: [
+        patronNoticeCategoryIds.FEE_FINE_ACTION,
+        patronNoticeCategoryIds.AUTOMATED_FEE_FINE,
+      ],
     },
     {
       token: 'feeAction.additionalInfo',
       previewValue: 'Cost to repair less than expected.',
-      allowedFor: [patronNoticeCategoryIds.FEE_FINE_ACTION],
+      allowedFor: [
+        patronNoticeCategoryIds.FEE_FINE_ACTION,
+        patronNoticeCategoryIds.AUTOMATED_FEE_FINE,
+      ],
     },
   ],
 };

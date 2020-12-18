@@ -354,16 +354,16 @@ export const patronNoticeCategories = [
     label: 'ui-circulation.settings.patronNotices.categories.request',
   },
   {
+    id: patronNoticeCategoryIds.AUTOMATED_FEE_FINE,
+    label: 'ui-circulation.settings.patronNotices.categories.automatedFeeFineAction',
+  },
+  {
     id: patronNoticeCategoryIds.FEE_FINE_CHARGE,
     label: 'ui-circulation.settings.patronNotices.categories.feeFineCharge',
   },
   {
     id: patronNoticeCategoryIds.FEE_FINE_ACTION,
     label: 'ui-circulation.settings.patronNotices.categories.feeFineAction',
-  },
-  {
-    id: patronNoticeCategoryIds.AUTOMATED_FEE_FINE,
-    label: 'ui-circulation.settings.patronNotices.categories.automatedFeeFineAction',
   },
 ];
 
