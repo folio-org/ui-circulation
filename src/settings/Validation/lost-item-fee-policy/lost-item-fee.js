@@ -20,6 +20,31 @@ export default function (l) {
       rules: ['isNotEmptySelect'],
       shouldValidate: l.hasValue('patronBilledAfterAgedLost.duration'),
     },
+
+    // 'Recalled items aged to lost after overdue':
+    // Duration field: If there is an interval selected, there must be a duration value
+    'recalledItemAgedLostOverdue.duration': {
+      rules: ['hasAmount'],
+      shouldValidate: l.hasInterval('recalledItemAgedLostOverdue.intervalId'),
+    },
+    // Interval field: If there is a duration value, an interval must be selected
+    'recalledItemAgedLostOverdue.intervalId': {
+      rules: ['isNotEmptySelect'],
+      shouldValidate: l.hasValue('recalledItemAgedLostOverdue.duration'),
+    },
+
+    // 'Patron billed for recall after aged to lost':
+    // Duration field: If there is an interval selected, there must be a duration value
+    'patronBilledAfterRecalledItemAgedLost.duration': {
+      rules: ['hasAmount'],
+      shouldValidate: l.hasInterval('patronBilledAfterRecalledItemAgedLost.intervalId'),
+    },
+    // Interval field: If there is a duration value, an interval must be selected
+    'patronBilledAfterRecalledItemAgedLost.intervalId': {
+      rules: ['isNotEmptySelect'],
+      shouldValidate: l.hasValue('patronBilledAfterRecalledItemAgedLost.duration'),
+    },
+
     'chargeAmountItem.amount': {
       rules: ['hasPositiveItemsAgedToLostAfterOverdueAmount'],
       shouldValidate: l.hasPassedValue('chargeAmountItem.chargeType', 'anotherCost') && l.hasPositiveValue('itemAgedLostOverdue.duration'),
