@@ -81,8 +81,8 @@ class LostItemFeeSection extends React.Component {
         <div data-test-item-recalled-aged-lost>
           <Period
             fieldLabel="ui-circulation.settings.lostItemFee.itemRecalledAgedLostOverdue"
-            inputValuePath="patronBilledAfterAgedLost.duration"
-            selectValuePath="patronBilledAfterAgedLost.intervalId"
+            inputValuePath="recalledItemAgedLostOverdue.duration"
+            selectValuePath="recalledItemAgedLostOverdue.intervalId"
             intervalPeriods={this.generateOptions(intervalPeriodsLower, 'ui-circulation.settings.lostItemFee.selectInterval')}
             changeFormValue={change}
           />
@@ -90,8 +90,8 @@ class LostItemFeeSection extends React.Component {
         <div data-test-patron-billed-recalled>
           <Period
             fieldLabel="ui-circulation.settings.lostItemFee.patronBilledAfterRecalledAgedLost"
-            inputValuePath="patronBilledAfterAgedLost.duration"
-            selectValuePath="patronBilledAfterAgedLost.intervalId"
+            inputValuePath="patronBilledAfterRecalledItemAgedLost.duration"
+            selectValuePath="patronBilledAfterRecalledItemAgedLost.intervalId"
             intervalPeriods={this.generateOptions(intervalPeriodsLower, 'ui-circulation.settings.lostItemFee.selectInterval')}
             changeFormValue={change}
           />
