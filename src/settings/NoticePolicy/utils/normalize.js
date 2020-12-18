@@ -35,7 +35,7 @@ const setRealTimeFlag = (sectionKey, policy) => {
   return noticePolicy;
 };
 
-const setSendHowValue = (sectionKey, policy) => {
+export const setSendHowValue = (sectionKey, policy) => {
   const noticePolicy = cloneDeep(policy);
   const allowedStatues = [
     userInitiatedTimeBasedFeeFineEventsIds.ATL_FINE_ITEM_RETURNED,
