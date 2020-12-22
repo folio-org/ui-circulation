@@ -18,6 +18,7 @@ import {
   hasLostItemProcessingFeeValue,
   hasPositiveReplacementAllowed,
   hasPatronBilledAfterAgedToLostValue,
+  hasPatronBilledAfterRecalledAgedToLostValue,
   hasChargeAmountItemSystemSelected,
   isToBeforeFrom,
   isDueAfterTo,
@@ -28,6 +29,7 @@ import {
   hasPositiveLostItemProcessingFeeAndInvalidItemsAgedToLostAfterOverdue,
   hasReplacementAllowedAndNegativeLostItemPolicyFee,
   hasNegativeReplacementAllowedAndPositiveLostItemPolicyFee,
+  hasValueIfPatronBilledAfterRecalledHasValue,
 } from './handlers';
 
 export default {
@@ -102,6 +104,10 @@ export default {
   hasPatronBilledAfterAgedToLostValue : {
     validate: hasPatronBilledAfterAgedToLostValue,
     message: <FormattedMessage id="ui-circulation.settings.lostItemFee.validate.hasPatronBilledAfterAgedToLostValue" />
+  },
+  hasPatronBilledAfterRecalledAgedToLostValue : {
+    validate: hasPatronBilledAfterRecalledAgedToLostValue,
+    message: <FormattedMessage id="ui-circulation.settings.lostItemFee.validate.hasPatronBilledAfterRecalledAgedToLostValue" />
   },
   hasPositiveLostItemProcessingFeeValue: {
     validate: isFloatGreaterThanZero,

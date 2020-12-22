@@ -24,8 +24,8 @@ export default function (l) {
     // 'Recalled items aged to lost after overdue':
     // Duration field: If there is an interval selected, there must be a duration value
     'recalledItemAgedLostOverdue.duration': {
-      rules: ['hasAmount'],
-      shouldValidate: l.hasInterval('recalledItemAgedLostOverdue.intervalId'),
+      rules: ['hasPatronBilledAfterRecalledAgedToLostValue', 'hasAmount'],
+      shouldValidate: l.hasInterval('recalledItemAgedLostOverdue.intervalId') || l.hasValue('patronBilledAfterRecalledItemAgedLost.duration'),
     },
     // Interval field: If there is a duration value, an interval must be selected
     'recalledItemAgedLostOverdue.intervalId': {
