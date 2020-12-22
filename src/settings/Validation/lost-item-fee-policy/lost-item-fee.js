@@ -1,4 +1,4 @@
-/***
+/*
   Validation in ui-circulation is complex. Using the example of adding new fields (e.g., new <Period> components)
 to the lost item fee policy form, adding new validation rules requires the following steps:
   1. In the model class (src/Models/LostItemFeePolicy), add the new fields to the constructor
@@ -22,7 +22,7 @@ to the lost item fee policy form, adding new validation rules requires the follo
     then you must have a function named hasPatronBilledAfterRecalledAgedToLostValue in the handlers file.
 
   If you follow all these steps, then your new validation rules should start working for the form. Piece of cake!
- ***/
+ */
 
 export default function (l) {
   return {
