@@ -435,7 +435,7 @@
   "settings.lostItemFee.validate.hasReplacementAllowedAndNegativeLostItemPolicyFee": "'Replacement allowed' must be 'Yes' for this selection",
   "settings.lostItemFee.validate.chargeAmountItemSystemSelected": "Entry required if 'Charge lost item processing fee if item aged to lost by system' selected",
   "settings.lostItemFee.validate.emptyAmount": "Please enter amount",
-  "settings.lostItemFee.validate.hasPositiveItemsAgedToLostAfterOverdueAmount": "'Set cost' must be > 0 OR 'Charge lost item processing fee if item aged to lost by system?' must be 'Yes' if 'Items aged to lost after overdue' is > 0",
+  "settings.lostItemFee.validate.hasPositiveItemsAgedToLostAfterOverdueAmount": "'Set cost' must be > 0 OR 'Charge lost item processing fee if item aged to lost by system?' must be 'Yes' if 'Items aged to lost after overdue' is > 0 or 'Recalled items aged to lost after overdue' is > 0",
 
   "settings.noticePolicy.feeFineNotices.returned": "Overdue fine, returned",
   "settings.noticePolicy.feeFineNotices.renewed": "Overdue fine, renewed",

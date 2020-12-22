@@ -47,7 +47,9 @@ export default function (l) {
 
     'chargeAmountItem.amount': {
       rules: ['hasPositiveItemsAgedToLostAfterOverdueAmount'],
-      shouldValidate: l.hasPassedValue('chargeAmountItem.chargeType', 'anotherCost') && l.hasPositiveValue('itemAgedLostOverdue.duration'),
+      shouldValidate: l.hasPassedValue('chargeAmountItem.chargeType', 'anotherCost') && (l.hasPositiveValue('itemAgedLostOverdue.duration') ||
+      l.hasPositiveValue('recalledItemAgedLostOverdue.duration') ||
+      l.hasPositiveValue('patronBilledAfterRecalledItemAgedLost.duration')),
     },
     'lostItemProcessingFee': {
       rules: ['hasPositiveLostItemProcessingFeeValue', 'hasNoChargeLostItemProcessingFee'],

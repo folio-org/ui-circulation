@@ -107,7 +107,7 @@ export const hasNegativeReplacementAllowedAndPositiveLostItemPolicyFee = (value,
   );
 };
 
-export const hasPatronBilledAfterAgedToLostValue = (value, chargeAmountItemSystemSelected) => {
+export const hasPatronBilledAfterAgedToLostValue = (value, model) => {
   const patronBilledAfterAgedToLostValue = get(model, 'patronBilledAfterAgedLost.duration');
 
   return (isNotEmpty(patronBilledAfterAgedToLostValue) && isNotEmpty(value)) || !isNotEmpty(patronBilledAfterAgedToLostValue);
