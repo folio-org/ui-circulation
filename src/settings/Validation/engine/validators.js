@@ -29,7 +29,6 @@ import {
   hasPositiveLostItemProcessingFeeAndInvalidItemsAgedToLostAfterOverdue,
   hasReplacementAllowedAndNegativeLostItemPolicyFee,
   hasNegativeReplacementAllowedAndPositiveLostItemPolicyFee,
-  hasValueIfPatronBilledAfterRecalledHasValue,
 } from './handlers';
 
 export default {

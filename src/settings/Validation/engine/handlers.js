@@ -168,6 +168,6 @@ export const hasPositiveLostItemProcessingFeeAndInvalidItemsAgedToLostAfterOverd
 export const hasPatronBilledAfterRecalledAgedToLostValue = (value, model) => {
   const recalledLostValue = get(model, 'recalledItemAgedLostOverdue.duration');
   const patronBilledRecalledValue = get(model, 'patronBilledAfterRecalledItemAgedLost.duration');
-  
+
   return (isUndefined(patronBilledRecalledValue) || (recalledLostValue && patronBilledRecalledValue));
-}
+};
