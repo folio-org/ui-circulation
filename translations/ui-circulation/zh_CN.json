@@ -94,7 +94,7 @@
     "settings.staffSlips.editLabel": "编辑：员工单 - {name}",
     "settings.loanPolicy.openingTimeOffset": "开放时间抵消",
     "settings.index.patronNotices": "读者通知模板",
-    "settings.patronNotices.categories.feeFineAction": "费用/罚款操作（支付、豁免、退款、转移或错误取消）",
+    "settings.patronNotices.categories.feeFineAction": "人工操作费用/罚款（支付、豁免、退款、转移或取消/错误）",
     "settings.patronNotices.categories.feeFineCharge": "人工的费用/罚款收取",
     "settings.patronNotices.categories.loan": "借阅",
     "settings.patronNotices.categories.request": "请求",
@@ -295,7 +295,7 @@
     "settings.index.feesFines": "费用/罚款",
     "settings.index.patronNoticesSettings": "读者通知",
     "settings.index.request": "请求",
-    "settings.validate.greaterThanOrEqualToZero": "该值必须是整数且大于或等于0",
+    "settings.validate.greaterThanOrEqualToZero": "该值必须大于或等于0",
     "settings.finePolicy.entryLabel": "超期罚款政策",
     "settings.finePolicy.paneTitle": "超期罚款政策",
     "settings.finePolicy.overdueFine": "超期罚款",
@@ -423,5 +423,11 @@
     "settings.lostItemFee.validate.hasReplacementAllowedAndPositiveLostItemPolicyFee": "对于此选择，“遗失单件处理费”必须> 0，并且“允许更换”必须为“是”",
     "settings.lostItemFee.validate.hasReplacementAllowedAndNegativeLostItemPolicyFee": "对于此选择，“允许替换”必须为“是”",
     "settings.circulationRules.all": "所有",
-    "settings.circulationRules.not": "! (not)"
+    "settings.circulationRules.not": "!（非）",
+    "settings.requestManagement.allowRecallsToExtendOverdueLoans": "允许召回延长逾期借阅的到期日",
+    "settings.requestManagement.alternateRecallReturnInterval": "逾期借阅的备用召回归还间隔",
+    "settings.noticePolicy.notices.conditional.notification": "总是在事件触发且满足发送条件时发送。",
+    "settings.noticePolicy.loanNotices.agedToLost": "单件超期太久视为遗失",
+    "settings.noticePolicy.feeFineNotices.atl.fineCharged": "已收取遗失单件费",
+    "settings.noticePolicy.feeFineNotices.atl.itemReturned": "遗失单件归还-费用已调整"
 }

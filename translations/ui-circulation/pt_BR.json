@@ -94,7 +94,7 @@
     "settings.staffSlips.editLabel": "Editar: Ficha de encaminhamento - {name}",
     "settings.loanPolicy.openingTimeOffset": "Compensação de tempo de abertura",
     "settings.index.patronNotices": "Modelos de aviso aos usuários",
-    "settings.patronNotices.categories.feeFineAction": "Ação de taxa/multa (pagar, renunciar, reembolsar, transferir ou cancelar por erro)",
+    "settings.patronNotices.categories.feeFineAction": "Ação manual dee taxa/multa (pagar, abonar, reembolsar, transferir ou cancelar/erro)",
     "settings.patronNotices.categories.feeFineCharge": "Pagamento manual de taxa/multa",
     "settings.patronNotices.categories.loan": "Empréstimo",
     "settings.patronNotices.categories.request": "Pedido de compra",
@@ -423,5 +423,11 @@
     "settings.lostItemFee.validate.hasReplacementAllowedAndPositiveLostItemPolicyFee": "'Taxa de processamento de item perdido' deve ser maior que 0 e 'Substituição permitida' deve ser 'Sim' para esta seleção",
     "settings.lostItemFee.validate.hasReplacementAllowedAndNegativeLostItemPolicyFee": "'Substituição permitida' deve ser 'Sim' para esta seleção",
     "settings.circulationRules.all": "Todos",
-    "settings.circulationRules.not": "! (não)"
+    "settings.circulationRules.not": "! (não)",
+    "settings.requestManagement.allowRecallsToExtendOverdueLoans": "Permitir que os recalls prorroguem as datas de vencimento dos empréstimos em atraso",
+    "settings.requestManagement.alternateRecallReturnInterval": "Intervalo de recall alternativo para empréstimos em atraso",
+    "settings.noticePolicy.notices.conditional.notification": "Sempre enviado quando o evento é acionado e as condições de envio são cumpridas.",
+    "settings.noticePolicy.loanNotices.agedToLost": "Item com tempo para ser considerado perdido",
+    "settings.noticePolicy.feeFineNotices.atl.fineCharged": "Taxa(s) de item(s) perdido(s) cobrada(s)",
+    "settings.noticePolicy.feeFineNotices.atl.itemReturned": "Item perdido devolvido - taxa(s) ajustada(s)"
 }

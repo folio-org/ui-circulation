@@ -94,7 +94,7 @@
     "settings.staffSlips.editLabel": "Edit: staff slips - {name}",
     "settings.loanPolicy.openingTimeOffset": "Opening time offset",
     "settings.index.patronNotices": "Modelos de aviso ao utilizador",
-    "settings.patronNotices.categories.feeFineAction": "Fee/fine action (pay, waive, refund, transfer or cancel in error)",
+    "settings.patronNotices.categories.feeFineAction": "Manual fee/fine action (pay, waive, refund, transfer or cancel/error)",
     "settings.patronNotices.categories.feeFineCharge": "Manual fee/fine charge",
     "settings.patronNotices.categories.loan": "Empréstimo",
     "settings.patronNotices.categories.request": "Pedido",
@@ -423,5 +423,11 @@
     "settings.lostItemFee.validate.hasReplacementAllowedAndPositiveLostItemPolicyFee": "'Lost item processing fee' must be > 0 and 'Replacement allowed' must be 'Yes' for this selection",
     "settings.lostItemFee.validate.hasReplacementAllowedAndNegativeLostItemPolicyFee": "'Replacement allowed' must be 'Yes' for this selection",
     "settings.circulationRules.all": "All",
-    "settings.circulationRules.not": "! (not)"
+    "settings.circulationRules.not": "! (not)",
+    "settings.requestManagement.allowRecallsToExtendOverdueLoans": "Allow recalls to extend due dates for overdue loans",
+    "settings.requestManagement.alternateRecallReturnInterval": "Alternate recall return interval for overdue loans",
+    "settings.noticePolicy.notices.conditional.notification": "Always sent when event is triggered and send conditions are met.",
+    "settings.noticePolicy.loanNotices.agedToLost": "Item aged to lost",
+    "settings.noticePolicy.feeFineNotices.atl.fineCharged": "Lost item fee(s) charged",
+    "settings.noticePolicy.feeFineNotices.atl.itemReturned": "Lost item returned - fee(s) adjusted"
 }
