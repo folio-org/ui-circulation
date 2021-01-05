@@ -341,7 +341,8 @@ export const patronNoticeCategoryIds = {
   REQUEST: 'Request',
   FEE_FINE_CHARGE: 'FeeFineCharge',
   FEE_FINE_ACTION: 'FeeFineAction',
-  AUTOMATED_FEE_FINE: 'AutomatedFeeFine',
+  AUTOMATED_FEE_FINE_CHARGE: 'AutomatedFeeFineCharge',
+  AUTOMATED_FEE_FINE_ADJUSTMENT: 'AutomatedFeeFineAdjustment',
 };
 
 export const patronNoticeCategories = [
@@ -354,8 +355,12 @@ export const patronNoticeCategories = [
     label: 'ui-circulation.settings.patronNotices.categories.request',
   },
   {
-    id: patronNoticeCategoryIds.AUTOMATED_FEE_FINE,
-    label: 'ui-circulation.settings.patronNotices.categories.automatedFeeFineAction',
+    id: patronNoticeCategoryIds.AUTOMATED_FEE_FINE_CHARGE,
+    label: 'ui-circulation.settings.patronNotices.categories.automatedFeeFineCharge',
+  },
+  {
+    id: patronNoticeCategoryIds.AUTOMATED_FEE_FINE_ADJUSTMENT,
+    label: 'ui-circulation.settings.patronNotices.categories.automatedFeeFineAdjustment',
   },
   {
     id: patronNoticeCategoryIds.FEE_FINE_CHARGE,
