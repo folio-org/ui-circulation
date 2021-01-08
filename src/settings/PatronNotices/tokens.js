@@ -153,7 +153,8 @@ const formats = {
       previewValue: 'Dec 31, 2019',
       allowedFor: [
         patronNoticeCategoryIds.LOAN,
-        patronNoticeCategoryIds.AUTOMATED_FEE_FINE,
+        patronNoticeCategoryIds.AUTOMATED_FEE_FINE_CHARGE,
+        patronNoticeCategoryIds.AUTOMATED_FEE_FINE_ADJUSTMENT,
         patronNoticeCategoryIds.FEE_FINE_ACTION,
       ],
     },
@@ -162,7 +163,8 @@ const formats = {
       previewValue: 'Dec 31, 2019 22:00',
       allowedFor: [
         patronNoticeCategoryIds.LOAN,
-        patronNoticeCategoryIds.AUTOMATED_FEE_FINE,
+        patronNoticeCategoryIds.AUTOMATED_FEE_FINE_CHARGE,
+        patronNoticeCategoryIds.AUTOMATED_FEE_FINE_ADJUSTMENT,
         patronNoticeCategoryIds.FEE_FINE_ACTION,
       ],
     },
@@ -171,7 +173,8 @@ const formats = {
       previewValue: 'Jan 1, 2019',
       allowedFor: [
         patronNoticeCategoryIds.LOAN,
-        patronNoticeCategoryIds.AUTOMATED_FEE_FINE,
+        patronNoticeCategoryIds.AUTOMATED_FEE_FINE_CHARGE,
+        patronNoticeCategoryIds.AUTOMATED_FEE_FINE_ADJUSTMENT,
         patronNoticeCategoryIds.FEE_FINE_ACTION,
       ],
     },
@@ -180,7 +183,8 @@ const formats = {
       previewValue: 'Jan 1, 2019 11:00',
       allowedFor: [
         patronNoticeCategoryIds.LOAN,
-        patronNoticeCategoryIds.AUTOMATED_FEE_FINE,
+        patronNoticeCategoryIds.AUTOMATED_FEE_FINE_CHARGE,
+        patronNoticeCategoryIds.AUTOMATED_FEE_FINE_ADJUSTMENT,
         patronNoticeCategoryIds.FEE_FINE_ACTION,
       ],
     },
@@ -189,7 +193,8 @@ const formats = {
       previewValue: 'Dec 15, 2019',
       allowedFor: [
         patronNoticeCategoryIds.LOAN,
-        patronNoticeCategoryIds.AUTOMATED_FEE_FINE,
+        patronNoticeCategoryIds.AUTOMATED_FEE_FINE_CHARGE,
+        patronNoticeCategoryIds.AUTOMATED_FEE_FINE_ADJUSTMENT,
         patronNoticeCategoryIds.FEE_FINE_ACTION,
       ],
     },
@@ -198,7 +203,8 @@ const formats = {
       previewValue: 'Dec 15, 2019 13:24',
       allowedFor: [
         patronNoticeCategoryIds.LOAN,
-        patronNoticeCategoryIds.AUTOMATED_FEE_FINE,
+        patronNoticeCategoryIds.AUTOMATED_FEE_FINE_CHARGE,
+        patronNoticeCategoryIds.AUTOMATED_FEE_FINE_ADJUSTMENT,
         patronNoticeCategoryIds.FEE_FINE_ACTION,
       ],
     },
@@ -207,7 +213,8 @@ const formats = {
       previewValue: '10',
       allowedFor: [
         patronNoticeCategoryIds.LOAN,
-        patronNoticeCategoryIds.AUTOMATED_FEE_FINE,
+        patronNoticeCategoryIds.AUTOMATED_FEE_FINE_CHARGE,
+        patronNoticeCategoryIds.AUTOMATED_FEE_FINE_ADJUSTMENT,
         patronNoticeCategoryIds.FEE_FINE_ACTION,
       ],
     },
@@ -216,7 +223,8 @@ const formats = {
       previewValue: '2',
       allowedFor: [
         patronNoticeCategoryIds.LOAN,
-        patronNoticeCategoryIds.AUTOMATED_FEE_FINE,
+        patronNoticeCategoryIds.AUTOMATED_FEE_FINE_CHARGE,
+        patronNoticeCategoryIds.AUTOMATED_FEE_FINE_ADJUSTMENT,
         patronNoticeCategoryIds.FEE_FINE_ACTION,
       ],
     },
@@ -225,7 +233,8 @@ const formats = {
       previewValue: '8',
       allowedFor: [
         patronNoticeCategoryIds.LOAN,
-        patronNoticeCategoryIds.AUTOMATED_FEE_FINE,
+        patronNoticeCategoryIds.AUTOMATED_FEE_FINE_CHARGE,
+        patronNoticeCategoryIds.AUTOMATED_FEE_FINE_ADJUSTMENT,
         patronNoticeCategoryIds.FEE_FINE_ACTION,
       ],
     },
@@ -258,7 +267,8 @@ const formats = {
       previewValue: 'Main Library',
       allowedFor: [
         patronNoticeCategoryIds.FEE_FINE_CHARGE,
-        patronNoticeCategoryIds.AUTOMATED_FEE_FINE,
+        patronNoticeCategoryIds.AUTOMATED_FEE_FINE_CHARGE,
+        patronNoticeCategoryIds.AUTOMATED_FEE_FINE_ADJUSTMENT,
         patronNoticeCategoryIds.FEE_FINE_ACTION,
       ],
     },
@@ -267,7 +277,8 @@ const formats = {
       previewValue: 'Damaged Item',
       allowedFor: [
         patronNoticeCategoryIds.FEE_FINE_CHARGE,
-        patronNoticeCategoryIds.AUTOMATED_FEE_FINE,
+        patronNoticeCategoryIds.AUTOMATED_FEE_FINE_CHARGE,
+        patronNoticeCategoryIds.AUTOMATED_FEE_FINE_ADJUSTMENT,
         patronNoticeCategoryIds.FEE_FINE_ACTION,
       ],
     },
@@ -276,7 +287,8 @@ const formats = {
       previewValue: 'Outstanding',
       allowedFor: [
         patronNoticeCategoryIds.FEE_FINE_CHARGE,
-        patronNoticeCategoryIds.AUTOMATED_FEE_FINE,
+        patronNoticeCategoryIds.AUTOMATED_FEE_FINE_CHARGE,
+        patronNoticeCategoryIds.AUTOMATED_FEE_FINE_ADJUSTMENT,
         patronNoticeCategoryIds.FEE_FINE_ACTION,
       ],
     },
@@ -285,7 +297,8 @@ const formats = {
       previewValue: 'Jun 30, 2020',
       allowedFor: [
         patronNoticeCategoryIds.FEE_FINE_CHARGE,
-        patronNoticeCategoryIds.AUTOMATED_FEE_FINE,
+        patronNoticeCategoryIds.AUTOMATED_FEE_FINE_CHARGE,
+        patronNoticeCategoryIds.AUTOMATED_FEE_FINE_ADJUSTMENT,
         patronNoticeCategoryIds.FEE_FINE_ACTION,
       ],
     },
@@ -294,7 +307,8 @@ const formats = {
       previewValue: 'Jun 30, 2020 11:00',
       allowedFor: [
         patronNoticeCategoryIds.FEE_FINE_CHARGE,
-        patronNoticeCategoryIds.AUTOMATED_FEE_FINE,
+        patronNoticeCategoryIds.AUTOMATED_FEE_FINE_CHARGE,
+        patronNoticeCategoryIds.AUTOMATED_FEE_FINE_ADJUSTMENT,
         patronNoticeCategoryIds.FEE_FINE_ACTION,
       ],
     },
@@ -303,7 +317,8 @@ const formats = {
       previewValue: '$15.00',
       allowedFor: [
         patronNoticeCategoryIds.FEE_FINE_CHARGE,
-        patronNoticeCategoryIds.AUTOMATED_FEE_FINE,
+        patronNoticeCategoryIds.AUTOMATED_FEE_FINE_CHARGE,
+        patronNoticeCategoryIds.AUTOMATED_FEE_FINE_ADJUSTMENT,
         patronNoticeCategoryIds.FEE_FINE_ACTION,
       ],
     },
@@ -312,7 +327,8 @@ const formats = {
       previewValue: '$10.00',
       allowedFor: [
         patronNoticeCategoryIds.FEE_FINE_CHARGE,
-        patronNoticeCategoryIds.AUTOMATED_FEE_FINE,
+        patronNoticeCategoryIds.AUTOMATED_FEE_FINE_CHARGE,
+        patronNoticeCategoryIds.AUTOMATED_FEE_FINE_ADJUSTMENT,
         patronNoticeCategoryIds.FEE_FINE_ACTION,
       ],
     },
@@ -331,7 +347,7 @@ const formats = {
       previewValue: 'Waived partially',
       allowedFor: [
         patronNoticeCategoryIds.FEE_FINE_ACTION,
-        patronNoticeCategoryIds.AUTOMATED_FEE_FINE,
+        patronNoticeCategoryIds.AUTOMATED_FEE_FINE_ADJUSTMENT,
       ],
     },
     {
@@ -339,7 +355,7 @@ const formats = {
       previewValue: 'Jul 10, 2020',
       allowedFor: [
         patronNoticeCategoryIds.FEE_FINE_ACTION,
-        patronNoticeCategoryIds.AUTOMATED_FEE_FINE,
+        patronNoticeCategoryIds.AUTOMATED_FEE_FINE_ADJUSTMENT,
       ],
     },
     {
@@ -347,7 +363,7 @@ const formats = {
       previewValue: 'Jul 10, 2020 8:00',
       allowedFor: [
         patronNoticeCategoryIds.FEE_FINE_ACTION,
-        patronNoticeCategoryIds.AUTOMATED_FEE_FINE,
+        patronNoticeCategoryIds.AUTOMATED_FEE_FINE_ADJUSTMENT,
       ],
     },
     {
@@ -355,7 +371,7 @@ const formats = {
       previewValue: '$5.00',
       allowedFor: [
         patronNoticeCategoryIds.FEE_FINE_ACTION,
-        patronNoticeCategoryIds.AUTOMATED_FEE_FINE,
+        patronNoticeCategoryIds.AUTOMATED_FEE_FINE_ADJUSTMENT,
       ],
     },
     {
@@ -363,7 +379,7 @@ const formats = {
       previewValue: '$10.00',
       allowedFor: [
         patronNoticeCategoryIds.FEE_FINE_ACTION,
-        patronNoticeCategoryIds.AUTOMATED_FEE_FINE,
+        patronNoticeCategoryIds.AUTOMATED_FEE_FINE_ADJUSTMENT,
       ],
     },
     {
@@ -371,7 +387,7 @@ const formats = {
       previewValue: 'Cost to repair less than expected.',
       allowedFor: [
         patronNoticeCategoryIds.FEE_FINE_ACTION,
-        patronNoticeCategoryIds.AUTOMATED_FEE_FINE,
+        patronNoticeCategoryIds.AUTOMATED_FEE_FINE_ADJUSTMENT,
       ],
     },
   ],
