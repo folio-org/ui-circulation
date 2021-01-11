@@ -164,3 +164,10 @@ export const hasPositiveLostItemProcessingFeeAndInvalidItemsAgedToLostAfterOverd
 
   return value && parseFloat(lostItemProcessingFee, 10) < 0 && parseInt(itemAgedToLost, 10) > 0;
 };
+
+export const hasPatronBilledAfterRecalledAgedToLostValue = (value, model) => {
+  const recalledLostValue = get(model, 'recalledItemAgedLostOverdue.duration');
+  const patronBilledRecalledValue = get(model, 'patronBilledAfterRecalledItemAgedLost.duration');
+
+  return (isUndefined(patronBilledRecalledValue) || (recalledLostValue && patronBilledRecalledValue));
+};
