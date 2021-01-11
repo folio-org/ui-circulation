@@ -426,5 +426,11 @@
     "settings.lostItemFee.validate.hasReplacementAllowedAndPositiveLostItemPolicyFee": "'Lost item processing fee' must be > 0 and 'Replacement allowed' must be 'Yes' for this selection",
     "settings.lostItemFee.validate.hasReplacementAllowedAndNegativeLostItemPolicyFee": "'Replacement allowed' must be 'Yes' for this selection",
     "settings.circulationRules.all": "All",
-    "settings.circulationRules.not": "! (not)"
+    "settings.circulationRules.not": "! (not)",
+    "settings.requestManagement.allowRecallsToExtendOverdueLoans": "Allow recalls to extend due dates for overdue loans",
+    "settings.requestManagement.alternateRecallReturnInterval": "Alternate recall return interval for overdue loans",
+    "settings.noticePolicy.notices.conditional.notification": "Always sent when event is triggered and send conditions are met.",
+    "settings.noticePolicy.loanNotices.agedToLost": "Item aged to lost",
+    "settings.noticePolicy.feeFineNotices.atl.fineCharged": "Lost item fee(s) charged",
+    "settings.noticePolicy.feeFineNotices.atl.itemReturned": "Lost item returned - fee(s) adjusted"
 }
