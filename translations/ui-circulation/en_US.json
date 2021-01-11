@@ -336,8 +336,6 @@
     "settings.lostItemFee.description": "Description",
     "settings.lostItemFee.itemeAgedLostOverdue": "Items aged to lost after overdue",
     "settings.lostItemFee.patronBilledAfterAgedLost": "Patron billed after aged to lost",
-    "settings.lostItemFee.itemRecalledAgedLostOverdue": "Recalled items aged to lost after overdue",
-    "settings.lostItemFee.patronBilledAfterRecalledAgedLost": "Patron billed for recall after aged to lost",
     "settings.lostItemFee.chargeAmountItem": "Charge amount for item",
     "settings.lostItemFee.lostItemProcessingFee": "Lost item processing fee",
     "settings.lostItemFee.chargeAmountItemPatron": "Charge lost item processing fee if item declared lost by patron",
@@ -369,7 +367,6 @@
     "settings.validate.itemLimitInterval": "Item limit must be > 0, =< 9999 or blank",
     "settings.lostItemFee.setCost": "Set cost",
     "settings.circulationRules.lostItemFeePolicies": "Lost item fee policies",
-    "settings.patronNotices.categories.automatedFeeFineAction": "Automated fee/fine charge or adjustment",
     "settings.noticePolicy.feeFineNotices.returned": "Overdue fine, returned",
     "settings.noticePolicy.feeFineNotices.renewed": "Overdue fine, renewed",
     "settings.checkout.checkin.timeout": "Automatically end check in and check out session after period of inactivity",
@@ -388,7 +385,6 @@
     "settings.finePolicy.validate.invalidMaximumOverdueFine": "Please enter an overdue fine amount or set maximum overdue fine to 0",
     "settings.finePolicy.validate.invalidMaximumRecallOverdueFine": "Please enter an overdue recall fine amount or set maximum overdue recall fine to 0",
     "settings.lostItemFee.validate.hasPatronBilledAfterAgedToLostValue": "Entry required if 'Patron billed after aged to lost' amount entered",
-    "settings.lostItemFee.validate.hasPatronBilledAfterRecalledAgedToLostValue": "Entry required if 'Patron billed for recall after aged to lost' amount entered",
     "settings.lostItemFee.validate.hasPositiveLostItemProcessingFeeValue": "Entry required if 'Charge lost item processing fee if item declared lost by patron?' or 'Charge lost item processing fee if item aged to lost by system?' selected",
     "settings.lostItemFee.validate.hasNoChargeLostItemProcessingFee": "'Lost item processing fee' cannot be > 0 unless 'Charge lost item processing fee if item declared lost by patron ?' and/or 'Charge lost item processing fee if item aged to lost by system ?' is 'Yes'",
     "settings.lostItemFee.validate.hasLostItemProcessingFeeValue": "'Lost item processing fee' must be > 0 for this selection",
@@ -432,5 +428,10 @@
     "settings.noticePolicy.notices.conditional.notification": "Always sent when event is triggered and send conditions are met.",
     "settings.noticePolicy.loanNotices.agedToLost": "Item aged to lost",
     "settings.noticePolicy.feeFineNotices.atl.fineCharged": "Lost item fee(s) charged",
-    "settings.noticePolicy.feeFineNotices.atl.itemReturned": "Lost item returned - fee(s) adjusted"
+    "settings.noticePolicy.feeFineNotices.atl.itemReturned": "Lost item returned - fee(s) adjusted",
+    "settings.patronNotices.categories.automatedFeeFineCharge": "Automated fee/fine charge",
+    "settings.patronNotices.categories.automatedFeeFineAdjustment": "Automated fee/fine adjustment (refund or cancel)",
+    "settings.lostItemFee.itemRecalledAgedLostOverdue": "Recalled items aged to lost after overdue",
+    "settings.lostItemFee.patronBilledAfterRecalledAgedLost": "Patron billed for recall after aged to lost",
+    "settings.lostItemFee.validate.hasPatronBilledAfterRecalledAgedToLostValue": "Entry required if 'Patron billed for recall after aged to lost' amount entered"
 }

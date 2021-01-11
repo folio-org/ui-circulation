@@ -367,7 +367,6 @@
     "settings.validate.itemLimitInterval": "单件限制必须> 0，= < 9999或空白",
     "settings.lostItemFee.setCost": "设置费用",
     "settings.circulationRules.lostItemFeePolicies": "遗失单件费用政策",
-    "settings.patronNotices.categories.automatedFeeFineAction": "自动的费用/罚款收取或调整",
     "settings.noticePolicy.feeFineNotices.returned": "超期罚款，已退还",
     "settings.noticePolicy.feeFineNotices.renewed": "超期罚款，已续期",
     "settings.checkout.checkin.timeout": "未激活一段时间后自动结束归还和借出会话",
@@ -429,5 +428,10 @@
     "settings.noticePolicy.notices.conditional.notification": "总是在事件触发且满足发送条件时发送。",
     "settings.noticePolicy.loanNotices.agedToLost": "单件超期太久视为遗失",
     "settings.noticePolicy.feeFineNotices.atl.fineCharged": "已收取遗失单件费",
-    "settings.noticePolicy.feeFineNotices.atl.itemReturned": "遗失单件归还-费用已调整"
+    "settings.noticePolicy.feeFineNotices.atl.itemReturned": "遗失单件归还-费用已调整",
+    "settings.patronNotices.categories.automatedFeeFineCharge": "Automated fee/fine charge",
+    "settings.patronNotices.categories.automatedFeeFineAdjustment": "Automated fee/fine adjustment (refund or cancel)",
+    "settings.lostItemFee.itemRecalledAgedLostOverdue": "Recalled items aged to lost after overdue",
+    "settings.lostItemFee.patronBilledAfterRecalledAgedLost": "Patron billed for recall after aged to lost",
+    "settings.lostItemFee.validate.hasPatronBilledAfterRecalledAgedToLostValue": "Entry required if 'Patron billed for recall after aged to lost' amount entered"
 }

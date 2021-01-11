@@ -367,7 +367,6 @@
     "settings.validate.itemLimitInterval": "يجب يكون حد المادة > 0، =<9999 أو فارغًا",
     "settings.lostItemFee.setCost": "ضبط التكلفة",
     "settings.circulationRules.lostItemFeePolicies": "سياسات رسوم المواد المفقودة",
-    "settings.patronNotices.categories.automatedFeeFineAction": "فرض أو تعديل رسم/غرامة مؤتمتة",
     "settings.noticePolicy.feeFineNotices.returned": "غرامة تأخير، تمت الإعادة",
     "settings.noticePolicy.feeFineNotices.renewed": "غرامة تأخير، تم التجديد",
     "settings.checkout.checkin.timeout": "قم تلقائيا بإنهاء جلسة الرد والإعارة بعد فترة من عدم النشاط",
@@ -389,7 +388,7 @@
     "settings.lostItemFee.validate.hasPositiveLostItemProcessingFeeValue": "الإدخال مطلوب إذا تم تحديد فرض رسم معالجة مادة مفقودة لمادة تقادمت إلى ضائعة",
     "settings.lostItemFee.validate.hasNoChargeLostItemProcessingFee": "لا يمكن أن يكون 'رسم معالجة المادة الضائعة' > 0 إلا عندما يتم ضبط 'فرض رسم معالجة مادة ضائعة إذا تمت الإعلان عن ضياعها بواسطة المستفيد؟' أو 'فرض رسم معالجة مادة إذا تقادمت المادة إلى ضائعة بواسطة النظام' إلى 'نعم'",
     "settings.lostItemFee.validate.hasLostItemProcessingFeeValue": "يجب أن يكون 'رسم معالجة المادة الضائعة' > 0 لهذا التحديد",
-    "settings.lostItemFee.validate.hasPositiveReplacementProcessingFee": "لا يمكن أن يكون رسم معالجة الاستبدال > 0 إلا عند تحديد الاستبدال مسموح",
+    "settings.lostItemFee.validate.hasPositiveReplacementProcessingFee": "لا يمكن أن يكون 'رسم معالجة الاستبدال' > 0 إلا عند ضبط 'الاستبدال مسموح' إلى 'نعم",
     "settings.lostItemFee.validate.chargeAmountItemSystemSelected": "الإدخال مطلوب إذا تم تحديد 'فرض رسم معالجة مادة ضائعة إذا تقادمت المادة إلى ضائعة وفقًا للنظام'",
     "settings.circulationRules.label": "القواعد",
     "settings.circulationRules.overdueFine.quantity": "مبلغ غرامة التأخير",
@@ -429,5 +428,10 @@
     "settings.noticePolicy.notices.conditional.notification": "يتم إرساله دائماً عند بدء الحدث واستيفاء شروط الإرسال.",
     "settings.noticePolicy.loanNotices.agedToLost": "تقادمت المادة وتم اعتبارها ضائعة",
     "settings.noticePolicy.feeFineNotices.atl.fineCharged": "تم فرض رسوم المادة الضائعة",
-    "settings.noticePolicy.feeFineNotices.atl.itemReturned": "تمت إعادة المادة الضائعة - تم تعديل الرسوم"
+    "settings.noticePolicy.feeFineNotices.atl.itemReturned": "تمت إعادة المادة الضائعة - تم تعديل الرسوم",
+    "settings.patronNotices.categories.automatedFeeFineCharge": "فرض رسم/غرامة مؤتمتة",
+    "settings.patronNotices.categories.automatedFeeFineAdjustment": "تعديل رسم/غرامة مؤتمتة (استرداد أموال أو إلغاء)",
+    "settings.lostItemFee.itemRecalledAgedLostOverdue": "Recalled items aged to lost after overdue",
+    "settings.lostItemFee.patronBilledAfterRecalledAgedLost": "Patron billed for recall after aged to lost",
+    "settings.lostItemFee.validate.hasPatronBilledAfterRecalledAgedToLostValue": "Entry required if 'Patron billed for recall after aged to lost' amount entered"
 }

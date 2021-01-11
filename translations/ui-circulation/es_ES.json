@@ -367,7 +367,6 @@
     "settings.validate.itemLimitInterval": "El límite del ejemplar debe ser > 0, = < 9999 o en blanco",
     "settings.lostItemFee.setCost": "Fijar coste",
     "settings.circulationRules.lostItemFeePolicies": "Políticas de multa por ejemplar perdido",
-    "settings.patronNotices.categories.automatedFeeFineAction": "Tarifa automática / cargo o ajuste de multa",
     "settings.noticePolicy.feeFineNotices.returned": "Multa vencida, devuelta",
     "settings.noticePolicy.feeFineNotices.renewed": "Multa vencida, renovada",
     "settings.checkout.checkin.timeout": "Finalice automáticamente la sesión de devolucion y préstamos después del período de inactividad",
@@ -429,5 +428,10 @@
     "settings.noticePolicy.notices.conditional.notification": "Always sent when event is triggered and send conditions are met.",
     "settings.noticePolicy.loanNotices.agedToLost": "Item aged to lost",
     "settings.noticePolicy.feeFineNotices.atl.fineCharged": "Lost item fee(s) charged",
-    "settings.noticePolicy.feeFineNotices.atl.itemReturned": "Lost item returned - fee(s) adjusted"
+    "settings.noticePolicy.feeFineNotices.atl.itemReturned": "Lost item returned - fee(s) adjusted",
+    "settings.patronNotices.categories.automatedFeeFineCharge": "Automated fee/fine charge",
+    "settings.patronNotices.categories.automatedFeeFineAdjustment": "Automated fee/fine adjustment (refund or cancel)",
+    "settings.lostItemFee.itemRecalledAgedLostOverdue": "Recalled items aged to lost after overdue",
+    "settings.lostItemFee.patronBilledAfterRecalledAgedLost": "Patron billed for recall after aged to lost",
+    "settings.lostItemFee.validate.hasPatronBilledAfterRecalledAgedToLostValue": "Entry required if 'Patron billed for recall after aged to lost' amount entered"
 }
