@@ -367,7 +367,6 @@
     "settings.validate.itemLimitInterval": "La limite d'éléments doit être > 0, = < 9999 ou vierge",
     "settings.lostItemFee.setCost": "Définir le coût",
     "settings.circulationRules.lostItemFeePolicies": "Politiques relatives aux frais pour objets perdus",
-    "settings.patronNotices.categories.automatedFeeFineAction": "Frais / amende ou ajustement automatisés",
     "settings.noticePolicy.feeFineNotices.returned": "Overdue fine, returned",
     "settings.noticePolicy.feeFineNotices.renewed": "Overdue fine, renewed",
     "settings.checkout.checkin.timeout": "Automatically end check in and check out session after period of inactivity",
@@ -419,7 +418,7 @@
     "permission.settings.lost-item-fees-policies": "Settings (Circ): Can create, edit and remove lost item fee policies",
     "settings.lostItemFee.validate.hasPositiveLostItemProcessingFeeAndItemsAgedToLostAfterOverdue": "'Lost item processing fee' must be > 0 and 'Items aged to lost after overdue' amount must be > 0 for this selection",
     "settings.lostItemFee.validate.emptyAmount": "Veuillez saisir le montant",
-    "settings.lostItemFee.validate.hasPositiveItemsAgedToLostAfterOverdueAmount": "'Set cost' must be > 0 OR 'Charge lost item processing fee if item aged to lost by system?' must be 'Yes' if 'Items aged to lost after overdue' is > 0",
+    "settings.lostItemFee.validate.hasPositiveItemsAgedToLostAfterOverdueAmount": "'Set cost' must be > 0 OR 'Charge lost item processing fee if item aged to lost by system?' must be 'Yes' if 'Items aged to lost after overdue' is > 0 or 'Recalled items aged to lost after overdue' is > 0",
     "settings.lostItemFee.validate.hasReplacementAllowedAndPositiveLostItemPolicyFee": "'Lost item processing fee' must be > 0 and 'Replacement allowed' must be 'Yes' for this selection",
     "settings.lostItemFee.validate.hasReplacementAllowedAndNegativeLostItemPolicyFee": "«Le remplacement autorisé» doit être «Oui» pour cette sélection",
     "settings.circulationRules.all": "Tout",
@@ -429,5 +428,10 @@
     "settings.noticePolicy.notices.conditional.notification": "Always sent when event is triggered and send conditions are met.",
     "settings.noticePolicy.loanNotices.agedToLost": "Item aged to lost",
     "settings.noticePolicy.feeFineNotices.atl.fineCharged": "Lost item fee(s) charged",
-    "settings.noticePolicy.feeFineNotices.atl.itemReturned": "Lost item returned - fee(s) adjusted"
+    "settings.noticePolicy.feeFineNotices.atl.itemReturned": "Lost item returned - fee(s) adjusted",
+    "settings.patronNotices.categories.automatedFeeFineCharge": "Automated fee/fine charge",
+    "settings.patronNotices.categories.automatedFeeFineAdjustment": "Automated fee/fine adjustment (refund or cancel)",
+    "settings.lostItemFee.itemRecalledAgedLostOverdue": "Recalled items aged to lost after overdue",
+    "settings.lostItemFee.patronBilledAfterRecalledAgedLost": "Patron billed for recall after aged to lost",
+    "settings.lostItemFee.validate.hasPatronBilledAfterRecalledAgedToLostValue": "Entry required if 'Patron billed for recall after aged to lost' amount entered"
 }

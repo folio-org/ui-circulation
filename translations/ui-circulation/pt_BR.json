@@ -224,7 +224,7 @@
     "settings.common.weeks": "Semana(s)",
     "settings.common.months": "Mês(es)",
     "settings.common.years": "Ano(s)",
-    "settings.common.blankPlaceholder": " ",
+    "settings.common.blankPlaceholder": ".",
     "settings.requestPolicy.cannotDelete.label": "Política de solicitação não pode ser excluída",
     "settings.requestPolicy.cannotDelete.message": "Esta política de solicitação é usada por regras de circulação e não pode ser excluída",
     "settings.common.close": "Fechar",
@@ -367,7 +367,6 @@
     "settings.validate.itemLimitInterval": "O limite do item deve ser > 0, = < 9999 ou em branco",
     "settings.lostItemFee.setCost": "Definir custo",
     "settings.circulationRules.lostItemFeePolicies": "Políticas de taxa de itens perdidos",
-    "settings.patronNotices.categories.automatedFeeFineAction": "Cobrança de taxa/multa automatizada ou ajuste",
     "settings.noticePolicy.feeFineNotices.returned": "Multa por atraso, devolvida",
     "settings.noticePolicy.feeFineNotices.renewed": "Multa por atraso, renovada",
     "settings.checkout.checkin.timeout": "Terminar automaticamente a sessão de devolução e empréstimo após o período de inatividade",
@@ -429,5 +428,10 @@
     "settings.noticePolicy.notices.conditional.notification": "Sempre enviado quando o evento é acionado e as condições de envio são cumpridas.",
     "settings.noticePolicy.loanNotices.agedToLost": "Item com tempo para ser considerado perdido",
     "settings.noticePolicy.feeFineNotices.atl.fineCharged": "Taxa(s) de item(s) perdido(s) cobrada(s)",
-    "settings.noticePolicy.feeFineNotices.atl.itemReturned": "Item perdido devolvido - taxa(s) ajustada(s)"
+    "settings.noticePolicy.feeFineNotices.atl.itemReturned": "Item perdido devolvido - taxa(s) ajustada(s)",
+    "settings.patronNotices.categories.automatedFeeFineCharge": "Automated fee/fine charge",
+    "settings.patronNotices.categories.automatedFeeFineAdjustment": "Automated fee/fine adjustment (refund or cancel)",
+    "settings.lostItemFee.itemRecalledAgedLostOverdue": "Recalled items aged to lost after overdue",
+    "settings.lostItemFee.patronBilledAfterRecalledAgedLost": "Patron billed for recall after aged to lost",
+    "settings.lostItemFee.validate.hasPatronBilledAfterRecalledAgedToLostValue": "Entry required if 'Patron billed for recall after aged to lost' amount entered"
 }
