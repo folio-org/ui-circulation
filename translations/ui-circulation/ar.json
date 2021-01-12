@@ -431,7 +431,7 @@
     "settings.noticePolicy.feeFineNotices.atl.itemReturned": "تمت إعادة المادة الضائعة - تم تعديل الرسوم",
     "settings.patronNotices.categories.automatedFeeFineCharge": "فرض رسم/غرامة مؤتمتة",
     "settings.patronNotices.categories.automatedFeeFineAdjustment": "تعديل رسم/غرامة مؤتمتة (استرداد أموال أو إلغاء)",
-    "settings.lostItemFee.itemRecalledAgedLostOverdue": "Recalled items aged to lost after overdue",
-    "settings.lostItemFee.patronBilledAfterRecalledAgedLost": "Patron billed for recall after aged to lost",
-    "settings.lostItemFee.validate.hasPatronBilledAfterRecalledAgedToLostValue": "Entry required if 'Patron billed for recall after aged to lost' amount entered"
+    "settings.lostItemFee.itemRecalledAgedLostOverdue": "استعادة المواد التي تقادمت إلى ضائعة بعد التأخير",
+    "settings.lostItemFee.patronBilledAfterRecalledAgedLost": "تم تغريم المستفيد للاستعادة بعد تقادم  المادة إلى ضائعة",
+    "settings.lostItemFee.validate.hasPatronBilledAfterRecalledAgedToLostValue": "الإدخال مطلوب إذا تم إدخال مبلغ 'تغريم المستفيد للاستعادة بعد تقادم إلى ضائعة'"
 }

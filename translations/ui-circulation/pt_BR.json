@@ -418,7 +418,7 @@
     "permission.settings.lost-item-fees-policies": "Configurações (Circulação): Pode criar, editar e remover políticas de taxas de itens perdidos",
     "settings.lostItemFee.validate.hasPositiveLostItemProcessingFeeAndItemsAgedToLostAfterOverdue": "'Taxa de processamento de item perdido' deve ser > 0 e o valor de 'Itens perdidos após o vencimento' deve ser > 0 para esta seleção",
     "settings.lostItemFee.validate.emptyAmount": "Por favor, insira o valor",
-    "settings.lostItemFee.validate.hasPositiveItemsAgedToLostAfterOverdueAmount": "'Definir custo' deve ser > 0 OU 'Cobrar taxa de processamento de item perdido se o item envelhecer até ser perdido pelo sistema?' deve ser 'Sim' se 'Itens vencidos e perdidos após o vencimento' for > 0",
+    "settings.lostItemFee.validate.hasPositiveItemsAgedToLostAfterOverdueAmount": "'Definir custo' deve ser > 0 OU 'Cobrar taxa de processamento de item perdido se o item em atraso longo dado como perdido pelo sistema?' deve ser 'Sim' se 'Itens vencidos e perdidos após o vencimento' for > 0",
     "settings.lostItemFee.validate.hasReplacementAllowedAndPositiveLostItemPolicyFee": "'Taxa de processamento de item perdido' deve ser maior que 0 e 'Substituição permitida' deve ser 'Sim' para esta seleção",
     "settings.lostItemFee.validate.hasReplacementAllowedAndNegativeLostItemPolicyFee": "'Substituição permitida' deve ser 'Sim' para esta seleção",
     "settings.circulationRules.all": "Todos",
@@ -429,9 +429,9 @@
     "settings.noticePolicy.loanNotices.agedToLost": "Item com tempo para ser considerado perdido",
     "settings.noticePolicy.feeFineNotices.atl.fineCharged": "Taxa(s) de item(s) perdido(s) cobrada(s)",
     "settings.noticePolicy.feeFineNotices.atl.itemReturned": "Item perdido devolvido - taxa(s) ajustada(s)",
-    "settings.patronNotices.categories.automatedFeeFineCharge": "Automated fee/fine charge",
-    "settings.patronNotices.categories.automatedFeeFineAdjustment": "Automated fee/fine adjustment (refund or cancel)",
-    "settings.lostItemFee.itemRecalledAgedLostOverdue": "Recalled items aged to lost after overdue",
-    "settings.lostItemFee.patronBilledAfterRecalledAgedLost": "Patron billed for recall after aged to lost",
-    "settings.lostItemFee.validate.hasPatronBilledAfterRecalledAgedToLostValue": "Entry required if 'Patron billed for recall after aged to lost' amount entered"
+    "settings.patronNotices.categories.automatedFeeFineCharge": "Cobrança automatizada de multa/taxa",
+    "settings.patronNotices.categories.automatedFeeFineAdjustment": "Ajuste de multa/taxa automatizada (reembolso ou cancelamento)",
+    "settings.lostItemFee.itemRecalledAgedLostOverdue": "Itens recuperados com atraso antigo após o vencimento",
+    "settings.lostItemFee.patronBilledAfterRecalledAgedLost": "Usuário faturado para recall depois de empréstimo antigo dado como perdido",
+    "settings.lostItemFee.validate.hasPatronBilledAfterRecalledAgedToLostValue": "Entrada necessária se o valor 'Usuário faturado para recall depois de empréstimo antigo dado como perdido' for inserido"
 }
