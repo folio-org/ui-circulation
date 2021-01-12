@@ -432,6 +432,6 @@
     "settings.patronNotices.categories.automatedFeeFineCharge": "Automated fee/fine charge",
     "settings.patronNotices.categories.automatedFeeFineAdjustment": "Automated fee/fine adjustment (refund or cancel)",
     "settings.lostItemFee.itemRecalledAgedLostOverdue": "Recalled items aged to lost after overdue",
-    "settings.lostItemFee.patronBilledAfterRecalledAgedLost": "Patron billed for recall after aged to lost",
+    "settings.lostItemFee.patronBilledAfterRecalledAgedLost": "L'utente ha pagato la multa per item dichiarato perso",
     "settings.lostItemFee.validate.hasPatronBilledAfterRecalledAgedToLostValue": "Entry required if 'Patron billed for recall after aged to lost' amount entered"
 }
