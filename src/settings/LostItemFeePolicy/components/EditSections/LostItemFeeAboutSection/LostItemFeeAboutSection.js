@@ -20,6 +20,7 @@ const LostItemFeeAboutSection = () => (
           label={<FormattedMessage id="ui-circulation.settings.lostItemFee.lostItemFeePolicyName" />}
           component={TextField}
           required
+          autoFocus
           name="name"
           id="input-policy-name"
           fullWidth

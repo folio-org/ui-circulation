@@ -21,6 +21,10 @@ describe('NoticePolicyForm', () => {
       expect(NoticePolicyForm.expandAll.isPresent).to.be.true;
     });
 
+    it('should focus name field', () => {
+      expect(NoticePolicyForm.generalSection.policyName.isFocused).to.be.true;
+    });
+
     describe('collapse all', () => {
       beforeEach(async () => {
         await NoticePolicyForm.expandAll.click();

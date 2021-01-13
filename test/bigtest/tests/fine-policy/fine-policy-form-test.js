@@ -12,6 +12,10 @@ describe('FinePolicyForm', () => {
     this.visit('/settings/circulation/fine-policies?layer=add');
   });
 
+  it('should focus name field', () => {
+    expect(FinePolicyForm.aboutSection.policyName.isFocused).to.be.true;
+  });
+
   it('should be displayed', () => {
     expect(FinePolicyForm.expandAll.isPresent).to.be.true;
   });

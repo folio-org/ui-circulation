@@ -20,6 +20,10 @@ describe('Patron Notice Form', () => {
       expect(PatronNoticeForm.isPresent).to.be.true;
     });
 
+    it('should focus name field', () => {
+      expect(PatronNoticeForm.templateName.isFocused).to.be.true;
+    });
+
     describe('email template accordion', () => {
       beforeEach(async () => {
         await PatronNoticeForm.emaillSectionAccordion.clickHeader();
