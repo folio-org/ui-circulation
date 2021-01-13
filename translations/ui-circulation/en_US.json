@@ -94,7 +94,7 @@
     "settings.staffSlips.editLabel": "Edit: staff slips - {name}",
     "settings.loanPolicy.openingTimeOffset": "Opening time offset",
     "settings.index.patronNotices": "Patron notice templates",
-    "settings.patronNotices.categories.feeFineAction": "Fee/fine action (pay, waive, refund, transfer or cancel in error)",
+    "settings.patronNotices.categories.feeFineAction": "Manual fee/fine action (pay, waive, refund, transfer or cancel/error)",
     "settings.patronNotices.categories.feeFineCharge": "Manual fee/fine charge",
     "settings.patronNotices.categories.loan": "Loan",
     "settings.patronNotices.categories.request": "Request",
