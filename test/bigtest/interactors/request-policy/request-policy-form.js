@@ -10,6 +10,8 @@ import {
   focusable,
 } from '@bigtest/interactor';
 
+import TextFieldInteractor from '@folio/stripes-components/lib/TextField/tests/interactor';
+
 import { AccordionInteractor } from '@folio/stripes-components/lib/Accordion/tests/interactor';
 
 @interactor class RequestPolicyForm {
@@ -18,6 +20,7 @@ import { AccordionInteractor } from '@folio/stripes-components/lib/Accordion/tes
     return this.when(() => this.isLoaded);
   }
 
+  name = new TextFieldInteractor('[data-test-request-policy-name]');
   hasName = isPresent('#request_policy_name');
   nameValue = value('#request_policy_name');
   hasDescription = isPresent('#request_policy_description');

@@ -85,7 +85,10 @@ class StaffSlipForm extends React.Component {
               </Col>
             </Row>
             <Row>
-              <Col xs={8}>
+              <Col
+                data-test-staff-slip-description
+                xs={8}
+              >
                 <Field
                   label={<FormattedMessage id="ui-circulation.settings.staffSlips.description" />}
                   name="description"

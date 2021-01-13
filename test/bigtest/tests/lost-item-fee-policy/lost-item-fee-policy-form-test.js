@@ -13,6 +13,10 @@ describe('Lost Item Fee Policy Form', () => {
       await this.visit('/settings/circulation/lost-item-fee-policy?layer=add');
     });
 
+    it('should focus name field', () => {
+      expect(LostItemFeePolicyForm.aboutSection.policyName.isFocused).to.be.true;
+    });
+
     it('should be displayed', () => {
       expect(LostItemFeePolicyForm.expandAll.isPresent).to.be.true;
     });
