@@ -45,6 +45,7 @@ class GeneralSection extends React.Component {
               name="name"
               label={<FormattedMessage id="ui-circulation.settings.noticePolicy.policyName" />}
               required
+              autoFocus
               component={TextField}
             />
           </div>

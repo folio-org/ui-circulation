@@ -90,6 +90,7 @@ class StaffSlipForm extends React.Component {
                   label={<FormattedMessage id="ui-circulation.settings.staffSlips.description" />}
                   name="description"
                   id="input-staff-slip-description"
+                  autoFocus
                   component={TextArea}
                   fullWidth
                   disabled={disabled}

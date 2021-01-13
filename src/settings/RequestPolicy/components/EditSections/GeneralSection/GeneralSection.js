@@ -71,6 +71,7 @@ class GeneralSection extends React.Component {
           id="request_policy_name"
           name="name"
           required
+          autoFocus
           label={<FormattedMessage id="ui-circulation.settings.requestPolicy.policyName" />}
           component={TextField}
           validate={validateName}

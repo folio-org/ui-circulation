@@ -17,6 +17,7 @@ const OverdueAboutSection = () => (
           label={<FormattedMessage id="ui-circulation.settings.finePolicy.overdueFinePolicyName" />}
           id="input-policy-name"
           name="name"
+          autoFocus
           component={TextField}
           required
         />
