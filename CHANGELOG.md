@@ -14,6 +14,7 @@
 * Add fee/fine action tokens to template with fee/fine charge or adjustment. Refs UICIRC-537.
 * Add separate aged to lost settings for recalled items in lost item fee policies. Refs UICIRC-529.
 * First field should be in focus for all forms in circulation settings. Refs UICIRC-541.
+* Consistent UI for circulation settings. Refs UICIRC-542.
 
 ## 4.0.0 (https://github.com/folio-org/ui-circulation/tree/v4.0.0) (2020-10-13)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v3.0.0...v4.0.0)
