@@ -328,7 +328,7 @@
     "settings.noticePolicy.loanNotices.itemRecalled": "Item recalled",
     "settings.fDDSform.cancel": "取消",
     "settings.validate.lostItem": "Required if there is a possibility of no fee/fine being charged for a lost item",
-    "settings.lostItemFee.entryLabel": "Lost item fee policies",
+    "settings.lostItemFee.entryLabel": "New lost item fee policy",
     "settings.lostItemFee.paneTitle": "Lost item fee policies",
     "settings.lostItemFee.lostItemSection": "Lost item fee",
     "settings.lostItemFee.generalInformation": "General information",
