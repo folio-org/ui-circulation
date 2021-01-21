@@ -78,7 +78,7 @@ describe('NoticePolicyForm', () => {
         });
 
         it('should have proper text', () => {
-          expect(NoticePolicyForm.generalSection.policyName.text).to.contain(translation['settings.loanPolicy.policyName']);
+          expect(NoticePolicyForm.generalSection.policyName.text).to.contain(translation['settings.noticePolicy.policyName']);
         });
       });
 
