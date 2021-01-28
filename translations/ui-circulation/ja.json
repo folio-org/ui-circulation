@@ -150,7 +150,7 @@
     "settings.noticePolicy.editEntryLabel": "Edit patron notice policy",
     "settings.noticePolicy.deleteLoanPolicy": "Delete patron notice policy",
     "settings.noticePolicy.policyName": "Patron notice policy name",
-    "settings.noticePolicy.policyDescription": "Description",
+    "settings.noticePolicy.policyDescription": "説明",
     "settings.noticePolicy.active": "有効",
     "settings.index.requestPolicies": "リクエストポリシー",
     "settings.requestPolicy.paneTitle": "リクエストポリシー",
