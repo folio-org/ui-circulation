@@ -16,6 +16,7 @@
 * First field should be in focus for all forms in circulation settings. Refs UICIRC-541.
 * Consistent UI for circulation settings. Refs UICIRC-542.
 * Update to stripes v6. Refs UICIRC-543.
+* Move moment from a regular to a peer and dev dependencies. Refs UICIRC-513.
 
 ## 4.0.0 (https://github.com/folio-org/ui-circulation/tree/v4.0.0) (2020-10-13)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v3.0.0...v4.0.0)
