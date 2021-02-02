@@ -84,7 +84,7 @@
     "settings.cancelReasons.labelShort": "Cancelar razón*",
     "settings.cancelReasons.descriptionInternal": "Descripción (interna)",
     "settings.cancelReasons.descriptionPublic": "Descripción (pública)",
-    "meta.title": "Circulation",
+    "meta.title": "Circulación",
     "settings.loanPolicy.yes": "Yes",
     "settings.loanPolicy.no": "No",
     "settings.fDDS.editLabel": "Edit: {name}",
