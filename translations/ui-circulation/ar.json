@@ -94,7 +94,7 @@
     "settings.staffSlips.editLabel": "تحرير: كشوف الموظفين - {name}",
     "settings.loanPolicy.openingTimeOffset": "تعديل وقت الافتتاح",
     "settings.index.patronNotices": "قوالب إخطار المستفيد",
-    "settings.patronNotices.categories.feeFineAction": "إجراء الرسوم/الغرامات (دفع، إعفاء، استرداد أموال، تحويل أو إلغاء في حالة الخطأ)",
+    "settings.patronNotices.categories.feeFineAction": "إجراء الرسوم/الغرامات (دفع، إعفاء، استرداد أموال، تحويل أو إلغاء/خطأ)",
     "settings.patronNotices.categories.feeFineCharge": "فرض رسم/غرامة يدوية",
     "settings.patronNotices.categories.loan": "الإعارة",
     "settings.patronNotices.categories.request": "طلب",
