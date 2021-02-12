@@ -18,6 +18,7 @@
 * Update to stripes v6. Refs UICIRC-543.
 * Move moment from a regular to a peer and dev dependencies. Refs UICIRC-513.
 * Order of settings when viewing Lost Item Fee Policy not same as new/edit order. Refs UICIRC-531.
+* Update to `stripes-cli v2.0.0`. Refs UICIRC-547.
 
 ## 4.0.0 (https://github.com/folio-org/ui-circulation/tree/v4.0.0) (2020-10-13)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v3.0.0...v4.0.0)
