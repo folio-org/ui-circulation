@@ -185,7 +185,7 @@
     "settings.noticePolicy.notices.upon": "Fino a /al",
     "settings.noticePolicy.requestNotices.recallRequest": "Richiamo richiesta",
     "settings.noticePolicy.requestNotices.holdRequest": "Prenotazione",
-    "settings.noticePolicy.requestNotices.pagingRequest": "Pagina",
+    "settings.noticePolicy.requestNotices.pagingRequest": "Richiesta",
     "settings.noticePolicy.requestNotices.available": "In attesa di ritiro",
     "settings.noticePolicy.requestNotices.holdExpiration": "Scadenza prenotazione",
     "settings.noticePolicy.requestNotices.requestCancelation": "Cancella richiesta",
