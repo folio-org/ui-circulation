@@ -91,7 +91,7 @@
     "settings.checkout.filterRules": "filter rules",
     "settings.staffSlips.hold": "Hold",
     "settings.staffSlips.print": "Print",
-    "settings.staffSlips.editLabel": "Edit: staff slips - {name}",
+    "settings.staffSlips.editLabel": "Rediger: personalesedler - {name}",
     "settings.loanPolicy.openingTimeOffset": "Opening time offset",
     "settings.index.patronNotices": "Patron notice templates",
     "settings.patronNotices.categories.feeFineAction": "Manual fee/fine action (pay, waive, refund, transfer or cancel/error)",
