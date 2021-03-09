@@ -1,9 +1,9 @@
 # Change history for ui-circulation
 
-## 5.0.0 (IN PROGRESS)
+## 5.0.0 (https://github.com/folio-org/ui-circulation/tree/v5.0.0) (2021-03-09)
+[Full Changelog](https://github.com/folio-org/ui-circulation/compare/v4.0.2...v5.0.0)
 
 * Keyword all - allowed by backend. Refs UICIRC-506.
-* Unable to enter decimal places on Overdue Fines Policy on Honeysuckle and Snapshot Dev. Refs UICIRC-514.
 * Update version of `feesfines` okapi interface to `v16.0`.
 * Modifier ! (not) - preceding value entered for a criteria, means any value except. Refs UICIRC-507.
 * Add `Allow recalls to extend overdue loans` setting. Refs UICIRC-525.
@@ -19,6 +19,18 @@
 * Move moment from a regular to a peer and dev dependencies. Refs UICIRC-513.
 * Order of settings when viewing Lost Item Fee Policy not same as new/edit order. Refs UICIRC-531.
 * Update to `stripes-cli v2.0.0`. Refs UICIRC-547.
+
+## 4.0.2 (https://github.com/folio-org/ui-circulation/tree/v4.0.2) (2020-11-24)
+[Full Changelog](https://github.com/folio-org/ui-circulation/compare/v4.0.1...v4.0.2)
+
+* Incorrect validation blocking user from saving overdue fine policy. Refs UICIRC-533.
+
+## 4.0.1 (https://github.com/folio-org/ui-circulation/tree/v4.0.1) (2020-11-05)
+[Full Changelog](https://github.com/folio-org/ui-circulation/compare/v4.0.0...v4.0.1)
+
+* Errors with new validation for 'Lost item fee policy' page. Refs UICIRC-512.
+* Unable to enter decimal places on Overdue Fines Policy on Honeysuckle and Snapshot Dev. Refs UICIRC-514.
+* Validation and other issues with patron notice template names. Refs UICIRC-518.
 
 ## 4.0.0 (https://github.com/folio-org/ui-circulation/tree/v4.0.0) (2020-10-13)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v3.0.0...v4.0.0)
