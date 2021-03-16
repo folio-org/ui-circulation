@@ -9,7 +9,6 @@ import { stripesShape, withStripes } from '@folio/stripes/core';
 import { ConfigManager } from '@folio/stripes/smart-components';
 
 import CheckoutSettingsForm from './CheckoutSettingsForm';
-import { patronIdentifierTypes } from '../../constants';
 
 class CheckoutSettings extends React.Component {
   static propTypes = {
@@ -28,10 +27,11 @@ class CheckoutSettings extends React.Component {
     const value = isEmpty(settings) ? '' : head(settings).value;
 
     const defaultConfig = {
-      prefPatronIdentifier: '',
       audioAlertsEnabled: false,
       checkoutTimeout: true,
       checkoutTimeoutDuration: 3,
+      prefPatronIdentifier: '',
+      useCustomFieldsAsIdentifiers: false,
     };
 
     try {
@@ -39,33 +39,61 @@ class CheckoutSettings extends React.Component {
     } catch (e) {
       config = defaultConfig;
     }
-    const { prefPatronIdentifier } = config;
 
-    const values = prefPatronIdentifier ? prefPatronIdentifier.split(',') : [];
-    const idents = patronIdentifierTypes.map(i => (values.indexOf(i.key) >= 0));
+    // This section unfortunately must assume knowledge of how the IDs and Custom Field IDs
+    // are rendered in CheckoutSettingsForm. IDs can be toggled on and off by a checkbox,
+    // but because there can be /a lot/ of custom fields, the custom fields to use as a checkout ID
+    // must be selected by a multiselect. As a result, we need to split out those customFields
+    // into the `custom` object.
+    const { prefPatronIdentifier } = config;
+    const identifiers = { custom: [] };
+    (prefPatronIdentifier ? prefPatronIdentifier.split(',') : []).forEach(identifier => {
+      if (identifier.startsWith('customFields.')) {
+        identifiers.custom.push({ value: identifier });
+      } else {
+        identifiers[identifier] = true;
+      }
+    });
 
     return {
       audioAlertsEnabled: config.audioAlertsEnabled,
       checkoutTimeout: config.checkoutTimeout,
       checkoutTimeoutDuration: config.checkoutTimeoutDuration,
-      idents,
+      identifiers,
+      useCustomFieldsAsIdentifiers: config.useCustomFieldsAsIdentifiers,
     };
   }
 
-  normalize = ({ audioAlertsEnabled, checkoutTimeout, checkoutTimeoutDuration, idents }) => {
-    const values = idents.reduce((vals, ident, index) => {
-      if (ident) {
-        vals.push(patronIdentifierTypes[index].key);
-      }
+  normalize = ({
+    audioAlertsEnabled,
+    checkoutTimeout,
+    checkoutTimeoutDuration,
+    identifiers,
+    useCustomFieldsAsIdentifiers,
+  }) => {
+    // As in `getInitialValues`, we must assume knowledge of how the IDs and Custom Field IDs
+    // are rendered in CheckoutSettingsForm. IDs can be toggled on and off by a checkbox,
+    // but because there can be /a lot/ of custom fields, the custom fields to use as a checkout ID
+    // must be selected by a multiselect. As a result, here we need to merge the custom field IDs
+    // with the regular IDs before we `join` it all into a string.
+    const { custom: customFieldIdentifiers, ...defaultIdentifers } = identifiers;
+    const selectedDefaultPatronIdentifiers = Object.entries(defaultIdentifers)
+      .filter(([_key, value]) => value === true)
+      .map(([key]) => key);
 
-      return vals;
-    }, []);
+    const selectedCustomFieldPatronIdentifiers = customFieldIdentifiers.map(i => i.value);
+
+    const prefPatronIdentifier = [
+      ...selectedDefaultPatronIdentifiers,
+      ...selectedCustomFieldPatronIdentifiers,
+    ].join(',');
 
     const otherSettings = JSON.stringify({
-      audioAlertsEnabled: audioAlertsEnabled === 'true',
-      prefPatronIdentifier: values.join(','),
+      audioAlertsEnabled,
       checkoutTimeout,
       checkoutTimeoutDuration: parseInt(checkoutTimeoutDuration, 10),
+      prefPatronIdentifier,
+      useCustomFieldsAsIdentifiers,
     });
 
     return otherSettings;
