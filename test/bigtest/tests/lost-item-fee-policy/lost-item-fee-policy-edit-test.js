@@ -26,11 +26,8 @@ describe('LostItemFeePolicyEdit', () => {
 
     describe('updating an existing lost item fee policy', () => {
       beforeEach(async function () {
-        await LostItemFeePolicyForm
-          .aboutSection.policyNameValue.fill(newLoanPolicyName)
-          .lostItemFeeSection.lostItemFee.fill('0')
-          .lostItemFeeSection.replacementAllowed.selectAndBlur('Yes')
-          .save();
+        await LostItemFeePolicyForm.aboutSection.policyNameValue.fill(newLoanPolicyName);
+        await LostItemFeePolicyForm.save();
       });
 
       it('should render updated policy name', () => {
