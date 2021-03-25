@@ -1,14 +1,14 @@
 import React from 'react';
-import { ARRAY_ERROR } from 'final-form';
 import { FormattedMessage } from 'react-intl';
 
-export default function ({ idents = [] }, prevErrors) {
-  const nextErrors = { ...prevErrors, idents: [] };
+export default function ({ identifiers = {} }, prevErrors) {
+  const nextErrors = { ...prevErrors };
 
-  const hasIdents = idents.reduce((valid, v) => (valid || v), false);
+  const { custom: customFieldIdentifiers, ...defaultIdentifers } = identifiers;
+  const hasIndentifiers = Object.values(defaultIdentifers).includes(true) || customFieldIdentifiers.length > 0;
 
-  if (!hasIdents) {
-    nextErrors.idents[ARRAY_ERROR] = <FormattedMessage id="ui-circulation.settings.checkout.validate.selectContinue" />;
+  if (!hasIndentifiers) {
+    nextErrors.identifiers = <FormattedMessage id="ui-circulation.settings.checkout.validate.selectContinue" />;
   }
 
   return nextErrors;
