@@ -433,5 +433,12 @@
     "settings.patronNotices.categories.automatedFeeFineAdjustment": "Automatyczna modyfikacja opłaty/kary (zwrot lub anulowanie)",
     "settings.lostItemFee.itemRecalledAgedLostOverdue": "Egzemplarz z wysłanym upomnieniem uznany za zagubiony po przeterminowaniu",
     "settings.lostItemFee.patronBilledAfterRecalledAgedLost": "Czytelnik został obciążony kosztami za wezwanie po zgłoszeniu zagubienia",
-    "settings.lostItemFee.validate.hasPatronBilledAfterRecalledAgedToLostValue": "Wpis jest wymagany jeżeli \"Czytelnik rozliczony za wezwanie po zgłoszeniu zagubienia\" "
+    "settings.lostItemFee.validate.hasPatronBilledAfterRecalledAgedToLostValue": "Wpis jest wymagany jeżeli \"Czytelnik rozliczony za wezwanie po zgłoszeniu zagubienia\" ",
+    "settings.checkout.userCustomFields": "User custom fields",
+    "settings.checkout.userCustomFields.noValidFieldsAreDefined": "No matching custom fields have been configured",
+    "settings.checkout.userCustomFields.none": "None",
+    "settings.checkout.identifiers.barcode": "Barcode",
+    "settings.checkout.identifiers.externalSystemId": "External system ID",
+    "settings.checkout.identifiers.id": "FOLIO record number (ID)",
+    "settings.checkout.identifiers.username": "Username"
 }

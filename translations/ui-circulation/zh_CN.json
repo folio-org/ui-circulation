@@ -433,5 +433,12 @@
     "settings.patronNotices.categories.automatedFeeFineAdjustment": "自动费用/罚款微调（退款或取消）",
     "settings.lostItemFee.itemRecalledAgedLostOverdue": "超期后被召回单件，因超期太久视为遗失",
     "settings.lostItemFee.patronBilledAfterRecalledAgedLost": "超期太久视为遗失后向读者收取召回费",
-    "settings.lostItemFee.validate.hasPatronBilledAfterRecalledAgedToLostValue": "如果输入了“在超期太久视为遗失后读者被收取召回费”，则需要输入金额"
+    "settings.lostItemFee.validate.hasPatronBilledAfterRecalledAgedToLostValue": "如果输入了“在超期太久视为遗失后读者被收取召回费”，则需要输入金额",
+    "settings.checkout.userCustomFields": "用户自定义字段",
+    "settings.checkout.userCustomFields.noValidFieldsAreDefined": "尚未配置匹配的自定义字段",
+    "settings.checkout.userCustomFields.none": "无",
+    "settings.checkout.identifiers.barcode": "条码",
+    "settings.checkout.identifiers.externalSystemId": "外部系统ID",
+    "settings.checkout.identifiers.id": "FOLIO记录号（ID）",
+    "settings.checkout.identifiers.username": "用户名"
 }
