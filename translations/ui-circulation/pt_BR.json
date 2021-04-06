@@ -435,7 +435,7 @@
     "settings.lostItemFee.patronBilledAfterRecalledAgedLost": "Usuário faturado para recall depois de empréstimo antigo dado como perdido",
     "settings.lostItemFee.validate.hasPatronBilledAfterRecalledAgedToLostValue": "Entrada necessária se o valor 'Usuário faturado para recall depois de empréstimo antigo dado como perdido' for inserido",
     "settings.checkout.userCustomFields": "Campos personalizados do usuário",
-    "settings.checkout.userCustomFields.noValidFieldsAreDefined": "No matching custom fields have been configured",
+    "settings.checkout.userCustomFields.noValidFieldsAreDefined": "Nenhum campo personalizado correspondente foi configurado",
     "settings.checkout.userCustomFields.none": "Nenhum",
     "settings.checkout.identifiers.barcode": "Código de barras",
     "settings.checkout.identifiers.externalSystemId": "ID de sistema externo",
