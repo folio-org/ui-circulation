@@ -15,25 +15,9 @@ jest.mock('@folio/stripes/components', () => ({
   )),
   Icon: jest.fn((props) => (props && props.children ? props.children : <span />)),
   IconButton: jest.fn(({
-    icon,
     buttonProps,
-    autoFocus,
-    onClick,
-    onMouseDown,
-    type,
-    ariaLabel,
-    id,
-    style,
-    className,
-    badgeCount,
+    // eslint-disable-next-line no-unused-vars
     iconClassName,
-    innerClassName,
-    tabIndex,
-    badgeColor,
-    href,
-    to,
-    size,
-    iconSize,
     ...rest
   }) => (
     <button type="button" {...buttonProps}>
