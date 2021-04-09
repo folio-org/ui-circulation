@@ -252,7 +252,7 @@
   "scripts": {
     "start": "stripes serve",
     "lint": "eslint .",
-    "test": "yarn run test:jest && yarn run test:bigtest ",
+    "test": "yarn run test:jest && yarn run test:bigtest",
     "test:bigtest": "stripes test karma",
     "test:jest": "jest --ci --coverage --colors"
   },
