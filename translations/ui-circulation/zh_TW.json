@@ -435,7 +435,7 @@
     "settings.lostItemFee.patronBilledAfterRecalledAgedLost": "Patron billed for recall after aged to lost",
     "settings.lostItemFee.validate.hasPatronBilledAfterRecalledAgedToLostValue": "Entry required if 'Patron billed for recall after aged to lost' amount entered",
     "settings.checkout.userCustomFields": "使用者自定義欄位",
-    "settings.checkout.userCustomFields.noValidFieldsAreDefined": "No matching custom fields have been configured",
+    "settings.checkout.userCustomFields.noValidFieldsAreDefined": "沒有相同的客製欄位已被設定",
     "settings.checkout.userCustomFields.none": "無",
     "settings.checkout.identifiers.barcode": "條碼",
     "settings.checkout.identifiers.externalSystemId": "外部系統 ID",
