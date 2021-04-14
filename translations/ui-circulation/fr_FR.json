@@ -231,7 +231,7 @@
     "settings.noticePolicy.denyDelete.header": "Impossible de supprimer la notification utilisateur",
     "settings.noticePolicy.denyDelete.body": "Cette politique de notification ne peut pas être supprimée, car elle est utilisée par un ou plusieurs enregistrements.",
     "settings.patronNotices.addToken": "Ajouter un jeton",
-    "settings.patronNotices.itemTokenHeader": "Article",
+    "settings.patronNotices.itemTokenHeader": "Exemplaire",
     "settings.common.print": "Imprimer",
     "settings.patronNotices.userTokenHeader": "Utilisateur",
     "settings.patronNotices.requestTokenHeader": "Demande",
