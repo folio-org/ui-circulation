@@ -5,6 +5,7 @@
 * Update the .gitignore file. Refs UICIRC-550.
 * Add pull request template. Refs UICIRC-551.
 * Added ability to use user Custom Fields as patron IDs during checkout. Refs UICIRC-549
+* Also support `circulation` `10.0`. Refs UICIRC-563.
 
 ## 5.0.0 (https://github.com/folio-org/ui-circulation/tree/v5.0.0) (2021-03-09)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v4.0.2...v5.0.0)
