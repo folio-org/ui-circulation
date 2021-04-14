@@ -303,7 +303,7 @@ describe('NoticePolicyDetail', () => {
         });
       });
 
-      describe('random notice policy', () => {
+      describe.skip('random notice policy', () => {
         let patronNoticeTemplate;
         let noticePolicy;
 
