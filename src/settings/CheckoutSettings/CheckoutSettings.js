@@ -28,6 +28,7 @@ class CheckoutSettings extends React.Component {
 
     const defaultConfig = {
       audioAlertsEnabled: false,
+      audioTheme: 'modern',
       checkoutTimeout: true,
       checkoutTimeoutDuration: 3,
       prefPatronIdentifier: '',
@@ -57,6 +58,7 @@ class CheckoutSettings extends React.Component {
 
     return {
       audioAlertsEnabled: config.audioAlertsEnabled,
+      audioTheme: config.audioTheme,
       checkoutTimeout: config.checkoutTimeout,
       checkoutTimeoutDuration: config.checkoutTimeoutDuration,
       identifiers,
@@ -66,6 +68,7 @@ class CheckoutSettings extends React.Component {
 
   normalize = ({
     audioAlertsEnabled,
+    audioTheme,
     checkoutTimeout,
     checkoutTimeoutDuration,
     identifiers,
@@ -90,6 +93,7 @@ class CheckoutSettings extends React.Component {
 
     const otherSettings = JSON.stringify({
       audioAlertsEnabled,
+      audioTheme,
       checkoutTimeout,
       checkoutTimeoutDuration: parseInt(checkoutTimeoutDuration, 10),
       prefPatronIdentifier,
