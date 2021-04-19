@@ -28,7 +28,7 @@ class CheckoutSettings extends React.Component {
 
     const defaultConfig = {
       audioAlertsEnabled: false,
-      audioTheme: 'modern',
+      audioTheme: 'classic',
       checkoutTimeout: true,
       checkoutTimeoutDuration: 3,
       prefPatronIdentifier: '',
