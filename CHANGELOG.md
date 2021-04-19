@@ -7,7 +7,7 @@
 * Added ability to use user Custom Fields as patron IDs during checkout. Refs UICIRC-549
 * Add settings up for Jest/RTL tests. Refs UICIRC-557.
 * Also support `circulation` `10.0`. Refs UICIRC-563.
-* Change default audio alerts for successful/unsuccessful checkin, and support configurable audio themes. Refs UICIRC-556.
+* Change default audio alerts for successful/unsuccessful checkout, and support configurable audio themes. Refs UICIRC-556.
 
 ## 5.0.0 (https://github.com/folio-org/ui-circulation/tree/v5.0.0) (2021-03-09)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v4.0.2...v5.0.0)
