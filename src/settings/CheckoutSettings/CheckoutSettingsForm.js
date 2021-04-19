@@ -16,6 +16,7 @@ import {
   Pane,
   PaneFooter,
   Row,
+  Select,
   TextField,
 } from '@folio/stripes/components';
 
@@ -40,6 +41,13 @@ const CheckoutSettingsForm = ({
   const customFieldPatronIdentifiers = customFields
     .filter(cf => cf.entityType === 'user' && (cf.type === 'TEXTBOX_SHORT' || cf.type === 'TEXTBOX_LONG'))
     .map(cf => ({ label: cf.name, value: `customFields.${cf.refId}` }));
+
+  const audioThemeOptions = [
+    // One entry (here and in the translations files) for each theme in ../../../sound
+    { value: 'classic', label: formatMessage({ id: 'ui-circulation.settings.checkout.audioTheme.classic' }) },
+    { value: 'modern', label: formatMessage({ id: 'ui-circulation.settings.checkout.audioTheme.modern' }) },
+    { value: 'future', label: formatMessage({ id: 'ui-circulation.settings.checkout.audioTheme.future' }) },
+  ];
 
   return (
     <Pane
@@ -138,6 +146,12 @@ const CheckoutSettingsForm = ({
           label={<FormattedMessage id="ui-circulation.settings.checkout.audioAlerts" />}
           name="audioAlertsEnabled"
           type="checkbox"
+        />
+        <Field
+          component={Select}
+          label={<FormattedMessage id="ui-circulation.settings.checkout.audioTheme" />}
+          name="audioTheme"
+          dataOptions={audioThemeOptions}
         />
       </form>
     </Pane>
