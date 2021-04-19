@@ -1,5 +1,9 @@
 # Change history for ui-circulation
 
+## 5.0.1 (https://github.com/folio-org/ui-circulation/tree/v5.0.1) (2021-04-21)
+[Full Changelog](https://github.com/folio-org/ui-circulation/compare/v5.0.0...v5.0.1)
+* Shown notice template name on notice policy for fees/fines notices (view mode). Refs UICIRC-566.
+
 ## 5.0.0 (https://github.com/folio-org/ui-circulation/tree/v5.0.0) (2021-03-09)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v4.0.2...v5.0.0)
 
