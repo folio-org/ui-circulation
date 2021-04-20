@@ -440,5 +440,9 @@
     "settings.checkout.identifiers.barcode": "الباركود",
     "settings.checkout.identifiers.externalSystemId": "معرّف النظام الخارجي",
     "settings.checkout.identifiers.id": "(معرّف) رقم تسجيلة فوليو",
-    "settings.checkout.identifiers.username": "اسم المستخدم"
+    "settings.checkout.identifiers.username": "اسم المستخدم",
+    "settings.checkout.audioTheme": "Select audio-alerts theme",
+    "settings.checkout.audioTheme.classic": "Classico",
+    "settings.checkout.audioTheme.modern": "Moderna",
+    "settings.checkout.audioTheme.future": "Futura"
 }
