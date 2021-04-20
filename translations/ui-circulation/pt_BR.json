@@ -440,5 +440,9 @@
     "settings.checkout.identifiers.barcode": "Código de barras",
     "settings.checkout.identifiers.externalSystemId": "ID de sistema externo",
     "settings.checkout.identifiers.id": "Número do registro no FOLIO (ID)",
-    "settings.checkout.identifiers.username": "Nome de usuário"
+    "settings.checkout.identifiers.username": "Nome de usuário",
+    "settings.checkout.audioTheme": "Selecione o tema dos alertas de áudio",
+    "settings.checkout.audioTheme.classic": "Classico",
+    "settings.checkout.audioTheme.modern": "Moderna",
+    "settings.checkout.audioTheme.future": "Futura"
 }

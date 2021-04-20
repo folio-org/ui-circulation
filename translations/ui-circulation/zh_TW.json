@@ -440,5 +440,9 @@
     "settings.checkout.identifiers.barcode": "條碼",
     "settings.checkout.identifiers.externalSystemId": "外部系統 ID",
     "settings.checkout.identifiers.id": "Folio 紀錄號",
-    "settings.checkout.identifiers.username": "使用者名稱"
+    "settings.checkout.identifiers.username": "使用者名稱",
+    "settings.checkout.audioTheme": "Select audio-alerts theme",
+    "settings.checkout.audioTheme.classic": "Classico",
+    "settings.checkout.audioTheme.modern": "Moderna",
+    "settings.checkout.audioTheme.future": "Futura"
 }
