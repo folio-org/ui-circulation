@@ -8,6 +8,9 @@
 * Add settings up for Jest/RTL tests. Refs UICIRC-557.
 * Also support `circulation` `10.0`. Refs UICIRC-563.
 * Support configurable audio themes. Refs UICIRC-556.
+
+## 5.0.1 (https://github.com/folio-org/ui-circulation/tree/v5.0.1) (2021-04-21)
+[Full Changelog](https://github.com/folio-org/ui-circulation/compare/v5.0.0...v5.0.1)
 * Shown notice template name on notice policy for fees/fines notices (view mode). Refs UICIRC-566.
 
 ## 5.0.0 (https://github.com/folio-org/ui-circulation/tree/v5.0.0) (2021-03-09)
