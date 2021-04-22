@@ -441,7 +441,7 @@
     "settings.checkout.identifiers.externalSystemId": "Identifiant système externe",
     "settings.checkout.identifiers.id": "FOLIO record number (ID)",
     "settings.checkout.identifiers.username": "Nom d'utilisateur",
-    "settings.checkout.audioTheme": "Select audio-alerts theme",
+    "settings.checkout.audioTheme": "Sélectionnez le thème des alertes audio",
     "settings.checkout.audioTheme.classic": "Classico",
     "settings.checkout.audioTheme.modern": "Moderna",
     "settings.checkout.audioTheme.future": "Futura"
