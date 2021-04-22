@@ -441,8 +441,8 @@
     "settings.checkout.identifiers.externalSystemId": "معرّف النظام الخارجي",
     "settings.checkout.identifiers.id": "(معرّف) رقم تسجيلة فوليو",
     "settings.checkout.identifiers.username": "اسم المستخدم",
-    "settings.checkout.audioTheme": "Select audio-alerts theme",
-    "settings.checkout.audioTheme.classic": "Classico",
-    "settings.checkout.audioTheme.modern": "Moderna",
-    "settings.checkout.audioTheme.future": "Futura"
+    "settings.checkout.audioTheme": "حدد ثيمة التنبيهات الصوتية",
+    "settings.checkout.audioTheme.classic": "كلاسيكو",
+    "settings.checkout.audioTheme.modern": "مودرنا",
+    "settings.checkout.audioTheme.future": "فوتورا"
 }
