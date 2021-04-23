@@ -462,4 +462,6 @@ export const feeFineNoticesTriggeringEvents = [
   },
 ];
 
+export const MAX_UNPAGED_RESOURCE_COUNT = 1000;
+
 export default '';

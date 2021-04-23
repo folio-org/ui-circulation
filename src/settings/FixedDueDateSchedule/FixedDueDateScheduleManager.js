@@ -17,21 +17,28 @@ import FixedDueDateScheduleDetail from './FixedDueDateScheduleDetail';
 import FixedDueDateScheduleForm from './FixedDueDateScheduleForm';
 
 import FixedDueDateSchedule from '../Models/FixedDueDateSchedule';
+import { MAX_UNPAGED_RESOURCE_COUNT } from '../../constants';
 
 class FixedDueDateScheduleManager extends React.Component {
   static manifest = Object.freeze({
     fixedDueDateSchedules: {
       type: 'okapi',
       records: 'fixedDueDateSchedules',
-      perRequest: 100,
       path: 'fixed-due-date-schedule-storage/fixed-due-date-schedules',
+      params: {
+        query: 'cql.allRecords=1',
+        limit: (q, p, r, l, props) => props?.stripes?.config?.maxUnpagedResourceCount || MAX_UNPAGED_RESOURCE_COUNT,
+      }
     },
     loanPolicies: {
       type: 'okapi',
       records: 'loanPolicies',
-      perRequest: 100,
       path: 'loan-policy-storage/loan-policies',
       dataKey: 'loan-policies',
+      params: {
+        query: 'cql.allRecords=1',
+        limit: (q, p, r, l, props) => props?.stripes?.config?.maxUnpagedResourceCount || MAX_UNPAGED_RESOURCE_COUNT,
+      }
     },
   });
 

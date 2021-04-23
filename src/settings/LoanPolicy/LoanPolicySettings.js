@@ -13,28 +13,27 @@ import LoanPolicyDetail from './LoanPolicyDetail';
 import LoanPolicyForm from './LoanPolicyForm';
 import LoanPolicy from '../Models/LoanPolicy';
 import { normalize } from './utils/normalize';
+import { MAX_UNPAGED_RESOURCE_COUNT } from '../../constants';
 
 class LoanPolicySettings extends React.Component {
   static manifest = Object.freeze({
     loanPolicies: {
       type: 'okapi',
       records: 'loanPolicies',
-      perRequest: 100,
       path: 'loan-policy-storage/loan-policies',
       params: {
         query: 'cql.allRecords=1',
-        limit: '1000',
+        limit: (q, p, r, l, props) => props?.stripes?.config?.maxUnpagedResourceCount || MAX_UNPAGED_RESOURCE_COUNT,
       },
     },
     fixedDueDateSchedules: {
       type: 'okapi',
       records: 'fixedDueDateSchedules',
-      perRequest: 100,
       path: 'fixed-due-date-schedule-storage/fixed-due-date-schedules',
       resourceShouldRefresh: true,
       params: {
         query: 'cql.allRecords=1',
-        limit: '1000',
+        limit: (q, p, r, l, props) => props?.stripes?.config?.maxUnpagedResourceCount || MAX_UNPAGED_RESOURCE_COUNT,
       },
     },
   });
