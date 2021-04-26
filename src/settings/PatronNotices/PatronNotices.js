@@ -12,7 +12,10 @@ import { stripesConnect } from '@folio/stripes/core';
 
 import PatronNoticeDetail from './PatronNoticeDetail';
 import PatronNoticeForm from './PatronNoticeForm';
-import { patronNoticeCategories } from '../../constants';
+import {
+  patronNoticeCategories,
+  MAX_UNPAGED_RESOURCE_COUNT,
+} from '../../constants';
 
 class PatronNotices extends React.Component {
   static propTypes = {
@@ -53,7 +56,7 @@ class PatronNotices extends React.Component {
       path: 'patron-notice-policy-storage/patron-notice-policies',
       params: {
         query: 'cql.allRecords=1',
-        limit: '1000',
+        limit: (q, p, r, l, props) => props?.stripes?.config?.maxUnpagedResourceCount || MAX_UNPAGED_RESOURCE_COUNT,
       },
       throwErrors: false,
     },

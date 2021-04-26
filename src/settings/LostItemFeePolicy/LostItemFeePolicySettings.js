@@ -17,17 +17,17 @@ import LostItemFeePolicyDetail from './LostItemFeePolicyDetail';
 import LostItemFeePolicyForm from './LostItemFeePolicyForm';
 import LostItemFeePolicy from '../Models/LostItemFeePolicy';
 import normalize from './utils/normalize';
+import { MAX_UNPAGED_RESOURCE_COUNT } from '../../constants';
 
 class LostItemFeePolicySettings extends React.Component {
   static manifest = Object.freeze({
     lostItemFeePolicies: {
       type: 'okapi',
       records: 'lostItemFeePolicies',
-      perRequest: 100,
       path: 'lost-item-fees-policies',
       params: {
         query: 'cql.allRecords=1',
-        limit: '1000',
+        limit: (q, p, r, l, props) => props?.stripes?.config?.maxUnpagedResourceCount || MAX_UNPAGED_RESOURCE_COUNT,
       },
       throwErrors: false,
     },
