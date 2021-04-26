@@ -65,13 +65,7 @@ describe('Fixed Due Date Schedule Validation', () => {
 
     beforeEach(async function () {
       this.visit(`settings/circulation/fixed-due-date-schedules/${schedule.id}?layer=edit`);
-    });
-
-    beforeEach(async function () {
       await FddsForm.whenLoaded();
-    });
-
-    beforeEach(async () => {
       await FddsForm.fillName('test');
       await FddsForm.clickSave();
     });
