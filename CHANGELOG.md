@@ -9,6 +9,7 @@
 * Also support `circulation` `10.0`. Refs UICIRC-563.
 * Support configurable audio themes. Refs UICIRC-556.
 * Fix limit in policy settings. Fixes UICIRC-568.
+* Larger query limits for circulation-rules related queries. Fixes UICIRC-568.
 
 ## 5.0.1 (https://github.com/folio-org/ui-circulation/tree/v5.0.1) (2021-04-21)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v5.0.0...v5.0.1)
