@@ -441,8 +441,8 @@
     "settings.checkout.identifiers.externalSystemId": "外部系统ID",
     "settings.checkout.identifiers.id": "FOLIO记录号（ID）",
     "settings.checkout.identifiers.username": "用户名",
-    "settings.checkout.audioTheme": "Select audio-alerts theme",
-    "settings.checkout.audioTheme.classic": "Classico",
-    "settings.checkout.audioTheme.modern": "Moderna",
-    "settings.checkout.audioTheme.future": "Futura"
+    "settings.checkout.audioTheme": "选择音频提醒主题",
+    "settings.checkout.audioTheme.classic": "古典（音频）",
+    "settings.checkout.audioTheme.modern": "现代（音频）",
+    "settings.checkout.audioTheme.future": "未来（音频）"
 }
