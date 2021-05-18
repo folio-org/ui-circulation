@@ -14,6 +14,7 @@ import { stripesConnect } from '@folio/stripes/core';
 
 import RulesForm from './lib/RuleEditor/RulesForm';
 import {
+  MAX_UNPAGED_RESOURCE_COUNT,
   POLICY,
   RULES_TYPE,
 } from '../constants';
@@ -67,7 +68,7 @@ class CirculationRules extends React.Component {
       path: 'groups',
       records: 'usergroups',
       params: {
-        limit: '100',
+        limit: (q, p, r, l, props) => props?.stripes?.config?.maxUnpagedResourceCount || MAX_UNPAGED_RESOURCE_COUNT,
       },
       resourceShouldRefresh: true,
     },
@@ -75,7 +76,7 @@ class CirculationRules extends React.Component {
       type: 'okapi',
       path: 'material-types',
       params: {
-        limit: '100',
+        limit: (q, p, r, l, props) => props?.stripes?.config?.maxUnpagedResourceCount || MAX_UNPAGED_RESOURCE_COUNT,
       },
       records: 'mtypes',
       resourceShouldRefresh: true,
@@ -84,7 +85,7 @@ class CirculationRules extends React.Component {
       type: 'okapi',
       path: 'loan-types',
       params: {
-        limit: '100',
+        limit: (q, p, r, l, props) => props?.stripes?.config?.maxUnpagedResourceCount || MAX_UNPAGED_RESOURCE_COUNT,
       },
       records: 'loantypes',
       resourceShouldRefresh: true,
@@ -94,7 +95,7 @@ class CirculationRules extends React.Component {
       records: 'loanPolicies',
       path: 'loan-policy-storage/loan-policies',
       params: {
-        limit: '100',
+        limit: (q, p, r, l, props) => props?.stripes?.config?.maxUnpagedResourceCount || MAX_UNPAGED_RESOURCE_COUNT,
       },
       resourceShouldRefresh: true,
     },
@@ -103,7 +104,7 @@ class CirculationRules extends React.Component {
       records: 'requestPolicies',
       path: 'request-policy-storage/request-policies',
       params: {
-        limit: '100',
+        limit: (q, p, r, l, props) => props?.stripes?.config?.maxUnpagedResourceCount || MAX_UNPAGED_RESOURCE_COUNT,
       },
       resourceShouldRefresh: true,
     },
@@ -112,7 +113,7 @@ class CirculationRules extends React.Component {
       records: 'patronNoticePolicies',
       path: 'patron-notice-policy-storage/patron-notice-policies',
       params: {
-        limit: '100',
+        limit: (q, p, r, l, props) => props?.stripes?.config?.maxUnpagedResourceCount || MAX_UNPAGED_RESOURCE_COUNT,
       },
       resourceShouldRefresh: true,
     },
@@ -121,7 +122,7 @@ class CirculationRules extends React.Component {
       records: 'overdueFinePolicies',
       path: 'overdue-fines-policies',
       params: {
-        limit: '1000',
+        limit: (q, p, r, l, props) => props?.stripes?.config?.maxUnpagedResourceCount || MAX_UNPAGED_RESOURCE_COUNT,
       },
       resourceShouldRefresh: true,
     },
@@ -130,7 +131,7 @@ class CirculationRules extends React.Component {
       records: 'lostItemFeePolicies',
       path: 'lost-item-fees-policies',
       params: {
-        limit: '1000',
+        limit: (q, p, r, l, props) => props?.stripes?.config?.maxUnpagedResourceCount || MAX_UNPAGED_RESOURCE_COUNT,
       },
       resourceShouldRefresh: true,
     },
@@ -140,7 +141,7 @@ class CirculationRules extends React.Component {
       path: 'locations',
       params: {
         query: 'cql.allRecords=1 sortby name',
-        limit: '1000',
+        limit: (q, p, r, l, props) => props?.stripes?.config?.maxUnpagedResourceCount || MAX_UNPAGED_RESOURCE_COUNT,
       },
       resourceShouldRefresh: true,
     },
@@ -150,7 +151,7 @@ class CirculationRules extends React.Component {
       path: 'location-units/institutions',
       params: {
         query: 'cql.allRecords=1 sortby name',
-        limit: '1000',
+        limit: (q, p, r, l, props) => props?.stripes?.config?.maxUnpagedResourceCount || MAX_UNPAGED_RESOURCE_COUNT,
       },
       resourceShouldRefresh: true,
     },
@@ -160,7 +161,7 @@ class CirculationRules extends React.Component {
       path: 'location-units/campuses',
       params: {
         query: 'cql.allRecords=1 sortby name',
-        limit: '1000',
+        limit: (q, p, r, l, props) => props?.stripes?.config?.maxUnpagedResourceCount || MAX_UNPAGED_RESOURCE_COUNT,
       },
       resourceShouldRefresh: true,
     },
@@ -170,7 +171,7 @@ class CirculationRules extends React.Component {
       path: 'location-units/libraries',
       params: {
         query: 'cql.allRecords=1 sortby name',
-        limit: '1000',
+        limit: (q, p, r, l, props) => props?.stripes?.config?.maxUnpagedResourceCount || MAX_UNPAGED_RESOURCE_COUNT,
       },
       resourceShouldRefresh: true,
     },

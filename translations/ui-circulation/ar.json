@@ -433,5 +433,16 @@
     "settings.patronNotices.categories.automatedFeeFineAdjustment": "تعديل رسم/غرامة مؤتمتة (استرداد أموال أو إلغاء)",
     "settings.lostItemFee.itemRecalledAgedLostOverdue": "استعادة المواد التي تقادمت إلى ضائعة بعد التأخير",
     "settings.lostItemFee.patronBilledAfterRecalledAgedLost": "تم تغريم المستفيد للاستعادة بعد تقادم  المادة إلى ضائعة",
-    "settings.lostItemFee.validate.hasPatronBilledAfterRecalledAgedToLostValue": "الإدخال مطلوب إذا تم إدخال مبلغ 'تغريم المستفيد للاستعادة بعد تقادم إلى ضائعة'"
+    "settings.lostItemFee.validate.hasPatronBilledAfterRecalledAgedToLostValue": "الإدخال مطلوب إذا تم إدخال مبلغ 'تغريم المستفيد للاستعادة بعد تقادم إلى ضائعة'",
+    "settings.checkout.userCustomFields": "حقول المستخدم المخصصة",
+    "settings.checkout.userCustomFields.noValidFieldsAreDefined": "لم تتم تهيئة أي حقول مخصصة متطابقة",
+    "settings.checkout.userCustomFields.none": "لا شيء",
+    "settings.checkout.identifiers.barcode": "الباركود",
+    "settings.checkout.identifiers.externalSystemId": "معرّف النظام الخارجي",
+    "settings.checkout.identifiers.id": "(معرّف) رقم تسجيلة فوليو",
+    "settings.checkout.identifiers.username": "اسم المستخدم",
+    "settings.checkout.audioTheme": "حدد ثيمة التنبيهات الصوتية",
+    "settings.checkout.audioTheme.classic": "كلاسيكو",
+    "settings.checkout.audioTheme.modern": "مودرنا",
+    "settings.checkout.audioTheme.future": "فوتورا"
 }

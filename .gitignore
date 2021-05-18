@@ -1,8 +1,18 @@
+node_modules
+package-lock.json
+yarn.lock
+yarn-error.log
 .DS_Store
+*.idea*
+.vscode
+junit.xml
+artifacts
+debug.log
+ModuleDescriptor.json
+.npmrc
 *.swp
 *.swo
-node_modules
-yarn.lock
-ModuleDescriptor.json
-yarn-error.log
-artifacts
+
+# stripes
+stripes.config.js.local
+.stripesclirc

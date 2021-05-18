@@ -11,10 +11,11 @@ const CancelButton = ({
   onCancel,
   labelKey,
 }) => (
-  <PaneMenu>
+  <PaneMenu data-test-cancel-pane-menu>
     <FormattedMessage id={labelKey}>
       {ariaLabel => (
         <IconButton
+          data-test-cancel-icon-button
           icon="times"
           size="medium"
           iconClassName="closeIcon"

@@ -114,7 +114,7 @@ class NoticePolicyDetail extends React.Component {
           <FeeFineNoticesSection
             isOpen={viewFeeFineNotices}
             policy={noticePolicy}
-            templates={getTemplates(patronNoticeTemplates, patronNoticeCategoryIds.AUTOMATED_FEE_FINE)}
+            templates={getTemplates(patronNoticeTemplates, [patronNoticeCategoryIds.AUTOMATED_FEE_FINE_CHARGE, patronNoticeCategoryIds.AUTOMATED_FEE_FINE_ADJUSTMENT])}
           />
         </AccordionSet>
       </div>

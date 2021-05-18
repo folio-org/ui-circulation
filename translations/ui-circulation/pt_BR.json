@@ -433,5 +433,16 @@
     "settings.patronNotices.categories.automatedFeeFineAdjustment": "Ajuste de multa/taxa automatizada (reembolso ou cancelamento)",
     "settings.lostItemFee.itemRecalledAgedLostOverdue": "Itens recuperados com atraso antigo após o vencimento",
     "settings.lostItemFee.patronBilledAfterRecalledAgedLost": "Usuário faturado para recall depois de empréstimo antigo dado como perdido",
-    "settings.lostItemFee.validate.hasPatronBilledAfterRecalledAgedToLostValue": "Entrada necessária se o valor 'Usuário faturado para recall depois de empréstimo antigo dado como perdido' for inserido"
+    "settings.lostItemFee.validate.hasPatronBilledAfterRecalledAgedToLostValue": "Entrada necessária se o valor 'Usuário faturado para recall depois de empréstimo antigo dado como perdido' for inserido",
+    "settings.checkout.userCustomFields": "Campos personalizados do usuário",
+    "settings.checkout.userCustomFields.noValidFieldsAreDefined": "Nenhum campo personalizado correspondente foi configurado",
+    "settings.checkout.userCustomFields.none": "Nenhum",
+    "settings.checkout.identifiers.barcode": "Código de barras",
+    "settings.checkout.identifiers.externalSystemId": "ID de sistema externo",
+    "settings.checkout.identifiers.id": "Número do registro no FOLIO (ID)",
+    "settings.checkout.identifiers.username": "Nome de usuário",
+    "settings.checkout.audioTheme": "Selecione o tema dos alertas de áudio",
+    "settings.checkout.audioTheme.classic": "Classico",
+    "settings.checkout.audioTheme.modern": "Moderna",
+    "settings.checkout.audioTheme.future": "Futura"
 }
