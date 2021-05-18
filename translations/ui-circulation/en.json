@@ -467,5 +467,5 @@
   "permission.settings.overdue-fines-policies": "Settings (Circ): Can create, edit and remove overdue fine policies",
   "permission.settings.lost-item-fees-policies": "Settings (Circ): Can create, edit and remove lost item fee policies",
 
-  "mod-circulation.noItemFoundForBarcode", "No item with barcode {itemBarcode} exists"
+  "mod-circulation.noItemFoundForBarcode": "No item with barcode {itemBarcode} exists"
 }

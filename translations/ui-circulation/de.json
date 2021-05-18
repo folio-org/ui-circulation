@@ -446,5 +446,5 @@
     "settings.checkout.audioTheme.modern": "Moderna",
     "settings.checkout.audioTheme.future": "Futura",
 
-    "mod-circulation.noItemFoundForBarcode", "Es existiert kein Exemplar mit dem Barcode {itemBarcode}"
+    "mod-circulation.noItemFoundForBarcode": "Es existiert kein Exemplar mit dem Barcode {itemBarcode}"
 }
