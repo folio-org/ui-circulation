@@ -465,5 +465,7 @@
   "permission.settings.other-settings": "Settings (Circ): Can create, edit and remove other settings",
   "permission.settings.notice-templates": "Settings (Circ): Can create, edit and remove patron notice templates",
   "permission.settings.overdue-fines-policies": "Settings (Circ): Can create, edit and remove overdue fine policies",
-  "permission.settings.lost-item-fees-policies": "Settings (Circ): Can create, edit and remove lost item fee policies"
+  "permission.settings.lost-item-fees-policies": "Settings (Circ): Can create, edit and remove lost item fee policies",
+
+  "mod-circulation.noItemFoundForBarcode", "No item with barcode {itemBarcode} exists"
 }

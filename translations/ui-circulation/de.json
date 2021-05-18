@@ -444,5 +444,7 @@
     "settings.checkout.audioTheme": "Select audio-alerts theme",
     "settings.checkout.audioTheme.classic": "Classico",
     "settings.checkout.audioTheme.modern": "Moderna",
-    "settings.checkout.audioTheme.future": "Futura"
+    "settings.checkout.audioTheme.future": "Futura",
+
+    "mod-circulation.noItemFoundForBarcode", "Es existiert kein Exemplar mit dem Barcode {itemBarcode}"
 }
