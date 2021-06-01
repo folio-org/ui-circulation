@@ -87,7 +87,7 @@
     "meta.title": "Circulation",
     "settings.loanPolicy.yes": "Yes",
     "settings.loanPolicy.no": "No",
-    "settings.fDDS.editLabel": "편집: {이름}",
+    "settings.fDDS.editLabel": "Edit: {name}",
     "settings.checkout.filterRules": "필터 규칙",
     "settings.staffSlips.hold": "Hold",
     "settings.staffSlips.print": "Print",
