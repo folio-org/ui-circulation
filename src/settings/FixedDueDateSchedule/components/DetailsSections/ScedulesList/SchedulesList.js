@@ -13,7 +13,7 @@ import {
 
 import css from './SchedulesList.css';
 
-const SchedulesList = ({ schedules }) => {
+const SchedulesList = ({ schedules, timezone }) => {
   return schedules.map((schedule, index) => {
     return (
       <Row
@@ -43,13 +43,13 @@ const SchedulesList = ({ schedules }) => {
               </Row>
               <Row>
                 <Col xs={4}>
-                  <FormattedDate value={schedule.from} timeZone="UTC" />
+                  <FormattedDate value={schedule.from} timeZone={timezone} />
                 </Col>
                 <Col xs={4}>
-                  <FormattedDate value={schedule.to} timeZone="UTC" />
+                  <FormattedDate value={schedule.to} timeZone={timezone} />
                 </Col>
                 <Col xs={4}>
-                  <FormattedDate value={schedule.due} timeZone="UTC" />
+                  <FormattedDate value={schedule.due} timeZone={timezone} />
                 </Col>
               </Row>
             </Col>
@@ -62,6 +62,7 @@ const SchedulesList = ({ schedules }) => {
 
 SchedulesList.propTypes = {
   schedules: PropTypes.arrayOf(PropTypes.object).isRequired,
+  timezone: PropTypes.string.isRequired,
 };
 
 export default SchedulesList;

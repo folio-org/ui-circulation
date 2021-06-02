@@ -11,6 +11,7 @@
 * Fix limit in policy settings. Fixes UICIRC-568.
 * Larger query limits for circulation-rules related queries. Fixes UICIRC-568.
 * Also support `inventory` `11.0`. Refs UICIRC-578.
+* Checked out an item with due date/time in the past. Refs UICIRC-565.
 
 ## 5.0.1 (https://github.com/folio-org/ui-circulation/tree/v5.0.1) (2021-04-21)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v5.0.0...v5.0.1)

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import moment from 'moment-timezone';
 import { Field } from 'react-final-form';
 import { FormattedMessage } from 'react-intl';
 
@@ -18,6 +18,7 @@ class ScheduleCard extends React.Component {
     pathToSchedule: PropTypes.string.isRequired,
     scheduleIndex: PropTypes.number.isRequired,
     onRemoveSchedule: PropTypes.func.isRequired,
+    timezone: PropTypes.string.isRequired,
   };
 
   onRemove = () => {
@@ -28,6 +29,10 @@ class ScheduleCard extends React.Component {
 
     onRemoveSchedule(scheduleIndex);
   };
+
+  parseDateForStartOfDay = (date) => (date ? moment.tz(date, this.props.timezone).format() : date);
+
+  parseDateForEndOfDay = (date) => (date ? moment.tz(date, this.props.timezone).endOf('day').format() : date);
 
   render() {
     const {
@@ -75,12 +80,12 @@ class ScheduleCard extends React.Component {
                   sm={4}
                 >
                   <Field
-                    backendDateStandard="YYYY-MM-DD"
+                    dateFormat="YYYY/MM/DD"
                     component={Datepicker}
                     label={<FormattedMessage id="ui-circulation.settings.fDDSform.dateFrom" />}
                     name={`${pathToSchedule}.from`}
                     required
-                    timeZone="UTC"
+                    parse={this.parseDateForStartOfDay}
                   />
                 </Col>
                 <Col
@@ -89,12 +94,12 @@ class ScheduleCard extends React.Component {
                   sm={4}
                 >
                   <Field
-                    backendDateStandard="YYYY-MM-DD"
+                    dateFormat="YYYY/MM/DD"
                     component={Datepicker}
                     label={<FormattedMessage id="ui-circulation.settings.fDDSform.dateTo" />}
                     name={`${pathToSchedule}.to`}
                     required
-                    timeZone="UTC"
+                    parse={this.parseDateForEndOfDay}
                   />
                 </Col>
                 <Col
@@ -103,12 +108,12 @@ class ScheduleCard extends React.Component {
                   sm={4}
                 >
                   <Field
-                    backendDateStandard="YYYY-MM-DD"
+                    dateFormat="YYYY/MM/DD"
                     component={Datepicker}
                     label={<FormattedMessage id="ui-circulation.settings.fDDSform.dueDate" />}
                     name={`${pathToSchedule}.due`}
                     required
-                    timeZone="UTC"
+                    parse={this.parseDateForEndOfDay}
                   />
                 </Col>
               </Row>
