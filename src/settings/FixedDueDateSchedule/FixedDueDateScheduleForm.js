@@ -130,10 +130,6 @@ class FixedDueDateScheduleForm extends React.Component {
     this.setState({ confirmDelete: true });
   };
 
-  scheduleList = () => {
-    return <ScheduleList timezone={this.props.stripes.timezone} {...this.props} />;
-  }
-
   addFirstMenu = () => {
     const { onCancel } = this.props;
 

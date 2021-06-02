@@ -11,6 +11,7 @@ import {
   Row,
 } from '@folio/stripes/components';
 
+import { DATE_FORMAT } from '../../../../../../constants';
 import css from './ScheduleCard.css';
 
 class ScheduleCard extends React.Component {
@@ -80,7 +81,7 @@ class ScheduleCard extends React.Component {
                   sm={4}
                 >
                   <Field
-                    dateFormat="YYYY/MM/DD"
+                    dateFormat={DATE_FORMAT}
                     component={Datepicker}
                     label={<FormattedMessage id="ui-circulation.settings.fDDSform.dateFrom" />}
                     name={`${pathToSchedule}.from`}
@@ -94,7 +95,7 @@ class ScheduleCard extends React.Component {
                   sm={4}
                 >
                   <Field
-                    dateFormat="YYYY/MM/DD"
+                    dateFormat={DATE_FORMAT}
                     component={Datepicker}
                     label={<FormattedMessage id="ui-circulation.settings.fDDSform.dateTo" />}
                     name={`${pathToSchedule}.to`}
@@ -108,7 +109,7 @@ class ScheduleCard extends React.Component {
                   sm={4}
                 >
                   <Field
-                    dateFormat="YYYY/MM/DD"
+                    dateFormat={DATE_FORMAT}
                     component={Datepicker}
                     label={<FormattedMessage id="ui-circulation.settings.fDDSform.dueDate" />}
                     name={`${pathToSchedule}.due`}
