@@ -224,8 +224,8 @@ class FixedDueDateScheduleForm extends React.Component {
     const {
       handleSubmit,
       initialValues,
+      stripes: { timezone },
     } = this.props;
-
     const {
       confirmDelete,
       sections,
@@ -318,6 +318,7 @@ class FixedDueDateScheduleForm extends React.Component {
                     <FieldArray
                       component={ScheduleList}
                       name="schedules"
+                      timezone={timezone}
                     />
                   </section>
                 </Accordion>
