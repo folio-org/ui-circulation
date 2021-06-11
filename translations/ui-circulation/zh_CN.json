@@ -76,7 +76,7 @@
     "settings.staffSlips.description": "描述",
     "settings.staffSlips.preview": "预览",
     "settings.staffSlips.untitledStaffSlip": "员购单名称",
-    "settings.staffSlips.deleteStaffSlipMessage": "员工单{name} <strong> {name} </strong>将<strong>删除</strong> 。",
+    "settings.staffSlips.deleteStaffSlipMessage": "员工单<strong> {name} </strong>将<strong>删除</strong> 。",
     "settings.index.requestCancellationReasons": "请求取消的原因",
     "settings.loanPolicy.generalInformation": "概况",
     "settings.cancelReasons.label": "请求取消的原因",

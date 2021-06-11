@@ -76,7 +76,7 @@
     "settings.staffSlips.description": "描述",
     "settings.staffSlips.preview": "預覽",
     "settings.staffSlips.untitledStaffSlip": "館員夾書單名稱",
-    "settings.staffSlips.deleteStaffSlipMessage": "館員夾書單 {name} <strong> {name} </strong>將被<strong>刪除</strong> 。",
+    "settings.staffSlips.deleteStaffSlipMessage": "館員夾書單 <strong> {name} </strong>將被<strong>刪除</strong> 。",
     "settings.index.requestCancellationReasons": "取消預約的原因",
     "settings.loanPolicy.generalInformation": "一般資訊",
     "settings.cancelReasons.label": "取消預約的原因",
