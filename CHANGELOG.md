@@ -1,6 +1,7 @@
 # Change history for ui-circulation
 
-## [5.1.0] (IN PROGRESS)
+## [5.1.0] (https://github.com/folio-org/ui-circulation/tree/v5.1.0) (2021-06-14)
+[Full Changelog](https://github.com/folio-org/ui-circulation/compare/v5.0.1...v5.1.0)
 
 * Update the .gitignore file. Refs UICIRC-550.
 * Add pull request template. Refs UICIRC-551.
