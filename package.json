@@ -294,6 +294,7 @@
   },
   "dependencies": {
     "@folio/stripes-template-editor": "^1.0.0",
+    "codemirror": "^5.61.1",
     "final-form": "^4.18.2",
     "final-form-arrays": "^3.0.1",
     "final-form-set-field-data": "^1.0.2",
@@ -301,7 +302,7 @@
     "lodash": "^4.17.4",
     "moment-timezone": "^0.5.33",
     "prop-types": "^15.5.10",
-    "react-codemirror2": "^1.0.0",
+    "react-codemirror2": "^7.2.1",
     "react-final-form": "^6.3.0",
     "react-final-form-arrays": "^3.1.0"
   },
