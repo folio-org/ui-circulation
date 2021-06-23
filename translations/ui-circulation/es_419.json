@@ -256,7 +256,7 @@
     "settings.loanHistory.interval": "Intervalo",
     "settings.loanHistory.loan": "Préstamo",
     "settings.loanHistory.feeFine": "tarifa/multa",
-    "settings.loanHistory.immediatelyAfterClose": "Inmediatamente después del cierre de {nombre}",
+    "settings.loanHistory.immediatelyAfterClose": "Inmediatamente después del cierre de {name}",
     "settings.loanHistory.afterClose": "después del cierre de {name}",
     "settings.loanHistory.selectPaymentMethod": "Seleccionar método de pago",
     "settings.loanHistory.exceptionSectionHeader": "Excepción del método de pago",
