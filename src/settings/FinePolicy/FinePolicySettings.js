@@ -13,17 +13,17 @@ import FinePolicy from '../Models/FinePolicy';
 import FinePolicyDetail from './FinePolicyDetail';
 import FinePolicyForm from './FinePolicyForm';
 import normalize from './utils/normalize';
+import { MAX_UNPAGED_RESOURCE_COUNT } from '../../constants';
 
 class FinePolicySettings extends React.Component {
   static manifest = Object.freeze({
     finePolicies: {
       type: 'okapi',
       records: 'overdueFinePolicies',
-      perRequest: 100,
       path: 'overdue-fines-policies',
       params: {
         query: 'cql.allRecords=1',
-        limit: '1000',
+        limit: (q, p, r, l, props) => props?.stripes?.config?.maxUnpagedResourceCount || MAX_UNPAGED_RESOURCE_COUNT,
       },
       throwErrors: false,
     },

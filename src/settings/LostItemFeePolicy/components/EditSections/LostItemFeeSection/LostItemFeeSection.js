@@ -78,6 +78,24 @@ class LostItemFeeSection extends React.Component {
             changeFormValue={change}
           />
         </div>
+        <div data-test-item-recalled-aged-lost>
+          <Period
+            fieldLabel="ui-circulation.settings.lostItemFee.itemRecalledAgedLostOverdue"
+            inputValuePath="recalledItemAgedLostOverdue.duration"
+            selectValuePath="recalledItemAgedLostOverdue.intervalId"
+            intervalPeriods={this.generateOptions(intervalPeriodsLower, 'ui-circulation.settings.lostItemFee.selectInterval')}
+            changeFormValue={change}
+          />
+        </div>
+        <div data-test-patron-billed-recalled>
+          <Period
+            fieldLabel="ui-circulation.settings.lostItemFee.patronBilledAfterRecalledAgedLost"
+            inputValuePath="patronBilledAfterRecalledItemAgedLost.duration"
+            selectValuePath="patronBilledAfterRecalledItemAgedLost.intervalId"
+            intervalPeriods={this.generateOptions(intervalPeriodsLower, 'ui-circulation.settings.lostItemFee.selectInterval')}
+            changeFormValue={change}
+          />
+        </div>
         <RadioGroup onBlur={this.formatNumber} />
         <Row>
           <Col xs={2} data-test-lost-item-processing-fee>

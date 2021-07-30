@@ -72,6 +72,26 @@ const LostItemFeeSection = (props) => {
         </Row>
         <Row>
           <Col xs={12}>
+            <div data-test-item-recalled-aged>
+              <KeyValue
+                label={<FormattedMessage id="ui-circulation.settings.lostItemFee.itemRecalledAgedLostOverdue" />}
+                value={getPeriodValue('recalledItemAgedLostOverdue')}
+              />
+            </div>
+          </Col>
+        </Row>
+        <Row>
+          <Col xs={12}>
+            <div data-test-patron-billed-recalled>
+              <KeyValue
+                label={<FormattedMessage id="ui-circulation.settings.lostItemFee.patronBilledAfterRecalledAgedLost" />}
+                value={getPeriodValue('patronBilledAfterRecalledItemAgedLost')}
+              />
+            </div>
+          </Col>
+        </Row>
+        <Row>
+          <Col xs={12}>
             <div data-test-charge-amount>
               <KeyValue
                 label={<FormattedMessage id="ui-circulation.settings.lostItemFee.chargeAmountItem" />}
@@ -132,20 +152,12 @@ const LostItemFeeSection = (props) => {
         </Row>
         <Row>
           <Col xs={12}>
-            <div data-test-replaced-lost-item>
+            <div data-test-if-lost-item-returned>
               <KeyValue
-                label={<FormattedMessage id="ui-circulation.settings.lostItemFee.replacedLostItemProcessingFee" />}
-                value={replacedLostItemProcessingFee ? displayYes : displayNo}
-              />
-            </div>
-          </Col>
-        </Row>
-        <Row>
-          <Col xs={12}>
-            <div data-test-replacement-fee>
-              <KeyValue
-                label={<FormattedMessage id="ui-circulation.settings.lostItemFee.replacementProcessFee" />}
-                value={parseFloat(replacementProcessingFee).toFixed(2)}
+                label={<FormattedMessage id="ui-circulation.settings.lostItemFee.lostItemReturned" />}
+                value={lostItemReturned === 'Charge'
+                  ? <FormattedMessage id="ui-circulation.settings.lostItemFee.lostItemChargeOverdueBased" />
+                  : <FormattedMessage id="ui-circulation.settings.lostItemFee.lostItemRemoveOverdueFines" />}
               />
             </div>
           </Col>
@@ -162,12 +174,20 @@ const LostItemFeeSection = (props) => {
         </Row>
         <Row>
           <Col xs={12}>
-            <div data-test-if-lost-item-returned>
+            <div data-test-replaced-lost-item>
               <KeyValue
-                label={<FormattedMessage id="ui-circulation.settings.lostItemFee.lostItemReturned" />}
-                value={lostItemReturned === 'Charge'
-                  ? <FormattedMessage id="ui-circulation.settings.lostItemFee.lostItemChargeOverdueBased" />
-                  : <FormattedMessage id="ui-circulation.settings.lostItemFee.lostItemRemoveOverdueFines" />}
+                label={<FormattedMessage id="ui-circulation.settings.lostItemFee.replacedLostItemProcessingFee" />}
+                value={replacedLostItemProcessingFee ? displayYes : displayNo}
+              />
+            </div>
+          </Col>
+        </Row>
+        <Row>
+          <Col xs={12}>
+            <div data-test-replacement-fee>
+              <KeyValue
+                label={<FormattedMessage id="ui-circulation.settings.lostItemFee.replacementProcessFee" />}
+                value={parseFloat(replacementProcessingFee).toFixed(2)}
               />
             </div>
           </Col>

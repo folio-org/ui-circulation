@@ -43,21 +43,21 @@ describe('Fixed Due Date Schedule Validation', () => {
     });
   });
 
-  describe('Schedules overlappng error', () => {
+  describe('Schedules overlapping error', () => {
     let schedule;
 
     beforeEach(async function () {
       schedule = await this.server.create('fixed-due-date-schedule', {
         schedules: [
           {
-            from: '07/14/2020',
-            to: '07/15/2020',
-            due: '07/15/2020',
+            from: '2020-07-14T04:00:00.000+00:00',
+            to: '2020-07-15T03:59:59.000+00:00',
+            due: '2020-07-15T03:59:59.000+00:00',
           },
           {
-            from: '07/14/2020',
-            to: '07/15/2020',
-            due: '07/15/2020',
+            from: '2020-07-14T04:00:00.000+00:00',
+            to: '2020-07-15T03:59:59.000+00:00',
+            due: '2020-07-15T03:59:59.000+00:00',
           },
         ]
       });
@@ -65,13 +65,7 @@ describe('Fixed Due Date Schedule Validation', () => {
 
     beforeEach(async function () {
       this.visit(`settings/circulation/fixed-due-date-schedules/${schedule.id}?layer=edit`);
-    });
-
-    beforeEach(async function () {
       await FddsForm.whenLoaded();
-    });
-
-    beforeEach(async () => {
       await FddsForm.fillName('test');
       await FddsForm.clickSave();
     });

@@ -1,11 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  FormattedMessage,
-  injectIntl,
-} from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { Field } from 'react-final-form';
-import { FieldArray } from 'react-final-form-arrays';
 
 import stripesFinalForm from '@folio/stripes/final-form';
 
@@ -13,164 +9,165 @@ import {
   Button,
   Checkbox,
   Col,
+  Label,
+  Layout,
+  MessageBanner,
+  MultiSelection,
   Pane,
+  PaneFooter,
   Row,
   Select,
   TextField,
-  Label,
-  PaneFooter,
 } from '@folio/stripes/components';
 
-import { patronIdentifierTypes } from '../../constants';
+import { useCustomFields } from '@folio/stripes/core';
+
 import { CheckoutSettings as validateCheckoutSettings } from '../Validation';
 
-import css from './CheckoutSettingsForm.css';
+const DEFAULT_PATRON_IDENTIFIERS = ['barcode', 'externalSystemId', 'id', 'username'];
 
-class CheckoutSettingsForm extends Component {
-  renderFooter = () => {
-    const {
-      pristine,
-      submitting,
-    } = this.props;
+const CheckoutSettingsForm = ({
+  form: { getState },
+  handleSubmit,
+  label,
+  pristine,
+  submitting,
+}) => {
+  const { formatMessage } = useIntl();
 
-    return (
-      <PaneFooter
-        renderEnd={(
-          <Button
-            id="clickable-savescanid"
-            type="submit"
-            buttonStyle="primary paneHeaderNewButton"
-            disabled={pristine || submitting}
-            marginBottom0
-          >
-            <FormattedMessage id="ui-circulation.settings.checkout.save" />
-          </Button>
-        )}
-      />
-    );
-  }
+  const { values: checkoutValues } = getState();
+  const [customFields = []] = useCustomFields('users');
 
-  renderList = ({ fields, meta }) => {
-    const items = patronIdentifierTypes.map((iden, index) => (
-      <Row key={`row-${index}`}>
-        <Col xs={12}>
-          <Field
-            component={Checkbox}
-            type="checkbox"
-            id={`${iden.queryKey}-checkbox`}
-            data-checked={fields.value[index]}
-            label={iden.label}
-            name={`idents[${index}]`}
-          />
-        </Col>
-      </Row>
-    ));
+  const customFieldPatronIdentifiers = customFields
+    .filter(cf => cf.entityType === 'user' && (cf.type === 'TEXTBOX_SHORT' || cf.type === 'TEXTBOX_LONG'))
+    .map(cf => ({ label: cf.name, value: `customFields.${cf.refId}` }));
 
-    return (
-      <div>
-        <p>
-          <Label required>
-            <FormattedMessage id="ui-circulation.settings.checkout.patronIds" />
-          </Label>
-        </p>
-        {items}
-        {meta.error && <div className={css.error}>{meta.error}</div>}
-      </div>
-    );
-  }
+  const audioThemeOptions = [
+    // One entry (here and in the translations files) for each theme in ../../../sound
+    { value: 'classic', label: formatMessage({ id: 'ui-circulation.settings.checkout.audioTheme.classic' }) },
+    { value: 'modern', label: formatMessage({ id: 'ui-circulation.settings.checkout.audioTheme.modern' }) },
+    { value: 'future', label: formatMessage({ id: 'ui-circulation.settings.checkout.audioTheme.future' }) },
+  ];
 
-  render() {
-    const {
-      handleSubmit,
-      label,
-      form: { getState },
-      intl: { formatMessage },
-    } = this.props;
-
-    const { values: checkoutValues } = getState();
-
-    return (
-      <form
-        id="checkout-form"
-        className={css.checkoutForm}
-        noValidate
-        onSubmit={handleSubmit}
-      >
-        <Pane
-          defaultWidth="fill"
-          fluidContentWidth
-          paneTitle={label}
-          footer={this.renderFooter()}
-        >
-          <FieldArray
-            name="idents"
-            component={this.renderList}
-          />
-          <br />
-          <Row>
-            <Col xs={12}>
+  return (
+    <Pane
+      defaultWidth="fill"
+      fluidContentWidth
+      paneTitle={label}
+      footer={(
+        <PaneFooter
+          renderEnd={(
+            <Button
+              buttonStyle="primary paneHeaderNewButton"
+              disabled={pristine || submitting}
+              id="clickable-savescanid"
+              marginBottom0
+              onClick={handleSubmit}
+              type="submit"
+            >
+              <FormattedMessage id="ui-circulation.settings.checkout.save" />
+            </Button>
+          )}
+        />
+      )}
+    >
+      <form id="checkout-form">
+        <Field name="identifiers">
+          {({ meta }) => (
+            <div>
+              <Label required>
+                <FormattedMessage id="ui-circulation.settings.checkout.patronIds" />
+              </Label>
+              {meta.error && <MessageBanner type="error">{meta.error}</MessageBanner>}
+              {DEFAULT_PATRON_IDENTIFIERS.map(identifier => (
+                <Field
+                  component={Checkbox}
+                  id={`${identifier}-checkbox`}
+                  key={`${identifier}-checkbox`}
+                  label={<FormattedMessage id={`ui-circulation.settings.checkout.identifiers.${identifier}`} />}
+                  name={`identifiers.${identifier}`}
+                  type="checkbox"
+                />
+              ))}
               <Field
-                label={<FormattedMessage id="ui-circulation.settings.checkout.checkin.timeout" />}
-                id="checkoutTimeout"
-                name="checkoutTimeout"
                 component={Checkbox}
+                id="useCustomFieldsAsIdentifiers"
+                label={<FormattedMessage id="ui-circulation.settings.checkout.userCustomFields" />}
+                name="useCustomFieldsAsIdentifiers"
                 type="checkbox"
               />
-            </Col>
-
-          </Row>
-          { checkoutValues.checkoutTimeout &&
-            <Row>
-              <div className={css.indentSection}>
-                <Col xs={5}>
+              { checkoutValues.useCustomFieldsAsIdentifiers &&
+                <Layout className="margin-start-gutter">
                   <Field
-                    aria-label={formatMessage({ id: 'ui-circulation.settings.checkout.timeout.duration' })}
-                    id="checkoutTimeoutDuration"
-                    type="number"
-                    component={TextField}
-                    name="checkoutTimeoutDuration"
-                    parse={value => Number(value)}
+                    component={MultiSelection}
+                    dataOptions={customFieldPatronIdentifiers}
+                    emptyMessage={formatMessage({ id: 'ui-circulation.settings.checkout.userCustomFields.noValidFieldsAreDefined' })}
+                    formatter={({ option }) => (
+                      customFieldPatronIdentifiers.find(cf => cf.value === option.value)?.label ?? option.value
+                    )}
+                    name="identifiers.custom"
+                    placeholder={formatMessage({ id: 'ui-circulation.settings.checkout.userCustomFields.none' })}
                   />
-                </Col>
-                <Col xs={7}>
-                  <FormattedMessage id="ui-circulation.settings.checkout.minutes" />
-                </Col>
-              </div>
-            </Row>}
-          <br />
-          <Row>
-            <Col xs={12}>
-              <Field
-                label={<FormattedMessage id="ui-circulation.settings.checkout.audioAlerts" />}
-                name="audioAlertsEnabled"
-                component={Select}
-              >
-                <FormattedMessage id="ui-circulation.settings.checkout.no">
-                  {(message) => <option value="false">{message}</option>}
-                </FormattedMessage>
-                <FormattedMessage id="ui-circulation.settings.checkout.yes">
-                  {(message) => <option value="true">{message}</option>}
-                </FormattedMessage>
-              </Field>
-            </Col>
-          </Row>
-        </Pane>
+                </Layout>
+              }
+            </div>
+          )}
+        </Field>
+        <hr />
+        <Field
+          label={<FormattedMessage id="ui-circulation.settings.checkout.checkin.timeout" />}
+          id="checkoutTimeout"
+          name="checkoutTimeout"
+          component={Checkbox}
+          type="checkbox"
+        />
+        { checkoutValues.checkoutTimeout &&
+          <Layout className="margin-start-gutter">
+            <Row>
+              <Col xs={3}>
+                <Field
+                  aria-label={formatMessage({ id: 'ui-circulation.settings.checkout.timeout.duration' })}
+                  id="checkoutTimeoutDuration"
+                  type="number"
+                  component={TextField}
+                  name="checkoutTimeoutDuration"
+                  parse={value => Number(value)}
+                />
+              </Col>
+              <Col xs={9}>
+                <FormattedMessage id="ui-circulation.settings.checkout.minutes" />
+              </Col>
+            </Row>
+          </Layout>
+        }
+        <hr />
+        <Field
+          component={Checkbox}
+          label={<FormattedMessage id="ui-circulation.settings.checkout.audioAlerts" />}
+          name="audioAlertsEnabled"
+          type="checkbox"
+        />
+        <Field
+          component={Select}
+          label={<FormattedMessage id="ui-circulation.settings.checkout.audioTheme" />}
+          name="audioTheme"
+          dataOptions={audioThemeOptions}
+        />
       </form>
-    );
-  }
-}
+    </Pane>
+  );
+};
 
 CheckoutSettingsForm.propTypes = {
-  intl: PropTypes.object.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   pristine: PropTypes.bool,
   submitting: PropTypes.bool,
-  label: PropTypes.string,
+  label: PropTypes.node,
   form: PropTypes.object.isRequired,
 };
 
-export default injectIntl(stripesFinalForm({
+export default stripesFinalForm({
   navigationCheck: true,
   validate: validateCheckoutSettings,
   subscription: { values: true },
-})(CheckoutSettingsForm));
+})(CheckoutSettingsForm);

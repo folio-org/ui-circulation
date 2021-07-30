@@ -134,17 +134,17 @@ class NoticePolicyForm extends React.Component {
               <LoanNoticesSection
                 isOpen={sections.editLoanNotices}
                 policy={policy}
-                templates={getTemplates(patronNoticeTemplates, patronNoticeCategoryIds.LOAN)}
+                templates={getTemplates(patronNoticeTemplates, [patronNoticeCategoryIds.LOAN])}
               />
               <RequestNoticesSection
                 isOpen={sections.editRequestNotices}
                 policy={policy}
-                templates={getTemplates(patronNoticeTemplates, patronNoticeCategoryIds.REQUEST)}
+                templates={getTemplates(patronNoticeTemplates, [patronNoticeCategoryIds.REQUEST])}
               />
               <FeeFineNoticesSection
                 isOpen={sections.editFeeFineNotices}
                 policy={policy}
-                templates={getTemplates(patronNoticeTemplates, patronNoticeCategoryIds.AUTOMATED_FEE_FINE)}
+                templates={getTemplates(patronNoticeTemplates, [patronNoticeCategoryIds.AUTOMATED_FEE_FINE_CHARGE, patronNoticeCategoryIds.AUTOMATED_FEE_FINE_ADJUSTMENT])}
               />
             </AccordionSet>
           </Pane>

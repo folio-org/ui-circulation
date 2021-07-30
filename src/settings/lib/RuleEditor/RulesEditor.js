@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Codemirror from 'codemirror'; // eslint-disable-line import/no-extraneous-dependencies
-import CodeMirror from 'react-codemirror2';
+import { Controlled as CodeMirror } from 'react-codemirror2';
 import { injectIntl } from 'react-intl';
 import {
   noop,
@@ -366,6 +366,11 @@ class RulesEditor extends React.Component {
         value={this.state.code}
         onFocus={() => this.handleFocus(true)}
         onBlur={() => this.handleFocus(false)}
+        onBeforeChange={(editor, data, value) => {
+          this.setState({
+            code: value,
+          });
+        }}
         onChange={(editor, metadata, value) => this.props.onChange(value)}
       />
     );

@@ -52,7 +52,10 @@ class FixedDueDateScheduleDetail extends React.Component {
   };
 
   render() {
-    const { initialValues: fixedDueDateSchedule } = this.props;
+    const {
+      initialValues: fixedDueDateSchedule,
+      stripes: { timezone },
+    } = this.props;
     const { sections } = this.state;
 
     return (
@@ -101,7 +104,10 @@ class FixedDueDateScheduleDetail extends React.Component {
             open={sections.fixedDueDateSchedule}
           >
             <section className={css.accordionSection}>
-              <SchedulesList schedules={fixedDueDateSchedule.schedules} />
+              <SchedulesList
+                schedules={fixedDueDateSchedule.schedules}
+                timezone={timezone}
+              />
             </section>
           </Accordion>
         </AccordionSet>

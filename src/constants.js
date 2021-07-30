@@ -147,13 +147,6 @@ export const renewFromOptions = [
   },
 ];
 
-export const patronIdentifierTypes = [
-  { key: 'BARCODE', label: 'Barcode', queryKey: 'barcode' },
-  { key: 'EXTERNAL', label: 'External system id', queryKey: 'externalSystemId' },
-  { key: 'FOLIO', label: 'FOLIO record number', queryKey: 'id' },
-  { key: 'USER', label: 'Username', queryKey: 'username' },
-];
-
 export const requestPolicyTypes = [
   'Hold',
   'Page',
@@ -341,7 +334,8 @@ export const patronNoticeCategoryIds = {
   REQUEST: 'Request',
   FEE_FINE_CHARGE: 'FeeFineCharge',
   FEE_FINE_ACTION: 'FeeFineAction',
-  AUTOMATED_FEE_FINE: 'AutomatedFeeFine',
+  AUTOMATED_FEE_FINE_CHARGE: 'AutomatedFeeFineCharge',
+  AUTOMATED_FEE_FINE_ADJUSTMENT: 'AutomatedFeeFineAdjustment',
 };
 
 export const patronNoticeCategories = [
@@ -354,8 +348,12 @@ export const patronNoticeCategories = [
     label: 'ui-circulation.settings.patronNotices.categories.request',
   },
   {
-    id: patronNoticeCategoryIds.AUTOMATED_FEE_FINE,
-    label: 'ui-circulation.settings.patronNotices.categories.automatedFeeFineAction',
+    id: patronNoticeCategoryIds.AUTOMATED_FEE_FINE_CHARGE,
+    label: 'ui-circulation.settings.patronNotices.categories.automatedFeeFineCharge',
+  },
+  {
+    id: patronNoticeCategoryIds.AUTOMATED_FEE_FINE_ADJUSTMENT,
+    label: 'ui-circulation.settings.patronNotices.categories.automatedFeeFineAdjustment',
   },
   {
     id: patronNoticeCategoryIds.FEE_FINE_CHARGE,
@@ -464,4 +462,8 @@ export const feeFineNoticesTriggeringEvents = [
   },
 ];
 
+export const MAX_UNPAGED_RESOURCE_COUNT = 1000;
+
 export default '';
+
+export const DATE_FORMAT = 'YYYY/MM/DD';

@@ -6,12 +6,15 @@ import {
   value
 } from '@bigtest/interactor';
 
+import TextAreaInteractor from '@folio/stripes-components/lib/TextArea/tests/interactor';
+
 @interactor class StaffSlipForm {
   isLoaded = isPresent('#template-editor');
   whenLoaded() {
     return this.when(() => this.isLoaded);
   }
 
+  description = new TextAreaInteractor('[data-test-staff-slip-description]');
   hasDescription = isPresent('#input-staff-slip-description');
   descValue = value('#input-staff-slip-description');
 

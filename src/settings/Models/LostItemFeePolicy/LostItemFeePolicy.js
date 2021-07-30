@@ -27,6 +27,8 @@ export default class LostItemFeePolicy {
     this.description = policy.description;
     this.itemAgedLostOverdue = new LostItem(policy.itemAgedLostOverdue);
     this.patronBilledAfterAgedLost = new LostItem(policy.patronBilledAfterAgedLost);
+    this.recalledItemAgedLostOverdue = new LostItem(policy.recalledItemAgedLostOverdue);
+    this.patronBilledAfterRecalledItemAgedLost = new LostItem(policy.patronBilledAfterRecalledItemAgedLost);
     this.chargeAmountItem = new ChargeAmount(policy.chargeAmountItem);
     this.lostItemProcessingFee = policy.lostItemProcessingFee;
     this.chargeAmountItemPatron = policy.chargeAmountItemPatron;

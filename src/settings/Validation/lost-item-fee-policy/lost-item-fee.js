@@ -1,3 +1,29 @@
+/*
+  Validation in ui-circulation is complex. Using the example of adding new fields (e.g., new <Period> components)
+to the lost item fee policy form, adding new validation rules requires the following steps:
+  1. In the model class (src/Models/LostItemFeePolicy), add the new fields to the constructor
+  2. In src/settings/LostItemFeePolicy/utils/normalize.js, add the new fields to the 'periodsList' array
+  3. In this file, set up your desired validation rules. The exported validation object's keys are the field
+    names for which validation is (or can be performed). The sub-object for each key has two key/value pairs:
+      a. rules: this is an array of rules that the field should follow. Each rule name corresponds to a key in
+        the validators object (src/Validation/engine/validators.js). Rules are checked in order, so the first
+        rule in the array will be validated first, and so on.
+      b. shouldValidate: the conditions under which field validation should be performed (e.g., a different form
+        field has a value)
+  4. If you are creating a new rule, add it to the validators.js file. Each rule object in validators provides
+    a validation message for the user (e.g., 'Please provide a value') and a reference to a validation handler in
+    src/Validation/engine/handlers.js.
+  5. In the handlers.js file, create a new handler function with the same name as the 'validate' key in your validators
+    rule object. E.g., if you have the following object in validators:
+      hasPatronBilledAfterRecalledAgedToLostValue : {
+         validate: hasPatronBilledAfterRecalledAgedToLostValue,
+         message: <FormattedMessage id="ui-circulation.settings.lostItemFee.validate.hasPatronBilledAfterRecalledAgedToLostValue" />
+       },
+    then you must have a function named hasPatronBilledAfterRecalledAgedToLostValue in the handlers file.
+
+  If you follow all these steps, then your new validation rules should start working for the form. Piece of cake!
+ */
+
 export default function (l) {
   return {
     'name': {
@@ -20,9 +46,36 @@ export default function (l) {
       rules: ['isNotEmptySelect'],
       shouldValidate: l.hasValue('patronBilledAfterAgedLost.duration'),
     },
+
+    // 'Recalled items aged to lost after overdue':
+    // Duration field: If there is an interval selected, there must be a duration value
+    'recalledItemAgedLostOverdue.duration': {
+      rules: ['hasPatronBilledAfterRecalledAgedToLostValue', 'hasAmount'],
+      shouldValidate: l.hasInterval('recalledItemAgedLostOverdue.intervalId') || l.hasValue('patronBilledAfterRecalledItemAgedLost.duration'),
+    },
+    // Interval field: If there is a duration value, an interval must be selected
+    'recalledItemAgedLostOverdue.intervalId': {
+      rules: ['isNotEmptySelect'],
+      shouldValidate: l.hasValue('recalledItemAgedLostOverdue.duration'),
+    },
+
+    // 'Patron billed for recall after aged to lost':
+    // Duration field: If there is an interval selected, there must be a duration value
+    'patronBilledAfterRecalledItemAgedLost.duration': {
+      rules: ['hasAmount'],
+      shouldValidate: l.hasInterval('patronBilledAfterRecalledItemAgedLost.intervalId'),
+    },
+    // Interval field: If there is a duration value, an interval must be selected
+    'patronBilledAfterRecalledItemAgedLost.intervalId': {
+      rules: ['isNotEmptySelect'],
+      shouldValidate: l.hasValue('patronBilledAfterRecalledItemAgedLost.duration'),
+    },
+
     'chargeAmountItem.amount': {
       rules: ['hasPositiveItemsAgedToLostAfterOverdueAmount'],
-      shouldValidate: l.hasPassedValue('chargeAmountItem.chargeType', 'anotherCost') && l.hasPositiveValue('itemAgedLostOverdue.duration'),
+      shouldValidate: l.hasPassedValue('chargeAmountItem.chargeType', 'anotherCost') && (l.hasPositiveValue('itemAgedLostOverdue.duration') ||
+      l.hasPositiveValue('recalledItemAgedLostOverdue.duration') ||
+      l.hasPositiveValue('patronBilledAfterRecalledItemAgedLost.duration')),
     },
     'lostItemProcessingFee': {
       rules: ['hasPositiveLostItemProcessingFeeValue', 'hasNoChargeLostItemProcessingFee'],

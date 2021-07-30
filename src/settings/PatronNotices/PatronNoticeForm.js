@@ -182,6 +182,7 @@ class PatronNoticeForm extends React.Component {
                   name="name"
                   required
                   id="input-patron-notice-name"
+                  autoFocus
                   component={TextField}
                   validate={this.validateName}
                 />

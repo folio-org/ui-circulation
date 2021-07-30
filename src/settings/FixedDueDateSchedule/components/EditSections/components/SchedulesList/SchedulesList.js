@@ -21,6 +21,7 @@ class SchedulesList extends React.Component {
   static propTypes = {
     fields: PropTypes.object.isRequired,
     meta: PropTypes.object.isRequired,
+    timezone: PropTypes.string.isRequired,
   };
 
   onAddField = () => {
@@ -38,6 +39,7 @@ class SchedulesList extends React.Component {
         error,
         submitFailed,
       },
+      timezone,
     } = this.props;
 
     return (
@@ -73,6 +75,7 @@ class SchedulesList extends React.Component {
               pathToSchedule={schedule}
               scheduleIndex={index}
               onRemoveSchedule={this.onRemoveField}
+              timezone={timezone}
             />
           );
         })}

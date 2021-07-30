@@ -18,6 +18,8 @@ const checkInvalid = (policy) => {
   const periodsList = [
     'itemAgedLostOverdue',
     'patronBilledAfterAgedLost',
+    'recalledItemAgedLostOverdue',
+    'patronBilledAfterRecalledItemAgedLost',
     'lostItemChargeFeeFine',
     'feesFinesShallRefunded',
   ];

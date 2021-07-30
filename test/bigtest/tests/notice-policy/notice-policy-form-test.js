@@ -21,6 +21,10 @@ describe('NoticePolicyForm', () => {
       expect(NoticePolicyForm.expandAll.isPresent).to.be.true;
     });
 
+    it('should focus name field', () => {
+      expect(NoticePolicyForm.generalSection.policyName.isFocused).to.be.true;
+    });
+
     describe('collapse all', () => {
       beforeEach(async () => {
         await NoticePolicyForm.expandAll.click();
@@ -74,7 +78,7 @@ describe('NoticePolicyForm', () => {
         });
 
         it('should have proper text', () => {
-          expect(NoticePolicyForm.generalSection.policyName.text).to.contain(translation['settings.loanPolicy.policyName']);
+          expect(NoticePolicyForm.generalSection.policyName.text).to.contain(translation['settings.noticePolicy.policyName']);
         });
       });
 

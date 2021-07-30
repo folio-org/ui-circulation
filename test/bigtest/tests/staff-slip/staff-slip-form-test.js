@@ -21,6 +21,10 @@ describe('StaffSlipForm', () => {
     await StaffSlipForm.whenLoaded();
   });
 
+  it('should focus description field', () => {
+    expect(StaffSlipForm.description.isFocused).to.be.true;
+  });
+
   it('has a staff slip description field', () => {
     expect(StaffSlipForm.descValue).to.equal(staffSlip.description);
   });

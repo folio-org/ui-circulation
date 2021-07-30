@@ -67,14 +67,17 @@ class GeneralSection extends React.Component {
           connect={connect}
           metadata={metadata}
         />
-        <Field
-          id="request_policy_name"
-          name="name"
-          required
-          label={<FormattedMessage id="ui-circulation.settings.requestPolicy.policyName" />}
-          component={TextField}
-          validate={validateName}
-        />
+        <div data-test-request-policy-name>
+          <Field
+            id="request_policy_name"
+            name="name"
+            required
+            autoFocus
+            label={<FormattedMessage id="ui-circulation.settings.requestPolicy.policyName" />}
+            component={TextField}
+            validate={validateName}
+          />
+        </div>
         <Field
           id="request_policy_description"
           name="description"
