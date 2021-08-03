@@ -6,7 +6,7 @@ import LostItemFeePolicyForm from '../../interactors/lost-item-fee-policy/lost-i
 
 import translation from '../../../../translations/ui-circulation/en';
 
-describe('Validation of Lost Item Fee Policy Form', () => {
+describe.only('Validation of Lost Item Fee Policy Form', () => {
   setupApplication({ scenarios: ['testLostItemFeePolicy'] });
 
   describe('create new policy', () => {
@@ -62,7 +62,7 @@ describe('Validation of Lost Item Fee Policy Form', () => {
 
       it('shows validation error', () => {
         expect(LostItemFeePolicyForm.validationError(1).isPresent).to.be.true;
-        expect(LostItemFeePolicyForm.validationError(1).text).to.equal(translation['settings.lostItemFee.validate.hasLostItemProcessingFeeValue']);
+        expect(LostItemFeePolicyForm.validationError(1).text).to.equal(translation['settings.validate.lostItem']);
       });
     });
 
@@ -76,8 +76,8 @@ describe('Validation of Lost Item Fee Policy Form', () => {
       });
 
       it('shows validation error', () => {
-        expect(LostItemFeePolicyForm.validationError(2).isPresent).to.be.true;
-        expect(LostItemFeePolicyForm.validationError(2).text).to.equal(translation['settings.lostItemFee.validate.hasReplacementAllowedAndNegativeLostItemPolicyFee']);
+        expect(LostItemFeePolicyForm.validationError(1).isPresent).to.be.true;
+        expect(LostItemFeePolicyForm.validationError(1).text).to.equal(translation['settings.validate.lostItem']);
       });
     });
 
@@ -92,7 +92,7 @@ describe('Validation of Lost Item Fee Policy Form', () => {
 
       it('shows validation error', () => {
         expect(LostItemFeePolicyForm.validationError(1).isPresent).to.be.true;
-        expect(LostItemFeePolicyForm.validationError(1).text).to.equal(translation['settings.lostItemFee.validate.hasLostItemProcessingFeeValue']);
+        expect(LostItemFeePolicyForm.validationError(1).text).to.equal(translation['settings.validate.lostItem']);
       });
     });
   });
