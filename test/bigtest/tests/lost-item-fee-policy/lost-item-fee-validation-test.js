@@ -31,7 +31,7 @@ describe('Validation of Lost Item Fee Policy Form', () => {
 
       it('shows validation error', () => {
         expect(LostItemFeePolicyForm.validationError(1).isPresent).to.be.true;
-        expect(LostItemFeePolicyForm.validationError(1).text).to.equal(translation['settings.lostItemFee.validate.hasNoChargeLostItemProcessingFee']);
+        expect(LostItemFeePolicyForm.validationError(1).text).to.equal(translation['settings.validate.lostItem']);
       });
     });
 
