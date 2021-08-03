@@ -6,7 +6,7 @@ import LostItemFeePolicyForm from '../../interactors/lost-item-fee-policy/lost-i
 
 import translation from '../../../../translations/ui-circulation/en';
 
-describe.only('Validation of Lost Item Fee Policy Form', () => {
+describe('Validation of Lost Item Fee Policy Form', () => {
   setupApplication({ scenarios: ['testLostItemFeePolicy'] });
 
   describe('create new policy', () => {
