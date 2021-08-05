@@ -43,7 +43,7 @@ describe('Fixed Due Date Schedule Validation', () => {
     });
   });
 
-  describe.skip('Schedules overlapping error', () => {
+  describe('Schedules overlapping error', () => {
     let schedule;
 
     beforeEach(async function () {

@@ -10,7 +10,7 @@ import setupApplication from '../../../helpers/setup-application';
 import circulationRules from '../../../interactors/circulation-rules-editor/pane';
 import { removeDisplayedHints } from '../utils';
 
-describe.skip('Circulation rules editor -> hints menu: arrows keys navigation', () => {
+describe('Circulation rules editor -> hints menu: arrows keys navigation', () => {
   setupApplication();
 
   beforeEach(async function () {

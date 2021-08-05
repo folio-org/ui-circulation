@@ -21,23 +21,20 @@ describe('Patron notice editor', () => {
       expect(PatronNoticeForm.templateBody.isPresent).to.be.true;
     });
 
-    // Temporarily disabling this test set in response to requirement to have new bugfix tested and released,
-    // as per PM's request.
+    describe('Empty editor on blur', () => {
+      beforeEach(async () => {
+        await PatronNoticeForm.templateName.fillAndBlur('newPatronNoticeTemplateName');
+        await PatronNoticeForm.save();
+      });
 
-    // describe('Empty editor on blur', () => {
-    //   beforeEach(async () => {
-    //     await PatronNoticeForm.templateName.fillAndBlur('newPatronNoticeTemplateName');
-    //     await PatronNoticeForm.save();
-    //   });
+      it('should be displayed', () => {
+        expect(PatronNoticeForm.errorContainer.isVisible).to.be.true;
+      });
 
-    //   it('should be displayed', () => {
-    //     expect(PatronNoticeForm.errorContainer.isVisible).to.be.true;
-    //   });
-
-    //   it('should contain proper error text', () => {
-    //     expect(PatronNoticeForm.errorContainer.text).to.equal(translation['settings.validate.fillIn']);
-    //   });
-    // });
+      it('should contain proper error text', () => {
+        expect(PatronNoticeForm.errorContainer.text).to.equal(translation['settings.validate.fillIn']);
+      });
+    });
 
     describe('Tokens', () => {
       it('should display tokens button', () => {

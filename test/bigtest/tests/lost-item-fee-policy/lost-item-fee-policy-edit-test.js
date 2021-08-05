@@ -6,60 +6,57 @@ import LostItemFeePolicyDetail from '../../interactors/lost-item-fee-policy/lost
 import setupApplication from '../../helpers/setup-application';
 import testLostItemFeePolicySettings from '../../constants/testLostItemFeePolicySettings';
 
-// Temporarily disabling this test set in response to requirement to have new bugfix tested and released,
-// as per PM's request.
+describe('LostItemFeePolicyEdit', () => {
+  setupApplication({ scenarios: ['testLostItemFeePolicy'] });
 
-// describe('LostItemFeePolicyEdit', () => {
-//   setupApplication({ scenarios: ['testLostItemFeePolicy'] });
+  describe('updating an existing lost item fee policy', () => {
+    const newLoanPolicyName = 'updated lost item fee policy';
 
-//   describe('updating an existing lost item fee policy', () => {
-//     const newLoanPolicyName = 'updated lost item fee policy';
+    beforeEach(function () {
+      this.visit(`/settings/circulation/lost-item-fee-policy/${testLostItemFeePolicySettings.id}?layer=edit`);
+    });
 
-//     beforeEach(function () {
-//       this.visit(`/settings/circulation/lost-item-fee-policy/${testLostItemFeePolicySettings.id}?layer=edit`);
-//     });
+    beforeEach(async () => {
+      await LostItemFeePolicyForm.whenLoaded(testLostItemFeePolicySettings.name);
+    });
 
-//     beforeEach(async () => {
-//       await LostItemFeePolicyForm.whenLoaded(testLostItemFeePolicySettings.name);
-//     });
+    it('policy name should be same as in testLostItemFeePolicy scenario', () => {
+      expect(LostItemFeePolicyForm.aboutSection.policyNameValue.value).to.equal(testLostItemFeePolicySettings.name);
+    });
 
-//     it('policy name should be same as in testLostItemFeePolicy scenario', () => {
-//       expect(LostItemFeePolicyForm.aboutSection.policyNameValue.value).to.equal(testLostItemFeePolicySettings.name);
-//     });
+    describe('updating an existing lost item fee policy', () => {
+      beforeEach(async function () {
+        await LostItemFeePolicyForm
+          .aboutSection.policyNameValue.fill(newLoanPolicyName)
+          .lostItemFeeSection.lostItemFee.fill('0')
+          .lostItemFeeSection.replacementAllowed.selectAndBlur('Yes')
+          .save();
+      });
 
-//     describe('updating an existing lost item fee policy', () => {
-//       beforeEach(async function () {
-//         await LostItemFeePolicyForm
-//           .aboutSection.policyNameValue.fill(newLoanPolicyName)
-//           .lostItemFeeSection.lostItemFee.fill('0')
-//           .lostItemFeeSection.replacementAllowed.selectAndBlur('Yes')
-//           .save();
-//       });
+      it('should render updated policy name', () => {
+        expect(LostItemFeePolicyDetail.aboutSection.policyName.value.text).to.equal(newLoanPolicyName);
+      });
+    });
 
-//       it('should render updated policy name', () => {
-//         expect(LostItemFeePolicyDetail.aboutSection.policyName.value.text).to.equal(newLoanPolicyName);
-//       });
-//     });
+    describe('Cancel editing for pristine form', () => {
+      beforeEach(async () => {
+        await LostItemFeePolicyForm.cancelEditingLostItemPolicy.click();
+      });
 
-//     describe('Cancel editing for pristine form', () => {
-//       beforeEach(async () => {
-//         await LostItemFeePolicyForm.cancelEditingLostItemPolicy.click();
-//       });
+      it('should not show cancel editing confirmation', () => {
+        expect(LostItemFeePolicyForm.cancelEditingLostItemPolicyModal.isPresent).to.be.false;
+      });
+    });
 
-//       it('should not show cancel editing confirmation', () => {
-//         expect(LostItemFeePolicyForm.cancelEditingLostItemPolicyModal.isPresent).to.be.false;
-//       });
-//     });
+    describe('Cancel editing on dirty form', () => {
+      beforeEach(async () => {
+        await LostItemFeePolicyForm.aboutSection.policyNameValue.fill(newLoanPolicyName);
+        await LostItemFeePolicyForm.cancelEditingLostItemPolicy.click();
+      });
 
-//     describe('Cancel editing on dirty form', () => {
-//       beforeEach(async () => {
-//         await LostItemFeePolicyForm.aboutSection.policyNameValue.fill(newLoanPolicyName);
-//         await LostItemFeePolicyForm.cancelEditingLostItemPolicy.click();
-//       });
-
-//       it('should show cancel editing confirmation', () => {
-//         expect(LostItemFeePolicyForm.cancelEditingLostItemPolicyModal.isPresent).to.be.true;
-//       });
-//     });
-//   });
-// });
+      it('should show cancel editing confirmation', () => {
+        expect(LostItemFeePolicyForm.cancelEditingLostItemPolicyModal.isPresent).to.be.true;
+      });
+    });
+  });
+});

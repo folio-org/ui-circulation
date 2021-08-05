@@ -16,7 +16,7 @@ import {
 
 const getEditorHintSection = sectionIndex => circulationRules.editor.hints.sections(sectionIndex);
 
-describe.skip('Circulation rules editor -> hints menu: backward navigation between multiple sections ', () => {
+describe('Circulation rules editor -> hints menu: backward navigation between multiple sections ', () => {
   setupApplication();
 
   let institutions;
