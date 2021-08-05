@@ -4,7 +4,7 @@ to the lost item fee policy form, adding new validation rules requires the follo
   1. In the model class (src/Models/LostItemFeePolicy), add the new fields to the constructor
   2. In src/settings/LostItemFeePolicy/utils/normalize.js, add the new fields to the 'periodsList' array
   3. In this file, set up your desired validation rules. The exported validation object's keys are the field
-    names for which validation is (or can be performed). The sub-object for each key has two key/value pairs:
+    names for which validation is (or can be) performed. The sub-object for each key has two key/value pairs:
       a. rules: this is an array of rules that the field should follow. Each rule name corresponds to a key in
         the validators object (src/Validation/engine/validators.js). Rules are checked in order, so the first
         rule in the array will be validated first, and so on.
@@ -50,7 +50,7 @@ export default function (l) {
     // 'Recalled items aged to lost after overdue':
     // Duration field: If there is an interval selected, there must be a duration value
     'recalledItemAgedLostOverdue.duration': {
-      rules: ['hasPatronBilledAfterRecalledAgedToLostValue', 'hasAmount'],
+      rules: ['hasPatronBilledAfterRecalledAgedToLostValue', 'hasAmount', 'isIntegerGreaterThanOrEqualToZero'],
       shouldValidate: l.hasInterval('recalledItemAgedLostOverdue.intervalId') || l.hasValue('patronBilledAfterRecalledItemAgedLost.duration'),
     },
     // Interval field: If there is a duration value, an interval must be selected
@@ -62,7 +62,7 @@ export default function (l) {
     // 'Patron billed for recall after aged to lost':
     // Duration field: If there is an interval selected, there must be a duration value
     'patronBilledAfterRecalledItemAgedLost.duration': {
-      rules: ['hasAmount'],
+      rules: ['hasAmount', 'isIntegerGreaterThanOrEqualToZero'],
       shouldValidate: l.hasInterval('patronBilledAfterRecalledItemAgedLost.intervalId'),
     },
     // Interval field: If there is a duration value, an interval must be selected
