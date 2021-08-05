@@ -1,5 +1,10 @@
 # Change history for ui-circulation
 
+## [5.1.1] IN PROGRESS
+
+* Fix bug causing incorrect validation in lost item fee policies. Fixes UICIRC-667, UICIRC-668.
+
+
 ## [5.1.0] (https://github.com/folio-org/ui-circulation/tree/v5.1.0) (2021-06-14)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v5.0.1...v5.1.0)
 

@@ -67,7 +67,7 @@ describe('RequestPolicyForm', () => {
     });
   });
 
-  describe.skip('saving form', () => {
+  describe('saving form', () => {
     let requestPolicy;
 
     beforeEach(async function () {
