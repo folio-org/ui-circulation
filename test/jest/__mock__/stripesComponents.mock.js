@@ -13,6 +13,7 @@ jest.mock('@folio/stripes/components', () => ({
       </span>
     </button>
   )),
+  Col: jest.fn((props) => <div>{props.children}</div>),
   Icon: jest.fn((props) => (props && props.children ? props.children : <span />)),
   IconButton: jest.fn(({
     buttonProps,
@@ -28,4 +29,8 @@ jest.mock('@folio/stripes/components', () => ({
     <div ref={ref} {...rest}>{children}</div>
   )),
   PaneMenu: jest.fn((props) => <div>{props.children}</div>),
+  Row: jest.fn(({
+    children,
+    ...rest
+  }) => <div {...rest}>{children}</div>),
 }));
