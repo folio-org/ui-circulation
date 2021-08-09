@@ -7,6 +7,7 @@
 * Update `folio/stripes-template-editor` to `3.0.0`. Refs UICIRC-575
 * Fix bug causing incorrect validation in lost item fee policies. Fixes UICIRC-667, UICIRC-668.
 * Add RTL/Jest testing for `ScedulesList` component. Refs UICIRC-601.
+* Add RTL/Jest testing for `OverdueAboutSection` component. Refs UICIRC-595. 
 
 ## [5.1.0] (https://github.com/folio-org/ui-circulation/tree/v5.1.0) (2021-06-14)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v5.0.1...v5.1.0)

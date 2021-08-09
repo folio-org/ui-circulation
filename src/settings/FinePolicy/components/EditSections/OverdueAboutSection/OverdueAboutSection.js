@@ -10,10 +10,14 @@ import {
 } from '@folio/stripes/components';
 
 const OverdueAboutSection = () => (
-  <div data-test-fine-policy-form-about-section>
+  <div
+    data-test-fine-policy-form-about-section
+    data-testid="OverdueAboutSection"
+  >
     <Row>
       <Col xs={3} data-test-about-section-policy-name>
         <Field
+          data-testid="nameTestId"
           label={<FormattedMessage id="ui-circulation.settings.finePolicy.overdueFinePolicyName" />}
           id="input-policy-name"
           name="name"
@@ -26,6 +30,7 @@ const OverdueAboutSection = () => (
     <Row>
       <Col xs={5} data-test-about-section-policy-description>
         <Field
+          data-testid="descriptionTestId"
           label={<FormattedMessage id="ui-circulation.settings.finePolicy.description" />}
           id="description"
           name="description"
