@@ -132,7 +132,7 @@
   "settings.fDDSform.description": "Description",
   "settings.fDDSform.schedule": "Schedule",
   "settings.fDDSform.new": "New",
-  "settings.fDDSform.dateRange": "Date range",
+  "settings.fDDSform.dateFormTitle": "Date range {number}",
   "settings.fDDSform.dateFrom": "Date from",
   "settings.fDDSform.dateTo": "Date to",
   "settings.fDDSform.dueDate": "Due date",
