@@ -52,7 +52,6 @@
     "settings.fDDSform.description": "説明",
     "settings.fDDSform.schedule": "スケジュール",
     "settings.fDDSform.new": "新規",
-    "settings.fDDSform.dateRange": "日付の範囲",
     "settings.fDDSform.dateFrom": "開始日",
     "settings.fDDSform.dateTo": "終了日",
     "settings.fDDSform.dueDate": "期日",
@@ -444,5 +443,6 @@
     "settings.checkout.audioTheme": "Select audio-alerts theme",
     "settings.checkout.audioTheme.classic": "Classico",
     "settings.checkout.audioTheme.modern": "Moderna",
-    "settings.checkout.audioTheme.future": "Futura"
+    "settings.checkout.audioTheme.future": "Futura",
+    "settings.fDDSform.dateFormTitle": "Date range {number}"
 }

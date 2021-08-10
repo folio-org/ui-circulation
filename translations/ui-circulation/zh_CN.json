@@ -52,7 +52,6 @@
     "settings.fDDSform.description": "描述",
     "settings.fDDSform.schedule": "时间表",
     "settings.fDDSform.new": "新建",
-    "settings.fDDSform.dateRange": "日期范围",
     "settings.fDDSform.dateFrom": "日期自",
     "settings.fDDSform.dateTo": "日期到",
     "settings.fDDSform.dueDate": "到期日",
@@ -444,5 +443,6 @@
     "settings.checkout.audioTheme": "选择音频提醒主题",
     "settings.checkout.audioTheme.classic": "古典（音频）",
     "settings.checkout.audioTheme.modern": "现代（音频）",
-    "settings.checkout.audioTheme.future": "未来（音频）"
+    "settings.checkout.audioTheme.future": "未来（音频）",
+    "settings.fDDSform.dateFormTitle": "Date range {number}"
 }

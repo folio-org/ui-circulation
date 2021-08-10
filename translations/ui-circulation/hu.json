@@ -52,7 +52,6 @@
     "settings.fDDSform.description": "Leírás",
     "settings.fDDSform.schedule": "Ütemterv",
     "settings.fDDSform.new": "Új",
-    "settings.fDDSform.dateRange": "Dátumtartomány",
     "settings.fDDSform.dateFrom": "Dátumtól",
     "settings.fDDSform.dateTo": "Dátumig",
     "settings.fDDSform.dueDate": "Lejárati dátum",
@@ -444,5 +443,6 @@
     "settings.checkout.audioTheme": "Select audio-alerts theme",
     "settings.checkout.audioTheme.classic": "Classico",
     "settings.checkout.audioTheme.modern": "Moderna",
-    "settings.checkout.audioTheme.future": "Futura"
+    "settings.checkout.audioTheme.future": "Futura",
+    "settings.fDDSform.dateFormTitle": "Date range {number}"
 }

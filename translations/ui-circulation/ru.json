@@ -52,7 +52,6 @@
     "settings.fDDSform.description": "Описание",
     "settings.fDDSform.schedule": "Расписание",
     "settings.fDDSform.new": "Новый",
-    "settings.fDDSform.dateRange": "Интервал дат",
     "settings.fDDSform.dateFrom": "Сроком от",
     "settings.fDDSform.dateTo": "Дата до",
     "settings.fDDSform.dueDate": "Срок выполнения запроса",
@@ -444,5 +443,6 @@
     "settings.checkout.audioTheme": "Select audio-alerts theme",
     "settings.checkout.audioTheme.classic": "Classico",
     "settings.checkout.audioTheme.modern": "Moderna",
-    "settings.checkout.audioTheme.future": "Futura"
+    "settings.checkout.audioTheme.future": "Futura",
+    "settings.fDDSform.dateFormTitle": "Date range {number}"
 }

@@ -52,7 +52,6 @@
     "settings.fDDSform.description": "الوصف",
     "settings.fDDSform.schedule": "الجدول",
     "settings.fDDSform.new": "جديد",
-    "settings.fDDSform.dateRange": "نطاق التاريخ",
     "settings.fDDSform.dateFrom": "التاريخ من",
     "settings.fDDSform.dateTo": "التاريخ إلى",
     "settings.fDDSform.dueDate": "تاريخ الاستحقاق",
@@ -444,5 +443,6 @@
     "settings.checkout.audioTheme": "حدد ثيمة التنبيهات الصوتية",
     "settings.checkout.audioTheme.classic": "كلاسيكو",
     "settings.checkout.audioTheme.modern": "مودرنا",
-    "settings.checkout.audioTheme.future": "فوتورا"
+    "settings.checkout.audioTheme.future": "فوتورا",
+    "settings.fDDSform.dateFormTitle": "Date range {number}"
 }
