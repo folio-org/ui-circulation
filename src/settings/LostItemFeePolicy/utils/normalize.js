@@ -8,11 +8,11 @@ import {
 
 import { LostItem } from '../../Models/common';
 
-const convertToBoolean = (value) => {
+export const convertToBoolean = (value) => {
   return isBoolean(value) ? value : value === 'true';
 };
 
-const checkInvalid = (policy) => {
+export const checkInvalid = (policy) => {
   const lostItemPolicy = cloneDeep(policy);
 
   const periodsList = [
