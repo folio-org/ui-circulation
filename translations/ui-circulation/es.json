@@ -52,7 +52,6 @@
     "settings.fDDSform.description": "Descripción",
     "settings.fDDSform.schedule": "Horario",
     "settings.fDDSform.new": "Nuevo",
-    "settings.fDDSform.dateRange": "Rango de fecha",
     "settings.fDDSform.dateFrom": "Fecha de",
     "settings.fDDSform.dateTo": "Fecha para",
     "settings.fDDSform.dueDate": "Fecha de vencimiento",
@@ -444,5 +443,6 @@
     "settings.checkout.audioTheme": "Select audio-alerts theme",
     "settings.checkout.audioTheme.classic": "Classico",
     "settings.checkout.audioTheme.modern": "Moderna",
-    "settings.checkout.audioTheme.future": "Futura"
+    "settings.checkout.audioTheme.future": "Futura",
+    "settings.fDDSform.dateFormTitle": "Date range {number}"
 }
