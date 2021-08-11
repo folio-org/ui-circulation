@@ -1,6 +1,12 @@
 import React from 'react';
 
 jest.mock('@folio/stripes/components', () => ({
+  Accordion: jest.fn(({ children, label, ...rest }) => (
+    <section {...rest}>
+      <div>{label}</div>
+      {children}
+    </section>
+  )),
   Badge: jest.fn((props) => (
     <span>
       <span>{props.children}</span>

@@ -34,6 +34,7 @@ class FeeFineNoticesSection extends React.Component {
 
     return (
       <Accordion
+        data-testid="accordionTestId"
         id="viewFeeFineNotices"
         open={isOpen}
         label={<FormattedMessage id="ui-circulation.settings.noticePolicy.feeFineNotices" />}
