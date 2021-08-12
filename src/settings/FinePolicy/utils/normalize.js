@@ -4,7 +4,7 @@ import {
   cloneDeep,
 } from 'lodash';
 
-const isZeroOrBlank = (period) => {
+export const isZeroOrBlank = (period) => {
   const isZero = !isUndefined(period) && Number(period.quantity) === 0;
   const isBlank = !isUndefined(period) && isEmpty(period.quantity);
 
