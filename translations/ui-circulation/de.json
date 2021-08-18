@@ -342,7 +342,7 @@
     "settings.lostItemFee.returnedLostItemProcessingFee": "If lost item returned, remove lost item processing fee",
     "settings.lostItemFee.replacedLostItemProcessingFee": "If lost item replaced, remove lost item processing fee",
     "settings.lostItemFee.replacementProcessFee": "Replacement processing fee",
-    "settings.lostItemFee.replacementAllowed": "Replacement allowed",
+    "settings.lostItemFee.replacementAllowed": "Ersatz erlaubt",
     "settings.lostItemFee.lostItemReturned": "If lost item returned or renewed",
     "settings.lostItemFee.feesFinesShallRefunded": "No fees/fines shall be refunded if a lost item is returned more than",
     "settings.lostItemFee.yes": "Ja",
