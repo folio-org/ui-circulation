@@ -12,6 +12,7 @@
 * Add RTL/Jest testing for `normalize` function in `LostItemFeePolicy/utils`. Refs UICIRC-628.
 * Add RTL/Jest testing for `FeeFineNoticesSection` component. Refs UICIRC-631.
 * Add RTL/Jest testing for `normalize` function in `LoanHistory/utils`. Refs UICIRC-607.
+* Add RTL/Jest testing for `normalize` function in `LoanPolicy/utils`. Refs UICIRC-620.
 
 ## [5.1.0] (https://github.com/folio-org/ui-circulation/tree/v5.1.0) (2021-06-14)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v5.0.1...v5.1.0)

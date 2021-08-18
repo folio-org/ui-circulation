@@ -10,7 +10,7 @@ import LoanPolicy from '../../Models/LoanPolicy';
 import { Period } from '../../Models/common';
 import { loanProfileMap } from '../../../constants';
 
-const checkInvalidPeriods = (policy) => {
+export const checkInvalidPeriods = (policy) => {
   const loanPolicy = cloneDeep(policy);
 
   const periodsList = [
@@ -35,7 +35,7 @@ const checkInvalidPeriods = (policy) => {
   return loanPolicy;
 };
 
-const checkFixedProfile = (policy) => {
+export const checkFixedProfile = (policy) => {
   const loanPolicy = cloneDeep(policy);
   const profileId = get(loanPolicy, 'loansPolicy.profileId');
 
@@ -46,7 +46,7 @@ const checkFixedProfile = (policy) => {
   return loanPolicy;
 };
 
-const checkUnlimitedRenewals = (policy) => {
+export const checkUnlimitedRenewals = (policy) => {
   const loanPolicy = cloneDeep(policy);
   const isUnlimited = get(loanPolicy, 'renewalsPolicy.unlimited');
 
@@ -57,7 +57,7 @@ const checkUnlimitedRenewals = (policy) => {
   return loanPolicy;
 };
 
-const checkDifferentRenewalPeriod = (policy) => {
+export const checkDifferentRenewalPeriod = (policy) => {
   const loanPolicy = cloneDeep(policy);
   const isDifferentPeriod = get(loanPolicy, 'renewalsPolicy.differentPeriod');
 
@@ -69,10 +69,9 @@ const checkDifferentRenewalPeriod = (policy) => {
   return loanPolicy;
 };
 
-const checkOpeningTimeOffset = (policy) => {
+export const checkOpeningTimeOffset = (policy) => {
   const loanPolicy = cloneDeep(policy);
   const isFieldActive = new LoanPolicy(loanPolicy).isOpeningTimeOffsetActive();
-
   if (!isFieldActive) {
     unset(loanPolicy, 'loansPolicy.openingTimeOffset');
   }
@@ -80,7 +79,7 @@ const checkOpeningTimeOffset = (policy) => {
   return loanPolicy;
 };
 
-const checkLoanable = (policy) => {
+export const checkLoanable = (policy) => {
   const notLoanablePolicy = {
     id: policy.id,
     name: policy.name,
@@ -93,7 +92,7 @@ const checkLoanable = (policy) => {
   return policy.loanable ? policy : notLoanablePolicy;
 };
 
-const checkRenewable = (policy) => {
+export const checkRenewable = (policy) => {
   const loanPolicy = cloneDeep(policy);
 
   if (!loanPolicy.renewable) {
@@ -103,7 +102,7 @@ const checkRenewable = (policy) => {
   return loanPolicy;
 };
 
-const checkRequestManagementSection = (policy) => {
+export const checkRequestManagementSection = (policy) => {
   const loanPolicy = cloneDeep(policy);
   const sections = ['recalls', 'holds'];
   const isAllowedRecalls = get(loanPolicy, 'requestManagement.recalls.allowRecallsToExtendOverdueLoans');
@@ -132,7 +131,7 @@ const checkRequestManagementSection = (policy) => {
   return loanPolicy;
 };
 
-const checkRenewFrom = (policy) => {
+export const checkRenewFrom = (policy) => {
   const loanPolicy = cloneDeep(policy);
   const profileId = get(loanPolicy, 'loansPolicy.profileId');
   const isProfileFixed = profileId === loanProfileMap.FIXED;
@@ -145,7 +144,7 @@ const checkRenewFrom = (policy) => {
   return loanPolicy;
 };
 
-const checkSchedules = (policy) => {
+export const checkSchedules = (policy) => {
   const loanPolicy = cloneDeep(policy);
 
   const schedulesList = [
@@ -190,5 +189,3 @@ export const normalize = (entity) => {
 
   return filter(entity, ...callbacks);
 };
-
-export default normalize;
