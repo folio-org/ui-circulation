@@ -444,5 +444,5 @@
     "settings.checkout.audioTheme.classic": "Classico",
     "settings.checkout.audioTheme.modern": "Moderna",
     "settings.checkout.audioTheme.future": "Futura",
-    "settings.fDDSform.dateFormTitle": "Date range {number}"
+    "settings.fDDSform.dateFormTitle": "Intervalo de datas {number}"
 }

@@ -444,5 +444,5 @@
     "settings.checkout.audioTheme.classic": "كلاسيكو",
     "settings.checkout.audioTheme.modern": "مودرنا",
     "settings.checkout.audioTheme.future": "فوتورا",
-    "settings.fDDSform.dateFormTitle": "Date range {number}"
+    "settings.fDDSform.dateFormTitle": "نطاق التاريخ {number}"
 }
