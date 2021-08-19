@@ -12,10 +12,16 @@ const LostItemFeeAboutSection = (props) => {
   const { getValue } = props;
 
   return (
-    <div data-test-loan-policy-detail-about-section>
+    <div
+      data-test-loan-policy-detail-about-section
+      data-testid="lostItemFeeAboutSectionTestId"
+    >
       <Row>
         <Col xs={12}>
-          <div data-test-about-section-policy-name>
+          <div
+            data-test-about-section-policy-name
+            data-testid="nameTestId"
+          >
             <KeyValue
               label={<FormattedMessage id="ui-circulation.settings.lostItemFee.lostItemFeePolicyName" />}
               value={getValue('name')}
@@ -25,7 +31,10 @@ const LostItemFeeAboutSection = (props) => {
       </Row>
       <Row>
         <Col xs={12}>
-          <div data-test-about-section-policy-description>
+          <div
+            data-test-about-section-policy-description
+            data-testid="descriptionTestId"
+          >
             <KeyValue
               label={<FormattedMessage id="ui-circulation.settings.lostItemFee.description" />}
               value={getValue('description') || '-'}
