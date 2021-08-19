@@ -12,10 +12,16 @@ const OverdueAboutSection = (props) => {
   const { getValue } = props;
 
   return (
-    <div data-test-fine-policy-detail-about-section>
+    <div
+      data-test-fine-policy-detail-about-section
+      data-testid="overdueAboutSectionTestId"
+    >
       <Row>
         <Col xs={12}>
-          <div data-test-about-section-policy-name>
+          <div
+            data-test-about-section-policy-name
+            data-testid="nameTestId"
+          >
             <KeyValue
               label={<FormattedMessage id="ui-circulation.settings.finePolicy.overdueFinePolicyName" />}
               value={getValue('name')}
@@ -25,7 +31,10 @@ const OverdueAboutSection = (props) => {
       </Row>
       <Row>
         <Col xs={12}>
-          <div data-test-about-section-policy-description>
+          <div
+            data-test-about-section-policy-description
+            data-testid="descriptionTestId"
+          >
             <KeyValue
               label={<FormattedMessage id="ui-circulation.settings.finePolicy.description" />}
               value={getValue('description') || '-'}
