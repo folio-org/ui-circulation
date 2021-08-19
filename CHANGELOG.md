@@ -15,6 +15,7 @@
 * Add RTL/Jest testing for `normalize` function in `LoanPolicy/utils`. Refs UICIRC-620.
 * Add RTL/Jest testing for `OverdueAboutSection` component in `FinePolicy/components/ViewSections`. Refs UICIRC-598.
 * Add RTL/Jest testing for `LostItemFeeAboutSection` component in `LostItemFeePolicy/components/ViewSections`. Refs UICIRC-625.
+* Add RTL/Jest testing for `AboutSection` component in `LoanPolicy/components/ViewSections`. Refs UICIRC-616.
 
 ## [5.1.0] (https://github.com/folio-org/ui-circulation/tree/v5.1.0) (2021-06-14)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v5.0.1...v5.1.0)
