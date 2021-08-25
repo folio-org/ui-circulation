@@ -8,7 +8,7 @@ import translation from '../../../../translations/ui-circulation/en';
 
 // Temporarily disabling this test set in response to requirement to have new bugfix tested and released,
 // as per PM's request.
-describe('Validation of Lost Item Fee Policy Form', () => {
+describe.skip('Validation of Lost Item Fee Policy Form', () => {
   setupApplication({ scenarios: ['testLostItemFeePolicy'] });
   describe('create new policy', () => {
     const newLostItemPolicyName = 'new policy';
