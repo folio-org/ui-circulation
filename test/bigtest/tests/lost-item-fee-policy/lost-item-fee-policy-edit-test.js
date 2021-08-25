@@ -24,7 +24,7 @@ describe('LostItemFeePolicyEdit', () => {
       expect(LostItemFeePolicyForm.aboutSection.policyNameValue.value).to.equal(testLostItemFeePolicySettings.name);
     });
 
-    describe('updating an existing lost item fee policy', () => {
+    describe.skip('updating an existing lost item fee policy', () => {
       beforeEach(async function () {
         await LostItemFeePolicyForm
           .aboutSection.policyNameValue.fill(newLoanPolicyName)
