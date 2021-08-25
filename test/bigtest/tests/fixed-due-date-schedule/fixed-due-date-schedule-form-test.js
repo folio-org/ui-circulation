@@ -107,7 +107,7 @@ describe('FddsForm', () => {
 
         it('should have proper text', () => {
           expect(FddsForm.scheduleSection.schedules(0).dateRange.text).to.equal(
-            `${translation['settings.fDDSform.dateRange']} 1`
+            'Date range 1'
           );
         });
       });
@@ -176,13 +176,13 @@ describe('FddsForm', () => {
 
           it('should have proper text', () => {
             expect(FddsForm.scheduleSection.schedules(0).dateRange.text).to.equal(
-              `${translation['settings.fDDSform.dateRange']} 1`
+              'Date range 1'
             );
           });
 
           it('should have proper text', () => {
             expect(FddsForm.scheduleSection.schedules(1).dateRange.text).to.equal(
-              `${translation['settings.fDDSform.dateRange']} 2`
+              'Date range 2'
             );
           });
         });
@@ -214,7 +214,7 @@ describe('FddsForm', () => {
 
             it('should have proper text', () => {
               expect(FddsForm.scheduleSection.schedules(0).dateRange.text).to.equal(
-                `${translation['settings.fDDSform.dateRange']} 1`
+                'Date range 1'
               );
             });
           });
