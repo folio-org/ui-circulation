@@ -20,6 +20,7 @@
 * Support `feesfines` interface version `17.0`. Refs UICIRC-671.
 * Investigate possibility to run tests successfully. Refs UICIRC-681.
 * Add RTL/Jest testing for `AboutSection` component in `LoanPolicy/components/EditSections`. Refs UICIRC-612.
+* Add RTL/Jest testing for `LostItemFeeAboutSection` component in `LostItemFeePolicy/components/EditSections`. Refs UICIRC-622.
 
 ## [5.1.0] (https://github.com/folio-org/ui-circulation/tree/v5.1.0) (2021-06-14)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v5.0.1...v5.1.0)
