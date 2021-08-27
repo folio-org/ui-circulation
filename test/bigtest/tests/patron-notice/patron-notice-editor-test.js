@@ -21,7 +21,7 @@ describe('Patron notice editor', () => {
       expect(PatronNoticeForm.templateBody.isPresent).to.be.true;
     });
 
-    describe('Empty editor on blur', () => {
+    describe.skip('Empty editor on blur', () => {
       beforeEach(async () => {
         await PatronNoticeForm.templateName.fillAndBlur('newPatronNoticeTemplateName');
         await PatronNoticeForm.save();
