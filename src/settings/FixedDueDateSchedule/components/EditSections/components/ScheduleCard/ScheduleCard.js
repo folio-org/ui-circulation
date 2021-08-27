@@ -52,9 +52,10 @@ class ScheduleCard extends React.Component {
             data-test-schedule-date-range
           >
             <Col xs={11}>
-              <FormattedMessage id="ui-circulation.settings.fDDSform.dateRange" />
-              {' '}
-              {scheduleIndex + 1}
+              <FormattedMessage
+                id="ui-circulation.settings.fDDSform.dateFormTitle"
+                values={{ number: scheduleIndex + 1 }}
+              />
             </Col>
             <Col
               className={css.headerIcon}
