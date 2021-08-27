@@ -358,6 +358,7 @@
 
   "settings.finePolicy.entryLabel": "Overdue fine policies",
   "settings.finePolicy.paneTitle": "Overdue fine policies",
+  "settings.finePolicy.overdueFineTitle": "Overdue fine",
   "settings.finePolicy.overdueFine": "Overdue fine",
   "settings.finePolicy.overdueFines": "Overdue fines",
   "settings.finePolicy.generalInformation": "General information",
@@ -370,6 +371,7 @@
   "settings.finePolicy.overdueRecallFine": "Overdue recall fine",
   "settings.finePolicy.ignoreGracePeriodsRecalls": "Ignore grace periods for recalls",
   "settings.finePolicy.maximumRecallOverdueFine": "Maximum recall overdue fine",
+  "settings.finePolicy.perPeriod": "{number} per {period}",
   "settings.finePolicy.per": "per",
   "settings.finePolicy.yes": "Yes",
   "settings.finePolicy.no": "No",
