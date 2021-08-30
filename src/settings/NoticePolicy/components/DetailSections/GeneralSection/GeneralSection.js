@@ -28,6 +28,7 @@ const GeneralSection = (props) => {
   return (
     <div data-test-notice-policy-detail-general-section>
       <Accordion
+        data-testid="generalInformationTestId"
         open={isOpen}
         id="generalNoticePolicy"
         label={<FormattedMessage id="ui-circulation.settings.loanPolicy.generalInformation" />}
@@ -36,7 +37,7 @@ const GeneralSection = (props) => {
           connect={connect}
           metadata={metadata}
         />
-        <Row>
+        <Row data-testid="policyNameTestId">
           <Col
             xs={12}
             data-notice-policy-name
@@ -47,7 +48,7 @@ const GeneralSection = (props) => {
             />
           </Col>
         </Row>
-        <Row>
+        <Row data-testid="policyActiveTestId">
           <Col
             xs={12}
             data-notice-policy-active
@@ -58,7 +59,7 @@ const GeneralSection = (props) => {
             />
           </Col>
         </Row>
-        <Row>
+        <Row data-testid="policyDescriptionTestId">
           <Col
             xs={12}
             data-notice-policy-description
