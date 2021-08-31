@@ -9,35 +9,58 @@ import {
   Row,
 } from '@folio/stripes/components';
 
+export const getQuantityValue = (fine) => (
+  fine.quantity >= 0
+    ? (<FormattedMessage
+      id="ui-circulation.settings.finePolicy.perPeriod"
+      values={{
+        number: parseFloat(fine.quantity).toFixed(2),
+        period: fine.intervalId,
+      }}
+    />)
+    : '-'
+);
+
+export const getFormatedValue = (fine) => parseFloat(fine || 0).toFixed(2);
+
 const FinesSection = (props) => {
   const {
     policy,
     getCheckboxValue,
     fineSectionOpen,
   } = props;
-
   const { overdueFine, overdueRecallFine } = policy;
 
   return (
-    <div data-test-fine-policy-detail-fines-section>
+    <div
+      data-test-fine-policy-detail-fines-section
+      data-testid="detailFinesSection"
+    >
       <Accordion
+        data-testid="viewFineSectionTestId"
         id="viewFineSection"
-        label={<FormattedMessage id="ui-circulation.settings.finePolicy.overdueFine" />}
+        label={<FormattedMessage id="ui-circulation.settings.finePolicy.overdueFineTitle" />}
         open={fineSectionOpen}
       >
         <Row>
           <Col xs={12}>
-            <div data-test-fines-section-overdue>
+            <div
+              data-test-fines-section-overdue
+              data-testid="sectionOverdue"
+            >
               <KeyValue
                 label={<FormattedMessage id="ui-circulation.settings.finePolicy.overdueFine" />}
-                value={overdueFine.quantity >= 0 ? `${parseFloat(overdueFine.quantity).toFixed(2)}  per ${overdueFine.intervalId}` : '-'}
+                value={getQuantityValue(overdueFine)}
               />
             </div>
           </Col>
         </Row>
         <Row>
           <Col xs={12}>
-            <div data-test-fines-section-count-closed>
+            <div
+              data-test-fines-section-count-closed
+              data-testid="sectionCountClosed"
+            >
               <KeyValue
                 label={<FormattedMessage id="ui-circulation.settings.finePolicy.countClosedDHM" />}
                 value={getCheckboxValue(policy.countClosed)}
@@ -47,18 +70,23 @@ const FinesSection = (props) => {
         </Row>
         <Row>
           <Col xs={12}>
-            <div data-test-fines-section-max-overdue>
+            <div
+              data-test-fines-section-max-overdue
+              data-testid="sectionMaxOverdue"
+            >
               <KeyValue
                 label={<FormattedMessage id="ui-circulation.settings.finePolicy.maximumOverdueFine" />}
-                value={parseFloat(policy.maxOverdueFine || 0.00).toFixed(2)}
+                value={getFormatedValue(policy.maxOverdueFine)}
               />
             </div>
           </Col>
         </Row>
-
         <Row>
           <Col xs={12}>
-            <div data-test-fines-section-forgive-overdue>
+            <div
+              data-test-fines-section-forgive-overdue
+              data-testid="sectionForgiveOverdue"
+            >
               <KeyValue
                 label={<FormattedMessage id="ui-circulation.settings.finePolicy.forgiveOverdueFine" />}
                 value={getCheckboxValue(policy.forgiveOverdueFine)}
@@ -68,17 +96,23 @@ const FinesSection = (props) => {
         </Row>
         <Row>
           <Col xs={12}>
-            <div data-test-fines-section-overdue-recall>
+            <div
+              data-test-fines-section-overdue-recall
+              data-testid="sectionOverdueRecall"
+            >
               <KeyValue
                 label={<FormattedMessage id="ui-circulation.settings.finePolicy.overdueRecallFine" />}
-                value={overdueRecallFine.quantity >= 0 ? `${parseFloat(overdueRecallFine.quantity).toFixed(2)}   per  ${overdueRecallFine.intervalId}` : '-'}
+                value={getQuantityValue(overdueRecallFine)}
               />
             </div>
           </Col>
         </Row>
         <Row>
           <Col xs={12}>
-            <div data-test-fines-section-grace-period>
+            <div
+              data-test-fines-section-grace-period
+              data-testid="sectionGracePeriod"
+            >
               <KeyValue
                 label={<FormattedMessage id="ui-circulation.settings.finePolicy.ignoreGracePeriodsRecalls" />}
                 value={getCheckboxValue(policy.gracePeriodRecall)}
@@ -88,10 +122,13 @@ const FinesSection = (props) => {
         </Row>
         <Row>
           <Col xs={12}>
-            <div data-test-fines-section-max-overdue-recall>
+            <div
+              data-test-fines-section-max-overdue-recall
+              data-testid="sectionMaxOverdueRecall"
+            >
               <KeyValue
                 label={<FormattedMessage id="ui-circulation.settings.finePolicy.maximumRecallOverdueFine" />}
-                value={parseFloat(policy.maxOverdueRecallFine || 0.00).toFixed(2)}
+                value={getFormatedValue(policy.maxOverdueRecallFine)}
               />
             </div>
           </Col>
