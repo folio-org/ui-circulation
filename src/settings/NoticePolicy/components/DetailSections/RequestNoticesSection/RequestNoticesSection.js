@@ -35,6 +35,7 @@ class RequestNoticesSection extends React.Component {
     return (
       <div data-test-notice-policy-detail-request-notices-section>
         <Accordion
+          data-testid="viewRequestNoticesTestId"
           id="viewRequestNotices"
           open={isOpen}
           label={<FormattedMessage id="ui-circulation.settings.noticePolicy.requestNotices" />}
