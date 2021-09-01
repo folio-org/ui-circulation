@@ -124,7 +124,7 @@
     "settings.validate.greaterThanZero": "该值必须为整数且大于0",
     "settings.validate.isPositiveNumber": "该值必须大于或等于0",
     "settings.requestManagement.requestManagement": "请求管理",
-    "settings.requestManagement.recalls": " 召回",
+    "settings.requestManagement.recalls": "召回",
     "settings.requestManagement.recallReturnInterval": "召回返还间隔",
     "settings.requestManagement.alternateGracePeriod": "备用宽限期，用于召回的单件",
     "settings.requestManagement.alternateCheckoutLoanPeriod": "备用借阅期限，用于借出具有激活的待处理预约请求的单件",
@@ -153,7 +153,7 @@
     "settings.noticePolicy.active": "激活",
     "settings.index.requestPolicies": "请求政策",
     "settings.requestPolicy.paneTitle": "请求政策",
-    "settings.requestPolicy.entryLabel": "请求策略",
+    "settings.requestPolicy.entryLabel": "请求政策",
     "settings.requestPolicy.deletPolicy": "删除请求政策",
     "settings.requestPolicy.generalInformation": "一般信息",
     "settings.requestPolicy.policyName": "请求政策名称",
@@ -429,7 +429,7 @@
     "settings.noticePolicy.feeFineNotices.atl.fineCharged": "已收取遗失单件费",
     "settings.noticePolicy.feeFineNotices.atl.itemReturned": "遗失单件返还-费用已调整",
     "settings.patronNotices.categories.automatedFeeFineCharge": "自动费用/罚款收取",
-    "settings.patronNotices.categories.automatedFeeFineAdjustment": "自动费用/罚款微调（退款或取消）",
+    "settings.patronNotices.categories.automatedFeeFineAdjustment": "自动费用/罚款调整（退款或取消）",
     "settings.lostItemFee.itemRecalledAgedLostOverdue": "超期后被召回单件，因超期太久视为遗失",
     "settings.lostItemFee.patronBilledAfterRecalledAgedLost": "超期太久视为遗失后就召回向读者计费",
     "settings.lostItemFee.validate.hasPatronBilledAfterRecalledAgedToLostValue": "如果输入了“超期太久视为遗失后就召回向读者计费”，则需要输入金额",
@@ -444,5 +444,7 @@
     "settings.checkout.audioTheme.classic": "古典（音频）",
     "settings.checkout.audioTheme.modern": "现代（音频）",
     "settings.checkout.audioTheme.future": "未来（音频）",
-    "settings.fDDSform.dateFormTitle": "Date range {number}"
+    "settings.fDDSform.dateFormTitle": "日期范围{number}",
+    "settings.finePolicy.overdueFineTitle": "Overdue fine",
+    "settings.finePolicy.perPeriod": "{number} per {period}"
 }
