@@ -240,7 +240,7 @@
     "settings.staffSlips.view.previewLabel": "Vorschau Dienstzettel - {name}",
     "settings.staffSlips.form.previewLabel": "Vorschau Dienstzettel",
     "settings.patronNotices.denyDelete.header": "Benachrichtigungsvorlage kann nicht gelöscht werden",
-    "settings.patronNotices.denyDelete.body": "Diese Vorlage für die Benachrichtigung von Benutzenden kann nicht gelöscht werden, da sie von einem oder mehreren Datensätzen verwendet wird.",
+    "settings.patronNotices.denyDelete.body": "Diese Vorlage für die Benachrichtigung von Benutzenden kann nicht gelöscht werden, da diese von einem oder mehreren Datensätzen verwendet wird.",
     "settings.index.loanHistory": "Ausleihhistorie",
     "settings.loanHistory.validate.intervalValue": "Bitte eine ganze Zahl größer als Null eingeben, um fortzufahren",
     "settings.loanHistory.validate.selectContinue": "Bitte auswählen, um fortzufahren",
@@ -444,5 +444,7 @@
     "settings.checkout.audioTheme.classic": "Classico",
     "settings.checkout.audioTheme.modern": "Moderna",
     "settings.checkout.audioTheme.future": "Futura",
-    "settings.fDDSform.dateFormTitle": "Datumsbereich {number}"
+    "settings.fDDSform.dateFormTitle": "Datumsbereich {number}",
+    "settings.finePolicy.overdueFineTitle": "Overdue fine",
+    "settings.finePolicy.perPeriod": "{number} per {period}"
 }

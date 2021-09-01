@@ -444,5 +444,7 @@
     "settings.checkout.audioTheme.classic": "Classico",
     "settings.checkout.audioTheme.modern": "Moderna",
     "settings.checkout.audioTheme.future": "Futura",
-    "settings.fDDSform.dateFormTitle": "Intervalo de datas {number}"
+    "settings.fDDSform.dateFormTitle": "Intervalo de datas {number}",
+    "settings.finePolicy.overdueFineTitle": "Multa por atraso",
+    "settings.finePolicy.perPeriod": "{number} por {period}"
 }
