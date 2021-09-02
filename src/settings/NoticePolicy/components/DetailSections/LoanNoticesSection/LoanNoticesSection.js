@@ -35,6 +35,7 @@ class LoanNoticesSection extends React.Component {
     return (
       <div data-test-notice-policy-detail-loan-notices-section>
         <Accordion
+          data-testid="viewLoanNoticesTestId"
           id="viewLoanNotices"
           open={isOpen}
           label={<FormattedMessage id="ui-circulation.settings.noticePolicy.loanNotices" />}
