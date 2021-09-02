@@ -13,6 +13,10 @@ import {
   uponAndAfterSendEvents,
 } from '../../../../../constants';
 
+export const getSendEvents = (triggeringEvent) => {
+  return triggeringEvent === loanTimeBasedEventsIds.AGED_TO_LOST ? uponAndAfterSendEvents : noticesSendEvents;
+};
+
 class LoanNoticesSection extends React.Component {
   static propTypes = {
     isOpen: PropTypes.bool.isRequired,
@@ -22,10 +26,6 @@ class LoanNoticesSection extends React.Component {
       label: PropTypes.string.isRequired,
     })).isRequired,
   };
-
-  getSendEvents = (triggeringEvent) => {
-    return triggeringEvent === loanTimeBasedEventsIds.AGED_TO_LOST ? uponAndAfterSendEvents : noticesSendEvents;
-  }
 
   render() {
     const {
@@ -37,6 +37,7 @@ class LoanNoticesSection extends React.Component {
     return (
       <div data-test-notice-policy-form-loan-notices-section>
         <Accordion
+          data-testid="editLoanNotices"
           id="editLoanNotices"
           open={isOpen}
           label={<FormattedMessage id="ui-circulation.settings.noticePolicy.loanNotices" />}
@@ -47,7 +48,7 @@ class LoanNoticesSection extends React.Component {
             component={NoticesList}
             policy={policy}
             templates={templates}
-            getSendEvents={this.getSendEvents}
+            getSendEvents={getSendEvents}
             sendEventTriggeringIds={values(loanTimeBasedEventsIds)}
             triggeringEvents={loanNoticesTriggeringEvents}
           />
