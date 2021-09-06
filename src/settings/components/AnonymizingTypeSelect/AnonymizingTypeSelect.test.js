@@ -27,6 +27,7 @@ describe('AnonymizingTypeSelect', () => {
   };
   const testAnonymizingTypeRow = (type, index) => {
     const number = index + 1;
+
     it(`should use correct props for "Field" in ${number} row`, () => {
       const expectedResult = {
         'data-test-radio-button': true,
@@ -43,13 +44,15 @@ describe('AnonymizingTypeSelect', () => {
   };
 
   beforeEach(() => {
-    Field.mockClear();
-
     render(
       <AnonymizingTypeSelect
         {...mockedProps}
       />
     );
+  });
+
+  afterEach(() => {
+    Field.mockClear();
   });
 
   it(`should render ${mockedProps.types.length} rows`, () => {

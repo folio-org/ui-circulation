@@ -32,7 +32,7 @@ class Metadata extends React.Component {
     }
 
     return (
-      <Row>
+      <Row data-testid="metadataTestId">
         <Col xs={12}>
           <this.cViewMetaData metadata={metadata} />
         </Col>
