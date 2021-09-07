@@ -446,5 +446,5 @@
     "settings.checkout.audioTheme.future": "فوتورا",
     "settings.fDDSform.dateFormTitle": "نطاق التاريخ {number}",
     "settings.finePolicy.overdueFineTitle": "غرامة تأخير",
-    "settings.finePolicy.perPeriod": "{number} per {period}"
+    "settings.finePolicy.perPeriod": "{number} لكل {period}"
 }
