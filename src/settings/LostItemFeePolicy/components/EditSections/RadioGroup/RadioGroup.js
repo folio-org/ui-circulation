@@ -20,6 +20,7 @@ const RadioGroup = (props) => (
       <Row>
         <Col xs={6}>
           <Label
+            data-testid="chargeAmountItemTestId"
             htmlFor="chargeAmount"
             id="chargeAmount-label"
           >
@@ -27,7 +28,7 @@ const RadioGroup = (props) => (
           </Label>
         </Col>
       </Row>
-      <Row>
+      <Row data-testid="actualCostTestId">
         <Col
           xs={3}
           data-test-charge-type-actual
@@ -42,7 +43,7 @@ const RadioGroup = (props) => (
           />
         </Col>
       </Row>
-      <Row>
+      <Row data-testid="setCostTestId">
         <Col
           xs={2}
           data-test-charge-type-another
