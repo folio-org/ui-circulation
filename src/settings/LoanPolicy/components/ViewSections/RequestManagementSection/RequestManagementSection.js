@@ -25,16 +25,20 @@ const RequestManagementSection = (props) => {
 
   return (
     <div data-test-loan-policy-detail-request-management-section>
-      <h2 data-test-request-management-section-header>
+      <h2
+        data-test-request-management-section-header
+        data-testid="sectionHeaderTestId"
+      >
         <FormattedMessage id="ui-circulation.settings.requestManagement.requestManagement" />
       </h2>
       <Accordion
+        data-testid="recallsAccordionTestId"
         id="recalls"
         label={<FormattedMessage id="ui-circulation.settings.requestManagement.recalls" />}
         open={isRecallsOpen}
         onToggle={onSectionToggle}
       >
-        <Row>
+        <Row data-testid="recallReturnIntervalTestId">
           <Col xs={12}>
             <div data-test-request-management-section-recall-return-interval>
               <KeyValue
@@ -44,7 +48,7 @@ const RequestManagementSection = (props) => {
             </div>
           </Col>
         </Row>
-        <Row>
+        <Row data-testid="minimumGuaranteedLoanPeriodTestId">
           <Col xs={12}>
             <div data-test-request-management-section-minimum-guaranteed-loan-period>
               <KeyValue
@@ -54,7 +58,7 @@ const RequestManagementSection = (props) => {
             </div>
           </Col>
         </Row>
-        <Row>
+        <Row data-testid="allowRecallsToExtendOverdueLoansTestId">
           <Col xs={12}>
             <div data-test-request-management-section-recalls-extend-overdue-loans>
               <KeyValue
@@ -64,7 +68,7 @@ const RequestManagementSection = (props) => {
             </div>
           </Col>
         </Row>
-        <Row>
+        <Row data-testid="alternateRecallReturnIntervalTestId">
           <Col xs={12}>
             <div data-test-request-management-section-alternate-recall-return-interval>
               <KeyValue
@@ -76,12 +80,13 @@ const RequestManagementSection = (props) => {
         </Row>
       </Accordion>
       <Accordion
+        data-testid="holdsAccordionTestId"
         id="holds"
         label={<FormattedMessage id="ui-circulation.settings.requestManagement.holds" />}
         open={isHoldsOpen}
         onToggle={onSectionToggle}
       >
-        <Row>
+        <Row data-testid="alternateCheckoutLoanPeriodTestId">
           <Col xs={12}>
             <div data-test-request-management-section-alternate-checkout-loan-period>
               <KeyValue
@@ -91,7 +96,7 @@ const RequestManagementSection = (props) => {
             </div>
           </Col>
         </Row>
-        <Row>
+        <Row data-testid="renewItemsWithRequestTestId">
           <Col xs={12}>
             <div data-test-request-management-section-renew-items-with-request>
               <KeyValue
@@ -101,7 +106,7 @@ const RequestManagementSection = (props) => {
             </div>
           </Col>
         </Row>
-        <Row>
+        <Row data-testid="alternateRenewalLoanPeriodTestId">
           <Col xs={12}>
             <div data-test-request-management-section-alternate-renewal-loan-period>
               <KeyValue
