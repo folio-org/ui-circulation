@@ -4,6 +4,7 @@ import {
   isWordsSeparatingSymbol,
   convertNamesToIds,
   convertIdsToNames,
+  convertNamesToIdsInLine,
 } from './rules-string-convertors';
 import {
   EDITOR_SPECIAL_SYMBOL,
@@ -95,6 +96,40 @@ describe('settings utils', () => {
       const expectedResult = 'key expected-name';
 
       expect(convertIdsToNames(mockedLineContent, mockedRecords)).toBe(expectedResult);
+    });
+  });
+
+  describe('convertNamesToIdsInLine', () => {
+    const mockedRecords = {
+      l: {
+        'example-loan-policy': 'testData',
+      },
+    };
+    const mockedItemsTypes = ['l'];
+
+    it('should return unchanged data if line is priority', () => {
+      const mockedLineContent = 'test priority test';
+
+      expect(convertNamesToIdsInLine(mockedLineContent)).toBe(mockedLineContent);
+    });
+
+    it('should not change data if invalid type is passed', () => {
+      const mockedLineContent = 'fallback-policy: r example-loan-policy';
+
+      expect(convertNamesToIdsInLine(mockedLineContent, mockedRecords, mockedItemsTypes)).toBe(mockedLineContent);
+    });
+
+    it('should not change data if have no correct key in rule record', () => {
+      const mockedLineContent = 'fallback-policy: l something';
+
+      expect(convertNamesToIdsInLine(mockedLineContent, mockedRecords, mockedItemsTypes)).toBe(mockedLineContent);
+    });
+
+    it('should not transform comment part in passed string', () => {
+      const mockedLineContent = 'fallback-policy: !l example-loan-policy /l example-loan-policy';
+      const expectedResult = 'fallback-policy: !l testData /l example-loan-policy';
+
+      expect(convertNamesToIdsInLine(mockedLineContent, mockedRecords, mockedItemsTypes)).toBe(expectedResult);
     });
   });
 });
