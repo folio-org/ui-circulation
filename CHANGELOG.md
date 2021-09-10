@@ -33,6 +33,7 @@
 * Add RTL/Jest testing for functions in `settings/utils`. Refs UICIRC-656.
 * Add RTL/Jest testing for `LoansSection` component in `LoanPolicy/components/ViewSections`. Refs UICIRC-617.
 * Add RTL/Jest testing for `RequestManagementSection` component in `LoanPolicy/components/ViewSections`. Refs UICIRC-618.
+* Add RTL/Jest testing for `RadioGroup` component in `LostItemFeePolicy/components/EditSections`. Refs UICIRC-624.
 
 ## [5.1.0] (https://github.com/folio-org/ui-circulation/tree/v5.1.0) (2021-06-14)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v5.0.1...v5.1.0)

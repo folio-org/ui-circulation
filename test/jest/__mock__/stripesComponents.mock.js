@@ -45,6 +45,12 @@ jest.mock('@folio/stripes/components', () => ({
       </div>
     </div>
   )),
+  Label: jest.fn(({
+    htmlFor,
+    id,
+    children,
+    ...rest
+  }) => (<label htmlFor={htmlFor} id={id} {...rest}>{children}</label>)),
   PaneFooter: jest.fn(({ ref, children, ...rest }) => (
     <div ref={ref} {...rest}>{children}</div>
   )),
