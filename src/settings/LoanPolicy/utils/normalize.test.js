@@ -72,7 +72,7 @@ describe('LoanPolicy/utils functions', () => {
               duration: 'true',
               intervalId: null,
             },
-          }
+          },
         },
         testData,
       };
@@ -95,7 +95,7 @@ describe('LoanPolicy/utils functions', () => {
       loansPolicy: {
         period: periodTestData,
         profileId: loanProfileMap.FIXED,
-      }
+      },
     };
 
     it('should remove period', () => {
@@ -103,7 +103,7 @@ describe('LoanPolicy/utils functions', () => {
         ...mockedData,
         loansPolicy: {
           profileId: loanProfileMap.FIXED,
-        }
+        },
       };
 
       expect(checkFixedProfile(mockedData)).toEqual(expectedResult);
@@ -114,7 +114,7 @@ describe('LoanPolicy/utils functions', () => {
         loansPolicy: {
           ...mockedData.loansPolicy,
           profileId: 'not fixed',
-        }
+        },
       };
 
       expect(checkFixedProfile(dataForTest)).toEqual(dataForTest);
@@ -157,14 +157,14 @@ describe('LoanPolicy/utils functions', () => {
         differentPeriod: false,
         alternateFixedDueDateScheduleId: 'testData',
         period: 'testData',
-      }
+      },
     };
 
     it('should remove fields associated with period', () => {
       const expectedResult = {
         renewalsPolicy: {
           differentPeriod: false,
-        }
+        },
       };
 
       expect(checkDifferentRenewalPeriod(mockedData)).toEqual(expectedResult);
@@ -175,7 +175,7 @@ describe('LoanPolicy/utils functions', () => {
         renewalsPolicy: {
           ...mockedData.renewalsPolicy,
           differentPeriod: true,
-        }
+        },
       };
 
       expect(checkDifferentRenewalPeriod(dataForTest)).toEqual(dataForTest);
@@ -264,13 +264,13 @@ describe('LoanPolicy/utils functions', () => {
             testData,
           },
           testData,
-        }
+        },
       };
       const mockedData = {
         requestManagement: {
           ...expectedResult.requestManagement,
           holds: {},
-        }
+        },
       };
 
       expect(checkRequestManagementSection(mockedData)).toEqual(expectedResult);
@@ -283,13 +283,13 @@ describe('LoanPolicy/utils functions', () => {
             testData,
           },
           testData,
-        }
+        },
       };
       const mockedData = {
         requestManagement: {
           ...expectedResult.requestManagement,
           recalls: {},
-        }
+        },
       };
 
       expect(checkRequestManagementSection(mockedData)).toEqual(expectedResult);
@@ -300,7 +300,7 @@ describe('LoanPolicy/utils functions', () => {
         requestManagement: {
           recalls: {},
           holds: {},
-        }
+        },
       };
 
       expect(checkRequestManagementSection(mockedData)).toEqual({});
@@ -374,7 +374,7 @@ describe('LoanPolicy/utils functions', () => {
         ...mockedData,
         loansPolicy: {
           profileId: loanProfileMap.FIXED,
-        }
+        },
       };
       const expectedResult = {
         ...dataForTest,
@@ -470,7 +470,7 @@ describe('LoanPolicy/utils functions', () => {
             duration: 'true',
             intervalId: null,
           },
-        }
+        },
       },
       testData,
     };
@@ -478,7 +478,7 @@ describe('LoanPolicy/utils functions', () => {
       ...reusableCommonData,
       loansPolicy,
       requestManagement,
-      testData
+      testData,
     };
 
     it('should process all fields correctly', () => {

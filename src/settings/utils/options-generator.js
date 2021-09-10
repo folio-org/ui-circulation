@@ -11,6 +11,7 @@ export default (formatMessage = noop, config = {}, placeholder = '') => {
   if (!isEmpty(placeholder)) {
     options.push(
       <option
+        data-testid="placeholderTestId"
         value=""
         key="x"
       >
@@ -19,9 +20,10 @@ export default (formatMessage = noop, config = {}, placeholder = '') => {
     );
   }
 
-  forEach(config, ({ value, label }) => {
+  forEach(config, ({ value, label }, index) => {
     options.push(
       <option
+        data-testid={`optionTestId-${index}`}
         value={value}
         key={value}
       >
