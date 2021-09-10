@@ -31,6 +31,7 @@
 * Add RTL/Jest testing for `LoanNoticesSection` component in `NoticePolicy/components/EditSections`. Refs UICIRC-639.
 * Add RTL/Jest testing for `convertNamesToIdsInLine` function in `settings/utils/rules-string-convertors.js`. Refs UICIRC-686.
 * Add RTL/Jest testing for functions in `settings/utils`. Refs UICIRC-656.
+* Add RTL/Jest testing for `LoansSection` component in `LoanPolicy/components/ViewSections`. Refs UICIRC-617.
 
 ## [5.1.0] (https://github.com/folio-org/ui-circulation/tree/v5.1.0) (2021-06-14)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v5.0.1...v5.1.0)

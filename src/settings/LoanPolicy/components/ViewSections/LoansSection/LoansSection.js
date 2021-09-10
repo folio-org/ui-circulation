@@ -27,14 +27,14 @@ const LoansSection = (props) => {
   if (!policy.loanable) {
     return (
       <div data-test-loan-policy-detail-loans-section>
-        <Row>
+        <Row data-testid="loansTestId">
           <Col xs={12}>
             <h2 data-test-loans-section-header>
               <FormattedMessage id="ui-circulation.settings.loanPolicy.loans" />
             </h2>
           </Col>
         </Row>
-        <Row>
+        <Row data-testid="loanableTestId">
           <Col xs={12}>
             <div data-test-renewals-section-loanable>
               <KeyValue
@@ -54,14 +54,14 @@ const LoansSection = (props) => {
 
   return (
     <div data-test-loan-policy-detail-loans-section>
-      <Row>
+      <Row data-testid="loansTestId">
         <Col xs={12}>
           <h2 data-test-loans-section-header>
             <FormattedMessage id="ui-circulation.settings.loanPolicy.loans" />
           </h2>
         </Col>
       </Row>
-      <Row>
+      <Row data-testid="loanProfileTestId">
         <Col xs={12}>
           <div data-test-loans-section-loan-profile>
             <KeyValue
@@ -73,7 +73,7 @@ const LoansSection = (props) => {
       </Row>
       { policy.isProfileRolling() &&
         <div>
-          <Row>
+          <Row data-testid="periodTestId">
             <Col xs={12}>
               <div data-test-loans-section-loan-period>
                 <KeyValue
@@ -86,7 +86,7 @@ const LoansSection = (props) => {
         </div>}
       { (policy.isProfileRolling() || policy.isProfileFixed()) &&
         <div>
-          <Row>
+          <Row data-testid="scheduleTestId">
             <Col xs={12}>
               <div data-test-loans-section-due-date-schedule>
                 <KeyValue
@@ -97,7 +97,7 @@ const LoansSection = (props) => {
             </Col>
           </Row>
         </div>}
-      <Row>
+      <Row data-testid="closedDueDateTestId">
         <Col xs={12}>
           <div data-test-loans-section-closed-due-date-mgmte>
             <KeyValue
@@ -109,7 +109,7 @@ const LoansSection = (props) => {
       </Row>
       { policy.isOpeningTimeOffsetActive() &&
       <div>
-        <Row>
+        <Row data-testid="openingTimeOffsetTestId">
           <Col xs={12}>
             <div data-test-loans-section-opening-time-offset>
               <KeyValue
@@ -120,7 +120,7 @@ const LoansSection = (props) => {
           </Col>
         </Row>
       </div>}
-      <Row>
+      <Row data-testid="gracePeriodTestId">
         <Col xs={12}>
           <div data-test-loans-section-grace-period>
             <KeyValue
@@ -130,7 +130,7 @@ const LoansSection = (props) => {
           </div>
         </Col>
       </Row>
-      <Row>
+      <Row data-testid="itemLimitTestId">
         <Col xs={12}>
           <div data-test-loans-section-item-limit>
             <KeyValue
