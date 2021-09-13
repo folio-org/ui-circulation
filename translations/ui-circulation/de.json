@@ -34,7 +34,7 @@
     "settings.fDDS.validate.overlappingDateRange": "Datumsbereich {num1} darf sich nicht mit Datumsbereich {num2} überschneiden",
     "settings.fDDS.validate.uniqueName": "Bitte eindeutigen Namen eingeben",
     "settings.fDDS.validate.oneScheduleMin": "Mindestens ein Zeitplan muss eingegeben werden",
-    "settings.fDDS.validate.toDate": "To date must be after from date",
+    "settings.fDDS.validate.toDate": "Bis-Datum muss nach dem Von-Datum liegen",
     "settings.fDDS.validate.onOrAfter": "Fälligkeitsdatum muss am oder nach dem Datum liegen",
     "settings.fDDS.paneTitle": "Feste Fälligkeitszeitpläne",
     "settings.fDDS.deleteDisabled": "Zeitplan kann nicht gelöscht werden, wenn dieser von einer oder mehreren Ausleihrichtlinien verwendet wird.",
@@ -278,7 +278,7 @@
     "settings.circulationRules.library": "Bibliothek",
     "settings.circulationRules.campuses": "Campuse",
     "settings.circulationRules.campus": "Campus",
-    "settings.circulationRules.any": "ANY",
+    "settings.circulationRules.any": "irgendein",
     "settings.circulationRules.selectCampus": "Campus auswählen",
     "settings.circulationRules.selectLibrary": "Bibliothek auswählen",
     "settings.circulationRules.locations": "Standorte",
@@ -445,6 +445,6 @@
     "settings.checkout.audioTheme.modern": "Moderna",
     "settings.checkout.audioTheme.future": "Futura",
     "settings.fDDSform.dateFormTitle": "Datumsbereich {number}",
-    "settings.finePolicy.overdueFineTitle": "Overdue fine",
-    "settings.finePolicy.perPeriod": "{number} per {period}"
+    "settings.finePolicy.overdueFineTitle": "Gebühr für überfällige Exemplare",
+    "settings.finePolicy.perPeriod": "{number} pro {period}"
 }
