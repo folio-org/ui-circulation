@@ -445,6 +445,6 @@
     "settings.checkout.audioTheme.modern": "Moderna",
     "settings.checkout.audioTheme.future": "Futura",
     "settings.fDDSform.dateFormTitle": "Date range {number}",
-    "settings.finePolicy.overdueFineTitle": "Overdue fine",
+    "settings.finePolicy.overdueFineTitle": "Nombre de la política de multas por préstamos vencidos",
     "settings.finePolicy.perPeriod": "{number} per {period}"
 }
