@@ -5,15 +5,23 @@ import {
   within,
 } from '@testing-library/react';
 
+import { FieldArray } from 'react-final-form-arrays';
+
 import '../../../../../../test/jest/__mock__';
 
-import RequestNoticesSection from './RequestNoticesSection';
-import NoticeCard from '../components';
+import NoticesList from '../components';
+import RequestNoticesSection, {
+  getSendEvents,
+} from './RequestNoticesSection';
 import {
   requestTimeBasedEventsIds,
   uponAndBeforeSendEvents,
   requestNoticesTriggeringEvents,
 } from '../../../../../constants';
+
+jest.mock('react-final-form-arrays', () => ({
+  FieldArray: jest.fn(() => null),
+}));
 
 jest.mock('../components', () => jest.fn(() => null));
 
@@ -36,7 +44,7 @@ describe('RequestNoticesSection', () => {
   ];
   const requestNoticesId = 'ui-circulation.settings.noticePolicy.requestNotices';
 
-  describe('when "isOpen" prop is true', () => {
+  describe('with positive props', () => {
     beforeEach(() => {
       render(
         <RequestNoticesSection
@@ -47,35 +55,31 @@ describe('RequestNoticesSection', () => {
       );
     });
 
-    afterEach(() => {
-      NoticeCard.mockClear();
-    });
-
     it('should render accordion label correctly', () => {
-      expect(within(screen.getByTestId('viewRequestNoticesTestId')).getByText(requestNoticesId)).toBeVisible();
+      expect(within(screen.getByTestId('editRequestNotices')).getByText(requestNoticesId)).toBeVisible();
     });
 
     it('should pass "isOpen" prop correctly', () => {
-      expect(screen.getByTestId('viewRequestNoticesTestId')).toHaveAttribute('open');
+      expect(screen.getByTestId('editRequestNotices')).toHaveAttribute('open');
     });
 
-    it('should execute each "NoticeCard" with correct props', () => {
-      mockedPolicy.requestNotices.forEach((notice, index) => {
-        const expectedResult = {
-          index,
-          notice,
-          sendEvents: uponAndBeforeSendEvents,
-          sendEventTriggeringIds: Object.values(requestTimeBasedEventsIds),
-          templates: mockedTemplates,
-          triggeringEvents: requestNoticesTriggeringEvents,
-        };
+    it('should execute "FieldArray" with correct props', () => {
+      const expectedProps = {
+        name: 'requestNotices',
+        sectionKey: 'requestNotices',
+        component: NoticesList,
+        policy: mockedPolicy,
+        getSendEvents,
+        sendEventTriggeringIds: Object.values(requestTimeBasedEventsIds),
+        templates: mockedTemplates,
+        triggeringEvents: requestNoticesTriggeringEvents,
+      };
 
-        expect(NoticeCard).toHaveBeenNthCalledWith(index + 1, expectedResult, {});
-      });
+      expect(FieldArray).toHaveBeenLastCalledWith(expectedProps, {});
     });
   });
 
-  describe('when "isOpen" prop is false', () => {
+  describe('with negative props', () => {
     beforeEach(() => {
       render(
         <RequestNoticesSection
@@ -87,7 +91,13 @@ describe('RequestNoticesSection', () => {
     });
 
     it('should pass "isOpen" prop correctly', () => {
-      expect(screen.getByTestId('viewRequestNoticesTestId')).not.toHaveAttribute('open');
+      expect(screen.getByTestId('editRequestNotices')).not.toHaveAttribute('open');
+    });
+  });
+
+  describe('getSendEvents', () => {
+    it('should return list of "uponAndBeforeSendEvents"', () => {
+      expect(getSendEvents()).toEqual(uponAndBeforeSendEvents);
     });
   });
 });
