@@ -5,7 +5,6 @@ jest.mock('react-final-form', () => ({
     <div {...rest}>
       {label}
       {component()}
-      {children}
     </div>
   )),
 }));
