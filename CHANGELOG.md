@@ -37,6 +37,7 @@
 * Increment `stripes` to `v7`, `react` to `v17`. Refs UICIRC-676.
 * Add RTL/Jest testing for `RequestNoticesSection` component in `NoticePolicy/components/EditSections`. Refs UICIRC-640.
 * Add RTL/Jest testing for `OverdueFinesSection` and `OverdueFinesSectionColumn` components in `FinePolicy/components/EditSections/RangeSection`. Refs UICIRC-596.
+* Add RTL/Jest testing for `Period` component in `settings/components/Period`. Refs UICIRC-655.
 
 ## [5.1.0] (https://github.com/folio-org/ui-circulation/tree/v5.1.0) (2021-06-14)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v5.0.1...v5.1.0)
