@@ -12,6 +12,10 @@ import {
   uponAndBeforeSendEvents,
 } from '../../../../../constants';
 
+export const getSendEvents = () => {
+  return uponAndBeforeSendEvents;
+};
+
 class RequestNoticesSection extends React.Component {
   static propTypes = {
     isOpen: PropTypes.bool.isRequired,
@@ -21,10 +25,6 @@ class RequestNoticesSection extends React.Component {
       label: PropTypes.string.isRequired,
     })).isRequired,
   };
-
-  getSendEvents = () => {
-    return uponAndBeforeSendEvents;
-  }
 
   render() {
     const {
@@ -36,6 +36,7 @@ class RequestNoticesSection extends React.Component {
     return (
       <div data-test-notice-policy-form-request-notices-section>
         <Accordion
+          data-testid="editRequestNotices"
           id="editRequestNotices"
           open={isOpen}
           label={<FormattedMessage id="ui-circulation.settings.noticePolicy.requestNotices" />}
@@ -45,7 +46,7 @@ class RequestNoticesSection extends React.Component {
             sectionKey="requestNotices"
             component={NoticesList}
             policy={policy}
-            getSendEvents={this.getSendEvents}
+            getSendEvents={getSendEvents}
             sendEventTriggeringIds={values(requestTimeBasedEventsIds)}
             templates={templates}
             triggeringEvents={requestNoticesTriggeringEvents}
