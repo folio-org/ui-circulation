@@ -32,42 +32,42 @@ describe('View LostItemFeeSection', () => {
     policy: {
       chargeAmountItem: {
         amount: 0,
-        chargeType: 'actualCost'
+        chargeType: 'actualCost',
       },
       chargeAmountItemPatron: true,
       chargeAmountItemSystem: true,
       description: 'Test lost item fee policy',
       feesFinesShallRefunded: {
         duration: undefined,
-        intervalId: noop
+        intervalId: noop,
       },
       id: 'policyId',
       itemAgedLostOverdue: {
         duration: noop,
-        intervalId: noop
+        intervalId: noop,
       },
       lostItemChargeFeeFine: {
         duration: 2,
-        intervalId: 'Days'
+        intervalId: 'Days',
       },
       lostItemProcessingFee: 0,
       lostItemReturned: 'Charge',
       metadata: {
         createdByUserId: 'userId',
-        createdDate: '2021-09-01'
+        createdDate: '2021-09-01',
       },
       name: 'Lost item fee policy',
       patronBilledAfterAgedLost: {
         duration: noop,
-        intervalId: noop
+        intervalId: noop,
       },
       patronBilledAfterRecalledItemAgedLost: {
         duration: noop,
-        intervalId: noop
+        intervalId: noop,
       },
       recalledItemAgedLostOverdue: {
         duration: noop,
-        intervalId: noop
+        intervalId: noop,
       },
       returnedLostItemProcessingFee: true,
       replacedLostItemProcessingFee: true,
@@ -82,13 +82,13 @@ describe('View LostItemFeeSection', () => {
       ...lostItemFeeSectionProps.policy,
       chargeAmountItem: {
         amount: 25,
-        chargeType: 'otherCost'
+        chargeType: 'otherCost',
       },
       chargeAmountItemPatron: false,
       chargeAmountItemSystem: false,
       feesFinesShallRefunded: {
         duration: 1,
-        intervalId: 1
+        intervalId: 1,
       },
       lostItemReturned: 'Remove',
       returnedLostItemProcessingFee: false,
