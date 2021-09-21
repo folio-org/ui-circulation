@@ -45,11 +45,11 @@ const LostItemFeeSection = (props) => {
 
   return (
     <div
-      data-testid="viewLostItemFeeSectionTestId"
+      data-testid="viewLostItemFeeSection"
       data-test-lost-item-policy-detail-fee-section
     >
       <Accordion
-        data-testid="viewLostItemFeeSectionAccordionTestId"
+        data-testid="viewLostItemFeeSectionAccordion"
         id="viewLostItemFeeSection"
         label={<FormattedMessage id="ui-circulation.settings.lostItemFee.lostItemSection" />}
         open={lostItemFeeSectionOpen}
@@ -97,7 +97,7 @@ const LostItemFeeSection = (props) => {
         <Row>
           <Col xs={12}>
             <div
-              data-testid="chargeAmountTestId"
+              data-testid="chargeAmount"
               data-test-charge-amount
             >
               <KeyValue
@@ -120,7 +120,7 @@ const LostItemFeeSection = (props) => {
         <Row>
           <Col xs={12}>
             <div
-              data-testid="chargeAmountItemPatronTestId"
+              data-testid="chargeAmountItemPatron"
               data-test-lost-by-patron
             >
               <KeyValue
@@ -133,7 +133,7 @@ const LostItemFeeSection = (props) => {
         <Row>
           <Col xs={12}>
             <div
-              data-testid="chargeAmountItemSystemTestId"
+              data-testid="chargeAmountItemSystem"
               data-test-lost-by-system
             >
               <KeyValue
@@ -156,7 +156,7 @@ const LostItemFeeSection = (props) => {
         <Row>
           <Col xs={12}>
             <div
-              data-testid="returnedLostItemProcessingFeeTestId"
+              data-testid="returnedLostItemProcessingFee"
               data-test-returned-lost-item
             >
               <KeyValue
@@ -169,7 +169,7 @@ const LostItemFeeSection = (props) => {
         <Row>
           <Col xs={12}>
             <div
-              data-testid="lostItemReturnedTestId"
+              data-testid="lostItemReturned"
               data-test-if-lost-item-returned
             >
               <KeyValue
@@ -184,7 +184,7 @@ const LostItemFeeSection = (props) => {
         <Row>
           <Col xs={12}>
             <div
-              data-testid="replacementAllowedTestId"
+              data-testid="replacementAllowed"
               data-test-replacement-allowed
             >
               <KeyValue
@@ -197,7 +197,7 @@ const LostItemFeeSection = (props) => {
         <Row>
           <Col xs={12}>
             <div
-              data-testid="replacedLostItemProcessingFeeTestId"
+              data-testid="replacedLostItemProcessingFee"
               data-test-replaced-lost-item
             >
               <KeyValue
@@ -209,10 +209,7 @@ const LostItemFeeSection = (props) => {
         </Row>
         <Row>
           <Col xs={12}>
-            <div
-              data-testid="replacementProcessingFeeTestId"
-              data-test-replacement-fee
-            >
+            <div data-test-replacement-fee>
               <KeyValue
                 label={<FormattedMessage id="ui-circulation.settings.lostItemFee.replacementProcessFee" />}
                 value={parseFloat(replacementProcessingFee).toFixed(2)}
@@ -223,7 +220,7 @@ const LostItemFeeSection = (props) => {
         <Row>
           <Col xs={12}>
             <div
-              data-testid="displayFeesFinesShallRefundedTestId"
+              data-testid="displayFeesFinesShallRefunded"
               data-test-returned-more-than
             >
               <KeyValue

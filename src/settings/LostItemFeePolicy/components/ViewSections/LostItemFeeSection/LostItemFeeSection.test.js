@@ -12,8 +12,10 @@ import LostItemFeeSection from './LostItemFeeSection';
 
 const testSectionKeyValues = (testName, testId, expectedValue) => {
   it(`should render ${testName} with ${expectedValue} value`, () => {
-    expect(screen.getByTestId(testId)).toBeVisible();
-    expect(within(screen.getByTestId(testId)).getByText(expectedValue)).toBeVisible();
+    const testIdValue = screen.getByTestId(testId);
+
+    expect(testIdValue).toBeVisible();
+    expect(within(testIdValue).getByText(expectedValue)).toBeVisible();
   });
 };
 
@@ -103,21 +105,24 @@ describe('View LostItemFeeSection', () => {
     });
 
     it('should render LostItemFeeSection component', () => {
-      expect(screen.getByTestId('viewLostItemFeeSectionTestId')).toBeVisible();
+      expect(screen.getByTestId('viewLostItemFeeSection')).toBeVisible();
     });
 
     it('should render open accordion with label', () => {
-      expect(screen.getByTestId('viewLostItemFeeSectionAccordionTestId')).toBeVisible();
-      expect(screen.getByTestId('viewLostItemFeeSectionAccordionTestId')).toHaveAttribute('open');
-      expect(within(screen.getByTestId('viewLostItemFeeSectionAccordionTestId')).getByText(lostItemSectionAccordionLabel)).toBeVisible();
+      const viewLostItemFeeSectionAccordionTestIdValue = screen.getByTestId('viewLostItemFeeSectionAccordion');
+
+      expect(viewLostItemFeeSectionAccordionTestIdValue).toBeVisible();
+      expect(viewLostItemFeeSectionAccordionTestIdValue).toHaveAttribute('open');
+      expect(within(viewLostItemFeeSectionAccordionTestIdValue).getByText(lostItemSectionAccordionLabel)).toBeVisible();
     });
 
-    testSectionKeyValues('charge amount', 'chargeAmountTestId', actualCost);
-    testSectionKeyValues('fees/fines shall refunded', 'displayFeesFinesShallRefundedTestId', dash);
-    testSectionKeyValues('lost by system', 'chargeAmountItemSystemTestId', displayYes);
-    testSectionKeyValues('replaced lost item processing fee', 'replacedLostItemProcessingFeeTestId', displayYes);
-    testSectionKeyValues('replacement allowed', 'replacementAllowedTestId', displayYes);
-    testSectionKeyValues('if lost item returned', 'lostItemReturnedTestId', lostItemReturnedCharged);
+    testSectionKeyValues('charge amount', 'chargeAmount', actualCost);
+    testSectionKeyValues('fees/fines shall refunded', 'displayFeesFinesShallRefunded', dash);
+    testSectionKeyValues('lost by patron', 'chargeAmountItemPatron', displayYes);
+    testSectionKeyValues('lost by system', 'chargeAmountItemSystem', displayYes);
+    testSectionKeyValues('replaced lost item processing fee', 'replacedLostItemProcessingFee', displayYes);
+    testSectionKeyValues('replacement allowed', 'replacementAllowed', displayYes);
+    testSectionKeyValues('if lost item returned', 'lostItemReturned', lostItemReturnedCharged);
   });
 
   describe('with lostItemFeeSectionAlternativeProps', () => {
@@ -126,13 +131,14 @@ describe('View LostItemFeeSection', () => {
     });
 
     it('should render charge amount with other cost', () => {
-      expect(screen.getByTestId('chargeAmountTestId')).toBeVisible();
+      expect(screen.getByTestId('chargeAmount')).toBeVisible();
     });
 
-    testSectionKeyValues('lost by system', 'chargeAmountItemSystemTestId', displayNo);
-    testSectionKeyValues('replaced lost item processing fee', 'replacedLostItemProcessingFeeTestId', displayNo);
-    testSectionKeyValues('returned lost item processing fee', 'returnedLostItemProcessingFeeTestId', displayNo);
-    testSectionKeyValues('replacement allowed', 'replacementAllowedTestId', displayNo);
-    testSectionKeyValues('if lost item returned', 'lostItemReturnedTestId', lostItemReturnedRemove);
+    testSectionKeyValues('lost by patron', 'chargeAmountItemPatron', displayNo);
+    testSectionKeyValues('lost by system', 'chargeAmountItemSystem', displayNo);
+    testSectionKeyValues('replaced lost item processing fee', 'replacedLostItemProcessingFee', displayNo);
+    testSectionKeyValues('returned lost item processing fee', 'returnedLostItemProcessingFee', displayNo);
+    testSectionKeyValues('replacement allowed', 'replacementAllowed', displayNo);
+    testSectionKeyValues('if lost item returned', 'lostItemReturned', lostItemReturnedRemove);
   });
 });
