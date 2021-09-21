@@ -179,7 +179,7 @@
 }
 
 .CodeMirror-hints-list ul li {
-  height: 12px;
+  height: auto;
 }
 
 .CodeMirror-hints-list.CodeMirror-hints-multiple-selection ul {
