@@ -90,9 +90,9 @@
   width: 100%;
 }
 
+/* wrapper for the _entire_ list, not a single list-item */
 .CodeMirror-checkbox-container {
   width: 100%;
-  height: 12px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -179,7 +179,7 @@
 }
 
 .CodeMirror-hints-list ul li {
-  height: 12px;
+  height: auto;
 }
 
 .CodeMirror-hints-list.CodeMirror-hints-multiple-selection ul {
