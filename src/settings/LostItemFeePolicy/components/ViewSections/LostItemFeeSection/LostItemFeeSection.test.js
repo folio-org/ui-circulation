@@ -19,7 +19,6 @@ const testSectionKeyValues = (testName, testId, expectedValue) => {
 
     expect(testIdValue).toBeVisible();
     expect(within(testIdValue).getByText(expectedValue || `ui-circulation.settings.lostItemFee.${testId}`)).toBeVisible();
-    expect(within(testIdValue).getByText(`ui-circulation.settings.lostItemFee.${testId}`)).toBeVisible();
   });
 };
 const getFormattedValue = (value) => toNumber(parseFloat(value).toFixed(2));
