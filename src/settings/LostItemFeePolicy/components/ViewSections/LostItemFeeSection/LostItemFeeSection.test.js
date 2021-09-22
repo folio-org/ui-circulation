@@ -1,5 +1,8 @@
 import React from 'react';
-import { noop } from 'lodash';
+import {
+  noop,
+  toNumber,
+} from 'lodash';
 import {
   render,
   screen,
@@ -15,9 +18,11 @@ const testSectionKeyValues = (testName, testId, expectedValue) => {
     const testIdValue = screen.getByTestId(testId);
 
     expect(testIdValue).toBeVisible();
-    expect(within(testIdValue).getByText(expectedValue)).toBeVisible();
+    expect(within(testIdValue).getByText(expectedValue || `ui-circulation.settings.lostItemFee.${testId}`)).toBeVisible();
+    expect(within(testIdValue).getByText(`ui-circulation.settings.lostItemFee.${testId}`)).toBeVisible();
   });
 };
+const getFormattedValue = (value) => toNumber(parseFloat(value).toFixed(2));
 
 describe('View LostItemFeeSection', () => {
   const dash = '-';
@@ -116,11 +121,18 @@ describe('View LostItemFeeSection', () => {
       expect(within(viewLostItemFeeSectionAccordionTestIdValue).getByText(lostItemSectionAccordionLabel)).toBeVisible();
     });
 
-    testSectionKeyValues('charge amount', 'chargeAmount', actualCost);
-    testSectionKeyValues('fees/fines shall refunded', 'displayFeesFinesShallRefunded', dash);
+    testSectionKeyValues('item aged', 'itemeAgedLostOverdue');
+    testSectionKeyValues('patron billed after aged lost', 'patronBilledAfterAgedLost');
+    testSectionKeyValues('item recalled aged', 'itemRecalledAgedLostOverdue');
+    testSectionKeyValues('patron billed recalled', 'patronBilledAfterRecalledAgedLost');
+    testSectionKeyValues('lost item fee', 'lostItemProcessingFee', getFormattedValue(lostItemFeeSectionProps.lostItemProcessingFee));
+    testSectionKeyValues('charge amount', 'chargeAmountItem', actualCost);
+    testSectionKeyValues('fees/fines shall refunded', 'feesFinesShallRefunded', dash);
     testSectionKeyValues('lost by patron', 'chargeAmountItemPatron', displayYes);
     testSectionKeyValues('lost by system', 'chargeAmountItemSystem', displayYes);
+    testSectionKeyValues('close loan after', 'lostItemNotChargeFeesFine');
     testSectionKeyValues('replaced lost item processing fee', 'replacedLostItemProcessingFee', displayYes);
+    testSectionKeyValues('replacement fee', 'replacementProcessFee', getFormattedValue(lostItemFeeSectionProps.replacementProcessingFee));
     testSectionKeyValues('replacement allowed', 'replacementAllowed', displayYes);
     testSectionKeyValues('if lost item returned', 'lostItemReturned', lostItemReturnedCharged);
   });
@@ -131,7 +143,7 @@ describe('View LostItemFeeSection', () => {
     });
 
     it('should render charge amount with other cost', () => {
-      expect(screen.getByTestId('chargeAmount')).toBeVisible();
+      expect(screen.getByTestId('chargeAmountItem')).toBeVisible();
     });
 
     testSectionKeyValues('lost by patron', 'chargeAmountItemPatron', displayNo);

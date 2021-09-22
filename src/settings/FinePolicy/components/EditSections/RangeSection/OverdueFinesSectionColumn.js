@@ -59,7 +59,7 @@ const OverdueFinesSectionColumn = (props) => {
   );
 };
 OverdueFinesSectionColumn.propTypes = {
-  label: PropTypes.object,
+  label: PropTypes.node,
   name: PropTypes.string,
   component: PropTypes.string,
   intl: PropTypes.object,
