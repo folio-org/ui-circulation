@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {
   injectIntl,
-  FormattedMessage,
 } from 'react-intl';
 
 import { Accordion } from '@folio/stripes/components';
@@ -19,7 +18,7 @@ import css from '../../../FineSection.css';
 
 class FinesSection extends React.Component {
   static propTypes = {
-    intl: PropTypes.object,
+    intl: PropTypes.object.isRequired,
     fineSectionOpen: PropTypes.bool.isRequired,
   };
 
@@ -34,6 +33,7 @@ class FinesSection extends React.Component {
       fineSectionOpen,
       intl,
     } = this.props;
+    const { formatMessage } = intl;
 
     const intervalP = this.generateOptions(intervalPeriods, 'ui-circulation.settings.finePolicy.selectInterval');
 
@@ -42,12 +42,12 @@ class FinesSection extends React.Component {
         <Accordion
           id="editFineSection"
           open={fineSectionOpen}
-          label={<FormattedMessage id="ui-circulation.settings.finePolicy.overdueFine" />}
+          label={formatMessage({ id: 'ui-circulation.settings.finePolicy.overdueFine' })}
         >
           <section className={css.accordionSection}>
             <div data-test-fine-section-overdue>
               <OverdueFinesSection
-                label={<FormattedMessage id="ui-circulation.settings.finePolicy.overdueFine" />}
+                label={formatMessage({ id: 'ui-circulation.settings.finePolicy.overdueFine' })}
                 name="overdueFine.quantity"
                 period="overdueFine.intervalId"
                 intervalPeriods={intervalP}
@@ -57,14 +57,14 @@ class FinesSection extends React.Component {
             </div>
             <div data-test-fine-section-count-closed>
               <OverdueFinesSectionColumn
-                label={<FormattedMessage id="ui-circulation.settings.finePolicy.countClosedDHM" />}
+                label={formatMessage({ id: 'ui-circulation.settings.finePolicy.countClosedDHM' })}
                 name="countClosed"
                 intl={intl}
               />
             </div>
             <div data-test-fine-section-max-overdue>
               <OverdueFinesSectionColumn
-                label={<FormattedMessage id="ui-circulation.settings.finePolicy.maximumOverdueFine" />}
+                label={formatMessage({ id: 'ui-circulation.settings.finePolicy.maximumOverdueFine' })}
                 name="maxOverdueFine"
                 component="TextField"
                 intl={intl}
@@ -72,14 +72,14 @@ class FinesSection extends React.Component {
             </div>
             <div data-test-fine-section-forgive-overdue>
               <OverdueFinesSectionColumn
-                label={<FormattedMessage id="ui-circulation.settings.finePolicy.forgiveOverdueFine" />}
+                label={formatMessage({ id: 'ui-circulation.settings.finePolicy.forgiveOverdueFine' })}
                 name="forgiveOverdueFine"
                 intl={intl}
               />
             </div>
             <div data-test-fine-section-overdue-recall>
               <OverdueFinesSection
-                label={<FormattedMessage id="ui-circulation.settings.finePolicy.overdueRecallFine" />}
+                label={formatMessage({ id: 'ui-circulation.settings.finePolicy.overdueRecallFine' })}
                 name="overdueRecallFine.quantity"
                 period="overdueRecallFine.intervalId"
                 intervalPeriods={intervalP}
@@ -89,14 +89,14 @@ class FinesSection extends React.Component {
             </div>
             <div data-test-fine-section-grace-period-recall>
               <OverdueFinesSectionColumn
-                label={<FormattedMessage id="ui-circulation.settings.finePolicy.ignoreGracePeriodsRecalls" />}
+                label={formatMessage({ id: 'ui-circulation.settings.finePolicy.ignoreGracePeriodsRecalls' })}
                 name="gracePeriodRecall"
                 intl={intl}
               />
             </div>
             <div data-test-fine-section-max-overdue-recall>
               <OverdueFinesSectionColumn
-                label={<FormattedMessage id="ui-circulation.settings.finePolicy.maximumRecallOverdueFine" />}
+                label={formatMessage({ id: 'ui-circulation.settings.finePolicy.maximumRecallOverdueFine' })}
                 name="maxOverdueRecallFine"
                 component="TextField"
                 intl={intl}
