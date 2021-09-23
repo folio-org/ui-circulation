@@ -1,8 +1,5 @@
 import React from 'react';
-import {
-  noop,
-  toNumber,
-} from 'lodash';
+import { noop } from 'lodash';
 import {
   render,
   screen,
@@ -18,10 +15,11 @@ const testSectionKeyValues = (testName, testId, expectedValue) => {
     const testIdValue = screen.getByTestId(testId);
 
     expect(testIdValue).toBeVisible();
-    expect(within(testIdValue).getByText(expectedValue || `ui-circulation.settings.lostItemFee.${testId}`)).toBeVisible();
+    expect(within(testIdValue).getByText(expectedValue)).toBeVisible();
+    expect(within(testIdValue).getByText(`ui-circulation.settings.lostItemFee.${testId}`)).toBeVisible();
   });
 };
-const getFormattedValue = (value) => toNumber(parseFloat(value).toFixed(2));
+const getFormattedValue = (value) => parseFloat(value).toFixed(2);
 
 describe('View LostItemFeeSection', () => {
   const dash = '-';
@@ -32,7 +30,7 @@ describe('View LostItemFeeSection', () => {
   const lostItemReturnedCharged = 'ui-circulation.settings.lostItemFee.lostItemChargeOverdueBased';
   const lostItemReturnedRemove = 'ui-circulation.settings.lostItemFee.lostItemRemoveOverdueFines';
   const lostItemFeeSectionProps = {
-    formatMessage: jest.fn(() => null),
+    formatMessage: jest.fn(() => dash),
     getPeriodValue: jest.fn((value) => value || dash),
     lostItemFeeSectionOpen: true,
     policy: {
@@ -84,6 +82,7 @@ describe('View LostItemFeeSection', () => {
   };
   const lostItemFeeSectionAlternativeProps = {
     ...lostItemFeeSectionProps,
+    lostItemFeeSectionOpen: false,
     policy: {
       ...lostItemFeeSectionProps.policy,
       chargeAmountItem: {
@@ -120,18 +119,18 @@ describe('View LostItemFeeSection', () => {
       expect(within(viewLostItemFeeSectionAccordionTestIdValue).getByText(lostItemSectionAccordionLabel)).toBeVisible();
     });
 
-    testSectionKeyValues('item aged', 'itemeAgedLostOverdue');
-    testSectionKeyValues('patron billed after aged lost', 'patronBilledAfterAgedLost');
-    testSectionKeyValues('item recalled aged', 'itemRecalledAgedLostOverdue');
-    testSectionKeyValues('patron billed recalled', 'patronBilledAfterRecalledAgedLost');
-    testSectionKeyValues('lost item fee', 'lostItemProcessingFee', getFormattedValue(lostItemFeeSectionProps.lostItemProcessingFee));
+    testSectionKeyValues('item aged', 'itemeAgedLostOverdue', 'itemAgedLostOverdue');
+    testSectionKeyValues('patron billed after aged lost', 'patronBilledAfterAgedLost', 'patronBilledAfterAgedLost');
+    testSectionKeyValues('item recalled aged', 'itemRecalledAgedLostOverdue', 'recalledItemAgedLostOverdue');
+    testSectionKeyValues('patron billed recalled', 'patronBilledAfterRecalledAgedLost', 'patronBilledAfterRecalledItemAgedLost');
+    testSectionKeyValues('lost item fee', 'lostItemProcessingFee', getFormattedValue(lostItemFeeSectionProps.policy.lostItemProcessingFee));
     testSectionKeyValues('charge amount', 'chargeAmountItem', actualCost);
     testSectionKeyValues('fees/fines shall refunded', 'feesFinesShallRefunded', dash);
     testSectionKeyValues('lost by patron', 'chargeAmountItemPatron', displayYes);
     testSectionKeyValues('lost by system', 'chargeAmountItemSystem', displayYes);
-    testSectionKeyValues('close loan after', 'lostItemNotChargeFeesFine');
+    testSectionKeyValues('close loan after', 'lostItemNotChargeFeesFine', 'lostItemChargeFeeFine');
     testSectionKeyValues('replaced lost item processing fee', 'replacedLostItemProcessingFee', displayYes);
-    testSectionKeyValues('replacement fee', 'replacementProcessFee', getFormattedValue(lostItemFeeSectionProps.replacementProcessingFee));
+    testSectionKeyValues('replacement fee', 'replacementProcessFee', getFormattedValue(lostItemFeeSectionProps.policy.replacementProcessingFee));
     testSectionKeyValues('replacement allowed', 'replacementAllowed', displayYes);
     testSectionKeyValues('if lost item returned', 'lostItemReturned', lostItemReturnedCharged);
   });
@@ -139,6 +138,10 @@ describe('View LostItemFeeSection', () => {
   describe('with lostItemFeeSectionAlternativeProps', () => {
     beforeEach(() => {
       render(<LostItemFeeSection {...lostItemFeeSectionAlternativeProps} />);
+    });
+
+    it('should render close accordion', () => {
+      expect(screen.getByTestId('viewLostItemFeeSectionAccordion')).not.toHaveAttribute('open');
     });
 
     it('should render charge amount with other cost', () => {
