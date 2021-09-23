@@ -43,6 +43,7 @@
 * Add RTL/Jest testing for `RenewalsSection` component in `LoanPolicy/components/EditSections`. Refs UICIRC-614.
 * Add RTL/Jest testing for `GeneralSection` component in `NoticePolicy/components/EditSections`. Refs UICIRC-638.
 * Add RTL/Jest testing for `GeneralSection` component in `RequestPolicy/components/EditSections`. Refs UICIRC-648.
+* Add RTL/Jest testing for `LostItemFeeSection` component in `LostItemFeePolicy/components/ViewSections/LostItemFeeSection`. Refs UICIRC-627.
 
 ## [5.1.0] (https://github.com/folio-org/ui-circulation/tree/v5.1.0) (2021-06-14)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v5.0.1...v5.1.0)
