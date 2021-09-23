@@ -31,6 +31,7 @@ class GeneralSection extends React.Component {
     return (
       <div data-test-notice-policy-form-general-section>
         <Accordion
+          data-testid="general"
           id="general"
           open={isOpen}
           label={<FormattedMessage id="ui-circulation.settings.noticePolicy.generalInformation" />}
@@ -39,7 +40,10 @@ class GeneralSection extends React.Component {
             connect={connect}
             metadata={metadata}
           />
-          <div data-test-general-section-policy-name>
+          <div
+            data-test-general-section-policy-name
+            data-testid="nameField"
+          >
             <Field
               id="notice_policy_name"
               name="name"
@@ -49,7 +53,10 @@ class GeneralSection extends React.Component {
               component={TextField}
             />
           </div>
-          <div data-test-general-section-active>
+          <div
+            data-test-general-section-active
+            data-testid="activeField"
+          >
             <Field
               id="notice_policy_active"
               name="active"
@@ -59,7 +66,10 @@ class GeneralSection extends React.Component {
               component={Checkbox}
             />
           </div>
-          <div data-test-general-section-policy-description>
+          <div
+            data-test-general-section-policy-description
+            data-testid="descriptionField"
+          >
             <Field
               id="notice_policy_description"
               name="description"
