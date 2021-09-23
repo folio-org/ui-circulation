@@ -19,6 +19,7 @@ jest.mock('@folio/stripes/components', () => ({
       </span>
     </button>
   )),
+  Checkbox: jest.fn(() => <input type="checkbox" />),
   Col: jest.fn(({ children, ...rest }) => <div {...rest}>{children}</div>),
   Icon: jest.fn((props) => (props && props.children ? props.children : <span />)),
   IconButton: jest.fn(({
@@ -57,7 +58,7 @@ jest.mock('@folio/stripes/components', () => ({
   PaneMenu: jest.fn((props) => <div>{props.children}</div>),
   RadioButton: jest.fn(() => <input type="radio" />),
   Row: jest.fn(({ children, ...rest }) => <div {...rest}>{children}</div>),
-  Select: jest.fn(() => <div />),
+  Select: jest.fn(() => <select> </select>),
   TextArea: jest.fn((props) => <textarea {...props} />),
   TextField: jest.fn((props) => <input {...props} />),
 }));

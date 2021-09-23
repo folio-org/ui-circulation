@@ -49,11 +49,17 @@ class RenewalsSection extends React.Component {
       : <FormattedMessage id="ui-circulation.settings.loanPolicy.altFDDSforRenewals" />;
 
     return (
-      <div data-test-loan-policy-form-renewals-section>
+      <div
+        data-test-loan-policy-form-renewals-section
+        data-testid="renewals"
+      >
         <h2 data-test-renewals-section-header>
           <FormattedMessage id="ui-circulation.settings.loanPolicy.renewals" />
         </h2>
-        <div data-test-renewals-section-renewable>
+        <div
+          data-test-renewals-section-renewable
+          data-testid="renewable"
+        >
           <Field
             label={<FormattedMessage id="ui-circulation.settings.loanPolicy.renewable" />}
             name="renewable"
@@ -63,7 +69,10 @@ class RenewalsSection extends React.Component {
           />
         </div>
         { policy.isRenewable() &&
-          <div data-test-renewals-section-unlimited-renewals>
+          <div
+            data-test-renewals-section-unlimited-renewals
+            data-testid="unlimitedRenewals"
+          >
             <Field
               label={<FormattedMessage id="ui-circulation.settings.loanPolicy.unlimitedRenewals" />}
               name="renewalsPolicy.unlimited"
@@ -74,7 +83,10 @@ class RenewalsSection extends React.Component {
           </div>}
         { policy.isRenewable() && !policy.isUnlimitedRenewals() &&
           <>
-            <div data-test-renewals-section-num-renewals-allowed>
+            <div
+              data-test-renewals-section-num-renewals-allowed
+              data-testid="numRenewalsAllowed"
+            >
               <Field
                 label={<FormattedMessage id="ui-circulation.settings.loanPolicy.numRenewalsAllowed" />}
                 name="renewalsPolicy.numberAllowed"
@@ -88,7 +100,10 @@ class RenewalsSection extends React.Component {
           </>}
         { policy.isRenewable() && policy.isProfileRolling() &&
           <>
-            <div data-test-renewals-section-renew-from>
+            <div
+              data-test-renewals-section-renew-from
+              data-testid="renewFrom"
+            >
               <Field
                 label={<FormattedMessage id="ui-circulation.settings.loanPolicy.renewFrom" />}
                 name="renewalsPolicy.renewFromId"
@@ -101,7 +116,10 @@ class RenewalsSection extends React.Component {
             </div>
           </>}
         { policy.isRenewable() &&
-          <div data-test-renewals-section-renewal-period-different>
+          <div
+            data-test-renewals-section-renewal-period-different
+            data-testid="renewalPeriodDifferent"
+          >
             <Field
               label={<FormattedMessage id="ui-circulation.settings.loanPolicy.renewalPeriodDifferent" />}
               name="renewalsPolicy.differentPeriod"
@@ -113,7 +131,10 @@ class RenewalsSection extends React.Component {
         { policy.isRenewable() && policy.isDifferentPeriod() && policy.isProfileRolling() &&
           <>
             <br />
-            <div data-test-renewals-section-alternate-loan-period-renewals>
+            <div
+              data-test-renewals-section-alternate-loan-period-renewals
+              data-testid="alternateLoanPeriodRenewals"
+            >
               <Period
                 fieldLabel="ui-circulation.settings.loanPolicy.alternateLoanPeriodRenewals"
                 inputValuePath="renewalsPolicy.period.duration"
@@ -125,7 +146,10 @@ class RenewalsSection extends React.Component {
             </div>
           </>}
         { policy.isRenewable() && policy.isDifferentPeriod() &&
-          <div data-test-renewals-alternate-fixed-due-date-schedule>
+          <div
+            data-test-renewals-alternate-fixed-due-date-schedule
+            data-testid="altFDDS"
+          >
             <Field
               label={altRenewalScheduleLabel}
               name="renewalsPolicy.alternateFixedDueDateScheduleId"

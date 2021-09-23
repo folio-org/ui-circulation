@@ -40,6 +40,7 @@
 * Add RTL/Jest testing for `Period` component in `settings/components/Period`. Refs UICIRC-655.
 * Improve circ rules location list display, at least a tiny bit. Refs UICIRC-430.
 * Add RTL/Jest testing for `FinesSection` component in `FinePolicy/components/EditSections`. Refs UICIRC-594.
+* Add RTL/Jest testing for `RenewalsSection` component in `LoanPolicy/components/EditSections`. Refs UICIRC-614.
 
 ## [5.1.0] (https://github.com/folio-org/ui-circulation/tree/v5.1.0) (2021-06-14)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v5.0.1...v5.1.0)
