@@ -446,5 +446,7 @@
     "settings.checkout.audioTheme.future": "فوتورا",
     "settings.fDDSform.dateFormTitle": "نطاق التاريخ {number}",
     "settings.finePolicy.overdueFineTitle": "غرامة تأخير",
-    "settings.finePolicy.perPeriod": "{number} لكل {period}"
+    "settings.finePolicy.perPeriod": "{number} لكل {period}",
+    "permission.settings.view-overdue-fines-policies": "الإعدادات (الإعارة): إمكانية عرض سياسات غرامات المتأخرات",
+    "permission.settings.view-lost-item-fees-policies": "الإعدادات (الإعارة): إمكانية عرض سياسات رسوم المواد الضائعة"
 }
