@@ -446,5 +446,7 @@
     "settings.checkout.audioTheme.future": "Futura",
     "settings.fDDSform.dateFormTitle": "Intervalo de datas {number}",
     "settings.finePolicy.overdueFineTitle": "Multa por atraso",
-    "settings.finePolicy.perPeriod": "{number} por {period}"
+    "settings.finePolicy.perPeriod": "{number} por {period}",
+    "permission.settings.view-overdue-fines-policies": "Settings (Circ): Can view overdue fine policies",
+    "permission.settings.view-lost-item-fees-policies": "Settings (Circ): Can view lost item fee policies"
 }
