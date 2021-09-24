@@ -51,6 +51,7 @@ class SchedulesList extends React.Component {
             xsOffset={10}
           >
             <Button
+              data-testid="addScheduleButton"
               data-test-add-schedule
               type="button"
               onClick={this.onAddField}
@@ -62,7 +63,7 @@ class SchedulesList extends React.Component {
           </Col>
         </Row>
         { submitFailed && error && !isArray(error) && (
-          <Row>
+          <Row data-testid="errorRow">
             <Col xs={12} className={css.scheduleError}>
               {error}
             </Col>
