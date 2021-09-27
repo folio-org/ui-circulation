@@ -21,6 +21,7 @@ jest.mock('@folio/stripes/components', () => ({
   )),
   Checkbox: jest.fn(() => <input type="checkbox" />),
   Col: jest.fn(({ children, ...rest }) => <div {...rest}>{children}</div>),
+  Datepicker: jest.fn((props) => <div {...props} />),
   Icon: jest.fn((props) => (props && props.children ? props.children : <span />)),
   IconButton: jest.fn(({
     buttonProps,
