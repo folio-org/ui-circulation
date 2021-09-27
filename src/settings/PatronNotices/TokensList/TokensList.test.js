@@ -12,15 +12,17 @@ import tokens from '../tokens';
 import TokensList from './TokensList';
 
 const testTokensSection = (sectionTestId) => {
-  it(`should render 'TokensSection' for section ${sectionTestId}`, () => {
-    const sectionTestIdValue = screen.getByTestId(sectionTestId);
+  describe(`View ${sectionTestId} TokensSection`, () => {
+    it(`should render ${sectionTestId} section`, () => {
+      const sectionTestIdValue = screen.getByTestId(sectionTestId);
 
-    expect(sectionTestIdValue).toBeVisible();
-    expect(sectionTestIdValue).toHaveAttribute('section', sectionTestId);
-    expect(within(screen
-      .getByTestId(`headerFor${sectionTestId}`))
-      .getByText(`ui-circulation.settings.patronNotices.${sectionTestId}TokenHeader`))
-      .toBeVisible();
+      expect(sectionTestIdValue).toBeVisible();
+      expect(sectionTestIdValue).toHaveAttribute('section', sectionTestId);
+      expect(within(screen
+        .getByTestId(`headerFor${sectionTestId}`))
+        .getByText(`ui-circulation.settings.patronNotices.${sectionTestId}TokenHeader`))
+        .toBeVisible();
+    });
 
     tokens[sectionTestId].map((token) => {
       if (isString(token)) {
