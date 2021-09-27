@@ -5,4 +5,3 @@ import './stripesIcon.mock';
 import './stripesComponents.mock';
 import './finalFormComponents.mock';
 import './stripesSmartComponents.mock';
-import './stripesTemplateEditor.mock';
