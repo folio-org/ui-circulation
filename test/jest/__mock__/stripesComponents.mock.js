@@ -60,10 +60,12 @@ jest.mock('@folio/stripes/components', () => ({
     children,
     ...rest
   }) => (<label htmlFor={htmlFor} id={id} {...rest}>{children}</label>)),
+  Pane: jest.fn(({ children }) => (<div>{children}</div>)),
   PaneFooter: jest.fn(({ ref, children, ...rest }) => (
     <div ref={ref} {...rest}>{children}</div>
   )),
   PaneMenu: jest.fn((props) => <div>{props.children}</div>),
+  Paneset: jest.fn(({ children }) => (<div>{children}</div>)),
   RadioButton: jest.fn(() => <input type="radio" />),
   Row: jest.fn(({ children, ...rest }) => <div {...rest}>{children}</div>),
   Select: jest.fn(() => <select> </select>),
