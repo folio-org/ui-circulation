@@ -445,8 +445,8 @@
     "settings.checkout.audioTheme.modern": "现代（音频）",
     "settings.checkout.audioTheme.future": "未来（音频）",
     "settings.fDDSform.dateFormTitle": "日期范围{number}",
-    "settings.finePolicy.overdueFineTitle": "Overdue fine",
-    "settings.finePolicy.perPeriod": "{number} per {period}",
-    "permission.settings.view-overdue-fines-policies": "Settings (Circ): Can view overdue fine policies",
-    "permission.settings.view-lost-item-fees-policies": "Settings (Circ): Can view lost item fee policies"
+    "settings.finePolicy.overdueFineTitle": "超期罚款",
+    "settings.finePolicy.perPeriod": "{number}每{period}",
+    "permission.settings.view-overdue-fines-policies": "设置（流通）：可以查看超期罚款政策",
+    "permission.settings.view-lost-item-fees-policies": "设置（流通）：可以查看遗失单件费用政策"
 }
