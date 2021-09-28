@@ -46,7 +46,7 @@ class ExceptionsList extends Component {
     const paymentMethods = payments.map(item => ({ value: item.nameMethod, label: item.nameMethod }));
 
     return (
-      <div>
+      <div data-testid="exceptionSectionHeader">
         <FormattedMessage
           tagName="h4"
           id="ui-circulation.settings.loanHistory.exceptionSectionHeader"
