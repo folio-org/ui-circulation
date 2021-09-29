@@ -33,7 +33,7 @@ import {
 import stripesFinalForm from '@folio/stripes/final-form';
 import { ViewMetaData } from '@folio/stripes/smart-components';
 
-import ScheduleList from './components/EditSections/components/SchedulesList';
+import SchedulesList from './components/EditSections/components/SchedulesList';
 
 import { FixedDueDateSchedule as validateFixedDueDateSchedule } from '../Validation';
 
@@ -316,7 +316,7 @@ class FixedDueDateScheduleForm extends React.Component {
                     data-test-fdds-form-schedule-section
                   >
                     <FieldArray
-                      component={ScheduleList}
+                      component={SchedulesList}
                       name="schedules"
                       timezone={timezone}
                     />

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage } from 'react-intl';
+import { injectIntl } from 'react-intl';
 
 import {
   Col,
@@ -19,6 +19,9 @@ const RenewalsSection = (props) => {
     getPeriodValue,
     getScheduleValue,
     getValue,
+    intl:{
+      formatMessage,
+    },
   } = props;
 
   if (!isVisible) {
@@ -26,23 +29,26 @@ const RenewalsSection = (props) => {
   }
 
   const altRenewalScheduleLabel = policy.isProfileRolling()
-    ? <FormattedMessage id="ui-circulation.settings.loanPolicy.altFDDSDueDateLimit" />
-    : <FormattedMessage id="ui-circulation.settings.loanPolicy.altFDDSforRenewals" />;
+    ? formatMessage({ id: 'ui-circulation.settings.loanPolicy.altFDDSDueDateLimit' })
+    : formatMessage({ id: 'ui-circulation.settings.loanPolicy.altFDDSforRenewals' });
 
   return (
     <div data-test-loan-policy-detail-renewals-section>
-      <Row>
+      <Row data-testid="renewals">
         <Col xs={12}>
           <h2 data-test-renewals-section-header>
-            <FormattedMessage id="ui-circulation.settings.loanPolicy.renewals" />
+            {formatMessage({ id: 'ui-circulation.settings.loanPolicy.renewals' })}
           </h2>
         </Col>
       </Row>
       <Row>
         <Col xs={12}>
-          <div data-test-renewals-section-renewable>
+          <div
+            data-testid="renewable"
+            data-test-renewals-section-renewable
+          >
             <KeyValue
-              label={<FormattedMessage id="ui-circulation.settings.loanPolicy.renewable" />}
+              label={formatMessage({ id: 'ui-circulation.settings.loanPolicy.renewable' })}
               value={getCheckboxValue('renewable')}
             />
           </div>
@@ -51,9 +57,12 @@ const RenewalsSection = (props) => {
       { policy.isRenewable() &&
         <Row>
           <Col xs={12}>
-            <div data-test-renewals-section-unlimited-renewals>
+            <div
+              data-testid="unlimitedRenewals"
+              data-test-renewals-section-unlimited-renewals
+            >
               <KeyValue
-                label={<FormattedMessage id="ui-circulation.settings.loanPolicy.unlimitedRenewals" />}
+                label={formatMessage({ id: 'ui-circulation.settings.loanPolicy.unlimitedRenewals' })}
                 value={getCheckboxValue('renewalsPolicy.unlimited')}
               />
             </div>
@@ -63,9 +72,12 @@ const RenewalsSection = (props) => {
         <div>
           <Row>
             <Col xs={12}>
-              <div data-test-renewals-section-number-renewals-allowed>
+              <div
+                data-testid="numRenewalsAllowed"
+                data-test-renewals-section-number-renewals-allowed
+              >
                 <KeyValue
-                  label={<FormattedMessage id="ui-circulation.settings.loanPolicy.numRenewalsAllowed" />}
+                  label={formatMessage({ id: 'ui-circulation.settings.loanPolicy.numRenewalsAllowed' })}
                   value={getValue('renewalsPolicy.numberAllowed')}
                 />
               </div>
@@ -76,9 +88,12 @@ const RenewalsSection = (props) => {
         <>
           <Row>
             <Col xs={12}>
-              <div data-test-renewals-section-renew-from>
+              <div
+                data-testid="renewFrom"
+                data-test-renewals-section-renew-from
+              >
                 <KeyValue
-                  label={<FormattedMessage id="ui-circulation.settings.loanPolicy.renewFrom" />}
+                  label={formatMessage({ id: 'ui-circulation.settings.loanPolicy.renewFrom' })}
                   value={getDropdownValue('renewalsPolicy.renewFromId', renewFromOptions)}
                 />
               </div>
@@ -86,9 +101,12 @@ const RenewalsSection = (props) => {
           </Row>
           <Row>
             <Col xs={12}>
-              <div data-test-renewals-section-renewal-period-different>
+              <div
+                data-testid="renewalPeriodDifferent"
+                data-test-renewals-section-renewal-period-different
+              >
                 <KeyValue
-                  label={<FormattedMessage id="ui-circulation.settings.loanPolicy.renewalPeriodDifferent" />}
+                  label={formatMessage({ id: 'ui-circulation.settings.loanPolicy.renewalPeriodDifferent' })}
                   value={getCheckboxValue('renewalsPolicy.differentPeriod')}
                 />
               </div>
@@ -99,9 +117,12 @@ const RenewalsSection = (props) => {
       <div>
         <Row>
           <Col xs={12}>
-            <div data-test-renewals-section-alternate-loan-period-renewals>
+            <div
+              data-testid="alternateLoanPeriodRenewals"
+              data-test-renewals-section-alternate-loan-period-renewals
+            >
               <KeyValue
-                label={<FormattedMessage id="ui-circulation.settings.loanPolicy.alternateLoanPeriodRenewals" />}
+                label={formatMessage({ id: 'ui-circulation.settings.loanPolicy.alternateLoanPeriodRenewals' })}
                 value={getPeriodValue('renewalsPolicy.period')}
               />
             </div>
@@ -112,7 +133,10 @@ const RenewalsSection = (props) => {
         <div>
           <Row>
             <Col xs={12}>
-              <div data-test-renewals-section-alternate-fixed-due-date-schedule-id>
+              <div
+                data-testid="altFDDS"
+                data-test-renewals-section-alternate-fixed-due-date-schedule-id
+              >
                 <KeyValue
                   label={altRenewalScheduleLabel}
                   value={getScheduleValue('renewalsPolicy.alternateFixedDueDateScheduleId')}
@@ -134,6 +158,7 @@ RenewalsSection.propTypes = {
   getPeriodValue: PropTypes.func.isRequired,
   getCheckboxValue: PropTypes.func.isRequired,
   getScheduleValue: PropTypes.func.isRequired,
+  intl: PropTypes.object.isRequired,
 };
 
-export default RenewalsSection;
+export default injectIntl(RenewalsSection);

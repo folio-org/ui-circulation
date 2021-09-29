@@ -89,13 +89,17 @@ class NoticeCard extends React.Component {
     const notificationKey = getNotificationContent(notice?.sendOptions?.sendWhen);
 
     return (
-      <Row data-test-notice-card>
+      <Row
+        data-testid="noticeCard"
+        data-test-notice-card
+      >
         <Col
           xs={12}
           className={css.notice}
         >
           <Row className={css.header}>
             <Col
+              data-testid="header"
               xs={3}
               className={css.headerTitle}
             >
@@ -107,9 +111,10 @@ class NoticeCard extends React.Component {
           </Row>
           <Row>
             <Col
+              data-testid="noticeCardTemplate"
+              data-test-notice-card-template-id
               xs={4}
               className={css.noticeField}
-              data-test-notice-card-template-id
             >
               <KeyValue
                 label={<FormattedMessage id={`${translationNamespace}.notices.template`} />}
@@ -117,18 +122,20 @@ class NoticeCard extends React.Component {
               />
             </Col>
             <Col
+              data-testid="noticeCardViaText"
+              data-test-notice-card-via-text
               xs={1}
               className={css.cardText}
-              data-test-notice-card-via-text
             >
               <KeyValue>
                 <FormattedMessage id={`${translationNamespace}.notices.via`} />
               </KeyValue>
             </Col>
             <Col
+              data-testid="noticeCardFormat"
+              data-test-notice-card-format
               xs={2}
               className={css.noticeField}
-              data-test-notice-card-format
             >
               <KeyValue
                 label={<FormattedMessage id={`${translationNamespace}.notices.format`} />}
@@ -136,9 +143,10 @@ class NoticeCard extends React.Component {
               />
             </Col>
             <Col
+              data-testid="noticeCardTriggeringEvent"
+              data-test-notice-card-triggering-event
               xs={5}
               className={css.noticeField}
-              data-test-notice-card-triggering-event
             >
               <KeyValue
                 label={<FormattedMessage id={`${translationNamespace}.notices.triggeringEvent`} />}
@@ -150,12 +158,16 @@ class NoticeCard extends React.Component {
             <>
               <Row>
                 <Col
+                  data-testid="noticeSend"
                   xs={12}
                   className={css.fieldLabel}
                 >
                   <KeyValue label={<FormattedMessage id={`${translationNamespace}.notices.send`} />}>
                     <Row>
-                      <Col xs={4}>
+                      <Col
+                        data-testid="noticeCardSendHow"
+                        xs={4}
+                      >
                         <KeyValue data-test-notice-card-send-how>
                           {this.getTranslatedDropdownValue('sendOptions.sendHow', sendEvents)}
                         </KeyValue>
@@ -163,24 +175,27 @@ class NoticeCard extends React.Component {
                       {notice.sendOptions.isBeforeOrAfter() && (
                         <>
                           <Col
-                            xs={3}
+                            data-testid="noticeCardByText"
                             data-test-notice-card-by-text
+                            xs={3}
                           >
                             <KeyValue>
                               <FormattedMessage id={`${translationNamespace}.notices.by`} />
                             </KeyValue>
                           </Col>
                           <Col
-                            xs={1}
+                            data-testid="noticeCardSendByDuration"
                             data-test-notice-card-send-by-duration
+                            xs={1}
                           >
                             <KeyValue>
                               {get(notice, 'sendOptions.sendBy.duration')}
                             </KeyValue>
                           </Col>
                           <Col
-                            xs={4}
+                            data-testid="noticeCardSendByIntervalId"
                             data-test-notice-card-send-by-interval-id
+                            xs={4}
                           >
                             <KeyValue>
                               {this.getTranslatedDropdownValue('sendOptions.sendBy.intervalId', noticesIntervalPeriods)}
@@ -195,13 +210,15 @@ class NoticeCard extends React.Component {
               {notice.sendOptions.isFrequencyAvailable(sendEventTriggeringIds) && (
                 <Row>
                   <Col
+                    data-testid="noticeCardFrequencyLabel"
+                    data-test-notice-card-frequency-label
                     xs={12}
                     className={css.fieldLabel}
-                    data-test-notice-card-frequency-label
                   >
                     <KeyValue label={<FormattedMessage id={`${translationNamespace}.notices.frequency`} />}>
                       <Row>
                         <Col
+                          data-testid="noticeCardFrequency"
                           xs={4}
                           data-test-notice-card-frequency
                         >
@@ -211,22 +228,27 @@ class NoticeCard extends React.Component {
                         </Col>
                         {notice.isRecurring() && (
                           <>
-                            <Col xs={3}>
+                            <Col
+                              data-testid="noticeIsRecurring"
+                              xs={3}
+                            >
                               <KeyValue>
                                 <FormattedMessage id={`${translationNamespace}.notices.andEvery`} />
                               </KeyValue>
                             </Col>
                             <Col
-                              xs={1}
+                              data-testid="noticeCardSendEveryDuration"
                               data-test-notice-card-send-every-duration
+                              xs={1}
                             >
                               <KeyValue>
                                 {get(notice, 'sendOptions.sendEvery.duration')}
                               </KeyValue>
                             </Col>
                             <Col
-                              xs={4}
+                              data-testid="noticeCardSendEveryIntervalId"
                               data-test-notice-card-send-every-interval-id
+                              xs={4}
                             >
                               <KeyValue>
                                 {this.getTranslatedDropdownValue('sendOptions.sendEvery.intervalId', noticesIntervalPeriods)}
@@ -243,6 +265,7 @@ class NoticeCard extends React.Component {
           )}
           <Row>
             <Col
+              data-testid="isLoanDueDateTimeSelected"
               xs={12}
               className={css.noticeField}
             >
@@ -254,7 +277,10 @@ class NoticeCard extends React.Component {
           <Row>
             <Col xs={12}>
               { !isEmpty(notificationKey) && (
-                <MessageBanner type="warning">
+                <MessageBanner
+                  data-testid="messageBanner"
+                  type="warning"
+                >
                   <FormattedMessage id={notificationKey} />
                 </MessageBanner>) }
             </Col>
