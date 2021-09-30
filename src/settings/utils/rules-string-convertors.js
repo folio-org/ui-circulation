@@ -11,11 +11,11 @@ import {
   EDITOR_SPECIAL_SYMBOL,
 } from '../../constants';
 
-function isPriorityLine(lineContent) {
+export function isPriorityLine(lineContent) {
   return lineContent.includes(EDITOR_KEYWORD.PRIORITY);
 }
 
-function isCommentSymbol(symbol) {
+export function isCommentSymbol(symbol) {
   const {
     HASH,
     SLASH,
@@ -24,7 +24,7 @@ function isCommentSymbol(symbol) {
   return symbol === HASH || symbol === SLASH;
 }
 
-function isWordsSeparatingSymbol(symbol) {
+export function isWordsSeparatingSymbol(symbol) {
   const {
     PLUS,
     COLON,
@@ -33,7 +33,7 @@ function isWordsSeparatingSymbol(symbol) {
   return symbol === ' ' || symbol === PLUS || symbol === COLON;
 }
 
-function convertNamesToIdsInLine(line, records, itemsTypes) {
+export function convertNamesToIdsInLine(line, records, itemsTypes) {
   if (isPriorityLine(line)) return line;
 
   let replacedString = '';

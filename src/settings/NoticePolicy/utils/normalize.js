@@ -16,7 +16,7 @@ import {
   userInitiatedTimeBasedFeeFineEventsIds,
 } from '../../../constants';
 
-const setRealTimeFlag = (sectionKey, policy) => {
+export const setRealTimeFlag = (sectionKey, policy) => {
   const noticePolicy = cloneDeep(policy);
   const isTrueSet = value => value === 'true';
   const sendInRealTime = [
@@ -50,7 +50,7 @@ export const setSendHowValue = (sectionKey, policy) => {
   return noticePolicy;
 };
 
-const checkNoticeHiddenFields = (sectionKey, allowedIds, policy) => {
+export const checkNoticeHiddenFields = (sectionKey, allowedIds, policy) => {
   const noticePolicy = cloneDeep(policy);
 
   forEach(noticePolicy[sectionKey], (item, index) => {

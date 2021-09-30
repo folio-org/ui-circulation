@@ -52,7 +52,6 @@
     "settings.fDDSform.description": "الوصف",
     "settings.fDDSform.schedule": "الجدول",
     "settings.fDDSform.new": "جديد",
-    "settings.fDDSform.dateRange": "نطاق التاريخ",
     "settings.fDDSform.dateFrom": "التاريخ من",
     "settings.fDDSform.dateTo": "التاريخ إلى",
     "settings.fDDSform.dueDate": "تاريخ الاستحقاق",
@@ -444,5 +443,10 @@
     "settings.checkout.audioTheme": "حدد ثيمة التنبيهات الصوتية",
     "settings.checkout.audioTheme.classic": "كلاسيكو",
     "settings.checkout.audioTheme.modern": "مودرنا",
-    "settings.checkout.audioTheme.future": "فوتورا"
+    "settings.checkout.audioTheme.future": "فوتورا",
+    "settings.fDDSform.dateFormTitle": "نطاق التاريخ {number}",
+    "settings.finePolicy.overdueFineTitle": "غرامة تأخير",
+    "settings.finePolicy.perPeriod": "{number} لكل {period}",
+    "permission.settings.view-overdue-fines-policies": "الإعدادات (الإعارة): إمكانية عرض سياسات غرامات المتأخرات",
+    "permission.settings.view-lost-item-fees-policies": "الإعدادات (الإعارة): إمكانية عرض سياسات رسوم المواد الضائعة"
 }

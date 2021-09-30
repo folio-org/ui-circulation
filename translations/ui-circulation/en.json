@@ -132,7 +132,7 @@
   "settings.fDDSform.description": "Description",
   "settings.fDDSform.schedule": "Schedule",
   "settings.fDDSform.new": "New",
-  "settings.fDDSform.dateRange": "Date range",
+  "settings.fDDSform.dateFormTitle": "Date range {number}",
   "settings.fDDSform.dateFrom": "Date from",
   "settings.fDDSform.dateTo": "Date to",
   "settings.fDDSform.dueDate": "Due date",
@@ -358,6 +358,7 @@
 
   "settings.finePolicy.entryLabel": "Overdue fine policies",
   "settings.finePolicy.paneTitle": "Overdue fine policies",
+  "settings.finePolicy.overdueFineTitle": "Overdue fine",
   "settings.finePolicy.overdueFine": "Overdue fine",
   "settings.finePolicy.overdueFines": "Overdue fines",
   "settings.finePolicy.generalInformation": "General information",
@@ -370,6 +371,7 @@
   "settings.finePolicy.overdueRecallFine": "Overdue recall fine",
   "settings.finePolicy.ignoreGracePeriodsRecalls": "Ignore grace periods for recalls",
   "settings.finePolicy.maximumRecallOverdueFine": "Maximum recall overdue fine",
+  "settings.finePolicy.perPeriod": "{number} per {period}",
   "settings.finePolicy.per": "per",
   "settings.finePolicy.yes": "Yes",
   "settings.finePolicy.no": "No",
@@ -465,5 +467,7 @@
   "permission.settings.other-settings": "Settings (Circ): Can create, edit and remove other settings",
   "permission.settings.notice-templates": "Settings (Circ): Can create, edit and remove patron notice templates",
   "permission.settings.overdue-fines-policies": "Settings (Circ): Can create, edit and remove overdue fine policies",
-  "permission.settings.lost-item-fees-policies": "Settings (Circ): Can create, edit and remove lost item fee policies"
+  "permission.settings.lost-item-fees-policies": "Settings (Circ): Can create, edit and remove lost item fee policies",
+  "permission.settings.view-overdue-fines-policies": "Settings (Circ): Can view overdue fine policies",
+  "permission.settings.view-lost-item-fees-policies": "Settings (Circ): Can view lost item fee policies"
 }

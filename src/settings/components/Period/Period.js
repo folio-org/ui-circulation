@@ -18,9 +18,17 @@ import {
   TextField,
 } from '@folio/stripes/components';
 
+export const transformInputValue = (value) => {
+  if (isEmpty(value)) {
+    return '';
+  }
+
+  return Number(value);
+};
+
 class Period extends PureComponent {
   static propTypes = {
-    intl: PropTypes.object,
+    intl: PropTypes.object.isRequired,
     inputValuePath: PropTypes.string.isRequired,
     selectValuePath: PropTypes.string.isRequired,
     intervalPeriods: PropTypes.arrayOf(PropTypes.node).isRequired,
@@ -54,14 +62,6 @@ class Period extends PureComponent {
     changeFormValue(inputValuePath, '');
   };
 
-  transformInputValue = (value) => {
-    if (isEmpty(value)) {
-      return '';
-    }
-
-    return Number(value);
-  };
-
   render() {
     const {
       fieldLabel,
@@ -82,20 +82,24 @@ class Period extends PureComponent {
     return (
       <>
         {fieldLabel && (
-          <div data-test-period-label>
+          <div
+            data-test-period-label
+            data-testid="periodLabelSection"
+          >
             <Row>
               <Col xs={12}>
-                { fieldLabel && (
-                  <Label required={required}>
-                    <FormattedMessage id={fieldLabel} />
-                  </Label>
-                )}
+                <Label required={required}>
+                  <FormattedMessage id={fieldLabel} />
+                </Label>
               </Col>
             </Row>
           </div>
         )}
         <Row>
-          <Col xs={inputSize}>
+          <Col
+            data-testid="finePolicyDurationColumn"
+            xs={inputSize}
+          >
             <div data-test-period-duration>
               <Field
                 aria-label={formatMessage({ id: 'ui-circulation.settings.finePolicy.duration' })}
@@ -104,12 +108,15 @@ class Period extends PureComponent {
                 name={inputValuePath}
                 component={TextField}
                 onClearField={this.onInputClear}
-                parse={this.transformInputValue}
+                parse={transformInputValue}
                 placeholder={inputPlaceholder}
               />
             </div>
           </Col>
-          <Col xs={selectSize}>
+          <Col
+            data-testid="finePolicyIntervalColumn"
+            xs={selectSize}
+          >
             <div data-test-period-interval>
               <Field
                 aria-label={formatMessage({ id: 'ui-circulation.settings.finePolicy.interval' })}
@@ -123,7 +130,10 @@ class Period extends PureComponent {
             </div>
           </Col>
           { intervalPeriodsSuffix && (
-            <Col xs={selectSize}>
+            <Col
+              data-testid="periodIntervalColumn"
+              xs={selectSize}
+            >
               <div data-test-period-interval-suffix>
                 <Label>
                   <FormattedMessage id={intervalPeriodsSuffix} />

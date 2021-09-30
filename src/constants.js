@@ -241,7 +241,7 @@ export const loanUserInitiatedEventsIds = {
 
 export const loanTimeBasedEventsIds = {
   DUE_DATE: 'Due date',
-  AGED_TO_LOST: 'Aged to lost'
+  AGED_TO_LOST: 'Aged to lost',
 };
 
 export const loanNoticesTriggeringEvents = [
@@ -279,7 +279,7 @@ export const requestUserInitiatedEventsIds = {
   RECALL_REQUEST: 'Recall request',
   HOLD: 'Hold request',
   PAGE: 'Paging request',
-  CANCEL: 'Request cancellation'
+  CANCEL: 'Request cancellation',
 };
 
 export const requestTimeBasedEventsIds = {
@@ -326,7 +326,7 @@ export const staffSlipMap = {
   HOLD: 'Hold',
   TRANSIT: 'Transit',
   PICK_SLIP: 'Pick slip',
-  REQUEST_DELIVERY: 'Request delivery'
+  REQUEST_DELIVERY: 'Request delivery',
 };
 
 export const patronNoticeCategoryIds = {
@@ -414,7 +414,7 @@ export const POLICY = {
 
 export const EDITOR_KEYWORD = {
   FALLBACK_POLICY: 'fallback-policy',
-  PRIORITY: 'priority'
+  PRIORITY: 'priority',
 };
 
 export const EDITOR_SPECIAL_SYMBOL = {
@@ -425,6 +425,8 @@ export const EDITOR_SPECIAL_SYMBOL = {
   COLON: ':',
   NEGATION: '!',
 };
+
+export const WHITE_SPACE = ' ';
 
 export const LOCATION_RULES_TYPES = [
   RULES_TYPE.INSTITUTION,

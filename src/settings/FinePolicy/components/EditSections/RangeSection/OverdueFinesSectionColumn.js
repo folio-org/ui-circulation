@@ -9,26 +9,26 @@ import {
   TextField,
 } from '@folio/stripes/components';
 
+export const formatNumber = (value = 0) => {
+  return parseFloat(value).toFixed(2);
+};
+
 const OverdueFinesSectionColumn = (props) => {
   const {
     label,
     component,
     name,
-    intl: { formatMessage }
+    intl: { formatMessage },
   } = props;
-
-  const formatNumber = (value = 0) => {
-    return parseFloat(value).toFixed(2);
-  };
 
   return (
     <div>
-      <Row>
+      <Row data-testid="mainLabelTestId">
         <Col xs={3}>
           {label}
         </Col>
       </Row>
-      <Row>
+      <Row data-testid="sectionTestId">
         <Col xs={2}>
           <div>
             {component === 'TextField' ?
@@ -59,7 +59,7 @@ const OverdueFinesSectionColumn = (props) => {
   );
 };
 OverdueFinesSectionColumn.propTypes = {
-  label: PropTypes.object,
+  label: PropTypes.node,
   name: PropTypes.string,
   component: PropTypes.string,
   intl: PropTypes.object,

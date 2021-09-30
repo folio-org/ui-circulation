@@ -52,7 +52,6 @@
     "settings.fDDSform.description": "설명",
     "settings.fDDSform.schedule": "Schedule",
     "settings.fDDSform.new": "New",
-    "settings.fDDSform.dateRange": "날짜 범위",
     "settings.fDDSform.dateFrom": "날짜(From)",
     "settings.fDDSform.dateTo": "날짜(To)",
     "settings.fDDSform.dueDate": "Due date",
@@ -444,5 +443,10 @@
     "settings.checkout.audioTheme": "Select audio-alerts theme",
     "settings.checkout.audioTheme.classic": "Classico",
     "settings.checkout.audioTheme.modern": "Moderna",
-    "settings.checkout.audioTheme.future": "Futura"
+    "settings.checkout.audioTheme.future": "Futura",
+    "settings.fDDSform.dateFormTitle": "Date range {number}",
+    "settings.finePolicy.overdueFineTitle": "Overdue fine",
+    "settings.finePolicy.perPeriod": "{number} per {period}",
+    "permission.settings.view-overdue-fines-policies": "Settings (Circ): Can view overdue fine policies",
+    "permission.settings.view-lost-item-fees-policies": "Settings (Circ): Can view lost item fee policies"
 }

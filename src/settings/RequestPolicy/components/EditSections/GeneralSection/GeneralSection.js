@@ -16,6 +16,31 @@ import {
 import { Metadata } from '../../../../components';
 import { requestPolicyTypes } from '../../../../../constants';
 
+export const renderTypes = () => {
+  const items = requestPolicyTypes.map((name, index) => (
+    <Row key={`request-policy-type-${index}`}>
+      <Col xs={12}>
+        <Field
+          component={Checkbox}
+          type="checkbox"
+          id={`${name.toLowerCase()}-checkbox`}
+          label={name}
+          name={`requestTypes[${index}]`}
+        />
+      </Col>
+    </Row>
+  ));
+
+  return (
+    <>
+      <p data-testid="policyTypes">
+        <FormattedMessage id="ui-circulation.settings.requestPolicy.policyTypes" />
+      </p>
+      {items}
+    </>
+  );
+};
+
 class GeneralSection extends React.Component {
   static propTypes = {
     isOpen: PropTypes.bool.isRequired,
@@ -23,31 +48,6 @@ class GeneralSection extends React.Component {
     connect: PropTypes.func.isRequired,
     validateName: PropTypes.func.isRequired,
   };
-
-  renderTypes = () => {
-    const items = requestPolicyTypes.map((name, index) => (
-      <Row key={`request-policy-type-${index}`}>
-        <Col xs={12}>
-          <Field
-            component={Checkbox}
-            type="checkbox"
-            id={`${name.toLowerCase()}-checkbox`}
-            label={name}
-            name={`requestTypes[${index}]`}
-          />
-        </Col>
-      </Row>
-    ));
-
-    return (
-      <>
-        <p>
-          <FormattedMessage id="ui-circulation.settings.requestPolicy.policyTypes" />
-        </p>
-        {items}
-      </>
-    );
-  }
 
   render() {
     const {
@@ -59,6 +59,7 @@ class GeneralSection extends React.Component {
 
     return (
       <Accordion
+        data-testid="generalRequestPolicyForm"
         id="generalRequestPolicyForm"
         open={isOpen}
         label={<FormattedMessage id="ui-circulation.settings.requestPolicy.generalInformation" />}
@@ -69,6 +70,7 @@ class GeneralSection extends React.Component {
         />
         <div data-test-request-policy-name>
           <Field
+            data-testid="requestPolicyName"
             id="request_policy_name"
             name="name"
             required
@@ -79,6 +81,7 @@ class GeneralSection extends React.Component {
           />
         </div>
         <Field
+          data-testid="requestPolicyDescription"
           id="request_policy_description"
           name="description"
           label={<FormattedMessage id="ui-circulation.settings.requestPolicy.policyDescription" />}
@@ -86,7 +89,7 @@ class GeneralSection extends React.Component {
         />
         <FieldArray
           name="requestTypes"
-          component={this.renderTypes}
+          component={renderTypes}
         />
       </Accordion>
     );

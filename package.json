@@ -1,6 +1,6 @@
 {
   "name": "@folio/circulation",
-  "version": "5.1.0",
+  "version": "6.0.0",
   "description": "Circulation manager",
   "repository": "folio-org/ui-circulation",
   "publishConfig": {
@@ -37,7 +37,7 @@
       "patron-notice-policy-storage": "0.11",
       "location-units": "2.0",
       "locations": "3.0",
-      "feesfines": "16.0"
+      "feesfines": "16.0 17.0"
     },
     "permissionSets": [
       {
@@ -218,14 +218,34 @@
         "visible": true
       },
       {
+        "permissionName": "ui-circulation.settings.view-overdue-fines-policies",
+        "displayName": "Settings (Circ): Can view overdue fine policies",
+        "subPermissions": [
+          "overdue-fines-policies.collection.get",
+          "overdue-fines-policies.item.get",
+          "users.collection.get",
+          "users.item.get",
+          "settings.circulation.enabled"
+        ],
+        "visible": true
+      },
+      {
         "permissionName": "ui-circulation.settings.overdue-fines-policies",
         "displayName": "Settings (Circ): Can create, edit and remove overdue fine policies",
         "subPermissions": [
+          "ui-circulation.settings.view-overdue-fines-policies",
           "overdue-fines-policies.item.post",
           "overdue-fines-policies.item.put",
-          "overdue-fines-policies.item.delete",
-          "overdue-fines-policies.collection.get",
-          "overdue-fines-policies.item.get",
+          "overdue-fines-policies.item.delete"
+        ],
+        "visible": true
+      },
+      {
+        "permissionName": "ui-circulation.settings.view-lost-item-fees-policies",
+        "displayName": "Settings (Circ): Can view lost item fee policies",
+        "subPermissions": [
+          "lost-item-fees-policies.collection.get",
+          "lost-item-fees-policies.item.get",
           "users.collection.get",
           "users.item.get",
           "settings.circulation.enabled"
@@ -236,14 +256,10 @@
         "permissionName": "ui-circulation.settings.lost-item-fees-policies",
         "displayName": "Settings (Circ): Can create, edit and remove lost item fee policies",
         "subPermissions": [
+          "ui-circulation.settings.view-lost-item-fees-policies",
           "lost-item-fees-policies.item.post",
           "lost-item-fees-policies.item.put",
-          "lost-item-fees-policies.item.delete",
-          "lost-item-fees-policies.collection.get",
-          "lost-item-fees-policies.item.get",
-          "users.collection.get",
-          "users.item.get",
-          "settings.circulation.enabled"
+          "lost-item-fees-policies.item.delete"
         ],
         "visible": true
       }
@@ -252,7 +268,7 @@
   "scripts": {
     "start": "stripes serve",
     "lint": "eslint .",
-    "test": "yarn run test:jest && yarn run test:bigtest",
+    "test": "yarn run test:jest",
     "test:bigtest": "stripes test karma",
     "test:jest": "jest --ci --coverage --colors"
   },
@@ -264,10 +280,10 @@
     "@bigtest/mocha": "^0.5.2",
     "@bigtest/react": "^0.1.2",
     "@folio/eslint-config-stripes": "^5.1.0",
-    "@folio/stripes": "^6.0.0",
+    "@folio/stripes": "^7.0.0",
     "@folio/stripes-cli": "^2.0.0",
-    "@folio/stripes-components": "^9.0.0",
-    "@folio/stripes-core": "^7.0.0",
+    "@folio/stripes-components": "^10.0.0",
+    "@folio/stripes-core": "^8.0.0",
     "@testing-library/dom": "^7.26.3",
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",
@@ -284,8 +300,8 @@
     "inflected": "^2.0.4",
     "miragejs": "^0.1.40",
     "moment": "^2.29.0",
-    "react": "^16.5.0",
-    "react-dom": "^16.6.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
     "react-intl": "^5.7.0",
     "react-redux": "~7.2.2",
     "react-router-dom": "^5.2.0",
@@ -307,9 +323,9 @@
     "react-final-form-arrays": "^3.1.0"
   },
   "peerDependencies": {
-    "@folio/stripes": "^6.0.0",
+    "@folio/stripes": "^7.0.0",
     "moment": "^2.29.0",
-    "react": "*",
+    "react": "^17.0.2",
     "react-intl": "^5.7.0"
   }
 }

@@ -13,24 +13,27 @@ import {
   TextField,
 } from '@folio/stripes/components';
 
+export const formatNumber = (value = 0) => {
+  return parseFloat(value).toFixed(2);
+};
+
 const OverdueFinesSection = (props) => {
   const { label, name, period, intervalPeriods, data, intl: { formatMessage } } = props;
   const test = `data-test-quantity-${data}`;
 
-  const formatNumber = (value = 0) => {
-    return parseFloat(value).toFixed(2);
-  };
-
   return (
     <div>
-      <Row>
+      <Row data-testid="quantityDurationLabelTestId">
         <Col xs={2} data-test-quantity-duration-label>
           {label}
         </Col>
       </Row>
       <Row>
         <Col xs={2}>
-          <div id={test}>
+          <div
+            data-testid="qoverdueFineQuantityTestId"
+            id={test}
+          >
             <Field
               aria-label={formatMessage({ id: 'ui-circulation.settings.circulationRules.overdueFine.quantity' })}
               name={name}
@@ -43,12 +46,18 @@ const OverdueFinesSection = (props) => {
           </div>
         </Col>
         <Col>
-          <div data-test-quantity-interval-label>
+          <div
+            data-testid="finePolicyLabelTestId"
+            data-test-quantity-interval-label
+          >
             <FormattedMessage id="ui-circulation.settings.finePolicy.per" />
           </div>
         </Col>
         <Col xs={2}>
-          <div data-test-quantity-interval>
+          <div
+            data-testid="overdueFinePeriodTestId"
+            data-test-quantity-interval
+          >
             <Field
               aria-label={formatMessage({ id: 'ui-circulation.settings.circulationRules.overdueFine.period' })}
               name={period}
@@ -65,7 +74,7 @@ const OverdueFinesSection = (props) => {
 };
 OverdueFinesSection.propTypes = {
   intl: PropTypes.object.isRequired,
-  label: PropTypes.object,
+  label: PropTypes.node,
   name: PropTypes.string,
   period: PropTypes.string,
   data: PropTypes.string,

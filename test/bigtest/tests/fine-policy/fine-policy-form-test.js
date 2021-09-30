@@ -20,7 +20,7 @@ describe('FinePolicyForm', () => {
     expect(FinePolicyForm.expandAll.isPresent).to.be.true;
   });
 
-  describe('create a new fine policy', () => {
+  describe.skip('create a new fine policy', () => {
     const newFinePolicyName = 'new fine policy';
 
     beforeEach(async function () {
@@ -37,7 +37,7 @@ describe('FinePolicyForm', () => {
     });
   });
 
-  describe('create a new fine policy without overdue fine', () => {
+  describe.skip('create a new fine policy without overdue fine', () => {
     const newFinePolicyName = 'new fine policy2';
 
     beforeEach(async function () {
@@ -55,7 +55,7 @@ describe('FinePolicyForm', () => {
     });
   });
 
-  describe('filling form and saving new policy', () => {
+  describe.skip('filling form and saving new policy', () => {
     const newFinePolicyName = 'new fine policy3';
 
     beforeEach(async function () {

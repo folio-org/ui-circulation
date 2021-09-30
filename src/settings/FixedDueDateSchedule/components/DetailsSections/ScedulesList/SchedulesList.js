@@ -19,13 +19,15 @@ const SchedulesList = ({ schedules, timezone }) => {
       <Row
         className={css.scheduleItem}
         key={index}
+        data-testid={`ui-circulation.settings.fDDSform-${index + 1}`}
       >
         <Col xs={12}>
           <Row className={css.scheduleHeader}>
             <Col xs={12}>
-              <FormattedMessage id="ui-circulation.settings.fDDSform.dateRange" />
-              {' '}
-              {index + 1}
+              <FormattedMessage
+                id="ui-circulation.settings.fDDSform.dateFormTitle"
+                values={{ number: index + 1 }}
+              />
             </Col>
           </Row>
           <Row className={css.scheduleItemContent}>

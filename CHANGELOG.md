@@ -1,10 +1,58 @@
 # Change history for ui-circulation
 
-## [6.0.0] (IN PROGRESS)
+## [6.0.0] (https://github.com/folio-org/ui-circulation/tree/v6.0.0) (2021-09-30)
+[Full Changelog](https://github.com/folio-org/ui-circulation/compare/v5.1.1...v6.0.0)
 
 * Fix a typo in the word Year(s) in the Period interval. Refs UICIRC-662.
 * Update `codemirror` and `react-codemirror2`. Refs UICIRC-576.
-. Update `folio/stripes-template-editor` to `3.0.0`. Refs UICIRC-575
+* Update `folio/stripes-template-editor` to `3.0.0`. Refs UICIRC-575
+* Fix bug causing incorrect validation in lost item fee policies. Fixes UICIRC-667, UICIRC-668.
+* Add RTL/Jest testing for `ScedulesList` component. Refs UICIRC-601.
+* Add RTL/Jest testing for `OverdueAboutSection` component in `FinePolicy/components/EditSections`. Refs UICIRC-595.
+* Add RTL/Jest testing for `normalize` function in `FinePolicy/utils`. Refs UICIRC-599.
+* Add RTL/Jest testing for `normalize` function in `LostItemFeePolicy/utils`. Refs UICIRC-628.
+* Add RTL/Jest testing for `FeeFineNoticesSection` component. Refs UICIRC-631.
+* Add RTL/Jest testing for `normalize` function in `LoanHistory/utils`. Refs UICIRC-607.
+* Add RTL/Jest testing for `normalize` function in `LoanPolicy/utils`. Refs UICIRC-620.
+* Add RTL/Jest testing for `OverdueAboutSection` component in `FinePolicy/components/ViewSections`. Refs UICIRC-598.
+* Add RTL/Jest testing for `LostItemFeeAboutSection` component in `LostItemFeePolicy/components/ViewSections`. Refs UICIRC-625.
+* Add RTL/Jest testing for `AboutSection` component in `LoanPolicy/components/ViewSections`. Refs UICIRC-616.
+* Add RTL/Jest testing for all functions in `NoticePolicy/utils`. Refs UICIRC-642.
+* Support `feesfines` interface version `17.0`. Refs UICIRC-671.
+* Investigate possibility to run tests successfully. Refs UICIRC-681.
+* Add RTL/Jest testing for `AboutSection` component in `LoanPolicy/components/EditSections`. Refs UICIRC-612.
+* Add RTL/Jest testing for `LostItemFeeAboutSection` component in `LostItemFeePolicy/components/EditSections`. Refs UICIRC-622.
+* Add RTL/Jest testing for `RequestNoticesSection` component in `NoticePolicy/components/DetailSections`. Refs UICIRC-634.
+* Add RTL/Jest testing for functions in `settings/utils/rules-string-convertors.js`. Refs UICIRC-682.
+* Add RTL/Jest testing for `FinesSection` component in `FinePolicy/components/ViewSections`. Refs UICIRC-597.
+* Add RTL/Jest testing for `GeneralSection` component in `NoticePolicy/components/DetailSections`. Refs UICIRC-632.
+* Add RTL/Jest testing for `AnonymizingTypeSelect` component in `settings/components/AnonymizingTypeSelect`. Refs UICIRC-653.
+* Add RTL/Jest testing for `Metadata` component in `settings/components`. Refs UICIRC-652.
+* Add RTL/Jest testing for `LoanNoticesSection` component in `NoticePolicy/components/DetailSections`. Refs UICIRC-633.
+* Add RTL/Jest testing for `LoanNoticesSection` component in `NoticePolicy/components/EditSections`. Refs UICIRC-639.
+* Add RTL/Jest testing for `convertNamesToIdsInLine` function in `settings/utils/rules-string-convertors.js`. Refs UICIRC-686.
+* Add RTL/Jest testing for functions in `settings/utils`. Refs UICIRC-656.
+* Add RTL/Jest testing for `LoansSection` component in `LoanPolicy/components/ViewSections`. Refs UICIRC-617.
+* Add RTL/Jest testing for `RequestManagementSection` component in `LoanPolicy/components/ViewSections`. Refs UICIRC-618.
+* Add RTL/Jest testing for `RadioGroup` component in `LostItemFeePolicy/components/EditSections`. Refs UICIRC-624.
+* Increment `stripes` to `v7`, `react` to `v17`. Refs UICIRC-676.
+* Add RTL/Jest testing for `RequestNoticesSection` component in `NoticePolicy/components/EditSections`. Refs UICIRC-640.
+* Add RTL/Jest testing for `OverdueFinesSection` and `OverdueFinesSectionColumn` components in `FinePolicy/components/EditSections/RangeSection`. Refs UICIRC-596.
+* Add RTL/Jest testing for `Period` component in `settings/components/Period`. Refs UICIRC-655.
+* Improve circ rules location list display, at least a tiny bit. Refs UICIRC-430.
+* Add RTL/Jest testing for `FinesSection` component in `FinePolicy/components/EditSections`. Refs UICIRC-594.
+* Add RTL/Jest testing for `RenewalsSection` component in `LoanPolicy/components/EditSections`. Refs UICIRC-614.
+* Add RTL/Jest testing for `GeneralSection` component in `NoticePolicy/components/EditSections`. Refs UICIRC-638.
+* Add RTL/Jest testing for `GeneralSection` component in `RequestPolicy/components/EditSections`. Refs UICIRC-648.
+* Add RTL/Jest testing for `LostItemFeeSection` component in `LostItemFeePolicy/components/ViewSections/LostItemFeeSection`. Refs UICIRC-627.
+* Add RTL/Jest testing for `TokensList` component in `settings/StaffSlips/TokensList`. Refs UICIRC-651.
+* Add RTL/Jest testing for `ScheduleCard` component in `FixedDueDateSchedule/components/EditSections/components`. Refs UICIRC-602.
+* Add RTL/Jest testing for `ExceptionsList` component in `settings/LoanHistory`. Refs UICIRC-605.
+
+## [5.1.1] (https://github.com/folio-org/ui-circulation/tree/v5.1.1) (2021-08-06)
+[Full Changelog](https://github.com/folio-org/ui-circulation/compare/v5.1.0...v5.1.1)
+
+* Fix bug causing incorrect validation in lost item fee policies. Fixes UICIRC-667, UICIRC-668.
 
 ## [5.1.0] (https://github.com/folio-org/ui-circulation/tree/v5.1.0) (2021-06-14)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v5.0.1...v5.1.0)

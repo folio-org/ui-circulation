@@ -2,7 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment-timezone';
 import { Field } from 'react-final-form';
-import { FormattedMessage } from 'react-intl';
+import {
+  FormattedMessage,
+  injectIntl,
+} from 'react-intl';
 
 import {
   Col,
@@ -14,8 +17,23 @@ import {
 import { DATE_FORMAT } from '../../../../../../constants';
 import css from './ScheduleCard.css';
 
+export const parseDate = (date, timezone, isEndOfDay) => {
+  if (!date) {
+    return date;
+  }
+
+  let momentDate = moment.tz(date, timezone);
+
+  if (isEndOfDay) {
+    momentDate = momentDate.endOf('day');
+  }
+
+  return momentDate.format();
+};
+
 class ScheduleCard extends React.Component {
   static propTypes = {
+    intl: PropTypes.object.isRequired,
     pathToSchedule: PropTypes.string.isRequired,
     scheduleIndex: PropTypes.number.isRequired,
     onRemoveSchedule: PropTypes.func.isRequired,
@@ -31,14 +49,17 @@ class ScheduleCard extends React.Component {
     onRemoveSchedule(scheduleIndex);
   };
 
-  parseDateForStartOfDay = (date) => (date ? moment.tz(date, this.props.timezone).format() : date);
+  parseDateForStartOfDay = (date) => parseDate(date, this.props.timezone);
 
-  parseDateForEndOfDay = (date) => (date ? moment.tz(date, this.props.timezone).endOf('day').format() : date);
+  parseDateForEndOfDay = (date) => parseDate(date, this.props.timezone, true);
 
   render() {
     const {
       pathToSchedule,
       scheduleIndex,
+      intl: {
+        formatMessage,
+      },
     } = this.props;
 
     return (
@@ -51,31 +72,33 @@ class ScheduleCard extends React.Component {
             className={css.scheduleHeader}
             data-test-schedule-date-range
           >
-            <Col xs={11}>
-              <FormattedMessage id="ui-circulation.settings.fDDSform.dateRange" />
-              {' '}
-              {scheduleIndex + 1}
+            <Col
+              data-testid="dateFormTitleColumn"
+              xs={11}
+            >
+              <FormattedMessage
+                id="ui-circulation.settings.fDDSform.dateFormTitle"
+                values={{ number: scheduleIndex + 1 }}
+              />
             </Col>
             <Col
+              data-testid="removeColumn"
               className={css.headerIcon}
               data-test-schedule-remove
               xs={1}
             >
-              <FormattedMessage id="ui-circulation.settings.fDDSform.remove">
-                {ariaLabel => (
-                  <IconButton
-                    ariaLabel={ariaLabel}
-                    icon="trash"
-                    onClick={this.onRemove}
-                  />
-                )}
-              </FormattedMessage>
+              <IconButton
+                ariaLabel={formatMessage({ id: 'ui-circulation.settings.fDDSform.remove' })}
+                icon="trash"
+                onClick={this.onRemove}
+              />
             </Col>
           </Row>
           <Row className={css.scheduleItemContent}>
             <Col xs={12}>
               <Row>
                 <Col
+                  data-testid="dateFromColumn"
                   data-test-schedule-date-from
                   xs={12}
                   sm={4}
@@ -83,13 +106,14 @@ class ScheduleCard extends React.Component {
                   <Field
                     dateFormat={DATE_FORMAT}
                     component={Datepicker}
-                    label={<FormattedMessage id="ui-circulation.settings.fDDSform.dateFrom" />}
+                    label={formatMessage({ id: 'ui-circulation.settings.fDDSform.dateFrom' })}
                     name={`${pathToSchedule}.from`}
                     required
                     parse={this.parseDateForStartOfDay}
                   />
                 </Col>
                 <Col
+                  data-testid="dateToColumn"
                   data-test-schedule-date-to
                   xs={12}
                   sm={4}
@@ -97,13 +121,14 @@ class ScheduleCard extends React.Component {
                   <Field
                     dateFormat={DATE_FORMAT}
                     component={Datepicker}
-                    label={<FormattedMessage id="ui-circulation.settings.fDDSform.dateTo" />}
+                    label={formatMessage({ id: 'ui-circulation.settings.fDDSform.dateTo' })}
                     name={`${pathToSchedule}.to`}
                     required
                     parse={this.parseDateForEndOfDay}
                   />
                 </Col>
                 <Col
+                  data-testid="dueDateColumn"
                   data-test-schedule-due-date
                   xs={12}
                   sm={4}
@@ -111,7 +136,7 @@ class ScheduleCard extends React.Component {
                   <Field
                     dateFormat={DATE_FORMAT}
                     component={Datepicker}
-                    label={<FormattedMessage id="ui-circulation.settings.fDDSform.dueDate" />}
+                    label={formatMessage({ id: 'ui-circulation.settings.fDDSform.dueDate' })}
                     name={`${pathToSchedule}.due`}
                     required
                     parse={this.parseDateForEndOfDay}
@@ -126,4 +151,4 @@ class ScheduleCard extends React.Component {
   }
 }
 
-export default ScheduleCard;
+export default injectIntl(ScheduleCard);

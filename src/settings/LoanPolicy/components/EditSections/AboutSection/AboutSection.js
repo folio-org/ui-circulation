@@ -8,12 +8,16 @@ import {
 } from '@folio/stripes/components';
 
 const AboutSection = () => (
-  <div data-test-loan-policy-form-about-section>
+  <div
+    data-test-loan-policy-form-about-section
+    data-testid="aboutSection"
+  >
     <h2 data-test-about-section-header>
       <FormattedMessage id="ui-circulation.settings.loanPolicy.about" />
     </h2>
     <div data-test-about-section-policy-name>
       <Field
+        data-testid="nameTestId"
         label={<FormattedMessage id="ui-circulation.settings.loanPolicy.policyName" />}
         autoFocus
         component={TextField}
@@ -25,6 +29,7 @@ const AboutSection = () => (
     </div>
     <div data-test-about-section-policy-description>
       <Field
+        data-testid="descriptionTestId"
         label={<FormattedMessage id="ui-circulation.settings.loanPolicy.policyDescription" />}
         name="description"
         component={TextArea}

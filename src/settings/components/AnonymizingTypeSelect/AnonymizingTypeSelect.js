@@ -10,7 +10,10 @@ import {
 
 const AnonymizingTypeSelect = ({ name, types }) => {
   return types.map((type, index) => (
-    <Row key={`row-${index}`}>
+    <Row
+      key={`row-${index}`}
+      data-testid="anonymizingTypeRowTestId"
+    >
       <Col xs={12}>
         <Field
           data-test-radio-button
