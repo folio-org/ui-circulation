@@ -434,7 +434,7 @@
     "settings.lostItemFee.patronBilledAfterRecalledAgedLost": "Rechnungsstellung an Benutzer/-in für Rückruf - Zeitraum nach automatisch für verloren erklärt",
     "settings.lostItemFee.validate.hasPatronBilledAfterRecalledAgedToLostValue": "Eingabe erforderlich, wenn Betrag in 'Rechnungsstellung an Benutzer/-in für Rückruf - Zeitraum nach automatisch für verloren erklärt' eingegeben wurde.",
     "settings.checkout.userCustomFields": "Benutzerdefinierte Felder im Personendatensatz",
-    "settings.checkout.userCustomFields.noValidFieldsAreDefined": "Keine passenden benutzerdefinierten Felder wurden konfiguriert",
+    "settings.checkout.userCustomFields.noValidFieldsAreDefined": "Keine übereinstimmenden benutzerdefinierten Felder wurden konfiguriert",
     "settings.checkout.userCustomFields.none": "Keine",
     "settings.checkout.identifiers.barcode": "Barcode",
     "settings.checkout.identifiers.externalSystemId": "Externe System-ID",
