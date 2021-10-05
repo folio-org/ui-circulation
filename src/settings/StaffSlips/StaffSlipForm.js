@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage } from 'react-intl';
+import { injectIntl } from 'react-intl';
 
 import {
   Col,
@@ -8,7 +8,7 @@ import {
   Pane,
   Paneset,
   Row,
-  TextArea
+  TextArea,
 } from '@folio/stripes/components';
 
 import stripesFinalForm from '@folio/stripes/final-form';
@@ -35,6 +35,7 @@ class StaffSlipForm extends React.Component {
     onCancel: PropTypes.func,
     pristine: PropTypes.bool,
     submitting: PropTypes.bool,
+    intl: PropTypes.object.isRequired,
   };
 
   static defaultProps = {
@@ -49,12 +50,14 @@ class StaffSlipForm extends React.Component {
       pristine,
       submitting,
       onCancel,
+      intl,
     } = this.props;
+    const { formatMessage } = intl;
 
     const disabled = !stripes.hasPerm('settings.organizations.enabled');
     const panelTitle = initialValues.id
       ? initialValues.name
-      : <FormattedMessage id="ui-circulation.settings.staffSlips.new" />;
+      : formatMessage({ id: 'ui-circulation.settings.staffSlips.new' });
 
     const footerPaneProps = {
       pristine,
@@ -64,6 +67,7 @@ class StaffSlipForm extends React.Component {
 
     return (
       <form
+        data-testid="formStaffSlip"
         id="form-staff-slip"
         className={css.staffSlipForm}
         noValidate
@@ -79,7 +83,7 @@ class StaffSlipForm extends React.Component {
             <Row>
               <Col xs={8}>
                 <KeyValue
-                  label={<FormattedMessage id="ui-circulation.settings.staffSlips.name" />}
+                  label={formatMessage({ id: 'ui-circulation.settings.staffSlips.name' })}
                   value={initialValues.name}
                 />
               </Col>
@@ -90,7 +94,7 @@ class StaffSlipForm extends React.Component {
                 xs={8}
               >
                 <Field
-                  label={<FormattedMessage id="ui-circulation.settings.staffSlips.description" />}
+                  label={formatMessage({ id: 'ui-circulation.settings.staffSlips.description' })}
                   name="description"
                   id="input-staff-slip-description"
                   autoFocus
@@ -103,11 +107,11 @@ class StaffSlipForm extends React.Component {
             <Row>
               <Col xs={8}>
                 <Field
-                  label={<FormattedMessage id="ui-circulation.settings.staffSlips.display" />}
+                  label={formatMessage({ id: 'ui-circulation.settings.staffSlips.display' })}
                   component={TemplateEditor}
                   tokens={tokens}
                   name="template"
-                  previewModalHeader={<FormattedMessage id="ui-circulation.settings.staffSlips.form.previewLabel" />}
+                  previewModalHeader={formatMessage({ id: 'ui-circulation.settings.staffSlips.form.previewLabel' })}
                   tokensList={TokensList}
                   printable
                 />
@@ -122,4 +126,4 @@ class StaffSlipForm extends React.Component {
 
 export default stripesFinalForm({
   navigationCheck: true,
-})(StaffSlipForm);
+})(injectIntl(StaffSlipForm));
