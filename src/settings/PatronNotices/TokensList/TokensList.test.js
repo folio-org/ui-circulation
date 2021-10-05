@@ -77,25 +77,12 @@ const testTokensSection = (sectionTestId) => {
         .toBeVisible();
     });
 
-    tokensProps[sectionTestId].map((token) => {
-      if (isString(token)) {
-        return (
-          it(`should render checkbox for ${token}`, () => {
-            expect(within(screen
-              .getByTestId(token))
-              .getByDisplayValue(token))
-              .toBeVisible();
-
-            expect(within(screen
-              .getByTestId(token))
-              .getByLabelText(token))
-              .toBeVisible();
-          })
-        );
-      } else {
-        return null;
-      }
-    });
+    tokensProps[sectionTestId].forEach(({ token }) => (
+      it(`should render checkbox for ${token}`, () => {
+        expect(screen.getByTestId(token)).toHaveAttribute('label', token);
+        expect(screen.getByTestId(token)).toHaveAttribute('value', token);
+      })
+    ));
   });
 };
 
