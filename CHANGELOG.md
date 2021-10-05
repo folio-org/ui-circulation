@@ -51,6 +51,7 @@
 * Add RTL/Jest testing for `RenewalsSection` component in `LoanPolicy/components/ViewSections`. Refs UICIRC-695.
 * Add RTL/Jest testing for `StaffSlipForm` component in `settings/StaffSlips`. Refs UICIRC-650.
 * Add RTL/Jest testing for `RequestManagementSection` component in `LoanPolicy/components/EditSections`. Refs UICIRC-615.
+* Add RTL/Jest testing for `SchedulesList` component in `FixedDueDateSchedule/components/EditSections/components`. Refs UICIRC-603.
 
 ## [5.1.1] (https://github.com/folio-org/ui-circulation/tree/v5.1.1) (2021-08-06)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v5.1.0...v5.1.1)
