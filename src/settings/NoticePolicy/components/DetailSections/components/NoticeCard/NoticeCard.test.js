@@ -13,13 +13,34 @@ import {
   noticesSendEvents,
 } from '../../../../../../constants';
 
+const POLICY_NOTICES_TRANSLATION_KEY = 'ui-circulation.settings.noticePolicy.notices';
+const testIds = {
+  noticeCard: 'noticeCard',
+  noticeCardTemplate: 'noticeCardTemplate',
+  noticeCardViaText: 'noticeCardViaText',
+  noticeCardFormat: 'noticeCardFormat',
+  noticeCardTriggeringEvent: 'noticeCardTriggeringEvent',
+  noticeCardSendHow: 'noticeCardSendHow',
+  noticeCardFrequency: 'noticeCardFrequency',
+  noticeSend: 'noticeSend',
+  noticeCardByText: 'noticeCardByText',
+  noticeCardFrequencyLabel: 'noticeCardFrequencyLabel',
+  noticeIsRecurring: 'noticeIsRecurring',
+  isLoanDueDateTimeSelected: 'isLoanDueDateTimeSelected',
+  messageBanner: 'messageBanner',
+  noticeCardSendByDuration: 'noticeCardSendByDuration',
+  noticeCardSendByIntervalId: 'noticeCardSendByIntervalId',
+  noticeCardSendEveryDuration: 'noticeCardSendEveryDuration',
+  noticeCardSendEveryIntervalId: 'noticeCardSendEveryIntervalId',
+};
+
 const testKeyValues = (testId, label, value) => {
   if (!value) {
     it(`should render ${label}`, () => {
       const testIdValue = screen.getByTestId(testId);
 
       expect(testIdValue).toBeVisible();
-      expect(within(testIdValue).getByText(`ui-circulation.settings.noticePolicy.notices.${label}`)).toBeVisible();
+      expect(within(testIdValue).getByText(`${POLICY_NOTICES_TRANSLATION_KEY}.${label}`)).toBeVisible();
     });
   } else {
     it(`should render ${label} with ${value} value`, () => {
@@ -27,7 +48,7 @@ const testKeyValues = (testId, label, value) => {
 
       expect(testIdValue).toBeVisible();
       expect(within(testIdValue).getByText(value)).toBeVisible();
-      expect(within(testIdValue).getByText(`ui-circulation.settings.noticePolicy.notices.${label}`)).toBeVisible();
+      expect(within(testIdValue).getByText(`${POLICY_NOTICES_TRANSLATION_KEY}.${label}`)).toBeVisible();
     });
   }
 };
@@ -74,8 +95,8 @@ describe('View NoticeCard in DetailSection', () => {
       render(<NoticeCard {...noticeCardPropsCheckout} />);
     });
 
-    it('should render "NoticeCard" component', () => {
-      expect(screen.getByTestId('noticeCard')).toBeVisible();
+    it(`should render "${testIds.noticeCard}" component`, () => {
+      expect(screen.getByTestId(testIds.noticeCard)).toBeVisible();
     });
 
     it('should render correct header', () => {
@@ -83,44 +104,44 @@ describe('View NoticeCard in DetailSection', () => {
     });
 
     describe('test KeyValues', () => {
-      noticeCardPropsCheckout.templates.map((template) => {
-        return testKeyValues('noticeCardTemplate', 'template', template.label);
-      });
+      noticeCardPropsCheckout.templates.forEach(({ label }) => (
+        testKeyValues(testIds.noticeCardTemplate, 'template', label)
+      ));
 
-      testKeyValues('noticeCardViaText', 'via');
+      testKeyValues(testIds.noticeCardViaText, 'via');
       testKeyValues(
-        'noticeCardFormat',
+        testIds.noticeCardFormat,
         'format',
-        `ui-circulation.settings.noticePolicy.notices.${noticeCardPropsCheckout.notice.format.toLowerCase()}`
+        `${POLICY_NOTICES_TRANSLATION_KEY}.${noticeCardPropsCheckout.notice.format.toLowerCase()}`
       );
       testKeyValues(
-        'noticeCardTriggeringEvent',
+        testIds.noticeCardTriggeringEvent,
         'triggeringEvent',
         noticeCardPropsCheckout.triggeringEvents[1].label
       );
 
       describe('when "sendOptions" is available', () => {
-        testKeyValues('noticeSend', 'send');
+        testKeyValues(testIds.noticeSend, 'send');
 
         describe('when "isBeforeOrAfter" is "true"', () => {
-          testKeyValues('noticeCardByText', 'by');
+          testKeyValues(testIds.noticeCardByText, 'by');
         });
 
         describe('when "isFrequencyAvailable" is "true"', () => {
-          testKeyValues('noticeCardFrequencyLabel', 'frequency');
+          testKeyValues(testIds.noticeCardFrequencyLabel, 'frequency');
         });
 
         describe('when "isRecurring" is "true"', () => {
-          testKeyValues('noticeIsRecurring', 'andEvery');
+          testKeyValues(testIds.noticeIsRecurring, 'andEvery');
         });
       });
 
-      describe('when "isLoanDueDateTimeSelected" is "true" and real time message set to short term', () => {
-        testKeyValues('isLoanDueDateTimeSelected', 'send.longTerm');
+      describe(`when "${testIds.isLoanDueDateTimeSelected}" is "true" and real time message set to short term`, () => {
+        testKeyValues(testIds.isLoanDueDateTimeSelected, 'send.longTerm');
       });
 
-      describe('when "messageBanner" with warning is shown', () => {
-        testKeyValues('messageBanner', 'postponed.notification');
+      describe(`when "${testIds.messageBanner}" with warning is shown`, () => {
+        testKeyValues(testIds.messageBanner, 'postponed.notification');
       });
     });
   });
@@ -143,11 +164,11 @@ describe('View NoticeCard in DetailSection', () => {
     });
 
     describe('when "sendOptions" is not available', () => {
-      testNotShownValues('noticeSend');
+      testNotShownValues(testIds.noticeSend);
     });
 
-    describe('when "isLoanDueDateTimeSelected" is "true" and real time message set to short term', () => {
-      testKeyValues('isLoanDueDateTimeSelected', 'send.shortTerm');
+    describe(`when "${testIds.isLoanDueDateTimeSelected}" is "true" and real time message set to short term`, () => {
+      testKeyValues(testIds.isLoanDueDateTimeSelected, 'send.shortTerm');
     });
   });
 
@@ -170,18 +191,18 @@ describe('View NoticeCard in DetailSection', () => {
     });
 
     describe('when "isBeforeOrAfter" is "false"', () => {
-      testNotShownValues('noticeCardByText');
+      testNotShownValues(testIds.noticeCardByText);
     });
 
     describe('when "isFrequencyAvailable" is "false"', () => {
-      testNotShownValues('noticeCardFrequencyLabel');
+      testNotShownValues(testIds.noticeCardFrequencyLabel);
     });
 
     describe('when "isLoanDueDateTimeSelected" is "false"', () => {
       it('should not render real time message', () => {
-        expect(screen.queryByText('ui-circulation.settings.noticePolicy.notices.send.shortTerm'))
+        expect(screen.queryByText(`${POLICY_NOTICES_TRANSLATION_KEY}.send.shortTerm`))
           .not.toBeInTheDocument();
-        expect(screen.queryByText('ui-circulation.settings.noticePolicy.notices.send.longTerm'))
+        expect(screen.queryByText(`${POLICY_NOTICES_TRANSLATION_KEY}.send.longTerm`))
           .not.toBeInTheDocument();
       });
     });
@@ -204,7 +225,7 @@ describe('View NoticeCard in DetailSection', () => {
     });
 
     describe('when "isRecurring" is "false"', () => {
-      testNotShownValues('noticeIsRecurring');
+      testNotShownValues(testIds.noticeIsRecurring);
     });
   });
 
@@ -234,21 +255,21 @@ describe('View NoticeCard in DetailSection', () => {
       render(<NoticeCard {...noticeCardPropsDueDate} />);
     });
 
-    it('should render "NoticeCard" component', () => {
-      expect(screen.getByTestId('noticeCard')).toBeVisible();
+    it(`should render "${testIds.noticeCard}" component`, () => {
+      expect(screen.getByTestId(testIds.noticeCard)).toBeVisible();
     });
 
     describe('test KeyValues', () => {
       testKeyValues(
-        'noticeCardTriggeringEvent',
+        testIds.noticeCardTriggeringEvent,
         'triggeringEvent',
         noticeCardPropsCheckout.triggeringEvents[3].label
       );
-      testKeyValues('noticeCardSendHow', noticeCardPropsDueDate.notice.sendOptions.sendHow.toLowerCase());
-      testKeyValues('noticeCardFrequency', 'oneTime');
+      testKeyValues(testIds.noticeCardSendHow, noticeCardPropsDueDate.notice.sendOptions.sendHow.toLowerCase());
+      testKeyValues(testIds.noticeCardFrequency, 'oneTime');
 
-      it('should render "noticeCardSendByDuration" with value', () => {
-        const testIdValue = screen.getByTestId('noticeCardSendByDuration');
+      it(`should render "${testIds.noticeCardSendByDuration}" with value`, () => {
+        const testIdValue = screen.getByTestId(testIds.noticeCardSendByDuration);
 
         expect(testIdValue).toBeVisible();
         expect(within(testIdValue)
@@ -256,8 +277,8 @@ describe('View NoticeCard in DetailSection', () => {
           .toBeVisible();
       });
 
-      it('should render "noticeCardSendByIntervalId" with value', () => {
-        const testIdValue = screen.getByTestId('noticeCardSendByIntervalId');
+      it(`should render "${testIds.noticeCardSendByIntervalId}" with value`, () => {
+        const testIdValue = screen.getByTestId(testIds.noticeCardSendByIntervalId);
 
         expect(testIdValue).toBeVisible();
         expect(within(testIdValue)
@@ -265,8 +286,8 @@ describe('View NoticeCard in DetailSection', () => {
           .toBeVisible();
       });
 
-      it('should render "noticeCardSendEveryDuration" with value', () => {
-        const testIdValue = screen.getByTestId('noticeCardSendEveryDuration');
+      it(`should render "${testIds.noticeCardSendEveryDuration}" with value`, () => {
+        const testIdValue = screen.getByTestId(testIds.noticeCardSendEveryDuration);
 
         expect(testIdValue).toBeVisible();
         expect(within(testIdValue)
@@ -274,8 +295,8 @@ describe('View NoticeCard in DetailSection', () => {
           .toBeVisible();
       });
 
-      it('should render "noticeCardSendEveryIntervalId" with value', () => {
-        const testIdValue = screen.getByTestId('noticeCardSendEveryIntervalId');
+      it(`should render "${testIds.noticeCardSendEveryIntervalId}" with value`, () => {
+        const testIdValue = screen.getByTestId(testIds.noticeCardSendEveryIntervalId);
 
         expect(testIdValue).toBeVisible();
         expect(within(testIdValue)
