@@ -469,5 +469,6 @@
   "permission.settings.overdue-fines-policies": "Settings (Circ): Can create, edit and remove overdue fine policies",
   "permission.settings.lost-item-fees-policies": "Settings (Circ): Can create, edit and remove lost item fee policies",
   "permission.settings.view-overdue-fines-policies": "Settings (Circ): Can view overdue fine policies",
-  "permission.settings.view-lost-item-fees-policies": "Settings (Circ): Can view lost item fee policies"
+  "permission.settings.view-lost-item-fees-policies": "Settings (Circ): Can view lost item fee policies",
+  "permission.settings.titleLevelRequests": "Settings (Circ): Can modify title level requests settings"
 }
