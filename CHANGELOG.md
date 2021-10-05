@@ -48,6 +48,7 @@
 * Add RTL/Jest testing for `TokensList` component in `settings/StaffSlips/TokensList`. Refs UICIRC-651.
 * Add RTL/Jest testing for `ScheduleCard` component in `FixedDueDateSchedule/components/EditSections/components`. Refs UICIRC-602.
 * Add RTL/Jest testing for `ExceptionsList` component in `settings/LoanHistory`. Refs UICIRC-605.
+* Add RTL/Jest testing for `RenewalsSection` component in `LoanPolicy/components/ViewSections`. Refs UICIRC-695.
 
 ## [5.1.1] (https://github.com/folio-org/ui-circulation/tree/v5.1.1) (2021-08-06)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v5.1.0...v5.1.1)
