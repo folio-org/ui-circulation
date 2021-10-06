@@ -55,6 +55,7 @@
 * Add RTL/Jest testing for `NoticeCard` component in `settings/NoticePolicy/components/DetailSections/components/NoticeCard`. Refs UICIRC-635.
 * Add RTL/Jest testing for `TokensList` component in `PatronNotices/TokensList/TokensList.js`. Refs UICIRC-645.
 * Add Title Level Request permission. Refs UICIRC-699.
+* Add RTL/Jest testing for `LostItemFeeSection` component in `LostItemFeePolicy/components/EditSections`. Refs UICIRC-623.
 
 ## [5.1.1] (https://github.com/folio-org/ui-circulation/tree/v5.1.1) (2021-08-06)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v5.1.0...v5.1.1)
