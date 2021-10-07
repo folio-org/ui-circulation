@@ -140,7 +140,7 @@ class CirculationRules extends React.Component {
       records: 'locations',
       path: 'locations',
       params: {
-        query: 'cql.allRecords=1 sortby name',
+        query: 'cql.allRecords=1 sortby code name',
         limit: (q, p, r, l, props) => props?.stripes?.config?.maxUnpagedResourceCount || MAX_UNPAGED_RESOURCE_COUNT,
       },
       resourceShouldRefresh: true,
