@@ -1,5 +1,18 @@
 # Change history for ui-circulation
 
+## [7.0.0] (IN PROGRESS)
+
+* Add RTL/Jest testing for `RenewalsSection` component in `LoanPolicy/components/ViewSections`. Refs UICIRC-695.
+* Add RTL/Jest testing for `StaffSlipForm` component in `settings/StaffSlips`. Refs UICIRC-650.
+* Add RTL/Jest testing for `RequestManagementSection` component in `LoanPolicy/components/EditSections`. Refs UICIRC-615.
+* Add RTL/Jest testing for `SchedulesList` component in `FixedDueDateSchedule/components/EditSections/components`. Refs UICIRC-603.
+* Add RTL/Jest testing for `NoticeCard` component in `settings/NoticePolicy/components/DetailSections/components/NoticeCard`. Refs UICIRC-635.
+* Add RTL/Jest testing for `TokensList` component in `PatronNotices/TokensList/TokensList.js`. Refs UICIRC-645.
+* Add Title Level Request permission. Refs UICIRC-699.
+* Add RTL/Jest testing for `LostItemFeeSection` component in `LostItemFeePolicy/components/EditSections`. Refs UICIRC-623.
+* Create new setting for title level requests. Refs UICIRC-698.
+* UI tests replacement with RTL/Jest for component `NoticesList` (EditSections). Refs UICIRC-641.
+
 ## [6.0.0] (https://github.com/folio-org/ui-circulation/tree/v6.0.0) (2021-09-30)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v5.1.1...v6.0.0)
 
@@ -48,15 +61,6 @@
 * Add RTL/Jest testing for `TokensList` component in `settings/StaffSlips/TokensList`. Refs UICIRC-651.
 * Add RTL/Jest testing for `ScheduleCard` component in `FixedDueDateSchedule/components/EditSections/components`. Refs UICIRC-602.
 * Add RTL/Jest testing for `ExceptionsList` component in `settings/LoanHistory`. Refs UICIRC-605.
-* Add RTL/Jest testing for `RenewalsSection` component in `LoanPolicy/components/ViewSections`. Refs UICIRC-695.
-* Add RTL/Jest testing for `StaffSlipForm` component in `settings/StaffSlips`. Refs UICIRC-650.
-* Add RTL/Jest testing for `RequestManagementSection` component in `LoanPolicy/components/EditSections`. Refs UICIRC-615.
-* Add RTL/Jest testing for `SchedulesList` component in `FixedDueDateSchedule/components/EditSections/components`. Refs UICIRC-603.
-* Add RTL/Jest testing for `NoticeCard` component in `settings/NoticePolicy/components/DetailSections/components/NoticeCard`. Refs UICIRC-635.
-* Add RTL/Jest testing for `TokensList` component in `PatronNotices/TokensList/TokensList.js`. Refs UICIRC-645.
-* Add Title Level Request permission. Refs UICIRC-699.
-* Add RTL/Jest testing for `LostItemFeeSection` component in `LostItemFeePolicy/components/EditSections`. Refs UICIRC-623.
-* Create new setting for title level requests. Refs UICIRC-698.
 
 ## [5.1.1] (https://github.com/folio-org/ui-circulation/tree/v5.1.1) (2021-08-06)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v5.1.0...v5.1.1)
