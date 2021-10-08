@@ -448,5 +448,6 @@
     "settings.finePolicy.overdueFineTitle": "超期罚款",
     "settings.finePolicy.perPeriod": "{number}每{period}",
     "permission.settings.view-overdue-fines-policies": "设置（流通）：可以查看超期罚款政策",
-    "permission.settings.view-lost-item-fees-policies": "设置（流通）：可以查看遗失单件费用政策"
+    "permission.settings.view-lost-item-fees-policies": "设置（流通）：可以查看遗失单件费用政策",
+    "permission.settings.titleLevelRequests": "Settings (Circ): Can modify title level requests settings"
 }
