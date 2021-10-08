@@ -265,7 +265,7 @@
       },
       {
         "permissionName": "ui-circulation.settings.titleLevelRequests",
-        "displayName": "Settings (Circ): Can modify title level requests settings",
+        "displayName": "Settings (Circulation): Title level request edit",
         "subPermissions": [
           "settings.circulation.enabled",
           "templates.collection.get",

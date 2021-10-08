@@ -16,6 +16,7 @@ import PatronNotices from './settings/PatronNotices';
 import StaffSlips from './settings/StaffSlips';
 import NoticePolicySettings from './settings/NoticePolicy';
 import RequestPolicySettings from './settings/RequestPolicy';
+import TitleLevelRequests from './settings/TitleLevelRequests';
 
 class Circulation extends Component {
   static propTypes = {
@@ -125,6 +126,12 @@ class Circulation extends Component {
             label: <FormattedMessage id="ui-circulation.settings.index.requestPolicies" />,
             component: RequestPolicySettings,
             perm: 'ui-circulation.settings.request-policies',
+          },
+          {
+            route: 'title-level-requests',
+            label: <FormattedMessage id="ui-circulation.settings.index.titleLevelRequests" />,
+            component: TitleLevelRequests,
+            perm: 'ui-circulation.settings.titleLevelRequests',
           },
 
         ],

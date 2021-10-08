@@ -469,3 +469,27 @@ export const MAX_UNPAGED_RESOURCE_COUNT = 1000;
 export default '';
 
 export const DATE_FORMAT = 'YYYY/MM/DD';
+
+export const TITLE_LEVEL_REQUESTS = {
+  TLR_ENABLED: 'titleLevelRequestsFeatureEnabled',
+  CREATE_TLR_BY_DEFAULT: 'createTitleLevelRequestsByDefault',
+  CONFIRMATION_TEMPLATE:'confirmationPatronNoticeTemplateId',
+  CANCELLATION_TEMPLATE:'cancellationPatronNoticeTemplateId',
+  EXPIRATION_TEMPLATE:'expirationPatronNoticeTemplateId',
+};
+
+export const TITLE_LEVEL_REQUESTS_DEFAULT_VALUES = {
+  [TITLE_LEVEL_REQUESTS.TLR_ENABLED]: false,
+  [TITLE_LEVEL_REQUESTS.CREATE_TLR_BY_DEFAULT]: false,
+  [TITLE_LEVEL_REQUESTS.CONFIRMATION_TEMPLATE]: null,
+  [TITLE_LEVEL_REQUESTS.CANCELLATION_TEMPLATE]: null,
+  [TITLE_LEVEL_REQUESTS.EXPIRATION_TEMPLATE]: null,
+};
+
+export const MODULE_NAMES = {
+  SETTINGS: 'SETTINGS',
+};
+
+export const CONFIG_NAMES = {
+  TLR: 'TLR',
+};
