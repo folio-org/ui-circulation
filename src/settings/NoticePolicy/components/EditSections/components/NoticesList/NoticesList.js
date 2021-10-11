@@ -56,6 +56,7 @@ class NoticesList extends React.Component {
 
           return (
             <NoticeCard
+              data-testid={`noticeCard${noticeIndex}`}
               key={pathToNotice}
               notice={notice}
               noticeIndex={noticeIndex}
@@ -74,6 +75,7 @@ class NoticesList extends React.Component {
         >
           <Col xs={1}>
             <Button
+              data-testid="addNotice"
               type="button"
               buttonStyle="default"
               data-test-add-notice-card
