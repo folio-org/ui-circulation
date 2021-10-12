@@ -7,6 +7,11 @@ jest.mock('@folio/stripes/components', () => ({
       {children}
     </section>
   )),
+  AccordionSet: jest.fn(({ children }) => (
+    <div>
+      {children}
+    </div>
+  )),
   Badge: jest.fn((props) => (
     <span>
       <span>{props.children}</span>
