@@ -448,5 +448,16 @@
     "settings.finePolicy.overdueFineTitle": "Gebühr für überfällige Exemplare",
     "settings.finePolicy.perPeriod": "{number} pro {period}",
     "permission.settings.view-overdue-fines-policies": "Settings (Circ): Can view overdue fine policies",
-    "permission.settings.view-lost-item-fees-policies": "Settings (Circ): Can view lost item fee policies"
+    "permission.settings.view-lost-item-fees-policies": "Settings (Circ): Can view lost item fee policies",
+    "permission.settings.titleLevelRequests": "Settings (Circulation): Title level request edit",
+    "settings.index.titleLevelRequests": "Title level requests",
+    "settings.titleLevelRequests.paneTitle": "Title level requests",
+    "settings.titleLevelRequests.allow": "Allow title level requests",
+    "settings.titleLevelRequests.createTLR": "\"Create title level request\" selected by default",
+    "settings.titleLevelRequests.noticeTemplates": "Notice templates",
+    "settings.titleLevelRequests.confirmationNotice": "Confirmation notice",
+    "settings.titleLevelRequests.cancellationNotice": "Cancellation notice",
+    "settings.titleLevelRequests.expirationNotice": "Expiration notice",
+    "settings.titleLevelRequests.desription": "Select templates for the following patron notices. If no template is selected, no notice will be sent.",
+    "settings.titleLevelRequests.defaultTemplateValue": "Select notice"
 }
