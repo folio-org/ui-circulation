@@ -448,5 +448,16 @@
     "settings.finePolicy.overdueFineTitle": "غرامة تأخير",
     "settings.finePolicy.perPeriod": "{number} لكل {period}",
     "permission.settings.view-overdue-fines-policies": "الإعدادات (الإعارة): إمكانية عرض سياسات غرامات المتأخرات",
-    "permission.settings.view-lost-item-fees-policies": "الإعدادات (الإعارة): إمكانية عرض سياسات رسوم المواد الضائعة"
+    "permission.settings.view-lost-item-fees-policies": "الإعدادات (الإعارة): إمكانية عرض سياسات رسوم المواد الضائعة",
+    "permission.settings.titleLevelRequests": "الإعدادات (الإعارة): تحرير طلبات على مستوى العنوان",
+    "settings.index.titleLevelRequests": "طلبات على مستوى العنوان",
+    "settings.titleLevelRequests.paneTitle": "طلبات على مستوى العنوان",
+    "settings.titleLevelRequests.allow": "السماح بالطلبات على مستوى العنوان",
+    "settings.titleLevelRequests.createTLR": "تم تحديد \"إنشاء طلب على مستوى العنوان\" افتراضياً",
+    "settings.titleLevelRequests.noticeTemplates": "قوالب الإخطارات",
+    "settings.titleLevelRequests.confirmationNotice": "إخطار التأكيد",
+    "settings.titleLevelRequests.cancellationNotice": "إخطار الإلغاء",
+    "settings.titleLevelRequests.expirationNotice": "إخطار الانتهاء",
+    "settings.titleLevelRequests.desription": "حدد قوالب لإخطارات المستفيد التالية. إذا لم يتم تحديد أي قالب، فلن يتم إرسال أي إخطار.",
+    "settings.titleLevelRequests.defaultTemplateValue": "حدد إخطار"
 }

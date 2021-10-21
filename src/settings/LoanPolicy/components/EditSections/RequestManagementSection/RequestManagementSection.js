@@ -1,5 +1,4 @@
 import React from 'react';
-import { get } from 'lodash';
 import PropTypes from 'prop-types';
 import { Field } from 'react-final-form';
 import {
@@ -42,29 +41,40 @@ class RequestManagementSection extends React.Component {
       recallsSectionOpen,
       accordionOnToggle,
       change,
+      intl: {
+        formatMessage,
+      },
     } = this.props;
 
     if (!policy.loanable) {
       return null;
     }
 
+    const selectIntervalPeriods = this.generateOptions(intervalPeriods, 'ui-circulation.settings.loanPolicy.selectInterval');
+
     return (
-      <div data-test-loan-policy-form-request-management-section>
-        <h2 data-test-renewals-request-management-section-header>
+      <div
+        data-testid="requestManagementSection"
+        data-test-loan-policy-form-request-management-section
+      >
+        <h2
+          data-testid="requestManagementTitle"
+          data-test-renewals-request-management-section-header
+        >
           <FormattedMessage id="ui-circulation.settings.requestManagement.requestManagement" />
         </h2>
         <Accordion
           id="recallsSection"
           open={recallsSectionOpen}
           onToggle={accordionOnToggle}
-          label={<FormattedMessage id="ui-circulation.settings.requestManagement.recalls" />}
+          label={formatMessage({ id: 'ui-circulation.settings.requestManagement.recalls' })}
         >
           <div data-test-request-management-section-recall-return-interval>
             <Period
               fieldLabel="ui-circulation.settings.requestManagement.recallReturnInterval"
               inputValuePath="requestManagement.recalls.recallReturnInterval.duration"
               selectValuePath="requestManagement.recalls.recallReturnInterval.intervalId"
-              intervalPeriods={this.generateOptions(intervalPeriods, 'ui-circulation.settings.loanPolicy.selectInterval')}
+              intervalPeriods={selectIntervalPeriods}
               changeFormValue={change}
             />
           </div>
@@ -73,13 +83,13 @@ class RequestManagementSection extends React.Component {
               fieldLabel="ui-circulation.settings.requestManagement.minimumGuaranteedLoanPeriod"
               inputValuePath="requestManagement.recalls.minimumGuaranteedLoanPeriod.duration"
               selectValuePath="requestManagement.recalls.minimumGuaranteedLoanPeriod.intervalId"
-              intervalPeriods={this.generateOptions(intervalPeriods, 'ui-circulation.settings.loanPolicy.selectInterval')}
+              intervalPeriods={selectIntervalPeriods}
               changeFormValue={change}
             />
           </div>
           <div data-test-request-management-section-recalls-extend-overdue-loans>
             <Field
-              label={<FormattedMessage id="ui-circulation.settings.requestManagement.allowRecallsToExtendOverdueLoans" />}
+              label={formatMessage({ id: 'ui-circulation.settings.requestManagement.allowRecallsToExtendOverdueLoans' })}
               name="requestManagement.recalls.allowRecallsToExtendOverdueLoans"
               id="requestManagement.recalls.allowRecallsToExtendOverdueLoans"
               component={Checkbox}
@@ -89,12 +99,15 @@ class RequestManagementSection extends React.Component {
           <br />
           {
             policy.requestManagement?.recalls?.allowRecallsToExtendOverdueLoans &&
-            <div data-test-request-management-section-alternate-recall-return-interval>
+            <div
+              data-testid="alternateRecallReturnIntervalPeriod"
+              data-test-request-management-section-alternate-recall-return-interval
+            >
               <Period
                 fieldLabel="ui-circulation.settings.requestManagement.alternateRecallReturnInterval"
                 inputValuePath="requestManagement.recalls.alternateRecallReturnInterval.duration"
                 selectValuePath="requestManagement.recalls.alternateRecallReturnInterval.intervalId"
-                intervalPeriods={this.generateOptions(intervalPeriods, 'ui-circulation.settings.loanPolicy.selectInterval')}
+                intervalPeriods={selectIntervalPeriods}
                 changeFormValue={change}
               />
             </div>
@@ -104,20 +117,20 @@ class RequestManagementSection extends React.Component {
           id="holdsSection"
           open={holdsSectionOpen}
           onToggle={accordionOnToggle}
-          label={<FormattedMessage id="ui-circulation.settings.requestManagement.holds" />}
+          label={formatMessage({ id: 'ui-circulation.settings.requestManagement.holds' })}
         >
           <div data-test-request-management-section-alternate-checkout-loan-period>
             <Period
               fieldLabel="ui-circulation.settings.requestManagement.alternateCheckoutLoanPeriod"
               inputValuePath="requestManagement.holds.alternateCheckoutLoanPeriod.duration"
               selectValuePath="requestManagement.holds.alternateCheckoutLoanPeriod.intervalId"
-              intervalPeriods={this.generateOptions(intervalPeriods, 'ui-circulation.settings.loanPolicy.selectInterval')}
+              intervalPeriods={selectIntervalPeriods}
               changeFormValue={change}
             />
           </div>
           <div data-test-request-management-section-renew-items-with-request>
             <Field
-              label={<FormattedMessage id="ui-circulation.settings.requestManagement.renewItemsWithRequest" />}
+              label={formatMessage({ id: 'ui-circulation.settings.requestManagement.renewItemsWithRequest' })}
               name="requestManagement.holds.renewItemsWithRequest"
               id="requestManagement.holds.renewItemsWithRequest"
               component={Checkbox}
@@ -126,14 +139,17 @@ class RequestManagementSection extends React.Component {
           </div>
           <br />
           {
-            get(policy, 'loansPolicy.profileId') === loanProfileMap.ROLLING &&
-            get(policy, 'requestManagement.holds.renewItemsWithRequest') &&
-            <div data-test-request-management-section-alternate-renewal-loan-period>
+            policy.loansPolicy?.profileId === loanProfileMap.ROLLING &&
+            policy.requestManagement?.holds?.renewItemsWithRequest &&
+            <div
+              data-testid="alternateRenewalLoanPeriod"
+              data-test-request-management-section-alternate-renewal-loan-period
+            >
               <Period
                 fieldLabel="ui-circulation.settings.requestManagement.alternateRenewalLoanPeriod"
                 inputValuePath="requestManagement.holds.alternateRenewalLoanPeriod.duration"
                 selectValuePath="requestManagement.holds.alternateRenewalLoanPeriod.intervalId"
-                intervalPeriods={this.generateOptions(intervalPeriods, 'ui-circulation.settings.loanPolicy.selectInterval')}
+                intervalPeriods={selectIntervalPeriods}
                 changeFormValue={change}
               />
             </div>

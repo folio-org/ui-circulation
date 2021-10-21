@@ -22,6 +22,10 @@ import optionsGenerator from '../../../../utils/options-generator';
 import { Period } from '../../../../components';
 import { intervalPeriodsLower } from '../../../../../constants';
 
+export const formatNumber = (value = 0) => {
+  return isNumber(Number(value)) ? parseFloat(value).toFixed(2) : value;
+};
+
 class LostItemFeeSection extends React.Component {
   static propTypes = {
     intl: PropTypes.object,
@@ -34,10 +38,6 @@ class LostItemFeeSection extends React.Component {
 
     this.generateOptions = optionsGenerator.bind(null, this.props.intl.formatMessage);
   }
-
-  formatNumber = (value = 0) => {
-    return isNumber(Number(value)) ? parseFloat(value).toFixed(2) : value;
-  };
 
   render() {
     const {
@@ -53,11 +53,13 @@ class LostItemFeeSection extends React.Component {
       { value: 'false', label: formatMessage({ id: 'ui-circulation.settings.lostItemFee.no' }) },
     ];
 
+    const selectIntervalPeriods = this.generateOptions(intervalPeriodsLower, 'ui-circulation.settings.lostItemFee.selectInterval');
+
     return (
       <Accordion
         data-test-lost-item-fee-policy-form-section
         id="editLostItemFeeSection"
-        label={<FormattedMessage id="ui-circulation.settings.lostItemFee.lostItemSection" />}
+        label={formatMessage({ id: 'ui-circulation.settings.lostItemFee.lostItemSection' })}
         open={lostItemFeeSectionOpen}
       >
         <div data-test-item-aged-lost>
@@ -65,7 +67,7 @@ class LostItemFeeSection extends React.Component {
             fieldLabel="ui-circulation.settings.lostItemFee.itemeAgedLostOverdue"
             inputValuePath="itemAgedLostOverdue.duration"
             selectValuePath="itemAgedLostOverdue.intervalId"
-            intervalPeriods={this.generateOptions(intervalPeriodsLower, 'ui-circulation.settings.lostItemFee.selectInterval')}
+            intervalPeriods={selectIntervalPeriods}
             changeFormValue={change}
           />
         </div>
@@ -74,7 +76,7 @@ class LostItemFeeSection extends React.Component {
             fieldLabel="ui-circulation.settings.lostItemFee.patronBilledAfterAgedLost"
             inputValuePath="patronBilledAfterAgedLost.duration"
             selectValuePath="patronBilledAfterAgedLost.intervalId"
-            intervalPeriods={this.generateOptions(intervalPeriodsLower, 'ui-circulation.settings.lostItemFee.selectInterval')}
+            intervalPeriods={selectIntervalPeriods}
             changeFormValue={change}
           />
         </div>
@@ -83,7 +85,7 @@ class LostItemFeeSection extends React.Component {
             fieldLabel="ui-circulation.settings.lostItemFee.itemRecalledAgedLostOverdue"
             inputValuePath="recalledItemAgedLostOverdue.duration"
             selectValuePath="recalledItemAgedLostOverdue.intervalId"
-            intervalPeriods={this.generateOptions(intervalPeriodsLower, 'ui-circulation.settings.lostItemFee.selectInterval')}
+            intervalPeriods={selectIntervalPeriods}
             changeFormValue={change}
           />
         </div>
@@ -92,27 +94,30 @@ class LostItemFeeSection extends React.Component {
             fieldLabel="ui-circulation.settings.lostItemFee.patronBilledAfterRecalledAgedLost"
             inputValuePath="patronBilledAfterRecalledItemAgedLost.duration"
             selectValuePath="patronBilledAfterRecalledItemAgedLost.intervalId"
-            intervalPeriods={this.generateOptions(intervalPeriodsLower, 'ui-circulation.settings.lostItemFee.selectInterval')}
+            intervalPeriods={selectIntervalPeriods}
             changeFormValue={change}
           />
         </div>
-        <RadioGroup onBlur={this.formatNumber} />
+        <RadioGroup onBlur={formatNumber} />
         <Row>
           <Col xs={2} data-test-lost-item-processing-fee>
             <Field
               aria-label={formatMessage({ id: 'ui-circulation.settings.lostItemFee.lostItemProcessingFee' })}
-              label={<FormattedMessage id="ui-circulation.settings.lostItemFee.lostItemProcessingFee" />}
+              label={formatMessage({ id: 'ui-circulation.settings.lostItemFee.lostItemProcessingFee' })}
               name="lostItemProcessingFee"
               id="lost-item-processing-fee"
               component={TextField}
               type="number"
               formatOnBlur
-              format={this.formatNumber}
+              format={formatNumber}
             />
           </Col>
         </Row>
         <Row>
-          <Col xs={5}>
+          <Col
+            data-testid="chargeAmountItemPatronColumn"
+            xs={5}
+          >
             <Label
               htmlFor="charge-amount-item-patron"
               id="charge-amount-item-patron-label"
@@ -138,7 +143,10 @@ class LostItemFeeSection extends React.Component {
           </Col>
         </Row>
         <Row>
-          <Col xs={5}>
+          <Col
+            data-testid="chargeAmountItemSystemColumn"
+            xs={5}
+          >
             <Label
               htmlFor="charge-amount-item-system"
               id="charge-amount-item-system-label"
@@ -168,12 +176,15 @@ class LostItemFeeSection extends React.Component {
             fieldLabel="ui-circulation.settings.lostItemFee.lostItemNotChargeFeesFine"
             inputValuePath="lostItemChargeFeeFine.duration"
             selectValuePath="lostItemChargeFeeFine.intervalId"
-            intervalPeriods={this.generateOptions(intervalPeriodsLower, 'ui-circulation.settings.lostItemFee.selectInterval')}
+            intervalPeriods={selectIntervalPeriods}
             changeFormValue={change}
           />
         </div>
         <Row>
-          <Col xs={5}>
+          <Col
+            data-testid="returnedLostItemProcessingFeeColumn"
+            xs={5}
+          >
             <Label
               htmlFor="returnedLostItemProcessingFee"
               id="returnedLostItemProcessingFee-label"
@@ -194,7 +205,10 @@ class LostItemFeeSection extends React.Component {
           </Col>
         </Row>
         <Row>
-          <Col xs={5}>
+          <Col
+            data-testid="lostItemReturnedColumn"
+            xs={5}
+          >
             <Label
               htmlFor="Charge"
               id="Charge-label"
@@ -207,7 +221,7 @@ class LostItemFeeSection extends React.Component {
           <Col xs={7} data-test-lost-item-returned-charge>
             <Field
               aria-label={formatMessage({ id: 'ui-circulation.settings.lostItemFee.returned' })}
-              label={<FormattedMessage id="ui-circulation.settings.lostItemFee.lostItemChargeOverdueBased" />}
+              label={formatMessage({ id: 'ui-circulation.settings.lostItemFee.lostItemChargeOverdueBased' })}
               name="lostItemReturned"
               component={RadioButton}
               id="Charge"
@@ -215,7 +229,7 @@ class LostItemFeeSection extends React.Component {
               type="radio"
             />
             <Field
-              label={<FormattedMessage id="ui-circulation.settings.lostItemFee.lostItemRemoveOverdueFines" />}
+              label={formatMessage({ id: 'ui-circulation.settings.lostItemFee.lostItemRemoveOverdueFines' })}
               name="lostItemReturned"
               id="Remove"
               component={RadioButton}
@@ -226,7 +240,10 @@ class LostItemFeeSection extends React.Component {
           </Col>
         </Row>
         <Row>
-          <Col xs={5}>
+          <Col
+            data-testid="replacementAllowedColumn"
+            xs={5}
+          >
             <Label
               htmlFor="replacementAllowed"
               id="replacementAllowed-label"
@@ -247,7 +264,10 @@ class LostItemFeeSection extends React.Component {
           </Col>
         </Row>
         <Row>
-          <Col xs={5}>
+          <Col
+            data-testid="replacedLostItemProcessingFeeColumn"
+            xs={5}
+          >
             <Label
               htmlFor="replacedLostItemProcessingFee"
               id="replacedLostItemProcessingFee-label"
@@ -271,13 +291,13 @@ class LostItemFeeSection extends React.Component {
           <Col xs={2} data-test-replacement-processing-fee>
             <Field
               aria-label={formatMessage({ id: 'ui-circulation.settings.lostItemFee.replacementProcessFee' })}
-              label={<FormattedMessage id="ui-circulation.settings.lostItemFee.replacementProcessFee" />}
+              label={formatMessage({ id: 'ui-circulation.settings.lostItemFee.replacementProcessFee' })}
               name="replacementProcessingFee"
               id="replacement-processing-fee"
               component={TextField}
               type="number"
               formatOnBlur
-              format={this.formatNumber}
+              format={formatNumber}
             />
           </Col>
         </Row>
@@ -286,7 +306,7 @@ class LostItemFeeSection extends React.Component {
             fieldLabel="ui-circulation.settings.lostItemFee.feesFinesShallRefunded"
             inputValuePath="feesFinesShallRefunded.duration"
             selectValuePath="feesFinesShallRefunded.intervalId"
-            intervalPeriods={this.generateOptions(intervalPeriodsLower, 'ui-circulation.settings.lostItemFee.selectInterval')}
+            intervalPeriods={selectIntervalPeriods}
             changeFormValue={change}
             intervalPeriodsSuffix="ui-circulation.settings.lostItemFee.late"
           />

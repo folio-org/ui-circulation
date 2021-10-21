@@ -262,6 +262,18 @@
           "lost-item-fees-policies.item.delete"
         ],
         "visible": true
+      },
+      {
+        "permissionName": "ui-circulation.settings.titleLevelRequests",
+        "displayName": "Settings (Circulation): Title level request edit",
+        "subPermissions": [
+          "settings.circulation.enabled",
+          "templates.collection.get",
+          "configuration.entries.collection.get",
+          "configuration.entries.item.post",
+          "configuration.entries.item.put"
+        ],
+        "visible": true
       }
     ]
   },

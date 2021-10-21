@@ -447,6 +447,17 @@
     "settings.fDDSform.dateFormTitle": "Intervalo de datas {number}",
     "settings.finePolicy.overdueFineTitle": "Multa por atraso",
     "settings.finePolicy.perPeriod": "{number} por {period}",
-    "permission.settings.view-overdue-fines-policies": "Settings (Circ): Can view overdue fine policies",
-    "permission.settings.view-lost-item-fees-policies": "Settings (Circ): Can view lost item fee policies"
+    "permission.settings.view-overdue-fines-policies": "Configurações (Circ): pode visualizar políticas de multa por atraso",
+    "permission.settings.view-lost-item-fees-policies": "Configurações (Circ): pode ver as políticas de taxas de itens perdidos",
+    "permission.settings.titleLevelRequests": "Configurações (Circulação): Edição da solicitação de nível de título",
+    "settings.index.titleLevelRequests": "Solicitações de nível de título",
+    "settings.titleLevelRequests.paneTitle": "Solicitações de nível de título",
+    "settings.titleLevelRequests.allow": "Permitir solicitações de nível de título",
+    "settings.titleLevelRequests.createTLR": "\"Criar solicitação de nível de título\" selecionado por padrão",
+    "settings.titleLevelRequests.noticeTemplates": "Modelos de aviso",
+    "settings.titleLevelRequests.confirmationNotice": "Aviso de confirmação",
+    "settings.titleLevelRequests.cancellationNotice": "Aviso de cancelamento",
+    "settings.titleLevelRequests.expirationNotice": "Aviso de expiração",
+    "settings.titleLevelRequests.desription": "Selecione modelos para os seguintes avisos de cliente. Se nenhum modelo for selecionado, nenhum aviso será enviado.",
+    "settings.titleLevelRequests.defaultTemplateValue": "Selecione o aviso"
 }

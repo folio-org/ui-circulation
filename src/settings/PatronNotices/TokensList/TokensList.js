@@ -38,11 +38,12 @@ class TokensList extends React.Component {
     } = this.props;
 
     return (
-      <Row>
+      <Row data-testid="tokenListWrapper">
         <Col xs={4}>
           <Row>
             <Col xs={12}>
               <TokensSection
+                data-testid="item"
                 section="item"
                 selectedCategory={selectedCategory}
                 header={<FormattedMessage id="ui-circulation.settings.patronNotices.itemTokenHeader" />}
@@ -55,6 +56,7 @@ class TokensList extends React.Component {
           <Row>
             <Col xs={12}>
               <TokensSection
+                data-testid="effectiveLocation"
                 section="effectiveLocation"
                 selectedCategory={selectedCategory}
                 header={<FormattedMessage id="ui-circulation.settings.patronNotices.effectiveLocationTokenHeader" />}
@@ -69,6 +71,7 @@ class TokensList extends React.Component {
           <Row>
             <Col xs={12}>
               <TokensSection
+                data-testid="loan"
                 section="loan"
                 selectedCategory={selectedCategory}
                 header={<FormattedMessage id="ui-circulation.settings.patronNotices.loanTokenHeader" />}
@@ -83,6 +86,7 @@ class TokensList extends React.Component {
           <Row>
             <Col xs={12}>
               <TokensSection
+                data-testid="request"
                 section="request"
                 selectedCategory={selectedCategory}
                 header={<FormattedMessage id="ui-circulation.settings.patronNotices.requestTokenHeader" />}
@@ -97,6 +101,7 @@ class TokensList extends React.Component {
           <Row>
             <Col xs={12}>
               <TokensSection
+                data-testid="user"
                 section="user"
                 selectedCategory={selectedCategory}
                 header={<FormattedMessage id="ui-circulation.settings.patronNotices.userTokenHeader" />}
@@ -109,6 +114,7 @@ class TokensList extends React.Component {
           <Row>
             <Col xs={12}>
               <TokensSection
+                data-testid="feeFineCharge"
                 section="feeFineCharge"
                 selectedCategory={selectedCategory}
                 header={<FormattedMessage id="ui-circulation.settings.patronNotices.feeFineChargeTokenHeader" />}
@@ -121,6 +127,7 @@ class TokensList extends React.Component {
           <Row>
             <Col xs={12}>
               <TokensSection
+                data-testid="feeFineAction"
                 section="feeFineAction"
                 selectedCategory={selectedCategory}
                 header={<FormattedMessage id="ui-circulation.settings.patronNotices.feeFineActionTokenHeader" />}
