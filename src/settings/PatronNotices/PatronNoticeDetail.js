@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import HtmlToReact, { Parser } from 'html-to-react';
-import { FormattedMessage } from 'react-intl';
+import { injectIntl } from 'react-intl';
 import { get } from 'lodash';
 
 import {
@@ -19,6 +19,7 @@ import tokens from './tokens';
 class PatronNoticeDetail extends React.Component {
   static propTypes = {
     initialValues: PropTypes.object.isRequired,
+    intl: PropTypes.object.isRequired,
   };
 
   constructor(props) {
@@ -59,7 +60,10 @@ class PatronNoticeDetail extends React.Component {
   }
 
   render() {
-    const { initialValues: notice } = this.props;
+    const {
+      initialValues: notice,
+      intl: { formatMessage },
+    } = this.props;
     const {
       accordions,
       openPreview,
@@ -69,8 +73,8 @@ class PatronNoticeDetail extends React.Component {
     const parsedEmailTemplate = this.parser.parseWithInstructions(emailTemplate, () => true, this.rules);
 
     const isActiveLabel = notice.active
-      ? <FormattedMessage id="ui-circulation.settings.patronNotices.yes" />
-      : <FormattedMessage id="ui-circulation.settings.patronNotices.no" />;
+      ? formatMessage({ id: 'ui-circulation.settings.patronNotices.yes' })
+      : formatMessage({ id: 'ui-circulation.settings.patronNotices.no' });
 
     return (
       <>
@@ -78,7 +82,7 @@ class PatronNoticeDetail extends React.Component {
           <Col xs={12}>
             <div data-test-staff-slip-name>
               <KeyValue
-                label={<FormattedMessage id="ui-circulation.settings.patronNotices.notice.name" />}
+                label={formatMessage({ id: 'ui-circulation.settings.patronNotices.notice.name' })}
                 value={notice.name}
               />
             </div>
@@ -87,7 +91,7 @@ class PatronNoticeDetail extends React.Component {
         <Row>
           <Col xs={12}>
             <KeyValue
-              label={<FormattedMessage id="ui-circulation.settings.patronNotices.notice.active" />}
+              label={formatMessage({ id: 'ui-circulation.settings.patronNotices.notice.active' })}
               value={isActiveLabel}
             />
           </Col>
@@ -95,7 +99,7 @@ class PatronNoticeDetail extends React.Component {
         <Row>
           <Col xs={12}>
             <KeyValue
-              label={<FormattedMessage id="ui-circulation.settings.patronNotices.notice.description" />}
+              label={formatMessage({ id: 'ui-circulation.settings.patronNotices.notice.description' })}
               value={notice.description}
             />
           </Col>
@@ -103,7 +107,7 @@ class PatronNoticeDetail extends React.Component {
         <Row>
           <Col xs={12}>
             <KeyValue
-              label={<FormattedMessage id="ui-circulation.settings.patronNotices.notice.category" />}
+              label={formatMessage({ id: 'ui-circulation.settings.patronNotices.notice.category' })}
               value={notice.category}
             />
           </Col>
@@ -114,41 +118,44 @@ class PatronNoticeDetail extends React.Component {
         >
           <Accordion
             id="email-template-detail"
-            label={<FormattedMessage id="ui-circulation.settings.patronNotices.email" />}
+            label={formatMessage({ id: 'ui-circulation.settings.patronNotices.email' })}
           >
             { emailTemplate &&
-              <>
+              <div data-testid="emailAccordionContent">
                 <Row>
                   <Col xs={8}>
                     <KeyValue
-                      label={<FormattedMessage id="ui-circulation.settings.patronNotices.subject" />}
+                      label={formatMessage({ id: 'ui-circulation.settings.patronNotices.subject' })}
                       value={notice.localizedTemplates.en.header}
                     />
                   </Col>
-                  <Col xs={4}>
+                  <Col
+                    data-testid="previewButtonColumn"
+                    xs={4}
+                  >
                     <Button onClick={this.openPreviewDialog}>
-                      <FormattedMessage id="ui-circulation.settings.patronNotices.preview" />
+                      {formatMessage({ id: 'ui-circulation.settings.patronNotices.preview' })}
                     </Button>
                   </Col>
                 </Row>
                 <Row>
                   <Col xs={12}>
                     <KeyValue
-                      label={<FormattedMessage id="ui-circulation.settings.patronNotices.body" />}
+                      label={formatMessage({ id: 'ui-circulation.settings.patronNotices.body' })}
                       value={parsedEmailTemplate}
                     />
                   </Col>
                 </Row>
-              </>}
+              </div>}
           </Accordion>
         </AccordionSet>
         <PreviewModal
           open={openPreview}
           header={
-            <FormattedMessage
-              id="ui-circulation.settings.patronNotices.view.previewHeader"
-              values={{ name: notice.name }}
-            />
+            formatMessage({
+              id: 'ui-circulation.settings.patronNotices.view.previewHeader',
+              values: { name: notice.name },
+            })
           }
           previewTemplate={emailTemplate}
           previewFormat={tokensReducer(tokens)}
@@ -159,4 +166,4 @@ class PatronNoticeDetail extends React.Component {
   }
 }
 
-export default PatronNoticeDetail;
+export default injectIntl(PatronNoticeDetail);
