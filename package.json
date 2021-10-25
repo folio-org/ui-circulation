@@ -282,7 +282,10 @@
     "lint": "eslint .",
     "test": "yarn run test:jest",
     "test:bigtest": "stripes test karma",
-    "test:jest": "jest --ci --coverage --colors"
+    "test:jest": "jest --ci --coverage --colors",
+    "build-mod-descriptor": "stripes mod descriptor --full --strict | jq '.[]' > module-descriptor.json ",
+    "formatjs-compile": "formatjs compile-folder --ast --format simple ./translations/ui-circulation ./translations/ui-circulation/compiled"
+
   },
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.13.0",
@@ -296,6 +299,7 @@
     "@folio/stripes-cli": "^2.0.0",
     "@folio/stripes-components": "^10.0.0",
     "@folio/stripes-core": "^8.0.0",
+    "@formatjs/cli": "^4.2.20",
     "@testing-library/dom": "^7.26.3",
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",
