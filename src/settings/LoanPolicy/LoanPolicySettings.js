@@ -1,6 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { sortBy } from 'lodash';
+import {
+  get,
+  sortBy,
+} from 'lodash';
 import {
   FormattedMessage,
   injectIntl,
@@ -36,7 +39,23 @@ class LoanPolicySettings extends React.Component {
         limit: (q, p, r, l, props) => props?.stripes?.config?.maxUnpagedResourceCount || MAX_UNPAGED_RESOURCE_COUNT,
       },
     },
+    loans: {
+      type: 'okapi',
+      records: 'loans',
+      path: 'circulation/loans',
+      params: {
+        query: 'status.name==Open',
+        limit: () => 500000,
+      },
+    },
   });
+
+  isPolicyInUse = (templateId) => {
+    // Loans store policy names rather than IDs (why?), so we need a list of policy names to start
+    const policies = get(this.props, 'resources.loanPolicies.records', []).map(p => p.name);
+    const loans = get(this.props, 'resources.loans.records', []);
+    return !!loans.find(loan => loan?.loanPolicyId === templateId);
+  }
 
   static propTypes = {
     intl: PropTypes.object.isRequired,
@@ -76,9 +95,15 @@ class LoanPolicySettings extends React.Component {
         nameKey="name"
         resourceKey="loanPolicies"
         entryList={entryList}
+        isEntryInUse={this.isPolicyInUse}
         parentMutator={mutator}
         permissions={permissions}
         parentResources={resources}
+        prohibitItemDelete={{
+          close: <FormattedMessage id="ui-circulation.settings.common.close" />,
+          label: <FormattedMessage id="ui-circulation.settings.loanPolicy.denyDelete.header" />,
+          message: <FormattedMessage id="ui-circulation.settings.policy.denyDelete.body" />,
+        }}
         detailComponent={LoanPolicyDetail}
         enableDetailsActionMenu
         entryFormComponent={LoanPolicyForm}

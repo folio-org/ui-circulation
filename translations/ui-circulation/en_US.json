@@ -30,6 +30,8 @@
     "settings.loanPolicy.loanable": "Loanable",
     "settings.loanPolicy.selectInterval": "Select interval",
     "settings.loanPolicy.selectSchedule": "Select schedule",
+    "settings.loanPolicy.denyDelete.header": "Cannot delete Loan policy",
+    "settings.policy.denyDelete.body": "This policy cannot be deleted, as it is in use by one or more records.",
     "settings.validate.fillIn": "Please fill this in to continue",
     "settings.fDDS.validate.overlappingDateRange": "Date range {num1} cannot overlap with date range {num2}",
     "settings.fDDS.validate.uniqueName": "Please enter a unique name.",
