@@ -50,13 +50,6 @@ class LoanPolicySettings extends React.Component {
     },
   });
 
-  isPolicyInUse = (templateId) => {
-    // Loans store policy names rather than IDs (why?), so we need a list of policy names to start
-    const policies = get(this.props, 'resources.loanPolicies.records', []).map(p => p.name);
-    const loans = get(this.props, 'resources.loans.records', []);
-    return !!loans.find(loan => loan?.loanPolicyId === templateId);
-  }
-
   static propTypes = {
     intl: PropTypes.object.isRequired,
     resources: PropTypes.shape({
@@ -71,6 +64,19 @@ class LoanPolicySettings extends React.Component {
       }),
     }).isRequired,
   };
+
+  /**
+   * This function is used as a prop for <EntryManager> to determine
+   * whether or not a policy can be deleted -- i.e., whether or not
+   * there are any active loans that are using it.
+   *
+   * @param {string} targetId UUID of the loan policy to find
+   * @returns {boolean} Whether or not any (open) loans contain the targetId policy
+   */
+  isPolicyInUse = (targetId) => {
+    const loans = get(this.props, 'resources.loans.records', []);
+    return !!loans.find(loan => loan?.loanPolicyId === targetId);
+  }
 
   render() {
     const {
