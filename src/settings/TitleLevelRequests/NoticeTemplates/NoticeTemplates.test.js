@@ -11,7 +11,10 @@ import { Field } from 'react-final-form';
 
 import { Select } from '@folio/stripes/components';
 import NoticeTemplates from './NoticeTemplates';
-import { TITLE_LEVEL_REQUESTS } from '../../../constants';
+import {
+  TITLE_LEVEL_REQUESTS,
+  NOT_SELECTED,
+} from '../../../constants';
 
 describe('NoticeTemplates', () => {
   const mockedTemplates = [
@@ -37,7 +40,7 @@ describe('NoticeTemplates', () => {
   ];
 
   const expectedTemplatesResult = [
-    { value: 'null', label: labelIds.defaultTemplate },
+    { value: NOT_SELECTED, label: labelIds.defaultTemplate },
     ...mockedTemplates.map(template => ({ value: template.id, label: template.name })),
   ];
 

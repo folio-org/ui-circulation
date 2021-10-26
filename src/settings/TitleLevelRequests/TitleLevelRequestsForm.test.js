@@ -3,6 +3,8 @@ import {
   render,
   screen,
   fireEvent,
+  cleanup,
+  waitFor,
 } from '@testing-library/react';
 
 import '../../../test/jest/__mock__';
@@ -12,8 +14,10 @@ import {
   Checkbox,
   Pane,
   PaneFooter,
+  Modal,
 } from '@folio/stripes/components';
 import { Field } from 'react-final-form';
+
 import TitleLevelRequestsForm from './TitleLevelRequestsForm';
 import NoticeTemplates from './NoticeTemplates';
 import {
@@ -34,6 +38,21 @@ PaneFooter.mockImplementation(jest.fn(({ renderEnd }) => (
     {renderEnd}
   </div>
 )));
+Modal.mockImplementation(jest.fn(({ onClose, footer, children, open, ...rest }) => (
+  // eslint-disable-next-line jsx-a11y/no-static-element-interactions, jsx-a11y/click-events-have-key-events
+  <div
+    open={open}
+    onClick={onClose}
+    {...rest}
+  >
+    {children}
+    {footer}
+  </div>
+)));
+Field.mockImplementation(jest.fn(({ onChange, ...rest }) => (
+  // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
+  <div onClick={onChange} {...rest} />
+)));
 
 describe('TitleLevelRequestsForm', () => {
   const mockedHandleSubmit = jest.fn();
@@ -48,32 +67,45 @@ describe('TitleLevelRequestsForm', () => {
       records: mockedRecord,
     },
   };
+  const mockedRequest = [{ id: 'testRequest' }];
   const defaultProps = {
     handleSubmit: mockedHandleSubmit,
     label: 'testLabel',
     pristine: false,
     submitting: false,
     resources: mockedResources,
+    mutator: {
+      requests: {
+        GET: () => mockedRequest,
+      },
+    },
   };
   const testIds = {
     form: 'tlrForm',
     pane: 'tlrPane',
+    tlrCheckbox: 'tlrSwitchCheckbox',
+    errorModal: 'forbiddenDisableTlrModal',
   };
   const labelIds = {
     tlrEnabled: 'ui-circulation.settings.titleLevelRequests.allow',
     tlrByDefault: 'ui-circulation.settings.titleLevelRequests.createTLR',
     saveButon: 'stripes-core.button.save',
+    errorModalTitle: 'ui-circulation.settings.titleLevelRequests.forbiddenDisableTlrModal.title',
+    errorModalDescription: 'ui-circulation.settings.titleLevelRequests.forbiddenDisableTlrModal.description',
+    closeButton: 'stripes-core.button.close',
   };
   const orderOfFieldCall = {
     tlrEnabled: 1,
     tlrByDefault: 2,
   };
+  const mockedFormChange = jest.fn();
 
   afterEach(() => {
     Pane.mockClear();
     Field.mockClear();
     Button.mockClear();
     NoticeTemplates.mockClear();
+    mockedFormChange.mockClear();
   });
 
   describe('when "titleLevelRequestsFeatureEnabled" is true', () => {
@@ -84,6 +116,7 @@ describe('TitleLevelRequestsForm', () => {
           titleLevelRequestsFeatureEnabled: true,
         },
       })),
+      change: mockedFormChange,
     };
 
     beforeEach(() => {
@@ -123,7 +156,7 @@ describe('TitleLevelRequestsForm', () => {
         component: Checkbox,
       };
 
-      expect(Field).toHaveBeenNthCalledWith(orderOfFieldCall.tlrEnabled, expectedResult, {});
+      expect(Field).toHaveBeenNthCalledWith(orderOfFieldCall.tlrEnabled, expect.objectContaining(expectedResult), {});
     });
 
     it('should execute "Field" associated with "TLR by default" with passed props', () => {
@@ -192,6 +225,68 @@ describe('TitleLevelRequestsForm', () => {
         expect(Button).toHaveBeenLastCalledWith(expect.objectContaining({ disabled: true }), {});
       });
     });
+
+    describe('Modal', () => {
+      it('should be executed with passed props', () => {
+        const expectedResult = {
+          label: labelIds.errorModalTitle,
+          open: false,
+          dismissible: true,
+          children: labelIds.errorModalDescription,
+        };
+
+        expect(Modal).toHaveBeenLastCalledWith(expect.objectContaining(expectedResult), {});
+      });
+
+      it('should be open', async () => {
+        expect(screen.getByTestId(testIds.errorModal)).not.toHaveAttribute('open');
+
+        fireEvent.click(screen.getByTestId(testIds.tlrCheckbox));
+
+        const modalAfterClick = await screen.findByTestId(testIds.errorModal);
+
+        expect(mockedFormChange).not.toHaveBeenCalled();
+        expect(modalAfterClick).toHaveAttribute('open');
+      });
+
+      it('should have "Close" button', () => {
+        expect(screen.getByText(labelIds.closeButton)).toBeVisible();
+      });
+
+      it('should close modal on "Close" button click', async () => {
+        expect(screen.getByTestId(testIds.errorModal)).not.toHaveAttribute('open');
+        fireEvent.click(screen.getByTestId(testIds.tlrCheckbox));
+        const modalAfterFirstClick = await screen.findByTestId(testIds.errorModal);
+        expect(modalAfterFirstClick).toHaveAttribute('open');
+
+        fireEvent.click(screen.getByText(labelIds.closeButton));
+        const modalAfterSecondClick = await screen.findByTestId(testIds.errorModal);
+        expect(modalAfterSecondClick).not.toHaveAttribute('open');
+      });
+    });
+
+    describe('when there are no "Title" requests in data base', () => {
+      it('should disable TLR on checkbox click', async () => {
+        cleanup();
+        render(
+          <TitleLevelRequestsForm
+            form={mockedForm}
+            {...defaultProps}
+            mutator={{
+              requests: {
+                GET: () => [],
+              },
+            }}
+          />
+        );
+
+        fireEvent.click(screen.getByTestId(testIds.tlrCheckbox));
+
+        await waitFor(() => {
+          expect(mockedFormChange).toHaveBeenCalledWith(TITLE_LEVEL_REQUESTS.TLR_ENABLED, false);
+        });
+      });
+    });
   });
 
   describe('when "titleLevelRequestsFeatureEnabled" is false', () => {
@@ -202,6 +297,7 @@ describe('TitleLevelRequestsForm', () => {
           titleLevelRequestsFeatureEnabled: false,
         },
       })),
+      change: mockedFormChange,
     };
 
     beforeEach(() => {
@@ -222,7 +318,7 @@ describe('TitleLevelRequestsForm', () => {
       };
 
       expect(Field).toHaveBeenCalledTimes(1);
-      expect(Field).toHaveBeenNthCalledWith(orderOfFieldCall.tlrEnabled, expectedResult, {});
+      expect(Field).toHaveBeenNthCalledWith(orderOfFieldCall.tlrEnabled, expect.objectContaining(expectedResult), {});
     });
 
     it('should not render "NoticeTemplates"', () => {
@@ -239,6 +335,14 @@ describe('TitleLevelRequestsForm', () => {
       };
 
       expect(Button).toHaveBeenLastCalledWith(expectedResult, {});
+    });
+
+    it('should enable TLR on checkbox click', async () => {
+      fireEvent.click(screen.getByTestId(testIds.tlrCheckbox));
+
+      await waitFor(() => {
+        expect(mockedFormChange).toHaveBeenCalledWith(TITLE_LEVEL_REQUESTS.TLR_ENABLED, true);
+      });
     });
   });
 });
