@@ -1,11 +1,12 @@
-.codeMirrorFullScreen{
+.codeMirrorFullScreen {
   height: 100%;
   width: 100%;
   position: absolute;
-  & :global .CodeMirror {
-    height: 85%;
-    width: 98%;
-  }
+}
+
+.codeMirrorFullScreen :global .CodeMirror {
+  height: 85%;
+  width: 98%;
 }
 
 .circulationRulesForm {

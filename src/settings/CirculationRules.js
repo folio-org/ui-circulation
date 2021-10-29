@@ -7,7 +7,6 @@ import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import {
   Callout,
-  Paneset,
   Pane,
 } from '@folio/stripes/components';
 import { stripesConnect } from '@folio/stripes/core';
@@ -377,7 +376,7 @@ class CirculationRules extends React.Component {
     const editorProps = this.getEditorProps();
 
     return (
-      <Paneset>
+      <>
         <Pane
           data-test-circulation-rules
           paneTitle={<FormattedMessage id="ui-circulation.settings.circulationRules.paneTitle" />}
@@ -390,7 +389,7 @@ class CirculationRules extends React.Component {
           />
         </Pane>
         <Callout ref={(ref) => { this.callout = ref; }} />
-      </Paneset>
+      </>
     );
   }
 }
