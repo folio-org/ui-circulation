@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
 
@@ -13,6 +13,7 @@ import {
   Pane,
   Row,
   PaneFooter,
+  Modal,
 } from '@folio/stripes/components';
 
 import NoticeTemplates from './NoticeTemplates';
@@ -20,9 +21,13 @@ import {
   patronNoticeCategoryIds,
   MAX_UNPAGED_RESOURCE_COUNT,
   TITLE_LEVEL_REQUESTS,
+  OPEN_REQUESTS_STATUSES,
+  REQUEST_LEVEL,
 } from '../../constants';
 
 import css from './TitleLevelRequestsForm.css';
+
+const statusesQueryPart = OPEN_REQUESTS_STATUSES.map(status => `status=="${status}"`).join(' OR ');
 
 const TitleLevelRequestsForm = (props) => {
   const {
@@ -33,8 +38,10 @@ const TitleLevelRequestsForm = (props) => {
     submitting,
     form,
     resources,
+    mutator,
   } = props;
 
+  const [isErrorModalOpen, setIsErrorModalOpen] = useState(false);
   const templates = resources.templates?.records || [];
   const { values: titleLevelRequestsValues } = form.getState();
 
@@ -51,6 +58,35 @@ const TitleLevelRequestsForm = (props) => {
         </Button>
         )}
     />
+  );
+
+  const handleTlrCheckboxClick = async () => {
+    if (!titleLevelRequestsValues[TITLE_LEVEL_REQUESTS.TLR_ENABLED]) {
+      form.change(TITLE_LEVEL_REQUESTS.TLR_ENABLED, true);
+
+      return;
+    }
+
+    const activeTitleRequests = await mutator.requests.GET();
+
+    if (activeTitleRequests.length) {
+      setIsErrorModalOpen(true);
+
+      return;
+    }
+
+    form.change(TITLE_LEVEL_REQUESTS.TLR_ENABLED, false);
+  };
+
+  const handleModalClose = () => setIsErrorModalOpen(false);
+
+  const modalFooter = (
+    <Button
+      onClick={handleModalClose}
+      buttonStyle="primary"
+    >
+      {formatMessage({ id: 'stripes-core.button.close' })}
+    </Button>
   );
 
   return (
@@ -71,15 +107,17 @@ const TitleLevelRequestsForm = (props) => {
         <Row>
           <Col xs={12}>
             <Field
+              data-testid="tlrSwitchCheckbox"
               name={TITLE_LEVEL_REQUESTS.TLR_ENABLED}
               type="checkbox"
               label={formatMessage({ id: 'ui-circulation.settings.titleLevelRequests.allow' })}
               component={Checkbox}
+              onChange={handleTlrCheckboxClick}
             />
           </Col>
         </Row>
         {
-          titleLevelRequestsValues.titleLevelRequestsFeatureEnabled &&
+          titleLevelRequestsValues[TITLE_LEVEL_REQUESTS.TLR_ENABLED] &&
           <>
             <div className={css.tlrDefaultCheckbox}>
               <Field
@@ -96,6 +134,16 @@ const TitleLevelRequestsForm = (props) => {
             </div>
           </>
         }
+        <Modal
+          data-testid="forbiddenDisableTlrModal"
+          label={formatMessage({ id: 'ui-circulation.settings.titleLevelRequests.forbiddenDisableTlrModal.title' })}
+          open={isErrorModalOpen}
+          onClose={handleModalClose}
+          dismissible
+          footer={modalFooter}
+        >
+          {formatMessage({ id: 'ui-circulation.settings.titleLevelRequests.forbiddenDisableTlrModal.description' })}
+        </Modal>
       </Pane>
     </form>
   );
@@ -111,6 +159,17 @@ TitleLevelRequestsForm.manifest = Object.freeze({
     },
     recordsRequired: MAX_UNPAGED_RESOURCE_COUNT,
     perRequest: MAX_UNPAGED_RESOURCE_COUNT,
+  },
+  requests: {
+    type: 'okapi',
+    path: 'circulation/requests',
+    records: 'requests',
+    accumulate: true,
+    fetch: false,
+    params: {
+      query: `${statusesQueryPart} AND requestLevel=="${REQUEST_LEVEL.TITLE}"`,
+      limit: '1',
+    },
   },
 });
 
@@ -128,6 +187,14 @@ TitleLevelRequestsForm.propTypes = {
         name: PropTypes.string.isRequired,
       })),
     }),
+    requests: PropTypes.shape({
+      records: PropTypes.array.isRequired,
+    }).isRequired,
+  }).isRequired,
+  mutator: PropTypes.shape({
+    requests: PropTypes.shape({
+      GET: PropTypes.func.isRequired,
+    }).isRequired,
   }).isRequired,
 };
 

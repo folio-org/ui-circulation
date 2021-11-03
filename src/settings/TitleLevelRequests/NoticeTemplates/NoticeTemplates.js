@@ -12,7 +12,10 @@ import {
   Headline,
   Select,
 } from '@folio/stripes/components';
-import { TITLE_LEVEL_REQUESTS } from '../../../constants';
+import {
+  NOT_SELECTED,
+  TITLE_LEVEL_REQUESTS,
+} from '../../../constants';
 
 const NoticeTemplates = (props) => {
   const {
@@ -22,7 +25,7 @@ const NoticeTemplates = (props) => {
     templates,
   } = props;
   const noticeOptions = [
-    { value: 'null', label: formatMessage({ id: 'ui-circulation.settings.titleLevelRequests.defaultTemplateValue' }) },
+    { value: NOT_SELECTED, label: formatMessage({ id: 'ui-circulation.settings.titleLevelRequests.defaultTemplateValue' }) },
     ...templates.map(template => ({ value: template.id, label: template.name })),
   ];
 
