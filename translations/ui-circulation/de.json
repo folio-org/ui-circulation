@@ -459,5 +459,7 @@
     "settings.titleLevelRequests.cancellationNotice": "Stornierungsbenachrichtigung",
     "settings.titleLevelRequests.expirationNotice": "Ablaufbenachrichtigung",
     "settings.titleLevelRequests.desription": "Vorlagen für die folgenden Benachrichtigungen an Benutzende auswählen. Wenn keine Vorlage ausgewählt wird, wird keine Benachrichtigung gesendet.",
-    "settings.titleLevelRequests.defaultTemplateValue": "Benachrichtigung auswählen"
+    "settings.titleLevelRequests.defaultTemplateValue": "Benachrichtigung auswählen",
+    "settings.titleLevelRequests.forbiddenDisableTlrModal.title": "Cannot change \"Allow title level requests\"",
+    "settings.titleLevelRequests.forbiddenDisableTlrModal.description": "\"Allow title requests\" cannot be changed because it is in use by one or more requests"
 }
