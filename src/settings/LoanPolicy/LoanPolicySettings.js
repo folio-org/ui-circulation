@@ -1,9 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  get,
-  sortBy,
-} from 'lodash';
+import { sortBy } from 'lodash';
 import {
   FormattedMessage,
   injectIntl,
@@ -20,6 +17,7 @@ import { MAX_UNPAGED_RESOURCE_COUNT } from '../../constants';
 
 class LoanPolicySettings extends React.Component {
   static manifest = Object.freeze({
+    selectedPolicyId: {},
     loanPolicies: {
       type: 'okapi',
       records: 'loanPolicies',
@@ -44,16 +42,17 @@ class LoanPolicySettings extends React.Component {
       records: 'loans',
       path: 'circulation/loans',
       params: {
-        query: 'status.name==Open',
-        limit: () => 500000,
+        query: 'status.name==Open and loanPolicyId==%{selectedPolicyId}',
       },
     },
   });
 
   static propTypes = {
     intl: PropTypes.object.isRequired,
+    location: PropTypes.object.isRequired,
     resources: PropTypes.shape({
       loanPolicies: PropTypes.object,
+      loans: PropTypes.object,
       fixedDueDateSchedules: PropTypes.object,
     }).isRequired,
     mutator: PropTypes.shape({
@@ -62,21 +61,48 @@ class LoanPolicySettings extends React.Component {
         PUT: PropTypes.func.isRequired,
         DELETE: PropTypes.func.isRequired,
       }),
+      selectedPolicyId: PropTypes.shape({
+        replace: PropTypes.func.isRequired,
+      }),
     }).isRequired,
+    stripes: PropTypes.object.isRequired,
   };
+
+  constructor(props) {
+    super(props);
+
+    this.updateSelectedPolicy = this.updateSelectedPolicy.bind(this);
+    this.updateSelectedPolicy();
+
+    this.logger = props.stripes.logger;
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.location.pathname !== this.props.location.pathname) {
+      this.updateSelectedPolicy();
+    }
+  }
+
+  updateSelectedPolicy() {
+    const {
+      location,
+      mutator,
+    } = this.props;
+
+    const path = location.pathname;
+    mutator.selectedPolicyId.replace(path.substring(path.lastIndexOf('/') + 1));
+  }
 
   /**
    * This function is used as a prop for <EntryManager> to determine
    * whether or not a policy can be deleted -- i.e., whether or not
    * there are any active loans that are using it.
    *
-   * @param {string} targetId UUID of the loan policy to find
-   * @returns {boolean} Whether or not any (open) loans contain the targetId policy
+   * The loans resource query returns open loan records with a loanPolicyId
+   * of `selectedPolicyId`, a local resource that should be set before
+   * calling this function.
    */
-  isPolicyInUse = (targetId) => {
-    const loans = get(this.props, 'resources.loans.records', []);
-    return !!loans.find(loan => loan?.loanPolicyId === targetId);
-  }
+  isPolicyInUse = () => this.props.resources.loans.isLoading || this.props.resources.loans.records.length > 0;
 
   render() {
     const {
