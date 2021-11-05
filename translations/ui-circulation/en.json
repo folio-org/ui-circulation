@@ -410,6 +410,7 @@
   "settings.finePolicy.validate.hasOverdueRecallFineInterval": "Overdue recall fine must be greater than 0 if interval set",
   "settings.finePolicy.validate.invalidMaximumOverdueFine": "Please enter an overdue fine amount or set maximum overdue fine to 0",
   "settings.finePolicy.validate.invalidMaximumRecallOverdueFine": "Please enter an overdue recall fine amount or set maximum overdue recall fine to 0",
+  "settings.finePolicy.denyDelete.header": "Cannot delete overdue fine policy",
 
   "settings.lostItemFee.entryLabel": "New lost item fee policy",
   "settings.lostItemFee.paneTitle": "Lost item fee policies",
