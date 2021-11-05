@@ -459,5 +459,7 @@
     "settings.titleLevelRequests.cancellationNotice": "إخطار الإلغاء",
     "settings.titleLevelRequests.expirationNotice": "إخطار الانتهاء",
     "settings.titleLevelRequests.desription": "حدد قوالب لإخطارات المستفيد التالية. إذا لم يتم تحديد أي قالب، فلن يتم إرسال أي إخطار.",
-    "settings.titleLevelRequests.defaultTemplateValue": "حدد إخطار"
+    "settings.titleLevelRequests.defaultTemplateValue": "حدد إخطار",
+    "settings.titleLevelRequests.forbiddenDisableTlrModal.title": "لا يمكن تغيير \"السماح بالطلبات على مستوى العنوان\"",
+    "settings.titleLevelRequests.forbiddenDisableTlrModal.description": "لا يمكن تغيير \"السماح بطلبات العنوان\" لأنه قيد الاستخدام بواسطة طلب أو أكثر"
 }

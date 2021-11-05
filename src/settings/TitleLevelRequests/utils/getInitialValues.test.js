@@ -15,6 +15,8 @@ describe('getInitialValues', () => {
         value: JSON.stringify({
           [TITLE_LEVEL_REQUESTS.TLR_ENABLED]: true,
           [TITLE_LEVEL_REQUESTS.CONFIRMATION_TEMPLATE]: 'testId',
+          [TITLE_LEVEL_REQUESTS.EXPIRATION_TEMPLATE]: null,
+          [TITLE_LEVEL_REQUESTS.CANCELLATION_TEMPLATE]: null,
         }),
       },
     ];

@@ -461,5 +461,7 @@
     "settings.titleLevelRequests.cancellationNotice": "Cancellation notice",
     "settings.titleLevelRequests.expirationNotice": "Expiration notice",
     "settings.titleLevelRequests.desription": "Select templates for the following patron notices. If no template is selected, no notice will be sent.",
-    "settings.titleLevelRequests.defaultTemplateValue": "Select notice"
+    "settings.titleLevelRequests.defaultTemplateValue": "Select notice",
+    "settings.titleLevelRequests.forbiddenDisableTlrModal.title": "Cannot change \"Allow title level requests\"",
+    "settings.titleLevelRequests.forbiddenDisableTlrModal.description": "\"Allow title requests\" cannot be changed because it is in use by one or more requests"
 }
