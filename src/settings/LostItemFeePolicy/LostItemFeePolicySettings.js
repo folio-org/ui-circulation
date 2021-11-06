@@ -35,7 +35,11 @@ class LostItemFeePolicySettings extends React.Component {
   });
 
   static propTypes = {
+    checkPolicy: PropTypes.func.isRequired,
+    closeText: PropTypes.string.isRequired,
     intl: PropTypes.object,
+    labelText: PropTypes.string.isRequired,
+    messageText: PropTypes.string.isRequired,
     resources: PropTypes.shape({
       lostItemFeePolicies: PropTypes.object,
     }).isRequired,

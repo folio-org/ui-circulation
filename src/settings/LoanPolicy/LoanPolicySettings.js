@@ -40,11 +40,14 @@ class LoanPolicySettings extends React.Component {
   });
 
   static propTypes = {
-    intl: PropTypes.object.isRequired,
+    checkPolicy: PropTypes.func.isRequired,
+    closeText: PropTypes.string.isRequired,
+    intl: PropTypes.object,
+    labelText: PropTypes.string.isRequired,
+    messageText: PropTypes.string.isRequired,
     location: PropTypes.object.isRequired,
     resources: PropTypes.shape({
       loanPolicies: PropTypes.object,
-      loans: PropTypes.object,
       fixedDueDateSchedules: PropTypes.object,
     }).isRequired,
     mutator: PropTypes.shape({

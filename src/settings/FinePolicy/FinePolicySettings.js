@@ -31,7 +31,11 @@ class FinePolicySettings extends React.Component {
   });
 
   static propTypes = {
+    checkPolicy: PropTypes.func.isRequired,
+    closeText: PropTypes.string.isRequired,
     intl: PropTypes.object,
+    labelText: PropTypes.string.isRequired,
+    messageText: PropTypes.string.isRequired,
     resources: PropTypes.shape({
       finePolicies: PropTypes.object,
       fixedDueDateSchedules: PropTypes.object,
