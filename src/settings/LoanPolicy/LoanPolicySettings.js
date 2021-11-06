@@ -14,10 +14,10 @@ import LoanPolicyForm from './LoanPolicyForm';
 import LoanPolicy from '../Models/LoanPolicy';
 import { normalize } from './utils/normalize';
 import { MAX_UNPAGED_RESOURCE_COUNT } from '../../constants';
+import withPreventDelete from '../wrappers/withPreventDelete';
 
 class LoanPolicySettings extends React.Component {
   static manifest = Object.freeze({
-    selectedPolicyId: {},
     loanPolicies: {
       type: 'okapi',
       records: 'loanPolicies',
@@ -37,14 +37,6 @@ class LoanPolicySettings extends React.Component {
         limit: (q, p, r, l, props) => props?.stripes?.config?.maxUnpagedResourceCount || MAX_UNPAGED_RESOURCE_COUNT,
       },
     },
-    loans: {
-      type: 'okapi',
-      records: 'loans',
-      path: 'circulation/loans',
-      params: {
-        query: 'status.name==Open and loanPolicyId==%{selectedPolicyId}',
-      },
-    },
   });
 
   static propTypes = {
@@ -61,9 +53,6 @@ class LoanPolicySettings extends React.Component {
         PUT: PropTypes.func.isRequired,
         DELETE: PropTypes.func.isRequired,
       }),
-      selectedPolicyId: PropTypes.shape({
-        replace: PropTypes.func.isRequired,
-      }),
     }).isRequired,
     stripes: PropTypes.object.isRequired,
   };
@@ -71,41 +60,12 @@ class LoanPolicySettings extends React.Component {
   constructor(props) {
     super(props);
 
-    this.updateSelectedPolicy = this.updateSelectedPolicy.bind(this);
-    this.updateSelectedPolicy();
-
     this.logger = props.stripes.logger;
   }
 
-  componentDidUpdate(prevProps) {
-    if (prevProps.location.pathname !== this.props.location.pathname) {
-      this.updateSelectedPolicy();
-    }
-  }
-
-  updateSelectedPolicy() {
-    const {
-      location,
-      mutator,
-    } = this.props;
-
-    const path = location.pathname;
-    mutator.selectedPolicyId.replace(path.substring(path.lastIndexOf('/') + 1));
-  }
-
-  /**
-   * This function is used as a prop for <EntryManager> to determine
-   * whether or not a policy can be deleted -- i.e., whether or not
-   * there are any active loans that are using it.
-   *
-   * The loans resource query returns open loan records with a loanPolicyId
-   * of `selectedPolicyId`, a local resource that should be set before
-   * calling this function.
-   */
-  isPolicyInUse = () => this.props.resources.loans.isLoading || this.props.resources.loans.records.length > 0;
-
   render() {
     const {
+      checkPolicy,
       resources,
       mutator,
       intl: {
@@ -127,14 +87,14 @@ class LoanPolicySettings extends React.Component {
         nameKey="name"
         resourceKey="loanPolicies"
         entryList={entryList}
-        isEntryInUse={this.isPolicyInUse}
+        isEntryInUse={checkPolicy}
         parentMutator={mutator}
         permissions={permissions}
         parentResources={resources}
         prohibitItemDelete={{
-          close: <FormattedMessage id="ui-circulation.settings.common.close" />,
-          label: <FormattedMessage id="ui-circulation.settings.loanPolicy.denyDelete.header" />,
-          message: <FormattedMessage id="ui-circulation.settings.policy.denyDelete.body" />,
+          close: <FormattedMessage id={this.props.closeText} />,
+          label: <FormattedMessage id={this.props.labelText} />,
+          message: <FormattedMessage id={this.props.messageText} />,
         }}
         detailComponent={LoanPolicyDetail}
         enableDetailsActionMenu
@@ -148,4 +108,4 @@ class LoanPolicySettings extends React.Component {
   }
 }
 
-export default stripesConnect(injectIntl(LoanPolicySettings));
+export default stripesConnect(injectIntl(withPreventDelete(LoanPolicySettings, 'loanPolicy')));
