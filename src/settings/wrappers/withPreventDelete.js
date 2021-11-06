@@ -58,16 +58,12 @@ const withPreventDelete = (WrappedComponent, policyType) => class withPreventDel
    * of `selectedPolicyId`, a local resource that should be set before
    * calling this function.
    */
-  isPolicyInUse = () => {
-    console.log("calling the thing", this.props.resources.loans)
-    return this.props.resources.loans.isLoading || this.props.resources.loans.records.length > 0
-  };
+  isPolicyInUse = () => this.props.resources.loans.isLoading || this.props.resources.loans.records.length > 0;
 
   render() {
     return (
       <WrappedComponent
         {...this.props}
-        doit={this.doIt}
         checkPolicy={this.isPolicyInUse}
         updatePolicy={this.updateSelectedPolicy}
         closeText="ui-circulation.settings.common.close"
