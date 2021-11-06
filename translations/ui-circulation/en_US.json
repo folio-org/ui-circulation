@@ -364,7 +364,7 @@
     "settings.lostItemFee.editLabel": "Edit - {name}",
     "settings.lostItemFee.late": "late",
     "settings.lostItemFee.deleteFeePolicy": "Delete lost item fee policy",
-    "settings.lostItemFee.denyDelete.header": "Cannot delete lost item fee policy",
+    "settings.lostItemPolicy.denyDelete.header": "Cannot delete lost item fee policy",
     "settings.circulationRules.overdueFinePolicies": "Overdue fine policies",
     "settings.loanPolicy.itemLimit": "Item limit",
     "settings.validate.itemLimitInterval": "Item limit must be > 0, =< 9999 or blank",

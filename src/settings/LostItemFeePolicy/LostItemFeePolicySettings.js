@@ -18,10 +18,10 @@ import LostItemFeePolicyForm from './LostItemFeePolicyForm';
 import LostItemFeePolicy from '../Models/LostItemFeePolicy';
 import normalize from './utils/normalize';
 import { MAX_UNPAGED_RESOURCE_COUNT } from '../../constants';
+import withPreventDelete from '../wrappers/withPreventDelete';
 
 class LostItemFeePolicySettings extends React.Component {
   static manifest = Object.freeze({
-    selectedPolicyId: {},
     lostItemFeePolicies: {
       type: 'okapi',
       records: 'lostItemFeePolicies',
@@ -31,14 +31,6 @@ class LostItemFeePolicySettings extends React.Component {
         limit: (q, p, r, l, props) => props?.stripes?.config?.maxUnpagedResourceCount || MAX_UNPAGED_RESOURCE_COUNT,
       },
       throwErrors: false,
-    },
-    loans: {
-      type: 'okapi',
-      records: 'loans',
-      path: 'circulation/loans',
-      params: {
-        query: 'status.name==Open and lostItemPolicyId==%{selectedPolicyId}',
-      },
     },
   });
 
@@ -53,34 +45,8 @@ class LostItemFeePolicySettings extends React.Component {
         PUT: PropTypes.func.isRequired,
         DELETE: PropTypes.func.isRequired,
       }),
-      selectedPolicyId: PropTypes.shape({
-        replace: PropTypes.func.isRequired,
-      }),
     }).isRequired,
   };
-
-  constructor(props) {
-    super(props);
-
-    this.updateSelectedPolicy = this.updateSelectedPolicy.bind(this);
-    this.updateSelectedPolicy();
-  }
-
-  componentDidUpdate(prevProps) {
-    if (prevProps.location.pathname !== this.props.location.pathname) {
-      this.updateSelectedPolicy();
-    }
-  }
-
-  updateSelectedPolicy() {
-    const {
-      location,
-      mutator,
-    } = this.props;
-
-    const path = location.pathname;
-    mutator.selectedPolicyId.replace(path.substring(path.lastIndexOf('/') + 1));
-  }
 
   parseInitialValues = (init = {}) => {
     const policy = { ...init };
@@ -113,19 +79,9 @@ class LostItemFeePolicySettings extends React.Component {
     return policy;
   };
 
-  /**
-   * This function is used as a prop for <EntryManager> to determine
-   * whether or not a policy can be deleted -- i.e., whether or not
-   * there are any active loans that are using it.
-   *
-   * The loans resource query returns open loan records with a loanPolicyId
-   * of `selectedPolicyId`, a local resource that should be set before
-   * calling this function.
-   */
-  isPolicyInUse = () => this.props.resources.loans.isLoading || this.props.resources.loans.records.length > 0;
-
   render() {
     const {
+      checkPolicy,
       resources,
       mutator,
       intl: { formatMessage },
@@ -145,19 +101,19 @@ class LostItemFeePolicySettings extends React.Component {
         nameKey="name"
         resourceKey="lostItemFeePolicies"
         entryList={entryList}
+        isEntryInUse={checkPolicy}
         parentMutator={mutator}
         permissions={permissions}
         parseInitialValues={this.parseInitialValues}
         parentResources={resources}
         prohibitItemDelete={{
-          close: <FormattedMessage id="ui-circulation.settings.common.close" />,
-          label: <FormattedMessage id="ui-circulation.settings.lostItemFee.denyDelete.header" />,
-          message: <FormattedMessage id="ui-circulation.settings.policy.denyDelete.body" />,
+          close: <FormattedMessage id={this.props.closeText} />,
+          label: <FormattedMessage id={this.props.labelText} />,
+          message: <FormattedMessage id={this.props.messageText} />,
         }}
         detailComponent={LostItemFeePolicyDetail}
         enableDetailsActionMenu
         entryFormComponent={LostItemFeePolicyForm}
-        isEntryInUse={this.isPolicyInUse}
         paneTitle={<FormattedMessage id="ui-circulation.settings.lostItemFee.paneTitle" />}
         entryLabel={formatMessage({ id: 'ui-circulation.settings.lostItemFee.entryLabel' })}
         defaultEntry={LostItemFeePolicy.defaultLostItemFeePolicy()}
@@ -167,4 +123,4 @@ class LostItemFeePolicySettings extends React.Component {
   }
 }
 
-export default stripesConnect(injectIntl(LostItemFeePolicySettings));
+export default stripesConnect(injectIntl(withPreventDelete(LostItemFeePolicySettings, 'lostItemPolicy')));
