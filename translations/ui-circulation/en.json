@@ -305,7 +305,7 @@
   "settings.titleLevelRequests.desription": "Select templates for the following patron notices. If no template is selected, no notice will be sent.",
   "settings.titleLevelRequests.defaultTemplateValue": "Select notice",
   "settings.titleLevelRequests.forbiddenDisableTlrModal.title": "Cannot change \"Allow title level requests\"",
-  "settings.titleLevelRequests.forbiddenDisableTlrModal.description": "\"Allow title requests\" cannot be changed because it is in use by one or more requests",
+  "settings.titleLevelRequests.forbiddenDisableTlrModal.description": "\"Allow title level requests\" cannot be changed because it is in use by one or more requests",
 
   "settings.noticePolicy.addNotice": "Add notice",
   "settings.noticePolicy.countableNotice": "Notice {counter}",
