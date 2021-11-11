@@ -280,12 +280,11 @@
   "scripts": {
     "start": "stripes serve",
     "lint": "eslint .",
-    "test": "yarn run test:jest",
+    "test": "yarn run test:jest && yarn run test:bigtest",
     "test:bigtest": "stripes test karma",
     "test:jest": "jest --ci --coverage --colors",
     "build-mod-descriptor": "stripes mod descriptor --full --strict | jq '.[]' > module-descriptor.json ",
     "formatjs-compile": "formatjs compile-folder --ast --format simple ./translations/ui-circulation ./translations/ui-circulation/compiled"
-
   },
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.13.0",

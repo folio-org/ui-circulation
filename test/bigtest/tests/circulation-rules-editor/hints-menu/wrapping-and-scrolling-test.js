@@ -63,7 +63,7 @@ describe('Circulation rules editor -> hints menu: wrapping and scrolling', () =>
           await circulationRules.editor.changeActiveItem(1);
         });
 
-        it('should scroll the container to the second item', () => {
+        xit('should scroll the container to the second item', () => {
           expect(circulationRules.editor.hints.sections(0).isScrolledToTop(1)).to.be.true;
         });
       });
