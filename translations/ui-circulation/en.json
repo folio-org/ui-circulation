@@ -458,6 +458,7 @@
 
   "permission.settings.cancellation-reasons": "Settings (Circ): Can create, edit and remove cancellation reasons",
   "permission.settings.loan-history": "Settings (Circ): Can view loan history",
+  "permission.settings.view-loan-policies": "Settings (Circ): Can view loan policies",
   "permission.settings.loan-policies": "Settings (Circ): Can create, edit and remove loan policies",
   "permission.settings.notice-policies": "Settings (Circ): Can create, edit and remove notice policies",
   "permission.settings.circulation-rules": "Settings (Circ): Can create, edit and remove circulation rules",

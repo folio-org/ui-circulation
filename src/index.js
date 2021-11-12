@@ -69,7 +69,7 @@ class Circulation extends Component {
             route: 'loan-policies',
             label: <FormattedMessage id="ui-circulation.settings.index.loanPolicies" />,
             component: LoanPolicySettings,
-            perm: 'ui-circulation.settings.loan-policies',
+            perm: 'ui-circulation.settings.view-loan-policies',
           },
         ],
       },

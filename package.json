@@ -73,20 +73,28 @@
         "visible": true
       },
       {
-        "permissionName": "ui-circulation.settings.loan-policies",
-        "displayName": "Settings (Circ): Can create, edit and remove loan policies",
+        "permissionName": "ui-circulation.settings.view-loan-policies",
+        "displayName": "Settings (Circ): Can view loan policies",
         "subPermissions": [
           "circulation-storage.loan-policies.collection.get",
           "circulation-storage.loan-policies.item.get",
-          "circulation-storage.loan-policies.item.post",
-          "circulation-storage.loan-policies.item.put",
-          "circulation-storage.loan-policies.item.delete",
-          "circulation-storage.loan-policies.collection.delete",
           "circulation-storage.fixed-due-date-schedules.collection.get",
           "circulation-storage.fixed-due-date-schedules.item.get",
           "users.collection.get",
           "users.item.get",
           "settings.circulation.enabled"
+        ],
+        "visible": true
+      },
+      {
+        "permissionName": "ui-circulation.settings.loan-policies",
+        "displayName": "Settings (Circ): Can create, edit and remove loan policies",
+        "subPermissions": [
+          "ui-circulation.settings.view-loan-policies",
+          "circulation-storage.loan-policies.item.post",
+          "circulation-storage.loan-policies.item.put",
+          "circulation-storage.loan-policies.item.delete",
+          "circulation-storage.loan-policies.collection.delete"
         ],
         "visible": true
       },
