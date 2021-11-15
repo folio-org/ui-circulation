@@ -11,7 +11,10 @@ import RequestPolicyForm from './RequestPolicyForm';
 import RequestPolicy from '../Models/RequestPolicy';
 import normalize from './utils/normalize';
 
-import { requestPolicyTypes } from '../../constants';
+import {
+  requestPolicyTypes,
+  MAX_UNPAGED_RESOURCE_COUNT,
+} from '../../constants';
 
 class RequestPolicySettings extends React.Component {
   static manifest = Object.freeze({
@@ -21,7 +24,7 @@ class RequestPolicySettings extends React.Component {
       path: 'request-policy-storage/request-policies',
       params: {
         query: 'cql.allRecords=1',
-        limit: '1000',
+        limit: MAX_UNPAGED_RESOURCE_COUNT,
       },
     },
     circulationRules: {

@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import {
   sortBy,
   get,
-  reduce
+  reduce,
 } from 'lodash';
 
 import { EntryManager } from '@folio/stripes/smart-components';
@@ -47,8 +47,8 @@ class PatronNotices extends React.Component {
       params: {
         query: 'cql.allRecords=1 AND category=""',
       },
-      recordsRequired: 1000,
-      perRequest: 1000,
+      recordsRequired: MAX_UNPAGED_RESOURCE_COUNT,
+      perRequest: MAX_UNPAGED_RESOURCE_COUNT,
     },
     patronNoticePolicies: {
       type: 'okapi',

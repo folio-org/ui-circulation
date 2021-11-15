@@ -19,6 +19,8 @@ import NoticePolicyForm from './NoticePolicyForm';
 import normalize from './utils/normalize';
 import { NoticePolicy } from '../Models/NoticePolicy';
 
+import { MAX_UNPAGED_RESOURCE_COUNT } from '../../constants';
+
 class NoticePolicySettings extends React.Component {
   static manifest = Object.freeze({
     patronNoticePolicies: {
@@ -28,7 +30,7 @@ class NoticePolicySettings extends React.Component {
       throwErrors: false,
       params: {
         query: 'cql.allRecords=1',
-        limit: '1000',
+        limit: MAX_UNPAGED_RESOURCE_COUNT,
       },
     },
     templates: {
@@ -37,7 +39,7 @@ class NoticePolicySettings extends React.Component {
       path: 'templates',
       params: {
         query: 'cql.allRecords=1 AND category=""',
-        limit: '1000',
+        limit: MAX_UNPAGED_RESOURCE_COUNT,
       },
     },
     circulationRules: {
