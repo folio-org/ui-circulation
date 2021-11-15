@@ -4,24 +4,25 @@ import {
   screen,
 } from '@testing-library/react';
 
-import { StripesContext } from '@folio/stripes-core/src/StripesContext';
 import '../../../test/jest/__mock__';
-import {
-  useStripes,
-} from '@folio/stripes/core';
 
 import withPreventDelete from './withPreventDelete';
 
-const stripes = useStripes();
-const mockComponent = ({ location, closeText, mutator, resources }) => <span>{closeText}</span>
-
-jest.mock('stripes-config', () => (
-  {
-    modules: [],
-    metadata: {},
-  }
-),
-{ virtual: true });
+const mockComponent = ({
+  checkPolicy,
+  closeText,
+  labelText,
+  messageText,
+}) => (
+  <>
+    <span>{closeText}</span>
+    <span>{labelText}</span>
+    <span>{messageText}</span>
+    {checkPolicy() &&
+      <span>Policy is in use!</span>
+    }
+  </>
+);
 
 const mutator = {
   selectedPolicyId: {
@@ -29,38 +30,48 @@ const mutator = {
   }
 }
 
-const resources = {}
-
 const props = {
   location: {
     pathname: 'policies'
   },
   mutator,
-  resources,
- // stripes: buildStripes({ hasPerm: () => true }),
+  resources: {
+    loans: {
+      isLoading: false,
+      records: []
+    }
+  }
 }
 
 const WrappedComponent = withPreventDelete(mockComponent, 'test');
-console.log("TESTING TESTING", typeof(WrappedComponent))
-const renderWithPreventDelete = (props) => render(<WrappedComponent {...props} />)
+const renderWithPreventDelete = (extraProps = {}) => render(<WrappedComponent {...props} {...extraProps} />)
 
 describe('withPreventDelete', () => {
-  // let component = mockComponent()
-  // beforeEach(() => {
-  //   const stripes = useStripes();
-  //   return render(
-  //     <StripesContext.Provider value={stripes}>
-  //       {withPreventDelete(mockComponent('test'))}
-  //     </StripesContext.Provider>
-  //   )
-  // });
-
-  it('', () => {
-    expect(true).toBe(true)
+  it('passes in props', () => {
+    renderWithPreventDelete();
+    expect(screen.getByText('ui-circulation.settings.common.close')).toBeInTheDocument();
+    expect(screen.getByText('ui-circulation.settings.test.denyDelete.header')).toBeInTheDocument();
+    expect(screen.getByText('ui-circulation.settings.policy.denyDelete.body')).toBeInTheDocument();
   });
 
-  it('passes in props', () => {
-    renderWithPreventDelete(props);
-    expect(screen.getByText('ui-circulation.settings.common.close')).toBeInTheDocument()
+  describe('Checking policy in use', () => {
+    it('says a policy is in use if there are loan records', () => {
+      const overrideResources = {
+        resources: {
+          loans: {
+            isLoading: false,
+            records: ['a', 'b']
+          }
+        }
+      }
+      renderWithPreventDelete(overrideResources);
+      expect(screen.getByText('Policy is in use!')).toBeInTheDocument();
+    })
+
+    it('does not say policy is in use if there are no records', () => {
+      renderWithPreventDelete();
+      const policyText = screen.queryByText('Policy is in use!');
+      expect(policyText).toBeNull();
+    })
   })
 });
