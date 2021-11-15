@@ -1,8 +1,9 @@
 import React from 'react';
 import {
- render,
+  render,
   screen,
 } from '@testing-library/react';
+import PropTypes from 'prop-types';
 
 import '../../../test/jest/__mock__';
 
@@ -24,11 +25,18 @@ const mockComponent = ({
   </>
 );
 
+mockComponent.propTypes = {
+  checkPolicy: PropTypes.func.isRequired,
+  closeText: PropTypes.string.isRequired,
+  labelText: PropTypes.string.isRequired,
+  messageText: PropTypes.string.isRequired,
+};
+
 const mutator = {
   selectedPolicyId: {
     replace: jest.fn(),
   }
-}
+};
 
 const props = {
   location: {
@@ -41,10 +49,10 @@ const props = {
       records: []
     }
   }
-}
+};
 
 const WrappedComponent = withPreventDelete(mockComponent, 'test');
-const renderWithPreventDelete = (extraProps = {}) => render(<WrappedComponent {...props} {...extraProps} />)
+const renderWithPreventDelete = (extraProps = {}) => render(<WrappedComponent {...props} {...extraProps} />);
 
 describe('withPreventDelete', () => {
   it('passes in props', () => {
@@ -63,15 +71,15 @@ describe('withPreventDelete', () => {
             records: ['a', 'b']
           }
         }
-      }
+      };
       renderWithPreventDelete(overrideResources);
       expect(screen.getByText('Policy is in use!')).toBeInTheDocument();
-    })
+    });
 
     it('does not say policy is in use if there are no records', () => {
       renderWithPreventDelete();
       const policyText = screen.queryByText('Policy is in use!');
       expect(policyText).toBeNull();
-    })
-  })
+    });
+  });
 });
