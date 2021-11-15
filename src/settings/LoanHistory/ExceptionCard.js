@@ -81,7 +81,7 @@ class ExceptionCard extends Component {
         data-test-exception-card
       >
         <Col xs={12}>
-          <Row>
+          <Row data-testid="paymentMethod">
             <p className={css.exceptionCardHeader}>
               <FormattedMessage id="ui-circulation.settings.loanHistory.paymentMethodLabel" />
             </p>
@@ -99,6 +99,7 @@ class ExceptionCard extends Component {
             </Col>
             <Col xs={1}>
               <IconButton
+                data-testid="removeButton"
                 icon="trash"
                 data-test-remove-exception-icon
                 onClick={this.onRemove}
