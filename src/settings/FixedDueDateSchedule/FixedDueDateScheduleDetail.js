@@ -63,16 +63,19 @@ class FixedDueDateScheduleDetail extends React.Component {
         <Row end="xs">
           <Col xs>
             <ExpandAllButton
+              data-testid="expandAllButton"
               accordionStatus={sections}
               onToggle={this.handleExpandAll}
             />
           </Col>
         </Row>
         <AccordionSet
+          data-testid="accordionSet"
           accordionStatus={sections}
           onToggle={this.handleSectionToggle}
         >
           <Accordion
+            data-testid="generalFixedDueDateScheduleDetail"
             id="generalFixedDueDateScheduleDetail"
             open={sections.generalFixedDueDateScheduleDetail}
             label={<FormattedMessage id="ui-circulation.settings.fDDSform.about" />}
@@ -99,6 +102,7 @@ class FixedDueDateScheduleDetail extends React.Component {
             </section>
           </Accordion>
           <Accordion
+            data-testid="fixedDueDateSchedule"
             id="fixedDueDateSchedule"
             label={<FormattedMessage id="ui-circulation.settings.fDDSform.schedule" />}
             open={sections.fixedDueDateSchedule}
