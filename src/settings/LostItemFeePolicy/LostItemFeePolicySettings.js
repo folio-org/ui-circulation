@@ -18,6 +18,7 @@ import LostItemFeePolicyForm from './LostItemFeePolicyForm';
 import LostItemFeePolicy from '../Models/LostItemFeePolicy';
 import normalize from './utils/normalize';
 import { MAX_UNPAGED_RESOURCE_COUNT } from '../../constants';
+import withPreventDelete from '../wrappers/withPreventDelete';
 
 class LostItemFeePolicySettings extends React.Component {
   static manifest = Object.freeze({
@@ -34,7 +35,11 @@ class LostItemFeePolicySettings extends React.Component {
   });
 
   static propTypes = {
+    checkPolicy: PropTypes.func.isRequired,
+    closeText: PropTypes.string.isRequired,
     intl: PropTypes.object,
+    labelText: PropTypes.string.isRequired,
+    messageText: PropTypes.string.isRequired,
     resources: PropTypes.shape({
       lostItemFeePolicies: PropTypes.object,
     }).isRequired,
@@ -80,6 +85,7 @@ class LostItemFeePolicySettings extends React.Component {
 
   render() {
     const {
+      checkPolicy,
       resources,
       mutator,
       intl: { formatMessage },
@@ -99,10 +105,16 @@ class LostItemFeePolicySettings extends React.Component {
         nameKey="name"
         resourceKey="lostItemFeePolicies"
         entryList={entryList}
+        isEntryInUse={checkPolicy}
         parentMutator={mutator}
         permissions={permissions}
         parseInitialValues={this.parseInitialValues}
         parentResources={resources}
+        prohibitItemDelete={{
+          close: <FormattedMessage id={this.props.closeText} />,
+          label: <FormattedMessage id={this.props.labelText} />,
+          message: <FormattedMessage id={this.props.messageText} />,
+        }}
         detailComponent={LostItemFeePolicyDetail}
         enableDetailsActionMenu
         entryFormComponent={LostItemFeePolicyForm}
@@ -115,4 +127,4 @@ class LostItemFeePolicySettings extends React.Component {
   }
 }
 
-export default stripesConnect(injectIntl(LostItemFeePolicySettings));
+export default stripesConnect(injectIntl(withPreventDelete(LostItemFeePolicySettings, 'lostItemPolicy')));

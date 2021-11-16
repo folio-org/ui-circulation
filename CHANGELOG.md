@@ -18,6 +18,7 @@
 * Add possible for resizing panel in circulation rules editor. Refs UICIRC-709.
 * Use constants instead of hardcoded value for query limits. Refs UICIRC-724.
 * Provide read-only access to loan policies. Refs UICIRC-693.
+* Prevent deletion of policies if they're in use. Refs UICIRC-669.
 
 ## [6.0.0] (https://github.com/folio-org/ui-circulation/tree/v6.0.0) (2021-09-30)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v5.1.1...v6.0.0)
