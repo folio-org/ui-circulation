@@ -49,7 +49,6 @@ const withPreventDelete = (WrappedComponent, policyType) => class withPreventDel
   constructor(props) {
     super(props);
 
-    this.updateSelectedPolicy = this.updateSelectedPolicy.bind(this);
     this.updateSelectedPolicy();
   }
 
@@ -59,7 +58,7 @@ const withPreventDelete = (WrappedComponent, policyType) => class withPreventDel
     }
   }
 
-  updateSelectedPolicy() {
+  updateSelectedPolicy = () => {
     const {
       location,
       mutator,
