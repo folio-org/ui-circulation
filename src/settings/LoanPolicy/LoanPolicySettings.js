@@ -14,6 +14,7 @@ import LoanPolicyForm from './LoanPolicyForm';
 import LoanPolicy from '../Models/LoanPolicy';
 import { normalize } from './utils/normalize';
 import { MAX_UNPAGED_RESOURCE_COUNT } from '../../constants';
+import withPreventDelete from '../wrappers/withPreventDelete';
 
 class LoanPolicySettings extends React.Component {
   static manifest = Object.freeze({
@@ -39,7 +40,12 @@ class LoanPolicySettings extends React.Component {
   });
 
   static propTypes = {
-    intl: PropTypes.object.isRequired,
+    checkPolicy: PropTypes.func.isRequired,
+    closeText: PropTypes.string.isRequired,
+    intl: PropTypes.object,
+    labelText: PropTypes.string.isRequired,
+    messageText: PropTypes.string.isRequired,
+    location: PropTypes.object.isRequired,
     resources: PropTypes.shape({
       loanPolicies: PropTypes.object,
       fixedDueDateSchedules: PropTypes.object,
@@ -51,10 +57,18 @@ class LoanPolicySettings extends React.Component {
         DELETE: PropTypes.func.isRequired,
       }),
     }).isRequired,
+    stripes: PropTypes.object.isRequired,
   };
+
+  constructor(props) {
+    super(props);
+
+    this.logger = props.stripes.logger;
+  }
 
   render() {
     const {
+      checkPolicy,
       resources,
       mutator,
       intl: {
@@ -76,9 +90,15 @@ class LoanPolicySettings extends React.Component {
         nameKey="name"
         resourceKey="loanPolicies"
         entryList={entryList}
+        isEntryInUse={checkPolicy}
         parentMutator={mutator}
         permissions={permissions}
         parentResources={resources}
+        prohibitItemDelete={{
+          close: <FormattedMessage id={this.props.closeText} />,
+          label: <FormattedMessage id={this.props.labelText} />,
+          message: <FormattedMessage id={this.props.messageText} />,
+        }}
         detailComponent={LoanPolicyDetail}
         enableDetailsActionMenu
         entryFormComponent={LoanPolicyForm}
@@ -91,4 +111,4 @@ class LoanPolicySettings extends React.Component {
   }
 }
 
-export default stripesConnect(injectIntl(LoanPolicySettings));
+export default stripesConnect(injectIntl(withPreventDelete(LoanPolicySettings, 'loanPolicy')));

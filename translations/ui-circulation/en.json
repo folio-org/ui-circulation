@@ -68,6 +68,8 @@
   "settings.loanPolicy.longTermLoan.endOfThePreviousOpenDay": "Move to the end of the previous open day",
   "settings.loanPolicy.longTermLoan.endOfTheNextOpenDay": "Move to the end of the next open day",
   "settings.loanPolicy.itemLimit": "Item limit",
+  "settings.loanPolicy.denyDelete.header": "Cannot delete Loan policy",
+  "settings.policy.denyDelete.body": "This policy cannot be deleted, as it is in use by one or more records.",
 
   "settings.circulationRules.paneTitle": "Circulation rules editor",
   "settings.circulationRules.label": "Rules",
@@ -408,6 +410,7 @@
   "settings.finePolicy.validate.hasOverdueRecallFineInterval": "Overdue recall fine must be greater than 0 if interval set",
   "settings.finePolicy.validate.invalidMaximumOverdueFine": "Please enter an overdue fine amount or set maximum overdue fine to 0",
   "settings.finePolicy.validate.invalidMaximumRecallOverdueFine": "Please enter an overdue recall fine amount or set maximum overdue recall fine to 0",
+  "settings.overdueFinePolicy.denyDelete.header": "Cannot delete overdue fine policy",
 
   "settings.lostItemFee.entryLabel": "New lost item fee policy",
   "settings.lostItemFee.paneTitle": "Lost item fee policies",
@@ -463,6 +466,7 @@
   "settings.lostItemFee.validate.chargeAmountItemSystemSelected": "Entry required if 'Charge lost item processing fee if item aged to lost by system' selected",
   "settings.lostItemFee.validate.emptyAmount": "Please enter amount",
   "settings.lostItemFee.validate.hasPositiveItemsAgedToLostAfterOverdueAmount": "'Set cost' must be > 0 OR 'Charge lost item processing fee if item aged to lost by system?' must be 'Yes' if 'Items aged to lost after overdue' is > 0 or 'Recalled items aged to lost after overdue' is > 0",
+  "settings.lostItemPolicy.denyDelete.header": "Cannot delete lost item fee policy",
 
   "settings.noticePolicy.feeFineNotices.returned": "Overdue fine, returned",
   "settings.noticePolicy.feeFineNotices.renewed": "Overdue fine, renewed",
@@ -471,6 +475,7 @@
 
   "permission.settings.cancellation-reasons": "Settings (Circ): Can create, edit and remove cancellation reasons",
   "permission.settings.loan-history": "Settings (Circ): Can view loan history",
+  "permission.settings.view-loan-policies": "Settings (Circ): Can view loan policies",
   "permission.settings.loan-policies": "Settings (Circ): Can create, edit and remove loan policies",
   "permission.settings.notice-policies": "Settings (Circ): Can create, edit and remove notice policies",
   "permission.settings.circulation-rules": "Settings (Circ): Can create, edit and remove circulation rules",

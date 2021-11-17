@@ -14,6 +14,7 @@ import FinePolicyDetail from './FinePolicyDetail';
 import FinePolicyForm from './FinePolicyForm';
 import normalize from './utils/normalize';
 import { MAX_UNPAGED_RESOURCE_COUNT } from '../../constants';
+import withPreventDelete from '../wrappers/withPreventDelete';
 
 class FinePolicySettings extends React.Component {
   static manifest = Object.freeze({
@@ -27,11 +28,14 @@ class FinePolicySettings extends React.Component {
       },
       throwErrors: false,
     },
-
   });
 
   static propTypes = {
+    checkPolicy: PropTypes.func.isRequired,
+    closeText: PropTypes.string.isRequired,
     intl: PropTypes.object,
+    labelText: PropTypes.string.isRequired,
+    messageText: PropTypes.string.isRequired,
     resources: PropTypes.shape({
       finePolicies: PropTypes.object,
       fixedDueDateSchedules: PropTypes.object,
@@ -61,6 +65,7 @@ class FinePolicySettings extends React.Component {
 
   render() {
     const {
+      checkPolicy,
       resources,
       mutator,
       intl: {
@@ -82,10 +87,16 @@ class FinePolicySettings extends React.Component {
         nameKey="name"
         resourceKey="finePolicies"
         entryList={entryList}
+        isEntryInUse={checkPolicy}
         parentMutator={mutator}
         permissions={permissions}
         parseInitialValues={this.parseInitialValues}
         parentResources={resources}
+        prohibitItemDelete={{
+          close: <FormattedMessage id={this.props.closeText} />,
+          label: <FormattedMessage id={this.props.labelText} />,
+          message: <FormattedMessage id={this.props.messageText} />,
+        }}
         detailComponent={FinePolicyDetail}
         enableDetailsActionMenu
         entryFormComponent={FinePolicyForm}
@@ -98,4 +109,4 @@ class FinePolicySettings extends React.Component {
   }
 }
 
-export default stripesConnect(injectIntl(FinePolicySettings));
+export default stripesConnect(injectIntl(withPreventDelete(FinePolicySettings, 'overdueFinePolicy')));
