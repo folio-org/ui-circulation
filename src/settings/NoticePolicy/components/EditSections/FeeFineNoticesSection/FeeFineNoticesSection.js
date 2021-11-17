@@ -12,6 +12,10 @@ import {
   uponAndAfterSendEvents,
 } from '../../../../../constants';
 
+export const getSendEvents = () => {
+  return uponAndAfterSendEvents;
+};
+
 class FeeFineNoticesSection extends React.Component {
   static propTypes = {
     isOpen: PropTypes.bool.isRequired,
@@ -21,10 +25,6 @@ class FeeFineNoticesSection extends React.Component {
       label: PropTypes.string.isRequired,
     })).isRequired,
   };
-
-  getSendEvents = () => {
-    return uponAndAfterSendEvents;
-  }
 
   render() {
     const {
@@ -44,7 +44,7 @@ class FeeFineNoticesSection extends React.Component {
           sectionKey="feeFineNotices"
           component={NoticesList}
           policy={policy}
-          getSendEvents={this.getSendEvents}
+          getSendEvents={getSendEvents}
           sendEventTriggeringIds={values(timeBasedFeeFineEventsIds)}
           templates={templates}
           triggeringEvents={feeFineNoticesTriggeringEvents}
