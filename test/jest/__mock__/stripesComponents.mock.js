@@ -36,6 +36,16 @@ jest.mock('@folio/stripes/components', () => ({
   Checkbox: jest.fn(() => <input type="checkbox" />),
   Col: jest.fn(({ children, ...rest }) => <div {...rest}>{children}</div>),
   Datepicker: jest.fn((props) => <div {...props} />),
+  ExpandAllButton: jest.fn(({ onToggle, ...rest }) => (
+    // eslint-disable-next-line jsx-a11y/control-has-associated-label
+    <button
+      onClick={onToggle}
+      type="button"
+      {...rest}
+    >
+      Toggle accordion state
+    </button>
+  )),
   Headline: jest.fn(({ children, ...rest }) => <div {...rest}>{children}</div>),
   Icon: jest.fn((props) => (props && props.children ? props.children : <span />)),
   IconButton: jest.fn(({

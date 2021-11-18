@@ -5,6 +5,16 @@ const buildStripes = (otherProperties = {}) => ({
   hasInterface: noop,
   clone: noop,
   logger: { log: noop },
+  store: {
+    getState: noop,
+    dispatch: noop,
+    subscirbe: noop,
+    replaceReducer: noop,
+  },
+  epics: {
+    add: noop,
+    middleware: noop,
+  },
   config: {},
   okapi: {
     url: '',
@@ -19,7 +29,12 @@ const buildStripes = (otherProperties = {}) => ({
   setCurrency: noop,
   setSinglePlugin: noop,
   setBindings: noop,
-  connect: noop,
+  user: {
+    id: 'userTestId',
+    username: 'diku_admin',
+  },
+  connect: jest.fn((component) => component),
+  timezone: 'testTimeZone',
   ...otherProperties,
 });
 
