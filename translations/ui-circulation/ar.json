@@ -461,5 +461,10 @@
     "settings.titleLevelRequests.desription": "حدد قوالب لإخطارات المستفيد التالية. إذا لم يتم تحديد أي قالب، فلن يتم إرسال أي إخطار.",
     "settings.titleLevelRequests.defaultTemplateValue": "حدد إخطار",
     "settings.titleLevelRequests.forbiddenDisableTlrModal.title": "لا يمكن تغيير \"السماح بالطلبات على مستوى العنوان\"",
-    "settings.titleLevelRequests.forbiddenDisableTlrModal.description": "لا يمكن تغيير \"السماح بطلبات على مستوى العنوان\" لأنه قيد الاستخدام بواسطة طلب أو أكثر"
+    "settings.titleLevelRequests.forbiddenDisableTlrModal.description": "لا يمكن تغيير \"السماح بطلبات على مستوى العنوان\" لأنه قيد الاستخدام بواسطة طلب أو أكثر",
+    "permission.settings.view-loan-policies": "الإعدادات (الإعارة): إمكانية عرض سياسات الإعارة",
+    "settings.loanPolicy.denyDelete.header": "لا يمكن حذف سياسة الإعارة",
+    "settings.policy.denyDelete.body": "لا يمكن حذف هذه السياسة، حيث أنها قيد استخدام تسجيلة أو أكثر.",
+    "settings.overdueFinePolicy.denyDelete.header": "لا يمكن حذف سياسة رسوم التأخير",
+    "settings.lostItemPolicy.denyDelete.header": "لا يمكن حذف سياسة رسوم المادة الضائعة"
 }

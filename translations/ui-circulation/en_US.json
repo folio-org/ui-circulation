@@ -30,8 +30,6 @@
     "settings.loanPolicy.loanable": "Loanable",
     "settings.loanPolicy.selectInterval": "Select interval",
     "settings.loanPolicy.selectSchedule": "Select schedule",
-    "settings.loanPolicy.denyDelete.header": "Cannot delete Loan policy",
-    "settings.policy.denyDelete.body": "This policy cannot be deleted, as it is in use by one or more records.",
     "settings.validate.fillIn": "Please fill this in to continue",
     "settings.fDDS.validate.overlappingDateRange": "Date range {num1} cannot overlap with date range {num2}",
     "settings.fDDS.validate.uniqueName": "Please enter a unique name.",
@@ -324,7 +322,6 @@
     "settings.finePolicy.week": "week",
     "settings.finePolicy.month": "month",
     "settings.finePolicy.year": "year",
-    "settings.overdueFinePolicy.denyDelete.header": "Cannot delete overdue fine policy",
     "settings.circulationRules.filterOptionsList": "Filter options list",
     "settings.staffSlips.requestDeliveryAddressTokenHeader": "Request delivery address",
     "settings.noticePolicy.loanNotices.itemRecalled": "Item recalled",
@@ -364,7 +361,6 @@
     "settings.lostItemFee.editLabel": "Edit - {name}",
     "settings.lostItemFee.late": "late",
     "settings.lostItemFee.deleteFeePolicy": "Delete lost item fee policy",
-    "settings.lostItemPolicy.denyDelete.header": "Cannot delete lost item fee policy",
     "settings.circulationRules.overdueFinePolicies": "Overdue fine policies",
     "settings.loanPolicy.itemLimit": "Item limit",
     "settings.validate.itemLimitInterval": "Item limit must be > 0, =< 9999 or blank",
@@ -465,5 +461,10 @@
     "settings.titleLevelRequests.desription": "Select templates for the following patron notices. If no template is selected, no notice will be sent.",
     "settings.titleLevelRequests.defaultTemplateValue": "Select notice",
     "settings.titleLevelRequests.forbiddenDisableTlrModal.title": "Cannot change \"Allow title level requests\"",
-    "settings.titleLevelRequests.forbiddenDisableTlrModal.description": "\"Allow title level requests\" cannot be changed because it is in use by one or more requests"
+    "settings.titleLevelRequests.forbiddenDisableTlrModal.description": "\"Allow title level requests\" cannot be changed because it is in use by one or more requests",
+    "permission.settings.view-loan-policies": "Settings (Circ): Can view loan policies",
+    "settings.loanPolicy.denyDelete.header": "Cannot delete Loan policy",
+    "settings.policy.denyDelete.body": "This policy cannot be deleted, as it is in use by one or more records.",
+    "settings.overdueFinePolicy.denyDelete.header": "Cannot delete overdue fine policy",
+    "settings.lostItemPolicy.denyDelete.header": "Cannot delete lost item fee policy"
 }

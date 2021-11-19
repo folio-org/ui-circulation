@@ -461,5 +461,10 @@
     "settings.titleLevelRequests.desription": "Vorlagen für die folgenden Benachrichtigungen an Benutzende auswählen. Wenn keine Vorlage ausgewählt wird, wird keine Benachrichtigung gesendet.",
     "settings.titleLevelRequests.defaultTemplateValue": "Benachrichtigung auswählen",
     "settings.titleLevelRequests.forbiddenDisableTlrModal.title": "\"Bestandsanfragen auf Titelebene zulassen\" kann nicht verändert werden",
-    "settings.titleLevelRequests.forbiddenDisableTlrModal.description": "\"Bestandsanfragen auf Titelebene zulassen\" kann nicht verändert werden, da es von einer oder mehreren Bestandsanfragen verwendet wird"
+    "settings.titleLevelRequests.forbiddenDisableTlrModal.description": "\"Bestandsanfragen auf Titelebene zulassen\" kann nicht verändert werden, da es von einer oder mehreren Bestandsanfragen verwendet wird",
+    "permission.settings.view-loan-policies": "Settings (Circ): Can view loan policies",
+    "settings.loanPolicy.denyDelete.header": "Cannot delete Loan policy",
+    "settings.policy.denyDelete.body": "This policy cannot be deleted, as it is in use by one or more records.",
+    "settings.overdueFinePolicy.denyDelete.header": "Cannot delete overdue fine policy",
+    "settings.lostItemPolicy.denyDelete.header": "Cannot delete lost item fee policy"
 }
