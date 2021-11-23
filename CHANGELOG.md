@@ -1,6 +1,7 @@
 # Change history for ui-circulation
 
-## IN PROGRESS
+## [6.0.1] (https://github.com/folio-org/ui-circulation/tree/v6.0.1) (2021-11-23)
+[Full Changelog](https://github.com/folio-org/ui-circulation/compare/v6.0.0...v6.0.1)
 
 * Provide read-only access to loan policies. Refs UICIRC-693.
 
