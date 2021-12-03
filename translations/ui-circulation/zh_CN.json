@@ -460,11 +460,11 @@
     "settings.titleLevelRequests.expirationNotice": "到期通知",
     "settings.titleLevelRequests.desription": "为以下读者通知选择模板。如果未选择模板，则不会发送通知。",
     "settings.titleLevelRequests.defaultTemplateValue": "选择通知",
-    "settings.titleLevelRequests.forbiddenDisableTlrModal.title": "Cannot change \"Allow title level requests\"",
-    "settings.titleLevelRequests.forbiddenDisableTlrModal.description": "\"Allow title level requests\" cannot be changed because it is in use by one or more requests",
-    "permission.settings.view-loan-policies": "Settings (Circ): Can view loan policies",
-    "settings.loanPolicy.denyDelete.header": "Cannot delete Loan policy",
-    "settings.policy.denyDelete.body": "This policy cannot be deleted, as it is in use by one or more records.",
-    "settings.overdueFinePolicy.denyDelete.header": "Cannot delete overdue fine policy",
-    "settings.lostItemPolicy.denyDelete.header": "Cannot delete lost item fee policy"
+    "settings.titleLevelRequests.forbiddenDisableTlrModal.title": "无法改变“允许标题/品种级请求”",
+    "settings.titleLevelRequests.forbiddenDisableTlrModal.description": "“允许标题/品种级请求”无法更改，因为正被一个或多个请求使用",
+    "permission.settings.view-loan-policies": "设置（流通）：可以查看借阅政策",
+    "settings.loanPolicy.denyDelete.header": "无法删除借阅政策",
+    "settings.policy.denyDelete.body": "本政策无法删除，因为它正被一条或多条记录使用。",
+    "settings.overdueFinePolicy.denyDelete.header": "无法删除超期罚款政策",
+    "settings.lostItemPolicy.denyDelete.header": "无法删除遗失单件费用政策"
 }
