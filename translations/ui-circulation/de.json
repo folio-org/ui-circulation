@@ -115,7 +115,7 @@
     "settings.patronNotices.predefinedWarning": "Dies ist eine vordefinierte Benachrichtigung und kann nicht gelöscht werden",
     "settings.patronNotices.yes": "Ja",
     "settings.patronNotices.no": "Nein",
-    "settings.loanPolicy.saveAndClose": "Speichern und schließen",
+    "settings.loanPolicy.saveAndClose": "Speichern & schließen",
     "settings.loanPolicy.deleteLoanPolicy": "Ausleihrichtlinie löschen",
     "settings.loanPolicy.createEntryLabel": "Ausleihrichtlinie erstellen",
     "settings.loanPolicy.delete": "Löschen",

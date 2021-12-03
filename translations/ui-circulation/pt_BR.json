@@ -460,7 +460,7 @@
     "settings.titleLevelRequests.expirationNotice": "Aviso de expiração",
     "settings.titleLevelRequests.desription": "Selecione modelos para os seguintes avisos de cliente. Se nenhum modelo for selecionado, nenhum aviso será enviado.",
     "settings.titleLevelRequests.defaultTemplateValue": "Selecione o aviso",
-    "settings.titleLevelRequests.forbiddenDisableTlrModal.title": "Cannot change \"Allow title level requests\"",
+    "settings.titleLevelRequests.forbiddenDisableTlrModal.title": "Não é possível alterar \"Permitir solicitações de nível de título\"",
     "settings.titleLevelRequests.forbiddenDisableTlrModal.description": "\"Allow title level requests\" cannot be changed because it is in use by one or more requests",
     "permission.settings.view-loan-policies": "Settings (Circ): Can view loan policies",
     "settings.loanPolicy.denyDelete.header": "Cannot delete Loan policy",
