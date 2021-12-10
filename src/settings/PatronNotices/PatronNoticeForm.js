@@ -22,7 +22,7 @@ import {
 import stripesFinalForm from '@folio/stripes/final-form';
 import { TemplateEditor } from '@folio/stripes-template-editor';
 
-import tokens from './tokens';
+import getTokens from './tokens';
 import TokensList from './TokensList';
 import { patronNoticeCategories } from '../../constants';
 import {
@@ -145,10 +145,13 @@ class PatronNoticeForm extends React.Component {
     const {
       handleSubmit,
       initialValues,
-      intl: { formatMessage },
+      intl: {
+        formatMessage,
+        locale,
+      },
       form: { getFieldState }
     } = this.props;
-
+    const tokens = getTokens(locale);
     const isActive = initialValues && initialValues.active;
     const category = getFieldState('category')?.value;
 

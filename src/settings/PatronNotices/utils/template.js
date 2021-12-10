@@ -1,4 +1,4 @@
-export function template(str) {
+function template(str) {
   return (o) => {
     return str.replace(/{{([^{}]*)}}/g, (a, b) => {
       const r = o[b];
@@ -7,4 +7,4 @@ export function template(str) {
   };
 }
 
-export default {};
+export default template;
