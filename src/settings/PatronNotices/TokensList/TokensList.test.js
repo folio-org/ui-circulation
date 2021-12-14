@@ -1,5 +1,5 @@
 import React from 'react';
-import { isString } from 'lodash';
+
 import {
   screen,
   render,
@@ -8,8 +8,10 @@ import {
 
 import '../../../../test/jest/__mock__';
 
-import tokensProps from '../tokens';
 import TokensList from './TokensList';
+import getTokensProps from '../tokens';
+
+import { LOCALE_FOR_TESTS } from '../utils/constantsForMoment';
 
 jest.mock('@folio/stripes-template-editor', () => ({
   TokensSection: jest.fn(({
@@ -61,8 +63,10 @@ jest.mock('@folio/stripes-template-editor', () => ({
         )}
       </ul>
     </div>
-  ))
+  )),
 }));
+
+const tokensProps = getTokensProps(LOCALE_FOR_TESTS);
 
 const testTokensSection = (sectionTestId) => {
   describe(`View ${sectionTestId} TokensSection`, () => {
@@ -113,5 +117,3 @@ describe('View TokensList', () => {
     testTokensSection('feeFineAction');
   });
 });
-
-
