@@ -25,7 +25,7 @@
 * Add RTL/Jest testing for `RequestPolicyDetail` component in `src\settings\RequestPolicy`. Refs UICIRC-646.
 * UI fee/fine date/time token previews are hard-coded. Refs UICIRC-480.
 
-## [6.0.0] (https://github.com/folio-org/ui-circulation/tree/v6.0.0) (2021-09-30)
+## [6.0.0](https://github.com/folio-org/ui-circulation/tree/v6.0.0) (2021-09-30)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v5.1.1...v6.0.0)
 
 * Fix a typo in the word Year(s) in the Period interval. Refs UICIRC-662.
@@ -74,12 +74,12 @@
 * Add RTL/Jest testing for `ScheduleCard` component in `FixedDueDateSchedule/components/EditSections/components`. Refs UICIRC-602.
 * Add RTL/Jest testing for `ExceptionsList` component in `settings/LoanHistory`. Refs UICIRC-605.
 
-## [5.1.1] (https://github.com/folio-org/ui-circulation/tree/v5.1.1) (2021-08-06)
+## [5.1.1](https://github.com/folio-org/ui-circulation/tree/v5.1.1) (2021-08-06)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v5.1.0...v5.1.1)
 
 * Fix bug causing incorrect validation in lost item fee policies. Fixes UICIRC-667, UICIRC-668.
 
-## [5.1.0] (https://github.com/folio-org/ui-circulation/tree/v5.1.0) (2021-06-14)
+## [5.1.0](https://github.com/folio-org/ui-circulation/tree/v5.1.0) (2021-06-14)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v5.0.1...v5.1.0)
 
 * Update the .gitignore file. Refs UICIRC-550.
@@ -94,7 +94,7 @@
 * Checked out an item with due date/time in the past. Refs UICIRC-565.
 * Fix failed build on ui-circulation. Fixes UICIRC-657.
 
-## 5.0.1 (https://github.com/folio-org/ui-circulation/tree/v5.0.1) (2021-04-21)
+## [5.0.1](https://github.com/folio-org/ui-circulation/tree/v5.0.1) (2021-04-21)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v5.0.0...v5.0.1)
 * Shown notice template name on notice policy for fees/fines notices (view mode). Refs UICIRC-566.
 
@@ -118,19 +118,19 @@
 * Order of settings when viewing Lost Item Fee Policy not same as new/edit order. Refs UICIRC-531.
 * Update to `stripes-cli v2.0.0`. Refs UICIRC-547.
 
-## 4.0.2 (https://github.com/folio-org/ui-circulation/tree/v4.0.2) (2020-11-24)
+## [4.0.2](https://github.com/folio-org/ui-circulation/tree/v4.0.2) (2020-11-24)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v4.0.1...v4.0.2)
 
 * Incorrect validation blocking user from saving overdue fine policy. Refs UICIRC-533.
 
-## 4.0.1 (https://github.com/folio-org/ui-circulation/tree/v4.0.1) (2020-11-05)
+## [4.0.1](https://github.com/folio-org/ui-circulation/tree/v4.0.1) (2020-11-05)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v4.0.0...v4.0.1)
 
 * Errors with new validation for 'Lost item fee policy' page. Refs UICIRC-512.
 * Unable to enter decimal places on Overdue Fines Policy on Honeysuckle and Snapshot Dev. Refs UICIRC-514.
 * Validation and other issues with patron notice template names. Refs UICIRC-518.
 
-## 4.0.0 (https://github.com/folio-org/ui-circulation/tree/v4.0.0) (2020-10-13)
+## [4.0.0](https://github.com/folio-org/ui-circulation/tree/v4.0.0) (2020-10-13)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v3.0.0...v4.0.0)
 
 * Accessibility work with color contrast. Refs UICIRC-463.
@@ -162,7 +162,7 @@
 * Move Loan history form to react-final-form. Refs UICIRC-444.
 * Modify default values and validation for 'Lost item fee policy. Refs UICIRC-502.
 
-## 3.0.0 (https://github.com/folio-org/ui-circulation/tree/v3.0.0) (2020-06-10)
+## [3.0.0](https://github.com/folio-org/ui-circulation/tree/v3.0.0) (2020-06-10)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v2.0.0...v3.0.0)
 
 * New/Edit Patron notice policy: do not display inactive loan and request notice templates in the dropdown. Refs UICIRC-418.
@@ -176,7 +176,7 @@
 * Fixed Due Date Schedule - Dates on Edit/Create and View out of sync. Refs UICIRC-460.
 * Incorrect footer displaying for circulation settings. Refs UICIRC-469.
 
-## 2.0.0 (https://github.com/folio-org/ui-circulation/tree/v2.0.0) (2020-03-13)
+## [2.0.0](https://github.com/folio-org/ui-circulation/tree/v2.0.0) (2020-03-13)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v1.12.0...v2.0.0)
 
 * Provide two options for barcode tokens on staff slips. Refs UICIRC-393.
