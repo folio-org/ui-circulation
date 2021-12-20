@@ -1,6 +1,8 @@
 import { patronNoticeCategoryIds } from '../../constants';
+import { generatePreviewDateValue } from './utils';
+import { DATE_FORMAT_WITH_TIME } from './utils/constantsForMoment';
 
-const formats = {
+const getTokens = (locale) => ({
   item: [
     {
       token: 'item.title',
@@ -118,22 +120,22 @@ const formats = {
     },
     {
       token: 'request.requestExpirationDate',
-      previewValue: 'Mar 31 30, 2020',
+      previewValue: generatePreviewDateValue(locale),
       allowedFor: [patronNoticeCategoryIds.REQUEST],
     },
     {
       token: 'request.requestExpirationDateTime',
-      previewValue: 'Mar 31, 2020 23:59',
+      previewValue: generatePreviewDateValue(locale, DATE_FORMAT_WITH_TIME),
       allowedFor: [patronNoticeCategoryIds.REQUEST],
     },
     {
       token: 'request.holdShelfExpirationDate',
-      previewValue: 'Jun 30, 2020',
+      previewValue: generatePreviewDateValue(locale),
       allowedFor: [patronNoticeCategoryIds.REQUEST],
     },
     {
       token: 'request.holdShelfExpirationDateTime',
-      previewValue: 'Jun 30, 2020 23:59',
+      previewValue: generatePreviewDateValue(locale, DATE_FORMAT_WITH_TIME),
       allowedFor: [patronNoticeCategoryIds.REQUEST],
     },
     {
@@ -150,7 +152,7 @@ const formats = {
   loan: [
     {
       token: 'loan.dueDate',
-      previewValue: 'Dec 31, 2019',
+      previewValue: generatePreviewDateValue(locale),
       allowedFor: [
         patronNoticeCategoryIds.LOAN,
         patronNoticeCategoryIds.AUTOMATED_FEE_FINE_CHARGE,
@@ -160,7 +162,7 @@ const formats = {
     },
     {
       token: 'loan.dueDateTime',
-      previewValue: 'Dec 31, 2019 22:00',
+      previewValue: generatePreviewDateValue(locale, DATE_FORMAT_WITH_TIME),
       allowedFor: [
         patronNoticeCategoryIds.LOAN,
         patronNoticeCategoryIds.AUTOMATED_FEE_FINE_CHARGE,
@@ -170,7 +172,7 @@ const formats = {
     },
     {
       token: 'loan.initialBorrowDate',
-      previewValue: 'Jan 1, 2019',
+      previewValue: generatePreviewDateValue(locale),
       allowedFor: [
         patronNoticeCategoryIds.LOAN,
         patronNoticeCategoryIds.AUTOMATED_FEE_FINE_CHARGE,
@@ -180,7 +182,7 @@ const formats = {
     },
     {
       token: 'loan.initialBorrowDateTime',
-      previewValue: 'Jan 1, 2019 11:00',
+      previewValue: generatePreviewDateValue(locale, DATE_FORMAT_WITH_TIME),
       allowedFor: [
         patronNoticeCategoryIds.LOAN,
         patronNoticeCategoryIds.AUTOMATED_FEE_FINE_CHARGE,
@@ -190,7 +192,7 @@ const formats = {
     },
     {
       token: 'loan.checkedInDate',
-      previewValue: 'Dec 15, 2019',
+      previewValue: generatePreviewDateValue(locale),
       allowedFor: [
         patronNoticeCategoryIds.LOAN,
         patronNoticeCategoryIds.AUTOMATED_FEE_FINE_CHARGE,
@@ -200,7 +202,7 @@ const formats = {
     },
     {
       token: 'loan.checkedInDateTime',
-      previewValue: 'Dec 15, 2019 13:24',
+      previewValue: generatePreviewDateValue(locale, DATE_FORMAT_WITH_TIME),
       allowedFor: [
         patronNoticeCategoryIds.LOAN,
         patronNoticeCategoryIds.AUTOMATED_FEE_FINE_CHARGE,
@@ -294,7 +296,7 @@ const formats = {
     },
     {
       token: 'feeCharge.chargeDate',
-      previewValue: 'Jun 30, 2020',
+      previewValue: generatePreviewDateValue(locale),
       allowedFor: [
         patronNoticeCategoryIds.FEE_FINE_CHARGE,
         patronNoticeCategoryIds.AUTOMATED_FEE_FINE_CHARGE,
@@ -304,7 +306,7 @@ const formats = {
     },
     {
       token: 'feeCharge.chargeDateTime',
-      previewValue: 'Jun 30, 2020 11:00',
+      previewValue: generatePreviewDateValue(locale, DATE_FORMAT_WITH_TIME),
       allowedFor: [
         patronNoticeCategoryIds.FEE_FINE_CHARGE,
         patronNoticeCategoryIds.AUTOMATED_FEE_FINE_CHARGE,
@@ -352,7 +354,7 @@ const formats = {
     },
     {
       token: 'feeAction.actionDate',
-      previewValue: 'Jul 10, 2020',
+      previewValue: generatePreviewDateValue(locale),
       allowedFor: [
         patronNoticeCategoryIds.FEE_FINE_ACTION,
         patronNoticeCategoryIds.AUTOMATED_FEE_FINE_ADJUSTMENT,
@@ -360,7 +362,7 @@ const formats = {
     },
     {
       token: 'feeAction.actionDateTime',
-      previewValue: 'Jul 10, 2020 8:00',
+      previewValue: generatePreviewDateValue(locale, DATE_FORMAT_WITH_TIME),
       allowedFor: [
         patronNoticeCategoryIds.FEE_FINE_ACTION,
         patronNoticeCategoryIds.AUTOMATED_FEE_FINE_ADJUSTMENT,
@@ -391,6 +393,7 @@ const formats = {
       ],
     },
   ],
-};
+});
 
-export default formats;
+
+export default getTokens;

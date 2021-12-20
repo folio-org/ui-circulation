@@ -14,7 +14,7 @@ import {
 } from '@folio/stripes/components';
 import { PreviewModal, tokensReducer } from '@folio/stripes-template-editor';
 
-import tokens from './tokens';
+import getTokens from './tokens';
 
 class PatronNoticeDetail extends React.Component {
   static propTypes = {
@@ -62,12 +62,17 @@ class PatronNoticeDetail extends React.Component {
   render() {
     const {
       initialValues: notice,
-      intl: { formatMessage },
+      intl: {
+        formatMessage,
+        locale,
+      },
     } = this.props;
     const {
       accordions,
       openPreview,
     } = this.state;
+
+    const tokens = getTokens(locale);
 
     const emailTemplate = get(notice, 'localizedTemplates.en.body', '');
     const parsedEmailTemplate = this.parser.parseWithInstructions(emailTemplate, () => true, this.rules);
