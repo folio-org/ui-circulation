@@ -25,6 +25,7 @@
 * Add RTL/Jest testing for `RequestPolicyDetail` component in `src\settings\RequestPolicy`. Refs UICIRC-646.
 * UI fee/fine date/time token previews are hard-coded. Refs UICIRC-480.
 * Also support `circulation` `12.0`. Refs UICIRC-729.
+* Add RTL/Jest testing for `CheckoutSettings` component in `src/settings/CheckoutSettings`. Refs UICIRC-592.
 
 ## [6.0.0](https://github.com/folio-org/ui-circulation/tree/v6.0.0) (2021-09-30)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v5.1.1...v6.0.0)
