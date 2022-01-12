@@ -404,7 +404,7 @@ export default function config() {
       'module': 'CHECKOUT',
       'configName': 'other_settings',
       'enabled': true,
-      'value': '{"audioAlertsEnabled":false,"prefPatronIdentifier":"","checkoutTimeout":true,"checkoutTimeoutDuration":3}',
+      'value': '{"audioAlertsEnabled":false,"prefPatronIdentifier":"","checkoutTimeout":true,"checkoutTimeoutDuration":3,"wildcardLookupEnabled":false}',
       'metadata': {
         'createdDate' : '2019-05-15T18:42:52.380+0000',
         'createdByUserId' : '40d1bd71-ea7d-5987-be10-128e382bd307',
@@ -422,7 +422,7 @@ export default function config() {
         'module': 'CHECKOUT',
         'configName': 'other_settings',
         'enabled': true,
-        'value': '{"audioAlertsEnabled":false,"prefPatronIdentifier":"barcode,externalSystemId,id,username","checkoutTimeout":true,"checkoutTimeoutDuration":3}',
+        'value': '{"audioAlertsEnabled":false,"prefPatronIdentifier":"barcode,externalSystemId,id,username","checkoutTimeout":true,"checkoutTimeoutDuration":3,"wildcardLookupEnabled":false}',
         'metadata': {
           'createdDate' : '2019-05-15T18:42:52.380+0000',
           'createdByUserId' : '40d1bd71-ea7d-5987-be10-128e382bd307',

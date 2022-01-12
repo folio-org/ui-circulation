@@ -18,6 +18,7 @@ export const DEFAULT_INITIAL_CONFIG = {
   checkoutTimeoutDuration: 3,
   prefPatronIdentifier: '',
   useCustomFieldsAsIdentifiers: false,
+  wildcardLookupEnabled: false,
 };
 
 export const getInitialValues = (settings) => {
@@ -53,6 +54,7 @@ export const getInitialValues = (settings) => {
     checkoutTimeoutDuration: config.checkoutTimeoutDuration,
     identifiers,
     useCustomFieldsAsIdentifiers: config.useCustomFieldsAsIdentifiers,
+    wildcardLookupEnabled: config.wildcardLookupEnabled,
   };
 };
 
@@ -63,6 +65,7 @@ export const normalize = ({
   checkoutTimeoutDuration,
   identifiers,
   useCustomFieldsAsIdentifiers,
+  wildcardLookupEnabled,
 }) => {
   // As in `getInitialValues`, we must assume knowledge of how the IDs and Custom Field IDs
   // are rendered in CheckoutSettingsForm. IDs can be toggled on and off by a checkbox,
@@ -88,6 +91,7 @@ export const normalize = ({
     checkoutTimeoutDuration: parseInt(checkoutTimeoutDuration, 10),
     prefPatronIdentifier,
     useCustomFieldsAsIdentifiers,
+    wildcardLookupEnabled,
   });
 
   return otherSettings;
