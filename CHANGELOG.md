@@ -29,6 +29,7 @@
 * Add RTL/Jest testing for `NoticePolicyDetail` component in `src/settings/NoticePolicy`. Refs UICIRC-629.
 * Add RTL/Jest testing for `LostItemFeePolicyForm` component in `src/settings/LostItemFeePolicy`. Refs UICIRC-619.
 * Add RTL/Jest testing for `NoticePolicyForm` component in `src/settings/NoticePolicy`. Refs UICIRC-630.
+* Add RTL/Jest testing for `FinePolicyForm` component in `src/settings/FinePolicy`. Refs UICIRC-737.
 
 ## [6.0.0](https://github.com/folio-org/ui-circulation/tree/v6.0.0) (2021-09-30)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v5.1.1...v6.0.0)

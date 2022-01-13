@@ -2,7 +2,7 @@ import React from 'react';
 import stripesFinalForm from '@folio/stripes/final-form';
 import PropTypes from 'prop-types';
 import { stripesShape } from '@folio/stripes/core';
-import { FormattedMessage } from 'react-intl';
+import { injectIntl } from 'react-intl';
 
 import {
   Accordion,
@@ -41,6 +41,7 @@ class FinePolicyForm extends React.Component {
     onSave: PropTypes.func.isRequired,
     onCancel: PropTypes.func.isRequired,
     form: PropTypes.object.isRequired,
+    intl: PropTypes.object.isRequired,
   };
 
   static defaultProps = {
@@ -80,7 +81,10 @@ class FinePolicyForm extends React.Component {
       form: {
         change,
         getState,
-      }
+      },
+      intl: {
+        formatMessage,
+      },
     } = this.props;
 
     const { sections } = this.state;
@@ -90,7 +94,7 @@ class FinePolicyForm extends React.Component {
 
     const panelTitle = policy.id
       ? policy.name
-      : <FormattedMessage id="ui-circulation.settings.finePolicy.createEntryLabel" />;
+      : formatMessage({ id: 'ui-circulation.settings.finePolicy.createEntryLabel' });
 
     const footerPaneProps = {
       pristine,
@@ -100,6 +104,7 @@ class FinePolicyForm extends React.Component {
 
     return (
       <form
+        data-testid="finePolicyForm"
         noValidate
         className={css.finePolicyForm}
         data-test-fine-policy-form
@@ -125,12 +130,13 @@ class FinePolicyForm extends React.Component {
                 </Col>
               </Row>
               <AccordionSet
+                data-testid="generalSectionSet"
                 accordionStatus={sections}
                 onToggle={this.handleSectionToggle}
               >
                 <Accordion
                   id="overdueGeneralSection"
-                  label={<FormattedMessage id="ui-circulation.settings.finePolicy.generalInformation" />}
+                  label={formatMessage({ id: 'ui-circulation.settings.finePolicy.generalInformation' })}
                   open={sections.overdueGeneralSection}
                 >
                   <Metadata
@@ -157,4 +163,4 @@ class FinePolicyForm extends React.Component {
 export default stripesFinalForm({
   navigationCheck: true,
   validate: validateFinePolicy,
-})(FinePolicyForm);
+})(injectIntl(FinePolicyForm));
