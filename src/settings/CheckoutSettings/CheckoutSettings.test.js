@@ -89,6 +89,7 @@ describe('getInitialValues', () => {
       checkoutTimeout: 'testCheckoutTimeout',
       checkoutTimeoutDuration: 'testCheckoutTimeoutDuration',
       useCustomFieldsAsIdentifiers: 'testUseCustomFieldsAsIdentifiers',
+      wildcardLookupEnabled: 'testwildcardLookupEnabled',
     };
     const configForTest = [{
       value: JSON.stringify(mockedConfig),
@@ -149,6 +150,7 @@ describe('normalize', () => {
       audioTheme: 'testTheme',
       checkoutTimeout: 20,
       useCustomFieldsAsIdentifiers: true,
+      wildcardLookupEnabled: false,
     };
     const testConfig = {
       ...expectedResult,

@@ -96,7 +96,7 @@ const CheckoutSettingsForm = ({
                 name="useCustomFieldsAsIdentifiers"
                 type="checkbox"
               />
-              { checkoutValues.useCustomFieldsAsIdentifiers &&
+              {checkoutValues.useCustomFieldsAsIdentifiers &&
                 <Layout className="margin-start-gutter">
                   <Field
                     component={MultiSelection}
@@ -121,7 +121,7 @@ const CheckoutSettingsForm = ({
           component={Checkbox}
           type="checkbox"
         />
-        { checkoutValues.checkoutTimeout &&
+        {checkoutValues.checkoutTimeout &&
           <Layout className="margin-start-gutter">
             <Row>
               <Col xs={3}>
@@ -152,6 +152,13 @@ const CheckoutSettingsForm = ({
           label={<FormattedMessage id="ui-circulation.settings.checkout.audioTheme" />}
           name="audioTheme"
           dataOptions={audioThemeOptions}
+        />
+        <hr />
+        <Field
+          component={Checkbox}
+          label={<FormattedMessage id="ui-circulation.settings.checkout.wildcardLookup" />}
+          name="wildcardLookupEnabled"
+          type="checkbox"
         />
       </form>
     </Pane>
