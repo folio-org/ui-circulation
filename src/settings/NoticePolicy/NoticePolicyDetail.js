@@ -26,7 +26,7 @@ class NoticePolicyDetail extends React.Component {
     initialValues: PropTypes.object.isRequired,
     stripes: stripesShape.isRequired,
     parentResources: PropTypes.shape({
-      templates: PropTypes.object,
+      templates: PropTypes.object.isRequired,
     }).isRequired,
   };
 
@@ -56,13 +56,13 @@ class NoticePolicyDetail extends React.Component {
 
   render() {
     const {
-      initialValues: policy = {},
+      initialValues: policy,
       stripes: {
         connect,
       },
       parentResources: {
         templates: {
-          records: patronNoticeTemplates = [],
+          records: patronNoticeTemplates,
         },
       },
     } = this.props;
@@ -84,12 +84,14 @@ class NoticePolicyDetail extends React.Component {
             xs
           >
             <ExpandAllButton
+              data-testid="expandAllButton"
               accordionStatus={this.state.sections}
               onToggle={this.handleExpandAll}
             />
           </Col>
         </Row>
         <AccordionSet
+          data-testid="accordionSet"
           accordionStatus={this.state.sections}
           onToggle={this.handleSectionToggle}
         >
