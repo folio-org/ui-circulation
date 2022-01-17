@@ -21,9 +21,6 @@ import GeneralSection, {
 } from './GeneralSection';
 import { requestPolicyTypes } from '../../../../../constants';
 
-jest.mock('react-final-form-arrays', () => ({
-  FieldArray: jest.fn(() => null),
-}));
 jest.mock('../../../../components', () => ({
   Metadata: jest.fn(() => null),
 }));

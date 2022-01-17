@@ -5,9 +5,9 @@ import {
   within,
 } from '@testing-library/react';
 
-import { FieldArray } from 'react-final-form-arrays';
-
 import '../../../../../../test/jest/__mock__';
+
+import { FieldArray } from 'react-final-form-arrays';
 
 import NoticesList from '../components';
 import RequestNoticesSection, {
@@ -18,10 +18,6 @@ import {
   uponAndBeforeSendEvents,
   requestNoticesTriggeringEvents,
 } from '../../../../../constants';
-
-jest.mock('react-final-form-arrays', () => ({
-  FieldArray: jest.fn(() => null),
-}));
 
 jest.mock('../components', () => jest.fn(() => null));
 
