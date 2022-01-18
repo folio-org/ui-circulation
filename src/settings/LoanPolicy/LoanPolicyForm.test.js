@@ -97,17 +97,6 @@ ExpandAllButton.mockImplementation(jest.fn(({
     </div>
   );
 }));
-Pane.mockImplementation(jest.fn(({
-  children,
-  firstMenu,
-  footer,
-}) => (
-  <div>
-    {firstMenu}
-    {children}
-    {footer}
-  </div>
-)));
 
 describe('LoanPolicyForm', () => {
   const testIds = {

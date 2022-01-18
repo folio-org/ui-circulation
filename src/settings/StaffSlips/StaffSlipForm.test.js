@@ -31,13 +31,6 @@ jest.mock('../components', () => ({
   FooterPane: jest.fn(() => null),
 }));
 Field.mockImplementation(jest.fn(() => null));
-Pane.mockImplementation(jest.fn(({ children, firstMenu, footer }) => (
-  <div>
-    {firstMenu}
-    {children}
-    {footer}
-  </div>
-)));
 
 describe('StaffSlipForm', () => {
   const orderOfFieldExecution = {

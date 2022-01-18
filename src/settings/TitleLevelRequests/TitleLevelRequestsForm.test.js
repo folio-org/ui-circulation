@@ -27,12 +27,6 @@ import {
 
 jest.mock('./NoticeTemplates', () => jest.fn(() => null));
 jest.mock('@folio/stripes/final-form', () => jest.fn(() => (component) => component));
-Pane.mockImplementation(jest.fn(({ children, footer }) => (
-  <div>
-    {children}
-    {footer}
-  </div>
-)));
 PaneFooter.mockImplementation(jest.fn(({ renderEnd }) => (
   <div>
     {renderEnd}

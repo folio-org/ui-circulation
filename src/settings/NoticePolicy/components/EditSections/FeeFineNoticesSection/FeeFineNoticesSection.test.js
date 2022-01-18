@@ -22,10 +22,6 @@ import {
 
 const mockedCatchFunc = jest.fn();
 
-jest.mock('react-final-form-arrays', () => ({
-  FieldArray: jest.fn(() => null),
-}));
-
 describe('FeeFineNoticesSection', () => {
   const mockedPolicy = {
     data: 'mockedPolicy',

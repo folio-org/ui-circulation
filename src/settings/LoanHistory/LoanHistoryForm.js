@@ -37,6 +37,7 @@ class LoanHistoryForm extends Component {
     submitting: PropTypes.bool,
     label: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
     form: PropTypes.object.isRequired,
+    intl: PropTypes.object.isRequired,
   };
 
   renderFooter = () => {
@@ -49,6 +50,7 @@ class LoanHistoryForm extends Component {
       <PaneFooter
         renderEnd={(
           <Button
+            data-testid="submitButton"
             data-test-loan-history-save-button
             type="submit"
             buttonStyle="primary paneHeaderNewButton"
@@ -67,12 +69,16 @@ class LoanHistoryForm extends Component {
       handleSubmit,
       label,
       form: { getState },
+      intl: {
+        formatMessage,
+      },
     } = this.props;
 
     const { values: loanHistoryValues } = getState();
 
     return (
       <form
+        data-testid="form"
         id="loan-history-form"
         className={css.loanHistoryForm}
         noValidate
@@ -84,8 +90,12 @@ class LoanHistoryForm extends Component {
           paneTitle={label}
           footer={this.renderFooter()}
         >
-          <div data-test-closed-loans>
+          <div
+            data-testid="closedLoans"
+            data-test-closed-loans
+          >
             <Headline
+              data-testid="closedLoansHeadline"
               size="large"
               margin="xx-large"
               tag="h3"
@@ -105,23 +115,23 @@ class LoanHistoryForm extends Component {
           <br />
           <Row>
             <Col xs={12}>
-              <Field name="treatEnabled" type="checkbox">
-                {(props) => (
-                  <Checkbox
-                    checked={props.input.checked}
-                    id="treatEnabled-checkbox"
-                    label={<FormattedMessage id="ui-circulation.settings.loanHistory.treat" />}
-                    onChange={e => props.input.onChange(e)}
-                    type="checkbox"
-                  />
-                )}
-              </Field>
+              <Field
+                name="treatEnabled"
+                type="checkbox"
+                id="treatEnabled-checkbox"
+                component={Checkbox}
+                label={formatMessage({ id: 'ui-circulation.settings.loanHistory.treat' })}
+              />
             </Col>
           </Row>
           <br />
           {loanHistoryValues.treatEnabled &&
-            <div data-test-closed-loans-feefine>
+            <div
+              data-testid="loansFeefineSection"
+              data-test-closed-loans-feefine
+            >
               <Headline
+                data-testid="closedLoansFeesFinesHeadline"
                 size="large"
                 margin="xx-large"
                 tag="h3"
