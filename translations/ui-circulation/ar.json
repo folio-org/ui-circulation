@@ -466,5 +466,6 @@
     "settings.loanPolicy.denyDelete.header": "لا يمكن حذف سياسة الإعارة",
     "settings.policy.denyDelete.body": "لا يمكن حذف هذه السياسة، حيث أنها قيد استخدام تسجيلة أو أكثر.",
     "settings.overdueFinePolicy.denyDelete.header": "لا يمكن حذف سياسة رسوم التأخير",
-    "settings.lostItemPolicy.denyDelete.header": "لا يمكن حذف سياسة رسوم المادة الضائعة"
+    "settings.lostItemPolicy.denyDelete.header": "لا يمكن حذف سياسة رسوم المادة الضائعة",
+    "settings.checkout.wildcardLookup": "إجراء بحث بدل عن المواد بواسطة الباركود في تطبيقات الإعارة (الرد، الإعارة، الطلبات)"
 }

@@ -466,5 +466,6 @@
     "settings.loanPolicy.denyDelete.header": "Impossible de supprimer la politique de prêt",
     "settings.policy.denyDelete.body": "Cette politique ne peut pas être supprimée, car elle est utilisée par une ou plusieurs notices.",
     "settings.overdueFinePolicy.denyDelete.header": "Impossible de supprimer la politique des amendes pour retard",
-    "settings.lostItemPolicy.denyDelete.header": "Impossible de supprimer la politique de frais pour les exemplaires perdus"
+    "settings.lostItemPolicy.denyDelete.header": "Impossible de supprimer la politique de frais pour les exemplaires perdus",
+    "settings.checkout.wildcardLookup": "Perform wildcard lookup of items by barcode in circulation apps (Check in, Check out, Requests)"
 }
