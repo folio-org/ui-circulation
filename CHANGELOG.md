@@ -31,6 +31,7 @@
 * Add RTL/Jest testing for `NoticePolicyForm` component in `src/settings/NoticePolicy`. Refs UICIRC-630.
 * Add RTL/Jest testing for `FinePolicyForm` component in `src/settings/FinePolicy`. Refs UICIRC-737.
 * Add RTL/Jest testing for `LoanPolicyForm` component in `src/settings/LoanPolicy`. Refs UICIRC-611.
+* Add RTL/Jest testing for `StaffSlipDetail` component in `src/settings/StaffSlips`. Refs UICIRC-649.
 
 ## [6.0.0](https://github.com/folio-org/ui-circulation/tree/v6.0.0) (2021-09-30)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v5.1.1...v6.0.0)
