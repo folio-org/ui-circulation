@@ -45,19 +45,6 @@ jest.mock('./utils/get-templates', () => jest.fn((templates, categoryIds) => (
   }
 )));
 
-Pane.mockImplementation(jest.fn(({
-  paneTitle,
-  firstMenu,
-  children,
-  footer,
-}) => (
-  <div>
-    {paneTitle}
-    {firstMenu}
-    {children}
-    {footer}
-  </div>
-)));
 ExpandAllButton.mockImplementation(jest.fn(({ onToggle, ...rest }) => {
   const sections = {
     general: false,
