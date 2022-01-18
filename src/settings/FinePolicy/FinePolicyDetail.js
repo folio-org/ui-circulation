@@ -29,6 +29,7 @@ class FinePolicyDetail extends React.Component {
   static propTypes = {
     initialValues: PropTypes.object,
     stripes: stripesShape.isRequired,
+    intl: PropTypes.object.isRequired,
   };
 
   static defaultProps = {
@@ -63,18 +64,21 @@ class FinePolicyDetail extends React.Component {
     return get(policy, pathToValue);
   };
 
-  getCheckboxValue = (seletedValue) => {
-    return seletedValue
+  getCheckboxValue = (selectedValue) => {
+    return selectedValue
       ? <FormattedMessage id="ui-circulation.settings.finePolicy.yes" />
       : <FormattedMessage id="ui-circulation.settings.finePolicy.no" />;
   };
 
   render() {
     const {
-      initialValues: policy = {},
+      initialValues: policy,
       stripes: {
         connect,
-      }
+      },
+      intl: {
+        formatMessage,
+      },
     } = this.props;
 
     const { sections } = this.state;
@@ -97,7 +101,7 @@ class FinePolicyDetail extends React.Component {
         >
           <Accordion
             id="generalFeePolicy"
-            label={<FormattedMessage id="ui-circulation.settings.finePolicy.generalInformation" />}
+            label={formatMessage({ id: 'ui-circulation.settings.finePolicy.generalInformation' })}
             open={sections.generalFeePolicy}
           >
             <Metadata
