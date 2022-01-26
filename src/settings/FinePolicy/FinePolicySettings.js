@@ -16,6 +16,22 @@ import normalize from './utils/normalize';
 import { MAX_UNPAGED_RESOURCE_COUNT } from '../../constants';
 import withPreventDelete from '../wrappers/withPreventDelete';
 
+export const parseInitialValues = (init = {}) => {
+  return ({
+    ...init,
+    maxOverdueFine: parseFloat(init.maxOverdueFine).toFixed(2),
+    maxOverdueRecallFine: parseFloat(init.maxOverdueRecallFine).toFixed(2),
+    overdueFine: {
+      ...init.overdueFine,
+      quantity: parseFloat((init.overdueFine || {}).quantity || 0).toFixed(2)
+    },
+    overdueRecallFine: {
+      ...init.overdueRecallFine,
+      quantity: parseFloat((init.overdueRecallFine || {}).quantity || 0).toFixed(2)
+    }
+  });
+};
+
 class FinePolicySettings extends React.Component {
   static manifest = Object.freeze({
     finePolicies: {
@@ -49,20 +65,6 @@ class FinePolicySettings extends React.Component {
     }).isRequired,
   };
 
-  parseInitialValues = (init = {}) => ({
-    ...init,
-    maxOverdueFine: parseFloat(init.maxOverdueFine).toFixed(2),
-    maxOverdueRecallFine: parseFloat(init.maxOverdueRecallFine).toFixed(2),
-    overdueFine: {
-      ...init.overdueFine,
-      quantity: parseFloat((init.overdueFine || {}).quantity || 0).toFixed(2)
-    },
-    overdueRecallFine: {
-      ...init.overdueRecallFine,
-      quantity: parseFloat((init.overdueRecallFine || {}).quantity || 0).toFixed(2)
-    }
-  });
-
   render() {
     const {
       checkPolicy,
@@ -90,7 +92,7 @@ class FinePolicySettings extends React.Component {
         isEntryInUse={checkPolicy}
         parentMutator={mutator}
         permissions={permissions}
-        parseInitialValues={this.parseInitialValues}
+        parseInitialValues={parseInitialValues}
         parentResources={resources}
         prohibitItemDelete={{
           close: <FormattedMessage id={this.props.closeText} />,
