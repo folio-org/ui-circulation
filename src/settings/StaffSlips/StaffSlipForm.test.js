@@ -19,7 +19,7 @@ import {
 
 import StaffSlipForm from './StaffSlipForm';
 import TokensList from './TokensList';
-import tokens from './tokens';
+import getTokens from './tokens';
 import {
   CancelButton,
   FooterPane,
@@ -31,13 +31,6 @@ jest.mock('../components', () => ({
   FooterPane: jest.fn(() => null),
 }));
 Field.mockImplementation(jest.fn(() => null));
-Pane.mockImplementation(jest.fn(({ children, firstMenu, footer }) => (
-  <div>
-    {firstMenu}
-    {children}
-    {footer}
-  </div>
-)));
 
 describe('StaffSlipForm', () => {
   const orderOfFieldExecution = {
@@ -141,7 +134,7 @@ describe('StaffSlipForm', () => {
       const expectedResult = {
         label: labelIds.display,
         component: TemplateEditor,
-        tokens,
+        tokens: getTokens('en'),
         name: 'template',
         previewModalHeader: labelIds.preview,
         tokensList: TokensList,

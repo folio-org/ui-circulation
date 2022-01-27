@@ -1,7 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import HtmlToReact, { Parser } from 'html-to-react';
-import { FormattedMessage } from 'react-intl';
+import {
+  FormattedMessage,
+  injectIntl,
+} from 'react-intl';
 
 import {
   Button,
@@ -11,12 +14,13 @@ import {
 } from '@folio/stripes/components';
 import { PreviewModal, tokensReducer } from '@folio/stripes-template-editor';
 
-import tokens from './tokens';
+import getTokens from './tokens';
 import css from './StaffSlipDetail.css';
 
 class StaffSlipDetail extends React.Component {
   static propTypes = {
     initialValues: PropTypes.object.isRequired,
+    intl: PropTypes.object.isRequired,
   };
 
   constructor(props) {
@@ -29,7 +33,7 @@ class StaffSlipDetail extends React.Component {
       {
         shouldProcessNode: () => true,
         processNode: processNodeDefinitions.processDefaultNode,
-      }
+      },
     ];
 
     this.state = {
@@ -47,8 +51,15 @@ class StaffSlipDetail extends React.Component {
 
   render() {
     const { openPreview } = this.state;
-    const { initialValues: staffSlip } = this.props;
+    const {
+      initialValues: staffSlip,
+      intl: {
+        formatMessage,
+        locale,
+      },
+    } = this.props;
 
+    const tokens = getTokens(locale);
     const parsedEmailTemplate = this.parser.parseWithInstructions(staffSlip.template, () => true, this.rules);
 
     return (
@@ -57,7 +68,7 @@ class StaffSlipDetail extends React.Component {
           <Col xs={12}>
             <div data-test-staff-slip-name>
               <KeyValue
-                label={<FormattedMessage id="ui-circulation.settings.staffSlips.name" />}
+                label={formatMessage({ id: 'ui-circulation.settings.staffSlips.name' })}
                 value={staffSlip.name}
               />
             </div>
@@ -66,19 +77,23 @@ class StaffSlipDetail extends React.Component {
         <Row>
           <Col xs={12}>
             <KeyValue
-              label={<FormattedMessage id="ui-circulation.settings.staffSlips.description" />}
+              label={formatMessage({ id: 'ui-circulation.settings.staffSlips.description' })}
               value={staffSlip.description}
             />
           </Col>
         </Row>
         <Row>
-          <Col xs={9}>
+          <Col
+            data-testid="staffSlipsDisplayCol"
+            xs={9}
+          >
             <FormattedMessage id="ui-circulation.settings.staffSlips.display" />
           </Col>
           <Col xs={3}>
             <Row className={css.preview}>
               <Col>
                 <Button
+                  data-testid="staffSlipsPreviewButton"
                   data-test-open-preview-btn
                   bottomMargin0
                   onClick={this.openPreviewDialog}
@@ -91,6 +106,7 @@ class StaffSlipDetail extends React.Component {
         </Row>
         <Row>
           <Col
+            data-testid="emailTemplateCol"
             xs={12}
             className="editor-preview"
             data-test-staff-slip-content
@@ -99,12 +115,13 @@ class StaffSlipDetail extends React.Component {
           </Col>
         </Row>
         <PreviewModal
+          data-testid="previewModal"
           open={openPreview}
           header={
-            <FormattedMessage
-              id="ui-circulation.settings.staffSlips.view.previewLabel"
-              values={{ name: staffSlip.name }}
-            />
+            formatMessage({
+              id: 'ui-circulation.settings.staffSlips.view.previewLabel',
+              values: { name: staffSlip.name },
+            })
           }
           previewTemplate={staffSlip.template}
           previewFormat={tokensReducer(tokens)}
@@ -116,4 +133,4 @@ class StaffSlipDetail extends React.Component {
   }
 }
 
-export default StaffSlipDetail;
+export default injectIntl(StaffSlipDetail);

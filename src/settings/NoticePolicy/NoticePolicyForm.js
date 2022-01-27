@@ -98,6 +98,7 @@ class NoticePolicyForm extends React.Component {
 
     return (
       <form
+        data-testid="form"
         data-test-notice-policy-form
         className={css.noticePolicyForm}
         noValidate
@@ -122,6 +123,7 @@ class NoticePolicyForm extends React.Component {
               </Col>
             </Row>
             <AccordionSet
+              data-testid="accordionSet"
               accordionStatus={sections}
               onToggle={this.handleSectionToggle}
             >

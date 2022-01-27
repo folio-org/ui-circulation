@@ -19,10 +19,6 @@ import {
   noticesSendEvents,
 } from '../../../../../constants';
 
-jest.mock('react-final-form-arrays', () => ({
-  FieldArray: jest.fn(() => null),
-}));
-
 jest.mock('../components', () => jest.fn(() => null));
 
 describe('LoanNoticesSection', () => {

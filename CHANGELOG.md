@@ -26,6 +26,17 @@
 * UI fee/fine date/time token previews are hard-coded. Refs UICIRC-480.
 * Also support `circulation` `12.0`. Refs UICIRC-729.
 * Add RTL/Jest testing for `CheckoutSettings` component in `src/settings/CheckoutSettings`. Refs UICIRC-592.
+* Add RTL/Jest testing for `NoticePolicyDetail` component in `src/settings/NoticePolicy`. Refs UICIRC-629.
+* Add RTL/Jest testing for `LostItemFeePolicyForm` component in `src/settings/LostItemFeePolicy`. Refs UICIRC-619.
+* Add RTL/Jest testing for `NoticePolicyForm` component in `src/settings/NoticePolicy`. Refs UICIRC-630.
+* Add RTL/Jest testing for `FinePolicyForm` component in `src/settings/FinePolicy`. Refs UICIRC-737.
+* Add RTL/Jest testing for `LoanPolicyForm` component in `src/settings/LoanPolicy`. Refs UICIRC-611.
+* Add RTL/Jest testing for `StaffSlipDetail` component in `src/settings/StaffSlips`. Refs UICIRC-649.
+* Add RTL/Jest testing for `LoanHistoryForm` component in `src/settings/LoanHistory`. Refs UICIRC-606.
+* Add RTL/Jest testing for `FinePolicyDetail` component in `src/settings/FinePolicy`. Refs UICIRC-738.
+* Add RTL/Jest testing for `FixedDueDateScheduleManager` component in `src/settings/FixedDueDateSchedule`. Refs UICIRC-600.
+* Also support `circulation` `13.0`. Refs UICIRC-732.
+* Date format in preview should change depending on localization in `Staff slips`. Refs UICIRC-734.
 
 ## [6.0.0](https://github.com/folio-org/ui-circulation/tree/v6.0.0) (2021-09-30)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v5.1.1...v6.0.0)

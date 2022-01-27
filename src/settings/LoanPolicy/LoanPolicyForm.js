@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  FormattedMessage,
   injectIntl,
 } from 'react-intl';
 import {
@@ -124,6 +123,9 @@ class LoanPolicyForm extends React.Component {
         getState,
       },
       onCancel,
+      intl: {
+        formatMessage,
+      },
     } = this.props;
 
     const { sections } = this.state;
@@ -132,7 +134,7 @@ class LoanPolicyForm extends React.Component {
     const policy = new LoanPolicy(values);
 
     const schedules = this.generateScheduleOptions();
-    const panelTitle = policy.id ? policy.name : <FormattedMessage id="ui-circulation.settings.loanPolicy.createEntryLabel" />;
+    const panelTitle = policy.id ? policy.name : formatMessage({ id: 'ui-circulation.settings.loanPolicy.createEntryLabel' });
     const footerPaneProps = {
       pristine,
       submitting,
@@ -141,6 +143,7 @@ class LoanPolicyForm extends React.Component {
 
     return (
       <form
+        data-testid="loanPolicyForm"
         noValidate
         className={css.loanPolicyForm}
         data-test-loan-policy-form
@@ -166,9 +169,10 @@ class LoanPolicyForm extends React.Component {
             </Row>
             <AccordionSet>
               <Accordion
+                data-testid="mainAccordion"
                 id="generalLoanPolicyForm"
                 open={sections.generalLoanPolicyForm}
-                label={<FormattedMessage id="ui-circulation.settings.loanPolicy.generalInformation" />}
+                label={formatMessage({ id: 'ui-circulation.settings.loanPolicy.generalInformation' })}
                 onToggle={this.handleSectionToggle}
               >
                 <Metadata
@@ -177,16 +181,19 @@ class LoanPolicyForm extends React.Component {
                 />
                 <AboutSection />
                 <LoansSection
+                  data-testid="loanSection"
                   policy={policy}
                   schedules={schedules}
                   change={change}
                 />
                 <RenewalsSection
+                  data-testid="renewalsSection"
                   policy={policy}
                   schedules={schedules}
                   change={change}
                 />
                 <RequestManagementSection
+                  data-testid="requestManagementSection"
                   policy={policy}
                   holdsSectionOpen={sections.holdsSection}
                   recallsSectionOpen={sections.recallsSection}

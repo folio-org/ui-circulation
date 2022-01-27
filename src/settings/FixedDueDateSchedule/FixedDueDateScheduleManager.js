@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage } from 'react-intl';
+import { injectIntl } from 'react-intl';
 import {
   cloneDeep,
   find,
@@ -18,6 +18,26 @@ import FixedDueDateScheduleForm from './FixedDueDateScheduleForm';
 
 import FixedDueDateSchedule from '../Models/FixedDueDateSchedule';
 import { MAX_UNPAGED_RESOURCE_COUNT } from '../../constants';
+
+export const onBeforeSave = (entry) => {
+  const schedule = cloneDeep(entry);
+
+  forEach(schedule.schedules, (item) => {
+    unset(item, 'key');
+  });
+
+  return schedule;
+};
+
+export const parseInitialValues = (entry) => {
+  const fdds = cloneDeep(entry);
+
+  forEach(fdds?.schedules || [], schedule => {
+    schedule.key = uniqueId('schedule_');
+  });
+
+  return fdds;
+};
 
 class FixedDueDateScheduleManager extends React.Component {
   static manifest = Object.freeze({
@@ -44,6 +64,7 @@ class FixedDueDateScheduleManager extends React.Component {
 
   static propTypes = {
     resources: PropTypes.object.isRequired,
+    intl: PropTypes.object.isRequired,
     mutator: PropTypes.shape({
       fixedDueDateSchedules: PropTypes.shape({
         POST: PropTypes.func,
@@ -63,60 +84,39 @@ class FixedDueDateScheduleManager extends React.Component {
     return schedule.id && scheduleInUse;
   }
 
-  onBeforeSave = (entry) => {
-    const schedule = cloneDeep(entry);
-
-    forEach(schedule.schedules, (item) => {
-      unset(item, 'key');
-    });
-
-    return schedule;
-  };
-
-  parseInitialValues = (entry) => {
-    const fdds = cloneDeep(entry);
-
-    forEach(fdds?.schedules || [], schedule => {
-      schedule.key = uniqueId('schedule_');
-    });
-
-    return fdds;
-  };
-
   render() {
     const {
       resources,
       mutator,
+      intl: {
+        formatMessage,
+      },
     } = this.props;
 
     return (
-      <FormattedMessage id="ui-circulation.settings.fDDSform.entryLabel">
-        { entryLabel => (
-          <EntryManager
-            {...this.props}
-            defaultEntry={FixedDueDateSchedule.defaultFixedDueDateSchedule()}
-            detailComponent={FixedDueDateScheduleDetail}
-            deleteDisabled={this.deleteDisabled}
-            deleteDisabledMessage={<FormattedMessage id="ui-circulation.settings.fDDS.deleteDisabled" />}
-            entryLabel={entryLabel}
-            entryList={sortBy(resources.fixedDueDateSchedules?.records || [], ['name'])}
-            entryFormComponent={FixedDueDateScheduleForm}
-            nameKey="name"
-            paneTitle={<FormattedMessage id="ui-circulation.settings.fDDS.paneTitle" />}
-            parentMutator={mutator}
-            permissions={{
-              put: 'ui-circulation.settings.fixed-due-date-schedules',
-              post: 'ui-circulation.settings.fixed-due-date-schedules',
-              delete: 'ui-circulation.settings.fixed-due-date-schedules',
-            }}
-            resourceKey="fixedDueDateSchedules"
-            parseInitialValues={this.parseInitialValues}
-            onBeforeSave={this.onBeforeSave}
-          />
-        )}
-      </FormattedMessage>
+      <EntryManager
+        {...this.props}
+        defaultEntry={FixedDueDateSchedule.defaultFixedDueDateSchedule()}
+        detailComponent={FixedDueDateScheduleDetail}
+        deleteDisabled={this.deleteDisabled}
+        deleteDisabledMessage={formatMessage({ id: 'ui-circulation.settings.fDDS.deleteDisabled' })}
+        entryLabel={formatMessage({ id: 'ui-circulation.settings.fDDSform.entryLabel' })}
+        entryList={sortBy(resources.fixedDueDateSchedules?.records || [], ['name'])}
+        entryFormComponent={FixedDueDateScheduleForm}
+        nameKey="name"
+        paneTitle={formatMessage({ id: 'ui-circulation.settings.fDDS.paneTitle' })}
+        parentMutator={mutator}
+        permissions={{
+          put: 'ui-circulation.settings.fixed-due-date-schedules',
+          post: 'ui-circulation.settings.fixed-due-date-schedules',
+          delete: 'ui-circulation.settings.fixed-due-date-schedules',
+        }}
+        resourceKey="fixedDueDateSchedules"
+        parseInitialValues={parseInitialValues}
+        onBeforeSave={onBeforeSave}
+      />
     );
   }
 }
 
-export default stripesConnect(FixedDueDateScheduleManager);
+export default injectIntl(stripesConnect(FixedDueDateScheduleManager));

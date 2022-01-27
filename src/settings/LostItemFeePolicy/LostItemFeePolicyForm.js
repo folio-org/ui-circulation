@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage } from 'react-intl';
+import { injectIntl } from 'react-intl';
 
 import { stripesShape } from '@folio/stripes/core';
 import stripesFinalForm from '@folio/stripes/final-form';
@@ -40,6 +40,7 @@ class LostItemFeePolicyForm extends React.Component {
     form: PropTypes.object.isRequired,
     handleSubmit: PropTypes.func.isRequired,
     onCancel: PropTypes.func.isRequired,
+    intl: PropTypes.object.isRequired,
   };
 
   static defaultProps = {
@@ -81,6 +82,9 @@ class LostItemFeePolicyForm extends React.Component {
         getState,
       },
       onCancel,
+      intl : {
+        formatMessage,
+      },
     } = this.props;
 
     const { sections } = this.state;
@@ -88,7 +92,7 @@ class LostItemFeePolicyForm extends React.Component {
     const { values } = getState();
     const policy = new LostItemFeePolicy(values);
 
-    const panelTitle = policy.id ? policy.name : <FormattedMessage id="ui-circulation.settings.lostItemFee.entryLabel" />;
+    const panelTitle = policy.id ? policy.name : formatMessage({ id: 'ui-circulation.settings.lostItemFee.entryLabel' });
     const footerPaneProps = {
       pristine,
       submitting,
@@ -97,6 +101,7 @@ class LostItemFeePolicyForm extends React.Component {
 
     return (
       <form
+        data-testid="lostItemFeePolicyForm"
         noValidate
         data-test-lost-item-fee-policy-form
         onSubmit={handleSubmit}
@@ -121,11 +126,12 @@ class LostItemFeePolicyForm extends React.Component {
                 </Col>
               </Row>
               <AccordionSet
+                data-testid="generalSectionSet"
                 onToggle={this.handleSectionToggle}
               >
                 <Accordion
                   id="lostItemFeeFormGeneralSection"
-                  label={<FormattedMessage id="ui-circulation.settings.lostItemFee.generalInformation" />}
+                  label={formatMessage({ id: 'ui-circulation.settings.lostItemFee.generalInformation' })}
                   open={sections.lostItemFeeFormGeneralSection}
                 >
                   <Metadata
@@ -152,4 +158,4 @@ class LostItemFeePolicyForm extends React.Component {
 export default stripesFinalForm({
   navigationCheck: true,
   validate: model => validateLostItemFeePolicy(transformModelBooleans(model)),
-})(LostItemFeePolicyForm);
+})(injectIntl(LostItemFeePolicyForm));
