@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {
   injectIntl,
-  FormattedMessage,
 } from 'react-intl';
 
 import {
@@ -90,13 +89,13 @@ class LostItemFeePolicyDetail extends React.Component {
 
   render() {
     const {
-      initialValues: policy = {},
+      initialValues: policy,
       stripes: {
         connect,
       },
       intl: {
         formatMessage,
-      }
+      },
     } = this.props;
 
     const { sections } = this.state;
@@ -114,12 +113,13 @@ class LostItemFeePolicyDetail extends React.Component {
           </Col>
         </Row>
         <AccordionSet
+          data-testid="accordionSet"
           accordionStatus={sections}
           onToggle={this.handleSectionToggle}
         >
           <Accordion
             id="LostItemFeeGeneralInformation"
-            label={<FormattedMessage id="ui-circulation.settings.lostItemFee.generalInformation" />}
+            label={formatMessage({ id: 'ui-circulation.settings.lostItemFee.generalInformation' })}
             open={sections.LostItemFeeGeneralInformation}
           >
             <Metadata
