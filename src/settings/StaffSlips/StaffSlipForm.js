@@ -15,7 +15,7 @@ import stripesFinalForm from '@folio/stripes/final-form';
 import { Field } from 'react-final-form';
 import { TemplateEditor } from '@folio/stripes-template-editor';
 
-import tokens from './tokens';
+import getTokens from './tokens';
 import TokensList from './TokensList';
 
 import {
@@ -52,8 +52,12 @@ class StaffSlipForm extends React.Component {
       onCancel,
       intl,
     } = this.props;
-    const { formatMessage } = intl;
+    const {
+      formatMessage,
+      locale,
+    } = intl;
 
+    const tokens = getTokens(locale);
     const disabled = !stripes.hasPerm('settings.organizations.enabled');
     const panelTitle = initialValues.id
       ? initialValues.name

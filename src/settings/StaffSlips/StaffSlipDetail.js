@@ -14,7 +14,7 @@ import {
 } from '@folio/stripes/components';
 import { PreviewModal, tokensReducer } from '@folio/stripes-template-editor';
 
-import tokens from './tokens';
+import getTokens from './tokens';
 import css from './StaffSlipDetail.css';
 
 class StaffSlipDetail extends React.Component {
@@ -33,7 +33,7 @@ class StaffSlipDetail extends React.Component {
       {
         shouldProcessNode: () => true,
         processNode: processNodeDefinitions.processDefaultNode,
-      }
+      },
     ];
 
     this.state = {
@@ -55,9 +55,11 @@ class StaffSlipDetail extends React.Component {
       initialValues: staffSlip,
       intl: {
         formatMessage,
+        locale,
       },
     } = this.props;
 
+    const tokens = getTokens(locale);
     const parsedEmailTemplate = this.parser.parseWithInstructions(staffSlip.template, () => true, this.rules);
 
     return (
