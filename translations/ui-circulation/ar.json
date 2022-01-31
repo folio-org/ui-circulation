@@ -339,7 +339,7 @@
     "settings.lostItemFee.lostItemProcessingFee": "رسم معالجة مادة ضائعة",
     "settings.lostItemFee.chargeAmountItemPatron": "فرض رسم معالجة مادة ضائعة إذا أعلن المستفيد ضياع المادة",
     "settings.lostItemFee.chargeAmountItemSystem": "فرض رسم معالجة مادة ضائعة إذا تقادمت المادة إلى ضائعة وفقًا للنظام",
-    "settings.lostItemFee.returnedLostItemProcessingFee": "إذا تمت إعادة المادة الضائعة قم بإزالة رسم معالجة المادة الضائعة",
+    "settings.lostItemFee.returnedLostItemProcessingFee": "إذا تمت إعادة أو تجديد المادة الضائعة، قم بإزالة رسم معالجة المادة الضائعة",
     "settings.lostItemFee.replacedLostItemProcessingFee": "إذا تم استبدال المادة الضائعة قم بإزالة رسم معالجة المادة الضائعة",
     "settings.lostItemFee.replacementProcessFee": "رسم معالجة الاستبدال",
     "settings.lostItemFee.replacementAllowed": "مسموح بالاستبدال",

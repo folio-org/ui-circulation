@@ -339,7 +339,7 @@
     "settings.lostItemFee.lostItemProcessingFee": "Lost item processing fee",
     "settings.lostItemFee.chargeAmountItemPatron": "Charge lost item processing fee if item declared lost by patron",
     "settings.lostItemFee.chargeAmountItemSystem": "Charge lost item processing fee if item aged to lost by system",
-    "settings.lostItemFee.returnedLostItemProcessingFee": "If lost item returned, remove lost item processing fee",
+    "settings.lostItemFee.returnedLostItemProcessingFee": "If lost item returned or renewed, remove lost item processing fee",
     "settings.lostItemFee.replacedLostItemProcessingFee": "If lost item replaced, remove lost item processing fee",
     "settings.lostItemFee.replacementProcessFee": "Replacement processing fee",
     "settings.lostItemFee.replacementAllowed": "Replacement allowed",

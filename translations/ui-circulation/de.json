@@ -227,7 +227,7 @@
     "settings.requestPolicy.cannotDelete.label": "Richtlinie für Bestandsanfragen kann nicht gelöscht werden",
     "settings.requestPolicy.cannotDelete.message": "Diese Richtlinie für Bestandsanfragen wird von Ausleihregeln verwendet und kann nicht gelöscht werden",
     "settings.common.close": "Schließen",
-    "settings.noticePolicy.denyDelete.header": "Benachrichtigung kann nicht gelöscht werden",
+    "settings.noticePolicy.denyDelete.header": "Benachrichtigungsrichtlinie kann nicht gelöscht werden",
     "settings.noticePolicy.denyDelete.body": "Diese Benachrichtigungsrichtlinie kann nicht gelöscht werden, da diese von einem oder mehreren Datensätzen verwendet wird.",
     "settings.patronNotices.addToken": "Token hinzufügen",
     "settings.patronNotices.itemTokenHeader": "Exemplar",
@@ -467,5 +467,5 @@
     "settings.policy.denyDelete.body": "Diese Richtlinie kann nicht gelöscht werden, da sie von einem oder mehreren Datensätzen verwendet wird.",
     "settings.overdueFinePolicy.denyDelete.header": "Gebührenrichtlinie für überfällige Exemplare kann nicht gelöscht werden.",
     "settings.lostItemPolicy.denyDelete.header": "Gebührenrichtlinie für verlorene Exemplare kann nicht gelöscht werden.",
-    "settings.checkout.wildcardLookup": "Perform wildcard lookup of items by barcode in circulation apps (Check in, Check out, Requests)"
+    "settings.checkout.wildcardLookup": "Wildcard-Suche nach Exemplaren anhand von Barcodes in den Apps Rückgabe, Ausleihe und Bestandsanfragen"
 }
