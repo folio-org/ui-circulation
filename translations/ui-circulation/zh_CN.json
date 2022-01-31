@@ -339,7 +339,7 @@
     "settings.lostItemFee.lostItemProcessingFee": "遗失单件处理费",
     "settings.lostItemFee.chargeAmountItemPatron": "如果读者声称遗失单件，则收取遗失单件处理费",
     "settings.lostItemFee.chargeAmountItemSystem": "如果单件超期太久被系统视为遗失，则收取遗失单件处理费",
-    "settings.lostItemFee.returnedLostItemProcessingFee": "如遗失单件已返还，则移除遗失单件处理费",
+    "settings.lostItemFee.returnedLostItemProcessingFee": "如遗失单件已返还或续借，则移除遗失单件处理费",
     "settings.lostItemFee.replacedLostItemProcessingFee": "如遗失单件已更换，则移除遗失单件处理费",
     "settings.lostItemFee.replacementProcessFee": "更换处理费",
     "settings.lostItemFee.replacementAllowed": "允许同书更换",
@@ -467,5 +467,5 @@
     "settings.policy.denyDelete.body": "本政策无法删除，因为它正被一条或多条记录使用。",
     "settings.overdueFinePolicy.denyDelete.header": "无法删除超期罚款政策",
     "settings.lostItemPolicy.denyDelete.header": "无法删除遗失单件费用政策",
-    "settings.checkout.wildcardLookup": "Perform wildcard lookup of items by barcode in circulation apps (Check in, Check out, Requests)"
+    "settings.checkout.wildcardLookup": "在流通应用中以通配符查找条形码（签入、签出、请求）"
 }
