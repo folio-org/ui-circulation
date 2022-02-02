@@ -159,8 +159,7 @@ class PatronNoticeDetail extends React.Component {
           header={
             formatMessage({
               id: 'ui-circulation.settings.patronNotices.view.previewHeader',
-              values: { name: notice.name },
-            })
+            }, { name: notice.name })
           }
           previewTemplate={emailTemplate}
           previewFormat={tokensReducer(tokens)}

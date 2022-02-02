@@ -120,8 +120,7 @@ class StaffSlipDetail extends React.Component {
           header={
             formatMessage({
               id: 'ui-circulation.settings.staffSlips.view.previewLabel',
-              values: { name: staffSlip.name },
-            })
+            }, { name: staffSlip.name })
           }
           previewTemplate={staffSlip.template}
           previewFormat={tokensReducer(tokens)}
