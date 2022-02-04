@@ -32,7 +32,7 @@ import { intervalPeriods } from '../../constants';
 
 class LoanPolicyDetail extends React.Component {
   static propTypes = {
-    intl: PropTypes.object,
+    intl: PropTypes.object.isRequired,
     initialValues: PropTypes.object,
     stripes: stripesShape.isRequired,
     parentResources: PropTypes.shape({
@@ -123,10 +123,13 @@ class LoanPolicyDetail extends React.Component {
 
   render() {
     const {
-      initialValues: policy = {},
+      initialValues: policy,
       stripes: {
         connect,
-      }
+      },
+      intl: {
+        formatMessage,
+      },
     } = this.props;
 
     const { sections } = this.state;
@@ -146,7 +149,7 @@ class LoanPolicyDetail extends React.Component {
         <AccordionSet>
           <Accordion
             id="generalLoanPolicyDetail"
-            label={<FormattedMessage id="ui-circulation.settings.loanPolicy.generalInformation" />}
+            label={formatMessage({ id: 'ui-circulation.settings.loanPolicy.generalInformation' })}
             open={sections.generalLoanPolicyDetail}
             onToggle={this.handleSectionToggle}
           >
