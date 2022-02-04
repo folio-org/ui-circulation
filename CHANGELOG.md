@@ -38,6 +38,7 @@
 * Also support `circulation` `13.0`. Refs UICIRC-732.
 * Date format in preview should change depending on localization in `Staff slips`. Refs UICIRC-734.
 * `Preview of patron notice template` title is broken. `Preview of staff slips` title is broken. Refs UICIRC-735.
+* Add RTL/Jest testing for `LostItemFeePolicyDetail` component in `src\settings\LostItemFeePolicy`. Refs UICIRC-621.
 
 ## [6.0.0](https://github.com/folio-org/ui-circulation/tree/v6.0.0) (2021-09-30)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v5.1.1...v6.0.0)
