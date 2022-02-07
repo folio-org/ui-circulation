@@ -102,6 +102,7 @@
         "permissionName": "ui-circulation.settings.notice-policies",
         "displayName": "Settings (Circ): Can create, edit and remove notice policies",
         "subPermissions": [
+          "circulation.rules.get",
           "circulation-storage.patron-notice-policies.item.post",
           "circulation-storage.patron-notice-policies.item.put",
           "circulation-storage.patron-notice-policies.item.delete",
