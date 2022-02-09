@@ -40,6 +40,7 @@
 * `Preview of patron notice template` title is broken. `Preview of staff slips` title is broken. Refs UICIRC-735.
 * Add RTL/Jest testing for `LostItemFeePolicyDetail` component in `src\settings\LostItemFeePolicy`. Refs UICIRC-621.
 * Add RTL/Jest testing for `FinePolicySettings` component in `src/settings/FinePolicy`. Refs UICIRC-593.
+* Permission errors with `ui-circulation.settings.notice-policies`. Refs UICIRC-717.
 
 ## [6.0.0](https://github.com/folio-org/ui-circulation/tree/v6.0.0) (2021-09-30)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v5.1.1...v6.0.0)
