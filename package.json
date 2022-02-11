@@ -67,6 +67,7 @@
         "permissionName": "ui-circulation.settings.loan-history",
         "displayName": "Settings (Circ): Can view loan history",
         "subPermissions": [
+          "configuration.entries.collection.get",
           "settings.circulation.enabled",
           "payments.collection.get"
         ],
