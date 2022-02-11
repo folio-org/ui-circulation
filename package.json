@@ -219,6 +219,7 @@
         "permissionName": "ui-circulation.settings.notice-templates",
         "displayName": "Settings (Circ): Can create, edit and remove patron notice templates",
         "subPermissions": [
+          "circulation-storage.patron-notice-policies.collection.get",
           "templates.collection.get",
           "templates.item.get",
           "templates.item.post",
