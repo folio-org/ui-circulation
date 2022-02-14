@@ -49,6 +49,7 @@
 * Add `circulation.loans.collection.get` as subpermission for `ui-circulation.settings.view-lost-item-fees-policies`. Refs UICIRC-745.
 * Add `circulation.loans.collection.get` as subpermission for `ui-circulation.settings.view-overdue-fines-policies`. Refs UICIRC-746.
 * Permission errors with `ui-circulation.settings.notice-templates`. Refs UICIRC-744.
+* Add `user-settings.custom-fields.collection.get` as subpermission for `ui-circulation.settings.other-settings`. Refs UICIRC-746.
 
 ## [6.0.0](https://github.com/folio-org/ui-circulation/tree/v6.0.0) (2021-09-30)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v5.1.1...v6.0.0)
