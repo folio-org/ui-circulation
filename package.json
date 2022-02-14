@@ -256,6 +256,7 @@
         "permissionName": "ui-circulation.settings.view-lost-item-fees-policies",
         "displayName": "Settings (Circ): Can view lost item fee policies",
         "subPermissions": [
+          "circulation.loans.collection.get",
           "lost-item-fees-policies.collection.get",
           "lost-item-fees-policies.item.get",
           "users.collection.get",
@@ -297,7 +298,6 @@
     "test:jest": "jest --ci --coverage --colors",
     "build-mod-descriptor": "stripes mod descriptor --full --strict | jq '.[]' > module-descriptor.json ",
     "formatjs-compile": "formatjs compile-folder --ast --format simple ./translations/ui-circulation ./translations/ui-circulation/compiled"
-
   },
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.13.0",
