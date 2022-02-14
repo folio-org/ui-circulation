@@ -233,6 +233,7 @@
         "permissionName": "ui-circulation.settings.view-overdue-fines-policies",
         "displayName": "Settings (Circ): Can view overdue fine policies",
         "subPermissions": [
+          "circulation.loans.collection.get",
           "overdue-fines-policies.collection.get",
           "overdue-fines-policies.item.get",
           "users.collection.get",
