@@ -43,6 +43,7 @@
 * Permission errors with `ui-circulation.settings.notice-policies`. Refs UICIRC-717.
 * Add setting to enable and disable wildcard barcode lookup. Refs UICIRC-712.
 * Remove "Requests" from list of circulation apps to enable perform wildcard lookup of items by barcode in Circulation settings. Refs UICIRC-754.
+* Permission errors with `ui-circulation.settings.view-loan-policies`. Refs UICIRC-747.
 
 ## [6.0.0](https://github.com/folio-org/ui-circulation/tree/v6.0.0) (2021-09-30)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v5.1.1...v6.0.0)

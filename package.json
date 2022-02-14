@@ -76,6 +76,7 @@
         "permissionName": "ui-circulation.settings.view-loan-policies",
         "displayName": "Settings (Circ): Can view loan policies",
         "subPermissions": [
+          "circulation.loans.collection.get",
           "circulation-storage.loan-policies.collection.get",
           "circulation-storage.loan-policies.item.get",
           "circulation-storage.fixed-due-date-schedules.collection.get",
