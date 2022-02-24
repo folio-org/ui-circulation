@@ -1,5 +1,8 @@
 # Change history for ui-circulation
 
+## [8.0.0] (IN PROGRESS)
+
+
 ## [7.0.0](https://github.com/folio-org/ui-circulation/tree/v7.0.0) (2022-02-24)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v6.0.1...v7.0.0)
 
@@ -20,7 +23,7 @@
 * Use constants instead of hardcoded value for query limits. Refs UICIRC-724.
 * Prevent deletion of policies if they're in use. Refs UICIRC-669.
 * Add RTL/Jest testing for `FeeFineNoticesSection` component in `NoticePolicy/components/EditSections/FeeFineNoticesSection`. Refs UICIRC-637.
-* Add RTL/Jest testing for `ExceptionCard` component in `settings/LoanHistory/ExceptionCard`. Refs UICIRC- 604.
+* Add RTL/Jest testing for `ExceptionCard` component in `settings/LoanHistory/ExceptionCard`. Refs UICIRC-604.
 * Add RTL/Jest testing for `FixedDueDateScheduleDetail` component in `settings\FixedDueDateSchedule`. Refs UICIRC-608.
 * Add RTL/Jest testing for `RequestPolicyDetail` component in `src\settings\RequestPolicy`. Refs UICIRC-646.
 * UI fee/fine date/time token previews are hard-coded. Refs UICIRC-480.
@@ -49,7 +52,7 @@
 * Add `circulation.loans.collection.get` as subpermission for `ui-circulation.settings.view-lost-item-fees-policies`. Refs UICIRC-745.
 * Add `circulation.loans.collection.get` as subpermission for `ui-circulation.settings.view-overdue-fines-policies`. Refs UICIRC-746.
 * Permission errors with `ui-circulation.settings.notice-templates`. Refs UICIRC-744.
-* Add `user-settings.custom-fields.collection.get` as subpermission for `ui-circulation.settings.other-settings`. Refs UICIRC-746.
+* Add `user-settings.custom-fields.collection.get` as subpermission for `ui-circulation.settings.other-settings`. Refs UICIRC-750.
 * Add `overdue-fines-policies.collection.get` and `lost-item-fees-policies.collection.get` as subpermissions for `ui-circulation.settings.circulation-rules`. Refs UICIRC-714.
 
 ## [6.0.1] (https://github.com/folio-org/ui-circulation/tree/v6.0.1) (2021-11-23)
