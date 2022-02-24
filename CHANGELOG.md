@@ -1,6 +1,7 @@
 # Change history for ui-circulation
 
-## [7.0.0] (IN PROGRESS)
+## [7.0.0](https://github.com/folio-org/ui-circulation/tree/v7.0.0) (2022-02-24)
+[Full Changelog](https://github.com/folio-org/ui-circulation/compare/v6.0.1...v7.0.0)
 
 * Add RTL/Jest testing for `RenewalsSection` component in `LoanPolicy/components/ViewSections`. Refs UICIRC-695.
 * Add RTL/Jest testing for `StaffSlipForm` component in `settings/StaffSlips`. Refs UICIRC-650.
@@ -17,7 +18,6 @@
 * Title level request setting cannot be disabled when there is an active title level request in the system. Refs UICIRC-708.
 * Add possible for resizing panel in circulation rules editor. Refs UICIRC-709.
 * Use constants instead of hardcoded value for query limits. Refs UICIRC-724.
-* Provide read-only access to loan policies. Refs UICIRC-693.
 * Prevent deletion of policies if they're in use. Refs UICIRC-669.
 * Add RTL/Jest testing for `FeeFineNoticesSection` component in `NoticePolicy/components/EditSections/FeeFineNoticesSection`. Refs UICIRC-637.
 * Add RTL/Jest testing for `ExceptionCard` component in `settings/LoanHistory/ExceptionCard`. Refs UICIRC- 604.
@@ -51,6 +51,11 @@
 * Permission errors with `ui-circulation.settings.notice-templates`. Refs UICIRC-744.
 * Add `user-settings.custom-fields.collection.get` as subpermission for `ui-circulation.settings.other-settings`. Refs UICIRC-746.
 * Add `overdue-fines-policies.collection.get` and `lost-item-fees-policies.collection.get` as subpermissions for `ui-circulation.settings.circulation-rules`. Refs UICIRC-714.
+
+## [6.0.1] (https://github.com/folio-org/ui-circulation/tree/v6.0.1) (2021-11-23)
+[Full Changelog](https://github.com/folio-org/ui-circulation/compare/v6.0.0...v6.0.1)
+
+* Provide read-only access to loan policies. Refs UICIRC-693.
 
 ## [6.0.0](https://github.com/folio-org/ui-circulation/tree/v6.0.0) (2021-09-30)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v5.1.1...v6.0.0)
