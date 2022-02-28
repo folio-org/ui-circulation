@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage } from 'react-intl';
+import {
+  injectIntl,
+} from 'react-intl';
 import {
   sortBy,
   get,
@@ -37,6 +39,7 @@ class PatronNotices extends React.Component {
         DELETE: PropTypes.func,
       }),
     }).isRequired,
+    intl: PropTypes.object.isRequired,
   };
 
   static manifest = Object.freeze({
@@ -83,6 +86,7 @@ class PatronNotices extends React.Component {
 
   render() {
     const [{ id: defaultCategory }] = patronNoticeCategories;
+    const { formatMessage } = this.props.intl;
 
     return (
       <EntryManager
@@ -109,13 +113,13 @@ class PatronNotices extends React.Component {
         editElement="both"
         isEntryInUse={this.isTemplateInUse}
         prohibitItemDelete={{
-          close: <FormattedMessage id="ui-circulation.settings.common.close" />,
-          label: <FormattedMessage id="ui-circulation.settings.patronNotices.denyDelete.header" />,
-          message: <FormattedMessage id="ui-circulation.settings.patronNotices.denyDelete.body" />,
+          close: formatMessage({ id: 'ui-circulation.settings.common.close' }),
+          label: formatMessage({ id: 'ui-circulation.settings.patronNotices.denyDelete.header' }),
+          message: formatMessage({ id: 'ui-circulation.settings.patronNotices.denyDelete.body' }),
         }}
       />
     );
   }
 }
 
-export default stripesConnect(PatronNotices);
+export default stripesConnect(injectIntl(PatronNotices));
