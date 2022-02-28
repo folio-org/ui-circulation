@@ -6,7 +6,6 @@ import {
   sortBy,
 } from 'lodash';
 import {
-  FormattedMessage,
   injectIntl,
 } from 'react-intl';
 
@@ -19,6 +18,37 @@ import LostItemFeePolicy from '../Models/LostItemFeePolicy';
 import normalize from './utils/normalize';
 import { MAX_UNPAGED_RESOURCE_COUNT } from '../../constants';
 import withPreventDelete from '../wrappers/withPreventDelete';
+
+export const parseInitialValues = (init = {}) => {
+  const policy = { ...init };
+
+  for (const key in policy) {
+    if (isBoolean(policy[key])) {
+      policy[key] = policy[key].toString();
+    }
+  }
+
+  if (!isUndefined(init.lostItemProcessingFee)) {
+    policy.lostItemProcessingFee = parseFloat(init.lostItemProcessingFee).toFixed(2);
+  }
+
+  if (!isUndefined(init.replacementProcessingFee)) {
+    policy.replacementProcessingFee = parseFloat(init.replacementProcessingFee).toFixed(2);
+  }
+
+  if (init.chargeAmountItem) {
+    policy.chargeAmountItem = {
+      amount: init.chargeAmountItem.amount
+        ? parseFloat(init.chargeAmountItem.amount).toFixed(2)
+        : '0.00',
+      chargeType: init.chargeAmountItem.chargeType
+        ? init.chargeAmountItem.chargeType
+        : '',
+    };
+  }
+
+  return policy;
+};
 
 class LostItemFeePolicySettings extends React.Component {
   static manifest = Object.freeze({
@@ -52,37 +82,6 @@ class LostItemFeePolicySettings extends React.Component {
     }).isRequired,
   };
 
-  parseInitialValues = (init = {}) => {
-    const policy = { ...init };
-
-    for (const key in policy) {
-      if (isBoolean(policy[key])) {
-        policy[key] = policy[key].toString();
-      }
-    }
-
-    if (!isUndefined(init.lostItemProcessingFee)) {
-      policy.lostItemProcessingFee = parseFloat(init.lostItemProcessingFee).toFixed(2);
-    }
-
-    if (!isUndefined(init.replacementProcessingFee)) {
-      policy.replacementProcessingFee = parseFloat(init.replacementProcessingFee).toFixed(2);
-    }
-
-    if (init.chargeAmountItem) {
-      policy.chargeAmountItem = {
-        amount: init.chargeAmountItem.amount
-          ? parseFloat(init.chargeAmountItem.amount).toFixed(2)
-          : '0.00',
-        chargeType: init.chargeAmountItem.chargeType
-          ? init.chargeAmountItem.chargeType
-          : '',
-      };
-    }
-
-    return policy;
-  };
-
   render() {
     const {
       checkPolicy,
@@ -108,17 +107,17 @@ class LostItemFeePolicySettings extends React.Component {
         isEntryInUse={checkPolicy}
         parentMutator={mutator}
         permissions={permissions}
-        parseInitialValues={this.parseInitialValues}
+        parseInitialValues={parseInitialValues}
         parentResources={resources}
         prohibitItemDelete={{
-          close: <FormattedMessage id={this.props.closeText} />,
-          label: <FormattedMessage id={this.props.labelText} />,
-          message: <FormattedMessage id={this.props.messageText} />,
+          close: formatMessage({ id: this.props.closeText }),
+          label: formatMessage({ id: this.props.labelText }),
+          message: formatMessage({ id: this.props.messageText }),
         }}
         detailComponent={LostItemFeePolicyDetail}
         enableDetailsActionMenu
         entryFormComponent={LostItemFeePolicyForm}
-        paneTitle={<FormattedMessage id="ui-circulation.settings.lostItemFee.paneTitle" />}
+        paneTitle={formatMessage({ id: 'ui-circulation.settings.lostItemFee.paneTitle' })}
         entryLabel={formatMessage({ id: 'ui-circulation.settings.lostItemFee.entryLabel' })}
         defaultEntry={LostItemFeePolicy.defaultLostItemFeePolicy()}
         onBeforeSave={normalize}
