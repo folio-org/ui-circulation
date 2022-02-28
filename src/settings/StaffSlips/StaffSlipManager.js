@@ -1,7 +1,7 @@
 import { sortBy } from 'lodash';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage } from 'react-intl';
+import { injectIntl } from 'react-intl';
 import { EntryManager } from '@folio/stripes/smart-components';
 import { stripesConnect } from '@folio/stripes/core';
 
@@ -22,6 +22,7 @@ class StaffSlipManager extends React.Component {
         DELETE: PropTypes.func,
       }),
     }).isRequired,
+    intl: PropTypes.object.isRequired,
   };
 
   static manifest = Object.freeze({
@@ -37,30 +38,29 @@ class StaffSlipManager extends React.Component {
     const {
       mutator,
       resources,
+      intl: {
+        formatMessage,
+      },
     } = this.props;
 
     return (
-      <FormattedMessage id="ui-circulation.settings.staffSlips.staffSlipTokenHeader">
-        {(entryLabel) => (
-          <EntryManager
-            {...this.props}
-            parentMutator={mutator}
-            entryList={sortBy((resources.entries || {}).records || [], ['name'])}
-            detailComponent={StaffSlipDetail}
-            paneTitle={<FormattedMessage id="ui-circulation.settings.index.staffSlips" />}
-            entryLabel={entryLabel}
-            entryFormComponent={StaffSlipForm}
-            nameKey="name"
-            permissions={{
-              put: 'ui-circulation.settings.staff-slips',
-              post: 'ui-circulation.settings.staff-slips.post',
-              delete: 'ui-circulation.settings.staff-slips.delete'
-            }}
-          />
-        )}
-      </FormattedMessage>
+      <EntryManager
+        {...this.props}
+        parentMutator={mutator}
+        entryList={sortBy((resources.entries || {}).records || [], ['name'])}
+        detailComponent={StaffSlipDetail}
+        paneTitle={formatMessage({ id: 'ui-circulation.settings.index.staffSlips' })}
+        entryLabel={formatMessage({ id: 'ui-circulation.settings.staffSlips.staffSlipTokenHeader' })}
+        entryFormComponent={StaffSlipForm}
+        nameKey="name"
+        permissions={{
+          put: 'ui-circulation.settings.staff-slips',
+          post: 'ui-circulation.settings.staff-slips.post',
+          delete: 'ui-circulation.settings.staff-slips.delete'
+        }}
+      />
     );
   }
 }
 
-export default stripesConnect(StaffSlipManager);
+export default stripesConnect(injectIntl(StaffSlipManager));
