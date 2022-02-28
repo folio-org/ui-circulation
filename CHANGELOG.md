@@ -5,6 +5,8 @@
 * Add RTL/Jest testing for `LostItemFeePolicySettings` component in `settings/LostItemFeePolicy`. Refs UICIRC-758.
 * Add RTL/Jest testing for `PatronNotices` component in `settings/PatronNotices`. Refs UICIRC-760.
 * Add RTL/Jest testing for `StaffSlipManager` component in `src/settings/StaffSlips`. Refs UICIRC-762.
+* Add RTL/Jest testing for `LoanPolicySettings` component in `src/settings/LoanPolicy`. Refs UICIRC-757.
+* Add RTL/Jest testing for `NoticePolicySettings` component in `settings/NoticePolicy`. Refs UICIRC-759.
 
 ## [7.0.0](https://github.com/folio-org/ui-circulation/tree/v7.0.0) (2022-02-24)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v6.0.1...v7.0.0)
@@ -57,7 +59,6 @@
 * Permission errors with `ui-circulation.settings.notice-templates`. Refs UICIRC-744.
 * Add `user-settings.custom-fields.collection.get` as subpermission for `ui-circulation.settings.other-settings`. Refs UICIRC-750.
 * Add `overdue-fines-policies.collection.get` and `lost-item-fees-policies.collection.get` as subpermissions for `ui-circulation.settings.circulation-rules`. Refs UICIRC-714.
-* Add RTL/Jest testing for `LoanPolicySettings` component in `src/settings/LoanPolicy`. Refs UICIRC-757.
 
 ## [6.0.1] (https://github.com/folio-org/ui-circulation/tree/v6.0.1) (2021-11-23)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v6.0.0...v6.0.1)
