@@ -7,7 +7,6 @@ import {
   sortBy,
 } from 'lodash';
 import {
-  FormattedMessage,
   injectIntl,
 } from 'react-intl';
 
@@ -20,6 +19,16 @@ import normalize from './utils/normalize';
 import { NoticePolicy } from '../Models/NoticePolicy';
 
 import { MAX_UNPAGED_RESOURCE_COUNT } from '../../constants';
+
+export const parseInitialValues = (entity) => {
+  const policy = cloneDeep(entity);
+
+  forEach(policy?.loanNotices || [], (loanNotice) => {
+    loanNotice.realTime = loanNotice.realTime.toString();
+  });
+
+  return policy;
+};
 
 class NoticePolicySettings extends React.Component {
   static manifest = Object.freeze({
@@ -73,16 +82,6 @@ class NoticePolicySettings extends React.Component {
     return circulationRules.rulesAsText.includes(policyId);
   };
 
-  parseInitialValues = (entity) => {
-    const policy = cloneDeep(entity);
-
-    forEach(policy?.loanNotices || [], (loanNotice) => {
-      loanNotice.realTime = loanNotice.realTime.toString();
-    });
-
-    return policy;
-  };
-
   render() {
     const {
       resources,
@@ -112,16 +111,16 @@ class NoticePolicySettings extends React.Component {
         parentResources={resources}
         detailComponent={NoticePolicyDetail}
         entryFormComponent={NoticePolicyForm}
-        paneTitle={<FormattedMessage id="ui-circulation.settings.noticePolicy.paneTitle" />}
+        paneTitle={formatMessage({ id: 'ui-circulation.settings.noticePolicy.paneTitle' })}
         entryLabel={formatMessage({ id: 'ui-circulation.settings.noticePolicy.entryLabel' })}
         defaultEntry={NoticePolicy.defaultNoticePolicy()}
         isEntryInUse={this.isPolicyInUse}
         prohibitItemDelete={{
-          close: <FormattedMessage id="ui-circulation.settings.common.close" />,
-          label: <FormattedMessage id="ui-circulation.settings.noticePolicy.denyDelete.header" />,
-          message: <FormattedMessage id="ui-circulation.settings.noticePolicy.denyDelete.body" />,
+          close: formatMessage({ id: 'ui-circulation.settings.common.close' }),
+          label: formatMessage({ id: 'ui-circulation.settings.noticePolicy.denyDelete.header' }),
+          message: formatMessage({ id: 'ui-circulation.settings.noticePolicy.denyDelete.body' }),
         }}
-        parseInitialValues={this.parseInitialValues}
+        parseInitialValues={parseInitialValues}
         onBeforeSave={normalize}
       />
     );
