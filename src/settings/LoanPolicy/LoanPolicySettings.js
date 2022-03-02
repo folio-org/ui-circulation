@@ -1,10 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { sortBy } from 'lodash';
-import {
-  FormattedMessage,
-  injectIntl,
-} from 'react-intl';
+import { injectIntl } from 'react-intl';
 
 import { EntryManager } from '@folio/stripes/smart-components';
 import { stripesConnect } from '@folio/stripes/core';
@@ -42,7 +39,7 @@ class LoanPolicySettings extends React.Component {
   static propTypes = {
     checkPolicy: PropTypes.func.isRequired,
     closeText: PropTypes.string.isRequired,
-    intl: PropTypes.object,
+    intl: PropTypes.object.isRequired,
     labelText: PropTypes.string.isRequired,
     messageText: PropTypes.string.isRequired,
     location: PropTypes.object.isRequired,
@@ -95,14 +92,14 @@ class LoanPolicySettings extends React.Component {
         permissions={permissions}
         parentResources={resources}
         prohibitItemDelete={{
-          close: <FormattedMessage id={this.props.closeText} />,
-          label: <FormattedMessage id={this.props.labelText} />,
-          message: <FormattedMessage id={this.props.messageText} />,
+          close: formatMessage({ id: this.props.closeText }),
+          label: formatMessage({ id: this.props.labelText }),
+          message: formatMessage({ id: this.props.messageText }),
         }}
         detailComponent={LoanPolicyDetail}
         enableDetailsActionMenu
         entryFormComponent={LoanPolicyForm}
-        paneTitle={<FormattedMessage id="ui-circulation.settings.loanPolicy.paneTitle" />}
+        paneTitle={formatMessage({ id: 'ui-circulation.settings.loanPolicy.paneTitle' })}
         entryLabel={formatMessage({ id: 'ui-circulation.settings.loanPolicy.entryLabel' })}
         defaultEntry={LoanPolicy.defaultLoanPolicy()}
         onBeforeSave={normalize}

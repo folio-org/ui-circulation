@@ -1,7 +1,14 @@
 import React from 'react';
 
 jest.mock('@folio/stripes/core', () => ({
-  stripesConnect: jest.fn((component) => component),
+  stripesConnect: (Component) => (props) => (
+    <Component
+      {...props}
+      stripes={{
+        logger: () => {},
+      }}
+    />
+  ),
   stripesShape: {},
   withStripes: (Component) => (props) => <Component {...props} />,
 }));
