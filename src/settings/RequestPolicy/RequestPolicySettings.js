@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { sortBy, get } from 'lodash';
-import { FormattedMessage, injectIntl } from 'react-intl';
+import { injectIntl } from 'react-intl';
 
 import { EntryManager } from '@folio/stripes/smart-components';
 import { stripesConnect } from '@folio/stripes/core';
@@ -15,6 +15,16 @@ import {
   requestPolicyTypes,
   MAX_UNPAGED_RESOURCE_COUNT,
 } from '../../constants';
+
+export const parseInitialValues = (values = {}) => {
+  const types = values.requestTypes || [];
+  const typesMap = types.reduce((acc, type) => ({ ...acc, [type]: true }), {});
+  const requestTypes = requestPolicyTypes.map((type) => {
+    return !!typesMap[type];
+  });
+
+  return { ...values, requestTypes };
+};
 
 class RequestPolicySettings extends React.Component {
   static manifest = Object.freeze({
@@ -48,16 +58,6 @@ class RequestPolicySettings extends React.Component {
     }).isRequired,
   }
 
-  parseInitialValues = (values = {}) => {
-    const types = values.requestTypes || [];
-    const typesMap = types.reduce((acc, type) => ({ ...acc, [type]: true }), {});
-    const requestTypes = requestPolicyTypes.map((type) => {
-      return !!typesMap[type];
-    });
-
-    return { ...values, requestTypes };
-  };
-
   isPolicyInUse = (policyId) => {
     const { resources } = this.props;
     const circulationRules = get(resources, 'circulationRules.records[0].rulesAsText', '');
@@ -69,6 +69,9 @@ class RequestPolicySettings extends React.Component {
     const {
       resources,
       mutator,
+      intl: {
+        formatMessage,
+      },
     } = this.props;
 
     const permissions = {
@@ -85,14 +88,14 @@ class RequestPolicySettings extends React.Component {
         id="request-policy-settings"
         data-test-request-policy-settings
         parentMutator={mutator}
-        parseInitialValues={this.parseInitialValues}
+        parseInitialValues={parseInitialValues}
         parentResources={resources}
         entryList={entryList}
         resourceKey="requestPolicies"
         detailComponent={RequestPolicyDetail}
         entryFormComponent={RequestPolicyForm}
-        paneTitle={<FormattedMessage id="ui-circulation.settings.requestPolicy.paneTitle" />}
-        entryLabel={this.props.intl.formatMessage({ id : 'ui-circulation.settings.requestPolicy.entryLabel' })}
+        paneTitle={formatMessage({ id : 'ui-circulation.settings.requestPolicy.paneTitle' })}
+        entryLabel={formatMessage({ id : 'ui-circulation.settings.requestPolicy.entryLabel' })}
         nameKey="name"
         enableDetailsActionMenu
         permissions={permissions}
@@ -100,9 +103,9 @@ class RequestPolicySettings extends React.Component {
         defaultEntry={RequestPolicy.defaultPolicy()}
         isEntryInUse={this.isPolicyInUse}
         prohibitItemDelete={{
-          close: <FormattedMessage id="ui-circulation.settings.common.close" />,
-          label: <FormattedMessage id="ui-circulation.settings.requestPolicy.cannotDelete.label" />,
-          message: <FormattedMessage id="ui-circulation.settings.requestPolicy.cannotDelete.message" />,
+          close: formatMessage({ id : 'ui-circulation.settings.common.close' }),
+          label: formatMessage({ id : 'ui-circulation.settings.requestPolicy.cannotDelete.label' }),
+          message: formatMessage({ id : 'ui-circulation.settings.requestPolicy.cannotDelete.message' }),
         }}
       />
     );
