@@ -19,7 +19,7 @@ import css from './AnonymizingTypeSelectContainer.css';
 
 class AnonymizingTypeSelectContainer extends Component {
   static propTypes = {
-    intl: PropTypes.object,
+    intl: PropTypes.object.isRequired,
     name: PropTypes.string.isRequired,
     path: PropTypes.string.isRequired,
     types: PropTypes.arrayOf(PropTypes.object).isRequired,
@@ -35,6 +35,7 @@ class AnonymizingTypeSelectContainer extends Component {
   renderPeriod(name, path) {
     return (
       <div
+        data-testid="period"
         data-test-period-section
         className={css.periodContainer}
       >
