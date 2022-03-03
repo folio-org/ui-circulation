@@ -467,5 +467,5 @@
     "settings.policy.denyDelete.body": "本政策无法删除，因为它正被一条或多条记录使用。",
     "settings.overdueFinePolicy.denyDelete.header": "无法删除超期罚款政策",
     "settings.lostItemPolicy.denyDelete.header": "无法删除遗失单件费用政策",
-    "settings.checkout.wildcardLookup": "在流通应用中以通配符查找条形码（签入、签出、请求）"
+    "settings.checkout.wildcardLookup": "在流通应用程序中按条码执行通配符查找单件（归还、借出）"
 }
