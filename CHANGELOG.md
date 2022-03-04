@@ -9,6 +9,7 @@
 * Add RTL/Jest testing for `NoticePolicySettings` component in `settings/NoticePolicy`. Refs UICIRC-759.
 * Add RTL/Jest testing for `RequestPolicySettings` component in `settings/RequestPolicy`. Refs UICIRC-761.
 * Add RTL/Jest testing for `LoanHistorySettings` component in `src/settings/LoanHistory`. Refs UICIRC-763.
+* Add RTL/Jest testing for `AnonymizingTypeSelectContainer` component in `src/settings/components/AnonymizingTypeSelect`. Refs UICIRC-654.
 
 ## [7.0.0](https://github.com/folio-org/ui-circulation/tree/v7.0.0) (2022-02-24)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v6.0.1...v7.0.0)
