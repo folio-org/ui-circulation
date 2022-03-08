@@ -248,6 +248,7 @@ class FixedDueDateScheduleForm extends React.Component {
       >
         <Paneset isRoot>
           <Pane
+            id="fixed-due-date-schedule-pane"
             defaultWidth="100%"
             firstMenu={this.addFirstMenu()}
             footer={this.renderFooter()}

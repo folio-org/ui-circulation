@@ -170,6 +170,7 @@ class PatronNoticeForm extends React.Component {
       >
         <Paneset isRoot>
           <Pane
+            id="patron-notice-template-pane"
             defaultWidth="100%"
             paneTitle={this.renderPaneTitle()}
             firstMenu={this.renderCLoseIcon()}

@@ -106,6 +106,7 @@ class NoticePolicyForm extends React.Component {
       >
         <Paneset isRoot>
           <Pane
+            id="patron-notice-policy-pane"
             defaultWidth="100%"
             paneTitle={panelTitle}
             firstMenu={<CancelButton onCancel={onCancel} />}

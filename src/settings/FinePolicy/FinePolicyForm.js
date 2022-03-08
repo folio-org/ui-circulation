@@ -112,6 +112,7 @@ class FinePolicyForm extends React.Component {
       >
         <Paneset isRoot>
           <Pane
+            id="overdue-fine-policy-pane"
             defaultWidth="100%"
             paneTitle={panelTitle}
             firstMenu={<CancelButton onCancel={onCancel} />}

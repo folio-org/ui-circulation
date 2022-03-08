@@ -151,6 +151,7 @@ class LoanPolicyForm extends React.Component {
       >
         <Paneset isRoot>
           <Pane
+            id="loan-policy-pane"
             defaultWidth="100%"
             paneTitle={panelTitle}
             firstMenu={<CancelButton onCancel={onCancel} />}

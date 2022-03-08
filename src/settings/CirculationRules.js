@@ -378,6 +378,7 @@ class CirculationRules extends React.Component {
     return (
       <>
         <Pane
+          id="circulation-rules-pane"
           data-test-circulation-rules
           paneTitle={<FormattedMessage id="ui-circulation.settings.circulationRules.paneTitle" />}
           defaultWidth="fill"

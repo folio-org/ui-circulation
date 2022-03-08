@@ -85,6 +85,7 @@ class LoanHistoryForm extends Component {
         onSubmit={handleSubmit}
       >
         <Pane
+          id="loan-history-pane"
           defaultWidth="fill"
           fluidContentWidth
           paneTitle={label}
