@@ -98,6 +98,7 @@ const TitleLevelRequestsForm = (props) => {
       onSubmit={handleSubmit}
     >
       <Pane
+        id="title-level-requests-pane"
         data-testid="tlrPane"
         defaultWidth="fill"
         fluidContentWidth

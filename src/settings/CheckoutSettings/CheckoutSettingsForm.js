@@ -51,6 +51,7 @@ const CheckoutSettingsForm = ({
 
   return (
     <Pane
+      id="other-settings-pane"
       defaultWidth="fill"
       fluidContentWidth
       paneTitle={label}

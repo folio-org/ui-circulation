@@ -131,6 +131,7 @@ class RequestPolicyForm extends React.Component {
       >
         <Paneset isRoot>
           <Pane
+            id="request-policy-pane"
             defaultWidth="100%"
             paneTitle={panelTitle}
             firstMenu={<CancelButton onCancel={onCancel} />}

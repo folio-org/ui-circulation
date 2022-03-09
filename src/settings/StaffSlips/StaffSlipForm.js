@@ -79,6 +79,7 @@ class StaffSlipForm extends React.Component {
       >
         <Paneset isRoot>
           <Pane
+            id="staff-slip-pane"
             defaultWidth="100%"
             paneTitle={panelTitle}
             firstMenu={<CancelButton onCancel={onCancel} />}
