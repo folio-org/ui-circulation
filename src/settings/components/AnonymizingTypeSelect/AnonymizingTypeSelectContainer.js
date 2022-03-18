@@ -7,7 +7,7 @@ import {
 import { Field } from 'react-final-form';
 
 import AnonymizingTypeSelect from './AnonymizingTypeSelect';
-import { Period } from '..';
+import Period from '../Period';
 import optionsGenerator from '../../utils/options-generator';
 import {
   closingTypesMap,
@@ -65,7 +65,7 @@ class AnonymizingTypeSelectContainer extends Component {
               id={type.label}
               values={{ name: <FormattedMessage id={`ui-circulation.settings.loanHistory.${name}`} /> }}
             />
-          )
+          ),
         };
       }
 

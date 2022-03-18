@@ -10,7 +10,7 @@ import '../../../../test/jest/__mock__';
 import { Field } from 'react-final-form';
 
 import AnonymizingTypeSelect from './AnonymizingTypeSelect';
-import { Period } from '..';
+import Period from '../Period';
 import AnonymizingTypeSelectContainer from './AnonymizingTypeSelectContainer';
 
 Field.mockImplementation(() => null);
@@ -24,9 +24,7 @@ jest.mock('./AnonymizingTypeSelect', () => jest.fn(({ types }) => (
     ))}
   </div>
 )));
-jest.mock('..', () => ({
-  Period: jest.fn(() => null),
-}));
+jest.mock('../Period', () => jest.fn(() => null));
 
 describe('AnonymizingTypeSelectContainer', () => {
   const labelIds = {
