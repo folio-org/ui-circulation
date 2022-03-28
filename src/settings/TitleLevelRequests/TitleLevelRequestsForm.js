@@ -42,7 +42,7 @@ const TitleLevelRequestsForm = (props) => {
   } = props;
 
   const [isErrorModalOpen, setIsErrorModalOpen] = useState(false);
-  const templates = resources.templates?.records || [];
+  const templates = resources.templates?.records?.filter(({ active }) => active) || [];
   const { values: titleLevelRequestsValues } = form.getState();
 
   const renderFooter = () => (
