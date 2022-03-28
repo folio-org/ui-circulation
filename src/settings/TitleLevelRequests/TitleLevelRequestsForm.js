@@ -155,7 +155,7 @@ TitleLevelRequestsForm.manifest = Object.freeze({
     path: 'templates',
     records: 'templates',
     params: {
-      query: `cql.allRecords=1 AND category="${patronNoticeCategoryIds.REQUEST}"`,
+      query: `cql.allRecords=1 AND category="${patronNoticeCategoryIds.REQUEST}" AND active="true"`,
     },
     recordsRequired: MAX_UNPAGED_RESOURCE_COUNT,
     perRequest: MAX_UNPAGED_RESOURCE_COUNT,
