@@ -54,12 +54,6 @@ describe('TitleLevelRequestsForm', () => {
     {
       id: 'testId',
       name: 'testName',
-      active: true,
-    },
-    {
-      id: 'id',
-      name: 'name',
-      active: false,
     },
   ];
   const mockedResources = {
@@ -170,8 +164,8 @@ describe('TitleLevelRequestsForm', () => {
       expect(Field).toHaveBeenNthCalledWith(orderOfFieldCall.tlrByDefault, expectedResult, {});
     });
 
-    it('should execute "NoticeTemplates" with passed filtered props', () => {
-      expect(NoticeTemplates).toHaveBeenLastCalledWith({ templates: [mockedRecord[0]] }, {});
+    it('should execute "NoticeTemplates" with passed props', () => {
+      expect(NoticeTemplates).toHaveBeenLastCalledWith({ templates: mockedRecord }, {});
     });
 
     it('should execute "Button" with passed props', () => {
