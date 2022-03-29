@@ -12,6 +12,7 @@
 * Add RTL/Jest testing for `AnonymizingTypeSelectContainer` component in `src/settings/components/AnonymizingTypeSelect`. Refs UICIRC-654.
 * Add id for Pane component. Refs UICIRC-756.
 * Fix problem with module launch. Refs UICIRC-768.
+* Lost Item Policy validation error with aging only recalls to lost. Refs UICIRC-772.
 
 ## [7.0.1](https://github.com/folio-org/ui-circulation/tree/v7.0.1) (2022-03-31)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v7.0.0...v7.0.1)
