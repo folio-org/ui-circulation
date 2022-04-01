@@ -72,7 +72,7 @@ const renderLoansSection = (props = initialProps) => {
 
 describe('LoansSection', () => {
   afterEach(() => {
-    Field.mockClear();
+    jest.clearAllMocks();
   });
 
   describe('Initial render with default properties', () => {
