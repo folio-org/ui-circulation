@@ -17,6 +17,7 @@
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v7.0.0...v7.0.1)
 
 * Add the possibility to select only active templates. Refs UICIRC-771.
+* Cover LoansSection component by RTL/jest tests. Refs UICIRC-613.
 
 ## [7.0.0](https://github.com/folio-org/ui-circulation/tree/v7.0.0) (2022-02-24)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v6.0.1...v7.0.0)
