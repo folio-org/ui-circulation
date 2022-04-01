@@ -16,6 +16,7 @@ import LoansSection from './LoansSection';
 import {
   longTermLoansOptions,
   shortTermLoansOptions,
+  intervalPeriods,
 } from '../../../../../constants';
 
 jest.mock('../../../../components/Period', () => jest.fn(() => null));
@@ -36,6 +37,7 @@ const messageIds = {
   fDDS: 'ui-circulation.settings.loanPolicy.fDDS',
   openingTimeOffset: 'ui-circulation.settings.loanPolicy.openingTimeOffset',
   pleaseSelect: 'ui-circulation.settings.common.pleaseSelect',
+  selectInterval: 'ui-circulation.settings.loanPolicy.selectInterval',
 };
 
 const mockedSchedules = [
@@ -99,6 +101,11 @@ describe('LoansSection', () => {
 
   describe('Render when "isLoanable" returns true', () => {
     let container;
+    const fieldComponentOrderCalls = {
+      loanProfile: 2,
+      closedDueDate: 3,
+      gracePeriod: 4,
+    };
 
     beforeEach(() => {
       container = renderLoansSection({
@@ -117,7 +124,7 @@ describe('LoansSection', () => {
         name: 'loansPolicy.profileId',
       };
 
-      expect(Field).toHaveBeenNthCalledWith(2, expect.objectContaining(expectedProps), {});
+      expect(Field).toHaveBeenNthCalledWith(fieldComponentOrderCalls.loanProfile, expect.objectContaining(expectedProps), {});
       expect(container.getByText(messageIds.loanProfile)).toBeInTheDocument();
     });
 
@@ -131,7 +138,7 @@ describe('LoansSection', () => {
         }
       };
 
-      expect(Field).toHaveBeenNthCalledWith(3, expect.objectContaining(expectedProps), {});
+      expect(Field).toHaveBeenNthCalledWith(fieldComponentOrderCalls.closedDueDate, expect.objectContaining(expectedProps), {});
       expect(container.getByText(messageIds.dueDate)).toBeInTheDocument();
     });
 
@@ -143,7 +150,7 @@ describe('LoansSection', () => {
         type: 'number',
       };
 
-      expect(Field).toHaveBeenNthCalledWith(4, expect.objectContaining(expectedProps), {});
+      expect(Field).toHaveBeenNthCalledWith(fieldComponentOrderCalls.gracePeriod, expect.objectContaining(expectedProps), {});
       expect(container.getByText(messageIds.itemLimit)).toBeInTheDocument();
     });
 
@@ -153,6 +160,10 @@ describe('LoansSection', () => {
         inputValuePath: 'loansPolicy.gracePeriod.duration',
         selectValuePath: 'loansPolicy.gracePeriod.intervalId',
         changeFormValue: initialProps.change,
+        intervalPeriods: {
+          id: messageIds.selectInterval,
+          options: intervalPeriods,
+        },
       };
 
       expect(Period).toHaveBeenCalledWith(expect.objectContaining(expectedProps), {});
@@ -161,6 +172,9 @@ describe('LoansSection', () => {
 
   describe('Render when "isProfileRolling" returns true', () => {
     let container;
+    const fieldComponentOrderCalls = {
+      dueDateSchedule: 2,
+    };
 
     beforeEach(() => {
       container = renderLoansSection({
@@ -168,7 +182,7 @@ describe('LoansSection', () => {
         policy: {
           ...mockedPolicy,
           isProfileRolling: jest.fn(() => true),
-        }
+        },
       });
     });
 
@@ -178,6 +192,10 @@ describe('LoansSection', () => {
         inputValuePath: 'loansPolicy.period.duration',
         selectValuePath: 'loansPolicy.period.intervalId',
         changeFormValue: initialProps.change,
+        intervalPeriods: {
+          id: messageIds.selectInterval,
+          options: intervalPeriods,
+        },
       };
 
       expect(Period).toHaveBeenCalledWith(expect.objectContaining(expectedProps), {});
@@ -189,15 +207,19 @@ describe('LoansSection', () => {
         name: 'loansPolicy.fixedDueDateScheduleId',
         id: 'input_loansPolicy_fixedDueDateSchedule',
         required: false,
+        children: mockedSchedules,
       };
 
-      expect(Field).toHaveBeenNthCalledWith(2, expect.objectContaining(expectedProps), {});
+      expect(Field).toHaveBeenNthCalledWith(fieldComponentOrderCalls.dueDateSchedule, expect.objectContaining(expectedProps), {});
       expect(container.getByText(messageIds.fDDSLimit)).toBeInTheDocument();
     });
   });
 
   describe('Render when "isProfileFixed" returns true', () => {
     let container;
+    const fieldComponentOrderCalls = {
+      dueDateSchedule: 2,
+    };
 
     beforeEach(() => {
       container = renderLoansSection({
@@ -215,15 +237,19 @@ describe('LoansSection', () => {
         name: 'loansPolicy.fixedDueDateScheduleId',
         id: 'input_loansPolicy_fixedDueDateSchedule',
         required: true,
+        children: mockedSchedules,
       };
 
-      expect(Field).toHaveBeenNthCalledWith(2, expect.objectContaining(expectedProps), {});
+      expect(Field).toHaveBeenNthCalledWith(fieldComponentOrderCalls.dueDateSchedule, expect.objectContaining(expectedProps), {});
       expect(container.getByText(messageIds.fDDS)).toBeInTheDocument();
     });
   });
 
   describe('Render when "isShortTermLoan" and "isLoanable" return true', () => {
     let container;
+    const fieldComponentOrderCalls = {
+      closedDueDate: 3,
+    };
 
     beforeEach(() => {
       container = renderLoansSection({
@@ -246,7 +272,7 @@ describe('LoansSection', () => {
         }
       };
 
-      expect(Field).toHaveBeenNthCalledWith(3, expect.objectContaining(expectedProps), {});
+      expect(Field).toHaveBeenNthCalledWith(fieldComponentOrderCalls.closedDueDate, expect.objectContaining(expectedProps), {});
       expect(container.getByText(messageIds.dueDate)).toBeInTheDocument();
     });
   });
@@ -268,6 +294,10 @@ describe('LoansSection', () => {
         inputValuePath: 'loansPolicy.openingTimeOffset.duration',
         selectValuePath: 'loansPolicy.openingTimeOffset.intervalId',
         changeFormValue: initialProps.change,
+        intervalPeriods: {
+          id: messageIds.selectInterval,
+          options: intervalPeriods.slice(0, 2).reverse(),
+        },
       };
 
       expect(Period).toHaveBeenCalledWith(expect.objectContaining(expectedProps), {});
