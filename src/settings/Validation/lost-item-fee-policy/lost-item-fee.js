@@ -32,7 +32,10 @@ export default function (l) {
     },
     'itemAgedLostOverdue.duration': {
       rules: ['chargeAmountItemSystemSelected', 'hasPatronBilledAfterAgedToLostValue', 'hasAmount', 'isIntegerGreaterThanOrEqualToZero'],
-      shouldValidate: l.hasInterval('itemAgedLostOverdue.intervalId') || l.hasValue('patronBilledAfterAgedLost.duration') || l.hasPassedValue('chargeAmountItemSystem', true) || l.hasValue('itemAgedLostOverdue.duration'),
+      shouldValidate: l.hasInterval('itemAgedLostOverdue.intervalId')
+        || l.hasValue('patronBilledAfterAgedLost.duration')
+        || l.hasValue('itemAgedLostOverdue.duration')
+        || (l.hasPassedValue('chargeAmountItemSystem', true) && !l.hasValue('recalledItemAgedLostOverdue.duration')),
     },
     'itemAgedLostOverdue.intervalId': {
       rules: ['isNotEmptySelect'],
@@ -50,8 +53,11 @@ export default function (l) {
     // 'Recalled items aged to lost after overdue':
     // Duration field: If there is an interval selected, there must be a duration value
     'recalledItemAgedLostOverdue.duration': {
-      rules: ['hasPatronBilledAfterRecalledAgedToLostValue', 'hasAmount', 'isIntegerGreaterThanOrEqualToZero'],
-      shouldValidate: l.hasInterval('recalledItemAgedLostOverdue.intervalId') || l.hasValue('patronBilledAfterRecalledItemAgedLost.duration'),
+      rules: ['chargeAmountItemSystemSelected', 'hasPatronBilledAfterRecalledAgedToLostValue', 'hasAmount', 'isIntegerGreaterThanOrEqualToZero'],
+      shouldValidate: l.hasInterval('recalledItemAgedLostOverdue.intervalId')
+        || l.hasValue('patronBilledAfterRecalledItemAgedLost.duration')
+        || l.hasValue('recalledItemAgedLostOverdue.duration')
+        || (l.hasPassedValue('chargeAmountItemSystem', true) && !l.hasValue('itemAgedLostOverdue.duration')),
     },
     // Interval field: If there is a duration value, an interval must be selected
     'recalledItemAgedLostOverdue.intervalId': {
