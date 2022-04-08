@@ -30,17 +30,6 @@ jest.mock('../components', () => ({
   FooterPane: jest.fn(() => null),
 }));
 
-Pane.mockImplementation(({
-  children,
-  firstMenu,
-  footer,
-}) => (
-  <div>
-    {firstMenu}
-    {children}
-    {footer}
-  </div>
-));
 ExpandAllButton.mockImplementation(({ onToggle }) => (
   // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
   <div onClick={() => onToggle({ generalRequestPolicyForm: false })}>
