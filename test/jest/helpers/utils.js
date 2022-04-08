@@ -4,12 +4,12 @@ export const componentPropsCheck = (Component, testId, expectedProps, partialCom
     .reverse()
     .find(item => item[0]['data-testid'] === testId);
 
-  if (partialCompare) {
-    expect(propertiesForCompare[0]).toStrictEqual(expect.objectContaining(expectedProps));
-  } else {
-    expect(propertiesForCompare[0]).toStrictEqual({
+  const resultExpectedProps = partialCompare
+    ? expect.objectContaining(expectedProps)
+    : {
       ...expectedProps,
       'data-testid': testId,
-    });
-  }
+    };
+
+  expect(propertiesForCompare[0]).toStrictEqual(resultExpectedProps);
 };
