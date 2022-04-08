@@ -132,7 +132,7 @@ describe('RequestPolicyForm', () => {
       }, {});
     });
 
-    it('"CancelButton" should be executed with correct props', () => {
+    it('"FooterPane" should be executed with correct props', () => {
       expect(FooterPane).toHaveBeenCalledWith({
         pristine: true,
         submitting: false,
