@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage } from 'react-intl';
+import { injectIntl } from 'react-intl';
 import {
   find,
   memoize,
@@ -36,6 +36,7 @@ class RequestPolicyForm extends React.Component {
     submitting: PropTypes.bool.isRequired,
     onCancel: PropTypes.func.isRequired,
     handleSubmit: PropTypes.func.isRequired,
+    intl: PropTypes.object.isRequired,
   };
 
   static defaultProps = {
@@ -72,28 +73,31 @@ class RequestPolicyForm extends React.Component {
           'X-Okapi-Tenant': okapi.tenant,
           'X-Okapi-Token': okapi.token,
           'Content-Type': 'application/json',
-        }
+        },
       });
   };
 
   validate = memoize(async (name) => {
-    const { initialValues } = this.props;
+    const {
+      initialValues,
+      intl: {
+        formatMessage,
+      },
+    } = this.props;
 
     let error;
-
     if (name) {
       try {
         const response = await this.getPoliciesByName(name);
         const { requestPolicies = [] } = await response.json();
         const matchedPolicy = find(requestPolicies, ['name', name]);
         if (matchedPolicy && matchedPolicy.id !== initialValues.id) {
-          error = <FormattedMessage id="ui-circulation.settings.requestPolicy.errors.nameExists" />;
+          error = formatMessage({ id: 'ui-circulation.settings.requestPolicy.errors.nameExists' });
         }
       } catch (e) {
         throw new Error(e);
       }
     }
-
     return error;
   });
 
@@ -105,6 +109,9 @@ class RequestPolicyForm extends React.Component {
       submitting,
       handleSubmit,
       onCancel,
+      intl: {
+        formatMessage,
+      },
     } = this.props;
 
     const { sections } = this.state;
@@ -114,7 +121,7 @@ class RequestPolicyForm extends React.Component {
 
     const panelTitle = policy.id
       ? policy.name
-      : <FormattedMessage id="ui-circulation.settings.requestPolicy.createEntryLabel" />;
+      : formatMessage({ id: 'ui-circulation.settings.requestPolicy.createEntryLabel' });
 
     const footerPaneProps = {
       pristine,
@@ -124,6 +131,7 @@ class RequestPolicyForm extends React.Component {
 
     return (
       <form
+        data-testid="form"
         noValidate
         className={css.requestPolicyForm}
         data-test-request-policy-form
@@ -169,4 +177,4 @@ class RequestPolicyForm extends React.Component {
 export default stripesFinalForm({
   navigationCheck: true,
   validate: validateRequestPolicy,
-})(RequestPolicyForm);
+})(injectIntl(RequestPolicyForm));

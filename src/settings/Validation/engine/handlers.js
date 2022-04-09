@@ -115,8 +115,12 @@ export const hasPatronBilledAfterAgedToLostValue = (value, model) => {
 
 export const hasChargeAmountItemSystemSelected = (value, model) => {
   const chargeAmountItemSystem = get(model, 'chargeAmountItemSystem');
+  const itemAgedLostOverdueDuration = get(model, 'itemAgedLostOverdue.duration');
+  const recalledItemAgedLostOverdueDuration = get(model, 'recalledItemAgedLostOverdue.duration');
 
-  return (chargeAmountItemSystem && isNotEmpty(value)) || !chargeAmountItemSystem;
+  return !chargeAmountItemSystem
+    || isNotEmpty(itemAgedLostOverdueDuration)
+    || isNotEmpty(recalledItemAgedLostOverdueDuration);
 };
 
 export const isToBeforeFrom = (value, model, { pathToSection }) => {
