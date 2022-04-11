@@ -1,5 +1,9 @@
 # Change history for ui-circulation
 
+## 7.0.3
+
+* Hide title level requests settings. Refs UICIRC-777.
+
 ## [7.0.2](https://github.com/folio-org/ui-circulation/tree/v7.0.2) (2022-04-06)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v7.0.1...v7.0.2)
 
