@@ -41,11 +41,6 @@ IconButton.mockImplementation(({ icon, onClick }) => (
     {`iconButton-${icon}`}
   </div>
 ));
-Field.mockImplementation(({ 'data-testid': testId, label }) => (
-  <div data-testid={testId}>
-    {label}
-  </div>
-));
 
 describe('NoticeCard', () => {
   const labelIds = {
