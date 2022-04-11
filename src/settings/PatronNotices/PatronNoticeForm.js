@@ -109,6 +109,7 @@ class PatronNoticeForm extends React.Component {
 
     return (
       <CancelButton
+        data-testid="patronNoticeCancelButton"
         labelKey="ui-circulation.settings.patronNotices.closeDialog"
         onCancel={onCancel}
       />
@@ -117,12 +118,15 @@ class PatronNoticeForm extends React.Component {
 
   renderPaneTitle() {
     const {
-      initialValues: notice = {}
+      initialValues: notice,
+      intl: {
+        formatMessage,
+      },
     } = this.props;
 
     return notice.id
       ? notice.name
-      : <FormattedMessage id="ui-circulation.settings.patronNotices.newLabel" />;
+      : formatMessage({ id: 'ui-circulation.settings.patronNotices.newLabel' });
   }
 
   renderFooterPane() {
@@ -134,6 +138,7 @@ class PatronNoticeForm extends React.Component {
 
     return (
       <FooterPane
+        data-testid="patronNoticeFooterPane"
         pristine={pristine}
         submitting={submitting}
         onCancel={onCancel}
@@ -168,8 +173,12 @@ class PatronNoticeForm extends React.Component {
         data-test-patron-notice-form
         onSubmit={handleSubmit}
       >
-        <Paneset isRoot>
+        <Paneset
+          data-testid="patronNoticePaneset"
+          isRoot
+        >
           <Pane
+            data-testid="patronNoticeTemplatePane"
             id="patron-notice-template-pane"
             defaultWidth="100%"
             paneTitle={this.renderPaneTitle()}
@@ -182,7 +191,8 @@ class PatronNoticeForm extends React.Component {
                 data-test-patron-notice-template-name
               >
                 <Field
-                  label={<FormattedMessage id="ui-circulation.settings.patronNotices.notice.name" />}
+                  data-testid="patronNoticesNoticeName"
+                  label={formatMessage({ id: 'ui-circulation.settings.patronNotices.notice.name' })}
                   name="name"
                   required
                   id="input-patron-notice-name"
@@ -195,7 +205,8 @@ class PatronNoticeForm extends React.Component {
             <Row>
               <Col xs={3}>
                 <Field
-                  label={<FormattedMessage id="ui-circulation.settings.patronNotices.notice.active" />}
+                  data-testid="patronNoticesNoticeActive"
+                  label={formatMessage({ id: 'ui-circulation.settings.patronNotices.notice.active' })}
                   name="active"
                   id="input-patron-notice-active"
                   component={Checkbox}
@@ -207,7 +218,8 @@ class PatronNoticeForm extends React.Component {
             <Row>
               <Col xs={8}>
                 <Field
-                  label={<FormattedMessage id="ui-circulation.settings.patronNotices.notice.description" />}
+                  data-testid="patronNoticesNoticeDescription"
+                  label={formatMessage({ id: 'ui-circulation.settings.patronNotices.notice.description' })}
                   name="description"
                   id="input-patron-notice-description"
                   component={TextArea}
@@ -218,7 +230,8 @@ class PatronNoticeForm extends React.Component {
               <Col xs={8}>
                 <div data-test-template-category>
                   <Field
-                    label={<FormattedMessage id="ui-circulation.settings.patronNotices.notice.category" />}
+                    data-testid="patronNoticesNoticeCategory"
+                    label={formatMessage({ id: 'ui-circulation.settings.patronNotices.notice.category' })}
                     name="category"
                     component={Select}
                     fullWidth
@@ -227,18 +240,24 @@ class PatronNoticeForm extends React.Component {
                 </div>
               </Col>
             </Row>
-            <AccordionSet accordionStatus={this.state.accordions} onToggle={this.onToggleSection}>
+            <AccordionSet
+              data-testid="patronNoticesAccordionSet"
+              accordionStatus={this.state.accordions}
+              onToggle={this.onToggleSection}
+            >
               <Accordion
+                data-testid="patronNoticesEmail"
                 id="email-template-form"
-                label={<FormattedMessage id="ui-circulation.settings.patronNotices.email" />}
+                label={formatMessage({ id: 'ui-circulation.settings.patronNotices.email' })}
               >
                 <Row>
                   <Col xs={8}>
                     <Field
+                      data-testid="patronNoticesSubject"
                       id="input-patron-notice-subject"
                       component={TextField}
                       required
-                      label={<FormattedMessage id="ui-circulation.settings.patronNotices.subject" />}
+                      label={formatMessage({ id: 'ui-circulation.settings.patronNotices.subject' })}
                       name="localizedTemplates.en.header"
                     />
                   </Col>
@@ -246,14 +265,15 @@ class PatronNoticeForm extends React.Component {
                 <Row>
                   <Col xs={8}>
                     <Field
-                      label={<FormattedMessage id="ui-circulation.settings.patronNotices.body" />}
+                      data-testid="patronNoticesBody"
+                      label={formatMessage({ id: 'ui-circulation.settings.patronNotices.body' })}
                       required
                       name="localizedTemplates.en.body"
                       id="input-email-template-body"
                       component={TemplateEditor}
                       tokens={tokens}
                       tokensList={TokensList}
-                      previewModalHeader={<FormattedMessage id="ui-circulation.settings.patronNotices.form.previewHeader" />}
+                      previewModalHeader={formatMessage({ id: 'ui-circulation.settings.patronNotices.form.previewHeader' })}
                       selectedCategory={category}
                     />
                   </Col>
