@@ -16,7 +16,6 @@ import PatronNotices from './settings/PatronNotices';
 import StaffSlips from './settings/StaffSlips';
 import NoticePolicySettings from './settings/NoticePolicy';
 import RequestPolicySettings from './settings/RequestPolicy';
-import TitleLevelRequests from './settings/TitleLevelRequests';
 
 class Circulation extends Component {
   static propTypes = {
