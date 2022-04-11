@@ -114,7 +114,6 @@ class Circulation extends Component {
       {
         label: <FormattedMessage id="ui-circulation.settings.index.request" />,
         pages: [
-
           {
             route: 'cancellation-reasons',
             label: <FormattedMessage id="ui-circulation.settings.index.requestCancellationReasons" />,
@@ -127,13 +126,6 @@ class Circulation extends Component {
             component: RequestPolicySettings,
             perm: 'ui-circulation.settings.request-policies',
           },
-          {
-            route: 'title-level-requests',
-            label: <FormattedMessage id="ui-circulation.settings.index.titleLevelRequests" />,
-            component: TitleLevelRequests,
-            perm: 'ui-circulation.settings.titleLevelRequests',
-          },
-
         ],
       },
     ];
