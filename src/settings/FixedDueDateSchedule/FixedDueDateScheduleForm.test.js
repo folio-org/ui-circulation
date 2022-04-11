@@ -18,6 +18,7 @@ import {
   TextArea,
   TextField,
 } from '@folio/stripes/components';
+import { ViewMetaData } from '@folio/stripes/smart-components';
 import { Field } from 'react-final-form';
 import { FieldArray } from 'react-final-form-arrays';
 
@@ -165,6 +166,9 @@ describe('FixedDueDateScheduleForm', () => {
       };
 
       expect(Field).toHaveBeenNthCalledWith(fieldCallOrder.name, expect.objectContaining(expectedProps), {});
+    });
+
+    it('Label of name "Field" should be rendered', () => {
       expect(container.getByText(messageIds.name)).toBeInTheDocument();
     });
 
@@ -176,6 +180,9 @@ describe('FixedDueDateScheduleForm', () => {
       };
 
       expect(Field).toHaveBeenNthCalledWith(fieldCallOrder.description, expect.objectContaining(expectedProps), {});
+    });
+
+    it('"Label of description "Field" should be rendered', () => {
       expect(container.getByText(messageIds.description)).toBeInTheDocument();
     });
 
@@ -196,6 +203,9 @@ describe('FixedDueDateScheduleForm', () => {
       };
       expect(Accordion)
         .toHaveBeenNthCalledWith(accordionCallOrder.general, expect.objectContaining(expectedProps), {});
+    });
+
+    it('Label of "General" accordion should be rendered', () => {
       expect(container.getByText(messageIds.about)).toBeInTheDocument();
     });
 
@@ -206,6 +216,9 @@ describe('FixedDueDateScheduleForm', () => {
       };
       expect(Accordion)
         .toHaveBeenNthCalledWith(accordionCallOrder.schedule, expect.objectContaining(expectedProps), {});
+    });
+
+    it('Label of "Schedule" accordion should be rendered', () => {
       expect(container.getByText(messageIds.schedule)).toBeInTheDocument();
     });
 
@@ -240,6 +253,9 @@ describe('FixedDueDateScheduleForm', () => {
       };
 
       expect(Button).toHaveBeenNthCalledWith(buttonCallOrder.cancel, expect.objectContaining(expectedProps), {});
+    });
+
+    it('Name of "Cancel" button should be rendered', () => {
       expect(container.getByText(messageIds.cancel)).toBeInTheDocument();
     });
 
@@ -250,6 +266,9 @@ describe('FixedDueDateScheduleForm', () => {
       };
 
       expect(Button).toHaveBeenNthCalledWith(buttonCallOrder.save, expect.objectContaining(expectedProps), {});
+    });
+
+    it('Name of "Save and close" button should be rendered', () => {
       expect(container.getByText(messageIds.saveAndClose)).toBeInTheDocument();
     });
 
@@ -305,10 +324,6 @@ describe('FixedDueDateScheduleForm', () => {
       );
     });
 
-    afterEach(() => {
-      Button.mockClear();
-    });
-
     it('"Pane" component should have correct title', () => {
       expect(container.getByText(messageIds.editLabel)).toBeInTheDocument();
     });
@@ -320,6 +335,9 @@ describe('FixedDueDateScheduleForm', () => {
       };
 
       expect(Button).toHaveBeenNthCalledWith(buttonCallOrder.delete, expect.objectContaining(expectedProps), {});
+    });
+
+    it('Name of "Delete" button should be rendered', () => {
       expect(container.getByText(messageIds.delete)).toBeInTheDocument();
     });
 
@@ -330,6 +348,9 @@ describe('FixedDueDateScheduleForm', () => {
       };
 
       expect(Button).toHaveBeenNthCalledWith(buttonCallOrder.save, expect.objectContaining(expectedProps), {});
+    });
+
+    it('Name of "Save and close" button should be rendered', () => {
       expect(container.getByText(messageIds.saveAndClose)).toBeInTheDocument();
     });
 
@@ -343,6 +364,14 @@ describe('FixedDueDateScheduleForm', () => {
       fireEvent.click(deleteButton);
 
       expect(Button).toHaveBeenNthCalledWith(buttonCallOrder.updatedDelete, expect.objectContaining(expectedProps), {});
+    });
+
+    it('"ViewMetaData" should be called with correct props', () => {
+      const expectedProps = {
+        metadata: initialValues.metadata,
+      };
+
+      expect(ViewMetaData).toHaveBeenCalledWith(expect.objectContaining(expectedProps), {});
     });
 
     describe('ConfirmationModal', () => {

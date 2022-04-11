@@ -63,10 +63,8 @@ jest.mock('@folio/stripes/components', () => ({
   )),
   Headline: jest.fn(({ children, ...rest }) => <div {...rest}>{children}</div>),
   Icon: jest.fn((props) => (props && props.children ? props.children : <span />)),
-  IconButton: jest.fn(({
-    ...rest
-  }) => (
-    <button type="button" {...rest} />
+  IconButton: jest.fn((props) => (
+    <button type="button" {...props} />
   )),
   KeyValue: jest.fn(({
     label,
