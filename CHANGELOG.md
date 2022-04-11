@@ -16,6 +16,11 @@
 * Add RTL/Jest testing for `RequestPolicyForm` component in `src/settings/RequestPolicy`. Refs UICIRC-647.
 * Add RTL/Jest testing for `NoticeCard` component in `src\settings\NoticePolicy\components\EditSections\components`. Refs UICIRC-636.
 
+## [7.0.3](https://github.com/folio-org/ui-circulation/tree/v7.0.3) (2022-04-11)
+[Full Changelog](https://github.com/folio-org/ui-circulation/compare/v7.0.2...v7.0.3)
+
+* Hide title level requests settings. Refs UICIRC-777.
+
 ## [7.0.2](https://github.com/folio-org/ui-circulation/tree/v7.0.2) (2022-04-06)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v7.0.1...v7.0.2)
 
