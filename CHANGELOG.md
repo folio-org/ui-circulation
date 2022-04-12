@@ -14,7 +14,13 @@
 * Fix problem with module launch. Refs UICIRC-768.
 * Cover LoansSection component by RTL/jest tests. Refs UICIRC-613.
 * Add RTL/Jest testing for `RequestPolicyForm` component in `src/settings/RequestPolicy`. Refs UICIRC-647.
+* Add RTL/Jest testing for `NoticeCard` component in `src\settings\NoticePolicy\components\EditSections\components`. Refs UICIRC-636.
 * Cover FixedDueDateScheduleForm component by RTL/jest tests. Refs UICIRC-609.
+
+## [7.0.3](https://github.com/folio-org/ui-circulation/tree/v7.0.3) (2022-04-11)
+[Full Changelog](https://github.com/folio-org/ui-circulation/compare/v7.0.2...v7.0.3)
+
+* Hide title level requests settings. Refs UICIRC-777.
 
 ## [7.0.2](https://github.com/folio-org/ui-circulation/tree/v7.0.2) (2022-04-06)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v7.0.1...v7.0.2)

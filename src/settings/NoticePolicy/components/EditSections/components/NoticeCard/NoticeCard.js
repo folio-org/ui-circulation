@@ -69,7 +69,9 @@ class NoticeCard extends React.Component {
 
   render() {
     const {
-      intl,
+      intl: {
+        formatMessage,
+      },
       notice,
       noticeIndex,
       pathToNotice,
@@ -79,7 +81,7 @@ class NoticeCard extends React.Component {
       triggeringEvents,
     } = this.props;
 
-    const blankPlaceholder = intl.formatMessage({ id: 'ui-circulation.settings.common.blankPlaceholder' });
+    const blankPlaceholder = formatMessage({ id: 'ui-circulation.settings.common.blankPlaceholder' });
     const notificationKey = getNotificationContent(notice?.sendOptions?.sendWhen);
 
     return (
@@ -123,8 +125,9 @@ class NoticeCard extends React.Component {
                   data-test-notice-card-template-id
                 >
                   <Field
+                    data-testid="templateSelect"
                     name={`${pathToNotice}.templateId`}
-                    label={<FormattedMessage id="ui-circulation.settings.noticePolicy.notices.template" />}
+                    label={formatMessage({ id: 'ui-circulation.settings.noticePolicy.notices.template' })}
                     required
                     component={Select}
                     dataOptions={templates}
@@ -144,8 +147,9 @@ class NoticeCard extends React.Component {
                   data-test-notice-card-format
                 >
                   <Field
+                    data-testid="formatSelect"
                     name={`${pathToNotice}.format`}
-                    label={<FormattedMessage id="ui-circulation.settings.noticePolicy.notices.format" />}
+                    label={formatMessage({ id:'ui-circulation.settings.noticePolicy.notices.format' })}
                     required
                     component={Select}
                     placeholder={blankPlaceholder}
@@ -159,8 +163,9 @@ class NoticeCard extends React.Component {
                   data-test-notice-card-triggering-event
                 >
                   <Field
+                    data-testid="triggeringEventSelect"
                     name={`${pathToNotice}.sendOptions.sendWhen`}
-                    label={<FormattedMessage id="ui-circulation.settings.noticePolicy.notices.triggeringEvent" />}
+                    label={formatMessage({ id:'ui-circulation.settings.noticePolicy.notices.triggeringEvent' })}
                     required
                     component={Select}
                     placeholder={blankPlaceholder}
@@ -188,6 +193,7 @@ class NoticeCard extends React.Component {
                       data-test-notice-card-send-how
                     >
                       <Field
+                        data-testid="sendSelect"
                         name={`${pathToNotice}.sendOptions.sendHow`}
                         component={Select}
                         placeholder={blankPlaceholder}
@@ -210,6 +216,7 @@ class NoticeCard extends React.Component {
                           data-test-notice-card-send-by
                         >
                           <Period
+                            data-testid="sendByPeriod"
                             inputSize={6}
                             selectSize={6}
                             inputPlaceholder={1}
@@ -241,6 +248,7 @@ class NoticeCard extends React.Component {
                           data-test-notice-card-frequency
                         >
                           <Field
+                            data-testid="frequencySelect"
                             name={`${pathToNotice}.frequency`}
                             component={Select}
                             placeholder={blankPlaceholder}
@@ -263,6 +271,7 @@ class NoticeCard extends React.Component {
                               data-test-notice-card-send-every
                             >
                               <Period
+                                data-testid="andEveryPeriod"
                                 inputSize={6}
                                 selectSize={6}
                                 inputPlaceholder={1}
@@ -284,17 +293,19 @@ class NoticeCard extends React.Component {
                   { notice.sendOptions.isLoanDueDateTimeSelected() && (
                     <>
                       <Field
+                        data-testid="longTermRadioButton"
                         name={`${pathToNotice}.realTime`}
                         component={RadioButton}
                         type="radio"
-                        label={<FormattedMessage id="ui-circulation.settings.noticePolicy.notices.send.longTerm" />}
+                        label={formatMessage({ id:'ui-circulation.settings.noticePolicy.notices.send.longTerm' })}
                         value="false"
                       />
                       <Field
+                        data-testid="shortTermRadioButton"
                         name={`${pathToNotice}.realTime`}
                         component={RadioButton}
                         type="radio"
-                        label={<FormattedMessage id="ui-circulation.settings.noticePolicy.notices.send.shortTerm" />}
+                        label={formatMessage({ id:'ui-circulation.settings.noticePolicy.notices.send.shortTerm' })}
                         value="true"
                       />
                     </>
