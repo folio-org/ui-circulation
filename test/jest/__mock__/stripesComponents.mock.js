@@ -35,6 +35,21 @@ jest.mock('@folio/stripes/components', () => ({
   )),
   Checkbox: jest.fn(() => <input type="checkbox" />),
   Col: jest.fn(({ children, ...rest }) => <div {...rest}>{children}</div>),
+  ConfirmationModal: jest.fn(({
+    heading,
+    message,
+    onCancel,
+    onConfirm,
+    confirmLabel,
+    ...rest
+  }) => (
+    <div {...rest}>
+      <span>{heading}</span>
+      <span>{message}</span>
+      <button type="button" onClick={onCancel}>Cancel</button>
+      <button type="button" onClick={onConfirm}>{confirmLabel}</button>
+    </div>
+  )),
   Datepicker: jest.fn((props) => <div {...props} />),
   ExpandAllButton: jest.fn(({ onToggle, ...rest }) => (
     // eslint-disable-next-line jsx-a11y/control-has-associated-label
@@ -48,15 +63,8 @@ jest.mock('@folio/stripes/components', () => ({
   )),
   Headline: jest.fn(({ children, ...rest }) => <div {...rest}>{children}</div>),
   Icon: jest.fn((props) => (props && props.children ? props.children : <span />)),
-  IconButton: jest.fn(({
-    buttonProps,
-    // eslint-disable-next-line no-unused-vars
-    iconClassName,
-    ...rest
-  }) => (
-    <button type="button" {...buttonProps}>
-      <span {...rest} />
-    </button>
+  IconButton: jest.fn((props) => (
+    <button type="button" {...props} />
   )),
   KeyValue: jest.fn(({
     label,

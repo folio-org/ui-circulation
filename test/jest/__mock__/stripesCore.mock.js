@@ -11,4 +11,5 @@ jest.mock('@folio/stripes/core', () => ({
   ),
   stripesShape: {},
   withStripes: (Component) => (props) => <Component {...props} />,
+  IfPermission: jest.fn(({ children }) => <div>{children}</div>),
 }));

@@ -138,6 +138,7 @@ class FixedDueDateScheduleForm extends React.Component {
         <FormattedMessage id="ui-circulation.settings.fDDSform.closeLabel">
           {ariaLabel => (
             <IconButton
+              data-testid="close-icon"
               aria-label={ariaLabel}
               icon="times"
               iconClassName="closeIcon"
@@ -261,6 +262,7 @@ class FixedDueDateScheduleForm extends React.Component {
                   xs
                 >
                   <ExpandAllButton
+                    data-testid="expand-all-button"
                     accordionStatus={sections}
                     onToggle={this.handleExpandAll}
                   />
