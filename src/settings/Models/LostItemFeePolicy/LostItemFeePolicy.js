@@ -49,6 +49,12 @@ export default class LostItemFeePolicy {
     return isNumber(value);
   }
 
+  hasNonZeroValue(pathToValue) {
+    const value = get(this, pathToValue);
+
+    return !!parseFloat(value, 10);
+  }
+
   hasInterval(pathToValue) {
     const value = get(this, pathToValue);
 
