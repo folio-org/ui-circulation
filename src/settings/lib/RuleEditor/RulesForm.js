@@ -77,7 +77,7 @@ class RulesForm extends React.Component {
             </Button>
           </Col>
         </Row>
-        <Row>
+        <Row className={styles.circulationRulesFormBody}>
           <Col>
             <Field
               component={RulesField}
