@@ -231,7 +231,7 @@
     "settings.noticePolicy.denyDelete.body": "无法删除此通知政策，因为它正由一个或多个记录使用。",
     "settings.patronNotices.addToken": "添加令牌",
     "settings.patronNotices.itemTokenHeader": "單件",
-    "settings.common.print": "打印",
+    "settings.common.print": "列印",
     "settings.patronNotices.userTokenHeader": "使用者",
     "settings.patronNotices.requestTokenHeader": "預約",
     "settings.patronNotices.loanTokenHeader": "借阅",
