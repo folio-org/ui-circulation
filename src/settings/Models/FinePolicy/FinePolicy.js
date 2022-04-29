@@ -13,7 +13,7 @@ export default class FinePolicy {
       'overdueFine': { quantity: 0, intervalId: '' },
       'maxOverdueFine': 0,
       'maxOverdueRecallFine': 0,
-      'overdueRecallFine': { quantity: 0, intervalId: '' }
+      'overdueRecallFine': { quantity: 0, intervalId: '' },
     };
   }
 
@@ -33,7 +33,8 @@ export default class FinePolicy {
 
   hasValue(pathToValue) {
     const value = get(this, pathToValue);
-    return value > 0;
+
+    return !!parseFloat(value);
   }
 
   isIntervalSelected = (pathToValue) => {

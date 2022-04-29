@@ -18,6 +18,7 @@
 * Cover FixedDueDateScheduleForm component by RTL/jest tests. Refs UICIRC-609.
 * Add RTL/Jest testing for `PatronNoticeForm` component in `src/settings/PatronNotices`. Refs UICIRC-644.
 * Cypress issue with circulation rules form. Refs UICIRC-776.
+* User can save "Overdue fine" and "Overdue recall fine" with values less than 0. Refs UICIRC-784.
 
 ## [7.0.3](https://github.com/folio-org/ui-circulation/tree/v7.0.3) (2022-04-11)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v7.0.2...v7.0.3)
