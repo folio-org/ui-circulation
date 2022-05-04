@@ -34,7 +34,7 @@ export default class FinePolicy {
   hasValue(pathToValue) {
     const value = get(this, pathToValue);
 
-    return !!parseFloat(value);
+    return !!parseFloat(value, 10);
   }
 
   isIntervalSelected = (pathToValue) => {
