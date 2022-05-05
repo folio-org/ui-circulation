@@ -33,6 +33,11 @@ export default class FinePolicy {
 
   hasValue(pathToValue) {
     const value = get(this, pathToValue);
+    return value > 0;
+  }
+  
+  hasNonZeroValue(pathToValue) {
+    const value = get(this, pathToValue);
 
     return !!parseFloat(value, 10);
   }
