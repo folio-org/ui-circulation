@@ -84,8 +84,8 @@ export default function (l) {
       l.hasPositiveValue('patronBilledAfterRecalledItemAgedLost.duration')),
     },
     'lostItemProcessingFee': {
-      rules: ['hasPositiveLostItemProcessingFeeValue', 'hasNoChargeLostItemProcessingFee'],
-      shouldValidate: l.hasPassedValue('chargeAmountItemPatron', true) || l.hasPassedValue('chargeAmountItemSystem', true) || l.hasValue('lostItemProcessingFee') || l.hasPositiveValue('lostItemProcessingFee'),
+      rules: ['isFloatGreaterThanOrEqualToZero', 'hasNoChargeLostItemProcessingFee'],
+      shouldValidate: l.hasPassedValue('chargeAmountItemPatron', true) || l.hasPassedValue('chargeAmountItemSystem', true) || l.hasNonZeroValue('lostItemProcessingFee'),
     },
     'returnedLostItemProcessingFee': {
       rules: ['hasLostItemProcessingFeeValue'],
