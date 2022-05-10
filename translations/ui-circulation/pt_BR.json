@@ -384,7 +384,6 @@
     "settings.finePolicy.validate.invalidMaximumOverdueFine": "Por favor, informe um valor para a multa por atraso ou fixe o valor máximo da multa em atraso em 0",
     "settings.finePolicy.validate.invalidMaximumRecallOverdueFine": "Por favor, informe um valor para a multa por recall ou fixe o valor máximo da multa por recall em 0",
     "settings.lostItemFee.validate.hasPatronBilledAfterAgedToLostValue": "A entrada é obrigatória se o valor 'Cliente faturado após a idade até a perda' for inserido",
-    "settings.lostItemFee.validate.hasPositiveLostItemProcessingFeeValue": "A entrada necessária se 'Cobrar taxa de processamento de item perdido se o item for declarado perdido pelo usuário?' ou 'Cobrar taxa de processamento de item perdido se o item tiver tempo para ser considerado perdido pelo sistema?' selecionado",
     "settings.lostItemFee.validate.hasNoChargeLostItemProcessingFee": "'Taxa de processamento de item perdido' não pode ser maior que 0, a menos que 'Cobrar taxa de processamento de item perdido se o item for declarado perdido pelo usuário?' e / ou 'Cobrar taxa de processamento de item perdido se o item envelhecer até ser perdido pelo sistema?' for 'Sim'",
     "settings.lostItemFee.validate.hasLostItemProcessingFeeValue": "'A taxa de processamento de itens perdidos' deve ser maior que 0 para esta seleção",
     "settings.lostItemFee.validate.hasPositiveReplacementProcessingFee": "'Taxa de processamento de substituição' não pode ser maior que 0, a menos que 'Substituição permitida' seja 'Sim",

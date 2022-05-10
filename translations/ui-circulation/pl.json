@@ -384,7 +384,6 @@
     "settings.finePolicy.validate.invalidMaximumOverdueFine": "Proszę wprowadzić kwotę za przetrzymanie lub ustawić maksymalną kwotę za przetrzymanie na 0",
     "settings.finePolicy.validate.invalidMaximumRecallOverdueFine": "Proszę wprowadzić opłatę za wysłane upomnienia lub ustawić maksymalną kwotę za wysłane upomnienia na 0",
     "settings.lostItemFee.validate.hasPatronBilledAfterAgedToLostValue": "Wpis jest wymagany jeżeli \"Czytelnik obciążony kosztami po zgłoszeniu zamówienia\"",
-    "settings.lostItemFee.validate.hasPositiveLostItemProcessingFeeValue": "Wpis wymagany jeżeli została wybrana opcja \"Naliczaj opłatę za zagubienie jeżeli zagubienie zostało zgłoszone przez czytelnika\" lub \"Naliczaj opłatę za zagubienie jeżeli egzemplarz został zagubiony przez system\"",
     "settings.lostItemFee.validate.hasNoChargeLostItemProcessingFee": "\"Opłata za zagubienie\" nie może mieć wartości > 0, chyba że \"Naliczać opłaty jeżeli egzemplarz został zagubiony przez czytelnika? i/lub \"Naliczaj opłatę za zagubienie jeżeli egzemplarz został zagubiony przez system\" ma wartość \"Tak\"",
     "settings.lostItemFee.validate.hasLostItemProcessingFeeValue": "\"Opłat za zagubienie\" musi mieć wartość > 0 dla tej opcji",
     "settings.lostItemFee.validate.hasPositiveReplacementProcessingFee": "\"Opłata za wymianę\" nie może być > 0 jeżeli \"Wymiana dozwolona\" ma wartość Tak",

@@ -384,7 +384,6 @@
     "settings.finePolicy.validate.invalidMaximumOverdueFine": "Please enter an overdue fine amount or set maximum overdue fine to 0",
     "settings.finePolicy.validate.invalidMaximumRecallOverdueFine": "Please enter an overdue recall fine amount or set maximum overdue recall fine to 0",
     "settings.lostItemFee.validate.hasPatronBilledAfterAgedToLostValue": "Entry required if 'Patron billed after aged to lost' amount entered",
-    "settings.lostItemFee.validate.hasPositiveLostItemProcessingFeeValue": "Entry required if 'Charge lost item processing fee if item declared lost by patron?' or 'Charge lost item processing fee if item aged to lost by system?' selected",
     "settings.lostItemFee.validate.hasNoChargeLostItemProcessingFee": "'Lost item processing fee' cannot be > 0 unless 'Charge lost item processing fee if item declared lost by patron ?' and/or 'Charge lost item processing fee if item aged to lost by system ?' is 'Yes'",
     "settings.lostItemFee.validate.hasLostItemProcessingFeeValue": "'Lost item processing fee' must be > 0 for this selection",
     "settings.lostItemFee.validate.hasPositiveReplacementProcessingFee": "'Replacement processing fee' cannot be > 0 unless 'Replacement allowed' is 'Yes",

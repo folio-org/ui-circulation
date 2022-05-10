@@ -384,7 +384,6 @@
     "settings.finePolicy.validate.invalidMaximumOverdueFine": "Пожалуйста, введите размер пени за несвоевременный возврат или установите максимум пени 0",
     "settings.finePolicy.validate.invalidMaximumRecallOverdueFine": "Пожалуйста, введите размер пени за несвоевременный возврат или установите максимум пени 0",
     "settings.lostItemFee.validate.hasPatronBilledAfterAgedToLostValue": "Entry required if 'Patron billed after aged to lost' amount entered",
-    "settings.lostItemFee.validate.hasPositiveLostItemProcessingFeeValue": "Entry required if 'Charge lost item processing fee if item declared lost by patron?' or 'Charge lost item processing fee if item aged to lost by system?' selected",
     "settings.lostItemFee.validate.hasNoChargeLostItemProcessingFee": "'Lost item processing fee' cannot be > 0 unless 'Charge lost item processing fee if item declared lost by patron ?' and/or 'Charge lost item processing fee if item aged to lost by system ?' is 'Yes'",
     "settings.lostItemFee.validate.hasLostItemProcessingFeeValue": "'Lost item processing fee' must be > 0 for this selection",
     "settings.lostItemFee.validate.hasPositiveReplacementProcessingFee": "Плата за замену не может быть > 0, если уже выбрана доступная замена",
