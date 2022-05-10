@@ -384,7 +384,6 @@
     "settings.finePolicy.validate.invalidMaximumOverdueFine": "يرجى إدخال مبلغ غرامة التأخير أو تعيين الحد الأقصى لغرامة التأخير إلى 0",
     "settings.finePolicy.validate.invalidMaximumRecallOverdueFine": "يرجى إدخال مبلغ غرامة الاستعادة المتأخرة أو تعيين الحد الأقصى لغرامة الاستعادة المتأخرة إلى 0",
     "settings.lostItemFee.validate.hasPatronBilledAfterAgedToLostValue": "الإدخال مطلوب إذا تم تحديد تغريم المستفيد بعد تقادم إلى ضائعة",
-    "settings.lostItemFee.validate.hasPositiveLostItemProcessingFeeValue": "الإدخال مطلوب إذا تم تحديد فرض رسم معالجة مادة ضائعة لمادة تقادمت إلى ضائعة",
     "settings.lostItemFee.validate.hasNoChargeLostItemProcessingFee": "لا يمكن أن يكون 'رسم معالجة المادة الضائعة' > 0 إلا عندما يتم ضبط 'فرض رسم معالجة مادة ضائعة إذا تمت الإعلان عن ضياعها بواسطة المستفيد؟' أو 'فرض رسم معالجة مادة إذا تقادمت المادة إلى ضائعة بواسطة النظام' إلى 'نعم'",
     "settings.lostItemFee.validate.hasLostItemProcessingFeeValue": "يجب أن يكون 'رسم معالجة المادة الضائعة' > 0 لهذا التحديد",
     "settings.lostItemFee.validate.hasPositiveReplacementProcessingFee": "لا يمكن أن يكون 'رسم معالجة الاستبدال' > 0 إلا عند ضبط 'الاستبدال مسموح' إلى 'نعم",

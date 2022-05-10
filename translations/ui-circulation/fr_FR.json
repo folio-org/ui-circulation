@@ -384,7 +384,6 @@
     "settings.finePolicy.validate.invalidMaximumOverdueFine": "Veuillez saisir un montant d'amende en souffrance ou définir l'amende en souffrance maximale sur 0",
     "settings.finePolicy.validate.invalidMaximumRecallOverdueFine": "Veuillez saisir un montant d'amende de rappel en retard ou définir l'amende de rappel en retard maximale sur 0",
     "settings.lostItemFee.validate.hasPatronBilledAfterAgedToLostValue": "Entrée requise si un montant est saisi pour \"utilisateur facturé pour exemplaire(s) considéré(s) comme perdu(s)",
-    "settings.lostItemFee.validate.hasPositiveLostItemProcessingFeeValue": "Entrée requise si les options suivantes sont sélectionnées: \"Facturer les frais de traitement de l'exemplaire perdu si l'article déclaré perdu par l'utilisateur'' ou 'Facturer les frais de traitement des exemplaires perdus si l'article a été considéré comme perdu par le système'",
     "settings.lostItemFee.validate.hasNoChargeLostItemProcessingFee": "'Lost item processing fee' cannot be > 0 unless 'Charge lost item processing fee if item declared lost by patron ?' and/or 'Charge lost item processing fee if item aged to lost by system ?' is 'Yes'",
     "settings.lostItemFee.validate.hasLostItemProcessingFeeValue": "Les frais de traitement des objets perdus doivent être > 0 pour cette sélection",
     "settings.lostItemFee.validate.hasPositiveReplacementProcessingFee": "Les \"frais de traitement de remplacement\" ne peuvent pas être > 0 sauf si \"Remplacement autorisé\" est positionné sur \"Oui\"",
