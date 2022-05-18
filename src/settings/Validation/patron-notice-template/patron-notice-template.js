@@ -1,11 +1,10 @@
 import FormValidator from '../engine/FormValidator';
 
+import { GENERAL_NAME_FIELD_PROPS } from '../../../constants/Validation/general';
+
 export default function (template) {
   const config = {
-    'name': {
-      rules: ['isNotEmpty'],
-      shouldValidate: true,
-    },
+    ...GENERAL_NAME_FIELD_PROPS,
     'category': {
       rules: ['isNotEmptySelect'],
       shouldValidate: true,
