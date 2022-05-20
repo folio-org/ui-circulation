@@ -2,13 +2,13 @@ import FormValidator from '../engine/FormValidator';
 import FixedDueDateSchedule from '../../Models/FixedDueDateSchedule';
 import schedulesArrayValidator from './schedules';
 
-import { GENERAL_NAME_FIELD_PROPS } from '../../../constants/Validation/general';
+import { GENERAL_NAME_FIELD_VALIDATION_PROPS } from '../../../constants/Validation/general';
 
 export default function (schedule) {
   const fixedDueDateSchedule = new FixedDueDateSchedule(schedule);
 
   const config = {
-    ...GENERAL_NAME_FIELD_PROPS,
+    ...GENERAL_NAME_FIELD_VALIDATION_PROPS,
     ...fixedDueDateSchedule.schedules.reduce((validationConfig, item, index) => {
       const itemConfig = {
         [`schedules[${index}].from`]: {

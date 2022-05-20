@@ -24,11 +24,11 @@ to the lost item fee policy form, adding new validation rules requires the follo
   If you follow all these steps, then your new validation rules should start working for the form. Piece of cake!
  */
 
-import { GENERAL_NAME_FIELD_PROPS } from '../../../constants/Validation/general';
+import { GENERAL_NAME_FIELD_VALIDATION_PROPS } from '../../../constants/Validation/general';
 
 export default function (l) {
   return {
-    ...GENERAL_NAME_FIELD_PROPS,
+    ...GENERAL_NAME_FIELD_VALIDATION_PROPS,
     'itemAgedLostOverdue.duration': {
       rules: ['chargeAmountItemSystemSelected', 'hasPatronBilledAfterAgedToLostValue', 'hasAmount', 'isIntegerGreaterThanOrEqualToZero'],
       shouldValidate: l.hasInterval('itemAgedLostOverdue.intervalId')

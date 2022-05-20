@@ -1,8 +1,8 @@
-import { GENERAL_NAME_FIELD_PROPS } from '../../../constants/Validation/general';
+import { GENERAL_NAME_FIELD_VALIDATION_PROPS } from '../../../constants/Validation/general';
 
 export default function (finePolicy) {
   return {
-    ...GENERAL_NAME_FIELD_PROPS,
+    ...GENERAL_NAME_FIELD_VALIDATION_PROPS,
     'overdueFine.quantity': {
       rules: ['isFloatGreaterThanOrEqualToZero', 'hasOverdueFineInterval'],
       shouldValidate: finePolicy.isIntervalSelected('overdueFine.intervalId') || finePolicy.hasNonZeroValue('overdueFine.quantity'),
