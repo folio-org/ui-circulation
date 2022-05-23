@@ -190,6 +190,7 @@ class PatronNoticeForm extends React.Component {
                 xs={8}
                 data-test-patron-notice-template-name
               >
+                <span>test</span>
                 <Field
                   data-testid="patronNoticesNoticeName"
                   label={formatMessage({ id: 'ui-circulation.settings.patronNotices.notice.name' })}
