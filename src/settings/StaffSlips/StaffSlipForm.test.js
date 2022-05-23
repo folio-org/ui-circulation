@@ -25,7 +25,6 @@ import {
   FooterPane,
 } from '../components';
 
-jest.mock('@folio/stripes/final-form', () => jest.fn(() => (component) => component));
 jest.mock('../components', () => ({
   CancelButton: jest.fn(() => null),
   FooterPane: jest.fn(() => null),

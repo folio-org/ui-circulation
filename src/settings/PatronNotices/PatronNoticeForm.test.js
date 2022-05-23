@@ -39,7 +39,6 @@ AccordionSet.mockImplementation(({ children, onToggle }) => (
 jest.mock('@folio/stripes-template-editor', () => ({
   TemplateEditor: jest.fn(() => null),
 }));
-jest.mock('@folio/stripes/final-form', () => jest.fn(() => (Component) => Component));
 jest.mock('./tokens', () => jest.fn(() => mockGetTokensReturnValue));
 jest.mock('./TokensList', () => jest.fn(() => null));
 jest.mock('../components', () => ({

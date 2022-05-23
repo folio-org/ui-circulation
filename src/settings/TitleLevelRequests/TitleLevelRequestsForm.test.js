@@ -26,7 +26,6 @@ import {
 } from '../../constants';
 
 jest.mock('./NoticeTemplates', () => jest.fn(() => null));
-jest.mock('@folio/stripes/final-form', () => jest.fn(() => (component) => component));
 PaneFooter.mockImplementation(jest.fn(({ renderEnd }) => (
   <div>
     {renderEnd}
