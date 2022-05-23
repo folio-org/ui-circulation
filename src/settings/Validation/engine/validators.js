@@ -3,6 +3,7 @@ import { FormattedMessage } from 'react-intl';
 
 import {
   isNotEmpty,
+  isNotEmptyWithoutSpace,
   isIntegerGreaterThanZero,
   isIntegerGreaterThanOrEqualToZero,
   isPositiveNumber,
@@ -34,6 +35,10 @@ import {
 export default {
   isNotEmpty: {
     validate: isNotEmpty,
+    message: <FormattedMessage id="ui-circulation.settings.validate.fillIn" />,
+  },
+  isNotEmptyWithoutSpace: {
+    validate: isNotEmptyWithoutSpace,
     message: <FormattedMessage id="ui-circulation.settings.validate.fillIn" />,
   },
   isNotEmptySelect: {

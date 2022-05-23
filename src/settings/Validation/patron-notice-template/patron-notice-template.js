@@ -11,7 +11,7 @@ export default function (template) {
       shouldValidate: true,
     },
     'localizedTemplates.en.header': {
-      rules: ['isNotEmpty'],
+      rules: ['isNotEmpty', 'isNotEmptyWithoutSpace'],
       shouldValidate: true,
     },
     'localizedTemplates.en.body': {

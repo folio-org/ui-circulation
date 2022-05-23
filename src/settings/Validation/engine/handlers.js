@@ -14,6 +14,10 @@ export const isNotEmpty = (value) => {
   return isNumber(value) || !isEmpty(value);
 };
 
+export const isNotEmptyWithoutSpace = (value) => {
+  return value.trim();
+};
+
 export const isIntegerGreaterThanZero = (value) => isInteger(value) && value > 0;
 
 export const isIntegerGreaterThanOrEqualToZero = (value) => isInteger(value) && value >= 0;
