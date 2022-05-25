@@ -26,7 +26,6 @@ import {
 } from '../components';
 import LostItemFeePolicy from '../Models/LostItemFeePolicy';
 
-jest.mock('@folio/stripes/final-form', () => jest.fn(() => (Component) => Component));
 jest.mock('./components/EditSections', () => ({
   LostItemFeeAboutSection: jest.fn(() => null),
   LostItemFeeSection: jest.fn(() => null),

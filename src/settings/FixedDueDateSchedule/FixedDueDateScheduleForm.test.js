@@ -25,8 +25,6 @@ import { FieldArray } from 'react-final-form-arrays';
 import FixedDueDateScheduleForm from './FixedDueDateScheduleForm';
 import SchedulesList from './components/EditSections/components/SchedulesList';
 
-jest.mock('@folio/stripes/final-form', () => jest.fn(() => (component) => component));
-
 ExpandAllButton.mockImplementation(({ onToggle, ...rest }) => (
   <button
     type="button"

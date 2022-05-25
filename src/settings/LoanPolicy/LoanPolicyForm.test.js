@@ -28,7 +28,6 @@ import {
 } from '../components';
 import LoanPolicy from '../Models/LoanPolicy';
 
-jest.mock('@folio/stripes/final-form', () => jest.fn(() => (Component) => Component));
 jest.mock('./components/EditSections', () => ({
   AboutSection: jest.fn(() => null),
   LoansSection: jest.fn(({
