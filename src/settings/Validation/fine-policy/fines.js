@@ -1,31 +1,35 @@
-import { GENERAL_NAME_FIELD_VALIDATION_PROPS } from '../../../constants/Validation/general';
+import {
+  GENERAL_NAME_FIELD_VALIDATION_PROPS,
+  RULES,
+} from '../../../constants/Validation/general';
+import { FINE_POLICY_PATH } from '../../../constants/Validation/fine-policy';
 
 export default function (finePolicy) {
   return {
     ...GENERAL_NAME_FIELD_VALIDATION_PROPS,
-    'overdueFine.quantity': {
-      rules: ['isFloatGreaterThanOrEqualToZero', 'hasOverdueFineInterval'],
-      shouldValidate: finePolicy.isIntervalSelected('overdueFine.intervalId') || finePolicy.hasNonZeroValue('overdueFine.quantity'),
+    [FINE_POLICY_PATH.OVERDUE_FINE_QUANTITY]: {
+      rules: [RULES.IS_FLOAT_GREATER_THAN_OR_EQUAL_TO_ZERO, RULES.HAS_OVERDUE_FINE_INTERVAL],
+      shouldValidate: finePolicy.isIntervalSelected(FINE_POLICY_PATH.OVERDUE_FINE_INTERVAL_ID) || finePolicy.hasNonZeroValue(FINE_POLICY_PATH.OVERDUE_FINE_QUANTITY),
     },
-    'overdueFine.intervalId': {
-      rules: ['isNotEmptySelect'],
+    [FINE_POLICY_PATH.OVERDUE_FINE_INTERVAL_ID]: {
+      rules: [RULES.IS_NOT_EMPTY_SELECT],
       shouldValidate: finePolicy.isOverdueFine(),
     },
-    'overdueRecallFine.quantity': {
-      rules: ['isFloatGreaterThanOrEqualToZero', 'hasOverdueRecallFineInterval'],
-      shouldValidate: finePolicy.isIntervalSelected('overdueRecallFine.intervalId') || finePolicy.hasNonZeroValue('overdueRecallFine.quantity'),
+    [FINE_POLICY_PATH.OVERDUE_RECALL_FINE_QUANTITY]: {
+      rules: [RULES.IS_FLOAT_GREATER_THAN_OR_EQUAL_TO_ZERO, RULES.HAS_OVERDUE_RECALL_FINE_INTERVAL],
+      shouldValidate: finePolicy.isIntervalSelected(FINE_POLICY_PATH.OVERDUE_RECALL_FINE_INTERVAL_ID) || finePolicy.hasNonZeroValue(FINE_POLICY_PATH.OVERDUE_RECALL_FINE_QUANTITY),
     },
-    'overdueRecallFine.intervalId': {
-      rules: ['isNotEmptySelect'],
+    [FINE_POLICY_PATH.OVERDUE_RECALL_FINE_INTERVAL_ID]: {
+      rules: [RULES.IS_NOT_EMPTY_SELECT],
       shouldValidate: finePolicy.isOverdueRecallFine(),
     },
-    'maxOverdueFine': {
-      rules: ['isFloatGreaterThanOrEqualToZero', 'isGreaterThanOverdueFine', 'isMaximumOverdueFineValid'],
-      shouldValidate: finePolicy.isOverdueFine() || finePolicy.hasNonZeroValue('maxOverdueFine'),
+    [FINE_POLICY_PATH.MAX_OVERDUE_FINE]: {
+      rules: [RULES.IS_FLOAT_GREATER_THAN_OR_EQUAL_TO_ZERO, RULES.IS_GREATER_THAN_OVERDUE_FINE, RULES.IS_MAXIMUM_OVERDUE_FINE_VALID],
+      shouldValidate: finePolicy.isOverdueFine() || finePolicy.hasNonZeroValue(FINE_POLICY_PATH.MAX_OVERDUE_FINE),
     },
-    'maxOverdueRecallFine': {
-      rules: ['isFloatGreaterThanOrEqualToZero', 'isGreaterThanOverdueRecallFine', 'isMaximumOverdueRecallFineValid'],
-      shouldValidate: finePolicy.isOverdueRecallFine() || finePolicy.hasNonZeroValue('maxOverdueRecallFine'),
+    [FINE_POLICY_PATH.MAX_OVERDUE_RECALL_FINE]: {
+      rules: [RULES.IS_FLOAT_GREATER_THAN_OR_EQUAL_TO_ZERO, RULES.IS_GREATER_THAN_OVERDUE_RECALL_FINE, RULES.IS_MAXIMUM_OVERDUE_RECALL_FINE_VALID],
+      shouldValidate: finePolicy.isOverdueRecallFine() || finePolicy.hasNonZeroValue(FINE_POLICY_PATH.MAX_OVERDUE_RECALL_FINE),
     },
   };
 }
