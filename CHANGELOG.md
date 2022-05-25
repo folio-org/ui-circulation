@@ -24,6 +24,7 @@
 * Unable to delete fixed due date schedule with permission `ui-circulation.settings.fixed-due-date-schedules`. Refs UICIRC-715.
 * Extract repeatable part of code from `Validation`. Refs UICIRC-804.
 * Add RTL/Jest testing for `src\settings\Validation\fine-policy` folder. Refs UICIRC-806.
+* Update NodeJS to v16 in GitHub Actions. Refs UICIRC-815.
 
 ## [7.0.3](https://github.com/folio-org/ui-circulation/tree/v7.0.3) (2022-04-11)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v7.0.2...v7.0.3)
