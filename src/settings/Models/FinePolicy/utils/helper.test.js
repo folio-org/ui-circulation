@@ -7,7 +7,7 @@ describe('FinePolicy helpers', () => {
       { id: 'test' },
       { id: selectedId },
     ];
-    expect(helpers.isValidItemSelected(options, selectedId)).toBe(true);
+    expect(helpers.isValidItemSelected(options, selectedId)).toEqual(true);
   });
 
   it('"isValidItemSelected" should return false if there is no matches', () => {
@@ -16,6 +16,6 @@ describe('FinePolicy helpers', () => {
       { id: 'test' },
       { id: 'test_2' },
     ];
-    expect(helpers.isValidItemSelected(options, selectedId)).toBe(false);
+    expect(helpers.isValidItemSelected(options, selectedId)).toEqual(false);
   });
 });

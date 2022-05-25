@@ -20,27 +20,27 @@ describe('FinePolicy', () => {
   const finePolicyInstance = new FinePolicy(policy);
 
   it('"hasValue" should return true if required value more than 0', () => {
-    expect(finePolicyInstance.hasValue('maxOverdueRecallFine')).toBe(true);
+    expect(finePolicyInstance.hasValue('maxOverdueRecallFine')).toEqual(true);
   });
 
   it('"hasValue" should return false if required value less than 0', () => {
-    expect(finePolicyInstance.hasValue('countClosed')).toBe(false);
+    expect(finePolicyInstance.hasValue('countClosed')).toEqual(false);
   });
 
   it('"hasNonZeroValue" should return true if it is possible to parse value', () => {
-    expect(finePolicyInstance.hasNonZeroValue('maxOverdueRecallFine')).toBe(true);
+    expect(finePolicyInstance.hasNonZeroValue('maxOverdueRecallFine')).toEqual(true);
   });
 
   it('"hasNonZeroValue" should return false if it is not possible to parse value', () => {
-    expect(finePolicyInstance.hasNonZeroValue('name')).toBe(false);
+    expect(finePolicyInstance.hasNonZeroValue('name')).toEqual(false);
   });
 
   it('"isIntervalSelected" should return true if it is possible to get value', () => {
-    expect(finePolicyInstance.isIntervalSelected('overdueRecallFine.intervalId')).toBe(true);
+    expect(finePolicyInstance.isIntervalSelected('overdueRecallFine.intervalId')).toEqual(true);
   });
 
   it('"isIntervalSelected" should return false if it is not possible to get value', () => {
-    expect(finePolicyInstance.isIntervalSelected('overdueFine.intervalId')).toBe(false);
+    expect(finePolicyInstance.isIntervalSelected('overdueFine.intervalId')).toEqual(false);
   });
 
   it('"isOverdueFine" should return true if required value more than 0', () => {
@@ -50,15 +50,15 @@ describe('FinePolicy', () => {
         quantity: 1,
       },
     });
-    expect(finePolicy.isOverdueFine()).toBe(true);
+    expect(finePolicy.isOverdueFine()).toEqual(true);
   });
 
   it('"isOverdueFine" should return false if required value less than 0', () => {
-    expect(finePolicyInstance.isOverdueFine()).toBe(false);
+    expect(finePolicyInstance.isOverdueFine()).toEqual(false);
   });
 
   it('"isOverdueRecallFine" should return true if required value more than 0', () => {
-    expect(finePolicyInstance.isOverdueRecallFine()).toBe(true);
+    expect(finePolicyInstance.isOverdueRecallFine()).toEqual(true);
   });
 
   it('"isOverdueRecallFine" should return false if required value less than 0', () => {
@@ -67,7 +67,7 @@ describe('FinePolicy', () => {
       overdueRecallFine: {},
     });
 
-    expect(finePolicy.isOverdueRecallFine()).toBe(false);
+    expect(finePolicy.isOverdueRecallFine()).toEqual(false);
   });
 
   it('"defaultFinePolicy" should return correct data', () => {
