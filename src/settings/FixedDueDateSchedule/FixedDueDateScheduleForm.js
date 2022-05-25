@@ -9,10 +9,7 @@ import {
   memoize,
 } from 'lodash';
 
-import {
-  stripesShape,
-  IfPermission,
-} from '@folio/stripes/core';
+import { stripesShape } from '@folio/stripes/core';
 import {
   Accordion,
   AccordionSet,
@@ -174,17 +171,15 @@ class FixedDueDateScheduleForm extends React.Component {
             <FormattedMessage id="ui-circulation.settings.fDDSform.cancel" />
           </Button>
           {edit && (
-            <IfPermission perm="ui-circulation.settings.circulation-rules">
-              <Button
-                id="clickable-delete-item"
-                buttonStyle="danger mega"
-                disabled={confirmDelete}
-                marginBottom0
-                onClick={this.beginDelete}
-              >
-                <FormattedMessage id="stripes-core.button.delete" />
-              </Button>
-            </IfPermission>
+            <Button
+              id="clickable-delete-item"
+              buttonStyle="danger mega"
+              disabled={confirmDelete}
+              marginBottom0
+              onClick={this.beginDelete}
+            >
+              <FormattedMessage id="stripes-core.button.delete" />
+            </Button>
           )}
           <Button
             id="clickable-save-fixedDueDateSchedule"
