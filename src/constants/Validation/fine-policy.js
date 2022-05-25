@@ -1,5 +1,5 @@
 /* eslint-disable import/prefer-default-export */
-export const PATH = {
+export const FINE_POLICY_PATH = {
   MAX_OVERDUE_FINE: 'maxOverdueFine',
   MAX_OVERDUE_RECALL_FINE: 'maxOverdueRecallFine',
   NAME: 'name',
