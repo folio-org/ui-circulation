@@ -21,7 +21,6 @@ import {
 } from '../components';
 import RequestPolicy from '../Models/RequestPolicy';
 
-jest.mock('@folio/stripes/final-form', () => jest.fn(() => (component) => component));
 jest.mock('./components', () => ({
   GeneralSection: jest.fn(() => null),
 }));
