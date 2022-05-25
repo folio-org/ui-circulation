@@ -1,16 +1,18 @@
 import Metadata from './Metadata';
-import { commonClassCheck } from '../../../../test/jest/helpers/utils';
-
-const testMetadata = commonClassCheck.bind(null, Metadata);
+import {
+  commonClassCheckForEachProp,
+  commonClassCheckForAllProps,
+} from '../../../../test/jest/helpers/utils';
 
 describe('Metadata', () => {
-  testMetadata();
+  const testData = {
+    createdByUserId: 'testCreatedByUserId',
+    createdDate: 'testCreatedDate',
+    updatedByUserId: 'testUpdatedByUserId',
+    updatedDate: 'testUpdatedDate',
+  };
 
-  testMetadata({ createdByUserId: 'testCreatedByUserId' });
+  commonClassCheckForEachProp(Metadata, testData);
 
-  testMetadata({ createdDate: 'testCreatedDate' });
-
-  testMetadata({ updatedByUserId: 'testUpdatedByUserId' });
-
-  testMetadata({ updatedDate: 'testUpdatedDate' });
+  commonClassCheckForAllProps(Metadata, testData);
 });

@@ -13,13 +13,24 @@ export const componentPropsCheck = (Component, testId, expectedProps, partialCom
   expect(propertiesForCompare[0]).toStrictEqual(resultExpectedProps);
 };
 
-export const commonClassCheck = (Class, data) => {
-  const classInstance = new Class(data);
+export const commonClassCheckForEachProp = (Class, data) => {
   const passedDataKeys = Object.keys(data || {});
 
-  it(`should have correct values if ${passedDataKeys[0] ? `only "${passedDataKeys[0]}"` : 'nothing'} passed`, () => {
-    Object.keys(classInstance).forEach(key => {
-      expect(classInstance[key]).toBe(passedDataKeys.includes(key) ? data[key] : undefined);
+  passedDataKeys.forEach(dataKey => {
+    it(`should have correct values if only "${dataKey}" passed`, () => {
+      const classInstance = new Class({ [dataKey]: data[dataKey] });
+
+      Object.keys(classInstance).forEach(instanceKey => {
+        expect(classInstance[instanceKey]).toBe(instanceKey === dataKey ? data[dataKey] : undefined);
+      });
     });
+  });
+};
+
+export const commonClassCheckForAllProps = (Class, data) => {
+  const classInstance = new Class(data);
+
+  it('should have correct values when fully data passed', () => {
+    expect(classInstance).toEqual(data);
   });
 };

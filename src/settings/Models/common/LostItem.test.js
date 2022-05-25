@@ -1,14 +1,18 @@
 import LostItem from './LostItem';
-import { commonClassCheck } from '../../../../test/jest/helpers/utils';
-
-const testLostItem = commonClassCheck.bind(null, LostItem);
+import {
+  commonClassCheckForEachProp,
+  commonClassCheckForAllProps,
+} from '../../../../test/jest/helpers/utils';
 
 describe('LostItem', () => {
-  testLostItem();
+  const testData = {
+    duration: 'testDuration',
+    intervalId: 'testIntervalId',
+  };
 
-  testLostItem({ duration: 'testDuration' });
+  commonClassCheckForEachProp(LostItem, testData);
 
-  testLostItem({ intervalId: 'testIntervalId' });
+  commonClassCheckForAllProps(LostItem, testData);
 
   describe('isPeriodValid', () => {
     it('should return true if valid combination is passed', () => {

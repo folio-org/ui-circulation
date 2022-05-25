@@ -1,12 +1,16 @@
 import ChargeAmount from './ChargeAmount';
-import { commonClassCheck } from '../../../../test/jest/helpers/utils';
-
-const testChargeAmount = commonClassCheck.bind(null, ChargeAmount);
+import {
+  commonClassCheckForEachProp,
+  commonClassCheckForAllProps,
+} from '../../../../test/jest/helpers/utils';
 
 describe('ChargeAmount', () => {
-  testChargeAmount();
+  const testData = {
+    chargeType: 'testChargeType',
+    amount: 'testAmount',
+  };
 
-  testChargeAmount({ chargeType: 'testChargeType' });
+  commonClassCheckForEachProp(ChargeAmount, testData);
 
-  testChargeAmount({ amount: 'testAmount' });
+  commonClassCheckForAllProps(ChargeAmount, testData);
 });

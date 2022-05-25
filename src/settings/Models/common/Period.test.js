@@ -1,14 +1,18 @@
 import Period from './Period';
-import { commonClassCheck } from '../../../../test/jest/helpers/utils';
-
-const testPeriod = commonClassCheck.bind(null, Period);
+import {
+  commonClassCheckForEachProp,
+  commonClassCheckForAllProps,
+} from '../../../../test/jest/helpers/utils';
 
 describe('Period', () => {
-  testPeriod();
+  const testData = {
+    duration: 'testDuration',
+    intervalId: 'testIntervalId',
+  };
 
-  testPeriod({ duration: 'testDuration' });
+  commonClassCheckForEachProp(Period, testData);
 
-  testPeriod({ intervalId: 'testIntervalId' });
+  commonClassCheckForAllProps(Period, testData);
 
   describe('isPeriodValid', () => {
     it('should return true if valid combination is passed', () => {

@@ -1,14 +1,18 @@
 import OverdueFine from './OverdueFine';
-import { commonClassCheck } from '../../../../test/jest/helpers/utils';
-
-const testOverdueFine = commonClassCheck.bind(null, OverdueFine);
+import {
+  commonClassCheckForEachProp,
+  commonClassCheckForAllProps,
+} from '../../../../test/jest/helpers/utils';
 
 describe('OverdueFine', () => {
-  testOverdueFine();
+  const testData = {
+    quantity: 'testQuantity',
+    intervalId: 'testIntervalId',
+  };
 
-  testOverdueFine({ quantity: 'testQuantity' });
+  commonClassCheckForEachProp(OverdueFine, testData);
 
-  testOverdueFine({ intervalId: 'testQuantity' });
+  commonClassCheckForAllProps(OverdueFine, testData);
 
   describe('isPeriodValid', () => {
     it('should return true if valid combination is passed', () => {
