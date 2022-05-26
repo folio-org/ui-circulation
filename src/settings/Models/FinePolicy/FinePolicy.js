@@ -3,6 +3,7 @@ import {
 } from 'lodash';
 
 import { OverdueFine, Metadata } from '../common';
+import { FINE_POLICY_PATH } from '../../../constants/Validation/fine-policy';
 
 export default class FinePolicy {
   static defaultFinePolicy() {
@@ -47,12 +48,12 @@ export default class FinePolicy {
   };
 
   isOverdueFine() {
-    const value = get(this, 'overdueFine.quantity');
+    const value = get(this, FINE_POLICY_PATH.OVERDUE_FINE_QUANTITY);
     return value > 0;
   }
 
   isOverdueRecallFine() {
-    const value = get(this, 'overdueRecallFine.quantity');
+    const value = get(this, FINE_POLICY_PATH.OVERDUE_RECALL_FINE_QUANTITY);
     return value > 0;
   }
 }
