@@ -1,5 +1,6 @@
 import FinePolicy from './FinePolicy';
 import { OverdueFine, Metadata } from '../common';
+import { FINE_POLICY_PATH } from '../../../constants/Validation/fine-policy';
 
 describe('FinePolicy', () => {
   const basicPolicy = {
@@ -56,27 +57,27 @@ describe('FinePolicy', () => {
   });
 
   it('"hasValue" should return true if required value more than 0', () => {
-    expect(finePolicyInstance.hasValue('maxOverdueRecallFine')).toEqual(true);
+    expect(finePolicyInstance.hasValue(FINE_POLICY_PATH.MAX_OVERDUE_RECALL_FINE)).toEqual(true);
   });
 
   it('"hasValue" should return false if required value less than 0', () => {
-    expect(finePolicyInstance.hasValue('countClosed')).toEqual(false);
+    expect(finePolicyInstance.hasValue(FINE_POLICY_PATH.MAX_OVERDUE_FINE)).toEqual(false);
   });
 
   it('"hasNonZeroValue" should return true if it is possible to parse value', () => {
-    expect(finePolicyInstance.hasNonZeroValue('maxOverdueRecallFine')).toEqual(true);
+    expect(finePolicyInstance.hasNonZeroValue(FINE_POLICY_PATH.MAX_OVERDUE_RECALL_FINE)).toEqual(true);
   });
 
   it('"hasNonZeroValue" should return false if it is not possible to parse value', () => {
-    expect(finePolicyInstance.hasNonZeroValue('name')).toEqual(false);
+    expect(finePolicyInstance.hasNonZeroValue(FINE_POLICY_PATH.NAME)).toEqual(false);
   });
 
   it('"isIntervalSelected" should return true if it is possible to get value', () => {
-    expect(finePolicyInstance.isIntervalSelected('overdueRecallFine.intervalId')).toEqual(true);
+    expect(finePolicyInstance.isIntervalSelected(FINE_POLICY_PATH.OVERDUE_RECALL_FINE_INTERVAL_ID)).toEqual(true);
   });
 
   it('"isIntervalSelected" should return false if it is not possible to get value', () => {
-    expect(finePolicyInstance.isIntervalSelected('overdueFine.intervalId')).toEqual(false);
+    expect(finePolicyInstance.isIntervalSelected(FINE_POLICY_PATH.OVERDUE_FINE_INTERVAL_ID)).toEqual(false);
   });
 
   it('"isOverdueFine" should return true if required value more than 0', () => {
