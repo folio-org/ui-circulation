@@ -60,12 +60,16 @@ describe('FinePolicy', () => {
     expect(finePolicyInstance.hasValue(FINE_POLICY_PATH.MAX_OVERDUE_RECALL_FINE)).toEqual(true);
   });
 
-  it('"hasValue" should return false if required value less than 0', () => {
+  it('"hasValue" should return false if required value less or equal 0', () => {
     expect(finePolicyInstance.hasValue(FINE_POLICY_PATH.MAX_OVERDUE_FINE)).toEqual(false);
   });
 
-  it('"hasNonZeroValue" should return true if it is possible to parse value', () => {
+  it('"hasNonZeroValue" should return true if it is possible to parse value and value is not equal 0', () => {
     expect(finePolicyInstance.hasNonZeroValue(FINE_POLICY_PATH.MAX_OVERDUE_RECALL_FINE)).toEqual(true);
+  });
+
+  it('"hasNonZeroValue" should return false if value equals 0', () => {
+    expect(finePolicyInstance.hasNonZeroValue(FINE_POLICY_PATH.MAX_OVERDUE_FINE)).toEqual(false);
   });
 
   it('"hasNonZeroValue" should return false if it is not possible to parse value', () => {
@@ -87,10 +91,11 @@ describe('FinePolicy', () => {
         quantity: 1,
       },
     });
+
     expect(finePolicy.isOverdueFine()).toEqual(true);
   });
 
-  it('"isOverdueFine" should return false if required value less than 0', () => {
+  it('"isOverdueFine" should return false if required value less or equal 0', () => {
     expect(finePolicyInstance.isOverdueFine()).toEqual(false);
   });
 
@@ -98,7 +103,7 @@ describe('FinePolicy', () => {
     expect(finePolicyInstance.isOverdueRecallFine()).toEqual(true);
   });
 
-  it('"isOverdueRecallFine" should return false if required value less than 0', () => {
+  it('"isOverdueRecallFine" should return false if required value less or equal 0', () => {
     const finePolicy = new FinePolicy({
       ...policy,
       overdueRecallFine: {},

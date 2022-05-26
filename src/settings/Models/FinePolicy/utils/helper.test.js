@@ -7,6 +7,7 @@ describe('FinePolicy helpers', () => {
       { id: 'test' },
       { id: selectedId },
     ];
+
     expect(helpers.isValidItemSelected(options, selectedId)).toEqual(true);
   });
 
@@ -16,6 +17,7 @@ describe('FinePolicy helpers', () => {
       { id: 'test' },
       { id: 'test_2' },
     ];
+
     expect(helpers.isValidItemSelected(options, selectedId)).toEqual(false);
   });
 });
