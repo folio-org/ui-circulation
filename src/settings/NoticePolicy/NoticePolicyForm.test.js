@@ -58,7 +58,7 @@ ExpandAllButton.mockImplementation(jest.fn(({ onToggle, ...rest }) => {
       type="button"
       {...rest}
     >
-        Expand all button
+      Expand all button
     </button>
   );
 }));

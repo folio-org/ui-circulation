@@ -51,7 +51,7 @@ ExpandAllButton.mockImplementation(jest.fn(({
       onClick={() => onToggle(sections)}
       type="button"
     >
-        Toggle accordion state
+      Toggle accordion state
     </button>
   );
 }));

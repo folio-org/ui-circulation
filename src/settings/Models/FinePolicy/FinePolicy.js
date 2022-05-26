@@ -36,7 +36,7 @@ export default class FinePolicy {
     const value = get(this, pathToValue);
     return value > 0;
   }
-  
+
   hasNonZeroValue(pathToValue) {
     const value = get(this, pathToValue);
 

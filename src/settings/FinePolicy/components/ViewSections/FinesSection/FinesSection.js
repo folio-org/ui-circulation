@@ -12,11 +12,11 @@ import {
 export const getQuantityValue = (fine) => (
   fine.quantity >= 0
     ? (<FormattedMessage
-      id="ui-circulation.settings.finePolicy.perPeriod"
-      values={{
-        number: parseFloat(fine.quantity).toFixed(2),
-        period: fine.intervalId,
-      }}
+        id="ui-circulation.settings.finePolicy.perPeriod"
+        values={{
+          number: parseFloat(fine.quantity).toFixed(2),
+          period: fine.intervalId,
+        }}
     />)
     : '-'
 );
