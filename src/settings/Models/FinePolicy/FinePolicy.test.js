@@ -16,12 +16,20 @@ describe('FinePolicy', () => {
 
   const policy = {
     ...basicPolicy,
-    overdueFine: {},
-    overdueRecallFine: {
+    overdueFine: {
       quantity: 1,
       intervalId: 'id',
     },
-    metadata: {},
+    overdueRecallFine: {
+      quantity: 2,
+      intervalId: 'id_2',
+    },
+    metadata: {
+      createdByUserId: 'createdByUserId',
+      createdDate: 'createdDate',
+      updatedByUserId: 'updatedByUserId',
+      updatedDate: 'updatedDate',
+    },
   };
 
   const finePolicyInstance = new FinePolicy(policy);
