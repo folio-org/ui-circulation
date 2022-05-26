@@ -1,23 +1,59 @@
 import FinePolicy from './FinePolicy';
+import { OverdueFine, Metadata } from '../common';
 
 describe('FinePolicy', () => {
-  const policy = {
+  const basicPolicy = {
     id: 'id',
     name: 'name',
     description: 'description',
-    overdueFine: {},
     countClosed: 0,
     maxOverdueFine: '0.00',
     forgiveOverdueFine: 1,
-    overdueRecallFine: {
-      quantity: 1,
-      intervalId: 'id',
-    },
     gracePeriodRecall: 5,
     maxOverdueRecallFine: '5.00',
   };
 
+  const policy = {
+    ...basicPolicy,
+    overdueFine: {},
+    overdueRecallFine: {
+      quantity: 1,
+      intervalId: 'id',
+    },
+  };
+
   const finePolicyInstance = new FinePolicy(policy);
+
+  it('"FinePolicy" should have correct properties', () => {
+    expect(finePolicyInstance).toEqual(expect.objectContaining(basicPolicy));
+  });
+
+  it('"FinePolicy" should have correct properties if "policy" is not provided', () => {
+    const finePolicy = new FinePolicy();
+
+    expect(finePolicy).toEqual(expect.objectContaining({
+      id: undefined,
+      name: undefined,
+      description: undefined,
+      countClosed: undefined,
+      maxOverdueFine: undefined,
+      forgiveOverdueFine: undefined,
+      gracePeriodRecall: undefined,
+      maxOverdueRecallFine: undefined,
+    }));
+  });
+
+  it('"overdueFine" property should be instance of "OverdueFine"', () => {
+    expect(finePolicyInstance.overdueFine).toBeInstanceOf(OverdueFine);
+  });
+
+  it('"overdueRecallFine" property should be instance of "OverdueFine"', () => {
+    expect(finePolicyInstance.overdueRecallFine).toBeInstanceOf(OverdueFine);
+  });
+
+  it('"metadata" property should be instance of "Metadata"', () => {
+    expect(finePolicyInstance.metadata).toBeInstanceOf(Metadata);
+  });
 
   it('"hasValue" should return true if required value more than 0', () => {
     expect(finePolicyInstance.hasValue('maxOverdueRecallFine')).toEqual(true);
