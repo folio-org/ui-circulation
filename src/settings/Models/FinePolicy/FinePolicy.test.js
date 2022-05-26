@@ -90,22 +90,27 @@ describe('FinePolicy', () => {
   });
 
   it('"isIntervalSelected" should return false if it is not possible to get value', () => {
-    expect(finePolicyInstance.isIntervalSelected(FINE_POLICY_PATH.OVERDUE_FINE_INTERVAL_ID)).toEqual(false);
+    const finePolicy = new FinePolicy({
+      ...policy,
+      overdueFine: {},
+    });
+
+    expect(finePolicy.isIntervalSelected(FINE_POLICY_PATH.OVERDUE_FINE_INTERVAL_ID)).toEqual(false);
   });
 
   it('"isOverdueFine" should return true if required value more than 0', () => {
-    const finePolicy = new FinePolicy({
-      ...policy,
-      overdueFine: {
-        quantity: 1,
-      },
-    });
-
-    expect(finePolicy.isOverdueFine()).toEqual(true);
+    expect(finePolicyInstance.isOverdueFine()).toEqual(true);
   });
 
   it('"isOverdueFine" should return false if required value less or equal 0', () => {
-    expect(finePolicyInstance.isOverdueFine()).toEqual(false);
+    const finePolicy = new FinePolicy({
+      ...policy,
+      overdueFine: {
+        quantity: 0,
+      },
+    });
+
+    expect(finePolicy.isOverdueFine()).toEqual(false);
   });
 
   it('"isOverdueRecallFine" should return true if required value more than 0', () => {
