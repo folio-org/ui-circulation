@@ -21,12 +21,13 @@ describe('FinePolicy', () => {
       quantity: 1,
       intervalId: 'id',
     },
+    metadata: {},
   };
 
   const finePolicyInstance = new FinePolicy(policy);
 
   it('"FinePolicy" should have correct properties', () => {
-    expect(finePolicyInstance).toEqual(expect.objectContaining(basicPolicy));
+    expect(finePolicyInstance).toEqual(expect.objectContaining(policy));
   });
 
   it('"FinePolicy" should have correct properties if "policy" is not provided', () => {
