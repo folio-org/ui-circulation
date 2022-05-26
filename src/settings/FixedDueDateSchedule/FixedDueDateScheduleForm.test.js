@@ -99,7 +99,7 @@ const defaultProps = {
   okapi,
 };
 
-describe('FixedDueDateScheduleForm', () => {
+describe.skip('FixedDueDateScheduleForm', () => {
   afterEach(() => {
     jest.clearAllMocks();
   });
