@@ -1,23 +1,17 @@
 import helpers from './helpers';
 
 describe('FinePolicy helpers', () => {
-  it('"isValidItemSelected" should return true if some matches', () => {
-    const selectedId = 'selectedId';
-    const options = [
-      { id: 'test' },
-      { id: selectedId },
-    ];
+  const selector1 = 'selector1';
+  const options = [
+    { id: 'selector1' },
+    { id: 'selector2' },
+  ];
 
-    expect(helpers.isValidItemSelected(options, selectedId)).toEqual(true);
+  it('"isValidItemSelected" should return true if some matches', () => {
+    expect(helpers.isValidItemSelected(options, selector1)).toEqual(true);
   });
 
   it('"isValidItemSelected" should return false if there is no matches', () => {
-    const selectedId = 'selectedId';
-    const options = [
-      { id: 'test' },
-      { id: 'test_2' },
-    ];
-
-    expect(helpers.isValidItemSelected(options, selectedId)).toEqual(false);
+    expect(helpers.isValidItemSelected(options, 'selector3')).toEqual(false);
   });
 });
