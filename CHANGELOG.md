@@ -25,6 +25,7 @@
 * Extract repeatable part of code from `Validation`. Refs UICIRC-804.
 * Add RTL/Jest testing for `src\settings\Validation\fine-policy` folder. Refs UICIRC-806.
 * Update NodeJS to v16 in GitHub Actions. Refs UICIRC-815.
+* Add RTL/Jest testing for `src/settings/Models/common` folder. Refs UICIRC-795.
 * UI tests replacement with RTL/Jest for `FinePolicy` folder in `Models`. Refs UICIRC-796.
 
 ## [7.0.3](https://github.com/folio-org/ui-circulation/tree/v7.0.3) (2022-04-11)
