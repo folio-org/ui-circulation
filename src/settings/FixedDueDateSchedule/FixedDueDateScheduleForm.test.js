@@ -99,7 +99,7 @@ const defaultProps = {
   okapi,
 };
 
-describe.skip('FixedDueDateScheduleForm', () => {
+describe('FixedDueDateScheduleForm', () => {
   afterEach(() => {
     jest.clearAllMocks();
   });
@@ -436,10 +436,13 @@ describe.skip('FixedDueDateScheduleForm', () => {
     describe('With provided name and without response data', () => {
       beforeAll(() => {
         Field.mockImplementationOnce(({ validate }) => {
-          const validateName = async () => {
-            await validate(name);
-          };
-          validateName();
+          if (validate) {
+            const validateName = async () => {
+              await validate(name);
+            };
+
+            validateName();
+          }
 
           return null;
         });
@@ -458,46 +461,26 @@ describe.skip('FixedDueDateScheduleForm', () => {
               'X-Okapi-Tenant': okapi.tenant,
               'X-Okapi-Token': okapi.token,
               'Content-Type': 'application/json',
-            }
+            },
           });
-      });
-    });
-
-    describe('With provided name and with broken response', () => {
-      const dataTestId = 'validation-result';
-      beforeAll(() => {
-        Field.mockImplementationOnce(({ validate }) => {
-          let result;
-          const validateName = async () => {
-            result = await validate(name);
-          };
-          validateName();
-
-          return <div data-testid={dataTestId}>{result}</div>;
-        });
-
-        global.fetch = jest.fn(() => {
-          return Promise.resolve({
-            json: jest.fn(),
-          });
-        });
-      });
-
-      it('If error happen nothing should be rendered', () => {
-        waitFor(() => expect(screen.getByTestId(dataTestId)).toBeEmpty());
       });
     });
 
     describe('With provided name and with response data', () => {
       beforeAll(() => {
         Field.mockImplementation(({ validate }) => {
-          let result;
-          const validateName = async () => {
-            result = await validate(name);
-          };
-          validateName();
+          if (validate) {
+            let result;
+            const validateName = async () => {
+              result = await validate(name);
+            };
 
-          return <div data-testid="validation-result">{result}</div>;
+            validateName();
+
+            return <div data-testid="validation-result">{result}</div>;
+          }
+
+          return null;
         });
 
         global.fetch = jest.fn(() => {
@@ -506,7 +489,7 @@ describe.skip('FixedDueDateScheduleForm', () => {
               fixedDueDateSchedules: [{
                 id: 'test',
                 name,
-              }]
+              }],
             }),
           });
         });
@@ -520,10 +503,13 @@ describe.skip('FixedDueDateScheduleForm', () => {
     describe('Without provided name', () => {
       beforeAll(() => {
         Field.mockImplementation(({ validate }) => {
-          const validateName = async () => {
-            await validate();
-          };
-          validateName();
+          if (validate) {
+            const validateName = async () => {
+              await validate();
+            };
+
+            validateName();
+          }
 
           return null;
         });
