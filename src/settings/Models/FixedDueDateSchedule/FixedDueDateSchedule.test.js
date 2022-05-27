@@ -16,12 +16,14 @@ describe('FixedDueDateSchedule', () => {
     const scheduleInstance = new FixedDueDateSchedule();
 
     it('should have correct values', () => {
-      const emptyMetadata = new Metadata();
+      const expectedResult = {
+        id: undefined,
+        name: undefined,
+        metadata: new Metadata(),
+        schedules: [],
+      };
 
-      expect(scheduleInstance.id).toBe(undefined);
-      expect(scheduleInstance.name).toBe(undefined);
-      expect(scheduleInstance.metadata).toEqual(emptyMetadata);
-      expect(scheduleInstance.schedules).toEqual([]);
+      expect(scheduleInstance).toEqual(expectedResult);
     });
 
     it('"hasSchedules" should return false', () => {
@@ -63,10 +65,7 @@ describe('FixedDueDateSchedule', () => {
       const scheduleInstance = new FixedDueDateSchedule(validScheduleProps);
 
       it('should have correct values', () => {
-        expect(scheduleInstance.id).toBe(validScheduleProps.id);
-        expect(scheduleInstance.name).toBe(validScheduleProps.name);
-        expect(scheduleInstance.metadata).toEqual(expect.objectContaining(validScheduleProps.metadata));
-        expect(scheduleInstance.schedules).toEqual(expect.objectContaining(validScheduleProps.schedules));
+        expect(scheduleInstance).toEqual(validScheduleProps);
       });
 
       it('"metadata" should be an instance of Metadata', () => {
