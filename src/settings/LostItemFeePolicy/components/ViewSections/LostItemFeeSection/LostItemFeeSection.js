@@ -33,11 +33,11 @@ const LostItemFeeSection = (props) => {
   const displayNo = <FormattedMessage id="ui-circulation.settings.lostItemFee.no" />;
   const actualCost = (chargeAmountItem && chargeAmountItem.chargeType === 'actualCost')
     ? <FormattedMessage
-      id="ui-circulation.settings.lostItemFee.actualCost"
+        id="ui-circulation.settings.lostItemFee.actualCost"
     />
     : <FormattedMessage
-      id="ui-circulation.settings.lostItemFee.otherCost"
-      values={{ name: parseFloat(chargeAmountItem.amount).toFixed(2) }}
+        id="ui-circulation.settings.lostItemFee.otherCost"
+        values={{ name: parseFloat(chargeAmountItem.amount).toFixed(2) }}
     />;
   const displayFeesFinesShallRefunded = feesFinesShallRefunded && feesFinesShallRefunded.duration !== undefined
     ? `${getPeriodValue('feesFinesShallRefunded')} ${props.formatMessage({ id: 'ui-circulation.settings.lostItemFee.late' })}`
