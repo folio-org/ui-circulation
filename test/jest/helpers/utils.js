@@ -18,7 +18,7 @@ export const commonClassCheckWithoutProps = (Class, defaultProps = {}) => {
     const classInstance = new Class();
 
     Object.keys(classInstance).forEach(instanceKey => {
-      expect(classInstance[instanceKey]).toBe(defaultProps[instanceKey] ? defaultProps[instanceKey] : undefined);
+      expect(classInstance[instanceKey]).toEqual(defaultProps[instanceKey] ? defaultProps[instanceKey] : undefined);
     });
   });
 };
