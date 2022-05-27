@@ -13,14 +13,12 @@ export const componentPropsCheck = (Component, testId, expectedProps, partialCom
   expect(propertiesForCompare[0]).toStrictEqual(resultExpectedProps);
 };
 
-export const commonClassCheckWithoutProps = (Class, skipProps = []) => {
+export const commonClassCheckWithoutProps = (Class, defaultProps = {}) => {
   it('should have correct values if nothing was passed', () => {
     const classInstance = new Class();
 
     Object.keys(classInstance).forEach(instanceKey => {
-      if (!skipProps.includes(instanceKey)) {
-        expect(classInstance[instanceKey]).toBe(undefined);
-      }
+      expect(classInstance[instanceKey]).toBe(defaultProps[instanceKey] ? defaultProps[instanceKey] : undefined);
     });
   });
 };
