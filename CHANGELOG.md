@@ -28,6 +28,7 @@
 * Add RTL/Jest testing for `src/settings/Models/common` folder. Refs UICIRC-795.
 * UI tests replacement with RTL/Jest for `FinePolicy` folder in `Models`. Refs UICIRC-796.
 * Add RTL/Jest testing for `src/settings/Models/FixedDueDateSchedule` folder. Refs UICIRC-797.
+* Fix problems in `FixedDueDateScheduleForm` tests. Refs UICIRC-817.
 
 ## [7.0.3](https://github.com/folio-org/ui-circulation/tree/v7.0.3) (2022-04-11)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v7.0.2...v7.0.3)
