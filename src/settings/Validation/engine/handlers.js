@@ -15,7 +15,7 @@ export const isNotEmpty = (value) => {
 };
 
 export const isNotEmptyWithoutSpace = (value) => {
-  return typeof value === 'string' && value.trim();
+  return typeof value === 'string' && !!value.trim();
 };
 
 export const isIntegerGreaterThanZero = (value) => isInteger(value) && value > 0;
