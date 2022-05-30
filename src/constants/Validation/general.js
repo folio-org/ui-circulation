@@ -8,6 +8,8 @@ export const RULES = {
   IS_MAXIMUM_OVERDUE_RECALL_FINE_VALID: 'isMaximumOverdueRecallFineValid',
   IS_NOT_EMPTY: 'isNotEmpty',
   IS_NOT_EMPTY_SELECT: 'isNotEmptySelect',
+  IS_NOT_EMPTY_WITHOUT_SPACE: 'isNotEmptyWithoutSpace',
+  IS_NOT_EMPTY_EDITOR: 'isNotEmptyEditor',
 };
 
 export const GENERAL_NAME_FIELD_VALIDATION_PROPS = {
