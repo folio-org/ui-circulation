@@ -24,7 +24,6 @@ import {
   closedLoansRules,
 } from '../../constants';
 
-jest.mock('@folio/stripes/final-form', () => jest.fn(() => (Component) => Component));
 jest.mock('../components/AnonymizingTypeSelect/AnonymizingTypeSelectContainer', () => jest.fn(() => null));
 jest.mock('./ExceptionsList', () => jest.fn(() => null));
 jest.mock('../../constants', () => ({

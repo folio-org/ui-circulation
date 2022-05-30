@@ -20,6 +20,16 @@
 * Cypress issue with circulation rules form. Refs UICIRC-776.
 * User can save "Overdue fine" and "Overdue recall fine" with values less than 0. Refs UICIRC-784.
 * Lost item processing fee can be saved with a value less than 0. Refs UICIRC-779.
+* Fix tests fails. Refs UICIRC-816.
+* Unable to delete fixed due date schedule with permission `ui-circulation.settings.fixed-due-date-schedules`. Refs UICIRC-715.
+* Extract repeatable part of code from `Validation`. Refs UICIRC-804.
+* Add RTL/Jest testing for `src\settings\Validation\fine-policy` folder. Refs UICIRC-806.
+* Update NodeJS to v16 in GitHub Actions. Refs UICIRC-815.
+* Add RTL/Jest testing for `src/settings/Models/common` folder. Refs UICIRC-795.
+* UI tests replacement with RTL/Jest for `FinePolicy` folder in `Models`. Refs UICIRC-796.
+* Add RTL/Jest testing for `src/settings/Models/FixedDueDateSchedule` folder. Refs UICIRC-797.
+* Fix problems in `FixedDueDateScheduleForm` tests. Refs UICIRC-817.
+* Replace babel-eslint with @babel/eslint-parser. Refs UICIRC-780.
 
 ## [7.0.3](https://github.com/folio-org/ui-circulation/tree/v7.0.3) (2022-04-11)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v7.0.2...v7.0.3)

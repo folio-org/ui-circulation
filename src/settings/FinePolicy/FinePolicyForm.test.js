@@ -26,7 +26,6 @@ import {
 } from '../components';
 import FinePolicy from '../Models/FinePolicy';
 
-jest.mock('@folio/stripes/final-form', () => jest.fn(() => (Component) => Component));
 jest.mock('./components/EditSections', () => ({
   FinesSection: jest.fn(() => null),
   OverdueAboutSection: jest.fn(() => null),

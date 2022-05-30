@@ -6,7 +6,6 @@ import {
 } from '@testing-library/react';
 
 import '../../../test/jest/__mock__';
-import { componentPropsCheck } from '../../../test/jest/helpers';
 
 import { Field } from 'react-final-form';
 import {
@@ -21,6 +20,7 @@ import {
 } from '@folio/stripes/components';
 
 import { TemplateEditor } from '@folio/stripes-template-editor';
+import { componentPropsCheck } from '../../../test/jest/helpers';
 import PatronNoticeForm from './PatronNoticeForm';
 import TokensList from './TokensList';
 import {
@@ -39,7 +39,6 @@ AccordionSet.mockImplementation(({ children, onToggle }) => (
 jest.mock('@folio/stripes-template-editor', () => ({
   TemplateEditor: jest.fn(() => null),
 }));
-jest.mock('@folio/stripes/final-form', () => jest.fn(() => (Component) => Component));
 jest.mock('./tokens', () => jest.fn(() => mockGetTokensReturnValue));
 jest.mock('./TokensList', () => jest.fn(() => null));
 jest.mock('../components', () => ({
@@ -290,6 +289,6 @@ describe('PatronNoticeForm', () => {
 
     it('should not render patron notices predefined warning label', () => {
       expect(screen.queryByText(labelIds.patronNoticesPredefinedWarning)).toBeVisible();
-    }); 
+    });
   });
 });

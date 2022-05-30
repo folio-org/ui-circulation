@@ -1,4 +1,3 @@
-/* eslint-disable import/prefer-default-export */
 export const componentPropsCheck = (Component, testId, expectedProps, partialCompare = false) => {
   const propertiesForCompare = Component.mock.calls
     .reverse()
@@ -12,4 +11,36 @@ export const componentPropsCheck = (Component, testId, expectedProps, partialCom
     };
 
   expect(propertiesForCompare[0]).toStrictEqual(resultExpectedProps);
+};
+
+export const commonClassCheckWithoutProps = (Class, defaultProps = {}) => {
+  it('should have correct values if nothing was passed', () => {
+    const classInstance = new Class();
+
+    Object.keys(classInstance).forEach(instanceKey => {
+      expect(classInstance[instanceKey]).toEqual(defaultProps[instanceKey] ? defaultProps[instanceKey] : undefined);
+    });
+  });
+};
+
+export const commonClassCheckForEachProp = (Class, data) => {
+  const passedDataKeys = Object.keys(data || {});
+
+  passedDataKeys.forEach(dataKey => {
+    it(`should have correct values if only "${dataKey}" passed`, () => {
+      const classInstance = new Class({ [dataKey]: data[dataKey] });
+
+      Object.keys(classInstance).forEach(instanceKey => {
+        expect(classInstance[instanceKey]).toBe(instanceKey === dataKey ? data[dataKey] : undefined);
+      });
+    });
+  });
+};
+
+export const commonClassCheckForAllProps = (Class, data) => {
+  const classInstance = new Class(data);
+
+  it('should have correct values when fully data passed', () => {
+    expect(classInstance).toEqual(data);
+  });
 };

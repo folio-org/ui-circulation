@@ -27,7 +27,6 @@ import {
 import { NoticePolicy } from '../Models/NoticePolicy';
 import { patronNoticeCategoryIds } from '../../constants';
 
-jest.mock('@folio/stripes/final-form', () => jest.fn(() => (component) => component));
 jest.mock('./components', () => ({
   GeneralSection: jest.fn(() => null),
   LoanNoticesSection: jest.fn(() => null),
@@ -59,7 +58,7 @@ ExpandAllButton.mockImplementation(jest.fn(({ onToggle, ...rest }) => {
       type="button"
       {...rest}
     >
-        Expand all button
+      Expand all button
     </button>
   );
 }));
