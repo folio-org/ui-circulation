@@ -30,6 +30,7 @@
 * Add RTL/Jest testing for `src/settings/Models/FixedDueDateSchedule` folder. Refs UICIRC-797.
 * Fix problems in `FixedDueDateScheduleForm` tests. Refs UICIRC-817.
 * Replace babel-eslint with @babel/eslint-parser. Refs UICIRC-780.
+* No validation for spacebar when create Patron notice template. Refs UICIRC-782.
 
 ## [7.0.3](https://github.com/folio-org/ui-circulation/tree/v7.0.3) (2022-04-11)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v7.0.2...v7.0.3)

@@ -3,7 +3,8 @@ import {
   isEmpty,
   isNumber,
   isInteger,
-  isUndefined
+  isUndefined,
+  isString,
 } from 'lodash';
 
 import moment from 'moment';
@@ -12,6 +13,10 @@ import LostItemFeePolicy from '../../Models/LostItemFeePolicy';
 
 export const isNotEmpty = (value) => {
   return isNumber(value) || !isEmpty(value);
+};
+
+export const isNotEmptyWithoutSpace = (value) => {
+  return isString(value) && !!value.trim();
 };
 
 export const isIntegerGreaterThanZero = (value) => isInteger(value) && value > 0;
