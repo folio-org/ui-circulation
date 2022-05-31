@@ -3,7 +3,8 @@ import {
   isEmpty,
   isNumber,
   isInteger,
-  isUndefined
+  isUndefined,
+  isString,
 } from 'lodash';
 
 import moment from 'moment';
@@ -15,7 +16,7 @@ export const isNotEmpty = (value) => {
 };
 
 export const isNotEmptyWithoutSpace = (value) => {
-  return typeof value === 'string' && !!value.trim();
+  return typeof isString(value) && !!value.trim();
 };
 
 export const isIntegerGreaterThanZero = (value) => isInteger(value) && value > 0;
