@@ -294,7 +294,7 @@
     "settings.index.feesFines": "费用/罚款",
     "settings.index.patronNoticesSettings": "读者通知",
     "settings.index.request": "请求",
-    "settings.validate.greaterThanOrEqualToZero": "该值必须大于或等于0",
+    "settings.validate.greaterThanOrEqualToZero": "该值必须大于等于0",
     "settings.finePolicy.entryLabel": "超期罚款政策",
     "settings.finePolicy.paneTitle": "超期罚款政策",
     "settings.finePolicy.overdueFine": "超期罚款",
