@@ -29,7 +29,7 @@ describe('LoansSection', () => {
   };
 
   const mockedFunction = jest.fn((id) => `${id}-processed`);
-  const mockedGetDropdownValue = jest.fn((id, ...rest) => id);
+  const mockedGetDropdownValue = jest.fn((id) => id);
 
   const getById = (id) => within(screen.getByTestId(id));
   const sectionTest = (section, loansPolicy = true) => {

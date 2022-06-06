@@ -189,7 +189,7 @@ TitleLevelRequestsForm.propTypes = {
       })),
     }),
     requests: PropTypes.shape({
-      records: PropTypes.array.isRequired,
+      records: PropTypes.arrayOf(PropTypes.object).isRequired,
     }).isRequired,
   }).isRequired,
   mutator: PropTypes.shape({

@@ -10,7 +10,6 @@ import '../../../test/jest/__mock__';
 import {
   ExpandAllButton,
   AccordionSet,
-  Pane,
 } from '@folio/stripes/components';
 
 import NoticePolicyForm from './NoticePolicyForm';

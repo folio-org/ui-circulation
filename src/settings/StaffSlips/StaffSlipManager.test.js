@@ -77,7 +77,7 @@ describe('StaffSlipManager', () => {
     });
 
     it('should render "EntryManager" component when entries resource is not passed', () => {
-      const { entries, ...restResources } = testResources;
+      const { entries, ...restResources } = testResources; // eslint-disable-line no-unused-vars
       render(
         <StaffSlipManager
           {...testDefaultProps}

@@ -5,8 +5,6 @@ jest.mock('react-final-form', () => ({
     label,
     component,
     'data-testid': testId,
-    children,
-    dataOptions,
     ...rest
   }) => (
     <div
