@@ -2,6 +2,8 @@ import sectionConfigGenerator from './section-config-generator';
 
 import { loanTimeBasedEventsIds } from '../../../constants';
 
-export default function (policy) {
+const loanNotices = (policy) => {
   return sectionConfigGenerator(policy, 'loanNotices', loanTimeBasedEventsIds);
-}
+};
+
+export default loanNotices;

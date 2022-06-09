@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-export default function ({ identifiers = {} }, prevErrors) {
+const patronIdentifierValidator = ({ identifiers = {} }, prevErrors) => {
   const nextErrors = { ...prevErrors };
 
   const { custom: customFieldIdentifiers, ...defaultIdentifers } = identifiers;
@@ -12,4 +12,6 @@ export default function ({ identifiers = {} }, prevErrors) {
   }
 
   return nextErrors;
-}
+};
+
+export default patronIdentifierValidator;

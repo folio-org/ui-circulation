@@ -1,6 +1,6 @@
 import { closingTypesMap } from '../../../constants';
 
-export default function (data, sectionKey) {
+const loanExceptions = (data, sectionKey) => {
   return data[sectionKey].reduce((config, item, index) => {
     const section = data.closingType[sectionKey];
     const isClosingTypeIntervalSelected = section && section[index] === closingTypesMap.INTERVAL;
@@ -22,4 +22,6 @@ export default function (data, sectionKey) {
 
     return { ...config, ...loanExceptionConfig };
   }, {});
-}
+};
+
+export default loanExceptions;

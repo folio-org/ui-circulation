@@ -1,4 +1,4 @@
-export default function (loanPolicy) {
+const renewals = (loanPolicy) => {
   return {
     'renewalsPolicy.alternateFixedDueDateScheduleId': {
       rules: ['isNotEmptySelect'],
@@ -21,4 +21,6 @@ export default function (loanPolicy) {
       shouldValidate: loanPolicy.isRenewable() && loanPolicy.isProfileRolling(),
     },
   };
-}
+};
+
+export default renewals;

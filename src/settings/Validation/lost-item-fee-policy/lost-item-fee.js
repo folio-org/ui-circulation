@@ -26,7 +26,7 @@ to the lost item fee policy form, adding new validation rules requires the follo
 
 import { GENERAL_NAME_FIELD_VALIDATION_PROPS } from '../../../constants/Validation/general';
 
-export default function (l) {
+const lostItemFee = (l) => {
   return {
     ...GENERAL_NAME_FIELD_VALIDATION_PROPS,
     'itemAgedLostOverdue.duration': {
@@ -123,4 +123,6 @@ export default function (l) {
       shouldValidate: l.hasValue('feesFinesShallRefunded.duration'),
     },
   };
-}
+};
+
+export default lostItemFee;

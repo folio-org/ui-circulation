@@ -6,7 +6,7 @@ import { NoticePolicy } from '../../Models/NoticePolicy';
 
 import { GENERAL_NAME_FIELD_VALIDATION_PROPS } from '../../../constants/Validation/general';
 
-export default function (policy) {
+const noticePolicyValidator = (policy) => {
   const noticePolicy = new NoticePolicy(policy);
   const config = {
     ...GENERAL_NAME_FIELD_VALIDATION_PROPS,
@@ -17,4 +17,6 @@ export default function (policy) {
   const formValidator = new FormValidator(config);
 
   return formValidator.validate(noticePolicy);
-}
+};
+
+export default noticePolicyValidator;

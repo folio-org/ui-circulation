@@ -1,6 +1,6 @@
 import buildPeriodValidationConfig from './utils';
 
-export default function (loanPolicy) {
+const loans = (loanPolicy) => {
   return {
     'loansPolicy.profileId': {
       rules: ['isNotEmpty'],
@@ -36,4 +36,6 @@ export default function (loanPolicy) {
     },
     ...buildPeriodValidationConfig(loanPolicy, 'loansPolicy.gracePeriod')
   };
-}
+};
+
+export default loans;

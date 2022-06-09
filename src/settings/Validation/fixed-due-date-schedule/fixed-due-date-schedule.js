@@ -4,7 +4,7 @@ import schedulesArrayValidator from './schedules';
 
 import { GENERAL_NAME_FIELD_VALIDATION_PROPS } from '../../../constants/Validation/general';
 
-export default function (schedule) {
+const fixedDueDateScheduleValidator = (schedule) => {
   const fixedDueDateSchedule = new FixedDueDateSchedule(schedule);
 
   const config = {
@@ -38,4 +38,6 @@ export default function (schedule) {
   const formValidator = new FormValidator(config);
 
   return schedulesArrayValidator(fixedDueDateSchedule, formValidator.validate(fixedDueDateSchedule));
-}
+};
+
+export default fixedDueDateScheduleValidator;

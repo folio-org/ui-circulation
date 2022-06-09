@@ -6,7 +6,7 @@ import requests from './request-management';
 
 import { GENERAL_NAME_FIELD_VALIDATION_PROPS } from '../../../constants/Validation/general';
 
-export default function (policy) {
+const loanPolicyValidator = (policy) => {
   const loanPolicy = new LoanPolicy(policy);
 
   const config = {
@@ -18,4 +18,6 @@ export default function (policy) {
 
   const formValidator = new FormValidator(config);
   return formValidator.validate(policy);
-}
+};
+
+export default loanPolicyValidator;
