@@ -113,7 +113,7 @@ describe('LoanPolicySettings', () => {
     });
 
     it('should render "EntryManager" component when loanPolicies resource is not passed', () => {
-      const { loanPolicies, ...restResources } = testResources;
+      const { loanPolicies, ...restResources } = testResources; // eslint-disable-line no-unused-vars
       render(
         <LoanPolicySettings
           {...testDefaultProps}

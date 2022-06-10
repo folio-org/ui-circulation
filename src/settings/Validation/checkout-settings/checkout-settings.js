@@ -1,7 +1,7 @@
 import FormValidator from '../engine/FormValidator';
 import patronIdentifierValidator from './patron-identifiers';
 
-export default function (settings) {
+const checkoutSettingsValidator = (settings) => {
   const config = {
     'checkoutTimeoutDuration': {
       rules: ['hasPositiveCheckoutTimeoutDuration'],
@@ -11,4 +11,6 @@ export default function (settings) {
   const formValidator = new FormValidator(config);
 
   return patronIdentifierValidator(settings, formValidator.validate(settings));
-}
+};
+
+export default checkoutSettingsValidator;

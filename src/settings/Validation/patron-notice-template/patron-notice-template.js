@@ -5,7 +5,7 @@ import {
   GENERAL_NAME_FIELD_VALIDATION_PROPS,
 } from '../../../constants/Validation/general';
 
-export default function (template) {
+const patronNoticeTemplate = (template) => {
   const config = {
     ...GENERAL_NAME_FIELD_VALIDATION_PROPS,
     'category': {
@@ -25,4 +25,6 @@ export default function (template) {
   const formValidator = new FormValidator(config);
 
   return formValidator.validate(template);
-}
+};
+
+export default patronNoticeTemplate;

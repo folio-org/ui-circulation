@@ -4,7 +4,7 @@ import {
 } from '../../../constants/Validation/general';
 import { FINE_POLICY_PATH } from '../../../constants/Validation/fine-policy';
 
-export default function (finePolicy) {
+const fines = (finePolicy) => {
   return {
     ...GENERAL_NAME_FIELD_VALIDATION_PROPS,
     [FINE_POLICY_PATH.OVERDUE_FINE_QUANTITY]: {
@@ -32,4 +32,6 @@ export default function (finePolicy) {
       shouldValidate: finePolicy.isOverdueRecallFine() || finePolicy.hasNonZeroValue(FINE_POLICY_PATH.MAX_OVERDUE_RECALL_FINE),
     },
   };
-}
+};
+
+export default fines;

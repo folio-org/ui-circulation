@@ -2,7 +2,7 @@ import React from 'react';
 import { ARRAY_ERROR } from 'final-form';
 import { FormattedMessage } from 'react-intl';
 
-export default function (fixedDueDateSchedule, prevErrors) {
+const schedulesArrayValidator = (fixedDueDateSchedule, prevErrors) => {
   if (fixedDueDateSchedule.hasInvalidSchedules() || prevErrors.schedules) {
     return prevErrors;
   }
@@ -20,4 +20,6 @@ export default function (fixedDueDateSchedule, prevErrors) {
   }
 
   return nextErrors;
-}
+};
+
+export default schedulesArrayValidator;

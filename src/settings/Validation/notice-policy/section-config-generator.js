@@ -1,6 +1,6 @@
 import { reduce } from 'lodash';
 
-export default function (policy, sectionKey, allowedIds) {
+const sectionConfigGenerator = (policy, sectionKey, allowedIds) => {
   return reduce(policy[sectionKey], (config, notice, index) => {
     const isRecurringSelected = notice.isRecurring();
     const isBeforeOrAfterSelected = notice.sendOptions.isBeforeOrAfter();
@@ -53,4 +53,6 @@ export default function (policy, sectionKey, allowedIds) {
 
     return { ...config, ...noticeConfig };
   }, {});
-}
+};
+
+export default sectionConfigGenerator;

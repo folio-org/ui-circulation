@@ -1,6 +1,6 @@
 import { requestPolicyTypes } from '../../../constants';
 
-export default function (policy) {
+const normalize = (policy) => {
   const requestTypes = policy.requestTypes.reduce((acc, type, index) => {
     if (type) {
       acc.push(requestPolicyTypes[index]);
@@ -9,4 +9,6 @@ export default function (policy) {
   }, []);
 
   return { ...policy, requestTypes };
-}
+};
+
+export default normalize;

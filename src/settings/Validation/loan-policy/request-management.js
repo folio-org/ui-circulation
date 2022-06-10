@@ -15,9 +15,11 @@ const holds = (loanPolicy) => {
   };
 };
 
-export default function (loanPolicy) {
+const requests = (loanPolicy) => {
   return {
     ...recalls(loanPolicy),
     ...holds(loanPolicy),
   };
-}
+};
+
+export default requests;

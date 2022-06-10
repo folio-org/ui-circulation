@@ -2,7 +2,7 @@ import { reduce } from 'lodash';
 
 import { closedLoansRules } from '../../../constants';
 
-export default function (data) {
+const general = (data) => {
   return reduce(closedLoansRules, (config, item) => {
     const ruleConfig = {
       [`${item}.duration`]: {
@@ -21,4 +21,6 @@ export default function (data) {
 
     return { ...config, ...ruleConfig };
   }, {});
-}
+};
+
+export default general;

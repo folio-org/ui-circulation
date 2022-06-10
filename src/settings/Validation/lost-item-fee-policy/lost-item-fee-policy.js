@@ -2,7 +2,7 @@ import LostItemFeePolicy from '../../Models/LostItemFeePolicy';
 import FormValidator from '../engine/FormValidator';
 import lostItemFee from './lost-item-fee';
 
-export default function (policy) {
+const lostItemFeePolicyValidator = (policy) => {
   const lostItemFeePolicy = new LostItemFeePolicy(policy);
 
   const config = {
@@ -10,5 +10,8 @@ export default function (policy) {
   };
 
   const formValidator = new FormValidator(config);
+
   return formValidator.validate(policy);
-}
+};
+
+export default lostItemFeePolicyValidator;

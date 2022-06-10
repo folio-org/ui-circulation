@@ -2,6 +2,8 @@ import sectionConfigGenerator from './section-config-generator';
 
 import { timeBasedFeeFineEventsIds } from '../../../constants';
 
-export default function (policy) {
+const feeFineNotices = (policy) => {
   return sectionConfigGenerator(policy, 'feeFineNotices', timeBasedFeeFineEventsIds);
-}
+};
+
+export default feeFineNotices;
