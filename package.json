@@ -213,8 +213,11 @@
         "displayName": "Settings (Circ): Can create, edit and remove other settings",
         "subPermissions": [
           "user-settings.custom-fields.collection.get",
-          "configuration.all",
-          "settings.circulation.enabled"
+          "settings.circulation.enabled",
+          "configuration.entries.collection.get",
+          "configuration.entries.item.get",
+          "configuration.entries.item.post",
+          "configuration.entries.item.put"
         ],
         "visible": true
       },
