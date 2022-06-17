@@ -217,7 +217,8 @@
           "configuration.entries.collection.get",
           "configuration.entries.item.get",
           "configuration.entries.item.post",
-          "configuration.entries.item.put"
+          "configuration.entries.item.put",
+          "configuration.entries.item.delete"
         ],
         "visible": true
       },
