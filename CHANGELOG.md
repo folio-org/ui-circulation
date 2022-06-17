@@ -32,6 +32,7 @@
 * Replace babel-eslint with @babel/eslint-parser. Refs UICIRC-780.
 * No validation for spacebar when create Patron notice template. Refs UICIRC-782.
 * Fix eslint error. Refs UICIRC-820.
+* Adjust `configuration.all` permission set. Refs UICIRC-697.
 * Cover `LoanPolicy` folder in `Models` by RTL/jest tests. Refs UICIRC-798.
 
 ## [7.0.3](https://github.com/folio-org/ui-circulation/tree/v7.0.3) (2022-04-11)
