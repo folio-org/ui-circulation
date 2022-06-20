@@ -33,6 +33,7 @@
 * No validation for spacebar when create Patron notice template. Refs UICIRC-782.
 * Fix eslint error. Refs UICIRC-820.
 * Adjust `configuration.all` permission set. Refs UICIRC-697.
+* Cover `RequestPolicy` by RTL/jest tests. Refs UICIRC-801.
 
 ## [7.0.3](https://github.com/folio-org/ui-circulation/tree/v7.0.3) (2022-04-11)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v7.0.2...v7.0.3)
