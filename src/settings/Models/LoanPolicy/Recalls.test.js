@@ -17,10 +17,9 @@ describe('Recalls', () => {
       intervalId: 'id_3',
     },
   };
-
   const recalls = new Recalls(recall);
 
-  it('"Recalls" should have correct properties', () => {
+  it('should have correct properties', () => {
     expect(recalls).toEqual(expect.objectContaining(recall));
   });
 
@@ -36,7 +35,7 @@ describe('Recalls', () => {
     expect(recalls.alternateRecallReturnInterval).toBeInstanceOf(Period);
   });
 
-  it('"Recalls" should have correct properties if there is no "recall"', () => {
+  it('should have correct properties if there is no "recall"', () => {
     const expectedResult = {
       allowRecallsToExtendOverdueLoans: undefined,
       recallReturnInterval: {

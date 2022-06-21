@@ -17,7 +17,6 @@ describe('LoanPolicy', () => {
     loanable: true,
     renewable: true,
   };
-
   const fullPolicy = {
     ...basicPolicy,
     loansPolicy: {},
@@ -31,10 +30,9 @@ describe('LoanPolicy', () => {
     requestManagement: {},
     metadata: {},
   };
-
   const loanPolicy = new LoanPolicy(fullPolicy);
 
-  it('"LoanPolicy" should have correct properties', () => {
+  it('should have correct properties', () => {
     expect(loanPolicy).toEqual(expect.objectContaining(basicPolicy));
   });
 
@@ -54,7 +52,7 @@ describe('LoanPolicy', () => {
     expect(loanPolicy.metadata).toBeInstanceOf(Metadata);
   });
 
-  it('"LoanPolicy" should have correct properties when "policy" is not provided', () => {
+  it('should have correct properties when "policy" is not provided', () => {
     const loanPolicyInstance = new LoanPolicy();
     const expectedResult = {
       id: undefined,
@@ -74,90 +72,12 @@ describe('LoanPolicy', () => {
     });
   });
 
-  it('"hasValue" should return true', () => {
-    expect(loanPolicy.hasValue('renewalsPolicy.numberAllowed')).toEqual(true);
-  });
-
-  it('"hasValue" should return false', () => {
-    expect(loanPolicy.hasValue('name')).toEqual(false);
-  });
-
-  it('"isIntervalSelected" should return true', () => {
-    expect(loanPolicy.isIntervalSelected('renewalsPolicy.period.intervalId')).toEqual(true);
-  });
-
-  it('"isIntervalSelected" should return false', () => {
-    expect(loanPolicy.isIntervalSelected('loansPolicy.period.intervalId')).toEqual(false);
-  });
-
   it('"isLoanable" should return "loanable" property', () => {
     expect(loanPolicy.isLoanable()).toEqual(basicPolicy.loanable);
   });
 
   it('"isRenewable" should return "renewable" property', () => {
     expect(loanPolicy.isLoanable()).toEqual(basicPolicy.renewable);
-  });
-
-  it('"isShortTermLoan" should return true when "intervalId" equal "Minutes"', () => {
-    const policy = {
-      ...fullPolicy,
-      loansPolicy: {
-        profileId: loanProfileMap.ROLLING,
-        period: {
-          intervalId: intervalIdsMap.MINUTES,
-        },
-      },
-    };
-    const loanPolicyInstance = new LoanPolicy(policy);
-
-    expect(loanPolicyInstance.isShortTermLoan()).toEqual(true);
-  });
-
-  it('"isShortTermLoan" should return true when "intervalId" equal "Hours"', () => {
-    const policy = {
-      ...fullPolicy,
-      loansPolicy: {
-        profileId: loanProfileMap.ROLLING,
-        period: {
-          intervalId: intervalIdsMap.HOURS,
-        },
-      },
-    };
-    const loanPolicyInstance = new LoanPolicy(policy);
-
-    expect(loanPolicyInstance.isShortTermLoan()).toEqual(true);
-  });
-
-  it('"isOpeningTimeOffsetActive" should return true', () => {
-    const policy = {
-      ...fullPolicy,
-      loansPolicy: {
-        profileId: loanProfileMap.ROLLING,
-        period: {
-          intervalId: intervalIdsMap.HOURS,
-        },
-        closedLibraryDueDateManagementId: BEGINNING_OF_THE_NEXT_OPEN_SERVICE_POINT_HOURS,
-      },
-    };
-    const loanPolicyInstance = new LoanPolicy(policy);
-
-    expect(loanPolicyInstance.isOpeningTimeOffsetActive()).toEqual(true);
-  });
-
-  it('"isOpeningTimeOffsetActive" should return false', () => {
-    const policy = {
-      ...fullPolicy,
-      loansPolicy: {
-        profileId: loanProfileMap.ROLLING,
-        period: {
-          intervalId: intervalIdsMap.HOURS,
-        },
-        closedLibraryDueDateManagementId: 'test_id',
-      },
-    };
-    const loanPolicyInstance = new LoanPolicy(policy);
-
-    expect(loanPolicyInstance.isOpeningTimeOffsetActive()).toEqual(false);
   });
 
   it('"isDifferentPeriod" should return "differentPeriod" when "renewable" is true', () => {
@@ -186,137 +106,233 @@ describe('LoanPolicy', () => {
     expect(loanPolicyInstance.isUnlimitedRenewals()).toEqual(unlimited);
   });
 
-  it('"isProfileFixed" should return true when "profileId" equals "Fixed"', () => {
-    const policy = {
-      ...fullPolicy,
-      loansPolicy: {
-        profileId: loanProfileMap.FIXED,
-      },
-    };
-    const loanPolicyInstance = new LoanPolicy(policy);
+  describe('hasValue', () => {
+    it('should return true if value is number', () => {
+      expect(loanPolicy.hasValue('renewalsPolicy.numberAllowed')).toEqual(true);
+    });
 
-    expect(loanPolicyInstance.isProfileFixed()).toEqual(true);
+    it('should return false if value is not number', () => {
+      expect(loanPolicy.hasValue('name')).toEqual(false);
+    });
   });
 
-  it('"isProfileFixed" should return false when "profileId" is not equal "Fixed"', () => {
-    const policy = {
-      ...fullPolicy,
-      loansPolicy: {
-        profileId: loanProfileMap.ROLLING,
-      },
-    };
-    const loanPolicyInstance = new LoanPolicy(policy);
+  describe('isIntervalSelected', () => {
+    it('should return true if value is number', () => {
+      expect(loanPolicy.isIntervalSelected('renewalsPolicy.period.intervalId')).toEqual(true);
+    });
 
-    expect(loanPolicyInstance.isProfileFixed()).toEqual(false);
+    it('should return false if value is not number', () => {
+      expect(loanPolicy.isIntervalSelected('loansPolicy.period.intervalId')).toEqual(false);
+    });
   });
 
-  it('"isProfileRolling" should return true when "profileId" equals "Rolling"', () => {
-    const policy = {
-      ...fullPolicy,
-      loansPolicy: {
-        profileId: loanProfileMap.ROLLING,
-      },
-    };
-    const loanPolicyInstance = new LoanPolicy(policy);
+  describe('isShortTermLoan', () => {
+    it('should return true when "intervalId" equal "Minutes"', () => {
+      const policy = {
+        ...fullPolicy,
+        loansPolicy: {
+          profileId: loanProfileMap.ROLLING,
+          period: {
+            intervalId: intervalIdsMap.MINUTES,
+          },
+        },
+      };
+      const loanPolicyInstance = new LoanPolicy(policy);
 
-    expect(loanPolicyInstance.isProfileRolling()).toEqual(true);
+      expect(loanPolicyInstance.isShortTermLoan()).toEqual(true);
+    });
+
+    it('should return true when "intervalId" equal "Hours"', () => {
+      const policy = {
+        ...fullPolicy,
+        loansPolicy: {
+          profileId: loanProfileMap.ROLLING,
+          period: {
+            intervalId: intervalIdsMap.HOURS,
+          },
+        },
+      };
+      const loanPolicyInstance = new LoanPolicy(policy);
+
+      expect(loanPolicyInstance.isShortTermLoan()).toEqual(true);
+    });
   });
 
-  it('"isProfileRolling" should return false when "profileId" is not equal "Rolling"', () => {
-    const policy = {
-      ...fullPolicy,
-      loansPolicy: {
-        profileId: loanProfileMap.FIXED,
-      },
-    };
-    const loanPolicyInstance = new LoanPolicy(policy);
+  describe('isOpeningTimeOffsetActive', () => {
+    it('should return true if there is correct dueDateManagementId', () => {
+      const policy = {
+        ...fullPolicy,
+        loansPolicy: {
+          profileId: loanProfileMap.ROLLING,
+          period: {
+            intervalId: intervalIdsMap.HOURS,
+          },
+          closedLibraryDueDateManagementId: BEGINNING_OF_THE_NEXT_OPEN_SERVICE_POINT_HOURS,
+        },
+      };
+      const loanPolicyInstance = new LoanPolicy(policy);
 
-    expect(loanPolicyInstance.isProfileRolling()).toEqual(false);
+      expect(loanPolicyInstance.isOpeningTimeOffsetActive()).toEqual(true);
+    });
+
+    it('should return false if there is not correct dueDateManagementId', () => {
+      const policy = {
+        ...fullPolicy,
+        loansPolicy: {
+          profileId: loanProfileMap.ROLLING,
+          period: {
+            intervalId: intervalIdsMap.HOURS,
+          },
+          closedLibraryDueDateManagementId: 'test_id',
+        },
+      };
+      const loanPolicyInstance = new LoanPolicy(policy);
+
+      expect(loanPolicyInstance.isOpeningTimeOffsetActive()).toEqual(false);
+    });
   });
 
-  it('"isNumberOfRenewalsAllowedActive" should return true when "unlimited" is false', () => {
-    const unlimited = false;
-    const policy = {
-      ...fullPolicy,
-      renewalsPolicy: {
-        unlimited,
-      },
-    };
-    const loanPolicyInstance = new LoanPolicy(policy);
+  describe('isProfileFixed', () => {
+    it('should return true when "profileId" equals "Fixed"', () => {
+      const policy = {
+        ...fullPolicy,
+        loansPolicy: {
+          profileId: loanProfileMap.FIXED,
+        },
+      };
+      const loanPolicyInstance = new LoanPolicy(policy);
 
-    expect(loanPolicyInstance.isNumberOfRenewalsAllowedActive()).toEqual(!unlimited);
+      expect(loanPolicyInstance.isProfileFixed()).toEqual(true);
+    });
+
+    it('should return false when "profileId" is not equal "Fixed"', () => {
+      const policy = {
+        ...fullPolicy,
+        loansPolicy: {
+          profileId: loanProfileMap.ROLLING,
+        },
+      };
+      const loanPolicyInstance = new LoanPolicy(policy);
+
+      expect(loanPolicyInstance.isProfileFixed()).toEqual(false);
+    });
   });
 
-  it('"isNumberOfRenewalsAllowedActive" should return false when "unlimited" is true', () => {
-    const unlimited = true;
-    const policy = {
-      ...fullPolicy,
-      renewalsPolicy: {
-        unlimited,
-      },
-    };
-    const loanPolicyInstance = new LoanPolicy(policy);
+  describe('isProfileRolling', () => {
+    it('should return true when "profileId" equals "Rolling"', () => {
+      const policy = {
+        ...fullPolicy,
+        loansPolicy: {
+          profileId: loanProfileMap.ROLLING,
+        },
+      };
+      const loanPolicyInstance = new LoanPolicy(policy);
 
-    expect(loanPolicyInstance.isNumberOfRenewalsAllowedActive()).toEqual(!unlimited);
+      expect(loanPolicyInstance.isProfileRolling()).toEqual(true);
+    });
+
+    it('should return false when "profileId" is not equal "Rolling"', () => {
+      const policy = {
+        ...fullPolicy,
+        loansPolicy: {
+          profileId: loanProfileMap.FIXED,
+        },
+      };
+      const loanPolicyInstance = new LoanPolicy(policy);
+
+      expect(loanPolicyInstance.isProfileRolling()).toEqual(false);
+    });
   });
 
-  it('"isAlternateFixedDueDateScheduleIdRequired" should return true', () => {
-    const policy = {
-      ...fullPolicy,
-      loansPolicy: {
-        profileId: loanProfileMap.FIXED,
-      },
-      renewalsPolicy: {
-        differentPeriod: true,
-      },
-    };
-    const loanPolicyInstance = new LoanPolicy(policy);
+  describe('isNumberOfRenewalsAllowedActive', () => {
+    it('should return true when "unlimited" is false', () => {
+      const unlimited = false;
+      const policy = {
+        ...fullPolicy,
+        renewalsPolicy: {
+          unlimited,
+        },
+      };
+      const loanPolicyInstance = new LoanPolicy(policy);
 
-    expect(loanPolicyInstance.isAlternateFixedDueDateScheduleIdRequired()).toEqual(true);
+      expect(loanPolicyInstance.isNumberOfRenewalsAllowedActive()).toEqual(!unlimited);
+    });
+
+    it('should return false when "unlimited" is true', () => {
+      const unlimited = true;
+      const policy = {
+        ...fullPolicy,
+        renewalsPolicy: {
+          unlimited,
+        },
+      };
+      const loanPolicyInstance = new LoanPolicy(policy);
+
+      expect(loanPolicyInstance.isNumberOfRenewalsAllowedActive()).toEqual(!unlimited);
+    });
   });
 
-  it('"isAlternateFixedDueDateScheduleIdRequired" should return false', () => {
-    const policy = {
-      ...fullPolicy,
-      loansPolicy: {
-        profileId: loanProfileMap.FIXED,
-      },
-      renewalsPolicy: {
-        differentPeriod: false,
-      },
-    };
-    const loanPolicyInstance = new LoanPolicy(policy);
+  describe('isAlternateFixedDueDateScheduleIdRequired', () => {
+    it('should return true when differentPeriod is true', () => {
+      const policy = {
+        ...fullPolicy,
+        loansPolicy: {
+          profileId: loanProfileMap.FIXED,
+        },
+        renewalsPolicy: {
+          differentPeriod: true,
+        },
+      };
+      const loanPolicyInstance = new LoanPolicy(policy);
 
-    expect(loanPolicyInstance.isAlternateFixedDueDateScheduleIdRequired()).toEqual(false);
+      expect(loanPolicyInstance.isAlternateFixedDueDateScheduleIdRequired()).toEqual(true);
+    });
+
+    it('should return false when differentPeriod is false', () => {
+      const policy = {
+        ...fullPolicy,
+        loansPolicy: {
+          profileId: loanProfileMap.FIXED,
+        },
+        renewalsPolicy: {
+          differentPeriod: false,
+        },
+      };
+      const loanPolicyInstance = new LoanPolicy(policy);
+
+      expect(loanPolicyInstance.isAlternateFixedDueDateScheduleIdRequired()).toEqual(false);
+    });
   });
 
-  it('"isRenewalsPolicyPeriodRequired" should return true', () => {
-    const policy = {
-      ...fullPolicy,
-      loansPolicy: {
-        profileId: loanProfileMap.ROLLING,
-      },
-      renewalsPolicy: {
-        differentPeriod: true,
-      },
-    };
-    const loanPolicyInstance = new LoanPolicy(policy);
+  describe('isRenewalsPolicyPeriodRequired', () => {
+    it('should return true when differentPeriod is true', () => {
+      const policy = {
+        ...fullPolicy,
+        loansPolicy: {
+          profileId: loanProfileMap.ROLLING,
+        },
+        renewalsPolicy: {
+          differentPeriod: true,
+        },
+      };
+      const loanPolicyInstance = new LoanPolicy(policy);
 
-    expect(loanPolicyInstance.isRenewalsPolicyPeriodRequired()).toEqual(true);
-  });
+      expect(loanPolicyInstance.isRenewalsPolicyPeriodRequired()).toEqual(true);
+    });
 
-  it('"isRenewalsPolicyPeriodRequired" should return false', () => {
-    const policy = {
-      ...fullPolicy,
-      loansPolicy: {
-        profileId: loanProfileMap.ROLLING,
-      },
-      renewalsPolicy: {
-        differentPeriod: false,
-      },
-    };
-    const loanPolicyInstance = new LoanPolicy(policy);
+    it('should return false when differentPeriod is false', () => {
+      const policy = {
+        ...fullPolicy,
+        loansPolicy: {
+          profileId: loanProfileMap.ROLLING,
+        },
+        renewalsPolicy: {
+          differentPeriod: false,
+        },
+      };
+      const loanPolicyInstance = new LoanPolicy(policy);
 
-    expect(loanPolicyInstance.isRenewalsPolicyPeriodRequired()).toEqual(false);
+      expect(loanPolicyInstance.isRenewalsPolicyPeriodRequired()).toEqual(false);
+    });
   });
 });

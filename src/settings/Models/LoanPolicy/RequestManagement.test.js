@@ -18,7 +18,6 @@ describe('RequestManagement', () => {
       intervalId: 'id_3',
     },
   };
-
   const holds = {
     renewItemsWithRequest: true,
     alternateCheckoutLoanPeriod: {
@@ -30,13 +29,12 @@ describe('RequestManagement', () => {
       intervalId: 'id_2',
     },
   };
-
   const requestManagement = new RequestManagement({
     recalls,
     holds,
   });
 
-  it('"RequestManagement" should have correct properties', () => {
+  it('should have correct properties', () => {
     expect(requestManagement).toEqual(expect.objectContaining({
       holds,
       recalls,

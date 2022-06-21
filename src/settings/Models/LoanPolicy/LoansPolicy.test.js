@@ -10,7 +10,6 @@ describe('LoansPolicy', () => {
     closedLibraryDueDateManagementId: 'closedLibraryDueDateManagementId',
     fixedDueDateScheduleId: 'fixedDueDateScheduleId',
   };
-
   const fullPolicy = {
     ...basicPolicy,
     period: {
@@ -26,10 +25,9 @@ describe('LoansPolicy', () => {
       intervalId: 'id_3',
     },
   };
-
   const loansPolicy = new LoansPolicy(fullPolicy);
 
-  it('"LoansPolicy" should have correct properties', () => {
+  it('should have correct properties', () => {
     expect(loansPolicy).toEqual(expect.objectContaining(fullPolicy));
   });
 
@@ -45,7 +43,7 @@ describe('LoansPolicy', () => {
     expect(loansPolicy.openingTimeOffset).toBeInstanceOf(Period);
   });
 
-  it('"LoansPolicy" should have correct properties if there is no "policy"', () => {
+  it('should have correct properties if there is no "policy"', () => {
     const expectedResult = {
       profileId: undefined,
       closedLibraryDueDateManagementId: undefined,
@@ -68,30 +66,32 @@ describe('LoansPolicy', () => {
     expect(loansPolicyInstance).toEqual(expect.objectContaining(expectedResult));
   });
 
-  it('"setDueDateManagementId" should change class data when "isShortTermLoan" is true', () => {
-    helpers.isValidItemSelected.mockImplementation(() => false);
-    const loansPolicyInstance = new LoansPolicy(fullPolicy);
+  describe('setDueDateManagementId', () => {
+    it('should change class data when "isShortTermLoan" is true', () => {
+      helpers.isValidItemSelected.mockImplementation(() => false);
+      const loansPolicyInstance = new LoansPolicy(fullPolicy);
 
-    loansPolicyInstance.setDueDateManagementId(true);
+      loansPolicyInstance.setDueDateManagementId(true);
 
-    expect(loansPolicyInstance.closedLibraryDueDateManagementId).toEqual('');
-  });
+      expect(loansPolicyInstance.closedLibraryDueDateManagementId).toEqual('');
+    });
 
-  it('"setDueDateManagementId" should change class data when "isShortTermLoan" is false', () => {
-    helpers.isValidItemSelected.mockImplementation(() => false);
-    const loansPolicyInstance = new LoansPolicy(fullPolicy);
+    it('should change class data when "isShortTermLoan" is false', () => {
+      helpers.isValidItemSelected.mockImplementation(() => false);
+      const loansPolicyInstance = new LoansPolicy(fullPolicy);
 
-    loansPolicyInstance.setDueDateManagementId(false);
+      loansPolicyInstance.setDueDateManagementId(false);
 
-    expect(loansPolicyInstance.closedLibraryDueDateManagementId).toEqual('');
-  });
+      expect(loansPolicyInstance.closedLibraryDueDateManagementId).toEqual('');
+    });
 
-  it('"setDueDateManagementId" should not change class data', () => {
-    helpers.isValidItemSelected.mockImplementation(() => true);
-    const loansPolicyInstance = new LoansPolicy(fullPolicy);
+    it('should not change class data', () => {
+      helpers.isValidItemSelected.mockImplementation(() => true);
+      const loansPolicyInstance = new LoansPolicy(fullPolicy);
 
-    loansPolicyInstance.setDueDateManagementId(true);
+      loansPolicyInstance.setDueDateManagementId(true);
 
-    expect(loansPolicyInstance.closedLibraryDueDateManagementId).toEqual(fullPolicy.closedLibraryDueDateManagementId);
+      expect(loansPolicyInstance.closedLibraryDueDateManagementId).toEqual(fullPolicy.closedLibraryDueDateManagementId);
+    });
   });
 });

@@ -13,10 +13,9 @@ describe('Holds', () => {
       intervalId: 'id_2',
     },
   };
-
   const holds = new Holds(hold);
 
-  it('"Holds" should have correct properties', () => {
+  it('should have correct properties', () => {
     expect(holds).toEqual(expect.objectContaining(hold));
   });
 
@@ -24,11 +23,11 @@ describe('Holds', () => {
     expect(holds.alternateCheckoutLoanPeriod).toBeInstanceOf(Period);
   });
 
-  it('"alternateCheckoutLoanPeriod" should be instance of "Period"', () => {
+  it('"alternateRenewalLoanPeriod" should be instance of "Period"', () => {
     expect(holds.alternateRenewalLoanPeriod).toBeInstanceOf(Period);
   });
 
-  it('"Holds" should have correct properties if there is no "hold"', () => {
+  it('should have correct properties if there is no "hold"', () => {
     const expectedResult = {
       alternateCheckoutLoanPeriod: {
         duration: undefined,
@@ -40,7 +39,6 @@ describe('Holds', () => {
       },
       renewItemsWithRequest: undefined,
     };
-
     const holdInstance = new Holds();
 
     expect(holdInstance).toEqual(expect.objectContaining(expectedResult));

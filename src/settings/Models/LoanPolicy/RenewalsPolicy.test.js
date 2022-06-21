@@ -6,7 +6,6 @@ describe('RenewalsPolicy', () => {
     duration: 1,
     intervalId: 'id',
   };
-
   const basicPolicy = {
     numberAllowed: 10,
     renewFromId: 'renewFromId',
@@ -14,15 +13,13 @@ describe('RenewalsPolicy', () => {
     unlimited: true,
     differentPeriod: 2,
   };
-
   const fullPolicy = {
     ...basicPolicy,
     period,
   };
-
   const renewalsPolicy = new RenewalsPolicy(fullPolicy);
 
-  it('"RenewalsPolicy" should have correct properties when "policy" has all data', () => {
+  it('should have correct properties when "policy" has all data', () => {
     expect(renewalsPolicy).toEqual(expect.objectContaining(fullPolicy));
   });
 
@@ -30,13 +27,12 @@ describe('RenewalsPolicy', () => {
     expect(renewalsPolicy.period).toBeInstanceOf(Period);
   });
 
-  it('"RenewalsPolicy" should have correct properties when "policy" does not have all data', () => {
+  it('should have correct properties when "policy" does not have all data', () => {
     const expectedResult = {
       ...fullPolicy,
       unlimited: false,
       differentPeriod: false,
     };
-
     const renewalsPolicyInstance = new RenewalsPolicy({
       ...fullPolicy,
       unlimited: undefined,
@@ -46,7 +42,7 @@ describe('RenewalsPolicy', () => {
     expect(renewalsPolicyInstance).toEqual(expect.objectContaining(expectedResult));
   });
 
-  it('"RenewalsPolicy" should have correct properties if there is no "policy"', () => {
+  it('should have correct properties if there is no "policy"', () => {
     const expectedResult = {
       numberAllowed: undefined,
       renewFromId: undefined,
@@ -58,7 +54,6 @@ describe('RenewalsPolicy', () => {
         intervalId: undefined,
       },
     };
-
     const renewalsPolicyInstance = new RenewalsPolicy();
 
     expect(renewalsPolicyInstance).toEqual(expect.objectContaining(expectedResult));
