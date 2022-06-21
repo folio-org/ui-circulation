@@ -1,4 +1,4 @@
-import helpers from '../common/utils';
+import helpers from './utils';
 import { Period } from '../common';
 import {
   shortTermLoansOptions,
