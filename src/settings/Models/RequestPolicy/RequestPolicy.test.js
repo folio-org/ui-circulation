@@ -17,7 +17,7 @@ describe('RequestPolicy', () => {
 
   const requestPolicy = new RequestPolicy(policy);
 
-  it('"RequestPolicy" instance should have correct properties', () => {
+  it('should have correct properties', () => {
     expect(requestPolicy).toEqual(expect.objectContaining(policy));
   });
 
@@ -25,7 +25,7 @@ describe('RequestPolicy', () => {
     expect(requestPolicy.metadata).toBeInstanceOf(Metadata);
   });
 
-  it('"RequestPolicy" instance should have correct properties if policy is not provided', () => {
+  it('should have correct properties if policy is not provided', () => {
     const expectedResult = {
       id: undefined,
       name: undefined,
