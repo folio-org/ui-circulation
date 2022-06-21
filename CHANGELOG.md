@@ -34,6 +34,7 @@
 * Fix eslint error. Refs UICIRC-820.
 * Adjust `configuration.all` permission set. Refs UICIRC-697.
 * Create common helper, cover it by RTL/jest tests. UICIRC-803.
+* Cover `LoanPolicy` folder in `Models` by RTL/jest tests. Refs UICIRC-798.
 
 ## [7.0.3](https://github.com/folio-org/ui-circulation/tree/v7.0.3) (2022-04-11)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v7.0.2...v7.0.3)
