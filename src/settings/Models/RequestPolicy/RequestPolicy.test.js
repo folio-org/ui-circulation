@@ -14,7 +14,6 @@ describe('RequestPolicy', () => {
       updatedDate: 'date_2',
     },
   };
-
   const requestPolicy = new RequestPolicy(policy);
 
   it('should have correct properties', () => {
