@@ -1,0 +1,122 @@
+import NoticeSendOptions from './NoticeSendOptions';
+import { Period } from '../common';
+import {
+  loanTimeBasedEventsIds,
+  noticesSendEventMap,
+} from '../../../constants';
+
+describe('NoticeSendOptions', () => {
+  const options = {
+    sendHow: noticesSendEventMap.AFTER,
+    sendWhen: loanTimeBasedEventsIds.DUE_DATE,
+    sendBy: {
+      duration: 1,
+      intervalId: 'id',
+    },
+    sendEvery: {
+      duration: 1,
+      intervalId: 'id_2',
+    },
+  };
+
+  const noticeSendOptions = new NoticeSendOptions(options);
+
+  it('should have correct properties', () => {
+    expect(noticeSendOptions).toEqual(expect.objectContaining(options));
+  });
+
+  it('"sendBy" should be instance of "Period"', () => {
+    expect(noticeSendOptions.sendBy).toBeInstanceOf(Period);
+  });
+
+  it('"sendEvery" should be instance of "Period"', () => {
+    expect(noticeSendOptions.sendEvery).toBeInstanceOf(Period);
+  });
+
+  it('should have correct properties if "options" are not provided', () => {
+    const noticeSendOptionsInstance = new NoticeSendOptions();
+    const expectedResult = {
+      sendHow: undefined,
+      sendWhen: undefined,
+      sendBy: {
+        duration: undefined,
+        intervalId: undefined,
+      },
+      sendEvery: {
+        duration: undefined,
+        intervalId: undefined,
+      },
+    };
+
+    expect(noticeSendOptionsInstance).toEqual(expect.objectContaining(expectedResult));
+  });
+
+  describe('isSendOptionsAvailable', () => {
+    it('should return true if "allowedIds" includes "sendWhen" value', () => {
+      const allowedIds = [loanTimeBasedEventsIds.DUE_DATE, 'test'];
+
+      expect(noticeSendOptions.isSendOptionsAvailable(allowedIds)).toEqual(true);
+    });
+
+    it('should return false if there is no matches', () => {
+      const allowedIds = ['test'];
+
+      expect(noticeSendOptions.isSendOptionsAvailable(allowedIds)).toEqual(false);
+    });
+
+    it('should return false if "allowedIds" is not provided', () => {
+      expect(noticeSendOptions.isSendOptionsAvailable()).toEqual(false);
+    });
+  });
+
+  describe('isBeforeOrAfter', () => {
+    it('should return true if "sendHow" equals "After"', () => {
+      expect(noticeSendOptions.isBeforeOrAfter()).toEqual(true);
+    });
+
+    it('should return true if "sendHow" equals "Before"', () => {
+      const noticeSendOptionsInstance = new NoticeSendOptions({
+        ...options,
+        sendHow: noticesSendEventMap.BEFORE,
+      });
+
+      expect(noticeSendOptionsInstance.isBeforeOrAfter()).toEqual(true);
+    });
+
+    it('should return false if "sendHow" is not equal "Before" or "After"', () => {
+      const noticeSendOptionsInstance = new NoticeSendOptions({
+        ...options,
+        sendHow: 'test',
+      });
+
+      expect(noticeSendOptionsInstance.isBeforeOrAfter()).toEqual(false);
+    });
+  });
+
+  describe('isFrequencyAvailable', () => {
+    it('should return true if "isSendOptionsAvailable" and "isBeforeOrAfter" return true', () => {
+      const allowedIds = [loanTimeBasedEventsIds.DUE_DATE];
+
+      expect(noticeSendOptions.isFrequencyAvailable(allowedIds)).toEqual(true);
+    });
+
+    it('should return false if "isSendOptionsAvailable" returns false', () => {
+      expect(noticeSendOptions.isFrequencyAvailable()).toEqual(false);
+    });
+  });
+
+  describe('isLoanDueDateTimeSelected', () => {
+    it('should return true if "sendWhen" equals "Due date"', () => {
+      expect(noticeSendOptions.isLoanDueDateTimeSelected()).toEqual(true);
+    });
+
+    it('should return false if "sendWhen" is not equal "Due date"', () => {
+      const noticeSendOptionsInstance = new NoticeSendOptions({
+        ...options,
+        sendWhen: 'test',
+      });
+
+      expect(noticeSendOptionsInstance.isLoanDueDateTimeSelected()).toEqual(false);
+    });
+  });
+});
