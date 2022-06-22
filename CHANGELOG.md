@@ -40,6 +40,7 @@
 * Add RTL/Jest testing for `src/settings/Validation/checkout-settings` folder. Refs UICIRC-805.
 * Cover `RequestPolicy` by RTL/jest tests. Refs UICIRC-801.
 * Add RTL/Jest testing for `RulesForm` component in `src/settings/lib/RuleEditor`. Refs UICIRC-825.
+* Add RTL/Jest testing for `src/settings/Models/LostItemFeePolicy` folder. Refs UICIRC-799.
 
 ## [7.0.3](https://github.com/folio-org/ui-circulation/tree/v7.0.3) (2022-04-11)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v7.0.2...v7.0.3)
