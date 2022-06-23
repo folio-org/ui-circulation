@@ -1,7 +1,22 @@
+// eslint-disable-next-line max-classes-per-file
 import NoticePolicy from './NoticePolicy';
 import Notice from './Notice';
 import { Metadata } from '../common';
 import { noticesFrequencyMap } from '../../../constants';
+
+jest.mock('./Notice', () => class {
+  constructor(notice) {
+    this.notice = notice;
+  }
+});
+
+jest.mock('../common', () => ({
+  Metadata: class {
+    constructor(metadata) {
+      this.metadata = metadata;
+    }
+  },
+}));
 
 describe('NoticePolicy', () => {
   const notice = {
@@ -31,7 +46,21 @@ describe('NoticePolicy', () => {
   const noticePolicy = new NoticePolicy(policy);
 
   it('should have correct properties', () => {
-    expect(noticePolicy).toEqual(expect.objectContaining(basicPolicy));
+    expect(noticePolicy).toEqual(expect.objectContaining({
+      ...basicPolicy,
+      metadata: {
+        metadata: basicPolicy.metadata,
+      },
+      loanNotices: [{
+        notice,
+      }],
+      requestNotices: [{
+        notice,
+      }],
+      feeFineNotices: [{
+        notice,
+      }],
+    }));
   });
 
   it('"loanNotices" should contain instances of "Notice"', () => {
@@ -60,7 +89,7 @@ describe('NoticePolicy', () => {
     expect(NoticePolicy.defaultNoticePolicy()).toEqual({});
   });
 
-  it('should have correct properties', () => {
+  it('should have correct properties if policy is not provided', () => {
     const noticePolicyInstance = new NoticePolicy();
     const expectedResult = {
       id: undefined,
@@ -68,10 +97,7 @@ describe('NoticePolicy', () => {
       descrition: undefined,
       active: undefined,
       metadata: {
-        createdByUserId: undefined,
-        createdDate: undefined,
-        updatedByUserId: undefined,
-        updatedDate: undefined,
+        metadata: undefined,
       },
       loanNotices: [],
       requestNotices: [],

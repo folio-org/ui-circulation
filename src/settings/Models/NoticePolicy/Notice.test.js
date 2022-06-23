@@ -2,17 +2,29 @@ import Notice from './Notice';
 import NoticeSendOptions from './NoticeSendOptions';
 import { noticesFrequencyMap } from '../../../constants';
 
+jest.mock('./NoticeSendOptions', () => class {
+  constructor(options) {
+    this.options = options;
+  }
+});
+
 describe('Notice', () => {
   const noticeProp = {
     templateId: 'id',
     format: 'test',
     frequency: noticesFrequencyMap.RECURRING,
     realTime: 'realTime',
+    sendOptions: {},
   };
   const notice = new Notice(noticeProp);
 
   it('should have correct properties', () => {
-    expect(notice).toEqual(expect.objectContaining(noticeProp));
+    expect(notice).toEqual(expect.objectContaining({
+      ...noticeProp,
+      sendOptions: {
+        options: {},
+      },
+    }));
   });
 
   it('"sendOptions" should be instance of "NoticeSendOptions"', () => {
@@ -26,6 +38,9 @@ describe('Notice', () => {
       format: undefined,
       frequency: undefined,
       realTime: undefined,
+      sendOptions: {
+        options: undefined,
+      },
     };
 
     expect(noticeInstance).toEqual(expect.objectContaining(expectedResult));

@@ -5,6 +5,14 @@ import {
   noticesSendEventMap,
 } from '../../../constants';
 
+jest.mock('../common', () => ({
+  Period: class {
+    constructor(period) {
+      this.period = period;
+    }
+  },
+}));
+
 describe('NoticeSendOptions', () => {
   const options = {
     sendHow: noticesSendEventMap.AFTER,
@@ -22,7 +30,19 @@ describe('NoticeSendOptions', () => {
   const noticeSendOptions = new NoticeSendOptions(options);
 
   it('should have correct properties', () => {
-    expect(noticeSendOptions).toEqual(expect.objectContaining(options));
+    expect(noticeSendOptions).toEqual(expect.objectContaining({
+      ...options,
+      sendBy: {
+        period: {
+          ...options.sendBy,
+        }
+      },
+      sendEvery: {
+        period: {
+          ...options.sendEvery,
+        }
+      }
+    }));
   });
 
   it('"sendBy" should be instance of "Period"', () => {
@@ -39,12 +59,10 @@ describe('NoticeSendOptions', () => {
       sendHow: undefined,
       sendWhen: undefined,
       sendBy: {
-        duration: undefined,
-        intervalId: undefined,
+        period: undefined,
       },
       sendEvery: {
-        duration: undefined,
-        intervalId: undefined,
+        period: undefined,
       },
     };
 
