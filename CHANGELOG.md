@@ -33,6 +33,11 @@
 * No validation for spacebar when create Patron notice template. Refs UICIRC-782.
 * Fix eslint error. Refs UICIRC-820.
 * Adjust `configuration.all` permission set. Refs UICIRC-697.
+* Create common helper, cover it by RTL/jest tests. UICIRC-803.
+* Cover `LoanPolicy` folder in `Models` by RTL/jest tests. Refs UICIRC-798.
+* Add RTL/Jest testing for `LoanHistoryModel` in `src/settings/Models`. Refs UICIRC-802.
+* Add RTL/Jest testing for `RulesField` component in `src/settings/lib/RuleEditor`. Refs UICIRC-826.
+* Add RTL/Jest testing for `src/settings/Validation/checkout-settings` folder. Refs UICIRC-805.
 * Cover `RequestPolicy` by RTL/jest tests. Refs UICIRC-801.
 
 ## [7.0.3](https://github.com/folio-org/ui-circulation/tree/v7.0.3) (2022-04-11)
