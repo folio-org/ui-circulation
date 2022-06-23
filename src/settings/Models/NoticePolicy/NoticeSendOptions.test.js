@@ -45,14 +45,6 @@ describe('NoticeSendOptions', () => {
     }));
   });
 
-  it('"sendBy" should be instance of "Period"', () => {
-    expect(noticeSendOptions.sendBy).toBeInstanceOf(Period);
-  });
-
-  it('"sendEvery" should be instance of "Period"', () => {
-    expect(noticeSendOptions.sendEvery).toBeInstanceOf(Period);
-  });
-
   it('should have correct properties if "options" are not provided', () => {
     const noticeSendOptionsInstance = new NoticeSendOptions();
     const expectedResult = {
@@ -135,6 +127,18 @@ describe('NoticeSendOptions', () => {
       });
 
       expect(noticeSendOptionsInstance.isLoanDueDateTimeSelected()).toEqual(false);
+    });
+  });
+
+  describe('"sendBy" property', () => {
+    it('should be instance of "Period"', () => {
+      expect(noticeSendOptions.sendBy).toBeInstanceOf(Period);
+    });
+  });
+
+  describe('"sendEvery" property', () => {
+    it('should be instance of "Period"', () => {
+      expect(noticeSendOptions.sendEvery).toBeInstanceOf(Period);
     });
   });
 });

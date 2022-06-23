@@ -27,10 +27,6 @@ describe('Notice', () => {
     }));
   });
 
-  it('"sendOptions" should be instance of "NoticeSendOptions"', () => {
-    expect(notice.sendOptions).toBeInstanceOf(NoticeSendOptions);
-  });
-
   it('should have correct properties if "notice" is not provided', () => {
     const noticeInstance = new Notice();
     const expectedResult = {
@@ -44,6 +40,12 @@ describe('Notice', () => {
     };
 
     expect(noticeInstance).toEqual(expect.objectContaining(expectedResult));
+  });
+
+  describe('"sendOptions" property', () => {
+    it('should be instance of "NoticeSendOptions"', () => {
+      expect(notice.sendOptions).toBeInstanceOf(NoticeSendOptions);
+    });
   });
 
   describe('isRecurring', () => {

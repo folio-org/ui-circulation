@@ -63,29 +63,7 @@ describe('NoticePolicy', () => {
     }));
   });
 
-  it('"loanNotices" should contain instances of "Notice"', () => {
-    noticePolicy.loanNotices.forEach(item => {
-      expect(item).toBeInstanceOf(Notice);
-    });
-  });
-
-  it('"requestNotices" should contain instances of "Notice"', () => {
-    noticePolicy.requestNotices.forEach(item => {
-      expect(item).toBeInstanceOf(Notice);
-    });
-  });
-
-  it('"feeFineNotices" should contain instances of "Notice"', () => {
-    noticePolicy.feeFineNotices.forEach(item => {
-      expect(item).toBeInstanceOf(Notice);
-    });
-  });
-
-  it('"metadata" property should be instance of "Metadata"', () => {
-    expect(noticePolicy.metadata).toBeInstanceOf(Metadata);
-  });
-
-  it('"defaultNoticePolicy" should return correct data', () => {
+  it('should return correct data for "defaultNoticePolicy"', () => {
     expect(NoticePolicy.defaultNoticePolicy()).toEqual({});
   });
 
@@ -105,5 +83,35 @@ describe('NoticePolicy', () => {
     };
 
     expect(noticePolicyInstance).toEqual(expect.objectContaining(expectedResult));
+  });
+
+  describe('"loanNotices" property', () => {
+    it('should contain instances of "Notice"', () => {
+      noticePolicy.loanNotices.forEach(item => {
+        expect(item).toBeInstanceOf(Notice);
+      });
+    });
+  });
+
+  describe('"requestNotices" property', () => {
+    it('should contain instances of "Notice"', () => {
+      noticePolicy.requestNotices.forEach(item => {
+        expect(item).toBeInstanceOf(Notice);
+      });
+    });
+  });
+
+  describe('"feeFineNotices" property', () => {
+    it('should contain instances of "Notice"', () => {
+      noticePolicy.feeFineNotices.forEach(item => {
+        expect(item).toBeInstanceOf(Notice);
+      });
+    });
+  });
+
+  describe('"metadata" property', () => {
+    it('should be instance of "Metadata"', () => {
+      expect(noticePolicy.metadata).toBeInstanceOf(Metadata);
+    });
   });
 });
