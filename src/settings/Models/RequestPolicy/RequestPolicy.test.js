@@ -20,10 +20,6 @@ describe('RequestPolicy', () => {
     expect(requestPolicy).toEqual(expect.objectContaining(policy));
   });
 
-  it('"metadata" property should be instance of "Metadata"', () => {
-    expect(requestPolicy.metadata).toBeInstanceOf(Metadata);
-  });
-
   it('should have correct properties if policy is not provided', () => {
     const expectedResult = {
       id: undefined,
@@ -42,9 +38,15 @@ describe('RequestPolicy', () => {
     expect(requestPolicyInstance).toEqual(expect.objectContaining(expectedResult));
   });
 
-  it('"defaultPolicy" should return correct data', () => {
+  it('should return correct data for "defaultPolicy"', () => {
     expect(RequestPolicy.defaultPolicy()).toEqual({
       requestTypes: [],
+    });
+  });
+
+  describe('"metadata" property', () => {
+    it('should be instance of "Metadata"', () => {
+      expect(requestPolicy.metadata).toBeInstanceOf(Metadata);
     });
   });
 });
