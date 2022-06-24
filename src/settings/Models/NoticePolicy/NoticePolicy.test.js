@@ -86,24 +86,24 @@ describe('NoticePolicy', () => {
   });
 
   describe('"loanNotices" property', () => {
-    it('should contain instances of "Notice"', () => {
-      noticePolicy.loanNotices.forEach(item => {
+    noticePolicy.loanNotices.forEach((item, index) => {
+      it(`should contain instance of "Notice" for array element with index ${index}`, () => {
         expect(item).toBeInstanceOf(Notice);
       });
     });
   });
 
   describe('"requestNotices" property', () => {
-    it('should contain instances of "Notice"', () => {
-      noticePolicy.requestNotices.forEach(item => {
+    noticePolicy.requestNotices.forEach((item, index) => {
+      it(`should contain instance of "Notice" for array element with index ${index}`, () => {
         expect(item).toBeInstanceOf(Notice);
       });
     });
   });
 
   describe('"feeFineNotices" property', () => {
-    it('should contain instances of "Notice"', () => {
-      noticePolicy.feeFineNotices.forEach(item => {
+    noticePolicy.feeFineNotices.forEach((item, index) => {
+      it(`should contain instance of "Notice" for array element with index ${index}`, () => {
         expect(item).toBeInstanceOf(Notice);
       });
     });

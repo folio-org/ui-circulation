@@ -30,7 +30,7 @@ describe('NoticeSendOptions', () => {
   const noticeSendOptions = new NoticeSendOptions(options);
 
   it('should have correct properties', () => {
-    expect(noticeSendOptions).toEqual(expect.objectContaining({
+    const expectedResult = {
       ...options,
       sendBy: {
         period: {
@@ -42,7 +42,9 @@ describe('NoticeSendOptions', () => {
           ...options.sendEvery,
         }
       }
-    }));
+    };
+
+    expect(noticeSendOptions).toEqual(expect.objectContaining(expectedResult));
   });
 
   it('should have correct properties if "options" are not provided', () => {
