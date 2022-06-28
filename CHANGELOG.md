@@ -44,6 +44,7 @@
 * Add RTL/Jest testing for `patron-notice-template` and `request-policy` components in `src/settings/Validation`. Refs UICIRC-812.
 * UI tests replacement with RTL/Jest for `NoticePolicy` folder in `Models`. UICIRC-800.
 * Add RTL/Jest testing for `src/settings/Validation/loan-history` folder. Refs UICIRC-808.
+* Add RTL/Jest testing for `src/settings/Validation/fixed-due-date-schedule` folder. Refs UICIRC-808.
 
 ## [7.0.3](https://github.com/folio-org/ui-circulation/tree/v7.0.3) (2022-04-11)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v7.0.2...v7.0.3)
