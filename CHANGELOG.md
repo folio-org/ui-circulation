@@ -4,6 +4,7 @@
 
 * UI tests replacement with RTL/Jest for `src/settings/Validation/engine/handlers.js`. UICIRC-814.
 * UI tests replacement with RTL/Jest for `src/settings/lib/RuleEditor/utils.js`. UICIRC-828.
+* Add RTL/Jest testing for `initFoldRules` in `src/settings/lib/RuleEditor`. Refs UICIRC-829.
 
 ## [7.1.0](https://github.com/folio-org/ui-circulation/tree/v7.1.0) (2022-06-29)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v7.0.3...v7.1.0)
@@ -50,7 +51,7 @@
 * Add RTL/Jest testing for `patron-notice-template` and `request-policy` components in `src/settings/Validation`. Refs UICIRC-812.
 * UI tests replacement with RTL/Jest for `NoticePolicy` folder in `Models`. UICIRC-800.
 * Add RTL/Jest testing for `src/settings/Validation/loan-history` folder. Refs UICIRC-808.
-* Add RTL/Jest testing for `src/settings/Validation/fixed-due-date-schedule` folder. Refs UICIRC-808.
+* Add RTL/Jest testing for `src/settings/Validation/fixed-due-date-schedule` folder. Refs UICIRC-807.
 
 ## [7.0.3](https://github.com/folio-org/ui-circulation/tree/v7.0.3) (2022-04-11)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v7.0.2...v7.0.3)
