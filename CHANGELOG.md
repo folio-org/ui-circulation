@@ -1,6 +1,7 @@
 # Change history for ui-circulation
 
-## [8.0.0] (IN PROGRESS)
+## [7.1.0](https://github.com/folio-org/ui-circulation/tree/v7.1.0) (2022-06-29)
+[Full Changelog](https://github.com/folio-org/ui-circulation/compare/v7.0.3...v7.1.0)
 
 * Add RTL/Jest testing for `LostItemFeePolicySettings` component in `settings/LostItemFeePolicy`. Refs UICIRC-758.
 * Add RTL/Jest testing for `PatronNotices` component in `settings/PatronNotices`. Refs UICIRC-760.
