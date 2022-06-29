@@ -1,5 +1,9 @@
 # Change history for ui-circulation
 
+## IN PROGRESS
+
+* UI tests replacement with RTL/Jest for `src\settings\Validation\engine\handlers.js`. UICIRC-814.
+
 ## [7.1.0](https://github.com/folio-org/ui-circulation/tree/v7.1.0) (2022-06-29)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v7.0.3...v7.1.0)
 
