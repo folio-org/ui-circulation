@@ -5,6 +5,7 @@
 * UI tests replacement with RTL/Jest for `src/settings/Validation/engine/handlers.js`. UICIRC-814.
 * UI tests replacement with RTL/Jest for `src/settings/lib/RuleEditor/utils.js`. UICIRC-828.
 * Add RTL/Jest testing for `initFoldRules` in `src/settings/lib/RuleEditor`. Refs UICIRC-829.
+* UI tests replacement with RTL/Jest for `FormValidator.js` file in `Validation`. Refs UICIRC-813.
 
 ## [7.1.0](https://github.com/folio-org/ui-circulation/tree/v7.1.0) (2022-06-29)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v7.0.3...v7.1.0)
