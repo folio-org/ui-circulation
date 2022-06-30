@@ -69,6 +69,7 @@ describe('FormValidator', () => {
     });
 
     it('should throw an error if there is no matched validators', () => {
+      let error;
       const wrongValidator = 'wrongValidator';
       const validatorConfig = {
         [fieldName]: {
@@ -81,8 +82,9 @@ describe('FormValidator', () => {
       try {
         formValidatorInstance.validate(validationData);
       } catch (e) {
-        expect(e).toEqual(Error(`Validation: no handler to validate - ${wrongValidator}`));
+        error = e.message;
       }
+      expect(error).toEqual(`Validation: no handler to validate - ${wrongValidator}`);
     });
 
     it('should return empty error object if "shouldValidate" equals false', () => {
