@@ -1,6 +1,11 @@
 # Change history for ui-circulation
 
-## [8.0.0] (IN PROGRESS)
+## IN PROGRESS
+
+* UI tests replacement with RTL/Jest for `src\settings\Validation\engine\handlers.js`. UICIRC-814.
+
+## [7.1.0](https://github.com/folio-org/ui-circulation/tree/v7.1.0) (2022-06-29)
+[Full Changelog](https://github.com/folio-org/ui-circulation/compare/v7.0.3...v7.1.0)
 
 * Add RTL/Jest testing for `LostItemFeePolicySettings` component in `settings/LostItemFeePolicy`. Refs UICIRC-758.
 * Add RTL/Jest testing for `PatronNotices` component in `settings/PatronNotices`. Refs UICIRC-760.
@@ -44,6 +49,7 @@
 * Add RTL/Jest testing for `patron-notice-template` and `request-policy` components in `src/settings/Validation`. Refs UICIRC-812.
 * UI tests replacement with RTL/Jest for `NoticePolicy` folder in `Models`. UICIRC-800.
 * Add RTL/Jest testing for `src/settings/Validation/loan-history` folder. Refs UICIRC-808.
+* Add RTL/Jest testing for `src/settings/Validation/fixed-due-date-schedule` folder. Refs UICIRC-808.
 * UI tests replacement with RTL/Jest for `FormValidator.js` file in `Validation`. Refs UICIRC-813.
 
 ## [7.0.3](https://github.com/folio-org/ui-circulation/tree/v7.0.3) (2022-04-11)

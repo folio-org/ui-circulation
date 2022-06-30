@@ -85,31 +85,20 @@ export const hasReplacementAllowedAndPositiveLostItemPolicyFee = (value, model) 
 
   const hasVaidLostItemProcessingFee = parseFloat(lostItemProcessingFee, 10) > 0;
 
-  return value && (
-    (replacementAllowed && hasVaidLostItemProcessingFee)
-    || (!replacementAllowed && hasVaidLostItemProcessingFee)
-    || (replacementAllowed && !hasVaidLostItemProcessingFee)
-  );
+  return value && (hasVaidLostItemProcessingFee || replacementAllowed);
 };
 
 export const hasReplacementAllowedAndNegativeLostItemPolicyFee = (value, model) => {
   const replacementAllowed = get(model, 'replacementAllowed');
   const lostItemProcessingFee = get(model, 'lostItemProcessingFee');
 
-  return value && (
-    (replacementAllowed && parseFloat(lostItemProcessingFee, 10) === 0)
-    || (replacementAllowed && parseFloat(lostItemProcessingFee, 10) > 0)
-  );
+  return value && replacementAllowed && parseFloat(lostItemProcessingFee, 10) >= 0;
 };
 
 export const hasNegativeReplacementAllowedAndPositiveLostItemPolicyFee = (value, model) => {
-  const replacementAllowed = get(model, 'replacementAllowed');
   const lostItemProcessingFee = get(model, 'lostItemProcessingFee');
 
-  return value && (
-    (!replacementAllowed && parseFloat(lostItemProcessingFee, 10) > 0)
-    || (replacementAllowed && parseFloat(lostItemProcessingFee, 10) > 0)
-  );
+  return value && parseFloat(lostItemProcessingFee, 10) > 0;
 };
 
 export const hasPatronBilledAfterAgedToLostValue = (value, model) => {
@@ -145,9 +134,7 @@ export const isDueAfterTo = (value, model, { pathToSection }) => {
 export const isRquiredLostItemCharge = (value, model) => {
   const lostItemFeePolicy = new LostItemFeePolicy(model);
 
-  return (!lostItemFeePolicy.isRquiredLostItemCharge() && !isNotEmpty(value))
-    || (!lostItemFeePolicy.isRquiredLostItemCharge() && isNotEmpty(value))
-    || (lostItemFeePolicy.isRquiredLostItemCharge() && isNotEmpty(value));
+  return !lostItemFeePolicy.isRquiredLostItemCharge() || isNotEmpty(value);
 };
 
 export const hasPositiveItemsAgedToLostAfterOverdueAmount = (value, model) => {
@@ -158,13 +145,11 @@ export const hasPositiveItemsAgedToLostAfterOverdueAmount = (value, model) => {
 };
 
 export const hasPositiveLostItemProcessingFeeAndItemsAgedToLostAfterOverdue = (value, model) => {
-  const lostItemProcessingFee = get(model, 'lostItemProcessingFee');
   const itemAgedToLost = get(model, 'itemAgedLostOverdue.duration');
 
-  const hasVaidLostItemProcessingFee = parseFloat(lostItemProcessingFee, 10) > 0;
   const hasValidItemAgedToLost = (!isUndefined(itemAgedToLost) && parseInt(itemAgedToLost, 10) > 0);
 
-  return value && ((hasVaidLostItemProcessingFee && hasValidItemAgedToLost) || (!hasVaidLostItemProcessingFee && hasValidItemAgedToLost));
+  return value && hasValidItemAgedToLost;
 };
 
 export const hasPositiveLostItemProcessingFeeAndInvalidItemsAgedToLostAfterOverdue = (value, model) => {
