@@ -9,7 +9,7 @@ import {
   EDITOR_SPECIAL_SYMBOL,
 } from '../../../constants';
 
-const hooks = {
+export const hooks = {
   [EDITOR_SPECIAL_SYMBOL.HASH]: (stream, state) => { // # starts a rule, followed by name of rule.
     stream.eatWhile(/[^/]/);
     state.ruleLine = true;
