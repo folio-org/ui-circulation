@@ -17,7 +17,7 @@ import {
   CONFIG_NAMES,
 } from '../../constants';
 
-jest.mock('@folio/stripes-core', () => ({
+jest.mock('@folio/stripes/core', () => ({
   withStripes: jest.fn((component) => component),
 }));
 

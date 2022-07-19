@@ -5,7 +5,7 @@ import { injectIntl } from 'react-intl';
 import { ConfigManager } from '@folio/stripes/smart-components';
 import {
   withStripes,
-} from '@folio/stripes-core';
+} from '@folio/stripes/core';
 
 import TitleLevelRequestsForm from './TitleLevelRequestsForm';
 import {
