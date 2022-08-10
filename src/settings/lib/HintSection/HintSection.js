@@ -1,4 +1,7 @@
-import { get, isEmpty } from 'lodash';
+import {
+  get,
+  isEmpty,
+} from 'lodash';
 import utils from '../RuleEditor/utils';
 import {
   ACTIVE_HINT_ELEMENT_CLASS,

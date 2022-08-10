@@ -303,14 +303,14 @@ describe('HintSection', () => {
     });
 
     describe('when "nextIndex" bigger then number of nodes', () => {
-      jest.spyOn(document, 'createElement').mockImplementationOnce(createElementMocked);
-
       const nextActiveHintIndex = 5;
-      const hintSection = new HintSection(defaultSectionOptions, cm);
 
       it('should return correct index if "avoidWrap" is true', () => {
+        jest.spyOn(document, 'createElement').mockImplementationOnce(createElementMocked);
+
         const avoidWrap = true;
         const expectedResult = childNodes.length - 1;
+        const hintSection = new HintSection(defaultSectionOptions, cm);
 
         expect(
           hintSection.calculateNextHintIndex(nextActiveHintIndex, avoidWrap)
@@ -318,10 +318,11 @@ describe('HintSection', () => {
       });
 
       it('should return correct index if "avoidWrap" is false', () => {
+        jest.spyOn(document, 'createElement').mockImplementationOnce(createElementMocked);
+
         const avoidWrap = false;
         const expectedResult = 0;
-
-        jest.spyOn(document, 'createElement').mockImplementationOnce(createElementMocked);
+        const hintSection = new HintSection(defaultSectionOptions, cm);
 
         expect(
           hintSection.calculateNextHintIndex(nextActiveHintIndex, avoidWrap)
@@ -330,13 +331,13 @@ describe('HintSection', () => {
     });
 
     describe('when "nextIndex" bigger then 0 and smaller then number of nodes', () => {
-      jest.spyOn(document, 'createElement').mockImplementationOnce(createElementMocked);
-
       const nextActiveHintIndex = 1;
-      const hintSection = new HintSection(defaultSectionOptions, cm);
 
       it('should return correct index', () => {
+        jest.spyOn(document, 'createElement').mockImplementationOnce(createElementMocked);
+
         const avoidWrap = true;
+        const hintSection = new HintSection(defaultSectionOptions, cm);
 
         expect(
           hintSection.calculateNextHintIndex(nextActiveHintIndex, avoidWrap)
@@ -345,14 +346,14 @@ describe('HintSection', () => {
     });
 
     describe('when "nextIndex" smaller then 0', () => {
-      jest.spyOn(document, 'createElement').mockImplementationOnce(createElementMocked);
-
       const nextActiveHintIndex = -5;
-      const hintSection = new HintSection(defaultSectionOptions, cm);
 
       it('should return correct index if "avoidWrap" is true', () => {
+        jest.spyOn(document, 'createElement').mockImplementationOnce(createElementMocked);
+
         const avoidWrap = true;
         const expectedResult = 0;
+        const hintSection = new HintSection(defaultSectionOptions, cm);
 
         expect(
           hintSection.calculateNextHintIndex(nextActiveHintIndex, avoidWrap)
@@ -360,10 +361,11 @@ describe('HintSection', () => {
       });
 
       it('should return correct index if "avoidWrap" is false', () => {
+        jest.spyOn(document, 'createElement').mockImplementationOnce(createElementMocked);
+
         const avoidWrap = false;
         const expectedResult = childNodes.length - 1;
-
-        jest.spyOn(document, 'createElement').mockImplementationOnce(createElementMocked);
+        const hintSection = new HintSection(defaultSectionOptions, cm);
 
         expect(
           hintSection.calculateNextHintIndex(nextActiveHintIndex, avoidWrap)
@@ -372,121 +374,157 @@ describe('HintSection', () => {
     });
   });
 
-  // describe('changeActive', () => {
-  //   describe('when next "hintNode" is not available', () => {
-  //     const toggleMock = jest.fn();
-  //     const firstChildNode = {
-  //       classList: {
-  //         toggle: toggleMock,
-  //       },
-  //     };
-  //     const nextIndex = 1;
-  //     const createElementMocked = () => ({
-  //       childNodes: [firstChildNode],
-  //     });
-  //
-  //     it('should trigger "toggle" with correct arguments', () => {
-  //       jest.spyOn(document, 'createElement').mockImplementationOnce(createElementMocked);
-  //
-  //       const hintSection = new HintSection(defaultSectionOptions, cm);
-  //
-  //       hintSection.changeActive(nextIndex);
-  //
-  //       expect(toggleMock).toHaveBeenCalledWith(ACTIVE_HINT_ELEMENT_CLASS, false);
-  //     });
-  //
-  //     it('should return undefined if there is no next node', () => {
-  //       jest.spyOn(document, 'createElement').mockImplementationOnce(createElementMocked);
-  //
-  //       const hintSection = new HintSection(defaultSectionOptions, cm);
-  //
-  //       expect(hintSection.changeActive(nextIndex)).toBeUndefined();
-  //     });
-  //   });
-  //
-  //   describe('when "hintNode.offsetTop" bigger than container "scrollTop"', () => {
-  //     const offsetTop = 10;
-  //     const offsetHeight = 10;
-  //     const scrollTop = 8;
-  //     const clientHeight = 0;
-  //     const firstChildNode = {
-  //       classList: {
-  //         toggle: () => {},
-  //       },
-  //     };
-  //     const lastChildNode = {
-  //       offsetTop,
-  //       offsetHeight,
-  //       classList: {
-  //         toggle: () => {},
-  //       },
-  //     };
-  //     const nextIndex = 1;
-  //     const createElementMocked = () => ({
-  //       scrollTop,
-  //       clientHeight,
-  //       childNodes: [firstChildNode, lastChildNode],
-  //     });
-  //
-  //     it('should correctly set "listContainer.scrollTop" value', () => {
-  //       jest.spyOn(document, 'createElement').mockImplementationOnce(createElementMocked);
-  //
-  //       const hintSection = new HintSection(defaultSectionOptions, cm);
-  //       const expectedResult = 23;
-  //
-  //       hintSection.changeActive(nextIndex);
-  //
-  //       expect(hintSection.listContainer.scrollTop).toBe(expectedResult);
-  //     });
-  //   });
-  //
-  //   describe('when next "hintNode" is  available', () => {
-  //     const toggleMock = jest.fn();
-  //     const offsetTop = 10;
-  //     const offsetHeight = 10;
-  //     const scrollTop = 20;
-  //     const clientHeight = 0;
-  //     const firstChildNode = {
-  //       classList: {
-  //         toggle: () => {},
-  //       },
-  //     };
-  //     const lastChildNode = {
-  //       offsetTop,
-  //       offsetHeight,
-  //       classList: {
-  //         toggle: toggleMock,
-  //       },
-  //     };
-  //     const nextIndex = 1;
-  //     const createElementMocked = () => ({
-  //       scrollTop,
-  //       clientHeight,
-  //       childNodes: [firstChildNode, lastChildNode],
-  //     });
-  //
-  //     it('should trigger "toggle" with correct arguments', () => {
-  //       jest.spyOn(document, 'createElement').mockImplementationOnce(createElementMocked);
-  //
-  //       const hintSection = new HintSection(defaultSectionOptions, cm);
-  //
-  //       hintSection.changeActive(nextIndex);
-  //
-  //       expect(toggleMock).toHaveBeenCalledWith(ACTIVE_HINT_ELEMENT_CLASS, true);
-  //     });
-  //
-  //     it('should correctly set "listContainer.scrollTop" value', () => {
-  //       jest.spyOn(document, 'createElement').mockImplementationOnce(createElementMocked);
-  //
-  //       const hintSection = new HintSection(defaultSectionOptions, cm);
-  //       const expectedResult = 7;
-  //
-  //       hintSection.changeActive(nextIndex);
-  //
-  //       expect(hintSection.listContainer.scrollTop).toBe(expectedResult);
-  //     });
-  //   });
-  // });
+  describe('changeActive', () => {
+    describe('when next "hintNode" is not available', () => {
+      const toggleMock = jest.fn();
+      const firstChildNode = {
+        classList: {
+          toggle: toggleMock,
+        },
+      };
+      const nextIndex = 1;
+      const createElementMocked = () => ({
+        childNodes: [firstChildNode],
+      });
+
+      it('should trigger "toggle" with correct arguments', () => {
+        jest.spyOn(document, 'createElement').mockImplementationOnce(createElementMocked);
+
+        const hintSection = new HintSection(defaultSectionOptions, cm);
+
+        hintSection.changeActive(nextIndex);
+
+        expect(toggleMock).toHaveBeenCalledWith(ACTIVE_HINT_ELEMENT_CLASS, false);
+      });
+
+      it('should return undefined if there is no next node', () => {
+        jest.spyOn(document, 'createElement').mockImplementationOnce(createElementMocked);
+
+        const hintSection = new HintSection(defaultSectionOptions, cm);
+
+        expect(hintSection.changeActive(nextIndex)).toBeUndefined();
+      });
+    });
+
+    describe('when "hintNode.offsetTop" bigger than container "scrollTop"', () => {
+      const offsetTop = 10;
+      const offsetHeight = 10;
+      const scrollTop = 8;
+      const clientHeight = 0;
+      const firstChildNode = {
+        classList: {
+          toggle: () => {},
+        },
+      };
+      const lastChildNode = {
+        offsetTop,
+        offsetHeight,
+        classList: {
+          toggle: () => {},
+        },
+      };
+      const nextIndex = 1;
+      const createElementMocked = () => ({
+        scrollTop,
+        clientHeight,
+        childNodes: [firstChildNode, lastChildNode],
+      });
+
+      it('should correctly set "listContainer.scrollTop" value', () => {
+        jest.spyOn(document, 'createElement').mockImplementationOnce(createElementMocked);
+
+        const hintSection = new HintSection(defaultSectionOptions, cm);
+        const expectedResult = 23;
+
+        hintSection.changeActive(nextIndex);
+
+        expect(hintSection.listContainer.scrollTop).toBe(expectedResult);
+      });
+    });
+
+    describe('when next "hintNode" is  available', () => {
+      const toggleMock = jest.fn();
+      const offsetTop = 10;
+      const offsetHeight = 10;
+      const scrollTop = 20;
+      const clientHeight = 0;
+      const firstChildNode = {
+        classList: {
+          toggle: () => {},
+        },
+      };
+      const lastChildNode = {
+        offsetTop,
+        offsetHeight,
+        classList: {
+          toggle: toggleMock,
+        },
+      };
+      const nextIndex = 1;
+      const createElementMocked = () => ({
+        scrollTop,
+        clientHeight,
+        childNodes: [firstChildNode, lastChildNode],
+      });
+
+      it('should trigger "toggle" with correct arguments', () => {
+        jest.spyOn(document, 'createElement').mockImplementationOnce(createElementMocked);
+
+        const hintSection = new HintSection(defaultSectionOptions, cm);
+
+        hintSection.changeActive(nextIndex);
+
+        expect(toggleMock).toHaveBeenCalledWith(ACTIVE_HINT_ELEMENT_CLASS, true);
+      });
+
+      it('should correctly set "listContainer.scrollTop" value', () => {
+        jest.spyOn(document, 'createElement').mockImplementationOnce(createElementMocked);
+
+        const hintSection = new HintSection(defaultSectionOptions, cm);
+        const expectedResult = 7;
+
+        hintSection.changeActive(nextIndex);
+
+        expect(hintSection.listContainer.scrollTop).toBe(expectedResult);
+      });
+    });
+
+    describe('when "clientHeight" has big value', () => {
+      const toggleMock = jest.fn();
+      const offsetTop = 20;
+      const offsetHeight = 10;
+      const scrollTop = 10;
+      const clientHeight = 200;
+      const firstChildNode = {
+        classList: {
+          toggle: () => {},
+        },
+      };
+      const lastChildNode = {
+        offsetTop,
+        offsetHeight,
+        classList: {
+          toggle: toggleMock,
+        },
+      };
+      const nextIndex = 1;
+      const createElementMocked = () => ({
+        scrollTop,
+        clientHeight,
+        childNodes: [firstChildNode, lastChildNode],
+      });
+
+      it('should not change "listContainer.scrollTop" value', () => {
+        jest.spyOn(document, 'createElement').mockImplementationOnce(createElementMocked);
+
+        const hintSection = new HintSection(defaultSectionOptions, cm);
+
+        hintSection.changeActive(nextIndex);
+
+        expect(hintSection.listContainer.scrollTop).toBe(scrollTop);
+      });
+    });
+  });
 
   describe('setSelectedHintIndex', () => {
     it('should set index to instance', () => {
@@ -499,19 +537,19 @@ describe('HintSection', () => {
     });
   });
 
-  // describe('listNodes', () => {
-  //   it('should return appropriate element', () => {
-  //     const childNodes = [{ test: 'test' }];
-  //
-  //     jest.spyOn(document, 'createElement').mockImplementationOnce(() => ({
-  //       childNodes,
-  //     }));
-  //
-  //     const hintSection = new HintSection(defaultSectionOptions, cm);
-  //
-  //     expect(hintSection.listNodes).toEqual(childNodes);
-  //   });
-  // });
+  describe('listNodes', () => {
+    it('should return appropriate element', () => {
+      const childNodes = [{ test: 'test' }];
+
+      jest.spyOn(document, 'createElement').mockImplementationOnce(() => ({
+        childNodes,
+      }));
+
+      const hintSection = new HintSection(defaultSectionOptions, cm);
+
+      expect(hintSection.listNodes).toEqual(childNodes);
+    });
+  });
 
   describe('isSelectedByIndex', () => {
     it('should return true if indexes are the same', () => {
