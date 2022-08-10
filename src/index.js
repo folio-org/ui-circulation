@@ -61,8 +61,8 @@ class Circulation extends Component {
             perm: 'ui-circulation.settings.fixed-due-date-schedules',
           },
           {
-            route: 'loan-history',
-            label: <FormattedMessage id="ui-circulation.settings.index.loanHistory" />,
+            route: 'loan-anonymization',
+            label: <FormattedMessage id="ui-circulation.settings.index.loanAnonymization" />,
             component: LoanHistorySettings,
             perm: 'ui-circulation.settings.loan-history',
           },

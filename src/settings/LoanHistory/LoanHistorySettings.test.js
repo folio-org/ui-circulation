@@ -15,7 +15,7 @@ jest.mock('./LoanHistoryForm', () => jest.fn(() => null));
 
 describe('LoanHistorySettings', () => {
   const labelIds = {
-    loanHistory: 'ui-circulation.settings.index.loanHistory',
+    loanAnonymization: 'ui-circulation.settings.index.loanAnonymization',
   };
 
   const testStripes = {
@@ -37,7 +37,7 @@ describe('LoanHistorySettings', () => {
       );
 
       expect(ConfigManager).toHaveBeenCalledWith(expect.objectContaining({
-        label: labelIds.loanHistory,
+        label: labelIds.loanAnonymization,
         moduleName: 'LOAN_HISTORY',
         configName: 'loan_history',
         configFormComponent: LoanHistoryForm,
