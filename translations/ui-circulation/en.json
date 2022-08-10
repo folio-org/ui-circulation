@@ -2,7 +2,7 @@
   "meta.title": "Circulation",
 
   "settings.index.paneTitle": "Circulation",
-  "settings.index.loanHistory": "Loan history",
+  "settings.index.loanAnonymization": "Loan anonymization",
   "settings.index.loanPolicies": "Loan policies",
   "settings.index.circulationRules": "Circulation rules",
   "settings.index.fdds": "Fixed due date schedules",
