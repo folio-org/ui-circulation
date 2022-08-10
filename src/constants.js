@@ -393,6 +393,8 @@ export const closedLoansRules = {
 
 export const HINT_ELEMENT_CLASS = 'CodeMirror-hint';
 export const ACTIVE_HINT_ELEMENT_CLASS = `${HINT_ELEMENT_CLASS}-active`;
+export const HINT_SECTION_CONTAINER = 'CodeMirror-hints-list';
+export const HINT_SECTIONS_CONTAINER = 'CodeMirror-hints-sections-container';
 
 export const RULES_TYPE = {
   INSTITUTION: 'a',
