@@ -26,7 +26,7 @@ describe('Loan History Form', () => {
   setupApplication({ scenarios: ['testLoanHistory'] });
 
   beforeEach(function () {
-    this.visit('/settings/circulation/loan-history');
+    this.visit('/settings/circulation/loan-anonymization');
   });
 
   it('save button should be disabled', () => {
