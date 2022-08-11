@@ -78,7 +78,7 @@ class LoanHistorySettings extends React.Component {
 
     return (
       <this.configManager
-        label={formatMessage({ id: 'ui-circulation.settings.index.loanHistory' })}
+        label={formatMessage({ id: 'ui-circulation.settings.index.loanAnonymization' })}
         moduleName="LOAN_HISTORY"
         configName="loan_history"
         configFormComponent={LoanHistoryForm}

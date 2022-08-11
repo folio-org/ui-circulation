@@ -439,7 +439,7 @@
     "settings.checkout.identifiers.externalSystemId": "Externe System-ID",
     "settings.checkout.identifiers.id": "FOLIO Datensatznummer (ID)",
     "settings.checkout.identifiers.username": "Kennung",
-    "settings.checkout.audioTheme": "Thema für Audiowarnungen auswählen",
+    "settings.checkout.audioTheme": "Klangschema für Audiowarnungen auswählen",
     "settings.checkout.audioTheme.classic": "Classico",
     "settings.checkout.audioTheme.modern": "Moderna",
     "settings.checkout.audioTheme.future": "Futura",
