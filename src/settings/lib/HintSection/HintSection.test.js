@@ -142,7 +142,6 @@ describe('HintSection', () => {
 
     afterEach(() => {
       jest.clearAllMocks();
-      // document.createElement.mockRestore();
     });
 
     describe('when "itemOptions" contains data', () => {
