@@ -241,7 +241,6 @@
     "settings.staffSlips.form.previewLabel": "预览员工单",
     "settings.patronNotices.denyDelete.header": "无法删除读者通知模板",
     "settings.patronNotices.denyDelete.body": "此读者通知模板无法删除，因为它正由一个或多个记录使用。",
-    "settings.index.loanHistory": "借阅历史",
     "settings.loanHistory.validate.intervalValue": "请输入大于零的整数以继续",
     "settings.loanHistory.validate.selectContinue": "请选择以继续",
     "settings.loanHistory.selectInterval": "选择间隔",
@@ -466,5 +465,6 @@
     "settings.policy.denyDelete.body": "本政策无法删除，因为它正被一条或多条记录使用。",
     "settings.overdueFinePolicy.denyDelete.header": "无法删除超期罚款政策",
     "settings.lostItemPolicy.denyDelete.header": "无法删除遗失单件费用政策",
-    "settings.checkout.wildcardLookup": "在流通应用程序中按条码执行通配符查找单件（归还、借出）"
+    "settings.checkout.wildcardLookup": "在流通应用程序中按条码执行通配符查找单件（归还、借出）",
+    "settings.index.loanAnonymization": "Loan anonymization"
 }
