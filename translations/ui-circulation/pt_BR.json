@@ -241,7 +241,6 @@
     "settings.staffSlips.form.previewLabel": "Pré-visualização da ficha de encaminhamento",
     "settings.patronNotices.denyDelete.header": "Não é possível excluir o modelo de aviso aos usuários",
     "settings.patronNotices.denyDelete.body": "Este modelo de aviso aos usuários não pode ser excluído, pois está em uso por um ou mais registros.",
-    "settings.index.loanHistory": "Histórico de empréstimos",
     "settings.loanHistory.validate.intervalValue": "Por favor, insira um número inteiro maior que zero para continuar",
     "settings.loanHistory.validate.selectContinue": "Por favor selecione para continuar",
     "settings.loanHistory.selectInterval": "Selecione o intervalo",
@@ -466,5 +465,6 @@
     "settings.policy.denyDelete.body": "Esta política não pode ser excluída, pois está em uso por um ou mais registros.",
     "settings.overdueFinePolicy.denyDelete.header": "Não é possível excluir a política de multas vencidas",
     "settings.lostItemPolicy.denyDelete.header": "Não é possível excluir a política de taxa de item perdido",
-    "settings.checkout.wildcardLookup": "Realizar pesquisa curinga de itens por código de barras em aplicativos de circulação (Empréstimo, Devolução)"
+    "settings.checkout.wildcardLookup": "Realizar pesquisa curinga de itens por código de barras em aplicativos de circulação (Empréstimo, Devolução)",
+    "settings.index.loanAnonymization": "Loan anonymization"
 }

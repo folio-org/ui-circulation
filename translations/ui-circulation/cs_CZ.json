@@ -241,7 +241,6 @@
     "settings.staffSlips.form.previewLabel": "Náhled zaměstnaneckého lístku",
     "settings.patronNotices.denyDelete.header": "Šablonu oznámení pro čtenáře nelze odstranit",
     "settings.patronNotices.denyDelete.body": "Tuto šablonu upozornění čtenáře nelze odstranit, protože ji používá jeden nebo více záznamů.",
-    "settings.index.loanHistory": "Historie výpůjčky",
     "settings.loanHistory.validate.intervalValue": "Pro pokračování zadejte prosím celé číslo větší než nula.",
     "settings.loanHistory.validate.selectContinue": "Vyberte prosím pro pokračování",
     "settings.loanHistory.selectInterval": "Vybrat interval",
@@ -466,5 +465,6 @@
     "settings.policy.denyDelete.body": "Tuto zásadu nelze smazat, protože ji používá jeden nebo více záznamů.",
     "settings.overdueFinePolicy.denyDelete.header": "Nelze odstranit zásady pokuty po splatnosti",
     "settings.lostItemPolicy.denyDelete.header": "Nelze odstranit zásady poplatků za ztracené jednotky",
-    "settings.checkout.wildcardLookup": "Proveďte vyhledávání jednotek pomocí zástupných znaků podle čárového kódu v aplikacích (Návrat, Výpůjčka)"
+    "settings.checkout.wildcardLookup": "Proveďte vyhledávání jednotek pomocí zástupných znaků podle čárového kódu v aplikacích (Návrat, Výpůjčka)",
+    "settings.index.loanAnonymization": "Loan anonymization"
 }

@@ -241,7 +241,6 @@
     "settings.staffSlips.form.previewLabel": "Vorschau Dienstzettel",
     "settings.patronNotices.denyDelete.header": "Benachrichtigungsvorlage kann nicht gelöscht werden",
     "settings.patronNotices.denyDelete.body": "Diese Vorlage für die Benachrichtigung von Benutzenden kann nicht gelöscht werden, da diese von einem oder mehreren Datensätzen verwendet wird.",
-    "settings.index.loanHistory": "Ausleihhistorie",
     "settings.loanHistory.validate.intervalValue": "Bitte eine ganze Zahl größer als Null eingeben, um fortzufahren",
     "settings.loanHistory.validate.selectContinue": "Bitte auswählen, um fortzufahren",
     "settings.loanHistory.selectInterval": "Intervall auswählen",
@@ -466,5 +465,6 @@
     "settings.policy.denyDelete.body": "Diese Richtlinie kann nicht gelöscht werden, da sie von einem oder mehreren Datensätzen verwendet wird.",
     "settings.overdueFinePolicy.denyDelete.header": "Gebührenrichtlinie für überfällige Exemplare kann nicht gelöscht werden.",
     "settings.lostItemPolicy.denyDelete.header": "Gebührenrichtlinie für verlorene Exemplare kann nicht gelöscht werden.",
-    "settings.checkout.wildcardLookup": "Wildcard-Suche nach Exemplaren anhand von Barcodes in den Apps Rückgabe, Ausleihe und Bestandsanfragen"
+    "settings.checkout.wildcardLookup": "Wildcard-Suche nach Exemplaren anhand von Barcodes in den Apps Rückgabe, Ausleihe und Bestandsanfragen",
+    "settings.index.loanAnonymization": "Loan anonymization"
 }

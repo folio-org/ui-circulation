@@ -241,7 +241,6 @@
     "settings.staffSlips.form.previewLabel": "Podgląd pokwitowania pracowników",
     "settings.patronNotices.denyDelete.header": "Nie można usunąć szablonu blokady czytelnika",
     "settings.patronNotices.denyDelete.body": "Tego szablonu powiadomienia czytelnika nie można usunąć, ponieważ jest używany przez jeden lub więcej rekordów",
-    "settings.index.loanHistory": "Historia wypożyczenia",
     "settings.loanHistory.validate.intervalValue": "Aby kontynuować, wprowadź liczbę całkowitą większą niż zero",
     "settings.loanHistory.validate.selectContinue": "Proszę wybrać, aby kontynuować",
     "settings.loanHistory.selectInterval": "Wybierz interwał",
@@ -466,5 +465,6 @@
     "settings.policy.denyDelete.body": "This policy cannot be deleted, as it is in use by one or more records.",
     "settings.overdueFinePolicy.denyDelete.header": "Cannot delete overdue fine policy",
     "settings.lostItemPolicy.denyDelete.header": "Cannot delete lost item fee policy",
-    "settings.checkout.wildcardLookup": "Perform wildcard lookup of items by barcode in circulation apps (Check in, Check out)"
+    "settings.checkout.wildcardLookup": "Perform wildcard lookup of items by barcode in circulation apps (Check in, Check out)",
+    "settings.index.loanAnonymization": "Loan anonymization"
 }
