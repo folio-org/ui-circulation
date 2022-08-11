@@ -38,7 +38,7 @@ const defaultOptions = {
 // This is the old interface, kept around for now to stay backwards-compatible
 CodeMirror.showHint = utils.showHint;
 
-CodeMirror.defineExtension('showHint', function (initialOptions) {
+function showHintValue(initialOptions) {
   const options = parseOptions(this, this.getCursor('start'), initialOptions);
   const selections = this.listSelections();
 
@@ -66,7 +66,9 @@ CodeMirror.defineExtension('showHint', function (initialOptions) {
 
   CodeMirror.signal(this, 'startCompletion', this);
   completion.update(true);
-});
+}
+
+CodeMirror.defineExtension('showHint', showHintValue);
 
 class Completion {
   constructor(cm, options) {
@@ -836,7 +838,7 @@ function resolveAutoHints(cm, pos) {
   return noop;
 }
 
-CodeMirror.registerHelper('hint', 'fromList', (cm, options) => {
+const getFromList = (cm, options) => {
   const cursor = cm.getCursor();
   const tokenAtCursor = cm.getTokenAt(cursor);
   const to = CodeMirror.Pos(cursor.line, tokenAtCursor.end);
@@ -852,8 +854,20 @@ CodeMirror.registerHelper('hint', 'fromList', (cm, options) => {
       to
     };
   }
-});
+};
+
+CodeMirror.registerHelper('hint', 'fromList', getFromList);
 
 CodeMirror.commands.autocomplete = CodeMirror.showHint;
 
 CodeMirror.defineOption('hintOptions', null);
+
+export default {
+  Completion,
+  Widget,
+  MultipleSelectionHintSection,
+  showHintValue,
+  parseOptions,
+  resolveAutoHints,
+  getFromList,
+};
