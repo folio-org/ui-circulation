@@ -241,7 +241,6 @@
     "settings.staffSlips.form.previewLabel": "Preview of staff slip",
     "settings.patronNotices.denyDelete.header": "Cannot delete Patron notice template",
     "settings.patronNotices.denyDelete.body": "This Patron notice template cannot be deleted, as it is in use by one or more records.",
-    "settings.index.loanHistory": "Loan history",
     "settings.loanHistory.validate.intervalValue": "Пожалуйста, введите целое число больше нуля, чтобы продолжить",
     "settings.loanHistory.validate.selectContinue": "Пожалуйста, выберите, чтобы продолжить",
     "settings.loanHistory.selectInterval": "Выберите интервал",
@@ -466,5 +465,6 @@
     "settings.policy.denyDelete.body": "This policy cannot be deleted, as it is in use by one or more records.",
     "settings.overdueFinePolicy.denyDelete.header": "Cannot delete overdue fine policy",
     "settings.lostItemPolicy.denyDelete.header": "Cannot delete lost item fee policy",
-    "settings.checkout.wildcardLookup": "Perform wildcard lookup of items by barcode in circulation apps (Check in, Check out)"
+    "settings.checkout.wildcardLookup": "Perform wildcard lookup of items by barcode in circulation apps (Check in, Check out)",
+    "settings.index.loanAnonymization": "Loan anonymization"
 }
