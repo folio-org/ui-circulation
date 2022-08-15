@@ -1,4 +1,15 @@
-import utils from './utils';
+import {
+  addIndentToEditorRules,
+  fetchHints,
+  getApplicableHelpers,
+  isTextInputField,
+  isChildTextInputField,
+  isAnyItem,
+  createContainer,
+  createHeader,
+  getText,
+  showHint,
+} from './utils';
 
 describe('utils', () => {
   afterEach(() => {
@@ -10,19 +21,19 @@ describe('utils', () => {
 
     describe('when position is before', () => {
       it('should add indent before', () => {
-        expect(utils.addIndentToEditorRules(rule, 'before')).toBe(` ${rule}`);
+        expect(addIndentToEditorRules(rule, 'before')).toBe(` ${rule}`);
       });
     });
 
     describe('when position is after', () => {
       it('should add indent after', () => {
-        expect(utils.addIndentToEditorRules(rule, 'after')).toBe(`${rule} `);
+        expect(addIndentToEditorRules(rule, 'after')).toBe(`${rule} `);
       });
     });
 
     describe('when position is not passed', () => {
       it('should return rule', () => {
-        expect(utils.addIndentToEditorRules(rule)).toBe(rule);
+        expect(addIndentToEditorRules(rule)).toBe(rule);
       });
     });
   });
@@ -36,7 +47,7 @@ describe('utils', () => {
       it('should trigger "hint" with correct arguments', () => {
         const hint = jest.fn();
 
-        utils.fetchHints(hint, cm, options, callback);
+        fetchHints(hint, cm, options, callback);
 
         expect(hint).toHaveBeenLastCalledWith(cm, options);
       });
@@ -45,7 +56,7 @@ describe('utils', () => {
         const result = () => new Promise((res) => { res(); });
         const hint = jest.fn(result);
 
-        utils.fetchHints(hint, cm, options, callback)
+        fetchHints(hint, cm, options, callback)
           .then(() => {
             expect(callback).toBeCalled();
           });
@@ -55,7 +66,7 @@ describe('utils', () => {
         const result = 'test result';
         const hint = jest.fn(() => result);
 
-        utils.fetchHints(hint, cm, options, callback);
+        fetchHints(hint, cm, options, callback);
 
         expect(callback).toHaveBeenCalledWith(result);
       });
@@ -68,7 +79,7 @@ describe('utils', () => {
       hint.async = true;
 
       beforeAll(() => {
-        hints = utils.fetchHints(hint, cm, options, callback);
+        hints = fetchHints(hint, cm, options, callback);
       });
 
       it('should trigger "hint" with correct arguments', () => {
@@ -97,7 +108,7 @@ describe('utils', () => {
       };
 
       it('should return array of helpers', () => {
-        expect(utils.getApplicableHelpers(cm, helpers)).toEqual(helpers);
+        expect(getApplicableHelpers(cm, helpers)).toEqual(helpers);
       });
     });
 
@@ -109,7 +120,7 @@ describe('utils', () => {
       it('should return filtered array of helpers', () => {
         const expectedResult = [helpers[0]];
 
-        expect(utils.getApplicableHelpers(cm, helpers)).toEqual(expectedResult);
+        expect(getApplicableHelpers(cm, helpers)).toEqual(expectedResult);
       });
     });
   });
@@ -122,7 +133,7 @@ describe('utils', () => {
           type: 'text',
         };
 
-        expect(utils.isTextInputField(element)).toBe(false);
+        expect(isTextInputField(element)).toBe(false);
       });
     });
 
@@ -133,7 +144,7 @@ describe('utils', () => {
           type: 'text',
         };
 
-        expect(utils.isTextInputField(element)).toBe(true);
+        expect(isTextInputField(element)).toBe(true);
       });
     });
   });
@@ -150,7 +161,7 @@ describe('utils', () => {
           contains: () => true,
         };
 
-        expect(utils.isChildTextInputField(container, element)).toBe(true);
+        expect(isChildTextInputField(container, element)).toBe(true);
       });
     });
 
@@ -160,7 +171,7 @@ describe('utils', () => {
           contains: () => false,
         };
 
-        expect(utils.isChildTextInputField(container, element)).toBe(false);
+        expect(isChildTextInputField(container, element)).toBe(false);
       });
     });
   });
@@ -169,19 +180,19 @@ describe('utils', () => {
     it('should return true', () => {
       const itemId = 'any item id';
 
-      expect(utils.isAnyItem(itemId)).toBe(true);
+      expect(isAnyItem(itemId)).toBe(true);
     });
 
     it('should return false', () => {
       const itemId = 'item id';
 
-      expect(utils.isAnyItem(itemId)).toBe(false);
+      expect(isAnyItem(itemId)).toBe(false);
     });
   });
 
   describe('createContainer', () => {
     describe('when "className" is not provided', () => {
-      const result = utils.createContainer();
+      const result = createContainer();
 
       it('should return div element', () => {
         expect(result.tagName.toLowerCase()).toBe('div');
@@ -194,7 +205,7 @@ describe('utils', () => {
 
     describe('when "className" is provided', () => {
       const className = 'className';
-      const result = utils.createContainer(className);
+      const result = createContainer(className);
 
       it('should return div element', () => {
         expect(result.tagName.toLowerCase()).toBe('div');
@@ -210,7 +221,7 @@ describe('utils', () => {
     const text = 'header text';
 
     describe('when "className" is not provided', () => {
-      const result = utils.createHeader(text);
+      const result = createHeader(text);
 
       it('should return element with appropriate text', () => {
         expect(result.innerHTML).toBe(text);
@@ -223,7 +234,7 @@ describe('utils', () => {
 
     describe('when "className" is provided', () => {
       const className = 'className';
-      const result = utils.createHeader(text, className);
+      const result = createHeader(text, className);
 
       it('should return element with appropriate text', () => {
         expect(result.innerHTML).toBe(text);
@@ -239,14 +250,14 @@ describe('utils', () => {
     it('should return "completion" argument if it is string', () => {
       const completion = 'completion';
 
-      expect(utils.getText(completion)).toBe(completion);
+      expect(getText(completion)).toBe(completion);
     });
 
     it('should return "text" value if "completion" is not string', () => {
       const text = 'text';
       const completion = { text };
 
-      expect(utils.getText(completion)).toBe(text);
+      expect(getText(completion)).toBe(text);
     });
   });
 
@@ -261,7 +272,7 @@ describe('utils', () => {
 
     describe('when "getHints" is not provided', () => {
       it('should trigger "showHint" with correct arguments', () => {
-        utils.showHint(cm, undefined, options);
+        showHint(cm, undefined, options);
 
         expect(cm.showHint).toHaveBeenCalledWith(options);
       });
@@ -269,7 +280,7 @@ describe('utils', () => {
 
     describe('when "getHints" is provided', () => {
       it('should trigger "showHint" with correct arguments', () => {
-        utils.showHint(cm, getHints, options);
+        showHint(cm, getHints, options);
 
         expect(cm.showHint).toHaveBeenCalledWith({
           ...options,
@@ -280,7 +291,7 @@ describe('utils', () => {
 
     describe('when "options" has "async" param', () => {
       it('should add "async" property to "getHints"', () => {
-        utils.showHint(cm, getHints, {
+        showHint(cm, getHints, {
           ...options,
           async: true,
         });
