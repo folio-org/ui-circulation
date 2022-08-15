@@ -9,6 +9,7 @@
 * UI tests replacement with RTL/Jest for hooks in `src/settings/lib/RuleEditor/initRulesCMM.js`. UICIRC-830.
 * Correctly import components from @folio/stripes/* packages. UICIRC-839.
 * Change setting "Loan history" setting to "Loan anonymization". UICIRC-685
+* Split `rule-show-hint.js` into a few files and cover new files by RTL/Jest test. Refs UICIRC-823.
 
 ## [7.1.0](https://github.com/folio-org/ui-circulation/tree/v7.1.0) (2022-06-29)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v7.0.3...v7.1.0)

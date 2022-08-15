@@ -14,7 +14,7 @@ import {
   RULES_TYPE,
   LOCATION_RULES_TYPES
 } from '../../../constants';
-import addIndentToEditorRules from './utils';
+import { addIndentToEditorRules } from './utils';
 
 const locationHeadersMapping = {
   [RULES_TYPE.INSTITUTION]: 'institution',

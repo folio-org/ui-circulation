@@ -16,11 +16,21 @@ import {
 import {
   ACTIVE_HINT_ELEMENT_CLASS,
   HINT_ELEMENT_CLASS,
+  HINT_SECTION_CONTAINER,
+  HINT_SECTIONS_CONTAINER,
 } from '../../../constants';
-import addIndentToEditorRules from './utils';
-
-const HINT_SECTIONS_CONTAINER = 'CodeMirror-hints-sections-container';
-const HINT_SECTION_CONTAINER = 'CodeMirror-hints-list';
+import HintSection from '../HintSection/HintSection';
+import {
+  showHint,
+  getText,
+  addIndentToEditorRules,
+  fetchHints,
+  isChildTextInputField,
+  createContainer,
+  createHeader,
+  isAnyItem,
+  getApplicableHelpers,
+} from './utils';
 
 CodeMirror.registerHelper('hint', 'auto', { resolve: resolveAutoHints });
 
@@ -36,19 +46,9 @@ const defaultOptions = {
 };
 
 // This is the old interface, kept around for now to stay backwards-compatible
-CodeMirror.showHint = function (cm, getHints, options) {
-  if (!getHints) {
-    return cm.showHint(options);
-  }
+CodeMirror.showHint = showHint;
 
-  if (options && options.async) getHints.async = true;
-
-  const newOptions = { hint: getHints, ...options };
-
-  return cm.showHint(newOptions);
-};
-
-CodeMirror.defineExtension('showHint', function (initialOptions) {
+function showHintValue(initialOptions) {
   const options = parseOptions(this, this.getCursor('start'), initialOptions);
   const selections = this.listSelections();
 
@@ -76,7 +76,9 @@ CodeMirror.defineExtension('showHint', function (initialOptions) {
 
   CodeMirror.signal(this, 'startCompletion', this);
   completion.update(true);
-});
+}
+
+CodeMirror.defineExtension('showHint', showHintValue);
 
 class Completion {
   constructor(cm, options) {
@@ -218,10 +220,6 @@ function parseOptions(cm, pos, options) {
   }
 
   return parsedOptions;
-}
-
-function getText(completion) {
-  return isString(completion) ? completion : completion.text;
 }
 
 class Widget {
@@ -631,131 +629,6 @@ class Widget {
   }
 }
 
-class HintSection {
-  constructor(sectionOptions, cm) {
-    this.cm = cm;
-    this.container = createContainer(HINT_SECTION_CONTAINER);
-    this.setSelectedHintIndex(sectionOptions.selectedHintIndex || 0);
-    this.defaultSelectedHintIndex = this.selectedHintIndex;
-    this.itemsOptions = sectionOptions.list;
-
-    if (sectionOptions.header) {
-      this.initHeader(sectionOptions.header);
-    }
-
-    this.listContainer = document.createElement('ul');
-    this.container.appendChild(this.listContainer);
-
-    if (!isEmpty(get(sectionOptions, 'list'))) {
-      this.setList(sectionOptions.list, this.defaultSelectedHintIndex);
-    }
-  }
-
-  initHeader(headerText) {
-    this.header = createHeader(headerText, 'CodeMirror-hints-subheader');
-
-    this.container.appendChild(this.header);
-  }
-
-  setList(list, selectedHintIndex = -1) {
-    this.clearItemsList();
-    this.itemsOptions = list;
-    this.setSelectedHintIndex(selectedHintIndex);
-
-    this.itemsOptions.forEach((currentListItem, index) => {
-      this.listContainer.appendChild(this.createListItem(currentListItem, index));
-    });
-
-    this.setupListScrollingPadding();
-  }
-
-  createListItem(itemOptions, index) {
-    const listItemElement = document.createElement('li');
-    const className = HINT_ELEMENT_CLASS + (this.isSelectedByIndex(index) ? addIndentToEditorRules(ACTIVE_HINT_ELEMENT_CLASS, 'before') : '');
-
-    listItemElement.className = itemOptions.className ? `${itemOptions.className} ${className}` : className;
-
-    const displayText = itemOptions.displayText || getText(itemOptions);
-
-    listItemElement.appendChild(this.createListItemContent(displayText, itemOptions));
-    listItemElement.hintId = index;
-
-    return listItemElement;
-  }
-
-  createListItemContent(displayText) {
-    return document.createTextNode(displayText);
-  }
-
-  clearItemsList() {
-    this.defaultSelectedHintIndex = 0;
-    this.setSelectedHintIndex(this.defaultSelectedHintIndex);
-    this.itemsOptions = [];
-
-    while (this.listContainer.firstChild) {
-      this.listContainer.removeChild(this.listContainer.firstChild);
-    }
-  }
-
-  setupListScrollingPadding() {
-    if (this.listContainer.scrollHeight > this.listContainer.clientHeight + 1) {
-      for (let node = this.listContainer.firstChild; node; node = node.nextSibling) {
-        node.style.paddingRight = `${this.cm.display.nativeBarWidth}px`;
-      }
-    }
-  }
-
-  getListNodeAt(index) {
-    return this.listContainer.childNodes[index];
-  }
-
-  calculateNextHintIndex(nextActiveHintIndex, avoidWrap) {
-    const itemsOptionsSize = this.listNodes.length;
-    let nextIndex = nextActiveHintIndex;
-
-    if (nextIndex >= itemsOptionsSize) {
-      nextIndex = avoidWrap ? itemsOptionsSize - 1 : 0;
-    } else if (nextIndex < 0) {
-      nextIndex = avoidWrap ? 0 : itemsOptionsSize - 1;
-    }
-
-    return nextIndex;
-  }
-
-  changeActive(nextIndex) {
-    let hintNode = this.getListNodeAt(this.selectedHintIndex);
-
-    if (hintNode) {
-      hintNode.classList.toggle(ACTIVE_HINT_ELEMENT_CLASS, false);
-    }
-
-    this.setSelectedHintIndex(nextIndex);
-    hintNode = this.getListNodeAt(this.selectedHintIndex);
-
-    if (!hintNode) return;
-
-    hintNode.classList.toggle(ACTIVE_HINT_ELEMENT_CLASS, true);
-
-    if (hintNode.offsetTop < this.listContainer.scrollTop) {
-      this.listContainer.scrollTop = hintNode.offsetTop - 3;
-    } else if (hintNode.offsetTop + hintNode.offsetHeight > this.listContainer.scrollTop + this.listContainer.clientHeight) {
-      this.listContainer.scrollTop = hintNode.offsetTop + hintNode.offsetHeight - this.listContainer.clientHeight + 3;
-    }
-  }
-
-  setSelectedHintIndex(index) {
-    this.selectedHintIndex = index;
-  }
-
-  get listNodes() {
-    return Array.from(this.listContainer.childNodes);
-  }
-
-  isSelectedByIndex(index) {
-    return this.selectedHintIndex === index;
-  }
-}
-
 class MultipleSelectionHintSection extends HintSection {
   constructor(sectionOptions, cm) {
     super(sectionOptions, cm);
@@ -936,57 +809,6 @@ class MultipleSelectionHintSection extends HintSection {
   }
 }
 
-function createHeader(text, className = '') {
-  const header = createContainer(className);
-
-  header.innerHTML = text;
-
-  return header;
-}
-
-function createContainer(className = '') {
-  const divElement = document.createElement('div');
-
-  divElement.className = className;
-
-  return divElement;
-}
-
-function isAnyItem(itemId) {
-  return itemId && itemId.includes('any');
-}
-
-function isChildTextInputField(container, element) {
-  return isTextInputField(element) && container.contains(element);
-}
-
-function isTextInputField(element) {
-  return element && element.tagName.toLowerCase() === 'input' && element.type === 'text';
-}
-
-function getApplicableHelpers(cm, helpers) {
-  if (!cm.somethingSelected()) {
-    return helpers;
-  }
-
-  return helpers.filter(helper => helper.supportsSelection);
-}
-
-function fetchHints(hint, cm, options, callback) {
-  if (hint.async) {
-    return hint(cm, callback, options);
-  }
-
-  const result = hint(cm, options);
-  const isPromise = result && result.then;
-
-  if (isPromise) {
-    return result.then(callback);
-  }
-
-  return callback(result);
-}
-
 function resolveAutoHints(cm, pos) {
   const helpers = cm.getHelpers(pos, 'hint');
 
@@ -1026,7 +848,7 @@ function resolveAutoHints(cm, pos) {
   return noop;
 }
 
-CodeMirror.registerHelper('hint', 'fromList', (cm, options) => {
+const getFromList = (cm, options) => {
   const cursor = cm.getCursor();
   const tokenAtCursor = cm.getTokenAt(cursor);
   const to = CodeMirror.Pos(cursor.line, tokenAtCursor.end);
@@ -1042,8 +864,20 @@ CodeMirror.registerHelper('hint', 'fromList', (cm, options) => {
       to
     };
   }
-});
+};
+
+CodeMirror.registerHelper('hint', 'fromList', getFromList);
 
 CodeMirror.commands.autocomplete = CodeMirror.showHint;
 
 CodeMirror.defineOption('hintOptions', null);
+
+export default {
+  Completion,
+  Widget,
+  MultipleSelectionHintSection,
+  showHintValue,
+  parseOptions,
+  resolveAutoHints,
+  getFromList,
+};
