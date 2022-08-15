@@ -127,7 +127,7 @@ describe('utils', () => {
     });
 
     describe('when element is "input"', () => {
-      it('should return false', () => {
+      it('should return true', () => {
         const element = {
           tagName: 'input',
           type: 'text',
@@ -139,23 +139,25 @@ describe('utils', () => {
   });
 
   describe('isChildTextInputField', () => {
-    describe('when "contains" returns true', () => {
-      const element = {
-        tagName: 'input',
-        type: 'text',
-      };
+    const element = {
+      tagName: 'input',
+      type: 'text',
+    };
 
+    describe('when "contains" returns true', () => {
       it('should return true', () => {
         const container = {
-          contains: () => true
+          contains: () => true,
         };
 
         expect(utils.isChildTextInputField(container, element)).toBe(true);
       });
+    });
 
+    describe('when "contains" returns false', () => {
       it('should return false', () => {
         const container = {
-          contains: () => false
+          contains: () => false,
         };
 
         expect(utils.isChildTextInputField(container, element)).toBe(false);

@@ -1,6 +1,6 @@
 import { isString } from 'lodash';
 
-const addIndentToEditorRules = (rule, position) => {
+export const addIndentToEditorRules = (rule, position) => {
   switch (position) {
     case 'before':
       return ` ${rule}`;
@@ -11,7 +11,7 @@ const addIndentToEditorRules = (rule, position) => {
   }
 };
 
-function fetchHints(hint, cm, options, callback) {
+export function fetchHints(hint, cm, options, callback) {
   if (hint.async) {
     return hint(cm, callback, options);
   }
@@ -26,7 +26,7 @@ function fetchHints(hint, cm, options, callback) {
   return callback(result);
 }
 
-function getApplicableHelpers(cm, helpers) {
+export function getApplicableHelpers(cm, helpers) {
   if (!cm.somethingSelected()) {
     return helpers;
   }
@@ -34,19 +34,19 @@ function getApplicableHelpers(cm, helpers) {
   return helpers.filter(helper => helper.supportsSelection);
 }
 
-function isTextInputField(element) {
+export function isTextInputField(element) {
   return element && element.tagName.toLowerCase() === 'input' && element.type === 'text';
 }
 
-function isChildTextInputField(container, element) {
+export function isChildTextInputField(container, element) {
   return isTextInputField(element) && container.contains(element);
 }
 
-function isAnyItem(itemId) {
+export function isAnyItem(itemId) {
   return itemId && itemId.includes('any');
 }
 
-function createContainer(className = '') {
+export function createContainer(className = '') {
   const divElement = document.createElement('div');
 
   divElement.className = className;
@@ -54,7 +54,7 @@ function createContainer(className = '') {
   return divElement;
 }
 
-function createHeader(text, className = '') {
+export function createHeader(text, className = '') {
   const header = createContainer(className);
 
   header.innerHTML = text;
@@ -62,11 +62,11 @@ function createHeader(text, className = '') {
   return header;
 }
 
-function getText(completion) {
+export function getText(completion) {
   return isString(completion) ? completion : completion.text;
 }
 
-function showHint(cm, getHints, options) {
+export function showHint(cm, getHints, options) {
   if (!getHints) {
     return cm.showHint(options);
   }
@@ -77,16 +77,3 @@ function showHint(cm, getHints, options) {
 
   return cm.showHint(newOptions);
 }
-
-export default {
-  addIndentToEditorRules,
-  fetchHints,
-  getApplicableHelpers,
-  isTextInputField,
-  isChildTextInputField,
-  isAnyItem,
-  createContainer,
-  createHeader,
-  getText,
-  showHint,
-};

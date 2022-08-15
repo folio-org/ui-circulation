@@ -2,7 +2,13 @@ import {
   get,
   isEmpty,
 } from 'lodash';
-import utils from '../RuleEditor/utils';
+
+import {
+  createContainer,
+  createHeader,
+  addIndentToEditorRules,
+  getText,
+} from '../RuleEditor/utils';
 import {
   ACTIVE_HINT_ELEMENT_CLASS,
   HINT_ELEMENT_CLASS,
@@ -12,7 +18,7 @@ import {
 class HintSection {
   constructor(sectionOptions, cm) {
     this.cm = cm;
-    this.container = utils.createContainer(HINT_SECTION_CONTAINER);
+    this.container = createContainer(HINT_SECTION_CONTAINER);
     this.setSelectedHintIndex(sectionOptions.selectedHintIndex || 0);
     this.defaultSelectedHintIndex = this.selectedHintIndex;
     this.itemsOptions = sectionOptions.list;
@@ -30,7 +36,7 @@ class HintSection {
   }
 
   initHeader(headerText) {
-    this.header = utils.createHeader(headerText, 'CodeMirror-hints-subheader');
+    this.header = createHeader(headerText, 'CodeMirror-hints-subheader');
 
     this.container.appendChild(this.header);
   }
@@ -49,11 +55,11 @@ class HintSection {
 
   createListItem(itemOptions, index) {
     const listItemElement = document.createElement('li');
-    const className = HINT_ELEMENT_CLASS + (this.isSelectedByIndex(index) ? utils.addIndentToEditorRules(ACTIVE_HINT_ELEMENT_CLASS, 'before') : '');
+    const className = HINT_ELEMENT_CLASS + (this.isSelectedByIndex(index) ? addIndentToEditorRules(ACTIVE_HINT_ELEMENT_CLASS, 'before') : '');
 
     listItemElement.className = itemOptions.className ? `${itemOptions.className} ${className}` : className;
 
-    const displayText = itemOptions.displayText || utils.getText(itemOptions);
+    const displayText = itemOptions.displayText || getText(itemOptions);
 
     listItemElement.appendChild(this.createListItemContent(displayText, itemOptions));
     listItemElement.hintId = index;

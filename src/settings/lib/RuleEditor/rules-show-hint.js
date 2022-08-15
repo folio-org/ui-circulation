@@ -20,7 +20,17 @@ import {
   HINT_SECTIONS_CONTAINER,
 } from '../../../constants';
 import HintSection from '../HintSection/HintSection';
-import utils from './utils';
+import {
+  showHint,
+  getText,
+  addIndentToEditorRules,
+  fetchHints,
+  isChildTextInputField,
+  createContainer,
+  createHeader,
+  isAnyItem,
+  getApplicableHelpers,
+} from './utils';
 
 CodeMirror.registerHelper('hint', 'auto', { resolve: resolveAutoHints });
 
@@ -36,7 +46,7 @@ const defaultOptions = {
 };
 
 // This is the old interface, kept around for now to stay backwards-compatible
-CodeMirror.showHint = utils.showHint;
+CodeMirror.showHint = showHint;
 
 function showHintValue(initialOptions) {
   const options = parseOptions(this, this.getCursor('start'), initialOptions);
@@ -121,7 +131,7 @@ class Completion {
     const from = completion.from || data.from;
     const to = completion.to || data.to;
 
-    this.cm.replaceRange(utils.getText(completion), from, to, 'complete');
+    this.cm.replaceRange(getText(completion), from, to, 'complete');
     CodeMirror.signal(data, 'pick', completion);
     this.close();
   }
@@ -135,10 +145,10 @@ class Completion {
 
     const completions = sections[this.widget.currentSectionIndex].list;
     const pickedCompletions = completions.filter(completion => selectedItemsIds.includes(completion.id));
-    const codesText = pickedCompletions.map(utils.getText).join('');
+    const codesText = pickedCompletions.map(getText).join('');
 
     pickedCompletions.forEach(completion => { CodeMirror.signal(data, 'pick', completion); });
-    this.cm.replaceRange(utils.addIndentToEditorRules(codesText, 'before'), from, to, 'complete');
+    this.cm.replaceRange(addIndentToEditorRules(codesText, 'before'), from, to, 'complete');
     this.close();
   }
 
@@ -167,7 +177,7 @@ class Completion {
 
     const updatedTick = ++this.tick;
 
-    utils.fetchHints(this.options.hint, this.cm, this.options, data => {
+    fetchHints(this.options.hint, this.cm, this.options, data => {
       if (this.tick === updatedTick) this.finishUpdate(data, first);
     });
   }
@@ -304,7 +314,7 @@ class Widget {
       cm.on('blur', this.handleBlur = (cmInstance, e) => {
         const { relatedTarget } = e;
 
-        if (!relatedTarget || !utils.isChildTextInputField(this.container, relatedTarget)) {
+        if (!relatedTarget || !isChildTextInputField(this.container, relatedTarget)) {
           closingOnBlur = setTimeout(completion.close, 100);
         }
       });
@@ -340,7 +350,7 @@ class Widget {
     });
 
     CodeMirror.on(this.container, 'mousedown', (e) => {
-      if (e.target && !utils.isChildTextInputField(this.container, e.target)) {
+      if (e.target && !isChildTextInputField(this.container, e.target)) {
         setTimeout(() => cm.focus(), 20);
       }
     });
@@ -422,11 +432,11 @@ class Widget {
   }
 
   initContainers() {
-    this.container = utils.createContainer('CodeMirror-hints');
-    this.sectionsContainer = utils.createContainer(HINT_SECTIONS_CONTAINER);
+    this.container = createContainer('CodeMirror-hints');
+    this.sectionsContainer = createContainer(HINT_SECTIONS_CONTAINER);
 
     if (this.data.header) {
-      this.container.appendChild(utils.createHeader(this.data.header, 'CodeMirror-hints-header'));
+      this.container.appendChild(createHeader(this.data.header, 'CodeMirror-hints-header'));
     }
 
     this.container.appendChild(this.sectionsContainer);
@@ -544,7 +554,7 @@ class Widget {
     if (currentSectionData.isMultipleSelection) {
       const currentSection = this.getCurrentSection();
 
-      if (!isEmpty(currentSection.listNodes) && !utils.isAnyItem(currentItemOptions.id)) {
+      if (!isEmpty(currentSection.listNodes) && !isAnyItem(currentItemOptions.id)) {
         currentSection.checkItem();
       }
     } else if (this.currentSectionIndex < this.data.sections.length - 1) {
@@ -589,7 +599,7 @@ class Widget {
     const { list } = this.getCurrentSection(this.data);
     const selectionId = list[this.getSelectedHintInCurrentSection()].id;
 
-    if (utils.isAnyItem(selectionId)) {
+    if (isAnyItem(selectionId)) {
       return list.filter(listItem => listItem.id !== selectionId).map(listItem => listItem.id);
     }
 
@@ -697,7 +707,7 @@ class MultipleSelectionHintSection extends HintSection {
   }
 
   initCompletionButton(buttonText) {
-    this.buttonContainer = utils.createContainer('CodeMirror-hint-section-button-container');
+    this.buttonContainer = createContainer('CodeMirror-hint-section-button-container');
     this.completionButton = document.createElement('button');
     this.completionButton.className = 'CodeMirror-hint-section-button';
     this.completionButton.innerHTML = buttonText;
@@ -713,11 +723,11 @@ class MultipleSelectionHintSection extends HintSection {
   }
 
   createListItemContent(displayText, itemOptions) {
-    if (utils.isAnyItem(itemOptions.id)) {
+    if (isAnyItem(itemOptions.id)) {
       return super.createListItemContent(displayText, itemOptions);
     }
 
-    const checkBoxContainer = utils.createContainer('CodeMirror-checkbox-container');
+    const checkBoxContainer = createContainer('CodeMirror-checkbox-container');
     const labelElement = document.createElement('label');
 
     labelElement.innerHTML = displayText;
@@ -804,14 +814,14 @@ function resolveAutoHints(cm, pos) {
 
   if (!isEmpty(helpers)) {
     const resolved = function (codeMirror, callback, options) {
-      const applicableHelpers = utils.getApplicableHelpers(codeMirror, helpers);
+      const applicableHelpers = getApplicableHelpers(codeMirror, helpers);
 
       function initHelpers(helperIndex) {
         if (helperIndex === applicableHelpers.length) {
           return callback(null);
         }
 
-        utils.fetchHints(applicableHelpers[helperIndex], codeMirror, options, result => {
+        fetchHints(applicableHelpers[helperIndex], codeMirror, options, result => {
           return isEmpty(get(result, 'sections.0.list')) ? initHelpers(helperIndex + 1) : callback(result);
         });
       }
