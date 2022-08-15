@@ -1,5 +1,5 @@
 import HintSection from './HintSection';
-import utils from '../RuleEditor/utils';
+import * as utils from '../RuleEditor/utils';
 import {
   ACTIVE_HINT_ELEMENT_CLASS,
   HINT_ELEMENT_CLASS,
@@ -96,10 +96,11 @@ describe('HintSection', () => {
     const list = ['test'];
     const appendChildMock = jest.fn();
 
-    it('should trigger banch of methods', () => {
+    it('should trigger methods', () => {
       utils.createContainer.mockImplementation(() => ({
         appendChild: appendChildMock,
       }));
+
       const hintSection = new HintSection(defaultSectionOptions, cm);
       const clearItemsListSpy = jest.spyOn(hintSection, 'clearItemsList');
       const setSelectedHintIndexSpy = jest.spyOn(hintSection, 'setSelectedHintIndex');
@@ -210,7 +211,7 @@ describe('HintSection', () => {
 
       hintSection.createListItemContent(displayText);
 
-      expect(createTextNodeMock).toHaveBeenLastCalledWith(displayText);
+      expect(createTextNodeMock).toHaveBeenCalledWith(displayText);
     });
   });
 
@@ -301,35 +302,31 @@ describe('HintSection', () => {
       appendChild: () => {},
     });
 
-    describe('when "nextIndex" bigger then number of nodes', () => {
+    describe('when "nextIndex" more than number of nodes', () => {
       const nextActiveHintIndex = 5;
 
-      it('should return correct index if "avoidWrap" is true', () => {
+      it('should return index if "avoidWrap" is true', () => {
         jest.spyOn(document, 'createElement').mockImplementationOnce(createElementMocked);
 
         const avoidWrap = true;
         const expectedResult = childNodes.length - 1;
         const hintSection = new HintSection(defaultSectionOptions, cm);
 
-        expect(
-          hintSection.calculateNextHintIndex(nextActiveHintIndex, avoidWrap)
-        ).toBe(expectedResult);
+        expect(hintSection.calculateNextHintIndex(nextActiveHintIndex, avoidWrap)).toBe(expectedResult);
       });
 
-      it('should return correct index if "avoidWrap" is false', () => {
+      it('should return index if "avoidWrap" is false', () => {
         jest.spyOn(document, 'createElement').mockImplementationOnce(createElementMocked);
 
         const avoidWrap = false;
         const expectedResult = 0;
         const hintSection = new HintSection(defaultSectionOptions, cm);
 
-        expect(
-          hintSection.calculateNextHintIndex(nextActiveHintIndex, avoidWrap)
-        ).toBe(expectedResult);
+        expect(hintSection.calculateNextHintIndex(nextActiveHintIndex, avoidWrap)).toBe(expectedResult);
       });
     });
 
-    describe('when "nextIndex" bigger then 0 and smaller then number of nodes', () => {
+    describe('when "nextIndex" more than 0 and less than number of nodes', () => {
       const nextActiveHintIndex = 1;
 
       it('should return correct index', () => {
@@ -338,37 +335,31 @@ describe('HintSection', () => {
         const avoidWrap = true;
         const hintSection = new HintSection(defaultSectionOptions, cm);
 
-        expect(
-          hintSection.calculateNextHintIndex(nextActiveHintIndex, avoidWrap)
-        ).toBe(nextActiveHintIndex);
+        expect(hintSection.calculateNextHintIndex(nextActiveHintIndex, avoidWrap)).toBe(nextActiveHintIndex);
       });
     });
 
-    describe('when "nextIndex" smaller then 0', () => {
+    describe('when "nextIndex" less than 0', () => {
       const nextActiveHintIndex = -5;
 
-      it('should return correct index if "avoidWrap" is true', () => {
+      it('should return index if "avoidWrap" is true', () => {
         jest.spyOn(document, 'createElement').mockImplementationOnce(createElementMocked);
 
         const avoidWrap = true;
         const expectedResult = 0;
         const hintSection = new HintSection(defaultSectionOptions, cm);
 
-        expect(
-          hintSection.calculateNextHintIndex(nextActiveHintIndex, avoidWrap)
-        ).toBe(expectedResult);
+        expect(hintSection.calculateNextHintIndex(nextActiveHintIndex, avoidWrap)).toBe(expectedResult);
       });
 
-      it('should return correct index if "avoidWrap" is false', () => {
+      it('should return index if "avoidWrap" is false', () => {
         jest.spyOn(document, 'createElement').mockImplementationOnce(createElementMocked);
 
         const avoidWrap = false;
         const expectedResult = childNodes.length - 1;
         const hintSection = new HintSection(defaultSectionOptions, cm);
 
-        expect(
-          hintSection.calculateNextHintIndex(nextActiveHintIndex, avoidWrap)
-        ).toBe(expectedResult);
+        expect(hintSection.calculateNextHintIndex(nextActiveHintIndex, avoidWrap)).toBe(expectedResult);
       });
     });
   });
@@ -402,42 +393,6 @@ describe('HintSection', () => {
         const hintSection = new HintSection(defaultSectionOptions, cm);
 
         expect(hintSection.changeActive(nextIndex)).toBeUndefined();
-      });
-    });
-
-    describe('when "hintNode.offsetTop" bigger than container "scrollTop"', () => {
-      const offsetTop = 10;
-      const offsetHeight = 10;
-      const scrollTop = 8;
-      const clientHeight = 0;
-      const firstChildNode = {
-        classList: {
-          toggle: () => {},
-        },
-      };
-      const lastChildNode = {
-        offsetTop,
-        offsetHeight,
-        classList: {
-          toggle: () => {},
-        },
-      };
-      const nextIndex = 1;
-      const createElementMocked = () => ({
-        scrollTop,
-        clientHeight,
-        childNodes: [firstChildNode, lastChildNode],
-      });
-
-      it('should correctly set "listContainer.scrollTop" value', () => {
-        jest.spyOn(document, 'createElement').mockImplementationOnce(createElementMocked);
-
-        const hintSection = new HintSection(defaultSectionOptions, cm);
-        const expectedResult = 23;
-
-        hintSection.changeActive(nextIndex);
-
-        expect(hintSection.listContainer.scrollTop).toBe(expectedResult);
       });
     });
 
@@ -488,7 +443,43 @@ describe('HintSection', () => {
       });
     });
 
-    describe('when "clientHeight" has big value', () => {
+    describe('when "hintNode.offsetTop" more then container "scrollTop"', () => {
+      const offsetTop = 10;
+      const offsetHeight = 10;
+      const scrollTop = 8;
+      const clientHeight = 0;
+      const firstChildNode = {
+        classList: {
+          toggle: () => {},
+        },
+      };
+      const lastChildNode = {
+        offsetTop,
+        offsetHeight,
+        classList: {
+          toggle: () => {},
+        },
+      };
+      const nextIndex = 1;
+      const createElementMocked = () => ({
+        scrollTop,
+        clientHeight,
+        childNodes: [firstChildNode, lastChildNode],
+      });
+
+      it('should correctly set "listContainer.scrollTop" value', () => {
+        jest.spyOn(document, 'createElement').mockImplementationOnce(createElementMocked);
+
+        const hintSection = new HintSection(defaultSectionOptions, cm);
+        const expectedResult = 23;
+
+        hintSection.changeActive(nextIndex);
+
+        expect(hintSection.listContainer.scrollTop).toBe(expectedResult);
+      });
+    });
+
+    describe('when "clientHeight" has a big value', () => {
       const toggleMock = jest.fn();
       const offsetTop = 20;
       const offsetHeight = 10;
