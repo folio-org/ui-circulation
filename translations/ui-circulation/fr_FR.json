@@ -241,7 +241,6 @@
     "settings.staffSlips.form.previewLabel": "Aperçu du ticket/bordereau pour le personnel",
     "settings.patronNotices.denyDelete.header": "Impossible de supprimer le modèle de notification",
     "settings.patronNotices.denyDelete.body": "Ce modèle de notification ne peut être supprimé, car il est utilisé par un ou plusieurs enregistrements.",
-    "settings.index.loanHistory": "Historique du prêt",
     "settings.loanHistory.validate.intervalValue": "Merci de saisir un nombre entier supérieur à zéro pour continuer",
     "settings.loanHistory.validate.selectContinue": "Merci de sélectionner pour continuer",
     "settings.loanHistory.selectInterval": "Sélectionner l'intervalle",
@@ -466,5 +465,6 @@
     "settings.policy.denyDelete.body": "Cette politique ne peut pas être supprimée, car elle est utilisée par une ou plusieurs notices.",
     "settings.overdueFinePolicy.denyDelete.header": "Impossible de supprimer la politique des amendes pour retard",
     "settings.lostItemPolicy.denyDelete.header": "Impossible de supprimer la politique de frais pour les exemplaires perdus",
-    "settings.checkout.wildcardLookup": "Perform wildcard lookup of items by barcode in circulation apps (Check in, Check out)"
+    "settings.checkout.wildcardLookup": "Perform wildcard lookup of items by barcode in circulation apps (Check in, Check out)",
+    "settings.index.loanAnonymization": "Loan anonymization"
 }

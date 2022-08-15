@@ -241,7 +241,6 @@
     "settings.staffSlips.form.previewLabel": "Vista previa de la hoja de aviso para el personal",
     "settings.patronNotices.denyDelete.header": "No se puede eliminar la plantilla de aviso de usuario",
     "settings.patronNotices.denyDelete.body": "Esta plantilla de aviso de patrocinador no se puede eliminar, ya que está siendo utilizada por uno o más registros.",
-    "settings.index.loanHistory": "Historial de préstamos",
     "settings.loanHistory.validate.intervalValue": "Por favor ingrese un número entero mayor que cero para continuar",
     "settings.loanHistory.validate.selectContinue": "Por favor, seleccione para continuar",
     "settings.loanHistory.selectInterval": "Seleccionar intervalo",
@@ -466,5 +465,6 @@
     "settings.policy.denyDelete.body": "Esta política no puede ser eliminada, dado que está siendo usada por uno o más registros.",
     "settings.overdueFinePolicy.denyDelete.header": "No es posible eliminar la política de multa vencida",
     "settings.lostItemPolicy.denyDelete.header": "No es posible eliminar la política de tarifa por ejemplar perdido",
-    "settings.checkout.wildcardLookup": "Realice búsquedas avanzadas de ejemplares por código de barras en los módulos de  circulación (Devolución, Préstamo)"
+    "settings.checkout.wildcardLookup": "Realice búsquedas avanzadas de ejemplares por código de barras en los módulos de  circulación (Devolución, Préstamo)",
+    "settings.index.loanAnonymization": "Loan anonymization"
 }

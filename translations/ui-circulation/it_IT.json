@@ -241,7 +241,6 @@
     "settings.staffSlips.form.previewLabel": "Anteprima ricevuta per lo staff",
     "settings.patronNotices.denyDelete.header": "Impossibile eliminare il modello di notifica utente",
     "settings.patronNotices.denyDelete.body": "Questo modello di notifica utente è in uso in uno o più record e non può essere eliminato",
-    "settings.index.loanHistory": "Storico prestiti",
     "settings.loanHistory.validate.intervalValue": "Inserisci un numero intero maggiore di zero per continuare",
     "settings.loanHistory.validate.selectContinue": "Seleziona per continuare",
     "settings.loanHistory.selectInterval": "Seleziona intervallo",
@@ -466,5 +465,6 @@
     "settings.policy.denyDelete.body": "This policy cannot be deleted, as it is in use by one or more records.",
     "settings.overdueFinePolicy.denyDelete.header": "Cannot delete overdue fine policy",
     "settings.lostItemPolicy.denyDelete.header": "Cannot delete lost item fee policy",
-    "settings.checkout.wildcardLookup": "Perform wildcard lookup of items by barcode in circulation apps (Check in, Check out)"
+    "settings.checkout.wildcardLookup": "Perform wildcard lookup of items by barcode in circulation apps (Check in, Check out)",
+    "settings.index.loanAnonymization": "Loan anonymization"
 }
