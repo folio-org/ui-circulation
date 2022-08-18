@@ -466,5 +466,5 @@
     "settings.overdueFinePolicy.denyDelete.header": "Nelze odstranit zásady pokuty po splatnosti",
     "settings.lostItemPolicy.denyDelete.header": "Nelze odstranit zásady poplatků za ztracené jednotky",
     "settings.checkout.wildcardLookup": "Proveďte vyhledávání jednotek pomocí zástupných znaků podle čárového kódu v aplikacích (Návrat, Výpůjčka)",
-    "settings.index.loanAnonymization": "Loan anonymization"
+    "settings.index.loanAnonymization": "Anonymizace půjčky"
 }
