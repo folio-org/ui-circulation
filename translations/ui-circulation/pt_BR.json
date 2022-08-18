@@ -466,5 +466,5 @@
     "settings.overdueFinePolicy.denyDelete.header": "Não é possível excluir a política de multas vencidas",
     "settings.lostItemPolicy.denyDelete.header": "Não é possível excluir a política de taxa de item perdido",
     "settings.checkout.wildcardLookup": "Realizar pesquisa curinga de itens por código de barras em aplicativos de circulação (Empréstimo, Devolução)",
-    "settings.index.loanAnonymization": "Loan anonymization"
+    "settings.index.loanAnonymization": "Anonimização de empréstimos"
 }
