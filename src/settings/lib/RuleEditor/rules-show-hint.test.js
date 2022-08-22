@@ -62,7 +62,7 @@ describe('rulesShowHint', () => {
           listSelections: () => [1, 2],
         };
 
-        expect(fakeCodeMirror.showHintValue(initialOptions)).toBe(undefined);
+        expect(fakeCodeMirror.showHintValue(initialOptions)).toBeUndefined();
       });
     });
 
@@ -73,7 +73,7 @@ describe('rulesShowHint', () => {
           somethingSelected: () => true,
         };
 
-        expect(fakeCodeMirror.showHintValue(initialOptions)).toBe(undefined);
+        expect(fakeCodeMirror.showHintValue(initialOptions)).toBeUndefined();
       });
     });
 
@@ -99,7 +99,7 @@ describe('rulesShowHint', () => {
           },
         };
 
-        expect(fakeCodeMirror.showHintValue(options)).toBe(undefined);
+        expect(fakeCodeMirror.showHintValue(options)).toBeUndefined();
       });
 
       it('should trigger "close"', () => {
@@ -146,7 +146,7 @@ describe('rulesShowHint', () => {
           state: {},
         };
 
-        expect(fakeCodeMirror.showHintValue(rulesShowHint.defaultOptions)).toBe(undefined);
+        expect(fakeCodeMirror.showHintValue(rulesShowHint.defaultOptions)).toBeUndefined();
       });
     });
   });
@@ -192,55 +192,6 @@ describe('rulesShowHint', () => {
   });
 
   describe('resolveAutoHints', () => {
-    describe('when "getHelpers" returns empty array', () => {
-      const cm = {
-        getHelpers: () => [],
-        getCursor: () => [],
-      };
-
-      it('should return undefined', () => {
-        const getHelper = jest.fn(() => '');
-
-        expect(rulesShowHint.resolveAutoHints({
-          ...cm,
-          getHelper,
-        })).toBe(noop);
-      });
-
-      it('should trigger "fromList" from returned function', () => {
-        const fromListSpy = jest.spyOn(CodeMirror.hint, 'fromList');
-        const words = 'test';
-        const getHelper = jest.fn(() => words);
-        const codeMirror = {};
-        const returnedFunction = rulesShowHint.resolveAutoHints({
-          ...cm,
-          getHelper,
-        });
-
-        returnedFunction(codeMirror);
-
-        expect(fromListSpy).toHaveBeenCalledWith(codeMirror, { words });
-      });
-
-      it('should trigger "anyword" from returned function', () => {
-        const anyword = jest.fn();
-        const getHelper = jest.fn(() => '');
-        const codeMirror = {};
-        const options = {};
-
-        CodeMirror.hint.anyword = anyword;
-
-        const returnedFunction = rulesShowHint.resolveAutoHints({
-          ...cm,
-          getHelper,
-        });
-
-        returnedFunction(codeMirror, options);
-
-        expect(anyword).toHaveBeenCalledWith(codeMirror, options);
-      });
-    });
-
     describe('when "getHelpers" returns array with data', () => {
       const helpers = ['helper'];
       const applicableHelpers = [];
@@ -287,6 +238,55 @@ describe('rulesShowHint', () => {
         returnedFunction(codeMirror, () => {}, options);
 
         expect(fetchHintsSpy).toHaveBeenCalledWith(appHelper[helperIndex], codeMirror, options, expect.any(Function));
+      });
+    });
+
+    describe('when "getHelpers" returns empty array', () => {
+      const cm = {
+        getHelpers: () => [],
+        getCursor: () => [],
+      };
+
+      it('should return noop', () => {
+        const getHelper = jest.fn(() => '');
+
+        expect(rulesShowHint.resolveAutoHints({
+          ...cm,
+          getHelper,
+        })).toBe(noop);
+      });
+
+      it('should trigger "fromList" from returned function', () => {
+        const fromListSpy = jest.spyOn(CodeMirror.hint, 'fromList');
+        const words = 'test';
+        const getHelper = jest.fn(() => words);
+        const codeMirror = {};
+        const returnedFunction = rulesShowHint.resolveAutoHints({
+          ...cm,
+          getHelper,
+        });
+
+        returnedFunction(codeMirror);
+
+        expect(fromListSpy).toHaveBeenCalledWith(codeMirror, { words });
+      });
+
+      it('should trigger "anyword" from returned function', () => {
+        const anyword = jest.fn();
+        const getHelper = jest.fn(() => '');
+        const codeMirror = {};
+        const options = {};
+
+        CodeMirror.hint.anyword = anyword;
+
+        const returnedFunction = rulesShowHint.resolveAutoHints({
+          ...cm,
+          getHelper,
+        });
+
+        returnedFunction(codeMirror, options);
+
+        expect(anyword).toHaveBeenCalledWith(codeMirror, options);
       });
     });
   });
@@ -350,7 +350,7 @@ describe('rulesShowHint', () => {
 
     describe('when there are no founded words', () => {
       it('should return undefined', () => {
-        expect(rulesShowHint.getFromList(commonCm, options)).toBe(undefined);
+        expect(rulesShowHint.getFromList(commonCm, options)).toBeUndefined();
       });
     });
   });
