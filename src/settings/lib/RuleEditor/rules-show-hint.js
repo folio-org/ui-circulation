@@ -880,4 +880,5 @@ export default {
   parseOptions,
   resolveAutoHints,
   getFromList,
+  defaultOptions,
 };
