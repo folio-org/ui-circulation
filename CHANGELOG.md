@@ -11,6 +11,7 @@
 * Change setting "Loan history" setting to "Loan anonymization". UICIRC-685
 * Split `rule-show-hint.js` into a few files and cover new files by RTL/Jest test. Refs UICIRC-823.
 * Cover functions in `rule-show-hint.js` by RTL/jest tests. UICIRC-832.
+* Do not allow only space characters in the notice template body. UICIRC-783
 
 ## [7.1.0](https://github.com/folio-org/ui-circulation/tree/v7.1.0) (2022-06-29)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v7.0.3...v7.1.0)
