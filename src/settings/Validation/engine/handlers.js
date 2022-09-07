@@ -44,7 +44,7 @@ export const isInIntervalOrNull = (min, max, value) => !value || isInInterval(mi
 export const isNotEmptyEditor = (value = '') => {
   const plainText = value.replace(/<\/?[^>]+(>|$)/g, '');
 
-  return !isEmpty(plainText);
+  return !isEmpty(plainText) && !!plainText.trim();
 };
 
 export const isSelected = (value) => !isUndefined(value);
