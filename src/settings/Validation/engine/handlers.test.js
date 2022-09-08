@@ -377,8 +377,8 @@ describe('handlers', () => {
     });
 
     describe('when passed value has space after removing tags', () => {
-      it('should return true', () => {
-        expect(isNotEmptyEditor(' <h1></h1><b></b>')).toBe(true);
+      it('should return false', () => {
+        expect(isNotEmptyEditor(' <h1></h1><b></b>')).toBe(false);
       });
     });
 
