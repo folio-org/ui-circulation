@@ -74,6 +74,16 @@
         "visible": true
       },
       {
+        "permissionName": "ui-circulation.settings.edit-loan-history",
+        "displayName": "Settings (Circ): Can edit loan history",
+        "subPermissions": [
+          "ui-circulation.settings.loan-history",
+          "configuration.entries.item.post",
+          "configuration.entries.item.put"
+        ],
+        "visible": true
+      },
+      {
         "permissionName": "ui-circulation.settings.view-loan-policies",
         "displayName": "Settings (Circ): Can view loan policies",
         "subPermissions": [
