@@ -407,7 +407,7 @@
     "permission.settings.notice-policies": "Nastavení (Circ): Může vytvářet, upravovat a odstraňovat zásady upozornění",
     "permission.settings.circulation-rules": "Nastavení (Circ): Může vytvářet, upravovat a odstraňovat pravidla pro výpůjčky",
     "permission.settings.fixed-due-date-schedules": "Nastavení (Circ): Může vytvářet, upravovat a odstraňovat plány pevných termínů",
-    "permission.settings.staff-slips": "Nastavení (Circ): Může vytvářet, upravovat a odstraňovat složenky",
+    "permission.settings.staff-slips": "Nastavení (Circ): Může vytvářet, upravovat a odstraňovat zaměstnanecké lístky",
     "permission.settings.request-policies": "Nastavení (Circ): Může vytvářet, upravovat a odstraňovat zásady žádanek",
     "permission.settings.other-settings": "Nastavení (Circ): Může vytvářet, upravovat a odstraňovat další nastavení",
     "permission.settings.notice-templates": "Nastavení (Circ): Může vytvářet, upravovat a odstraňovat šablony upozornění pro čtenáře",
