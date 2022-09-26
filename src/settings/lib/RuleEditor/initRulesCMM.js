@@ -42,7 +42,7 @@ export const hooks = {
   }
 };
 
-function processToken(stream, state, parserConfig) {
+export function processToken(stream, state, parserConfig) {
   const {
     typeMapping,
     policyMapping,
@@ -133,64 +133,66 @@ function processToken(stream, state, parserConfig) {
   return null;
 }
 
-const initRulesCMM = (CodeMirror) => {
-  CodeMirror.defineMode('rulesCMM', (config, parserConfig) => {
-    const { indentUnit } = config;
+export const defineRulesCMM = (config, parserConfig) => {
+  const { indentUnit } = config;
 
-    return {
-      startState() {
-        const { completionLists, typeMapping, policyMapping } = parserConfig;
+  return {
+    startState() {
+      const { completionLists, typeMapping, policyMapping } = parserConfig;
 
-        return {
-          keyProperty: null, // current defined property or typegroup, if any.
-          rValue: false, // in a property or value?
-          indented: 0,
-          nextApplicable: { completionLists, typeMapping, policyMapping },
-          ruleLine: false,
-          context: {
-            align: null,
-          }
-        };
-      },
-
-      blankLine(state) {
-        state.comment = false;
-        state.indented = 0;
-        state.keyProperty = null;
-      },
-
-      indent(state) {
-        if (state.ruleLine) {
-          return state.indented + indentUnit;
+      return {
+        keyProperty: null, // current defined property or typegroup, if any.
+        rValue: false, // in a property or value?
+        indented: 0,
+        nextApplicable: { completionLists, typeMapping, policyMapping },
+        ruleLine: false,
+        context: {
+          align: null,
         }
+      };
+    },
 
-        if (state.rValue) {
-          return state.indented;
-        }
+    blankLine(state) {
+      state.comment = false;
+      state.indented = 0;
+      state.keyProperty = null;
+    },
 
-        return null;
-      },
-
-      eletricInput: /#.*$/,
-
-      token(stream, state) {
-        const ctx = state.context;
-
-        if (stream.eol()) {
-          state.keyProperty = null;
-        }
-
-        if (stream.sol()) {
-          if (ctx.align == null) ctx.align = false;
-
-          state.indented = stream.indentation();
-          state.startOfLine = true;
-        }
-
-        return processToken(stream, state, parserConfig);
+    indent(state) {
+      if (state.ruleLine) {
+        return state.indented + indentUnit;
       }
-    };
-  });
+
+      if (state.rValue) {
+        return state.indented;
+      }
+
+      return null;
+    },
+
+    eletricInput: /#.*$/,
+
+    token(stream, state) {
+      const ctx = state.context;
+
+      if (stream.eol()) {
+        state.keyProperty = null;
+      }
+
+      if (stream.sol()) {
+        if (ctx.align == null) ctx.align = false;
+
+        state.indented = stream.indentation();
+        state.startOfLine = true;
+      }
+
+      return processToken(stream, state, parserConfig);
+    }
+  };
+};
+
+const initRulesCMM = (CodeMirror) => {
+  CodeMirror.defineMode('rulesCMM', defineRulesCMM);
 };
 
 export default initRulesCMM;
