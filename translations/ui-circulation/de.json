@@ -466,5 +466,5 @@
     "settings.overdueFinePolicy.denyDelete.header": "Gebührenrichtlinie für überfällige Exemplare kann nicht gelöscht werden.",
     "settings.lostItemPolicy.denyDelete.header": "Gebührenrichtlinie für verlorene Exemplare kann nicht gelöscht werden.",
     "settings.checkout.wildcardLookup": "Wildcard-Suche nach Exemplaren anhand von Barcodes in den Apps Rückgabe, Ausleihe und Bestandsanfragen",
-    "settings.index.loanAnonymization": "Loan anonymization"
+    "settings.index.loanAnonymization": "Anonymisierung von Ausleihen"
 }
