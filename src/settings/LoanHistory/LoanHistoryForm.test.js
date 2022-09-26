@@ -64,6 +64,13 @@ describe('LoanHistoryForm', () => {
     },
     pristine: false,
     submitting: false,
+    stripes: {
+      user: {
+        perms: {
+          'ui-circulation.settings.edit-loan-history': true
+        }
+      }
+    }
   };
 
   const getById = (id) => within(screen.getByTestId(id));

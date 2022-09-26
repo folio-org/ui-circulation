@@ -34,6 +34,7 @@ class LoanHistoryForm extends Component {
   static propTypes = {
     handleSubmit: PropTypes.func.isRequired,
     pristine: PropTypes.bool,
+    stripes: PropTypes.object,
     submitting: PropTypes.bool,
     label: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
     form: PropTypes.object.isRequired,
@@ -43,6 +44,7 @@ class LoanHistoryForm extends Component {
   renderFooter = () => {
     const {
       pristine,
+      stripes,
       submitting,
     } = this.props;
 
@@ -54,7 +56,7 @@ class LoanHistoryForm extends Component {
             data-test-loan-history-save-button
             type="submit"
             buttonStyle="primary paneHeaderNewButton"
-            disabled={pristine || submitting}
+            disabled={pristine || submitting || !stripes?.user?.perms?.['ui-circulation.settings.edit-loan-history']}
             marginBottom0
           >
             <FormattedMessage id="stripes-core.button.save" />
