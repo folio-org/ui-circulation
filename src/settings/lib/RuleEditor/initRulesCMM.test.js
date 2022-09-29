@@ -90,9 +90,9 @@ describe('initRulesCMM', () => {
     const commonStream = {
       sol: () => true,
       eatSpace: () => true,
-      skipToEnd: () => {},
-      next: () => {},
-      eatWhile: () => {},
+      skipToEnd: jest.fn(),
+      next: jest.fn(),
+      eatWhile: jest.fn(),
     };
     const commonParserConfig = {
       typeMapping: {},
@@ -120,8 +120,8 @@ describe('initRulesCMM', () => {
       const stream = {
         ...commonStream,
         eatSpace: () => false,
-        next: () => {},
-        current: () => {},
+        next: jest.fn(),
+        current: jest.fn(),
       };
       const result = processToken(stream, state, commonParserConfig);
 
@@ -209,7 +209,7 @@ describe('initRulesCMM', () => {
         ...commonStream,
         sol: () => false,
         eatSpace: () => false,
-        next: () => undefined,
+        next: () => '',
         current: () => currentResult,
       };
       const result = processToken(stream, state, commonParserConfig);
@@ -235,7 +235,7 @@ describe('initRulesCMM', () => {
         ...commonStream,
         sol: () => false,
         eatSpace: () => false,
-        next: () => undefined,
+        next: () => '',
         current: () => 'test',
       };
       const result = processToken(stream, state, commonParserConfig);
@@ -258,7 +258,7 @@ describe('initRulesCMM', () => {
         ...commonStream,
         sol: () => false,
         eatSpace: () => false,
-        next: () => undefined,
+        next: () => '',
         current: () => test,
       };
       const parserConfig = {
@@ -288,7 +288,7 @@ describe('initRulesCMM', () => {
         ...commonStream,
         sol: () => false,
         eatSpace: () => false,
-        next: () => undefined,
+        next: () => '',
         current: () => RULES_TYPE.INSTITUTION,
       };
       const result = processToken(stream, state, commonParserConfig);
@@ -312,7 +312,7 @@ describe('initRulesCMM', () => {
         ...commonStream,
         eatSpace: () => false,
         sol: () => false,
-        next: () => undefined,
+        next: () => '',
         current: () => current,
       };
       const parserConfig = {
@@ -346,7 +346,7 @@ describe('initRulesCMM', () => {
           ...commonStream,
           eatSpace: () => false,
           sol: () => false,
-          next: () => undefined,
+          next: () => '',
           current: () => keyProperty,
         };
         const state = {
@@ -364,7 +364,7 @@ describe('initRulesCMM', () => {
           ...commonStream,
           eatSpace: () => false,
           sol: () => false,
-          next: () => undefined,
+          next: () => '',
           current: () => current,
         };
         const state = {
@@ -393,7 +393,7 @@ describe('initRulesCMM', () => {
           ...commonStream,
           eatSpace: () => false,
           sol: () => false,
-          next: () => undefined,
+          next: () => '',
           current: () => current,
         };
         const state = {
@@ -422,7 +422,7 @@ describe('initRulesCMM', () => {
           ...commonStream,
           eatSpace: () => false,
           sol: () => false,
-          next: () => undefined,
+          next: () => '',
           current: () => current,
         };
         const state = {
@@ -452,7 +452,7 @@ describe('initRulesCMM', () => {
           ...commonStream,
           eatSpace: () => false,
           sol: () => false,
-          next: () => undefined,
+          next: () => '',
           current: () => current,
         };
         const state = {
@@ -568,10 +568,10 @@ describe('initRulesCMM', () => {
 
     describe('token', () => {
       const commonStream = {
-        eatSpace: () => {},
-        next: () => {},
-        eatWhile: () => {},
-        current: () => {},
+        eatSpace: jest.fn(),
+        next: jest.fn(),
+        eatWhile: jest.fn(),
+        current: jest.fn(),
       };
 
       describe('when "stream.eol" returns true', () => {

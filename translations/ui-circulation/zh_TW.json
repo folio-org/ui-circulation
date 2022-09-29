@@ -184,7 +184,7 @@
     "settings.noticePolicy.notices.upon": "在/在",
     "settings.noticePolicy.requestNotices.recallRequest": "催還預約",
     "settings.noticePolicy.requestNotices.holdRequest": "預約要求",
-    "settings.noticePolicy.requestNotices.pagingRequest": "处理请求",
+    "settings.noticePolicy.requestNotices.pagingRequest": "處理預約",
     "settings.noticePolicy.requestNotices.available": "等待取件",
     "settings.noticePolicy.requestNotices.holdExpiration": "預約書架到期",
     "settings.noticePolicy.requestNotices.requestCancelation": "取消",
