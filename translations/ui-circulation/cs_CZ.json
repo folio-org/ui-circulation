@@ -186,7 +186,7 @@
     "settings.noticePolicy.requestNotices.holdRequest": "Vyžádat zadržení",
     "settings.noticePolicy.requestNotices.pagingRequest": "Vyžádat stránku",
     "settings.noticePolicy.requestNotices.available": "Čeká na vyzvednutí",
-    "settings.noticePolicy.requestNotices.holdExpiration": "Vypršení police rezervací",
+    "settings.noticePolicy.requestNotices.holdExpiration": "Vypršení regálu rezervací",
     "settings.noticePolicy.requestNotices.requestCancelation": "Zrušit žádanku",
     "settings.index.circulationRules": "Pravidla oběhu",
     "settings.circulationRules.paneTitle": "Editor pravidel oběhu",
