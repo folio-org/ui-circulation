@@ -75,6 +75,9 @@ describe('RequestPolicyForm', () => {
     submitting: false,
     onCancel,
     handleSubmit,
+    location: {
+      search: '',
+    },
   };
 
   afterEach(() => {
@@ -188,6 +191,9 @@ describe('RequestPolicyForm', () => {
           {...defaultProps}
           initialValues={initialValues}
           form={form}
+          location={{
+            search: 'edit',
+          }}
         />
       );
     });
@@ -254,7 +260,11 @@ describe('RequestPolicyForm', () => {
         });
 
         it('the corresponding error should appear', () => {
-          expect(catchFunction).toHaveBeenCalledWith(labelIds.nameExists);
+          expect(catchFunction.mock.calls[0][0]).toEqual(expect.objectContaining({
+            props: {
+              id: labelIds.nameExists,
+            },
+          }));
         });
       });
 
@@ -292,6 +302,26 @@ describe('RequestPolicyForm', () => {
           expect(catchFunction).toHaveBeenCalledWith(undefined);
         });
       });
+    });
+  });
+
+  describe('Edit layer without data', () => {
+    const form = {
+      getState: jest.fn(() => ({})),
+    };
+    const props = {
+      ...defaultProps,
+      location: {
+        search: 'edit',
+      },
+    };
+
+    beforeEach(() => {
+      render(<RequestPolicyForm {...props} form={form} />);
+    });
+
+    it('should not return view', () => {
+      expect(screen.queryByTestId(testIds.form)).not.toBeInTheDocument();
     });
   });
 });

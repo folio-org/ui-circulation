@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Field } from 'react-final-form';
-import { FormattedMessage, injectIntl } from 'react-intl';
 import {
-  find,
-  memoize,
-} from 'lodash';
+  FormattedMessage,
+  injectIntl,
+} from 'react-intl';
+import { memoize } from 'lodash';
 
 import {
   Accordion,
@@ -32,6 +32,11 @@ import {
 
 import { PatronNoticeTemplate as validatePatronNoticeTemplate } from '../Validation';
 
+import {
+  isEditLayer,
+  validateUniqueNameById,
+} from '../utils/utils';
+
 import css from './PatronNoticeForm.css';
 
 class PatronNoticeForm extends React.Component {
@@ -44,6 +49,9 @@ class PatronNoticeForm extends React.Component {
     submitting: PropTypes.bool.isRequired,
     handleSubmit: PropTypes.func.isRequired,
     onCancel: PropTypes.func.isRequired,
+    location: PropTypes.shape({
+      search: PropTypes.string.isRequired,
+    }).isRequired,
   };
 
   static defaultProps = {
@@ -72,29 +80,6 @@ class PatronNoticeForm extends React.Component {
         }
       });
   };
-
-  validateName = memoize(async (name) => {
-    const { initialValues } = this.props;
-
-    let error;
-
-    if (name) {
-      try {
-        const response = await this.getTemplatesByName(name);
-        const { templates = [] } = await response.json();
-        const matchedTemplate = find(templates, template => {
-          return template.name.toLowerCase() === name.toLowerCase();
-        });
-        if (matchedTemplate && matchedTemplate.id !== initialValues.id) {
-          error = <FormattedMessage id="ui-circulation.settings.patronNotices.errors.nameExists" />;
-        }
-      } catch (e) {
-        throw new Error(e);
-      }
-    }
-
-    return error;
-  });
 
   onToggleSection = ({ id }) => {
     this.setState((state) => {
@@ -146,10 +131,26 @@ class PatronNoticeForm extends React.Component {
     );
   }
 
+  validateName = memoize((name) => (
+    validateUniqueNameById({
+      currentName: name,
+      previousId: this.props.initialValues.id,
+      getByName: this.getTemplatesByName,
+      selector: 'templates',
+      errorKey: 'settings.patronNotices.errors.nameExists',
+    })
+  ));
+
   render() {
     const {
       handleSubmit,
       initialValues,
+      initialValues: {
+        id: initialId,
+      },
+      location: {
+        search,
+      },
       intl: {
         formatMessage,
         locale,
@@ -165,9 +166,14 @@ class PatronNoticeForm extends React.Component {
       value: id,
     }));
 
+    if (isEditLayer(search) && !initialId) {
+      return null;
+    }
+
     return (
       <form
         id="form-patron-notice"
+        data-testid="patronNoticeForm"
         className={css.patronNoticeForm}
         noValidate
         data-test-patron-notice-form

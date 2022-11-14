@@ -1,10 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
-import {
-  find,
-  memoize,
-} from 'lodash';
+import { memoize } from 'lodash';
 
 import stripesFinalForm from '@folio/stripes/final-form';
 import {
@@ -24,6 +21,11 @@ import {
   FooterPane,
 } from '../components';
 
+import {
+  isEditLayer,
+  validateUniqueNameById,
+} from '../utils/utils';
+
 import css from './RequestPolicyForm.css';
 
 class RequestPolicyForm extends React.Component {
@@ -37,6 +39,9 @@ class RequestPolicyForm extends React.Component {
     onCancel: PropTypes.func.isRequired,
     handleSubmit: PropTypes.func.isRequired,
     intl: PropTypes.object.isRequired,
+    location: PropTypes.shape({
+      search: PropTypes.string.isRequired,
+    }).isRequired,
   };
 
   static defaultProps = {
@@ -77,29 +82,15 @@ class RequestPolicyForm extends React.Component {
       });
   };
 
-  validate = memoize(async (name) => {
-    const {
-      initialValues,
-      intl: {
-        formatMessage,
-      },
-    } = this.props;
-
-    let error;
-    if (name) {
-      try {
-        const response = await this.getPoliciesByName(name);
-        const { requestPolicies = [] } = await response.json();
-        const matchedPolicy = find(requestPolicies, ['name', name]);
-        if (matchedPolicy && matchedPolicy.id !== initialValues.id) {
-          error = formatMessage({ id: 'ui-circulation.settings.requestPolicy.errors.nameExists' });
-        }
-      } catch (e) {
-        throw new Error(e);
-      }
-    }
-    return error;
-  });
+  validateName = memoize((name) => (
+    validateUniqueNameById({
+      currentName: name,
+      previousId: this.props.initialValues.id,
+      getByName: this.getPoliciesByName,
+      selector: 'requestPolicies',
+      errorKey: 'settings.requestPolicy.errors.nameExists',
+    })
+  ));
 
   render() {
     const {
@@ -108,6 +99,12 @@ class RequestPolicyForm extends React.Component {
       stripes,
       submitting,
       handleSubmit,
+      initialValues: {
+        id,
+      },
+      location: {
+        search,
+      },
       onCancel,
       intl: {
         formatMessage,
@@ -128,6 +125,10 @@ class RequestPolicyForm extends React.Component {
       submitting,
       onCancel,
     };
+
+    if (isEditLayer(search) && !id) {
+      return null;
+    }
 
     return (
       <form
@@ -163,7 +164,7 @@ class RequestPolicyForm extends React.Component {
                   isOpen={sections.generalRequestPolicyForm}
                   metadata={policy.metadata}
                   connect={stripes.connect}
-                  validateName={this.validate}
+                  validateName={this.validateName}
                 />
               </AccordionSet>
             </>
