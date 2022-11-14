@@ -1,13 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
 import { Field } from 'react-final-form';
 import { FieldArray } from 'react-final-form-arrays';
 import { FormattedMessage } from 'react-intl';
-import {
-  find,
-  memoize,
-} from 'lodash';
+import { memoize } from 'lodash';
 
 import { stripesShape } from '@folio/stripes/core';
 import {
@@ -34,6 +30,11 @@ import SchedulesList from './components/EditSections/components/SchedulesList';
 
 import { FixedDueDateSchedule as validateFixedDueDateSchedule } from '../Validation';
 
+import {
+  isEditLayer,
+  validateUniqueNameById,
+} from '../utils/utils';
+
 import css from './FixedDueDateSchedule.css';
 
 class FixedDueDateScheduleForm extends React.Component {
@@ -46,6 +47,9 @@ class FixedDueDateScheduleForm extends React.Component {
     pristine: PropTypes.bool.isRequired,
     submitting: PropTypes.bool.isRequired,
     okapi: PropTypes.object.isRequired,
+    location: PropTypes.shape({
+      search: PropTypes.string.isRequired,
+    }).isRequired,
   };
 
   static defaultProps = {
@@ -77,27 +81,6 @@ class FixedDueDateScheduleForm extends React.Component {
         }
       });
   };
-
-  validateName = memoize(async (name) => {
-    const { initialValues } = this.props;
-
-    let error;
-
-    if (name) {
-      try {
-        const response = await this.getScheduleByName(name);
-        const { fixedDueDateSchedules = [] } = await response.json();
-        const matchedSchedule = find(fixedDueDateSchedules, ['name', name]);
-        if (matchedSchedule && matchedSchedule.id !== initialValues.id) {
-          error = <FormattedMessage id="ui-circulation.settings.fDDS.validate.uniqueName" />;
-        }
-      } catch (e) {
-        throw new Error(e);
-      }
-    }
-
-    return error;
-  });
 
   handleSectionToggle = ({ id }) => {
     this.setState(({ sections }) => {
@@ -216,10 +199,26 @@ class FixedDueDateScheduleForm extends React.Component {
     return <FormattedMessage id="ui-circulation.settings.fDDSform.newFixDDSchedule" />;
   };
 
+  validateName = memoize((name) => (
+    validateUniqueNameById({
+      currentName: name,
+      previousId: this.props.initialValues.id,
+      getByName: this.getScheduleByName,
+      selector: 'fixedDueDateSchedules',
+      errorKey: 'settings.fDDS.validate.uniqueName',
+    })
+  ));
+
   render() {
     const {
       handleSubmit,
       initialValues,
+      initialValues: {
+        id,
+      },
+      location: {
+        search,
+      },
       stripes: { timezone },
     } = this.props;
     const {
@@ -234,9 +233,14 @@ class FixedDueDateScheduleForm extends React.Component {
       values={{ name: <strong>{selectedName}</strong>, deleted: <strong>deleted</strong> }}
     />;
 
+    if (isEditLayer(search) && !id) {
+      return null;
+    }
+
     return (
       <form
         id="form-fixedDueDateSchedule"
+        data-testid="fixedDueDateScheduleForm"
         className={css.fixedDueDateScheduleForm}
         data-test-fdds-form
         noValidate
