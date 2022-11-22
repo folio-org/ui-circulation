@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   render,
+  screen,
   fireEvent,
   waitFor,
 } from '@testing-library/react';
@@ -50,7 +51,9 @@ AccordionSet.mockImplementation(({
 ));
 
 const name = 'test-name';
-
+const testIds = {
+  form: 'fixedDueDateScheduleForm',
+};
 const messageIds = {
   about: 'ui-circulation.settings.fDDSform.about',
   editLabel: 'ui-circulation.settings.fDDS.editLabel',
@@ -96,6 +99,9 @@ const defaultProps = {
   handleSubmit: jest.fn(),
   stripes,
   okapi,
+  location: {
+    search: '',
+  },
 };
 
 describe('FixedDueDateScheduleForm', () => {
@@ -313,6 +319,9 @@ describe('FixedDueDateScheduleForm', () => {
       ...defaultProps,
       pristine: false,
       initialValues,
+      location: {
+        search: 'edit',
+      },
     };
 
     beforeEach(() => {
@@ -519,6 +528,23 @@ describe('FixedDueDateScheduleForm', () => {
       it('"fetch" should not be called if "name" is not provided', () => {
         expect(fetch).not.toBeCalledWith();
       });
+    });
+  });
+
+  describe('Edit layer without data', () => {
+    const props = {
+      ...defaultProps,
+      location: {
+        search: 'edit',
+      },
+    };
+
+    beforeEach(() => {
+      render(<FixedDueDateScheduleForm {...props} />);
+    });
+
+    it('should not return view', () => {
+      expect(screen.queryByTestId(testIds.form)).not.toBeInTheDocument();
     });
   });
 });

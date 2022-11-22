@@ -54,6 +54,7 @@ jest.mock('../../constants', () => ({
 
 describe('PatronNoticeForm', () => {
   const testIds = {
+    form: 'patronNoticeForm',
     patronNoticePaneset: 'patronNoticePaneset',
     patronNoticeTemplatePane: 'patronNoticeTemplatePane',
     patronNoticeCancelButton: 'patronNoticeCancelButton',
@@ -106,6 +107,9 @@ describe('PatronNoticeForm', () => {
     handleSubmit: testHandleSubmit,
     onCancel: testOnCancel,
     okapi: testOkapi,
+    location: {
+      search: '',
+    },
   };
 
   afterEach(() => {
@@ -271,6 +275,9 @@ describe('PatronNoticeForm', () => {
         <PatronNoticeForm
           {...defaultTestProps}
           initialValues={initialValues}
+          location={{
+            search: 'edit',
+          }}
         />
       );
     });
@@ -289,6 +296,23 @@ describe('PatronNoticeForm', () => {
 
     it('should not render patron notices predefined warning label', () => {
       expect(screen.queryByText(labelIds.patronNoticesPredefinedWarning)).toBeVisible();
+    });
+  });
+
+  describe('Edit layer without data', () => {
+    const props = {
+      ...defaultTestProps,
+      location: {
+        search: 'edit',
+      },
+    };
+
+    beforeEach(() => {
+      render(<PatronNoticeForm {...props} />);
+    });
+
+    it('should not return view', () => {
+      expect(screen.queryByTestId(testIds.form)).not.toBeInTheDocument();
     });
   });
 });

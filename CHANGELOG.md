@@ -1,5 +1,10 @@
 # Change history for ui-circulation
 
+## IN PROGRESS
+* Fix problem with saving Notice template. UICIRC-870.
+* Fix problem with saving Due date schedules. UICIRC-872.
+* Fix problem with saving Request policy. UICIRC-873.
+
 ## [7.2.0](https://github.com/folio-org/ui-circulation/tree/v7.2.0) (2022-10-20)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v7.1.0...v7.2.0)
 
