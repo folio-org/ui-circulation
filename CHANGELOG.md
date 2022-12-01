@@ -1,5 +1,8 @@
 # Change history for ui-circulation
 
+## IN PROGRESS
+* Add sub permission to "Settings (Circ): Can create, edit and remove staff slips". Refs UICIRC-876.
+
 ## [7.2.1](https://github.com/folio-org/ui-circulation/tree/v7.2.1) (2022-11-29)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v7.2.0...v7.2.1)
 * Fix problem with saving Notice template. UICIRC-870.

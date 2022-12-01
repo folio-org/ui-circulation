@@ -197,7 +197,8 @@
           "circulation-storage.staff-slips.item.post",
           "circulation-storage.staff-slips.item.put",
           "circulation-storage.staff-slips.item.get",
-          "settings.circulation.enabled"
+          "settings.circulation.enabled",
+          "settings.organizations.enabled"
         ],
         "visible": true
       },
