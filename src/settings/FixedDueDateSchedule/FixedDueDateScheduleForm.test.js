@@ -302,9 +302,7 @@ describe('FixedDueDateScheduleForm', () => {
   describe('Render of edit form', () => {
     let container;
     const buttonCallOrder = {
-      delete: 2,
-      save: 3,
-      updatedDelete: 5,
+      save: 2,
     };
 
     const initialValues = {
@@ -334,19 +332,6 @@ describe('FixedDueDateScheduleForm', () => {
       expect(container.getByText(messageIds.editLabel)).toBeInTheDocument();
     });
 
-    it('Footer should contain "Delete" button with appropriate props', () => {
-      const expectedProps = {
-        id: 'clickable-delete-item',
-        disabled: defaultState.confirmDelete,
-      };
-
-      expect(Button).toHaveBeenNthCalledWith(buttonCallOrder.delete, expect.objectContaining(expectedProps), {});
-    });
-
-    it('Name of "Delete" button should be rendered', () => {
-      expect(container.getByText(messageIds.delete)).toBeInTheDocument();
-    });
-
     it('Footer should contain "Save and close" button with appropriate props', () => {
       const expectedProps = {
         id: 'clickable-save-fixedDueDateSchedule',
@@ -360,67 +345,12 @@ describe('FixedDueDateScheduleForm', () => {
       expect(container.getByText(messageIds.saveAndClose)).toBeInTheDocument();
     });
 
-    it('"Button" component should be called with updated state after clicking on delete button', () => {
-      const deleteButton = container.getByText(messageIds.delete);
-      const expectedProps = {
-        id: 'clickable-delete-item',
-        disabled: !defaultState.confirmDelete,
-      };
-
-      fireEvent.click(deleteButton);
-
-      expect(Button).toHaveBeenNthCalledWith(buttonCallOrder.updatedDelete, expect.objectContaining(expectedProps), {});
-    });
-
     it('"ViewMetaData" should be called with correct props', () => {
       const expectedProps = {
         metadata: initialValues.metadata,
       };
 
       expect(ViewMetaData).toHaveBeenCalledWith(expect.objectContaining(expectedProps), {});
-    });
-
-    describe('ConfirmationModal', () => {
-      const modalCallOrder = {
-        render: 1,
-        update: 3,
-      };
-
-      it('"ConfirmationModal" should be called with correct props', () => {
-        const expectedProps = {
-          id: 'deletefixedduedateschedule-confirmation',
-          open: defaultState.confirmDelete,
-          onCancel: expect.any(Function),
-          onConfirm: expect.any(Function),
-        };
-
-        expect(ConfirmationModal).toHaveBeenNthCalledWith(modalCallOrder.render, expect.objectContaining(expectedProps), {});
-      });
-
-      it('"ConfirmationModal" should have correct header', () => {
-        expect(container.getByText(messageIds.deleteHeader)).toBeInTheDocument();
-      });
-
-      it('"ConfirmationModal" should have correct message', () => {
-        expect(container.getByText(messageIds.deleteMessage)).toBeInTheDocument();
-      });
-
-      it('"ConfirmationModal" should have correct label of confirm button', () => {
-        expect(container.getByText(messageIds.deleteLabel)).toBeInTheDocument();
-      });
-
-      it('"onRemove" prop should be triggered after clicking on confirm button', () => {
-        fireEvent.click(container.getByText(messageIds.deleteLabel));
-
-        expect(defaultProps.onRemove).toBeCalledWith(initialValues);
-      });
-
-      it('"ConfirmationModal" should be called with correct props after clicking on "Cancel" button', () => {
-        fireEvent.click(container.getByText(messageIds.delete));
-        fireEvent.click(container.getByText('Cancel'));
-
-        expect(ConfirmationModal).toHaveBeenNthCalledWith(modalCallOrder.update, expect.objectContaining({ open: false }), {});
-      });
     });
   });
 
