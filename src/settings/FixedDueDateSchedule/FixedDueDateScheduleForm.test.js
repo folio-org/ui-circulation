@@ -12,7 +12,6 @@ import {
   Accordion,
   AccordionSet,
   Button,
-  ConfirmationModal,
   ExpandAllButton,
   IconButton,
   TextArea,
