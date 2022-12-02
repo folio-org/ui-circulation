@@ -11,7 +11,6 @@ import {
   AccordionSet,
   Button,
   Col,
-  ConfirmationModal,
   ExpandAllButton,
   Icon,
   IconButton,
@@ -43,7 +42,6 @@ class FixedDueDateScheduleForm extends React.Component {
     initialValues: PropTypes.object,
     handleSubmit: PropTypes.func.isRequired,
     onCancel: PropTypes.func.isRequired,
-    onRemove: PropTypes.func.isRequired,
     pristine: PropTypes.bool.isRequired,
     submitting: PropTypes.bool.isRequired,
     okapi: PropTypes.object.isRequired,
@@ -61,7 +59,6 @@ class FixedDueDateScheduleForm extends React.Component {
     this.cViewMetaData = props.stripes.connect(ViewMetaData);
 
     this.state = {
-      confirmDelete: false,
       sections: {
         generalFixedDueDate: true,
         schedule: true,
@@ -93,23 +90,6 @@ class FixedDueDateScheduleForm extends React.Component {
     this.setState({ sections });
   };
 
-  confirmDeleteSet = (confirmation) => {
-    const {
-      initialValues,
-      onRemove,
-    } = this.props;
-
-    if (confirmation) {
-      onRemove(initialValues);
-    } else {
-      this.setState({ confirmDelete: false });
-    }
-  }
-
-  beginDelete = () => {
-    this.setState({ confirmDelete: true });
-  };
-
   addFirstMenu = () => {
     const { onCancel } = this.props;
 
@@ -133,14 +113,10 @@ class FixedDueDateScheduleForm extends React.Component {
 
   renderFooter() {
     const {
-      initialValues,
       pristine,
       submitting,
       onCancel,
     } = this.props;
-
-    const { confirmDelete } = this.state;
-    const edit = Boolean(initialValues.id);
 
     return (
       <PaneFooter>
@@ -153,17 +129,6 @@ class FixedDueDateScheduleForm extends React.Component {
           >
             <FormattedMessage id="ui-circulation.settings.fDDSform.cancel" />
           </Button>
-          {edit && (
-            <Button
-              id="clickable-delete-item"
-              buttonStyle="danger mega"
-              disabled={confirmDelete}
-              marginBottom0
-              onClick={this.beginDelete}
-            >
-              <FormattedMessage id="stripes-core.button.delete" />
-            </Button>
-          )}
           <Button
             id="clickable-save-fixedDueDateSchedule"
             type="submit"
@@ -222,16 +187,8 @@ class FixedDueDateScheduleForm extends React.Component {
       stripes: { timezone },
     } = this.props;
     const {
-      confirmDelete,
       sections,
     } = this.state;
-
-    const selectedSet = initialValues || {};
-    const selectedName = selectedSet.name || <FormattedMessage id="ui-circulation.settings.fDDSform.untitled" />;
-    const confirmationMessage = <FormattedMessage
-      id="ui-circulation.settings.fDDSform.deleteMessage"
-      values={{ name: <strong>{selectedName}</strong>, deleted: <strong>deleted</strong> }}
-    />;
 
     if (isEditLayer(search) && !id) {
       return null;
@@ -325,16 +282,6 @@ class FixedDueDateScheduleForm extends React.Component {
                   </section>
                 </Accordion>
               </AccordionSet>
-              <ConfirmationModal
-                id="deletefixedduedateschedule-confirmation"
-                buttonStyle="danger"
-                confirmLabel={<FormattedMessage id="ui-circulation.settings.fDDSform.delete" />}
-                heading={<FormattedMessage id="ui-circulation.settings.fDDSform.deleteHeader" />}
-                open={confirmDelete}
-                message={confirmationMessage}
-                onCancel={() => { this.confirmDeleteSet(false); }}
-                onConfirm={() => { this.confirmDeleteSet(true); }}
-              />
             </div>
           </Pane>
         </Paneset>

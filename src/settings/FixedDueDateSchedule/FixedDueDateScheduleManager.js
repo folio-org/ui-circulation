@@ -114,6 +114,7 @@ class FixedDueDateScheduleManager extends React.Component {
         resourceKey="fixedDueDateSchedules"
         parseInitialValues={parseInitialValues}
         onBeforeSave={onBeforeSave}
+        enableDetailsActionMenu
       />
     );
   }
