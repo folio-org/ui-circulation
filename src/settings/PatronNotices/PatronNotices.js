@@ -19,7 +19,25 @@ import {
   MAX_UNPAGED_RESOURCE_COUNT,
 } from '../../constants';
 
-class PatronNotices extends React.Component {
+export const isTemplateExist = (templateId, noticePolicies) => {
+  const patronNoticeTemplateIds = reduce(noticePolicies, (templateIds, policy) => {
+    const notices = [
+      ...policy.loanNotices,
+      ...policy.requestNotices,
+      ...policy.feeFineNotices,
+    ];
+
+    const noticeIds = reduce(notices, (ids, notice) => {
+      return [...ids, notice.templateId];
+    }, []);
+
+    return [...templateIds, ...noticeIds];
+  }, []);
+
+  return patronNoticeTemplateIds.includes(templateId);
+};
+
+export class PatronNotices extends React.Component {
   static propTypes = {
     label: PropTypes.string.isRequired,
     resources: PropTypes.shape({
@@ -67,21 +85,7 @@ class PatronNotices extends React.Component {
 
   isTemplateInUse = (templateId) => {
     const noticePolicies = get(this.props, 'resources.patronNoticePolicies.records', []);
-    const patronNoticeTemplateIds = reduce(noticePolicies, (templateIds, policy) => {
-      const notices = [
-        ...policy.loanNotices,
-        ...policy.requestNotices,
-        ...policy.feeFineNotices,
-      ];
-
-      const noticeIds = reduce(notices, (ids, notice) => {
-        return [...ids, notice.templateId];
-      }, []);
-
-      return [...templateIds, ...noticeIds];
-    }, []);
-
-    return patronNoticeTemplateIds.includes(templateId);
+    return isTemplateExist(templateId, noticePolicies);
   };
 
   render() {
