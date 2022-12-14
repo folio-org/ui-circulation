@@ -477,6 +477,7 @@
   "permission.settings.notice-policies": "Settings (Circ): Can create, edit and remove notice policies",
   "permission.settings.circulation-rules": "Settings (Circ): Can create, edit and remove circulation rules",
   "permission.settings.fixed-due-date-schedules": "Settings (Circ): Can create, edit and remove fixed due date schedules",
+  "permission.settings.edit-staff-slips": "Settings (Circ): Can edit staff slips",
   "permission.settings.staff-slips": "Settings (Circ): Can create, edit and remove staff slips",
   "permission.settings.request-policies": "Settings (Circ): Can create, edit and remove request policies",
   "permission.settings.other-settings": "Settings (Circ): Can create, edit and remove other settings",
