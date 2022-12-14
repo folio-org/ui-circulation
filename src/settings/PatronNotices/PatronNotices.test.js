@@ -7,11 +7,16 @@ import '../../../test/jest/__mock__';
 
 import { EntryManager } from '@folio/stripes/smart-components';
 
-import PatronNotices from './PatronNotices';
+// eslint-disable-next-line import/no-named-as-default
+import PatronNotices, {
+  isTemplateExist,
+  PatronNotices as PatronNoticesClass,
+} from './PatronNotices';
 import PatronNoticeDetail from './PatronNoticeDetail';
 import PatronNoticeForm from './PatronNoticeForm';
 
 import {
+  MAX_UNPAGED_RESOURCE_COUNT,
   patronNoticeCategories,
 } from '../../constants';
 
@@ -139,5 +144,72 @@ describe('PatronNotices', () => {
     expect(EntryManager).toBeCalledWith(expect.objectContaining({
       entryList: [],
     }), {});
+  });
+
+  describe('manifest', () => {
+    describe('patronNoticePolicies', () => {
+      it('should have limit from config', () => {
+        const maxUnpagedResourceCount = 10;
+        const limitProps = {
+          stripes: {
+            config: {
+              maxUnpagedResourceCount,
+            }
+          }
+        };
+        const result = PatronNoticesClass.manifest.patronNoticePolicies.params.limit('', '', '', '', limitProps);
+
+        expect(result).toBe(maxUnpagedResourceCount);
+      });
+
+      it('should have default limit', () => {
+        const limitProps = {
+          stripes: {
+            config: {}
+          }
+        };
+        const result = PatronNoticesClass.manifest.patronNoticePolicies.params.limit('', '', '', '', limitProps);
+
+        expect(result).toBe(MAX_UNPAGED_RESOURCE_COUNT);
+      });
+    });
+  });
+
+  describe('isTemplateExist', () => {
+    const templateId = 'templateId';
+    const commonNoticePolicies = {
+      loanNotices: [{
+        templateId: '1',
+      }],
+      requestNotices: [{
+        templateId: '2',
+      }],
+    };
+
+    describe('when template already exists', () => {
+      it('should return true', () => {
+        const noticePolicies = [{
+          ...commonNoticePolicies,
+          feeFineNotices: [{
+            templateId,
+          }],
+        }];
+
+        expect(isTemplateExist(templateId, noticePolicies)).toBe(true);
+      });
+    });
+
+    describe('when template does not exist', () => {
+      it('should return false', () => {
+        const noticePolicies = [{
+          ...commonNoticePolicies,
+          feeFineNotices: [{
+            templateId: '3',
+          }],
+        }];
+
+        expect(isTemplateExist(templateId, noticePolicies)).toBe(false);
+      });
+    });
   });
 });
