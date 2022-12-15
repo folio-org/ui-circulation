@@ -58,7 +58,7 @@ class StaffSlipForm extends React.Component {
     } = intl;
 
     const tokens = getTokens(locale);
-    const disabled = !stripes.hasPerm('settings.organizations.enabled');
+    const disabled = !stripes.hasPerm('ui-circulation.settings.edit-staff-slips');
     const panelTitle = initialValues.id
       ? initialValues.name
       : formatMessage({ id: 'ui-circulation.settings.staffSlips.new' });
