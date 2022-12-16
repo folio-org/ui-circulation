@@ -196,7 +196,7 @@
           "circulation-storage.staff-slips.item.get",
           "settings.circulation.enabled"
         ],
-        "visible": true
+        "visible": false
       },
       {
         "permissionName": "ui-circulation.settings.staff-slips",
