@@ -4,6 +4,7 @@
 * Make consistent view of delete functionality of "Fixed due date schedules". Refs UICIRC-874.
 * Increase code coverage of "PatronNotices.js" file. Refs UICIRC-866.
 * Add "Settings (Circ): Can edit staff slips" permission. Refs UICIRC-876.
+* UI tests replacement with RTL/Jest for `notice-policy` folder in `Validation`. Refs UICIRC-811.
 
 ## [7.2.1](https://github.com/folio-org/ui-circulation/tree/v7.2.1) (2022-11-29)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v7.2.0...v7.2.1)
