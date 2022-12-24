@@ -463,5 +463,6 @@
     "settings.overdueFinePolicy.denyDelete.header": "无法删除超期罚款政策",
     "settings.lostItemPolicy.denyDelete.header": "无法删除遗失单件费用政策",
     "settings.checkout.wildcardLookup": "在流通应用程序中按条码执行通配符查找单件（归还、借出）",
-    "settings.index.loanAnonymization": "借阅匿名化"
+    "settings.index.loanAnonymization": "借阅匿名化",
+    "permission.settings.edit-staff-slips": "Settings (Circ): Can edit staff slips"
 }
