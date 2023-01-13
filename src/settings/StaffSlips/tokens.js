@@ -208,6 +208,11 @@ const getTokens = (locale) => ({
       allowedFor: [...Object.values(staffSlipMap)],
     },
     {
+      token: 'requester.preferredFirstName',
+      previewValue: 'Paul',
+      allowedFor: [...Object.values(staffSlipMap)],
+    },
+    {
       token: 'requester.barcode',
       previewValue: '456123789',
       allowedFor: [...Object.values(staffSlipMap)],
