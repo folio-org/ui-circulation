@@ -434,14 +434,11 @@ describe('lostItemFee', () => {
       });
     });
 
-    describe('when only first call of "hasPassedValue" returns true and "hasNonZeroValue" returns false', () => {
+    describe('when "hasPassedValue" returns true and "hasNonZeroValue" returns false', () => {
       it('should return "shouldValidate" property equals true', () => {
         const lostItemPolicy = {
           ...basicLostItemPolicy,
-          hasPassedValue: jest.fn()
-            .mockReturnValue(true)
-            .mockReturnValueOnce(true)
-            .mockReturnValueOnce(false),
+          hasPassedValue: () => true,
           hasNonZeroValue: () => false,
         };
         const {
@@ -454,14 +451,11 @@ describe('lostItemFee', () => {
       });
     });
 
-    describe('when only second call of "hasPassedValue" returns true and "hasNonZeroValue" returns false', () => {
+    describe('when "hasPassedValue" returns false and "hasNonZeroValue" returns true', () => {
       it('should return "shouldValidate" property equals true', () => {
         const lostItemPolicy = {
           ...basicLostItemPolicy,
-          hasPassedValue: jest.fn()
-            .mockReturnValue(true)
-            .mockReturnValueOnce(false),
-          hasNonZeroValue: () => false,
+          hasPassedValue: () => false,
         };
         const {
           'lostItemProcessingFee': {
