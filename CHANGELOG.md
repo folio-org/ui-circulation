@@ -7,6 +7,7 @@
 * UI tests replacement with RTL/Jest for `notice-policy` folder in `Validation`. Refs UICIRC-811.
 * Add "requester.preferredFirstName" as staff slip token in Settings. Refs UICIRC-819.
 * Remove bigtest tests and associated dependencies. Refs UICIRC-591.
+* Bump major versions of several @folio/stripes-* packages. Refs UICIRC-891.
 
 ## [7.2.1](https://github.com/folio-org/ui-circulation/tree/v7.2.1) (2022-11-29)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v7.2.0...v7.2.1)
