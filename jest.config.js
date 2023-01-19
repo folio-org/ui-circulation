@@ -19,6 +19,6 @@ module.exports = {
     '^.+\\.(svg)$': 'identity-obj-proxy',
   },
   testMatch: ['**/(lib|src)/**/?(*.)test.{js,jsx}'],
-  testPathIgnorePatterns: ['/node_modules/', '/test/bigtest/', '/test/ui-testing/'],
+  testPathIgnorePatterns: ['/node_modules/'],
   setupFilesAfterEnv: [path.join(__dirname, './test/jest/jest.setup.js')],
 };
