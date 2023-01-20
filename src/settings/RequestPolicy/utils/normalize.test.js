@@ -21,7 +21,7 @@ describe('normalize', () => {
   describe('when "type" is not a correct value', () => {
     const policy = {
       test: 'test',
-      requestTypes: [undefined],
+      requestTypes: [''],
     };
 
     it('should return object with "requestTypes" field as empty array', () => {
