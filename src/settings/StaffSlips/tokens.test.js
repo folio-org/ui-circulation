@@ -32,6 +32,11 @@ describe('getTokens', () => {
       name: 'request.holdShelfExpirationDate',
       expectedResult: expectedDateResult,
     },
+    {
+      category: 'requester',
+      name: 'requester.patronGroup',
+      expectedResult: 'Undergraduate',
+    },
   ];
   const result = getTokens(testLocale);
   const tokenTest = ({
