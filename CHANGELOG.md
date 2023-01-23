@@ -8,6 +8,9 @@
 * Add "requester.preferredFirstName" as staff slip token in Settings. Refs UICIRC-819.
 * Remove bigtest tests and associated dependencies. Refs UICIRC-591.
 * Bump major versions of several @folio/stripes-* packages. Refs UICIRC-891.
+* Add "user.preferredFirstName" as notice token in Settings. Refs UICIRC-462.
+* Add "Patron Group" as staff slip token in Settings. Refs UICIRC-791.
+* UI tests replacement with RTL/Jest for `normalize.js`. Refs UICIRC-864.
 * UI tests replacement with RTL/Jest for `lost-item-fee-policy` folder in `Validation`. Refs UICIRC-810.
 
 ## [7.2.1](https://github.com/folio-org/ui-circulation/tree/v7.2.1) (2022-11-29)
