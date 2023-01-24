@@ -102,7 +102,7 @@ const getTokens = (locale) => ({
       allowedFor: [...Object.values(patronNoticeCategoryIds)],
     },
     {
-      token: 'user.prefferedFirstName',
+      token: 'user.preferredFirstName',
       previewValue: 'Paul',
       allowedFor: [...Object.values(patronNoticeCategoryIds)],
     },

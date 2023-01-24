@@ -222,6 +222,11 @@ const getTokens = (locale) => ({
       previewValue: '<Barcode>456123789</Barcode>',
       allowedFor: [...Object.values(staffSlipMap)],
     },
+    {
+      token: 'requester.patronGroup',
+      previewValue: 'Undergraduate',
+      allowedFor: [...Object.values(staffSlipMap)],
+    },
   ],
   staffSlip: [
     {
