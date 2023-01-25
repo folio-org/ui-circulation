@@ -12,6 +12,7 @@
 * Add "Patron Group" as staff slip token in Settings. Refs UICIRC-791.
 * UI tests replacement with RTL/Jest for `normalize.js`. Refs UICIRC-864.
 * UI tests replacement with RTL/Jest for `lost-item-fee-policy` folder in `Validation`. Refs UICIRC-810.
+* Removed unused file. Refs UICIRC-865.
 * UI tests replacement with RTL/Jest for `loan-policy` folder in `Validation`. Refs UICIRC-809.
 
 ## [7.2.1](https://github.com/folio-org/ui-circulation/tree/v7.2.1) (2022-11-29)
