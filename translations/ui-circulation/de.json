@@ -463,5 +463,6 @@
     "settings.overdueFinePolicy.denyDelete.header": "Gebührenrichtlinie für überfällige Exemplare kann nicht gelöscht werden.",
     "settings.lostItemPolicy.denyDelete.header": "Gebührenrichtlinie für verlorene Exemplare kann nicht gelöscht werden.",
     "settings.checkout.wildcardLookup": "Wildcard-Suche nach Exemplaren anhand von Barcodes in den Apps Rückgabe, Ausleihe und Bestandsanfragen",
-    "settings.index.loanAnonymization": "Anonymisierung von Ausleihen"
+    "settings.index.loanAnonymization": "Anonymisierung von Ausleihen",
+    "permission.settings.edit-staff-slips": "Einstellungen (Ausleihe): Kann Dienstzettel bearbeiten"
 }
