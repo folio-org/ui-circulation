@@ -1,6 +1,6 @@
 import buildPeriodValidationConfig from './utils';
 
-const recalls = (loanPolicy) => {
+export const recalls = (loanPolicy) => {
   return {
     ...buildPeriodValidationConfig(loanPolicy, 'requestManagement.recalls.recallReturnInterval'),
     ...buildPeriodValidationConfig(loanPolicy, 'requestManagement.recalls.minimumGuaranteedLoanPeriod'),
@@ -8,7 +8,7 @@ const recalls = (loanPolicy) => {
   };
 };
 
-const holds = (loanPolicy) => {
+export const holds = (loanPolicy) => {
   return {
     ...buildPeriodValidationConfig(loanPolicy, 'requestManagement.holds.alternateCheckoutLoanPeriod'),
     ...buildPeriodValidationConfig(loanPolicy, 'requestManagement.holds.alternateRenewalLoanPeriod'),
