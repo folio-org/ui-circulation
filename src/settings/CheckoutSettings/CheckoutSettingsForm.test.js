@@ -10,10 +10,6 @@ import CheckoutSettingsForm, {
   getCustomFieldPatronIdentifiers,
 } from './CheckoutSettingsForm';
 
-jest.mock('@folio/stripes/core', () => ({
-  useCustomFields: jest.fn(() => []),
-}));
-
 describe('CheckoutSettingsForm', () => {
   const testIds = {
     barcode: 'barcode',
@@ -36,7 +32,6 @@ describe('CheckoutSettingsForm', () => {
     username: 'ui-circulation.settings.checkout.identifiers.username',
     userCustomFields: 'ui-circulation.settings.checkout.userCustomFields',
     timeout: 'ui-circulation.settings.checkout.checkin.timeout',
-    timeoutDuration: 'ui-circulation.settings.checkout.timeout.duration',
     audioAlerts: 'ui-circulation.settings.checkout.audioAlerts',
     audioTheme: 'ui-circulation.settings.checkout.audioTheme',
     wildcardLookup: 'ui-circulation.settings.checkout.wildcardLookup',
