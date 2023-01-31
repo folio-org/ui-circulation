@@ -1,6 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage, useIntl } from 'react-intl';
+import {
+  FormattedMessage,
+  useIntl,
+} from 'react-intl';
 import { Field } from 'react-final-form';
 
 import stripesFinalForm from '@folio/stripes/final-form';
@@ -19,12 +22,17 @@ import {
   Select,
   TextField,
 } from '@folio/stripes/components';
-
 import { useCustomFields } from '@folio/stripes/core';
 
 import { CheckoutSettings as validateCheckoutSettings } from '../Validation';
 
 const DEFAULT_PATRON_IDENTIFIERS = ['barcode', 'externalSystemId', 'id', 'username'];
+
+export const getCustomFieldPatronIdentifiers = (customFields) => (
+  customFields
+    .filter(cf => cf.entityType === 'user' && (cf.type === 'TEXTBOX_SHORT' || cf.type === 'TEXTBOX_LONG'))
+    .map(cf => ({ label: cf.name, value: `customFields.${cf.refId}` }))
+);
 
 const CheckoutSettingsForm = ({
   form: { getState },
@@ -38,9 +46,7 @@ const CheckoutSettingsForm = ({
   const { values: checkoutValues } = getState();
   const [customFields = []] = useCustomFields('users');
 
-  const customFieldPatronIdentifiers = customFields
-    .filter(cf => cf.entityType === 'user' && (cf.type === 'TEXTBOX_SHORT' || cf.type === 'TEXTBOX_LONG'))
-    .map(cf => ({ label: cf.name, value: `customFields.${cf.refId}` }));
+  const customFieldPatronIdentifiers = getCustomFieldPatronIdentifiers(customFields);
 
   const audioThemeOptions = [
     // One entry (here and in the translations files) for each theme in ../../../sound
@@ -59,6 +65,7 @@ const CheckoutSettingsForm = ({
         <PaneFooter
           renderEnd={(
             <Button
+              data-testid="otherSettingsFormSubmit"
               buttonStyle="primary paneHeaderNewButton"
               disabled={pristine || submitting}
               id="clickable-savescanid"
@@ -82,6 +89,7 @@ const CheckoutSettingsForm = ({
               {meta.error && <MessageBanner type="error">{meta.error}</MessageBanner>}
               {DEFAULT_PATRON_IDENTIFIERS.map(identifier => (
                 <Field
+                  data-testid={identifier}
                   component={Checkbox}
                   id={`${identifier}-checkbox`}
                   key={`${identifier}-checkbox`}
@@ -91,6 +99,7 @@ const CheckoutSettingsForm = ({
                 />
               ))}
               <Field
+                data-testid="useCustomFields"
                 component={Checkbox}
                 id="useCustomFieldsAsIdentifiers"
                 label={<FormattedMessage id="ui-circulation.settings.checkout.userCustomFields" />}
@@ -100,6 +109,7 @@ const CheckoutSettingsForm = ({
               {checkoutValues.useCustomFieldsAsIdentifiers &&
                 <Layout className="margin-start-gutter">
                   <Field
+                    data-testid="useCustomFieldsAsIdentifiers"
                     component={MultiSelection}
                     dataOptions={customFieldPatronIdentifiers}
                     emptyMessage={formatMessage({ id: 'ui-circulation.settings.checkout.userCustomFields.noValidFieldsAreDefined' })}
@@ -116,6 +126,7 @@ const CheckoutSettingsForm = ({
         </Field>
         <hr />
         <Field
+          data-testid="timeout"
           label={<FormattedMessage id="ui-circulation.settings.checkout.checkin.timeout" />}
           id="checkoutTimeout"
           name="checkoutTimeout"
@@ -127,6 +138,7 @@ const CheckoutSettingsForm = ({
             <Row>
               <Col xs={3}>
                 <Field
+                  data-testid="timeoutDuration"
                   aria-label={formatMessage({ id: 'ui-circulation.settings.checkout.timeout.duration' })}
                   id="checkoutTimeoutDuration"
                   type="number"
@@ -143,12 +155,14 @@ const CheckoutSettingsForm = ({
         }
         <hr />
         <Field
+          data-testid="audioAlerts"
           component={Checkbox}
           label={<FormattedMessage id="ui-circulation.settings.checkout.audioAlerts" />}
           name="audioAlertsEnabled"
           type="checkbox"
         />
         <Field
+          data-testid="audioTheme"
           component={Select}
           label={<FormattedMessage id="ui-circulation.settings.checkout.audioTheme" />}
           name="audioTheme"
@@ -156,6 +170,7 @@ const CheckoutSettingsForm = ({
         />
         <hr />
         <Field
+          data-testid="wildcardLookup"
           component={Checkbox}
           label={<FormattedMessage id="ui-circulation.settings.checkout.wildcardLookup" />}
           name="wildcardLookupEnabled"

@@ -12,7 +12,10 @@ jest.mock('react-final-form', () => ({
       {...rest}
     >
       {label}
-      {component()}
+      {typeof component === 'function' && component()}
+      {typeof rest?.children === 'function' && rest.children({
+        meta: {},
+      })}
     </div>
   )),
 }));
