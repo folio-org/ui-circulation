@@ -14,6 +14,7 @@
 * UI tests replacement with RTL/Jest for `lost-item-fee-policy` folder in `Validation`. Refs UICIRC-810.
 * Removed unused file. Refs UICIRC-865.
 * UI tests replacement with RTL/Jest for `loan-policy` folder in `Validation`. Refs UICIRC-809.
+* An error for spacebar before symbols in "Subject" field when create Patron notice template. Fixes UICIRC-898.
 
 ## [7.2.1](https://github.com/folio-org/ui-circulation/tree/v7.2.1) (2022-11-29)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v7.2.0...v7.2.1)
