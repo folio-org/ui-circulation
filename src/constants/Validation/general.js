@@ -10,6 +10,7 @@ export const RULES = {
   IS_NOT_EMPTY_SELECT: 'isNotEmptySelect',
   IS_NOT_EMPTY_WITHOUT_SPACE: 'isNotEmptyWithoutSpace',
   IS_NOT_EMPTY_EDITOR: 'isNotEmptyEditor',
+  NO_WHITE_SPACE_AT_BEGIN: 'noWhiteSpaceAtBegin',
 };
 
 export const GENERAL_NAME_FIELD_VALIDATION_PROPS = {

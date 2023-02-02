@@ -2,6 +2,7 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import {
+  noWhiteSpaceAtBegin,
   isNotEmpty,
   isNotEmptyWithoutSpace,
   isIntegerGreaterThanZero,
@@ -33,6 +34,10 @@ import {
 } from './handlers';
 
 export default {
+  noWhiteSpaceAtBegin: {
+    validate: noWhiteSpaceAtBegin,
+    message: <FormattedMessage id="ui-circulation.settings.validate.subject" />,
+  },
   isNotEmpty: {
     validate: isNotEmpty,
     message: <FormattedMessage id="ui-circulation.settings.validate.fillIn" />,
