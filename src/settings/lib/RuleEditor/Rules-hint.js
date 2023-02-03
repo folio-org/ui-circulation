@@ -12,7 +12,7 @@ import {
 
 import {
   RULES_TYPE,
-  LOCATION_RULES_TYPES
+  LOCATION_RULES_TYPES,
 } from '../../../constants';
 import { addIndentToEditorRules } from './utils';
 
@@ -28,9 +28,9 @@ const truncateOptions = {
   omission: '...',
 };
 
-const isLocationType = type => LOCATION_RULES_TYPES.includes(type);
+export const isLocationType = type => LOCATION_RULES_TYPES.includes(type);
 
-const getSectionsDescriptions = type => {
+export const getSectionsDescriptions = type => {
   switch (type) {
     case RULES_TYPE.INSTITUTION:
       return [
@@ -59,7 +59,7 @@ const getSectionsDescriptions = type => {
   }
 };
 
-function getItemOptions(selector, typeKey) {
+export function getItemOptions(selector, typeKey) {
   const text = isLocationType(typeKey) ? selector.code : selector;
   const displayText = getDisplayText(selector, typeKey);
 
@@ -71,7 +71,7 @@ function getItemOptions(selector, typeKey) {
   };
 }
 
-function getDisplayText(selector, typeKey) {
+export function getDisplayText(selector, typeKey) {
   if (isLocationType(typeKey)) {
     return typeKey !== RULES_TYPE.LOCATION ? truncate(selector.displayCode, truncateOptions) : selector.displayCode;
   }
@@ -102,7 +102,7 @@ export function rulesHint(Codemirror, props) {
     const {
       policyMapping,
       typeMapping,
-      completionLists
+      completionLists,
     } = nextApplicable;
 
     const start = cur.ch;
