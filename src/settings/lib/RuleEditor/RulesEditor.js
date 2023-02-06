@@ -62,7 +62,7 @@ const propTypes = {
   intl: PropTypes.object.isRequired,
 };
 
-function handleBackspace(cm) {
+export function handleBackspace(cm) {
   const { widget } = cm.state.completionActive;
 
   if (widget.currentSectionIndex < 1) {
@@ -73,9 +73,9 @@ function handleBackspace(cm) {
 }
 
 // custom handlers for working with the ever-present code hinting
-const moveFocus = value => (cm, handle) => handle.moveFocus(value);
+export const moveFocus = value => (cm, handle) => handle.moveFocus(value);
 
-function handleEnter(cm, handle) {
+export function handleEnter(cm, handle) {
   if (selectHint(cm, handle)) {
     return;
   }
@@ -83,7 +83,7 @@ function handleEnter(cm, handle) {
   cm.execCommand('newlineAndIndent');
 }
 
-function selectHint(cm, handle) {
+export function selectHint(cm, handle) {
   const { currentSectionIndex } = cm.state.completionActive.widget;
   const {
     selectedHintIndex,
@@ -97,7 +97,7 @@ function selectHint(cm, handle) {
   }
 }
 
-function handleTab(cm, handle) {
+export function handleTab(cm, handle) {
   if (selectHint(cm, handle)) {
     return;
   }
@@ -114,7 +114,7 @@ function handleTab(cm, handle) {
   activeDocument.replaceRange('\t', cursor); // adds a new line
 }
 
-function createTriangle(isOpen = true) {
+export function createTriangle(isOpen = true) {
   const container = document.createElement('div');
   const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
   const polygon = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
@@ -128,6 +128,23 @@ function createTriangle(isOpen = true) {
 
   return container;
 }
+
+export const hintOptions = {
+  completeSingle: false,
+  hideOnUnfocus: true,
+  customKeys: {
+    Up: moveFocus(-1),
+    Down: moveFocus(1),
+    PageUp: (codeMirror, handle) => { handle.moveFocus(-handle.menuSize() + 1, true); },
+    PageDown: (codeMirror, handle) => { handle.moveFocus(handle.menuSize() - 1, true); },
+    Home: (codeMirror, handle) => { handle.setFocus(0); },
+    End: (codeMirror, handle) => { handle.setFocus(handle.length - 1); },
+    Enter: handleEnter,
+    Tab: handleTab,
+    Backspace: handleBackspace,
+    Esc: noop,
+  }
+};
 
 class RulesEditor extends React.Component {
   constructor(props) {
@@ -336,23 +353,6 @@ class RulesEditor extends React.Component {
     // * showing help has been turned off
     // * component knows the editor is in focus(updates before the actual editor knows)
     if (cm.state.completionActive || !this.props.showAssist || !this.editorFocused) return;
-
-    const hintOptions = {
-      completeSingle: false,
-      hideOnUnfocus: true,
-      customKeys: {
-        Up: moveFocus(-1),
-        Down: moveFocus(1),
-        PageUp: (codeMirror, handle) => { handle.moveFocus(-handle.menuSize() + 1, true); },
-        PageDown: (codeMirror, handle) => { handle.moveFocus(handle.menuSize() - 1, true); },
-        Home: (codeMirror, handle) => { handle.setFocus(0); },
-        End: (codeMirror, handle) => { handle.setFocus(handle.length - 1); },
-        Enter: handleEnter,
-        Tab: handleTab,
-        Backspace: handleBackspace,
-        Esc: noop,
-      }
-    };
 
     Codemirror.showHint(this.cm, Codemirror.hint.rulesCMM, hintOptions);
   };
