@@ -16,6 +16,7 @@
 * UI tests replacement with RTL/Jest for `loan-policy` folder in `Validation`. Refs UICIRC-809.
 * UI tests replacement with RTL/Jest for `CheckoutSettingsForm`. Refs UICIRC-867.
 * An error for spacebar before symbols in "Subject" field when create Patron notice template. Fixes UICIRC-898.
+* UI tests replacement with RTL/Jest for component `RulesEditor`. Refs UICIRC-827.
 
 ## [7.2.1](https://github.com/folio-org/ui-circulation/tree/v7.2.1) (2022-11-29)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v7.2.0...v7.2.1)
