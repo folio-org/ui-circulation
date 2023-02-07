@@ -27,6 +27,7 @@ import {
   hasPositiveLostItemProcessingFeeAndItemsAgedToLostAfterOverdue,
   hasPositiveLostItemProcessingFeeAndInvalidItemsAgedToLostAfterOverdue,
   hasPatronBilledAfterRecalledAgedToLostValue,
+  noWhiteSpaceAtBegin,
 } from './handlers';
 import LostItemFeePolicy from '../../Models/LostItemFeePolicy';
 
@@ -1466,6 +1467,20 @@ describe('handlers', () => {
 
       it('should return false', () => {
         expect(hasReplacementAllowedAndNegativeLostItemPolicyFee(value, model)).toBe(false);
+      });
+    });
+
+    describe('noWhiteSpaceAtBegin method', () => {
+      it('should return true', () => {
+        expect(noWhiteSpaceAtBegin('test')).toBe(true);
+      });
+
+      it('should return false', () => {
+        expect(noWhiteSpaceAtBegin(' test')).toBe(false);
+      });
+
+      it('should return false', () => {
+        expect(noWhiteSpaceAtBegin(1)).toBe(false);
       });
     });
   });

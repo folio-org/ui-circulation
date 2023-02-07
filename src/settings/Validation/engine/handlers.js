@@ -19,6 +19,10 @@ export const isNotEmptyWithoutSpace = (value) => {
   return isString(value) && !!value.trim();
 };
 
+export const noWhiteSpaceAtBegin = (value) => {
+  return isString(value) && !(/^\s/.test(value)); // value.match(/^\s/)
+};
+
 export const isIntegerGreaterThanZero = (value) => isInteger(value) && value > 0;
 
 export const isIntegerGreaterThanOrEqualToZero = (value) => isInteger(value) && value >= 0;
