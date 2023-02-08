@@ -112,7 +112,7 @@
   "settings.validate.isFromOneToHundred": "The value must be between 1 and 100",
   "settings.validate.lostItem": "Required if there is a possibility of no fee/fine being charged for a lost item",
   "settings.validate.itemLimitInterval": "Item limit must be > 0, =< 9999 or blank",
-  "settings.validate.subject": "Should not begin with space",
+  "settings.validate.subject": "Should not begin with a space",
 
   "settings.fDDS.validate.overlappingDateRange": "Date range {num1} cannot overlap with date range {num2}",
   "settings.fDDS.validate.uniqueName": "Please enter a unique name.",
