@@ -206,7 +206,7 @@ describe('Rules-hint', () => {
 
       rulesHint(CodemirrorNotRuleName, props);
 
-      expect(result).toEqual(expect.objectContaining({
+      expect(result).toEqual({
         sections: [{
           list: [
             {
@@ -227,13 +227,13 @@ describe('Rules-hint', () => {
           ],
           selectedHintIndex: -1
         }],
-      }));
+      });
     });
 
     it('should return sections list for ruleName type', () => {
       rulesHint(Codemirror, props);
 
-      expect(result).toEqual(expect.objectContaining({
+      expect(result).toEqual({
         sections: [{
           list: [
             {
@@ -254,7 +254,7 @@ describe('Rules-hint', () => {
           ],
           selectedHintIndex: -1
         }],
-      }));
+      });
     });
 
     it('should return typegroups ', () => {
@@ -292,7 +292,7 @@ describe('Rules-hint', () => {
 
       rulesHint(CodemirrorNotRuleName, props);
 
-      expect(result).toEqual(expect.objectContaining({
+      expect(result).toEqual({
         sections: [{
           list: [
             {
@@ -348,7 +348,7 @@ describe('Rules-hint', () => {
           ],
           selectedHintIndex: -1
         }],
-      }));
+      });
     });
 
     it('should return type selectors', () => {
@@ -386,7 +386,7 @@ describe('Rules-hint', () => {
 
       rulesHint(CodemirrorNotRuleName, props);
 
-      expect(result).toEqual(expect.objectContaining({
+      expect(result).toEqual({
         header: 'ui-circulation.settings.circulationRules.selectLibrary',
         sections: [
           {
@@ -415,7 +415,135 @@ describe('Rules-hint', () => {
             selectedHintIndex: 0,
           },
         ]
-      }));
+      });
+    });
+
+    it('should return display policies types', () => {
+      const stateType = {
+        nextApplicable: {
+          policyMapping: {
+            i: 'lostItemFeePolicies',
+            l: 'loanPolicies',
+            n: 'noticePolicies',
+            o: 'overdueFinePolicies',
+            r: 'requestPolicies',
+          },
+          completionLists: {
+            loanPolicies: ['loanPolicies'],
+          },
+        },
+        indented: 0,
+        rValue: true,
+      };
+      const cmRuleName = {
+        ...cm,
+        getTokenAt: jest.fn(() => ({
+          type: 'ruleName',
+          state: stateType,
+        })),
+        getCursor: jest.fn(() => ({
+          ch: 2,
+          line: 99,
+        })),
+      };
+      const CodemirrorNotRuleName = {
+        ...Codemirror,
+        registerHelper: (fold, rules, callback) => {
+          result = callback(cmRuleName);
+        },
+      };
+
+      rulesHint(CodemirrorNotRuleName, props);
+
+      expect(result).toEqual({
+        header: 'ui-circulation.settings.circulationRules.circulationPolicies',
+        sections: [
+          {
+            list: [
+              {
+                className: 'rule-hint-minor',
+                displayText: 'ui-circulation.settings.circulationRules.lostItemFeePolicies',
+                text: 'i ',
+              },
+              {
+                className: 'rule-hint-minor',
+                displayText: 'ui-circulation.settings.circulationRules.loanPolicies',
+                text: 'l ',
+              },
+              {
+                className: 'rule-hint-minor',
+                displayText: 'ui-circulation.settings.circulationRules.noticePolicies',
+                text: 'n ',
+              },
+              {
+                className: 'rule-hint-minor',
+                displayText: 'ui-circulation.settings.circulationRules.overdueFinePolicies',
+                text: 'o ',
+              },
+              {
+                className: 'rule-hint-minor',
+                displayText: 'ui-circulation.settings.circulationRules.requestPolicies',
+                text: 'r ',
+              },
+            ],
+            selectedHintIndex: -1,
+          }
+        ]
+      });
+    });
+
+    it('should return display policies', () => {
+      const stateType = {
+        nextApplicable: {
+          policyMapping: {
+            i: 'lostItemFeePolicies',
+            l: 'loanPolicies',
+            n: 'noticePolicies',
+            o: 'overdueFinePolicies',
+            r: 'requestPolicies',
+          },
+          completionLists: {
+            loanPolicies: ['loanPolicies'],
+          },
+        },
+        keyProperty: 'l',
+        indented: 0,
+        rValue: true,
+      };
+      const cmRuleName = {
+        ...cm,
+        getTokenAt: jest.fn(() => ({
+          type: 'ruleName',
+          state: stateType,
+        })),
+        getCursor: jest.fn(() => ({
+          ch: 101,
+          line: 2,
+        })),
+      };
+      const CodemirrorNotRuleName = {
+        ...Codemirror,
+        registerHelper: (fold, rules, callback) => {
+          result = callback(cmRuleName);
+        },
+      };
+
+      rulesHint(CodemirrorNotRuleName, props);
+
+      expect(result).toEqual({
+        sections: [
+          {
+            list: [
+              {
+                className: 'rule-hint-minor',
+                displayText: 'loanPolicies',
+                text: 'loanPolicies ',
+              },
+            ],
+            selectedHintIndex: -1,
+          },
+        ],
+      });
     });
   });
 
