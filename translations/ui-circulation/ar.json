@@ -464,5 +464,6 @@
     "settings.lostItemPolicy.denyDelete.header": "لا يمكن حذف سياسة رسوم المادة الضائعة",
     "settings.checkout.wildcardLookup": "إجراء بحث بدل عن المواد بواسطة الباركود في تطبيقات الإعارة (الرد، الإعارة)",
     "settings.index.loanAnonymization": "عدم تعريف هوية الاستعارة",
-    "permission.settings.edit-staff-slips": "Settings (Circ): Can edit staff slips"
+    "permission.settings.edit-staff-slips": "Settings (Circ): Can edit staff slips",
+    "settings.validate.subject": "Should not begin with a space"
 }
