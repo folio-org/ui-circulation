@@ -2,43 +2,51 @@ import React from 'react';
 import {
   render,
   screen,
-  within,
   fireEvent,
 } from '@testing-library/react';
 
 import '../../../test/jest/__mock__';
 
 import {
-  KeyValue,
   Button,
+  Accordion,
+  AccordionSet,
+  ExpandAllButton,
 } from '@folio/stripes/components';
-import { PreviewModal } from '@folio/stripes-template-editor';
+import buildStripes from '../../../test/jest/__mock__/stripes.mock';
 
 import StaffSlipDetail from './StaffSlipDetail';
+import { Metadata } from '../components';
+import { StaffSlipAboutSection, StaffSlipTemplateContentSection } from './components/ViewSections';
 
-const mockParseWithInstructionsReturnValue = 'testParsedValue';
-const mockTokensReducerReturnValue = 'testReturnValue';
+const mockGeneralStaffSlipDetailId = 'generalInformation';
+const mocktemplateContentId = 'templateContent';
 
-jest.mock('html-to-react', () => ({
-  __esModule: true,
-  default: {
-    ProcessNodeDefinitions: jest.fn(() => ({
-      processDefaultNode: 'testDefaultNode',
-    })),
-  },
-  Parser: () => ({
-    parseWithInstructions: jest.fn(() => mockParseWithInstructionsReturnValue),
-  }),
+jest.mock('../components', () => ({
+  Metadata: jest.fn(() => null),
 }));
-jest.mock('@folio/stripes-template-editor', () => ({
-  PreviewModal: jest.fn(({
-    'data-testid': testId,
-  }) => (
-    // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
-    <div data-testid={testId} />
-  )),
-  tokensReducer: () => mockTokensReducerReturnValue,
+jest.mock('./components/ViewSections', () => ({
+  StaffSlipAboutSection: jest.fn(() => 'StaffSlipAboutSection'),
+  StaffSlipTemplateContentSection: jest.fn(() => 'StaffSlipTemplateContentSection'),
 }));
+
+
+const mockTestIds = {
+  expandAllButton: 'expandAllButton',
+  accordion: 'accordion',
+  accordionSet: 'accordionSet',
+};
+
+ExpandAllButton.mockImplementation(({ onToggle }) => (
+  // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
+  <div
+    data-testid={mockTestIds.expandAllButton}
+    onClick={() => onToggle({
+      generalInformation: false,
+      templateContent: false,
+    })}
+  />
+));
 
 Button.mockImplementation(jest.fn(({
   children,
@@ -54,23 +62,17 @@ Button.mockImplementation(jest.fn(({
   </div>
 )));
 
+const testStripes = buildStripes();
+
 describe('StaffSlipDetail', () => {
-  const keyValueCallOrder = {
-    staffSlipsName: 1,
-    staffSlipsDescription: 2,
-  };
-  const testIds = {
-    staffSlipsDisplayCol: 'staffSlipsDisplayCol',
-    staffSlipsPreviewButton: 'staffSlipsPreviewButton',
-    emailTemplateCol: 'emailTemplateCol',
-    previewModal: 'previewModal',
-  };
   const labelIds = {
     staffSlipsName: 'ui-circulation.settings.staffSlips.name',
     staffSlipsDescription: 'ui-circulation.settings.staffSlips.description',
     staffSlipsDisplay: 'ui-circulation.settings.staffSlips.display',
     staffSlipsPreview: 'ui-circulation.settings.staffSlips.preview',
     staffSlipsViewPreviewLabel: 'ui-circulation.settings.staffSlips.view.previewLabel',
+    staffSlipsGeneralInformation: 'ui-circulation.settings.staffSlips.generalInformation',
+    staffSlipsTemplateContent: 'ui-circulation.settings.staffSlips.templateContent',
   };
   const testInitialValues = {
     name: 'testNameValue',
@@ -79,13 +81,22 @@ describe('StaffSlipDetail', () => {
   };
   const testDefaultProps = {
     initialValues: testInitialValues,
+    stripes: testStripes,
   };
-  const getById = (id) => within(screen.getByTestId(id));
+
+  const accordionDefaultStatus = {
+    generalInformation: true,
+    templateContent: true,
+  };
 
   afterEach(() => {
-    KeyValue.mockClear();
+    Accordion.mockClear();
+    AccordionSet.mockClear();
+    ExpandAllButton.mockClear();
+    Metadata.mockClear();
     Button.mockClear();
-    PreviewModal.mockClear();
+    StaffSlipAboutSection.mockClear();
+    StaffSlipTemplateContentSection.mockClear();
   });
 
   describe('with default props', () => {
@@ -95,71 +106,108 @@ describe('StaffSlipDetail', () => {
       );
     });
 
-    it('should render staff slips name KeyValue component', () => {
-      expect(KeyValue).toHaveBeenNthCalledWith(keyValueCallOrder.staffSlipsName, {
-        label: labelIds.staffSlipsName,
-        value: testInitialValues.name,
-      }, {});
+    it('should render ExpandAllButton component', () => {
+      expect(ExpandAllButton).toHaveBeenCalled();
     });
 
-    it('should render staff slips description KeyValue component', () => {
-      expect(KeyValue).toHaveBeenNthCalledWith(keyValueCallOrder.staffSlipsDescription, {
-        label: labelIds.staffSlipsDescription,
-        value: testInitialValues.description,
-      }, {});
+    it('should render ExpandAllButton component', () => {
+      expect(ExpandAllButton).toHaveBeenCalledWith(expect.objectContaining({
+        accordionStatus: accordionDefaultStatus,
+      }), {});
     });
 
-    it('should render staff slips display label', () => {
-      expect(getById(testIds.staffSlipsDisplayCol).getByText(labelIds.staffSlipsDisplay)).toBeVisible();
+    it('should render AccordionSet component', () => {
+      expect(AccordionSet).toHaveBeenCalled();
     });
 
-    it('should render staff slips preview label', () => {
-      expect(getById(testIds.staffSlipsPreviewButton).getByText(labelIds.staffSlipsPreview)).toBeVisible();
+    it('should render Accordion component with label "General information"', () => {
+      expect(Accordion).toHaveBeenCalledWith(expect.objectContaining({
+        id: mockGeneralStaffSlipDetailId,
+        label: labelIds.staffSlipsGeneralInformation,
+        open: accordionDefaultStatus.generalInformation,
+      }), {});
     });
 
-    it('should render parsed email template', () => {
-      expect(getById(testIds.emailTemplateCol).getByText(mockParseWithInstructionsReturnValue)).toBeVisible();
+    it('should render Accordion component with label "Template content"', () => {
+      expect(Accordion).toHaveBeenCalledWith(expect.objectContaining({
+        id: mocktemplateContentId,
+        label: labelIds.staffSlipsTemplateContent,
+        open: accordionDefaultStatus.templateContent,
+      }), {});
     });
 
-    describe('PreviewModal', () => {
-      it('should render PreviewModal component', () => {
-        expect(PreviewModal).toHaveBeenCalledWith(expect.objectContaining({
-          open: false,
-          header: labelIds.staffSlipsViewPreviewLabel,
-          previewTemplate: testInitialValues.template,
-          previewFormat: mockTokensReducerReturnValue,
-          printable: true,
+    it('should call Metadata component', () => {
+      expect(Metadata).toHaveBeenCalledWith(expect.objectContaining({
+        connect: testStripes.connect,
+        metadata: undefined,
+      }), {});
+    });
+
+    it('should display StaffSlipAboutSection', () => {
+      expect(screen.getByText('StaffSlipAboutSection')).toBeVisible();
+    });
+
+    describe('handleExpandAll method', () => {
+      it('should render components with default accordions statuses', () => {
+        expect(ExpandAllButton).toHaveBeenLastCalledWith(expect.objectContaining({
+          accordionStatus: accordionDefaultStatus,
         }), {});
+
+        expect(Accordion).toHaveBeenLastCalledWith(
+          expect.objectContaining({
+            open: accordionDefaultStatus.generalInformation,
+          }), {}
+        );
       });
 
-      it('should open and close PreviewModal component', () => {
-        PreviewModal.mockImplementationOnce(({
-          onClose,
-          'data-testid': testId,
-        }) => (
-          // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
-          <div
-            data-testid={testId}
-            onClick={onClose}
-          />
-        ));
+      it('should expand all accordions statuses', () => {
+        fireEvent.click(screen.getByTestId(mockTestIds.expandAllButton));
 
-        expect(PreviewModal).toHaveBeenLastCalledWith(expect.objectContaining({
-          open: false,
+        expect(ExpandAllButton).toHaveBeenLastCalledWith(expect.objectContaining({
+          accordionStatus: {
+            generalInformation: false,
+            templateContent: false,
+          },
         }), {});
 
-        fireEvent.click(screen.getByTestId(testIds.staffSlipsPreviewButton));
-
-        expect(PreviewModal).toHaveBeenLastCalledWith(expect.objectContaining({
-          open: true,
-        }), {});
-
-        fireEvent.click(screen.getByTestId(testIds.previewModal));
-
-        expect(PreviewModal).toHaveBeenLastCalledWith(expect.objectContaining({
-          open: false,
-        }), {});
+        expect(Accordion).toHaveBeenLastCalledWith(
+          expect.objectContaining({
+            open: false,
+          }), {}
+        );
       });
+    });
+  });
+
+  describe('handleSectionToggle method', () => {
+    it('should close accordion', () => {
+      Accordion.mockImplementationOnce(({ onToggle, children }) => (
+        // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
+        <div
+          data-testid={mockTestIds.accordion}
+          onClick={() => onToggle({ id: mockGeneralStaffSlipDetailId })}
+        >
+          {children}
+        </div>
+      ));
+
+      render(
+        <StaffSlipDetail {...testDefaultProps} />
+      );
+
+      expect(Accordion).toHaveBeenCalledWith(
+        expect.objectContaining({
+          open: accordionDefaultStatus.generalInformation,
+        }), {}
+      );
+
+      fireEvent.click(screen.getByTestId(mockTestIds.accordion));
+
+      expect(Accordion).toHaveBeenCalledWith(
+        expect.objectContaining({
+          open: !accordionDefaultStatus.generalInformation,
+        }), {}
+      );
     });
   });
 });

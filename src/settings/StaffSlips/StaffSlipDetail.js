@@ -1,132 +1,93 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import HtmlToReact, { Parser } from 'html-to-react';
-import {
-  FormattedMessage,
-  injectIntl,
-} from 'react-intl';
+import { injectIntl } from 'react-intl';
 
+import { stripesShape } from '@folio/stripes/core';
 import {
-  Button,
   Col,
-  KeyValue,
   Row,
+  ExpandAllButton,
+  Accordion,
+  AccordionSet,
 } from '@folio/stripes/components';
-import { PreviewModal, tokensReducer } from '@folio/stripes-template-editor';
 
-import getTokens from './tokens';
-import css from './StaffSlipDetail.css';
+import { Metadata } from '../components';
+import { StaffSlipAboutSection, StaffSlipTemplateContentSection } from './components/ViewSections';
 
 class StaffSlipDetail extends React.Component {
   static propTypes = {
     initialValues: PropTypes.object.isRequired,
     intl: PropTypes.object.isRequired,
+    stripes: stripesShape.isRequired,
   };
 
   constructor(props) {
     super(props);
 
-    const processNodeDefinitions = new HtmlToReact.ProcessNodeDefinitions(React);
-    this.parser = new Parser();
-
-    this.rules = [
-      {
-        shouldProcessNode: () => true,
-        processNode: processNodeDefinitions.processDefaultNode,
-      },
-    ];
-
     this.state = {
-      openPreview: false,
+      sections: {
+        generalInformation: true,
+        templateContent: true
+      }
     };
   }
 
-  openPreviewDialog = () => {
-    this.setState({ openPreview: true });
+  handleSectionToggle = ({ id }) => {
+    this.setState(({ sections }) => {
+      sections[id] = !sections[id];
+      return { sections };
+    });
   };
 
-  closePreviewDialog = () => {
-    this.setState({ openPreview: false });
+  handleExpandAll = (sections) => {
+    this.setState({ sections });
   };
 
   render() {
-    const { openPreview } = this.state;
+    const { sections } = this.state;
     const {
       initialValues: staffSlip,
+      stripes: {
+        connect,
+      },
       intl: {
         formatMessage,
-        locale,
       },
     } = this.props;
 
-    const tokens = getTokens(locale);
-    const parsedEmailTemplate = this.parser.parseWithInstructions(staffSlip.template, () => true, this.rules);
-
     return (
       <div data-test-staff-slip-details>
-        <Row>
-          <Col xs={12}>
-            <div data-test-staff-slip-name>
-              <KeyValue
-                label={formatMessage({ id: 'ui-circulation.settings.staffSlips.name' })}
-                value={staffSlip.name}
-              />
-            </div>
-          </Col>
-        </Row>
-        <Row>
-          <Col xs={12}>
-            <KeyValue
-              label={formatMessage({ id: 'ui-circulation.settings.staffSlips.description' })}
-              value={staffSlip.description}
+        <Row end="xs">
+          <Col data-test-expand-all>
+            <ExpandAllButton
+              accordionStatus={sections}
+              onToggle={this.handleExpandAll}
             />
           </Col>
         </Row>
-        <Row>
-          <Col
-            data-testid="staffSlipsDisplayCol"
-            xs={9}
+        <AccordionSet>
+          <Accordion
+            id="generalInformation"
+            label={formatMessage({ id: 'ui-circulation.settings.staffSlips.generalInformation' })}
+            open={sections.generalInformation}
+            onToggle={this.handleSectionToggle}
           >
-            <FormattedMessage id="ui-circulation.settings.staffSlips.display" />
-          </Col>
-          <Col xs={3}>
-            <Row className={css.preview}>
-              <Col>
-                <Button
-                  data-testid="staffSlipsPreviewButton"
-                  data-test-open-preview-btn
-                  bottomMargin0
-                  onClick={this.openPreviewDialog}
-                >
-                  <FormattedMessage id="ui-circulation.settings.staffSlips.preview" />
-                </Button>
-              </Col>
-            </Row>
-          </Col>
-        </Row>
-        <Row>
-          <Col
-            data-testid="emailTemplateCol"
-            xs={12}
-            className="editor-preview"
-            data-test-staff-slip-content
+            <Metadata
+              connect={connect}
+              metadata={staffSlip.metadata}
+            />
+            <StaffSlipAboutSection staffSlip={staffSlip} />
+          </Accordion>
+          <Accordion
+            id="templateContent"
+            label={formatMessage({ id: 'ui-circulation.settings.staffSlips.templateContent' })}
+            open={sections.templateContent}
+            onToggle={this.handleSectionToggle}
           >
-            {parsedEmailTemplate}
-          </Col>
-        </Row>
-        <PreviewModal
-          data-testid="previewModal"
-          open={openPreview}
-          header={
-            formatMessage({
-              id: 'ui-circulation.settings.staffSlips.view.previewLabel',
-            }, { name: staffSlip.name })
-          }
-          previewTemplate={staffSlip.template}
-          previewFormat={tokensReducer(tokens)}
-          printable
-          onClose={this.closePreviewDialog}
-        />
+            <StaffSlipTemplateContentSection staffSlip={staffSlip} />
+          </Accordion>
+        </AccordionSet>
+
       </div>
     );
   }
