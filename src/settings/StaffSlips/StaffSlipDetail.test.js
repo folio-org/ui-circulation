@@ -8,7 +8,6 @@ import {
 import '../../../test/jest/__mock__';
 
 import {
-  Button,
   Accordion,
   AccordionSet,
   ExpandAllButton,
@@ -30,7 +29,6 @@ jest.mock('./components/ViewSections', () => ({
   StaffSlipTemplateContentSection: jest.fn(() => 'StaffSlipTemplateContentSection'),
 }));
 
-
 const mockTestIds = {
   expandAllButton: 'expandAllButton',
   accordion: 'accordion',
@@ -48,29 +46,10 @@ ExpandAllButton.mockImplementation(({ onToggle }) => (
   />
 ));
 
-Button.mockImplementation(jest.fn(({
-  children,
-  'data-testid': testId,
-  onClick,
-}) => (
-  // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
-  <div
-    data-testid={testId}
-    onClick={onClick}
-  >
-    {children}
-  </div>
-)));
-
 const testStripes = buildStripes();
 
 describe('StaffSlipDetail', () => {
   const labelIds = {
-    staffSlipsName: 'ui-circulation.settings.staffSlips.name',
-    staffSlipsDescription: 'ui-circulation.settings.staffSlips.description',
-    staffSlipsDisplay: 'ui-circulation.settings.staffSlips.display',
-    staffSlipsPreview: 'ui-circulation.settings.staffSlips.preview',
-    staffSlipsViewPreviewLabel: 'ui-circulation.settings.staffSlips.view.previewLabel',
     staffSlipsGeneralInformation: 'ui-circulation.settings.staffSlips.generalInformation',
     staffSlipsTemplateContent: 'ui-circulation.settings.staffSlips.templateContent',
   };
@@ -78,6 +57,7 @@ describe('StaffSlipDetail', () => {
     name: 'testNameValue',
     description: 'testDescriptionValue',
     template: 'testTemplateValue',
+    metadata: 'testMetadata'
   };
   const testDefaultProps = {
     initialValues: testInitialValues,
@@ -94,7 +74,6 @@ describe('StaffSlipDetail', () => {
     AccordionSet.mockClear();
     ExpandAllButton.mockClear();
     Metadata.mockClear();
-    Button.mockClear();
     StaffSlipAboutSection.mockClear();
     StaffSlipTemplateContentSection.mockClear();
   });
@@ -120,18 +99,28 @@ describe('StaffSlipDetail', () => {
       expect(AccordionSet).toHaveBeenCalled();
     });
 
-    it('should render Accordion component with label "General information"', () => {
-      expect(Accordion).toHaveBeenCalledWith(expect.objectContaining({
+    it('should render Accordion component 2 times', () => {
+      expect(Accordion).toHaveBeenCalledTimes(2);
+    });
+
+    it('should render "General information" label', () => {
+      expect(screen.getByText(labelIds.staffSlipsGeneralInformation)).toBeDefined();
+    });
+
+    it('should render "Template content" label', () => {
+      expect(screen.getByText(labelIds.staffSlipsTemplateContent)).toBeDefined();
+    });
+
+    it("should render 'General information' Accordion", () => {
+      expect(Accordion).toHaveBeenNthCalledWith(1, expect.objectContaining({
         id: mockGeneralStaffSlipDetailId,
-        label: labelIds.staffSlipsGeneralInformation,
         open: accordionDefaultStatus.generalInformation,
       }), {});
     });
 
-    it('should render Accordion component with label "Template content"', () => {
-      expect(Accordion).toHaveBeenCalledWith(expect.objectContaining({
+    it('should render "Template content" Accordion', () => {
+      expect(Accordion).toHaveBeenNthCalledWith(2, expect.objectContaining({
         id: mocktemplateContentId,
-        label: labelIds.staffSlipsTemplateContent,
         open: accordionDefaultStatus.templateContent,
       }), {});
     });
@@ -139,7 +128,7 @@ describe('StaffSlipDetail', () => {
     it('should call Metadata component', () => {
       expect(Metadata).toHaveBeenCalledWith(expect.objectContaining({
         connect: testStripes.connect,
-        metadata: undefined,
+        metadata: testDefaultProps.initialValues.metadata,
       }), {});
     });
 

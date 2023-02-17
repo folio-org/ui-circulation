@@ -21,6 +21,7 @@ const StaffSlipTemplateContentSection = ({ intl, staffSlip }) => {
     locale,
   } = intl;
   const tokens = getTokens(locale);
+  const { name, template } = staffSlip;
 
   const processNodeDefinitions = new HtmlToReact.ProcessNodeDefinitions(React);
   const rules = [
@@ -31,7 +32,7 @@ const StaffSlipTemplateContentSection = ({ intl, staffSlip }) => {
   ];
 
   const parser = new Parser();
-  const parsedEmailTemplate = parser.parseWithInstructions(staffSlip.template, () => true, rules);
+  const parsedEmailTemplate = parser.parseWithInstructions(template, () => true, rules);
 
   const [openPreview, setOpenPreview] = useState(false);
 
@@ -79,9 +80,9 @@ const StaffSlipTemplateContentSection = ({ intl, staffSlip }) => {
         header={
             formatMessage({
               id: 'ui-circulation.settings.staffSlips.view.previewLabel',
-            }, { name: staffSlip.name })
+            }, { name })
           }
-        previewTemplate={staffSlip.template}
+        previewTemplate={template}
         previewFormat={tokensReducer(tokens)}
         printable
         onClose={togglePreviewDialog}

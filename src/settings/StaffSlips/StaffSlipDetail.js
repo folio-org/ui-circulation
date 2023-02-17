@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { injectIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
 import { stripesShape } from '@folio/stripes/core';
 import {
@@ -17,7 +17,6 @@ import { StaffSlipAboutSection, StaffSlipTemplateContentSection } from './compon
 class StaffSlipDetail extends React.Component {
   static propTypes = {
     initialValues: PropTypes.object.isRequired,
-    intl: PropTypes.object.isRequired,
     stripes: stripesShape.isRequired,
   };
 
@@ -50,9 +49,6 @@ class StaffSlipDetail extends React.Component {
       stripes: {
         connect,
       },
-      intl: {
-        formatMessage,
-      },
     } = this.props;
 
     return (
@@ -68,7 +64,7 @@ class StaffSlipDetail extends React.Component {
         <AccordionSet>
           <Accordion
             id="generalInformation"
-            label={formatMessage({ id: 'ui-circulation.settings.staffSlips.generalInformation' })}
+            label={<FormattedMessage id="ui-circulation.settings.staffSlips.generalInformation" />}
             open={sections.generalInformation}
             onToggle={this.handleSectionToggle}
           >
@@ -80,7 +76,7 @@ class StaffSlipDetail extends React.Component {
           </Accordion>
           <Accordion
             id="templateContent"
-            label={formatMessage({ id: 'ui-circulation.settings.staffSlips.templateContent' })}
+            label={<FormattedMessage id="ui-circulation.settings.staffSlips.templateContent" />}
             open={sections.templateContent}
             onToggle={this.handleSectionToggle}
           >
@@ -93,4 +89,4 @@ class StaffSlipDetail extends React.Component {
   }
 }
 
-export default injectIntl(StaffSlipDetail);
+export default StaffSlipDetail;
