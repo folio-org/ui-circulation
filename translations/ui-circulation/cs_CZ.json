@@ -464,5 +464,6 @@
     "settings.lostItemPolicy.denyDelete.header": "Nelze smazat zásady poplatků za ztracené jednotky",
     "settings.checkout.wildcardLookup": "Proveďte vyhledávání jednotek pomocí zástupných znaků podle čárového kódu v aplikacích (Návrat, Výpůjčka)",
     "settings.index.loanAnonymization": "Anonymizace výpůjčky",
-    "permission.settings.edit-staff-slips": "Nastavení (Výpůjčky): Může upravovat výpůjčkové lístky"
+    "permission.settings.edit-staff-slips": "Nastavení (Výpůjčky): Může upravovat výpůjčkové lístky",
+    "settings.validate.subject": "Nemělo by začínat mezerou"
 }
