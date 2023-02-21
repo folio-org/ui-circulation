@@ -11,7 +11,10 @@ import {
   Col,
   Row,
 } from '@folio/stripes/components';
-import { PreviewModal, tokensReducer } from '@folio/stripes-template-editor';
+import {
+  PreviewModal,
+  tokensReducer,
+} from '@folio/stripes-template-editor';
 import css from '../../../StaffSlipDetail.css';
 import getTokens from '../../../tokens';
 

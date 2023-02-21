@@ -16,10 +16,13 @@ import buildStripes from '../../../test/jest/__mock__/stripes.mock';
 
 import StaffSlipDetail from './StaffSlipDetail';
 import { Metadata } from '../components';
-import { StaffSlipAboutSection, StaffSlipTemplateContentSection } from './components/ViewSections';
+import {
+  StaffSlipAboutSection,
+  StaffSlipTemplateContentSection,
+} from './components/ViewSections';
 
 const mockGeneralStaffSlipDetailId = 'generalInformation';
-const mocktemplateContentId = 'templateContent';
+const mockTemplateContentId = 'templateContent';
 
 jest.mock('../components', () => ({
   Metadata: jest.fn(() => null),
