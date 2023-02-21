@@ -12,7 +12,10 @@ import {
 } from '@folio/stripes/components';
 
 import { Metadata } from '../components';
-import { StaffSlipAboutSection, StaffSlipTemplateContentSection } from './components/ViewSections';
+import {
+  StaffSlipAboutSection,
+  StaffSlipTemplateContentSection,
+  } from './components/ViewSections';
 
 class StaffSlipDetail extends React.Component {
   static propTypes = {
