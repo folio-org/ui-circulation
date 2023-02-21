@@ -127,7 +127,7 @@
     "settings.requestManagement.alternateCheckoutLoanPeriod": "Período de empréstimo alternativo no empréstimo para itens com reservas",
     "settings.requestManagement.renewItemsWithRequest": "Permitir a renovação de itens com reservas",
     "settings.requestManagement.alternateRenewalLoanPeriod": "Período alternativo de empréstimo na renovação para itens com reservas",
-    "settings.requestManagement.holds": "Acervos",
+    "settings.requestManagement.holds": "Reservas",
     "settings.validate.select": "Por favor, faça uma seleção",
     "settings.index.noticePolicies": "Políticas de avisos aos usuários",
     "settings.noticePolicy.entryLabel": "Política de aviso aos usuários",
