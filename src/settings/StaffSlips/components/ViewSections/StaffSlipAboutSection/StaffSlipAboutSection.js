@@ -18,7 +18,7 @@ const StaffSlipAboutSection = ({ staffSlip }) => {
         <Col xs={12}>
           <div
             data-test-staff-slip-name
-            data-testid="nameTestId"
+            data-testid="staffSlipName"
           >
             <KeyValue
               label={<FormattedMessage id="ui-circulation.settings.staffSlips.name" />}
@@ -31,7 +31,7 @@ const StaffSlipAboutSection = ({ staffSlip }) => {
         <Col xs={12}>
           <div
             data-test-about-section-staff-slip-description
-            data-testid="descriptionTestId"
+            data-testid="staffSlipDescription"
           >
             <KeyValue
               label={<FormattedMessage id="ui-circulation.settings.staffSlips.description" />}

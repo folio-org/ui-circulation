@@ -15,7 +15,7 @@ import { Metadata } from '../components';
 import {
   StaffSlipAboutSection,
   StaffSlipTemplateContentSection,
-  } from './components/ViewSections';
+} from './components/ViewSections';
 
 class StaffSlipDetail extends React.Component {
   static propTypes = {
@@ -86,7 +86,6 @@ class StaffSlipDetail extends React.Component {
             <StaffSlipTemplateContentSection staffSlip={staffSlip} />
           </Accordion>
         </AccordionSet>
-
       </div>
     );
   }

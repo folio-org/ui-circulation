@@ -15,7 +15,7 @@ import {
   PreviewModal,
   tokensReducer,
 } from '@folio/stripes-template-editor';
-import css from '../../../StaffSlipDetail.css';
+import css from './StaffSlipTemplateContentSection.css';
 import getTokens from '../../../tokens';
 
 const StaffSlipTemplateContentSection = ({ intl, staffSlip }) => {
@@ -25,7 +25,6 @@ const StaffSlipTemplateContentSection = ({ intl, staffSlip }) => {
   } = intl;
   const tokens = getTokens(locale);
   const { name, template } = staffSlip;
-
   const processNodeDefinitions = new HtmlToReact.ProcessNodeDefinitions(React);
   const rules = [
     {
@@ -33,12 +32,9 @@ const StaffSlipTemplateContentSection = ({ intl, staffSlip }) => {
       processNode: processNodeDefinitions.processDefaultNode,
     },
   ];
-
   const parser = new Parser();
   const parsedEmailTemplate = parser.parseWithInstructions(template, () => true, rules);
-
   const [openPreview, setOpenPreview] = useState(false);
-
   const togglePreviewDialog = () => {
     setOpenPreview(!openPreview);
   };

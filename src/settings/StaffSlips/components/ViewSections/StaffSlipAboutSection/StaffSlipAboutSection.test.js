@@ -5,7 +5,6 @@ import {
   within,
 } from '@testing-library/react';
 
-
 import '../../../../../../test/jest/__mock__';
 
 import StaffSlipAboutSection from './StaffSlipAboutSection';
@@ -36,18 +35,18 @@ describe('StaffSlipAboutSection', () => {
   });
 
   it('should render label of "name" field', () => {
-    expect(getItemByTestId('nameTestId').getByText(labelIds.staffSlipsName)).toBeVisible();
+    expect(getItemByTestId('staffSlipName').getByText(labelIds.staffSlipsName)).toBeVisible();
   });
 
   it('should render value of "name" field', () => {
-    expect(getItemByTestId('nameTestId').getByText('testNameValue')).toBeVisible();
+    expect(getItemByTestId('staffSlipName').getByText(testStaffSlip.name)).toBeVisible();
   });
 
   it('should render label of "description" field', () => {
-    expect(getItemByTestId('descriptionTestId').getByText(labelIds.staffSlipsDescription)).toBeVisible();
+    expect(getItemByTestId('staffSlipDescription').getByText(labelIds.staffSlipsDescription)).toBeVisible();
   });
 
   it('should render value of "description" field', () => {
-    expect(getItemByTestId('descriptionTestId').getByText('testDescriptionValue')).toBeVisible();
+    expect(getItemByTestId('staffSlipDescription').getByText(testStaffSlip.description)).toBeVisible();
   });
 });
