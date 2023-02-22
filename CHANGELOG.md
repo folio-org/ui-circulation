@@ -18,6 +18,7 @@
 * An error for spacebar before symbols in "Subject" field when create Patron notice template. Fixes UICIRC-898.
 * UI tests replacement with RTL/Jest for component `RulesEditor`. Refs UICIRC-827.
 * UI tests replacement with RTL/Jest for `Rules-hint`. Refs UICIRC-831.
+* Add metadata info to view of Patron Notice Templates (Settings > Circulation > Patron Notice Templates). Refs UICIRC-856.
 
 ## [7.2.1](https://github.com/folio-org/ui-circulation/tree/v7.2.1) (2022-11-29)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v7.2.0...v7.2.1)

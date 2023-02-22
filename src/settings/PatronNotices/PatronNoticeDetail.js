@@ -14,12 +14,14 @@ import {
 } from '@folio/stripes/components';
 import { PreviewModal, tokensReducer } from '@folio/stripes-template-editor';
 
+import { Metadata } from '../components';
 import getTokens from './tokens';
 
 class PatronNoticeDetail extends React.Component {
   static propTypes = {
     initialValues: PropTypes.object.isRequired,
     intl: PropTypes.object.isRequired,
+    stripes: PropTypes.object.isRequired,
   };
 
   constructor(props) {
@@ -66,6 +68,9 @@ class PatronNoticeDetail extends React.Component {
         formatMessage,
         locale,
       },
+      stripes: {
+        connect,
+      }
     } = this.props;
     const {
       accordions,
@@ -83,44 +88,53 @@ class PatronNoticeDetail extends React.Component {
 
     return (
       <>
-        <Row>
-          <Col xs={12}>
-            <div data-test-staff-slip-name>
-              <KeyValue
-                label={formatMessage({ id: 'ui-circulation.settings.patronNotices.notice.name' })}
-                value={notice.name}
-              />
-            </div>
-          </Col>
-        </Row>
-        <Row>
-          <Col xs={12}>
-            <KeyValue
-              label={formatMessage({ id: 'ui-circulation.settings.patronNotices.notice.active' })}
-              value={isActiveLabel}
-            />
-          </Col>
-        </Row>
-        <Row>
-          <Col xs={12}>
-            <KeyValue
-              label={formatMessage({ id: 'ui-circulation.settings.patronNotices.notice.description' })}
-              value={notice.description}
-            />
-          </Col>
-        </Row>
-        <Row>
-          <Col xs={12}>
-            <KeyValue
-              label={formatMessage({ id: 'ui-circulation.settings.patronNotices.notice.category' })}
-              value={notice.category}
-            />
-          </Col>
-        </Row>
         <AccordionSet
           accordionStatus={accordions}
           onToggle={this.onToggleSection}
         >
+          <Accordion
+            id="general-information"
+            label={formatMessage({ id:'ui-circulation.settings.staffSlips.generalInformation' })}
+          >
+            <Metadata
+              connect={connect}
+              metadata={notice.metadata}
+            />
+            <Row>
+              <Col xs={12}>
+                <div data-test-staff-slip-name>
+                  <KeyValue
+                    label={formatMessage({ id: 'ui-circulation.settings.patronNotices.notice.name' })}
+                    value={notice.name}
+                  />
+                </div>
+              </Col>
+            </Row>
+            <Row>
+              <Col xs={12}>
+                <KeyValue
+                  label={formatMessage({ id: 'ui-circulation.settings.patronNotices.notice.active' })}
+                  value={isActiveLabel}
+                />
+              </Col>
+            </Row>
+            <Row>
+              <Col xs={12}>
+                <KeyValue
+                  label={formatMessage({ id: 'ui-circulation.settings.patronNotices.notice.description' })}
+                  value={notice.description}
+                />
+              </Col>
+            </Row>
+            <Row>
+              <Col xs={12}>
+                <KeyValue
+                  label={formatMessage({ id: 'ui-circulation.settings.patronNotices.notice.category' })}
+                  value={notice.category}
+                />
+              </Col>
+            </Row>
+          </Accordion>
           <Accordion
             id="email-template-detail"
             label={formatMessage({ id: 'ui-circulation.settings.patronNotices.email' })}
