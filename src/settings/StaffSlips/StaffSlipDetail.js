@@ -83,7 +83,6 @@ class StaffSlipDetail extends React.Component {
             <StaffSlipTemplateContentSection staffSlip={staffSlip} />
           </Accordion>
         </AccordionSet>
-
       </div>
     );
   }

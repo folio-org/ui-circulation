@@ -22,7 +22,7 @@ const StaffSlipAboutSection = ({ staffSlip }) => {
           >
             <KeyValue
               label={<FormattedMessage id="ui-circulation.settings.staffSlips.name" />}
-              value={staffSlip.name}
+              value={staffSlip?.name}
             />
           </div>
         </Col>
@@ -35,7 +35,7 @@ const StaffSlipAboutSection = ({ staffSlip }) => {
           >
             <KeyValue
               label={<FormattedMessage id="ui-circulation.settings.staffSlips.description" />}
-              value={staffSlip.description}
+              value={staffSlip?.description}
             />
           </div>
         </Col>
