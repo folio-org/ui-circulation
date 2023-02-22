@@ -191,66 +191,71 @@ class PatronNoticeForm extends React.Component {
             firstMenu={this.renderCLoseIcon()}
             footer={this.renderFooterPane()}
           >
-            <Row>
-              <Col
-                xs={8}
-                data-test-patron-notice-template-name
-              >
-                <Field
-                  data-testid="patronNoticesNoticeName"
-                  label={formatMessage({ id: 'ui-circulation.settings.patronNotices.notice.name' })}
-                  name="name"
-                  required
-                  id="input-patron-notice-name"
-                  autoFocus
-                  component={TextField}
-                  validate={this.validateName}
-                />
-              </Col>
-            </Row>
-            <Row>
-              <Col xs={3}>
-                <Field
-                  data-testid="patronNoticesNoticeActive"
-                  label={formatMessage({ id: 'ui-circulation.settings.patronNotices.notice.active' })}
-                  name="active"
-                  id="input-patron-notice-active"
-                  component={Checkbox}
-                  defaultChecked={isActive}
-                />
-              </Col>
-            </Row>
-            <br />
-            <Row>
-              <Col xs={8}>
-                <Field
-                  data-testid="patronNoticesNoticeDescription"
-                  label={formatMessage({ id: 'ui-circulation.settings.patronNotices.notice.description' })}
-                  name="description"
-                  id="input-patron-notice-description"
-                  component={TextArea}
-                />
-              </Col>
-            </Row>
-            <Row>
-              <Col xs={8}>
-                <div data-test-template-category>
-                  <Field
-                    data-testid="patronNoticesNoticeCategory"
-                    label={formatMessage({ id: 'ui-circulation.settings.patronNotices.notice.category' })}
-                    name="category"
-                    component={Select}
-                    fullWidth
-                    dataOptions={categoryOptions}
-                  />
-                </div>
-              </Col>
-            </Row>
             <AccordionSet
               data-testid="patronNoticesAccordionSet"
               accordionStatus={this.state.accordions}
               onToggle={this.onToggleSection}
             >
+              <Accordion
+                id="general-information-form"
+                label={formatMessage({ id: 'ui-circulation.settings.patronNotices.generalInformation' })}
+              >
+                <Row>
+                  <Col
+                    xs={8}
+                    data-test-patron-notice-template-name
+                  >
+                    <Field
+                      data-testid="patronNoticesNoticeName"
+                      label={formatMessage({ id: 'ui-circulation.settings.patronNotices.notice.name' })}
+                      name="name"
+                      required
+                      id="input-patron-notice-name"
+                      autoFocus
+                      component={TextField}
+                      validate={this.validateName}
+                    />
+                  </Col>
+                </Row>
+                <Row>
+                  <Col xs={3}>
+                    <Field
+                      data-testid="patronNoticesNoticeActive"
+                      label={formatMessage({ id: 'ui-circulation.settings.patronNotices.notice.active' })}
+                      name="active"
+                      id="input-patron-notice-active"
+                      component={Checkbox}
+                      defaultChecked={isActive}
+                    />
+                  </Col>
+                </Row>
+                <br />
+                <Row>
+                  <Col xs={8}>
+                    <Field
+                      data-testid="patronNoticesNoticeDescription"
+                      label={formatMessage({ id: 'ui-circulation.settings.patronNotices.notice.description' })}
+                      name="description"
+                      id="input-patron-notice-description"
+                      component={TextArea}
+                    />
+                  </Col>
+                </Row>
+                <Row>
+                  <Col xs={8}>
+                    <div data-test-template-category>
+                      <Field
+                        data-testid="patronNoticesNoticeCategory"
+                        label={formatMessage({ id: 'ui-circulation.settings.patronNotices.notice.category' })}
+                        name="category"
+                        component={Select}
+                        fullWidth
+                        dataOptions={categoryOptions}
+                      />
+                    </div>
+                  </Col>
+                </Row>
+              </Accordion>
               <Accordion
                 data-testid="patronNoticesEmail"
                 id="email-template-form"
