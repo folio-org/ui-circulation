@@ -19,6 +19,8 @@
 * UI tests replacement with RTL/Jest for component `RulesEditor`. Refs UICIRC-827.
 * UI tests replacement with RTL/Jest for `Rules-hint`. Refs UICIRC-831.
 * Add metadata information to view of Staff Slips (Settings > Circulation > Staff Slips). Refs UICIRC-855.
+* Implement General information accordion. Refs UICIRC-909
+* Implement Template content accordion. Refs UICIRC-910
 
 ## [7.2.1](https://github.com/folio-org/ui-circulation/tree/v7.2.1) (2022-11-29)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v7.2.0...v7.2.1)
