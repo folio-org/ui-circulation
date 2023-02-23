@@ -12,17 +12,17 @@ const StaffSlipAboutSection = ({ staffSlip }) => {
   return (
     <div
       data-test-staff-slip-detail-about-section
-      data-testid="StaffSlipAboutSectionTestId"
+      data-testid="staffSlipAboutSectionTestId"
     >
       <Row>
         <Col xs={12}>
           <div
             data-test-staff-slip-name
-            data-testid="nameTestId"
+            data-testid="staffSlipName"
           >
             <KeyValue
               label={<FormattedMessage id="ui-circulation.settings.staffSlips.name" />}
-              value={staffSlip?.name}
+              value={staffSlip.name}
             />
           </div>
         </Col>
@@ -31,11 +31,11 @@ const StaffSlipAboutSection = ({ staffSlip }) => {
         <Col xs={12}>
           <div
             data-test-about-section-staff-slip-description
-            data-testid="descriptionTestId"
+            data-testid="staffSlipDescription"
           >
             <KeyValue
               label={<FormattedMessage id="ui-circulation.settings.staffSlips.description" />}
-              value={staffSlip?.description}
+              value={staffSlip.description}
             />
           </div>
         </Col>

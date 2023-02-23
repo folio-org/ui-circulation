@@ -8,11 +8,7 @@ import {
 
 import '../../../../../../test/jest/__mock__';
 
-import {
-  Button,
-} from '@folio/stripes/components';
 import { PreviewModal } from '@folio/stripes-template-editor';
-// import buildStripes from '../../../../../../test/jest/__mock__/stripes.mock';
 
 import StaffSlipTemplateContentSection from './StaffSlipTemplateContentSection';
 
@@ -40,46 +36,24 @@ jest.mock('@folio/stripes-template-editor', () => ({
   tokensReducer: () => mockTokensReducerReturnValue,
 }));
 
-Button.mockImplementation(jest.fn(({
-  children,
-  'data-testid': testId,
-  onClick,
-}) => (
-  // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
-  <div
-    data-testid={testId}
-    onClick={onClick}
-  >
-    {children}
-  </div>
-)));
-
 describe('StaffSlipTemplateContentSection', () => {
   const testIds = {
-    staffSlipsDisplayCol: 'staffSlipsDisplayCol',
     staffSlipsPreviewButton: 'staffSlipsPreviewButton',
-    emailTemplateCol: 'emailTemplateCol',
     previewModal: 'previewModal',
   };
-
   const testInitialValues = {
     name: 'testNameValue',
     description: 'testDescriptionValue',
     template: 'testTemplateValue',
   };
-
   const labelIds = {
-    staffSlipsName: 'ui-circulation.settings.staffSlips.name',
-    staffSlipsDescription: 'ui-circulation.settings.staffSlips.description',
-    staffSlipsDisplay: 'ui-circulation.settings.staffSlips.display',
     staffSlipsPreview: 'ui-circulation.settings.staffSlips.preview',
     staffSlipsViewPreviewLabel: 'ui-circulation.settings.staffSlips.view.previewLabel',
+    staffSlipsDisplay: 'ui-circulation.settings.staffSlips.display',
   };
-
   const getById = (id) => within(screen.getByTestId(id));
 
   afterEach(() => {
-    Button.mockClear();
     PreviewModal.mockClear();
   });
 
@@ -88,7 +62,7 @@ describe('StaffSlipTemplateContentSection', () => {
   });
 
   it('render StaffSlipTemplateContentSection', () => {
-    expect(screen.getByText('ui-circulation.settings.staffSlips.display')).toBeVisible();
+    expect(screen.getByText(labelIds.staffSlipsDisplay)).toBeVisible();
   });
 
   it('should render staff slips preview label', () => {

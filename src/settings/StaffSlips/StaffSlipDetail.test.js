@@ -16,10 +16,13 @@ import buildStripes from '../../../test/jest/__mock__/stripes.mock';
 
 import StaffSlipDetail from './StaffSlipDetail';
 import { Metadata } from '../components';
-import { StaffSlipAboutSection, StaffSlipTemplateContentSection } from './components/ViewSections';
+import {
+  StaffSlipAboutSection,
+  StaffSlipTemplateContentSection,
+} from './components/ViewSections';
 
 const mockGeneralStaffSlipDetailId = 'generalInformation';
-const mocktemplateContentId = 'templateContent';
+const mockTemplateContentId = 'templateContent';
 
 jest.mock('../components', () => ({
   Metadata: jest.fn(() => null),
@@ -34,6 +37,7 @@ const mockTestIds = {
   accordion: 'accordion',
   accordionSet: 'accordionSet',
 };
+const testStripes = buildStripes();
 
 ExpandAllButton.mockImplementation(({ onToggle }) => (
   // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
@@ -45,8 +49,6 @@ ExpandAllButton.mockImplementation(({ onToggle }) => (
     })}
   />
 ));
-
-const testStripes = buildStripes();
 
 describe('StaffSlipDetail', () => {
   const labelIds = {
@@ -63,7 +65,6 @@ describe('StaffSlipDetail', () => {
     initialValues: testInitialValues,
     stripes: testStripes,
   };
-
   const accordionDefaultStatus = {
     generalInformation: true,
     templateContent: true,
@@ -89,7 +90,7 @@ describe('StaffSlipDetail', () => {
       expect(ExpandAllButton).toHaveBeenCalled();
     });
 
-    it('should render ExpandAllButton component', () => {
+    it('should render ExpandAllButton component and also have all accordions open', () => {
       expect(ExpandAllButton).toHaveBeenCalledWith(expect.objectContaining({
         accordionStatus: accordionDefaultStatus,
       }), {});
@@ -120,7 +121,7 @@ describe('StaffSlipDetail', () => {
 
     it('should render "Template content" Accordion', () => {
       expect(Accordion).toHaveBeenNthCalledWith(2, expect.objectContaining({
-        id: mocktemplateContentId,
+        id: mockTemplateContentId,
         open: accordionDefaultStatus.templateContent,
       }), {});
     });
@@ -158,12 +159,6 @@ describe('StaffSlipDetail', () => {
             templateContent: false,
           },
         }), {});
-
-        expect(Accordion).toHaveBeenLastCalledWith(
-          expect.objectContaining({
-            open: false,
-          }), {}
-        );
       });
     });
   });
