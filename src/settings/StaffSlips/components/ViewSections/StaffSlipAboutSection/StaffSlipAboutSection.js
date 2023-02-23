@@ -12,7 +12,7 @@ const StaffSlipAboutSection = ({ staffSlip }) => {
   return (
     <div
       data-test-staff-slip-detail-about-section
-      data-testid="StaffSlipAboutSectionTestId"
+      data-testid="staffSlipAboutSectionTestId"
     >
       <Row>
         <Col xs={12}>

@@ -15,8 +15,10 @@ import {
   PreviewModal,
   tokensReducer,
 } from '@folio/stripes-template-editor';
-import css from './StaffSlipTemplateContentSection.css';
+
 import getTokens from '../../../tokens';
+
+import css from './StaffSlipTemplateContentSection.css';
 
 const StaffSlipTemplateContentSection = ({ intl, staffSlip }) => {
   const {

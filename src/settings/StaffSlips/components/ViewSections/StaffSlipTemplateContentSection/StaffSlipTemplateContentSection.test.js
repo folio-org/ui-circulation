@@ -49,6 +49,7 @@ describe('StaffSlipTemplateContentSection', () => {
   const labelIds = {
     staffSlipsPreview: 'ui-circulation.settings.staffSlips.preview',
     staffSlipsViewPreviewLabel: 'ui-circulation.settings.staffSlips.view.previewLabel',
+    staffSlipsDisplay: 'ui-circulation.settings.staffSlips.display',
   };
   const getById = (id) => within(screen.getByTestId(id));
 
@@ -61,7 +62,7 @@ describe('StaffSlipTemplateContentSection', () => {
   });
 
   it('render StaffSlipTemplateContentSection', () => {
-    expect(screen.getByText('ui-circulation.settings.staffSlips.display')).toBeVisible();
+    expect(screen.getByText(labelIds.staffSlipsDisplay)).toBeVisible();
   });
 
   it('should render staff slips preview label', () => {
