@@ -1,6 +1,8 @@
 # Change history for ui-circulation
 
-## IN PROGRESS
+## [8.0.0](https://github.com/folio-org/ui-circulation/tree/v8.0.0) (2023-02-22)
+[Full Changelog](https://github.com/folio-org/ui-circulation/compare/v7.2.1...v8.0.0)
+
 * Make consistent view of delete functionality of "Fixed due date schedules". Refs UICIRC-874.
 * Increase code coverage of "PatronNotices.js" file. Refs UICIRC-866.
 * Add "Settings (Circ): Can edit staff slips" permission. Refs UICIRC-876.
