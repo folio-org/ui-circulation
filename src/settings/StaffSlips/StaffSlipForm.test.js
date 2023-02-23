@@ -28,6 +28,8 @@ import {
   Metadata,
 } from '../components';
 
+const mockGeneralStaffSlipDetailId = 'generalInformation';
+const mockTemplateContentId = 'templateContent';
 
 jest.mock('../components', () => ({
   CancelButton: jest.fn(() => null),
@@ -60,6 +62,8 @@ ExpandAllButton.mockImplementation(({ onToggle }) => (
 describe('StaffSlipForm', () => {
   const labelIds = {
     new: 'ui-circulation.settings.staffSlips.new',
+    staffSlipsGeneralInformation: 'ui-circulation.settings.staffSlips.generalInformation',
+    staffSlipsTemplateContent: 'ui-circulation.settings.staffSlips.templateContent',
   };
   const mockedHandleSubmit = jest.fn();
   const mockedOnCancel = jest.fn();
@@ -90,11 +94,14 @@ describe('StaffSlipForm', () => {
       hasPerm: jest.fn(() => true),
       connect: jest.fn(),
     };
-    // stripes: testStripes,
     const mockedfooterPaneProps = {
       pristine: true,
       submitting: true,
       onCancel: mockedOnCancel,
+    };
+    const accordionDefaultStatus = {
+      generalInformation: true,
+      templateContent: true,
     };
 
     beforeEach(() => {
@@ -141,8 +148,16 @@ describe('StaffSlipForm', () => {
       expect(AccordionSet).toHaveBeenCalled();
     });
 
-    it('should render Accordion component', () => {
-      expect(Accordion).toHaveBeenCalled();
+    it('should render Accordion component 2 times', () => {
+      expect(Accordion).toHaveBeenCalledTimes(2);
+    });
+
+    it('should render "General information" label', () => {
+      expect(screen.getByText(labelIds.staffSlipsGeneralInformation)).toBeDefined();
+    });
+
+    it('should render "Template content" label', () => {
+      expect(screen.getByText(labelIds.staffSlipsTemplateContent)).toBeDefined();
     });
 
     it('should call Metadata component', () => {
@@ -152,42 +167,67 @@ describe('StaffSlipForm', () => {
       }), {});
     });
 
-    // it('should execute "KeyValue" with passed props', () => {
-    //   const expectedResult = {
-    //     label: labelIds.name,
-    //     value: mockedInitialValues.name,
-    //   };
+    describe('handleExpandAll method', () => {
+      it('should render components with default accordions statuses', () => {
+        expect(ExpandAllButton).toHaveBeenLastCalledWith(expect.objectContaining({
+          accordionStatus: accordionDefaultStatus,
+        }), {});
 
-    //   expect(KeyValue).toHaveBeenLastCalledWith(expectedResult, {});
-    // });
+        expect(Accordion).toHaveBeenLastCalledWith(
+          expect.objectContaining({
+            open: accordionDefaultStatus.generalInformation,
+          }), {}
+        );
+      });
 
-    // it('should execute "Field" associated with description with passed props', () => {
-    //   const expectedResult = {
-    //     label: labelIds.description,
-    //     name: 'description',
-    //     id: 'input-staff-slip-description',
-    //     autoFocus: true,
-    //     component: TextArea,
-    //     fullWidth: true,
-    //     disabled: false,
-    //   };
+      it('should expand all accordions statuses', () => {
+        fireEvent.click(screen.getByTestId(mockTestIds.expandAllButton));
 
-    //   expect(Field).toHaveBeenNthCalledWith(orderOfFieldExecution.description, expectedResult, {});
-    // });
+        expect(ExpandAllButton).toHaveBeenLastCalledWith(expect.objectContaining({
+          accordionStatus: {
+            generalInformation: false,
+            templateContent: false,
+          },
+        }), {});
+      });
+    });
 
-    // it("should execute 'Field' associated with template with passed props", () => {
-    //   const expectedResult = {
-    //     label: labelIds.display,
-    //     component: TemplateEditor,
-    //     tokens: getTokens('en'),
-    //     name: 'template',
-    //     previewModalHeader: labelIds.preview,
-    //     tokensList: TokensList,
-    //     printable: true,
-    //   };
+    describe('handleSectionToggle method', () => {
+      it('should close accordion', () => {
+        Accordion.mockImplementationOnce(({ onToggle, children }) => (
+          // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
+          <div
+            data-testid={mockTestIds.accordion}
+            onClick={() => onToggle({ id: mockGeneralStaffSlipDetailId })}
+          >
+            {children}
+          </div>
+        ));
 
-    //   expect(Field).toHaveBeenCalledWith(orderOfFieldExecution.template, expectedResult, {});
-    // });
+        render(
+          <StaffSlipForm
+            stripes={mockedStripes}
+            handleSubmit={mockedHandleSubmit}
+            initialValues={mockedInitialValues}
+            {...mockedfooterPaneProps}
+          />
+        );
+
+        expect(Accordion).toHaveBeenCalledWith(
+          expect.objectContaining({
+            open: accordionDefaultStatus.generalInformation,
+          }), {}
+        );
+
+        fireEvent.click(screen.getByTestId(mockTestIds.accordion));
+
+        expect(Accordion).toHaveBeenCalledWith(
+          expect.objectContaining({
+            open: !accordionDefaultStatus.generalInformation,
+          }), {}
+        );
+      });
+    });
   });
 
   describe('with alternative props', () => {
@@ -228,13 +268,5 @@ describe('StaffSlipForm', () => {
         {},
       );
     });
-
-    // it('should execute "Field" associated with description with passed props', () => {
-    //   expect(Field).toHaveBeenNthCalledWith(
-    //     orderOfFieldExecution.description,
-    //     expect.objectContaining({ disabled: true }),
-    //     {},
-    //   );
-    // });
   });
 });

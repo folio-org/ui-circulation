@@ -126,6 +126,20 @@ describe('StaffSlipDetail', () => {
       }), {});
     });
 
+    it("should render 'General information' Accordion", () => {
+      expect(Accordion).toHaveBeenNthCalledWith(1, expect.objectContaining({
+        id: mockGeneralStaffSlipDetailId,
+        open: accordionDefaultStatus.generalInformation,
+      }), {});
+    });
+
+    it('should render "Template content" Accordion', () => {
+      expect(Accordion).toHaveBeenNthCalledWith(2, expect.objectContaining({
+        id: mockTemplateContentId,
+        open: accordionDefaultStatus.templateContent,
+      }), {});
+    });
+
     it('should call Metadata component', () => {
       expect(Metadata).toHaveBeenCalledWith(expect.objectContaining({
         connect: testStripes.connect,
