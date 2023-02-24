@@ -20,7 +20,7 @@ const StaffSlipAboutSection = ({ initialValues, disabled }) => {
         <Col xs={8}>
           <div
             data-test-staff-slip-name
-            data-testid="nameTestId"
+            data-testid="staffSlipName"
           >
             <KeyValue
               label={<FormattedMessage id="ui-circulation.settings.staffSlips.name" />}
@@ -38,7 +38,7 @@ const StaffSlipAboutSection = ({ initialValues, disabled }) => {
             label={<FormattedMessage id="ui-circulation.settings.staffSlips.description" />}
             name="description"
             id="input-staff-slip-description"
-            data-testid="descriptionTestId"
+            data-testid="staffSlipDescription"
             autoFocus
             component={TextArea}
             fullWidth

@@ -22,6 +22,12 @@ describe('StaffSlipAboutSectionEdit', () => {
     staffSlipsDescription: 'ui-circulation.settings.staffSlips.description',
   };
 
+  const testIds = {
+    staffSlipAboutSectionTestId: 'staffSlipAboutSectionTestId',
+    staffSlipName: 'staffSlipName',
+    staffSlipDescription: 'staffSlipDescription',
+  };
+
   beforeEach(() => {
     render(
       <StaffSlipAboutSection
@@ -36,14 +42,18 @@ describe('StaffSlipAboutSectionEdit', () => {
   });
 
   it('should render label of "name" field', () => {
-    expect(getItemByTestId('nameTestId').getByText(labelIds.staffSlipsName)).toBeVisible();
+    expect(getItemByTestId(testIds.staffSlipName).getByText(labelIds.staffSlipsName)).toBeVisible();
   });
 
   it('should render value of "name" field', () => {
-    expect(getItemByTestId('nameTestId').getByText('testNameValue')).toBeVisible();
+    expect(getItemByTestId(testIds.staffSlipName).getByText(testStaffSlip.name)).toBeVisible();
   });
 
   it('should render label of "description" field', () => {
-    expect(getItemByTestId('descriptionTestId').getByText(labelIds.staffSlipsDescription)).toBeVisible();
+    expect(getItemByTestId(testIds.staffSlipDescription).getByText(labelIds.staffSlipsDescription)).toBeVisible();
+  });
+
+  it('should render value of "description" with name as "description"', () => {
+    expect(screen.getByTestId(testIds.staffSlipDescription)).toHaveAttribute('name', 'description');
   });
 });

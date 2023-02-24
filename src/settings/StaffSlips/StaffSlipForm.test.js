@@ -120,7 +120,6 @@ describe('StaffSlipForm', () => {
     });
 
     it('"form" component should have correct attributes', () => {
-      screen.debug();
       expect(screen.getByTestId('formStaffSlip')).toHaveAttribute('noValidate');
     });
 
