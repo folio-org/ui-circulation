@@ -37,6 +37,7 @@ class StaffSlipDetail extends React.Component {
   handleSectionToggle = ({ id }) => {
     this.setState(({ sections }) => {
       sections[id] = !sections[id];
+
       return { sections };
     });
   };

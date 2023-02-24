@@ -79,6 +79,7 @@ describe('StaffSlipTemplateContentSection', () => {
         printable: true,
       }), {});
     });
+
     it('should open and close PreviewModal component', () => {
       PreviewModal.mockImplementationOnce(({
         onClose,
