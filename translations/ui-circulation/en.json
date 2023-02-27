@@ -233,6 +233,8 @@
   "settings.staffSlips.requestTokenHeader": "Request",
   "settings.staffSlips.requestDeliveryAddressTokenHeader": "Request delivery address",
   "settings.staffSlips.requesterTokenHeader": "Requester",
+  "settings.staffSlips.generalInformation": "General information",
+  "settings.staffSlips.templateContent": "Template content",
 
   "settings.requestManagement.requestManagement": "Request management",
   "settings.requestManagement.recalls": "Recalls",
