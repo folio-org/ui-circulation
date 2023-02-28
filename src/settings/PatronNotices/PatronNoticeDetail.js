@@ -1,21 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import HtmlToReact, { Parser } from 'html-to-react';
+
 import { injectIntl } from 'react-intl';
 import { get } from 'lodash';
 
 import {
   Accordion,
   AccordionSet,
-  Button,
+  ExpandAllButton,
+  Row,
   Col,
-  KeyValue,
-  Row
 } from '@folio/stripes/components';
-import { PreviewModal, tokensReducer } from '@folio/stripes-template-editor';
+// import { PreviewModal, tokensReducer } from '@folio/stripes-template-editor';
 
 import { Metadata } from '../components';
-import getTokens from './tokens';
+// import getTokens from './tokens';
+import {
+  PatronNoticeAboutSection,
+  PatronNoticeEmailSection,
+} from './components/ViewSections';
 
 class PatronNoticeDetail extends React.Component {
   static propTypes = {
@@ -27,39 +30,41 @@ class PatronNoticeDetail extends React.Component {
   constructor(props) {
     super(props);
 
-    const processNodeDefinitions = new HtmlToReact.ProcessNodeDefinitions(React);
-    this.parser = new Parser();
-
-    this.rules = [
-      {
-        shouldProcessNode: () => true,
-        processNode: processNodeDefinitions.processDefaultNode,
-      }
-    ];
+    // this.rules = [
+    //   {
+    //     shouldProcessNode: () => true,
+    //     processNode: processNodeDefinitions.processDefaultNode,
+    //   }
+    // ];
 
     this.state = {
       accordions: {
-        'email-template-detail': true,
-      },
-      openPreview: false,
+        generalInformation: true,
+        emailTemplateDetail: true,
+      }
+      // openPreview: false,
     };
   }
 
-  openPreviewDialog = () => {
-    this.setState({ openPreview: true });
-  };
+  // openPreviewDialog = () => {
+  //   this.setState({ openPreview: true });
+  // };
 
-  closePreviewDialog = () => {
-    this.setState({ openPreview: false });
-  }
+  // closePreviewDialog = () => {
+  //   this.setState({ openPreview: false });
+  // }
 
-  onToggleSection = ({ id }) => {
-    this.setState((curState) => {
-      const accordions = { ...curState.accordions };
+  handleSectionToggle = ({ id }) => {
+    this.setState(({ accordions }) => {
       accordions[id] = !accordions[id];
+
       return { accordions };
     });
-  }
+  };
+
+  handleExpandAll = (accordions) => {
+    this.setState({ accordions });
+  };
 
   render() {
     const {
@@ -74,112 +79,53 @@ class PatronNoticeDetail extends React.Component {
     } = this.props;
     const {
       accordions,
-      openPreview,
+      // openPreview,
     } = this.state;
 
-    const tokens = getTokens(locale);
+    // const tokens = getTokens(locale);
 
     const emailTemplate = get(notice, 'localizedTemplates.en.body', '');
-    const parsedEmailTemplate = this.parser.parseWithInstructions(emailTemplate, () => true, this.rules);
-
-    const isActiveLabel = notice.active
-      ? formatMessage({ id: 'ui-circulation.settings.patronNotices.yes' })
-      : formatMessage({ id: 'ui-circulation.settings.patronNotices.no' });
+    // const parsedEmailTemplate = this.parser.parseWithInstructions(emailTemplate, () => true, this.rules);
 
     return (
-      <>
-        <AccordionSet
-          accordionStatus={accordions}
-          onToggle={this.onToggleSection}
-        >
+      <div data-test-patron-notice-details>
+        <Row end="xs">
+          <Col data-test-expand-all>
+            <ExpandAllButton
+              accordionStatus={accordions}
+              onToggle={this.handleExpandAll}
+            />
+          </Col>
+        </Row>
+        <AccordionSet>
           <Accordion
-            id="general-information"
-            label={formatMessage({ id:'ui-circulation.settings.staffSlips.generalInformation' })}
+            id="generalInformation"
+            label={formatMessage({ id:'ui-circulation.settings.patronNotices.generalInformation' })}
+            open={accordions.generalInformation}
+            onToggle={this.handleSectionToggle}
           >
             <Metadata
               connect={connect}
               metadata={notice.metadata}
             />
-            <Row>
-              <Col xs={12}>
-                <div data-test-staff-slip-name>
-                  <KeyValue
-                    label={formatMessage({ id: 'ui-circulation.settings.patronNotices.notice.name' })}
-                    value={notice.name}
-                  />
-                </div>
-              </Col>
-            </Row>
-            <Row>
-              <Col xs={12}>
-                <KeyValue
-                  label={formatMessage({ id: 'ui-circulation.settings.patronNotices.notice.active' })}
-                  value={isActiveLabel}
-                />
-              </Col>
-            </Row>
-            <Row>
-              <Col xs={12}>
-                <KeyValue
-                  label={formatMessage({ id: 'ui-circulation.settings.patronNotices.notice.description' })}
-                  value={notice.description}
-                />
-              </Col>
-            </Row>
-            <Row>
-              <Col xs={12}>
-                <KeyValue
-                  label={formatMessage({ id: 'ui-circulation.settings.patronNotices.notice.category' })}
-                  value={notice.category}
-                />
-              </Col>
-            </Row>
+            <PatronNoticeAboutSection notice={notice} />
           </Accordion>
           <Accordion
-            id="email-template-detail"
+            id="emailTemplateDetail"
             label={formatMessage({ id: 'ui-circulation.settings.patronNotices.email' })}
+            open={accordions.emailTemplateDetail}
+            onToggle={this.handleSectionToggle}
           >
             { emailTemplate &&
-              <div data-testid="emailAccordionContent">
-                <Row>
-                  <Col xs={8}>
-                    <KeyValue
-                      label={formatMessage({ id: 'ui-circulation.settings.patronNotices.subject' })}
-                      value={notice.localizedTemplates.en.header}
-                    />
-                  </Col>
-                  <Col
-                    data-testid="previewButtonColumn"
-                    xs={4}
-                  >
-                    <Button onClick={this.openPreviewDialog}>
-                      {formatMessage({ id: 'ui-circulation.settings.patronNotices.preview' })}
-                    </Button>
-                  </Col>
-                </Row>
-                <Row>
-                  <Col xs={12}>
-                    <KeyValue
-                      label={formatMessage({ id: 'ui-circulation.settings.patronNotices.body' })}
-                      value={parsedEmailTemplate}
-                    />
-                  </Col>
-                </Row>
-              </div>}
+              <PatronNoticeEmailSection
+                notice={notice}
+                locale={locale}
+                emailTemplate={emailTemplate}
+              />
+            }
           </Accordion>
         </AccordionSet>
-        <PreviewModal
-          open={openPreview}
-          header={
-            formatMessage({
-              id: 'ui-circulation.settings.patronNotices.view.previewHeader',
-            }, { name: notice.name })
-          }
-          previewTemplate={emailTemplate}
-          previewFormat={tokensReducer(tokens)}
-          onClose={this.closePreviewDialog}
-        />
-      </>
+      </div>
     );
   }
 }
