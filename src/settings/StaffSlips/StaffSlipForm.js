@@ -50,7 +50,7 @@ class StaffSlipForm extends React.Component {
     this.state = {
       sections: {
         generalInformation: true,
-        templateContent: true
+        templateContent: true,
       }
     };
   }

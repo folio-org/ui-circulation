@@ -10,6 +10,7 @@ import {
   Row,
 } from '@folio/stripes/components';
 import { TemplateEditor } from '@folio/stripes-template-editor';
+
 import TokensList from '../../../TokensList';
 import getTokens from '../../../tokens';
 
@@ -39,10 +40,5 @@ const StaffSlipTemplateContentSection = ({ intl }) => {
 
 StaffSlipTemplateContentSection.propTypes = {
   intl: PropTypes.object.isRequired,
-  staffSlip: PropTypes.shape({
-    name: PropTypes.string,
-    description: PropTypes.string,
-    template: PropTypes.string,
-  }).isRequired,
 };
 export default injectIntl(StaffSlipTemplateContentSection);

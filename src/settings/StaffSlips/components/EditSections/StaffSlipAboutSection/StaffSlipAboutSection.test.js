@@ -23,7 +23,7 @@ describe('StaffSlipAboutSectionEdit', () => {
   };
 
   const testIds = {
-    staffSlipAboutSectionTestId: 'staffSlipAboutSectionTestId',
+    staffSlipAboutSectionEditTestId: 'staffSlipAboutSectionEditTestId',
     staffSlipName: 'staffSlipName',
     staffSlipDescription: 'staffSlipDescription',
   };
@@ -38,7 +38,7 @@ describe('StaffSlipAboutSectionEdit', () => {
   });
 
   it('should render component', () => {
-    expect(getItemByTestId('StaffSlipAboutSectionEditTestId')).toBeTruthy();
+    expect(getItemByTestId(testIds.staffSlipAboutSectionEditTestId)).toBeTruthy();
   });
 
   it('should render label of "name" field', () => {

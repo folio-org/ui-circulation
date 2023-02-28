@@ -14,7 +14,7 @@ const StaffSlipAboutSection = ({ initialValues, disabled }) => {
   return (
     <div
       data-test-staff-slip-edit-about-section
-      data-testid="StaffSlipAboutSectionEditTestId"
+      data-testid="staffSlipAboutSectionEditTestId"
     >
       <Row>
         <Col xs={8}>

@@ -20,7 +20,7 @@ import {
 import StaffSlipForm from './StaffSlipForm';
 import {
   StaffSlipAboutSection,
-  StaffSlipTemplateContentSection
+  StaffSlipTemplateContentSection,
 } from './components/EditSections';
 import {
   CancelButton,
