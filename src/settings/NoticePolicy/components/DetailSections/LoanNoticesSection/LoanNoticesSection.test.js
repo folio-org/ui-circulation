@@ -17,6 +17,13 @@ import {
 
 jest.mock('../components', () => jest.fn(() => null));
 
+const testIds = {
+  viewLoanNoticesTestId: 'viewLoanNoticesTestId',
+};
+const labelIds = {
+  loanNoticesId: 'ui-circulation.settings.noticePolicy.loanNotices',
+};
+
 describe('LoanNoticesSection', () => {
   const mockedPolicy = {
     loanNotices: ['firstTestNotice', 'secondTestNotice'],
@@ -31,7 +38,6 @@ describe('LoanNoticesSection', () => {
       label: 'secondTestLabel',
     },
   ];
-  const loanNoticesId = 'ui-circulation.settings.noticePolicy.loanNotices';
   const eachNoticeTest = (notice, index) => {
     const number = index + 1;
     const expectedResult = {
@@ -64,12 +70,12 @@ describe('LoanNoticesSection', () => {
     });
 
     it('should render accrodion with label', () => {
-      expect(screen.getByTestId('viewLoanNoticesTestId')).toBeVisible();
-      expect(within(screen.getByTestId('viewLoanNoticesTestId')).getByText(loanNoticesId)).toBeVisible();
+      expect(screen.getByTestId(testIds.viewLoanNoticesTestId)).toBeVisible();
+      expect(within(screen.getByTestId(testIds.viewLoanNoticesTestId)).getByText(labelIds.loanNoticesId)).toBeVisible();
     });
 
     it('should pass "isOpen" prop correctly', () => {
-      expect(screen.getByTestId('viewLoanNoticesTestId')).toHaveAttribute('open');
+      expect(screen.getByTestId(testIds.viewLoanNoticesTestId)).toHaveAttribute('open');
     });
 
     mockedPolicy.loanNotices.map(eachNoticeTest);
@@ -87,7 +93,7 @@ describe('LoanNoticesSection', () => {
     });
 
     it('should pass "isOpen" prop correctly', () => {
-      expect(screen.getByTestId('viewLoanNoticesTestId')).not.toHaveAttribute('open');
+      expect(screen.getByTestId(testIds.viewLoanNoticesTestId)).not.toHaveAttribute('open');
     });
   });
 });

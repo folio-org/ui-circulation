@@ -49,6 +49,12 @@ AccordionSet.mockImplementation(({ children, onToggle }) => (
 ));
 
 describe('PatronNoticeDetail', () => {
+  const testIds = {
+    accordionSet: 'accordionSet',
+    emailAccordionContent: 'emailAccordionContent',
+    previewModal: 'previewModal',
+    previewButtonColumn: 'previewButtonColumn',
+  };
   const labelIds = {
     noticeName: 'ui-circulation.settings.patronNotices.notice.name',
     noticeActive: 'ui-circulation.settings.patronNotices.notice.active',
@@ -144,7 +150,7 @@ describe('PatronNoticeDetail', () => {
           }), {}
         );
 
-        const accordionSet = screen.getByTestId('accordionSet');
+        const accordionSet = screen.getByTestId(testIds.accordionSet);
         fireEvent.click(accordionSet);
 
         expect(AccordionSet).toHaveBeenLastCalledWith(
@@ -224,7 +230,7 @@ describe('PatronNoticeDetail', () => {
 
         if (localizedTemplates.en.body) {
           it('should render email accordion content', () => {
-            expect(screen.getByTestId('emailAccordionContent')).toBeVisible();
+            expect(screen.getByTestId(testIds.emailAccordionContent)).toBeVisible();
           });
 
           it('should render "subject" KeyValue', () => {
@@ -248,16 +254,16 @@ describe('PatronNoticeDetail', () => {
           });
 
           it('should render "preview" Button', () => {
-            expect(getById('previewButtonColumn').getByText(labelIds.preview)).toBeVisible();
+            expect(getById(testIds.previewButtonColumn).getByText(labelIds.preview)).toBeVisible();
           });
 
           describe('open/close preview dialog', () => {
             const openPreviewDialog = () => {
-              const previewButton = getById('previewButtonColumn').getByText(labelIds.preview);
+              const previewButton = getById(testIds.previewButtonColumn).getByText(labelIds.preview);
               fireEvent.click(previewButton);
             };
             const closePreviewDialog = () => {
-              const previewModal = screen.getByTestId('previewModal');
+              const previewModal = screen.getByTestId(testIds.previewModal);
               fireEvent.click(previewModal);
             };
             const testPreviewModalOpen = (open) => {
@@ -295,7 +301,7 @@ describe('PatronNoticeDetail', () => {
           });
         } else {
           it('should not render email accordion content', () => {
-            expect(screen.queryByTestId('emailAccordionContent')).not.toBeInTheDocument();
+            expect(screen.queryByTestId(testIds.emailAccordionContent)).not.toBeInTheDocument();
           });
         }
       }

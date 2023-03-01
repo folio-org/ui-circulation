@@ -14,17 +14,30 @@ import FinesSection, {
   getFormatedValue,
 } from './FinesSection';
 
+const testIds = {
+  viewFineSectionTestId: 'viewFineSectionTestId',
+  sectionOverdue: 'sectionOverdue',
+  sectionCountClosed: 'sectionCountClosed',
+  sectionMaxOverdue: 'sectionMaxOverdue',
+  sectionForgiveOverdue: 'sectionForgiveOverdue',
+  sectionOverdueRecall: 'sectionOverdueRecall',
+  sectionGracePeriod: 'sectionGracePeriod',
+  sectionMaxOverdueRecall: 'sectionMaxOverdueRecall',
+};
+const labelIds = {
+  overdueFineIdTitle: 'ui-circulation.settings.finePolicy.overdueFineTitle',
+  overdueFineId: 'ui-circulation.settings.finePolicy.overdueFine',
+  countClosedDHMId: 'ui-circulation.settings.finePolicy.countClosedDHM',
+  maximumOverdueFineId: 'ui-circulation.settings.finePolicy.maximumOverdueFine',
+  forgiveOverdueFineId: 'ui-circulation.settings.finePolicy.forgiveOverdueFine',
+  overdueRecallFineId: 'ui-circulation.settings.finePolicy.overdueRecallFine',
+  ignoreGracePeriodsRecallsId: 'ui-circulation.settings.finePolicy.ignoreGracePeriodsRecalls',
+  maximumRecallOverdueFineId: 'ui-circulation.settings.finePolicy.maximumRecallOverdueFine',
+  perPeriodId: 'ui-circulation.settings.finePolicy.perPeriod',
+};
+
 describe('FinesSection', () => {
   const getElementByTestId = (id) => within(screen.getByTestId(id));
-  const overdueFineIdTitle = 'ui-circulation.settings.finePolicy.overdueFineTitle';
-  const overdueFineId = 'ui-circulation.settings.finePolicy.overdueFine';
-  const countClosedDHMId = 'ui-circulation.settings.finePolicy.countClosedDHM';
-  const maximumOverdueFineId = 'ui-circulation.settings.finePolicy.maximumOverdueFine';
-  const forgiveOverdueFineId = 'ui-circulation.settings.finePolicy.forgiveOverdueFine';
-  const overdueRecallFineId = 'ui-circulation.settings.finePolicy.overdueRecallFine';
-  const ignoreGracePeriodsRecallsId = 'ui-circulation.settings.finePolicy.ignoreGracePeriodsRecalls';
-  const maximumRecallOverdueFineId = 'ui-circulation.settings.finePolicy.maximumRecallOverdueFine';
-  const perPeriodId = 'ui-circulation.settings.finePolicy.perPeriod';
   const mockedGetCheckboxValue = jest.fn(value => value);
 
   describe('should render correctly with valid values', () => {
@@ -60,11 +73,11 @@ describe('FinesSection', () => {
     });
 
     it('should render component header', () => {
-      expect(screen.getByText(overdueFineIdTitle)).toBeVisible();
+      expect(screen.getByText(labelIds.overdueFineIdTitle)).toBeVisible();
     });
 
     it('should pass "fineSectionOpen" correctly', () => {
-      expect(screen.getByTestId('viewFineSectionTestId')).toHaveAttribute('open');
+      expect(screen.getByTestId(testIds.viewFineSectionTestId)).toHaveAttribute('open');
     });
 
     it('should execute "getCheckboxValue" functions 3 times', () => {
@@ -72,46 +85,46 @@ describe('FinesSection', () => {
     });
 
     it('should render "overdue" section correctly', () => {
-      const expectedResult = overdueFine.quantity >= 0 ? perPeriodId : '-';
+      const expectedResult = overdueFine.quantity >= 0 ? labelIds.perPeriodId : '-';
 
-      expect(getElementByTestId('sectionOverdue').getByText(overdueFineId)).toBeVisible();
-      expect(getElementByTestId('sectionOverdue').getByText(expectedResult)).toBeVisible();
+      expect(getElementByTestId(testIds.sectionOverdue).getByText(labelIds.overdueFineId)).toBeVisible();
+      expect(getElementByTestId(testIds.sectionOverdue).getByText(expectedResult)).toBeVisible();
     });
 
     it('should render "count closed" section correctly', () => {
-      expect(getElementByTestId('sectionCountClosed').getByText(countClosedDHMId)).toBeVisible();
-      expect(getElementByTestId('sectionCountClosed').getByText(mockedPolicy.countClosed)).toBeVisible();
+      expect(getElementByTestId(testIds.sectionCountClosed).getByText(labelIds.countClosedDHMId)).toBeVisible();
+      expect(getElementByTestId(testIds.sectionCountClosed).getByText(mockedPolicy.countClosed)).toBeVisible();
     });
 
     it('should render "max overdue" section correctly', () => {
       const expectedResult = parseFloat(mockedPolicy.maxOverdueFine || 0.00).toFixed(2);
 
-      expect(getElementByTestId('sectionMaxOverdue').getByText(maximumOverdueFineId)).toBeVisible();
-      expect(getElementByTestId('sectionMaxOverdue').getByText(expectedResult)).toBeVisible();
+      expect(getElementByTestId(testIds.sectionMaxOverdue).getByText(labelIds.maximumOverdueFineId)).toBeVisible();
+      expect(getElementByTestId(testIds.sectionMaxOverdue).getByText(expectedResult)).toBeVisible();
     });
 
     it('should render "forgive overdue" section correctly', () => {
-      expect(getElementByTestId('sectionForgiveOverdue').getByText(forgiveOverdueFineId)).toBeVisible();
-      expect(getElementByTestId('sectionForgiveOverdue').getByText(mockedPolicy.forgiveOverdueFine)).toBeVisible();
+      expect(getElementByTestId(testIds.sectionForgiveOverdue).getByText(labelIds.forgiveOverdueFineId)).toBeVisible();
+      expect(getElementByTestId(testIds.sectionForgiveOverdue).getByText(mockedPolicy.forgiveOverdueFine)).toBeVisible();
     });
 
     it('should render "overdue recall" section correctly', () => {
-      const expectedResult = overdueRecallFine.quantity >= 0 ? perPeriodId : '-';
+      const expectedResult = overdueRecallFine.quantity >= 0 ? labelIds.perPeriodId : '-';
 
-      expect(getElementByTestId('sectionOverdueRecall').getByText(overdueRecallFineId)).toBeVisible();
-      expect(getElementByTestId('sectionOverdueRecall').getByText(expectedResult)).toBeVisible();
+      expect(getElementByTestId(testIds.sectionOverdueRecall).getByText(labelIds.overdueRecallFineId)).toBeVisible();
+      expect(getElementByTestId(testIds.sectionOverdueRecall).getByText(expectedResult)).toBeVisible();
     });
 
     it('should render "grace period" section correctly', () => {
-      expect(getElementByTestId('sectionGracePeriod').getByText(ignoreGracePeriodsRecallsId)).toBeVisible();
-      expect(getElementByTestId('sectionGracePeriod').getByText(mockedPolicy.gracePeriodRecall)).toBeVisible();
+      expect(getElementByTestId(testIds.sectionGracePeriod).getByText(labelIds.ignoreGracePeriodsRecallsId)).toBeVisible();
+      expect(getElementByTestId(testIds.sectionGracePeriod).getByText(mockedPolicy.gracePeriodRecall)).toBeVisible();
     });
 
     it('should render "max overdue recall" section correctly', () => {
       const expectedResult = parseFloat(mockedPolicy.maxOverdueRecallFine || 0.00).toFixed(2);
 
-      expect(getElementByTestId('sectionMaxOverdueRecall').getByText(maximumRecallOverdueFineId)).toBeVisible();
-      expect(getElementByTestId('sectionMaxOverdueRecall').getByText(expectedResult)).toBeVisible();
+      expect(getElementByTestId(testIds.sectionMaxOverdueRecall).getByText(labelIds.maximumRecallOverdueFineId)).toBeVisible();
+      expect(getElementByTestId(testIds.sectionMaxOverdueRecall).getByText(expectedResult)).toBeVisible();
     });
   });
 
@@ -139,7 +152,7 @@ describe('FinesSection', () => {
     });
 
     it('should pass "fineSectionOpen" correctly', () => {
-      expect(screen.getByTestId('viewFineSectionTestId')).not.toHaveAttribute('open');
+      expect(screen.getByTestId(testIds.viewFineSectionTestId)).not.toHaveAttribute('open');
     });
   });
 
@@ -154,7 +167,7 @@ describe('FinesSection', () => {
         intervalId: 100,
       };
       const expectedResult = {
-        id: perPeriodId,
+        id: labelIds.perPeriodId,
         values: {
           number: parseFloat(mockedFine.quantity).toFixed(2),
           period: mockedFine.intervalId,
@@ -163,7 +176,7 @@ describe('FinesSection', () => {
 
       render(getQuantityValue(mockedFine));
 
-      expect(screen.getByText(perPeriodId)).toBeVisible();
+      expect(screen.getByText(labelIds.perPeriodId)).toBeVisible();
       expect(FormattedMessage).toHaveBeenLastCalledWith(expectedResult, {});
     });
 

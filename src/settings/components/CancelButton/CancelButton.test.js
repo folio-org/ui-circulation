@@ -14,6 +14,10 @@ const renderCancelButton = (props) => {
   );
 };
 
+const labelIds = {
+  closeEntryDialog: 'ui-circulation.settings.common.closeEntryDialog',
+};
+
 describe('Cancel Button', () => {
   let renderButton;
   beforeEach(() => {
@@ -28,6 +32,6 @@ describe('Cancel Button', () => {
 
     expect(container).toBeVisible();
     expect(iconCancelButton).toBeVisible();
-    expect(queryByLabelText('ui-circulation.settings.common.closeEntryDialog')).toBeTruthy();
+    expect(queryByLabelText(labelIds.closeEntryDialog)).toBeTruthy();
   });
 });

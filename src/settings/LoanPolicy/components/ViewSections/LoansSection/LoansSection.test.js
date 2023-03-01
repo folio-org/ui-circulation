@@ -15,6 +15,13 @@ import {
 } from '../../../../../constants';
 
 describe('LoansSection', () => {
+  const testIds = {
+    loansTestId: 'loansTestId',
+    loanProfileTestId: 'loanProfileTestId',
+    scheduleTestId: 'scheduleTestId',
+    closedDueDateTestId: 'closedDueDateTestId',
+    itemLimitTestId: 'itemLimitTestId',
+  };
   const labelIds = {
     loansLabelId: 'ui-circulation.settings.loanPolicy.loans',
     loanableLabelId: 'ui-circulation.settings.loanPolicy.loanable',
@@ -65,7 +72,7 @@ describe('LoansSection', () => {
     });
 
     it('should render "loans" section correctly', () => {
-      expect(getById('loansTestId').getByText(labelIds.loansLabelId)).toBeVisible();
+      expect(getById(testIds.loansTestId).getByText(labelIds.loansLabelId)).toBeVisible();
     });
 
     sectionTest('loanable', false);
@@ -89,22 +96,22 @@ describe('LoansSection', () => {
       });
 
       it('should render "loans" section correctly', () => {
-        expect(getById('loansTestId').getByText(labelIds.loansLabelId)).toBeVisible();
+        expect(getById(testIds.loansTestId).getByText(labelIds.loansLabelId)).toBeVisible();
       });
 
       it('should render "profile" section correctly', () => {
         const labelId = 'loansPolicy.profileId';
 
-        expect(getById('loanProfileTestId').getByText(labelIds.loanProfileLabelId)).toBeVisible();
-        expect(getById('loanProfileTestId').getByText(labelId)).toBeVisible();
+        expect(getById(testIds.loanProfileTestId).getByText(labelIds.loanProfileLabelId)).toBeVisible();
+        expect(getById(testIds.loanProfileTestId).getByText(labelId)).toBeVisible();
         expect(mockedGetDropdownValue).toHaveBeenNthCalledWith(1, labelId, loanProfileTypes);
       });
 
       sectionTest('period');
 
       it('should render "schedule" section correctly', () => {
-        expect(getById('scheduleTestId').getByText(labelIds.fDDSlimitLabelId)).toBeVisible();
-        expect(getById('scheduleTestId').getByText('loansPolicy.fixedDueDateScheduleId-processed')).toBeVisible();
+        expect(getById(testIds.scheduleTestId).getByText(labelIds.fDDSlimitLabelId)).toBeVisible();
+        expect(getById(testIds.scheduleTestId).getByText('loansPolicy.fixedDueDateScheduleId-processed')).toBeVisible();
       });
 
       it('should render "closed due date" section correctly', () => {
@@ -114,8 +121,8 @@ describe('LoansSection', () => {
         ];
         const labelId = 'loansPolicy.closedLibraryDueDateManagementId';
 
-        expect(getById('closedDueDateTestId').getByText(labelIds.closedDueDateLabelId)).toBeVisible();
-        expect(getById('closedDueDateTestId').getByText(labelId)).toBeVisible();
+        expect(getById(testIds.closedDueDateTestId).getByText(labelIds.closedDueDateLabelId)).toBeVisible();
+        expect(getById(testIds.closedDueDateTestId).getByText(labelId)).toBeVisible();
         expect(mockedGetDropdownValue).toHaveBeenNthCalledWith(2, labelId, expectedResult);
       });
 
@@ -150,8 +157,8 @@ describe('LoansSection', () => {
       sectionIsNotRenderedTest('openingTimeOffset');
 
       it('should render "item limit" section correctly', () => {
-        expect(getById('itemLimitTestId').getByText(labelIds.itemLimitLabelId)).toBeVisible();
-        expect(getById('itemLimitTestId').getByText('-')).toBeVisible();
+        expect(getById(testIds.itemLimitTestId).getByText(labelIds.itemLimitLabelId)).toBeVisible();
+        expect(getById(testIds.itemLimitTestId).getByText('-')).toBeVisible();
       });
     });
 
@@ -171,8 +178,8 @@ describe('LoansSection', () => {
       });
 
       it('should render "schedule" section correctly', () => {
-        expect(getById('scheduleTestId').getByText(labelIds.fDDSLabelId)).toBeVisible();
-        expect(getById('scheduleTestId').getByText('loansPolicy.fixedDueDateScheduleId-processed')).toBeVisible();
+        expect(getById(testIds.scheduleTestId).getByText(labelIds.fDDSLabelId)).toBeVisible();
+        expect(getById(testIds.scheduleTestId).getByText('loansPolicy.fixedDueDateScheduleId-processed')).toBeVisible();
       });
     });
   });

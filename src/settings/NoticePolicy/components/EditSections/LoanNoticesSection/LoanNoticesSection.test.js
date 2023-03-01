@@ -21,6 +21,13 @@ import {
 
 jest.mock('../components', () => jest.fn(() => null));
 
+const testIds = {
+  editLoanNotices: 'editLoanNotices',
+};
+const labelIds = {
+  loanNoticesId: 'ui-circulation.settings.noticePolicy.loanNotices',
+};
+
 describe('LoanNoticesSection', () => {
   const mockedPolicy = {
     policy: 'testPolicyData',
@@ -37,8 +44,6 @@ describe('LoanNoticesSection', () => {
   ];
 
   describe('when it is open', () => {
-    const loanNoticesId = 'ui-circulation.settings.noticePolicy.loanNotices';
-
     beforeEach(() => {
       render(
         <LoanNoticesSection
@@ -54,11 +59,11 @@ describe('LoanNoticesSection', () => {
     });
 
     it('should render accordion with label', () => {
-      expect(within(screen.getByTestId('editLoanNotices')).getByText(loanNoticesId)).toBeVisible();
+      expect(within(screen.getByTestId(testIds.editLoanNotices)).getByText(labelIds.loanNoticesId)).toBeVisible();
     });
 
     it('should pass "isOpen" prop correctly', () => {
-      expect(screen.getByTestId('editLoanNotices')).toHaveAttribute('open');
+      expect(screen.getByTestId(testIds.editLoanNotices)).toHaveAttribute('open');
     });
 
     it('should execute "FieldArray" with correct props', () => {
@@ -89,7 +94,7 @@ describe('LoanNoticesSection', () => {
     });
 
     it('should pass "isOpen" prop correctly', () => {
-      expect(screen.getByTestId('editLoanNotices')).not.toHaveAttribute('open');
+      expect(screen.getByTestId(testIds.editLoanNotices)).not.toHaveAttribute('open');
     });
   });
 

@@ -42,16 +42,22 @@ jest.mock('./components/EditSections', () => ({
 }));
 Field.mockImplementation(jest.fn(() => null));
 
-const mockTestIds = {
+const testIds = {
   expandAllButton: 'expandAllButton',
   accordion: 'accordion',
   accordionSet: 'accordionSet',
+  formStaffSlip: 'formStaffSlip',
+};
+const labelIds = {
+  new: 'ui-circulation.settings.staffSlips.new',
+  staffSlipsGeneralInformation: 'ui-circulation.settings.staffSlips.generalInformation',
+  staffSlipsTemplateContent: 'ui-circulation.settings.staffSlips.templateContent',
 };
 
 ExpandAllButton.mockImplementation(({ onToggle }) => (
   // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
   <div
-    data-testid={mockTestIds.expandAllButton}
+    data-testid={testIds.expandAllButton}
     onClick={() => onToggle({
       generalInformation: false,
       templateContent: false,
@@ -60,11 +66,6 @@ ExpandAllButton.mockImplementation(({ onToggle }) => (
 ));
 
 describe('StaffSlipForm', () => {
-  const labelIds = {
-    new: 'ui-circulation.settings.staffSlips.new',
-    staffSlipsGeneralInformation: 'ui-circulation.settings.staffSlips.generalInformation',
-    staffSlipsTemplateContent: 'ui-circulation.settings.staffSlips.templateContent',
-  };
   const mockedHandleSubmit = jest.fn();
   const mockedOnCancel = jest.fn();
   const mockedHandleExpandAll = jest.fn();
@@ -120,12 +121,12 @@ describe('StaffSlipForm', () => {
     });
 
     it('"form" component should have correct attributes', () => {
-      expect(screen.getByTestId('formStaffSlip')).toHaveAttribute('noValidate');
+      expect(screen.getByTestId(testIds.formStaffSlip)).toHaveAttribute('noValidate');
     });
 
     it('on "form" submit should execute passed function', () => {
       expect(mockedHandleSubmit).toHaveBeenCalledTimes(0);
-      fireEvent.submit(screen.getByTestId('formStaffSlip'));
+      fireEvent.submit(screen.getByTestId(testIds.formStaffSlip));
       expect(mockedHandleSubmit).toHaveBeenCalledTimes(1);
     });
 
@@ -194,7 +195,7 @@ describe('StaffSlipForm', () => {
       });
 
       it('should expand all accordions statuses', () => {
-        fireEvent.click(screen.getByTestId(mockTestIds.expandAllButton));
+        fireEvent.click(screen.getByTestId(testIds.expandAllButton));
 
         expect(ExpandAllButton).toHaveBeenLastCalledWith(expect.objectContaining({
           accordionStatus: {
@@ -210,7 +211,7 @@ describe('StaffSlipForm', () => {
         Accordion.mockImplementationOnce(({ onToggle, children }) => (
           // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
           <div
-            data-testid={mockTestIds.accordion}
+            data-testid={testIds.accordion}
             onClick={() => onToggle({ id: mockGeneralStaffSlipDetailId })}
           >
             {children}
@@ -232,7 +233,7 @@ describe('StaffSlipForm', () => {
           }), {}
         );
 
-        fireEvent.click(screen.getByTestId(mockTestIds.accordion));
+        fireEvent.click(screen.getByTestId(testIds.accordion));
 
         expect(Accordion).toHaveBeenCalledWith(
           expect.objectContaining({

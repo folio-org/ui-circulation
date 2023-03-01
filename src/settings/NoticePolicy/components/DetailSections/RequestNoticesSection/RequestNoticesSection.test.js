@@ -17,6 +17,13 @@ import {
 
 jest.mock('../components', () => jest.fn(() => null));
 
+const testIds = {
+  viewRequestNoticesTestId: 'viewRequestNoticesTestId',
+};
+const labelIds = {
+  requestNoticesId: 'ui-circulation.settings.noticePolicy.requestNotices',
+};
+
 describe('RequestNoticesSection', () => {
   const mockedPolicy = {
     requestNotices: [
@@ -34,7 +41,6 @@ describe('RequestNoticesSection', () => {
       label: 'secondTemplateData',
     },
   ];
-  const requestNoticesId = 'ui-circulation.settings.noticePolicy.requestNotices';
 
   describe('when "isOpen" prop is true', () => {
     beforeEach(() => {
@@ -52,11 +58,11 @@ describe('RequestNoticesSection', () => {
     });
 
     it('should render accordion label correctly', () => {
-      expect(within(screen.getByTestId('viewRequestNoticesTestId')).getByText(requestNoticesId)).toBeVisible();
+      expect(within(screen.getByTestId(testIds.viewRequestNoticesTestId)).getByText(labelIds.requestNoticesId)).toBeVisible();
     });
 
     it('should pass "isOpen" prop correctly', () => {
-      expect(screen.getByTestId('viewRequestNoticesTestId')).toHaveAttribute('open');
+      expect(screen.getByTestId(testIds.viewRequestNoticesTestId)).toHaveAttribute('open');
     });
 
     it('should execute each "NoticeCard" with correct props', () => {
@@ -87,7 +93,7 @@ describe('RequestNoticesSection', () => {
     });
 
     it('should pass "isOpen" prop correctly', () => {
-      expect(screen.getByTestId('viewRequestNoticesTestId')).not.toHaveAttribute('open');
+      expect(screen.getByTestId(testIds.viewRequestNoticesTestId)).not.toHaveAttribute('open');
     });
   });
 });

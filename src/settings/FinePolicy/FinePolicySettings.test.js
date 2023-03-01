@@ -27,6 +27,7 @@ describe('FinePolicySettings', () => {
   const labelIds = {
     paneTitle: 'ui-circulation.settings.finePolicy.paneTitle',
     entryLabel: 'ui-circulation.settings.finePolicy.entryLabel',
+    overdueFinesPolicies: 'ui-circulation.settings.overdue-fines-policies',
   };
   const testMutator = {
     finePolicies: {
@@ -74,9 +75,9 @@ describe('FinePolicySettings', () => {
           },
           parseInitialValues,
           permissions: {
-            delete: 'ui-circulation.settings.overdue-fines-policies',
-            post: 'ui-circulation.settings.overdue-fines-policies',
-            put: 'ui-circulation.settings.overdue-fines-policies',
+            delete: labelIds.overdueFinesPolicies,
+            post: labelIds.overdueFinesPolicies,
+            put: labelIds.overdueFinesPolicies,
           },
           resourceKey: 'finePolicies',
           resources: {

@@ -36,6 +36,14 @@ jest.mock('../RadioGroup/RadioGroup', () => jest.fn(() => null));
 jest.mock('../../../../components/Period', () => jest.fn(() => null));
 
 describe('LostItemFeeSection', () => {
+  const testIds = {
+    chargeAmountItemPatronColumn: 'chargeAmountItemPatronColumn',
+    chargeAmountItemSystemColumn: 'chargeAmountItemSystemColumn',
+    returnedLostItemProcessingFeeColumn: 'returnedLostItemProcessingFeeColumn',
+    lostItemReturnedColumn: 'lostItemReturnedColumn',
+    replacementAllowedColumn: 'replacementAllowedColumn',
+    replacedLostItemProcessingFeeColumn: 'replacedLostItemProcessingFeeColumn',
+  };
   const labelIds = {
     lostItemSection: 'ui-circulation.settings.lostItemFee.lostItemSection',
     selectInterval: 'ui-circulation.settings.lostItemFee.selectInterval',
@@ -388,37 +396,37 @@ describe('LostItemFeeSection', () => {
 
     it('should render "chargeAmountItemPatron" text', () => {
       expect(
-        getById('chargeAmountItemPatronColumn').getByText(`${labelIds.chargeAmountItemPatron}?`)
+        getById(testIds.chargeAmountItemPatronColumn).getByText(`${labelIds.chargeAmountItemPatron}?`)
       ).toBeVisible();
     });
 
     it('should render "chargeAmountItemSystem" text', () => {
       expect(
-        getById('chargeAmountItemSystemColumn').getByText(`${labelIds.chargeAmountItemSystem}?`)
+        getById(testIds.chargeAmountItemSystemColumn).getByText(`${labelIds.chargeAmountItemSystem}?`)
       ).toBeVisible();
     });
 
     it('should render "returnedLostItemProcessing" text', () => {
       expect(
-        getById('returnedLostItemProcessingFeeColumn').getByText(labelIds.returnedLostItemProcessingFee)
+        getById(testIds.returnedLostItemProcessingFeeColumn).getByText(labelIds.returnedLostItemProcessingFee)
       ).toBeVisible();
     });
 
     it('should render "lostItemReturned" text', () => {
       expect(
-        getById('lostItemReturnedColumn').getByText(labelIds.lostItemReturned)
+        getById(testIds.lostItemReturnedColumn).getByText(labelIds.lostItemReturned)
       ).toBeVisible();
     });
 
     it('should render "replacementAllowed" text', () => {
       expect(
-        getById('replacementAllowedColumn').getByText(labelIds.replacementAllowed)
+        getById(testIds.replacementAllowedColumn).getByText(labelIds.replacementAllowed)
       ).toBeVisible();
     });
 
     it('should render "replacedLostItemProcessingFee" text', () => {
       expect(
-        getById('replacedLostItemProcessingFeeColumn').getByText(labelIds.replacedLostItemProcessingFee)
+        getById(testIds.replacedLostItemProcessingFeeColumn).getByText(labelIds.replacedLostItemProcessingFee)
       ).toBeVisible();
     });
   });

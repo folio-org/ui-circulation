@@ -27,19 +27,24 @@ jest.mock('./AnonymizingTypeSelect', () => jest.fn(({ types }) => (
 jest.mock('../Period', () => jest.fn(() => null));
 
 describe('AnonymizingTypeSelectContainer', () => {
+  const testIds = {
+    period: 'period',
+  };
   const labelIds = {
     afterClose: 'ui-circulation.settings.loanHistory.afterClose',
+    immediatelyAfterClose: 'ui-circulation.settings.loanHistory.immediatelyAfterClose',
+    interval: 'ui-circulation.settings.loanHistory.interval',
   };
   const testName = 'testName';
   const testPath = 'testPath';
   const testTypes = [
     {
       value: 'immediately',
-      label: 'ui-circulation.settings.loanHistory.immediatelyAfterClose',
+      label: labelIds.immediatelyAfterClose,
     },
     {
       value: 'interval',
-      label: 'ui-circulation.settings.loanHistory.interval',
+      label: labelIds.interval,
     },
   ];
   const testDefaultProps = {
@@ -71,7 +76,7 @@ describe('AnonymizingTypeSelectContainer', () => {
         selectValuePath: `${testPath}.intervalId`,
       }), {});
 
-      expect(within(screen.getByTestId('period')).getByText(labelIds.afterClose)).toBeVisible();
+      expect(within(screen.getByTestId(testIds.period)).getByText(labelIds.afterClose)).toBeVisible();
     });
 
     it('should render Field component', () => {

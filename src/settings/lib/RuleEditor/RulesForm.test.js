@@ -9,7 +9,7 @@ import '../../../../test/jest/__mock__';
 
 import {
   Button,
-  TextField
+  TextField,
 } from '@folio/stripes/components';
 
 import { Field } from 'react-final-form';
@@ -25,8 +25,8 @@ describe('RulesForm', () => {
     checkoutSave: 'ui-circulation.settings.checkout.save',
   };
   const testIds = {
-    formLoanRules: 'form-loan-rules',
-    ruleFilter: 'rule-filter',
+    formLoanRules: 'formLoanRules',
+    ruleFilter: 'ruleFilter',
   };
   const testEditorProps = {
     propA: 'testValue',

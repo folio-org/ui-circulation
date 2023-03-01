@@ -52,7 +52,7 @@ class RulesForm extends React.Component {
       <form
         id="form-loan-rules"
         data-test-circulation-rules-form
-        data-testid="form-loan-rules"
+        data-testid="formLoanRules"
         className={styles.circulationRulesForm}
         onSubmit={handleSubmit}
       >

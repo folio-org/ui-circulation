@@ -1,10 +1,12 @@
 # Change history for ui-circulation
 
 ## IN PROGRESS
+
 * Add metadata information to view of Staff Slips (Settings > Circulation > Staff Slips). Refs UICIRC-855.
 * Implement General information accordion. Refs UICIRC-909
 * Implement Template content accordion. Refs UICIRC-910
 * Add "item.loanType" as notice token in Settings. Refs UICIRC-852
+* Use camel case notation for all data-testid. Refs UICIRC-912.
 
 ## [8.0.0](https://github.com/folio-org/ui-circulation/tree/v8.0.0) (2023-02-22)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v7.2.1...v8.0.0)
