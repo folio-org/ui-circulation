@@ -465,5 +465,7 @@
     "settings.checkout.wildcardLookup": "Wildcard-Suche nach Exemplaren anhand von Barcodes in den Apps Rückgabe, Ausleihe und Bestandsanfragen",
     "settings.index.loanAnonymization": "Anonymisierung von Ausleihen",
     "permission.settings.edit-staff-slips": "Einstellungen (Ausleihe): Kann Dienstzettel bearbeiten",
-    "settings.validate.subject": "Sollte nicht mit einem Leerzeichen beginnen"
+    "settings.validate.subject": "Sollte nicht mit einem Leerzeichen beginnen",
+    "settings.staffSlips.generalInformation": "General information",
+    "settings.staffSlips.templateContent": "Template content"
 }
