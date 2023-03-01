@@ -4,24 +4,25 @@ import { injectIntl } from 'react-intl';
 
 import {
   Col,
-  KeyValue,
   Pane,
   Paneset,
   Row,
-  TextArea,
+  Accordion,
+  AccordionSet,
+  ExpandAllButton,
 } from '@folio/stripes/components';
 
 import stripesFinalForm from '@folio/stripes/final-form';
-import { Field } from 'react-final-form';
-import { TemplateEditor } from '@folio/stripes-template-editor';
-
-import getTokens from './tokens';
-import TokensList from './TokensList';
 
 import {
   CancelButton,
   FooterPane,
+  Metadata,
 } from '../components';
+import {
+  StaffSlipAboutSection,
+  StaffSlipTemplateContentSection,
+} from './components/EditSections';
 
 import css from './StaffSlipForm.css';
 
@@ -29,6 +30,7 @@ class StaffSlipForm extends React.Component {
   static propTypes = {
     stripes: PropTypes.shape({
       hasPerm: PropTypes.func.isRequired,
+      connect:PropTypes.func,
     }).isRequired,
     initialValues: PropTypes.object,
     handleSubmit: PropTypes.func.isRequired,
@@ -40,6 +42,28 @@ class StaffSlipForm extends React.Component {
 
   static defaultProps = {
     initialValues: {},
+  };
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      sections: {
+        generalInformation: true,
+        templateContent: true,
+      }
+    };
+  }
+
+  handleSectionToggle = ({ id }) => {
+    this.setState(({ sections }) => {
+      sections[id] = !sections[id];
+      return { sections };
+    });
+  };
+
+  handleExpandAll = (sections) => {
+    this.setState({ sections });
   };
 
   render() {
@@ -56,8 +80,8 @@ class StaffSlipForm extends React.Component {
       formatMessage,
       locale,
     } = intl;
+    const { sections } = this.state;
 
-    const tokens = getTokens(locale);
     const disabled = !stripes.hasPerm('ui-circulation.settings.edit-staff-slips');
     const panelTitle = initialValues.id
       ? initialValues.name
@@ -85,43 +109,41 @@ class StaffSlipForm extends React.Component {
             firstMenu={<CancelButton onCancel={onCancel} />}
             footer={<FooterPane {...footerPaneProps} />}
           >
-            <Row>
-              <Col xs={8}>
-                <KeyValue
-                  label={formatMessage({ id: 'ui-circulation.settings.staffSlips.name' })}
-                  value={initialValues.name}
+            <Row end="xs">
+              <Col
+                data-test-expand-all
+              >
+                <ExpandAllButton
+                  accordionStatus={sections}
+                  onToggle={this.handleExpandAll}
                 />
               </Col>
             </Row>
-            <Row>
-              <Col
-                data-test-staff-slip-description
-                xs={8}
+            <AccordionSet>
+              <Accordion
+                id="generalInformation"
+                label={formatMessage({ id: 'ui-circulation.settings.staffSlips.generalInformation' })}
+                open={sections.generalInformation}
+                onToggle={this.handleSectionToggle}
               >
-                <Field
-                  label={formatMessage({ id: 'ui-circulation.settings.staffSlips.description' })}
-                  name="description"
-                  id="input-staff-slip-description"
-                  autoFocus
-                  component={TextArea}
-                  fullWidth
+                <Metadata
+                  connect={stripes.connect}
+                  metadata={initialValues.metadata}
+                />
+                <StaffSlipAboutSection
+                  initialValues={initialValues}
                   disabled={disabled}
                 />
-              </Col>
-            </Row>
-            <Row>
-              <Col xs={8}>
-                <Field
-                  label={formatMessage({ id: 'ui-circulation.settings.staffSlips.display' })}
-                  component={TemplateEditor}
-                  tokens={tokens}
-                  name="template"
-                  previewModalHeader={formatMessage({ id: 'ui-circulation.settings.staffSlips.form.previewLabel' })}
-                  tokensList={TokensList}
-                  printable
-                />
-              </Col>
-            </Row>
+              </Accordion>
+              <Accordion
+                id="templateContent"
+                label={formatMessage({ id:'ui-circulation.settings.staffSlips.templateContent' })}
+                open={sections.templateContent}
+                onToggle={this.handleSectionToggle}
+              >
+                <StaffSlipTemplateContentSection locale={locale} />
+              </Accordion>
+            </AccordionSet>
           </Pane>
         </Paneset>
       </form>
