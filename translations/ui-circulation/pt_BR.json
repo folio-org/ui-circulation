@@ -465,5 +465,7 @@
     "settings.checkout.wildcardLookup": "Realizar pesquisa curinga de itens por código de barras em aplicativos de circulação (Empréstimo, Devolução)",
     "settings.index.loanAnonymization": "Anonimização de empréstimos",
     "permission.settings.edit-staff-slips": "Configurações (Circulação): Pode editar cadastro de funcionários",
-    "settings.validate.subject": "Não deve começar com um espaço"
+    "settings.validate.subject": "Não deve começar com um espaço",
+    "settings.staffSlips.generalInformation": "Informações gerais",
+    "settings.staffSlips.templateContent": "Conteúdo do modelo"
 }
