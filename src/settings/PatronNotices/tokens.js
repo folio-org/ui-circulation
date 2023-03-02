@@ -84,6 +84,11 @@ const getTokens = (locale) => ({
       previewValue: '7 maps in pocket',
       allowedFor: [...Object.values(patronNoticeCategoryIds)],
     },
+    {
+      token: 'item.loanType',
+      previewValue: 'Can circulate',
+      allowedFor: [...Object.values(patronNoticeCategoryIds)],
+    },
   ],
   user: [
     {
