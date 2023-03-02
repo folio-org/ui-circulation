@@ -11,10 +11,8 @@ import {
   Row,
   Col,
 } from '@folio/stripes/components';
-// import { PreviewModal, tokensReducer } from '@folio/stripes-template-editor';
 
 import { Metadata } from '../components';
-// import getTokens from './tokens';
 import {
   PatronNoticeAboutSection,
   PatronNoticeEmailSection,
@@ -30,29 +28,13 @@ class PatronNoticeDetail extends React.Component {
   constructor(props) {
     super(props);
 
-    // this.rules = [
-    //   {
-    //     shouldProcessNode: () => true,
-    //     processNode: processNodeDefinitions.processDefaultNode,
-    //   }
-    // ];
-
     this.state = {
       accordions: {
         generalInformation: true,
         emailTemplateDetail: true,
-      }
-      // openPreview: false,
+      },
     };
   }
-
-  // openPreviewDialog = () => {
-  //   this.setState({ openPreview: true });
-  // };
-
-  // closePreviewDialog = () => {
-  //   this.setState({ openPreview: false });
-  // }
 
   handleSectionToggle = ({ id }) => {
     this.setState(({ accordions }) => {
@@ -79,13 +61,8 @@ class PatronNoticeDetail extends React.Component {
     } = this.props;
     const {
       accordions,
-      // openPreview,
     } = this.state;
-
-    // const tokens = getTokens(locale);
-
     const emailTemplate = get(notice, 'localizedTemplates.en.body', '');
-    // const parsedEmailTemplate = this.parser.parseWithInstructions(emailTemplate, () => true, this.rules);
 
     return (
       <div data-test-patron-notice-details>

@@ -45,7 +45,7 @@ describe('PatronNoticeAboutSection', () => {
     KeyValue.mockClear();
   });
 
-  describe('when notice is active ', () => {
+  describe('with default props ', () => {
     beforeEach(() => {
       render(
         <PatronNoticeAboutSection
@@ -62,10 +62,6 @@ describe('PatronNoticeAboutSection', () => {
       expect(getItemByTestId(testIds.patronNoticeTemplateName).getByText(labelIds.noticeName)).toBeVisible();
     });
 
-    it('should render label of "active" field', () => {
-      expect(getItemByTestId(testIds.patronNoticeActive).getByText(labelIds.noticeActiveYes)).toBeVisible();
-    });
-
     it('should render label of "description" field', () => {
       expect(getItemByTestId(testIds.patronNoticeDescription).getByText(labelIds.noticeDescription)).toBeVisible();
     });
@@ -78,7 +74,6 @@ describe('PatronNoticeAboutSection', () => {
       expect(KeyValue).toHaveBeenNthCalledWith(
         keyValueCallOrderByPlace.noticeName,
         expect.objectContaining({
-          // label: labelIds.noticeName,
           value: testNotice.name,
         }), {}
       );
@@ -92,7 +87,6 @@ describe('PatronNoticeAboutSection', () => {
       expect(KeyValue).toHaveBeenNthCalledWith(
         keyValueCallOrderByPlace.noticeDescription,
         expect.objectContaining({
-          // label: labelIds.noticeDescription,
           value: testNotice.description,
         }), {}
       );
@@ -102,29 +96,37 @@ describe('PatronNoticeAboutSection', () => {
       expect(KeyValue).toHaveBeenNthCalledWith(
         keyValueCallOrderByPlace.noticeCategory,
         expect.objectContaining({
-          // label: labelIds.noticeCategory,
           value: testNotice.category,
         }), {}
       );
     });
   });
 
-  describe('when notice is not active ', () => {
-    const testNoticeInactive = {
-      ...testNotice,
-      active: false,
-    };
+  [
+    false,
+    true,
+  ].forEach((active) => {
+    describe(`when 'active' is ${active}`, () => {
+      beforeEach(() => {
+        const props = {
+          notice: {
+            ...testNotice,
+            active,
+          },
+        };
 
-    beforeEach(() => {
-      render(
-        <PatronNoticeAboutSection
-          notice={testNoticeInactive}
-        />
-      );
-    });
+        afterEach(() => {
+          KeyValue.mockClear();
+        });
 
-    it('should render label of "active" field', () => {
-      expect(getItemByTestId(testIds.patronNoticeActive).getByText(labelIds.noticeActiveNo)).toBeVisible();
+        render(<PatronNoticeAboutSection {...props} />);
+      });
+
+      it('should render "notice active" KeyValue', () => {
+        expect(getItemByTestId(testIds.patronNoticeActive).getByText(
+          labelIds[active ? 'noticeActiveYes' : 'noticeActiveNo']
+        )).toBeVisible();
+      });
     });
   });
 });

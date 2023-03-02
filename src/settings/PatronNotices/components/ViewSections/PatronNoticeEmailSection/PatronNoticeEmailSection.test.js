@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  fireEvent,
   render,
   screen,
   within,
@@ -48,15 +49,24 @@ describe('PatronNoticeEmailSection', () => {
     category: 'testCategory',
     localizedTemplates: {
       en: {
-        header: 'test'
+        header: 'header',
       },
     }
   };
+  const testEmailTemplate = '<div>test</div>';
+  const keyValueCallOrderByPlace = {
+    subject: 1,
+    body: 2,
+  };
   const testIds = {
     patronNoticeSubject: 'patronNoticeSubject',
+    patronNoticeBody: 'patronNoticeBody',
+    emailAccordionContent: 'emailAccordionContent',
   };
   const labelIds = {
     subject: 'ui-circulation.settings.patronNotices.subject',
+    body: 'ui-circulation.settings.patronNotices.body',
+    viewPreviewHeader: 'ui-circulation.settings.patronNotices.view.previewHeader',
   };
   const getItemByTestId = (id) => within(screen.getByTestId(id));
 
@@ -73,20 +83,83 @@ describe('PatronNoticeEmailSection', () => {
       <PatronNoticeEmailSection
         notice={testNotice}
         locale="en"
-        emailTemplate="<div>test</div>"
+        emailTemplate={testEmailTemplate}
       />
     );
   });
 
   it('should render "email" accordion content', () => {
-    expect(screen.getByTestId('emailAccordionContent')).toBeVisible();
+    expect(screen.getByTestId(testIds.emailAccordionContent)).toBeVisible();
   });
 
   it('should render label of "subject" field', () => {
     expect(getItemByTestId(testIds.patronNoticeSubject).getByText(labelIds.subject)).toBeVisible();
   });
 
+  it('should render "subject" KeyValue', () => {
+    expect(KeyValue).toHaveBeenNthCalledWith(
+      keyValueCallOrderByPlace.subject,
+      expect.objectContaining({
+        value: testNotice.localizedTemplates.en.header,
+      }), {}
+    );
+  });
+
   it('should render "preview" button', () => {
-    expect(screen.getByRole('button', { name: /preview/i }));
+    expect(screen.getByRole('button', { name: /preview/i })).toBeDefined();
+  });
+
+  it('should render label of "body" field', () => {
+    expect(getItemByTestId(testIds.patronNoticeBody).getByText(labelIds.body)).toBeVisible();
+  });
+
+  it('should render "body" KeyValue', () => {
+    expect(KeyValue).toHaveBeenNthCalledWith(
+      keyValueCallOrderByPlace.body,
+      expect.objectContaining({
+        value: mockParseWithInstructionsReturnValue,
+      }), {}
+    );
+  });
+
+  it('should render PreviewModal', () => {
+    expect(PreviewModal).toHaveBeenLastCalledWith(
+      expect.objectContaining({
+        open: false,
+        previewTemplate: testEmailTemplate,
+        previewFormat: mockTokensReducerReturnValue,
+      }), {}
+    );
+  });
+
+  describe('open/close preview dialog', () => {
+    const openPreviewDialog = () => {
+      const previewButton = screen.getByRole('button', { name: /preview/i });
+      fireEvent.click(previewButton);
+    };
+    const closePreviewDialog = () => {
+      const previewModal = screen.getByTestId('previewModal');
+      fireEvent.click(previewModal);
+    };
+    const testPreviewModalOpen = (open) => {
+      expect(PreviewModal).toHaveBeenLastCalledWith(
+        expect.objectContaining({
+          open,
+          previewFormat: mockTokensReducerReturnValue,
+        }), {}
+      );
+    };
+
+    it('should open preview dialog', () => {
+      openPreviewDialog();
+      testPreviewModalOpen(true);
+    });
+
+    it('should close preview dialog', () => {
+      openPreviewDialog();
+      testPreviewModalOpen(true);
+      closePreviewDialog();
+      testPreviewModalOpen(false);
+    });
   });
 });

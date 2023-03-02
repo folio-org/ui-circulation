@@ -14,7 +14,6 @@ import { PreviewModal, tokensReducer } from '@folio/stripes-template-editor';
 import getTokens from '../../../tokens';
 
 const PatronNoticeEmailSection = ({ notice, locale, emailTemplate }) => {
-  // console.log('notice ', notice);
   const processNodeDefinitions = new HtmlToReact.ProcessNodeDefinitions(React);
   const parser = new Parser();
   const rules = [
@@ -51,7 +50,10 @@ const PatronNoticeEmailSection = ({ notice, locale, emailTemplate }) => {
         </Col>
       </Row>
       <Row>
-        <Col xs={12}>
+        <Col
+          xs={12}
+          data-testid="patronNoticeBody"
+        >
           <KeyValue
             label={<FormattedMessage id="ui-circulation.settings.patronNotices.body" />}
             value={parsedEmailTemplate}
@@ -63,7 +65,7 @@ const PatronNoticeEmailSection = ({ notice, locale, emailTemplate }) => {
         header={
           <FormattedMessage
             id="ui-circulation.settings.patronNotices.view.previewHeader"
-            name={notice.name}
+            values={{ name: notice.name }}
           />
           }
         previewTemplate={emailTemplate}

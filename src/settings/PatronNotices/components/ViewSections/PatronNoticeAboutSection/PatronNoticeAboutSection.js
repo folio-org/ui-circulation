@@ -10,9 +10,9 @@ import {
 import { FormattedMessage } from 'react-intl';
 
 const PatronNoticeAboutSection = ({ notice }) => {
-  const { name, description, category } = notice;
+  const { active, name, description, category } = notice;
 
-  const isActiveLabel = notice.active
+  const isActiveLabel = active
     ? <FormattedMessage id="ui-circulation.settings.patronNotices.yes" />
     : <FormattedMessage id="ui-circulation.settings.patronNotices.no" />;
 
