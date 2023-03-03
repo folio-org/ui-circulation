@@ -18,93 +18,56 @@ import {
   PatronNoticeEmailSection,
 } from './components/ViewSections';
 
-class PatronNoticeDetail extends React.Component {
-  static propTypes = {
-    initialValues: PropTypes.object.isRequired,
-    intl: PropTypes.object.isRequired,
-    stripes: PropTypes.object.isRequired,
-  };
+const PatronNoticeDetail = (props) => {
+  const {
+    initialValues: notice,
+    intl: {
+      formatMessage,
+      locale,
+    },
+    stripes: {
+      connect,
+    }
+  } = props;
+  const emailTemplate = get(notice, 'localizedTemplates.en.body', '');
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      accordions: {
-        generalInformation: true,
-        emailTemplateDetail: true,
-      },
-    };
-  }
-
-  handleSectionToggle = ({ id }) => {
-    this.setState(({ accordions }) => {
-      accordions[id] = !accordions[id];
-
-      return { accordions };
-    });
-  };
-
-  handleExpandAll = (accordions) => {
-    this.setState({ accordions });
-  };
-
-  render() {
-    const {
-      initialValues: notice,
-      intl: {
-        formatMessage,
-        locale,
-      },
-      stripes: {
-        connect,
-      }
-    } = this.props;
-    const {
-      accordions,
-    } = this.state;
-    const emailTemplate = get(notice, 'localizedTemplates.en.body', '');
-
-    return (
-      <div data-test-patron-notice-details>
+  return (
+    <div data-test-patron-notice-details>
+      <AccordionSet>
         <Row end="xs">
           <Col data-test-expand-all>
-            <ExpandAllButton
-              accordionStatus={accordions}
-              onToggle={this.handleExpandAll}
-            />
+            <ExpandAllButton />
           </Col>
         </Row>
-        <AccordionSet>
-          <Accordion
-            id="generalInformation"
-            label={formatMessage({ id:'ui-circulation.settings.patronNotices.generalInformation' })}
-            open={accordions.generalInformation}
-            onToggle={this.handleSectionToggle}
-          >
-            <Metadata
-              connect={connect}
-              metadata={notice.metadata}
-            />
-            <PatronNoticeAboutSection notice={notice} />
-          </Accordion>
-          <Accordion
-            id="emailTemplateDetail"
-            label={formatMessage({ id: 'ui-circulation.settings.patronNotices.email' })}
-            open={accordions.emailTemplateDetail}
-            onToggle={this.handleSectionToggle}
-          >
-            { emailTemplate &&
-              <PatronNoticeEmailSection
-                notice={notice}
-                locale={locale}
-                emailTemplate={emailTemplate}
-              />
+        <Accordion
+          label={formatMessage({ id:'ui-circulation.settings.patronNotices.generalInformation' })}
+        >
+          <Metadata
+            connect={connect}
+            metadata={notice.metadata}
+          />
+          <PatronNoticeAboutSection notice={notice} />
+        </Accordion>
+        <Accordion
+          label={formatMessage({ id: 'ui-circulation.settings.patronNotices.email' })}
+        >
+          { emailTemplate &&
+          <PatronNoticeEmailSection
+            notice={notice}
+            locale={locale}
+            emailTemplate={emailTemplate}
+          />
             }
-          </Accordion>
-        </AccordionSet>
-      </div>
-    );
-  }
-}
+        </Accordion>
+      </AccordionSet>
+    </div>
+  );
+};
+
+PatronNoticeDetail.propTypes = {
+  initialValues: PropTypes.object.isRequired,
+  intl: PropTypes.object.isRequired,
+  stripes: PropTypes.object.isRequired,
+};
 
 export default injectIntl(PatronNoticeDetail);
