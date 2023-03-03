@@ -1,13 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { FormattedMessage } from 'react-intl';
 
 import {
   Col,
   KeyValue,
-  Row
+  Row,
 } from '@folio/stripes/components';
-
-import { FormattedMessage } from 'react-intl';
 
 const PatronNoticeAboutSection = ({ notice }) => {
   const { active, name, description, category } = notice;

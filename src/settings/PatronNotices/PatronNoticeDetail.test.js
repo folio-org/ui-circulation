@@ -17,7 +17,7 @@ import { Metadata } from '../components';
 import PatronNoticeDetail from './PatronNoticeDetail';
 import {
   PatronNoticeAboutSection,
-  PatronNoticeEmailSection
+  PatronNoticeEmailSection,
 } from './components/ViewSections';
 
 jest.mock('../components', () => ({

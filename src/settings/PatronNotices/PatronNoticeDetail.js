@@ -51,13 +51,15 @@ const PatronNoticeDetail = (props) => {
         <Accordion
           label={formatMessage({ id: 'ui-circulation.settings.patronNotices.email' })}
         >
-          { emailTemplate &&
-          <PatronNoticeEmailSection
-            notice={notice}
-            locale={locale}
-            emailTemplate={emailTemplate}
-          />
-            }
+          {
+            emailTemplate && (
+              <PatronNoticeEmailSection
+                notice={notice}
+                locale={locale}
+                emailTemplate={emailTemplate}
+              />
+            )
+          }
         </Accordion>
       </AccordionSet>
     </div>

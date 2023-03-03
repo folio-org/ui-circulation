@@ -67,7 +67,7 @@ const PatronNoticeEmailSection = ({ notice, locale, emailTemplate }) => {
             id="ui-circulation.settings.patronNotices.view.previewHeader"
             values={{ name: notice.name }}
           />
-          }
+        }
         previewTemplate={emailTemplate}
         previewFormat={tokensReducer(tokens)}
         onClose={togglePreviewDialog}
