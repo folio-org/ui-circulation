@@ -14,7 +14,6 @@ import {
   Paneset,
   Accordion,
   AccordionSet,
-  ExpandAllButton,
 } from '@folio/stripes/components';
 
 import StaffSlipForm from './StaffSlipForm';
@@ -28,9 +27,6 @@ import {
   Metadata,
 } from '../components';
 
-const mockGeneralStaffSlipDetailId = 'generalInformation';
-const mockTemplateContentId = 'templateContent';
-
 jest.mock('../components', () => ({
   CancelButton: jest.fn(() => null),
   FooterPane: jest.fn(() => null),
@@ -42,23 +38,6 @@ jest.mock('./components/EditSections', () => ({
 }));
 Field.mockImplementation(jest.fn(() => null));
 
-const mockTestIds = {
-  expandAllButton: 'expandAllButton',
-  accordion: 'accordion',
-  accordionSet: 'accordionSet',
-};
-
-ExpandAllButton.mockImplementation(({ onToggle }) => (
-  // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
-  <div
-    data-testid={mockTestIds.expandAllButton}
-    onClick={() => onToggle({
-      generalInformation: false,
-      templateContent: false,
-    })}
-  />
-));
-
 describe('StaffSlipForm', () => {
   const labelIds = {
     new: 'ui-circulation.settings.staffSlips.new',
@@ -67,19 +46,14 @@ describe('StaffSlipForm', () => {
   };
   const mockedHandleSubmit = jest.fn();
   const mockedOnCancel = jest.fn();
-  const mockedHandleExpandAll = jest.fn();
-  const mockedHandleSectionToggle = jest.fn();
 
   afterEach(() => {
     Pane.mockClear();
     Accordion.mockClear();
     AccordionSet.mockClear();
-    ExpandAllButton.mockClear();
     Metadata.mockClear();
     mockedHandleSubmit.mockClear();
     mockedOnCancel.mockClear();
-    mockedHandleExpandAll.mockClear();
-    mockedHandleSectionToggle.mockClear();
     StaffSlipAboutSection.mockClear();
     StaffSlipTemplateContentSection.mockClear();
   });
@@ -98,10 +72,6 @@ describe('StaffSlipForm', () => {
       pristine: true,
       submitting: true,
       onCancel: mockedOnCancel,
-    };
-    const accordionDefaultStatus = {
-      generalInformation: true,
-      templateContent: true,
     };
 
     beforeEach(() => {
@@ -161,15 +131,13 @@ describe('StaffSlipForm', () => {
 
     it("should render 'General information' Accordion", () => {
       expect(Accordion).toHaveBeenNthCalledWith(1, expect.objectContaining({
-        id: mockGeneralStaffSlipDetailId,
-        open: accordionDefaultStatus.generalInformation,
+        label: labelIds.staffSlipsGeneralInformation
       }), {});
     });
 
     it('should render "Template content" Accordion', () => {
       expect(Accordion).toHaveBeenNthCalledWith(2, expect.objectContaining({
-        id: mockTemplateContentId,
-        open: accordionDefaultStatus.templateContent,
+        label: labelIds.staffSlipsTemplateContent
       }), {});
     });
 
@@ -178,68 +146,6 @@ describe('StaffSlipForm', () => {
         connect: mockedStripes.connect,
         metadata: mockedInitialValues.metadata,
       }), {});
-    });
-
-    describe('handleExpandAll method', () => {
-      it('should render components with default accordions statuses', () => {
-        expect(ExpandAllButton).toHaveBeenLastCalledWith(expect.objectContaining({
-          accordionStatus: accordionDefaultStatus,
-        }), {});
-
-        expect(Accordion).toHaveBeenLastCalledWith(
-          expect.objectContaining({
-            open: accordionDefaultStatus.generalInformation,
-          }), {}
-        );
-      });
-
-      it('should expand all accordions statuses', () => {
-        fireEvent.click(screen.getByTestId(mockTestIds.expandAllButton));
-
-        expect(ExpandAllButton).toHaveBeenLastCalledWith(expect.objectContaining({
-          accordionStatus: {
-            generalInformation: false,
-            templateContent: false,
-          },
-        }), {});
-      });
-    });
-
-    describe('handleSectionToggle method', () => {
-      it('should close accordion', () => {
-        Accordion.mockImplementationOnce(({ onToggle, children }) => (
-          // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
-          <div
-            data-testid={mockTestIds.accordion}
-            onClick={() => onToggle({ id: mockGeneralStaffSlipDetailId })}
-          >
-            {children}
-          </div>
-        ));
-
-        render(
-          <StaffSlipForm
-            stripes={mockedStripes}
-            handleSubmit={mockedHandleSubmit}
-            initialValues={mockedInitialValues}
-            {...mockedfooterPaneProps}
-          />
-        );
-
-        expect(Accordion).toHaveBeenCalledWith(
-          expect.objectContaining({
-            open: accordionDefaultStatus.generalInformation,
-          }), {}
-        );
-
-        fireEvent.click(screen.getByTestId(mockTestIds.accordion));
-
-        expect(Accordion).toHaveBeenCalledWith(
-          expect.objectContaining({
-            open: !accordionDefaultStatus.generalInformation,
-          }), {}
-        );
-      });
     });
   });
 
