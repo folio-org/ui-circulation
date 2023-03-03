@@ -2,89 +2,95 @@ import { patronNoticeCategoryIds } from '../../constants';
 import { generatePreviewDateValue } from './utils';
 import { DATE_FORMAT_WITH_TIME } from './utils/constantsForMoment';
 
+const item = [
+  {
+    token: 'item.title',
+    previewValue: 'The Wines of Italy',
+    allowedFor: [...Object.values(patronNoticeCategoryIds)],
+  },
+  {
+    token: 'item.primaryContributor',
+    previewValue: 'Thomas, George B.',
+    allowedFor: [...Object.values(patronNoticeCategoryIds)],
+  },
+  {
+    token: 'item.allContributors',
+    previewValue: 'Finney, Ross L.; Weir, Maurice D.',
+    allowedFor: [...Object.values(patronNoticeCategoryIds)],
+  },
+  {
+    token: 'item.barcode',
+    previewValue: '31924001521792',
+    allowedFor: [...Object.values(patronNoticeCategoryIds)],
+  },
+  {
+    token: 'item.barcodeImage',
+    previewValue: '<Barcode>31924001521792</Barcode>',
+    allowedFor: [...Object.values(patronNoticeCategoryIds)],
+  },
+  {
+    token: 'item.callNumber',
+    previewValue: 'TK7871.15.F4 S67 1988',
+    allowedFor: [...Object.values(patronNoticeCategoryIds)],
+  },
+  {
+    token: 'item.callNumberPrefix',
+    previewValue: 'New & Noteworthy',
+    allowedFor: [...Object.values(patronNoticeCategoryIds)],
+  },
+  {
+    token: 'item.callNumberSuffix',
+    previewValue: 'Handbook',
+    allowedFor: [...Object.values(patronNoticeCategoryIds)],
+  },
+  {
+    token: 'item.enumeration',
+    previewValue: 'no.1-3',
+    allowedFor: [...Object.values(patronNoticeCategoryIds)],
+  },
+  {
+    token: 'item.volume',
+    previewValue: 'v. 27',
+    allowedFor: [...Object.values(patronNoticeCategoryIds)],
+  },
+  {
+    token: 'item.chronology',
+    previewValue: '1964-1967 (Board)',
+    allowedFor: [...Object.values(patronNoticeCategoryIds)],
+  },
+  {
+    token: 'item.yearCaption',
+    previewValue: 'Convention photographs 1911-1960',
+    allowedFor: [...Object.values(patronNoticeCategoryIds)],
+  },
+  {
+    token: 'item.materialType',
+    previewValue: 'Serial',
+    allowedFor: [...Object.values(patronNoticeCategoryIds)],
+  },
+  {
+    token: 'item.copy',
+    previewValue: 'c.2',
+    allowedFor: [...Object.values(patronNoticeCategoryIds)],
+  },
+  {
+    token: 'item.numberOfPieces',
+    previewValue: '7',
+    allowedFor: [...Object.values(patronNoticeCategoryIds)],
+  },
+  {
+    token: 'item.descriptionOfPieces',
+    previewValue: '7 maps in pocket',
+    allowedFor: [...Object.values(patronNoticeCategoryIds)],
+  },
+  {
+    token: 'item.loanType',
+    previewValue: 'Can circulate',
+    allowedFor: [...Object.values(patronNoticeCategoryIds)],
+  },
+];
 const getTokens = (locale) => ({
-  item: [
-    {
-      token: 'item.title',
-      previewValue: 'The Wines of Italy',
-      allowedFor: [...Object.values(patronNoticeCategoryIds)],
-    },
-    {
-      token: 'item.primaryContributor',
-      previewValue: 'Thomas, George B.',
-      allowedFor: [...Object.values(patronNoticeCategoryIds)],
-    },
-    {
-      token: 'item.allContributors',
-      previewValue: 'Finney, Ross L.; Weir, Maurice D.',
-      allowedFor: [...Object.values(patronNoticeCategoryIds)],
-    },
-    {
-      token: 'item.barcode',
-      previewValue: '31924001521792',
-      allowedFor: [...Object.values(patronNoticeCategoryIds)],
-    },
-    {
-      token: 'item.barcodeImage',
-      previewValue: '<Barcode>31924001521792</Barcode>',
-      allowedFor: [...Object.values(patronNoticeCategoryIds)],
-    },
-    {
-      token: 'item.callNumber',
-      previewValue: 'TK7871.15.F4 S67 1988',
-      allowedFor: [...Object.values(patronNoticeCategoryIds)],
-    },
-    {
-      token: 'item.callNumberPrefix',
-      previewValue: 'New & Noteworthy',
-      allowedFor: [...Object.values(patronNoticeCategoryIds)],
-    },
-    {
-      token: 'item.callNumberSuffix',
-      previewValue: 'Handbook',
-      allowedFor: [...Object.values(patronNoticeCategoryIds)],
-    },
-    {
-      token: 'item.enumeration',
-      previewValue: 'no.1-3',
-      allowedFor: [...Object.values(patronNoticeCategoryIds)],
-    },
-    {
-      token: 'item.volume',
-      previewValue: 'v. 27',
-      allowedFor: [...Object.values(patronNoticeCategoryIds)],
-    },
-    {
-      token: 'item.chronology',
-      previewValue: '1964-1967 (Board)',
-      allowedFor: [...Object.values(patronNoticeCategoryIds)],
-    },
-    {
-      token: 'item.yearCaption',
-      previewValue: 'Convention photographs 1911-1960',
-      allowedFor: [...Object.values(patronNoticeCategoryIds)],
-    },
-    {
-      token: 'item.materialType',
-      previewValue: 'Serial',
-      allowedFor: [...Object.values(patronNoticeCategoryIds)],
-    },
-    {
-      token: 'item.copy',
-      previewValue: 'c.2',
-      allowedFor: [...Object.values(patronNoticeCategoryIds)],
-    },
-    {
-      token: 'item.numberOfPieces',
-      previewValue: '7',
-      allowedFor: [...Object.values(patronNoticeCategoryIds)],
-    },
-    {
-      token: 'item.descriptionOfPieces',
-      previewValue: '7 maps in pocket',
-      allowedFor: [...Object.values(patronNoticeCategoryIds)],
-    },
-  ],
+  item,
   user: [
     {
       token: 'user.firstName',
