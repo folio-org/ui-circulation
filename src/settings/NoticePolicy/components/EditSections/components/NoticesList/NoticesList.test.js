@@ -11,6 +11,13 @@ import '../../../../../../../test/jest/__mock__';
 import NoticesList from './NoticesList';
 import NoticeCard from '../NoticeCard';
 
+const testIds = {
+  addNotice: 'addNotice',
+};
+const labelIds = {
+  addNotice: 'ui-circulation.settings.noticePolicy.addNotice',
+};
+
 jest.mock('../NoticeCard', () => jest.fn(({
   onRemoveNotice,
   noticeIndex,
@@ -23,9 +30,6 @@ jest.mock('../NoticeCard', () => jest.fn(({
 )));
 
 describe('NoticesList', () => {
-  const labelIds = {
-    addNotice: 'ui-circulation.settings.noticePolicy.addNotice',
-  };
   const testFieldsNames = [
     'notice1',
     'notice2',
@@ -140,11 +144,11 @@ describe('NoticesList', () => {
     });
 
     it('should render add notice button', () => {
-      expect(within(screen.getByTestId('addNotice')).getByText(labelIds.addNotice)).toBeVisible();
+      expect(within(screen.getByTestId(testIds.addNotice)).getByText(labelIds.addNotice)).toBeVisible();
     });
 
     it('should add notice', () => {
-      const addNotice = screen.getByTestId('addNotice');
+      const addNotice = screen.getByTestId(testIds.addNotice);
 
       fireEvent.click(addNotice);
 

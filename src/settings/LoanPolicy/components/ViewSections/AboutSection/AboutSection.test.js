@@ -9,9 +9,16 @@ import '../../../../../../test/jest/__mock__';
 
 import AboutSection from './AboutSection';
 
-const labelIdForHeader = 'ui-circulation.settings.loanPolicy.about';
-const labelIdForNameField = 'ui-circulation.settings.loanPolicy.policyName';
-const labelIdForDescriptionField = 'ui-circulation.settings.loanPolicy.policyDescription';
+const testIds = {
+  aboutSectionTestId: 'aboutSectionTestId',
+  nameTestId: 'nameTestId',
+  descriptionTestId: 'descriptionTestId',
+};
+const labelIds = {
+  labelIdForHeader: 'ui-circulation.settings.loanPolicy.about',
+  labelIdForNameField: 'ui-circulation.settings.loanPolicy.policyName',
+  labelIdForDescriptionField: 'ui-circulation.settings.loanPolicy.policyDescription',
+};
 
 describe('AboutSection', () => {
   beforeEach(() => {
@@ -25,26 +32,26 @@ describe('AboutSection', () => {
   const getItemByTestId = (id) => within(screen.getByTestId(id));
 
   it('should render component', () => {
-    expect(getItemByTestId('aboutSectionTestId')).toBeTruthy();
+    expect(getItemByTestId(testIds.aboutSectionTestId)).toBeTruthy();
   });
 
   it('should render component header', () => {
-    expect(getItemByTestId('aboutSectionTestId').getByText(labelIdForHeader)).toBeVisible();
+    expect(getItemByTestId(testIds.aboutSectionTestId).getByText(labelIds.labelIdForHeader)).toBeVisible();
   });
 
   it('should render label of "name" field', () => {
-    expect(getItemByTestId('nameTestId').getByText(labelIdForNameField)).toBeVisible();
+    expect(getItemByTestId(testIds.nameTestId).getByText(labelIds.labelIdForNameField)).toBeVisible();
   });
 
   it('should render value of "name" field', () => {
-    expect(getItemByTestId('nameTestId').getByText('name')).toBeVisible();
+    expect(getItemByTestId(testIds.nameTestId).getByText('name')).toBeVisible();
   });
 
   it('should render label of "description" field', () => {
-    expect(getItemByTestId('descriptionTestId').getByText(labelIdForDescriptionField)).toBeVisible();
+    expect(getItemByTestId(testIds.descriptionTestId).getByText(labelIds.labelIdForDescriptionField)).toBeVisible();
   });
 
   it('should render value of "description" field', () => {
-    expect(getItemByTestId('descriptionTestId').getByText('description')).toBeVisible();
+    expect(getItemByTestId(testIds.descriptionTestId).getByText('description')).toBeVisible();
   });
 });

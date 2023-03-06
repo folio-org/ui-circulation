@@ -16,12 +16,26 @@ import {
   Select,
 } from '@folio/stripes/components';
 
-import Period, { transformInputValue } from './Period';
+import Period, {
+  transformInputValue,
+} from './Period';
+
+const testIds = {
+  onClearFieldTestElement: 'onClearFieldTestElement',
+  periodLabelSection: 'periodLabelSection',
+  periodIntervalColumn: 'periodIntervalColumn',
+  finePolicyDurationColumn: 'finePolicyDurationColumn',
+  finePolicyIntervalColumn: 'finePolicyIntervalColumn',
+};
+const labelIds = {
+  fieldLabelId: 'testFieldLabelId',
+  intervalPeriodsSuffixId: 'testIntervalPeriodsSuffix',
+};
 
 Field.mockImplementation(({ onClearField }) => {
   return (
     // eslint-disable-next-line
-    <div data-testid="onClearFieldTestElement" onClick={onClearField} />
+    <div data-testid={testIds.onClearFieldTestElement} onClick={onClearField} />
   );
 });
 
@@ -35,10 +49,6 @@ describe('Period', () => {
     Field.mockClear();
   });
 
-  const labelIds = {
-    fieldLabelId: 'testFieldLabelId',
-    intervalPeriodsSuffixId: 'testIntervalPeriodsSuffix',
-  };
   const commonMockedProps = {
     inputValuePath: 'inputValuePathTestValue',
     selectValuePath: 'selectValuePathTestValue',
@@ -58,13 +68,13 @@ describe('Period', () => {
     });
 
     it('should not render period label section', () => {
-      const periodLabelSection = screen.queryByTestId('periodLabelSection');
+      const periodLabelSection = screen.queryByTestId(testIds.periodLabelSection);
 
       expect(periodLabelSection).not.toBeInTheDocument();
     });
 
     it('should render fine policy duration column', () => {
-      const finePolicyDurationColumn = screen.getByTestId('finePolicyDurationColumn');
+      const finePolicyDurationColumn = screen.getByTestId(testIds.finePolicyDurationColumn);
 
       expect(finePolicyDurationColumn).toHaveAttribute('xs', '2');
       expect(Field).toHaveBeenNthCalledWith(
@@ -81,7 +91,7 @@ describe('Period', () => {
     });
 
     it('should render fine policy interval column', () => {
-      const finePolicyIntervalColumn = screen.getByTestId('finePolicyIntervalColumn');
+      const finePolicyIntervalColumn = screen.getByTestId(testIds.finePolicyIntervalColumn);
 
       expect(finePolicyIntervalColumn).toHaveAttribute('xs', '2');
       expect(Field).toHaveBeenNthCalledWith(
@@ -97,7 +107,7 @@ describe('Period', () => {
     });
 
     it('should not render period interval column', () => {
-      const periodIntervalColumn = screen.queryByTestId('periodIntervalColumn');
+      const periodIntervalColumn = screen.queryByTestId(testIds.periodIntervalColumn);
 
       expect(periodIntervalColumn).not.toBeInTheDocument();
     });
@@ -108,9 +118,9 @@ describe('Period', () => {
 
     render(<Period {...commonMockedProps} changeFormValue={changeFormValueMock} />);
 
-    const finePolicyDurationColumn = screen.getByTestId('finePolicyDurationColumn');
+    const finePolicyDurationColumn = screen.getByTestId(testIds.finePolicyDurationColumn);
     const textFieldOnClearFieldTestElement =
-      within(finePolicyDurationColumn).getByTestId('onClearFieldTestElement');
+      within(finePolicyDurationColumn).getByTestId(testIds.onClearFieldTestElement);
 
     fireEvent.click(textFieldOnClearFieldTestElement);
 
@@ -150,7 +160,7 @@ describe('Period', () => {
     });
 
     it('should render period label section', () => {
-      const periodLabelSection = screen.getByTestId('periodLabelSection');
+      const periodLabelSection = screen.getByTestId(testIds.periodLabelSection);
       const periodLabel = within(periodLabelSection).getByText(labelIds.fieldLabelId);
 
       expect(periodLabelSection).toBeVisible();
@@ -170,7 +180,7 @@ describe('Period', () => {
     });
 
     it('should render period label section', () => {
-      const periodLabelSection = screen.getByTestId('periodLabelSection');
+      const periodLabelSection = screen.getByTestId(testIds.periodLabelSection);
       const periodLabel = within(periodLabelSection).getByText(labelIds.fieldLabelId);
 
       expect(periodLabel).toHaveAttribute('required');
@@ -188,7 +198,7 @@ describe('Period', () => {
     });
 
     it('should render fine policy duration column', () => {
-      const finePolicyDurationColumn = screen.getByTestId('finePolicyDurationColumn');
+      const finePolicyDurationColumn = screen.getByTestId(testIds.finePolicyDurationColumn);
 
       expect(finePolicyDurationColumn).toHaveAttribute('xs', '3');
     });
@@ -205,7 +215,7 @@ describe('Period', () => {
     });
 
     it('should render period interval column', () => {
-      const periodIntervalColumn = screen.getByTestId('periodIntervalColumn');
+      const periodIntervalColumn = screen.getByTestId(testIds.periodIntervalColumn);
       const periodLabel = within(periodIntervalColumn).getByText(labelIds.intervalPeriodsSuffixId);
 
       expect(periodIntervalColumn).toBeVisible();
@@ -226,13 +236,13 @@ describe('Period', () => {
     });
 
     it('should render fine policy interval column', () => {
-      const finePolicyIntervalColumn = screen.getByTestId('finePolicyIntervalColumn');
+      const finePolicyIntervalColumn = screen.getByTestId(testIds.finePolicyIntervalColumn);
 
       expect(finePolicyIntervalColumn).toHaveAttribute('xs', '3');
     });
 
     it('should render period interval column', () => {
-      const periodIntervalColumn = screen.getByTestId('periodIntervalColumn');
+      const periodIntervalColumn = screen.getByTestId(testIds.periodIntervalColumn);
 
       expect(periodIntervalColumn).toHaveAttribute('xs', '3');
     });

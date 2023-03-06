@@ -45,7 +45,10 @@ describe('ScheduleCard', () => {
       dateToColumn: 2,
       dueDateColumn: 3,
     };
-
+    const testIds = {
+      removeColumn: 'removeColumn',
+      onClickTestElement: 'onClickTestElement',
+    };
     const labelIds = {
       dateFormTitle: 'ui-circulation.settings.fDDSform.dateFormTitle',
       remove: 'ui-circulation.settings.fDDSform.remove',
@@ -131,7 +134,7 @@ describe('ScheduleCard', () => {
 
       it('should call "onRemoveSchedule" callback on remove button click', () => {
         const onClickTestElement =
-          within(screen.getByTestId('removeColumn')).getByTestId('onClickTestElement');
+          within(screen.getByTestId(testIds.removeColumn)).getByTestId(testIds.onClickTestElement);
 
         fireEvent.click(onClickTestElement);
 

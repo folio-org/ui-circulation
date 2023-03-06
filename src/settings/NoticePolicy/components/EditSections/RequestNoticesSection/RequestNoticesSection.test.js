@@ -21,6 +21,13 @@ import {
 
 jest.mock('../components', () => jest.fn(() => null));
 
+const testIds = {
+  editRequestNotices: 'editRequestNotices',
+};
+const labelIds = {
+  requestNoticesId: 'ui-circulation.settings.noticePolicy.requestNotices',
+};
+
 describe('RequestNoticesSection', () => {
   const mockedPolicy = {
     requestNotices: [
@@ -38,7 +45,6 @@ describe('RequestNoticesSection', () => {
       label: 'secondTemplateData',
     },
   ];
-  const requestNoticesId = 'ui-circulation.settings.noticePolicy.requestNotices';
 
   describe('with positive props', () => {
     beforeEach(() => {
@@ -52,11 +58,11 @@ describe('RequestNoticesSection', () => {
     });
 
     it('should render accordion label correctly', () => {
-      expect(within(screen.getByTestId('editRequestNotices')).getByText(requestNoticesId)).toBeVisible();
+      expect(within(screen.getByTestId(testIds.editRequestNotices)).getByText(labelIds.requestNoticesId)).toBeVisible();
     });
 
     it('should pass "isOpen" prop correctly', () => {
-      expect(screen.getByTestId('editRequestNotices')).toHaveAttribute('open');
+      expect(screen.getByTestId(testIds.editRequestNotices)).toHaveAttribute('open');
     });
 
     it('should execute "FieldArray" with correct props', () => {
@@ -87,7 +93,7 @@ describe('RequestNoticesSection', () => {
     });
 
     it('should pass "isOpen" prop correctly', () => {
-      expect(screen.getByTestId('editRequestNotices')).not.toHaveAttribute('open');
+      expect(screen.getByTestId(testIds.editRequestNotices)).not.toHaveAttribute('open');
     });
   });
 

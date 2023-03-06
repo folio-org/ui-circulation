@@ -32,6 +32,7 @@ const testIds = {
   noticeCardSendByIntervalId: 'noticeCardSendByIntervalId',
   noticeCardSendEveryDuration: 'noticeCardSendEveryDuration',
   noticeCardSendEveryIntervalId: 'noticeCardSendEveryIntervalId',
+  header: 'header',
 };
 
 const testKeyValues = (testId, label, value) => {
@@ -100,7 +101,7 @@ describe('View NoticeCard in DetailSection', () => {
     });
 
     it('should render correct header', () => {
-      expect(within(screen.getByTestId('header')).getByText(noticeCard.header)).toBeVisible();
+      expect(within(screen.getByTestId(testIds.header)).getByText(noticeCard.header)).toBeVisible();
     });
 
     describe('test KeyValues', () => {

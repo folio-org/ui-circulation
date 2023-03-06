@@ -8,14 +8,18 @@ import {
 
 import optionsGenerator from './options-generator';
 
+const testIds = {
+  placeholderTestId: 'placeholderTestId',
+};
+
 describe('settings utils', () => {
   describe('optionsGenerator', () => {
     const mockedFormatMessage = jest.fn(({ id }) => id);
     const getById = (id) => within(screen.getByTestId(id));
     const optionTest = (config) => {
       config.forEach((item, index) => {
-        expect(screen.getByTestId(`optionTestId-${index}`)).toBeVisible();
-        expect(getById(`optionTestId-${index}`).getByText(item.label)).toBeVisible();
+        expect(screen.getByTestId(`optionTestId${index}`)).toBeVisible();
+        expect(getById(`optionTestId${index}`).getByText(item.label)).toBeVisible();
       });
     };
     const mockedConfigData = [
@@ -28,7 +32,7 @@ describe('settings utils', () => {
         label: 'secondTestLabel',
       },
     ];
-    const mockedPlaceholder = 'Test PLaceholder';
+    const mockedPlaceholder = 'Test Placeholder';
 
     afterEach(() => {
       mockedFormatMessage.mockClear();
@@ -46,7 +50,7 @@ describe('settings utils', () => {
       render(result.map((item) => item));
 
       expect(screen.getAllByRole('option')).toHaveLength(1);
-      expect(screen.getByText('Test PLaceholder')).toBeVisible();
+      expect(screen.getByText(mockedPlaceholder)).toBeVisible();
       expect(mockedFormatMessage).toHaveBeenCalledTimes(1);
     });
 
@@ -55,7 +59,7 @@ describe('settings utils', () => {
 
       render(result.map((item) => item));
 
-      expect(screen.queryByTestId('placeholderTestId')).not.toBeInTheDocument();
+      expect(screen.queryByTestId(testIds.placeholderTestId)).not.toBeInTheDocument();
       expect(screen.getAllByRole('option')).toHaveLength(2);
       expect(mockedFormatMessage).toHaveBeenCalledTimes(2);
       optionTest(mockedConfigData);

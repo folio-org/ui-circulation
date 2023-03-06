@@ -90,6 +90,10 @@ const testTokensSection = (sectionTestId) => {
   });
 };
 
+const testIds = {
+  tokenListWrapper: 'tokenListWrapper',
+};
+
 describe('View TokensList', () => {
   const defaultProps = {
     onLoopSelect: jest.fn(),
@@ -105,7 +109,7 @@ describe('View TokensList', () => {
     });
 
     it('should render TokensList component', () => {
-      expect(screen.getByTestId('tokenListWrapper')).toBeVisible();
+      expect(screen.getByTestId(testIds.tokenListWrapper)).toBeVisible();
     });
 
     testTokensSection('item');

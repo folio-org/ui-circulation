@@ -30,7 +30,12 @@ Accordion.mockImplementation(jest.fn(({
 )));
 
 describe('RequestManagementSection', () => {
-  const requestManagementLabelId = 'ui-circulation.settings.requestManagement.requestManagement';
+  const testIds = {
+    sectionHeaderTestId: 'sectionHeaderTestId',
+  };
+  const labelIds = {
+    requestManagementLabelId: 'ui-circulation.settings.requestManagement.requestManagement',
+  };
   const mockedFunction = jest.fn();
   const defaultProps = {
     isVisible: true,
@@ -83,7 +88,7 @@ describe('RequestManagementSection', () => {
     });
 
     it('should render component header', () => {
-      expect(getById('sectionHeaderTestId').getByText(requestManagementLabelId)).toBeVisible();
+      expect(getById(testIds.sectionHeaderTestId).getByText(labelIds.requestManagementLabelId)).toBeVisible();
     });
 
     accordionTest('recalls');
@@ -119,7 +124,7 @@ describe('RequestManagementSection', () => {
     });
 
     it('should render component header', () => {
-      expect(getById('sectionHeaderTestId').getByText(requestManagementLabelId)).toBeVisible();
+      expect(getById(testIds.sectionHeaderTestId).getByText(labelIds.requestManagementLabelId)).toBeVisible();
     });
 
     accordionTest('recalls', false);
@@ -138,7 +143,7 @@ describe('RequestManagementSection', () => {
     });
 
     it('should not render anything', () => {
-      expect(screen.queryByTestId('sectionHeaderTestId')).not.toBeInTheDocument();
+      expect(screen.queryByTestId(testIds.sectionHeaderTestId)).not.toBeInTheDocument();
     });
   });
 });

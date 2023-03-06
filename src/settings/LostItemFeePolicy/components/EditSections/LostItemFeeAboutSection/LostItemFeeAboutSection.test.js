@@ -13,13 +13,22 @@ import {
 } from '@folio/stripes/components';
 import LostItemFeeAboutSection from './LostItemFeeAboutSection';
 
-TextArea.mockImplementation(jest.fn((props) => <textarea {...props} data-testid="textAreaTestId" />));
-TextField.mockImplementation(jest.fn((props) => <input {...props} data-testid="textFieldTestId" />));
+const testIds = {
+  textAreaTestId: 'textAreaTestId',
+  textFieldTestId: 'textextFieldTestIdtAreaTestId',
+  nameTestId: 'nameTestId',
+  descriptionTestId: 'descriptionTestId',
+  lostItemFeeAboutSectionTestId: 'lostItemFeeAboutSectionTestId',
+};
+const labelIds = {
+  labelIdForNameField: 'ui-circulation.settings.lostItemFee.lostItemFeePolicyName',
+  labelIdForDescriptionField: 'ui-circulation.settings.lostItemFee.description',
+};
+
+TextArea.mockImplementation(jest.fn((props) => <textarea {...props} data-testid={testIds.textAreaTestId} />));
+TextField.mockImplementation(jest.fn((props) => <input {...props} data-testid={testIds.textFieldTestId} />));
 
 describe('LostItemFeeAboutSection', () => {
-  const labelIdForNameField = 'ui-circulation.settings.lostItemFee.lostItemFeePolicyName';
-  const labelIdForDescriptionField = 'ui-circulation.settings.lostItemFee.description';
-
   beforeEach(() => {
     render(<LostItemFeeAboutSection />);
   });
@@ -27,19 +36,19 @@ describe('LostItemFeeAboutSection', () => {
   const getItemByTestId = (id) => within(screen.getByTestId(id));
 
   it('should render component', () => {
-    expect(screen.getByTestId('lostItemFeeAboutSectionTestId')).toBeTruthy();
+    expect(screen.getByTestId(testIds.lostItemFeeAboutSectionTestId)).toBeTruthy();
   });
 
   it('should render "name" field with the correct props', () => {
-    expect(screen.getByTestId('nameTestId')).toHaveAttribute('name', 'name');
-    expect(screen.getByTestId('nameTestId')).toHaveAttribute('required');
-    expect(getItemByTestId('nameTestId').getByText(labelIdForNameField)).toBeVisible();
-    expect(getItemByTestId('nameTestId').getByTestId('textFieldTestId')).toBeVisible();
+    expect(screen.getByTestId(testIds.nameTestId)).toHaveAttribute('name', 'name');
+    expect(screen.getByTestId(testIds.nameTestId)).toHaveAttribute('required');
+    expect(getItemByTestId(testIds.nameTestId).getByText(labelIds.labelIdForNameField)).toBeVisible();
+    expect(getItemByTestId(testIds.nameTestId).getByTestId(testIds.textFieldTestId)).toBeVisible();
   });
 
   it('should render "description" field with the correct props', () => {
-    expect(screen.getByTestId('descriptionTestId')).toHaveAttribute('name', 'description');
-    expect(getItemByTestId('descriptionTestId').getByText(labelIdForDescriptionField)).toBeVisible();
-    expect(getItemByTestId('descriptionTestId').getByTestId('textAreaTestId')).toBeVisible();
+    expect(screen.getByTestId(testIds.descriptionTestId)).toHaveAttribute('name', 'description');
+    expect(getItemByTestId(testIds.descriptionTestId).getByText(labelIds.labelIdForDescriptionField)).toBeVisible();
+    expect(getItemByTestId(testIds.descriptionTestId).getByTestId(testIds.textAreaTestId)).toBeVisible();
   });
 });

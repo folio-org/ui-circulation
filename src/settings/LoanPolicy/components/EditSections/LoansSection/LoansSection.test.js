@@ -25,7 +25,7 @@ jest.mock('../../../../utils/options-generator', () => jest.fn((func, options, i
   options,
 })));
 
-const messageIds = {
+const labelIds = {
   header: 'ui-circulation.settings.loanPolicy.loans',
   loanable: 'ui-circulation.settings.loanPolicy.loanable',
   loanProfile: 'ui-circulation.settings.loanPolicy.loanProfile',
@@ -83,7 +83,7 @@ describe('LoansSection', () => {
     });
 
     it('Should be rendered with correct header', () => {
-      expect(container.getByText(messageIds.header)).toBeInTheDocument();
+      expect(container.getByText(labelIds.header)).toBeInTheDocument();
     });
 
     it('Should render loanable checkbox correctly', () => {
@@ -95,7 +95,7 @@ describe('LoansSection', () => {
       };
 
       expect(Field).toHaveBeenCalledWith(expect.objectContaining(expectedProps), {});
-      expect(container.getByText(messageIds.loanable)).toBeInTheDocument();
+      expect(container.getByText(labelIds.loanable)).toBeInTheDocument();
     });
   });
 
@@ -125,7 +125,7 @@ describe('LoansSection', () => {
       };
 
       expect(Field).toHaveBeenNthCalledWith(fieldComponentOrderCalls.loanProfile, expect.objectContaining(expectedProps), {});
-      expect(container.getByText(messageIds.loanProfile)).toBeInTheDocument();
+      expect(container.getByText(labelIds.loanProfile)).toBeInTheDocument();
     });
 
     it('Should render due date dropdown correctly', () => {
@@ -134,12 +134,12 @@ describe('LoansSection', () => {
         name: 'loansPolicy.closedLibraryDueDateManagementId',
         children: {
           options: longTermLoansOptions,
-          id: messageIds.pleaseSelect,
+          id: labelIds.pleaseSelect,
         }
       };
 
       expect(Field).toHaveBeenNthCalledWith(fieldComponentOrderCalls.closedDueDate, expect.objectContaining(expectedProps), {});
-      expect(container.getByText(messageIds.dueDate)).toBeInTheDocument();
+      expect(container.getByText(labelIds.dueDate)).toBeInTheDocument();
     });
 
     it('Should render item limit input correctly', () => {
@@ -151,17 +151,17 @@ describe('LoansSection', () => {
       };
 
       expect(Field).toHaveBeenNthCalledWith(fieldComponentOrderCalls.gracePeriod, expect.objectContaining(expectedProps), {});
-      expect(container.getByText(messageIds.itemLimit)).toBeInTheDocument();
+      expect(container.getByText(labelIds.itemLimit)).toBeInTheDocument();
     });
 
     it('"Period" component should get correct properties under "Grace period" section', () => {
       const expectedProps = {
-        fieldLabel: messageIds.gracePeriod,
+        fieldLabel: labelIds.gracePeriod,
         inputValuePath: 'loansPolicy.gracePeriod.duration',
         selectValuePath: 'loansPolicy.gracePeriod.intervalId',
         changeFormValue: initialProps.change,
         intervalPeriods: {
-          id: messageIds.selectInterval,
+          id: labelIds.selectInterval,
           options: intervalPeriods,
         },
       };
@@ -188,12 +188,12 @@ describe('LoansSection', () => {
 
     it('"Period" component should get correct properties under "Loan period" section', () => {
       const expectedProps = {
-        fieldLabel: messageIds.loanPeriod,
+        fieldLabel: labelIds.loanPeriod,
         inputValuePath: 'loansPolicy.period.duration',
         selectValuePath: 'loansPolicy.period.intervalId',
         changeFormValue: initialProps.change,
         intervalPeriods: {
-          id: messageIds.selectInterval,
+          id: labelIds.selectInterval,
           options: intervalPeriods,
         },
       };
@@ -211,7 +211,7 @@ describe('LoansSection', () => {
       };
 
       expect(Field).toHaveBeenNthCalledWith(fieldComponentOrderCalls.dueDateSchedule, expect.objectContaining(expectedProps), {});
-      expect(container.getByText(messageIds.fDDSLimit)).toBeInTheDocument();
+      expect(container.getByText(labelIds.fDDSLimit)).toBeInTheDocument();
     });
   });
 
@@ -241,7 +241,7 @@ describe('LoansSection', () => {
       };
 
       expect(Field).toHaveBeenNthCalledWith(fieldComponentOrderCalls.dueDateSchedule, expect.objectContaining(expectedProps), {});
-      expect(container.getByText(messageIds.fDDS)).toBeInTheDocument();
+      expect(container.getByText(labelIds.fDDS)).toBeInTheDocument();
     });
   });
 
@@ -268,12 +268,12 @@ describe('LoansSection', () => {
         name: 'loansPolicy.closedLibraryDueDateManagementId',
         children: {
           options: shortTermLoansOptions,
-          id: messageIds.pleaseSelect,
+          id: labelIds.pleaseSelect,
         }
       };
 
       expect(Field).toHaveBeenNthCalledWith(fieldComponentOrderCalls.closedDueDate, expect.objectContaining(expectedProps), {});
-      expect(container.getByText(messageIds.dueDate)).toBeInTheDocument();
+      expect(container.getByText(labelIds.dueDate)).toBeInTheDocument();
     });
   });
 
@@ -290,12 +290,12 @@ describe('LoansSection', () => {
 
     it('"Period" component should get correct properties for opening time offset field', () => {
       const expectedProps = {
-        fieldLabel: messageIds.openingTimeOffset,
+        fieldLabel: labelIds.openingTimeOffset,
         inputValuePath: 'loansPolicy.openingTimeOffset.duration',
         selectValuePath: 'loansPolicy.openingTimeOffset.intervalId',
         changeFormValue: initialProps.change,
         intervalPeriods: {
-          id: messageIds.selectInterval,
+          id: labelIds.selectInterval,
           options: intervalPeriods.slice(0, 2).reverse(),
         },
       };
@@ -331,3 +331,4 @@ describe('LoansSection', () => {
     });
   });
 });
+

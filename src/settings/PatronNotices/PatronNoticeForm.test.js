@@ -29,10 +29,39 @@ import {
 } from '../components';
 
 const mockGetTokensReturnValue = 'getTokensReturnValue';
+const testIds = {
+  accordionSet: 'accordionSet',
+  form: 'patronNoticeForm',
+  patronNoticePaneset: 'patronNoticePaneset',
+  patronNoticeTemplatePane: 'patronNoticeTemplatePane',
+  patronNoticeCancelButton: 'patronNoticeCancelButton',
+  patronNoticeFooterPane: 'patronNoticeFooterPane',
+  patronNoticesNoticeName: 'patronNoticesNoticeName',
+  patronNoticesNoticeActive: 'patronNoticesNoticeActive',
+  patronNoticesNoticeDescription: 'patronNoticesNoticeDescription',
+  patronNoticesNoticeCategory: 'patronNoticesNoticeCategory',
+  patronNoticesSubject: 'patronNoticesSubject',
+  patronNoticesBody: 'patronNoticesBody',
+  patronNoticesAccordionSet: 'patronNoticesAccordionSet',
+  patronNoticesEmail: 'patronNoticesEmail',
+};
+const labelIds = {
+  patronNoticesNew: 'ui-circulation.settings.patronNotices.newLabel',
+  patronNoticesCloseDialog: 'ui-circulation.settings.patronNotices.closeDialog',
+  patronNoticesNoticeName: 'ui-circulation.settings.patronNotices.notice.name',
+  patronNoticesNoticeActive: 'ui-circulation.settings.patronNotices.notice.active',
+  patronNoticesNoticeDescription: 'ui-circulation.settings.patronNotices.notice.description',
+  patronNoticesNoticeCategory: 'ui-circulation.settings.patronNotices.notice.category',
+  patronNoticesEmail: 'ui-circulation.settings.patronNotices.email',
+  patronNoticesSubject: 'ui-circulation.settings.patronNotices.subject',
+  patronNoticesBody: 'ui-circulation.settings.patronNotices.body',
+  patronNoticesFormPreviewHeader: 'ui-circulation.settings.patronNotices.form.previewHeader',
+  patronNoticesPredefinedWarning: 'ui-circulation.settings.patronNotices.predefinedWarning',
+};
 
 AccordionSet.mockImplementation(({ children, onToggle }) => (
   // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
-  <span data-testid="accordionSet" onClick={() => onToggle({ id: 'email-template-form' })}>
+  <span data-testid={testIds.accordionSet} onClick={() => onToggle({ id: 'email-template-form' })}>
     {children}
   </span>
 ));
@@ -53,34 +82,6 @@ jest.mock('../../constants', () => ({
 }));
 
 describe('PatronNoticeForm', () => {
-  const testIds = {
-    form: 'patronNoticeForm',
-    patronNoticePaneset: 'patronNoticePaneset',
-    patronNoticeTemplatePane: 'patronNoticeTemplatePane',
-    patronNoticeCancelButton: 'patronNoticeCancelButton',
-    patronNoticeFooterPane: 'patronNoticeFooterPane',
-    patronNoticesNoticeName: 'patronNoticesNoticeName',
-    patronNoticesNoticeActive: 'patronNoticesNoticeActive',
-    patronNoticesNoticeDescription: 'patronNoticesNoticeDescription',
-    patronNoticesNoticeCategory: 'patronNoticesNoticeCategory',
-    patronNoticesSubject: 'patronNoticesSubject',
-    patronNoticesBody: 'patronNoticesBody',
-    patronNoticesAccordionSet: 'patronNoticesAccordionSet',
-    patronNoticesEmail: 'patronNoticesEmail',
-  };
-  const labelIds = {
-    patronNoticesNew: 'ui-circulation.settings.patronNotices.newLabel',
-    patronNoticesCloseDialog: 'ui-circulation.settings.patronNotices.closeDialog',
-    patronNoticesNoticeName: 'ui-circulation.settings.patronNotices.notice.name',
-    patronNoticesNoticeActive: 'ui-circulation.settings.patronNotices.notice.active',
-    patronNoticesNoticeDescription: 'ui-circulation.settings.patronNotices.notice.description',
-    patronNoticesNoticeCategory: 'ui-circulation.settings.patronNotices.notice.category',
-    patronNoticesEmail: 'ui-circulation.settings.patronNotices.email',
-    patronNoticesSubject: 'ui-circulation.settings.patronNotices.subject',
-    patronNoticesBody: 'ui-circulation.settings.patronNotices.body',
-    patronNoticesFormPreviewHeader: 'ui-circulation.settings.patronNotices.form.previewHeader',
-    patronNoticesPredefinedWarning: 'ui-circulation.settings.patronNotices.predefinedWarning',
-  };
   const testOkapi = {
     url: 'testUrl',
     tenant: 'testTenant',
@@ -239,7 +240,7 @@ describe('PatronNoticeForm', () => {
           },
         }, true);
 
-        const accordionSet = screen.getByTestId('accordionSet');
+        const accordionSet = screen.getByTestId(testIds.accordionSet);
         fireEvent.click(accordionSet);
 
         componentPropsCheck(AccordionSet, testIds.patronNoticesAccordionSet, {
