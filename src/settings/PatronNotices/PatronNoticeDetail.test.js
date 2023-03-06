@@ -20,6 +20,9 @@ import {
   PatronNoticeEmailSection,
 } from './components/ViewSections';
 
+const mockPatronNoticeAboutSection = 'PatronNoticeAboutSection';
+const mockPatronNoticeEmailSection = 'PatronNoticeEmailSection';
+
 jest.mock('../components', () => ({
   Metadata: jest.fn(() => null),
 }));
@@ -108,7 +111,7 @@ describe('PatronNoticeDetail', () => {
     });
 
     it('should render PatronNoticeAboutSection', () => {
-      expect(screen.getByText('PatronNoticeAboutSection')).toBeVisible();
+      expect(screen.getByText(mockPatronNoticeAboutSection)).toBeVisible();
     });
   });
 
@@ -140,11 +143,11 @@ describe('PatronNoticeDetail', () => {
 
         if (localizedTemplates.en.body) {
           it('should render PatronNoticeEmailSection', () => {
-            expect(screen.getByText('PatronNoticeEmailSection')).toBeVisible();
+            expect(screen.getByText(mockPatronNoticeEmailSection)).toBeVisible();
           });
         } else {
           it('should not render email accordion content', () => {
-            expect(screen.queryByText('PatronNoticeEmailSection')).not.toBeInTheDocument();
+            expect(screen.queryByText(mockPatronNoticeEmailSection)).not.toBeInTheDocument();
           });
         }
       }

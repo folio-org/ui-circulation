@@ -51,7 +51,7 @@ describe('PatronNoticeEmailSection', () => {
       en: {
         header: 'header',
       },
-    }
+    },
   };
   const testEmailTemplate = '<div>test</div>';
   const keyValueCallOrderByPlace = {
@@ -62,6 +62,7 @@ describe('PatronNoticeEmailSection', () => {
     patronNoticeSubject: 'patronNoticeSubject',
     patronNoticeBody: 'patronNoticeBody',
     emailAccordionContent: 'emailAccordionContent',
+    previewModal: 'previewModal',
   };
   const labelIds = {
     subject: 'ui-circulation.settings.patronNotices.subject',
@@ -138,7 +139,7 @@ describe('PatronNoticeEmailSection', () => {
       fireEvent.click(previewButton);
     };
     const closePreviewDialog = () => {
-      const previewModal = screen.getByTestId('previewModal');
+      const previewModal = screen.getByTestId(testIds.previewModal);
       fireEvent.click(previewModal);
     };
     const testPreviewModalOpen = (open) => {

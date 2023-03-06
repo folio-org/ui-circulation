@@ -7,9 +7,12 @@ import {
   Button,
   Col,
   KeyValue,
-  Row
+  Row,
 } from '@folio/stripes/components';
-import { PreviewModal, tokensReducer } from '@folio/stripes-template-editor';
+import {
+  PreviewModal,
+  tokensReducer,
+} from '@folio/stripes-template-editor';
 
 import getTokens from '../../../tokens';
 

@@ -11,6 +11,7 @@ import {
   Row,
   Col,
 } from '@folio/stripes/components';
+import { stripesShape } from '@folio/stripes/core';
 
 import { Metadata } from '../components';
 import {
@@ -69,7 +70,7 @@ const PatronNoticeDetail = (props) => {
 PatronNoticeDetail.propTypes = {
   initialValues: PropTypes.object.isRequired,
   intl: PropTypes.object.isRequired,
-  stripes: PropTypes.object.isRequired,
+  stripes: stripesShape.isRequired,
 };
 
 export default injectIntl(PatronNoticeDetail);

@@ -34,7 +34,7 @@ describe('PatronNoticeAboutSection', () => {
     noticeActiveNo: 'ui-circulation.settings.patronNotices.no',
   };
   const testIds = {
-    patronNoticeAboutSectionTestId: 'patronNoticeAboutSectionTestId',
+    patronNoticeAboutSection: 'patronNoticeAboutSection',
     patronNoticeTemplateName: 'patronNoticeTemplateName',
     patronNoticeActive: 'patronNoticeActive',
     patronNoticeDescription: 'patronNoticeDescription',
@@ -55,7 +55,7 @@ describe('PatronNoticeAboutSection', () => {
     });
 
     it('should render component', () => {
-      expect(getItemByTestId(testIds.patronNoticeAboutSectionTestId)).toBeTruthy();
+      expect(getItemByTestId(testIds.patronNoticeAboutSection)).toBeTruthy();
     });
 
     it('should render label of "name" field', () => {

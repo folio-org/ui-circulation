@@ -18,7 +18,7 @@ const PatronNoticeAboutSection = ({ notice }) => {
   return (
     <div
       data-test-patron-notice-detail-about-section
-      data-testid="patronNoticeAboutSectionTestId"
+      data-testid="patronNoticeAboutSection"
     >
       <Row>
         <Col
