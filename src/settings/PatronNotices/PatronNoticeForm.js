@@ -5,18 +5,19 @@ import {
   FormattedMessage,
   injectIntl,
 } from 'react-intl';
-import { memoize } from 'lodash';
 
+import { stripesShape } from '@folio/stripes/core';
 import {
   Accordion,
   AccordionSet,
-  Checkbox,
+  // Checkbox,
   Col,
+  ExpandAllButton,
   Pane,
   Paneset,
   Row,
-  Select,
-  TextArea,
+  // Select,
+  // TextArea,
   TextField,
 } from '@folio/stripes/components';
 import stripesFinalForm from '@folio/stripes/final-form';
@@ -24,17 +25,21 @@ import { TemplateEditor } from '@folio/stripes-template-editor';
 
 import getTokens from './tokens';
 import TokensList from './TokensList';
-import { patronNoticeCategories } from '../../constants';
 import {
   CancelButton,
   FooterPane,
+  Metadata,
 } from '../components';
+import {
+  PatronNoticeAboutSection,
+  // PatronNoticeEmailSection,
+} from './components/EditSections';
 
 import { PatronNoticeTemplate as validatePatronNoticeTemplate } from '../Validation';
 
 import {
   isEditLayer,
-  validateUniqueNameById,
+  // validateUniqueNameById,
 } from '../utils/utils';
 
 import css from './PatronNoticeForm.css';
@@ -52,6 +57,7 @@ class PatronNoticeForm extends React.Component {
     location: PropTypes.shape({
       search: PropTypes.string.isRequired,
     }).isRequired,
+    stripes: stripesShape.isRequired,
   };
 
   static defaultProps = {
@@ -67,19 +73,6 @@ class PatronNoticeForm extends React.Component {
       }
     };
   }
-
-  getTemplatesByName = (name) => {
-    const { okapi } = this.props;
-
-    return fetch(`${okapi.url}/templates?query=(name=="${name}")`,
-      {
-        headers: {
-          'X-Okapi-Tenant': okapi.tenant,
-          'X-Okapi-Token': okapi.token,
-          'Content-Type': 'application/json',
-        }
-      });
-  };
 
   onToggleSection = ({ id }) => {
     this.setState((state) => {
@@ -131,16 +124,6 @@ class PatronNoticeForm extends React.Component {
     );
   }
 
-  validateName = memoize((name) => (
-    validateUniqueNameById({
-      currentName: name,
-      previousId: this.props.initialValues.id,
-      getByName: this.getTemplatesByName,
-      selector: 'templates',
-      errorKey: 'settings.patronNotices.errors.nameExists',
-    })
-  ));
-
   render() {
     const {
       handleSubmit,
@@ -155,16 +138,14 @@ class PatronNoticeForm extends React.Component {
         formatMessage,
         locale,
       },
-      form: { getFieldState }
+      form: { getFieldState },
+      stripes: {
+        connect,
+      },
+      okapi,
     } = this.props;
     const tokens = getTokens(locale);
-    const isActive = initialValues && initialValues.active;
     const category = getFieldState('category')?.value;
-
-    const categoryOptions = patronNoticeCategories.map(({ label, id }) => ({
-      label: formatMessage({ id: label }),
-      value: id,
-    }));
 
     if (isEditLayer(search) && !initialId) {
       return null;
@@ -191,74 +172,22 @@ class PatronNoticeForm extends React.Component {
             firstMenu={this.renderCLoseIcon()}
             footer={this.renderFooterPane()}
           >
-            <AccordionSet
-              data-testid="patronNoticesAccordionSet"
-              accordionStatus={this.state.accordions}
-              onToggle={this.onToggleSection}
-            >
+            <AccordionSet>
+              <Row end="xs">
+                <Col data-test-expand-all>
+                  <ExpandAllButton />
+                </Col>
+              </Row>
               <Accordion
-                id="general-information-form"
                 label={formatMessage({ id: 'ui-circulation.settings.patronNotices.generalInformation' })}
               >
-                <Row>
-                  <Col
-                    xs={8}
-                    data-test-patron-notice-template-name
-                  >
-                    <Field
-                      data-testid="patronNoticesNoticeName"
-                      label={formatMessage({ id: 'ui-circulation.settings.patronNotices.notice.name' })}
-                      name="name"
-                      required
-                      id="input-patron-notice-name"
-                      autoFocus
-                      component={TextField}
-                      validate={this.validateName}
-                    />
-                  </Col>
-                </Row>
-                <Row>
-                  <Col xs={3}>
-                    <Field
-                      data-testid="patronNoticesNoticeActive"
-                      label={formatMessage({ id: 'ui-circulation.settings.patronNotices.notice.active' })}
-                      name="active"
-                      id="input-patron-notice-active"
-                      component={Checkbox}
-                      defaultChecked={isActive}
-                    />
-                  </Col>
-                </Row>
-                <br />
-                <Row>
-                  <Col xs={8}>
-                    <Field
-                      data-testid="patronNoticesNoticeDescription"
-                      label={formatMessage({ id: 'ui-circulation.settings.patronNotices.notice.description' })}
-                      name="description"
-                      id="input-patron-notice-description"
-                      component={TextArea}
-                    />
-                  </Col>
-                </Row>
-                <Row>
-                  <Col xs={8}>
-                    <div data-test-template-category>
-                      <Field
-                        data-testid="patronNoticesNoticeCategory"
-                        label={formatMessage({ id: 'ui-circulation.settings.patronNotices.notice.category' })}
-                        name="category"
-                        component={Select}
-                        fullWidth
-                        dataOptions={categoryOptions}
-                      />
-                    </div>
-                  </Col>
-                </Row>
+                <Metadata
+                  connect={connect}
+                  metadata={initialValues.metadata}
+                />
+                <PatronNoticeAboutSection initialValues={initialValues} okapi={okapi} />
               </Accordion>
               <Accordion
-                data-testid="patronNoticesEmail"
-                id="email-template-form"
                 label={formatMessage({ id: 'ui-circulation.settings.patronNotices.email' })}
               >
                 <Row>
