@@ -37,6 +37,12 @@ const expectedResults = [
 ];
 
 const eachScheduleTesting = (item, index) => {
+  const labelIds = {
+    dateFormTitle: 'ui-circulation.settings.fDDSform.dateFormTitle',
+    dateFrom: 'ui-circulation.settings.fDDSform.dateFrom',
+    dateTo: 'ui-circulation.settings.fDDSform.dateTo',
+    dueDate: 'ui-circulation.settings.fDDSform.dueDate',
+  };
   const currentItemNumber = index + 1;
   const currentItemSelector = () => within(screen.getByTestId(`ui-circulation.settings.fDDSform-${currentItemNumber}`));
   const {
@@ -50,13 +56,13 @@ const eachScheduleTesting = (item, index) => {
   });
 
   it(`should render header of element at number ${currentItemNumber}`, () => {
-    expect(currentItemSelector().getByText('ui-circulation.settings.fDDSform.dateFormTitle')).toBeTruthy();
+    expect(currentItemSelector().getByText(labelIds.dateFormTitle)).toBeTruthy();
   });
 
   it(`should render all necessary columns of element at number ${currentItemNumber}`, () => {
-    expect(currentItemSelector().getByText('ui-circulation.settings.fDDSform.dateFrom')).toBeTruthy();
-    expect(currentItemSelector().getByText('ui-circulation.settings.fDDSform.dateTo')).toBeTruthy();
-    expect(currentItemSelector().getByText('ui-circulation.settings.fDDSform.dueDate')).toBeTruthy();
+    expect(currentItemSelector().getByText(labelIds.dateFrom)).toBeTruthy();
+    expect(currentItemSelector().getByText(labelIds.dateTo)).toBeTruthy();
+    expect(currentItemSelector().getByText(labelIds.dueDate)).toBeTruthy();
   });
 
   it(`should render dates of element at number ${currentItemNumber} correctly`, () => {

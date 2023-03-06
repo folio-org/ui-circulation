@@ -9,8 +9,15 @@ import '../../../../../../test/jest/__mock__';
 
 import LostItemFeeAboutSection from './LostItemFeeAboutSection';
 
-const labelIdForNameField = 'ui-circulation.settings.lostItemFee.lostItemFeePolicyName';
-const labelIdForDescriptionField = 'ui-circulation.settings.lostItemFee.description';
+const testIds = {
+  lostItemFeeAboutSectionTestId: 'lostItemFeeAboutSectionTestId',
+  nameTestId: 'nameTestId',
+  descriptionTestId: 'descriptionTestId',
+};
+const labelIds = {
+  labelIdForNameField: 'ui-circulation.settings.lostItemFee.lostItemFeePolicyName',
+  labelIdForDescriptionField: 'ui-circulation.settings.lostItemFee.description',
+};
 
 describe('LostItemFeeAboutSection', () => {
   beforeEach(() => {
@@ -24,23 +31,23 @@ describe('LostItemFeeAboutSection', () => {
   const getItemByTestId = (id) => within(screen.getByTestId(id));
 
   it('should render component', () => {
-    expect(getItemByTestId('lostItemFeeAboutSectionTestId')).toBeTruthy();
+    expect(getItemByTestId(testIds.lostItemFeeAboutSectionTestId)).toBeTruthy();
   });
 
   it('should render label of "name" field', () => {
-    expect(getItemByTestId('nameTestId').getByText(labelIdForNameField)).toBeVisible();
+    expect(getItemByTestId(testIds.nameTestId).getByText(labelIds.labelIdForNameField)).toBeVisible();
   });
 
   it('should render value of "name" field', () => {
-    expect(getItemByTestId('nameTestId').getByText('name')).toBeVisible();
+    expect(getItemByTestId(testIds.nameTestId).getByText('name')).toBeVisible();
   });
 
   it('should render label of "description" field', () => {
-    expect(getItemByTestId('descriptionTestId').getByText(labelIdForDescriptionField)).toBeVisible();
+    expect(getItemByTestId(testIds.descriptionTestId).getByText(labelIds.labelIdForDescriptionField)).toBeVisible();
   });
 
   it('should render value of "description" field', () => {
-    expect(getItemByTestId('descriptionTestId').getByText('description')).toBeVisible();
+    expect(getItemByTestId(testIds.descriptionTestId).getByText('description')).toBeVisible();
   });
 
   it('should render dash if description has not found', () => {

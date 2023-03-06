@@ -51,9 +51,12 @@ AccordionSet.mockImplementation(({
 
 const name = 'test-name';
 const testIds = {
+  accordionSet: 'accordionSet',
+  closeIcon: 'closeIcon',
+  expandAllButton: 'expandAllButton',
   form: 'fixedDueDateScheduleForm',
 };
-const messageIds = {
+const labelIds = {
   about: 'ui-circulation.settings.fDDSform.about',
   editLabel: 'ui-circulation.settings.fDDS.editLabel',
   newFixDDSchedule: 'ui-circulation.settings.fDDSform.newFixDDSchedule',
@@ -139,7 +142,7 @@ describe('FixedDueDateScheduleForm', () => {
 
     it('"IconButton" should be rendered with correct props', () => {
       const expectedProps = {
-        'aria-label': [messageIds.closeLabel],
+        'aria-label': [labelIds.closeLabel],
         icon: 'times',
         iconClassName: 'closeIcon',
         onClick: defaultProps.onCancel,
@@ -149,13 +152,13 @@ describe('FixedDueDateScheduleForm', () => {
     });
 
     it('"onCancel" should be called after clicking on close icon', () => {
-      fireEvent.click(container.getByTestId('close-icon'));
+      fireEvent.click(container.getByTestId(testIds.closeIcon));
 
       expect(defaultProps.onCancel).toBeCalled();
     });
 
     it('"Pane" component should have correct title', () => {
-      expect(container.getByText(messageIds.newFixDDSchedule)).toBeInTheDocument();
+      expect(container.getByText(labelIds.newFixDDSchedule)).toBeInTheDocument();
     });
 
     it('"Field" for name should be called with correct props', () => {
@@ -171,7 +174,7 @@ describe('FixedDueDateScheduleForm', () => {
     });
 
     it('Label of name "Field" should be rendered', () => {
-      expect(container.getByText(messageIds.name)).toBeInTheDocument();
+      expect(container.getByText(labelIds.name)).toBeInTheDocument();
     });
 
     it('"Field" for description should be called with correct props', () => {
@@ -185,7 +188,7 @@ describe('FixedDueDateScheduleForm', () => {
     });
 
     it('"Label of description "Field" should be rendered', () => {
-      expect(container.getByText(messageIds.description)).toBeInTheDocument();
+      expect(container.getByText(labelIds.description)).toBeInTheDocument();
     });
 
     it('"FieldArray" should be called with correct props', () => {
@@ -208,7 +211,7 @@ describe('FixedDueDateScheduleForm', () => {
     });
 
     it('Label of "General" accordion should be rendered', () => {
-      expect(container.getByText(messageIds.about)).toBeInTheDocument();
+      expect(container.getByText(labelIds.about)).toBeInTheDocument();
     });
 
     it('"Schedule" accordion should be rendered with correct props', () => {
@@ -221,7 +224,7 @@ describe('FixedDueDateScheduleForm', () => {
     });
 
     it('Label of "Schedule" accordion should be rendered', () => {
-      expect(container.getByText(messageIds.schedule)).toBeInTheDocument();
+      expect(container.getByText(labelIds.schedule)).toBeInTheDocument();
     });
 
     it('"ExpandAllButton" should be rendered with correct props', () => {
@@ -243,7 +246,7 @@ describe('FixedDueDateScheduleForm', () => {
         },
       };
 
-      fireEvent.click(container.getByTestId('expand-all-button'));
+      fireEvent.click(container.getByTestId(testIds.expandAllButton));
 
       expect(ExpandAllButton).toHaveBeenNthCalledWith(expandAllButtonCallOrder.update, expect.objectContaining(expectedProps), {});
     });
@@ -258,7 +261,7 @@ describe('FixedDueDateScheduleForm', () => {
     });
 
     it('Name of "Cancel" button should be rendered', () => {
-      expect(container.getByText(messageIds.cancel)).toBeInTheDocument();
+      expect(container.getByText(labelIds.cancel)).toBeInTheDocument();
     });
 
     it('Footer should contain "Save and close" button with appropriate props', () => {
@@ -271,7 +274,7 @@ describe('FixedDueDateScheduleForm', () => {
     });
 
     it('Name of "Save and close" button should be rendered', () => {
-      expect(container.getByText(messageIds.saveAndClose)).toBeInTheDocument();
+      expect(container.getByText(labelIds.saveAndClose)).toBeInTheDocument();
     });
 
     it('"AccordionSet" should be called with correct props', () => {
@@ -292,7 +295,7 @@ describe('FixedDueDateScheduleForm', () => {
         onToggle: expect.any(Function),
       };
 
-      fireEvent.click(container.getByTestId('accordionSet'));
+      fireEvent.click(container.getByTestId(testIds.accordionSet));
 
       expect(AccordionSet).toHaveBeenNthCalledWith(accordionSetCallOrder.update, expect.objectContaining(expectedProps), {});
     });
@@ -328,7 +331,7 @@ describe('FixedDueDateScheduleForm', () => {
     });
 
     it('"Pane" component should have correct title', () => {
-      expect(container.getByText(messageIds.editLabel)).toBeInTheDocument();
+      expect(container.getByText(labelIds.editLabel)).toBeInTheDocument();
     });
 
     it('Footer should contain "Save and close" button with appropriate props', () => {
@@ -341,7 +344,7 @@ describe('FixedDueDateScheduleForm', () => {
     });
 
     it('Name of "Save and close" button should be rendered', () => {
-      expect(container.getByText(messageIds.saveAndClose)).toBeInTheDocument();
+      expect(container.getByText(labelIds.saveAndClose)).toBeInTheDocument();
     });
 
     it('"ViewMetaData" should be called with correct props', () => {
@@ -433,7 +436,7 @@ describe('FixedDueDateScheduleForm', () => {
       });
 
       it('"uniqueName" error message should be rendered', () => {
-        waitFor(() => expect(messageIds.uniqueName).toBeInTheDocument());
+        waitFor(() => expect(labelIds.uniqueName).toBeInTheDocument());
       });
     });
 

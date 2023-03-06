@@ -33,12 +33,17 @@ jest.mock('../Models/FixedDueDateSchedule', () => ({
   defaultFixedDueDateSchedule: jest.fn(() => mockDefaultFixedDueDateScheduleReturnValue),
 }));
 
+const testIds = {
+  entryManager: 'entryManager',
+  deleteDisabled: 'deleteDisabled',
+};
+const labelIds = {
+  fDDSPaneTitle: 'ui-circulation.settings.fDDS.paneTitle',
+  fDDSformEntryLabel: 'ui-circulation.settings.fDDSform.entryLabel',
+  fDDSDeleteDisabled: 'ui-circulation.settings.fDDS.deleteDisabled',
+};
+
 describe('FixedDueDateScheduleManager', () => {
-  const labelIds = {
-    fDDSPaneTitle: 'ui-circulation.settings.fDDS.paneTitle',
-    fDDSformEntryLabel: 'ui-circulation.settings.fDDSform.entryLabel',
-    fDDSDeleteDisabled: 'ui-circulation.settings.fDDS.deleteDisabled',
-  };
   const testMutator = {
     fixedDueDateSchedules: {
       POST: jest.fn(),
@@ -158,7 +163,7 @@ describe('FixedDueDateScheduleManager', () => {
         />
       );
 
-      expect(getById('entryManager').getByTestId('deleteDisabled')).toBeVisible();
+      expect(getById(testIds.entryManager).getByTestId(testIds.deleteDisabled)).toBeVisible();
     });
 
     it('should not disabled delete when schedule has id which does not match some loans policy id', () => {
@@ -182,7 +187,7 @@ describe('FixedDueDateScheduleManager', () => {
         />
       );
 
-      expect(getById('entryManager').queryByTestId('deleteDisabled')).not.toBeInTheDocument();
+      expect(getById(testIds.entryManager).queryByTestId(testIds.deleteDisabled)).not.toBeInTheDocument();
     });
 
     it('should not disabled delete when loans policies are not passed', () => {
@@ -196,7 +201,7 @@ describe('FixedDueDateScheduleManager', () => {
         />
       );
 
-      expect(getById('entryManager').queryByTestId('deleteDisabled')).not.toBeInTheDocument();
+      expect(getById(testIds.entryManager).queryByTestId(testIds.deleteDisabled)).not.toBeInTheDocument();
     });
 
     it('should not disabled delete when schedule has no id', () => {
@@ -218,7 +223,7 @@ describe('FixedDueDateScheduleManager', () => {
         />
       );
 
-      expect(getById('entryManager').queryByTestId('deleteDisabled')).not.toBeInTheDocument();
+      expect(getById(testIds.entryManager).queryByTestId(testIds.deleteDisabled)).not.toBeInTheDocument();
     });
   });
 
