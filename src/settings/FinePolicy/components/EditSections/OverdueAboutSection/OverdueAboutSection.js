@@ -12,7 +12,7 @@ import {
 const OverdueAboutSection = () => (
   <div
     data-test-fine-policy-form-about-section
-    data-testid="OverdueAboutSection"
+    data-testid="overdueAboutSection"
   >
     <Row>
       <Col xs={3} data-test-about-section-policy-name>

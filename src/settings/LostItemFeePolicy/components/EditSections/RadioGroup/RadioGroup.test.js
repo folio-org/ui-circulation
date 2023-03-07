@@ -28,10 +28,17 @@ Field.mockImplementation(({ label, ...rest }) => {
 });
 
 describe('RadioGroup', () => {
-  const chargeAmountItemLabelId = 'ui-circulation.settings.lostItemFee.chargeAmountItem';
-  const actualCostLabelId = 'ui-circulation.settings.lostItemFee.actualCost';
-  const setCostLabelId = 'ui-circulation.settings.lostItemFee.setCost';
-  const chargeAmountLabelId = 'ui-circulation.settings.lostItemFee.chargeAmount';
+  const testIds = {
+    actualCostTestId: 'actualCostTestId',
+    chargeAmountItemTestId: 'chargeAmountItemTestId',
+    setCostTestId: 'setCostTestId',
+  };
+  const labelIds = {
+    chargeAmountItemLabelId: 'ui-circulation.settings.lostItemFee.chargeAmountItem',
+    actualCostLabelId: 'ui-circulation.settings.lostItemFee.actualCost',
+    setCostLabelId: 'ui-circulation.settings.lostItemFee.setCost',
+    chargeAmountLabelId: 'ui-circulation.settings.lostItemFee.chargeAmount',
+  };
 
   const getById = (id) => within(screen.getByTestId(id));
   const mockedOnBlure = jest.fn();
@@ -49,9 +56,9 @@ describe('RadioGroup', () => {
   });
 
   it('should render label of component correctly', () => {
-    expect(getById('chargeAmountItemTestId').getByText(chargeAmountItemLabelId)).toBeVisible();
-    expect(screen.getByTestId('chargeAmountItemTestId')).toHaveAttribute('for', 'chargeAmount');
-    expect(screen.getByTestId('chargeAmountItemTestId')).toHaveAttribute('id', 'chargeAmount-label');
+    expect(getById(testIds.chargeAmountItemTestId).getByText(labelIds.chargeAmountItemLabelId)).toBeVisible();
+    expect(screen.getByTestId(testIds.chargeAmountItemTestId)).toHaveAttribute('for', 'chargeAmount');
+    expect(screen.getByTestId(testIds.chargeAmountItemTestId)).toHaveAttribute('id', 'chargeAmount-label');
   });
 
   it('should use correct props for "Field" in "actual cost" section', () => {
@@ -63,7 +70,7 @@ describe('RadioGroup', () => {
       type: 'radio',
     };
 
-    expect(getById('actualCostTestId').getByText(actualCostLabelId)).toBeVisible();
+    expect(getById(testIds.actualCostTestId).getByText(labelIds.actualCostLabelId)).toBeVisible();
     expect(catchFunction).toHaveBeenNthCalledWith(1, expectedResult);
   });
 
@@ -75,13 +82,13 @@ describe('RadioGroup', () => {
       type: 'radio',
     };
 
-    expect(getById('setCostTestId').getByText(setCostLabelId)).toBeVisible();
+    expect(getById(testIds.setCostTestId).getByText(labelIds.setCostLabelId)).toBeVisible();
     expect(catchFunction).toHaveBeenNthCalledWith(2, expectedResult);
   });
 
   it('should use correct props for "Field" in "charge amount" section', () => {
     const expectedResult = {
-      'aria-label': chargeAmountLabelId,
+      'aria-label': labelIds.chargeAmountLabelId,
       name: 'chargeAmountItem.amount',
       component: TextField,
       type: 'number',

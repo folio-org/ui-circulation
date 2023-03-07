@@ -9,6 +9,7 @@ import '../../../test/jest/__mock__';
 
 import withPreventDelete from './withPreventDelete';
 
+const policyInUse = 'Policy is in use!';
 const mockComponent = ({
   checkPolicy,
   closeText,
@@ -20,7 +21,7 @@ const mockComponent = ({
     <span>{labelText}</span>
     <span>{messageText}</span>
     {checkPolicy() &&
-      <span>Policy is in use!</span>
+      <span>{policyInUse}</span>
     }
   </>
 );
@@ -53,13 +54,18 @@ const props = {
 
 const WrappedComponent = withPreventDelete(mockComponent, 'test');
 const renderWithPreventDelete = (extraProps = {}) => render(<WrappedComponent {...props} {...extraProps} />);
+const labelIds = {
+  commonClose: 'ui-circulation.settings.common.close',
+  denyDeleteHeader: 'ui-circulation.settings.test.denyDelete.header',
+  denyDeleteBody: 'ui-circulation.settings.policy.denyDelete.body',
+};
 
 describe('withPreventDelete', () => {
   it('passes in props', () => {
     renderWithPreventDelete();
-    expect(screen.getByText('ui-circulation.settings.common.close')).toBeInTheDocument();
-    expect(screen.getByText('ui-circulation.settings.test.denyDelete.header')).toBeInTheDocument();
-    expect(screen.getByText('ui-circulation.settings.policy.denyDelete.body')).toBeInTheDocument();
+    expect(screen.getByText(labelIds.commonClose)).toBeInTheDocument();
+    expect(screen.getByText(labelIds.denyDeleteHeader)).toBeInTheDocument();
+    expect(screen.getByText(labelIds.denyDeleteBody)).toBeInTheDocument();
   });
 
   describe('Checking policy in use', () => {
@@ -73,12 +79,12 @@ describe('withPreventDelete', () => {
         }
       };
       renderWithPreventDelete(overrideResources);
-      expect(screen.getByText('Policy is in use!')).toBeInTheDocument();
+      expect(screen.getByText(policyInUse)).toBeInTheDocument();
     });
 
     it('does not say policy is in use if there are no records', () => {
       renderWithPreventDelete();
-      const policyText = screen.queryByText('Policy is in use!');
+      const policyText = screen.queryByText(policyInUse);
       expect(policyText).toBeNull();
     });
   });

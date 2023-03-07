@@ -23,7 +23,7 @@ export default (formatMessage = noop, config = {}, placeholder = '') => {
   forEach(config, ({ value, label }, index) => {
     options.push(
       <option
-        data-testid={`optionTestId-${index}`}
+        data-testid={`optionTestId${index}`}
         value={value}
         key={value}
       >

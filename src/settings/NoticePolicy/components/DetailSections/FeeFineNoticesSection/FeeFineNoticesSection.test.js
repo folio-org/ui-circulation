@@ -18,7 +18,12 @@ jest.mock('../components', () => (
   jest.fn(() => null)
 ));
 
-const labelId = 'ui-circulation.settings.noticePolicy.feeFineNotices';
+const testIds = {
+  accordionTestId: 'accordionTestId',
+};
+const labelIds = {
+  feeFineNotices: 'ui-circulation.settings.noticePolicy.feeFineNotices',
+};
 const isOpen = true;
 
 const mockedFeeFineNotice = {
@@ -94,15 +99,15 @@ describe('FeeFineNoticesSection', () => {
   });
 
   it('should render component', () => {
-    expect(screen.getByTestId('accordionTestId')).toBeTruthy();
+    expect(screen.getByTestId(testIds.accordionTestId)).toBeTruthy();
   });
 
   it('should render label', () => {
-    expect(screen.getByText(labelId)).toBeTruthy();
+    expect(screen.getByText(labelIds.feeFineNotices)).toBeTruthy();
   });
 
   it('should have `open` attribute', () => {
-    expect(screen.getByTestId('accordionTestId')).toHaveAttribute('open');
+    expect(screen.getByTestId(testIds.accordionTestId)).toHaveAttribute('open');
   });
 
   describe('inner NoticeCard component', () => {

@@ -34,6 +34,12 @@ jest.mock('./components/ViewSections', () => ({
 const testStripes = buildStripes();
 
 describe('PatronNoticeDetail', () => {
+  const testIds = {
+    accordionSet: 'accordionSet',
+    emailAccordionContent: 'emailAccordionContent',
+    previewModal: 'previewModal',
+    previewButtonColumn: 'previewButtonColumn',
+  };
   const labelIds = {
     generalInformation: 'ui-circulation.settings.patronNotices.generalInformation',
     email: 'ui-circulation.settings.patronNotices.email',

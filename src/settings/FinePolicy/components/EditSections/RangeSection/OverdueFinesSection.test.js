@@ -19,10 +19,17 @@ import OverdueFinesSection, {
 
 Field.mockImplementation(jest.fn(() => null));
 
+const testIds = {
+  finePolicyLabelTestId: 'finePolicyLabelTestId',
+  quantityDurationLabelTestId: 'quantityDurationLabelTestId',
+};
+const labelIds = {
+  quantityLabelId: 'ui-circulation.settings.circulationRules.overdueFine.quantity',
+  perLabelId: 'ui-circulation.settings.finePolicy.per',
+  periodLabelId: 'ui-circulation.settings.circulationRules.overdueFine.period',
+};
+
 describe('OverdueFinesSection', () => {
-  const quantityLabelId = 'ui-circulation.settings.circulationRules.overdueFine.quantity';
-  const perLabelId = 'ui-circulation.settings.finePolicy.per';
-  const periodLabelId = 'ui-circulation.settings.circulationRules.overdueFine.period';
   const fieldsMap = {
     quantityField: 1,
     periodField: 2,
@@ -47,12 +54,12 @@ describe('OverdueFinesSection', () => {
   });
 
   it('should render component main label', () => {
-    expect(getById('quantityDurationLabelTestId').getByText('testLabel')).toBeVisible();
+    expect(getById(testIds.quantityDurationLabelTestId).getByText('testLabel')).toBeVisible();
   });
 
   it('should use correct props for "Field" in "overdue fine quantity" section', () => {
     const expectedResult = {
-      'aria-label': quantityLabelId,
+      'aria-label': labelIds.quantityLabelId,
       name: 'testName',
       type: 'number',
       hasClearIcon: false,
@@ -65,12 +72,12 @@ describe('OverdueFinesSection', () => {
   });
 
   it('should render secondary label', () => {
-    expect(getById('finePolicyLabelTestId').getByText(perLabelId)).toBeVisible();
+    expect(getById(testIds.finePolicyLabelTestId).getByText(labelIds.perLabelId)).toBeVisible();
   });
 
   it('should use correct props for "Field" in "overdue fine period" section', () => {
     const expectedResult = {
-      'aria-label': periodLabelId,
+      'aria-label': labelIds.periodLabelId,
       children: ['testIntervalPeriod'],
       name: 'testPeriod',
       component: Select,

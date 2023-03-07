@@ -15,13 +15,22 @@ import '../../../../../../../test/jest/__mock__';
 import SchedulesList from './SchedulesList';
 import ScheduleCard from '../ScheduleCard';
 
+const testIds = {
+  addScheduleButton: 'addScheduleButton',
+  scheduleCard: 'scheduleCard',
+  errorRow: 'errorRow',
+};
+const labelIds = {
+  new: 'ui-circulation.settings.fDDSform.new',
+};
+
 jest.mock('../ScheduleCard', () => jest.fn(({
   onRemoveSchedule,
   scheduleIndex,
 }) => (
   // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
   <div
-    data-testid="scheduleCard"
+    data-testid={testIds.scheduleCard}
     onClick={() => onRemoveSchedule(scheduleIndex)}
   />
 )));
@@ -56,10 +65,6 @@ describe('SchedulesList', () => {
     value: testFieldsValue,
   };
 
-  const labelIds = {
-    new: 'ui-circulation.settings.fDDSform.new',
-  };
-
   afterEach(() => {
     ScheduleCard.mockClear();
     testFields.push.mockClear();
@@ -83,12 +88,12 @@ describe('SchedulesList', () => {
     });
 
     it('should render "add schedule" button', () => {
-      expect(within(screen.getByTestId('addScheduleButton')).getByText(labelIds.new))
+      expect(within(screen.getByTestId(testIds.addScheduleButton)).getByText(labelIds.new))
         .toBeVisible();
     });
 
     it('should add schedule', () => {
-      const addScheduleButton = screen.getByTestId('addScheduleButton');
+      const addScheduleButton = screen.getByTestId(testIds.addScheduleButton);
 
       fireEvent.click(addScheduleButton);
 
@@ -116,7 +121,7 @@ describe('SchedulesList', () => {
         });
 
         it('should remove schedule', () => {
-          const scheduleCard = screen.getAllByTestId('scheduleCard');
+          const scheduleCard = screen.getAllByTestId(testIds.scheduleCard);
 
           fireEvent.click(scheduleCard[cardOrder]);
 
@@ -139,12 +144,12 @@ describe('SchedulesList', () => {
       if (submitFailed && error && !isArray(error)) {
         it('should render "error row" section', () => {
           expect(within(
-            screen.getByTestId('errorRow')
+            screen.getByTestId(testIds.errorRow)
           ).getByText(error)).toBeVisible();
         });
       } else {
         it('should not render "error row" section', () => {
-          expect(screen.queryByTestId('errorRow')).not.toBeInTheDocument();
+          expect(screen.queryByTestId(testIds.errorRow)).not.toBeInTheDocument();
         });
       }
     };

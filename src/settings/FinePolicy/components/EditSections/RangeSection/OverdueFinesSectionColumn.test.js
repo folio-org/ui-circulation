@@ -20,6 +20,17 @@ import OverdueFinesSectionColumn, {
 
 Field.mockImplementation(jest.fn(() => null));
 
+const testIds = {
+  mainLabelTestId: 'mainLabelTestId',
+};
+const labelIds = {
+  quantityLabelId: 'ui-circulation.settings.finePolicy.quantity',
+  selectLabelId: 'ui-circulation.settings.finePolicy.select',
+  finePolicyYes: 'ui-circulation.settings.finePolicy.yes',
+  finePolicyNo: 'ui-circulation.settings.finePolicy.no',
+
+};
+
 describe('OverdueFinesSectionColumn', () => {
   const getById = (id) => within(screen.getByTestId(id));
 
@@ -28,8 +39,6 @@ describe('OverdueFinesSectionColumn', () => {
   });
 
   describe('when component is "TextField"', () => {
-    const quantityLabelId = 'ui-circulation.settings.finePolicy.quantity';
-
     beforeEach(() => {
       render(
         <OverdueFinesSectionColumn
@@ -42,12 +51,12 @@ describe('OverdueFinesSectionColumn', () => {
     });
 
     it('should render main label', () => {
-      expect(getById('mainLabelTestId').getByText('firstTestLabel')).toBeVisible();
+      expect(getById(testIds.mainLabelTestId).getByText('firstTestLabel')).toBeVisible();
     });
 
     it('should execute "Field" with correct props', () => {
       const expectedProps = {
-        'aria-label': quantityLabelId,
+        'aria-label': labelIds.quantityLabelId,
         name: 'firstTestName',
         type: 'number',
         hasClearIcon: false,
@@ -61,8 +70,6 @@ describe('OverdueFinesSectionColumn', () => {
   });
 
   describe('when component is "Select"', () => {
-    const selectLabelId = 'ui-circulation.settings.finePolicy.select';
-
     beforeEach(() => {
       render(
         <OverdueFinesSectionColumn
@@ -75,22 +82,22 @@ describe('OverdueFinesSectionColumn', () => {
     });
 
     it('should render main label', () => {
-      expect(getById('mainLabelTestId').getByText('firstTestLabel')).toBeVisible();
+      expect(getById(testIds.mainLabelTestId).getByText('firstTestLabel')).toBeVisible();
     });
 
     it('should execute "Field" with correct props', () => {
       const expectedProps = {
-        'aria-label': selectLabelId,
+        'aria-label': labelIds.selectLabelId,
         name: 'secondTestName',
         component: Select,
         dataOptions: [
           {
             value: true,
-            label: 'ui-circulation.settings.finePolicy.yes',
+            label: labelIds.finePolicyYes,
           },
           {
             value: false,
-            label: 'ui-circulation.settings.finePolicy.no',
+            label: labelIds.finePolicyNo,
           },
         ],
       };

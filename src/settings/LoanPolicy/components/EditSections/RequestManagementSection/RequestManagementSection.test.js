@@ -31,6 +31,11 @@ jest.mock('../../../../utils/options-generator', () => jest.fn((
 jest.mock('../../../../components/Period', () => jest.fn(() => null));
 
 describe('RequestManagementSection', () => {
+  const testIds = {
+    alternateRecallReturnIntervalPeriod: 'alternateRecallReturnIntervalPeriod',
+    alternateRenewalLoanPeriod: 'alternateRenewalLoanPeriod',
+    requestManagementSection: 'requestManagementSection',
+  };
   const labelIds = {
     requestManagement: 'ui-circulation.settings.requestManagement.requestManagement',
     recalls: 'ui-circulation.settings.requestManagement.recalls',
@@ -98,7 +103,7 @@ describe('RequestManagementSection', () => {
         />
       );
 
-      expect(screen.queryByTestId('requestManagementSection')).not.toBeInTheDocument();
+      expect(screen.queryByTestId(testIds.requestManagementSection)).not.toBeInTheDocument();
     });
   });
 
@@ -115,11 +120,11 @@ describe('RequestManagementSection', () => {
     });
 
     it('should render component', () => {
-      expect(screen.getByTestId('requestManagementSection')).toBeVisible();
+      expect(screen.getByTestId(testIds.requestManagementSection)).toBeVisible();
     });
 
     it('should render request management title', () => {
-      expect(within(screen.getByTestId('requestManagementSection'))
+      expect(within(screen.getByTestId(testIds.requestManagementSection))
         .getByText(labelIds.requestManagement)).toBeVisible();
     });
 
@@ -286,7 +291,7 @@ describe('RequestManagementSection', () => {
 
         if (requestManagement?.recalls?.allowRecallsToExtendOverdueLoans) {
           it('should render period', () => {
-            expect(screen.getByTestId('alternateRecallReturnIntervalPeriod')).toBeVisible();
+            expect(screen.getByTestId(testIds.alternateRecallReturnIntervalPeriod)).toBeVisible();
             expect(Period).toHaveBeenNthCalledWith(
               periodCallOrderByPlace.alternateRecallReturnInterval,
               {
@@ -299,7 +304,7 @@ describe('RequestManagementSection', () => {
           });
         } else {
           it('should not render period', () => {
-            expect(screen.queryByTestId('alternateRecallReturnIntervalPeriod')).not.toBeInTheDocument();
+            expect(screen.queryByTestId(testIds.alternateRecallReturnIntervalPeriod)).not.toBeInTheDocument();
           });
         }
       });
@@ -351,7 +356,7 @@ describe('RequestManagementSection', () => {
             requestManagement?.holds?.renewItemsWithRequest
           ) {
             it('should render period', () => {
-              expect(screen.getByTestId('alternateRenewalLoanPeriod')).toBeVisible();
+              expect(screen.getByTestId(testIds.alternateRenewalLoanPeriod)).toBeVisible();
               expect(Period).toHaveBeenNthCalledWith(
                 periodCallOrderByPlace.alternateRenewalLoan,
                 {
@@ -364,7 +369,7 @@ describe('RequestManagementSection', () => {
             });
           } else {
             it('should not render period', () => {
-              expect(screen.queryByTestId('alternateRenewalLoanPeriod')).not.toBeInTheDocument();
+              expect(screen.queryByTestId(testIds.alternateRenewalLoanPeriod)).not.toBeInTheDocument();
             });
           }
         });

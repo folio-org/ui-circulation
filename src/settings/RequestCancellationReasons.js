@@ -25,7 +25,13 @@ class RequestCancellationReasons extends React.Component {
         baseUrl="cancellation-reason-storage/cancellation-reasons"
         records="cancellationReasons"
         label={<FormattedMessage id="ui-circulation.settings.cancelReasons.label" />}
-        labelSingular={<FormattedMessage id="ui-circulation.settings.cancelReasons.labelSingular" />}
+        translations={{
+          cannotDeleteTermHeader: 'ui-circulation.settings.cancelReasons.cannotDeleteTermHeader',
+          cannotDeleteTermMessage: 'ui-circulation.settings.cancelReasons.cannotDeleteTermMessage',
+          deleteEntry: 'ui-circulation.settings.cancelReasons.deleteEntry',
+          termDeleted: 'ui-circulation.settings.cancelReasons.termDeleted',
+          termWillBeDeleted: 'ui-circulation.settings.cancelReasons.termWillBeDeleted',
+        }}
         objectLabel=""
         visibleFields={['name', 'description', 'publicDescription']}
         hiddenFields={['lastUpdated', 'numberOfObjects']}
