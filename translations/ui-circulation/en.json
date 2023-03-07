@@ -182,6 +182,7 @@
   "settings.patronNotices.categories.automatedFeeFineAdjustment": "Automated fee/fine adjustment (refund or cancel)",
   "settings.patronNotices.categories.loan": "Loan",
   "settings.patronNotices.categories.request": "Request",
+  "settings.patronNotices.generalInformation": "General information",
   "settings.patronNotices.notice.name": "Patron notice template name",
   "settings.patronNotices.notice.active": "Active",
   "settings.patronNotices.notice.description": "Description",

@@ -7,7 +7,8 @@
 * Implement Template content accordion. Refs UICIRC-910
 * Add "item.loanType" as notice token in Settings. Refs UICIRC-852
 * Use camel case notation for all data-testid. Refs UICIRC-912.
-* Replace `labelSingular` with `translations` in props to `ControlledVocab`. Refs UICIRC-849
+* Replace `labelSingular` with `translations` in props to `ControlledVocab`. Refs UICIRC-849.
+* Add metadata info to view of Patron Notice Templates (Settings > Circulation > Patron Notice Templates). Refs UICIRC-856.
 
 ## [8.0.0](https://github.com/folio-org/ui-circulation/tree/v8.0.0) (2023-02-22)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v7.2.1...v8.0.0)
