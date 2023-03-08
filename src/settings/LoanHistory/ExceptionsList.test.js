@@ -18,11 +18,19 @@ jest.mock('./ExceptionCard', () => jest.fn(({
   return (
     // eslint-disable-next-line
     <div
-      data-testid={`exeptionCard-${exceptionIndex + 1}`}
+      data-testid={`exeptionCard${exceptionIndex + 1}`}
       onClick={() => onRemoveException(exceptionIndex)}
     />
   );
 }));
+
+const testIds = {
+  exceptionSectionHeader: 'exceptionSectionHeader',
+};
+const labelIds = {
+  exceptionSectionHeader: 'ui-circulation.settings.loanHistory.exceptionSectionHeader',
+  exceptionAddButton: 'ui-circulation.settings.loanHistory.addExceptionButton',
+};
 
 describe('ExceptionsList', () => {
   const mockedFields = {
@@ -53,10 +61,6 @@ describe('ExceptionsList', () => {
       ],
     },
   };
-  const labelIds = {
-    exceptionSectionHeader: 'ui-circulation.settings.loanHistory.exceptionSectionHeader',
-    exceptionAddButton: 'ui-circulation.settings.loanHistory.addExceptionButton',
-  };
 
   const getById = (id) => within(screen.getByTestId(id));
   const exeptionCardTest = (patch, index) => {
@@ -82,7 +86,9 @@ describe('ExceptionsList', () => {
 
     it(`should correctly execute "handleRemoveField" for ${number} "ExceptionCard"`, () => {
       expect(mockedFields.remove).toHaveBeenCalledTimes(0);
-      fireEvent.click(screen.getByTestId(`exeptionCard-${number}`));
+
+      fireEvent.click(screen.getByTestId(`exeptionCard${number}`));
+
       expect(mockedFields.remove).toHaveBeenCalledWith(index);
     });
   };
@@ -103,7 +109,7 @@ describe('ExceptionsList', () => {
   });
 
   it('should render header label', () => {
-    expect(getById('exceptionSectionHeader').getByText(labelIds.exceptionSectionHeader)).toBeVisible();
+    expect(getById(testIds.exceptionSectionHeader).getByText(labelIds.exceptionSectionHeader)).toBeVisible();
   });
 
   mockedFields.values.map(exeptionCardTest);
@@ -114,7 +120,9 @@ describe('ExceptionsList', () => {
 
   it('should correctly execute "handleAddField" on button click', () => {
     expect(mockedFields.push).toHaveBeenCalledTimes(0);
+
     fireEvent.click(screen.getByRole('button'));
+
     expect(mockedFields.push).toHaveBeenCalledWith({});
   });
 });

@@ -9,13 +9,18 @@ import '../../../../test/jest/__mock__';
 
 import Metadata from './Metadata';
 
+const testIds = {
+  connectedComponentTestId: 'connectedComponentTestId',
+  metadataTestId: 'metadataTestId',
+};
+
 describe('Metadata', () => {
   const mockedConnect = jest.fn((Component) => {
     return class extends React.Component {
       render() {
         return (
           <Component
-            data-testid="connectedComponentTestId"
+            data-testid={testIds.connectedComponentTestId}
             {...this.props}
           />
         );
@@ -42,16 +47,16 @@ describe('Metadata', () => {
     });
 
     it('should render component', () => {
-      expect(screen.getByTestId('metadataTestId')).toBeVisible();
+      expect(screen.getByTestId(testIds.metadataTestId)).toBeVisible();
     });
 
     it('should use "connect" function on correct component', () => {
       expect(mockedConnect).toHaveBeenCalled();
-      expect(screen.getByTestId('connectedComponentTestId')).toBeVisible();
+      expect(screen.getByTestId(testIds.connectedComponentTestId)).toBeVisible();
     });
 
     it('should receive correct props', () => {
-      expect(within(screen.getByTestId('connectedComponentTestId')).getByText(`${mockedMetadata.createdDate}`));
+      expect(within(screen.getByTestId(testIds.connectedComponentTestId)).getByText(`${mockedMetadata.createdDate}`));
     });
   });
 
@@ -63,7 +68,7 @@ describe('Metadata', () => {
         />
       );
 
-      expect(screen.queryByTestId('metadataTestId')).not.toBe();
+      expect(screen.queryByTestId(testIds.metadataTestId)).not.toBe();
     });
 
     it('should not render element if "createdDate" in "metadata" is absent', () => {
@@ -74,7 +79,7 @@ describe('Metadata', () => {
         />
       );
 
-      expect(screen.queryByTestId('metadataTestId')).not.toBe();
+      expect(screen.queryByTestId(testIds.metadataTestId)).not.toBe();
     });
   });
 });

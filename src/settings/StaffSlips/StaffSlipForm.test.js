@@ -9,57 +9,71 @@ import '../../../test/jest/__mock__';
 
 import { Field } from 'react-final-form';
 
-import { TemplateEditor } from '@folio/stripes-template-editor';
 import {
-  KeyValue,
   Pane,
   Paneset,
-  TextArea,
+  Accordion,
+  AccordionSet,
 } from '@folio/stripes/components';
 
 import StaffSlipForm from './StaffSlipForm';
-import TokensList from './TokensList';
-import getTokens from './tokens';
+import {
+  StaffSlipAboutSection,
+  StaffSlipTemplateContentSection,
+} from './components/EditSections';
 import {
   CancelButton,
   FooterPane,
+  Metadata,
 } from '../components';
 
 jest.mock('../components', () => ({
   CancelButton: jest.fn(() => null),
   FooterPane: jest.fn(() => null),
+  Metadata: jest.fn(() => null),
+}));
+jest.mock('./components/EditSections', () => ({
+  StaffSlipAboutSection: jest.fn(() => 'StaffSlipAboutSection'),
+  StaffSlipTemplateContentSection: jest.fn(() => 'StaffSlipTemplateContentSection'),
 }));
 Field.mockImplementation(jest.fn(() => null));
 
+const testIds = {
+  expandAllButton: 'expandAllButton',
+  accordion: 'accordion',
+  accordionSet: 'accordionSet',
+  formStaffSlip: 'formStaffSlip',
+};
+const labelIds = {
+  new: 'ui-circulation.settings.staffSlips.new',
+  staffSlipsGeneralInformation: 'ui-circulation.settings.staffSlips.generalInformation',
+  staffSlipsTemplateContent: 'ui-circulation.settings.staffSlips.templateContent',
+};
+
 describe('StaffSlipForm', () => {
-  const orderOfFieldExecution = {
-    description: 1,
-    template: 2,
-  };
-  const labelIds = {
-    name: 'ui-circulation.settings.staffSlips.name',
-    description: 'ui-circulation.settings.staffSlips.description',
-    display: 'ui-circulation.settings.staffSlips.display',
-    preview: 'ui-circulation.settings.staffSlips.form.previewLabel',
-    new: 'ui-circulation.settings.staffSlips.new',
-  };
   const mockedHandleSubmit = jest.fn();
   const mockedOnCancel = jest.fn();
 
   afterEach(() => {
-    Field.mockClear();
     Pane.mockClear();
+    Accordion.mockClear();
+    AccordionSet.mockClear();
+    Metadata.mockClear();
     mockedHandleSubmit.mockClear();
     mockedOnCancel.mockClear();
+    StaffSlipAboutSection.mockClear();
+    StaffSlipTemplateContentSection.mockClear();
   });
 
   describe('with main props', () => {
     const mockedInitialValues = {
       id: 'testId',
       name: 'testName',
+      metadata: 'testMetadata',
     };
     const mockedStripes = {
       hasPerm: jest.fn(() => true),
+      connect: jest.fn(),
     };
     const mockedfooterPaneProps = {
       pristine: true,
@@ -83,12 +97,12 @@ describe('StaffSlipForm', () => {
     });
 
     it('"form" component should have correct attributes', () => {
-      expect(screen.getByTestId('formStaffSlip')).toHaveAttribute('noValidate');
+      expect(screen.getByTestId(testIds.formStaffSlip)).toHaveAttribute('noValidate');
     });
 
     it('on "form" submit should execute passed function', () => {
       expect(mockedHandleSubmit).toHaveBeenCalledTimes(0);
-      fireEvent.submit(screen.getByTestId('formStaffSlip'));
+      fireEvent.submit(screen.getByTestId(testIds.formStaffSlip));
       expect(mockedHandleSubmit).toHaveBeenCalledTimes(1);
     });
 
@@ -106,41 +120,39 @@ describe('StaffSlipForm', () => {
       expect(FooterPane).toHaveBeenLastCalledWith(mockedfooterPaneProps, {});
     });
 
-    it('should execute "KeyValue" with passed props', () => {
-      const expectedResult = {
-        label: labelIds.name,
-        value: mockedInitialValues.name,
-      };
-
-      expect(KeyValue).toHaveBeenLastCalledWith(expectedResult, {});
+    it('should render AccordionSet component', () => {
+      expect(AccordionSet).toHaveBeenCalled();
     });
 
-    it('should execute "Field" associated with description with passed props', () => {
-      const expectedResult = {
-        label: labelIds.description,
-        name: 'description',
-        id: 'input-staff-slip-description',
-        autoFocus: true,
-        component: TextArea,
-        fullWidth: true,
-        disabled: false,
-      };
-
-      expect(Field).toHaveBeenNthCalledWith(orderOfFieldExecution.description, expectedResult, {});
+    it('should render Accordion component 2 times', () => {
+      expect(Accordion).toHaveBeenCalledTimes(2);
     });
 
-    it('should execute "Field" associated with template with passed props', () => {
-      const expectedResult = {
-        label: labelIds.display,
-        component: TemplateEditor,
-        tokens: getTokens('en'),
-        name: 'template',
-        previewModalHeader: labelIds.preview,
-        tokensList: TokensList,
-        printable: true,
-      };
+    it('should render "General information" label', () => {
+      expect(screen.getByText(labelIds.staffSlipsGeneralInformation)).toBeDefined();
+    });
 
-      expect(Field).toHaveBeenNthCalledWith(orderOfFieldExecution.template, expectedResult, {});
+    it('should render "Template content" label', () => {
+      expect(screen.getByText(labelIds.staffSlipsTemplateContent)).toBeDefined();
+    });
+
+    it("should render 'General information' Accordion", () => {
+      expect(Accordion).toHaveBeenNthCalledWith(1, expect.objectContaining({
+        label: labelIds.staffSlipsGeneralInformation
+      }), {});
+    });
+
+    it('should render "Template content" Accordion', () => {
+      expect(Accordion).toHaveBeenNthCalledWith(2, expect.objectContaining({
+        label: labelIds.staffSlipsTemplateContent
+      }), {});
+    });
+
+    it('should call Metadata component', () => {
+      expect(Metadata).toHaveBeenCalledWith(expect.objectContaining({
+        connect: mockedStripes.connect,
+        metadata: mockedInitialValues.metadata,
+      }), {});
     });
   });
 
@@ -179,14 +191,6 @@ describe('StaffSlipForm', () => {
       );
       expect(FooterPane).toHaveBeenLastCalledWith(
         mockedfooterPaneProps,
-        {},
-      );
-    });
-
-    it('should execute "Field" associated with description with passed props', () => {
-      expect(Field).toHaveBeenNthCalledWith(
-        orderOfFieldExecution.description,
-        expect.objectContaining({ disabled: true }),
         {},
       );
     });

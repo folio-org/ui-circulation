@@ -465,5 +465,7 @@
     "settings.checkout.wildcardLookup": "Realice búsquedas avanzadas de ejemplares por código de barras en los módulos de  circulación (Devolución, Préstamo)",
     "settings.index.loanAnonymization": "Loan anonymization",
     "permission.settings.edit-staff-slips": "Settings (Circ): Can edit staff slips",
-    "settings.validate.subject": "Should not begin with a space"
+    "settings.validate.subject": "Should not begin with a space",
+    "settings.staffSlips.generalInformation": "General information",
+    "settings.staffSlips.templateContent": "Template content"
 }

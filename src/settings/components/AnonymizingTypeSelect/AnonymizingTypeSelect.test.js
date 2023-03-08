@@ -11,6 +11,10 @@ import AnonymizingTypeSelect from './AnonymizingTypeSelect';
 RadioButton.mockImplementation(() => null);
 Field.mockImplementation(() => null);
 
+const testIds = {
+  anonymizingTypeRowTestId: 'anonymizingTypeRowTestId',
+};
+
 describe('AnonymizingTypeSelect', () => {
   const mockedProps = {
     name: 'testName',
@@ -56,7 +60,7 @@ describe('AnonymizingTypeSelect', () => {
   });
 
   it(`should render ${mockedProps.types.length} rows`, () => {
-    expect(screen.getAllByTestId('anonymizingTypeRowTestId')).toHaveLength(mockedProps.types.length);
+    expect(screen.getAllByTestId(testIds.anonymizingTypeRowTestId)).toHaveLength(mockedProps.types.length);
   });
 
   mockedProps.types.forEach(testAnonymizingTypeRow);

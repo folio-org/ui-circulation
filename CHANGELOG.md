@@ -1,6 +1,23 @@
 # Change history for ui-circulation
 
 ## IN PROGRESS
+
+* Add metadata information to view of Staff Slips (Settings > Circulation > Staff Slips). Refs UICIRC-855.
+* Implement General information accordion. Refs UICIRC-909
+* Implement Template content accordion. Refs UICIRC-910
+* Add "item.loanType" as notice token in Settings. Refs UICIRC-852
+* Use camel case notation for all data-testid. Refs UICIRC-912.
+* Replace `labelSingular` with `translations` in props to `ControlledVocab`. Refs UICIRC-849.
+* Add metadata info to view of Patron Notice Templates (Settings > Circulation > Patron Notice Templates). Refs UICIRC-856.
+
+## [8.0.1](https://github.com/folio-org/ui-circulation/tree/v8.0.1) (2023-03-07)
+[Full Changelog](https://github.com/folio-org/ui-circulation/compare/v8.0.0...v8.0.1)
+
+* Update `folio/stripes-template-editor` to `3.2.0`. Refs UICIRC-916.
+
+## [8.0.0](https://github.com/folio-org/ui-circulation/tree/v8.0.0) (2023-02-22)
+[Full Changelog](https://github.com/folio-org/ui-circulation/compare/v7.2.1...v8.0.0)
+
 * Make consistent view of delete functionality of "Fixed due date schedules". Refs UICIRC-874.
 * Increase code coverage of "PatronNotices.js" file. Refs UICIRC-866.
 * Add "Settings (Circ): Can edit staff slips" permission. Refs UICIRC-876.

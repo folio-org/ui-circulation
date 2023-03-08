@@ -11,18 +11,23 @@ jest.mock('../../../../components', () => ({
 }));
 
 describe('GeneralSection', () => {
+  const testIds = {
+    generalInformationTestId: 'generalInformationTestId',
+  };
+  const labelIds = {
+    generalInformationId: 'ui-circulation.settings.loanPolicy.generalInformation',
+    policyNameId: 'ui-circulation.settings.noticePolicy.policyName',
+    activeLabelId: 'ui-circulation.settings.noticePolicy.active',
+    activeStatusId: 'ui-circulation.settings.loanPolicy.yes',
+    inactiveStatusId: 'ui-circulation.settings.loanPolicy.no',
+    policyDescriptionId: 'ui-circulation.settings.loanPolicy.policyDescription',
+  };
   const mockedMetadata = {
     data: 'mockedMetadata',
   };
   const mockedName = 'mockedPolicyName';
   const mockedDescription = 'mockedPolicyDescription';
   const getItemById = (id) => within(screen.getByTestId(id));
-  const generalInformationId = 'ui-circulation.settings.loanPolicy.generalInformation';
-  const policyNameId = 'ui-circulation.settings.noticePolicy.policyName';
-  const activeLabelId = 'ui-circulation.settings.noticePolicy.active';
-  const activeStatusId = 'ui-circulation.settings.loanPolicy.yes';
-  const inactiveStatusId = 'ui-circulation.settings.loanPolicy.no';
-  const policyDescriptionId = 'ui-circulation.settings.loanPolicy.policyDescription';
   const sectionTesting = (policy, labelId, contentValue) => {
     it(`should render "policy ${policy}" section correctly`, () => {
       expect(screen.getByTestId(`policy${policy}TestId`)).toBeVisible();
@@ -46,12 +51,12 @@ describe('GeneralSection', () => {
     });
 
     it('should render general information section correctly', () => {
-      expect(screen.getByTestId('generalInformationTestId')).toBeVisible();
-      expect(getItemById('generalInformationTestId').getByText(generalInformationId)).toBeVisible();
+      expect(screen.getByTestId(testIds.generalInformationTestId)).toBeVisible();
+      expect(getItemById(testIds.generalInformationTestId).getByText(labelIds.generalInformationId)).toBeVisible();
     });
 
     it('should pass "isOpen" property correctly', () => {
-      expect(screen.getByTestId('generalInformationTestId')).toHaveAttribute('open');
+      expect(screen.getByTestId(testIds.generalInformationTestId)).toHaveAttribute('open');
     });
 
     it('should execute "Metadata" with correct props', () => {
@@ -63,11 +68,11 @@ describe('GeneralSection', () => {
       expect(Metadata).toHaveBeenLastCalledWith(expectedResult, {});
     });
 
-    sectionTesting('Name', policyNameId, mockedName);
+    sectionTesting('Name', labelIds.policyNameId, mockedName);
 
-    sectionTesting('Active', activeLabelId, activeStatusId);
+    sectionTesting('Active', labelIds.activeLabelId, labelIds.activeStatusId);
 
-    sectionTesting('Description', policyDescriptionId, mockedDescription);
+    sectionTesting('Description', labelIds.policyDescriptionId, mockedDescription);
   });
 
   describe('with negative props', () => {
@@ -84,9 +89,9 @@ describe('GeneralSection', () => {
     });
 
     it('should pass "isOpen" property correctly', () => {
-      expect(screen.getByTestId('generalInformationTestId')).not.toHaveAttribute('open');
+      expect(screen.getByTestId(testIds.generalInformationTestId)).not.toHaveAttribute('open');
     });
 
-    sectionTesting('Active', activeLabelId, inactiveStatusId);
+    sectionTesting('Active', labelIds.activeLabelId, labelIds.inactiveStatusId);
   });
 });

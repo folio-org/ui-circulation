@@ -1,173 +1,76 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import HtmlToReact, { Parser } from 'html-to-react';
+
 import { injectIntl } from 'react-intl';
 import { get } from 'lodash';
 
 import {
   Accordion,
   AccordionSet,
-  Button,
+  ExpandAllButton,
+  Row,
   Col,
-  KeyValue,
-  Row
 } from '@folio/stripes/components';
-import { PreviewModal, tokensReducer } from '@folio/stripes-template-editor';
+import { stripesShape } from '@folio/stripes/core';
 
-import getTokens from './tokens';
+import { Metadata } from '../components';
+import {
+  PatronNoticeAboutSection,
+  PatronNoticeEmailSection,
+} from './components/ViewSections';
 
-class PatronNoticeDetail extends React.Component {
-  static propTypes = {
-    initialValues: PropTypes.object.isRequired,
-    intl: PropTypes.object.isRequired,
-  };
+const PatronNoticeDetail = (props) => {
+  const {
+    initialValues: notice,
+    intl: {
+      formatMessage,
+      locale,
+    },
+    stripes: {
+      connect,
+    }
+  } = props;
+  const emailTemplate = get(notice, 'localizedTemplates.en.body', '');
 
-  constructor(props) {
-    super(props);
-
-    const processNodeDefinitions = new HtmlToReact.ProcessNodeDefinitions(React);
-    this.parser = new Parser();
-
-    this.rules = [
-      {
-        shouldProcessNode: () => true,
-        processNode: processNodeDefinitions.processDefaultNode,
-      }
-    ];
-
-    this.state = {
-      accordions: {
-        'email-template-detail': true,
-      },
-      openPreview: false,
-    };
-  }
-
-  openPreviewDialog = () => {
-    this.setState({ openPreview: true });
-  };
-
-  closePreviewDialog = () => {
-    this.setState({ openPreview: false });
-  }
-
-  onToggleSection = ({ id }) => {
-    this.setState((curState) => {
-      const accordions = { ...curState.accordions };
-      accordions[id] = !accordions[id];
-      return { accordions };
-    });
-  }
-
-  render() {
-    const {
-      initialValues: notice,
-      intl: {
-        formatMessage,
-        locale,
-      },
-    } = this.props;
-    const {
-      accordions,
-      openPreview,
-    } = this.state;
-
-    const tokens = getTokens(locale);
-
-    const emailTemplate = get(notice, 'localizedTemplates.en.body', '');
-    const parsedEmailTemplate = this.parser.parseWithInstructions(emailTemplate, () => true, this.rules);
-
-    const isActiveLabel = notice.active
-      ? formatMessage({ id: 'ui-circulation.settings.patronNotices.yes' })
-      : formatMessage({ id: 'ui-circulation.settings.patronNotices.no' });
-
-    return (
-      <>
-        <Row>
-          <Col xs={12}>
-            <div data-test-staff-slip-name>
-              <KeyValue
-                label={formatMessage({ id: 'ui-circulation.settings.patronNotices.notice.name' })}
-                value={notice.name}
-              />
-            </div>
+  return (
+    <div data-test-patron-notice-details>
+      <AccordionSet>
+        <Row end="xs">
+          <Col data-test-expand-all>
+            <ExpandAllButton />
           </Col>
         </Row>
-        <Row>
-          <Col xs={12}>
-            <KeyValue
-              label={formatMessage({ id: 'ui-circulation.settings.patronNotices.notice.active' })}
-              value={isActiveLabel}
-            />
-          </Col>
-        </Row>
-        <Row>
-          <Col xs={12}>
-            <KeyValue
-              label={formatMessage({ id: 'ui-circulation.settings.patronNotices.notice.description' })}
-              value={notice.description}
-            />
-          </Col>
-        </Row>
-        <Row>
-          <Col xs={12}>
-            <KeyValue
-              label={formatMessage({ id: 'ui-circulation.settings.patronNotices.notice.category' })}
-              value={notice.category}
-            />
-          </Col>
-        </Row>
-        <AccordionSet
-          accordionStatus={accordions}
-          onToggle={this.onToggleSection}
+        <Accordion
+          label={formatMessage({ id:'ui-circulation.settings.patronNotices.generalInformation' })}
         >
-          <Accordion
-            id="email-template-detail"
-            label={formatMessage({ id: 'ui-circulation.settings.patronNotices.email' })}
-          >
-            { emailTemplate &&
-              <div data-testid="emailAccordionContent">
-                <Row>
-                  <Col xs={8}>
-                    <KeyValue
-                      label={formatMessage({ id: 'ui-circulation.settings.patronNotices.subject' })}
-                      value={notice.localizedTemplates.en.header}
-                    />
-                  </Col>
-                  <Col
-                    data-testid="previewButtonColumn"
-                    xs={4}
-                  >
-                    <Button onClick={this.openPreviewDialog}>
-                      {formatMessage({ id: 'ui-circulation.settings.patronNotices.preview' })}
-                    </Button>
-                  </Col>
-                </Row>
-                <Row>
-                  <Col xs={12}>
-                    <KeyValue
-                      label={formatMessage({ id: 'ui-circulation.settings.patronNotices.body' })}
-                      value={parsedEmailTemplate}
-                    />
-                  </Col>
-                </Row>
-              </div>}
-          </Accordion>
-        </AccordionSet>
-        <PreviewModal
-          open={openPreview}
-          header={
-            formatMessage({
-              id: 'ui-circulation.settings.patronNotices.view.previewHeader',
-            }, { name: notice.name })
+          <Metadata
+            connect={connect}
+            metadata={notice.metadata}
+          />
+          <PatronNoticeAboutSection notice={notice} />
+        </Accordion>
+        <Accordion
+          label={formatMessage({ id: 'ui-circulation.settings.patronNotices.email' })}
+        >
+          {
+            emailTemplate && (
+              <PatronNoticeEmailSection
+                notice={notice}
+                locale={locale}
+                emailTemplate={emailTemplate}
+              />
+            )
           }
-          previewTemplate={emailTemplate}
-          previewFormat={tokensReducer(tokens)}
-          onClose={this.closePreviewDialog}
-        />
-      </>
-    );
-  }
-}
+        </Accordion>
+      </AccordionSet>
+    </div>
+  );
+};
+
+PatronNoticeDetail.propTypes = {
+  initialValues: PropTypes.object.isRequired,
+  intl: PropTypes.object.isRequired,
+  stripes: stripesShape.isRequired,
+};
 
 export default injectIntl(PatronNoticeDetail);
