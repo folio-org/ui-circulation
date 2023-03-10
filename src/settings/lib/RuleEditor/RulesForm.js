@@ -4,6 +4,9 @@ import { Field } from 'react-final-form';
 import { injectIntl } from 'react-intl';
 
 import {
+  IfPermission,
+} from '@folio/stripes/core';
+import {
   Row,
   Col,
   Button,
@@ -67,16 +70,18 @@ class RulesForm extends React.Component {
               onChange={this.filterRules}
             />
           </Col>
-          <Col xs={3}>
-            <Button
-              fullWidth
-              id="clickable-save-loan-rules"
-              type="submit"
-              disabled={pristine || submitting}
-            >
-              {formatMessage({ id: 'ui-circulation.settings.checkout.save' })}
-            </Button>
-          </Col>
+          <IfPermission perm="ui-circulation.settings.circulation-rules">
+            <Col xs={3}>
+              <Button
+                fullWidth
+                id="clickable-save-loan-rules"
+                type="submit"
+                disabled={pristine || submitting}
+              >
+                {formatMessage({ id: 'ui-circulation.settings.checkout.save' })}
+              </Button>
+            </Col>
+          </IfPermission>
         </Row>
         <Row className={styles.circulationRulesFormBody}>
           <Col>

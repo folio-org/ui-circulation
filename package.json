@@ -137,7 +137,7 @@
       },
       {
         "permissionName": "ui-circulation.settings.view-circulation-rules",
-        "displayName": "Settings (Circ): Can view circulation rules",
+        "displayName": "Settings (Circ): View circulation rules",
         "subPermissions": [
           "circulation-storage.circulation-rules.get",
           "circulation.rules.get",
@@ -150,6 +150,7 @@
           "circulation-storage.loan-policies.item.get",
           "circulation-storage.request-policies.item.get",
           "circulation-storage.patron-notice-policies.item.get",
+          "settings.circulation.enabled",
           "inventory-storage.material-types.item.get",
           "inventory-storage.loan-types.item.get",
           "inventory-storage.location-units.institutions.collection.get",
