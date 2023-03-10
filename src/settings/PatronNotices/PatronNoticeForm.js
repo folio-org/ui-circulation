@@ -35,28 +35,34 @@ import {
 
 import css from './PatronNoticeForm.css';
 
-class PatronNoticeForm extends React.Component {
-  static propTypes = {
-    intl: PropTypes.object.isRequired,
-    okapi: PropTypes.object.isRequired,
-    initialValues: PropTypes.object,
-    form: PropTypes.object.isRequired,
-    pristine: PropTypes.bool.isRequired,
-    submitting: PropTypes.bool.isRequired,
-    handleSubmit: PropTypes.func.isRequired,
-    onCancel: PropTypes.func.isRequired,
-    location: PropTypes.shape({
-      search: PropTypes.string.isRequired,
-    }).isRequired,
-    stripes: stripesShape.isRequired,
-  };
+const PatronNoticeForm = (props) => {
+  const {
+    handleSubmit,
+    initialValues,
+    initialValues: {
+      id: initialId,
+    },
+    location: {
+      search,
+    },
+    intl: {
+      formatMessage,
+      locale,
+    },
+    form: { getFieldState },
+    stripes: {
+      connect,
+    },
+    okapi,
+  } = props;
+  const category = getFieldState('category')?.value;
 
-  static defaultProps = {
-    initialValues: {},
-  };
+  if (isEditLayer(search) && !initialId) {
+    return null;
+  }
 
-  renderCLoseIcon() {
-    const { onCancel } = this.props;
+  const renderCLoseIcon = () => {
+    const { onCancel } = props;
 
     return (
       <CancelButton
@@ -65,27 +71,24 @@ class PatronNoticeForm extends React.Component {
         onCancel={onCancel}
       />
     );
-  }
+  };
 
-  renderPaneTitle() {
+  const renderPaneTitle = () => {
     const {
       initialValues: notice,
-      intl: {
-        formatMessage,
-      },
-    } = this.props;
+    } = props;
 
     return notice.id
       ? notice.name
       : formatMessage({ id: 'ui-circulation.settings.patronNotices.newLabel' });
-  }
+  };
 
-  renderFooterPane() {
+  const renderFooterPane = () => {
     const {
       pristine,
       submitting,
       onCancel,
-    } = this.props;
+    } = props;
 
     return (
       <FooterPane
@@ -95,89 +98,80 @@ class PatronNoticeForm extends React.Component {
         onCancel={onCancel}
       />
     );
-  }
+  };
 
-  render() {
-    const {
-      handleSubmit,
-      initialValues,
-      initialValues: {
-        id: initialId,
-      },
-      location: {
-        search,
-      },
-      intl: {
-        formatMessage,
-        locale,
-      },
-      form: { getFieldState },
-      stripes: {
-        connect,
-      },
-      okapi,
-    } = this.props;
-    const category = getFieldState('category')?.value;
-
-    if (isEditLayer(search) && !initialId) {
-      return null;
-    }
-
-    return (
-      <form
-        id="form-patron-notice"
-        data-testid="patronNoticeForm"
-        className={css.patronNoticeForm}
-        noValidate
-        data-test-patron-notice-form
-        onSubmit={handleSubmit}
+  return (
+    <form
+      id="form-patron-notice"
+      data-testid="patronNoticeForm"
+      className={css.patronNoticeForm}
+      noValidate
+      data-test-patron-notice-form
+      onSubmit={handleSubmit}
+    >
+      <Paneset
+        data-testid="patronNoticePaneset"
+        isRoot
       >
-        <Paneset
-          data-testid="patronNoticePaneset"
-          isRoot
+        <Pane
+          data-testid="patronNoticeTemplatePane"
+          id="patron-notice-template-pane"
+          defaultWidth="100%"
+          paneTitle={renderPaneTitle()}
+          firstMenu={renderCLoseIcon()}
+          footer={renderFooterPane()}
         >
-          <Pane
-            data-testid="patronNoticeTemplatePane"
-            id="patron-notice-template-pane"
-            defaultWidth="100%"
-            paneTitle={this.renderPaneTitle()}
-            firstMenu={this.renderCLoseIcon()}
-            footer={this.renderFooterPane()}
-          >
-            <AccordionSet>
-              <Row end="xs">
-                <Col data-test-expand-all>
-                  <ExpandAllButton />
-                </Col>
-              </Row>
-              <Accordion
-                label={formatMessage({ id: 'ui-circulation.settings.patronNotices.generalInformation' })}
-              >
-                <Metadata
-                  connect={connect}
-                  metadata={initialValues.metadata}
-                />
-                <PatronNoticeAboutSection initialValues={initialValues} okapi={okapi} />
-              </Accordion>
-              <Accordion
-                label={formatMessage({ id: 'ui-circulation.settings.patronNotices.email' })}
-              >
-                <PatronNoticeEmailSection category={category} locale={locale} />
-              </Accordion>
-            </AccordionSet>
-            { initialValues.predefined &&
-              <Row>
-                <Col xs={8}>
-                  <FormattedMessage id="ui-circulation.settings.patronNotices.predefinedWarning" />
-                </Col>
-              </Row>}
-          </Pane>
-        </Paneset>
-      </form>
-    );
-  }
-}
+          <AccordionSet>
+            <Row end="xs">
+              <Col data-test-expand-all>
+                <ExpandAllButton />
+              </Col>
+            </Row>
+            <Accordion
+              label={formatMessage({ id: 'ui-circulation.settings.patronNotices.generalInformation' })}
+            >
+              <Metadata
+                connect={connect}
+                metadata={initialValues.metadata}
+              />
+              <PatronNoticeAboutSection initialValues={initialValues} okapi={okapi} />
+            </Accordion>
+            <Accordion
+              label={formatMessage({ id: 'ui-circulation.settings.patronNotices.email' })}
+            >
+              <PatronNoticeEmailSection category={category} locale={locale} />
+            </Accordion>
+          </AccordionSet>
+          { initialValues.predefined &&
+            <Row>
+              <Col xs={8}>
+                <FormattedMessage id="ui-circulation.settings.patronNotices.predefinedWarning" />
+              </Col>
+            </Row>}
+        </Pane>
+      </Paneset>
+    </form>
+  );
+};
 
+PatronNoticeForm.propTypes = {
+  intl: PropTypes.object.isRequired,
+  okapi: PropTypes.object.isRequired,
+  initialValues: PropTypes.object,
+  form: PropTypes.object.isRequired,
+  pristine: PropTypes.bool.isRequired,
+  submitting: PropTypes.bool.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  onCancel: PropTypes.func.isRequired,
+  location: PropTypes.shape({
+    search: PropTypes.string.isRequired,
+  }).isRequired,
+  stripes: stripesShape.isRequired,
+};
+
+PatronNoticeForm.defaultProps = {
+  initialValues: {},
+};
 export default stripesFinalForm({
   navigationCheck: true,
   validate: validatePatronNoticeTemplate,
