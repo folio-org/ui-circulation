@@ -9,6 +9,7 @@
 * Use camel case notation for all data-testid. Refs UICIRC-912.
 * Replace `labelSingular` with `translations` in props to `ControlledVocab`. Refs UICIRC-849.
 * Add metadata info to view of Patron Notice Templates (Settings > Circulation > Patron Notice Templates). Refs UICIRC-856.
+* Add metadata info and accordion organization to Patron Notice Templates edit screen. REFs UICIRC-906.
 
 ## [8.0.1](https://github.com/folio-org/ui-circulation/tree/v8.0.1) (2023-03-07)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v8.0.0...v8.0.1)
