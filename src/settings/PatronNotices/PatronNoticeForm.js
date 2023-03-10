@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Field } from 'react-final-form';
 import {
   FormattedMessage,
   injectIntl,
@@ -10,21 +9,14 @@ import { stripesShape } from '@folio/stripes/core';
 import {
   Accordion,
   AccordionSet,
-  // Checkbox,
   Col,
   ExpandAllButton,
   Pane,
   Paneset,
   Row,
-  // Select,
-  // TextArea,
-  TextField,
 } from '@folio/stripes/components';
 import stripesFinalForm from '@folio/stripes/final-form';
-import { TemplateEditor } from '@folio/stripes-template-editor';
 
-import getTokens from './tokens';
-import TokensList from './TokensList';
 import {
   CancelButton,
   FooterPane,
@@ -32,14 +24,13 @@ import {
 } from '../components';
 import {
   PatronNoticeAboutSection,
-  // PatronNoticeEmailSection,
+  PatronNoticeEmailSection,
 } from './components/EditSections';
 
 import { PatronNoticeTemplate as validatePatronNoticeTemplate } from '../Validation';
 
 import {
   isEditLayer,
-  // validateUniqueNameById,
 } from '../utils/utils';
 
 import css from './PatronNoticeForm.css';
@@ -63,24 +54,6 @@ class PatronNoticeForm extends React.Component {
   static defaultProps = {
     initialValues: {},
   };
-
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      accordions: {
-        'email-template-form': true,
-      }
-    };
-  }
-
-  onToggleSection = ({ id }) => {
-    this.setState((state) => {
-      const accordions = { ...state.accordions };
-      accordions[id] = !accordions[id];
-      return { accordions };
-    });
-  }
 
   renderCLoseIcon() {
     const { onCancel } = this.props;
@@ -144,7 +117,6 @@ class PatronNoticeForm extends React.Component {
       },
       okapi,
     } = this.props;
-    const tokens = getTokens(locale);
     const category = getFieldState('category')?.value;
 
     if (isEditLayer(search) && !initialId) {
@@ -190,34 +162,7 @@ class PatronNoticeForm extends React.Component {
               <Accordion
                 label={formatMessage({ id: 'ui-circulation.settings.patronNotices.email' })}
               >
-                <Row>
-                  <Col xs={8}>
-                    <Field
-                      data-testid="patronNoticesSubject"
-                      id="input-patron-notice-subject"
-                      component={TextField}
-                      required
-                      label={formatMessage({ id: 'ui-circulation.settings.patronNotices.subject' })}
-                      name="localizedTemplates.en.header"
-                    />
-                  </Col>
-                </Row>
-                <Row>
-                  <Col xs={8}>
-                    <Field
-                      data-testid="patronNoticesBody"
-                      label={formatMessage({ id: 'ui-circulation.settings.patronNotices.body' })}
-                      required
-                      name="localizedTemplates.en.body"
-                      id="input-email-template-body"
-                      component={TemplateEditor}
-                      tokens={tokens}
-                      tokensList={TokensList}
-                      previewModalHeader={formatMessage({ id: 'ui-circulation.settings.patronNotices.form.previewHeader' })}
-                      selectedCategory={category}
-                    />
-                  </Col>
-                </Row>
+                <PatronNoticeEmailSection category={category} locale={locale} />
               </Accordion>
             </AccordionSet>
             { initialValues.predefined &&

@@ -1,6 +1,6 @@
 import React from 'react';
 import Proptypes from 'prop-types';
-import { FormattedMessage, injectIntl } from 'react-intl';
+import { injectIntl } from 'react-intl';
 import { Field } from 'react-final-form';
 import { memoize } from 'lodash';
 
@@ -14,13 +14,10 @@ import {
 } from '@folio/stripes/components';
 
 import { patronNoticeCategories } from '../../../../../constants';
-import {
-  // isEditLayer,
-  validateUniqueNameById,
-} from '../../../../utils/utils';
+import { validateUniqueNameById } from '../../../../utils/utils';
 
-const PatronNoticeAboutSection = (props) => {
-  const { initialValues, okapi, intl : { formatMessage } } = props;
+const PatronNoticeAboutSection = ({ initialValues, okapi, intl }) => {
+  const { formatMessage } = intl;
   const categoryOptions = patronNoticeCategories.map(({ label, id }) => ({
     label: formatMessage({ id: label }),
     value: id,
@@ -49,7 +46,7 @@ const PatronNoticeAboutSection = (props) => {
   ));
 
   return (
-    <div>
+    <div data-testid="patronNoticeAboutSection">
       <Row>
         <Col
           xs={8}
@@ -71,7 +68,7 @@ const PatronNoticeAboutSection = (props) => {
         <Col xs={3}>
           <Field
             data-testid="patronNoticesNoticeActive"
-            label={<FormattedMessage id="ui-circulation.settings.patronNotices.notice.active" />}
+            label={formatMessage({ id:'ui-circulation.settings.patronNotices.notice.active' })}
             name="active"
             id="input-patron-notice-active"
             component={Checkbox}
@@ -84,7 +81,7 @@ const PatronNoticeAboutSection = (props) => {
         <Col xs={8}>
           <Field
             data-testid="patronNoticesNoticeDescription"
-            label={<FormattedMessage id="ui-circulation.settings.patronNotices.notice.description" />}
+            label={formatMessage({ id:'ui-circulation.settings.patronNotices.notice.description' })}
             name="description"
             id="input-patron-notice-description"
             component={TextArea}
@@ -96,7 +93,7 @@ const PatronNoticeAboutSection = (props) => {
           <div data-test-template-category>
             <Field
               data-testid="patronNoticesNoticeCategory"
-              label={<FormattedMessage id="ui-circulation.settings.patronNotices.notice.category" />}
+              label={formatMessage({ id:'ui-circulation.settings.patronNotices.notice.category' })}
               name="category"
               component={Select}
               fullWidth

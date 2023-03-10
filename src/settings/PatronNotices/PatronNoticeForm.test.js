@@ -2,7 +2,7 @@ import React from 'react';
 import {
   render,
   screen,
-  fireEvent,
+  // fireEvent,
 } from '@testing-library/react';
 
 import '../../../test/jest/__mock__';
@@ -11,68 +11,35 @@ import { Field } from 'react-final-form';
 import {
   Pane,
   Paneset,
-  TextField,
-  Checkbox,
-  TextArea,
-  Select,
   AccordionSet,
   Accordion,
+  ExpandAllButton,
 } from '@folio/stripes/components';
 
-import { TemplateEditor } from '@folio/stripes-template-editor';
+import buildStripes from '../../../test/jest/__mock__/stripes.mock';
 import { componentPropsCheck } from '../../../test/jest/helpers';
 import PatronNoticeForm from './PatronNoticeForm';
-import TokensList from './TokensList';
 import {
   CancelButton,
   FooterPane,
+  Metadata,
 } from '../components';
+import {
+  PatronNoticeAboutSection,
+  PatronNoticeEmailSection,
+} from './components/EditSections';
 
-const mockGetTokensReturnValue = 'getTokensReturnValue';
-const testIds = {
-  accordionSet: 'accordionSet',
-  form: 'patronNoticeForm',
-  patronNoticePaneset: 'patronNoticePaneset',
-  patronNoticeTemplatePane: 'patronNoticeTemplatePane',
-  patronNoticeCancelButton: 'patronNoticeCancelButton',
-  patronNoticeFooterPane: 'patronNoticeFooterPane',
-  patronNoticesNoticeName: 'patronNoticesNoticeName',
-  patronNoticesNoticeActive: 'patronNoticesNoticeActive',
-  patronNoticesNoticeDescription: 'patronNoticesNoticeDescription',
-  patronNoticesNoticeCategory: 'patronNoticesNoticeCategory',
-  patronNoticesSubject: 'patronNoticesSubject',
-  patronNoticesBody: 'patronNoticesBody',
-  patronNoticesAccordionSet: 'patronNoticesAccordionSet',
-  patronNoticesEmail: 'patronNoticesEmail',
-};
-const labelIds = {
-  patronNoticesNew: 'ui-circulation.settings.patronNotices.newLabel',
-  patronNoticesCloseDialog: 'ui-circulation.settings.patronNotices.closeDialog',
-  patronNoticesNoticeName: 'ui-circulation.settings.patronNotices.notice.name',
-  patronNoticesNoticeActive: 'ui-circulation.settings.patronNotices.notice.active',
-  patronNoticesNoticeDescription: 'ui-circulation.settings.patronNotices.notice.description',
-  patronNoticesNoticeCategory: 'ui-circulation.settings.patronNotices.notice.category',
-  patronNoticesEmail: 'ui-circulation.settings.patronNotices.email',
-  patronNoticesSubject: 'ui-circulation.settings.patronNotices.subject',
-  patronNoticesBody: 'ui-circulation.settings.patronNotices.body',
-  patronNoticesFormPreviewHeader: 'ui-circulation.settings.patronNotices.form.previewHeader',
-  patronNoticesPredefinedWarning: 'ui-circulation.settings.patronNotices.predefinedWarning',
-};
+const mockPatronNoticeAboutSection = 'PatronNoticeAboutSection';
+const mockPatronNoticeEmailSection = 'PatronNoticeEmailSection';
 
-AccordionSet.mockImplementation(({ children, onToggle }) => (
-  // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
-  <span data-testid={testIds.accordionSet} onClick={() => onToggle({ id: 'email-template-form' })}>
-    {children}
-  </span>
-));
-jest.mock('@folio/stripes-template-editor', () => ({
-  TemplateEditor: jest.fn(() => null),
+jest.mock('./components/EditSections', () => ({
+  PatronNoticeAboutSection: jest.fn(() => 'PatronNoticeAboutSection'),
+  PatronNoticeEmailSection: jest.fn(() => 'PatronNoticeEmailSection'),
 }));
-jest.mock('./tokens', () => jest.fn(() => mockGetTokensReturnValue));
-jest.mock('./TokensList', () => jest.fn(() => null));
 jest.mock('../components', () => ({
   CancelButton: jest.fn(() => null),
   FooterPane: jest.fn(() => null),
+  Metadata: jest.fn(() => null),
 }));
 jest.mock('../../constants', () => ({
   patronNoticeCategories: [{
@@ -80,6 +47,26 @@ jest.mock('../../constants', () => ({
     label: 'testLabel',
   }],
 }));
+jest.mock('./components/EditSections', () => ({
+  PatronNoticeAboutSection: jest.fn(() => 'PatronNoticeAboutSection'),
+  PatronNoticeEmailSection: jest.fn(() => 'PatronNoticeEmailSection'),
+}));
+
+const testIds = {
+  form: 'patronNoticeForm',
+  patronNoticePaneset: 'patronNoticePaneset',
+  patronNoticeTemplatePane: 'patronNoticeTemplatePane',
+  patronNoticeCancelButton: 'patronNoticeCancelButton',
+  patronNoticeFooterPane: 'patronNoticeFooterPane',
+};
+const labelIds = {
+  patronNoticesNew: 'ui-circulation.settings.patronNotices.newLabel',
+  patronNoticesCloseDialog: 'ui-circulation.settings.patronNotices.closeDialog',
+  patronNoticesEmail: 'ui-circulation.settings.patronNotices.email',
+  patronNoticesPredefinedWarning: 'ui-circulation.settings.patronNotices.predefinedWarning',
+  patronNoticesGeneralInformation: 'ui-circulation.settings.patronNotices.generalInformation',
+};
+const testStripes = buildStripes();
 
 describe('PatronNoticeForm', () => {
   const testOkapi = {
@@ -99,6 +86,10 @@ describe('PatronNoticeForm', () => {
   const testSubmittingValue = true;
   const testHandleSubmit = jest.fn();
   const testOnCancel = jest.fn();
+  const mockedStripes = {
+    hasPerm: jest.fn(() => true),
+    connect: jest.fn(),
+  };
   const defaultTestProps = {
     form: {
       getFieldState: testGetFieldState,
@@ -111,6 +102,7 @@ describe('PatronNoticeForm', () => {
     location: {
       search: '',
     },
+    stripes : { mockedStripes }
   };
 
   afterEach(() => {
@@ -121,6 +113,10 @@ describe('PatronNoticeForm', () => {
     Accordion.mockClear();
     CancelButton.mockClear();
     FooterPane.mockClear();
+    Metadata.mockClear();
+    ExpandAllButton.mockClear();
+    PatronNoticeAboutSection.mockClear();
+    PatronNoticeEmailSection.mockClear();
   });
 
   describe('with default props', () => {
@@ -157,109 +153,36 @@ describe('PatronNoticeForm', () => {
       });
     });
 
-    it('should render notice name Field component', () => {
-      componentPropsCheck(Field, testIds.patronNoticesNoticeName, {
-        label: labelIds.patronNoticesNoticeName,
-        name: 'name',
-        required: true,
-        id: 'input-patron-notice-name',
-        autoFocus: true,
-        component: TextField,
-      }, true);
+    it('should render ExpandAllButton component', () => {
+      expect(ExpandAllButton).toHaveBeenCalled();
     });
 
-    it('should render notice active Field component', () => {
-      componentPropsCheck(Field, testIds.patronNoticesNoticeActive, {
-        label: labelIds.patronNoticesNoticeActive,
-        name: 'active',
-        id: 'input-patron-notice-active',
-        component: Checkbox,
-        defaultChecked: undefined,
-      });
+    it('should render AccordionSet component', () => {
+      expect(AccordionSet).toHaveBeenCalled();
     });
 
-    it('should render notice description Field component', () => {
-      componentPropsCheck(Field, testIds.patronNoticesNoticeDescription, {
-        label: labelIds.patronNoticesNoticeDescription,
-        name: 'description',
-        id: 'input-patron-notice-description',
-        component: TextArea,
-      });
-    });
-
-    it('should render notice category Field component', () => {
-      componentPropsCheck(Field, testIds.patronNoticesNoticeCategory, {
-        label: labelIds.patronNoticesNoticeCategory,
-        name: 'category',
-        component: Select,
-        fullWidth: true,
-        dataOptions: [{
-          value: 'testId',
-          label: 'testLabel',
-        }],
-      });
-    });
-
-    it('should render notice category Field component', () => {
-      componentPropsCheck(Field, testIds.patronNoticesSubject, {
-        id: 'input-patron-notice-subject',
-        component: TextField,
-        required: true,
-        label: labelIds.patronNoticesSubject,
-        name: 'localizedTemplates.en.header',
-      });
-    });
-
-    it('should render patron notices body Field component', () => {
-      componentPropsCheck(Field, testIds.patronNoticesBody, {
-        label: labelIds.patronNoticesBody,
-        required: true,
-        name: 'localizedTemplates.en.body',
-        id: 'input-email-template-body',
-        component: TemplateEditor,
-        tokens: mockGetTokensReturnValue,
-        tokensList: TokensList,
-        previewModalHeader: labelIds.patronNoticesFormPreviewHeader,
-        selectedCategory: categoryValue,
-      });
-    });
-
-    describe('AccordionSet', () => {
-      it('should render AccordionSet component', () => {
-        componentPropsCheck(AccordionSet, testIds.patronNoticesAccordionSet, {
-          accordionStatus: {
-            'email-template-form': true,
-          },
-        }, true);
-      });
-
-      it('should toggle accordions', () => {
-        componentPropsCheck(AccordionSet, testIds.patronNoticesAccordionSet, {
-          accordionStatus: {
-            'email-template-form': true,
-          },
-        }, true);
-
-        const accordionSet = screen.getByTestId(testIds.accordionSet);
-        fireEvent.click(accordionSet);
-
-        componentPropsCheck(AccordionSet, testIds.patronNoticesAccordionSet, {
-          accordionStatus: {
-            'email-template-form': false,
-          },
-        }, true);
-      });
-    });
-
-    it('should render Accordion component', () => {
-      componentPropsCheck(Accordion, testIds.patronNoticesEmail, {
-        id: 'email-template-form',
-        label: labelIds.patronNoticesEmail,
-      }, true);
+    it('should render Accordion component 2 times', () => {
+      expect(Accordion).toHaveBeenCalledTimes(2);
     });
 
     it('should not render patron notices predefined warning label', () => {
       expect(screen.queryByText(labelIds.patronNoticesPredefinedWarning)).not.toBeInTheDocument();
+    });
+
+    it('should render "General information" label', () => {
+      expect(screen.getByText(labelIds.patronNoticesGeneralInformation)).toBeDefined();
+    });
+
+    it('should render "Email" label', () => {
+      expect(screen.getByText(labelIds.patronNoticesEmail)).toBeDefined();
+    });
+
+    it('should render PatronNoticeAboutSection', () => {
+      expect(screen.getByText(mockPatronNoticeAboutSection)).toBeVisible();
+    });
+
+    it('should render PatronNoticeEmailSection', () => {
+      expect(screen.getByText(mockPatronNoticeEmailSection)).toBeVisible();
     });
   });
 
@@ -269,6 +192,7 @@ describe('PatronNoticeForm', () => {
       name: 'testName',
       active: true,
       predefined: true,
+      metadata: 'testMetadata',
     };
 
     beforeEach(() => {
@@ -276,6 +200,7 @@ describe('PatronNoticeForm', () => {
         <PatronNoticeForm
           {...defaultTestProps}
           initialValues={initialValues}
+          stripes={testStripes}
           location={{
             search: 'edit',
           }}
@@ -289,14 +214,15 @@ describe('PatronNoticeForm', () => {
       }, true);
     });
 
-    it('should render notice active Field component', () => {
-      componentPropsCheck(Field, testIds.patronNoticesNoticeActive, {
-        defaultChecked: initialValues.active,
-      }, true);
-    });
-
     it('should not render patron notices predefined warning label', () => {
       expect(screen.queryByText(labelIds.patronNoticesPredefinedWarning)).toBeVisible();
+    });
+
+    it('should call Metadata component', () => {
+      expect(Metadata).toHaveBeenCalledWith(expect.objectContaining({
+        connect: testStripes.connect,
+        metadata: initialValues.metadata,
+      }), {});
     });
   });
 
