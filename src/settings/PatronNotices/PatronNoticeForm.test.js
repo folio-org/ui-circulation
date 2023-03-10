@@ -2,7 +2,6 @@ import React from 'react';
 import {
   render,
   screen,
-  // fireEvent,
 } from '@testing-library/react';
 
 import '../../../test/jest/__mock__';
