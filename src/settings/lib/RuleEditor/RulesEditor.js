@@ -14,6 +14,11 @@ import 'codemirror/addon/fold/foldcode'; // eslint-disable-line import/no-extran
 import 'codemirror/addon/fold/foldgutter'; // eslint-disable-line import/no-extraneous-dependencies
 import 'codemirror/addon/hint/css-hint'; // eslint-disable-line import/no-extraneous-dependencies
 
+import {
+  withStripes,
+  stripesShape,
+} from '@folio/stripes/core';
+
 import initRulesCMM from './initRulesCMM';
 import initFoldRules from './initFoldRules';
 import './rules-show-hint';
@@ -60,6 +65,7 @@ const propTypes = {
   showAssist: PropTypes.bool,
   filter: PropTypes.string,
   intl: PropTypes.object.isRequired,
+  stripes: stripesShape.isRequired,
 };
 
 export function handleBackspace(cm) {
@@ -167,6 +173,7 @@ class RulesEditor extends React.Component {
       typeMapping,
       policyMapping,
       code,
+      stripes,
     } = this.props;
 
     const modeConfig = {
@@ -199,7 +206,8 @@ class RulesEditor extends React.Component {
           gutter: 'rules-foldgutter',
           indicatorOpen: openTri,
           indicatorFolded: foldedTri,
-        }
+        },
+        readOnly: stripes?.user?.perms['ui-circulation.settings.edit-circulation-rules'] ? false : 'nocursor',
       },
     };
   }
@@ -379,4 +387,4 @@ class RulesEditor extends React.Component {
 
 RulesEditor.propTypes = propTypes;
 
-export default injectIntl(RulesEditor);
+export default injectIntl(withStripes(RulesEditor));

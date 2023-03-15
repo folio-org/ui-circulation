@@ -163,7 +163,7 @@
         "visible": true
       },
       {
-        "permissionName": "ui-circulation.settings.circulation-rules",
+        "permissionName": "ui-circulation.settings.edit-circulation-rules",
         "displayName": "Settings (Circ): Can create, edit and remove circulation rules",
         "subPermissions": [
           "ui-circulation.settings.view-circulation-rules",

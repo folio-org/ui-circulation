@@ -70,7 +70,7 @@ class RulesForm extends React.Component {
               onChange={this.filterRules}
             />
           </Col>
-          <IfPermission perm="ui-circulation.settings.circulation-rules">
+          <IfPermission perm="ui-circulation.settings.edit-circulation-rules">
             <Col xs={3}>
               <Button
                 fullWidth

@@ -9,6 +9,7 @@ import { Controlled as CodeMirror } from 'react-codemirror2';
 import Codemirror from 'codemirror';
 
 import '../../../../test/jest/__mock__';
+// import buildStripes from '../../../../test/jest/__mock__/stripes.mock';
 
 import RulesEditor, {
   handleBackspace,
@@ -56,6 +57,8 @@ jest.mock('./rules-show-hint', () => jest.fn());
 jest.mock('codemirror/addon/fold/foldcode', () => jest.fn());
 jest.mock('codemirror/addon/fold/foldgutter', () => jest.fn());
 jest.mock('codemirror/addon/hint/css-hint', () => jest.fn());
+
+// const testStripes = buildStripes();
 
 describe('RulesEditor', () => {
   describe('handleBackspace', () => {
@@ -515,6 +518,13 @@ describe('RulesEditor', () => {
       code,
       filter: '',
       showAssist: true,
+      stripes: {
+        user: {
+          perms: {
+            'ui-circulation.settings.edit-circulation-rules': true
+          }
+        }
+      },
     };
     const rulesHintArgs = {
       ...initialProps,
@@ -556,6 +566,7 @@ describe('RulesEditor', () => {
             rangeFinder: 'rules',
             gutter: 'rules-foldgutter',
           }),
+          readOnly: false,
         };
         const expectedProps = {
           className: codeMirrorFullScreen,
@@ -822,6 +833,79 @@ describe('RulesEditor', () => {
         fireEvent.change(screen.getByTestId(codeMirrorArea), event);
 
         expect(onChange).toHaveBeenCalled();
+      });
+    });
+
+    describe('when user has view only permission for circulation rules', () => {
+      const props = {
+        ...initialProps,
+        stripes: {
+          user: {
+            perms: {
+              'ui-circulation.settings.view-circulation-rules': true
+            }
+          },
+        }
+      };
+      render(
+        <RulesEditor
+          {...props}
+        />
+      );
+
+      it('should render "CodeMirror" with correct props', () => {
+        const codeMirrorOptions = {
+          lineNumbers: true,
+          lineWrapping: true,
+          tabSize: 4,
+          indentUnit: 4,
+          smartIndent: true,
+          indentWithTabs: true,
+          tabindex: 0,
+          rtlMoveVisually: true,
+          mode: {
+            name: 'rulesCMM',
+            completionLists,
+            typeMapping,
+            policyMapping,
+            keySelector: ['all', 'rare'],
+          },
+          electricChars: true,
+          gutters: ['CodeMirror-linenumbers', 'rules-foldgutter'],
+          foldGutter: expect.objectContaining({
+            rangeFinder: 'rules',
+            gutter: 'rules-foldgutter',
+          }),
+          readOnly: 'nocursor',
+        };
+        const expectedProps = {
+          className: codeMirrorFullScreen,
+          options: codeMirrorOptions,
+          value: initialProps.code,
+          onFocus: expect.any(Function),
+          onBlur: expect.any(Function),
+          onBeforeChange: expect.any(Function),
+          onChange: expect.any(Function),
+        };
+
+        expect(CodeMirror).toHaveBeenCalledWith(expect.objectContaining(expectedProps), {});
+      });
+
+      describe('user interaction', () => {
+        beforeEach(() => {
+          cleanup();
+        });
+
+        it('should trigger "Codemirror.showHint"', () => {
+          render(
+            <RulesEditor
+              {...props}
+            />
+          );
+          fireEvent.focus(screen.getByTestId(codeMirrorArea));
+
+          expect(Codemirror.showHint).not.toHaveBeenCalled();
+        });
       });
     });
   });
