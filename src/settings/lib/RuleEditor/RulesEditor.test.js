@@ -9,7 +9,6 @@ import { Controlled as CodeMirror } from 'react-codemirror2';
 import Codemirror from 'codemirror';
 
 import '../../../../test/jest/__mock__';
-// import buildStripes from '../../../../test/jest/__mock__/stripes.mock';
 
 import RulesEditor, {
   handleBackspace,
@@ -57,8 +56,6 @@ jest.mock('./rules-show-hint', () => jest.fn());
 jest.mock('codemirror/addon/fold/foldcode', () => jest.fn());
 jest.mock('codemirror/addon/fold/foldgutter', () => jest.fn());
 jest.mock('codemirror/addon/hint/css-hint', () => jest.fn());
-
-// const testStripes = buildStripes();
 
 describe('RulesEditor', () => {
   describe('handleBackspace', () => {
