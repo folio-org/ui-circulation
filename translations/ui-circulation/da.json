@@ -76,7 +76,6 @@
     "settings.index.requestCancellationReasons": "Request cancellation reasons",
     "settings.loanPolicy.generalInformation": "General information",
     "settings.cancelReasons.label": "Request cancellation reasons",
-    "settings.cancelReasons.labelSingular": "Request cancellation reason",
     "settings.cancelReasons.labelShort": "Cancel reason",
     "settings.cancelReasons.descriptionInternal": "Description (internal)",
     "settings.cancelReasons.descriptionPublic": "Description (public)",
@@ -467,5 +466,11 @@
     "permission.settings.edit-staff-slips": "Settings (Circ): Can edit staff slips",
     "settings.validate.subject": "Should not begin with a space",
     "settings.staffSlips.generalInformation": "General information",
-    "settings.staffSlips.templateContent": "Template content"
+    "settings.staffSlips.templateContent": "Template content",
+    "settings.cancelReasons.cannotDeleteTermHeader": "Cannot delete the cancel reason",
+    "settings.cancelReasons.cannotDeleteTermMessage": "This cancel reason cannot be deleted, as it is in use by one or more records.",
+    "settings.cancelReasons.deleteEntry": "Delete cancel reason",
+    "settings.cancelReasons.termDeleted": "The cancel reason <b>{term}</b> was successfully <b>deleted</b>",
+    "settings.cancelReasons.termWillBeDeleted": "The cancel reason <b>{term}</b> will be <b>deleted.</b>",
+    "settings.patronNotices.generalInformation": "General information"
 }
