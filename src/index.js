@@ -34,7 +34,7 @@ class Circulation extends Component {
             route: 'rules',
             label: <FormattedMessage id="ui-circulation.settings.index.circulationRules" />,
             component: CirculationRules,
-            perm: 'ui-circulation.settings.circulation-rules',
+            perm: 'ui-circulation.settings.view-circulation-rules',
           },
           {
             route: 'checkout',

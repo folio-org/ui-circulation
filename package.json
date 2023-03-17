@@ -136,13 +136,11 @@
         ]
       },
       {
-        "permissionName": "ui-circulation.settings.circulation-rules",
-        "displayName": "Settings (Circ): Can create, edit and remove circulation rules",
+        "permissionName": "ui-circulation.settings.view-circulation-rules",
+        "displayName": "Settings (Circ): View circulation rules",
         "subPermissions": [
           "circulation-storage.circulation-rules.get",
-          "circulation-storage.circulation-rules.put",
           "circulation.rules.get",
-          "circulation.rules.put",
           "usergroups.collection.get",
           "circulation-storage.loan-policies.collection.get",
           "circulation-storage.request-policies.collection.get",
@@ -152,15 +150,25 @@
           "circulation-storage.loan-policies.item.get",
           "circulation-storage.request-policies.item.get",
           "circulation-storage.patron-notice-policies.item.get",
+          "settings.circulation.enabled",
           "inventory-storage.material-types.item.get",
           "inventory-storage.loan-types.item.get",
-          "settings.circulation.enabled",
           "inventory-storage.location-units.institutions.collection.get",
           "inventory-storage.location-units.campuses.collection.get",
           "inventory-storage.location-units.libraries.collection.get",
           "inventory-storage.locations.collection.get",
           "overdue-fines-policies.collection.get",
           "lost-item-fees-policies.collection.get"
+        ],
+        "visible": true
+      },
+      {
+        "permissionName": "ui-circulation.settings.edit-circulation-rules",
+        "displayName": "Settings (Circ): Can create, edit and remove circulation rules",
+        "subPermissions": [
+          "ui-circulation.settings.view-circulation-rules",
+          "circulation-storage.circulation-rules.put",
+          "circulation.rules.put"
         ],
         "visible": true
       },
