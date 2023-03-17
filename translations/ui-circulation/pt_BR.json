@@ -76,7 +76,6 @@
     "settings.index.requestCancellationReasons": "Motivos de cancelamento da solicitação",
     "settings.loanPolicy.generalInformation": "Informação geral",
     "settings.cancelReasons.label": "Motivos de cancelamento da solicitação",
-    "settings.cancelReasons.labelSingular": "Motivo de cancelamento da solicitação",
     "settings.cancelReasons.labelShort": "Motivo do cancelamento",
     "settings.cancelReasons.descriptionInternal": "Descrição (interna)",
     "settings.cancelReasons.descriptionPublic": "Descrição (pública)",
@@ -467,5 +466,11 @@
     "permission.settings.edit-staff-slips": "Configurações (Circulação): Pode editar cadastro de funcionários",
     "settings.validate.subject": "Não deve começar com um espaço",
     "settings.staffSlips.generalInformation": "Informações gerais",
-    "settings.staffSlips.templateContent": "Conteúdo do modelo"
+    "settings.staffSlips.templateContent": "Conteúdo do modelo",
+    "settings.cancelReasons.cannotDeleteTermHeader": "Não é possível excluir o motivo do cancelamento",
+    "settings.cancelReasons.cannotDeleteTermMessage": "Este motivo de cancelamento não pode ser excluído, pois está em uso por um ou mais registros.",
+    "settings.cancelReasons.deleteEntry": "Excluir motivo do cancelamento",
+    "settings.cancelReasons.termDeleted": "O motivo do cancelamento <b> {term} </b> foi <b> excluído </b> com sucesso",
+    "settings.cancelReasons.termWillBeDeleted": "O motivo do cancelamento <b> {term} </b> será <b> excluído. </b>",
+    "settings.patronNotices.generalInformation": "Informações gerais"
 }

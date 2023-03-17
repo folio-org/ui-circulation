@@ -76,7 +76,6 @@
     "settings.index.requestCancellationReasons": "请求取消的原因",
     "settings.loanPolicy.generalInformation": "概况",
     "settings.cancelReasons.label": "请求取消的原因",
-    "settings.cancelReasons.labelSingular": "请求取消的原因",
     "settings.cancelReasons.labelShort": "取消原因",
     "settings.cancelReasons.descriptionInternal": "描述（内部）",
     "settings.cancelReasons.descriptionPublic": "描述（公开）",
@@ -467,5 +466,11 @@
     "permission.settings.edit-staff-slips": "设置（流通）：可以编辑员工单",
     "settings.validate.subject": "不应以空格开头",
     "settings.staffSlips.generalInformation": "General information",
-    "settings.staffSlips.templateContent": "Template content"
+    "settings.staffSlips.templateContent": "Template content",
+    "settings.cancelReasons.cannotDeleteTermHeader": "Cannot delete the cancel reason",
+    "settings.cancelReasons.cannotDeleteTermMessage": "This cancel reason cannot be deleted, as it is in use by one or more records.",
+    "settings.cancelReasons.deleteEntry": "Delete cancel reason",
+    "settings.cancelReasons.termDeleted": "The cancel reason <b>{term}</b> was successfully <b>deleted</b>",
+    "settings.cancelReasons.termWillBeDeleted": "The cancel reason <b>{term}</b> will be <b>deleted.</b>",
+    "settings.patronNotices.generalInformation": "General information"
 }
