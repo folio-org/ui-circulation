@@ -447,7 +447,7 @@
     "settings.index.titleLevelRequests": "Žádanky na úrovni titulu",
     "settings.titleLevelRequests.paneTitle": "Žádanky na úrovni titulu",
     "settings.titleLevelRequests.allow": "Povolit žádanky na úrovni titulu",
-    "settings.titleLevelRequests.createTLR": "Ve výchozím nastavení je vybrána možnost „Vytvořit žádanku na úroveň názvu“.",
+    "settings.titleLevelRequests.createTLR": "Ve výchozím nastavení je vybrána možnost „Vytvořit žádanku na úrovni titulu“.",
     "settings.titleLevelRequests.noticeTemplates": "Šablony notifikací",
     "settings.titleLevelRequests.confirmationNotice": "Notifikace o potvrzení",
     "settings.titleLevelRequests.cancellationNotice": "Notifikace o zrušení",
