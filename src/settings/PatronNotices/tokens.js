@@ -89,6 +89,33 @@ const item = [
     allowedFor: [...Object.values(patronNoticeCategoryIds)],
   },
 ];
+const effectiveLocation = [
+  {
+    token: 'item.effectiveLocationDiscoveryDisplayName',
+    previewValue: 'Main Library',
+    allowedFor: [...Object.values(patronNoticeCategoryIds)],
+  },
+  {
+    token: 'item.effectiveLocationSpecific',
+    previewValue: 'Main Library Reserve',
+    allowedFor: [...Object.values(patronNoticeCategoryIds)],
+  },
+  {
+    token: 'item.effectiveLocationLibrary',
+    previewValue: 'Main Library',
+    allowedFor: [...Object.values(patronNoticeCategoryIds)],
+  },
+  {
+    token: 'item.effectiveLocationCampus',
+    previewValue: 'South Campus',
+    allowedFor: [...Object.values(patronNoticeCategoryIds)],
+  },
+  {
+    token: 'item.effectiveLocationInstitution',
+    previewValue: 'Opentown University',
+    allowedFor: [...Object.values(patronNoticeCategoryIds)],
+  },
+];
 const getTokens = (locale) => ({
   item,
   user: [
@@ -252,28 +279,7 @@ const getTokens = (locale) => ({
       ],
     },
   ],
-  effectiveLocation: [
-    {
-      token: 'item.effectiveLocationSpecific',
-      previewValue: 'Main Library Reserve',
-      allowedFor: [...Object.values(patronNoticeCategoryIds)],
-    },
-    {
-      token: 'item.effectiveLocationLibrary',
-      previewValue: 'Main Library',
-      allowedFor: [...Object.values(patronNoticeCategoryIds)],
-    },
-    {
-      token: 'item.effectiveLocationCampus',
-      previewValue: 'South Campus',
-      allowedFor: [...Object.values(patronNoticeCategoryIds)],
-    },
-    {
-      token: 'item.effectiveLocationInstitution',
-      previewValue: 'Opentown University',
-      allowedFor: [...Object.values(patronNoticeCategoryIds)],
-    },
-  ],
+  effectiveLocation,
   feeFineCharge: [
     {
       token: 'feeCharge.owner',
