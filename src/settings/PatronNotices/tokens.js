@@ -2,118 +2,119 @@ import { patronNoticeCategoryIds } from '../../constants';
 import { generatePreviewDateValue } from './utils';
 import { DATE_FORMAT_WITH_TIME } from './utils/constantsForMoment';
 
+const allowedForAllCategories = [...Object.values(patronNoticeCategoryIds)];
 const item = [
   {
     token: 'item.title',
     previewValue: 'The Wines of Italy',
-    allowedFor: [...Object.values(patronNoticeCategoryIds)],
+    allowedFor: allowedForAllCategories,
   },
   {
     token: 'item.primaryContributor',
     previewValue: 'Thomas, George B.',
-    allowedFor: [...Object.values(patronNoticeCategoryIds)],
+    allowedFor: allowedForAllCategories,
   },
   {
     token: 'item.allContributors',
     previewValue: 'Finney, Ross L.; Weir, Maurice D.',
-    allowedFor: [...Object.values(patronNoticeCategoryIds)],
+    allowedFor: allowedForAllCategories,
   },
   {
     token: 'item.barcode',
     previewValue: '31924001521792',
-    allowedFor: [...Object.values(patronNoticeCategoryIds)],
+    allowedFor: allowedForAllCategories,
   },
   {
     token: 'item.barcodeImage',
     previewValue: '<Barcode>31924001521792</Barcode>',
-    allowedFor: [...Object.values(patronNoticeCategoryIds)],
+    allowedFor: allowedForAllCategories,
   },
   {
     token: 'item.callNumber',
     previewValue: 'TK7871.15.F4 S67 1988',
-    allowedFor: [...Object.values(patronNoticeCategoryIds)],
+    allowedFor: allowedForAllCategories,
   },
   {
     token: 'item.callNumberPrefix',
     previewValue: 'New & Noteworthy',
-    allowedFor: [...Object.values(patronNoticeCategoryIds)],
+    allowedFor: allowedForAllCategories,
   },
   {
     token: 'item.callNumberSuffix',
     previewValue: 'Handbook',
-    allowedFor: [...Object.values(patronNoticeCategoryIds)],
+    allowedFor: allowedForAllCategories,
   },
   {
     token: 'item.enumeration',
     previewValue: 'no.1-3',
-    allowedFor: [...Object.values(patronNoticeCategoryIds)],
+    allowedFor: allowedForAllCategories,
   },
   {
     token: 'item.volume',
     previewValue: 'v. 27',
-    allowedFor: [...Object.values(patronNoticeCategoryIds)],
+    allowedFor: allowedForAllCategories,
   },
   {
     token: 'item.chronology',
     previewValue: '1964-1967 (Board)',
-    allowedFor: [...Object.values(patronNoticeCategoryIds)],
+    allowedFor: allowedForAllCategories,
   },
   {
     token: 'item.yearCaption',
     previewValue: 'Convention photographs 1911-1960',
-    allowedFor: [...Object.values(patronNoticeCategoryIds)],
+    allowedFor: allowedForAllCategories,
   },
   {
     token: 'item.materialType',
     previewValue: 'Serial',
-    allowedFor: [...Object.values(patronNoticeCategoryIds)],
+    allowedFor: allowedForAllCategories,
   },
   {
     token: 'item.copy',
     previewValue: 'c.2',
-    allowedFor: [...Object.values(patronNoticeCategoryIds)],
+    allowedFor: allowedForAllCategories,
   },
   {
     token: 'item.numberOfPieces',
     previewValue: '7',
-    allowedFor: [...Object.values(patronNoticeCategoryIds)],
+    allowedFor: allowedForAllCategories,
   },
   {
     token: 'item.descriptionOfPieces',
     previewValue: '7 maps in pocket',
-    allowedFor: [...Object.values(patronNoticeCategoryIds)],
+    allowedFor: allowedForAllCategories,
   },
   {
     token: 'item.loanType',
     previewValue: 'Can circulate',
-    allowedFor: [...Object.values(patronNoticeCategoryIds)],
+    allowedFor: allowedForAllCategories,
   },
 ];
 const effectiveLocation = [
   {
     token: 'item.effectiveLocationDiscoveryDisplayName',
     previewValue: 'Main Library',
-    allowedFor: [...Object.values(patronNoticeCategoryIds)],
+    allowedFor: allowedForAllCategories,
   },
   {
     token: 'item.effectiveLocationSpecific',
     previewValue: 'Main Library Reserve',
-    allowedFor: [...Object.values(patronNoticeCategoryIds)],
+    allowedFor: allowedForAllCategories,
   },
   {
     token: 'item.effectiveLocationLibrary',
     previewValue: 'Main Library',
-    allowedFor: [...Object.values(patronNoticeCategoryIds)],
+    allowedFor: allowedForAllCategories,
   },
   {
     token: 'item.effectiveLocationCampus',
     previewValue: 'South Campus',
-    allowedFor: [...Object.values(patronNoticeCategoryIds)],
+    allowedFor: allowedForAllCategories,
   },
   {
     token: 'item.effectiveLocationInstitution',
     previewValue: 'Opentown University',
-    allowedFor: [...Object.values(patronNoticeCategoryIds)],
+    allowedFor: allowedForAllCategories,
   },
 ];
 const getTokens = (locale) => ({
@@ -122,32 +123,32 @@ const getTokens = (locale) => ({
     {
       token: 'user.firstName',
       previewValue: 'John',
-      allowedFor: [...Object.values(patronNoticeCategoryIds)],
+      allowedFor: allowedForAllCategories,
     },
     {
       token: 'user.lastName',
       previewValue: 'Smith',
-      allowedFor: [...Object.values(patronNoticeCategoryIds)],
+      allowedFor: allowedForAllCategories,
     },
     {
       token: 'user.middleName',
       previewValue: 'Adam',
-      allowedFor: [...Object.values(patronNoticeCategoryIds)],
+      allowedFor: allowedForAllCategories,
     },
     {
       token: 'user.preferredFirstName',
       previewValue: 'Paul',
-      allowedFor: [...Object.values(patronNoticeCategoryIds)],
+      allowedFor: allowedForAllCategories,
     },
     {
       token: 'user.barcode',
       previewValue: '456123789',
-      allowedFor: [...Object.values(patronNoticeCategoryIds)],
+      allowedFor: allowedForAllCategories,
     },
     {
       token: 'user.barcodeImage',
       previewValue: '<Barcode>456123789</Barcode>',
-      allowedFor: [...Object.values(patronNoticeCategoryIds)],
+      allowedFor: allowedForAllCategories,
     },
   ],
   request: [
