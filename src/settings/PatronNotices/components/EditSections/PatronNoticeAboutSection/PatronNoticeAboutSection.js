@@ -49,7 +49,7 @@ const PatronNoticeAboutSection = ({ initialValues, okapi, intl }) => {
     <div data-testid="patronNoticeAboutSection">
       <Row>
         <Col
-          xs={8}
+          xs={12}
           data-test-patron-notice-template-name
         >
           <Field
@@ -65,7 +65,7 @@ const PatronNoticeAboutSection = ({ initialValues, okapi, intl }) => {
         </Col>
       </Row>
       <Row>
-        <Col xs={3}>
+        <Col xs={12}>
           <Field
             data-testid="patronNoticesNoticeActive"
             label={formatMessage({ id:'ui-circulation.settings.patronNotices.notice.active' })}
@@ -78,7 +78,7 @@ const PatronNoticeAboutSection = ({ initialValues, okapi, intl }) => {
       </Row>
       <br />
       <Row>
-        <Col xs={8}>
+        <Col xs={12}>
           <Field
             data-testid="patronNoticesNoticeDescription"
             label={formatMessage({ id:'ui-circulation.settings.patronNotices.notice.description' })}
@@ -89,7 +89,7 @@ const PatronNoticeAboutSection = ({ initialValues, okapi, intl }) => {
         </Col>
       </Row>
       <Row>
-        <Col xs={8}>
+        <Col xs={12}>
           <div data-test-template-category>
             <Field
               data-testid="patronNoticesNoticeCategory"

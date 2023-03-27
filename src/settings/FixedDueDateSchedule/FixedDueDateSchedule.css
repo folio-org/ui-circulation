@@ -1,14 +1,6 @@
 @import "@folio/stripes-components/lib/variables.css";
 
-.accordionSection{
-  max-width:700px;
-  margin-left:20px;
-}
-
-.smformItem{
-  max-width:40%;
-}
-.adjustDelete{
+.adjustDelete {
   margin: 10px 0 10px 0;
 }
 

@@ -17,7 +17,7 @@ const StaffSlipAboutSection = ({ initialValues, disabled }) => {
       data-testid="staffSlipAboutSectionEditTestId"
     >
       <Row>
-        <Col xs={8}>
+        <Col xs={12}>
           <div
             data-test-staff-slip-name
             data-testid="staffSlipName"
@@ -32,7 +32,7 @@ const StaffSlipAboutSection = ({ initialValues, disabled }) => {
       <Row>
         <Col
           data-test-staff-slip-description
-          xs={8}
+          xs={12}
         >
           <Field
             label={<FormattedMessage id="ui-circulation.settings.staffSlips.description" />}

@@ -80,7 +80,7 @@ class FixedDueDateScheduleDetail extends React.Component {
             open={sections.generalFixedDueDateScheduleDetail}
             label={<FormattedMessage id="ui-circulation.settings.fDDSform.about" />}
           >
-            <section className={css.accordionSection}>
+            <section>
               {(fixedDueDateSchedule.metadata && fixedDueDateSchedule.metadata.createdDate) &&
                 <this.cViewMetaData metadata={fixedDueDateSchedule.metadata} />}
               <Row>
@@ -107,7 +107,7 @@ class FixedDueDateScheduleDetail extends React.Component {
             label={<FormattedMessage id="ui-circulation.settings.fDDSform.schedule" />}
             open={sections.fixedDueDateSchedule}
           >
-            <section className={css.accordionSection}>
+            <section>
               <SchedulesList
                 schedules={fixedDueDateSchedule.schedules}
                 timezone={timezone}

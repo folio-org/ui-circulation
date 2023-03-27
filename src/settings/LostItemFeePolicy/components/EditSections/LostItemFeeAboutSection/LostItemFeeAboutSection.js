@@ -16,7 +16,7 @@ const LostItemFeeAboutSection = () => (
   >
     <Row>
       <Col
-        xs={3}
+        xs={12}
         data-test-about-section-policy-name
       >
         <Field
@@ -33,7 +33,7 @@ const LostItemFeeAboutSection = () => (
     </Row>
     <Row>
       <Col
-        xs={5}
+        xs={12}
         data-test-about-section-policy-description
       >
         <Field

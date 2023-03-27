@@ -44,7 +44,7 @@ class FinesSection extends React.Component {
           open={fineSectionOpen}
           label={formatMessage({ id: 'ui-circulation.settings.finePolicy.overdueFine' })}
         >
-          <section className={css.accordionSection}>
+          <section>
             <div data-test-fine-section-overdue>
               <OverdueFinesSection
                 label={formatMessage({ id: 'ui-circulation.settings.finePolicy.overdueFine' })}

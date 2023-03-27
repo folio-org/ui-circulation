@@ -15,7 +15,7 @@ const OverdueAboutSection = () => (
     data-testid="overdueAboutSection"
   >
     <Row>
-      <Col xs={3} data-test-about-section-policy-name>
+      <Col xs={12} data-test-about-section-policy-name>
         <Field
           data-testid="nameTestId"
           label={<FormattedMessage id="ui-circulation.settings.finePolicy.overdueFinePolicyName" />}
@@ -28,7 +28,7 @@ const OverdueAboutSection = () => (
       </Col>
     </Row>
     <Row>
-      <Col xs={5} data-test-about-section-policy-description>
+      <Col xs={12} data-test-about-section-policy-description>
         <Field
           data-testid="descriptionTestId"
           label={<FormattedMessage id="ui-circulation.settings.finePolicy.description" />}

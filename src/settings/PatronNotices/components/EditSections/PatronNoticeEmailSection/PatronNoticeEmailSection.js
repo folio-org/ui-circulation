@@ -19,7 +19,7 @@ const PatronNoticeEmailSection = ({ category, locale }) => {
   return (
     <div data-testid="emailAccordionContent">
       <Row>
-        <Col xs={8}>
+        <Col xs={12}>
           <Field
             data-testid="patronNoticesSubject"
             id="input-patron-notice-subject"
@@ -31,7 +31,7 @@ const PatronNoticeEmailSection = ({ category, locale }) => {
         </Col>
       </Row>
       <Row>
-        <Col xs={8}>
+        <Col xs={12}>
           <Field
             data-testid="patronNoticesBody"
             label={<FormattedMessage id="ui-circulation.settings.patronNotices.body" />}
