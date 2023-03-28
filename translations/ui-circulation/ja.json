@@ -411,7 +411,7 @@
     "permission.settings.lost-item-fees-policies": "Settings (Circ): Can create, edit and remove lost item fee policies",
     "settings.lostItemFee.validate.hasPositiveLostItemProcessingFeeAndItemsAgedToLostAfterOverdue": "'Lost item processing fee' must be > 0 and 'Items aged to lost after overdue' amount must be > 0 for this selection",
     "settings.lostItemFee.validate.emptyAmount": "Please enter amount",
-    "settings.lostItemFee.validate.hasPositiveItemsAgedToLostAfterOverdueAmount": "'Set cost' must be > 0 OR 'Charge lost item processing fee if item aged to lost by system?' must be 'Yes' if 'Items aged to lost after overdue' is > 0 or 'Recalled items aged to lost after overdue' is > 0",
+    "settings.lostItemFee.validate.hasPositiveItemsAgedToLostAfterOverdueAmount": "「設定コスト」が 0 >か、「期限切れから紛失までのアイテム」が 0 >場合、または「期限切れ後に紛失するまでのリコール済みアイテム>」が 0 の場合は「はい」である必要があります。",
     "settings.lostItemFee.validate.hasReplacementAllowedAndPositiveLostItemPolicyFee": "この選択では、「紛失物の処理手数料」は > 0、「交換可能」は「はい」である必要があります",
     "settings.lostItemFee.validate.hasReplacementAllowedAndNegativeLostItemPolicyFee": "この選択では、「交換可能」は「はい」である必要があります",
     "settings.circulationRules.all": "All",
@@ -472,5 +472,5 @@
     "settings.cancelReasons.deleteEntry": "Delete cancel reason",
     "settings.cancelReasons.termDeleted": "The cancel reason <b>{term}</b> was successfully <b>deleted</b>",
     "settings.cancelReasons.termWillBeDeleted": "The cancel reason <b>{term}</b> will be <b>deleted.</b>",
-    "settings.patronNotices.generalInformation": "General information"
+    "settings.patronNotices.generalInformation": "一般情報"
 }
