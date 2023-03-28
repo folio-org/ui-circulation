@@ -14,8 +14,6 @@ import optionsGenerator from '../../../../utils/options-generator';
 import OverdueFinesSection from '../RangeSection/OverdueFinesSection';
 import OverdueFinesSectionColumn from '../RangeSection/OverdueFinesSectionColumn';
 
-import css from '../../../FineSection.css';
-
 class FinesSection extends React.Component {
   static propTypes = {
     intl: PropTypes.object.isRequired,

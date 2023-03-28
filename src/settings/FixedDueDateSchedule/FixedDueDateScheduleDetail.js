@@ -16,8 +16,6 @@ import { ViewMetaData } from '@folio/stripes/smart-components';
 
 import SchedulesList from './components/DetailsSections/ScedulesList';
 
-import css from './FixedDueDateSchedule.css';
-
 class FixedDueDateScheduleDetail extends React.Component {
   static propTypes = {
     initialValues: PropTypes.object,
