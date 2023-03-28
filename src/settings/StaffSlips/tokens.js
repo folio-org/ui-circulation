@@ -227,6 +227,11 @@ const getTokens = (locale) => ({
       previewValue: 'Undergraduate',
       allowedFor: [...Object.values(staffSlipMap)],
     },
+    {
+      token: 'requester.departments',
+      previewValue: 'Library Technical Services; IT Operations',
+      allowedFor: [...Object.values(staffSlipMap)],
+    },
   ],
   staffSlip: [
     {
