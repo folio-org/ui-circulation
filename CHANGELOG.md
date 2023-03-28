@@ -13,6 +13,7 @@
 * Create a new permission that grants View-only access to Settings > Circulation > Circulation rules. Refs UICIRC-843.
 * Support `feesfines` interface version `18.0`. Refs UICIRC-920.
 * Add "Discovery display name" as notice token in Settings. Refs UICIRC-792.
+* Add "Departments" as staff slip token in Settings. Refs UICIRC-844.
 
 ## [8.0.1](https://github.com/folio-org/ui-circulation/tree/v8.0.1) (2023-03-07)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v8.0.0...v8.0.1)
