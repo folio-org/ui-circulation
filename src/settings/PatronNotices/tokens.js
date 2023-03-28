@@ -351,6 +351,7 @@ const getTokens = (locale) => ({
       allowedFor: [
         patronNoticeCategoryIds.FEE_FINE_CHARGE,
         patronNoticeCategoryIds.FEE_FINE_ACTION,
+        patronNoticeCategoryIds.AUTOMATED_FEE_FINE_ADJUSTMENT,
       ],
     },
   ],
