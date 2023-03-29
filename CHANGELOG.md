@@ -14,6 +14,7 @@
 * Support `feesfines` interface version `18.0`. Refs UICIRC-920.
 * Add "Discovery display name" as notice token in Settings. Refs UICIRC-792.
 * Add "Departments" as staff slip token in Settings. Refs UICIRC-844.
+* FE | Make the token "feeCharge.additionalInfo" selectable for automated f/f adjustment notice templates. Refs UICIRC-862.
 
 ## [8.0.1](https://github.com/folio-org/ui-circulation/tree/v8.0.1) (2023-03-07)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v8.0.0...v8.0.1)
