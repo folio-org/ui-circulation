@@ -233,17 +233,11 @@ class FixedDueDateScheduleForm extends React.Component {
                   open={sections.generalFixedDueDate}
                   label={<FormattedMessage id="ui-circulation.settings.fDDSform.about" />}
                 >
-                  <section
-                    className={css.accordionSection}
-                    data-test-fdds-form-general-section
-                  >
+                  <section data-test-fdds-form-general-section>
                     {(initialValues.metadata && initialValues.metadata.createdDate) && (
                       <this.cViewMetaData metadata={initialValues.metadata} />
                     )}
-                    <div
-                      className={css.smformItem}
-                      data-test-general-section-name
-                    >
+                    <div data-test-general-section-name>
                       <Field
                         id="input_schedule_name"
                         autoFocus
@@ -270,10 +264,7 @@ class FixedDueDateScheduleForm extends React.Component {
                   id="schedule"
                   label={<FormattedMessage id="ui-circulation.settings.fDDSform.schedule" />}
                 >
-                  <section
-                    className={css.accordionSection}
-                    data-test-fdds-form-schedule-section
-                  >
+                  <section data-test-fdds-form-schedule-section>
                     <FieldArray
                       component={SchedulesList}
                       name="schedules"

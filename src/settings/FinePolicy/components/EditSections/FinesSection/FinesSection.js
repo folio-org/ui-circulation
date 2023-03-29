@@ -14,8 +14,6 @@ import optionsGenerator from '../../../../utils/options-generator';
 import OverdueFinesSection from '../RangeSection/OverdueFinesSection';
 import OverdueFinesSectionColumn from '../RangeSection/OverdueFinesSectionColumn';
 
-import css from '../../../FineSection.css';
-
 class FinesSection extends React.Component {
   static propTypes = {
     intl: PropTypes.object.isRequired,
@@ -44,7 +42,7 @@ class FinesSection extends React.Component {
           open={fineSectionOpen}
           label={formatMessage({ id: 'ui-circulation.settings.finePolicy.overdueFine' })}
         >
-          <section className={css.accordionSection}>
+          <section>
             <div data-test-fine-section-overdue>
               <OverdueFinesSection
                 label={formatMessage({ id: 'ui-circulation.settings.finePolicy.overdueFine' })}

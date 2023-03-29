@@ -23,7 +23,7 @@ const StaffSlipTemplateContentSection = ({ intl }) => {
 
   return (
     <Row>
-      <Col xs={8}>
+      <Col xs={12}>
         <Field
           label={formatMessage({ id:'ui-circulation.settings.staffSlips.display' })}
           component={TemplateEditor}
