@@ -1,123 +1,119 @@
 import React from 'react';
-
 import {
   screen,
   render,
-  within,
 } from '@testing-library/react';
 
 import '../../../../test/jest/__mock__';
 
-import TokensList from './TokensList';
-import getTokensProps from '../tokens';
+import { TokensSection } from '@folio/stripes-template-editor';
 
+import TokensList, {
+  LOAN_TAG,
+  FEE_FINE_CHARGE_TAG,
+  isDisabledLoop,
+  TOKEN_SECTION,
+} from './TokensList';
+import getTokensProps from '../tokens';
 import { LOCALE_FOR_TESTS } from '../utils/constantsForMoment';
+import { patronNoticeCategoryIds } from '../../../constants';
 
 jest.mock('@folio/stripes-template-editor', () => ({
-  TokensSection: jest.fn(({
-    selectedCategory,
-    header,
-    tokens = [],
-    loopConfig = {
-      enabled: true,
-      label: 'label',
-      tag: 'tag',
-    },
-    section,
-    onLoopSelect = jest.fn(),
-    // eslint-disable-next-line no-unused-vars
-    onSectionInit = jest.fn(),
-    onTokenSelect = jest.fn(),
-    ...rest
-  }) => (
-    <div section={section} {...rest}>
-      <div data-testid={`headerFor${section}`}>{header}</div>
-      <ul data-testid="availableTokens">
-        {tokens.map(({ token, allowedFor }) => {
-          const disabled = selectedCategory && !allowedFor.includes(selectedCategory);
-
-          return (
-            <li key={token}>
-              <input
-                data-testid={token}
-                type="checkbox"
-                value={token}
-                label={token}
-                disabled={disabled}
-                onChange={onTokenSelect}
-              />
-            </li>
-          );
-        })}
-        { loopConfig.enabled && (
-          <>
-            <hr />
-            <input
-              data-testid="multipleTokens"
-              type="checkbox"
-              value={loopConfig.tag}
-              label={<strong>{loopConfig.label}</strong>}
-              onChange={onLoopSelect}
-            />
-          </>
-        )}
-      </ul>
-    </div>
-  )),
+  TokensSection: jest.fn(() => null),
 }));
 
-const tokensProps = getTokensProps(LOCALE_FOR_TESTS);
-
-const testTokensSection = (sectionTestId) => {
-  describe(`View ${sectionTestId} TokensSection`, () => {
-    it(`should render ${sectionTestId} section`, () => {
-      const sectionTestIdValue = screen.getByTestId(sectionTestId);
-
-      expect(sectionTestIdValue).toBeVisible();
-      expect(sectionTestIdValue).toHaveAttribute('section', sectionTestId);
-      expect(within(screen
-        .getByTestId(`headerFor${sectionTestId}`))
-        .getByText(`ui-circulation.settings.patronNotices.${sectionTestId}TokenHeader`))
-        .toBeVisible();
-    });
-
-    tokensProps[sectionTestId].forEach(({ token }) => (
-      it(`should render checkbox for ${token}`, () => {
-        expect(screen.getByTestId(token)).toHaveAttribute('label', token);
-        expect(screen.getByTestId(token)).toHaveAttribute('value', token);
-      })
-    ));
-  });
-};
-
+const TOKEN_SECTION_LIST = [
+  TOKEN_SECTION.ITEM,
+  TOKEN_SECTION.EFFECTIVE_LOCATION,
+  TOKEN_SECTION.LOAN,
+  TOKEN_SECTION.REQUEST,
+  TOKEN_SECTION.USER,
+  TOKEN_SECTION.FEE_FINE_CHARGE,
+  TOKEN_SECTION.FEE_FINE_ACTION,
+];
 const testIds = {
   tokenListWrapper: 'tokenListWrapper',
 };
 
 describe('View TokensList', () => {
+  const tokensProps = getTokensProps(LOCALE_FOR_TESTS);
+  const mockedOnLoopSelect = jest.fn();
+  const mockedOnSectionInit = jest.fn();
+  const mockedOnTokenSelect = jest.fn();
+  const selectedCategory = 'Loan';
   const defaultProps = {
-    onLoopSelect: jest.fn(),
-    onSectionInit: jest.fn(),
-    onTokenSelect: jest.fn(),
-    selectedCategory: 'Loan',
+    selectedCategory,
     tokens: tokensProps,
+    onLoopSelect: mockedOnLoopSelect,
+    onSectionInit: mockedOnSectionInit,
+    onTokenSelect: mockedOnTokenSelect,
   };
 
-  describe('with default props', () => {
-    beforeEach(() => {
-      render(<TokensList {...defaultProps} />);
+  const tokensSectionTest = (name, index) => {
+    describe(`Tokens section ${name}`, () => {
+      it(`should execute TokensSection for ${name} with passed props`, () => {
+        const number = index + 1;
+        const expectedResult = {
+          section: name,
+          selectedCategory,
+          header: `ui-circulation.settings.patronNotices.${name}TokenHeader`,
+          tokens: tokensProps[name],
+          onSectionInit: mockedOnSectionInit,
+          onTokenSelect: mockedOnTokenSelect,
+        };
+
+        if (name === TOKEN_SECTION.LOAN) {
+          expectedResult.onLoopSelect = mockedOnLoopSelect;
+          expectedResult.loopConfig = {
+            enabled: true,
+            label: 'ui-circulation.settings.patronNotices.multipleLoans',
+            tag: LOAN_TAG,
+            isDisabledLoop: null,
+          };
+        }
+
+        if (name === TOKEN_SECTION.FEE_FINE_CHARGE) {
+          expectedResult.onLoopSelect = mockedOnLoopSelect;
+          expectedResult.loopConfig = {
+            enabled: true,
+            label: 'ui-circulation.settings.patronNotices.multipleFeeFineCharges',
+            tag: FEE_FINE_CHARGE_TAG,
+            isDisabledLoop,
+          };
+        }
+
+        expect(TokensSection).toHaveBeenNthCalledWith(number, expect.objectContaining(expectedResult), {});
+      });
+    });
+  };
+
+  beforeEach(() => {
+    render(
+      <TokensList {...defaultProps} />
+    );
+  });
+
+  afterEach(() => {
+    TokensSection.mockClear();
+  });
+
+  it('should render TokensList component', () => {
+    expect(screen.getByTestId(testIds.tokenListWrapper)).toBeVisible();
+  });
+
+  TOKEN_SECTION_LIST.forEach(tokensSectionTest);
+
+  describe('isDisabledLoop', () => {
+    it(`should return true for category not equal to ${patronNoticeCategoryIds.AUTOMATED_FEE_FINE_CHARGE}`, () => {
+      expect(isDisabledLoop(patronNoticeCategoryIds.LOAN, FEE_FINE_CHARGE_TAG, true)).toBeTruthy();
     });
 
-    it('should render TokensList component', () => {
-      expect(screen.getByTestId(testIds.tokenListWrapper)).toBeVisible();
+    it(`should return true for tag not equal to ${FEE_FINE_CHARGE_TAG}`, () => {
+      expect(isDisabledLoop(patronNoticeCategoryIds.AUTOMATED_FEE_FINE_CHARGE, LOAN_TAG, true)).toBeTruthy();
     });
 
-    testTokensSection('item');
-    testTokensSection('effectiveLocation');
-    testTokensSection('loan');
-    testTokensSection('request');
-    testTokensSection('user');
-    testTokensSection('feeFineCharge');
-    testTokensSection('feeFineAction');
+    it(`should return false for category ${patronNoticeCategoryIds.AUTOMATED_FEE_FINE_CHARGE} and tag ${FEE_FINE_CHARGE_TAG}`, () => {
+      expect(isDisabledLoop(patronNoticeCategoryIds.AUTOMATED_FEE_FINE_CHARGE, FEE_FINE_CHARGE_TAG, true)).toBeFalsy();
+    });
   });
 });
