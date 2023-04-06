@@ -12,7 +12,6 @@ import {
   loanNoticesTriggeringEvents,
   noticesSendEvents,
 } from '../../../../../../constants';
-// import { REAL_TIME_NOTICES_TRANSLATION_KEYS } from '../../../../utils/get-real-time-labels';
 
 const POLICY_NOTICES_TRANSLATION_KEY = 'ui-circulation.settings.noticePolicy.notices';
 const testIds = {
