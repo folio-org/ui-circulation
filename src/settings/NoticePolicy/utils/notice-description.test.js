@@ -26,7 +26,6 @@ const mockedData = {
     userInitiatedTimeBasedFeeFineEventsIds.ATL_FINE_ITEM_RETURNED,
   ],
   'conditionalEvents': [
-    timeBasedFeeFineEventsIds.ATL_FINE_CHARGED,
     loanTimeBasedEventsIds.AGED_TO_LOST,
   ]
 };

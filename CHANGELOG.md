@@ -17,6 +17,7 @@
 * FE | Make the token "feeCharge.additionalInfo" selectable for automated f/f adjustment notice templates. Refs UICIRC-862.
 * Changed translation for token section. Refs UICIRC-911.
 * Fields use full use screen width (part 1). Refs UICIRC-917.
+* Update patron notice policy: Multiples options for "Lost item fee(s) charged". Refs UICIRC-895.
 
 ## [8.0.1](https://github.com/folio-org/ui-circulation/tree/v8.0.1) (2023-03-07)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v8.0.0...v8.0.1)

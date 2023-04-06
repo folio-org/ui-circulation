@@ -3,6 +3,7 @@ import { Period } from '../common';
 import {
   loanTimeBasedEventsIds,
   noticesSendEventMap,
+  timeBasedFeeFineEventsIds,
 } from '../../../constants';
 
 jest.mock('../common', () => ({
@@ -129,6 +130,25 @@ describe('NoticeSendOptions', () => {
       });
 
       expect(noticeSendOptionsInstance.isLoanDueDateTimeSelected()).toEqual(false);
+    });
+  });
+  describe('isLostItemFeesSelected', () => {
+    const noticeSendOptionsInstance = new NoticeSendOptions({
+      ...options,
+      sendWhen: timeBasedFeeFineEventsIds.ATL_FINE_CHARGED,
+    });
+
+    it('should return true if "sendWhen" equals "Aged to lost - fine charged"', () => {
+      expect(noticeSendOptionsInstance.isLostItemFeesSelected()).toEqual(true);
+    });
+
+    it('should return false if "sendWhen" is not equal "Aged to lost - fine charged"', () => {
+      const noticeSendOptionsInstance = new NoticeSendOptions({
+        ...options,
+        sendWhen: 'test',
+      });
+
+      expect(noticeSendOptionsInstance.isLostItemFeesSelected()).toEqual(false);
     });
   });
 

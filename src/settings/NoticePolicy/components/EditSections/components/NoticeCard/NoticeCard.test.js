@@ -24,6 +24,7 @@ import {
   noticesFrequency,
   noticesIntervalPeriods,
 } from '../../../../../../constants';
+import isRealTimeMessage from '../../../../utils/is-real-time-message';
 
 import { componentPropsCheck } from '../../../../../../../test/jest/helpers';
 
@@ -32,6 +33,7 @@ jest.mock('../../../../utils/notice-description', () => jest.fn(data => data));
 jest.mock('../../../../../components/Period', () => jest.fn(({ 'data-testid': testId }) => (
   <div data-testid={testId} />
 )));
+jest.mock('../../../../utils/is-real-time-message', () => jest.fn(() => true));
 
 IconButton.mockImplementation(({ icon, onClick }) => (
   // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
@@ -76,6 +78,7 @@ describe('NoticeCard', () => {
     isBeforeOrAfter: jest.fn(() => true),
     isFrequencyAvailable: jest.fn(() => true),
     isLoanDueDateTimeSelected: jest.fn(() => true),
+    isLostItemFeesSelected: jest.fn(() => false),
   };
   const notice = {
     sendOptions,
@@ -347,9 +350,14 @@ describe('NoticeCard', () => {
       });
     });
 
-    describe('when "isLoanDueDateTimeSelected" returns false', () => {
+    describe('when "isRealTimeMessage" returns false', () => {
       beforeEach(() => {
+        isRealTimeMessage.mockReturnValueOnce(false)
         renderComponent(createNewNotice('isLoanDueDateTimeSelected'));
+      });
+
+      afterEach(() => {
+        isRealTimeMessage.mockRestore();
       });
 
       it('should not render longTermRadioButton "Field"', () => {

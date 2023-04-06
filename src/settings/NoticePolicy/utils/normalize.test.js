@@ -145,6 +145,7 @@ describe('NoticePolicy utils', () => {
       jest.spyOn(NoticeSendOptions.prototype, 'isSendOptionsAvailable').mockImplementation(() => true);
       jest.spyOn(NoticeSendOptions.prototype, 'isBeforeOrAfter').mockImplementation(() => true);
       jest.spyOn(NoticeSendOptions.prototype, 'isLoanDueDateTimeSelected').mockImplementation(() => true);
+      jest.spyOn(NoticeSendOptions.prototype, 'isLostItemFeesSelected').mockImplementation(() => true);
       jest.spyOn(Notice.prototype, 'isRecurring').mockImplementation(() => true);
     });
 
@@ -152,6 +153,7 @@ describe('NoticePolicy utils', () => {
       jest.spyOn(NoticeSendOptions.prototype, 'isSendOptionsAvailable').mockRestore();
       jest.spyOn(NoticeSendOptions.prototype, 'isBeforeOrAfter').mockRestore();
       jest.spyOn(NoticeSendOptions.prototype, 'isLoanDueDateTimeSelected').mockRestore();
+      jest.spyOn(NoticeSendOptions.prototype, 'isLostItemFeesSelected').mockRestore();
       jest.spyOn(Notice.prototype, 'isRecurring').mockRestore();
     });
 
@@ -194,21 +196,6 @@ describe('NoticePolicy utils', () => {
       expect(checkNoticeHiddenFields('testSection', [], mockedData)).toEqual(expectedResult);
     });
 
-    it('should remove "realTime" field if "isLoanDueDateTimeSelected" return false', () => {
-      const dataForTest = {
-        testSection: [
-          {
-            ...mockedData.testSection[0],
-            realTime: 'testData',
-          },
-        ],
-      };
-
-      jest.spyOn(NoticeSendOptions.prototype, 'isLoanDueDateTimeSelected').mockImplementation(() => false);
-
-      expect(checkNoticeHiddenFields('testSection', [], dataForTest)).toEqual(mockedData);
-    });
-
     it('should remove "sendEvery" field if "isRecurring" return false', () => {
       const expectedResult = {
         'testSection': [
@@ -229,6 +216,47 @@ describe('NoticePolicy utils', () => {
 
     it('should not remove any fields', () => {
       expect(checkNoticeHiddenFields('testSection', [], mockedData)).toEqual(mockedData);
+    });
+
+    it('should remove "realTime" field', () => {
+      const sectionName = 'section';
+      const policy = {
+        [sectionName]: [
+          {
+            sendOptions: defaultSendOptions,
+            frequency: 'testData',
+            realTime: 'true',
+          },
+        ],
+      };
+      const expectedData = {
+        [sectionName]: [
+          {
+            sendOptions: defaultSendOptions,
+            frequency: 'testData',
+          },
+        ],
+      };
+
+      jest.spyOn(NoticeSendOptions.prototype, 'isLoanDueDateTimeSelected').mockImplementationOnce(() => false);
+      jest.spyOn(NoticeSendOptions.prototype, 'isLostItemFeesSelected').mockImplementationOnce(() => false);
+
+      expect(checkNoticeHiddenFields(sectionName, [], policy)).toEqual(expectedData);
+    });
+
+    it('should not remove "realTime" field', () => {
+      const sectionName = 'section';
+      const policy = {
+        [sectionName]: [
+          {
+            sendOptions: defaultSendOptions,
+            frequency: 'testData',
+            realTime: 'true',
+          },
+        ],
+      };
+
+      expect(checkNoticeHiddenFields(sectionName, [], policy)).toEqual(policy);
     });
   });
 

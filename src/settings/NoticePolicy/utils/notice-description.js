@@ -29,7 +29,6 @@ export default (eventId) => {
   ];
 
   const conditionalEvents = [
-    timeBasedFeeFineEventsIds.ATL_FINE_CHARGED,
     loanTimeBasedEventsIds.AGED_TO_LOST,
   ];
 

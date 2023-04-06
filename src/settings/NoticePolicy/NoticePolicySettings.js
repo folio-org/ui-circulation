@@ -20,12 +20,14 @@ import { NoticePolicy } from '../Models/NoticePolicy';
 
 import { MAX_UNPAGED_RESOURCE_COUNT } from '../../constants';
 
+export const changeToString = (notice) => {
+  notice.realTime = notice.realTime.toString();
+};
 export const parseInitialValues = (entity) => {
   const policy = cloneDeep(entity);
 
-  forEach(policy?.loanNotices || [], (loanNotice) => {
-    loanNotice.realTime = loanNotice.realTime.toString();
-  });
+  forEach(policy?.loanNotices || [], changeToString);
+  forEach(policy?.feeFineNotices || [], changeToString);
 
   return policy;
 };

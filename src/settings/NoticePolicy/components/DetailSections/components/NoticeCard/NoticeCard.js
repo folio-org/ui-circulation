@@ -23,8 +23,9 @@ import {
   noticesFrequency,
   noticesIntervalPeriods,
 } from '../../../../../../constants';
-
 import getNotificationContent from '../../../../utils/notice-description';
+import getRealTimeLabels from '../../../../utils/get-real-time-labels';
+import isRealTimeMessage from '../../../../utils/is-real-time-message';
 
 import css from './NoticeCard.css';
 
@@ -67,12 +68,13 @@ class NoticeCard extends React.Component {
 
   getRealTimeMessage = (pathToValue) => {
     const { notice } = this.props;
-
+    const isLostItemFees = notice.sendOptions.isLostItemFeesSelected();
     const selectedValue = get(notice, pathToValue);
+    const realTimeLabels = getRealTimeLabels(isLostItemFees);
 
     return selectedValue
-      ? <FormattedMessage id="ui-circulation.settings.noticePolicy.notices.send.shortTerm" />
-      : <FormattedMessage id="ui-circulation.settings.noticePolicy.notices.send.longTerm" />;
+      ? <FormattedMessage id={realTimeLabels.shortTerm} />
+      : <FormattedMessage id={realTimeLabels.longTerm} />;
   };
 
   render() {
@@ -87,6 +89,7 @@ class NoticeCard extends React.Component {
 
     const translationNamespace = 'ui-circulation.settings.noticePolicy';
     const notificationKey = getNotificationContent(notice?.sendOptions?.sendWhen);
+    const isRealTimeMessageVisible = isRealTimeMessage(notice.sendOptions);
 
     return (
       <Row
@@ -269,7 +272,7 @@ class NoticeCard extends React.Component {
               xs={12}
               className={css.noticeField}
             >
-              { notice.sendOptions.isLoanDueDateTimeSelected() && (
+              { isRealTimeMessageVisible && (
                 <strong>{this.getRealTimeMessage('realTime')}</strong>
               )}
             </Col>

@@ -9,6 +9,7 @@ import '../../../test/jest/__mock__';
 import { EntryManager } from '@folio/stripes/smart-components';
 
 import NoticePolicySettings, {
+  changeToString,
   parseInitialValues,
 } from './NoticePolicySettings';
 import NoticePolicyDetail from './NoticePolicyDetail';
@@ -175,27 +176,49 @@ describe('NoticePolicySettings', () => {
   });
 });
 
+describe('changeToString', () => {
+  it('should make a string from "realTime" property', () => {
+    const notice = {
+      realTime: true,
+    };
+
+    changeToString(notice);
+
+    expect(notice.realTime).toBe('true');
+  });
+});
+
 describe('parseInitialValues', () => {
   it('should correctly process passed policy', () => {
     const policyForTest = {
       loanNotices: [
-        { realTime: 42 },
-        { realTime: 99 },
-        { realTime: 1000 },
+        { realTime: false },
+        { realTime: true },
+        { realTime: true },
+      ],
+      feeFineNotices: [
+        {
+          realTime: true,
+        },
       ],
     };
     const expectedResult = {
       loanNotices: [
-        { realTime: '42' },
-        { realTime: '99' },
-        { realTime: '1000' },
+        { realTime: 'false' },
+        { realTime: 'true' },
+        { realTime: 'true' },
+      ],
+      feeFineNotices: [
+        {
+          realTime: 'true',
+        },
       ],
     };
 
     expect(parseInitialValues(policyForTest)).toEqual(expectedResult);
   });
 
-  it('should correctly process passed policy if no "loanNotices" in it', () => {
+  it('should correctly process passed policy if no "loanNotices" and "feeFineNotices" in it', () => {
     expect(parseInitialValues({})).toEqual({});
   });
 });

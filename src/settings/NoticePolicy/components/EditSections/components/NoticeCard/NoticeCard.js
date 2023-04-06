@@ -27,6 +27,8 @@ import {
 
 import optionsGenerator from '../../../../../utils/options-generator';
 import getNotificationContent from '../../../../utils/notice-description';
+import getRealTimeLabels from '../../../../utils/get-real-time-labels';
+import isRealTimeMessage from '../../../../utils/is-real-time-message';
 
 import css from './NoticeCard.css';
 
@@ -83,6 +85,9 @@ class NoticeCard extends React.Component {
 
     const blankPlaceholder = formatMessage({ id: 'ui-circulation.settings.common.blankPlaceholder' });
     const notificationKey = getNotificationContent(notice?.sendOptions?.sendWhen);
+    const isLostItemFees = notice.sendOptions.isLostItemFeesSelected();
+    const shouldShowRealTimeOptions = isRealTimeMessage(notice.sendOptions);
+    const realTimeLabels = getRealTimeLabels(isLostItemFees);
 
     return (
       <Row data-test-notice-card>
@@ -290,14 +295,14 @@ class NoticeCard extends React.Component {
               )}
               <Row>
                 <Col xs={12}>
-                  { notice.sendOptions.isLoanDueDateTimeSelected() && (
+                  { shouldShowRealTimeOptions && (
                     <>
                       <Field
                         data-testid="longTermRadioButton"
                         name={`${pathToNotice}.realTime`}
                         component={RadioButton}
                         type="radio"
-                        label={formatMessage({ id:'ui-circulation.settings.noticePolicy.notices.send.longTerm' })}
+                        label={formatMessage({ id: realTimeLabels.longTerm })}
                         value="false"
                       />
                       <Field
@@ -305,7 +310,7 @@ class NoticeCard extends React.Component {
                         name={`${pathToNotice}.realTime`}
                         component={RadioButton}
                         type="radio"
-                        label={formatMessage({ id:'ui-circulation.settings.noticePolicy.notices.send.shortTerm' })}
+                        label={formatMessage({ id: realTimeLabels.shortTerm })}
                         value="true"
                       />
                     </>
