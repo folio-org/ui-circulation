@@ -132,6 +132,7 @@ describe('NoticeSendOptions', () => {
       expect(noticeSendOptionsInstance.isLoanDueDateTimeSelected()).toEqual(false);
     });
   });
+
   describe('isLostItemFeesSelected', () => {
     const noticeSendOptionsInstance = new NoticeSendOptions({
       ...options,
