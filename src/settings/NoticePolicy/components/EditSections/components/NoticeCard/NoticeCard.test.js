@@ -352,7 +352,7 @@ describe('NoticeCard', () => {
 
     describe('when "isRealTimeMessage" returns false', () => {
       beforeEach(() => {
-        isRealTimeMessage.mockReturnValueOnce(false)
+        isRealTimeMessage.mockReturnValueOnce(false);
         renderComponent(createNewNotice('isLoanDueDateTimeSelected'));
       });
 

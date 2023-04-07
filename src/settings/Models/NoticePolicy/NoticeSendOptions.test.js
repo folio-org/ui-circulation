@@ -143,12 +143,12 @@ describe('NoticeSendOptions', () => {
     });
 
     it('should return false if "sendWhen" is not equal "Aged to lost - fine charged"', () => {
-      const noticeSendOptionsInstance = new NoticeSendOptions({
+      const noticeOptionsInstance = new NoticeSendOptions({
         ...options,
         sendWhen: 'test',
       });
 
-      expect(noticeSendOptionsInstance.isLostItemFeesSelected()).toEqual(false);
+      expect(noticeOptionsInstance.isLostItemFeesSelected()).toEqual(false);
     });
   });
 
