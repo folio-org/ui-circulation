@@ -35,6 +35,11 @@ const testIds = {
   header: 'header',
 };
 
+jest.mock('../../../../utils/get-real-time-labels', () => jest.fn(() => ({
+  longTerm: 'ui-circulation.settings.noticePolicy.notices.send.longTerm',
+  shortTerm: 'ui-circulation.settings.noticePolicy.notices.send.shortTerm',
+})));
+
 const testKeyValues = (testId, label, value) => {
   if (!value) {
     it(`should render ${label}`, () => {
@@ -72,6 +77,7 @@ describe('View NoticeCard in DetailSection', () => {
         isFrequencyAvailable: jest.fn(() => true),
         isLoanDueDateTimeSelected: jest.fn(() => true),
         isSendOptionsAvailable: jest.fn(() => true),
+        isLostItemFeesSelected: jest.fn(() => true),
         sendWhen: 'Check out',
       },
       templateId: 'testTemplateId',
@@ -183,6 +189,7 @@ describe('View NoticeCard in DetailSection', () => {
           isBeforeOrAfter: jest.fn(() => false),
           isFrequencyAvailable: jest.fn(() => false),
           isLoanDueDateTimeSelected: jest.fn(() => false),
+          isLostItemFeesSelected: jest.fn(() => false),
         },
       },
     };
@@ -199,7 +206,7 @@ describe('View NoticeCard in DetailSection', () => {
       testNotShownValues(testIds.noticeCardFrequencyLabel);
     });
 
-    describe('when "isLoanDueDateTimeSelected" is "false"', () => {
+    describe('when "isLoanDueDateTimeSelected" and "isLostItemFeesSelected" are "false"', () => {
       it('should not render real time message', () => {
         expect(screen.queryByText(`${POLICY_NOTICES_TRANSLATION_KEY}.send.shortTerm`))
           .not.toBeInTheDocument();

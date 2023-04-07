@@ -5,6 +5,7 @@ describe('sectionConfigGenerator', () => {
   const isBeforeOrAfter = jest.fn(() => false);
   const isSendOptionsAvailable = jest.fn(() => false);
   const isLoanDueDateTimeSelected = jest.fn(() => false);
+  const isLostItemFeesSelected = jest.fn(() => false);
   const isFrequencyAvailable = jest.fn(() => false);
   const allowedIds = ['id'];
   const sectionKey = 'sectionKey';
@@ -15,6 +16,7 @@ describe('sectionConfigGenerator', () => {
         isBeforeOrAfter,
         isSendOptionsAvailable,
         isLoanDueDateTimeSelected,
+        isLostItemFeesSelected,
         isFrequencyAvailable,
       },
     }],
@@ -38,6 +40,10 @@ describe('sectionConfigGenerator', () => {
 
   it('should trigger "isLoanDueDateTimeSelected"', () => {
     expect(isLoanDueDateTimeSelected).toHaveBeenCalled();
+  });
+
+  it('should trigger "isLostItemFeesSelected"', () => {
+    expect(isLostItemFeesSelected).toHaveBeenCalled();
   });
 
   it('should trigger "isFrequencyAvailable" with correct argument', () => {
@@ -82,6 +88,7 @@ describe('sectionConfigGenerator', () => {
           isSendOptionsAvailable: jest.fn(() => true),
           isLoanDueDateTimeSelected,
           isFrequencyAvailable,
+          isLostItemFeesSelected,
         },
       }],
     };
@@ -108,6 +115,49 @@ describe('sectionConfigGenerator', () => {
       it('should not validate ".sendOptions.sendEvery.intervalId"', () => {
         expect(config[`${sectionKey}[0].sendOptions.sendEvery.intervalId`].shouldValidate).toBe(true);
       });
+    });
+  });
+
+  describe('when "isLoanDueDateTimeSelected" and "isLostItemFeesSelected" return true', () => {
+    let config;
+
+    beforeAll(() => {
+      config = sectionConfigGenerator({
+        [sectionKey]: [{
+          isRecurring,
+          sendOptions: {
+            isBeforeOrAfter,
+            isSendOptionsAvailable,
+            isFrequencyAvailable,
+            isLoanDueDateTimeSelected: () => true,
+            isLostItemFeesSelected: () => true,
+          },
+        }],
+      }, sectionKey, allowedIds);
+    });
+
+    it('should not validate ".realTime"', () => {
+      expect(config[`${sectionKey}[0].realTime`].shouldValidate).toBe(true);
+    });
+
+    it('should not validate ".realTime"', () => {
+      expect(config[`${sectionKey}[0].realTime`].shouldValidate).toBe(true);
+    });
+  });
+
+  describe('when "isLoanDueDateTimeSelected" and "isLostItemFeesSelected" return false', () => {
+    let config;
+
+    beforeAll(() => {
+      config = sectionConfigGenerator(policy, sectionKey, allowedIds);
+    });
+
+    it('should not validate ".realTime"', () => {
+      expect(config[`${sectionKey}[0].realTime`].shouldValidate).toBe(false);
+    });
+
+    it('should not validate ".realTime"', () => {
+      expect(config[`${sectionKey}[0].realTime`].shouldValidate).toBe(false);
     });
   });
 });

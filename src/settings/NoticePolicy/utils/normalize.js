@@ -73,7 +73,7 @@ export const checkNoticeHiddenFields = (sectionKey, allowedIds, policy) => {
       unset(noticePolicy, `[${sectionKey}][${index}].sendOptions.sendEvery`);
     }
 
-    if (!notice.sendOptions.isLoanDueDateTimeSelected()) {
+    if (!notice.sendOptions.isLoanDueDateTimeSelected() && !notice.sendOptions.isLostItemFeesSelected()) {
       unset(noticePolicy, `[${sectionKey}][${index}].realTime`);
     }
   });

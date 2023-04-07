@@ -7,6 +7,7 @@ import { Period } from '../common';
 import {
   loanTimeBasedEventsIds,
   noticesSendEventMap,
+  timeBasedFeeFineEventsIds,
 } from '../../../constants';
 
 export default class NoticeSendOptions {
@@ -32,5 +33,9 @@ export default class NoticeSendOptions {
 
   isLoanDueDateTimeSelected() {
     return isEqual(this.sendWhen, loanTimeBasedEventsIds.DUE_DATE);
+  }
+
+  isLostItemFeesSelected() {
+    return isEqual(this.sendWhen, timeBasedFeeFineEventsIds.ATL_FINE_CHARGED);
   }
 }

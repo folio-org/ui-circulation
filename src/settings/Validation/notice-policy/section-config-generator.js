@@ -6,6 +6,7 @@ const sectionConfigGenerator = (policy, sectionKey, allowedIds) => {
     const isBeforeOrAfterSelected = notice.sendOptions.isBeforeOrAfter();
     const isSendOptionsAvailable = notice.sendOptions.isSendOptionsAvailable(allowedIds);
     const isLoanDueDateTimeSelected = notice.sendOptions.isLoanDueDateTimeSelected();
+    const isLostItemFeesSelected = notice.sendOptions.isLostItemFeesSelected();
     const isFrequencyAvailable = notice.sendOptions.isFrequencyAvailable(allowedIds);
 
     const noticeConfig = {
@@ -47,7 +48,7 @@ const sectionConfigGenerator = (policy, sectionKey, allowedIds) => {
       },
       [`${sectionKey}[${index}].realTime`]: {
         rules: ['isSelected'],
-        shouldValidate: isLoanDueDateTimeSelected,
+        shouldValidate: isLoanDueDateTimeSelected || isLostItemFeesSelected,
       },
     };
 
