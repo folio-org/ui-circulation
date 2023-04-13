@@ -20,6 +20,7 @@
 * Update patron notice policy: Multiples options for "Lost item fee(s) charged". Refs UICIRC-895.
 * Make the token feeCharge.additionalInfo selectable for automated f/f charge notice templates. Refs UICIRC-838.
 * Add new multiples token: Multiple fee/fine charges for the Fee/fine charge section. Refs UICIRC-904.
+* Remove unnecessary `recordsRequired` manifest param. Refs UIREQ-858.
 
 ## [8.0.1](https://github.com/folio-org/ui-circulation/tree/v8.0.1) (2023-03-07)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v8.0.0...v8.0.1)

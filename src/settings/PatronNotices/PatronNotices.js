@@ -68,7 +68,6 @@ export class PatronNotices extends React.Component {
       params: {
         query: 'cql.allRecords=1 AND category=""',
       },
-      recordsRequired: MAX_UNPAGED_RESOURCE_COUNT,
       perRequest: MAX_UNPAGED_RESOURCE_COUNT,
     },
     patronNoticePolicies: {
