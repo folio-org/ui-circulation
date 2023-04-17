@@ -368,7 +368,7 @@
     "settings.noticePolicy.notices.realTime.notification": "Sempre enviado quando o evento é acionado.",
     "settings.noticePolicy.notices.send.longTerm": "Enviar durante a noite com vários empréstimos/itens por cliente. Útil para empréstimos de longo prazo.",
     "settings.noticePolicy.notices.send.shortTerm": "Envie ao longo do dia sem vários empréstimos/itens. Útil para empréstimos de curto prazo.",
-    "settings.patronNotices.feeFineChargeTokenHeader": "Pagamento de taxa/multa",
+    "settings.patronNotices.feeFineChargeTokenHeader": "Cobrança de taxa/multa",
     "settings.patronNotices.feeFineActionTokenHeader": "Ação de taxa/multa",
     "settings.patronNotices.multipleFeeFineActions": "Múltiplas ações de taxa/multa",
     "settings.patronNotices.multipleFeeFineCharges": "Múltiplos pagamentos de taxas/multas",
@@ -472,5 +472,7 @@
     "settings.cancelReasons.deleteEntry": "Excluir motivo do cancelamento",
     "settings.cancelReasons.termDeleted": "O motivo do cancelamento <b> {term} </b> foi <b> excluído </b> com sucesso",
     "settings.cancelReasons.termWillBeDeleted": "O motivo do cancelamento <b> {term} </b> será <b> excluído. </b>",
-    "settings.patronNotices.generalInformation": "Informações gerais"
+    "settings.patronNotices.generalInformation": "Informações gerais",
+    "settings.noticePolicy.feeFineNotices.realTime.longTerm": "Envie durante a noite com as taxas de cobrança de item perdido pelo cliente.",
+    "settings.noticePolicy.feeFineNotices.realTime.shortTerm": "Envie ao longo do dia com as taxas de cobrança de item perdido por aviso."
 }

@@ -462,7 +462,7 @@
     "settings.overdueFinePolicy.denyDelete.header": "No es posible eliminar la política de multa vencida",
     "settings.lostItemPolicy.denyDelete.header": "No es posible eliminar la política de tarifa por ejemplar perdido",
     "settings.checkout.wildcardLookup": "Realice búsquedas avanzadas de ejemplares por código de barras en los módulos de  circulación (Devolución, Préstamo)",
-    "settings.index.loanAnonymization": "Loan anonymization",
+    "settings.index.loanAnonymization": "Anonimización de préstamos",
     "permission.settings.edit-staff-slips": "Ajustes (Circ): Puede editar las fichas de personal",
     "settings.validate.subject": "No debe comenzar con un espacio",
     "settings.staffSlips.generalInformation": "Información general",
@@ -472,5 +472,7 @@
     "settings.cancelReasons.deleteEntry": "Borrar motivo de cancelación",
     "settings.cancelReasons.termDeleted": "El motivo de cancelación <b>{term}</b> se ha <b>eliminado</b> correctamente",
     "settings.cancelReasons.termWillBeDeleted": "Se <b>eliminará</b> el motivo de cancelación <b>{term}</b> <b>.</b>",
-    "settings.patronNotices.generalInformation": "Información general"
+    "settings.patronNotices.generalInformation": "Información general",
+    "settings.noticePolicy.feeFineNotices.realTime.longTerm": "Enviar de un día para otro con múltiples cargos de tasas por objetos perdidos por patrón.",
+    "settings.noticePolicy.feeFineNotices.realTime.shortTerm": "Envíos a lo largo del día con un cargo de tasa por objeto perdido por aviso."
 }

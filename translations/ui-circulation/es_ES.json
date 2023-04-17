@@ -472,5 +472,7 @@
     "settings.cancelReasons.deleteEntry": "Delete cancel reason",
     "settings.cancelReasons.termDeleted": "The cancel reason <b>{term}</b> was successfully <b>deleted</b>",
     "settings.cancelReasons.termWillBeDeleted": "The cancel reason <b>{term}</b> will be <b>deleted.</b>",
-    "settings.patronNotices.generalInformation": "General information"
+    "settings.patronNotices.generalInformation": "General information",
+    "settings.noticePolicy.feeFineNotices.realTime.longTerm": "Send overnight with multiple lost item fee charges by patron.",
+    "settings.noticePolicy.feeFineNotices.realTime.shortTerm": "Send throughout the day with one lost item fee charge per notice."
 }
