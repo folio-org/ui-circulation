@@ -368,8 +368,8 @@
     "settings.noticePolicy.notices.realTime.notification": "Always sent when event is triggered.",
     "settings.noticePolicy.notices.send.longTerm": "Send overnight with multiple loans/items by patron. Useful for long-term loans.",
     "settings.noticePolicy.notices.send.shortTerm": "Send throughout the day without multiple loans/items. Useful for short-term loans.",
-    "settings.patronNotices.feeFineChargeTokenHeader": "Fee/Fine Charge",
-    "settings.patronNotices.feeFineActionTokenHeader": "Fee/Fine Action",
+    "settings.patronNotices.feeFineChargeTokenHeader": "Fee/fine charge",
+    "settings.patronNotices.feeFineActionTokenHeader": "Fee/fine action",
     "settings.patronNotices.multipleFeeFineActions": "Multiple fee/fine actions",
     "settings.patronNotices.multipleFeeFineCharges": "Multiple fee/fine charges",
     "settings.finePolicy.validate.maximumOverdueFine": "Maximum overdue fine must be greater than or equal to Overdue fine",
@@ -472,5 +472,7 @@
     "settings.cancelReasons.deleteEntry": "Delete cancel reason",
     "settings.cancelReasons.termDeleted": "The cancel reason <b>{term}</b> was successfully <b>deleted</b>",
     "settings.cancelReasons.termWillBeDeleted": "The cancel reason <b>{term}</b> will be <b>deleted.</b>",
-    "settings.patronNotices.generalInformation": "General information"
+    "settings.patronNotices.generalInformation": "General information",
+    "settings.noticePolicy.feeFineNotices.realTime.longTerm": "Send overnight with multiple lost item fee charges by patron.",
+    "settings.noticePolicy.feeFineNotices.realTime.shortTerm": "Send throughout the day with one lost item fee charge per notice."
 }
