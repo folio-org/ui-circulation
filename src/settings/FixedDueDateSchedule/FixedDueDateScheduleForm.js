@@ -30,6 +30,9 @@ import SchedulesList from './components/EditSections/components/SchedulesList';
 import { FixedDueDateSchedule as validateFixedDueDateSchedule } from '../Validation';
 
 import {
+  getHeaderWithCredentials,
+} from '../utils/headers';
+import {
   isEditLayer,
   validateUniqueNameById,
 } from '../utils/utils';
@@ -71,11 +74,7 @@ class FixedDueDateScheduleForm extends React.Component {
 
     return fetch(`${okapi.url}/fixed-due-date-schedule-storage/fixed-due-date-schedules?query=(name=="${name}")`,
       {
-        headers: {
-          'X-Okapi-Tenant': okapi.tenant,
-          'X-Okapi-Token': okapi.token,
-          'Content-Type': 'application/json',
-        }
+        ...getHeaderWithCredentials(okapi)
       });
   };
 

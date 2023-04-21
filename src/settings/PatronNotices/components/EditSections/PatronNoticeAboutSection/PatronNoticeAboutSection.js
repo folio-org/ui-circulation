@@ -14,6 +14,7 @@ import {
 } from '@folio/stripes/components';
 
 import { patronNoticeCategories } from '../../../../../constants';
+import { getHeaderWithCredentials } from '../../../../utils/headers';
 import { validateUniqueNameById } from '../../../../utils/utils';
 
 const PatronNoticeAboutSection = ({ initialValues, okapi, intl }) => {
@@ -27,11 +28,7 @@ const PatronNoticeAboutSection = ({ initialValues, okapi, intl }) => {
   const getTemplatesByName = (name) => {
     return fetch(`${okapi.url}/templates?query=(name=="${name}")`,
       {
-        headers: {
-          'X-Okapi-Tenant': okapi.tenant,
-          'X-Okapi-Token': okapi.token,
-          'Content-Type': 'application/json',
-        }
+        ...getHeaderWithCredentials(okapi)
       });
   };
 

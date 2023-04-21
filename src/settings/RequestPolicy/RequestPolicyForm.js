@@ -22,6 +22,9 @@ import {
 } from '../components';
 
 import {
+  getHeaderWithCredentials,
+} from '../utils/headers';
+import {
   isEditLayer,
   validateUniqueNameById,
 } from '../utils/utils';
@@ -74,11 +77,7 @@ class RequestPolicyForm extends React.Component {
 
     return fetch(`${okapi.url}/request-policy-storage/request-policies?query=(name=="${name}")`,
       {
-        headers: {
-          'X-Okapi-Tenant': okapi.tenant,
-          'X-Okapi-Token': okapi.token,
-          'Content-Type': 'application/json',
-        },
+        ...getHeaderWithCredentials(okapi)
       });
   };
 
