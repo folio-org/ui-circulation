@@ -12,6 +12,9 @@ import {
   Paneset,
   Row,
 } from '@folio/stripes/components';
+import {
+  getHeaderWithCredentials,
+} from '@folio/stripes/util';
 
 import RequestPolicy from '../Models/RequestPolicy';
 import { RequestPolicy as validateRequestPolicy } from '../Validation';
@@ -21,9 +24,6 @@ import {
   FooterPane,
 } from '../components';
 
-import {
-  getHeaderWithCredentials,
-} from '../utils/headers';
 import {
   isEditLayer,
   validateUniqueNameById,

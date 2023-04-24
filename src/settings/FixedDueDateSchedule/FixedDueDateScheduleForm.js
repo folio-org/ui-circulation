@@ -24,14 +24,14 @@ import {
 } from '@folio/stripes/components';
 import stripesFinalForm from '@folio/stripes/final-form';
 import { ViewMetaData } from '@folio/stripes/smart-components';
+import {
+  getHeaderWithCredentials,
+} from '@folio/stripes/util';
 
 import SchedulesList from './components/EditSections/components/SchedulesList';
 
 import { FixedDueDateSchedule as validateFixedDueDateSchedule } from '../Validation';
 
-import {
-  getHeaderWithCredentials,
-} from '../utils/headers';
 import {
   isEditLayer,
   validateUniqueNameById,
