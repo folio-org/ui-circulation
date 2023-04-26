@@ -379,7 +379,7 @@
     "settings.finePolicy.validate.invalidMaximumOverdueFine": "Zadejte prosím částku pokuty při překročení termínu vrácení nebo nastavte maximální pokutu při překročení termínu vrácení na 0",
     "settings.finePolicy.validate.invalidMaximumRecallOverdueFine": "Zadejte prosím částku pokuty za stažení z výpůjčky při překročení termínu vrácení nebo nastavte maximální pokutu za stažení z výpůjčky při překročení termínu vrácení na 0",
     "settings.lostItemFee.validate.hasPatronBilledAfterAgedToLostValue": "Zápis je povinný, pokud je zadáno \"Čtenáři naúčtovat poplatek po ztrátě\"",
-    "settings.lostItemFee.validate.hasNoChargeLostItemProcessingFee": "'Poplatek za zpracování ztracené jednotky' nemůže být > 0, pokud není 'Naúčtovat poplatek za zpracování ztracené jednotky, pokud je jednotka prohlášena za ztracenou čtenářem ?' a/nebo 'Naúčtovat poplatek za zpracování ztracené jednotky, pokud je jednotka prohlášena za stracenou?' je 'Ano'",
+    "settings.lostItemFee.validate.hasNoChargeLostItemProcessingFee": "'Poplatek za zpracování ztracené jednotky' nemůže být > 0, pokud není 'Naúčtovat poplatek za zpracování ztracené jednotky, pokud je jednotka prohlášena za ztracenou čtenářem?' a/nebo 'Naúčtovat poplatek za zpracování ztracené jednotky, pokud je jednotka prohlášena za stracenou?' je 'Ano'",
     "settings.lostItemFee.validate.hasLostItemProcessingFeeValue": "'Poplatek za zpracování ztracené jednotky' musí být > 0 pro tento výběr",
     "settings.lostItemFee.validate.hasPositiveReplacementProcessingFee": "„Poplatek za zpracování výměny“ nemůže být > 0, pokud „Výměna povolena“ není „Ano\"",
     "settings.lostItemFee.validate.chargeAmountItemSystemSelected": "Zadání je povinné, pokud je vybrána možnost \"Naúčtovat poplatek za zpracování ztracené jednotky, pokud je jednotka systémem označena jako ztracená.\"",
@@ -472,5 +472,7 @@
     "settings.cancelReasons.deleteEntry": "Smazat důvod zrušení",
     "settings.cancelReasons.termDeleted": "Důvod zrušení <b>{term}</b> byl úspěšně <b>smazán</b>",
     "settings.cancelReasons.termWillBeDeleted": "Důvod zrušení <b>{term}</b> bude <b>smazán.</b>",
-    "settings.patronNotices.generalInformation": "Obecné informace"
+    "settings.patronNotices.generalInformation": "Obecné informace",
+    "settings.noticePolicy.feeFineNotices.realTime.longTerm": "Odeslat přes noc s vícenásobnými poplatky za ztracené položky čtenářem.",
+    "settings.noticePolicy.feeFineNotices.realTime.shortTerm": "Odeslat během dne s jedním poplatkem za ztracenou položku za oznámení."
 }
