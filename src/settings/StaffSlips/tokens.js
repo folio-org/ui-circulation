@@ -240,6 +240,11 @@ const getTokens = (locale) => ({
       previewValue: 'Transit',
       allowedFor: allowedForAllStaffSlips,
     },
+    {
+      token: 'staffSlip.currentDateTime',
+      previewValue: '3/18/22, 11:59 AM',
+      allowedFor: allowedForAllStaffSlips,
+    },
   ],
 });
 

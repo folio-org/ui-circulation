@@ -37,6 +37,11 @@ describe('getTokens', () => {
       name: 'requester.patronGroup',
       expectedResult: 'Undergraduate',
     },
+    {
+      category: 'staffSlip',
+      name: 'staffSlip.currentDateTime',
+      expectedResult: '3/18/22, 11:59 AM',
+    },
   ];
   const result = getTokens(testLocale);
   const tokenTest = ({
