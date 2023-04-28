@@ -473,6 +473,6 @@
     "settings.cancelReasons.termDeleted": "取消原因<b> {term} </b>已成功<b>删除</b>",
     "settings.cancelReasons.termWillBeDeleted": "取消原因<b> {term} </b>将被<b>删除。 </b>",
     "settings.patronNotices.generalInformation": "一般信息",
-    "settings.noticePolicy.feeFineNotices.realTime.longTerm": "Send overnight with multiple lost item fee charges by patron.",
-    "settings.noticePolicy.feeFineNotices.realTime.shortTerm": "Send throughout the day with one lost item fee charge per notice."
+    "settings.noticePolicy.feeFineNotices.realTime.longTerm": "连夜寄出，并由读者收取多件遗失物品费用。",
+    "settings.noticePolicy.feeFineNotices.realTime.shortTerm": "全天发送，每份通知收取一件遗失物品费用。"
 }
