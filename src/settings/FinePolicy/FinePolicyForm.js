@@ -19,6 +19,7 @@ import FinePolicy from '../Models/FinePolicy';
 import {
   FinesSection,
   OverdueAboutSection,
+  ReminderFeesSection,
 } from './components/EditSections';
 
 import {
@@ -55,6 +56,7 @@ class FinePolicyForm extends React.Component {
       sections: {
         overdueGeneralSection: true,
         editFineSection: true,
+        editReminderFeesSection: true,
       },
     };
   }
@@ -150,6 +152,12 @@ class FinePolicyForm extends React.Component {
                   initialValues={initialValues}
                   policy
                   fineSectionOpen={sections.editFineSection}
+                  change={change}
+                />
+                <ReminderFeesSection
+                  initialValues={initialValues}
+                  policy
+                  sectionOpen={sections.editReminderFeesSection}
                   change={change}
                 />
               </AccordionSet>
