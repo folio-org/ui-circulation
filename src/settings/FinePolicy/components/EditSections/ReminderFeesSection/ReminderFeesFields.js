@@ -152,11 +152,12 @@ const ReminderFeesFields = props => {
       component={RepeatableField}
       addLabel={<FormattedMessage id="ui-circulation.settings.finePolicy.reminderFees.add" />}
       onAdd={fields => fields.push({
-        relationshipId: '',
-        uri: '',
-        linkText: '',
-        materialsSpecification: '',
-        publicNote: '',
+        interval: '',
+        frequency: 'day(s)',
+        fee: '',
+        after: 'previousReminder',
+        noticeMethod: '',
+        noticeTemplate: '',
       })}
       headLabels={headLabels}
       renderField={renderField}
