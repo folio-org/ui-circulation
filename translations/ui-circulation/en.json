@@ -429,9 +429,9 @@
   "settings.finePolicy.reminderFees.noticeTemplate": "Notice template",
   "settings.finePolicy.reminderFees.actions": "Actions",
   "settings.finePolicy.reminderFees.previousReminder": "Previous reminder",
+  "settings.finePolicy.reminderFees.overdue": "Overdue",
   "settings.finePolicy.reminderFees.selectNoticeMethod": "Select notice method",
   "settings.finePolicy.reminderFees.selectNoticeTemplate": "Select notice template",
-
 
   "settings.overdueFinePolicy.denyDelete.header": "Cannot delete overdue fine policy",
 

@@ -23,7 +23,7 @@ const frequencyOptions = ['day(s)', 'week(s)'].map(option => ({
 }));
 
 // TODO: coming from the server?
-const noticeMethodOptions = ['Email', 'File'].map(option => ({
+const noticeMethodOptions = ['Email', 'Mail'].map(option => ({
   label: option,
   value: option,
 }));
@@ -45,7 +45,7 @@ const ReminderFeesFields = props => {
   const noticeTemplateLabel = formatMessage({ id: 'ui-circulation.settings.finePolicy.reminderFees.noticeTemplate' });
 
   const templateOptions = templates.map(it => ({
-    label: it.description,
+    label: it.name,
     value: it.id,
   }));
 
@@ -113,7 +113,7 @@ const ReminderFeesFields = props => {
         />
       </Col>
       <Col sm={2}>
-        <FormattedMessage id="ui-circulation.settings.finePolicy.reminderFees.previousReminder" />
+        <FormattedMessage id={`ui-circulation.settings.finePolicy.reminderFees.${index ? 'previousReminder' : 'overdue'}`} />
       </Col>
       <Col sm={2}>
         <Field

@@ -4,6 +4,7 @@ import {
 
 import { OverdueFine, Metadata } from '../common';
 import { FINE_POLICY_PATH } from '../../../constants/Validation/fine-policy';
+import ReminderFee from './ReminderFee';
 
 export default class FinePolicy {
   static defaultFinePolicy() {
@@ -15,6 +16,7 @@ export default class FinePolicy {
       'maxOverdueFine': 0,
       'maxOverdueRecallFine': 0,
       'overdueRecallFine': { quantity: 0, intervalId: '' },
+      'reminderFees': [],
     };
   }
 
@@ -30,6 +32,7 @@ export default class FinePolicy {
     this.gracePeriodRecall = policy.gracePeriodRecall;
     this.maxOverdueRecallFine = policy.maxOverdueRecallFine;
     this.metadata = new Metadata(policy.metadata);
+    this.reminderFees = policy.reminderFees?.map(fee => new ReminderFee(fee)) ?? [];
   }
 
   hasValue(pathToValue) {

@@ -28,7 +28,9 @@ export const parseInitialValues = (init = {}) => {
     overdueRecallFine: {
       ...init.overdueRecallFine,
       quantity: parseFloat((init.overdueRecallFine || {}).quantity || 0).toFixed(2)
-    }
+    },
+    // TODO: remove after sever side is ready
+    reminderFees: init?.id ? JSON.parse(localStorage.getItem('reminderFees') ?? '[]') : []
   });
 };
 
@@ -64,6 +66,18 @@ class FinePolicySettings extends React.Component {
       }),
     }).isRequired,
   };
+
+  // TODO: remove when backend is ready
+  saveReminderFees = async (reminderFees) => {
+    localStorage.setItem('reminderFees', JSON.stringify(reminderFees));
+  }
+
+  onBeforeSave = (data) => {
+    this.saveReminderFees(data.reminderFees);
+    delete data.reminderFees;
+
+    return normalize(data);
+  }
 
   render() {
     const {
@@ -105,7 +119,7 @@ class FinePolicySettings extends React.Component {
         paneTitle={<FormattedMessage id="ui-circulation.settings.finePolicy.paneTitle" />}
         entryLabel={formatMessage({ id: 'ui-circulation.settings.finePolicy.entryLabel' })}
         defaultEntry={FinePolicy.defaultFinePolicy()}
-        onBeforeSave={normalize}
+        onBeforeSave={this.onBeforeSave}
       />
     );
   }

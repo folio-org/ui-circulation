@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useIntl } from 'react-intl';
 
@@ -39,7 +39,7 @@ ReminderFeesSection.manifest = {
     records: 'templates',
     path: 'templates',
     params: {
-      query: 'category="AutomatedFeeFineCharge"',
+      query: 'category="AutomatedFeeFineAdjustment" sortby name',
       limit: MAX_UNPAGED_RESOURCE_COUNT,
     },
   },
