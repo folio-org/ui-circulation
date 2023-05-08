@@ -99,7 +99,7 @@ const ReminderFeesFields = props => {
           aria-label={intervalLabel}
           name={`${field}.interval`}
           component={TextField}
-          rows={1}
+          type="number"
           disabled={!canEdit}
         />
       </Col>
@@ -120,7 +120,6 @@ const ReminderFeesFields = props => {
           aria-label={feeLabel}
           name={`${field}.fee`}
           component={TextField}
-          rows={2}
           type="number"
           disabled={!canEdit}
         />
