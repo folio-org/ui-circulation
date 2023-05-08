@@ -69,7 +69,7 @@ class FinePolicySettings extends React.Component {
 
   // TODO: remove when backend is ready
   saveReminderFees = async (reminderFees) => {
-    localStorage.setItem('reminderFees', JSON.stringify(reminderFees));
+    localStorage.setItem('reminderFees', reminderFees ? JSON.stringify(reminderFees) : '[]');
   }
 
   onBeforeSave = (data) => {
