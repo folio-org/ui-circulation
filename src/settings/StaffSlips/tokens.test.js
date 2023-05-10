@@ -43,7 +43,7 @@ describe('getTokens', () => {
       expectedResult: '3/18/22, 11:59 AM',
     },
     {
-      category: 'item',
+      category: 'effectiveLocation',
       name: 'item.effectiveLocationPrimaryServicePointName',
       expectedResult: 'Circulation Desk',
     },
