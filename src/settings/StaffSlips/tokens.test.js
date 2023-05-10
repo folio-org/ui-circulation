@@ -42,6 +42,11 @@ describe('getTokens', () => {
       name: 'staffSlip.currentDateTime',
       expectedResult: '3/18/22, 11:59 AM',
     },
+    {
+      category: 'item',
+      name: 'item.effectiveLocationPrimaryServicePointName',
+      expectedResult: 'Circulation Desk',
+    },
   ];
   const result = getTokens(testLocale);
   const tokenTest = ({
