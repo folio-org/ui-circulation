@@ -24,6 +24,9 @@ import {
 } from '@folio/stripes/components';
 import stripesFinalForm from '@folio/stripes/final-form';
 import { ViewMetaData } from '@folio/stripes/smart-components';
+import {
+  getHeaderWithCredentials,
+} from '@folio/stripes/util';
 
 import SchedulesList from './components/EditSections/components/SchedulesList';
 
@@ -71,11 +74,7 @@ class FixedDueDateScheduleForm extends React.Component {
 
     return fetch(`${okapi.url}/fixed-due-date-schedule-storage/fixed-due-date-schedules?query=(name=="${name}")`,
       {
-        headers: {
-          'X-Okapi-Tenant': okapi.tenant,
-          'X-Okapi-Token': okapi.token,
-          'Content-Type': 'application/json',
-        }
+        ...getHeaderWithCredentials(okapi)
       });
   };
 

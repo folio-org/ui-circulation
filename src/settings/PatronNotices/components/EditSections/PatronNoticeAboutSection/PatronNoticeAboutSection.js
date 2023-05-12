@@ -12,6 +12,9 @@ import {
   TextArea,
   TextField,
 } from '@folio/stripes/components';
+import {
+  getHeaderWithCredentials,
+} from '@folio/stripes/util';
 
 import { patronNoticeCategories } from '../../../../../constants';
 import { validateUniqueNameById } from '../../../../utils/utils';
@@ -27,11 +30,7 @@ const PatronNoticeAboutSection = ({ initialValues, okapi, intl }) => {
   const getTemplatesByName = (name) => {
     return fetch(`${okapi.url}/templates?query=(name=="${name}")`,
       {
-        headers: {
-          'X-Okapi-Tenant': okapi.tenant,
-          'X-Okapi-Token': okapi.token,
-          'Content-Type': 'application/json',
-        }
+        ...getHeaderWithCredentials(okapi)
       });
   };
 
