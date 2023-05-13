@@ -29,6 +29,11 @@ describe('getTokens', () => {
     },
     {
       category: 'request',
+      name: 'request.requestDate',
+      expectedResult: expectedDateResult,
+    },
+    {
+      category: 'request',
       name: 'request.holdShelfExpirationDate',
       expectedResult: expectedDateResult,
     },
