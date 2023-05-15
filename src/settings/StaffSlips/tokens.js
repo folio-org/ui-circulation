@@ -145,6 +145,11 @@ const getTokens = (locale) => ({
       allowedFor: allowedForAllStaffSlips,
     },
     {
+      token: 'request.requestDate',
+      previewValue: generatePreviewDateValue(locale, DATE_FORMAT_WITH_TIME),
+      allowedFor: allowedForAllStaffSlips,
+    },
+    {
       token: 'request.holdShelfExpirationDate',
       previewValue: generatePreviewDateValue(locale, DATE_FORMAT_WITH_TIME),
       allowedFor: allowedForAllStaffSlips,
