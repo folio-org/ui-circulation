@@ -401,7 +401,7 @@
     "permission.settings.loan-history": "Settings (Circ): Can view loan history",
     "permission.settings.loan-policies": "Settings (Circ): Can create, edit and remove loan policies",
     "permission.settings.notice-policies": "Settings (Circ): Can create, edit and remove notice policies",
-    "permission.settings.circulation-rules": "Settings (Circ): Can create, edit and remove circulation rules",
+    "permission.settings.circulation-rules": "Settings (Circ): Can create, edit and remove circulation rules [LEGACY]",
     "permission.settings.fixed-due-date-schedules": "Settings (Circ): Can create, edit and remove fixed due date schedules",
     "permission.settings.staff-slips": "Settings (Circ): Can create, edit and remove staff slips",
     "permission.settings.request-policies": "Settings (Circ): Can create, edit and remove request policies",
