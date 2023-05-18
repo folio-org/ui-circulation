@@ -4,19 +4,19 @@ import {
 
 import { OverdueFine, Metadata } from '../common';
 import { FINE_POLICY_PATH } from '../../../constants/Validation/fine-policy';
-import ReminderFee from './ReminderFee';
+import ReminderFeesPolicy from '../ReminderFeesPolicy';
 
 export default class FinePolicy {
   static defaultFinePolicy() {
     return {
-      'countClosed': true,
-      'forgiveOverdueFine': true,
-      'gracePeriodRecall': true,
-      'overdueFine': { quantity: 0, intervalId: '' },
-      'maxOverdueFine': 0,
-      'maxOverdueRecallFine': 0,
-      'overdueRecallFine': { quantity: 0, intervalId: '' },
-      'reminderFees': [{ interval: '', frequency: '', fee: '' }],
+      countClosed: true,
+      forgiveOverdueFine: true,
+      gracePeriodRecall: true,
+      overdueFine: { quantity: 0, intervalId: '' },
+      maxOverdueFine: 0,
+      maxOverdueRecallFine: 0,
+      overdueRecallFine: { quantity: 0, intervalId: '' },
+      reminderFeesPolicy: { reminderSchedule: [] },
     };
   }
 
@@ -32,7 +32,7 @@ export default class FinePolicy {
     this.gracePeriodRecall = policy.gracePeriodRecall;
     this.maxOverdueRecallFine = policy.maxOverdueRecallFine;
     this.metadata = new Metadata(policy.metadata);
-    this.reminderFees = policy.reminderFees?.map(fee => new ReminderFee(fee)) ?? [];
+    this.reminderFeesPolicy = new ReminderFeesPolicy(policy.reminderFeesPolicy);
   }
 
   hasValue(pathToValue) {

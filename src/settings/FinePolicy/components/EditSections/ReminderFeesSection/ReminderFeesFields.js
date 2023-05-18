@@ -16,17 +16,7 @@ import {
   Label,
 } from '@folio/stripes/components';
 
-// TODO: coming from the server?
-const frequencyOptions = ['day(s)', 'week(s)'].map(option => ({
-  label: option,
-  value: option,
-}));
-
-// TODO: coming from the server?
-const noticeMethodOptions = ['Email', 'Mail'].map(option => ({
-  label: option,
-  value: option,
-}));
+import { timeUnits, noticeMethods } from '../../../../../constants';
 
 const ReminderFeesFields = props => {
   const { formatMessage } = useIntl();
@@ -47,6 +37,16 @@ const ReminderFeesFields = props => {
   const templateOptions = templates.map(it => ({
     label: it.name,
     value: it.id,
+  }));
+
+  const timeUnitsOptions = timeUnits.map(({ label, value }) => ({
+    label: formatMessage({ id: label }),
+    value,
+  }));
+
+  const noticeMethodsOptions = noticeMethods.map(({ label, value }) => ({
+    label: formatMessage({ id: label }),
+    value,
   }));
 
   const headLabels = (
@@ -106,9 +106,9 @@ const ReminderFeesFields = props => {
       <Col sm={2}>
         <Field
           aria-label={frequencyLabel}
-          name={`${field}.frequency`}
+          name={`${field}.timeUnitId`}
           component={Select}
-          dataOptions={frequencyOptions}
+          dataOptions={timeUnitsOptions}
           disabled={!canEdit}
         />
       </Col>
@@ -118,7 +118,7 @@ const ReminderFeesFields = props => {
       <Col sm={2}>
         <Field
           aria-label={feeLabel}
-          name={`${field}.fee`}
+          name={`${field}.reminderFee`}
           component={TextField}
           type="number"
           disabled={!canEdit}
@@ -127,16 +127,16 @@ const ReminderFeesFields = props => {
       <Col sm={2}>
         <Field
           aria-label={noticeMethodLabel}
-          name={`${field}.noticeMethod`}
+          name={`${field}.noticeMethodId`}
           component={Select}
-          dataOptions={[{ label: formatMessage({ id: 'ui-circulation.settings.finePolicy.reminderFees.selectNoticeMethod' }), value: '' }, ...noticeMethodOptions]}
+          dataOptions={[{ label: formatMessage({ id: 'ui-circulation.settings.finePolicy.reminderFees.selectNoticeMethod' }), value: '' }, ...noticeMethodsOptions]}
           disabled={!canEdit}
         />
       </Col>
       <Col sm={2}>
         <Field
           aria-label={noticeTemplateLabel}
-          name={`${field}.noticeTemplate`}
+          name={`${field}.noticeTemplateId`}
           component={Select}
           dataOptions={[{ label: formatMessage({ id: 'ui-circulation.settings.finePolicy.reminderFees.selectNoticeTemplate' }), value: '' }, ...templateOptions]}
           disabled={!canEdit}
@@ -147,16 +147,15 @@ const ReminderFeesFields = props => {
 
   return (
     <FieldArray
-      name="reminderFees"
+      name="reminderFeesPolicy.reminderSchedule"
       component={RepeatableField}
       addLabel={<FormattedMessage id="ui-circulation.settings.finePolicy.reminderFees.add" />}
       onAdd={fields => fields.push({
-        interval: '',
-        frequency: 'day(s)',
-        fee: '',
-        after: 'previousReminder',
-        noticeMethod: '',
-        noticeTemplate: '',
+        interval: null,
+        timeUnitId: 'day',
+        reminderFee: null,
+        noticeMethodId: '',
+        noticeTemplateId: '',
       })}
       headLabels={headLabels}
       renderField={renderField}
