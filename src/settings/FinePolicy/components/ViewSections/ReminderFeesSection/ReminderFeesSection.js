@@ -27,8 +27,8 @@ const columnWidths = {
   sequence: '16%',
   interval: '14%',
   after: '12%',
-  timeUnitId: '18%',
-  reminderFee: '10%',
+  timeUnitId: '16%',
+  reminderFee: '12%',
   noticeMethodId: '15%',
   noticeTemplateId: '15%',
 };
@@ -39,25 +39,24 @@ const ReminderFeesSection = (props) => {
     sectionOpen,
     resources,
   } = props;
-
   const { templates: { records } } = resources;
   const templatesById = keyBy(records, 'id');
   const timeUnitsByValue = keyBy(timeUnits, 'value');
   const noticeMethodsByValue = keyBy(noticeMethods, 'value');
   const resultFormatter = {
     sequence: (item) => (item.rowIndex + 1),
+    reminderFee: (item) => parseFloat(item?.reminderFee || 0).toFixed(2),
     after: (item) => <FormattedMessage id={`ui-circulation.settings.finePolicy.reminderFees.${item.rowIndex ? 'previousReminder' : 'overdue'}`} />,
     noticeTemplateId: (item) => templatesById[item.noticeTemplateId]?.name ?? '',
     noticeMethodId: (item) => <FormattedMessage id={noticeMethodsByValue[item.noticeMethodId]?.label} />,
     timeUnitId: (item) => <FormattedMessage id={timeUnitsByValue[item.timeUnitId]?.label} />,
   };
-
   const contentData = policy?.reminderFeesPolicy?.reminderSchedule ?? [];
 
   return (
     <div
       data-test-fine-policy-detail-reminder-fees
-      data-testid="remiderFeesTestId"
+      data-testid="reminderFeesTestId"
     >
       <Accordion
         data-testid="viewFineSectionTestId"
@@ -98,6 +97,5 @@ ReminderFeesSection.manifest = {
     },
   },
 };
-
 
 export default stripesConnect(ReminderFeesSection);
