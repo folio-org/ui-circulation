@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { useIntl } from 'react-intl';
 
@@ -14,7 +14,7 @@ const ReminderFeesSection = ({ sectionOpen, resources }) => {
   const { templates: { records } } = resources;
 
   return (
-    <div data-test-fine-policy-form-overdue-fines-section>
+    <div data-test-reminder-fees-section>
       <Accordion
         id="editReminderFeesSection"
         open={sectionOpen}

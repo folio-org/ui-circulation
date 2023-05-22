@@ -20,6 +20,7 @@ import {
 import {
   FinesSection,
   OverdueAboutSection,
+  ReminderFeesSection,
 } from './components/ViewSections';
 
 import { Metadata } from '../components';
@@ -43,6 +44,7 @@ class FinePolicyDetail extends React.Component {
       sections: {
         generalFeePolicy: true,
         viewFineSection: true,
+        reminderFeesSection: true,
       },
     };
   }
@@ -114,6 +116,10 @@ class FinePolicyDetail extends React.Component {
             policy={finePolicy}
             getCheckboxValue={this.getCheckboxValue}
             fineSectionOpen={sections.viewFineSection}
+          />
+          <ReminderFeesSection
+            policy={finePolicy}
+            sectionOpen={sections.reminderFeesSection}
           />
         </AccordionSet>
       </div>
