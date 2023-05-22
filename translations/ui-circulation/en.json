@@ -432,9 +432,11 @@
   "settings.finePolicy.reminderFees.overdue": "Overdue",
   "settings.finePolicy.reminderFees.selectNoticeMethod": "Select notice method",
   "settings.finePolicy.reminderFees.selectNoticeTemplate": "Select notice template",
-
+  "settings.finePolicy.reminderFees.timeUnit.days": "Day(s)",
+  "settings.finePolicy.reminderFees.timeUnit.weeks": "Week(s)",
+  "settings.finePolicy.reminderFees.noticeMethods.email": "Email",
+  "settings.finePolicy.reminderFees.noticeMethods.mail": "Mail",
   "settings.overdueFinePolicy.denyDelete.header": "Cannot delete overdue fine policy",
-
   "settings.lostItemFee.entryLabel": "New lost item fee policy",
   "settings.lostItemFee.paneTitle": "Lost item fee policies",
   "settings.lostItemFee.lostItemSection": "Lost item fee",
