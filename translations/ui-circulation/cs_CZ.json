@@ -474,5 +474,7 @@
     "settings.cancelReasons.termWillBeDeleted": "Důvod zrušení <b>{term}</b> bude <b>smazán.</b>",
     "settings.patronNotices.generalInformation": "Obecné informace",
     "settings.noticePolicy.feeFineNotices.realTime.longTerm": "Odeslat přes noc s vícenásobnými poplatky za ztracené položky čtenářem.",
-    "settings.noticePolicy.feeFineNotices.realTime.shortTerm": "Odeslat během dne s jedním poplatkem za ztracenou položku za oznámení."
+    "settings.noticePolicy.feeFineNotices.realTime.shortTerm": "Odeslat během dne s jedním poplatkem za ztracenou položku za oznámení.",
+    "permission.settings.view-circulation-rules": "Settings (Circ): View circulation rules",
+    "permission.settings.edit-circulation-rules": "Settings (Circ): Can create, edit and remove circulation rules"
 }
