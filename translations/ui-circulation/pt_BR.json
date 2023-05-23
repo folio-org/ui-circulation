@@ -401,7 +401,7 @@
     "permission.settings.loan-history": "Configurações (Circulação): Pode visualizar o histórico de empréstimos",
     "permission.settings.loan-policies": "Configurações (Circulação): Pode criar, editar e remover políticas de empréstimo",
     "permission.settings.notice-policies": "Configurações (Circulação): Pode criar, editar e remover políticas de aviso",
-    "permission.settings.circulation-rules": "Configurações (Circulação): Pode criar, editar e remover regras de circulação",
+    "permission.settings.circulation-rules": "Configurações (Circulação): Pode criar, editar e remover regras de circulação [LEGADO]",
     "permission.settings.fixed-due-date-schedules": "Configurações (Circulação): Pode criar, editar e remover programações de datas de vencimento fixas",
     "permission.settings.staff-slips": "Configurações (Circulação): Pode criar, editar e remover fichas de encaminhamento",
     "permission.settings.request-policies": "Configurações (Circulação): Pode criar, editar e remover políticas de requisições",
@@ -474,5 +474,7 @@
     "settings.cancelReasons.termWillBeDeleted": "O motivo do cancelamento <b> {term} </b> será <b> excluído. </b>",
     "settings.patronNotices.generalInformation": "Informações gerais",
     "settings.noticePolicy.feeFineNotices.realTime.longTerm": "Envie durante a noite com as taxas de cobrança de item perdido pelo cliente.",
-    "settings.noticePolicy.feeFineNotices.realTime.shortTerm": "Envie ao longo do dia com as taxas de cobrança de item perdido por aviso."
+    "settings.noticePolicy.feeFineNotices.realTime.shortTerm": "Envie ao longo do dia com as taxas de cobrança de item perdido por aviso.",
+    "permission.settings.view-circulation-rules": "Configurações (Circulação): Ver regras de circulação",
+    "permission.settings.edit-circulation-rules": "Configurações (Circulação): Pode criar, editar e remover regras de circulação"
 }
