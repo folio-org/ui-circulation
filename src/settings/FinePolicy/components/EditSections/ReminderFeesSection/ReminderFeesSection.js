@@ -3,15 +3,12 @@ import PropTypes from 'prop-types';
 import { useIntl } from 'react-intl';
 
 import { Accordion } from '@folio/stripes/components';
-import { stripesConnect } from '@folio/stripes/core';
 
 import ReminderFeesFields from './ReminderFeesFields';
-import { MAX_UNPAGED_RESOURCE_COUNT } from '../../../../../constants';
 
-const ReminderFeesSection = ({ sectionOpen, resources }) => {
+const ReminderFeesSection = ({ sectionOpen, templates }) => {
   const intl = useIntl();
   const { formatMessage } = intl;
-  const { templates: { records } } = resources;
 
   return (
     <div data-test-reminder-fees-section>
@@ -21,7 +18,7 @@ const ReminderFeesSection = ({ sectionOpen, resources }) => {
         label={formatMessage({ id: 'ui-circulation.settings.finePolicy.reminderFees.label' })}
       >
         <section>
-          <ReminderFeesFields templates={records} />
+          <ReminderFeesFields templates={templates} />
         </section>
       </Accordion>
     </div>
@@ -30,19 +27,7 @@ const ReminderFeesSection = ({ sectionOpen, resources }) => {
 
 ReminderFeesSection.propTypes = {
   sectionOpen: PropTypes.bool.isRequired,
-  resources: PropTypes.object,
+  templates: PropTypes.arrayOf(PropTypes.object),
 };
 
-ReminderFeesSection.manifest = {
-  templates: {
-    type: 'okapi',
-    records: 'templates',
-    path: 'templates',
-    params: {
-      query: 'category="AutomatedFeeFineAdjustment" sortby name',
-      limit: MAX_UNPAGED_RESOURCE_COUNT,
-    },
-  },
-};
-
-export default stripesConnect(ReminderFeesSection);
+export default ReminderFeesSection;

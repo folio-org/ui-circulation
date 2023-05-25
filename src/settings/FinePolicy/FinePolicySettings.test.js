@@ -39,6 +39,7 @@ describe('FinePolicySettings', () => {
   const testResources = {
     finePolicies: {},
     fixedDueDateSchedules: {},
+    templates: {}
   };
   const testDefaultProps = {
     mutator: testMutator,
@@ -72,6 +73,7 @@ describe('FinePolicySettings', () => {
           parentResources: {
             finePolicies: {},
             fixedDueDateSchedules: {},
+            templates: {},
           },
           parseInitialValues,
           permissions: {
@@ -83,6 +85,7 @@ describe('FinePolicySettings', () => {
           resources: {
             finePolicies: {},
             fixedDueDateSchedules: {},
+            templates: {},
           },
         }
       ), {});

@@ -30,6 +30,17 @@ describe('FinePolicy', () => {
       updatedByUserId: 'updatedByUserId',
       updatedDate: 'updatedDate',
     },
+    reminderFeesPolicy: {
+      reminderSchedule: [
+        {
+          interval: 2,
+          timeUnitId: 'day',
+          reminderFee: 1,
+          noticeMethodId: 'email',
+          noticeTemplateId: 'c4f23e08-3b0d-4424-afc3-1e228240a8b0'
+        },
+      ]
+    }
   };
 
   const finePolicyInstance = new FinePolicy(policy);
@@ -135,6 +146,7 @@ describe('FinePolicy', () => {
       maxOverdueFine: 0,
       maxOverdueRecallFine: 0,
       overdueRecallFine: { quantity: 0, intervalId: '' },
+      reminderFeesPolicy: { reminderSchedule: [] }
     };
 
     expect(FinePolicy.defaultFinePolicy()).toEqual(expectedPolicy);

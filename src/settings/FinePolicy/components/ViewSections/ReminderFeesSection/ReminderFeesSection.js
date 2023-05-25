@@ -1,9 +1,7 @@
-import React from 'react';
 import { keyBy } from 'lodash';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 
-import { stripesConnect } from '@folio/stripes/core';
 import {
   Accordion,
   MultiColumnList,
@@ -11,7 +9,7 @@ import {
   Row,
 } from '@folio/stripes/components';
 
-import { timeUnits, noticeMethods, MAX_UNPAGED_RESOURCE_COUNT } from '../../../../../constants';
+import { timeUnits, noticeMethods } from '../../../../../constants';
 
 const visibleColumns = ['sequence', 'interval', 'timeUnitId', 'after', 'reminderFee', 'noticeMethodId', 'noticeTemplateId'];
 const columnMapping = {
@@ -37,10 +35,9 @@ const ReminderFeesSection = (props) => {
   const {
     policy,
     sectionOpen,
-    resources,
+    templates,
   } = props;
-  const { templates: { records } } = resources;
-  const templatesById = keyBy(records, 'id');
+  const templatesById = keyBy(templates, 'id');
   const timeUnitsByValue = keyBy(timeUnits, 'value');
   const noticeMethodsByValue = keyBy(noticeMethods, 'value');
   const resultFormatter = {
@@ -83,19 +80,7 @@ const ReminderFeesSection = (props) => {
 ReminderFeesSection.propTypes = {
   policy: PropTypes.object.isRequired,
   sectionOpen: PropTypes.bool.isRequired,
-  resources: PropTypes.object,
+  templates: PropTypes.arrayOf(PropTypes.object),
 };
 
-ReminderFeesSection.manifest = {
-  templates: {
-    type: 'okapi',
-    records: 'templates',
-    path: 'templates',
-    params: {
-      query: 'category="AutomatedFeeFineAdjustment" sortby name',
-      limit: MAX_UNPAGED_RESOURCE_COUNT,
-    },
-  },
-};
-
-export default stripesConnect(ReminderFeesSection);
+export default ReminderFeesSection;
