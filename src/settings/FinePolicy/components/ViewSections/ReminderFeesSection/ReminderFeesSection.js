@@ -51,29 +51,24 @@ const ReminderFeesSection = (props) => {
   const contentData = policy?.reminderFeesPolicy?.reminderSchedule ?? [];
 
   return (
-    <div
-      data-test-fine-policy-detail-reminder-fees
+    <Accordion
       data-testid="reminderFeesTestId"
+      id="reminderFeesSection"
+      label={<FormattedMessage id="ui-circulation.settings.finePolicy.reminderFees.label" />}
+      open={sectionOpen}
     >
-      <Accordion
-        data-testid="viewFineSectionTestId"
-        id="reminderFeesSection"
-        label={<FormattedMessage id="ui-circulation.settings.finePolicy.reminderFees.label" />}
-        open={sectionOpen}
-      >
-        <Row>
-          <Col xs={12}>
-            <MultiColumnList
-              contentData={contentData}
-              formatter={resultFormatter}
-              visibleColumns={visibleColumns}
-              columnMapping={columnMapping}
-              columnWidths={columnWidths}
-            />
-          </Col>
-        </Row>
-      </Accordion>
-    </div>
+      <Row>
+        <Col xs={12}>
+          <MultiColumnList
+            contentData={contentData}
+            formatter={resultFormatter}
+            visibleColumns={visibleColumns}
+            columnMapping={columnMapping}
+            columnWidths={columnWidths}
+          />
+        </Col>
+      </Row>
+    </Accordion>
   );
 };
 

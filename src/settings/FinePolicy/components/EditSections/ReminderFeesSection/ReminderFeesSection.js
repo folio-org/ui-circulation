@@ -13,7 +13,7 @@ const ReminderFeesSection = ({ sectionOpen, templates }) => {
   return (
     <div data-test-reminder-fees-section>
       <Accordion
-        id="editReminderFeesSection"
+        data-testid="editReminderFeesTestId"
         open={sectionOpen}
         label={formatMessage({ id: 'ui-circulation.settings.finePolicy.reminderFees.label' })}
       >

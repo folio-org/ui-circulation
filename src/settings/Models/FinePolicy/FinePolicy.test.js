@@ -1,6 +1,7 @@
 import FinePolicy from './FinePolicy';
 import { OverdueFine, Metadata } from '../common';
 import { FINE_POLICY_PATH } from '../../../constants/Validation/fine-policy';
+import reminderFeesPolicy from '../../../../test/jest/fixtures/reminderFeesPolicy';
 
 describe('FinePolicy', () => {
   const basicPolicy = {
@@ -30,17 +31,7 @@ describe('FinePolicy', () => {
       updatedByUserId: 'updatedByUserId',
       updatedDate: 'updatedDate',
     },
-    reminderFeesPolicy: {
-      reminderSchedule: [
-        {
-          interval: 2,
-          timeUnitId: 'day',
-          reminderFee: 1,
-          noticeMethodId: 'email',
-          noticeTemplateId: 'c4f23e08-3b0d-4424-afc3-1e228240a8b0'
-        },
-      ]
-    }
+    reminderFeesPolicy,
   };
 
   const finePolicyInstance = new FinePolicy(policy);
