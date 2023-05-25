@@ -256,6 +256,7 @@ describe('RequestPolicyForm', () => {
               'X-Okapi-Token': okapi.token,
               'Content-Type': 'application/json',
             },
+            credentials: 'include',
           });
         });
 

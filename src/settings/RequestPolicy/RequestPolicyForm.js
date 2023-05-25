@@ -12,6 +12,9 @@ import {
   Paneset,
   Row,
 } from '@folio/stripes/components';
+import {
+  getHeaderWithCredentials,
+} from '@folio/stripes/util';
 
 import RequestPolicy from '../Models/RequestPolicy';
 import { RequestPolicy as validateRequestPolicy } from '../Validation';
@@ -74,11 +77,7 @@ class RequestPolicyForm extends React.Component {
 
     return fetch(`${okapi.url}/request-policy-storage/request-policies?query=(name=="${name}")`,
       {
-        headers: {
-          'X-Okapi-Tenant': okapi.tenant,
-          'X-Okapi-Token': okapi.token,
-          'Content-Type': 'application/json',
-        },
+        ...getHeaderWithCredentials(okapi)
       });
   };
 

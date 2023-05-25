@@ -29,6 +29,11 @@ describe('getTokens', () => {
     },
     {
       category: 'request',
+      name: 'request.requestDate',
+      expectedResult: expectedDateResult,
+    },
+    {
+      category: 'request',
       name: 'request.holdShelfExpirationDate',
       expectedResult: expectedDateResult,
     },
@@ -41,6 +46,11 @@ describe('getTokens', () => {
       category: 'staffSlip',
       name: 'staffSlip.currentDateTime',
       expectedResult: '3/18/22, 11:59 AM',
+    },
+    {
+      category: 'effectiveLocation',
+      name: 'item.effectiveLocationPrimaryServicePointName',
+      expectedResult: 'Circulation Desk',
     },
   ];
   const result = getTokens(testLocale);

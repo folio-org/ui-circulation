@@ -118,6 +118,11 @@ const getTokens = (locale) => ({
       allowedFor: allowedForAllStaffSlips,
     },
     {
+      token: 'item.effectiveLocationPrimaryServicePointName',
+      previewValue: 'Circulation Desk',
+      allowedFor: allowedForAllStaffSlips,
+    },
+    {
       token: 'item.effectiveLocationLibrary',
       previewValue: 'Main Library',
       allowedFor: allowedForAllStaffSlips,
@@ -136,6 +141,11 @@ const getTokens = (locale) => ({
     },
     {
       token: 'request.requestExpirationDate',
+      previewValue: generatePreviewDateValue(locale, DATE_FORMAT_WITH_TIME),
+      allowedFor: allowedForAllStaffSlips,
+    },
+    {
+      token: 'request.requestDate',
       previewValue: generatePreviewDateValue(locale, DATE_FORMAT_WITH_TIME),
       allowedFor: allowedForAllStaffSlips,
     },
