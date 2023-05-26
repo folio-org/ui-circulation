@@ -30,6 +30,17 @@ const columnWidths = {
 const timeUnitsByValue = keyBy(timeUnits, 'value');
 const noticeMethodsByValue = keyBy(noticeMethods, 'value');
 
+export const generateFormatter = (templatesById) => {
+  return {
+    sequence: (item) => (item.rowIndex + 1),
+    reminderFee: (item) => parseFloat(item?.reminderFee || 0).toFixed(2),
+    after: (item) => <FormattedMessage id={`ui-circulation.settings.finePolicy.reminderFees.${item.rowIndex ? 'previousReminder' : 'overdue'}`} />,
+    noticeTemplateId: (item) => templatesById[item.noticeTemplateId]?.name ?? '',
+    noticeMethodId: (item) => <FormattedMessage id={noticeMethodsByValue[item.noticeMethodId]?.label} />,
+    timeUnitId: (item) => <FormattedMessage id={timeUnitsByValue[item.timeUnitId]?.label} />,
+  };
+};
+
 const ReminderFeesSection = (props) => {
   const {
     policy,
@@ -38,15 +49,7 @@ const ReminderFeesSection = (props) => {
   } = props;
   const contentData = policy?.reminderFeesPolicy?.reminderSchedule ?? [];
   const templatesById = keyBy(templates, 'id');
-
-  const resultFormatter = {
-    sequence: (item) => (item.rowIndex + 1),
-    reminderFee: (item) => parseFloat(item?.reminderFee || 0).toFixed(2),
-    after: (item) => <FormattedMessage id={`ui-circulation.settings.finePolicy.reminderFees.${item.rowIndex ? 'previousReminder' : 'overdue'}`} />,
-    noticeTemplateId: (item) => templatesById[item.noticeTemplateId]?.name ?? '',
-    noticeMethodId: (item) => <FormattedMessage id={noticeMethodsByValue[item.noticeMethodId]?.label} />,
-    timeUnitId: (item) => <FormattedMessage id={timeUnitsByValue[item.timeUnitId]?.label} />,
-  };
+  const resultFormatter = generateFormatter(templatesById);
 
   return (
     <Accordion
