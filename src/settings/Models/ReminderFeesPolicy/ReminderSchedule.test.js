@@ -12,4 +12,14 @@ describe('ReminderSchedule', () => {
     expect(reminderSchedule.noticeMethodId).toEqual(reminderScheduleData.noticeMethodId);
     expect(reminderSchedule.noticeTemplateId).toEqual(reminderScheduleData.noticeTemplateId);
   });
+
+  it('handles missing input correctly', () => {
+    const reminderSchedule = new ReminderSchedule();
+
+    expect(reminderSchedule.interval).toBeUndefined();
+    expect(reminderSchedule.timeUnitId).toBeUndefined();
+    expect(reminderSchedule.reminderFee).toBeUndefined();
+    expect(reminderSchedule.noticeMethodId).toBeUndefined();
+    expect(reminderSchedule.noticeTemplateId).toBeUndefined();
+  });
 });
