@@ -27,6 +27,8 @@ const columnWidths = {
   timeUnitId: '80px',
   after: '80px'
 };
+const timeUnitsByValue = keyBy(timeUnits, 'value');
+const noticeMethodsByValue = keyBy(noticeMethods, 'value');
 
 const ReminderFeesSection = (props) => {
   const {
@@ -34,9 +36,9 @@ const ReminderFeesSection = (props) => {
     sectionOpen,
     templates,
   } = props;
+  const contentData = policy?.reminderFeesPolicy?.reminderSchedule ?? [];
   const templatesById = keyBy(templates, 'id');
-  const timeUnitsByValue = keyBy(timeUnits, 'value');
-  const noticeMethodsByValue = keyBy(noticeMethods, 'value');
+
   const resultFormatter = {
     sequence: (item) => (item.rowIndex + 1),
     reminderFee: (item) => parseFloat(item?.reminderFee || 0).toFixed(2),
@@ -45,7 +47,6 @@ const ReminderFeesSection = (props) => {
     noticeMethodId: (item) => <FormattedMessage id={noticeMethodsByValue[item.noticeMethodId]?.label} />,
     timeUnitId: (item) => <FormattedMessage id={timeUnitsByValue[item.timeUnitId]?.label} />,
   };
-  const contentData = policy?.reminderFeesPolicy?.reminderSchedule ?? [];
 
   return (
     <Accordion
