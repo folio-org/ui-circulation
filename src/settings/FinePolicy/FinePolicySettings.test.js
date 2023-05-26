@@ -180,4 +180,34 @@ describe('FinePolicySettings', () => {
       expect(parseInitialValues(testSchedules)).toEqual(expectedResult);
     });
   });
+
+  describe('parseInitialValues', () => {
+    it('should correctly parse initial values', () => {
+      const initialValues = {
+        maxOverdueFine: '100.1234',
+        maxOverdueRecallFine: '200.1234',
+        overdueFine: {
+          quantity: '300.1234'
+        },
+        overdueRecallFine: {
+          quantity: '400.1234'
+        },
+        anotherKey: 'anotherValue',
+      };
+
+      const result = parseInitialValues(initialValues);
+
+      expect(result).toEqual({
+        maxOverdueFine: '100.12',
+        maxOverdueRecallFine: '200.12',
+        overdueFine: {
+          quantity: '300.12'
+        },
+        overdueRecallFine: {
+          quantity: '400.12'
+        },
+        anotherKey: 'anotherValue',
+      });
+    });
+  });
 });
