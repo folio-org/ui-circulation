@@ -22,13 +22,10 @@ const columnMapping = {
   noticeTemplateId: <FormattedMessage id="ui-circulation.settings.finePolicy.reminderFees.noticeTemplate" />,
 };
 const columnWidths = {
-  sequence: '16%',
-  interval: '14%',
-  after: '12%',
-  timeUnitId: '16%',
-  reminderFee: '12%',
-  noticeMethodId: '15%',
-  noticeTemplateId: '15%',
+  sequence: '80px',
+  interval: '80px',
+  timeUnitId: '80px',
+  after: '80px'
 };
 
 const ReminderFeesSection = (props) => {

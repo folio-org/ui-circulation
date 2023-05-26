@@ -1,4 +1,4 @@
-export default class ReminderSchedule {
+class ReminderSchedule {
   constructor(reminderSchedule = {}) {
     this.interval = reminderSchedule.interval;
     this.timeUnitId = reminderSchedule.timeUnitId;
@@ -7,3 +7,5 @@ export default class ReminderSchedule {
     this.noticeTemplateId = reminderSchedule.noticeTemplateId;
   }
 }
+
+export default ReminderSchedule;
