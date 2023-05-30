@@ -284,6 +284,11 @@ const getTokens = (locale) => ({
         patronNoticeCategoryIds.FEE_FINE_ACTION,
       ],
     },
+    {
+      token: 'loan.additionalInfo',
+      previewValue: 'Please bring donuts for the librarians when returning this item.',
+      allowedFor: [patronNoticeCategoryIds.LOAN],
+    },
   ],
   effectiveLocation,
   feeFineCharge: [
