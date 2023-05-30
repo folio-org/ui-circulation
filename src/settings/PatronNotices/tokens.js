@@ -190,6 +190,11 @@ const getTokens = (locale) => ({
   ],
   loan: [
     {
+      token: 'loan.additionalInfo',
+      previewValue: 'Please bring donuts for the librarians when returning this item.',
+      allowedFor: [patronNoticeCategoryIds.LOAN],
+    },
+    {
       token: 'loan.dueDate',
       previewValue: generatePreviewDateValue(locale),
       allowedFor: [
@@ -278,6 +283,11 @@ const getTokens = (locale) => ({
         patronNoticeCategoryIds.AUTOMATED_FEE_FINE_ADJUSTMENT,
         patronNoticeCategoryIds.FEE_FINE_ACTION,
       ],
+    },
+    {
+      token: 'loan.additionalInfo',
+      previewValue: 'Please bring donuts for the librarians when returning this item.',
+      allowedFor: [patronNoticeCategoryIds.LOAN],
     },
   ],
   effectiveLocation,
