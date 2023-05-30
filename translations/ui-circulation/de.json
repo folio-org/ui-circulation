@@ -474,5 +474,7 @@
     "settings.cancelReasons.termWillBeDeleted": "Stornierungsgrund <b>{term}</b> wird <b>gelöscht</b>.",
     "settings.patronNotices.generalInformation": "Allgemeine Informationen",
     "settings.noticePolicy.feeFineNotices.realTime.longTerm": "Send overnight with multiple lost item fee charges by patron.",
-    "settings.noticePolicy.feeFineNotices.realTime.shortTerm": "Send throughout the day with one lost item fee charge per notice."
+    "settings.noticePolicy.feeFineNotices.realTime.shortTerm": "Send throughout the day with one lost item fee charge per notice.",
+    "permission.settings.view-circulation-rules": "Settings (Circ): View circulation rules",
+    "permission.settings.edit-circulation-rules": "Settings (Circ): Can create, edit and remove circulation rules"
 }

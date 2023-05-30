@@ -474,5 +474,7 @@
     "settings.cancelReasons.termWillBeDeleted": "取消原因<b> {term} </b>将被<b>删除。 </b>",
     "settings.patronNotices.generalInformation": "一般信息",
     "settings.noticePolicy.feeFineNotices.realTime.longTerm": "连夜寄出，并由读者收取多件遗失物品费用。",
-    "settings.noticePolicy.feeFineNotices.realTime.shortTerm": "全天发送，每份通知收取一件遗失物品费用。"
+    "settings.noticePolicy.feeFineNotices.realTime.shortTerm": "全天发送，每份通知收取一件遗失物品费用。",
+    "permission.settings.view-circulation-rules": "Settings (Circ): View circulation rules",
+    "permission.settings.edit-circulation-rules": "Settings (Circ): Can create, edit and remove circulation rules"
 }
