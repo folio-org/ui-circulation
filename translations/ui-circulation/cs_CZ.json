@@ -401,7 +401,7 @@
     "permission.settings.loan-history": "Nastavení (Cirkulace): Může zobrazit historii výpůjček",
     "permission.settings.loan-policies": "Nastavení (Cirkulace): Může vytvářet, upravovat a odstraňovat pravidla pro výpůjčky",
     "permission.settings.notice-policies": "Nastavení (Cirkulace): Může vytvářet, upravovat a odstraňovat pravidla notifikací",
-    "permission.settings.circulation-rules": "Nastavení (Cirkulace): Může vytvářet, upravovat a odstraňovat pravidla cirkulace",
+    "permission.settings.circulation-rules": "Nastavení (Cirkulace): Může vytvářet, upravovat a odstraňovat pravidla cirkulace [LEGACY]",
     "permission.settings.fixed-due-date-schedules": "Nastavení (Cirkulace): Může vytvářet, upravovat a odstraňovat rozvrhy pevných termínů vrácení",
     "permission.settings.staff-slips": "Nastavení (Cirkulace): Může vytvářet, upravovat a odstraňovat cirkulační lístky",
     "permission.settings.request-policies": "Nastavení (Cirkulace): Může vytvářet, upravovat a odstraňovat pravidla pro žádanky/rezervace",
@@ -452,7 +452,7 @@
     "settings.titleLevelRequests.confirmationNotice": "Notifikace o potvrzení",
     "settings.titleLevelRequests.cancellationNotice": "Notifikace o zrušení",
     "settings.titleLevelRequests.expirationNotice": "Notifikace o vypršení platnosti",
-    "settings.titleLevelRequests.desription": "Vyberte šablony pro následující notifikace pro čtenáře. Pokud není vybrána žádná šablona, nebude odeslána žádná notifikace.",
+    "settings.titleLevelRequests.desription": "Vybrat šablony pro následující notifikace pro čtenáře. Pokud není vybrána žádná šablona, nebude odeslána žádná notifikace.",
     "settings.titleLevelRequests.defaultTemplateValue": "Vybrat notifikaci",
     "settings.titleLevelRequests.forbiddenDisableTlrModal.title": "Nelze změnit „Povolit žádanky na úrovni titulu“",
     "settings.titleLevelRequests.forbiddenDisableTlrModal.description": "\"Povolit žádanky na úrovni titulu\" nelze změnit, protože je používáno jedním nebo více žádankami",
@@ -475,6 +475,6 @@
     "settings.patronNotices.generalInformation": "Obecné informace",
     "settings.noticePolicy.feeFineNotices.realTime.longTerm": "Odeslat přes noc s vícenásobnými poplatky za ztracené položky čtenářem.",
     "settings.noticePolicy.feeFineNotices.realTime.shortTerm": "Odeslat během dne s jedním poplatkem za ztracenou položku za oznámení.",
-    "permission.settings.view-circulation-rules": "Settings (Circ): View circulation rules",
-    "permission.settings.edit-circulation-rules": "Settings (Circ): Can create, edit and remove circulation rules"
+    "permission.settings.view-circulation-rules": "Nastavení (Cirkulace): Zobrazit pravidla cirkulace",
+    "permission.settings.edit-circulation-rules": "Nastavení (Cirkulace): Může vytvářet, upravovat a odstraňovat pravidla cirkulace"
 }
