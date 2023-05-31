@@ -190,6 +190,11 @@ const getTokens = (locale) => ({
   ],
   loan: [
     {
+      token: 'loan.additionalInfo',
+      previewValue: 'Please bring donuts for the librarians when returning this item.',
+      allowedFor: [patronNoticeCategoryIds.LOAN],
+    },
+    {
       token: 'loan.dueDate',
       previewValue: generatePreviewDateValue(locale),
       allowedFor: [
