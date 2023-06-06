@@ -27,6 +27,7 @@
 * Also support `circulation` `14.0`. Refs UICIRC-935.
 * Add request.requestDate as staff slip token in Settings. Ref CIRC-1784
 * Add new template token `loan.additionalInfo` for loan notifications. Fixes UICIRC-939.
+* Add new template tokens for user addresses under patron notice templates Fixes UICIRC-938.
 
 ## [8.0.1](https://github.com/folio-org/ui-circulation/tree/v8.0.1) (2023-03-07)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v8.0.0...v8.0.1)
