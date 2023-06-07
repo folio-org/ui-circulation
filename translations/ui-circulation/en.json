@@ -204,6 +204,7 @@
   "settings.patronNotices.addToken": "Add token",
   "settings.patronNotices.itemTokenHeader": "Item",
   "settings.patronNotices.userTokenHeader": "User",
+  "settings.patronNotices.userAddressTokenHeader": "User Address",
   "settings.patronNotices.feeFineChargeTokenHeader": "Fee/fine charge",
   "settings.patronNotices.feeFineActionTokenHeader": "Fee/fine action",
   "settings.patronNotices.requestTokenHeader": "Request",

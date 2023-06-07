@@ -151,6 +151,43 @@ const getTokens = (locale) => ({
       allowedFor: allowedForAllCategories,
     },
   ],
+  userAddress: [
+    {
+      token: 'user.deliveryAddressType',
+      previewValue: 'Office',
+      allowedFor: allowedForAllCategories,
+    },
+    {
+      token: 'user.addressLine1',
+      previewValue: '123 Campus Drive',
+      allowedFor: allowedForAllCategories,
+    },
+    {
+      token: 'user.addressLine2',
+      previewValue: '226 Classroom Building, Box 12345',
+      allowedFor: allowedForAllCategories,
+    },
+    {
+      token: 'user.city',
+      previewValue: 'Los Angeles',
+      allowedFor: allowedForAllCategories,
+    },
+    {
+      token: 'user.stateProvRegion',
+      previewValue: 'CA',
+      allowedFor: allowedForAllCategories,
+    },
+    {
+      token: 'user.zipPostalCode',
+      previewValue: '90084',
+      allowedFor: allowedForAllCategories,
+    },
+    {
+      token: 'user.country',
+      previewValue: 'USA',
+      allowedFor: allowedForAllCategories,
+    },
+  ],
   request: [
     {
       token: 'request.servicePointPickup',

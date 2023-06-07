@@ -21,6 +21,7 @@ export const TOKEN_SECTION = {
   LOAN: 'loan',
   REQUEST: 'request',
   USER: 'user',
+  USER_ADDRESS: 'userAddress',
   FEE_FINE_CHARGE: 'feeFineCharge',
   FEE_FINE_ACTION: 'feeFineAction',
 };
@@ -130,6 +131,18 @@ class TokensList extends React.Component {
                 selectedCategory={selectedCategory}
                 header={formatMessage({ id: 'ui-circulation.settings.patronNotices.userTokenHeader' })}
                 tokens={tokens[TOKEN_SECTION.USER]}
+                onSectionInit={onSectionInit}
+                onTokenSelect={onTokenSelect}
+              />
+            </Col>
+          </Row>
+          <Row>
+            <Col xs={12}>
+              <TokensSection
+                section={TOKEN_SECTION.USER_ADDRESS}
+                selectedCategory={selectedCategory}
+                header={formatMessage({ id: 'ui-circulation.settings.patronNotices.userAddressTokenHeader' })}
+                tokens={tokens[TOKEN_SECTION.USER_ADDRESS]}
                 onSectionInit={onSectionInit}
                 onTokenSelect={onTokenSelect}
               />
