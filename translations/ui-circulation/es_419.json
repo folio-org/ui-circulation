@@ -476,5 +476,6 @@
     "settings.noticePolicy.feeFineNotices.realTime.longTerm": "Enviar de un día para otro con múltiples cargos de tasas por objetos perdidos por patrón.",
     "settings.noticePolicy.feeFineNotices.realTime.shortTerm": "Envíos a lo largo del día con un cargo de tasa por objeto perdido por aviso.",
     "permission.settings.view-circulation-rules": "Ajustes (Circ): Ver normas de circulación",
-    "permission.settings.edit-circulation-rules": "Ajustes (Circ): Puede crear, editar y eliminar normas de circulación"
+    "permission.settings.edit-circulation-rules": "Ajustes (Circ): Puede crear, editar y eliminar normas de circulación",
+    "settings.patronNotices.userAddressTokenHeader": "User Address"
 }
