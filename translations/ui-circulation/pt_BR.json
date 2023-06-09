@@ -476,5 +476,6 @@
     "settings.noticePolicy.feeFineNotices.realTime.longTerm": "Envie durante a noite com as taxas de cobrança de item perdido pelo cliente.",
     "settings.noticePolicy.feeFineNotices.realTime.shortTerm": "Envie ao longo do dia com as taxas de cobrança de item perdido por aviso.",
     "permission.settings.view-circulation-rules": "Configurações (Circulação): Ver regras de circulação",
-    "permission.settings.edit-circulation-rules": "Configurações (Circulação): Pode criar, editar e remover regras de circulação"
+    "permission.settings.edit-circulation-rules": "Configurações (Circulação): Pode criar, editar e remover regras de circulação",
+    "settings.patronNotices.userAddressTokenHeader": "Endereço do usuário"
 }

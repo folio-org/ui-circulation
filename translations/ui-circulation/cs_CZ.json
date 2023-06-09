@@ -476,5 +476,6 @@
     "settings.noticePolicy.feeFineNotices.realTime.longTerm": "Odeslat přes noc s vícenásobnými poplatky za ztracené položky čtenářem.",
     "settings.noticePolicy.feeFineNotices.realTime.shortTerm": "Odeslat během dne s jedním poplatkem za ztracenou položku za oznámení.",
     "permission.settings.view-circulation-rules": "Nastavení (Cirkulace): Zobrazit pravidla cirkulace",
-    "permission.settings.edit-circulation-rules": "Nastavení (Cirkulace): Může vytvářet, upravovat a odstraňovat pravidla cirkulace"
+    "permission.settings.edit-circulation-rules": "Nastavení (Cirkulace): Může vytvářet, upravovat a odstraňovat pravidla cirkulace",
+    "settings.patronNotices.userAddressTokenHeader": "User Address"
 }
