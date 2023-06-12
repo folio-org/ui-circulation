@@ -49,7 +49,7 @@ class FinePolicySettings extends React.Component {
       records: 'templates',
       path: 'templates',
       params: {
-        query: 'category="AutomatedFeeFineAdjustment" sortby name',
+        query: 'category="AutomatedFeeFineCharge" sortby name',
         limit: MAX_UNPAGED_RESOURCE_COUNT,
       },
     },
