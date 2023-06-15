@@ -1,4 +1,8 @@
 class ReminderSchedule {
+  static defaultReminderSchedule() {
+    return {};
+  }
+
   constructor(reminderSchedule = {}) {
     this.interval = reminderSchedule.interval;
     this.timeUnitId = reminderSchedule.timeUnitId;

@@ -20,4 +20,12 @@ describe('ReminderFeesPolicy', () => {
       expect(schedule.noticeTemplateId).toEqual(inputSchedule.noticeTemplateId);
     });
   });
+
+  it('"defaultReminderFeesPolicy" should return correct data', () => {
+    const expectedPolicy = {
+      reminderSchedule: []
+    };
+
+    expect(ReminderFeesPolicy.defaultReminderFeesPolicy()).toEqual(expectedPolicy);
+  });
 });

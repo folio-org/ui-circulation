@@ -16,7 +16,7 @@ export default class FinePolicy {
       maxOverdueFine: 0,
       maxOverdueRecallFine: 0,
       overdueRecallFine: { quantity: 0, intervalId: '' },
-      reminderFeesPolicy: { reminderSchedule: [] },
+      reminderFeesPolicy: ReminderFeesPolicy.defaultReminderFeesPolicy(),
     };
   }
 

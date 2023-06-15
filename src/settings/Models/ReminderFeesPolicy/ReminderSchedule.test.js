@@ -22,4 +22,8 @@ describe('ReminderSchedule', () => {
     expect(reminderSchedule.noticeMethodId).toBeUndefined();
     expect(reminderSchedule.noticeTemplateId).toBeUndefined();
   });
+
+  it('"defaultReminderFeesPolicy" should return correct data', () => {
+    expect(ReminderSchedule.defaultReminderSchedule()).toEqual({});
+  });
 });
