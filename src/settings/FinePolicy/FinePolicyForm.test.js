@@ -29,6 +29,7 @@ import FinePolicy from '../Models/FinePolicy';
 jest.mock('./components/EditSections', () => ({
   FinesSection: jest.fn(() => null),
   OverdueAboutSection: jest.fn(() => null),
+  ReminderFeesSection: jest.fn(() => null),
 }));
 jest.mock('../components', () => ({
   CancelButton: jest.fn(() => null),
@@ -111,6 +112,9 @@ describe('FinePolicyForm', () => {
     onSave: mockedOnSave,
     onCancel: mockedOnCancel,
     form: mockedForm,
+    parentResources: {
+      templates: { records: [] }
+    },
   };
 
   beforeEach(() => {

@@ -44,6 +44,15 @@ class FinePolicySettings extends React.Component {
       },
       throwErrors: false,
     },
+    templates: {
+      type: 'okapi',
+      records: 'templates',
+      path: 'templates',
+      params: {
+        query: 'category="AutomatedFeeFineCharge" sortby name',
+        limit: MAX_UNPAGED_RESOURCE_COUNT,
+      },
+    },
   });
 
   static propTypes = {
@@ -55,6 +64,7 @@ class FinePolicySettings extends React.Component {
     resources: PropTypes.shape({
       finePolicies: PropTypes.object,
       fixedDueDateSchedules: PropTypes.object,
+      templates: PropTypes.object,
     }).isRequired,
     mutator: PropTypes.shape({
       finePolicies: PropTypes.shape({

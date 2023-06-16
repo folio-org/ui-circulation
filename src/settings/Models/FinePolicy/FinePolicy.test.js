@@ -1,6 +1,7 @@
 import FinePolicy from './FinePolicy';
 import { OverdueFine, Metadata } from '../common';
 import { FINE_POLICY_PATH } from '../../../constants/Validation/fine-policy';
+import reminderFeesPolicy from '../../../../test/jest/fixtures/reminderFeesPolicy';
 
 describe('FinePolicy', () => {
   const basicPolicy = {
@@ -30,6 +31,7 @@ describe('FinePolicy', () => {
       updatedByUserId: 'updatedByUserId',
       updatedDate: 'updatedDate',
     },
+    reminderFeesPolicy,
   };
 
   const finePolicyInstance = new FinePolicy(policy);
@@ -135,6 +137,7 @@ describe('FinePolicy', () => {
       maxOverdueFine: 0,
       maxOverdueRecallFine: 0,
       overdueRecallFine: { quantity: 0, intervalId: '' },
+      reminderFeesPolicy: { reminderSchedule: [] }
     };
 
     expect(FinePolicy.defaultFinePolicy()).toEqual(expectedPolicy);
