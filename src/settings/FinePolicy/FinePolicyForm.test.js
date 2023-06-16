@@ -113,7 +113,8 @@ describe('FinePolicyForm', () => {
     onCancel: mockedOnCancel,
     form: mockedForm,
     parentResources: {
-      templates: { records: [] }
+      noticeTemplates: { records: [] },
+      blockTemplates: { records: [] },
     },
   };
 

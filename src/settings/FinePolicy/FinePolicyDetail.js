@@ -83,12 +83,12 @@ class FinePolicyDetail extends React.Component {
         formatMessage,
       },
       parentResources: {
-        templates: { records: templates },
+        noticeTemplates: { records: noticeTemplates },
+        blockTemplates: { records: blockTemplates },
       }
     } = this.props;
 
     const { sections } = this.state;
-
     const finePolicy = new FinePolicy(policy);
 
     return (
@@ -122,8 +122,10 @@ class FinePolicyDetail extends React.Component {
             fineSectionOpen={sections.viewFineSection}
           />
           <ReminderFeesSection
-            policy={finePolicy}
-            templates={templates}
+            policy={finePolicy.reminderFeesPolicy}
+            getCheckboxValue={this.getCheckboxValue}
+            noticeTemplates={noticeTemplates}
+            blockTemplates={blockTemplates}
             sectionOpen={sections.reminderFeesSection}
           />
         </AccordionSet>

@@ -24,7 +24,8 @@ const ReminderFeesFields = props => {
     canAdd,
     canEdit,
     canDelete,
-    templates,
+    noticeTemplates,
+    blockTemplates,
   } = props;
   const sequenceLabel = formatMessage({ id: 'ui-circulation.settings.finePolicy.reminderFees.sequence' });
   const intervalLabel = formatMessage({ id: 'ui-circulation.settings.finePolicy.reminderFees.interval' });
@@ -33,8 +34,14 @@ const ReminderFeesFields = props => {
   const feeLabel = formatMessage({ id: 'ui-circulation.settings.finePolicy.reminderFees.fee' });
   const noticeMethodLabel = formatMessage({ id: 'ui-circulation.settings.finePolicy.reminderFees.noticeMethod' });
   const noticeTemplateLabel = formatMessage({ id: 'ui-circulation.settings.finePolicy.reminderFees.noticeTemplate' });
+  const blockTemplateLabel = formatMessage({ id: 'ui-circulation.settings.finePolicy.reminderFees.blockTemplate' });
 
-  const templateOptions = templates.map(it => ({
+  const noticeTemplateOptions = noticeTemplates.map(it => ({
+    label: it.name,
+    value: it.id,
+  }));
+
+  const blockTemplateOptions = blockTemplates.map(it => ({
     label: it.name,
     value: it.id,
   }));
@@ -61,7 +68,7 @@ const ReminderFeesFields = props => {
           {intervalLabel}
         </Label>
       </Col>
-      <Col sm={2}>
+      <Col sm={1}>
         <Label tagName="legend" required>
           {frequencyLabel}
         </Label>
@@ -71,7 +78,7 @@ const ReminderFeesFields = props => {
           {afterLabel}
         </Label>
       </Col>
-      <Col sm={2}>
+      <Col sm={1}>
         <Label tagName="legend" required>
           {feeLabel}
         </Label>
@@ -84,6 +91,11 @@ const ReminderFeesFields = props => {
       <Col sm={2}>
         <Label tagName="legend" required>
           {noticeTemplateLabel}
+        </Label>
+      </Col>
+      <Col sm={2}>
+        <Label tagName="legend" required>
+          {blockTemplateLabel}
         </Label>
       </Col>
     </Row>
@@ -103,7 +115,7 @@ const ReminderFeesFields = props => {
           disabled={!canEdit}
         />
       </Col>
-      <Col sm={2}>
+      <Col sm={1}>
         <Field
           aria-label={frequencyLabel}
           name={`${field}.timeUnitId`}
@@ -115,7 +127,7 @@ const ReminderFeesFields = props => {
       <Col sm={2}>
         <FormattedMessage id={`ui-circulation.settings.finePolicy.reminderFees.${index ? 'previousReminder' : 'overdue'}`} />
       </Col>
-      <Col sm={2}>
+      <Col sm={1}>
         <Field
           aria-label={feeLabel}
           name={`${field}.reminderFee`}
@@ -138,7 +150,16 @@ const ReminderFeesFields = props => {
           aria-label={noticeTemplateLabel}
           name={`${field}.noticeTemplateId`}
           component={Select}
-          dataOptions={[{ label: formatMessage({ id: 'ui-circulation.settings.finePolicy.reminderFees.selectNoticeTemplate' }), value: '' }, ...templateOptions]}
+          dataOptions={[{ label: formatMessage({ id: 'ui-circulation.settings.finePolicy.reminderFees.selectNoticeTemplate' }), value: '' }, ...noticeTemplateOptions]}
+          disabled={!canEdit}
+        />
+      </Col>
+      <Col sm={2}>
+        <Field
+          aria-label={blockTemplateLabel}
+          name={`${field}.blockTemplateId`}
+          component={Select}
+          dataOptions={[{ label: formatMessage({ id: 'ui-circulation.settings.finePolicy.reminderFees.selectBlockTemplate' }), value: '' }, ...blockTemplateOptions]}
           disabled={!canEdit}
         />
       </Col>
@@ -169,14 +190,16 @@ ReminderFeesFields.propTypes = {
   canAdd: PropTypes.bool,
   canEdit: PropTypes.bool,
   canDelete: PropTypes.bool,
-  templates: PropTypes.arrayOf(PropTypes.object),
+  noticeTemplates: PropTypes.arrayOf(PropTypes.object),
+  blockTemplates: PropTypes.arrayOf(PropTypes.object),
 };
 
 ReminderFeesFields.defaultProps = {
   canAdd: true,
   canEdit: true,
   canDelete: true,
-  templates: [],
+  noticeTemplates: [],
+  blockTemplates: [],
 };
 
 export default ReminderFeesFields;

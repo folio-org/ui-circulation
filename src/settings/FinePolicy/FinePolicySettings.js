@@ -44,12 +44,20 @@ class FinePolicySettings extends React.Component {
       },
       throwErrors: false,
     },
-    templates: {
+    noticeTemplates: {
       type: 'okapi',
       records: 'templates',
       path: 'templates',
       params: {
         query: 'category="AutomatedFeeFineCharge" sortby name',
+        limit: MAX_UNPAGED_RESOURCE_COUNT,
+      },
+    },
+    blockTemplates: {
+      type: 'okapi',
+      records: 'manualBlockTemplates',
+      path:'manual-block-templates',
+      params: {
         limit: MAX_UNPAGED_RESOURCE_COUNT,
       },
     },
