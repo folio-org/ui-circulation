@@ -77,7 +77,8 @@ describe('FinePolicyDetail', () => {
   const testDefaultProps = {
     stripes: testStripes,
     parentResources: {
-      templates: { records: [] },
+      noticeTemplates: { records: [] },
+      blockTemplates: { records: [] },
     },
   };
   const accordionDefaultStatus = {

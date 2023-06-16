@@ -4,6 +4,8 @@ import '../../../../../../test/jest/__mock__';
 
 import ReminderFeesSection, { generateFormatter } from './ReminderFeesSection';
 
+const getCheckboxValue = jest.fn(() => null);
+
 describe('ReminderFeesSection', () => {
   it('renders reminder fees section', () => {
     const policy = {
@@ -12,7 +14,15 @@ describe('ReminderFeesSection', () => {
       },
     };
 
-    const { getByTestId } = render(<ReminderFeesSection policy={policy} sectionOpen templates={[]} />);
+    const { getByTestId } = render(
+      <ReminderFeesSection
+        getCheckboxValue={getCheckboxValue}
+        policy={policy}
+        sectionOpen
+        blockTemplates={[]}
+        noticeTemplates={[]}
+      />
+    );
 
     expect(getByTestId('reminderFeesTestId')).toBeInTheDocument();
   });
