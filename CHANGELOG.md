@@ -29,6 +29,7 @@
 * Add "Reminder fees" sub-section to Overdue Fine Policy. Refs UICIRC-931.
 * Add new template token `loan.additionalInfo` for loan notifications. Fixes UICIRC-939.
 * Add new template tokens for user addresses under patron notice templates Fixes UICIRC-938.
+* Add "Reminder fees" sub-section to Overdue Fine Policy. Refs UICIRC-931.
 
 ## [8.0.1](https://github.com/folio-org/ui-circulation/tree/v8.0.1) (2023-03-07)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v8.0.0...v8.0.1)
