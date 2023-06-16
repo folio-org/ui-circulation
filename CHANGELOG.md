@@ -26,7 +26,6 @@
 * Leverage cookie-based authentication in all API requests. Refs UICIRC-881.
 * Also support `circulation` `14.0`. Refs UICIRC-935.
 * Add request.requestDate as staff slip token in Settings. Ref CIRC-1784
-* Add "Reminder fees" sub-section to Overdue Fine Policy. Refs UICIRC-931.
 * Add new template token `loan.additionalInfo` for loan notifications. Fixes UICIRC-939.
 * Add new template tokens for user addresses under patron notice templates Fixes UICIRC-938.
 * Add "Reminder fees" sub-section to Overdue Fine Policy. Refs UICIRC-931.
