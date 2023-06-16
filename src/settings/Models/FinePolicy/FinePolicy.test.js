@@ -137,7 +137,12 @@ describe('FinePolicy', () => {
       maxOverdueFine: 0,
       maxOverdueRecallFine: 0,
       overdueRecallFine: { quantity: 0, intervalId: '' },
-      reminderFeesPolicy: { reminderSchedule: [] }
+      reminderFeesPolicy: {
+        countClosed: true,
+        ignoreGracePeriodRecall: true,
+        clearPatronBlockWhenPaid: true,
+        reminderSchedule: [],
+      },
     };
 
     expect(FinePolicy.defaultFinePolicy()).toEqual(expectedPolicy);

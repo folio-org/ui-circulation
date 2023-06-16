@@ -423,6 +423,18 @@ export const noticeMethods = [
   }
 ];
 
+export const yesNoOptions = [
+  {
+    value: true,
+    label: 'ui-circulation.settings.common.yes',
+  },
+  {
+    value: false,
+    label: 'ui-circulation.settings.common.no',
+  }
+];
+
+
 export const HINT_ELEMENT_CLASS = 'CodeMirror-hint';
 export const ACTIVE_HINT_ELEMENT_CLASS = `${HINT_ELEMENT_CLASS}-active`;
 export const HINT_SECTION_CONTAINER = 'CodeMirror-hints-list';

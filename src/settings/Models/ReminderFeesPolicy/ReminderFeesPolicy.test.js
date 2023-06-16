@@ -23,6 +23,9 @@ describe('ReminderFeesPolicy', () => {
 
   it('"defaultReminderFeesPolicy" should return correct data', () => {
     const expectedPolicy = {
+      countClosed: true,
+      ignoreGracePeriodRecall: true,
+      clearPatronBlockWhenPaid: true,
       reminderSchedule: []
     };
 
