@@ -12,6 +12,9 @@ class Metadata extends React.Component {
   static propTypes = {
     connect: PropTypes.func.isRequired,
     metadata: PropTypes.object,
+    useAccordion: PropTypes.bool,
+    noBackGround: PropTypes.bool,
+    inlineLayout: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -25,7 +28,7 @@ class Metadata extends React.Component {
   }
 
   render() {
-    const { metadata } = this.props;
+    const { metadata, useAccordion, noBackGround, inlineLayout } = this.props;
 
     if (isUndefined(metadata) || isUndefined(metadata.createdDate)) {
       return null;
@@ -34,7 +37,12 @@ class Metadata extends React.Component {
     return (
       <Row data-testid="metadataTestId">
         <Col xs={12}>
-          <this.cViewMetaData metadata={metadata} />
+          <this.cViewMetaData
+            metadata={metadata}
+            useAccordion={useAccordion}
+            noBackGround={noBackGround}
+            inlineLayout={inlineLayout}
+          />
         </Col>
       </Row>
     );

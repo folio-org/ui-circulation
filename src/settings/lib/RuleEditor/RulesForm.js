@@ -5,6 +5,8 @@ import { injectIntl } from 'react-intl';
 
 import {
   IfPermission,
+  stripesShape,
+  stripesConnect,
 } from '@folio/stripes/core';
 import {
   Row,
@@ -13,6 +15,8 @@ import {
   TextField
 } from '@folio/stripes/components';
 import stripesFinalForm from '@folio/stripes/final-form';
+
+import { Metadata } from '../../components';
 
 import RulesField from './RulesField';
 
@@ -26,6 +30,7 @@ class RulesForm extends React.Component {
     handleSubmit: PropTypes.func.isRequired,
     intl: PropTypes.object.isRequired,
     editorProps: PropTypes.object,
+    stripes: stripesShape.isRequired,
   };
 
   constructor(props) {
@@ -47,9 +52,16 @@ class RulesForm extends React.Component {
       intl: {
         formatMessage,
       },
+      stripes: {
+        connect,
+      },
     } = this.props;
 
     const { ruleFilter } = this.state;
+    const metadata = {
+      createdDate: '2023-06-14T13:45:51.365+00:00',
+      updatedDate: '2023-06-14T13:45:51.365+00:00'
+    };
 
     return (
       <form
@@ -59,7 +71,16 @@ class RulesForm extends React.Component {
         className={styles.circulationRulesForm}
         onSubmit={handleSubmit}
       >
-        <Row end="xs">
+        <Row>
+          <Col xs={6}>
+            <Metadata
+              connect={connect}
+              metadata={metadata}
+              useAccordion={false}
+              noBackGround
+              inlineLayout={false}
+            />
+          </Col>
           <Col xs={3}>
             <TextField
               data-test-rules-filter
@@ -98,4 +119,4 @@ class RulesForm extends React.Component {
   }
 }
 
-export default stripesFinalForm({ navigationCheck: true })(injectIntl(RulesForm));
+export default stripesFinalForm({ navigationCheck: true })(stripesConnect(injectIntl(RulesForm)));
