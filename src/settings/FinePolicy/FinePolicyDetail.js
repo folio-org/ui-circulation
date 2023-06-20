@@ -20,6 +20,7 @@ import {
 import {
   FinesSection,
   OverdueAboutSection,
+  ReminderFeesSection,
 } from './components/ViewSections';
 
 import { Metadata } from '../components';
@@ -30,6 +31,7 @@ class FinePolicyDetail extends React.Component {
     initialValues: PropTypes.object,
     stripes: stripesShape.isRequired,
     intl: PropTypes.object.isRequired,
+    parentResources: PropTypes.object.isRequired,
   };
 
   static defaultProps = {
@@ -43,6 +45,7 @@ class FinePolicyDetail extends React.Component {
       sections: {
         generalFeePolicy: true,
         viewFineSection: true,
+        reminderFeesSection: true,
       },
     };
   }
@@ -79,6 +82,9 @@ class FinePolicyDetail extends React.Component {
       intl: {
         formatMessage,
       },
+      parentResources: {
+        templates: { records: templates },
+      }
     } = this.props;
 
     const { sections } = this.state;
@@ -114,6 +120,11 @@ class FinePolicyDetail extends React.Component {
             policy={finePolicy}
             getCheckboxValue={this.getCheckboxValue}
             fineSectionOpen={sections.viewFineSection}
+          />
+          <ReminderFeesSection
+            policy={finePolicy}
+            templates={templates}
+            sectionOpen={sections.reminderFeesSection}
           />
         </AccordionSet>
       </div>

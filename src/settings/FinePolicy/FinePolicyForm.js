@@ -19,6 +19,7 @@ import FinePolicy from '../Models/FinePolicy';
 import {
   FinesSection,
   OverdueAboutSection,
+  ReminderFeesSection,
 } from './components/EditSections';
 
 import {
@@ -42,6 +43,7 @@ class FinePolicyForm extends React.Component {
     onCancel: PropTypes.func.isRequired,
     form: PropTypes.object.isRequired,
     intl: PropTypes.object.isRequired,
+    parentResources: PropTypes.object.isRequired,
   };
 
   static defaultProps = {
@@ -55,6 +57,7 @@ class FinePolicyForm extends React.Component {
       sections: {
         overdueGeneralSection: true,
         editFineSection: true,
+        editReminderFeesSection: true,
       },
     };
   }
@@ -84,6 +87,9 @@ class FinePolicyForm extends React.Component {
       },
       intl: {
         formatMessage,
+      },
+      parentResources: {
+        templates: { records: templates }
       },
     } = this.props;
 
@@ -150,6 +156,13 @@ class FinePolicyForm extends React.Component {
                   initialValues={initialValues}
                   policy
                   fineSectionOpen={sections.editFineSection}
+                  change={change}
+                />
+                <ReminderFeesSection
+                  initialValues={initialValues}
+                  policy
+                  templates={templates}
+                  sectionOpen={sections.editReminderFeesSection}
                   change={change}
                 />
               </AccordionSet>

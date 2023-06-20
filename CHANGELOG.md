@@ -28,6 +28,7 @@
 * Add request.requestDate as staff slip token in Settings. Ref CIRC-1784
 * Add new template token `loan.additionalInfo` for loan notifications. Fixes UICIRC-939.
 * Add new template tokens for user addresses under patron notice templates Fixes UICIRC-938.
+* Add "Reminder fees" sub-section to Overdue Fine Policy. Refs UICIRC-931.
 * Update record metadata object when saving circulation rules. Refs UICIRC-858.
 
 ## [8.0.1](https://github.com/folio-org/ui-circulation/tree/v8.0.1) (2023-03-07)

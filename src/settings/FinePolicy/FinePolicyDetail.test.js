@@ -19,6 +19,7 @@ import buildStripes from '../../../test/jest/__mock__/stripes.mock';
 import {
   FinesSection,
   OverdueAboutSection,
+  ReminderFeesSection,
 } from './components/ViewSections';
 import { Metadata } from '../components';
 import FinePolicyDetail from './FinePolicyDetail';
@@ -36,6 +37,7 @@ const mockTestIds = {
 jest.mock('./components/ViewSections', () => ({
   FinesSection: jest.fn(() => null),
   OverdueAboutSection: jest.fn(() => null),
+  ReminderFeesSection: jest.fn(() => null),
 }));
 jest.mock('../components', () => ({
   Metadata: jest.fn(() => null),
@@ -49,6 +51,7 @@ ExpandAllButton.mockImplementation(({ onToggle }) => (
     onClick={() => onToggle({
       generalFeePolicy: false,
       viewFineSection: false,
+      reminderFeesSection: false,
     })}
   />
 ));
@@ -73,10 +76,14 @@ describe('FinePolicyDetail', () => {
   };
   const testDefaultProps = {
     stripes: testStripes,
+    parentResources: {
+      templates: { records: [] },
+    },
   };
   const accordionDefaultStatus = {
     generalFeePolicy: true,
     viewFineSection: true,
+    reminderFeesSection: true,
   };
 
   const getById = (id) => within(screen.getByTestId(id));
@@ -88,6 +95,7 @@ describe('FinePolicyDetail', () => {
     Metadata.mockClear();
     FinesSection.mockClear();
     OverdueAboutSection.mockClear();
+    ReminderFeesSection.mockClear();
   });
 
   describe('with default props', () => {
@@ -168,6 +176,7 @@ describe('FinePolicyDetail', () => {
         accordionStatus: {
           generalFeePolicy: false,
           viewFineSection: false,
+          reminderFeesSection: false,
         },
       }), {});
 
@@ -175,6 +184,7 @@ describe('FinePolicyDetail', () => {
         accordionStatus: {
           generalFeePolicy: false,
           viewFineSection: false,
+          reminderFeesSection: false,
         },
       }), {});
 

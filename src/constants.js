@@ -371,6 +371,16 @@ export const closingTypesMap = {
   NEVER: 'never',
 };
 
+export const timeUnitsMap = {
+  DAY: 'day',
+  WEEK: 'week',
+};
+
+export const noticeMethodMap = {
+  EMAIL: 'email',
+  MAIL: 'mail',
+};
+
 export const closingTypes = [
   {
     value: closingTypesMap.IMMEDIATELY,
@@ -390,6 +400,28 @@ export const closedLoansRules = {
   DEFAULT: 'loan',
   WITH_FEES_FINES: 'feeFine',
 };
+
+export const timeUnits = [
+  {
+    value: timeUnitsMap.DAY,
+    label: 'ui-circulation.settings.finePolicy.reminderFees.timeUnit.days',
+  },
+  {
+    value: timeUnitsMap.WEEK,
+    label: 'ui-circulation.settings.finePolicy.reminderFees.timeUnit.weeks',
+  },
+];
+
+export const noticeMethods = [
+  {
+    value: noticeMethodMap.EMAIL,
+    label: 'ui-circulation.settings.finePolicy.reminderFees.noticeMethods.email',
+  },
+  {
+    value: noticeMethodMap.MAIL,
+    label: 'ui-circulation.settings.finePolicy.reminderFees.noticeMethods.mail',
+  }
+];
 
 export const HINT_ELEMENT_CLASS = 'CodeMirror-hint';
 export const ACTIVE_HINT_ELEMENT_CLASS = `${HINT_ELEMENT_CLASS}-active`;
