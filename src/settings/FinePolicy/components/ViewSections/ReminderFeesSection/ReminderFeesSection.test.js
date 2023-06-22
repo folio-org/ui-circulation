@@ -28,20 +28,26 @@ describe('ReminderFeesSection', () => {
   });
 
   describe('generateFormatter function', () => {
-    const mockTemplatesById = {
+    const mockNoticeTemplatesById = {
       'template1': { name: 'Template 1' },
       'template2': { name: 'Template 2' },
+    };
+
+    const mockblockTemplateId = {
+      'template3': { name: 'Template 3' },
+      'template4': { name: 'Template 4' },
     };
 
     const mockItem = {
       rowIndex: 1,
       reminderFee: '10',
       noticeTemplateId: 'template1',
+      blockTemplateId: 'template3',
       noticeMethodId: 'email',
       timeUnitId: 'day',
     };
 
-    const formatter = generateFormatter(mockTemplatesById);
+    const formatter = generateFormatter(mockNoticeTemplatesById, mockblockTemplateId);
 
     it('should format sequence correctly', () => {
       expect(formatter.sequence(mockItem)).toEqual(2);
@@ -63,6 +69,10 @@ describe('ReminderFeesSection', () => {
 
     it('should format noticeTemplateId correctly', () => {
       expect(formatter.noticeTemplateId(mockItem)).toEqual('Template 1');
+    });
+
+    it('should format blockTemplateId correctly', () => {
+      expect(formatter.blockTemplateId(mockItem)).toEqual('Template 3');
     });
 
     it('should format noticeMethodId correctly', () => {
