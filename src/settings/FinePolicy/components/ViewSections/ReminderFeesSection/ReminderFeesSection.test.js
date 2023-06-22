@@ -57,6 +57,10 @@ describe('ReminderFeesSection', () => {
       expect(formatter.reminderFee(mockItem)).toEqual('10.00');
     });
 
+    it('should format reminderFee correctly when not present', () => {
+      expect(formatter.reminderFee({ ...mockItem, reminderFee: null })).toEqual('0.00');
+    });
+
     it('should format after with previous reminder message', () => {
       const { container } = render(<>{formatter.after(mockItem)}</>);
       expect(container).toHaveTextContent('ui-circulation.settings.finePolicy.reminderFees.previousReminder');
@@ -71,8 +75,16 @@ describe('ReminderFeesSection', () => {
       expect(formatter.noticeTemplateId(mockItem)).toEqual('Template 1');
     });
 
+    it('should format noticeTemplateId correctly when template is not present', () => {
+      expect(formatter.noticeTemplateId({ ...mockItem, noticeTemplateId: null })).toEqual('');
+    });
+
     it('should format blockTemplateId correctly', () => {
       expect(formatter.blockTemplateId(mockItem)).toEqual('Template 3');
+    });
+
+    it('should format blockTemplateId correctly when template is not present', () => {
+      expect(formatter.blockTemplateId({ ...mockItem, blockTemplateId: null })).toEqual('');
     });
 
     it('should format noticeMethodId correctly', () => {
