@@ -31,6 +31,14 @@ class RulesForm extends React.Component {
     intl: PropTypes.object.isRequired,
     editorProps: PropTypes.object,
     stripes: stripesShape.isRequired,
+    metadata: PropTypes.shape({
+      createdByUserId: PropTypes.string.isRequired,
+      createdByUsername: PropTypes.string.isRequired,
+      createdDate: PropTypes.string.isRequired,
+      updatedByUserId: PropTypes.string,
+      updatedByUsername: PropTypes.string,
+      updatedDate: PropTypes.string,
+    }).isRequired,
   };
 
   constructor(props) {
@@ -55,13 +63,10 @@ class RulesForm extends React.Component {
       stripes: {
         connect,
       },
+      metadata,
     } = this.props;
 
     const { ruleFilter } = this.state;
-    const metadata = {
-      createdDate: '2023-06-14T13:45:51.365+00:00',
-      updatedDate: '2023-06-14T13:45:51.365+00:00'
-    };
 
     return (
       <form
