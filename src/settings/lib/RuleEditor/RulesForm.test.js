@@ -24,7 +24,7 @@ jest.mock('../../components', () => ({
   Metadata: jest.fn(() => null),
 }));
 
-describe.only('RulesForm', () => {
+describe('RulesForm', () => {
   const labelIds = {
     filterRules: 'ui-circulation.settings.checkout.filterRules',
     checkoutSave: 'ui-circulation.settings.checkout.save',
