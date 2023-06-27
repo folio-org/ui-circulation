@@ -13,11 +13,16 @@ import {
 } from '@folio/stripes/components';
 
 import { Field } from 'react-final-form';
+import buildStripes from '../../../../test/jest/__mock__/stripes.mock';
 
+import { Metadata } from '../../components';
 import RulesForm from './RulesForm';
 import RulesField from './RulesField';
 
 jest.mock('./RulesField', () => jest.fn(() => null));
+jest.mock('../../components', () => ({
+  Metadata: jest.fn(() => null),
+}));
 
 describe('RulesForm', () => {
   const labelIds = {
@@ -28,6 +33,7 @@ describe('RulesForm', () => {
     formLoanRules: 'formLoanRules',
     ruleFilter: 'ruleFilter',
   };
+  const testStripes = buildStripes();
   const testEditorProps = {
     propA: 'testValue',
   };
@@ -37,6 +43,8 @@ describe('RulesForm', () => {
     onSubmit: jest.fn(),
     handleSubmit: jest.fn(),
     editorProps: testEditorProps,
+    metadata: 'testMetadata',
+    stripes: testStripes,
   };
 
   afterEach(() => {
@@ -44,6 +52,7 @@ describe('RulesForm', () => {
     TextField.mockClear();
     Field.mockClear();
     testDefaultProps.handleSubmit.mockClear();
+    Metadata.mockClear();
   });
 
   describe('with default props', () => {
@@ -148,6 +157,15 @@ describe('RulesForm', () => {
 
       expect(Field).toHaveBeenCalledWith(expect.objectContaining({
         filter: newRuleFilterValue,
+      }), {});
+    });
+
+    it('should call Metadata component', () => {
+      expect(Metadata).toHaveBeenCalledWith(expect.objectContaining({
+        metadata: testDefaultProps.metadata,
+        inlineLayout: false,
+        noBackGround: true,
+        useAccordion: false,
       }), {});
     });
   });

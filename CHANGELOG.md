@@ -30,6 +30,7 @@
 * Add new template tokens for user addresses under patron notice templates Fixes UICIRC-938.
 * Add "Reminder fees" sub-section to Overdue Fine Policy. Refs UICIRC-931.
 * UI tests replacement with RTL/Jest for rules-show-hint (part 2). Refs UICIRC-845.
+* Update record metadata object when saving circulation rules. Refs UICIRC-858.
 
 ## [8.0.1](https://github.com/folio-org/ui-circulation/tree/v8.0.1) (2023-03-07)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v8.0.0...v8.0.1)
