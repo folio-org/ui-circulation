@@ -7,11 +7,12 @@ import {
   MultiColumnList,
   Col,
   Row,
+  KeyValue,
 } from '@folio/stripes/components';
 
 import { timeUnits, noticeMethods } from '../../../../../constants';
 
-const visibleColumns = ['sequence', 'interval', 'timeUnitId', 'after', 'reminderFee', 'noticeMethodId', 'noticeTemplateId'];
+const visibleColumns = ['sequence', 'interval', 'timeUnitId', 'after', 'reminderFee', 'noticeMethodId', 'noticeTemplateId', 'blockTemplateId'];
 const columnMapping = {
   sequence: <FormattedMessage id="ui-circulation.settings.finePolicy.reminderFees.sequence" />,
   interval: <FormattedMessage id="ui-circulation.settings.finePolicy.reminderFees.interval" />,
@@ -20,6 +21,7 @@ const columnMapping = {
   reminderFee: <FormattedMessage id="ui-circulation.settings.finePolicy.reminderFees.fee" />,
   noticeMethodId: <FormattedMessage id="ui-circulation.settings.finePolicy.reminderFees.noticeMethod" />,
   noticeTemplateId: <FormattedMessage id="ui-circulation.settings.finePolicy.reminderFees.noticeTemplate" />,
+  blockTemplateId: <FormattedMessage id="ui-circulation.settings.finePolicy.reminderFees.blockTemplate" />,
 };
 const columnWidths = {
   sequence: '80px',
@@ -30,12 +32,13 @@ const columnWidths = {
 const timeUnitsByValue = keyBy(timeUnits, 'value');
 const noticeMethodsByValue = keyBy(noticeMethods, 'value');
 
-export const generateFormatter = (templatesById) => {
+export const generateFormatter = (noticeTemplatesById, blockTemplatesById) => {
   return {
     sequence: (item) => (item.rowIndex + 1),
     reminderFee: (item) => parseFloat(item?.reminderFee || 0).toFixed(2),
     after: (item) => <FormattedMessage id={`ui-circulation.settings.finePolicy.reminderFees.${item.rowIndex ? 'previousReminder' : 'overdue'}`} />,
-    noticeTemplateId: (item) => templatesById[item.noticeTemplateId]?.name ?? '',
+    noticeTemplateId: (item) => noticeTemplatesById[item.noticeTemplateId]?.name ?? '',
+    blockTemplateId: (item) => blockTemplatesById[item.blockTemplateId]?.name ?? '',
     noticeMethodId: (item) => <FormattedMessage id={noticeMethodsByValue[item.noticeMethodId]?.label} />,
     timeUnitId: (item) => <FormattedMessage id={timeUnitsByValue[item.timeUnitId]?.label} />,
   };
@@ -45,11 +48,19 @@ const ReminderFeesSection = (props) => {
   const {
     policy,
     sectionOpen,
-    templates,
+    noticeTemplates,
+    blockTemplates,
+    getCheckboxValue,
   } = props;
-  const contentData = policy?.reminderFeesPolicy?.reminderSchedule ?? [];
-  const templatesById = keyBy(templates, 'id');
-  const resultFormatter = generateFormatter(templatesById);
+  const {
+    countClosed,
+    ignoreGracePeriodRecall,
+    clearPatronBlockWhenPaid,
+    reminderSchedule,
+  } = policy;
+  const noticeTemplatesById = keyBy(noticeTemplates, 'id');
+  const blockTemplatesById = keyBy(blockTemplates, 'id');
+  const resultFormatter = generateFormatter(noticeTemplatesById, blockTemplatesById);
 
   return (
     <Accordion
@@ -60,8 +71,32 @@ const ReminderFeesSection = (props) => {
     >
       <Row>
         <Col xs={12}>
+          <KeyValue
+            label={<FormattedMessage id="ui-circulation.settings.finePolicy.reminderFees.countClosed" />}
+            value={getCheckboxValue(countClosed)}
+          />
+        </Col>
+      </Row>
+      <Row>
+        <Col xs={12}>
+          <KeyValue
+            label={<FormattedMessage id="ui-circulation.settings.finePolicy.reminderFees.ignoreGracePeriodRecall" />}
+            value={getCheckboxValue(ignoreGracePeriodRecall)}
+          />
+        </Col>
+      </Row>
+      <Row>
+        <Col xs={12}>
+          <KeyValue
+            label={<FormattedMessage id="ui-circulation.settings.finePolicy.reminderFees.clearPatronBlockWhenPaid" />}
+            value={getCheckboxValue(clearPatronBlockWhenPaid)}
+          />
+        </Col>
+      </Row>
+      <Row>
+        <Col xs={12}>
           <MultiColumnList
-            contentData={contentData}
+            contentData={reminderSchedule}
             formatter={resultFormatter}
             visibleColumns={visibleColumns}
             columnMapping={columnMapping}
@@ -76,7 +111,9 @@ const ReminderFeesSection = (props) => {
 ReminderFeesSection.propTypes = {
   policy: PropTypes.object.isRequired,
   sectionOpen: PropTypes.bool.isRequired,
-  templates: PropTypes.arrayOf(PropTypes.object),
+  noticeTemplates: PropTypes.arrayOf(PropTypes.object),
+  blockTemplates: PropTypes.arrayOf(PropTypes.object),
+  getCheckboxValue: PropTypes.func.isRequired,
 };
 
 export default ReminderFeesSection;

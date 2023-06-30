@@ -89,7 +89,8 @@ class FinePolicyForm extends React.Component {
         formatMessage,
       },
       parentResources: {
-        templates: { records: templates }
+        noticeTemplates: { records: noticeTemplates },
+        blockTemplates: { records: blockTemplates },
       },
     } = this.props;
 
@@ -161,7 +162,8 @@ class FinePolicyForm extends React.Component {
                 <ReminderFeesSection
                   initialValues={initialValues}
                   policy
-                  templates={templates}
+                  noticeTemplates={noticeTemplates}
+                  blockTemplates={blockTemplates}
                   sectionOpen={sections.editReminderFeesSection}
                   change={change}
                 />

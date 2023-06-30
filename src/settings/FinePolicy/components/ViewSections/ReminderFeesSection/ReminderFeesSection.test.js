@@ -4,6 +4,8 @@ import '../../../../../../test/jest/__mock__';
 
 import ReminderFeesSection, { generateFormatter } from './ReminderFeesSection';
 
+const getCheckboxValue = jest.fn(() => null);
+
 describe('ReminderFeesSection', () => {
   it('renders reminder fees section', () => {
     const policy = {
@@ -12,26 +14,40 @@ describe('ReminderFeesSection', () => {
       },
     };
 
-    const { getByTestId } = render(<ReminderFeesSection policy={policy} sectionOpen templates={[]} />);
+    const { getByTestId } = render(
+      <ReminderFeesSection
+        getCheckboxValue={getCheckboxValue}
+        policy={policy}
+        sectionOpen
+        blockTemplates={[]}
+        noticeTemplates={[]}
+      />
+    );
 
     expect(getByTestId('reminderFeesTestId')).toBeInTheDocument();
   });
 
   describe('generateFormatter function', () => {
-    const mockTemplatesById = {
+    const mockNoticeTemplatesById = {
       'template1': { name: 'Template 1' },
       'template2': { name: 'Template 2' },
+    };
+
+    const mockblockTemplateId = {
+      'template3': { name: 'Template 3' },
+      'template4': { name: 'Template 4' },
     };
 
     const mockItem = {
       rowIndex: 1,
       reminderFee: '10',
       noticeTemplateId: 'template1',
+      blockTemplateId: 'template3',
       noticeMethodId: 'email',
       timeUnitId: 'day',
     };
 
-    const formatter = generateFormatter(mockTemplatesById);
+    const formatter = generateFormatter(mockNoticeTemplatesById, mockblockTemplateId);
 
     it('should format sequence correctly', () => {
       expect(formatter.sequence(mockItem)).toEqual(2);
@@ -39,6 +55,10 @@ describe('ReminderFeesSection', () => {
 
     it('should format reminderFee correctly', () => {
       expect(formatter.reminderFee(mockItem)).toEqual('10.00');
+    });
+
+    it('should format reminderFee correctly when not present', () => {
+      expect(formatter.reminderFee({ ...mockItem, reminderFee: null })).toEqual('0.00');
     });
 
     it('should format after with previous reminder message', () => {
@@ -53,6 +73,18 @@ describe('ReminderFeesSection', () => {
 
     it('should format noticeTemplateId correctly', () => {
       expect(formatter.noticeTemplateId(mockItem)).toEqual('Template 1');
+    });
+
+    it('should format noticeTemplateId correctly when template is not present', () => {
+      expect(formatter.noticeTemplateId({ ...mockItem, noticeTemplateId: null })).toEqual('');
+    });
+
+    it('should format blockTemplateId correctly', () => {
+      expect(formatter.blockTemplateId(mockItem)).toEqual('Template 3');
+    });
+
+    it('should format blockTemplateId correctly when template is not present', () => {
+      expect(formatter.blockTemplateId({ ...mockItem, blockTemplateId: null })).toEqual('');
     });
 
     it('should format noticeMethodId correctly', () => {

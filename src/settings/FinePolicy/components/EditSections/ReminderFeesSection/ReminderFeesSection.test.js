@@ -12,7 +12,14 @@ describe('ReminderFeesSection', () => {
       },
     };
 
-    const { getByTestId } = render(<ReminderFeesSection policy={policy} sectionOpen templates={[]} />);
+    const { getByTestId } = render(
+      <ReminderFeesSection
+        policy={policy}
+        sectionOpen
+        noticeTemplates={[]}
+        blockTemplates={[]}
+      />
+    );
 
     expect(getByTestId('editReminderFeesTestId')).toBeInTheDocument();
   });

@@ -1,4 +1,7 @@
 const reminderFeesPolicy = {
+  countClosed: true,
+  ignoreGracePeriodRecall: true,
+  clearPatronBlockWhenPaid: true,
   reminderSchedule: [
     {
       interval: 2,

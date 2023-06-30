@@ -2,7 +2,12 @@ import ReminderSchedule from './ReminderSchedule';
 
 export default class ReminderFeesPolicy {
   static defaultReminderFeesPolicy() {
-    return { reminderSchedule: [] };
+    return {
+      countClosed: true,
+      ignoreGracePeriodRecall: true,
+      clearPatronBlockWhenPaid: true,
+      reminderSchedule: []
+    };
   }
 
   constructor(reminderFeesPolicy = {}) {
