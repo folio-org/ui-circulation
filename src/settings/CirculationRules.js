@@ -374,6 +374,7 @@ class CirculationRules extends React.Component {
 
     const rules = this.state.rules || this.getRules();
     const editorProps = this.getEditorProps();
+    const metadata = resources.circulationRules.records[0]?.metadata;
 
     return (
       <>
@@ -387,6 +388,7 @@ class CirculationRules extends React.Component {
             onSubmit={this.onSubmit}
             initialValues={{ rules }}
             editorProps={editorProps}
+            metadata={metadata}
           />
         </Pane>
         <Callout ref={(ref) => { this.callout = ref; }} />
