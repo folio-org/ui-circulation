@@ -16,7 +16,9 @@ import RulesEditor, {
   handleEnter,
   selectHint,
   handleTab,
-  createTriangle, hintOptions,
+  createTriangle,
+  hintOptions,
+  escapingForSpecialCharactersWhichCanBreakRegExp,
 } from './RulesEditor';
 import {
   rulesHint,
@@ -904,6 +906,49 @@ describe('RulesEditor', () => {
           expect(Codemirror.showHint).not.toHaveBeenCalled();
         });
       });
+    });
+  });
+
+  describe('escapingForSpecialCharactersWhichCanBreakRegExp', () => {
+    it('should return empty string', () => {
+      expect(escapingForSpecialCharactersWhichCanBreakRegExp()).toBe('');
+    });
+
+    it('should escape \\', () => {
+      expect(escapingForSpecialCharactersWhichCanBreakRegExp('\\')).toBe('\\\\');
+    });
+
+    it('should escape ?', () => {
+      expect(escapingForSpecialCharactersWhichCanBreakRegExp('?')).toBe('\\?');
+    });
+
+    it('should escape (', () => {
+      expect(escapingForSpecialCharactersWhichCanBreakRegExp('(')).toBe('\\(');
+    });
+
+    it('should escape )', () => {
+      expect(escapingForSpecialCharactersWhichCanBreakRegExp(')')).toBe('\\)');
+    });
+
+    it('should escape [', () => {
+      expect(escapingForSpecialCharactersWhichCanBreakRegExp('[')).toBe('\\[');
+    });
+
+    it('should escape ]', () => {
+      expect(escapingForSpecialCharactersWhichCanBreakRegExp(']')).toBe('\\]');
+    });
+
+    it('should escape +', () => {
+      expect(escapingForSpecialCharactersWhichCanBreakRegExp('+')).toBe('\\+');
+    });
+
+    it('should escape *', () => {
+      expect(escapingForSpecialCharactersWhichCanBreakRegExp('*')).toBe('\\*');
+    });
+
+    it('should escape special characters in string', () => {
+      expect(escapingForSpecialCharactersWhichCanBreakRegExp('(test) + [test] * ? \\ (){}[]-_=+<>/?.,~'))
+        .toBe('\\(test\\) \\+ \\[test\\] \\* \\? \\\\ \\(\\){}\\[\\]-_=\\+<>/\\?.,~');
     });
   });
 });
