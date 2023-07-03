@@ -120,11 +120,17 @@ const TitleLevelRequestsForm = (props) => {
         {
           titleLevelRequestsValues[TITLE_LEVEL_REQUESTS.TLR_ENABLED] &&
           <>
-            <div className={css.tlrDefaultCheckbox}>
+            <div className={css.tlrSettings}>
               <Field
                 name={TITLE_LEVEL_REQUESTS.CREATE_TLR_BY_DEFAULT}
                 type="checkbox"
                 label={formatMessage({ id: 'ui-circulation.settings.titleLevelRequests.createTLR' })}
+                component={Checkbox}
+              />
+              <Field
+                name={TITLE_LEVEL_REQUESTS.TLR_HOLD_SHOULD_FOLLOW_CIRCULATION_RULES}
+                type="checkbox"
+                label={formatMessage({ id: 'ui-circulation.settings.titleLevelRequests.tlrHoldShouldFollowCirculationRules' })}
                 component={Checkbox}
               />
             </div>
