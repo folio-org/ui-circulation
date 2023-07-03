@@ -307,6 +307,7 @@
   "settings.titleLevelRequests.paneTitle": "Title level requests",
   "settings.titleLevelRequests.allow": "Allow title level requests",
   "settings.titleLevelRequests.createTLR": "\"Create title level request\" selected by default",
+  "settings.titleLevelRequests.tlrHoldShouldFollowCirculationRules": "Fail to create title level hold when request is blocked by circulation rule",
   "settings.titleLevelRequests.noticeTemplates": "Notice templates",
   "settings.titleLevelRequests.confirmationNotice": "Confirmation notice",
   "settings.titleLevelRequests.cancellationNotice": "Cancellation notice",

@@ -82,6 +82,7 @@ describe('TitleLevelRequestsForm', () => {
   const labelIds = {
     tlrEnabled: 'ui-circulation.settings.titleLevelRequests.allow',
     tlrByDefault: 'ui-circulation.settings.titleLevelRequests.createTLR',
+    tlrHoldShouldFollowCirculationRules: 'ui-circulation.settings.titleLevelRequests.tlrHoldShouldFollowCirculationRules',
     saveButon: 'stripes-core.button.save',
     errorModalTitle: 'ui-circulation.settings.titleLevelRequests.forbiddenDisableTlrModal.title',
     errorModalDescription: 'ui-circulation.settings.titleLevelRequests.forbiddenDisableTlrModal.description',
@@ -90,6 +91,7 @@ describe('TitleLevelRequestsForm', () => {
   const orderOfFieldCall = {
     tlrEnabled: 1,
     tlrByDefault: 2,
+    tlrHoldShouldFollowCirculationRules: 3,
   };
   const mockedFormChange = jest.fn();
 
@@ -161,6 +163,17 @@ describe('TitleLevelRequestsForm', () => {
       };
 
       expect(Field).toHaveBeenNthCalledWith(orderOfFieldCall.tlrByDefault, expectedResult, {});
+    });
+
+    it('should execute "Field" associated with "tlr hold should follow circulation rules" with passed props', () => {
+      const expectedResult = {
+        name: TITLE_LEVEL_REQUESTS.TLR_HOLD_SHOULD_FOLLOW_CIRCULATION_RULES,
+        type: 'checkbox',
+        label: labelIds.tlrHoldShouldFollowCirculationRules,
+        component: Checkbox,
+      };
+
+      expect(Field).toHaveBeenNthCalledWith(orderOfFieldCall.tlrHoldShouldFollowCirculationRules, expectedResult, {});
     });
 
     it('should execute "NoticeTemplates" with passed props', () => {
