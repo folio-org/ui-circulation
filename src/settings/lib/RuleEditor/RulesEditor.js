@@ -152,6 +152,9 @@ export const hintOptions = {
   }
 };
 
+// eslint-disable-next-line no-useless-escape
+export const escapingForSpecialCharactersWhichCanBreakRegExp = (string = '') => string.replace(/[\\?()\[\]+*]/g, '\\$&');
+
 class RulesEditor extends React.Component {
   constructor(props) {
     super(props);
@@ -276,7 +279,8 @@ class RulesEditor extends React.Component {
 
     // scan rows with '#'
     const ranges = [];
-    const re = new RegExp(filter, 'i');
+    const filterStringWithEscaping = escapingForSpecialCharactersWhichCanBreakRegExp(filter);
+    const re = new RegExp(filterStringWithEscaping, 'i');
     let found = true;
     const rng = {};
 
