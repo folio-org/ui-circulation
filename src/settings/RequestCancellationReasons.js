@@ -5,6 +5,11 @@ import { FormattedMessage } from 'react-intl';
 import { ControlledVocab } from '@folio/stripes/smart-components';
 import { stripesConnect } from '@folio/stripes/core';
 import { Label } from '@folio/stripes/components';
+import { getSourceSuppressor } from '@folio/stripes/util';
+
+import { RECORD_SOURCE } from '../constants';
+
+const suppress = getSourceSuppressor(RECORD_SOURCE.CONSORTIUM);
 
 class RequestCancellationReasons extends React.Component {
   static propTypes = {
@@ -45,8 +50,8 @@ class RequestCancellationReasons extends React.Component {
           publicDescription: <FormattedMessage id="ui-circulation.settings.cancelReasons.descriptionPublic" />,
         }}
         actionSuppressor={{
-          edit: () => false,
-          delete: reason => reason.requiresAdditionalInformation,
+          edit: suppress,
+          delete: reason => reason.requiresAdditionalInformation || suppress(reason),
         }}
         nameKey="name"
         id="request-cancellation-reasons"

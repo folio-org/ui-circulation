@@ -34,6 +34,7 @@
 * Add extra fields to reminder fees policy. Refs UICIRC-955.
 * Add New setting to enable hold requests to fail. Refs UICIRC-949.
 * Fix Circ rules editor crashes when certain special characters entered in filter box. Refs UICIRC-921.
+* Prevent editing of shared settings from outside "Consortium manager". Refs UICIRC-962.
 
 ## [8.0.1](https://github.com/folio-org/ui-circulation/tree/v8.0.1) (2023-03-07)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v8.0.0...v8.0.1)
