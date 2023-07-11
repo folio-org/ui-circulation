@@ -140,6 +140,8 @@ describe('FinePolicy', () => {
       reminderFeesPolicy: {
         countClosed: true,
         ignoreGracePeriodRecall: true,
+        ignoreGracePeriodHolds: true,
+        allowRenewalOfItemsWithReminderFees: true,
         clearPatronBlockWhenPaid: true,
         reminderSchedule: [],
       },

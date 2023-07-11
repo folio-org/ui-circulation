@@ -25,6 +25,8 @@ describe('ReminderFeesPolicy', () => {
     const expectedPolicy = {
       countClosed: true,
       ignoreGracePeriodRecall: true,
+      ignoreGracePeriodHolds: true,
+      allowRenewalOfItemsWithReminderFees: true,
       clearPatronBlockWhenPaid: true,
       reminderSchedule: []
     };

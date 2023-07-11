@@ -5,6 +5,8 @@ export default class ReminderFeesPolicy {
     return {
       countClosed: true,
       ignoreGracePeriodRecall: true,
+      ignoreGracePeriodHolds: true,
+      allowRenewalOfItemsWithReminderFees: true,
       clearPatronBlockWhenPaid: true,
       reminderSchedule: []
     };
@@ -14,6 +16,8 @@ export default class ReminderFeesPolicy {
     this.countClosed = reminderFeesPolicy.countClosed;
     this.ignoreGracePeriodRecall = reminderFeesPolicy.ignoreGracePeriodRecall;
     this.clearPatronBlockWhenPaid = reminderFeesPolicy.clearPatronBlockWhenPaid;
+    this.ignoreGracePeriodHolds = reminderFeesPolicy.ignoreGracePeriodHolds;
+    this.allowRenewalOfItemsWithReminderFees = reminderFeesPolicy.allowRenewalOfItemsWithReminderFees;
     this.reminderSchedule = reminderFeesPolicy.reminderSchedule?.map(schedule => new ReminderSchedule(schedule)) ?? [];
   }
 }

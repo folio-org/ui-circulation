@@ -55,6 +55,28 @@ const ReminderFeesSection = ({ sectionOpen, noticeTemplates, blockTemplates }) =
         <Row>
           <Col xs={3}>
             <Field
+              data-testid="ignoreGracePeriodHoldsTestId"
+              label={<FormattedMessage id="ui-circulation.settings.finePolicy.reminderFees.ignoreGracePeriodHolds" />}
+              name="reminderFeesPolicy.ignoreGracePeriodHolds"
+              dataOptions={dataOptions}
+              component={Select}
+            />
+          </Col>
+        </Row>
+        <Row>
+          <Col xs={3}>
+            <Field
+              data-testid="allowRenewalOfItemsWithReminderFeesTestId"
+              label={<FormattedMessage id="ui-circulation.settings.finePolicy.reminderFees.allowRenewalOfItemsWithReminderFees" />}
+              name="reminderFeesPolicy.allowRenewalOfItemsWithReminderFees"
+              dataOptions={dataOptions}
+              component={Select}
+            />
+          </Col>
+        </Row>
+        <Row>
+          <Col xs={3}>
+            <Field
               data-testid="clearPatronBlockWhenPaidTestId"
               label={<FormattedMessage id="ui-circulation.settings.finePolicy.reminderFees.clearPatronBlockWhenPaid" />}
               name="reminderFeesPolicy.clearPatronBlockWhenPaid"
