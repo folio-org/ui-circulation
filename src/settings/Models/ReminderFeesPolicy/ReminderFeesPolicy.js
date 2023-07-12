@@ -1,13 +1,19 @@
 import ReminderSchedule from './ReminderSchedule';
 
 export default class ReminderFeesPolicy {
+  static defaultReminderFeesFields() {
+    return {
+      countClosed: false,
+      ignoreGracePeriodRecall: false,
+      ignoreGracePeriodHolds: false,
+      allowRenewalOfItemsWithReminderFees: false,
+      clearPatronBlockWhenPaid: false,
+    };
+  }
+
   static defaultReminderFeesPolicy() {
     return {
-      countClosed: true,
-      ignoreGracePeriodRecall: true,
-      ignoreGracePeriodHolds: true,
-      allowRenewalOfItemsWithReminderFees: true,
-      clearPatronBlockWhenPaid: true,
+      ...ReminderFeesPolicy.defaultReminderFeesFields(),
       reminderSchedule: []
     };
   }

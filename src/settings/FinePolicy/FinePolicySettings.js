@@ -17,6 +17,15 @@ import { MAX_UNPAGED_RESOURCE_COUNT } from '../../constants';
 import withPreventDelete from '../wrappers/withPreventDelete';
 
 export const parseInitialValues = (init = {}) => {
+  const reminderFeesPolicy = init?.reminderFeesPolicy ?? {};
+  const {
+    countClosed = false,
+    ignoreGracePeriodRecall = false,
+    ignoreGracePeriodHolds = false,
+    allowRenewalOfItemsWithReminderFees = false,
+    clearPatronBlockWhenPaid = false,
+  } = reminderFeesPolicy;
+
   return ({
     ...init,
     maxOverdueFine: parseFloat(init.maxOverdueFine).toFixed(2),
@@ -28,6 +37,14 @@ export const parseInitialValues = (init = {}) => {
     overdueRecallFine: {
       ...init.overdueRecallFine,
       quantity: parseFloat((init.overdueRecallFine || {}).quantity || 0).toFixed(2)
+    },
+    reminderFeesPolicy: {
+      ...reminderFeesPolicy,
+      countClosed,
+      ignoreGracePeriodRecall,
+      ignoreGracePeriodHolds,
+      allowRenewalOfItemsWithReminderFees,
+      clearPatronBlockWhenPaid,
     }
   });
 };

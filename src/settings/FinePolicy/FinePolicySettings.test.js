@@ -10,6 +10,7 @@ import { EntryManager } from '@folio/stripes/smart-components';
 import withPreventDelete from '../wrappers/withPreventDelete';
 import FinePolicyDetail from './FinePolicyDetail';
 import FinePolicyForm from './FinePolicyForm';
+import ReminderFeesPolicy from '../Models/ReminderFeesPolicy/ReminderFeesPolicy';
 import FinePolicySettings, {
   parseInitialValues,
 } from './FinePolicySettings';
@@ -17,6 +18,11 @@ import FinePolicySettings, {
 import normalize from './utils/normalize';
 
 const mockDefaultFinePolicyReturnValue = 'testReturnValue';
+const defaultReminderFeesPolicy = {
+  reminderFeesPolicy: {
+    ...ReminderFeesPolicy.defaultReminderFeesFields()
+  },
+};
 
 jest.mock('../wrappers/withPreventDelete', () => jest.fn((component) => component));
 jest.mock('../Models/FinePolicy', () => ({
@@ -148,6 +154,7 @@ describe('FinePolicySettings', () => {
         overdueRecallFine: {
           quantity: '0.00',
         },
+        ...defaultReminderFeesPolicy
       };
 
       expect(parseInitialValues(testSchedules)).toEqual(expectedResult);
@@ -175,6 +182,7 @@ describe('FinePolicySettings', () => {
         overdueRecallFine: {
           quantity: '10.00',
         },
+        ...defaultReminderFeesPolicy
       };
 
       expect(parseInitialValues(testSchedules)).toEqual(expectedResult);
@@ -207,6 +215,7 @@ describe('FinePolicySettings', () => {
           quantity: '400.12'
         },
         anotherKey: 'anotherValue',
+        ...defaultReminderFeesPolicy
       });
     });
   });
