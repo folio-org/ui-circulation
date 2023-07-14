@@ -138,9 +138,11 @@ describe('FinePolicy', () => {
       maxOverdueRecallFine: 0,
       overdueRecallFine: { quantity: 0, intervalId: '' },
       reminderFeesPolicy: {
-        countClosed: true,
-        ignoreGracePeriodRecall: true,
-        clearPatronBlockWhenPaid: true,
+        countClosed: false,
+        ignoreGracePeriodRecall: false,
+        ignoreGracePeriodHolds: false,
+        allowRenewalOfItemsWithReminderFees: false,
+        clearPatronBlockWhenPaid: false,
         reminderSchedule: [],
       },
     };
