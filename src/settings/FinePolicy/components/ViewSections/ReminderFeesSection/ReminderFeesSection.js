@@ -55,6 +55,8 @@ const ReminderFeesSection = (props) => {
   const {
     countClosed,
     ignoreGracePeriodRecall,
+    ignoreGracePeriodHolds,
+    allowRenewalOfItemsWithReminderFees,
     clearPatronBlockWhenPaid,
     reminderSchedule,
   } = policy;
@@ -82,6 +84,22 @@ const ReminderFeesSection = (props) => {
           <KeyValue
             label={<FormattedMessage id="ui-circulation.settings.finePolicy.reminderFees.ignoreGracePeriodRecall" />}
             value={getCheckboxValue(ignoreGracePeriodRecall)}
+          />
+        </Col>
+      </Row>
+      <Row>
+        <Col xs={12}>
+          <KeyValue
+            label={<FormattedMessage id="ui-circulation.settings.finePolicy.reminderFees.ignoreGracePeriodHolds" />}
+            value={getCheckboxValue(ignoreGracePeriodHolds)}
+          />
+        </Col>
+      </Row>
+      <Row>
+        <Col xs={12}>
+          <KeyValue
+            label={<FormattedMessage id="ui-circulation.settings.finePolicy.reminderFees.allowRenewalOfItemsWithReminderFees" />}
+            value={getCheckboxValue(allowRenewalOfItemsWithReminderFees)}
           />
         </Col>
       </Row>

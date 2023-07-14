@@ -23,12 +23,26 @@ describe('ReminderFeesPolicy', () => {
 
   it('"defaultReminderFeesPolicy" should return correct data', () => {
     const expectedPolicy = {
-      countClosed: true,
-      ignoreGracePeriodRecall: true,
-      clearPatronBlockWhenPaid: true,
+      countClosed: false,
+      ignoreGracePeriodRecall: false,
+      ignoreGracePeriodHolds: false,
+      allowRenewalOfItemsWithReminderFees: false,
+      clearPatronBlockWhenPaid: false,
       reminderSchedule: []
     };
 
     expect(ReminderFeesPolicy.defaultReminderFeesPolicy()).toEqual(expectedPolicy);
+  });
+
+  it('"defaultReminderFeesFields" should return correct data', () => {
+    const expectedValues = {
+      countClosed: false,
+      ignoreGracePeriodRecall: false,
+      ignoreGracePeriodHolds: false,
+      allowRenewalOfItemsWithReminderFees: false,
+      clearPatronBlockWhenPaid: false,
+    };
+
+    expect(ReminderFeesPolicy.defaultReminderFeesFields()).toEqual(expectedValues);
   });
 });
