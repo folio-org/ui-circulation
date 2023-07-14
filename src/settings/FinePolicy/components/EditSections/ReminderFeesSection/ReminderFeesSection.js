@@ -47,8 +47,8 @@ const ReminderFeesSection = ({ sectionOpen, noticeTemplates, blockTemplates }) =
               data-testid="ignoreGracePeriodRecallTestId"
               label={<FormattedMessage id="ui-circulation.settings.finePolicy.reminderFees.ignoreGracePeriodRecall" />}
               name="reminderFeesPolicy.ignoreGracePeriodRecall"
-              dataOptions={dataOptions}
               component={Select}
+              dataOptions={dataOptions}
             />
           </Col>
         </Row>
@@ -58,8 +58,8 @@ const ReminderFeesSection = ({ sectionOpen, noticeTemplates, blockTemplates }) =
               data-testid="ignoreGracePeriodHoldsTestId"
               label={<FormattedMessage id="ui-circulation.settings.finePolicy.reminderFees.ignoreGracePeriodHolds" />}
               name="reminderFeesPolicy.ignoreGracePeriodHolds"
-              dataOptions={dataOptions}
               component={Select}
+              dataOptions={dataOptions}
             />
           </Col>
         </Row>
@@ -69,8 +69,8 @@ const ReminderFeesSection = ({ sectionOpen, noticeTemplates, blockTemplates }) =
               data-testid="allowRenewalOfItemsWithReminderFeesTestId"
               label={<FormattedMessage id="ui-circulation.settings.finePolicy.reminderFees.allowRenewalOfItemsWithReminderFees" />}
               name="reminderFeesPolicy.allowRenewalOfItemsWithReminderFees"
-              dataOptions={dataOptions}
               component={Select}
+              dataOptions={dataOptions}
             />
           </Col>
         </Row>
@@ -80,8 +80,8 @@ const ReminderFeesSection = ({ sectionOpen, noticeTemplates, blockTemplates }) =
               data-testid="clearPatronBlockWhenPaidTestId"
               label={<FormattedMessage id="ui-circulation.settings.finePolicy.reminderFees.clearPatronBlockWhenPaid" />}
               name="reminderFeesPolicy.clearPatronBlockWhenPaid"
-              dataOptions={dataOptions}
               component={Select}
+              dataOptions={dataOptions}
             />
           </Col>
         </Row>
