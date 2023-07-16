@@ -495,5 +495,13 @@
     "settings.finePolicy.reminderFees.timeUnit.days": "天",
     "settings.finePolicy.reminderFees.timeUnit.weeks": "周",
     "settings.finePolicy.reminderFees.noticeMethods.email": "电子邮件",
-    "settings.finePolicy.reminderFees.noticeMethods.mail": "邮件"
+    "settings.finePolicy.reminderFees.noticeMethods.mail": "邮件",
+    "settings.finePolicy.reminderFees.blockTemplate": "Block template",
+    "settings.finePolicy.reminderFees.selectBlockTemplate": "Select block template",
+    "settings.finePolicy.reminderFees.countClosed": "Count closed days/hours/minutes",
+    "settings.finePolicy.reminderFees.ignoreGracePeriodRecall": "Ignore grace periods for recalls",
+    "settings.finePolicy.reminderFees.clearPatronBlockWhenPaid": "Clear patron block when paid",
+    "settings.titleLevelRequests.tlrHoldShouldFollowCirculationRules": "Fail to create title level hold when request is blocked by circulation rule",
+    "settings.finePolicy.reminderFees.ignoreGracePeriodHolds": "Ignore grace periods for holds",
+    "settings.finePolicy.reminderFees.allowRenewalOfItemsWithReminderFees": "Allow renewal of items with reminder fee(s)"
 }
