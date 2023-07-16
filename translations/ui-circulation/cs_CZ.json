@@ -495,5 +495,13 @@
     "settings.finePolicy.reminderFees.timeUnit.days": "Dny",
     "settings.finePolicy.reminderFees.timeUnit.weeks": "Týden(y)",
     "settings.finePolicy.reminderFees.noticeMethods.email": "E-mail",
-    "settings.finePolicy.reminderFees.noticeMethods.mail": "Pošta"
+    "settings.finePolicy.reminderFees.noticeMethods.mail": "Pošta",
+    "settings.finePolicy.reminderFees.blockTemplate": "Šablona blokace",
+    "settings.finePolicy.reminderFees.selectBlockTemplate": "Vybrat šablonu blokace",
+    "settings.finePolicy.reminderFees.countClosed": "Počítat i zavírací dny/hodiny/minuty",
+    "settings.finePolicy.reminderFees.ignoreGracePeriodRecall": "Ignorovat dobu odkladu při stažení z výpůjčky",
+    "settings.finePolicy.reminderFees.clearPatronBlockWhenPaid": "Po zaplacení vymazat blokaci čtenáře",
+    "settings.titleLevelRequests.tlrHoldShouldFollowCirculationRules": "Nepodařilo se vytvořit bklokaci na úrovni názvu, když je požadavek blokován pravidlem pro výpůjčky",
+    "settings.finePolicy.reminderFees.ignoreGracePeriodHolds": "Ignore grace periods for holds",
+    "settings.finePolicy.reminderFees.allowRenewalOfItemsWithReminderFees": "Allow renewal of items with reminder fee(s)"
 }
