@@ -495,5 +495,13 @@
     "settings.finePolicy.reminderFees.timeUnit.days": "Dia(s)",
     "settings.finePolicy.reminderFees.timeUnit.weeks": "Semana(s)",
     "settings.finePolicy.reminderFees.noticeMethods.email": "E-mail",
-    "settings.finePolicy.reminderFees.noticeMethods.mail": "Correio"
+    "settings.finePolicy.reminderFees.noticeMethods.mail": "Correio",
+    "settings.finePolicy.reminderFees.blockTemplate": "Modelo de bloqueio",
+    "settings.finePolicy.reminderFees.selectBlockTemplate": "Selecionar modelo de bloqueio",
+    "settings.finePolicy.reminderFees.countClosed": "Contagem de dias/horas/minutos fechados",
+    "settings.finePolicy.reminderFees.ignoreGracePeriodRecall": "Ignorar períodos de carência para devoluções antecipadas",
+    "settings.finePolicy.reminderFees.clearPatronBlockWhenPaid": "Limpar o bloqueio do usuário quando estiver pago",
+    "settings.titleLevelRequests.tlrHoldShouldFollowCirculationRules": "Falha ao criar reserva ao nível de título quando a solicitação é bloqueada por uma regra de circulação",
+    "settings.finePolicy.reminderFees.ignoreGracePeriodHolds": "Ignorar períodos de carência para reservas",
+    "settings.finePolicy.reminderFees.allowRenewalOfItemsWithReminderFees": "Permitir a renovação de itens com taxa(s) de lembrete"
 }

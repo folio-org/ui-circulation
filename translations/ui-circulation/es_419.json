@@ -495,5 +495,13 @@
     "settings.finePolicy.reminderFees.timeUnit.days": "Día(s)",
     "settings.finePolicy.reminderFees.timeUnit.weeks": "Semana(s)",
     "settings.finePolicy.reminderFees.noticeMethods.email": "Correo electrónico",
-    "settings.finePolicy.reminderFees.noticeMethods.mail": "Correo"
+    "settings.finePolicy.reminderFees.noticeMethods.mail": "Correo",
+    "settings.finePolicy.reminderFees.blockTemplate": "Plantilla de bloques",
+    "settings.finePolicy.reminderFees.selectBlockTemplate": "Seleccionar plantilla de bloque",
+    "settings.finePolicy.reminderFees.countClosed": "Contar días/horas/minutos cerrados",
+    "settings.finePolicy.reminderFees.ignoreGracePeriodRecall": "Ignorar los periodos de gracia para las retiradas",
+    "settings.finePolicy.reminderFees.clearPatronBlockWhenPaid": "Borrar el bloqueo de clientes cuando se paga",
+    "settings.titleLevelRequests.tlrHoldShouldFollowCirculationRules": "No se puede crear una retención a nivel de título cuando la solicitud está bloqueada por una norma de circulación",
+    "settings.finePolicy.reminderFees.ignoreGracePeriodHolds": "Ignore grace periods for holds",
+    "settings.finePolicy.reminderFees.allowRenewalOfItemsWithReminderFees": "Allow renewal of items with reminder fee(s)"
 }
