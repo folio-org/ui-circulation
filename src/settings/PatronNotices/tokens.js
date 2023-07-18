@@ -158,32 +158,32 @@ const getTokens = (locale) => ({
       allowedFor: allowedForAllCategories,
     },
     {
-      token: 'user.addressLine1',
+      token: 'user.primaryAddressLine1',
       previewValue: '123 Campus Drive',
       allowedFor: allowedForAllCategories,
     },
     {
-      token: 'user.addressLine2',
+      token: 'user.primaryAddressLine2',
       previewValue: '226 Classroom Building, Box 12345',
       allowedFor: allowedForAllCategories,
     },
     {
-      token: 'user.city',
+      token: 'user.primaryCity',
       previewValue: 'Los Angeles',
       allowedFor: allowedForAllCategories,
     },
     {
-      token: 'user.stateProvRegion',
+      token: 'user.primaryStateProvRegion',
       previewValue: 'CA',
       allowedFor: allowedForAllCategories,
     },
     {
-      token: 'user.zipPostalCode',
+      token: 'user.primaryZipPostalCode',
       previewValue: '90084',
       allowedFor: allowedForAllCategories,
     },
     {
-      token: 'user.country',
+      token: 'user.primaryCountry',
       previewValue: 'USA',
       allowedFor: allowedForAllCategories,
     },
