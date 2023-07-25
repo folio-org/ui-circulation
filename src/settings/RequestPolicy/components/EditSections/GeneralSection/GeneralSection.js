@@ -3,33 +3,115 @@ import PropTypes from 'prop-types';
 import { Field } from 'react-final-form';
 import { FieldArray } from 'react-final-form-arrays';
 import { FormattedMessage } from 'react-intl';
+import { isEmpty } from 'lodash';
 
 import {
   TextArea,
   TextField,
   Accordion,
   Checkbox,
+  RadioButton,
+  MultiSelection,
+  RadioButtonGroup,
   Row,
   Col,
 } from '@folio/stripes/components';
 
 import { Metadata } from '../../../../components';
-import { requestPolicyTypes } from '../../../../../constants';
+import {
+  requestPolicyTypes,
+  REQUEST_TYPE_RULES,
+} from '../../../../../constants';
 
-export const renderTypes = () => {
-  const items = requestPolicyTypes.map((name, index) => (
-    <Row key={`request-policy-type-${index}`}>
-      <Col xs={12}>
-        <Field
-          component={Checkbox}
-          type="checkbox"
-          id={`${name.toLowerCase()}-checkbox`}
-          label={name}
-          name={`requestTypes[${index}]`}
-        />
-      </Col>
-    </Row>
-  ));
+export const getDataOptions = (servicePoints = []) => {
+  return servicePoints.map(({
+    name,
+    id,
+  }) => ({
+    label: name,
+    value: id,
+  }));
+};
+
+export const validateServicePointsList = (servicePoints) => {
+  let error;
+
+  if (isEmpty(servicePoints)) {
+    error = <FormattedMessage id="ui-circulation.settings.requestPolicy.errors.selectServicePoint" />;
+  }
+
+  return error;
+};
+
+export const renderTypes = (props) => {
+  const {
+    handleChangeRequestTypesRules,
+    requestTypesRules,
+    servicePoints,
+    isLoading,
+  } = props;
+  const dataOptions = getDataOptions(servicePoints);
+  const onChangeRequestTypeRules = (name) => (e) => {
+    handleChangeRequestTypesRules(e, name)
+  };
+  const items = requestPolicyTypes.map((name, index) => {
+    const isAllowedSomeServicePoints = requestTypesRules[name] === REQUEST_TYPE_RULES.ALLOW_SOME;
+
+    return (
+      <Row key={`request-policy-type-${index}`}>
+        <Col xs={12}>
+          <Field
+            component={Checkbox}
+            type="checkbox"
+            id={`${name.toLowerCase()}-checkbox`}
+            label={name}
+            name={`requestTypes[${index}]`}
+          />
+        </Col>
+        {props.fields.value[index] &&
+        <>
+          <Col xs={12}>
+            <RadioButtonGroup>
+              <Field
+                type="radio"
+                name={`requestTypesRules.${name}`}
+                component={RadioButton}
+                id={`${name}AllowAllRadioButton`}
+                label={<FormattedMessage id="ui-circulation.settings.requestPolicy.requestTypes.allowAll" />}
+                value={REQUEST_TYPE_RULES.ALLOW_ALL}
+                onChange={onChangeRequestTypeRules(name)}
+                disabled={isLoading}
+              />
+              <Field
+                type="radio"
+                name={`requestTypesRules.${name}`}
+                component={RadioButton}
+                id={`${name}AllowSomeRadioButton`}
+                label={<FormattedMessage id="ui-circulation.settings.requestPolicy.requestTypes.allowSome" />}
+                value={REQUEST_TYPE_RULES.ALLOW_SOME}
+                onChange={onChangeRequestTypeRules(name)}
+                disabled={isLoading}
+              />
+            </RadioButtonGroup>
+          </Col>
+          {
+            isAllowedSomeServicePoints &&
+              <Col xs={4}>
+                <Field
+                  component={MultiSelection}
+                  name={`allowedServicePoints.${name}`}
+                  id={`${name}MultiSelect`}
+                  dataOptions={dataOptions}
+                  validate={validateServicePointsList}
+                  disabled={isLoading}
+                />
+              </Col>
+          }
+        </>
+        }
+      </Row>
+    );
+  });
 
   return (
     <>
@@ -47,6 +129,13 @@ class GeneralSection extends React.Component {
     metadata: PropTypes.object.isRequired,
     connect: PropTypes.func.isRequired,
     validateName: PropTypes.func.isRequired,
+    requestTypesRules: PropTypes.object.isRequired,
+    handleChangeRequestTypesRules: PropTypes.func.isRequired,
+    isLoading: PropTypes.bool.isRequired,
+    servicePoints: PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.string,
+      name: PropTypes.string,
+    })),
   };
 
   render() {
@@ -55,6 +144,10 @@ class GeneralSection extends React.Component {
       metadata,
       connect,
       validateName,
+      handleChangeRequestTypesRules,
+      requestTypesRules,
+      servicePoints,
+      isLoading,
     } = this.props;
 
     return (
@@ -90,6 +183,10 @@ class GeneralSection extends React.Component {
         <FieldArray
           name="requestTypes"
           component={renderTypes}
+          handleChangeRequestTypesRules={handleChangeRequestTypesRules}
+          requestTypesRules={requestTypesRules}
+          servicePoints={servicePoints}
+          isLoading={isLoading}
         />
       </Accordion>
     );

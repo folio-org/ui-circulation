@@ -14,16 +14,41 @@ import normalize from './utils/normalize';
 import {
   requestPolicyTypes,
   MAX_UNPAGED_RESOURCE_COUNT,
+  REQUEST_TYPE_RULES,
+  MAX_RECORDS,
 } from '../../constants';
 
-export const parseInitialValues = (values = {}) => {
+export const findServicePointById = (servicePoints, id) => servicePoints.records.find(servicePoint => servicePoint.id === id);
+export const parseInitialValues = (servicePoints) => (values = {}) => {
   const types = values.requestTypes || [];
   const typesMap = types.reduce((acc, type) => ({ ...acc, [type]: true }), {});
   const requestTypes = requestPolicyTypes.map((type) => {
     return !!typesMap[type];
   });
+  const allowedServicePoints = {};
+  const requestTypesRules = {};
 
-  return { ...values, requestTypes };
+  requestPolicyTypes.forEach(name => {
+    if (values.allowedServicePoints?.[name]) {
+      requestTypesRules[name] = REQUEST_TYPE_RULES.ALLOW_SOME;
+      allowedServicePoints[name] = values.allowedServicePoints[name]
+        .filter((id) => findServicePointById(servicePoints, id))
+        .map((id) => ({
+          label: findServicePointById(servicePoints, id)?.name,
+          value: id,
+        })
+      );
+    } else {
+      requestTypesRules[name] = REQUEST_TYPE_RULES.ALLOW_ALL;
+    }
+  });
+
+  return {
+    ...values,
+    requestTypes,
+    allowedServicePoints,
+    requestTypesRules,
+  };
 };
 
 class RequestPolicySettings extends React.Component {
@@ -41,6 +66,15 @@ class RequestPolicySettings extends React.Component {
       type: 'okapi',
       path: 'circulation/rules',
     },
+    servicePoints: {
+      type: 'okapi',
+      records: 'servicepoints',
+      path: 'service-points',
+      params: {
+        query: 'query=(pickupLocation==true) sortby name',
+        limit: MAX_RECORDS,
+      },
+    },
   });
 
   static propTypes = {
@@ -48,6 +82,7 @@ class RequestPolicySettings extends React.Component {
     resources: PropTypes.shape({
       requestPolicies: PropTypes.object,
       circulationRules: PropTypes.object,
+      servicePoints: PropTypes.object,
     }).isRequired,
     mutator: PropTypes.shape({
       requestPolicies: PropTypes.shape({
@@ -88,7 +123,7 @@ class RequestPolicySettings extends React.Component {
         id="request-policy-settings"
         data-test-request-policy-settings
         parentMutator={mutator}
-        parseInitialValues={parseInitialValues}
+        parseInitialValues={parseInitialValues(resources.servicePoints)}
         parentResources={resources}
         entryList={entryList}
         resourceKey="requestPolicies"
