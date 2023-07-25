@@ -52,7 +52,7 @@ export const renderTypes = (props) => {
   } = props;
   const dataOptions = getDataOptions(servicePoints);
   const onChangeRequestTypeRules = (name) => (e) => {
-    handleChangeRequestTypesRules(e, name)
+    handleChangeRequestTypesRules(e, name);
   };
   const items = requestPolicyTypes.map((name, index) => {
     const isAllowedSomeServicePoints = requestTypesRules[name] === REQUEST_TYPE_RULES.ALLOW_SOME;

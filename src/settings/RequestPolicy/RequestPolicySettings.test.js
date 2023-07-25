@@ -10,6 +10,7 @@ import { EntryManager } from '@folio/stripes/smart-components';
 
 import RequestPolicySettings, {
   parseInitialValues,
+  findServicePointById,
 } from './RequestPolicySettings';
 import RequestPolicyDetail from './RequestPolicyDetail';
 import RequestPolicyForm from './RequestPolicyForm';
@@ -17,6 +18,7 @@ import RequestPolicy from '../Models/RequestPolicy';
 import normalize from './utils/normalize';
 
 import {
+  REQUEST_TYPE_RULES,
   requestPolicyTypes,
 } from '../../constants';
 
@@ -89,7 +91,7 @@ describe('RequestPolicySettings', () => {
 
     expect(EntryManager).toHaveBeenCalledWith(expect.objectContaining({
       parentMutator: mockedMutator,
-      parseInitialValues,
+      parseInitialValues: expect.any(Function),
       parentResources: defaultProps.resources,
       entryList: sortedEntyList,
       resourceKey: 'requestPolicies',
@@ -179,7 +181,35 @@ describe('RequestPolicySettings', () => {
   });
 });
 
+describe('findServicePointById', () => {
+  const id = 'id';
+  const servicePoints = {
+    records: [{ id }],
+  };
+
+  it('should return found record', () => {
+    expect(findServicePointById(servicePoints, id)).toEqual(servicePoints.records[0]);
+  });
+
+  it('should return undefined', () => {
+    expect(findServicePointById(servicePoints, 'testId')).toBeUndefined();
+  });
+});
+
 describe('parseInitialValues', () => {
+  const id = 'id';
+  const servicePoints = {
+    records: [{ id }],
+  };
+  const requestTypeRulesProperties = {
+    allowedServicePoints: {},
+    requestTypesRules: requestPolicyTypes.reduce((acc, name) => {
+      acc[name] = REQUEST_TYPE_RULES.ALLOW_ALL;
+
+      return acc;
+    }, {}),
+  };
+
   it('should correctly process if "values" was not passed', () => {
     const expectedResult = {
       requestTypes: [
@@ -187,9 +217,10 @@ describe('parseInitialValues', () => {
         false,
         false,
       ],
+      ...requestTypeRulesProperties,
     };
 
-    expect(parseInitialValues()).toEqual(expectedResult);
+    expect(parseInitialValues(servicePoints, id)()).toEqual(expectedResult);
   });
 
   it('should correctly process passed "values" with "requestTypes"', () => {
@@ -203,8 +234,9 @@ describe('parseInitialValues', () => {
         false,
         true,
       ],
+      ...requestTypeRulesProperties,
     };
 
-    expect(parseInitialValues(mockedValues)).toEqual(expectedResult);
+    expect(parseInitialValues(servicePoints, id)(mockedValues)).toEqual(expectedResult);
   });
 });

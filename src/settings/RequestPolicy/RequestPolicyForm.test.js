@@ -78,6 +78,23 @@ describe('RequestPolicyForm', () => {
     location: {
       search: '',
     },
+    parentResources: {
+      requestPolicies: {
+        records: [
+          {
+            id: 'policyId',
+            allowedServicePoints: {
+              Page: ['servicePointId'],
+            },
+          }
+        ],
+        isPending: false,
+      },
+      servicePoints: {
+        records: [],
+        isPending: false,
+      },
+    },
   };
 
   afterEach(() => {
@@ -92,6 +109,7 @@ describe('RequestPolicyForm', () => {
   describe('with default props', () => {
     const form = {
       getState: jest.fn(() => ({})),
+      change: jest.fn(),
     };
 
     beforeEach(() => {
@@ -181,6 +199,7 @@ describe('RequestPolicyForm', () => {
     };
     const form = {
       getState: jest.fn(() => ({ values: initialValues })),
+      change: jest.fn(),
     };
 
     const testPolicy = new RequestPolicy(initialValues);
@@ -309,6 +328,7 @@ describe('RequestPolicyForm', () => {
   describe('Edit layer without data', () => {
     const form = {
       getState: jest.fn(() => ({})),
+      change: jest.fn(),
     };
     const props = {
       ...defaultProps,

@@ -36,8 +36,7 @@ export const parseInitialValues = (servicePoints) => (values = {}) => {
         .map((id) => ({
           label: findServicePointById(servicePoints, id)?.name,
           value: id,
-        })
-      );
+        }));
     } else {
       requestTypesRules[name] = REQUEST_TYPE_RULES.ALLOW_ALL;
     }

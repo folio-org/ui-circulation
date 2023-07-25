@@ -111,7 +111,9 @@ class RequestPolicyForm extends React.Component {
       const selectedRequestTypes = Object.keys(allowedServicePoints);
       const rules = {};
 
-      selectedRequestTypes.forEach(requestType => rules[requestType] = REQUEST_TYPE_RULES.ALLOW_SOME);
+      selectedRequestTypes.forEach(requestType => {
+        rules[requestType] = REQUEST_TYPE_RULES.ALLOW_SOME;
+      });
 
       this.setState((prevState) => ({
         requestTypesRules: {

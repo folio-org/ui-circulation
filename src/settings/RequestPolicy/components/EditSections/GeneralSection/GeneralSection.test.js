@@ -18,8 +18,12 @@ import {
 import { Metadata } from '../../../../components';
 import GeneralSection, {
   renderTypes,
+  getDataOptions,
 } from './GeneralSection';
-import { requestPolicyTypes } from '../../../../../constants';
+import {
+  REQUEST_TYPE_RULES,
+  requestPolicyTypes,
+} from '../../../../../constants';
 
 jest.mock('../../../../components', () => ({
   Metadata: jest.fn(() => null),
@@ -47,11 +51,25 @@ describe('GeneralSection', () => {
   const mockedConnect = jest.fn();
   const mockedValidateName = jest.fn();
   const getById = (id) => within(screen.getByTestId(id));
+  const renderTypesProps = {
+    handleChangeRequestTypesRules: jest.fn(),
+    requestTypesRules: {
+      Hold: REQUEST_TYPE_RULES.ALLOW_ALL,
+    },
+    servicePoints: [
+      {
+        id: 'id',
+        name: 'name',
+      }
+    ],
+    isLoading: false,
+  };
   const defaultProps = {
     isOpen: true,
     metadata: mockedMetadata,
     connect: mockedConnect,
     validateName: mockedValidateName,
+    ...renderTypesProps,
   };
 
   afterEach(() => {
@@ -115,6 +133,7 @@ describe('GeneralSection', () => {
       const expectedResult = {
         name: 'requestTypes',
         component: renderTypes,
+        ...renderTypesProps,
       };
 
       expect(FieldArray).toHaveBeenLastCalledWith(expectedResult, {});
@@ -143,7 +162,6 @@ describe('GeneralSection', () => {
   describe('renderTypes', () => {
     const policyTypesLabelId = 'ui-circulation.settings.requestPolicy.policyTypes';
     const polycyTypeTest = (name, index) => {
-      const number = index + 1;
       const expectedResult = {
         component: Checkbox,
         type: 'checkbox',
@@ -152,14 +170,19 @@ describe('GeneralSection', () => {
         name: `requestTypes[${index}]`,
       };
 
-      it(`should render ${number} policy with right props`, () => {
-        expect(Field).toHaveBeenNthCalledWith(number, expectedResult, {});
+      it(`should render ${name} policy with correct props`, () => {
+        expect(Field).toHaveBeenCalledWith(expectedResult, {});
       });
     };
 
     beforeEach(() => {
       render(
-        renderTypes()
+        renderTypes({
+          ...renderTypesProps,
+          fields: {
+            value: [true],
+          },
+        })
       );
     });
 
@@ -168,5 +191,31 @@ describe('GeneralSection', () => {
     });
 
     requestPolicyTypes.forEach(polycyTypeTest);
+  });
+
+  describe('getDataOptions', () => {
+    it('should correctly modify service points', () => {
+      const name = 'name';
+      const id = 'id';
+      const servicePoints = [
+        {
+          name,
+          id,
+          test: 'test',
+        }
+      ];
+      const expectedResult = [
+        {
+          label: name,
+          value: id,
+        }
+      ];
+
+      expect(getDataOptions(servicePoints)).toEqual(expectedResult);
+    });
+
+    it('should return empty array', () => {
+      expect(getDataOptions()).toEqual([]);
+    });
   });
 });

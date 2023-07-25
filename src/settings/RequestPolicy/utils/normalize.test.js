@@ -1,33 +1,70 @@
 import normalize from './normalize';
-import { requestPolicyTypes } from '../../../constants';
+import {
+  REQUEST_TYPE_RULES,
+  requestPolicyTypes,
+} from '../../../constants';
 
 describe('normalize', () => {
-  describe('when "type" is a correct value', () => {
-    const policy = {
-      test: 'test',
-      requestTypes: ['Hold'],
-    };
+  const holdRequestType = requestPolicyTypes[0];
+  const basePolicy = {
+    allowedServicePoints: {
+      [holdRequestType]: [
+        {
+          value: REQUEST_TYPE_RULES.ALLOW_SOME,
+        }
+      ],
+    },
+    requestTypesRules: {
+      [holdRequestType]: REQUEST_TYPE_RULES.ALLOW_SOME,
+    },
+    requestTypes: [holdRequestType],
+  };
 
+  describe('when "type" is a correct value', () => {
     it('should return object with not empty "requestTypes" field', () => {
       const expectedResult = {
-        ...policy,
-        requestTypes: [requestPolicyTypes[0]],
+        ...basePolicy,
+        allowedServicePoints: {
+          [holdRequestType]: [REQUEST_TYPE_RULES.ALLOW_SOME],
+        },
+        requestTypesRules: undefined,
+      };
+
+      expect(normalize(basePolicy)).toEqual(expectedResult);
+    });
+  });
+
+  describe('when "type" is not a correct value', () => {
+    const policy = {
+      ...basePolicy,
+      requestTypes: [''],
+    };
+
+    it('should return object with "requestTypes" field as empty array', () => {
+      const expectedResult = {
+        ...basePolicy,
+        requestTypesRules: undefined,
+        allowedServicePoints: undefined,
+        requestTypes: [],
       };
 
       expect(normalize(policy)).toEqual(expectedResult);
     });
   });
 
-  describe('when "type" is not a correct value', () => {
+  describe('when policy allows all service points', () => {
     const policy = {
-      test: 'test',
-      requestTypes: [''],
+      ...basePolicy,
+      requestTypesRules: {
+        [holdRequestType]: REQUEST_TYPE_RULES.ALLOW_ALL,
+      },
     };
 
-    it('should return object with "requestTypes" field as empty array', () => {
+    it('should return policy without allowed service points', () => {
       const expectedResult = {
-        ...policy,
-        requestTypes: [],
+        ...basePolicy,
+        requestTypesRules: undefined,
+        allowedServicePoints: undefined,
       };
 
       expect(normalize(policy)).toEqual(expectedResult);
