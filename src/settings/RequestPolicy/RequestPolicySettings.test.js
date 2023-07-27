@@ -198,17 +198,20 @@ describe('findServicePointById', () => {
 
 describe('parseInitialValues', () => {
   const id = 'id';
+  const name = 'name';
   const servicePoints = {
-    records: [{ id }],
+    records: [
+      {
+        id,
+        name,
+      }
+    ],
   };
-  const requestTypeRulesProperties = {
-    allowedServicePoints: {},
-    requestTypesRules: requestPolicyTypes.reduce((acc, name) => {
-      acc[name] = REQUEST_TYPE_RULES.ALLOW_ALL;
+  const requestTypesRules = requestPolicyTypes.reduce((acc, requestType) => {
+    acc[requestType] = REQUEST_TYPE_RULES.ALLOW_ALL;
 
-      return acc;
-    }, {}),
-  };
+    return acc;
+  }, {});
 
   it('should correctly process if "values" was not passed', () => {
     const expectedResult = {
@@ -217,10 +220,11 @@ describe('parseInitialValues', () => {
         false,
         false,
       ],
-      ...requestTypeRulesProperties,
+      allowedServicePoints: {},
+      requestTypesRules,
     };
 
-    expect(parseInitialValues(servicePoints, id)()).toEqual(expectedResult);
+    expect(parseInitialValues(servicePoints)()).toEqual(expectedResult);
   });
 
   it('should correctly process passed "values" with "requestTypes"', () => {
@@ -234,9 +238,40 @@ describe('parseInitialValues', () => {
         false,
         true,
       ],
-      ...requestTypeRulesProperties,
+      allowedServicePoints: {},
+      requestTypesRules,
     };
 
-    expect(parseInitialValues(servicePoints, id)(mockedValues)).toEqual(expectedResult);
+    expect(parseInitialValues(servicePoints)(mockedValues)).toEqual(expectedResult);
+  });
+
+  it('should return correct data if only some service points allowed', () => {
+    const mockedValues = {
+      requestTypes: [requestPolicyTypes[0]],
+      allowedServicePoints: {
+        [requestPolicyTypes[0]]: [id],
+      },
+    };
+    const expectedResult = {
+      requestTypes: [
+        true,
+        false,
+        false,
+      ],
+      requestTypesRules: {
+        ...requestTypesRules,
+        [requestPolicyTypes[0]]: REQUEST_TYPE_RULES.ALLOW_SOME,
+      },
+      allowedServicePoints: {
+        [requestPolicyTypes[0]]: [
+          {
+            label: name,
+            value: id,
+          }
+        ],
+      },
+    };
+
+    expect(parseInitialValues(servicePoints)(mockedValues)).toEqual(expectedResult);
   });
 });

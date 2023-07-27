@@ -3,6 +3,7 @@ import {
   render,
   screen,
   within,
+  cleanup,
 } from '@testing-library/react';
 
 import '../../../../../../test/jest/__mock__';
@@ -14,11 +15,14 @@ import {
   TextArea,
   TextField,
   Checkbox,
+  RadioButton,
+  MultiSelection,
 } from '@folio/stripes/components';
 import { Metadata } from '../../../../components';
 import GeneralSection, {
   renderTypes,
   getDataOptions,
+  validateServicePointsList,
 } from './GeneralSection';
 import {
   REQUEST_TYPE_RULES,
@@ -40,6 +44,8 @@ describe('GeneralSection', () => {
     accordion: 'ui-circulation.settings.requestPolicy.generalInformation',
     name: 'ui-circulation.settings.requestPolicy.policyName',
     description: 'ui-circulation.settings.requestPolicy.policyDescription',
+    allowAllServicePoints: 'ui-circulation.settings.requestPolicy.requestTypes.allowAll',
+    allowSomeServicePoints: 'ui-circulation.settings.requestPolicy.requestTypes.allowSome',
   };
   const fieldCallOrderByPlace = {
     name: 1,
@@ -76,6 +82,7 @@ describe('GeneralSection', () => {
     Metadata.mockClear();
     Field.mockClear();
     FieldArray.mockClear();
+    cleanup();
   });
 
   describe('when "isOpen" prop is true', () => {
@@ -175,22 +182,92 @@ describe('GeneralSection', () => {
       });
     };
 
-    beforeEach(() => {
-      render(
-        renderTypes({
-          ...renderTypesProps,
-          fields: {
-            value: [true],
-          },
-        })
-      );
+    describe('when all service points allowed', () => {
+      beforeEach(() => {
+        render(
+          renderTypes({
+            ...renderTypesProps,
+            fields: {
+              value: [true],
+            },
+          })
+        );
+      });
+
+      it('should render main label', () => {
+        expect(getById(testIds.policyTypes).getByText(policyTypesLabelId)).toBeVisible();
+      });
+
+      it('should render allow all service points label', () => {
+        const allowAllServicePointsLabel = screen.getByText(labelIds.allowAllServicePoints);
+
+        expect(allowAllServicePointsLabel).toBeInTheDocument();
+      });
+
+      it('should render allow some service points label', () => {
+        const allowSomeServicePointsLabel = screen.getByText(labelIds.allowSomeServicePoints);
+
+        expect(allowSomeServicePointsLabel).toBeInTheDocument();
+      });
+
+      it('should trigger allow all service points Field with correct props', () => {
+        const expectedProps = {
+          type: 'radio',
+          name: `requestTypesRules.${requestPolicyTypes[0]}`,
+          id: `${requestPolicyTypes[0]}AllowAllRadioButton`,
+          component: RadioButton,
+          value: REQUEST_TYPE_RULES.ALLOW_ALL,
+          onChange: expect.any(Function),
+          disabled: false,
+        };
+
+        expect(Field).toHaveBeenCalledWith(expect.objectContaining(expectedProps), {});
+      });
+
+      it('should trigger allow some service points Field with correct props', () => {
+        const expectedProps = {
+          type: 'radio',
+          name: `requestTypesRules.${requestPolicyTypes[0]}`,
+          id: `${requestPolicyTypes[0]}AllowSomeRadioButton`,
+          component: RadioButton,
+          value: REQUEST_TYPE_RULES.ALLOW_SOME,
+          onChange: expect.any(Function),
+          disabled: false,
+        };
+
+        expect(Field).toHaveBeenCalledWith(expect.objectContaining(expectedProps), {});
+      });
+
+      requestPolicyTypes.forEach(polycyTypeTest);
     });
 
-    it('should render main label', () => {
-      expect(getById(testIds.policyTypes).getByText(policyTypesLabelId)).toBeVisible();
-    });
+    describe('when some service points allowed', () => {
+      beforeEach(() => {
+        render(
+          renderTypes({
+            ...renderTypesProps,
+            requestTypesRules: {
+              Hold: REQUEST_TYPE_RULES.ALLOW_SOME,
+            },
+            fields: {
+              value: [true],
+            },
+          })
+        );
+      });
 
-    requestPolicyTypes.forEach(polycyTypeTest);
+      it('should trigger Field with correct props', () => {
+        const expectedProps = {
+          component: MultiSelection,
+          name: `allowedServicePoints.${requestPolicyTypes[0]}`,
+          id: `${requestPolicyTypes[0]}MultiSelect`,
+          validate: validateServicePointsList,
+          disabled: false,
+        };
+
+        expect(Field).toHaveBeenCalledWith(expect.objectContaining(expectedProps), {});
+      });
+    });
   });
 
   describe('getDataOptions', () => {
@@ -216,6 +293,20 @@ describe('GeneralSection', () => {
 
     it('should return empty array', () => {
       expect(getDataOptions()).toEqual([]);
+    });
+  });
+
+  describe('validateServicePointsList', () => {
+    it('should return undefined', () => {
+      const servicePoints = [{}];
+
+      expect(validateServicePointsList(servicePoints)).toBeUndefined();
+    });
+
+    it('should return an error', () => {
+      const servicePoints = [];
+
+      expect(validateServicePointsList(servicePoints)).toBeTruthy();
     });
   });
 });
