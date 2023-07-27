@@ -110,6 +110,7 @@ jest.mock('@folio/stripes/components', () => ({
   PaneMenu: jest.fn((props) => <div>{props.children}</div>),
   Paneset: jest.fn(({ children }) => (<div>{children}</div>)),
   RadioButton: jest.fn(() => <input type="radio" />),
+  RadioButtonGroup: jest.fn(({ children }) => (<div>{children}</div>)),
   Row: jest.fn(({ children, ...rest }) => <div {...rest}>{children}</div>),
   Select: jest.fn(() => <select> </select>),
   TextArea: jest.fn((props) => <textarea {...props} />),

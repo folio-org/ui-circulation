@@ -28,6 +28,10 @@ import {
   isEditLayer,
   validateUniqueNameById,
 } from '../utils/utils';
+import {
+  REQUEST_TYPE_RULES,
+  requestPolicyTypes,
+} from '../../constants';
 
 import css from './RequestPolicyForm.css';
 
@@ -45,6 +49,10 @@ class RequestPolicyForm extends React.Component {
     location: PropTypes.shape({
       search: PropTypes.string.isRequired,
     }).isRequired,
+    parentResources: PropTypes.shape({
+      requestPolicies: PropTypes.object,
+      servicePoints: PropTypes.object,
+    }).isRequired,
   };
 
   static defaultProps = {
@@ -58,7 +66,28 @@ class RequestPolicyForm extends React.Component {
       sections: {
         generalRequestPolicyForm: true,
       },
+      requestTypesRules: requestPolicyTypes.reduce((acc, name) => {
+        acc[name] = name;
+
+        return acc;
+      }, {}),
     };
+  }
+
+  componentDidMount() {
+    this.setRequestTypesRules();
+  }
+
+  componentDidUpdate(prevProps) {
+    const {
+      parentResources: {
+        requestPolicies,
+      },
+    } = this.props;
+
+    if (prevProps.parentResources.requestPolicies.records !== requestPolicies.records) {
+      this.setRequestTypesRules();
+    }
   }
 
   handleSectionToggle = ({ id }) => {
@@ -66,6 +95,53 @@ class RequestPolicyForm extends React.Component {
       sections[id] = !sections[id];
       return { sections };
     });
+  };
+
+  setRequestTypesRules = () => {
+    const {
+      parentResources: {
+        requestPolicies,
+      },
+      initialValues,
+    } = this.props;
+    const allowedServicePoints = requestPolicies.records
+      .find(({ id }) => id === initialValues.id)?.allowedServicePoints;
+
+    if (allowedServicePoints) {
+      const selectedRequestTypes = Object.keys(allowedServicePoints);
+      const rules = {};
+
+      selectedRequestTypes.forEach(requestType => {
+        rules[requestType] = REQUEST_TYPE_RULES.ALLOW_SOME;
+      });
+
+      this.setState((prevState) => ({
+        requestTypesRules: {
+          ...prevState.requestTypesRules,
+          ...rules,
+        },
+      }));
+    }
+  };
+
+  handleChangeRequestTypesRules = (e, requestType) => {
+    const {
+      form: {
+        change,
+      },
+    } = this.props;
+    const {
+      name,
+      value,
+    } = e.target;
+
+    this.setState((prevState) => ({
+      requestTypesRules: {
+        ...prevState.requestTypesRules,
+        [requestType]: value,
+      },
+    }));
+    change(name, value);
   };
 
   handleExpandAll = (sections) => {
@@ -108,17 +184,20 @@ class RequestPolicyForm extends React.Component {
       intl: {
         formatMessage,
       },
+      parentResources: {
+        servicePoints,
+        requestPolicies,
+      },
     } = this.props;
-
-    const { sections } = this.state;
-
+    const {
+      sections,
+      requestTypesRules,
+    } = this.state;
     const { values = {} } = getState();
     const policy = new RequestPolicy(values);
-
     const panelTitle = policy.id
       ? policy.name
       : formatMessage({ id: 'ui-circulation.settings.requestPolicy.createEntryLabel' });
-
     const footerPaneProps = {
       pristine,
       submitting,
@@ -128,6 +207,8 @@ class RequestPolicyForm extends React.Component {
     if (isEditLayer(search) && !id) {
       return null;
     }
+
+    const isDataLoading = servicePoints.isPending || requestPolicies.isPending;
 
     return (
       <form
@@ -164,6 +245,10 @@ class RequestPolicyForm extends React.Component {
                   metadata={policy.metadata}
                   connect={stripes.connect}
                   validateName={this.validateName}
+                  handleChangeRequestTypesRules={this.handleChangeRequestTypesRules}
+                  requestTypesRules={requestTypesRules}
+                  servicePoints={servicePoints.records}
+                  isLoading={isDataLoading}
                 />
               </AccordionSet>
             </>

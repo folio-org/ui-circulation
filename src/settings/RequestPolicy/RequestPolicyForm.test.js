@@ -22,7 +22,17 @@ import {
 import RequestPolicy from '../Models/RequestPolicy';
 
 jest.mock('./components', () => ({
-  GeneralSection: jest.fn(() => null),
+  GeneralSection: jest.fn(({
+    handleChangeRequestTypesRules,
+    ...rest
+  }) => (
+    <div {...rest}>
+      <input
+        data-testid="generalSectionInput"
+        onChange={handleChangeRequestTypesRules}
+      />
+    </div>
+  )),
 }));
 jest.mock('../components', () => ({
   CancelButton: jest.fn(() => null),
@@ -57,6 +67,7 @@ describe('RequestPolicyForm', () => {
   const testIds = {
     form: 'form',
     accordionSet: 'accordionSet',
+    generalSectionInput: 'generalSectionInput',
   };
   const okapi = {
     url: 'url',
@@ -78,6 +89,23 @@ describe('RequestPolicyForm', () => {
     location: {
       search: '',
     },
+    parentResources: {
+      requestPolicies: {
+        records: [
+          {
+            id: 'policyId',
+            allowedServicePoints: {
+              Page: ['servicePointId'],
+            },
+          }
+        ],
+        isPending: false,
+      },
+      servicePoints: {
+        records: [],
+        isPending: false,
+      },
+    },
   };
 
   afterEach(() => {
@@ -92,6 +120,7 @@ describe('RequestPolicyForm', () => {
   describe('with default props', () => {
     const form = {
       getState: jest.fn(() => ({})),
+      change: jest.fn(),
     };
 
     beforeEach(() => {
@@ -181,6 +210,7 @@ describe('RequestPolicyForm', () => {
     };
     const form = {
       getState: jest.fn(() => ({ values: initialValues })),
+      change: jest.fn(),
     };
 
     const testPolicy = new RequestPolicy(initialValues);
@@ -208,6 +238,20 @@ describe('RequestPolicyForm', () => {
       expect(GeneralSection).toHaveBeenCalledWith(expect.objectContaining({
         metadata: testPolicy.metadata,
       }), {});
+    });
+
+    it('should trigger "form.change" with correct arguments', () => {
+      const generalSectionInput = screen.getByTestId(testIds.generalSectionInput);
+      const event = {
+        target: {
+          value: 'testValue',
+          name: 'testName',
+        },
+      };
+
+      fireEvent.change(generalSectionInput, event);
+
+      expect(form.change).toHaveBeenCalledWith(event.target.name, event.target.value);
     });
 
     describe('validation check', () => {
@@ -309,6 +353,7 @@ describe('RequestPolicyForm', () => {
   describe('Edit layer without data', () => {
     const form = {
       getState: jest.fn(() => ({})),
+      change: jest.fn(),
     };
     const props = {
       ...defaultProps,

@@ -7,6 +7,9 @@ describe('RequestPolicy', () => {
     name: 'name',
     description: 'description',
     requestTypes: 'type',
+    allowedServicePoints: {
+      Hold: ['holdId']
+    },
     metadata: {
       createdByUserId: 'id',
       createdDate: 'date',
@@ -26,6 +29,7 @@ describe('RequestPolicy', () => {
       name: undefined,
       description: undefined,
       requestTypes: undefined,
+      allowedServicePoints: undefined,
       metadata: {
         createdByUserId: undefined,
         createdDate: undefined,

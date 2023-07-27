@@ -510,6 +510,8 @@ export const feeFineNoticesTriggeringEvents = [
   },
 ];
 
+export const MAX_RECORDS = '10000';
+
 export const MAX_UNPAGED_RESOURCE_COUNT = '1000';
 
 export default '';
@@ -563,4 +565,9 @@ export const TLR_FIELDS_FOR_RESET = [
 
 export const RECORD_SOURCE = {
   CONSORTIUM: 'consortium',
+};
+
+export const REQUEST_TYPE_RULES = {
+  ALLOW_ALL: 'allowAll',
+  ALLOW_SOME: 'allowSome',
 };
