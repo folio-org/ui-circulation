@@ -503,5 +503,8 @@
     "settings.finePolicy.reminderFees.clearPatronBlockWhenPaid": "Clear patron block when paid",
     "settings.titleLevelRequests.tlrHoldShouldFollowCirculationRules": "Fail to create title level hold when request is blocked by circulation rule",
     "settings.finePolicy.reminderFees.ignoreGracePeriodHolds": "Ignore grace periods for holds",
-    "settings.finePolicy.reminderFees.allowRenewalOfItemsWithReminderFees": "Allow renewal of items with reminder fee(s)"
+    "settings.finePolicy.reminderFees.allowRenewalOfItemsWithReminderFees": "Allow renewal of items with reminder fee(s)",
+    "settings.requestPolicy.errors.selectServicePoint": "Please select at least one service point",
+    "settings.requestPolicy.requestTypes.allowAll": "Allow all pickup service points",
+    "settings.requestPolicy.requestTypes.allowSome": "Allow some pickup service points"
 }

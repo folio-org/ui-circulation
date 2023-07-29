@@ -503,5 +503,8 @@
     "settings.finePolicy.reminderFees.clearPatronBlockWhenPaid": "Borrar el bloqueo de clientes cuando se paga",
     "settings.titleLevelRequests.tlrHoldShouldFollowCirculationRules": "No se puede crear una retención a nivel de título cuando la solicitud está bloqueada por una norma de circulación",
     "settings.finePolicy.reminderFees.ignoreGracePeriodHolds": "Ignorar los periodos de gracia de las retenciones",
-    "settings.finePolicy.reminderFees.allowRenewalOfItemsWithReminderFees": "Permitir la renovación de artículos con cargo(s) de recordatorio"
+    "settings.finePolicy.reminderFees.allowRenewalOfItemsWithReminderFees": "Permitir la renovación de artículos con cargo(s) de recordatorio",
+    "settings.requestPolicy.errors.selectServicePoint": "Please select at least one service point",
+    "settings.requestPolicy.requestTypes.allowAll": "Allow all pickup service points",
+    "settings.requestPolicy.requestTypes.allowSome": "Allow some pickup service points"
 }

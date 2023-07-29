@@ -503,5 +503,8 @@
     "settings.finePolicy.reminderFees.clearPatronBlockWhenPaid": "Limpar o bloqueio do usuário quando estiver pago",
     "settings.titleLevelRequests.tlrHoldShouldFollowCirculationRules": "Falha ao criar reserva ao nível de título quando a solicitação é bloqueada por uma regra de circulação",
     "settings.finePolicy.reminderFees.ignoreGracePeriodHolds": "Ignorar períodos de carência para reservas",
-    "settings.finePolicy.reminderFees.allowRenewalOfItemsWithReminderFees": "Permitir a renovação de itens com taxa(s) de lembrete"
+    "settings.finePolicy.reminderFees.allowRenewalOfItemsWithReminderFees": "Permitir a renovação de itens com taxa(s) de lembrete",
+    "settings.requestPolicy.errors.selectServicePoint": "Por favor, selecione pelo menos um ponto de serviço",
+    "settings.requestPolicy.requestTypes.allowAll": "Permitir todos os pontos de serviço de retirada",
+    "settings.requestPolicy.requestTypes.allowSome": "Permitir alguns pontos de serviço de retirada"
 }
