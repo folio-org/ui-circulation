@@ -36,6 +36,7 @@
 * Fix Circ rules editor crashes when certain special characters entered in filter box. Refs UICIRC-921.
 * Prevent editing of shared settings from outside "Consortium manager". Refs UICIRC-962.
 * Allowing Selection of Some Pickup Service Points as Optional When Creating a New Request Policy. Refs UICIRC-963.
+* Upgrade babel config. Refs UICIRC-968.
 
 ## [8.0.1](https://github.com/folio-org/ui-circulation/tree/v8.0.1) (2023-03-07)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v8.0.0...v8.0.1)
