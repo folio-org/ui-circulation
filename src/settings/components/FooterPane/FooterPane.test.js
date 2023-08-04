@@ -5,7 +5,10 @@ import {
   getByText,
 } from '@testing-library/react';
 
+import { runAxeTest } from '@folio/stripes-testing';
+
 import '../../../../test/jest/__mock__';
+
 import FooterPane from './FooterPane';
 
 const renderFooterPane = ({
@@ -27,6 +30,12 @@ describe('Footer Pane', () => {
   });
 
   afterEach(cleanup);
+
+  it('should render with no axe errors', async () => {
+    await runAxeTest({
+      rootNode: document.body,
+    });
+  });
 
   it('should be rendered', () => {
     const { container } = footerPane;
