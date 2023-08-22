@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   render,
-} from '@testing-library/react';
+} from '@folio/jest-config-stripes/testing-library/react';
 
 import '../../../test/jest/__mock__';
 
@@ -16,10 +16,6 @@ import {
   MODULE_NAMES,
   CONFIG_NAMES,
 } from '../../constants';
-
-jest.mock('@folio/stripes/core', () => ({
-  withStripes: jest.fn((component) => component),
-}));
 
 describe('TitleLevelRequests', () => {
   const paneTitleLabelId = 'ui-circulation.settings.titleLevelRequests.paneTitle';
