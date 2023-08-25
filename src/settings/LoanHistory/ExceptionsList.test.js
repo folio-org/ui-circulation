@@ -3,8 +3,8 @@ import {
   render,
   screen,
   within,
-} from '@testing-library/react';
-import fireEvent from '@testing-library/user-event';
+} from '@folio/jest-config-stripes/testing-library/react';
+import userEvent from '@folio/jest-config-stripes/testing-library/user-event';
 
 import '../../../test/jest/__mock__';
 
@@ -84,10 +84,10 @@ describe('ExceptionsList', () => {
       expect(ExceptionCard).toHaveBeenNthCalledWith(number, expect.objectContaining(expectedResult), {});
     });
 
-    it(`should correctly execute "handleRemoveField" for ${number} "ExceptionCard"`, () => {
+    it(`should correctly execute "handleRemoveField" for ${number} "ExceptionCard"`, async () => {
       expect(mockedFields.remove).toHaveBeenCalledTimes(0);
 
-      fireEvent.click(screen.getByTestId(`exeptionCard${number}`));
+      await userEvent.click(screen.getByTestId(`exeptionCard${number}`));
 
       expect(mockedFields.remove).toHaveBeenCalledWith(index);
     });
@@ -118,10 +118,10 @@ describe('ExceptionsList', () => {
     expect(within(screen.getByRole('button')).getByText(labelIds.exceptionAddButton)).toBeVisible();
   });
 
-  it('should correctly execute "handleAddField" on button click', () => {
+  it('should correctly execute "handleAddField" on button click', async () => {
     expect(mockedFields.push).toHaveBeenCalledTimes(0);
 
-    fireEvent.click(screen.getByRole('button'));
+    await userEvent.click(screen.getByRole('button'));
 
     expect(mockedFields.push).toHaveBeenCalledWith({});
   });

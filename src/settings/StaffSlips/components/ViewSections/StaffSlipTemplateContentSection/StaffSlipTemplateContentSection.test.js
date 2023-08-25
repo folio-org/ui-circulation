@@ -4,7 +4,7 @@ import {
   screen,
   fireEvent,
   within,
-} from '@testing-library/react';
+} from '@folio/jest-config-stripes/testing-library/react';
 
 import '../../../../../../test/jest/__mock__';
 
@@ -22,9 +22,9 @@ jest.mock('html-to-react', () => ({
       processDefaultNode: 'testDefaultNode',
     })),
   },
-  Parser: () => ({
+  Parser: jest.fn(() => ({
     parseWithInstructions: jest.fn(() => mockParseWithInstructionsReturnValue),
-  }),
+  })),
 }));
 jest.mock('@folio/stripes-template-editor', () => ({
   PreviewModal: jest.fn(({

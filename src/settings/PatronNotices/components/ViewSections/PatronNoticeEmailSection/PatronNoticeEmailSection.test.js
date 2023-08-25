@@ -4,7 +4,7 @@ import {
   render,
   screen,
   within,
-} from '@testing-library/react';
+} from '@folio/jest-config-stripes/testing-library/react';
 
 import '../../../../../../test/jest/__mock__';
 
@@ -37,9 +37,9 @@ jest.mock('html-to-react', () => ({
       processDefaultNode: 'defaultNode',
     })),
   },
-  Parser: () => ({
+  Parser:  jest.fn(() => ({
     parseWithInstructions: jest.fn(() => mockParseWithInstructionsReturnValue),
-  }),
+  })),
 }));
 
 describe('PatronNoticeEmailSection', () => {

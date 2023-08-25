@@ -2,7 +2,7 @@ import React from 'react';
 import {
   render,
   screen,
-} from '@testing-library/react';
+} from '@folio/jest-config-stripes/testing-library/react';
 import PropTypes from 'prop-types';
 
 import '../../../test/jest/__mock__';

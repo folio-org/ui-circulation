@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, within } from '@testing-library/react';
+import { render, screen, within } from '@folio/jest-config-stripes/testing-library/react';
 
 import '../../../../../../test/jest/__mock__';
 

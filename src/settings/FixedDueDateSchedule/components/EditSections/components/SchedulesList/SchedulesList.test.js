@@ -4,7 +4,7 @@ import {
   screen,
   within,
   fireEvent,
-} from '@testing-library/react';
+} from '@folio/jest-config-stripes/testing-library/react';
 import {
   isArray,
   uniqueId,
