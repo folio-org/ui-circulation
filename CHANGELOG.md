@@ -40,6 +40,7 @@
 * Add possible for run axe tests. Refs UICIRC-965.
 * Update Node.js to v18 in GitHub Actions. Refs UICIRC-969.
 * *BREAKING* Upgrade React to v18. Refs UICIRC-966.
+* Get rid of automatic alert after request failure. UICIRC-967.
 
 ## [8.0.1](https://github.com/folio-org/ui-circulation/tree/v8.0.1) (2023-03-07)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v8.0.0...v8.0.1)
