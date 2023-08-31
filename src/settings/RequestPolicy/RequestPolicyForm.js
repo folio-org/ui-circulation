@@ -48,6 +48,7 @@ class RequestPolicyForm extends React.Component {
     intl: PropTypes.object.isRequired,
     location: PropTypes.shape({
       search: PropTypes.string.isRequired,
+      pathname: PropTypes.string.isRequired,
     }).isRequired,
     parentResources: PropTypes.shape({
       requestPolicies: PropTypes.object,
@@ -102,10 +103,10 @@ class RequestPolicyForm extends React.Component {
       parentResources: {
         requestPolicies,
       },
-      initialValues,
+      location,
     } = this.props;
     const allowedServicePoints = requestPolicies.records
-      .find(({ id }) => id === initialValues.id)?.allowedServicePoints;
+      .find(({ id }) => location.pathname.includes(id))?.allowedServicePoints;
 
     if (allowedServicePoints) {
       const selectedRequestTypes = Object.keys(allowedServicePoints);
