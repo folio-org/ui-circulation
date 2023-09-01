@@ -79,6 +79,7 @@ describe('RequestPolicyForm', () => {
   };
   const onCancel = jest.fn();
   const handleSubmit = jest.fn();
+  const pathname = '/policyId/test';
   const defaultProps = {
     okapi,
     pristine: true,
@@ -88,6 +89,7 @@ describe('RequestPolicyForm', () => {
     handleSubmit,
     location: {
       search: '',
+      pathname,
     },
     parentResources: {
       requestPolicies: {
@@ -223,6 +225,7 @@ describe('RequestPolicyForm', () => {
           form={form}
           location={{
             search: 'edit',
+            pathname,
           }}
         />
       );
@@ -359,6 +362,7 @@ describe('RequestPolicyForm', () => {
       ...defaultProps,
       location: {
         search: 'edit',
+        pathname,
       },
     };
 
