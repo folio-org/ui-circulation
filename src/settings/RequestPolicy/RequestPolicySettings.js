@@ -60,6 +60,7 @@ class RequestPolicySettings extends React.Component {
         query: 'cql.allRecords=1',
         limit: MAX_UNPAGED_RESOURCE_COUNT,
       },
+      throwErrors: false,
     },
     circulationRules: {
       type: 'okapi',
