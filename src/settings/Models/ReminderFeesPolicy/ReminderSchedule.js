@@ -8,7 +8,7 @@ class ReminderSchedule {
     this.timeUnitId = reminderSchedule.timeUnitId;
     this.reminderFee = reminderSchedule.reminderFee;
     this.noticeMethodId = reminderSchedule.noticeMethodId;
-    this.noticeTemplateId = reminderSchedule.noticeTemplateId;
+    this.noticeFormat = reminderSchedule.noticeFormat;
     this.blockTemplateId = reminderSchedule.blockTemplateId;
   }
 }

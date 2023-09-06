@@ -12,7 +12,7 @@ import {
 
 import { timeUnits, noticeMethods } from '../../../../../constants';
 
-const visibleColumns = ['sequence', 'interval', 'timeUnitId', 'after', 'reminderFee', 'noticeMethodId', 'noticeTemplateId', 'blockTemplateId'];
+const visibleColumns = ['sequence', 'interval', 'timeUnitId', 'after', 'reminderFee', 'noticeMethodId', 'noticeFormat', 'blockTemplateId'];
 const columnMapping = {
   sequence: <FormattedMessage id="ui-circulation.settings.finePolicy.reminderFees.sequence" />,
   interval: <FormattedMessage id="ui-circulation.settings.finePolicy.reminderFees.interval" />,
@@ -20,7 +20,7 @@ const columnMapping = {
   after: <FormattedMessage id="ui-circulation.settings.finePolicy.reminderFees.after" />,
   reminderFee: <FormattedMessage id="ui-circulation.settings.finePolicy.reminderFees.fee" />,
   noticeMethodId: <FormattedMessage id="ui-circulation.settings.finePolicy.reminderFees.noticeMethod" />,
-  noticeTemplateId: <FormattedMessage id="ui-circulation.settings.finePolicy.reminderFees.noticeTemplate" />,
+  noticeFormat: <FormattedMessage id="ui-circulation.settings.finePolicy.reminderFees.noticeTemplate" />,
   blockTemplateId: <FormattedMessage id="ui-circulation.settings.finePolicy.reminderFees.blockTemplate" />,
 };
 const columnWidths = {
@@ -37,7 +37,7 @@ export const generateFormatter = (noticeTemplatesById, blockTemplatesById) => {
     sequence: (item) => (item.rowIndex + 1),
     reminderFee: (item) => parseFloat(item?.reminderFee || 0).toFixed(2),
     after: (item) => <FormattedMessage id={`ui-circulation.settings.finePolicy.reminderFees.${item.rowIndex ? 'previousReminder' : 'overdue'}`} />,
-    noticeTemplateId: (item) => noticeTemplatesById[item.noticeTemplateId]?.name ?? '',
+    noticeFormat: (item) => noticeTemplatesById[item.noticeFormat]?.name ?? '',
     blockTemplateId: (item) => blockTemplatesById[item.blockTemplateId]?.name ?? '',
     noticeMethodId: (item) => (noticeMethodsByValue[item.noticeMethodId]?.label ? <FormattedMessage id={noticeMethodsByValue[item.noticeMethodId]?.label} /> : ''),
     timeUnitId: (item) => <FormattedMessage id={timeUnitsByValue[item.timeUnitId]?.label} />,

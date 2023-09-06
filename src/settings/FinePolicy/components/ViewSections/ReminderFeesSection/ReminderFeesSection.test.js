@@ -41,7 +41,7 @@ describe('ReminderFeesSection', () => {
     const mockItem = {
       rowIndex: 1,
       reminderFee: '10',
-      noticeTemplateId: 'template1',
+      noticeFormat: 'template1',
       blockTemplateId: 'template3',
       noticeMethodId: 'Email',
       timeUnitId: 'day',
@@ -71,12 +71,12 @@ describe('ReminderFeesSection', () => {
       expect(container).toHaveTextContent('ui-circulation.settings.finePolicy.reminderFees.overdue');
     });
 
-    it('should format noticeTemplateId correctly', () => {
-      expect(formatter.noticeTemplateId(mockItem)).toEqual('Template 1');
+    it('should format noticeFormat correctly', () => {
+      expect(formatter.noticeFormat(mockItem)).toEqual('Template 1');
     });
 
-    it('should format noticeTemplateId correctly when template is not present', () => {
-      expect(formatter.noticeTemplateId({ ...mockItem, noticeTemplateId: null })).toEqual('');
+    it('should format noticeFormat correctly when template is not present', () => {
+      expect(formatter.noticeFormat({ ...mockItem, noticeFormat: null })).toEqual('');
     });
 
     it('should format blockTemplateId correctly', () => {
