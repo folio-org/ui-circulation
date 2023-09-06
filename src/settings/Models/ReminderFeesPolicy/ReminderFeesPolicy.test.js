@@ -17,7 +17,7 @@ describe('ReminderFeesPolicy', () => {
       expect(schedule.timeUnitId).toEqual(inputSchedule.timeUnitId);
       expect(schedule.reminderFee).toEqual(inputSchedule.reminderFee);
       expect(schedule.noticeMethodId).toEqual(inputSchedule.noticeMethodId);
-      expect(schedule.noticeFormat).toEqual(inputSchedule.noticeFormat);
+      expect(schedule.noticeTemplateId).toEqual(inputSchedule.noticeTemplateId);
     });
   });
 

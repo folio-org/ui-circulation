@@ -10,7 +10,7 @@ describe('ReminderSchedule', () => {
     expect(reminderSchedule.timeUnitId).toEqual(reminderScheduleData.timeUnitId);
     expect(reminderSchedule.reminderFee).toEqual(reminderScheduleData.reminderFee);
     expect(reminderSchedule.noticeMethodId).toEqual(reminderScheduleData.noticeMethodId);
-    expect(reminderSchedule.noticeFormat).toEqual(reminderScheduleData.noticeFormat);
+    expect(reminderSchedule.noticeTemplateId).toEqual(reminderScheduleData.noticeTemplateId);
   });
 
   it('handles missing input correctly', () => {
@@ -20,7 +20,7 @@ describe('ReminderSchedule', () => {
     expect(reminderSchedule.timeUnitId).toBeUndefined();
     expect(reminderSchedule.reminderFee).toBeUndefined();
     expect(reminderSchedule.noticeMethodId).toBeUndefined();
-    expect(reminderSchedule.noticeFormat).toBeUndefined();
+    expect(reminderSchedule.noticeTemplateId).toBeUndefined();
   });
 
   it('"defaultReminderFeesPolicy" should return correct data', () => {

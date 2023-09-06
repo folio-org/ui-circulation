@@ -9,7 +9,8 @@ const reminderFeesPolicy = {
       interval: 2,
       timeUnitId: 'day',
       reminderFee: 1,
-      noticeFormat: 'Email',
+      noticeMethodId: 'email',
+      noticeTemplateId: 'c4f23e08-3b0d-4424-afc3-1e228240a8b0'
     },
   ],
 };

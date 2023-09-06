@@ -148,7 +148,7 @@ const ReminderFeesFields = props => {
       <Col sm={2}>
         <Field
           aria-label={noticeTemplateLabel}
-          name={`${field}.noticeFormat`}
+          name={`${field}.noticeTemplateId`}
           component={Select}
           dataOptions={[{ label: formatMessage({ id: 'ui-circulation.settings.finePolicy.reminderFees.selectNoticeTemplate' }), value: '' }, ...noticeTemplateOptions]}
           disabled={!canEdit}
@@ -176,7 +176,7 @@ const ReminderFeesFields = props => {
         timeUnitId: 'day',
         reminderFee: null,
         noticeMethodId: '',
-        noticeFormat: '',
+        noticeTemplateId: '',
       })}
       headLabels={headLabels}
       renderField={renderField}
