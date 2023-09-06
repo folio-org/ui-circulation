@@ -14,7 +14,7 @@ describe('reminderFeesPolicyValidator', () => {
         rules: [Validation.RULES.IS_NOT_EMPTY, Validation.RULES.IS_FLOAT_GREATER_THAN_OR_EQUAL_TO_ZERO],
         shouldValidate: true,
       },
-      'reminderFeesPolicy.reminderSchedule[0].noticeMethodId': {
+      'reminderFeesPolicy.reminderSchedule[0].noticeFormat': {
         rules: [Validation.RULES.IS_NOT_EMPTY_SELECT],
         shouldValidate: true,
       },

@@ -43,7 +43,7 @@ describe('ReminderFeesSection', () => {
       reminderFee: '10',
       noticeTemplateId: 'template1',
       blockTemplateId: 'template3',
-      noticeMethodId: 'Email',
+      noticeFormat: 'Email',
       timeUnitId: 'day',
     };
 
@@ -87,8 +87,8 @@ describe('ReminderFeesSection', () => {
       expect(formatter.blockTemplateId({ ...mockItem, blockTemplateId: null })).toEqual('');
     });
 
-    it('should format noticeMethodId correctly', () => {
-      const { container } = render(<>{formatter.noticeMethodId(mockItem)}</>);
+    it('should format noticeFormat correctly', () => {
+      const { container } = render(<>{formatter.noticeFormat(mockItem)}</>);
       expect(container).toHaveTextContent('ui-circulation.settings.finePolicy.reminderFees.noticeMethods.email');
     });
 
