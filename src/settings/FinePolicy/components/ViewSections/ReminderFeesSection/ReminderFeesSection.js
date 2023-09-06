@@ -39,7 +39,7 @@ export const generateFormatter = (noticeTemplatesById, blockTemplatesById) => {
     after: (item) => <FormattedMessage id={`ui-circulation.settings.finePolicy.reminderFees.${item.rowIndex ? 'previousReminder' : 'overdue'}`} />,
     noticeTemplateId: (item) => noticeTemplatesById[item.noticeTemplateId]?.name ?? '',
     blockTemplateId: (item) => blockTemplatesById[item.blockTemplateId]?.name ?? '',
-    noticeMethodId: (item) => <FormattedMessage id={noticeMethodsByValue[item.noticeMethodId]?.label} />,
+    noticeMethodId: (item) => (noticeMethodsByValue[item.noticeMethodId]?.label ? <FormattedMessage id={noticeMethodsByValue[item.noticeMethodId]?.label} /> : ''),
     timeUnitId: (item) => <FormattedMessage id={timeUnitsByValue[item.timeUnitId]?.label} />,
   };
 };
@@ -63,6 +63,8 @@ const ReminderFeesSection = (props) => {
   const noticeTemplatesById = keyBy(noticeTemplates, 'id');
   const blockTemplatesById = keyBy(blockTemplates, 'id');
   const resultFormatter = generateFormatter(noticeTemplatesById, blockTemplatesById);
+
+  console.log('reminderSchedule', reminderSchedule);
 
   return (
     <Accordion
