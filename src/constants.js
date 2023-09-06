@@ -377,8 +377,9 @@ export const timeUnitsMap = {
 };
 
 export const noticeMethodMap = {
-  EMAIL: 'email',
-  MAIL: 'mail',
+  EMAIL: 'Email',
+  PRINT: 'Print',
+  NONE: 'None',
 };
 
 export const closingTypes = [
@@ -418,8 +419,12 @@ export const noticeMethods = [
     label: 'ui-circulation.settings.finePolicy.reminderFees.noticeMethods.email',
   },
   {
-    value: noticeMethodMap.MAIL,
-    label: 'ui-circulation.settings.finePolicy.reminderFees.noticeMethods.mail',
+    value: noticeMethodMap.PRINT,
+    label: 'ui-circulation.settings.finePolicy.reminderFees.noticeMethods.print',
+  },
+  {
+    value: noticeMethodMap.NONE,
+    label: 'ui-circulation.settings.finePolicy.reminderFees.noticeMethods.none',
   }
 ];
 

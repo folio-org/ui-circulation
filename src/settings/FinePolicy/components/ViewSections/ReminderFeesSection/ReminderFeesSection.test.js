@@ -43,7 +43,7 @@ describe('ReminderFeesSection', () => {
       reminderFee: '10',
       noticeTemplateId: 'template1',
       blockTemplateId: 'template3',
-      noticeMethodId: 'email',
+      noticeMethodId: 'Email',
       timeUnitId: 'day',
     };
 
