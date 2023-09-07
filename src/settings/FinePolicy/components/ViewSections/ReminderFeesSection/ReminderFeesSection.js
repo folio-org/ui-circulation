@@ -64,8 +64,6 @@ const ReminderFeesSection = (props) => {
   const blockTemplatesById = keyBy(blockTemplates, 'id');
   const resultFormatter = generateFormatter(noticeTemplatesById, blockTemplatesById);
 
-  console.log('reminderSchedule', reminderSchedule);
-
   return (
     <Accordion
       data-testid="reminderFeesTestId"
