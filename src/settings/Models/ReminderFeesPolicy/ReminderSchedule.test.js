@@ -9,7 +9,7 @@ describe('ReminderSchedule', () => {
     expect(reminderSchedule.interval).toEqual(reminderScheduleData.interval);
     expect(reminderSchedule.timeUnitId).toEqual(reminderScheduleData.timeUnitId);
     expect(reminderSchedule.reminderFee).toEqual(reminderScheduleData.reminderFee);
-    expect(reminderSchedule.noticeMethodId).toEqual(reminderScheduleData.noticeMethodId);
+    expect(reminderSchedule.noticeFormat).toEqual(reminderScheduleData.noticeFormat);
     expect(reminderSchedule.noticeTemplateId).toEqual(reminderScheduleData.noticeTemplateId);
   });
 
@@ -19,7 +19,7 @@ describe('ReminderSchedule', () => {
     expect(reminderSchedule.interval).toBeUndefined();
     expect(reminderSchedule.timeUnitId).toBeUndefined();
     expect(reminderSchedule.reminderFee).toBeUndefined();
-    expect(reminderSchedule.noticeMethodId).toBeUndefined();
+    expect(reminderSchedule.noticeFormat).toBeUndefined();
     expect(reminderSchedule.noticeTemplateId).toBeUndefined();
   });
 
