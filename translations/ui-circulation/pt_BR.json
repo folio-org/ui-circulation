@@ -495,7 +495,6 @@
     "settings.finePolicy.reminderFees.timeUnit.days": "Dia(s)",
     "settings.finePolicy.reminderFees.timeUnit.weeks": "Semana(s)",
     "settings.finePolicy.reminderFees.noticeMethods.email": "E-mail",
-    "settings.finePolicy.reminderFees.noticeMethods.mail": "Correio",
     "settings.finePolicy.reminderFees.blockTemplate": "Modelo de bloqueio",
     "settings.finePolicy.reminderFees.selectBlockTemplate": "Selecionar modelo de bloqueio",
     "settings.finePolicy.reminderFees.countClosed": "Contagem de dias/horas/minutos fechados",
@@ -506,5 +505,7 @@
     "settings.finePolicy.reminderFees.allowRenewalOfItemsWithReminderFees": "Permitir a renovação de itens com taxa(s) de lembrete",
     "settings.requestPolicy.errors.selectServicePoint": "Por favor, selecione pelo menos um ponto de serviço",
     "settings.requestPolicy.requestTypes.allowAll": "Permitir todos os pontos de serviço de retirada",
-    "settings.requestPolicy.requestTypes.allowSome": "Permitir alguns pontos de serviço de retirada"
+    "settings.requestPolicy.requestTypes.allowSome": "Permitir alguns pontos de serviço de retirada",
+    "settings.finePolicy.reminderFees.noticeMethods.print": "Imprimir",
+    "settings.finePolicy.reminderFees.noticeMethods.none": "Nenhum"
 }
