@@ -44,6 +44,7 @@
 * Get rid of automatic alert after request failure. UICIRC-967.
 * Change enums for notice method. UICIRC-973.
 * *BREAKING* bump `react-intl` to `v6.4.4`. Refs UICIRC-977.
+* Add informational message for Holds to New Request Policy page. Refs UICIRC-981.
 
 ## [8.0.1](https://github.com/folio-org/ui-circulation/tree/v8.0.1) (2023-03-07)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v8.0.0...v8.0.1)

@@ -147,10 +147,16 @@ export const renewFromOptions = [
   },
 ];
 
+export const REQUEST_POLICY_TYPES = {
+  HOLD: 'Hold',
+  PAGE: 'Page',
+  RECALL: 'Recall',
+};
+
 export const requestPolicyTypes = [
-  'Hold',
-  'Page',
-  'Recall',
+  REQUEST_POLICY_TYPES.HOLD,
+  REQUEST_POLICY_TYPES.PAGE,
+  REQUEST_POLICY_TYPES.RECALL,
 ];
 
 export const noticesFormatsMap = {

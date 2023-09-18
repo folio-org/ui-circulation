@@ -23,8 +23,10 @@ import GeneralSection, {
   renderTypes,
   getDataOptions,
   validateServicePointsList,
+  getRequestPolicyLabel,
 } from './GeneralSection';
 import {
+  REQUEST_POLICY_TYPES,
   REQUEST_TYPE_RULES,
   requestPolicyTypes,
 } from '../../../../../constants';
@@ -173,12 +175,11 @@ describe('GeneralSection', () => {
         component: Checkbox,
         type: 'checkbox',
         id: `${name.toLowerCase()}-checkbox`,
-        label: name,
         name: `requestTypes[${index}]`,
       };
 
       it(`should render ${name} policy with correct props`, () => {
-        expect(Field).toHaveBeenCalledWith(expectedResult, {});
+        expect(Field).toHaveBeenCalledWith(expect.objectContaining(expectedResult), {});
       });
     };
 
@@ -307,6 +308,20 @@ describe('GeneralSection', () => {
       const servicePoints = [];
 
       expect(validateServicePointsList(servicePoints)).toBeTruthy();
+    });
+  });
+
+  describe('getRequestPolicyLabel', () => {
+    it(`should return ${REQUEST_POLICY_TYPES.HOLD}`, () => {
+      expect(getRequestPolicyLabel(REQUEST_POLICY_TYPES.HOLD).props.children[0]).toEqual(REQUEST_POLICY_TYPES.HOLD);
+    });
+
+    it(`should return ${REQUEST_POLICY_TYPES.PAGE}`, () => {
+      expect(getRequestPolicyLabel(REQUEST_POLICY_TYPES.PAGE)).toEqual(REQUEST_POLICY_TYPES.PAGE);
+    });
+
+    it(`should return ${REQUEST_POLICY_TYPES.RECALL}`, () => {
+      expect(getRequestPolicyLabel(REQUEST_POLICY_TYPES.RECALL)).toEqual(REQUEST_POLICY_TYPES.RECALL);
     });
   });
 });
