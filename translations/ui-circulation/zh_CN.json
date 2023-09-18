@@ -495,7 +495,6 @@
     "settings.finePolicy.reminderFees.timeUnit.days": "天",
     "settings.finePolicy.reminderFees.timeUnit.weeks": "周",
     "settings.finePolicy.reminderFees.noticeMethods.email": "电子邮件",
-    "settings.finePolicy.reminderFees.noticeMethods.mail": "邮件",
     "settings.finePolicy.reminderFees.blockTemplate": "冻结模板",
     "settings.finePolicy.reminderFees.selectBlockTemplate": "选择冻结模板",
     "settings.finePolicy.reminderFees.countClosed": "计算关闭的天/小时/分钟",
@@ -506,5 +505,7 @@
     "settings.finePolicy.reminderFees.allowRenewalOfItemsWithReminderFees": "允许续借带有提醒费的单件",
     "settings.requestPolicy.errors.selectServicePoint": "请至少选择一个服务点",
     "settings.requestPolicy.requestTypes.allowAll": "允许全部取件服务点",
-    "settings.requestPolicy.requestTypes.allowSome": "允许某些取件服务点"
+    "settings.requestPolicy.requestTypes.allowSome": "允许某些取件服务点",
+    "settings.finePolicy.reminderFees.noticeMethods.print": "Print",
+    "settings.finePolicy.reminderFees.noticeMethods.none": "None"
 }

@@ -495,7 +495,6 @@
     "settings.finePolicy.reminderFees.timeUnit.days": "Tag(e)",
     "settings.finePolicy.reminderFees.timeUnit.weeks": "Woche(n)",
     "settings.finePolicy.reminderFees.noticeMethods.email": "E-Mail",
-    "settings.finePolicy.reminderFees.noticeMethods.mail": "Post",
     "settings.finePolicy.reminderFees.blockTemplate": "Vorlage für Kontosperren",
     "settings.finePolicy.reminderFees.selectBlockTemplate": "Vorlage für Kontosperren auswählen",
     "settings.finePolicy.reminderFees.countClosed": "Geschlossene Tage/Stunden/Minuten zählen",
@@ -506,5 +505,7 @@
     "settings.finePolicy.reminderFees.allowRenewalOfItemsWithReminderFees": "Verlängerung von Exemplaren mit Mahngebühr(en) zulassen",
     "settings.requestPolicy.errors.selectServicePoint": "Bitte mindestens eine Servicestelle auswählen",
     "settings.requestPolicy.requestTypes.allowAll": "Alle Abholservicestellen zulassen",
-    "settings.requestPolicy.requestTypes.allowSome": "Einige Abholservicestellen zulassen"
+    "settings.requestPolicy.requestTypes.allowSome": "Einige Abholservicestellen zulassen",
+    "settings.finePolicy.reminderFees.noticeMethods.print": "Print",
+    "settings.finePolicy.reminderFees.noticeMethods.none": "None"
 }

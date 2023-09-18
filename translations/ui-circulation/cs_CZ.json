@@ -495,7 +495,6 @@
     "settings.finePolicy.reminderFees.timeUnit.days": "Dny",
     "settings.finePolicy.reminderFees.timeUnit.weeks": "Týden(y)",
     "settings.finePolicy.reminderFees.noticeMethods.email": "E-mail",
-    "settings.finePolicy.reminderFees.noticeMethods.mail": "Pošta",
     "settings.finePolicy.reminderFees.blockTemplate": "Šablona blokace",
     "settings.finePolicy.reminderFees.selectBlockTemplate": "Vybrat šablonu blokace",
     "settings.finePolicy.reminderFees.countClosed": "Počítat i zavírací dny/hodiny/minuty",
@@ -506,5 +505,7 @@
     "settings.finePolicy.reminderFees.allowRenewalOfItemsWithReminderFees": "Povolit obnovení jednotek s poplatkem za připomenutí",
     "settings.requestPolicy.errors.selectServicePoint": "Vyberte prosím alespoň jeden pult služeb",
     "settings.requestPolicy.requestTypes.allowAll": "Povolit všechny pulty služeb vyzvednutí",
-    "settings.requestPolicy.requestTypes.allowSome": "Povolte některý pult služeb vyzvednutí"
+    "settings.requestPolicy.requestTypes.allowSome": "Povolte některý pult služeb vyzvednutí",
+    "settings.finePolicy.reminderFees.noticeMethods.print": "Tisk",
+    "settings.finePolicy.reminderFees.noticeMethods.none": "Žádný"
 }

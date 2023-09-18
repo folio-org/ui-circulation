@@ -495,7 +495,6 @@
     "settings.finePolicy.reminderFees.timeUnit.days": "Day(s)",
     "settings.finePolicy.reminderFees.timeUnit.weeks": "Week(s)",
     "settings.finePolicy.reminderFees.noticeMethods.email": "Email",
-    "settings.finePolicy.reminderFees.noticeMethods.mail": "Mail",
     "settings.finePolicy.reminderFees.blockTemplate": "Block template",
     "settings.finePolicy.reminderFees.selectBlockTemplate": "Select block template",
     "settings.finePolicy.reminderFees.countClosed": "Count closed days/hours/minutes",
@@ -506,5 +505,7 @@
     "settings.finePolicy.reminderFees.allowRenewalOfItemsWithReminderFees": "Allow renewal of items with reminder fee(s)",
     "settings.requestPolicy.errors.selectServicePoint": "Please select at least one service point",
     "settings.requestPolicy.requestTypes.allowAll": "Allow all pickup service points",
-    "settings.requestPolicy.requestTypes.allowSome": "Allow some pickup service points"
+    "settings.requestPolicy.requestTypes.allowSome": "Allow some pickup service points",
+    "settings.finePolicy.reminderFees.noticeMethods.print": "Print",
+    "settings.finePolicy.reminderFees.noticeMethods.none": "None"
 }
