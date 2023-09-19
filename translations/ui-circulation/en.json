@@ -298,6 +298,7 @@
   "settings.requestPolicy.policyName": "Request policy name",
   "settings.requestPolicy.policyDescription": "Description",
   "settings.requestPolicy.policyTypes": "Request types allowed",
+  "settings.requestPolicy.policyTypes.hold.infoPopover.content": "If the \"Fail to create title level hold when request is blocked by circulation rule\" setting is <strong>unchecked</strong>, title level holds will always be allowed. (Settings > Circulation > Title level requests)",
   "settings.requestPolicy.saveAndClose": "Save",
   "settings.requestPolicy.createEntryLabel": "New request policy",
   "settings.requestPolicy.errors.nameExists": "A request policy with this name already exists",
