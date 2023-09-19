@@ -1,7 +1,7 @@
+import { Field } from 'react-final-form';
+
 import { render } from '@folio/jest-config-stripes/testing-library/react';
 import { TemplateEditor } from '@folio/stripes-template-editor';
-
-import { Field } from 'react-final-form';
 
 import StaffSlipTemplateContentSection from './StaffSlipTemplateContentSection';
 import TokensList from '../../../TokensList';
