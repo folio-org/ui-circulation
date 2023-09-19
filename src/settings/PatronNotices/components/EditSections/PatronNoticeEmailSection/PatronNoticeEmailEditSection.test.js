@@ -1,10 +1,10 @@
+import { Field } from 'react-final-form';
+
 import {
   render,
   screen,
   within,
 } from '@folio/jest-config-stripes/testing-library/react';
-
-import { Field } from 'react-final-form';
 import {
   TextField,
   Row,
