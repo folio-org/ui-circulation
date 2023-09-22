@@ -36,6 +36,7 @@ const ReminderFeesSection = ({ sectionOpen, noticeTemplates, blockTemplates }) =
               name="reminderFeesPolicy.countClosed"
               autoFocus
               component={Select}
+              disabled
               dataOptions={dataOptions}
               required
             />
@@ -48,6 +49,7 @@ const ReminderFeesSection = ({ sectionOpen, noticeTemplates, blockTemplates }) =
               label={<FormattedMessage id="ui-circulation.settings.finePolicy.reminderFees.ignoreGracePeriodRecall" />}
               name="reminderFeesPolicy.ignoreGracePeriodRecall"
               component={Select}
+              disabled
               dataOptions={dataOptions}
             />
           </Col>
@@ -59,6 +61,7 @@ const ReminderFeesSection = ({ sectionOpen, noticeTemplates, blockTemplates }) =
               label={<FormattedMessage id="ui-circulation.settings.finePolicy.reminderFees.ignoreGracePeriodHolds" />}
               name="reminderFeesPolicy.ignoreGracePeriodHolds"
               component={Select}
+              disabled
               dataOptions={dataOptions}
             />
           </Col>
@@ -70,6 +73,7 @@ const ReminderFeesSection = ({ sectionOpen, noticeTemplates, blockTemplates }) =
               label={<FormattedMessage id="ui-circulation.settings.finePolicy.reminderFees.allowRenewalOfItemsWithReminderFees" />}
               name="reminderFeesPolicy.allowRenewalOfItemsWithReminderFees"
               component={Select}
+              disabled
               dataOptions={dataOptions}
             />
           </Col>
@@ -81,6 +85,7 @@ const ReminderFeesSection = ({ sectionOpen, noticeTemplates, blockTemplates }) =
               label={<FormattedMessage id="ui-circulation.settings.finePolicy.reminderFees.clearPatronBlockWhenPaid" />}
               name="reminderFeesPolicy.clearPatronBlockWhenPaid"
               component={Select}
+              disabled
               dataOptions={dataOptions}
             />
           </Col>
