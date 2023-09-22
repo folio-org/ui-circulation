@@ -46,6 +46,7 @@
 * *BREAKING* bump `react-intl` to `v6.4.4`. Refs UICIRC-977.
 * Add informational message for Holds to New Request Policy page. Refs UICIRC-981.
 * Restore previously deleted Jest/RTL tests that were failing. Refs UICIRC-971.
+* Add "hour" to the time frequency for reminder fees. Fixes UICIRC-983.
 
 ## [8.0.1](https://github.com/folio-org/ui-circulation/tree/v8.0.1) (2023-03-07)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v8.0.0...v8.0.1)
