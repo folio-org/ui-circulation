@@ -378,6 +378,7 @@ export const closingTypesMap = {
 };
 
 export const timeUnitsMap = {
+  HOUR: 'hour',
   DAY: 'day',
   WEEK: 'week',
 };
@@ -409,6 +410,10 @@ export const closedLoansRules = {
 };
 
 export const timeUnits = [
+  {
+    value: timeUnitsMap.HOUR,
+    label: 'ui-circulation.settings.finePolicy.reminderFees.timeUnit.hours',
+  },
   {
     value: timeUnitsMap.DAY,
     label: 'ui-circulation.settings.finePolicy.reminderFees.timeUnit.days',
