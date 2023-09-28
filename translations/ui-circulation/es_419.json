@@ -507,5 +507,7 @@
     "settings.requestPolicy.requestTypes.allowAll": "Permitir todos los puntos de servicio de recogida",
     "settings.requestPolicy.requestTypes.allowSome": "Permitir algunos puntos de servicio de recogida",
     "settings.finePolicy.reminderFees.noticeMethods.print": "Imprimir",
-    "settings.finePolicy.reminderFees.noticeMethods.none": "Ninguno"
+    "settings.finePolicy.reminderFees.noticeMethods.none": "Ninguno",
+    "settings.requestPolicy.policyTypes.hold.infoPopover.content": "If the \"Fail to create title level hold when request is blocked by circulation rule\" setting is <strong>unchecked</strong>, title level holds will always be allowed. (Settings > Circulation > Title level requests)",
+    "settings.finePolicy.reminderFees.timeUnit.hours": "Hour(s)"
 }

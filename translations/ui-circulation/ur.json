@@ -507,5 +507,7 @@
     "settings.requestPolicy.requestTypes.allowAll": "Allow all pickup service points",
     "settings.requestPolicy.requestTypes.allowSome": "Allow some pickup service points",
     "settings.finePolicy.reminderFees.noticeMethods.print": "Print",
-    "settings.finePolicy.reminderFees.noticeMethods.none": "None"
+    "settings.finePolicy.reminderFees.noticeMethods.none": "None",
+    "settings.requestPolicy.policyTypes.hold.infoPopover.content": "If the \"Fail to create title level hold when request is blocked by circulation rule\" setting is <strong>unchecked</strong>, title level holds will always be allowed. (Settings > Circulation > Title level requests)",
+    "settings.finePolicy.reminderFees.timeUnit.hours": "Hour(s)"
 }

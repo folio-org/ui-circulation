@@ -507,5 +507,7 @@
     "settings.requestPolicy.requestTypes.allowAll": "Povolit všechny pulty služeb vyzvednutí",
     "settings.requestPolicy.requestTypes.allowSome": "Povolte některý pult služeb vyzvednutí",
     "settings.finePolicy.reminderFees.noticeMethods.print": "Tisk",
-    "settings.finePolicy.reminderFees.noticeMethods.none": "Žádný"
+    "settings.finePolicy.reminderFees.noticeMethods.none": "Žádný",
+    "settings.requestPolicy.policyTypes.hold.infoPopover.content": "If the \"Fail to create title level hold when request is blocked by circulation rule\" setting is <strong>unchecked</strong>, title level holds will always be allowed. (Settings > Circulation > Title level requests)",
+    "settings.finePolicy.reminderFees.timeUnit.hours": "Hour(s)"
 }
