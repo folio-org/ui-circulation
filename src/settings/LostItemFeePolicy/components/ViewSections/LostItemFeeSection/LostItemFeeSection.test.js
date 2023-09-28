@@ -1,12 +1,9 @@
-import React from 'react';
 import { noop } from 'lodash';
 import {
   render,
   screen,
   within,
 } from '@folio/jest-config-stripes/testing-library/react';
-
-import '../../../../../../test/jest/__mock__';
 
 import LostItemFeeSection from './LostItemFeeSection';
 

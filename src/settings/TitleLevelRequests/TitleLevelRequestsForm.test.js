@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   render,
   screen,
@@ -6,8 +5,6 @@ import {
   cleanup,
   waitFor,
 } from '@folio/jest-config-stripes/testing-library/react';
-
-import '../../../test/jest/__mock__';
 
 import {
   Button,

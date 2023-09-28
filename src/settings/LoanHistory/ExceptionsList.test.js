@@ -1,12 +1,9 @@
-import React from 'react';
 import {
   render,
   screen,
   within,
 } from '@folio/jest-config-stripes/testing-library/react';
 import userEvent from '@folio/jest-config-stripes/testing-library/user-event';
-
-import '../../../test/jest/__mock__';
 
 import ExceptionCard from './ExceptionCard';
 import ExceptionsList from './ExceptionsList';

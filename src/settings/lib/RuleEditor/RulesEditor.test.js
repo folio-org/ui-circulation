@@ -8,8 +8,6 @@ import {
 import { Controlled as CodeMirror } from 'react-codemirror2';
 import Codemirror from 'codemirror';
 
-import '../../../../test/jest/__mock__';
-
 import RulesEditor, {
   handleBackspace,
   moveFocus,

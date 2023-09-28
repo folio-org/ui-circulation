@@ -1,11 +1,8 @@
-import React from 'react';
 import {
   render,
   screen,
   within,
 } from '@folio/jest-config-stripes/testing-library/react';
-
-import '../../../../../../test/jest/__mock__';
 
 import { FieldArray } from 'react-final-form-arrays';
 

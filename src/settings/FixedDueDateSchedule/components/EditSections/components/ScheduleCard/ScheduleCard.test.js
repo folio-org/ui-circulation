@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   render,
   screen,
@@ -6,8 +5,6 @@ import {
   fireEvent,
 } from '@folio/jest-config-stripes/testing-library/react';
 import moment from 'moment-timezone';
-
-import '../../../../../../../test/jest/__mock__';
 
 import { FormattedMessage } from 'react-intl';
 import {

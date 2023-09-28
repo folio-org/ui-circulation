@@ -3,8 +3,6 @@ import {
   screen,
 } from '@folio/jest-config-stripes/testing-library/react';
 
-import '../../../../test/jest/__mock__';
-
 import schedulesArrayValidator from './schedules';
 
 const ARRAY_ERROR = 'ARRAY_ERROR';
