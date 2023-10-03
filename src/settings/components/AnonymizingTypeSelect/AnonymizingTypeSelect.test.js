@@ -1,7 +1,4 @@
-import React from 'react';
 import { render, screen } from '@folio/jest-config-stripes/testing-library/react';
-
-import '../../../../test/jest/__mock__';
 
 import { Field } from 'react-final-form';
 

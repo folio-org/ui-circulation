@@ -1,5 +1,3 @@
-import React from 'react';
-
 import {
   EDITOR_KEYWORD,
   EDITOR_SPECIAL_SYMBOL,

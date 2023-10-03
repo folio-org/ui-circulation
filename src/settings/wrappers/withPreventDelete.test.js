@@ -1,11 +1,8 @@
-import React from 'react';
 import {
   render,
   screen,
 } from '@folio/jest-config-stripes/testing-library/react';
 import PropTypes from 'prop-types';
-
-import '../../../test/jest/__mock__';
 
 import withPreventDelete from './withPreventDelete';
 

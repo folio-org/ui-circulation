@@ -1,9 +1,6 @@
-import React from 'react';
 import {
   render,
 } from '@folio/jest-config-stripes/testing-library/react';
-
-import '../../../../test/jest/__mock__';
 
 import { TokensSection } from '@folio/stripes-template-editor';
 import TokensList from './TokensList';
