@@ -440,6 +440,7 @@
   "settings.finePolicy.reminderFees.selectNoticeMethod": "Select notice method",
   "settings.finePolicy.reminderFees.selectNoticeTemplate": "Select notice template",
   "settings.finePolicy.reminderFees.selectBlockTemplate": "Select block template",
+  "settings.finePolicy.reminderFees.timeUnit.minutes": "Minute(s)",
   "settings.finePolicy.reminderFees.timeUnit.hours": "Hour(s)",
   "settings.finePolicy.reminderFees.timeUnit.days": "Day(s)",
   "settings.finePolicy.reminderFees.timeUnit.weeks": "Week(s)",
