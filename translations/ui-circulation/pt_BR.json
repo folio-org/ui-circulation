@@ -509,5 +509,6 @@
     "settings.finePolicy.reminderFees.noticeMethods.print": "Imprimir",
     "settings.finePolicy.reminderFees.noticeMethods.none": "Nenhum",
     "settings.requestPolicy.policyTypes.hold.infoPopover.content": "Se a configuração \"Falha ao criar reserva de nível de título quando a solicitação for bloqueada pela regra de circulação\" estiver <strong>desmarcada</strong>, as reservas a nível de título sempre serão permitidas. (Configurações > Circulação > Solicitações de nível de título)",
-    "settings.finePolicy.reminderFees.timeUnit.hours": "Hora(s)"
+    "settings.finePolicy.reminderFees.timeUnit.hours": "Hora(s)",
+    "settings.finePolicy.reminderFees.timeUnit.minutes": "Minuto(s)"
 }

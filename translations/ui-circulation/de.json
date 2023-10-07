@@ -506,8 +506,9 @@
     "settings.requestPolicy.errors.selectServicePoint": "Bitte mindestens eine Servicestelle auswählen",
     "settings.requestPolicy.requestTypes.allowAll": "Alle Abholservicestellen zulassen",
     "settings.requestPolicy.requestTypes.allowSome": "Einige Abholservicestellen zulassen",
-    "settings.finePolicy.reminderFees.noticeMethods.print": "Print",
-    "settings.finePolicy.reminderFees.noticeMethods.none": "None",
-    "settings.requestPolicy.policyTypes.hold.infoPopover.content": "If the \"Fail to create title level hold when request is blocked by circulation rule\" setting is <strong>unchecked</strong>, title level holds will always be allowed. (Settings > Circulation > Title level requests)",
-    "settings.finePolicy.reminderFees.timeUnit.hours": "Hour(s)"
+    "settings.finePolicy.reminderFees.noticeMethods.print": "Druck",
+    "settings.finePolicy.reminderFees.noticeMethods.none": "Keine",
+    "settings.requestPolicy.policyTypes.hold.infoPopover.content": "Wenn die Einstellung \"Vormerkung auf Titelebene wird nicht erstellt, wenn die Bestandsanfrage durch Ausleihregeln blockiert wurde\" <strong>nicht aktiviert</strong> ist, werden Vormerkungen auf Titelebene immer zugelassen. (Einstellungen > Ausleihe > Bestandsanfragen auf Titelebene)",
+    "settings.finePolicy.reminderFees.timeUnit.hours": "Stunde(n)",
+    "settings.finePolicy.reminderFees.timeUnit.minutes": "Minute(n)"
 }
