@@ -1,6 +1,7 @@
 # Change history for ui-circulation
 
-## 9.0.0 IN PROGRESS
+## [9.0.0](https://github.com/folio-org/ui-circulation/tree/v9.0.0) (2023-10-12)
+[Full Changelog](https://github.com/folio-org/ui-circulation/compare/v8.0.1...v9.0.0)
 
 * Add metadata information to view of Staff Slips (Settings > Circulation > Staff Slips). Refs UICIRC-855.
 * Implement General information accordion. Refs UICIRC-909
