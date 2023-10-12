@@ -1,6 +1,6 @@
 # Change history for ui-circulation
 
-## 10.0.0 IN PROGRESS
+## 9.1.0 IN PROGRESS
 
 * Also support `feesfines` interface version `19.0`. Refs UICIRC-992.
 
