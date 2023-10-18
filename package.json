@@ -1,6 +1,6 @@
 {
   "name": "@folio/circulation",
-  "version": "9.0.0",
+  "version": "9.1.0",
   "description": "Circulation manager",
   "repository": "folio-org/ui-circulation",
   "publishConfig": {
@@ -34,7 +34,7 @@
       "patron-notice-policy-storage": "0.11",
       "location-units": "2.0",
       "locations": "3.0",
-      "feesfines": "16.0 17.0 18.0"
+      "feesfines": "16.0 17.0 18.0 19.0"
     },
     "permissionSets": [
       {
