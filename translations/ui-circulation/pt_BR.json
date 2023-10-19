@@ -180,7 +180,7 @@
     "settings.noticePolicy.notices.upon": "Em cima/em",
     "settings.noticePolicy.requestNotices.recallRequest": "Requisição de devolução antecipada",
     "settings.noticePolicy.requestNotices.holdRequest": "Requisição de reserva",
-    "settings.noticePolicy.requestNotices.pagingRequest": "Requisição de página",
+    "settings.noticePolicy.requestNotices.pagingRequest": "Requisição de item disponível",
     "settings.noticePolicy.requestNotices.available": "Aguardando retirada",
     "settings.noticePolicy.requestNotices.holdExpiration": "Expiração da reserva",
     "settings.noticePolicy.requestNotices.requestCancelation": "Cancelar requisição",
