@@ -386,7 +386,6 @@ export const timeUnitsMap = {
 export const noticeMethodMap = {
   EMAIL: 'Email',
   PRINT: 'Print',
-  NONE: 'None',
 };
 
 export const closingTypes = [
@@ -433,10 +432,6 @@ export const noticeMethods = [
     value: noticeMethodMap.PRINT,
     label: 'ui-circulation.settings.finePolicy.reminderFees.noticeMethods.print',
   },
-  {
-    value: noticeMethodMap.NONE,
-    label: 'ui-circulation.settings.finePolicy.reminderFees.noticeMethods.none',
-  }
 ];
 
 export const yesNoOptions = [
