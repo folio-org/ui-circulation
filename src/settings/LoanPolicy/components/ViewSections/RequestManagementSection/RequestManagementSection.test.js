@@ -5,26 +5,9 @@ import {
   render,
   screen,
   within,
-  fireEvent,
 } from '@folio/jest-config-stripes/testing-library/react';
 
-import { Accordion } from '@folio/stripes/components';
 import RequestManagementSection from './RequestManagementSection';
-
-Accordion.mockImplementation(jest.fn(({
-  children,
-  label,
-  onToggle,
-  ...rest
-}) => (
-  <section
-    onClick={onToggle}
-    {...rest}
-  >
-    <div>{label}</div>
-    {children}
-  </section>
-)));
 
 describe('RequestManagementSection', () => {
   const testIds = {
@@ -55,23 +38,15 @@ describe('RequestManagementSection', () => {
     });
   };
 
-  const accordionTest = (accordionType, testType = true) => {
+  const accordionTest = (accordionType) => {
     const labelId = `ui-circulation.settings.requestManagement.${accordionType}`;
 
-    it(`should render "${accordionType}" accordion with passed props`, () => {
-      if (testType) {
-        expect(screen.getByTestId(`${accordionType}AccordionTestId`)).toHaveAttribute('open');
-      } else {
-        expect(screen.getByTestId(`${accordionType}AccordionTestId`)).not.toHaveAttribute('open');
-      }
-
+    it(`should render "${accordionType}" accordion label`, () => {
       expect(getById(`${accordionType}AccordionTestId`).getByText(labelId)).toBeVisible();
-      fireEvent.click((screen.getByTestId(`${accordionType}AccordionTestId`)));
-      expect(mockedFunction).toHaveBeenCalledTimes(1);
     });
   };
 
-  describe('when accordions are open', () => {
+  describe('when prop "isVisible" is true', () => {
     beforeEach(() => {
       render(
         <RequestManagementSection
@@ -103,30 +78,6 @@ describe('RequestManagementSection', () => {
     sectionTest('renewItemsWithRequest', 'holds');
 
     sectionTest('alternateRenewalLoanPeriod', 'holds');
-  });
-
-  describe('when accordions is not open', () => {
-    beforeEach(() => {
-      render(
-        <RequestManagementSection
-          {...defaultProps}
-          isRecallsOpen={false}
-          isHoldsOpen={false}
-        />
-      );
-    });
-
-    afterEach(() => {
-      mockedFunction.mockClear();
-    });
-
-    it('should render component header', () => {
-      expect(getById(testIds.sectionHeaderTestId).getByText(labelIds.requestManagementLabelId)).toBeVisible();
-    });
-
-    accordionTest('recalls', false);
-
-    accordionTest('holds', false);
   });
 
   describe('when prop "isVisible" is false', () => {

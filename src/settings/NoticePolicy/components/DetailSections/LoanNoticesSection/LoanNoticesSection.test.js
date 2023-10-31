@@ -51,46 +51,24 @@ describe('LoanNoticesSection', () => {
     });
   };
 
-  describe('when it is open', () => {
-    beforeEach(() => {
-      render(
-        <LoanNoticesSection
-          isOpen
-          policy={mockedPolicy}
-          templates={mockedTemplates}
-        />
-      );
-    });
-
-    afterEach(() => {
-      NoticeCard.mockClear();
-    });
-
-    it('should render accrodion with label', () => {
-      expect(screen.getByTestId(testIds.viewLoanNoticesTestId)).toBeVisible();
-      expect(within(screen.getByTestId(testIds.viewLoanNoticesTestId)).getByText(labelIds.loanNoticesId)).toBeVisible();
-    });
-
-    it('should pass "isOpen" prop correctly', () => {
-      expect(screen.getByTestId(testIds.viewLoanNoticesTestId)).toHaveAttribute('open');
-    });
-
-    mockedPolicy.loanNotices.map(eachNoticeTest);
+  beforeEach(() => {
+    render(
+      <LoanNoticesSection
+        isOpen
+        policy={mockedPolicy}
+        templates={mockedTemplates}
+      />
+    );
   });
 
-  describe('when it is not open', () => {
-    beforeEach(() => {
-      render(
-        <LoanNoticesSection
-          isOpen={false}
-          policy={mockedPolicy}
-          templates={mockedTemplates}
-        />
-      );
-    });
-
-    it('should pass "isOpen" prop correctly', () => {
-      expect(screen.getByTestId(testIds.viewLoanNoticesTestId)).not.toHaveAttribute('open');
-    });
+  afterEach(() => {
+    NoticeCard.mockClear();
   });
+
+  it('should render accrodion with label', () => {
+    expect(screen.getByTestId(testIds.viewLoanNoticesTestId)).toBeVisible();
+    expect(within(screen.getByTestId(testIds.viewLoanNoticesTestId)).getByText(labelIds.loanNoticesId)).toBeVisible();
+  });
+
+  mockedPolicy.loanNotices.map(eachNoticeTest);
 });

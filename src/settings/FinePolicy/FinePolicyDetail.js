@@ -12,6 +12,7 @@ import { stripesShape } from '@folio/stripes/core';
 import {
   Accordion,
   AccordionSet,
+  AccordionStatus,
   Col,
   Row,
   ExpandAllButton,
@@ -36,29 +37,6 @@ class FinePolicyDetail extends React.Component {
 
   static defaultProps = {
     initialValues: {},
-  };
-
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      sections: {
-        generalFeePolicy: true,
-        viewFineSection: true,
-        reminderFeesSection: true,
-      },
-    };
-  }
-
-  handleExpandAll = (sections) => {
-    this.setState({ sections });
-  };
-
-  handleSectionToggle = ({ id }) => {
-    this.setState(({ sections }) => {
-      sections[id] = !sections[id];
-      return { sections };
-    });
   };
 
   getValue = (pathToValue) => {
@@ -88,47 +66,39 @@ class FinePolicyDetail extends React.Component {
       }
     } = this.props;
 
-    const { sections } = this.state;
     const finePolicy = new FinePolicy(policy);
 
     return (
       <div data-test-fine-policy-detail>
-        <Row end="xs">
-          <Col data-test-expand-all>
-            <ExpandAllButton
-              accordionStatus={sections}
-              onToggle={this.handleExpandAll}
+        <AccordionStatus>
+          <Row end="xs">
+            <Col data-test-expand-all>
+              <ExpandAllButton />
+            </Col>
+          </Row>
+          <AccordionSet>
+            <Accordion
+              id="generalFeePolicy"
+              label={formatMessage({ id: 'ui-circulation.settings.finePolicy.generalInformation' })}
+            >
+              <Metadata
+                connect={connect}
+                metadata={finePolicy.metadata}
+              />
+              <OverdueAboutSection getValue={this.getValue} />
+            </Accordion>
+            <FinesSection
+              policy={finePolicy}
+              getCheckboxValue={this.getCheckboxValue}m
             />
-          </Col>
-        </Row>
-        <AccordionSet
-          accordionStatus={sections}
-          onToggle={this.handleSectionToggle}
-        >
-          <Accordion
-            id="generalFeePolicy"
-            label={formatMessage({ id: 'ui-circulation.settings.finePolicy.generalInformation' })}
-            open={sections.generalFeePolicy}
-          >
-            <Metadata
-              connect={connect}
-              metadata={finePolicy.metadata}
+            <ReminderFeesSection
+              policy={finePolicy.reminderFeesPolicy}
+              getCheckboxValue={this.getCheckboxValue}
+              noticeTemplates={noticeTemplates}
+              blockTemplates={blockTemplates}
             />
-            <OverdueAboutSection getValue={this.getValue} />
-          </Accordion>
-          <FinesSection
-            policy={finePolicy}
-            getCheckboxValue={this.getCheckboxValue}
-            fineSectionOpen={sections.viewFineSection}
-          />
-          <ReminderFeesSection
-            policy={finePolicy.reminderFeesPolicy}
-            getCheckboxValue={this.getCheckboxValue}
-            noticeTemplates={noticeTemplates}
-            blockTemplates={blockTemplates}
-            sectionOpen={sections.reminderFeesSection}
-          />
-        </AccordionSet>
+          </AccordionSet>
+        </AccordionStatus>
       </div>
     );
   }
