@@ -13,6 +13,7 @@
   "settings.index.noticePolicies": "Patron notice policies",
   "settings.index.requestPolicies": "Request policies",
   "settings.index.titleLevelRequests": "Title level requests",
+  "settings.index.printHoldRequests": "Print hold requests",
   "settings.index.general": "General",
   "settings.index.loans": "Loans",
   "settings.index.feesFines": "Fee/fine",
@@ -320,6 +321,9 @@
   "settings.titleLevelRequests.defaultTemplateValue": "Select notice",
   "settings.titleLevelRequests.forbiddenDisableTlrModal.title": "Cannot change \"Allow title level requests\"",
   "settings.titleLevelRequests.forbiddenDisableTlrModal.description": "\"Allow title level requests\" cannot be changed because it is in use by one or more requests",
+
+  "settings.PrintHoldRequests.paneTitle": "Print hold requests",
+  "settings.PrintHoldRequests.allow": "Allow print hold requests (Open - Not yet filled)",
 
   "settings.noticePolicy.addNotice": "Add notice",
   "settings.noticePolicy.countableNotice": "Notice {counter}",
