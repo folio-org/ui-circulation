@@ -43,17 +43,6 @@ class LostItemFeePolicyDetail extends React.Component {
     initialValues: {},
   };
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      sections: {
-        LostItemFeeGeneralInformation: true,
-        viewLostItemFeeSection: true,
-      },
-    };
-  }
-
   getPathToValue = (pathToValue) => {
     const { initialValues: policy } = this.props;
     return get(policy, pathToValue);
@@ -98,15 +87,17 @@ class LostItemFeePolicyDetail extends React.Component {
               <ExpandAllButton />
             </Col>
           </Row>
-          <AccordionSet data-testid="accordionSet" >
+          <AccordionSet data-testid="accordionSet">
             <Accordion
               id="LostItemFeeGeneralInformation"
               label={formatMessage({ id: 'ui-circulation.settings.lostItemFee.generalInformation' })}
             >
-              <Metadata
-                connect={connect}
-                metadata={policy.metadata}
-              />
+              <AccordionSet>
+                <Metadata
+                  connect={connect}
+                  metadata={policy.metadata}
+                />
+              </AccordionSet>
               <LostItemFeeAboutSection getValue={this.getPathToValue} />
             </Accordion>
             <LostItemFeeSection

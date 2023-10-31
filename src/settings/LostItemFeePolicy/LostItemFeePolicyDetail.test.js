@@ -1,7 +1,6 @@
 import {
   render,
   screen,
-  fireEvent,
   within,
 } from '@folio/jest-config-stripes/testing-library/react';
 

@@ -15,7 +15,6 @@ import buildStripes from '../../../test/jest/__mock__/stripes.mock';
 import {
   FinesSection,
   OverdueAboutSection,
-  ReminderFeesSection,
 } from './components/ViewSections';
 import { Metadata } from '../components';
 import FinePolicyDetail from './FinePolicyDetail';

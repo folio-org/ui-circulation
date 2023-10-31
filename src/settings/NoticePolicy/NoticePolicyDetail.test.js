@@ -3,11 +3,6 @@ import {
   screen,
 } from '@folio/jest-config-stripes/testing-library/react';
 
-import {
-  ExpandAllButton,
-  AccordionSet,
-} from '@folio/stripes/components';
-
 import NoticePolicyDetail from './NoticePolicyDetail';
 import {
   GeneralSection,

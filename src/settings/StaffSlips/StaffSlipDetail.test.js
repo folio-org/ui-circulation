@@ -13,10 +13,6 @@ import buildStripes from '../../../test/jest/__mock__/stripes.mock';
 
 import StaffSlipDetail from './StaffSlipDetail';
 import { Metadata } from '../components';
-import {
-  StaffSlipAboutSection,
-  StaffSlipTemplateContentSection,
-} from './components/ViewSections';
 
 jest.mock('../components', () => ({
   Metadata: jest.fn(() => null),

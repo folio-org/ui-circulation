@@ -44,7 +44,7 @@ class RequestPolicyDetail extends React.Component {
               <ExpandAllButton data-testid="expandAllButton" />
             </Col>
           </Row>
-          <AccordionSet data-testid="accordionSet" >
+          <AccordionSet data-testid="accordionSet">
             <Accordion
               data-testid="generalInformation"
               id="general"
@@ -54,7 +54,6 @@ class RequestPolicyDetail extends React.Component {
                 connect={stripes.connect}
                 metadata={policy.metadata}
               />
-
               <Row>
                 <Col xs={12} data-request-policy-name>
                   <KeyValue

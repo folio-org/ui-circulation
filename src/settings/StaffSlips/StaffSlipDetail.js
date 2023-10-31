@@ -41,14 +41,22 @@ class StaffSlipDetail extends React.Component {
             </Col>
           </Row>
           <AccordionSet>
-            <Accordion label={<FormattedMessage id="ui-circulation.settings.staffSlips.generalInformation" />} >
-              <Metadata
-                connect={connect}
-                metadata={staffSlip.metadata}
-              />
+            <Accordion
+              id="generalInformation"
+              label={<FormattedMessage id="ui-circulation.settings.staffSlips.generalInformation" />}
+            >
+              <AccordionSet>
+                <Metadata
+                  connect={connect}
+                  metadata={staffSlip.metadata}
+                />
+              </AccordionSet>
               <StaffSlipAboutSection staffSlip={staffSlip} />
             </Accordion>
-            <Accordion label={<FormattedMessage id="ui-circulation.settings.staffSlips.templateContent" />} >
+            <Accordion
+              id="templateContent"
+              label={<FormattedMessage id="ui-circulation.settings.staffSlips.templateContent" />}
+            >
               <StaffSlipTemplateContentSection staffSlip={staffSlip} />
             </Accordion>
           </AccordionSet>

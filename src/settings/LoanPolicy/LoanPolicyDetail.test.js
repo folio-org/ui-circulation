@@ -64,11 +64,6 @@ describe('LoanPolicyDetail', () => {
   const testDefaultProps = {
     stripes: testStripes,
   };
-  const accordionDefaultStatus = {
-    generalLoanPolicyDetail: true,
-    recalls: true,
-    holds: true,
-  };
 
   const getById = (id) => within(screen.getByTestId(id));
 

@@ -89,7 +89,7 @@ class FinePolicyDetail extends React.Component {
             </Accordion>
             <FinesSection
               policy={finePolicy}
-              getCheckboxValue={this.getCheckboxValue}m
+              getCheckboxValue={this.getCheckboxValue}
             />
             <ReminderFeesSection
               policy={finePolicy.reminderFeesPolicy}

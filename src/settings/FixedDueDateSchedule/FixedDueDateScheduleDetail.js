@@ -47,14 +47,19 @@ class FixedDueDateScheduleDetail extends React.Component {
               <ExpandAllButton data-testid="expandAllButton" />
             </Col>
           </Row>
-          <AccordionSet data-testid="accordionSet" >
+          <AccordionSet data-testid="accordionSet">
             <Accordion
               data-testid="generalFixedDueDateScheduleDetail"
+              id="generalFixedDueDateScheduleDetail"
               label={<FormattedMessage id="ui-circulation.settings.fDDSform.about" />}
             >
               <section>
-                {(fixedDueDateSchedule.metadata && fixedDueDateSchedule.metadata.createdDate) &&
-                  <this.cViewMetaData metadata={fixedDueDateSchedule.metadata} />}
+                {
+                  fixedDueDateSchedule?.metadata?.createdDate &&
+                    <AccordionSet>
+                      <this.cViewMetaData metadata={fixedDueDateSchedule.metadata} />
+                    </AccordionSet>
+                }
                 <Row>
                   <Col xs={12}>
                     <KeyValue
@@ -75,6 +80,7 @@ class FixedDueDateScheduleDetail extends React.Component {
             </Accordion>
             <Accordion
               data-testid="fixedDueDateSchedule"
+              id="fixedDueDateSchedule"
               label={<FormattedMessage id="ui-circulation.settings.fDDSform.schedule" />}
             >
               <section>
