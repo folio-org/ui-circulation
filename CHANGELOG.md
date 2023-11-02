@@ -3,6 +3,10 @@
 ## 9.1.0 IN PROGRESS
 
 * Also support `feesfines` interface version `19.0`. Refs UICIRC-992.
+
+## [9.0.1](https://github.com/folio-org/ui-circulation/tree/v9.0.1) (2023-11-02)
+[Full Changelog](https://github.com/folio-org/ui-circulation/compare/v9.0.0...v9.0.1)
+
 * Remove `None` option from notice methods. Fixes UICIRC-995.
 
 ## [9.0.0](https://github.com/folio-org/ui-circulation/tree/v9.0.0) (2023-10-12)
