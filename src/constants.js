@@ -333,6 +333,7 @@ export const staffSlipMap = {
   TRANSIT: 'Transit',
   PICK_SLIP: 'Pick slip',
   REQUEST_DELIVERY: 'Request delivery',
+  SEARCH_SLIP_HOLD_REQUESTS: 'Search slip (Hold requests)',
 };
 
 export const patronNoticeCategoryIds = {
