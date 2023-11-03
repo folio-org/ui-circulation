@@ -103,10 +103,6 @@ describe('FeeFineNoticesSection', () => {
     expect(screen.getByText(labelIds.feeFineNotices)).toBeTruthy();
   });
 
-  it('should have `open` attribute', () => {
-    expect(screen.getByTestId(testIds.accordionTestId)).toHaveAttribute('open');
-  });
-
   describe('inner NoticeCard component', () => {
     mockedPolicy.feeFineNotices.map(eachRowTesting);
   });

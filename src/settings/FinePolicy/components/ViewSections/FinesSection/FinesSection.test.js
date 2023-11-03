@@ -60,7 +60,6 @@ describe('FinesSection', () => {
         <FinesSection
           policy={mockedPolicy}
           getCheckboxValue={mockedGetCheckboxValue}
-          fineSectionOpen
         />
       );
     });
@@ -71,10 +70,6 @@ describe('FinesSection', () => {
 
     it('should render component header', () => {
       expect(screen.getByText(labelIds.overdueFineIdTitle)).toBeVisible();
-    });
-
-    it('should pass "fineSectionOpen" correctly', () => {
-      expect(screen.getByTestId(testIds.viewFineSectionTestId)).toHaveAttribute('open');
     });
 
     it('should execute "getCheckboxValue" functions 3 times', () => {
@@ -122,34 +117,6 @@ describe('FinesSection', () => {
 
       expect(getElementByTestId(testIds.sectionMaxOverdueRecall).getByText(labelIds.maximumRecallOverdueFineId)).toBeVisible();
       expect(getElementByTestId(testIds.sectionMaxOverdueRecall).getByText(expectedResult)).toBeVisible();
-    });
-  });
-
-  describe('should render correctly with invalid values', () => {
-    const mockedPolicy = {
-      overdueFine: {
-        quantity: -1,
-      },
-      overdueRecallFine: {
-        quantity: -1,
-      },
-      countClosed: 111,
-      forgiveOverdueFine: 321,
-      gracePeriodRecall: 404,
-    };
-
-    beforeEach(() => {
-      render(
-        <FinesSection
-          policy={mockedPolicy}
-          getCheckboxValue={mockedGetCheckboxValue}
-          fineSectionOpen={false}
-        />
-      );
-    });
-
-    it('should pass "fineSectionOpen" correctly', () => {
-      expect(screen.getByTestId(testIds.viewFineSectionTestId)).not.toHaveAttribute('open');
     });
   });
 

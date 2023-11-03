@@ -14,6 +14,7 @@ import { stripesShape } from '@folio/stripes/core';
 import {
   Accordion,
   AccordionSet,
+  AccordionStatus,
   Col,
   Row,
   ExpandAllButton,
@@ -40,28 +41,6 @@ class LostItemFeePolicyDetail extends React.Component {
 
   static defaultProps = {
     initialValues: {},
-  };
-
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      sections: {
-        LostItemFeeGeneralInformation: true,
-        viewLostItemFeeSection: true,
-      },
-    };
-  }
-
-  handleExpandAll = (sections) => {
-    this.setState({ sections });
-  };
-
-  handleSectionToggle = ({ id }) => {
-    this.setState(({ sections }) => {
-      sections[id] = !sections[id];
-      return { sections };
-    });
   };
 
   getPathToValue = (pathToValue) => {
@@ -98,43 +77,36 @@ class LostItemFeePolicyDetail extends React.Component {
       },
     } = this.props;
 
-    const { sections } = this.state;
-
     const LostItemFeePolicy = new LostItemFee(policy);
 
     return (
       <div data-test-lost-item-fee-policy-detail>
-        <Row end="xs">
-          <Col data-test-expand-all>
-            <ExpandAllButton
-              accordionStatus={sections}
-              onToggle={this.handleExpandAll}
+        <AccordionStatus>
+          <Row end="xs">
+            <Col data-test-expand-all>
+              <ExpandAllButton />
+            </Col>
+          </Row>
+          <AccordionSet data-testid="accordionSet">
+            <Accordion
+              id="LostItemFeeGeneralInformation"
+              label={formatMessage({ id: 'ui-circulation.settings.lostItemFee.generalInformation' })}
+            >
+              <AccordionSet>
+                <Metadata
+                  connect={connect}
+                  metadata={policy.metadata}
+                />
+              </AccordionSet>
+              <LostItemFeeAboutSection getValue={this.getPathToValue} />
+            </Accordion>
+            <LostItemFeeSection
+              policy={LostItemFeePolicy}
+              getPeriodValue={this.getPeriod}
+              formatMessage={formatMessage}
             />
-          </Col>
-        </Row>
-        <AccordionSet
-          data-testid="accordionSet"
-          accordionStatus={sections}
-          onToggle={this.handleSectionToggle}
-        >
-          <Accordion
-            id="LostItemFeeGeneralInformation"
-            label={formatMessage({ id: 'ui-circulation.settings.lostItemFee.generalInformation' })}
-            open={sections.LostItemFeeGeneralInformation}
-          >
-            <Metadata
-              connect={connect}
-              metadata={policy.metadata}
-            />
-            <LostItemFeeAboutSection getValue={this.getPathToValue} />
-          </Accordion>
-          <LostItemFeeSection
-            policy={LostItemFeePolicy}
-            viewLostItemFeeSection={sections.viewLostItemFeeSection}
-            getPeriodValue={this.getPeriod}
-            formatMessage={formatMessage}
-          />
-        </AccordionSet>
+          </AccordionSet>
+        </AccordionStatus>
       </div>
     );
   }

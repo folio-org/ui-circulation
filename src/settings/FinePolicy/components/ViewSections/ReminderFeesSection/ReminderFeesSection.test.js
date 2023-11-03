@@ -16,7 +16,6 @@ describe('ReminderFeesSection', () => {
       <ReminderFeesSection
         getCheckboxValue={getCheckboxValue}
         policy={policy}
-        sectionOpen
         blockTemplates={[]}
         noticeTemplates={[]}
       />
