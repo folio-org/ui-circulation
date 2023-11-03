@@ -27,7 +27,6 @@ const FinesSection = (props) => {
   const {
     policy,
     getCheckboxValue,
-    fineSectionOpen,
   } = props;
   const { overdueFine, overdueRecallFine } = policy;
 
@@ -40,7 +39,6 @@ const FinesSection = (props) => {
         data-testid="viewFineSectionTestId"
         id="viewFineSection"
         label={<FormattedMessage id="ui-circulation.settings.finePolicy.overdueFineTitle" />}
-        open={fineSectionOpen}
       >
         <Row>
           <Col xs={12}>
@@ -141,7 +139,6 @@ const FinesSection = (props) => {
 FinesSection.propTypes = {
   policy: PropTypes.object.isRequired,
   getCheckboxValue: PropTypes.func.isRequired,
-  fineSectionOpen: PropTypes.bool.isRequired,
 };
 
 export default FinesSection;

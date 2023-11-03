@@ -2,13 +2,11 @@ import {
   render,
   screen,
   within,
-  fireEvent,
 } from '@folio/jest-config-stripes/testing-library/react';
 
 import { ViewMetaData } from '@folio/stripes/smart-components';
 import {
-  AccordionSet,
-  Accordion,
+  AccordionStatus,
   KeyValue,
 } from '@folio/stripes/components';
 
@@ -17,14 +15,6 @@ import FixedDueDateScheduleDetail from './FixedDueDateScheduleDetail';
 import SchedulesList from './components/DetailsSections/ScedulesList';
 
 jest.mock('./components/DetailsSections/ScedulesList', () => jest.fn(() => null));
-AccordionSet.mockImplementation(jest.fn(({ children, onToggle, ...rest }) => {
-  return (
-    // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
-    <div {...rest} onClick={() => onToggle({ id: 'generalFixedDueDateScheduleDetail' })}>
-      {children}
-    </div>
-  );
-}));
 
 describe('FixedDueDateScheduleDetail', () => {
   const mockedCreatedDate = Date.now();
@@ -54,11 +44,7 @@ describe('FixedDueDateScheduleDetail', () => {
   };
 
   afterEach(() => {
-    AccordionSet.mockClear();
-    Accordion.mockClear();
-    SchedulesList.mockClear();
-    ViewMetaData.mockClear();
-    KeyValue.mockClear();
+    jest.clearAllMocks();
   });
 
   describe('with fully passed "initialValues"', () => {
@@ -71,38 +57,20 @@ describe('FixedDueDateScheduleDetail', () => {
       );
     });
 
-    it('should render "Expand all" button', () => {
-      expect(screen.getByText('Toggle accordion state')).toBeVisible();
+    it('should trigger "AccordionStatus" component', () => {
+      expect(AccordionStatus).toHaveBeenCalled();
     });
 
-    it('should expand/collapse all accordions with "Expand all" button', () => {
-      expect(screen.getByTestId(testIds.generalDetail)).toHaveAttribute('open');
-      expect(screen.getByTestId(testIds.scheduleInfo)).toHaveAttribute('open');
-
-      fireEvent.click(screen.getByTestId(testIds.expandAllButton));
-
-      expect(screen.getByTestId(testIds.generalDetail)).not.toHaveAttribute('open');
-      expect(screen.getByTestId(testIds.scheduleInfo)).not.toHaveAttribute('open');
+    it('should render "Expand all" button', () => {
+      expect(screen.getByText('Toggle accordion state')).toBeVisible();
     });
 
     it('should render "AccordionSet"', () => {
       expect(screen.getByTestId(testIds.accordionSet)).toBeVisible();
     });
 
-    describe('"Accordion" open/close state', () => {
-      it('should be open by default', () => {
-        expect(screen.getByTestId(testIds.generalDetail)).toHaveAttribute('open');
-      });
-
-      it('should change status from open to close', () => {
-        fireEvent.click(screen.getByTestId(testIds.accordionSet));
-
-        expect(screen.getByTestId(testIds.generalDetail)).not.toHaveAttribute('open');
-      });
-    });
-
     describe('general detail "Accordion"', () => {
-      it('shouдd be rendered', () => {
+      it('should be rendered', () => {
         const element = screen.getByTestId(testIds.generalDetail);
 
         expect(element).toBeVisible();

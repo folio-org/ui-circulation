@@ -2,7 +2,6 @@ import {
   render,
   screen,
   within,
-  fireEvent,
 } from '@folio/jest-config-stripes/testing-library/react';
 
 import {
@@ -35,22 +34,8 @@ const mockLoanPolicyReturnValue = {
   loanable: true,
 };
 const mockTestIds = {
-  expandAllButton: 'expandAllButton',
   loansSection: 'loansSection',
-  accordion: 'accordion',
 };
-
-ExpandAllButton.mockImplementation(({ onToggle }) => (
-  // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
-  <div
-    data-testid={mockTestIds.expandAllButton}
-    onClick={() => onToggle({
-      generalLoanPolicyDetail: false,
-      recalls: false,
-      holds: false,
-    })}
-  />
-));
 
 jest.mock('./components/ViewSections', () => ({
   AboutSection: jest.fn(() => null),
@@ -79,11 +64,6 @@ describe('LoanPolicyDetail', () => {
   const testDefaultProps = {
     stripes: testStripes,
   };
-  const accordionDefaultStatus = {
-    generalLoanPolicyDetail: true,
-    recalls: true,
-    holds: true,
-  };
 
   const getById = (id) => within(screen.getByTestId(id));
 
@@ -106,9 +86,7 @@ describe('LoanPolicyDetail', () => {
     });
 
     it('should render ExpandAllButton component', () => {
-      expect(ExpandAllButton).toHaveBeenCalledWith(expect.objectContaining({
-        accordionStatus: accordionDefaultStatus,
-      }), {});
+      expect(ExpandAllButton).toHaveBeenCalled();
     });
 
     it('should render AccordionSet component', () => {
@@ -119,7 +97,6 @@ describe('LoanPolicyDetail', () => {
       expect(Accordion).toHaveBeenCalledWith(expect.objectContaining({
         id: mockGeneralLoanPolicyDetailId,
         label: labelIds.loanPolicyGeneralInformation,
-        open: accordionDefaultStatus.generalLoanPolicyDetail,
       }), {});
     });
 
@@ -150,8 +127,8 @@ describe('LoanPolicyDetail', () => {
     it('should render RequestManagementSection component', () => {
       expect(RequestManagementSection).toHaveBeenCalledWith(expect.objectContaining({
         isVisible: undefined,
-        isRecallsOpen: accordionDefaultStatus.recalls,
-        isHoldsOpen: accordionDefaultStatus.holds,
+        getPeriodValue: expect.any(Function),
+        getCheckboxValue: expect.any(Function),
       }), {});
     });
   });
@@ -215,58 +192,6 @@ describe('LoanPolicyDetail', () => {
       expect(RenewalsSection).toHaveBeenCalledWith(expect.objectContaining({
         isVisible: loanPolicyReturnValue.loanable,
       }), {});
-    });
-  });
-
-  describe('handleExpandAll method', () => {
-    beforeEach(() => {
-      render(
-        <LoanPolicyDetail {...testDefaultProps} />
-      );
-    });
-
-    it('should render components with default accordions statuses', () => {
-      expect(ExpandAllButton).toHaveBeenLastCalledWith(expect.objectContaining({
-        accordionStatus: accordionDefaultStatus,
-      }), {});
-
-      expect(Accordion).toHaveBeenLastCalledWith(
-        expect.objectContaining({
-          open: accordionDefaultStatus.generalLoanPolicyDetail,
-        }), {}
-      );
-
-      expect(RequestManagementSection).toHaveBeenLastCalledWith(
-        expect.objectContaining({
-          isRecallsOpen: accordionDefaultStatus.recalls,
-          isHoldsOpen: accordionDefaultStatus.holds,
-        }), {}
-      );
-    });
-
-    it('should expand all accordions statuses', () => {
-      fireEvent.click(screen.getByTestId(mockTestIds.expandAllButton));
-
-      expect(ExpandAllButton).toHaveBeenLastCalledWith(expect.objectContaining({
-        accordionStatus: {
-          generalLoanPolicyDetail: false,
-          recalls: false,
-          holds: false,
-        },
-      }), {});
-
-      expect(Accordion).toHaveBeenLastCalledWith(
-        expect.objectContaining({
-          open: false,
-        }), {}
-      );
-
-      expect(RequestManagementSection).toHaveBeenLastCalledWith(
-        expect.objectContaining({
-          isRecallsOpen: false,
-          isHoldsOpen: false,
-        }), {}
-      );
     });
   });
 
@@ -340,45 +265,6 @@ describe('LoanPolicyDetail', () => {
       );
 
       expect(getById(mockTestIds.loansSection).getByText(testValue)).toBeVisible();
-    });
-  });
-
-  describe('handleSectionToggle method', () => {
-    it('should expand accordion', () => {
-      Accordion.mockImplementationOnce(({ onToggle, children }) => (
-        // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
-        <div
-          data-testid={mockTestIds.accordion}
-          onClick={() => onToggle({ id: mockGeneralLoanPolicyDetailId })}
-        >
-          {children}
-        </div>
-      ));
-
-      render(
-        <LoanPolicyDetail {...testDefaultProps} />
-      );
-
-      expect(ExpandAllButton).toHaveBeenLastCalledWith(expect.objectContaining({
-        accordionStatus: accordionDefaultStatus,
-      }), {});
-
-      expect(Accordion).toHaveBeenLastCalledWith(expect.objectContaining({
-        open: accordionDefaultStatus.generalLoanPolicyDetail,
-      }), {});
-
-      fireEvent.click(screen.getByTestId(mockTestIds.accordion));
-
-      expect(ExpandAllButton).toHaveBeenLastCalledWith(expect.objectContaining({
-        accordionStatus: {
-          ...accordionDefaultStatus,
-          generalLoanPolicyDetail: false,
-        },
-      }), {});
-
-      expect(Accordion).toHaveBeenLastCalledWith(expect.objectContaining({
-        open: false,
-      }), {});
     });
   });
 

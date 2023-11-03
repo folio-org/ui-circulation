@@ -2,7 +2,6 @@ import {
   render,
   screen,
   within,
-  fireEvent,
 } from '@folio/jest-config-stripes/testing-library/react';
 
 import {
@@ -18,14 +17,6 @@ import { Metadata } from '../components';
 
 jest.mock('../components', () => ({
   Metadata: jest.fn(() => null),
-}));
-AccordionSet.mockImplementation(jest.fn(({ children, onToggle, ...rest }) => {
-  return (
-    // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
-    <div {...rest} onClick={() => onToggle({ id: 'general' })}>
-      {children}
-    </div>
-  );
 }));
 
 const mockedStripes = buildStripes();
@@ -73,28 +64,8 @@ describe('RequestPolicyDetail', () => {
       expect(screen.getByText('Toggle accordion state')).toBeVisible();
     });
 
-    it('should expand/collapse all accordions with "Expand all" button', () => {
-      expect(screen.getByTestId(testIds.generalInformation)).toHaveAttribute('open');
-
-      fireEvent.click(screen.getByTestId(testIds.expandAllButton));
-
-      expect(screen.getByTestId(testIds.generalInformation)).not.toHaveAttribute('open');
-    });
-
     it('should render "AccordionSet"', () => {
       expect(screen.getByTestId(testIds.accordionSet)).toBeVisible();
-    });
-
-    describe('"Accordion" open/close state', () => {
-      it('should be open by default', () => {
-        expect(screen.getByTestId(testIds.generalInformation)).toHaveAttribute('open');
-      });
-
-      it('should change from open to close', () => {
-        fireEvent.click(screen.getByTestId(testIds.accordionSet));
-
-        expect(screen.getByTestId(testIds.generalInformation)).not.toHaveAttribute('open');
-      });
     });
 
     describe('general information "Accordion"', () => {

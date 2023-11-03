@@ -12,7 +12,6 @@ import {
 const LostItemFeeSection = (props) => {
   const {
     policy,
-    lostItemFeeSectionOpen,
     getPeriodValue,
   } = props;
 
@@ -52,7 +51,6 @@ const LostItemFeeSection = (props) => {
         data-testid="viewLostItemFeeSectionAccordion"
         id="viewLostItemFeeSection"
         label={<FormattedMessage id="ui-circulation.settings.lostItemFee.lostItemSection" />}
-        open={lostItemFeeSectionOpen}
       >
         <Row>
           <Col xs={12}>
@@ -258,7 +256,6 @@ const LostItemFeeSection = (props) => {
 
 LostItemFeeSection.propTypes = {
   policy: PropTypes.object.isRequired,
-  lostItemFeeSectionOpen: PropTypes.bool.isRequired,
   getPeriodValue: PropTypes.func.isRequired,
   formatMessage: PropTypes.func.isRequired,
 };

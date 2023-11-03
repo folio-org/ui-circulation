@@ -7,6 +7,7 @@
 * Fix permission error for Settings (Circ): Can create, edit and remove overdue fine policies. Refs UICIRC-1013.
 * Fix wrong position of "Cancel" and "Save & close" button. Refs UICIRC-1014.
 * Extend "Settings (Circ): Can create, edit and remove request policies" permission to be able to see service points. Refs UICIRC-1016.
+* Fix problem with accordions on Circulation settings page. Refs UICIRC-1009.
 
 ## [9.0.0](https://github.com/folio-org/ui-circulation/tree/v9.0.0) (2023-10-12)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v8.0.1...v9.0.0)
