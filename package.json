@@ -227,7 +227,8 @@
           "circulation-storage.request-policies.item.put",
           "users.collection.get",
           "users.item.get",
-          "settings.circulation.enabled"
+          "settings.circulation.enabled",
+          "inventory-storage.service-points.collection.get"
         ],
         "visible": true
       },
@@ -265,8 +266,10 @@
         "displayName": "Settings (Circ): Can view overdue fine policies",
         "subPermissions": [
           "circulation.loans.collection.get",
+          "manual-block-templates.collection.get",
           "overdue-fines-policies.collection.get",
           "overdue-fines-policies.item.get",
+          "templates.collection.get",
           "users.collection.get",
           "users.item.get",
           "settings.circulation.enabled"
