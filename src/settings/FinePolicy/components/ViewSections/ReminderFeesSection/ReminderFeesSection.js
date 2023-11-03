@@ -47,7 +47,6 @@ export const generateFormatter = (noticeTemplatesById, blockTemplatesById) => {
 const ReminderFeesSection = (props) => {
   const {
     policy,
-    sectionOpen,
     noticeTemplates,
     blockTemplates,
     getCheckboxValue,
@@ -69,7 +68,6 @@ const ReminderFeesSection = (props) => {
       data-testid="reminderFeesTestId"
       id="reminderFeesSection"
       label={<FormattedMessage id="ui-circulation.settings.finePolicy.reminderFees.label" />}
-      open={sectionOpen}
     >
       <Row>
         <Col xs={12}>
@@ -128,7 +126,6 @@ const ReminderFeesSection = (props) => {
 
 ReminderFeesSection.propTypes = {
   policy: PropTypes.object.isRequired,
-  sectionOpen: PropTypes.bool.isRequired,
   noticeTemplates: PropTypes.arrayOf(PropTypes.object),
   blockTemplates: PropTypes.arrayOf(PropTypes.object),
   getCheckboxValue: PropTypes.func.isRequired,

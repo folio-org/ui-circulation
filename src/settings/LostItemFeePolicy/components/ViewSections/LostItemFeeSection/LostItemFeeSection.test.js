@@ -119,7 +119,6 @@ describe('View LostItemFeeSection', () => {
       const viewLostItemFeeSectionAccordionTestIdValue = screen.getByTestId(testIds.viewLostItemFeeSectionAccordion);
 
       expect(viewLostItemFeeSectionAccordionTestIdValue).toBeVisible();
-      expect(viewLostItemFeeSectionAccordionTestIdValue).toHaveAttribute('open');
       expect(within(viewLostItemFeeSectionAccordionTestIdValue).getByText(labelIds.lostItemSectionAccordionLabel)).toBeVisible();
     });
 

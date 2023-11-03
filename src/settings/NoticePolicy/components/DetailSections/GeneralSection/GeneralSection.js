@@ -13,7 +13,6 @@ import { Metadata } from '../../../../components';
 
 const GeneralSection = (props) => {
   const {
-    isOpen,
     connect,
     metadata,
     policyName,
@@ -29,7 +28,6 @@ const GeneralSection = (props) => {
     <div data-test-notice-policy-detail-general-section>
       <Accordion
         data-testid="generalInformationTestId"
-        open={isOpen}
         id="generalNoticePolicy"
         label={<FormattedMessage id="ui-circulation.settings.loanPolicy.generalInformation" />}
       >
@@ -77,7 +75,6 @@ const GeneralSection = (props) => {
 
 GeneralSection.propTypes = {
   metadata: PropTypes.object.isRequired,
-  isOpen: PropTypes.bool.isRequired,
   isPolicyActive: PropTypes.bool,
   policyName: PropTypes.string.isRequired,
   policyDescription: PropTypes.string,

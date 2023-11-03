@@ -39,58 +39,36 @@ describe('RequestNoticesSection', () => {
     },
   ];
 
-  describe('when "isOpen" prop is true', () => {
-    beforeEach(() => {
-      render(
-        <RequestNoticesSection
-          isOpen
-          policy={mockedPolicy}
-          templates={mockedTemplates}
-        />
-      );
-    });
-
-    afterEach(() => {
-      NoticeCard.mockClear();
-    });
-
-    it('should render accordion label correctly', () => {
-      expect(within(screen.getByTestId(testIds.viewRequestNoticesTestId)).getByText(labelIds.requestNoticesId)).toBeVisible();
-    });
-
-    it('should pass "isOpen" prop correctly', () => {
-      expect(screen.getByTestId(testIds.viewRequestNoticesTestId)).toHaveAttribute('open');
-    });
-
-    it('should execute each "NoticeCard" with correct props', () => {
-      mockedPolicy.requestNotices.forEach((notice, index) => {
-        const expectedResult = {
-          index,
-          notice,
-          sendEvents: uponAndBeforeSendEvents,
-          sendEventTriggeringIds: Object.values(requestTimeBasedEventsIds),
-          templates: mockedTemplates,
-          triggeringEvents: requestNoticesTriggeringEvents,
-        };
-
-        expect(NoticeCard).toHaveBeenNthCalledWith(index + 1, expectedResult, {});
-      });
-    });
+  beforeEach(() => {
+    render(
+      <RequestNoticesSection
+        isOpen
+        policy={mockedPolicy}
+        templates={mockedTemplates}
+      />
+    );
   });
 
-  describe('when "isOpen" prop is false', () => {
-    beforeEach(() => {
-      render(
-        <RequestNoticesSection
-          isOpen={false}
-          policy={mockedPolicy}
-          templates={mockedTemplates}
-        />
-      );
-    });
+  afterEach(() => {
+    NoticeCard.mockClear();
+  });
 
-    it('should pass "isOpen" prop correctly', () => {
-      expect(screen.getByTestId(testIds.viewRequestNoticesTestId)).not.toHaveAttribute('open');
+  it('should render accordion label correctly', () => {
+    expect(within(screen.getByTestId(testIds.viewRequestNoticesTestId)).getByText(labelIds.requestNoticesId)).toBeVisible();
+  });
+
+  it('should execute each "NoticeCard" with correct props', () => {
+    mockedPolicy.requestNotices.forEach((notice, index) => {
+      const expectedResult = {
+        index,
+        notice,
+        sendEvents: uponAndBeforeSendEvents,
+        sendEventTriggeringIds: Object.values(requestTimeBasedEventsIds),
+        templates: mockedTemplates,
+        triggeringEvents: requestNoticesTriggeringEvents,
+      };
+
+      expect(NoticeCard).toHaveBeenNthCalledWith(index + 1, expectedResult, {});
     });
   });
 });
