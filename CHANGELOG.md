@@ -8,6 +8,7 @@
 * Extend "Settings (Circ): Can create, edit and remove request policies" permission to be able to see service points. Refs UICIRC-1016.
 * Fix problem with accordions on Circulation settings page. Refs UICIRC-1009.
 * Create and Display new Staff slip (Search slip (Hold requests)). Refs UICIRC-1001.
+* Create a new Circulation setting Print hold requests (Open – Not yet filled) – Printing search slips. Refs UICIRC-1000.
 
 ## [9.0.1](https://github.com/folio-org/ui-circulation/tree/v9.0.1) (2023-11-02)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v9.0.0...v9.0.1)
