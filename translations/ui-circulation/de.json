@@ -510,5 +510,8 @@
     "settings.finePolicy.reminderFees.noticeMethods.none": "Keine",
     "settings.requestPolicy.policyTypes.hold.infoPopover.content": "Wenn die Einstellung \"Vormerkung auf Titelebene wird nicht erstellt, wenn die Bestandsanfrage durch Ausleihregeln blockiert wurde\" <strong>nicht aktiviert</strong> ist, werden Vormerkungen auf Titelebene immer zugelassen. (Einstellungen > Ausleihe > Bestandsanfragen auf Titelebene)",
     "settings.finePolicy.reminderFees.timeUnit.hours": "Stunde(n)",
-    "settings.finePolicy.reminderFees.timeUnit.minutes": "Minute(n)"
+    "settings.finePolicy.reminderFees.timeUnit.minutes": "Minute(n)",
+    "settings.index.printHoldRequests": "Print hold requests",
+    "settings.PrintHoldRequests.paneTitle": "Print hold requests",
+    "settings.PrintHoldRequests.allow": "Allow print hold requests (Open - Not yet filled)"
 }

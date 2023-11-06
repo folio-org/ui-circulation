@@ -510,5 +510,8 @@
     "settings.finePolicy.reminderFees.noticeMethods.none": "Ninguno",
     "settings.requestPolicy.policyTypes.hold.infoPopover.content": "If the \"Fail to create title level hold when request is blocked by circulation rule\" setting is <strong>unchecked</strong>, title level holds will always be allowed. (Settings > Circulation > Title level requests)",
     "settings.finePolicy.reminderFees.timeUnit.hours": "Hora(s)",
-    "settings.finePolicy.reminderFees.timeUnit.minutes": "Minuto(s)"
+    "settings.finePolicy.reminderFees.timeUnit.minutes": "Minuto(s)",
+    "settings.index.printHoldRequests": "Print hold requests",
+    "settings.PrintHoldRequests.paneTitle": "Print hold requests",
+    "settings.PrintHoldRequests.allow": "Allow print hold requests (Open - Not yet filled)"
 }
