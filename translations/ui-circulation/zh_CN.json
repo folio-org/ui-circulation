@@ -510,5 +510,8 @@
     "settings.finePolicy.reminderFees.noticeMethods.none": "无",
     "settings.requestPolicy.policyTypes.hold.infoPopover.content": "如果“请求被流通规则阻止时无法创建标题级别预约”设置<strong>未选中</strong> ，则始终允许标题级别预约。（设置>流通>标题级别请求）",
     "settings.finePolicy.reminderFees.timeUnit.hours": "小时",
-    "settings.finePolicy.reminderFees.timeUnit.minutes": "分钟"
+    "settings.finePolicy.reminderFees.timeUnit.minutes": "分钟",
+    "settings.index.printHoldRequests": "Print hold requests",
+    "settings.PrintHoldRequests.paneTitle": "Print hold requests",
+    "settings.PrintHoldRequests.allow": "Allow print hold requests (Open - Not yet filled)"
 }
