@@ -1,12 +1,16 @@
 # Change history for ui-circulation
 
+## [9.0.2](https://github.com/folio-org/ui-circulation/tree/v9.0.2) (2023-11-08)
+[Full Changelog](https://github.com/folio-org/ui-circulation/compare/v9.0.1...v9.0.2)
+
+* Fix permission error for Settings (Circ): Can create, edit and remove overdue fine policies. Refs UICIRC-1013.
+* Fix wrong position of "Cancel" and "Save & close" button. Refs UICIRC-1014.
+* Extend "Settings (Circ): Can create, edit and remove request policies" permission to be able to see service points. Refs UICIRC-1016.
+
 ## [9.0.1](https://github.com/folio-org/ui-circulation/tree/v9.0.1) (2023-11-02)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v9.0.0...v9.0.1)
 
 * Remove `None` option from notice methods. Fixes UICIRC-995.
-* Fix permission error for Settings (Circ): Can create, edit and remove overdue fine policies. Refs UICIRC-1013.
-* Fix wrong position of "Cancel" and "Save & close" button. Refs UICIRC-1014.
-* Extend "Settings (Circ): Can create, edit and remove request policies" permission to be able to see service points. Refs UICIRC-1016.
 
 ## [9.0.0](https://github.com/folio-org/ui-circulation/tree/v9.0.0) (2023-10-12)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v8.0.1...v9.0.0)
