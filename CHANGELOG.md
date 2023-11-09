@@ -3,9 +3,13 @@
 ## 9.1.0 IN PROGRESS
 
 * Also support `feesfines` interface version `19.0`. Refs UICIRC-992.
-* Fix problem with accordions on Circulation settings page. Refs UICIRC-1009.
 * Create and Display new Staff slip (Search slip (Hold requests)). Refs UICIRC-1001.
 * Create a new Circulation setting Print hold requests (Open – Not yet filled) – Printing search slips. Refs UICIRC-1000.
+
+## [9.0.3](https://github.com/folio-org/ui-circulation/tree/v9.0.3) (2023-11-09)
+[Full Changelog](https://github.com/folio-org/ui-circulation/compare/v9.0.2...v9.0.3)
+
+* Fix problem with accordions on Circulation settings page. Refs UICIRC-1009.
 
 ## [9.0.2](https://github.com/folio-org/ui-circulation/tree/v9.0.2) (2023-11-08)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v9.0.1...v9.0.2)
