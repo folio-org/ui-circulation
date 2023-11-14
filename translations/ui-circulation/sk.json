@@ -11,7 +11,7 @@
     "settings.loanPolicy.loanPeriod": "Loan period",
     "settings.loanPolicy.loanProfile": "Loan profile",
     "settings.loanPolicy.fDDS": "Fixed due date schedule",
-    "settings.loanPolicy.fDDSlimit": "Fixed due date schedule (due date limit)",
+    "settings.loanPolicy.fDDSlimit": "Harmonogram termínov vrátenia (limit termínu vrátenia)",
     "settings.loanPolicy.closedDueDateMgmt": "Closed library due date management",
     "settings.loanPolicy.altFDDSforRenewals": "Alternate fixed due date schedule for renewals",
     "settings.loanPolicy.altFDDSDueDateLimit": "Alternate fixed due date schedule (due date limit) for renewals",

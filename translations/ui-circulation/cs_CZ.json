@@ -511,7 +511,7 @@
     "settings.requestPolicy.policyTypes.hold.infoPopover.content": "Pokud je nastavení \"Nepodařilo se vytvořit rezervaci na úrovni názvu, když je žádost blokována pravidlem cirkulace\" <strong>nezaškrtnuté</strong>, rezervace na úrovni názvu budou vždy povoleny. (Nastavení > Cirkulace > Žádosti na úrovni názvu)",
     "settings.finePolicy.reminderFees.timeUnit.hours": "Hodina(y)",
     "settings.finePolicy.reminderFees.timeUnit.minutes": "Minuta(y)",
-    "settings.index.printHoldRequests": "Print hold requests",
-    "settings.PrintHoldRequests.paneTitle": "Print hold requests",
-    "settings.PrintHoldRequests.allow": "Allow print hold requests (Open - Not yet filled)"
+    "settings.index.printHoldRequests": "Tisk rezervací",
+    "settings.PrintHoldRequests.paneTitle": "Tisk rezervací",
+    "settings.PrintHoldRequests.allow": "Povolit tisk rezervací (otevřené – dosud nevyřízené)"
 }
