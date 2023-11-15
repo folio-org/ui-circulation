@@ -3,6 +3,25 @@
 ## 9.1.0 IN PROGRESS
 
 * Also support `feesfines` interface version `19.0`. Refs UICIRC-992.
+* Create and Display new Staff slip (Search slip (Hold requests)). Refs UICIRC-1001.
+* Create a new Circulation setting Print hold requests (Open – Not yet filled) – Printing search slips. Refs UICIRC-1000.
+* Change label for count closed days. Refs UICIRC-1017.
+
+## [9.0.3](https://github.com/folio-org/ui-circulation/tree/v9.0.3) (2023-11-09)
+[Full Changelog](https://github.com/folio-org/ui-circulation/compare/v9.0.2...v9.0.3)
+
+* Fix problem with accordions on Circulation settings page. Refs UICIRC-1009.
+
+## [9.0.2](https://github.com/folio-org/ui-circulation/tree/v9.0.2) (2023-11-08)
+[Full Changelog](https://github.com/folio-org/ui-circulation/compare/v9.0.1...v9.0.2)
+
+* Fix permission error for Settings (Circ): Can create, edit and remove overdue fine policies. Refs UICIRC-1013.
+* Fix wrong position of "Cancel" and "Save & close" button. Refs UICIRC-1014.
+* Extend "Settings (Circ): Can create, edit and remove request policies" permission to be able to see service points. Refs UICIRC-1016.
+
+## [9.0.1](https://github.com/folio-org/ui-circulation/tree/v9.0.1) (2023-11-02)
+[Full Changelog](https://github.com/folio-org/ui-circulation/compare/v9.0.0...v9.0.1)
+
 * Remove `None` option from notice methods. Fixes UICIRC-995.
 
 ## [9.0.0](https://github.com/folio-org/ui-circulation/tree/v9.0.0) (2023-10-12)
