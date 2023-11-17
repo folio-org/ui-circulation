@@ -209,6 +209,7 @@
         "subPermissions": [
           "configuration.entries.collection.get",
           "configuration.entries.item.put",
+          "configuration.entries.item.post",
           "ui-circulation.settings.edit-staff-slips",
           "circulation-storage.staff-slips.item.delete",
           "circulation-storage.staff-slips.collection.delete",
