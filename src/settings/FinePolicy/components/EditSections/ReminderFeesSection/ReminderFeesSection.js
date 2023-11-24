@@ -83,6 +83,7 @@ const ReminderFeesSection = ({ sectionOpen, noticeTemplates, blockTemplates }) =
               label={<FormattedMessage id="ui-circulation.settings.finePolicy.reminderFees.clearPatronBlockWhenPaid" />}
               name="reminderFeesPolicy.clearPatronBlockWhenPaid"
               component={Select}
+              disabled
               dataOptions={dataOptions}
             />
           </Col>
