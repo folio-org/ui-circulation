@@ -9,6 +9,8 @@ import {
 import {
   Checkbox,
   Accordion,
+  AccordionSet,
+  AccordionStatus,
 } from '@folio/stripes/components';
 
 import optionsGenerator from '../../../../utils/options-generator';
@@ -22,9 +24,6 @@ class RequestManagementSection extends React.Component {
   static propTypes = {
     intl: PropTypes.object.isRequired,
     policy: PropTypes.object.isRequired,
-    holdsSectionOpen: PropTypes.bool.isRequired,
-    recallsSectionOpen: PropTypes.bool.isRequired,
-    accordionOnToggle: PropTypes.func.isRequired,
     change: PropTypes.func.isRequired,
   };
 
@@ -37,9 +36,6 @@ class RequestManagementSection extends React.Component {
   render() {
     const {
       policy,
-      holdsSectionOpen,
-      recallsSectionOpen,
-      accordionOnToggle,
       change,
       intl: {
         formatMessage,
@@ -63,98 +59,98 @@ class RequestManagementSection extends React.Component {
         >
           <FormattedMessage id="ui-circulation.settings.requestManagement.requestManagement" />
         </h2>
-        <Accordion
-          id="recallsSection"
-          open={recallsSectionOpen}
-          onToggle={accordionOnToggle}
-          label={formatMessage({ id: 'ui-circulation.settings.requestManagement.recalls' })}
-        >
-          <div data-test-request-management-section-recall-return-interval>
-            <Period
-              fieldLabel="ui-circulation.settings.requestManagement.recallReturnInterval"
-              inputValuePath="requestManagement.recalls.recallReturnInterval.duration"
-              selectValuePath="requestManagement.recalls.recallReturnInterval.intervalId"
-              intervalPeriods={selectIntervalPeriods}
-              changeFormValue={change}
-            />
-          </div>
-          <div data-test-request-management-section-minimum-guaranteed-loan-period>
-            <Period
-              fieldLabel="ui-circulation.settings.requestManagement.minimumGuaranteedLoanPeriod"
-              inputValuePath="requestManagement.recalls.minimumGuaranteedLoanPeriod.duration"
-              selectValuePath="requestManagement.recalls.minimumGuaranteedLoanPeriod.intervalId"
-              intervalPeriods={selectIntervalPeriods}
-              changeFormValue={change}
-            />
-          </div>
-          <div data-test-request-management-section-recalls-extend-overdue-loans>
-            <Field
-              label={formatMessage({ id: 'ui-circulation.settings.requestManagement.allowRecallsToExtendOverdueLoans' })}
-              name="requestManagement.recalls.allowRecallsToExtendOverdueLoans"
-              id="requestManagement.recalls.allowRecallsToExtendOverdueLoans"
-              component={Checkbox}
-              type="checkbox"
-            />
-          </div>
-          <br />
-          {
-            policy.requestManagement?.recalls?.allowRecallsToExtendOverdueLoans &&
-            <div
-              data-testid="alternateRecallReturnIntervalPeriod"
-              data-test-request-management-section-alternate-recall-return-interval
+        <AccordionStatus>
+          <AccordionSet>
+            <Accordion
+              id="recallsSection"
+              label={formatMessage({ id: 'ui-circulation.settings.requestManagement.recalls' })}
             >
-              <Period
-                fieldLabel="ui-circulation.settings.requestManagement.alternateRecallReturnInterval"
-                inputValuePath="requestManagement.recalls.alternateRecallReturnInterval.duration"
-                selectValuePath="requestManagement.recalls.alternateRecallReturnInterval.intervalId"
-                intervalPeriods={selectIntervalPeriods}
-                changeFormValue={change}
-              />
-            </div>
-          }
-        </Accordion>
-        <Accordion
-          id="holdsSection"
-          open={holdsSectionOpen}
-          onToggle={accordionOnToggle}
-          label={formatMessage({ id: 'ui-circulation.settings.requestManagement.holds' })}
-        >
-          <div data-test-request-management-section-alternate-checkout-loan-period>
-            <Period
-              fieldLabel="ui-circulation.settings.requestManagement.alternateCheckoutLoanPeriod"
-              inputValuePath="requestManagement.holds.alternateCheckoutLoanPeriod.duration"
-              selectValuePath="requestManagement.holds.alternateCheckoutLoanPeriod.intervalId"
-              intervalPeriods={selectIntervalPeriods}
-              changeFormValue={change}
-            />
-          </div>
-          <div data-test-request-management-section-renew-items-with-request>
-            <Field
-              label={formatMessage({ id: 'ui-circulation.settings.requestManagement.renewItemsWithRequest' })}
-              name="requestManagement.holds.renewItemsWithRequest"
-              id="requestManagement.holds.renewItemsWithRequest"
-              component={Checkbox}
-              type="checkbox"
-            />
-          </div>
-          <br />
-          {
-            policy.loansPolicy?.profileId === loanProfileMap.ROLLING &&
-            policy.requestManagement?.holds?.renewItemsWithRequest &&
-            <div
-              data-testid="alternateRenewalLoanPeriod"
-              data-test-request-management-section-alternate-renewal-loan-period
+              <div data-test-request-management-section-recall-return-interval>
+                <Period
+                  fieldLabel="ui-circulation.settings.requestManagement.recallReturnInterval"
+                  inputValuePath="requestManagement.recalls.recallReturnInterval.duration"
+                  selectValuePath="requestManagement.recalls.recallReturnInterval.intervalId"
+                  intervalPeriods={selectIntervalPeriods}
+                  changeFormValue={change}
+                />
+              </div>
+              <div data-test-request-management-section-minimum-guaranteed-loan-period>
+                <Period
+                  fieldLabel="ui-circulation.settings.requestManagement.minimumGuaranteedLoanPeriod"
+                  inputValuePath="requestManagement.recalls.minimumGuaranteedLoanPeriod.duration"
+                  selectValuePath="requestManagement.recalls.minimumGuaranteedLoanPeriod.intervalId"
+                  intervalPeriods={selectIntervalPeriods}
+                  changeFormValue={change}
+                />
+              </div>
+              <div data-test-request-management-section-recalls-extend-overdue-loans>
+                <Field
+                  label={formatMessage({ id: 'ui-circulation.settings.requestManagement.allowRecallsToExtendOverdueLoans' })}
+                  name="requestManagement.recalls.allowRecallsToExtendOverdueLoans"
+                  id="requestManagement.recalls.allowRecallsToExtendOverdueLoans"
+                  component={Checkbox}
+                  type="checkbox"
+                />
+              </div>
+              <br />
+              {
+                policy.requestManagement?.recalls?.allowRecallsToExtendOverdueLoans &&
+                <div
+                  data-testid="alternateRecallReturnIntervalPeriod"
+                  data-test-request-management-section-alternate-recall-return-interval
+                >
+                  <Period
+                    fieldLabel="ui-circulation.settings.requestManagement.alternateRecallReturnInterval"
+                    inputValuePath="requestManagement.recalls.alternateRecallReturnInterval.duration"
+                    selectValuePath="requestManagement.recalls.alternateRecallReturnInterval.intervalId"
+                    intervalPeriods={selectIntervalPeriods}
+                    changeFormValue={change}
+                  />
+                </div>
+              }
+            </Accordion>
+            <Accordion
+              id="holdsSection"
+              label={formatMessage({ id: 'ui-circulation.settings.requestManagement.holds' })}
             >
-              <Period
-                fieldLabel="ui-circulation.settings.requestManagement.alternateRenewalLoanPeriod"
-                inputValuePath="requestManagement.holds.alternateRenewalLoanPeriod.duration"
-                selectValuePath="requestManagement.holds.alternateRenewalLoanPeriod.intervalId"
-                intervalPeriods={selectIntervalPeriods}
-                changeFormValue={change}
-              />
-            </div>
-          }
-        </Accordion>
+              <div data-test-request-management-section-alternate-checkout-loan-period>
+                <Period
+                  fieldLabel="ui-circulation.settings.requestManagement.alternateCheckoutLoanPeriod"
+                  inputValuePath="requestManagement.holds.alternateCheckoutLoanPeriod.duration"
+                  selectValuePath="requestManagement.holds.alternateCheckoutLoanPeriod.intervalId"
+                  intervalPeriods={selectIntervalPeriods}
+                  changeFormValue={change}
+                />
+              </div>
+              <div data-test-request-management-section-renew-items-with-request>
+                <Field
+                  label={formatMessage({ id: 'ui-circulation.settings.requestManagement.renewItemsWithRequest' })}
+                  name="requestManagement.holds.renewItemsWithRequest"
+                  id="requestManagement.holds.renewItemsWithRequest"
+                  component={Checkbox}
+                  type="checkbox"
+                />
+              </div>
+              <br />
+              {
+                policy.loansPolicy?.profileId === loanProfileMap.ROLLING &&
+                policy.requestManagement?.holds?.renewItemsWithRequest &&
+                <div
+                  data-testid="alternateRenewalLoanPeriod"
+                  data-test-request-management-section-alternate-renewal-loan-period
+                >
+                  <Period
+                    fieldLabel="ui-circulation.settings.requestManagement.alternateRenewalLoanPeriod"
+                    inputValuePath="requestManagement.holds.alternateRenewalLoanPeriod.duration"
+                    selectValuePath="requestManagement.holds.alternateRenewalLoanPeriod.intervalId"
+                    intervalPeriods={selectIntervalPeriods}
+                    changeFormValue={change}
+                  />
+                </div>
+              }
+            </Accordion>
+          </AccordionSet>
+        </AccordionStatus>
       </div>
     );
   }

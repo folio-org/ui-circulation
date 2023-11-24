@@ -30,7 +30,6 @@ class LostItemFeeSection extends React.Component {
   static propTypes = {
     intl: PropTypes.object,
     change: PropTypes.func.isRequired,
-    lostItemFeeSectionOpen: PropTypes.bool.isRequired,
   };
 
   constructor(props) {
@@ -41,7 +40,6 @@ class LostItemFeeSection extends React.Component {
 
   render() {
     const {
-      lostItemFeeSectionOpen,
       change,
       intl: {
         formatMessage,
@@ -60,7 +58,6 @@ class LostItemFeeSection extends React.Component {
         data-test-lost-item-fee-policy-form-section
         id="editLostItemFeeSection"
         label={formatMessage({ id: 'ui-circulation.settings.lostItemFee.lostItemSection' })}
-        open={lostItemFeeSectionOpen}
       >
         <div data-test-item-aged-lost>
           <Period

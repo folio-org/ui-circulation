@@ -9,6 +9,7 @@ import { stripesShape } from '@folio/stripes/core';
 import {
   Accordion,
   AccordionSet,
+  AccordionStatus,
   Button,
   Col,
   ExpandAllButton,
@@ -60,13 +61,6 @@ class FixedDueDateScheduleForm extends React.Component {
   constructor(props) {
     super(props);
     this.cViewMetaData = props.stripes.connect(ViewMetaData);
-
-    this.state = {
-      sections: {
-        generalFixedDueDate: true,
-        schedule: true,
-      },
-    };
   }
 
   getScheduleByName = (name) => {
@@ -76,17 +70,6 @@ class FixedDueDateScheduleForm extends React.Component {
       {
         ...getHeaderWithCredentials(okapi)
       });
-  };
-
-  handleSectionToggle = ({ id }) => {
-    this.setState(({ sections }) => {
-      sections[id] = !sections[id];
-      return { sections };
-    });
-  }
-
-  handleExpandAll = (sections) => {
-    this.setState({ sections });
   };
 
   addFirstMenu = () => {
@@ -185,9 +168,6 @@ class FixedDueDateScheduleForm extends React.Component {
       },
       stripes: { timezone },
     } = this.props;
-    const {
-      sections,
-    } = this.state;
 
     if (isEditLayer(search) && !id) {
       return null;
@@ -211,67 +191,62 @@ class FixedDueDateScheduleForm extends React.Component {
             paneTitle={this.renderPaneTitle()}
           >
             <div>
-              <Row end="xs">
-                <Col
-                  data-test-expand-all
-                  xs
-                >
-                  <ExpandAllButton
-                    data-testid="expandAllButton"
-                    accordionStatus={sections}
-                    onToggle={this.handleExpandAll}
-                  />
-                </Col>
-              </Row>
-              <AccordionSet
-                accordionStatus={sections}
-                onToggle={this.handleSectionToggle}
-              >
-                <Accordion
-                  id="generalFixedDueDate"
-                  open={sections.generalFixedDueDate}
-                  label={<FormattedMessage id="ui-circulation.settings.fDDSform.about" />}
-                >
-                  <section data-test-fdds-form-general-section>
-                    {(initialValues.metadata && initialValues.metadata.createdDate) && (
-                      <this.cViewMetaData metadata={initialValues.metadata} />
-                    )}
-                    <div data-test-general-section-name>
-                      <Field
-                        id="input_schedule_name"
-                        autoFocus
-                        component={TextField}
-                        fullWidth
-                        label={<FormattedMessage id="ui-circulation.settings.fDDSform.name" />}
-                        name="name"
-                        required
-                        validate={this.validateName}
+              <AccordionStatus>
+                <Row end="xs">
+                  <Col
+                    data-test-expand-all
+                    xs
+                  >
+                    <ExpandAllButton data-testid="expandAllButton" />
+                  </Col>
+                </Row>
+                <AccordionSet>
+                  <Accordion
+                    id="generalFixedDueDate"
+                    label={<FormattedMessage id="ui-circulation.settings.fDDSform.about" />}
+                  >
+                    <section data-test-fdds-form-general-section>
+                      {initialValues?.metadata?.createdDate && (
+                        <AccordionSet>
+                          <this.cViewMetaData metadata={initialValues.metadata} />
+                        </AccordionSet>
+                      )}
+                      <div data-test-general-section-name>
+                        <Field
+                          id="input_schedule_name"
+                          autoFocus
+                          component={TextField}
+                          fullWidth
+                          label={<FormattedMessage id="ui-circulation.settings.fDDSform.name" />}
+                          name="name"
+                          required
+                          validate={this.validateName}
+                        />
+                      </div>
+                      <div data-test-general-section-description>
+                        <Field
+                          name="description"
+                          component={TextArea}
+                          fullWidth
+                          label={<FormattedMessage id="ui-circulation.settings.fDDSform.description" />}
+                        />
+                      </div>
+                    </section>
+                  </Accordion>
+                  <Accordion
+                    id="schedule"
+                    label={<FormattedMessage id="ui-circulation.settings.fDDSform.schedule" />}
+                  >
+                    <section data-test-fdds-form-schedule-section>
+                      <FieldArray
+                        component={SchedulesList}
+                        name="schedules"
+                        timezone={timezone}
                       />
-                    </div>
-                    <div data-test-general-section-description>
-                      <Field
-                        name="description"
-                        component={TextArea}
-                        fullWidth
-                        label={<FormattedMessage id="ui-circulation.settings.fDDSform.description" />}
-                      />
-                    </div>
-                  </section>
-                </Accordion>
-                <Accordion
-                  open={sections.schedule}
-                  id="schedule"
-                  label={<FormattedMessage id="ui-circulation.settings.fDDSform.schedule" />}
-                >
-                  <section data-test-fdds-form-schedule-section>
-                    <FieldArray
-                      component={SchedulesList}
-                      name="schedules"
-                      timezone={timezone}
-                    />
-                  </section>
-                </Accordion>
-              </AccordionSet>
+                    </section>
+                  </Accordion>
+                </AccordionSet>
+              </AccordionStatus>
             </div>
           </Pane>
         </Paneset>

@@ -13,7 +13,7 @@ import {
 import ReminderFeesFields from './ReminderFeesFields';
 import { yesNoOptions } from '../../../../../constants';
 
-const ReminderFeesSection = ({ sectionOpen, noticeTemplates, blockTemplates }) => {
+const ReminderFeesSection = ({ noticeTemplates, blockTemplates }) => {
   const intl = useIntl();
   const { formatMessage } = intl;
   const dataOptions = yesNoOptions.map(({ label, value }) => ({
@@ -25,7 +25,6 @@ const ReminderFeesSection = ({ sectionOpen, noticeTemplates, blockTemplates }) =
     <div data-test-reminder-fees-section>
       <Accordion
         data-testid="editReminderFeesTestId"
-        open={sectionOpen}
         label={formatMessage({ id: 'ui-circulation.settings.finePolicy.reminderFees.label' })}
       >
         <Row>
@@ -97,7 +96,6 @@ const ReminderFeesSection = ({ sectionOpen, noticeTemplates, blockTemplates }) =
 };
 
 ReminderFeesSection.propTypes = {
-  sectionOpen: PropTypes.bool.isRequired,
   noticeTemplates: PropTypes.arrayOf(PropTypes.object),
   blockTemplates: PropTypes.arrayOf(PropTypes.object),
 };

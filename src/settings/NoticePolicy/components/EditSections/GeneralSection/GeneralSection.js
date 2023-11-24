@@ -8,6 +8,7 @@ import {
   TextField,
   Checkbox,
   Accordion,
+  AccordionSet,
 } from '@folio/stripes/components';
 
 import { Metadata } from '../../../../components';
@@ -16,14 +17,12 @@ import styles from './GeneralSection.css';
 
 class GeneralSection extends React.Component {
   static propTypes = {
-    isOpen: PropTypes.bool.isRequired,
     metadata: PropTypes.object.isRequired,
     connect: PropTypes.func.isRequired,
   };
 
   render() {
     const {
-      isOpen,
       metadata,
       connect,
     } = this.props;
@@ -33,13 +32,14 @@ class GeneralSection extends React.Component {
         <Accordion
           data-testid="general"
           id="general"
-          open={isOpen}
           label={<FormattedMessage id="ui-circulation.settings.noticePolicy.generalInformation" />}
         >
-          <Metadata
-            connect={connect}
-            metadata={metadata}
-          />
+          <AccordionSet>
+            <Metadata
+              connect={connect}
+              metadata={metadata}
+            />
+          </AccordionSet>
           <div
             data-test-general-section-policy-name
             data-testid="nameField"

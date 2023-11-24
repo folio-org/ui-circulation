@@ -9,6 +9,7 @@ import {
   Row,
   Accordion,
   AccordionSet,
+  AccordionStatus,
   ExpandAllButton,
 } from '@folio/stripes/components';
 
@@ -68,7 +69,7 @@ const StaffSlipForm = (props) => {
           firstMenu={<CancelButton onCancel={onCancel} />}
           footer={<FooterPane {...footerPaneProps} />}
         >
-          <AccordionSet>
+          <AccordionStatus>
             <Row end="xs">
               <Col
                 data-test-expand-all
@@ -76,24 +77,28 @@ const StaffSlipForm = (props) => {
                 <ExpandAllButton />
               </Col>
             </Row>
-            <Accordion
-              label={formatMessage({ id: 'ui-circulation.settings.staffSlips.generalInformation' })}
-            >
-              <Metadata
-                connect={stripes.connect}
-                metadata={initialValues.metadata}
-              />
-              <StaffSlipAboutSection
-                initialValues={initialValues}
-                disabled={disabled}
-              />
-            </Accordion>
-            <Accordion
-              label={formatMessage({ id:'ui-circulation.settings.staffSlips.templateContent' })}
-            >
-              <StaffSlipTemplateContentSection locale={locale} />
-            </Accordion>
-          </AccordionSet>
+            <AccordionSet>
+              <Accordion
+                label={formatMessage({ id: 'ui-circulation.settings.staffSlips.generalInformation' })}
+              >
+                <AccordionSet>
+                  <Metadata
+                    connect={stripes.connect}
+                    metadata={initialValues.metadata}
+                  />
+                </AccordionSet>
+                <StaffSlipAboutSection
+                  initialValues={initialValues}
+                  disabled={disabled}
+                />
+              </Accordion>
+              <Accordion
+                label={formatMessage({ id:'ui-circulation.settings.staffSlips.templateContent' })}
+              >
+                <StaffSlipTemplateContentSection locale={locale} />
+              </Accordion>
+            </AccordionSet>
+          </AccordionStatus>
         </Pane>
       </Paneset>
     </form>

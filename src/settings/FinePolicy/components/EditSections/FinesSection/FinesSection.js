@@ -17,7 +17,6 @@ import OverdueFinesSectionColumn from '../RangeSection/OverdueFinesSectionColumn
 class FinesSection extends React.Component {
   static propTypes = {
     intl: PropTypes.object.isRequired,
-    fineSectionOpen: PropTypes.bool.isRequired,
   };
 
   constructor(props) {
@@ -28,7 +27,6 @@ class FinesSection extends React.Component {
 
   render() {
     const {
-      fineSectionOpen,
       intl,
     } = this.props;
     const { formatMessage } = intl;
@@ -39,7 +37,6 @@ class FinesSection extends React.Component {
       <div data-test-fine-policy-form-overdue-fines-section>
         <Accordion
           id="editFineSection"
-          open={fineSectionOpen}
           label={formatMessage({ id: 'ui-circulation.settings.finePolicy.overdueFine' })}
         >
           <section>
