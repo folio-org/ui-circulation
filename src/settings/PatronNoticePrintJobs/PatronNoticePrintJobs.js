@@ -1,42 +1,57 @@
-import { Button, Pane, MenuSection, MultiColumnList, Checkbox } from '@folio/stripes/components';
-import { useState } from 'react';
+import { Button, Pane, MenuSection, MultiColumnList, Checkbox, FormattedDate, FormattedTime } from '@folio/stripes/components';
+import { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
+import { stripesConnect } from '@folio/stripes/core';
 
-const visibleColumns = ['id', 'name', 'updatedAt'];
+const visibleColumns = ['id', 'sortingField', 'created'];
 const columnMapping = {
   id: '',
-  name: <FormattedMessage id="ui-circulation.settings.patronNoticePrintJobs.name" />,
-  updatedAt: <FormattedMessage id="ui-circulation.settings.patronNoticePrintJobs.updated" />,
+  sortingField: <FormattedMessage id="ui-circulation.settings.patronNoticePrintJobs.email" />,
+  created: <FormattedMessage id="ui-circulation.settings.patronNoticePrintJobs.created" />,
 };
 
-export const generateFormatter = (markPrintJobForDeletion) => {
+export const generateFormatter = (markPrintJobForDeletion, openPDF) => {
   return {
-    id: (item) => <Checkbox checked={item.selected} onClick={() => markPrintJobForDeletion(item)} />,
-    name: (item) => item.name,
-    updatedAt: (item) => item.updatedAt,
+    id: (item) => <Checkbox type="checkbox" checked={item.selected} onChange={() => markPrintJobForDeletion(item)} />,
+    sortingField: (item) => <button type="button" onClick={() => openPDF(item)}>{item.sortingField}</button>,
+    created: (item) => <><FormattedDate value={item.created} /> <FormattedTime value={item.created} /></>
   };
 };
 
-const PatronNoticePrintJobs = () => {
-  // TODO fetch this data from the server
-  const [contentData, setContentData] = useState([
-    { id: 1, name: 'reminder_print_2023-07-14_0800', updatedAt: '07/14/2023' },
-    { id: 2, name: 'reminder_print_2023-07-20_0800', updatedAt: '07/20/2023' },
-    { id: 3, name: 'reminder_print_2023-07-27_0800', updatedAt: '07/27/2023' }
-  ]);
+const PatronNoticePrintJobs = (props) => {
+  const records = props?.resources?.entries?.records;
+  const [contentData, setContentData] = useState([]);
 
   const markPrintJobForDeletion = (item) => {
-    const clonedData = structuredClone(contentData);
+    const clonedData = [...contentData];
     const index = clonedData.findIndex(el => el.id === item.id);
     clonedData[index] = { ...item, selected: !item.selected };
+
     setContentData(clonedData);
   };
 
-  const formatter = generateFormatter(markPrintJobForDeletion);
+  const openPDF = (item) => {
+    const { content } = item;
+    const bytes = new Uint8Array(content.match(/.{1,2}/g).map(byte => parseInt(byte, 16)));
+    const blob = new Blob([bytes], { type: 'application/pdf' });
+    const url = URL.createObjectURL(blob);
+    window.open(url, '_blank');
+  };
+
+  useEffect(() => {
+    const updatedRecords = records.map(record => ({
+      ...record,
+      selected: !!record.selected,
+    }));
+
+    setContentData(updatedRecords);
+  }, [records]);
+
+  const formatter = generateFormatter(markPrintJobForDeletion, openPDF);
 
   const actionMenu = ({ onToggle }) => {
     const removeSelectedPrintJobs = () => {
-      // TODO: handle removing printing jobs
       const filtered = contentData.filter(item => !item.selected);
       setContentData(filtered);
       onToggle();
@@ -64,9 +79,38 @@ const PatronNoticePrintJobs = () => {
         formatter={formatter}
         visibleColumns={visibleColumns}
         columnMapping={columnMapping}
+        interactive={false}
       />
     </Pane>
   );
 };
 
-export default PatronNoticePrintJobs;
+PatronNoticePrintJobs.manifest = {
+  entries: {
+    type: 'okapi',
+    path: 'print/entries',
+    params: {
+      query: 'type="BATCH"',
+      sortby: 'created/sort.descending'
+    },
+    records: 'items',
+    throwErrors: false,
+  },
+};
+
+
+PatronNoticePrintJobs.propTypes = {
+  resources: PropTypes.shape({
+    entries: PropTypes.shape({
+      records: PropTypes.arrayOf(PropTypes.object),
+    }),
+  }).isRequired,
+  mutator: PropTypes.shape({
+    entries: PropTypes.shape({
+      DELETE: PropTypes.func,
+    }),
+  }).isRequired,
+
+};
+
+export default stripesConnect(PatronNoticePrintJobs);
