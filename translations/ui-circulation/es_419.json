@@ -495,7 +495,6 @@
     "settings.finePolicy.reminderFees.timeUnit.days": "Día(s)",
     "settings.finePolicy.reminderFees.timeUnit.weeks": "Semana(s)",
     "settings.finePolicy.reminderFees.noticeMethods.email": "Correo electrónico",
-    "settings.finePolicy.reminderFees.noticeMethods.mail": "Correo",
     "settings.finePolicy.reminderFees.blockTemplate": "Plantilla de bloques",
     "settings.finePolicy.reminderFees.selectBlockTemplate": "Seleccionar plantilla de bloque",
     "settings.finePolicy.reminderFees.countClosed": "Contar días/horas/minutos cerrados",
@@ -503,5 +502,16 @@
     "settings.finePolicy.reminderFees.clearPatronBlockWhenPaid": "Borrar el bloqueo de clientes cuando se paga",
     "settings.titleLevelRequests.tlrHoldShouldFollowCirculationRules": "No se puede crear una retención a nivel de título cuando la solicitud está bloqueada por una norma de circulación",
     "settings.finePolicy.reminderFees.ignoreGracePeriodHolds": "Ignorar los periodos de gracia de las retenciones",
-    "settings.finePolicy.reminderFees.allowRenewalOfItemsWithReminderFees": "Permitir la renovación de artículos con cargo(s) de recordatorio"
+    "settings.finePolicy.reminderFees.allowRenewalOfItemsWithReminderFees": "Permitir la renovación de artículos con cargo(s) de recordatorio",
+    "settings.requestPolicy.errors.selectServicePoint": "Seleccione al menos un punto de servicio",
+    "settings.requestPolicy.requestTypes.allowAll": "Permitir todos los puntos de servicio de recogida",
+    "settings.requestPolicy.requestTypes.allowSome": "Permitir algunos puntos de servicio de recogida",
+    "settings.finePolicy.reminderFees.noticeMethods.print": "Imprimir",
+    "settings.finePolicy.reminderFees.noticeMethods.none": "Ninguno",
+    "settings.requestPolicy.policyTypes.hold.infoPopover.content": "If the \"Fail to create title level hold when request is blocked by circulation rule\" setting is <strong>unchecked</strong>, title level holds will always be allowed. (Settings > Circulation > Title level requests)",
+    "settings.finePolicy.reminderFees.timeUnit.hours": "Hour(s)",
+    "settings.finePolicy.reminderFees.timeUnit.minutes": "Minuto(s)",
+    "settings.index.printHoldRequests": "Print hold requests",
+    "settings.PrintHoldRequests.paneTitle": "Print hold requests",
+    "settings.PrintHoldRequests.allow": "Allow print hold requests (Open - Not yet filled)"
 }

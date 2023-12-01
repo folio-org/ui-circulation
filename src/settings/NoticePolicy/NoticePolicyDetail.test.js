@@ -1,16 +1,7 @@
-import React from 'react';
 import {
   render,
   screen,
-  fireEvent,
-} from '@testing-library/react';
-
-import '../../../test/jest/__mock__';
-
-import {
-  ExpandAllButton,
-  AccordionSet,
-} from '@folio/stripes/components';
+} from '@folio/jest-config-stripes/testing-library/react';
 
 import NoticePolicyDetail from './NoticePolicyDetail';
 import {
@@ -34,42 +25,6 @@ jest.mock('./utils/get-templates', () => jest.fn((templates, categoryIds) => (
     categoryIds,
   }
 )));
-
-ExpandAllButton.mockImplementation(jest.fn(({
-  onToggle,
-  'data-testid': testId,
-}) => {
-  const sections = {
-    generalNoticePolicy: false,
-    viewLoanNotices: false,
-    viewRequestNotices: false,
-    viewFeeFineNotices: false,
-  };
-  return (
-    <button
-      data-testid={testId}
-      onClick={() => onToggle(sections)}
-      type="button"
-    >
-      Toggle accordion state
-    </button>
-  );
-}));
-AccordionSet.mockImplementation(jest.fn(({
-  children,
-  onToggle,
-  'data-testid': testId,
-}) => {
-  return (
-    // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
-    <div
-      data-testid={testId}
-      onClick={() => onToggle({ id: 'generalNoticePolicy' })}
-    >
-      {children}
-    </div>
-  );
-}));
 
 describe('NoticePolicyDetail', () => {
   const testIds = {
@@ -114,30 +69,8 @@ describe('NoticePolicyDetail', () => {
     expect(screen.getByTestId(testIds.expandAllButton)).toBeInTheDocument();
   });
 
-  it('"ExpandAllButton" should correctly change state of accordion sections', () => {
-    fireEvent.click(screen.getByTestId(testIds.expandAllButton));
-
-    expect(GeneralSection).toHaveBeenLastCalledWith(expect.objectContaining({ isOpen: false }), {});
-    expect(LoanNoticesSection).toHaveBeenLastCalledWith(expect.objectContaining({ isOpen: false }), {});
-    expect(RequestNoticesSection).toHaveBeenLastCalledWith(expect.objectContaining({ isOpen: false }), {});
-    expect(FeeFineNoticesSection).toHaveBeenLastCalledWith(expect.objectContaining({ isOpen: false }), {});
-  });
-
-  it('"AccordionSet" should correctly handle section toggle', () => {
-    const accordionSet = screen.getByTestId(testIds.accordionSet);
-
-    fireEvent.click(accordionSet);
-
-    expect(GeneralSection).toHaveBeenLastCalledWith(expect.objectContaining({ isOpen: false }), {});
-
-    fireEvent.click(accordionSet);
-
-    expect(GeneralSection).toHaveBeenLastCalledWith(expect.objectContaining({ isOpen: true }), {});
-  });
-
   it('should execute "GeneralSection" with passed props', () => {
     const expectedResult = {
-      isOpen: true,
       isPolicyActive: mockedInitialValues.active,
       policyName: mockedInitialValues.name,
       policyDescription: mockedInitialValues.description,
@@ -150,7 +83,6 @@ describe('NoticePolicyDetail', () => {
 
   it('should execute "LoanNoticesSection" with passed props', () => {
     const expectedResult = {
-      isOpen: true,
       policy: mockedPolicy,
       templates: {
         templates: mockedTemplates,
@@ -163,7 +95,6 @@ describe('NoticePolicyDetail', () => {
 
   it('should execute "RequestNoticesSection" with passed props', () => {
     const expectedResult = {
-      isOpen: true,
       policy: mockedPolicy,
       templates: {
         templates: mockedTemplates,
@@ -176,7 +107,6 @@ describe('NoticePolicyDetail', () => {
 
   it('should execute "FeeFineNoticesSection" with passed props', () => {
     const expectedResult = {
-      isOpen: true,
       policy: mockedPolicy,
       templates: {
         templates: mockedTemplates,

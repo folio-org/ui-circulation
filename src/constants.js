@@ -147,10 +147,16 @@ export const renewFromOptions = [
   },
 ];
 
+export const REQUEST_POLICY_TYPES = {
+  HOLD: 'Hold',
+  PAGE: 'Page',
+  RECALL: 'Recall',
+};
+
 export const requestPolicyTypes = [
-  'Hold',
-  'Page',
-  'Recall',
+  REQUEST_POLICY_TYPES.HOLD,
+  REQUEST_POLICY_TYPES.PAGE,
+  REQUEST_POLICY_TYPES.RECALL,
 ];
 
 export const noticesFormatsMap = {
@@ -327,6 +333,7 @@ export const staffSlipMap = {
   TRANSIT: 'Transit',
   PICK_SLIP: 'Pick slip',
   REQUEST_DELIVERY: 'Request delivery',
+  SEARCH_SLIP_HOLD_REQUESTS: 'Search slip (Hold requests)',
 };
 
 export const patronNoticeCategoryIds = {
@@ -372,13 +379,14 @@ export const closingTypesMap = {
 };
 
 export const timeUnitsMap = {
+  MINUTE: 'minute',
   DAY: 'day',
   WEEK: 'week',
 };
 
 export const noticeMethodMap = {
-  EMAIL: 'email',
-  MAIL: 'mail',
+  EMAIL: 'Email',
+  PRINT: 'Print',
 };
 
 export const closingTypes = [
@@ -403,6 +411,10 @@ export const closedLoansRules = {
 
 export const timeUnits = [
   {
+    value: timeUnitsMap.MINUTE,
+    label: 'ui-circulation.settings.finePolicy.reminderFees.timeUnit.minutes',
+  },
+  {
     value: timeUnitsMap.DAY,
     label: 'ui-circulation.settings.finePolicy.reminderFees.timeUnit.days',
   },
@@ -418,9 +430,9 @@ export const noticeMethods = [
     label: 'ui-circulation.settings.finePolicy.reminderFees.noticeMethods.email',
   },
   {
-    value: noticeMethodMap.MAIL,
-    label: 'ui-circulation.settings.finePolicy.reminderFees.noticeMethods.mail',
-  }
+    value: noticeMethodMap.PRINT,
+    label: 'ui-circulation.settings.finePolicy.reminderFees.noticeMethods.print',
+  },
 ];
 
 export const yesNoOptions = [
@@ -538,12 +550,21 @@ export const TITLE_LEVEL_REQUESTS_DEFAULT_VALUES = {
   [TITLE_LEVEL_REQUESTS.EXPIRATION_TEMPLATE]: NOT_SELECTED,
 };
 
+export const PRINT_HOLD_REQUESTS = {
+  PRINT_HOLD_REQUESTS_ENABLED: 'printHoldRequestsEnabled',
+};
+
+export const PRINT_HOLD_REQUESTS_DEFAULT_VALUES = {
+  [PRINT_HOLD_REQUESTS.PRINT_HOLD_REQUESTS_ENABLED]: false,
+};
+
 export const MODULE_NAMES = {
   SETTINGS: 'SETTINGS',
 };
 
 export const CONFIG_NAMES = {
   TLR: 'TLR',
+  PRINT_HOLD_REQUESTS: 'PRINT_HOLD_REQUESTS',
 };
 
 export const OPEN_REQUESTS_STATUSES = [

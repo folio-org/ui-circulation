@@ -1,11 +1,8 @@
-import React from 'react';
 import {
   render,
   screen,
   fireEvent,
-} from '@testing-library/react';
-
-import '../../../test/jest/__mock__';
+} from '@folio/jest-config-stripes/testing-library/react';
 
 import {
   AccordionSet,
@@ -79,6 +76,7 @@ describe('RequestPolicyForm', () => {
   };
   const onCancel = jest.fn();
   const handleSubmit = jest.fn();
+  const pathname = '/policyId/test';
   const defaultProps = {
     okapi,
     pristine: true,
@@ -88,6 +86,7 @@ describe('RequestPolicyForm', () => {
     handleSubmit,
     location: {
       search: '',
+      pathname,
     },
     parentResources: {
       requestPolicies: {
@@ -223,6 +222,7 @@ describe('RequestPolicyForm', () => {
           form={form}
           location={{
             search: 'edit',
+            pathname,
           }}
         />
       );
@@ -359,6 +359,7 @@ describe('RequestPolicyForm', () => {
       ...defaultProps,
       location: {
         search: 'edit',
+        pathname,
       },
     };
 

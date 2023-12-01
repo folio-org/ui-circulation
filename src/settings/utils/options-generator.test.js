@@ -4,7 +4,7 @@ import {
   render,
   screen,
   within,
-} from '@testing-library/react';
+} from '@folio/jest-config-stripes/testing-library/react';
 
 import optionsGenerator from './options-generator';
 

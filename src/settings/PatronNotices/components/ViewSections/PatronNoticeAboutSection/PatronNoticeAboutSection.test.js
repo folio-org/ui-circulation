@@ -1,11 +1,8 @@
-import React from 'react';
 import {
   render,
   screen,
   within,
-} from '@testing-library/react';
-
-import '../../../../../../test/jest/__mock__';
+} from '@folio/jest-config-stripes/testing-library/react';
 
 import { KeyValue } from '@folio/stripes/components';
 
@@ -114,10 +111,6 @@ describe('PatronNoticeAboutSection', () => {
             active,
           },
         };
-
-        afterEach(() => {
-          KeyValue.mockClear();
-        });
 
         render(<PatronNoticeAboutSection {...props} />);
       });

@@ -18,6 +18,7 @@ import StaffSlips from './settings/StaffSlips';
 import NoticePolicySettings from './settings/NoticePolicy';
 import RequestPolicySettings from './settings/RequestPolicy';
 import TitleLevelRequests from './settings/TitleLevelRequests';
+import PrintHoldRequests from './settings/PrintHoldRequests';
 
 class Circulation extends Component {
   static propTypes = {
@@ -139,7 +140,12 @@ class Circulation extends Component {
             component: TitleLevelRequests,
             perm: 'ui-circulation.settings.titleLevelRequests',
           },
-
+          {
+            route: 'print-hold-requests',
+            label: <FormattedMessage id="ui-circulation.settings.index.printHoldRequests" />,
+            component: PrintHoldRequests,
+            perm: 'ui-circulation.settings.staff-slips',
+          },
         ],
       },
     ];

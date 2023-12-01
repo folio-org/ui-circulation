@@ -1,6 +1,4 @@
-import { render } from '@testing-library/react';
-
-import '../../../../../../test/jest/__mock__';
+import { render } from '@folio/jest-config-stripes/testing-library/react';
 
 import ReminderFeesSection from './ReminderFeesSection';
 

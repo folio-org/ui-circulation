@@ -1,12 +1,8 @@
-import React from 'react';
 import {
   render,
   screen,
   within,
-  fireEvent,
-} from '@testing-library/react';
-
-import '../../../test/jest/__mock__';
+} from '@folio/jest-config-stripes/testing-library/react';
 
 import {
   Accordion,
@@ -19,7 +15,6 @@ import buildStripes from '../../../test/jest/__mock__/stripes.mock';
 import {
   FinesSection,
   OverdueAboutSection,
-  ReminderFeesSection,
 } from './components/ViewSections';
 import { Metadata } from '../components';
 import FinePolicyDetail from './FinePolicyDetail';
@@ -44,28 +39,6 @@ jest.mock('../components', () => ({
 }));
 jest.mock('../Models/FinePolicy', () => jest.fn(() => mockFinePolicyReturnValue));
 
-ExpandAllButton.mockImplementation(({ onToggle }) => (
-  // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
-  <div
-    data-testid={mockTestIds.expandAllButton}
-    onClick={() => onToggle({
-      generalFeePolicy: false,
-      viewFineSection: false,
-      reminderFeesSection: false,
-    })}
-  />
-));
-
-AccordionSet.mockImplementation(({ onToggle, children }) => (
-  // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
-  <div
-    data-testid={mockTestIds.accordionSet}
-    onClick={() => onToggle({ id: 'generalFeePolicy' })}
-  >
-    {children}
-  </div>
-));
-
 const testStripes = buildStripes();
 
 describe('FinePolicyDetail', () => {
@@ -81,22 +54,11 @@ describe('FinePolicyDetail', () => {
       blockTemplates: { records: [] },
     },
   };
-  const accordionDefaultStatus = {
-    generalFeePolicy: true,
-    viewFineSection: true,
-    reminderFeesSection: true,
-  };
 
   const getById = (id) => within(screen.getByTestId(id));
 
   afterEach(() => {
-    Accordion.mockClear();
-    AccordionSet.mockClear();
-    ExpandAllButton.mockClear();
-    Metadata.mockClear();
-    FinesSection.mockClear();
-    OverdueAboutSection.mockClear();
-    ReminderFeesSection.mockClear();
+    jest.clearAllMocks();
   });
 
   describe('with default props', () => {
@@ -107,22 +69,17 @@ describe('FinePolicyDetail', () => {
     });
 
     it('should render ExpandAllButton component', () => {
-      expect(ExpandAllButton).toHaveBeenCalledWith(expect.objectContaining({
-        accordionStatus: accordionDefaultStatus,
-      }), {});
+      expect(ExpandAllButton).toHaveBeenCalled();
     });
 
     it('should render AccordionSet component', () => {
-      expect(AccordionSet).toHaveBeenCalledWith(expect.objectContaining({
-        accordionStatus: accordionDefaultStatus,
-      }), {});
+      expect(AccordionSet).toHaveBeenCalled();
     });
 
     it('should render Accordion component', () => {
       expect(Accordion).toHaveBeenCalledWith(expect.objectContaining({
         id: 'generalFeePolicy',
         label: labelIds.finePolicyGeneralInformation,
-        open: accordionDefaultStatus.generalFeePolicy,
       }), {});
     });
 
@@ -140,110 +97,7 @@ describe('FinePolicyDetail', () => {
     it('should render FinesSection component', () => {
       expect(FinesSection).toHaveBeenCalledWith(expect.objectContaining({
         policy: mockFinePolicyReturnValue,
-        fineSectionOpen: accordionDefaultStatus.viewFineSection,
       }), {});
-    });
-  });
-
-  describe('handleExpandAll method', () => {
-    it('should expand all accordions', () => {
-      render(
-        <FinePolicyDetail {...testDefaultProps} />
-      );
-
-      expect(ExpandAllButton).toHaveBeenLastCalledWith(expect.objectContaining({
-        accordionStatus: accordionDefaultStatus,
-      }), {});
-
-      expect(AccordionSet).toHaveBeenLastCalledWith(expect.objectContaining({
-        accordionStatus: accordionDefaultStatus,
-      }), {});
-
-      expect(Accordion).toHaveBeenLastCalledWith(
-        expect.objectContaining({
-          open: accordionDefaultStatus.generalFeePolicy,
-        }), {}
-      );
-
-      expect(FinesSection).toHaveBeenLastCalledWith(
-        expect.objectContaining({
-          fineSectionOpen: accordionDefaultStatus.viewFineSection,
-        }), {}
-      );
-
-      fireEvent.click(screen.getByTestId(mockTestIds.expandAllButton));
-
-      expect(ExpandAllButton).toHaveBeenLastCalledWith(expect.objectContaining({
-        accordionStatus: {
-          generalFeePolicy: false,
-          viewFineSection: false,
-          reminderFeesSection: false,
-        },
-      }), {});
-
-      expect(AccordionSet).toHaveBeenLastCalledWith(expect.objectContaining({
-        accordionStatus: {
-          generalFeePolicy: false,
-          viewFineSection: false,
-          reminderFeesSection: false,
-        },
-      }), {});
-
-      expect(Accordion).toHaveBeenLastCalledWith(
-        expect.objectContaining({
-          open: false,
-        }), {}
-      );
-
-      expect(FinesSection).toHaveBeenLastCalledWith(
-        expect.objectContaining({
-          fineSectionOpen: false,
-        }), {}
-      );
-    });
-  });
-
-  describe('handleSectionToggle method', () => {
-    it('should expand accordion', () => {
-      render(
-        <FinePolicyDetail {...testDefaultProps} />
-      );
-
-      expect(ExpandAllButton).toHaveBeenLastCalledWith(expect.objectContaining({
-        accordionStatus: accordionDefaultStatus,
-      }), {});
-
-      expect(AccordionSet).toHaveBeenLastCalledWith(expect.objectContaining({
-        accordionStatus: accordionDefaultStatus,
-      }), {});
-
-      expect(Accordion).toHaveBeenLastCalledWith(
-        expect.objectContaining({
-          open: accordionDefaultStatus.generalFeePolicy,
-        }), {}
-      );
-
-      fireEvent.click(screen.getByTestId(mockTestIds.accordionSet));
-
-      expect(ExpandAllButton).toHaveBeenLastCalledWith(expect.objectContaining({
-        accordionStatus: {
-          ...accordionDefaultStatus,
-          generalFeePolicy: false,
-        },
-      }), {});
-
-      expect(AccordionSet).toHaveBeenLastCalledWith(expect.objectContaining({
-        accordionStatus: {
-          ...accordionDefaultStatus,
-          generalFeePolicy: false,
-        },
-      }), {});
-
-      expect(Accordion).toHaveBeenLastCalledWith(
-        expect.objectContaining({
-          open: false,
-        }), {}
-      );
     });
   });
 

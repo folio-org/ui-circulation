@@ -1,10 +1,4 @@
-import React from 'react';
-import {
-  render,
-} from '@testing-library/react';
-
-import '../../../test/jest/__mock__';
-
+import { render } from '@folio/jest-config-stripes/testing-library/react';
 import { EntryManager } from '@folio/stripes/smart-components';
 
 // eslint-disable-next-line import/no-named-as-default
@@ -14,11 +8,13 @@ import PatronNotices, {
 } from './PatronNotices';
 import PatronNoticeDetail from './PatronNoticeDetail';
 import PatronNoticeForm from './PatronNoticeForm';
-
 import {
   MAX_UNPAGED_RESOURCE_COUNT,
   patronNoticeCategories,
 } from '../../constants';
+
+jest.mock('./PatronNoticeDetail', () => () => null);
+jest.mock('./PatronNoticeForm', () => () => null);
 
 describe('PatronNotices', () => {
   const labelIds = {
@@ -30,13 +26,13 @@ describe('PatronNotices', () => {
   const mockedEntries = {
     records: [
       {
-        name: 'Zak',
+        name: 'Bob',
       },
       {
         name: 'John',
       },
       {
-        name: 'Alex',
+        name: 'Ann',
       },
     ],
   };
@@ -70,13 +66,13 @@ describe('PatronNotices', () => {
   it('"EntryManager" should be executed with correct props', () => {
     const expectedNameOrder = [
       {
-        name: 'Alex',
+        name: 'Ann',
+      },
+      {
+        name: 'Bob',
       },
       {
         name: 'John',
-      },
-      {
-        name: 'Zak',
       },
     ];
 

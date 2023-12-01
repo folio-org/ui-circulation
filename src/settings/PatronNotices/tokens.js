@@ -153,7 +153,7 @@ const getTokens = (locale) => ({
   ],
   userAddress: [
     {
-      token: 'user.deliveryAddressType',
+      token: 'user.primaryDeliveryAddressType',
       previewValue: 'Office',
       allowedFor: allowedForAllCategories,
     },

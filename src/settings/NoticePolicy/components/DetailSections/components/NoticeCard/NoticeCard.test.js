@@ -1,11 +1,8 @@
-import React from 'react';
 import {
   screen,
   render,
   within,
-} from '@testing-library/react';
-
-import '../../../../../../../test/jest/__mock__';
+} from '@folio/jest-config-stripes/testing-library/react';
 
 import NoticeCard from './NoticeCard';
 import {

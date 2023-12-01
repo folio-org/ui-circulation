@@ -1,10 +1,7 @@
-import React from 'react';
 import {
   render,
   screen,
-} from '@testing-library/react';
-
-import '../../../../../../test/jest/__mock__';
+} from '@folio/jest-config-stripes/testing-library/react';
 
 import FeeFineNoticesSection from './FeeFineNoticesSection';
 import NoticeCard from '../components';
@@ -104,10 +101,6 @@ describe('FeeFineNoticesSection', () => {
 
   it('should render label', () => {
     expect(screen.getByText(labelIds.feeFineNotices)).toBeTruthy();
-  });
-
-  it('should have `open` attribute', () => {
-    expect(screen.getByTestId(testIds.accordionTestId)).toHaveAttribute('open');
   });
 
   describe('inner NoticeCard component', () => {

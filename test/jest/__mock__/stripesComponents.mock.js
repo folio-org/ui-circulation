@@ -7,7 +7,12 @@ jest.mock('@folio/stripes/components', () => ({
       {children}
     </section>
   )),
-  AccordionSet: jest.fn(({ children }) => (
+  AccordionSet: jest.fn(({ children, ...rest }) => (
+    <div {...rest}>
+      {children}
+    </div>
+  )),
+  AccordionStatus: jest.fn(({ children }) => (
     <div>
       {children}
     </div>
@@ -51,6 +56,7 @@ jest.mock('@folio/stripes/components', () => ({
     </div>
   )),
   Datepicker: jest.fn((props) => <div {...props} />),
+  InfoPopover: jest.fn(({ content }) => <div>{content}</div>),
   ExpandAllButton: jest.fn(({ onToggle, ...rest }) => (
     // eslint-disable-next-line jsx-a11y/control-has-associated-label
     <button

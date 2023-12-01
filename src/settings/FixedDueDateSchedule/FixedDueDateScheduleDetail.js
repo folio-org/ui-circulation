@@ -6,6 +6,7 @@ import { FormattedMessage } from 'react-intl';
 import {
   AccordionSet,
   Accordion,
+  AccordionStatus,
   Col,
   ExpandAllButton,
   KeyValue,
@@ -30,89 +31,67 @@ class FixedDueDateScheduleDetail extends React.Component {
     super(props);
 
     this.cViewMetaData = props.stripes.connect(ViewMetaData);
-    this.state = {
-      sections: {
-        generalFixedDueDateScheduleDetail: true,
-        fixedDueDateSchedule: true,
-      },
-    };
   }
-
-  handleExpandAll = sections => {
-    this.setState({ sections });
-  };
-
-  handleSectionToggle = ({ id }) => {
-    this.setState(({ sections }) => {
-      sections[id] = !sections[id];
-      return { sections };
-    });
-  };
 
   render() {
     const {
       initialValues: fixedDueDateSchedule,
       stripes: { timezone },
     } = this.props;
-    const { sections } = this.state;
 
     return (
       <div id="date-test-fixed-due-date-schedule-detail">
-        <Row end="xs">
-          <Col xs>
-            <ExpandAllButton
-              data-testid="expandAllButton"
-              accordionStatus={sections}
-              onToggle={this.handleExpandAll}
-            />
-          </Col>
-        </Row>
-        <AccordionSet
-          data-testid="accordionSet"
-          accordionStatus={sections}
-          onToggle={this.handleSectionToggle}
-        >
-          <Accordion
-            data-testid="generalFixedDueDateScheduleDetail"
-            id="generalFixedDueDateScheduleDetail"
-            open={sections.generalFixedDueDateScheduleDetail}
-            label={<FormattedMessage id="ui-circulation.settings.fDDSform.about" />}
-          >
-            <section>
-              {(fixedDueDateSchedule.metadata && fixedDueDateSchedule.metadata.createdDate) &&
-                <this.cViewMetaData metadata={fixedDueDateSchedule.metadata} />}
-              <Row>
-                <Col xs={12}>
-                  <KeyValue
-                    label={<FormattedMessage id="ui-circulation.settings.fDDSform.name" />}
-                    value={get(fixedDueDateSchedule, ['name'], <FormattedMessage id="ui-circulation.settings.fDDSform.untitled" />)}
-                  />
-                </Col>
-              </Row>
-              <Row>
-                <Col xs={12}>
-                  <KeyValue
-                    label={<FormattedMessage id="ui-circulation.settings.fDDSform.description" />}
-                    value={get(fixedDueDateSchedule, ['description'], '')}
-                  />
-                </Col>
-              </Row>
-            </section>
-          </Accordion>
-          <Accordion
-            data-testid="fixedDueDateSchedule"
-            id="fixedDueDateSchedule"
-            label={<FormattedMessage id="ui-circulation.settings.fDDSform.schedule" />}
-            open={sections.fixedDueDateSchedule}
-          >
-            <section>
-              <SchedulesList
-                schedules={fixedDueDateSchedule.schedules}
-                timezone={timezone}
-              />
-            </section>
-          </Accordion>
-        </AccordionSet>
+        <AccordionStatus>
+          <Row end="xs">
+            <Col xs>
+              <ExpandAllButton data-testid="expandAllButton" />
+            </Col>
+          </Row>
+          <AccordionSet data-testid="accordionSet">
+            <Accordion
+              data-testid="generalFixedDueDateScheduleDetail"
+              id="generalFixedDueDateScheduleDetail"
+              label={<FormattedMessage id="ui-circulation.settings.fDDSform.about" />}
+            >
+              <section>
+                {
+                  fixedDueDateSchedule?.metadata?.createdDate &&
+                    <AccordionSet>
+                      <this.cViewMetaData metadata={fixedDueDateSchedule.metadata} />
+                    </AccordionSet>
+                }
+                <Row>
+                  <Col xs={12}>
+                    <KeyValue
+                      label={<FormattedMessage id="ui-circulation.settings.fDDSform.name" />}
+                      value={get(fixedDueDateSchedule, ['name'], <FormattedMessage id="ui-circulation.settings.fDDSform.untitled" />)}
+                    />
+                  </Col>
+                </Row>
+                <Row>
+                  <Col xs={12}>
+                    <KeyValue
+                      label={<FormattedMessage id="ui-circulation.settings.fDDSform.description" />}
+                      value={get(fixedDueDateSchedule, ['description'], '')}
+                    />
+                  </Col>
+                </Row>
+              </section>
+            </Accordion>
+            <Accordion
+              data-testid="fixedDueDateSchedule"
+              id="fixedDueDateSchedule"
+              label={<FormattedMessage id="ui-circulation.settings.fDDSform.schedule" />}
+            >
+              <section>
+                <SchedulesList
+                  schedules={fixedDueDateSchedule.schedules}
+                  timezone={timezone}
+                />
+              </section>
+            </Accordion>
+          </AccordionSet>
+        </AccordionStatus>
       </div>
     );
   }

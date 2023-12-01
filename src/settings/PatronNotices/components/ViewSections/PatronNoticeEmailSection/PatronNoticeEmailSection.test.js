@@ -1,12 +1,9 @@
-import React from 'react';
 import {
   fireEvent,
   render,
   screen,
   within,
-} from '@testing-library/react';
-
-import '../../../../../../test/jest/__mock__';
+} from '@folio/jest-config-stripes/testing-library/react';
 
 import {
   Row,
@@ -37,9 +34,9 @@ jest.mock('html-to-react', () => ({
       processDefaultNode: 'defaultNode',
     })),
   },
-  Parser: () => ({
+  Parser:  jest.fn(() => ({
     parseWithInstructions: jest.fn(() => mockParseWithInstructionsReturnValue),
-  }),
+  })),
 }));
 
 describe('PatronNoticeEmailSection', () => {

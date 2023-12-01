@@ -17,7 +17,6 @@ import {
 
 class FeeFineNoticesSection extends React.Component {
   static propTypes = {
-    isOpen: PropTypes.bool.isRequired,
     policy: PropTypes.object.isRequired,
     templates: PropTypes.arrayOf(PropTypes.shape({
       value: PropTypes.string.isRequired,
@@ -27,7 +26,6 @@ class FeeFineNoticesSection extends React.Component {
 
   render() {
     const {
-      isOpen,
       policy,
       templates,
     } = this.props;
@@ -36,7 +34,6 @@ class FeeFineNoticesSection extends React.Component {
       <Accordion
         data-testid="accordionTestId"
         id="viewFeeFineNotices"
-        open={isOpen}
         label={<FormattedMessage id="ui-circulation.settings.noticePolicy.feeFineNotices" />}
       >
         {map(policy.feeFineNotices, (notice, index) => (

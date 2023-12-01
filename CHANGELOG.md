@@ -1,6 +1,33 @@
 # Change history for ui-circulation
 
-## IN PROGRESS
+## 9.1.0 IN PROGRESS
+
+* Also support `feesfines` interface version `19.0`. Refs UICIRC-992.
+* Create and Display new Staff slip (Search slip (Hold requests)). Refs UICIRC-1001.
+* Create a new Circulation setting Print hold requests (Open – Not yet filled) – Printing search slips. Refs UICIRC-1000.
+* Change label for count closed days. Refs UICIRC-1017.
+* Unfreeze the first five selection menus for reminder fees. Refs UICIRC-1002, UICIRC-1005, UICIRC-1006.
+* UI tests replacement with RTL/Jest for `RequestCancellationReasons.js`. Refs UICIRC-959.
+
+## [9.0.3](https://github.com/folio-org/ui-circulation/tree/v9.0.3) (2023-11-09)
+[Full Changelog](https://github.com/folio-org/ui-circulation/compare/v9.0.2...v9.0.3)
+
+* Fix problem with accordions on Circulation settings page. Refs UICIRC-1009.
+
+## [9.0.2](https://github.com/folio-org/ui-circulation/tree/v9.0.2) (2023-11-08)
+[Full Changelog](https://github.com/folio-org/ui-circulation/compare/v9.0.1...v9.0.2)
+
+* Fix permission error for Settings (Circ): Can create, edit and remove overdue fine policies. Refs UICIRC-1013.
+* Fix wrong position of "Cancel" and "Save & close" button. Refs UICIRC-1014.
+* Extend "Settings (Circ): Can create, edit and remove request policies" permission to be able to see service points. Refs UICIRC-1016.
+
+## [9.0.1](https://github.com/folio-org/ui-circulation/tree/v9.0.1) (2023-11-02)
+[Full Changelog](https://github.com/folio-org/ui-circulation/compare/v9.0.0...v9.0.1)
+
+* Remove `None` option from notice methods. Fixes UICIRC-995.
+
+## [9.0.0](https://github.com/folio-org/ui-circulation/tree/v9.0.0) (2023-10-12)
+[Full Changelog](https://github.com/folio-org/ui-circulation/compare/v8.0.1...v9.0.0)
 
 * Add metadata information to view of Staff Slips (Settings > Circulation > Staff Slips). Refs UICIRC-855.
 * Implement General information accordion. Refs UICIRC-909
@@ -36,6 +63,19 @@
 * Fix Circ rules editor crashes when certain special characters entered in filter box. Refs UICIRC-921.
 * Prevent editing of shared settings from outside "Consortium manager". Refs UICIRC-962.
 * Allowing Selection of Some Pickup Service Points as Optional When Creating a New Request Policy. Refs UICIRC-963.
+* Upgrade babel config. Refs UICIRC-968.
+* Add possible for run axe tests. Refs UICIRC-965.
+* Update Node.js to v18 in GitHub Actions. Refs UICIRC-969.
+* *BREAKING* Upgrade React to v18. Refs UICIRC-966.
+* Make visible selected service points after page reloading. Refs UICIRC-972.
+* Get rid of automatic alert after request failure. UICIRC-967.
+* Change enums for notice method. UICIRC-973.
+* *BREAKING* bump `react-intl` to `v6.4.4`. Refs UICIRC-977.
+* Add informational message for Holds to New Request Policy page. Refs UICIRC-981.
+* Restore previously deleted Jest/RTL tests that were failing. Refs UICIRC-971.
+* Add "hour" to the time frequency for reminder fees. Fixes UICIRC-983.
+* Freeze the first five selection menus for reminder fees. Refs UICIRC-982.
+* Remove outdated imports. Refs UICIRC-987.
 
 ## [8.0.1](https://github.com/folio-org/ui-circulation/tree/v8.0.1) (2023-03-07)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v8.0.0...v8.0.1)

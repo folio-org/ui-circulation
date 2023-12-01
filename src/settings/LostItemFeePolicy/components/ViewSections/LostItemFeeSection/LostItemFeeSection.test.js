@@ -1,12 +1,9 @@
-import React from 'react';
 import { noop } from 'lodash';
 import {
   render,
   screen,
   within,
-} from '@testing-library/react';
-
-import '../../../../../../test/jest/__mock__';
+} from '@folio/jest-config-stripes/testing-library/react';
 
 import LostItemFeeSection from './LostItemFeeSection';
 
@@ -122,7 +119,6 @@ describe('View LostItemFeeSection', () => {
       const viewLostItemFeeSectionAccordionTestIdValue = screen.getByTestId(testIds.viewLostItemFeeSectionAccordion);
 
       expect(viewLostItemFeeSectionAccordionTestIdValue).toBeVisible();
-      expect(viewLostItemFeeSectionAccordionTestIdValue).toHaveAttribute('open');
       expect(within(viewLostItemFeeSectionAccordionTestIdValue).getByText(labelIds.lostItemSectionAccordionLabel)).toBeVisible();
     });
 

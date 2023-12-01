@@ -1,13 +1,10 @@
-import React from 'react';
 import {
   render,
   screen,
   fireEvent,
   cleanup,
   waitFor,
-} from '@testing-library/react';
-
-import '../../../test/jest/__mock__';
+} from '@folio/jest-config-stripes/testing-library/react';
 
 import {
   Button,

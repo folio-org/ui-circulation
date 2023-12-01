@@ -1,20 +1,17 @@
-import React from 'react';
+import { Field } from 'react-final-form';
+
 import {
   render,
   screen,
   within,
-} from '@testing-library/react';
-
-import '../../../../../../test/jest/__mock__';
-
-import { Field } from 'react-final-form';
+} from '@folio/jest-config-stripes/testing-library/react';
 import {
   TextField,
   Row,
   Col,
 } from '@folio/stripes/components';
-
 import { TemplateEditor } from '@folio/stripes-template-editor';
+
 import { componentPropsCheck } from '../../../../../../test/jest/helpers';
 import PatronNoticeEmailSection from './PatronNoticeEmailSection';
 import TokensList from '../../../TokensList';
@@ -25,9 +22,6 @@ jest.mock('../../../tokens', () => jest.fn(() => mockGetTokensReturnValue));
 jest.mock('../../../TokensList', () => jest.fn(() => null));
 jest.mock('@folio/stripes-template-editor', () => ({
   TemplateEditor: jest.fn(() => null),
-}));
-jest.mock('react-intl', () => ({
-  FormattedMessage: jest.fn((id) => id),
 }));
 
 describe('PatronNoticeEmailEditSection', () => {
@@ -67,7 +61,7 @@ describe('PatronNoticeEmailEditSection', () => {
     expect(getItemByTestId(testIds.patronNoticesSubject).getByText(labelIds.patronNoticesSubject)).toBeVisible();
   });
 
-  it('should render notice subject Field component', () => {
+  it('should trigger Field component for notice subject with correct props', () => {
     componentPropsCheck(Field, testIds.patronNoticesSubject, {
       id: 'input-patron-notice-subject',
       component: TextField,
@@ -80,7 +74,7 @@ describe('PatronNoticeEmailEditSection', () => {
     expect(getItemByTestId(testIds.patronNoticesBody).getByText(labelIds.patronNoticesBody)).toBeVisible();
   });
 
-  it('should render patron notices body Field component', () => {
+  it('should trigger Field component for patron notices body with correct props', () => {
     componentPropsCheck(Field, testIds.patronNoticesBody, {
       'data-testid': 'patronNoticesBody',
       required: true,

@@ -7,6 +7,7 @@ import {
   ExpandAllButton,
   Row,
   AccordionSet,
+  AccordionStatus,
 } from '@folio/stripes/components';
 
 import { NoticePolicy } from '../Models/NoticePolicy';
@@ -30,30 +31,6 @@ class NoticePolicyDetail extends React.Component {
     }).isRequired,
   };
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      sections: {
-        generalNoticePolicy: true,
-        viewLoanNotices: true,
-        viewRequestNotices: true,
-        viewFeeFineNotices: true,
-      },
-    };
-  }
-
-  handleExpandAll = (sections) => {
-    this.setState({ sections });
-  };
-
-  handleSectionToggle = ({ id }) => {
-    this.setState(({ sections }) => {
-      sections[id] = !sections[id];
-      return { sections };
-    });
-  };
-
   render() {
     const {
       initialValues: policy,
@@ -67,58 +44,41 @@ class NoticePolicyDetail extends React.Component {
       },
     } = this.props;
 
-    const {
-      generalNoticePolicy,
-      viewLoanNotices,
-      viewFeeFineNotices,
-      viewRequestNotices,
-    } = this.state.sections;
-
     const noticePolicy = new NoticePolicy(policy);
 
     return (
       <div data-test-notice-policy-detail>
-        <Row end="xs">
-          <Col
-            data-test-expand-all
-            xs
-          >
-            <ExpandAllButton
-              data-testid="expandAllButton"
-              accordionStatus={this.state.sections}
-              onToggle={this.handleExpandAll}
+        <AccordionStatus>
+          <Row end="xs">
+            <Col
+              data-test-expand-all
+              xs
+            >
+              <ExpandAllButton data-testid="expandAllButton" />
+            </Col>
+          </Row>
+          <AccordionSet data-testid="accordionSet">
+            <GeneralSection
+              isPolicyActive={policy.active}
+              policyName={policy.name}
+              policyDescription={policy.description}
+              metadata={policy.metadata}
+              connect={connect}
             />
-          </Col>
-        </Row>
-        <AccordionSet
-          data-testid="accordionSet"
-          accordionStatus={this.state.sections}
-          onToggle={this.handleSectionToggle}
-        >
-          <GeneralSection
-            isOpen={generalNoticePolicy}
-            isPolicyActive={policy.active}
-            policyName={policy.name}
-            policyDescription={policy.description}
-            metadata={policy.metadata}
-            connect={connect}
-          />
-          <LoanNoticesSection
-            isOpen={viewLoanNotices}
-            policy={noticePolicy}
-            templates={getTemplates(patronNoticeTemplates, patronNoticeCategoryIds.LOAN)}
-          />
-          <RequestNoticesSection
-            isOpen={viewRequestNotices}
-            policy={noticePolicy}
-            templates={getTemplates(patronNoticeTemplates, patronNoticeCategoryIds.REQUEST)}
-          />
-          <FeeFineNoticesSection
-            isOpen={viewFeeFineNotices}
-            policy={noticePolicy}
-            templates={getTemplates(patronNoticeTemplates, [patronNoticeCategoryIds.AUTOMATED_FEE_FINE_CHARGE, patronNoticeCategoryIds.AUTOMATED_FEE_FINE_ADJUSTMENT])}
-          />
-        </AccordionSet>
+            <LoanNoticesSection
+              policy={noticePolicy}
+              templates={getTemplates(patronNoticeTemplates, patronNoticeCategoryIds.LOAN)}
+            />
+            <RequestNoticesSection
+              policy={noticePolicy}
+              templates={getTemplates(patronNoticeTemplates, patronNoticeCategoryIds.REQUEST)}
+            />
+            <FeeFineNoticesSection
+              policy={noticePolicy}
+              templates={getTemplates(patronNoticeTemplates, [patronNoticeCategoryIds.AUTOMATED_FEE_FINE_CHARGE, patronNoticeCategoryIds.AUTOMATED_FEE_FINE_ADJUSTMENT])}
+            />
+          </AccordionSet>
+        </AccordionStatus>
       </div>
     );
   }

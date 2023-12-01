@@ -1,12 +1,8 @@
-import React from 'react';
 import {
   render,
   screen,
-  fireEvent,
   within,
-} from '@testing-library/react';
-
-import '../../../test/jest/__mock__';
+} from '@folio/jest-config-stripes/testing-library/react';
 
 import {
   Accordion,
@@ -122,36 +118,9 @@ describe('LostItemFeePolicyDetail', () => {
       expect(screen.getByText(labelIds.expandAllButton)).toBeInTheDocument();
     });
 
-    describe('section statuses on "ExpandAllButton" click', () => {
-      it('should render sections with correct initial accordion open statuses', () => {
-        expect(Accordion).toHaveBeenCalledWith(expect.objectContaining({ open: true }), {});
-        expect(LostItemFeeSection).toHaveBeenCalledWith(expect.objectContaining({ viewLostItemFeeSection: true }), {});
-      });
-
-      it('should correctly change sections accrodeon statuses on "ExpandAllButton" click', () => {
-        fireEvent.click(screen.getByText(labelIds.expandAllButton));
-
-        expect(Accordion).toHaveBeenLastCalledWith(expect.objectContaining({ open: false }), {});
-        expect(LostItemFeeSection).toHaveBeenLastCalledWith(expect.objectContaining({ viewLostItemFeeSection: false }), {});
-      });
-    });
-
-    describe('"Accordion" statuses on "AccordionSet" click', () => {
-      it('should render with correct initial "open" state', () => {
-        expect(Accordion).toHaveBeenCalledWith(expect.objectContaining({ open: true }), {});
-      });
-
-      it('should correctly change "open" status on "AccordionSet" click', () => {
-        fireEvent.click(screen.getByTestId(testIds.accordionSet));
-
-        expect(Accordion).toHaveBeenLastCalledWith(expect.objectContaining({ open: false }), {});
-      });
-    });
-
     it('should render "Accordion" with passed props', () => {
       expect(Accordion).toHaveBeenCalledWith(expect.objectContaining({
         label: labelIds.generalInformation,
-        open: true,
       }), {});
     });
 
@@ -169,7 +138,6 @@ describe('LostItemFeePolicyDetail', () => {
     it('should render "LostItemFeeSection" with passed props', () => {
       expect(LostItemFeeSection).toHaveBeenCalledWith(expect.objectContaining({
         policy: policyForTest,
-        viewLostItemFeeSection: true,
       }), {});
     });
   });

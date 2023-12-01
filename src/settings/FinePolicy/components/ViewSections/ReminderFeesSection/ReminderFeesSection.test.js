@@ -1,6 +1,4 @@
-import { render } from '@testing-library/react';
-
-import '../../../../../../test/jest/__mock__';
+import { render } from '@folio/jest-config-stripes/testing-library/react';
 
 import ReminderFeesSection, { generateFormatter } from './ReminderFeesSection';
 
@@ -18,7 +16,6 @@ describe('ReminderFeesSection', () => {
       <ReminderFeesSection
         getCheckboxValue={getCheckboxValue}
         policy={policy}
-        sectionOpen
         blockTemplates={[]}
         noticeTemplates={[]}
       />
@@ -43,7 +40,7 @@ describe('ReminderFeesSection', () => {
       reminderFee: '10',
       noticeTemplateId: 'template1',
       blockTemplateId: 'template3',
-      noticeMethodId: 'email',
+      noticeFormat: 'Email',
       timeUnitId: 'day',
     };
 
@@ -87,8 +84,8 @@ describe('ReminderFeesSection', () => {
       expect(formatter.blockTemplateId({ ...mockItem, blockTemplateId: null })).toEqual('');
     });
 
-    it('should format noticeMethodId correctly', () => {
-      const { container } = render(<>{formatter.noticeMethodId(mockItem)}</>);
+    it('should format noticeFormat correctly', () => {
+      const { container } = render(<>{formatter.noticeFormat(mockItem)}</>);
       expect(container).toHaveTextContent('ui-circulation.settings.finePolicy.reminderFees.noticeMethods.email');
     });
 

@@ -1,12 +1,9 @@
-import React from 'react';
 import { IntlProvider } from 'react-intl';
 import {
   render,
   screen,
   within,
-} from '@testing-library/react';
-
-import '../../../../../../test/jest/__mock__';
+} from '@folio/jest-config-stripes/testing-library/react';
 
 import SchedulesList from './SchedulesList';
 

@@ -1,12 +1,9 @@
-import React from 'react';
 import {
   render,
   screen,
   fireEvent,
   within,
-} from '@testing-library/react';
-
-import '../../../../../../test/jest/__mock__';
+} from '@folio/jest-config-stripes/testing-library/react';
 
 import { PreviewModal } from '@folio/stripes-template-editor';
 
@@ -22,9 +19,9 @@ jest.mock('html-to-react', () => ({
       processDefaultNode: 'testDefaultNode',
     })),
   },
-  Parser: () => ({
+  Parser: jest.fn(() => ({
     parseWithInstructions: jest.fn(() => mockParseWithInstructionsReturnValue),
-  }),
+  })),
 }));
 jest.mock('@folio/stripes-template-editor', () => ({
   PreviewModal: jest.fn(({

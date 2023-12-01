@@ -1,16 +1,13 @@
-import React from 'react';
 import {
   render,
   screen,
   within,
   fireEvent,
-} from '@testing-library/react';
+} from '@folio/jest-config-stripes/testing-library/react';
 import {
   isArray,
   uniqueId,
 } from 'lodash';
-
-import '../../../../../../../test/jest/__mock__';
 
 import SchedulesList from './SchedulesList';
 import ScheduleCard from '../ScheduleCard';

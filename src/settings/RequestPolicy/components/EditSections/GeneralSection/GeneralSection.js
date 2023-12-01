@@ -15,11 +15,13 @@ import {
   RadioButtonGroup,
   Row,
   Col,
+  InfoPopover,
 } from '@folio/stripes/components';
 
 import { Metadata } from '../../../../components';
 import {
   requestPolicyTypes,
+  REQUEST_POLICY_TYPES,
   REQUEST_TYPE_RULES,
 } from '../../../../../constants';
 
@@ -43,6 +45,20 @@ export const validateServicePointsList = (servicePoints) => {
   return error;
 };
 
+export const getRequestPolicyLabel = (name) => (
+  name === REQUEST_POLICY_TYPES.HOLD
+    ? (
+      <>
+        {name}
+        <InfoPopover
+          content={<FormattedMessage id="ui-circulation.settings.requestPolicy.policyTypes.hold.infoPopover.content" />}
+          iconSize="medium"
+        />
+      </>
+    )
+    : name
+);
+
 export const renderTypes = (props) => {
   const {
     handleChangeRequestTypesRules,
@@ -64,7 +80,7 @@ export const renderTypes = (props) => {
             component={Checkbox}
             type="checkbox"
             id={`${name.toLowerCase()}-checkbox`}
-            label={name}
+            label={getRequestPolicyLabel(name)}
             name={`requestTypes[${index}]`}
           />
         </Col>
