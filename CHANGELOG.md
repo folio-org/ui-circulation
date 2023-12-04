@@ -7,6 +7,7 @@
 * Create a new Circulation setting Print hold requests (Open – Not yet filled) – Printing search slips. Refs UICIRC-1000.
 * Change label for count closed days. Refs UICIRC-1017.
 * Unfreeze the first five selection menus for reminder fees. Refs UICIRC-1002, UICIRC-1005, UICIRC-1006.
+* UI tests replacement with RTL/Jest for `RequestCancellationReasons.js`. Refs UICIRC-959.
 * Change functionality for accordions on Circulation settings page (create/edit). Refs UICIRC-1010.
 
 ## [9.0.3](https://github.com/folio-org/ui-circulation/tree/v9.0.3) (2023-11-09)

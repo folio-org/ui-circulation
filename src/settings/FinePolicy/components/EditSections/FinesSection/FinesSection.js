@@ -15,9 +15,7 @@ import OverdueFinesSection from '../RangeSection/OverdueFinesSection';
 import OverdueFinesSectionColumn from '../RangeSection/OverdueFinesSectionColumn';
 
 class FinesSection extends React.Component {
-  static propTypes = {
-    intl: PropTypes.object.isRequired,
-  };
+  static propTypes = { intl: PropTypes.object.isRequired };
 
   constructor(props) {
     super(props);
@@ -26,9 +24,7 @@ class FinesSection extends React.Component {
   }
 
   render() {
-    const {
-      intl,
-    } = this.props;
+    const { intl } = this.props;
     const { formatMessage } = intl;
 
     const intervalP = this.generateOptions(intervalPeriods, 'ui-circulation.settings.finePolicy.selectInterval');
