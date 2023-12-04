@@ -13,7 +13,6 @@ describe('ReminderFeesSection', () => {
     const { getByTestId } = render(
       <ReminderFeesSection
         policy={policy}
-        sectionOpen
         noticeTemplates={[]}
         blockTemplates={[]}
       />

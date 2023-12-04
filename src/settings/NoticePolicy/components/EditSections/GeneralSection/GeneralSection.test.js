@@ -66,10 +66,6 @@ describe('GeneralSection', () => {
       expect(getById(testIds.general).getByText(labelIds.general)).toBeVisible();
     });
 
-    it('should pass "isOpen" prop correctly', () => {
-      expect(screen.getByTestId(testIds.general)).toHaveAttribute('open');
-    });
-
     it('should execute "Metadata" with passed props', () => {
       const expectedResult = {
         connect: mockedConnect,

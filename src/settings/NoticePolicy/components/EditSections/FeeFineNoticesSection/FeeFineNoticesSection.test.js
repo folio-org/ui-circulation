@@ -41,62 +41,32 @@ describe('FeeFineNoticesSection', () => {
     mockedCatchFunc.mockClear();
   });
 
-  describe('when "Accordion" is open"', () => {
-    beforeEach(() => {
-      render(
-        <FeeFineNoticesSection
-          isOpen
-          policy={mockedPolicy}
-          templates={mockedTemplates}
-        />
-      );
-    });
-
-    it('should execute "Accordion" with passed props', () => {
-      const expectedResult = {
-        id: 'editFeeFineNotices',
-        open: true,
-      };
-
-      expect(Accordion).toHaveBeenCalledWith(expect.objectContaining(expectedResult), {});
-    });
-
-    it('should render "Accordion" label', () => {
-      expect(screen.getByText(feeFineNoticesLabel)).toBeVisible();
-    });
-
-    it('should execute "FieldArray" with passed props', () => {
-      const expectedResult = {
-        name: 'feeFineNotices',
-        sectionKey: 'feeFineNotices',
-        component: NoticesList,
-        policy: mockedPolicy,
-        getSendEvents,
-        sendEventTriggeringIds: Object.values(timeBasedFeeFineEventsIds),
-        templates: mockedTemplates,
-        triggeringEvents: feeFineNoticesTriggeringEvents,
-      };
-
-      expect(FieldArray).toHaveBeenLastCalledWith(expect.objectContaining(expectedResult), {});
-    });
+  beforeEach(() => {
+    render(
+      <FeeFineNoticesSection
+        policy={mockedPolicy}
+        templates={mockedTemplates}
+      />
+    );
   });
 
-  describe('when "Accordion" is closed', () => {
-    it('should execute "Accordion" with passed props', () => {
-      const expectedResult = {
-        open: false,
-      };
+  it('should render "Accordion" label', () => {
+    expect(screen.getByText(feeFineNoticesLabel)).toBeVisible();
+  });
 
-      render(
-        <FeeFineNoticesSection
-          isOpen={false}
-          policy={mockedPolicy}
-          templates={mockedTemplates}
-        />
-      );
+  it('should execute "FieldArray" with passed props', () => {
+    const expectedResult = {
+      name: 'feeFineNotices',
+      sectionKey: 'feeFineNotices',
+      component: NoticesList,
+      policy: mockedPolicy,
+      getSendEvents,
+      sendEventTriggeringIds: Object.values(timeBasedFeeFineEventsIds),
+      templates: mockedTemplates,
+      triggeringEvents: feeFineNoticesTriggeringEvents,
+    };
 
-      expect(Accordion).toHaveBeenLastCalledWith(expect.objectContaining(expectedResult), {});
-    });
+    expect(FieldArray).toHaveBeenLastCalledWith(expect.objectContaining(expectedResult), {});
   });
 
   describe('getSendEvents', () => {
