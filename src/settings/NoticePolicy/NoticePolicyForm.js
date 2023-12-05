@@ -7,6 +7,7 @@ import stripesFinalForm from '@folio/stripes/final-form';
 import { stripesShape } from '@folio/stripes/core';
 import {
   AccordionSet,
+  AccordionStatus,
   Col,
   Row,
   Pane,
@@ -47,30 +48,6 @@ class NoticePolicyForm extends React.Component {
     handleSubmit: PropTypes.func.isRequired,
   };
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      sections: {
-        general: true,
-        editLoanNotices: true,
-        editRequestNotices: true,
-        editFeeFineNotices: true,
-      },
-    };
-  }
-
-  handleSectionToggle = ({ id }) => {
-    this.setState(({ sections }) => {
-      sections[id] = !sections[id];
-      return { sections };
-    });
-  };
-
-  handleExpandAll = (sections) => {
-    this.setState({ sections });
-  };
-
   render() {
     const {
       form: { getState },
@@ -81,7 +58,6 @@ class NoticePolicyForm extends React.Component {
       onCancel,
     } = this.props;
 
-    const { sections } = this.state;
     const { values } = getState();
     const policy = new NoticePolicy(values);
 
@@ -112,44 +88,35 @@ class NoticePolicyForm extends React.Component {
             firstMenu={<CancelButton onCancel={onCancel} />}
             footer={<FooterPane {...footerPaneProps} />}
           >
-            <Row end="xs">
-              <Col
-                data-test-expand-all
-                xs
-              >
-                <ExpandAllButton
-                  accordionStatus={sections}
-                  onToggle={this.handleExpandAll}
+            <AccordionStatus>
+              <Row end="xs">
+                <Col
+                  data-test-expand-all
+                  xs
+                >
+                  <ExpandAllButton />
+                </Col>
+              </Row>
+              <AccordionSet data-testid="accordionSet">
+                <GeneralSection
+                  metadata={policy.metadata}
+                  connect={stripes.connect}
+                  isPolicyActive={policy.active}
                 />
-              </Col>
-            </Row>
-            <AccordionSet
-              data-testid="accordionSet"
-              accordionStatus={sections}
-              onToggle={this.handleSectionToggle}
-            >
-              <GeneralSection
-                isOpen={sections.general}
-                metadata={policy.metadata}
-                connect={stripes.connect}
-                isPolicyActive={policy.active}
-              />
-              <LoanNoticesSection
-                isOpen={sections.editLoanNotices}
-                policy={policy}
-                templates={getTemplates(patronNoticeTemplates, [patronNoticeCategoryIds.LOAN])}
-              />
-              <RequestNoticesSection
-                isOpen={sections.editRequestNotices}
-                policy={policy}
-                templates={getTemplates(patronNoticeTemplates, [patronNoticeCategoryIds.REQUEST])}
-              />
-              <FeeFineNoticesSection
-                isOpen={sections.editFeeFineNotices}
-                policy={policy}
-                templates={getTemplates(patronNoticeTemplates, [patronNoticeCategoryIds.AUTOMATED_FEE_FINE_CHARGE, patronNoticeCategoryIds.AUTOMATED_FEE_FINE_ADJUSTMENT])}
-              />
-            </AccordionSet>
+                <LoanNoticesSection
+                  policy={policy}
+                  templates={getTemplates(patronNoticeTemplates, [patronNoticeCategoryIds.LOAN])}
+                />
+                <RequestNoticesSection
+                  policy={policy}
+                  templates={getTemplates(patronNoticeTemplates, [patronNoticeCategoryIds.REQUEST])}
+                />
+                <FeeFineNoticesSection
+                  policy={policy}
+                  templates={getTemplates(patronNoticeTemplates, [patronNoticeCategoryIds.AUTOMATED_FEE_FINE_CHARGE, patronNoticeCategoryIds.AUTOMATED_FEE_FINE_ADJUSTMENT])}
+                />
+              </AccordionSet>
+            </AccordionStatus>
           </Pane>
         </Paneset>
       </form>

@@ -43,55 +43,32 @@ describe('RequestNoticesSection', () => {
     },
   ];
 
-  describe('with positive props', () => {
-    beforeEach(() => {
-      render(
-        <RequestNoticesSection
-          isOpen
-          policy={mockedPolicy}
-          templates={mockedTemplates}
-        />
-      );
-    });
-
-    it('should render accordion label correctly', () => {
-      expect(within(screen.getByTestId(testIds.editRequestNotices)).getByText(labelIds.requestNoticesId)).toBeVisible();
-    });
-
-    it('should pass "isOpen" prop correctly', () => {
-      expect(screen.getByTestId(testIds.editRequestNotices)).toHaveAttribute('open');
-    });
-
-    it('should execute "FieldArray" with correct props', () => {
-      const expectedProps = {
-        name: 'requestNotices',
-        sectionKey: 'requestNotices',
-        component: NoticesList,
-        policy: mockedPolicy,
-        getSendEvents,
-        sendEventTriggeringIds: Object.values(requestTimeBasedEventsIds),
-        templates: mockedTemplates,
-        triggeringEvents: requestNoticesTriggeringEvents,
-      };
-
-      expect(FieldArray).toHaveBeenLastCalledWith(expectedProps, {});
-    });
+  beforeEach(() => {
+    render(
+      <RequestNoticesSection
+        policy={mockedPolicy}
+        templates={mockedTemplates}
+      />
+    );
   });
 
-  describe('with negative props', () => {
-    beforeEach(() => {
-      render(
-        <RequestNoticesSection
-          isOpen={false}
-          policy={mockedPolicy}
-          templates={mockedTemplates}
-        />
-      );
-    });
+  it('should render accordion label correctly', () => {
+    expect(within(screen.getByTestId(testIds.editRequestNotices)).getByText(labelIds.requestNoticesId)).toBeVisible();
+  });
 
-    it('should pass "isOpen" prop correctly', () => {
-      expect(screen.getByTestId(testIds.editRequestNotices)).not.toHaveAttribute('open');
-    });
+  it('should execute "FieldArray" with correct props', () => {
+    const expectedProps = {
+      name: 'requestNotices',
+      sectionKey: 'requestNotices',
+      component: NoticesList,
+      policy: mockedPolicy,
+      getSendEvents,
+      sendEventTriggeringIds: Object.values(requestTimeBasedEventsIds),
+      templates: mockedTemplates,
+      triggeringEvents: requestNoticesTriggeringEvents,
+    };
+
+    expect(FieldArray).toHaveBeenLastCalledWith(expectedProps, {});
   });
 
   describe('getSendEvents', () => {

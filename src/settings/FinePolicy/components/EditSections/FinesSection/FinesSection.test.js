@@ -68,7 +68,6 @@ describe('FinesSection', () => {
     it('should render "Accordion" component with passed props', () => {
       expect(Accordion).toHaveBeenCalledWith(expect.objectContaining({
         id: 'editFineSection',
-        open: true,
         label: labelIds.accordion,
       }), {});
     });
@@ -149,19 +148,6 @@ describe('FinesSection', () => {
           label: labelIds.maximumRecallOverdueFineColumn,
         }), {}
       );
-    });
-  });
-
-  describe('when "fineSectionOpen" prop is false', () => {
-    beforeEach(() => {
-      render(<FinesSection fineSectionOpen={false} />);
-    });
-
-    it('should render "Accordion" component with passed props', () => {
-      expect(Accordion).toHaveBeenCalledWith(expect.objectContaining({
-        id: 'editFineSection',
-        open: false,
-      }), {});
     });
   });
 });

@@ -112,19 +112,6 @@ describe('NoticePolicyForm', () => {
     onCancel: mockedOnCancel,
     handleSubmit: mockedHandleSubmit,
   };
-  const componentSections = [
-    GeneralSection,
-    LoanNoticesSection,
-    RequestNoticesSection,
-    FeeFineNoticesSection,
-  ];
-  const isSectionsOpenOrClosed = (isOpen) => {
-    componentSections.forEach(section => {
-      expect(section).toHaveBeenLastCalledWith(expect.objectContaining({
-        isOpen,
-      }), {});
-    });
-  };
 
   beforeEach(() => {
     render(
@@ -169,29 +156,8 @@ describe('NoticePolicyForm', () => {
     expect(screen.getByText(labelIds.expandAllButton)).toBeInTheDocument();
   });
 
-  it('should correctly toogle sections status on "ExpandAllButton" click', () => {
-    isSectionsOpenOrClosed(true);
-
-    fireEvent.click(screen.getByText(labelIds.expandAllButton));
-
-    isSectionsOpenOrClosed(false);
-  });
-
-  it('"AccordionSet" should correctly handle section status toggle', () => {
-    expect(GeneralSection).toHaveBeenCalledWith(expect.objectContaining({
-      isOpen: true,
-    }), {});
-
-    fireEvent.click(screen.getByTestId(testIds.accordionSet));
-
-    expect(GeneralSection).toHaveBeenCalledWith(expect.objectContaining({
-      isOpen: false,
-    }), {});
-  });
-
   it('should execute "GeneralSection" with passed props', () => {
     expect(GeneralSection).toHaveBeenCalledWith({
-      isOpen: true,
       metadata: mockedPolicy.metadata,
       connect: mockedStripes.connect,
       isPolicyActive: mockedPolicy.active,
@@ -200,7 +166,6 @@ describe('NoticePolicyForm', () => {
 
   it('should execute "LoanNoticesSection" with passed props', () => {
     expect(LoanNoticesSection).toHaveBeenCalledWith({
-      isOpen: true,
       policy: mockedPolicy,
       templates: {
         templates: mockedTemplates,
@@ -211,7 +176,6 @@ describe('NoticePolicyForm', () => {
 
   it('should execute "RequestNoticesSection" with passed props', () => {
     expect(RequestNoticesSection).toHaveBeenCalledWith({
-      isOpen: true,
       policy: mockedPolicy,
       templates: {
         templates: mockedTemplates,
@@ -222,7 +186,6 @@ describe('NoticePolicyForm', () => {
 
   it('should execute "FeeFineNoticesSection" with passed props', () => {
     expect(FeeFineNoticesSection).toHaveBeenCalledWith({
-      isOpen: true,
       policy: mockedPolicy,
       templates: {
         templates: mockedTemplates,

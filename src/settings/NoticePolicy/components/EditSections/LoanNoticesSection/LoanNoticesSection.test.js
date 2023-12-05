@@ -40,59 +40,36 @@ describe('LoanNoticesSection', () => {
     },
   ];
 
-  describe('when it is open', () => {
-    beforeEach(() => {
-      render(
-        <LoanNoticesSection
-          isOpen
-          policy={mockedPolicy}
-          templates={mockedTemplates}
-        />
-      );
-    });
-
-    afterEach(() => {
-      FieldArray.mockClear();
-    });
-
-    it('should render accordion with label', () => {
-      expect(within(screen.getByTestId(testIds.editLoanNotices)).getByText(labelIds.loanNoticesId)).toBeVisible();
-    });
-
-    it('should pass "isOpen" prop correctly', () => {
-      expect(screen.getByTestId(testIds.editLoanNotices)).toHaveAttribute('open');
-    });
-
-    it('should execute "FieldArray" with correct props', () => {
-      const expectedResult = {
-        name: 'loanNotices',
-        sectionKey: 'loanNotices',
-        component: NoticesList,
-        policy: mockedPolicy,
-        templates: mockedTemplates,
-        getSendEvents,
-        sendEventTriggeringIds: Object.values(loanTimeBasedEventsIds),
-        triggeringEvents: loanNoticesTriggeringEvents,
-      };
-
-      expect(FieldArray).toHaveBeenCalledWith(expectedResult, {});
-    });
+  beforeEach(() => {
+    render(
+      <LoanNoticesSection
+        policy={mockedPolicy}
+        templates={mockedTemplates}
+      />
+    );
   });
 
-  describe('when it is not open', () => {
-    beforeEach(() => {
-      render(
-        <LoanNoticesSection
-          isOpen={false}
-          policy={mockedPolicy}
-          templates={mockedTemplates}
-        />
-      );
-    });
+  afterEach(() => {
+    FieldArray.mockClear();
+  });
 
-    it('should pass "isOpen" prop correctly', () => {
-      expect(screen.getByTestId(testIds.editLoanNotices)).not.toHaveAttribute('open');
-    });
+  it('should render accordion with label', () => {
+    expect(within(screen.getByTestId(testIds.editLoanNotices)).getByText(labelIds.loanNoticesId)).toBeVisible();
+  });
+
+  it('should execute "FieldArray" with correct props', () => {
+    const expectedResult = {
+      name: 'loanNotices',
+      sectionKey: 'loanNotices',
+      component: NoticesList,
+      policy: mockedPolicy,
+      templates: mockedTemplates,
+      getSendEvents,
+      sendEventTriggeringIds: Object.values(loanTimeBasedEventsIds),
+      triggeringEvents: loanNoticesTriggeringEvents,
+    };
+
+    expect(FieldArray).toHaveBeenCalledWith(expectedResult, {});
   });
 
   describe('getSendEvents function', () => {

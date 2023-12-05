@@ -66,16 +66,17 @@ class LoanPolicyForm extends React.Component {
     this.state = {
       sections: {
         generalLoanPolicyForm: true,
-        recallsSection: true,
-        holdsSection: true,
       },
     };
   }
 
   handleSectionToggle = ({ id }) => {
     this.setState(({ sections }) => {
-      sections[id] = !sections[id];
-      return { sections };
+      return {
+        sections: {
+          [id]: !sections[id],
+        },
+      };
     });
   };
 
@@ -196,9 +197,6 @@ class LoanPolicyForm extends React.Component {
                 <RequestManagementSection
                   data-testid="requestManagementSection"
                   policy={policy}
-                  holdsSectionOpen={sections.holdsSection}
-                  recallsSectionOpen={sections.recallsSection}
-                  accordionOnToggle={this.handleSectionToggle}
                   change={change}
                 />
               </Accordion>

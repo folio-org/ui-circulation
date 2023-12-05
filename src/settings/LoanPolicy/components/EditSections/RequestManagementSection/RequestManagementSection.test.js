@@ -46,13 +46,9 @@ describe('RequestManagementSection', () => {
     alternateRecallReturnInterval: 'ui-circulation.settings.requestManagement.alternateRecallReturnInterval',
     alternateRenewalLoanPeriod: 'ui-circulation.settings.requestManagement.alternateRenewalLoanPeriod',
   };
-  const accordionOnToggleMock = jest.fn();
   const changeMock = jest.fn();
   const defaultTestProps = {
     policy: {},
-    holdsSectionOpen: false,
-    recallsSectionOpen: false,
-    accordionOnToggle: accordionOnToggleMock,
     change: changeMock,
   };
   const periodCallOrderByPlace = {
@@ -85,7 +81,6 @@ describe('RequestManagementSection', () => {
 
   afterEach(() => {
     Accordion.mockClear();
-    accordionOnToggleMock.mockClear();
     changeMock.mockClear();
     Period.mockClear();
     Field.mockClear();
@@ -187,64 +182,44 @@ describe('RequestManagementSection', () => {
   });
 
   describe('"recalls section" accordion', () => {
-    [
-      false,
-      true,
-    ].forEach((testRecallsSectionOpen) => {
-      describe(`when "recallsSectionOpen" prop is ${testRecallsSectionOpen}`, () => {
-        it('should render accordion', () => {
-          render(
-            <RequestManagementSection
-              {...defaultTestProps}
-              recallsSectionOpen={testRecallsSectionOpen}
-              policy={{
-                loanable: true,
-              }}
-            />
-          );
+    it('should render accordion', () => {
+      render(
+        <RequestManagementSection
+          {...defaultTestProps}
+          policy={{
+            loanable: true,
+          }}
+        />
+      );
 
-          expect(Accordion).toHaveBeenNthCalledWith(
-            accordionCallOrderByPlace.recallsSection,
-            expect.objectContaining({
-              id: 'recallsSection',
-              open: testRecallsSectionOpen,
-              onToggle: accordionOnToggleMock,
-              label: labelIds.recalls,
-            }), {}
-          );
-        });
-      });
+      expect(Accordion).toHaveBeenNthCalledWith(
+        accordionCallOrderByPlace.recallsSection,
+        expect.objectContaining({
+          id: 'recallsSection',
+          label: labelIds.recalls,
+        }), {}
+      );
     });
   });
 
   describe('"holds section" accordion', () => {
-    [
-      false,
-      true,
-    ].forEach((testHoldsSectionOpen) => {
-      describe(`when "holdsSectionOpen" prop is ${testHoldsSectionOpen}`, () => {
-        it('should render accordion', () => {
-          render(
-            <RequestManagementSection
-              {...defaultTestProps}
-              holdsSectionOpen={testHoldsSectionOpen}
-              policy={{
-                loanable: true,
-              }}
-            />
-          );
+    it('should render accordion', () => {
+      render(
+        <RequestManagementSection
+          {...defaultTestProps}
+          policy={{
+            loanable: true,
+          }}
+        />
+      );
 
-          expect(Accordion).toHaveBeenNthCalledWith(
-            accordionCallOrderByPlace.holdsSection,
-            expect.objectContaining({
-              id: 'holdsSection',
-              open: testHoldsSectionOpen,
-              onToggle: accordionOnToggleMock,
-              label: labelIds.holds,
-            }), {}
-          );
-        });
-      });
+      expect(Accordion).toHaveBeenNthCalledWith(
+        accordionCallOrderByPlace.holdsSection,
+        expect.objectContaining({
+          id: 'holdsSection',
+          label: labelIds.holds,
+        }), {}
+      );
     });
   });
 

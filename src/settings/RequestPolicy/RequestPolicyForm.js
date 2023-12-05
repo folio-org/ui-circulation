@@ -93,8 +93,11 @@ class RequestPolicyForm extends React.Component {
 
   handleSectionToggle = ({ id }) => {
     this.setState(({ sections }) => {
-      sections[id] = !sections[id];
-      return { sections };
+      return {
+        sections: {
+          [id]: !sections[id],
+        },
+      };
     });
   };
 

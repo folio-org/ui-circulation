@@ -6,10 +6,7 @@ import {
 } from '@folio/jest-config-stripes/testing-library/react';
 
 import {
-  Accordion,
-  AccordionSet,
   Button,
-  ExpandAllButton,
   IconButton,
   TextArea,
   TextField,
@@ -20,31 +17,6 @@ import { FieldArray } from 'react-final-form-arrays';
 
 import FixedDueDateScheduleForm from './FixedDueDateScheduleForm';
 import SchedulesList from './components/EditSections/components/SchedulesList';
-
-ExpandAllButton.mockImplementation(({ onToggle, ...rest }) => (
-  <button
-    type="button"
-    onClick={() => onToggle({ generalFixedDueDate: false, schedule: false })}
-    {...rest}
-  >
-    ExpandAllButton
-  </button>
-));
-
-AccordionSet.mockImplementation(({
-  children,
-  onToggle,
-  ...rest
-}) => (
-  // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
-  <div
-    data-testid="accordionSet"
-    onClick={() => onToggle({ id: 'generalFixedDueDate' })}
-    {...rest}
-  >
-    {children}
-  </div>
-));
 
 const name = 'test-name';
 const testIds = {
@@ -69,15 +41,6 @@ const labelIds = {
   deleteHeader: 'ui-circulation.settings.fDDSform.deleteHeader',
   deleteMessage: 'ui-circulation.settings.fDDSform.deleteMessage',
 };
-
-const defaultState = {
-  confirmDelete: false,
-  sections: {
-    generalFixedDueDate: true,
-    schedule: true,
-  },
-};
-
 const okapi = {
   url: 'test-okapi-url',
   tenant: 'test-okapi-tenant',
@@ -114,21 +77,9 @@ describe('FixedDueDateScheduleForm', () => {
       name: 1,
       description: 2,
     };
-    const accordionCallOrder = {
-      general: 1,
-      schedule: 2,
-    };
-    const expandAllButtonCallOrder = {
-      render: 1,
-      update: 2,
-    };
     const buttonCallOrder = {
       cancel: 1,
       save: 2,
-    };
-    const accordionSetCallOrder = {
-      render: 1,
-      update: 2,
     };
 
     beforeEach(() => {
@@ -198,54 +149,12 @@ describe('FixedDueDateScheduleForm', () => {
       expect(FieldArray).toHaveBeenCalledWith(expect.objectContaining(expectedProps), {});
     });
 
-    it('"General" accordion should be rendered with correct props', () => {
-      const expectedProps = {
-        open: defaultState.sections.generalFixedDueDate,
-        id: 'generalFixedDueDate',
-      };
-      expect(Accordion)
-        .toHaveBeenNthCalledWith(accordionCallOrder.general, expect.objectContaining(expectedProps), {});
-    });
-
     it('Label of "General" accordion should be rendered', () => {
       expect(container.getByText(labelIds.about)).toBeInTheDocument();
     });
 
-    it('"Schedule" accordion should be rendered with correct props', () => {
-      const expectedProps = {
-        open: defaultState.sections.generalFixedDueDate,
-        id: 'schedule',
-      };
-      expect(Accordion)
-        .toHaveBeenNthCalledWith(accordionCallOrder.schedule, expect.objectContaining(expectedProps), {});
-    });
-
     it('Label of "Schedule" accordion should be rendered', () => {
       expect(container.getByText(labelIds.schedule)).toBeInTheDocument();
-    });
-
-    it('"ExpandAllButton" should be rendered with correct props', () => {
-      const expectedProps = {
-        accordionStatus: {
-          generalFixedDueDate: defaultState.sections.generalFixedDueDate,
-          schedule: defaultState.sections.schedule,
-        },
-      };
-
-      expect(ExpandAllButton).toHaveBeenNthCalledWith(expandAllButtonCallOrder.render, expect.objectContaining(expectedProps), {});
-    });
-
-    it('"ExpandAllButton" should be updated after clicking on it', () => {
-      const expectedProps = {
-        accordionStatus: {
-          generalFixedDueDate: !defaultState.sections.generalFixedDueDate,
-          schedule: !defaultState.sections.schedule,
-        },
-      };
-
-      fireEvent.click(container.getByTestId(testIds.expandAllButton));
-
-      expect(ExpandAllButton).toHaveBeenNthCalledWith(expandAllButtonCallOrder.update, expect.objectContaining(expectedProps), {});
     });
 
     it('Footer should contain "Cancel" button with appropriate props', () => {
@@ -272,29 +181,6 @@ describe('FixedDueDateScheduleForm', () => {
 
     it('Name of "Save and close" button should be rendered', () => {
       expect(container.getByText(labelIds.saveAndClose)).toBeInTheDocument();
-    });
-
-    it('"AccordionSet" should be called with correct props', () => {
-      const expectedProps = {
-        accordionStatus: defaultState.sections,
-        onToggle: expect.any(Function),
-      };
-
-      expect(AccordionSet).toHaveBeenNthCalledWith(accordionSetCallOrder.render, expect.objectContaining(expectedProps), {});
-    });
-
-    it('"AccordionSet" should be called with updated props after clicking on toggle button', () => {
-      const expectedProps = {
-        accordionStatus: {
-          generalFixedDueDate: !defaultState.sections.generalFixedDueDate,
-          schedule: defaultState.sections.schedule,
-        },
-        onToggle: expect.any(Function),
-      };
-
-      fireEvent.click(container.getByTestId(testIds.accordionSet));
-
-      expect(AccordionSet).toHaveBeenNthCalledWith(accordionSetCallOrder.update, expect.objectContaining(expectedProps), {});
     });
   });
 
