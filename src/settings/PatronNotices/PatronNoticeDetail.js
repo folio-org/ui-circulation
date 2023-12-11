@@ -7,6 +7,7 @@ import { get } from 'lodash';
 import {
   Accordion,
   AccordionSet,
+  AccordionStatus,
   ExpandAllButton,
   Row,
   Col,
@@ -34,35 +35,39 @@ const PatronNoticeDetail = (props) => {
 
   return (
     <div data-test-patron-notice-details>
-      <AccordionSet>
+      <AccordionStatus>
         <Row end="xs">
           <Col data-test-expand-all>
             <ExpandAllButton />
           </Col>
         </Row>
-        <Accordion
-          label={formatMessage({ id:'ui-circulation.settings.patronNotices.generalInformation' })}
-        >
-          <Metadata
-            connect={connect}
-            metadata={notice.metadata}
-          />
-          <PatronNoticeAboutSection notice={notice} />
-        </Accordion>
-        <Accordion
-          label={formatMessage({ id: 'ui-circulation.settings.patronNotices.email' })}
-        >
-          {
-            emailTemplate && (
-              <PatronNoticeEmailSection
-                notice={notice}
-                locale={locale}
-                emailTemplate={emailTemplate}
+        <AccordionSet>
+          <Accordion
+            label={formatMessage({ id:'ui-circulation.settings.patronNotices.generalInformation' })}
+          >
+            <AccordionSet>
+              <Metadata
+                connect={connect}
+                metadata={notice.metadata}
               />
-            )
-          }
-        </Accordion>
-      </AccordionSet>
+            </AccordionSet>
+            <PatronNoticeAboutSection notice={notice} />
+          </Accordion>
+          <Accordion
+            label={formatMessage({ id: 'ui-circulation.settings.patronNotices.emailOrPrint' })}
+          >
+            {
+              emailTemplate && (
+                <PatronNoticeEmailSection
+                  notice={notice}
+                  locale={locale}
+                  emailTemplate={emailTemplate}
+                />
+              )
+            }
+          </Accordion>
+        </AccordionSet>
+      </AccordionStatus>
     </div>
   );
 };
