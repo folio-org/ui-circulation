@@ -59,7 +59,6 @@ const labelIds = {
   patronNoticesNew: 'ui-circulation.settings.patronNotices.newLabel',
   patronNoticesCloseDialog: 'ui-circulation.settings.patronNotices.closeDialog',
   patronNoticesEmail: 'ui-circulation.settings.patronNotices.email',
-  patronNoticesEmailOrPrint: 'ui-circulation.settings.patronNotices.emailOrPrint',
   patronNoticesPredefinedWarning: 'ui-circulation.settings.patronNotices.predefinedWarning',
   patronNoticesGeneralInformation: 'ui-circulation.settings.patronNotices.generalInformation',
 };
@@ -79,12 +78,6 @@ describe('PatronNoticeForm', () => {
       },
     }[field];
   });
-
-  const testGetState = jest.fn(() => {
-    return {
-      values: {}
-    };
-  });
   const testPristineValue = true;
   const testSubmittingValue = true;
   const testHandleSubmit = jest.fn();
@@ -96,7 +89,6 @@ describe('PatronNoticeForm', () => {
   const defaultTestProps = {
     form: {
       getFieldState: testGetFieldState,
-      getState: testGetState,
     },
     pristine: testPristineValue,
     submitting: testSubmittingValue,
@@ -177,8 +169,8 @@ describe('PatronNoticeForm', () => {
       expect(screen.getByText(labelIds.patronNoticesGeneralInformation)).toBeDefined();
     });
 
-    it('should render "Email or print" label', () => {
-      expect(screen.getByText(labelIds.patronNoticesEmailOrPrint)).toBeDefined();
+    it('should render "Email" label', () => {
+      expect(screen.getByText(labelIds.patronNoticesEmail)).toBeDefined();
     });
 
     it('should render PatronNoticeAboutSection', () => {

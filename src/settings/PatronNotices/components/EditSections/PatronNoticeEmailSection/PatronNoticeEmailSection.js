@@ -7,14 +7,13 @@ import {
   Col,
   Row,
   TextField,
-  Checkbox
 } from '@folio/stripes/components';
 import { TemplateEditor } from '@folio/stripes-template-editor';
 
 import getTokens from '../../../tokens';
 import TokensList from '../../../TokensList';
 
-const PatronNoticeEmailSection = ({ category, locale, printOnly }) => {
+const PatronNoticeEmailSection = ({ category, locale }) => {
   const tokens = getTokens(locale);
 
   return (
@@ -22,36 +21,20 @@ const PatronNoticeEmailSection = ({ category, locale, printOnly }) => {
       <Row>
         <Col xs={12}>
           <Field
-            data-testid="patronNoticesPrintOnly"
-            id="input-patron-notice-printOnly"
-            component={Checkbox}
-            label={<FormattedMessage id="ui-circulation.settings.patronNotices.printOnly" />}
-            name="additionalProperties.printOnly"
-            type="checkbox"
+            data-testid="patronNoticesSubject"
+            id="input-patron-notice-subject"
+            component={TextField}
+            required
+            label={<FormattedMessage id="ui-circulation.settings.patronNotices.subject" />}
+            name="localizedTemplates.en.header"
           />
         </Col>
       </Row>
-      <br />
-      {
-        !printOnly &&
-        <Row>
-          <Col xs={12}>
-            <Field
-              data-testid="patronNoticesSubject"
-              id="input-patron-notice-subject"
-              component={TextField}
-              required
-              label={<FormattedMessage id="ui-circulation.settings.patronNotices.subject" />}
-              name="localizedTemplates.en.header"
-            />
-          </Col>
-        </Row>
-      }
       <Row>
         <Col xs={12}>
           <Field
             data-testid="patronNoticesBody"
-            label={<strong><FormattedMessage id="ui-circulation.settings.patronNotices.body" /></strong>}
+            label={<FormattedMessage id="ui-circulation.settings.patronNotices.body" />}
             required
             name="localizedTemplates.en.body"
             id="input-email-template-body"
@@ -68,7 +51,6 @@ const PatronNoticeEmailSection = ({ category, locale, printOnly }) => {
 };
 PatronNoticeEmailSection.propTypes = {
   category: PropTypes.string,
-  locale: PropTypes.string,
-  printOnly: PropTypes.bool,
+  locale: PropTypes.string
 };
 export default PatronNoticeEmailSection;

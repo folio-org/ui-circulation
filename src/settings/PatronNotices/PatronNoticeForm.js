@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import {
   FormattedMessage,
@@ -9,7 +9,6 @@ import { stripesShape } from '@folio/stripes/core';
 import {
   Accordion,
   AccordionSet,
-  AccordionStatus,
   Col,
   ExpandAllButton,
   Pane,
@@ -50,22 +49,13 @@ const PatronNoticeForm = (props) => {
       formatMessage,
       locale,
     },
-    form: { getFieldState, getState, change },
+    form: { getFieldState },
     stripes: {
       connect,
     },
     okapi,
   } = props;
   const category = getFieldState('category')?.value;
-  const { values } = getState();
-  const header = values?.localizedTemplates?.en?.header;
-  const printOnly = values?.additionalProperties?.printOnly;
-
-  useEffect(() => {
-    if (printOnly && !header) {
-      change('localizedTemplates.en.header', 'print only');
-    }
-  }, [header, printOnly, change]);
 
   if (isEditLayer(search) && !initialId) {
     return null;
@@ -131,35 +121,27 @@ const PatronNoticeForm = (props) => {
           firstMenu={renderCLoseIcon()}
           footer={renderFooterPane()}
         >
-          <AccordionStatus>
+          <AccordionSet>
             <Row end="xs">
               <Col data-test-expand-all>
                 <ExpandAllButton />
               </Col>
             </Row>
-            <AccordionSet>
-              <Accordion
-                label={formatMessage({ id: 'ui-circulation.settings.patronNotices.generalInformation' })}
-              >
-                <AccordionSet>
-                  <Metadata
-                    connect={connect}
-                    metadata={initialValues.metadata}
-                  />
-                </AccordionSet>
-                <PatronNoticeAboutSection initialValues={initialValues} okapi={okapi} />
-              </Accordion>
-              <Accordion
-                label={formatMessage({ id: 'ui-circulation.settings.patronNotices.emailOrPrint' })}
-              >
-                <PatronNoticeEmailSection
-                  printOnly={printOnly}
-                  category={category}
-                  locale={locale}
-                />
-              </Accordion>
-            </AccordionSet>
-          </AccordionStatus>
+            <Accordion
+              label={formatMessage({ id: 'ui-circulation.settings.patronNotices.generalInformation' })}
+            >
+              <Metadata
+                connect={connect}
+                metadata={initialValues.metadata}
+              />
+              <PatronNoticeAboutSection initialValues={initialValues} okapi={okapi} />
+            </Accordion>
+            <Accordion
+              label={formatMessage({ id: 'ui-circulation.settings.patronNotices.email' })}
+            >
+              <PatronNoticeEmailSection category={category} locale={locale} />
+            </Accordion>
+          </AccordionSet>
           { initialValues.predefined &&
             <Row>
               <Col xs={8}>
