@@ -63,9 +63,9 @@ const PatronNoticeForm = (props) => {
 
   useEffect(() => {
     if (printOnly && !header) {
-      change('localizedTemplates.en.header', 'print only');
+      change('localizedTemplates.en.header', formatMessage({ id: 'ui-circulation.settings.patronNotices.printOnly' }));
     }
-  }, [header, printOnly, change]);
+  }, [header, printOnly, change, formatMessage]);
 
   if (isEditLayer(search) && !initialId) {
     return null;
