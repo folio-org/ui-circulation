@@ -25,7 +25,6 @@ import {
 import {
   PatronNoticeAboutSection,
   PatronNoticeEmailSection,
-  PatronNoticePrintSection,
 } from './components/EditSections';
 
 import { PatronNoticeTemplate as validatePatronNoticeTemplate } from '../Validation';
@@ -35,12 +34,6 @@ import {
 } from '../utils/utils';
 
 import css from './PatronNoticeForm.css';
-
-const initialStatus = {
-  info: true,
-  email: true,
-  print: false,
-};
 
 const PatronNoticeForm = (props) => {
   const {
@@ -128,14 +121,13 @@ const PatronNoticeForm = (props) => {
           firstMenu={renderCLoseIcon()}
           footer={renderFooterPane()}
         >
-          <AccordionSet initialStatus={initialStatus}>
+          <AccordionSet>
             <Row end="xs">
               <Col data-test-expand-all>
                 <ExpandAllButton />
               </Col>
             </Row>
             <Accordion
-              id="info"
               label={formatMessage({ id: 'ui-circulation.settings.patronNotices.generalInformation' })}
             >
               <Metadata
@@ -145,16 +137,9 @@ const PatronNoticeForm = (props) => {
               <PatronNoticeAboutSection initialValues={initialValues} okapi={okapi} />
             </Accordion>
             <Accordion
-              id="email"
               label={formatMessage({ id: 'ui-circulation.settings.patronNotices.email' })}
             >
               <PatronNoticeEmailSection category={category} locale={locale} />
-            </Accordion>
-            <Accordion
-              id="print"
-              label={formatMessage({ id: 'ui-circulation.settings.patronNotices.print' })}
-            >
-              <PatronNoticePrintSection category={category} locale={locale} />
             </Accordion>
           </AccordionSet>
           { initialValues.predefined &&

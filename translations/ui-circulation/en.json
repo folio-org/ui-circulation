@@ -189,7 +189,6 @@
   "settings.patronNotices.notice.description": "Description",
   "settings.patronNotices.notice.category": "Category",
   "settings.patronNotices.email": "Email",
-  "settings.patronNotices.print": "Print",
   "settings.patronNotices.preview": "Preview",
   "settings.patronNotices.subject": "Subject",
   "settings.patronNotices.body": "Body",
