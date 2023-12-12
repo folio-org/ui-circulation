@@ -95,7 +95,7 @@ describe('SchedulesList', () => {
       fireEvent.click(addScheduleButton);
 
       expect(uniqueId).toHaveBeenCalledWith('schedule_');
-      expect(testFields.push).toHaveBeenCalledWith({ key: uniqueId.mock.results[0].value });
+      expect(testFields.push).toHaveBeenCalledWith({});
     });
   });
 

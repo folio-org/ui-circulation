@@ -25,7 +25,7 @@ class SchedulesList extends React.Component {
   };
 
   onAddField = () => {
-    this.props.fields.push({ key: uniqueId('schedule_') });
+    this.props.fields.push({});
   };
 
   onRemoveField = (index) => {
@@ -70,9 +70,11 @@ class SchedulesList extends React.Component {
           </Row>
         )}
         { fields.map((schedule, index) => {
+          const key = uniqueId('schedule_');
+
           return (
             <ScheduleCard
-              key={fields.value[index].key}
+              key={key}
               pathToSchedule={schedule}
               scheduleIndex={index}
               onRemoveSchedule={this.onRemoveField}

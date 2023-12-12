@@ -112,7 +112,6 @@ class FixedDueDateScheduleManager extends React.Component {
           delete: 'ui-circulation.settings.fixed-due-date-schedules',
         }}
         resourceKey="fixedDueDateSchedules"
-        parseInitialValues={parseInitialValues}
         onBeforeSave={onBeforeSave}
         enableDetailsActionMenu
       />

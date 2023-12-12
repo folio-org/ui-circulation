@@ -10,7 +10,6 @@ import FixedDueDateScheduleDetail from './FixedDueDateScheduleDetail';
 import FixedDueDateScheduleForm from './FixedDueDateScheduleForm';
 import FixedDueDateScheduleManager, {
   onBeforeSave,
-  parseInitialValues,
 } from './FixedDueDateScheduleManager';
 
 const mockDefaultFixedDueDateScheduleReturnValue = 'testReturnValue';
@@ -90,7 +89,6 @@ describe('FixedDueDateScheduleManager', () => {
           delete: 'ui-circulation.settings.fixed-due-date-schedules',
         },
         resourceKey: 'fixedDueDateSchedules',
-        parseInitialValues,
         onBeforeSave,
       }), {});
     });
@@ -238,27 +236,6 @@ describe('FixedDueDateScheduleManager', () => {
       };
 
       expect(onBeforeSave(testSchedules)).toEqual(expectedResult);
-    });
-  });
-
-  describe('parseInitialValues method', () => {
-    it('should parse initial values when schedules are passed', () => {
-      const testSchedules = {
-        schedules: [{}, {}],
-      };
-      const expectedResult = {
-        schedules: [{
-          key: 'schedule__uniqueId',
-        }, {
-          key: 'schedule__uniqueId',
-        }],
-      };
-
-      expect(parseInitialValues(testSchedules)).toEqual(expectedResult);
-    });
-
-    it('should parse initial values when schedules are not passed', () => {
-      expect(parseInitialValues()).toBeUndefined();
     });
   });
 });
