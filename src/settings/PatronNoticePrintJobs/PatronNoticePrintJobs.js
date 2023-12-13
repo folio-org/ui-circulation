@@ -7,20 +7,21 @@ import { stripesConnect } from '@folio/stripes/core';
 const visibleColumns = ['id', 'sortingField', 'created'];
 const columnMapping = {
   id: '',
-  sortingField: <FormattedMessage id="ui-circulation.settings.patronNoticePrintJobs.email" />,
+  sortingField: <FormattedMessage id="ui-circulation.settings.patronNoticePrintJobs.name" />,
   created: <FormattedMessage id="ui-circulation.settings.patronNoticePrintJobs.created" />,
 };
 
 export const generateFormatter = (markPrintJobForDeletion, openPDF) => {
   return {
     id: (item) => <Checkbox type="checkbox" checked={item.selected} onChange={() => markPrintJobForDeletion(item)} />,
-    sortingField: (item) => <button type="button" onClick={() => openPDF(item)}>{item.sortingField}</button>,
+    sortingField: (item) => <button type="button" onClick={() => openPDF(item)}>{item.sortingField ?? 'print job'}</button>,
     created: (item) => <><FormattedDate value={item.created} /> <FormattedTime value={item.created} /></>
   };
 };
 
 const PatronNoticePrintJobs = (props) => {
-  const records = props?.resources?.entries?.records;
+  const { mutator, resources } = props;
+  const records = resources?.entries?.records;
   const [contentData, setContentData] = useState([]);
 
   const markPrintJobForDeletion = (item) => {
@@ -31,12 +32,18 @@ const PatronNoticePrintJobs = (props) => {
     setContentData(clonedData);
   };
 
-  const openPDF = (item) => {
-    const { content } = item;
-    const bytes = new Uint8Array(content.match(/.{1,2}/g).map(byte => parseInt(byte, 16)));
-    const blob = new Blob([bytes], { type: 'application/pdf' });
-    const url = URL.createObjectURL(blob);
-    window.open(url, '_blank');
+  const openPDF = async (item) => {
+    try {
+      mutator.printingJob.reset();
+      const printingJob = await mutator.printingJob.GET({ path: `print/entries/${item.id}` });
+      const { content } = printingJob;
+      const bytes = new Uint8Array(content.match(/.{1,2}/g).map(byte => parseInt(byte, 16)));
+      const blob = new Blob([bytes], { type: 'application/pdf' });
+      const url = URL.createObjectURL(blob);
+      window.open(url, '_blank');
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   useEffect(() => {
@@ -96,6 +103,14 @@ PatronNoticePrintJobs.manifest = {
     records: 'items',
     throwErrors: false,
   },
+  printingJob: {
+    type: 'okapi',
+    path: 'print/entries',
+    accumulate: 'true',
+    fetch: false,
+    // records: 'items',
+    throwErrors: false,
+  },
 };
 
 
@@ -108,6 +123,10 @@ PatronNoticePrintJobs.propTypes = {
   mutator: PropTypes.shape({
     entries: PropTypes.shape({
       DELETE: PropTypes.func,
+    }),
+    printingJob: PropTypes.shape({
+      GET: PropTypes.func,
+      reset: PropTypes.func
     }),
   }).isRequired,
 
