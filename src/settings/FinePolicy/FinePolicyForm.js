@@ -7,6 +7,7 @@ import { injectIntl } from 'react-intl';
 import {
   Accordion,
   AccordionSet,
+  AccordionStatus,
   ExpandAllButton,
   Col,
   Row,
@@ -50,29 +51,6 @@ class FinePolicyForm extends React.Component {
     initialValues: {},
   };
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      sections: {
-        overdueGeneralSection: true,
-        editFineSection: true,
-        editReminderFeesSection: true,
-      },
-    };
-  }
-
-  handleSectionToggle = ({ id }) => {
-    this.setState(({ sections }) => {
-      sections[id] = !sections[id];
-      return { sections };
-    });
-  };
-
-  handleExpandAll = (sections) => {
-    this.setState({ sections });
-  };
-
   render() {
     const {
       pristine,
@@ -93,8 +71,6 @@ class FinePolicyForm extends React.Component {
         blockTemplates: { records: blockTemplates },
       },
     } = this.props;
-
-    const { sections } = this.state;
 
     const { values } = getState();
     const policy = new FinePolicy(values);
@@ -125,27 +101,19 @@ class FinePolicyForm extends React.Component {
             firstMenu={<CancelButton onCancel={onCancel} />}
             footer={<FooterPane {...footerPaneProps} />}
           >
-            <>
+            <AccordionStatus>
               <Row end="xs">
                 <Col
                   data-test-expand-all
                   xs
                 >
-                  <ExpandAllButton
-                    accordionStatus={sections}
-                    onToggle={this.handleExpandAll}
-                  />
+                  <ExpandAllButton />
                 </Col>
               </Row>
-              <AccordionSet
-                data-testid="generalSectionSet"
-                accordionStatus={sections}
-                onToggle={this.handleSectionToggle}
-              >
+              <AccordionSet data-testid="generalSectionSet">
                 <Accordion
                   id="overdueGeneralSection"
                   label={formatMessage({ id: 'ui-circulation.settings.finePolicy.generalInformation' })}
-                  open={sections.overdueGeneralSection}
                 >
                   <Metadata
                     connect={stripes.connect}
@@ -156,7 +124,6 @@ class FinePolicyForm extends React.Component {
                 <FinesSection
                   initialValues={initialValues}
                   policy
-                  fineSectionOpen={sections.editFineSection}
                   change={change}
                 />
                 <ReminderFeesSection
@@ -164,11 +131,10 @@ class FinePolicyForm extends React.Component {
                   policy
                   noticeTemplates={noticeTemplates}
                   blockTemplates={blockTemplates}
-                  sectionOpen={sections.editReminderFeesSection}
                   change={change}
                 />
               </AccordionSet>
-            </>
+            </AccordionStatus>
           </Pane>
         </Paneset>
       </form>

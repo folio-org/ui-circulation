@@ -207,19 +207,11 @@ describe('LoanPolicyForm', () => {
     expect(Accordion).toHaveBeenCalledWith(expect.objectContaining({
       open: true,
     }), {});
-    expect(RequestManagementSection).toHaveBeenCalledWith(expect.objectContaining({
-      holdsSectionOpen: true,
-      recallsSectionOpen: true,
-    }), {});
 
     fireEvent.click(screen.getByText(labelIds.expandAllButton));
 
     expect(Accordion).toHaveBeenCalledWith(expect.objectContaining({
       open: false,
-    }), {});
-    expect(RequestManagementSection).toHaveBeenCalledWith(expect.objectContaining({
-      holdsSectionOpen: false,
-      recallsSectionOpen: false,
     }), {});
   });
 
@@ -266,24 +258,10 @@ describe('LoanPolicyForm', () => {
     }), {});
   });
 
-  it('should correctly handle section toggle in "RequestManagementSection" component', () => {
-    expect(RequestManagementSection).toHaveBeenCalledWith(expect.objectContaining({
-      recallsSectionOpen: true,
-    }), {});
-
-    fireEvent.click(screen.getByTestId(testIds.requestManagementSection));
-
-    expect(RequestManagementSection).toHaveBeenCalledWith(expect.objectContaining({
-      recallsSectionOpen: false,
-    }), {});
-  });
-
   it('should execute "RequestManagementSection" with passed props', () => {
     expect(RequestManagementSection).toHaveBeenCalledWith(expect.objectContaining({
       policy: policyForTest,
-      holdsSectionOpen: true,
       change: mockedForm.change,
-      recallsSectionOpen: true,
     }), {});
   });
 

@@ -34,40 +34,6 @@ jest.mock('../components', () => ({
   Metadata: jest.fn(() => null),
 }));
 
-AccordionSet.mockImplementation(jest.fn(({
-  children,
-  onToggle,
-  'data-testid': testId,
-}) => (
-  // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
-  <div
-    data-testid={testId}
-    onClick={() => onToggle({ id: 'overdueGeneralSection' })}
-  >
-    {children}
-  </div>
-)));
-ExpandAllButton.mockImplementation(jest.fn(({
-  accordionStatus,
-  onToggle,
-}) => {
-  const sectionKeys = Object.keys(accordionStatus);
-  const sectionStatus = {};
-
-  sectionKeys.forEach(key => {
-    sectionStatus[key] = !accordionStatus[key];
-  });
-
-  return (
-    // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
-    <div
-      onClick={() => onToggle(sectionStatus)}
-    >
-      Expand all button
-    </div>
-  );
-}));
-
 describe('FinePolicyForm', () => {
   const testIds = {
     finePolicyForm: 'finePolicyForm',
@@ -76,7 +42,7 @@ describe('FinePolicyForm', () => {
   const labelIds = {
     createEntryLabel: 'ui-circulation.settings.finePolicy.createEntryLabel',
     generalInformation: 'ui-circulation.settings.finePolicy.generalInformation',
-    expandAllButton: 'Expand all button',
+    expandAllButton: 'Toggle accordion state',
   };
   const mockedStripes = {
     connect: jest.fn(),
@@ -161,43 +127,6 @@ describe('FinePolicyForm', () => {
     expect(screen.getByText(labelIds.expandAllButton)).toBeInTheDocument();
   });
 
-  it('should correctly toggle sections status on "ExpandAllButton" click', () => {
-    expect(Accordion).toHaveBeenCalledWith(expect.objectContaining({
-      open: true,
-    }), {});
-    expect(FinesSection).toHaveBeenCalledWith(expect.objectContaining({
-      fineSectionOpen: true,
-    }), {});
-
-    fireEvent.click(screen.getByText(labelIds.expandAllButton));
-
-    expect(Accordion).toHaveBeenCalledWith(expect.objectContaining({
-      open: false,
-    }), {});
-    expect(FinesSection).toHaveBeenCalledWith(expect.objectContaining({
-      fineSectionOpen: false,
-    }), {});
-  });
-
-  it('"AccordionSet" should correctly handle section status toggle', () => {
-    expect(Accordion).toHaveBeenCalledWith(expect.objectContaining({
-      open: true,
-    }), {});
-
-    fireEvent.click(screen.getByTestId(testIds.generalSectionSet));
-
-    expect(Accordion).toHaveBeenCalledWith(expect.objectContaining({
-      open: false,
-    }), {});
-  });
-
-  it('should execute "Accordion" with passed props', () => {
-    expect(Accordion).toHaveBeenCalledWith(expect.objectContaining({
-      label: labelIds.generalInformation,
-      open: true,
-    }), {});
-  });
-
   it('should execute "Metadata" with passed props', () => {
     expect(Metadata).toHaveBeenCalledWith({
       connect: mockedStripes.connect,
@@ -213,7 +142,6 @@ describe('FinePolicyForm', () => {
     expect(FinesSection).toHaveBeenCalledWith({
       initialValues: mockedInitialValues,
       policy: true,
-      fineSectionOpen: true,
       change: mockedForm.change,
     }, {});
   });

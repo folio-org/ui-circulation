@@ -19,7 +19,6 @@ export const getSendEvents = (triggeringEvent) => {
 
 class LoanNoticesSection extends React.Component {
   static propTypes = {
-    isOpen: PropTypes.bool.isRequired,
     policy: PropTypes.object.isRequired,
     templates: PropTypes.arrayOf(PropTypes.shape({
       value: PropTypes.string.isRequired,
@@ -29,7 +28,6 @@ class LoanNoticesSection extends React.Component {
 
   render() {
     const {
-      isOpen,
       policy,
       templates,
     } = this.props;
@@ -39,7 +37,6 @@ class LoanNoticesSection extends React.Component {
         <Accordion
           data-testid="editLoanNotices"
           id="editLoanNotices"
-          open={isOpen}
           label={<FormattedMessage id="ui-circulation.settings.noticePolicy.loanNotices" />}
         >
           <FieldArray

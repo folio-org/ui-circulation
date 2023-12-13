@@ -69,7 +69,6 @@ describe('LostItemFeeSection', () => {
   };
   const changeMock = jest.fn();
   const defaultTestProps = {
-    lostItemFeeSectionOpen: false,
     change: changeMock,
   };
   const intervarPeriodsExpectedValue = {
@@ -429,28 +428,19 @@ describe('LostItemFeeSection', () => {
   });
 
   describe('"edit lost item fee" accordion', () => {
-    [
-      false,
-      true,
-    ].forEach((lostItemFeeSectionOpen) => {
-      describe(`when "lostItemFeeSectionOpen" prop is ${lostItemFeeSectionOpen}`, () => {
-        it('should render accordion', () => {
-          render(
-            <LostItemFeeSection
-              {...defaultTestProps}
-              lostItemFeeSectionOpen={lostItemFeeSectionOpen}
-            />
-          );
+    it('should render accordion', () => {
+      render(
+        <LostItemFeeSection
+          {...defaultTestProps}
+        />
+      );
 
-          expect(Accordion).toHaveBeenLastCalledWith(
-            expect.objectContaining({
-              id: 'editLostItemFeeSection',
-              label: labelIds.lostItemSection,
-              open: lostItemFeeSectionOpen,
-            }), {}
-          );
-        });
-      });
+      expect(Accordion).toHaveBeenCalledWith(
+        expect.objectContaining({
+          id: 'editLostItemFeeSection',
+          label: labelIds.lostItemSection,
+        }), {}
+      );
     });
   });
 

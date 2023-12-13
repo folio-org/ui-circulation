@@ -33,40 +33,6 @@ jest.mock('../components', () => ({
   Metadata: jest.fn(() => null),
 }));
 
-AccordionSet.mockImplementation(jest.fn(({
-  children,
-  onToggle,
-  'data-testid': testId,
-}) => (
-  // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
-  <div
-    data-testid={testId}
-    onClick={() => onToggle({ id: 'lostItemFeeFormGeneralSection' })}
-  >
-    {children}
-  </div>
-)));
-ExpandAllButton.mockImplementation(jest.fn(({
-  accordionStatus,
-  onToggle,
-}) => {
-  const sectionKeys = Object.keys(accordionStatus);
-  const sectionStatus = {};
-
-  sectionKeys.forEach(key => {
-    sectionStatus[key] = !accordionStatus[key];
-  });
-
-  return (
-    // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
-    <div
-      onClick={() => onToggle(sectionStatus)}
-    >
-      Expand all button
-    </div>
-  );
-}));
-
 describe('LostItemFeePolicyForm', () => {
   const testIds = {
     lostItemFeePolicyForm: 'lostItemFeePolicyForm',
@@ -75,7 +41,7 @@ describe('LostItemFeePolicyForm', () => {
   const labelIds = {
     entryLabel: 'ui-circulation.settings.lostItemFee.entryLabel',
     generalInformation: 'ui-circulation.settings.lostItemFee.generalInformation',
-    expandAllButton: 'Expand all button',
+    expandAllButton: 'Toggle accordion state',
   };
   const mockedStripes = {
     connect: jest.fn(),
@@ -154,43 +120,6 @@ describe('LostItemFeePolicyForm', () => {
     expect(screen.getByText(labelIds.expandAllButton)).toBeInTheDocument();
   });
 
-  it('should correctly toogle sections status on "ExpandAllButton" click', () => {
-    expect(Accordion).toHaveBeenCalledWith(expect.objectContaining({
-      open: true,
-    }), {});
-    expect(LostItemFeeSection).toHaveBeenCalledWith(expect.objectContaining({
-      lostItemFeeSectionOpen: true,
-    }), {});
-
-    fireEvent.click(screen.getByText(labelIds.expandAllButton));
-
-    expect(Accordion).toHaveBeenCalledWith(expect.objectContaining({
-      open: false,
-    }), {});
-    expect(LostItemFeeSection).toHaveBeenCalledWith(expect.objectContaining({
-      lostItemFeeSectionOpen: false,
-    }), {});
-  });
-
-  it('"AccordionSet" should correctly handle section status toggle', () => {
-    expect(Accordion).toHaveBeenCalledWith(expect.objectContaining({
-      open: true,
-    }), {});
-
-    fireEvent.click(screen.getByTestId(testIds.generalSectionSet));
-
-    expect(Accordion).toHaveBeenCalledWith(expect.objectContaining({
-      open: false,
-    }), {});
-  });
-
-  it('should execute "Accordion" with passed props', () => {
-    expect(Accordion).toHaveBeenCalledWith(expect.objectContaining({
-      label: labelIds.generalInformation,
-      open: true,
-    }), {});
-  });
-
   it('should execute "Metadata" with passed props', () => {
     expect(Metadata).toHaveBeenCalledWith({
       connect: mockedStripes.connect,
@@ -207,7 +136,6 @@ describe('LostItemFeePolicyForm', () => {
       policy: policyForTest,
       change: mockedForm.change,
       initialValues: mockedInitialValues,
-      lostItemFeeSectionOpen: true,
     }, {});
   });
 

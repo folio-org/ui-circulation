@@ -8,6 +8,7 @@ import stripesFinalForm from '@folio/stripes/final-form';
 import {
   Accordion,
   AccordionSet,
+  AccordionStatus,
   ExpandAllButton,
   Col,
   Row,
@@ -49,29 +50,6 @@ class LostItemFeePolicyForm extends React.Component {
     initialValues: {},
   };
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      sections: {
-        lostItemFeeFormGeneralSection: true,
-        LostItemFeeSection: true,
-        editLostItemFeeSection: true,
-      },
-    };
-  }
-
-  handleSectionToggle = ({ id }) => {
-    this.setState(({ sections }) => {
-      sections[id] = !sections[id];
-      return { sections };
-    });
-  };
-
-  handleExpandAll = (sections) => {
-    this.setState({ sections });
-  };
-
   render() {
     const {
       pristine,
@@ -88,8 +66,6 @@ class LostItemFeePolicyForm extends React.Component {
         formatMessage,
       },
     } = this.props;
-
-    const { sections } = this.state;
 
     const { values } = getState();
     const policy = new LostItemFeePolicy(values);
@@ -117,41 +93,35 @@ class LostItemFeePolicyForm extends React.Component {
             firstMenu={<CancelButton onCancel={onCancel} />}
             footer={<FooterPane {...footerPaneProps} />}
           >
-            <>
+            <AccordionStatus>
               <Row end="xs">
                 <Col
                   data-test-expand-all
                   xs
                 >
-                  <ExpandAllButton
-                    accordionStatus={sections}
-                    onToggle={this.handleExpandAll}
-                  />
+                  <ExpandAllButton />
                 </Col>
               </Row>
-              <AccordionSet
-                data-testid="generalSectionSet"
-                onToggle={this.handleSectionToggle}
-              >
+              <AccordionSet data-testid="generalSectionSet">
                 <Accordion
                   id="lostItemFeeFormGeneralSection"
                   label={formatMessage({ id: 'ui-circulation.settings.lostItemFee.generalInformation' })}
-                  open={sections.lostItemFeeFormGeneralSection}
                 >
-                  <Metadata
-                    connect={stripes.connect}
-                    metadata={policy.metadata}
-                  />
+                  <AccordionSet>
+                    <Metadata
+                      connect={stripes.connect}
+                      metadata={policy.metadata}
+                    />
+                  </AccordionSet>
                   <LostItemFeeAboutSection />
                 </Accordion>
                 <LostItemFeeSection
                   policy={policy}
                   change={change}
                   initialValues={initialValues}
-                  lostItemFeeSectionOpen={sections.editLostItemFeeSection}
                 />
               </AccordionSet>
-            </>
+            </AccordionStatus>
           </Pane>
         </Paneset>
       </form>

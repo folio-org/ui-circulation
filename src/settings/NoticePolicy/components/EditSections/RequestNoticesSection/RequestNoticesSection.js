@@ -18,7 +18,6 @@ export const getSendEvents = () => {
 
 class RequestNoticesSection extends React.Component {
   static propTypes = {
-    isOpen: PropTypes.bool.isRequired,
     policy: PropTypes.object.isRequired,
     templates: PropTypes.arrayOf(PropTypes.shape({
       value: PropTypes.string.isRequired,
@@ -28,7 +27,6 @@ class RequestNoticesSection extends React.Component {
 
   render() {
     const {
-      isOpen,
       policy,
       templates,
     } = this.props;
@@ -38,7 +36,6 @@ class RequestNoticesSection extends React.Component {
         <Accordion
           data-testid="editRequestNotices"
           id="editRequestNotices"
-          open={isOpen}
           label={<FormattedMessage id="ui-circulation.settings.noticePolicy.requestNotices" />}
         >
           <FieldArray
