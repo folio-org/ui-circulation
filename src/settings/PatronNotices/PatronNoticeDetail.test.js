@@ -33,7 +33,7 @@ const testStripes = buildStripes();
 describe('PatronNoticeDetail', () => {
   const labelIds = {
     generalInformation: 'ui-circulation.settings.patronNotices.generalInformation',
-    email: 'ui-circulation.settings.patronNotices.email',
+    emailOrPrint: 'ui-circulation.settings.patronNotices.emailOrPrint',
   };
   const defaultInitialValues = {
     active: false,
@@ -83,8 +83,8 @@ describe('PatronNoticeDetail', () => {
       expect(screen.getByText(labelIds.generalInformation)).toBeDefined();
     });
 
-    it('should render "Email" label', () => {
-      expect(screen.getByText(labelIds.email)).toBeDefined();
+    it('should render "Email or print" label', () => {
+      expect(screen.getByText(labelIds.emailOrPrint)).toBeDefined();
     });
 
     it('should render "general information" Accordion', () => {
@@ -96,7 +96,7 @@ describe('PatronNoticeDetail', () => {
 
     it('should render "email" Accordion', () => {
       expect(Accordion).toHaveBeenNthCalledWith(2, expect.objectContaining({
-        label: labelIds.email,
+        label: labelIds.emailOrPrint,
       }), {});
     });
 
