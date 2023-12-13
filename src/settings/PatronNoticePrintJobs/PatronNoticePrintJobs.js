@@ -13,8 +13,18 @@ const visibleColumns = ['id', 'created'];
 
 export const generateFormatter = (markPrintJobForDeletion, openPDF) => {
   return {
-    id: (item) => <Checkbox type="checkbox" checked={item.selected} onChange={() => markPrintJobForDeletion(item)} />,
-    created: (item) => <TextLink className={css.printJobLink} onClick={() => openPDF(item)}><FormattedDate value={item.created} /> <FormattedTime value={item.created} /></TextLink>
+    id: (item) => (
+      <Checkbox
+        type="checkbox"
+        checked={item.selected}
+        onChange={() => markPrintJobForDeletion(item)}
+      />
+    ),
+    created: (item) => (
+      <TextLink className={css.printJobLink} onClick={() => openPDF(item)}>
+        <FormattedDate value={item.created} /> <FormattedTime value={item.created} />
+      </TextLink>
+    )
   };
 };
 
