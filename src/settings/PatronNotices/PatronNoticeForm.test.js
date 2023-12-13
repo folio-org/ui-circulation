@@ -54,6 +54,7 @@ const testIds = {
   patronNoticeTemplatePane: 'patronNoticeTemplatePane',
   patronNoticeCancelButton: 'patronNoticeCancelButton',
   patronNoticeFooterPane: 'patronNoticeFooterPane',
+  patronNoticesSubject: 'patronNoticesSubject'
 };
 const labelIds = {
   patronNoticesNew: 'ui-circulation.settings.patronNotices.newLabel',
@@ -97,6 +98,7 @@ describe('PatronNoticeForm', () => {
     form: {
       getFieldState: testGetFieldState,
       getState: testGetState,
+      change: jest.fn(),
     },
     pristine: testPristineValue,
     submitting: testSubmittingValue,
@@ -227,6 +229,38 @@ describe('PatronNoticeForm', () => {
         connect: testStripes.connect,
         metadata: initialValues.metadata,
       }), {});
+    });
+  });
+
+  describe('print only', () => {
+    beforeEach(() => {
+      testGetState.mockImplementation(() => {
+        return {
+          values: {
+            id: 'testId',
+            name: 'testName',
+            active: true,
+            predefined: true,
+            metadata: 'testMetadata',
+            additionalProperties: {
+              printOnly: true
+            }
+          }
+        };
+      });
+      render(
+        <PatronNoticeForm
+          {...defaultTestProps}
+          stripes={testStripes}
+          location={{
+            search: 'edit',
+          }}
+        />
+      );
+    });
+
+    it('should not render subject when printOnly is enabled', () => {
+      expect(screen.queryByTestId(testIds.patronNoticesSubject)).not.toBeInTheDocument();
     });
   });
 
