@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import {
   FormattedMessage,
@@ -50,13 +50,22 @@ const PatronNoticeForm = (props) => {
       formatMessage,
       locale,
     },
-    form: { getFieldState },
+    form: { getFieldState, getState, change },
     stripes: {
       connect,
     },
     okapi,
   } = props;
   const category = getFieldState('category')?.value;
+  const { values } = getState();
+  const header = values?.localizedTemplates?.en?.header;
+  const printOnly = values?.additionalProperties?.printOnly;
+
+  useEffect(() => {
+    if (printOnly && !header) {
+      change('localizedTemplates.en.header', formatMessage({ id: 'ui-circulation.settings.patronNotices.printOnly' }));
+    }
+  }, [header, printOnly, change, formatMessage]);
 
   if (isEditLayer(search) && !initialId) {
     return null;
@@ -141,9 +150,13 @@ const PatronNoticeForm = (props) => {
                 <PatronNoticeAboutSection initialValues={initialValues} okapi={okapi} />
               </Accordion>
               <Accordion
-                label={formatMessage({ id: 'ui-circulation.settings.patronNotices.email' })}
+                label={formatMessage({ id: 'ui-circulation.settings.patronNotices.emailOrPrint' })}
               >
-                <PatronNoticeEmailSection category={category} locale={locale} />
+                <PatronNoticeEmailSection
+                  printOnly={printOnly}
+                  category={category}
+                  locale={locale}
+                />
               </Accordion>
             </AccordionSet>
           </AccordionStatus>

@@ -54,11 +54,13 @@ const testIds = {
   patronNoticeTemplatePane: 'patronNoticeTemplatePane',
   patronNoticeCancelButton: 'patronNoticeCancelButton',
   patronNoticeFooterPane: 'patronNoticeFooterPane',
+  patronNoticesSubject: 'patronNoticesSubject'
 };
 const labelIds = {
   patronNoticesNew: 'ui-circulation.settings.patronNotices.newLabel',
   patronNoticesCloseDialog: 'ui-circulation.settings.patronNotices.closeDialog',
   patronNoticesEmail: 'ui-circulation.settings.patronNotices.email',
+  patronNoticesEmailOrPrint: 'ui-circulation.settings.patronNotices.emailOrPrint',
   patronNoticesPredefinedWarning: 'ui-circulation.settings.patronNotices.predefinedWarning',
   patronNoticesGeneralInformation: 'ui-circulation.settings.patronNotices.generalInformation',
 };
@@ -78,6 +80,12 @@ describe('PatronNoticeForm', () => {
       },
     }[field];
   });
+
+  const testGetState = jest.fn(() => {
+    return {
+      values: {}
+    };
+  });
   const testPristineValue = true;
   const testSubmittingValue = true;
   const testHandleSubmit = jest.fn();
@@ -89,6 +97,8 @@ describe('PatronNoticeForm', () => {
   const defaultTestProps = {
     form: {
       getFieldState: testGetFieldState,
+      getState: testGetState,
+      change: jest.fn(),
     },
     pristine: testPristineValue,
     submitting: testSubmittingValue,
@@ -169,8 +179,8 @@ describe('PatronNoticeForm', () => {
       expect(screen.getByText(labelIds.patronNoticesGeneralInformation)).toBeDefined();
     });
 
-    it('should render "Email" label', () => {
-      expect(screen.getByText(labelIds.patronNoticesEmail)).toBeDefined();
+    it('should render "Email or print" label', () => {
+      expect(screen.getByText(labelIds.patronNoticesEmailOrPrint)).toBeDefined();
     });
 
     it('should render PatronNoticeAboutSection', () => {
@@ -219,6 +229,38 @@ describe('PatronNoticeForm', () => {
         connect: testStripes.connect,
         metadata: initialValues.metadata,
       }), {});
+    });
+  });
+
+  describe('print only', () => {
+    beforeEach(() => {
+      testGetState.mockImplementation(() => {
+        return {
+          values: {
+            id: 'testId',
+            name: 'testName',
+            active: true,
+            predefined: true,
+            metadata: 'testMetadata',
+            additionalProperties: {
+              printOnly: true
+            }
+          }
+        };
+      });
+      render(
+        <PatronNoticeForm
+          {...defaultTestProps}
+          stripes={testStripes}
+          location={{
+            search: 'edit',
+          }}
+        />
+      );
+    });
+
+    it('should not render subject when printOnly is enabled', () => {
+      expect(screen.queryByTestId(testIds.patronNoticesSubject)).not.toBeInTheDocument();
     });
   });
 
