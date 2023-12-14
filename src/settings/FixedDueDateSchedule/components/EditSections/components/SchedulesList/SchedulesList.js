@@ -1,10 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
-import {
-  isArray,
-  uniqueId,
-} from 'lodash';
+import { isArray } from 'lodash';
 
 import {
   Button,
@@ -70,11 +67,9 @@ class SchedulesList extends React.Component {
           </Row>
         )}
         { fields.map((schedule, index) => {
-          const key = uniqueId('schedule_');
-
           return (
             <ScheduleCard
-              key={key}
+              key={schedule}
               pathToSchedule={schedule}
               scheduleIndex={index}
               onRemoveSchedule={this.onRemoveField}
