@@ -6,7 +6,6 @@ import {
   find,
   forEach,
   sortBy,
-  uniqueId,
   unset,
 } from 'lodash';
 
@@ -27,16 +26,6 @@ export const onBeforeSave = (entry) => {
   });
 
   return schedule;
-};
-
-export const parseInitialValues = (entry) => {
-  const fdds = cloneDeep(entry);
-
-  forEach(fdds?.schedules || [], schedule => {
-    schedule.key = uniqueId('schedule_');
-  });
-
-  return fdds;
 };
 
 class FixedDueDateScheduleManager extends React.Component {
@@ -112,7 +101,6 @@ class FixedDueDateScheduleManager extends React.Component {
           delete: 'ui-circulation.settings.fixed-due-date-schedules',
         }}
         resourceKey="fixedDueDateSchedules"
-        parseInitialValues={parseInitialValues}
         onBeforeSave={onBeforeSave}
         enableDetailsActionMenu
       />

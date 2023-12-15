@@ -4,10 +4,7 @@ import {
   within,
   fireEvent,
 } from '@folio/jest-config-stripes/testing-library/react';
-import {
-  isArray,
-  uniqueId,
-} from 'lodash';
+import { isArray } from 'lodash';
 
 import SchedulesList from './SchedulesList';
 import ScheduleCard from '../ScheduleCard';
@@ -31,15 +28,6 @@ jest.mock('../ScheduleCard', () => jest.fn(({
     onClick={() => onRemoveSchedule(scheduleIndex)}
   />
 )));
-jest.mock('lodash', () => {
-  const originalModule = jest.requireActual('lodash');
-
-  return {
-    __esModule: true,
-    ...originalModule,
-    uniqueId: jest.fn((prefix) => `${prefix}_uniqueId`),
-  };
-});
 
 describe('SchedulesList', () => {
   const testTimeZone = 'UTC';
@@ -47,14 +35,7 @@ describe('SchedulesList', () => {
     'testSchedule1',
     'testSchedule2',
   ];
-  const testFieldsValue = [
-    {
-      key: 'testScheduleKey1',
-    },
-    {
-      key: 'testScheduleKey2',
-    },
-  ];
+  const testFieldsValue = [];
   const testFields = {
     push: jest.fn(),
     remove: jest.fn(),
@@ -66,7 +47,6 @@ describe('SchedulesList', () => {
     ScheduleCard.mockClear();
     testFields.push.mockClear();
     testFields.remove.mockClear();
-    uniqueId.mockClear();
   });
 
   const renderComponent = (testMeta = {}) => {
@@ -94,8 +74,7 @@ describe('SchedulesList', () => {
 
       fireEvent.click(addScheduleButton);
 
-      expect(uniqueId).toHaveBeenCalledWith('schedule_');
-      expect(testFields.push).toHaveBeenCalledWith({ key: uniqueId.mock.results[0].value });
+      expect(testFields.push).toHaveBeenCalledWith({});
     });
   });
 
