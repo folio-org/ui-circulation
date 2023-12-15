@@ -3,7 +3,13 @@ import _ from 'lodash';
 
 import rulesShowHint from './rules-show-hint';
 import * as utils from './utils';
-import { ACTIVE_HINT_ELEMENT_CLASS } from '../../../constants';
+import {
+  ACTIVE_HINT_ELEMENT_CLASS,
+  HINT_ELEMENT_CLASS,
+  HINT_SECTION_CONTAINER,
+  HINT_SECTIONS_CONTAINER
+} from '../../../constants';
+import HintSection from '../HintSection/HintSection';
 
 jest.mock('codemirror', () => ({
   hint: {
@@ -11,12 +17,15 @@ jest.mock('codemirror', () => ({
       resolve: jest.fn(),
     },
     fromList: jest.fn(),
+    getSubMenuData: jest.fn(),
     anyword: null,
   },
   registerHelper: jest.fn(),
   defineExtension: jest.fn(),
   defineOption: jest.fn(),
   signal: jest.fn(),
+  on: jest.fn(),
+  off: jest.fn(),
   Pos: jest.fn(),
   cmpPos: jest.fn(),
   commands: {},
@@ -34,6 +43,23 @@ jest.mock('./utils', () => ({
 }));
 
 describe('rulesShowHint', () => {
+  const createElementMock = {
+    appendChild: jest.fn(),
+    getBoundingClientRect: jest.fn(() => ({
+      top: 1,
+      bottom: 3,
+      right: 2,
+    })),
+    style: {},
+    classList: {
+      add: jest.fn(),
+      toggle: jest.fn(),
+    },
+    clientHeight: 10,
+  };
+  utils.createContainer.mockImplementation(() => createElementMock);
+  utils.createHeader.mockImplementation(() => createElementMock);
+
   afterEach(() => {
     jest.clearAllMocks();
     jest.restoreAllMocks();
@@ -663,18 +689,6 @@ describe('rulesShowHint', () => {
       buttonText: 'buttonText',
     };
     const cm = {};
-    const createElementMock = {
-      appendChild: jest.fn(),
-      classList: {
-        add: jest.fn(),
-        toggle: jest.fn(),
-      },
-    };
-
-    beforeEach(() => {
-      utils.createContainer.mockImplementation(() => createElementMock);
-      utils.createHeader.mockImplementation(() => createElementMock);
-    });
 
     describe('initialization', () => {
       it('should trigger "classList.add" with correct argument', () => {
@@ -1523,6 +1537,1109 @@ describe('rulesShowHint', () => {
     describe('when there are no founded words', () => {
       it('should return undefined', () => {
         expect(rulesShowHint.getFromList(commonCm, options)).toBeUndefined();
+      });
+    });
+  });
+
+  describe('Widget', () => {
+    afterEach(() => {
+      jest.clearAllMocks();
+      jest.restoreAllMocks();
+    });
+
+    const baseCompletion = {
+      options: {
+        container: {
+          appendChild: jest.fn(),
+        }
+      },
+      cm: {
+        addKeyMap: jest.fn(),
+        removeKeyMap: jest.fn(),
+        on: jest.fn(),
+        off: jest.fn(),
+        getScrollInfo: jest.fn(),
+        getCursor: jest.fn(() => ({
+          ch: '',
+        })),
+        getWrapperElement: jest.fn(() => ({
+          getBoundingClientRect: jest.fn(),
+        })),
+        focus: jest.fn(),
+        cursorCoords: jest.fn(() => ({
+          left: 1,
+          bottom: 1,
+          top: 1,
+        })),
+      },
+      multiplePick: jest.fn(),
+      pick: jest.fn(),
+    };
+    const baseWidgetData = {
+      sections: [
+        {
+          list: [],
+        },
+      ],
+      from: {},
+    };
+
+    describe('Initialization', () => {
+      it('should trigger "addKeyMap"', () => {
+        // eslint-disable-next-line no-new
+        new rulesShowHint.Widget(baseCompletion, baseWidgetData);
+
+        expect(baseCompletion.cm.addKeyMap).toHaveBeenCalled();
+      });
+    });
+
+    describe('buildKeyMap', () => {
+      const menuSize = 1;
+      const movingStep = 1;
+      const initialFocus = 0;
+      const handler = {
+        moveFocus: jest.fn(),
+        setFocus: jest.fn(),
+        menuSize: jest.fn(() => menuSize),
+        pick: '',
+        close: '',
+        length: 5,
+      };
+
+      afterEach(jest.clearAllMocks);
+
+      describe('When customKeys and extraKeys are not set', () => {
+        const completion = {
+          options: {},
+        };
+
+        const keyMap = rulesShowHint.Widget.buildKeyMap(completion, handler);
+
+        it('should trigger moveFocus with correct argument when Up called', () => {
+          keyMap.Up();
+
+          expect(handler.moveFocus).toHaveBeenCalledWith(-movingStep);
+        });
+
+        it('should trigger moveFocus with correct argument when Down called', () => {
+          keyMap.Down();
+
+          expect(handler.moveFocus).toHaveBeenCalledWith(movingStep);
+        });
+
+        it('should trigger moveFocus with correct argument when PageUp called', () => {
+          keyMap.PageUp();
+
+          expect(handler.moveFocus).toHaveBeenCalledWith(-menuSize + movingStep, true);
+        });
+
+        it('should trigger moveFocus with correct argument when PageDown called', () => {
+          keyMap.PageDown();
+
+          expect(handler.moveFocus).toHaveBeenCalledWith(menuSize - movingStep, true);
+        });
+
+        it('should trigger setFocus with correct argument when Home called', () => {
+          keyMap.Home();
+
+          expect(handler.setFocus).toHaveBeenCalledWith(initialFocus);
+        });
+
+        it('should trigger setFocus with correct argument when End called', () => {
+          keyMap.End();
+
+          expect(handler.setFocus).toHaveBeenCalledWith(handler.length - movingStep);
+        });
+      });
+
+      describe('When customKeys are set', () => {
+        const completion = {
+          options: {
+            customKeys: {
+              customAction: jest.fn(),
+              customProperty: '',
+            },
+          },
+        };
+
+        const keyMap = rulesShowHint.Widget.buildKeyMap(completion, handler);
+
+        it('should trigger customAction', () => {
+          keyMap.customAction();
+
+          expect(completion.options.customKeys.customAction).toHaveBeenCalled();
+        });
+      });
+
+      describe('When extraKeys are set', () => {
+        const completion = {
+          options: {
+            extraKeys: {
+              extraAction: jest.fn(),
+              extraProperty: '',
+            },
+          },
+        };
+
+        const keyMap = rulesShowHint.Widget.buildKeyMap(completion, handler);
+
+        it('should trigger extraAction', () => {
+          keyMap.extraAction();
+
+          expect(completion.options.extraKeys.extraAction).toHaveBeenCalled();
+        });
+      });
+    });
+
+    describe('getHintElement', () => {
+      const targetElement = {
+        closest: jest.fn(),
+      };
+
+      it('should trigger "targetElement.closest" with correct argument', () => {
+        rulesShowHint.Widget.getHintElement(targetElement);
+
+        expect(targetElement.closest).toHaveBeenCalledWith(`.${HINT_ELEMENT_CLASS}`);
+      });
+    });
+
+    describe('getHintSectionIndex', () => {
+      const targetElement = {
+        closest: jest.fn().mockReturnValueOnce({
+          children: {},
+        }),
+      };
+
+      it('should trigger "targetElement.closest" twice with correct arguments', () => {
+        const expectedArguments = [`.${HINT_SECTIONS_CONTAINER}`, `.${HINT_SECTION_CONTAINER}`];
+
+        rulesShowHint.Widget.getHintSectionIndex(targetElement);
+
+        expectedArguments.forEach((arg, index) => {
+          expect(targetElement.closest).toHaveBeenNthCalledWith(index + 1, arg);
+        });
+      });
+    });
+
+    describe('handleSectionHintClick', () => {
+      const hintId = '2';
+      const sectionIndex = 1;
+      const indexIncrement = 1;
+      const targetElement = {
+        type: 'test',
+      };
+      let getHintSectionIndexSpy;
+
+      beforeEach(() => {
+        jest.spyOn(rulesShowHint.Widget, 'getHintElement').mockReturnValue({
+          hintId,
+        });
+        getHintSectionIndexSpy = jest.spyOn(rulesShowHint.Widget, 'getHintSectionIndex').mockReturnValue(sectionIndex);
+      });
+
+      describe('When hint does not exist', () => {
+        const widget = new rulesShowHint.Widget(baseCompletion, baseWidgetData);
+        let getHintElementSpy;
+
+        beforeEach(() => {
+          getHintElementSpy = jest.spyOn(rulesShowHint.Widget, 'getHintElement').mockReturnValue({});
+
+          widget.handleSectionHintClick(targetElement);
+        });
+
+        it('should trigger getHintElement', () => {
+          expect(getHintElementSpy).toHaveBeenCalled();
+        });
+
+        it('should not trigger getHintSectionIndex', () => {
+          expect(getHintSectionIndexSpy).not.toHaveBeenCalled();
+        });
+      });
+
+      describe('When hint id equals selectedHintIndex', () => {
+        const widget = new rulesShowHint.Widget(baseCompletion, baseWidgetData);
+        let getSectionAtSpy;
+        let getCurrentSectionSpy;
+
+        beforeEach(() => {
+          getCurrentSectionSpy = jest.spyOn(widget, 'getCurrentSection');
+          getSectionAtSpy = jest.spyOn(widget, 'getSectionAt')
+            .mockReturnValueOnce({
+              itemsOptions: {
+                option: 'testOption',
+              },
+            })
+            .mockReturnValueOnce({
+              selectedHintIndex: hintId,
+            });
+
+          widget.handleSectionHintClick(targetElement);
+        });
+
+        it('should trigger getHintSectionIndex', () => {
+          expect(getHintSectionIndexSpy).toHaveBeenCalled();
+        });
+
+        it('should trigger getSectionAt twice', () => {
+          expect(getSectionAtSpy).toHaveBeenCalledTimes(2);
+        });
+
+        it('should not trigger getCurrentSection', () => {
+          expect(getCurrentSectionSpy).not.toHaveBeenCalled();
+        });
+      });
+
+      describe('When isSectionChanged and isMultipleSelection are true', () => {
+        const setCompletionButtonVisibility = jest.fn();
+        const setCompletionButtonEnabling = jest.fn();
+        let getCurrentSectionSpy;
+
+        beforeEach(() => {
+          const widget = new rulesShowHint.Widget(baseCompletion, baseWidgetData);
+
+          jest.spyOn(widget, 'getSectionAt').mockReturnValue({
+            selectedHintIndex: hintId,
+          });
+          jest.spyOn(widget, 'changeActive').mockReturnValue({});
+          jest.spyOn(widget, 'pick').mockReturnValue({});
+          getCurrentSectionSpy = jest.spyOn(widget, 'getCurrentSection').mockReturnValue({
+            isMultipleSelection: true,
+            setCompletionButtonVisibility,
+            setCompletionButtonEnabling,
+            listNodes: {
+              indexOf: jest.fn(),
+            },
+          });
+
+          widget.handleSectionHintClick(targetElement);
+        });
+
+        it('should trigger getCurrentSection twice', () => {
+          expect(getCurrentSectionSpy).toHaveBeenCalledTimes(3);
+        });
+
+        it('should trigger setCompletionButtonVisibility with correct argument', () => {
+          expect(setCompletionButtonVisibility).toHaveBeenCalledWith(false);
+        });
+
+        it('should trigger setCompletionButtonVisibility with correct argument', () => {
+          expect(setCompletionButtonVisibility).toHaveBeenCalledWith(false);
+        });
+      });
+
+      describe('When isSectionChanged is true and isLastSection is false', () => {
+        const widget = new rulesShowHint.Widget(baseCompletion, baseWidgetData);
+        let changeActiveSpy;
+        let resetSectionsInCurrentSectionsListFromSpy;
+
+        beforeEach(() => {
+          jest.spyOn(widget, 'getSectionAt').mockReturnValue({
+            selectedHintIndex: hintId,
+          });
+          jest.spyOn(widget, 'pick').mockReturnValue({});
+          jest.spyOn(widget, 'getCurrentSection').mockReturnValue({
+            isMultipleSelection: false,
+            listNodes: {
+              indexOf: jest.fn(),
+            },
+          });
+          changeActiveSpy = jest.spyOn(widget, 'changeActive').mockReturnValue({});
+          resetSectionsInCurrentSectionsListFromSpy = jest.spyOn(widget, 'resetSectionsInCurrentSectionsListFrom');
+
+          widget.handleSectionHintClick(targetElement);
+        });
+
+        it('should trigger resetSectionsInCurrentSectionsListFrom with correct argument', () => {
+          expect(resetSectionsInCurrentSectionsListFromSpy).toHaveBeenCalledWith(sectionIndex + indexIncrement);
+        });
+
+        it('should trigger changeActiveSpy', () => {
+          expect(changeActiveSpy).toHaveBeenCalled();
+        });
+      });
+
+      describe('When there is a checkbox hint', () => {
+        const widget = new rulesShowHint.Widget(baseCompletion, baseWidgetData);
+        const target = {
+          type: 'checkbox',
+        };
+        let pickSpy;
+
+        beforeEach(() => {
+          jest.spyOn(widget, 'getSectionAt').mockReturnValue({
+            selectedHintIndex: hintId,
+          });
+          jest.spyOn(widget, 'changeActive').mockReturnValue({});
+          jest.spyOn(widget, 'getCurrentSection').mockReturnValue({
+            isMultipleSelection: false,
+            listNodes: {
+              indexOf: jest.fn(),
+            },
+          });
+          pickSpy = jest.spyOn(widget, 'pick');
+
+          widget.handleSectionHintClick(target);
+        });
+
+        it('should not trigger pick', () => {
+          expect(pickSpy).not.toHaveBeenCalled();
+        });
+      });
+
+      describe('When there is not a checkbox hint', () => {
+        const widget = new rulesShowHint.Widget(baseCompletion, baseWidgetData);
+        let pickSpy;
+
+        beforeEach(() => {
+          jest.spyOn(widget, 'getSectionAt').mockReturnValue({
+            selectedHintIndex: hintId,
+          });
+          jest.spyOn(widget, 'changeActive').mockReturnValue({});
+          jest.spyOn(widget, 'getCurrentSection').mockReturnValue({
+            isMultipleSelection: false,
+            listNodes: {
+              indexOf: jest.fn(),
+            },
+          });
+          pickSpy = jest.spyOn(widget, 'pick').mockReturnValue({});
+
+          widget.handleSectionHintClick(targetElement);
+        });
+
+        it('should trigger pick', () => {
+          expect(pickSpy).toHaveBeenCalled();
+        });
+      });
+    });
+
+    describe('handleMultiplePick', () => {
+      const widget = new rulesShowHint.Widget(baseCompletion, baseWidgetData);
+
+      it('should trigger multiplePick', () => {
+        widget.handleMultiplePick();
+
+        expect(baseCompletion.multiplePick).toHaveBeenCalled();
+      });
+    });
+
+    describe('resetSectionsInCurrentSectionsListFrom', () => {
+      const resetIndex = 0;
+      const widget = new rulesShowHint.Widget(baseCompletion, baseWidgetData);
+
+      it('should trigger clearItemsList once', () => {
+        const clearItemsListSpy = jest.spyOn(widget.sections[0], 'clearItemsList');
+
+        widget.resetSectionsInCurrentSectionsListFrom(resetIndex);
+
+        expect(clearItemsListSpy).toHaveBeenCalledTimes(1);
+      });
+    });
+
+    describe('moveToPreviousSectionInCurrentSectionsList', () => {
+      describe('When isMultipleSelection is true', () => {
+        const widget = new rulesShowHint.Widget(baseCompletion, baseWidgetData);
+        const setCompletionButtonVisibility = jest.fn();
+        const setCompletionButtonEnabling = jest.fn();
+        const clearItemsList = jest.fn();
+        let getCurrentSectionSpy;
+        const setSpies = (context) => {
+          getCurrentSectionSpy = jest.spyOn(context, 'getCurrentSection').mockReturnValue({
+            isMultipleSelection: true,
+            setCompletionButtonVisibility,
+            setCompletionButtonEnabling,
+            clearItemsList,
+          });
+        };
+
+        beforeEach(() => {
+          setSpies(widget);
+
+          widget.moveToPreviousSectionInCurrentSectionsList();
+        });
+
+        it('should trigger getCurrentSection twice', () => {
+          expect(getCurrentSectionSpy).toHaveBeenCalledTimes(2);
+        });
+
+        it('should trigger setCompletionButtonEnabling with correct argument', () => {
+          expect(setCompletionButtonVisibility).toHaveBeenCalledWith(false);
+        });
+
+        it('should trigger getCurrentSection twice with correct argument', () => {
+          expect(setCompletionButtonEnabling).toHaveBeenCalledWith(false);
+        });
+
+        it('should trigger clearItemsList', () => {
+          expect(clearItemsList).toHaveBeenCalled();
+        });
+
+        it('should set currentSectionIndex to -1', () => {
+          const newWidget = new rulesShowHint.Widget(baseCompletion, baseWidgetData);
+          const newCurrentSectionIndex = -1;
+
+          setSpies(newWidget);
+          newWidget.moveToPreviousSectionInCurrentSectionsList();
+
+          expect(newWidget.currentSectionIndex).toBe(newCurrentSectionIndex);
+        });
+      });
+
+      describe('When isMultipleSelection is true', () => {
+        const widget = new rulesShowHint.Widget(baseCompletion, baseWidgetData);
+        const setCompletionButtonVisibility = jest.fn();
+        const setCompletionButtonEnabling = jest.fn();
+
+        beforeEach(() => {
+          jest.spyOn(widget, 'getCurrentSection').mockReturnValue({
+            isMultipleSelection: false,
+            setCompletionButtonVisibility,
+            setCompletionButtonEnabling,
+            clearItemsList: jest.fn(),
+          });
+
+          widget.moveToPreviousSectionInCurrentSectionsList();
+        });
+
+        it('should not trigger setCompletionButtonEnabling', () => {
+          expect(setCompletionButtonVisibility).not.toHaveBeenCalled();
+        });
+
+        it('should not trigger getCurrentSection', () => {
+          expect(setCompletionButtonEnabling).not.toHaveBeenCalled();
+        });
+      });
+    });
+
+    describe('getSelectedHintInCurrentSection', () => {
+      const widget = new rulesShowHint.Widget(baseCompletion, baseWidgetData);
+      const selectedHintIndex = 10;
+
+      it('should return selected hint index', () => {
+        jest.spyOn(widget, 'getCurrentSection').mockReturnValue({
+          selectedHintIndex,
+        });
+
+        const result = widget.getSelectedHintInCurrentSection();
+
+        expect(result).toBe(selectedHintIndex);
+      });
+    });
+
+    describe('getSectionAt', () => {
+      describe('When data is provided', () => {
+        const widget = new rulesShowHint.Widget(baseCompletion, baseWidgetData);
+
+        it('should return correct section', () => {
+          const sectionIndex = 0;
+          const context = {
+            sections: [{}]
+          };
+          const result = widget.getSectionAt(sectionIndex, context);
+
+          expect(result).toBe(context.sections[sectionIndex]);
+        });
+      });
+
+      describe('When data is not provided', () => {
+        const widget = new rulesShowHint.Widget(baseCompletion, baseWidgetData);
+
+        it('should return correct section', () => {
+          const result = widget.getSectionAt();
+
+          expect(result).toBe(widget.sections[widget.currentSectionIndex]);
+        });
+      });
+    });
+
+    describe('createSection', () => {
+      const widget = new rulesShowHint.Widget(baseCompletion, baseWidgetData);
+
+      it('should return instance of MultipleSelectionHintSection', () => {
+        const sectionOptions = {
+          isMultipleSelection: true,
+        };
+        const result = widget.createSection(sectionOptions, baseCompletion);
+
+        expect(result).toBeInstanceOf(rulesShowHint.MultipleSelectionHintSection);
+      });
+
+      it('should return instance of HintSection', () => {
+        const sectionOptions = {
+          isMultipleSelection: false,
+        };
+        const result = widget.createSection(sectionOptions, baseCompletion);
+
+        expect(result).toBeInstanceOf(HintSection);
+      });
+    });
+
+    describe('setupNextSectionData', () => {
+      const widget = new rulesShowHint.Widget(baseCompletion, baseWidgetData);
+      const selectionsIds = ['id'];
+      let getCurrentSectionSpy;
+      let getSectionAtSpy;
+
+
+      beforeEach(() => {
+        getCurrentSectionSpy = jest.spyOn(widget, 'getCurrentSection').mockReturnValue({
+          childSection: {},
+        });
+        getSectionAtSpy = jest.spyOn(widget, 'getSectionAt').mockReturnValue({});
+        jest.spyOn(widget, 'selectionsIds', 'get').mockReturnValue(selectionsIds);
+        jest.spyOn(widget, 'selectionsIds', 'get').mockReturnValue(selectionsIds);
+
+        widget.setupNextSectionData();
+      });
+
+      it('should trigger getCurrentSection with correct argument', () => {
+        expect(getCurrentSectionSpy).toHaveBeenCalledWith(baseWidgetData);
+      });
+
+      it('should trigger getSectionAt with correct arguments', () => {
+        const expectedArgs = [widget.currentSectionIndex + 1, baseWidgetData];
+
+        expect(getSectionAtSpy).toHaveBeenCalledWith(...expectedArgs);
+      });
+
+      it('should trigger getSubMenuData with correct arguments', () => {
+        const expectedArgs = [
+          baseCompletion.cm,
+          {
+            childSection: {},
+            parentIds: widget.selectionsIds,
+            isLastSection: false,
+          }
+        ];
+
+        expect(CodeMirror.hint.getSubMenuData).toHaveBeenCalledWith(...expectedArgs);
+      });
+    });
+
+    describe('disable', () => {
+      const widget = new rulesShowHint.Widget(baseCompletion, baseWidgetData);
+
+      beforeEach(() => {
+        widget.disable();
+      });
+
+      it('should trigger removeKeyMap', () => {
+        expect(baseCompletion.cm.removeKeyMap).toHaveBeenCalled();
+      });
+
+      it('should trigger addKeyMap', () => {
+        expect(baseCompletion.cm.addKeyMap).toHaveBeenCalled();
+      });
+
+      it('should set picked to true', () => {
+        widget.keyMap.Enter();
+
+        expect(widget.picked).toBe(true);
+      });
+    });
+
+    describe('updatePosition', () => {
+      const originalWindow = { ...window };
+
+      describe('When overlapY is more than 0', () => {
+        const widget = new rulesShowHint.Widget(baseCompletion, baseWidgetData);
+
+        beforeEach(() => {
+          jest.spyOn(global, 'window', 'get').mockReturnValue({
+            ...originalWindow,
+            innerHeight: 1,
+          });
+          widget.updatePosition();
+        });
+
+        it('should correctly set position styles', () => {
+          expect(widget.position.top).toBe(0);
+        });
+
+        it('should correctly set container styles left', () => {
+          expect(widget.container.style.left).toBe(`${widget.position.left}px`);
+        });
+
+        it('should correctly set container styles top', () => {
+          expect(widget.container.style.top).toBe(`${widget.position.top}px`);
+        });
+      });
+
+      describe('When overlapX is more than 0', () => {
+        const widget = new rulesShowHint.Widget(baseCompletion, baseWidgetData);
+
+        beforeEach(() => {
+          jest.spyOn(global, 'window', 'get')
+            .mockReturnValue({
+              ...originalWindow,
+              innerWidth: 1,
+            });
+
+          widget.updatePosition();
+        });
+
+        it('should correctly set position styles left', () => {
+          expect(widget.position.left).toBe(0);
+        });
+
+        it('should correctly set container styles left', () => {
+          expect(widget.container.style.left).toBe(`${widget.position.left}px`);
+        });
+      });
+    });
+
+    describe('close', () => {
+      describe('When completion widget is not equal widget', () => {
+        const widget = new rulesShowHint.Widget(baseCompletion, baseWidgetData);
+
+        it('should not trigger removeKeyMap', () => {
+          widget.completion.widget = null;
+          widget.close();
+
+          expect(baseCompletion.cm.removeKeyMap).not.toHaveBeenCalled();
+        });
+      });
+
+      describe('When completion widget equals widget', () => {
+        const widget = new rulesShowHint.Widget(baseCompletion, baseWidgetData);
+
+        beforeEach(() => {
+          widget.completion.widget = widget;
+          widget.close();
+        });
+
+        it('should trigger removeKeyMap with correct argument', () => {
+          expect(baseCompletion.cm.removeKeyMap).toHaveBeenCalledWith(widget.keyMap);
+        });
+
+        it('should trigger cm.off with correct arguments', () => {
+          const expectedArgs = ['scroll', widget.handleScroll];
+
+          expect(baseCompletion.cm.off).toHaveBeenCalledWith(...expectedArgs);
+        });
+
+        it('should trigger CodeMirror.off with correct arguments', () => {
+          const expectedArgs = [baseCompletion.cm, 'multiplePick', widget.handleMultiplePick];
+
+          expect(CodeMirror.off).toHaveBeenCalledWith(...expectedArgs);
+        });
+      });
+
+      describe('When closeOnUnfocus is true', () => {
+        const completion = {
+          ...baseCompletion,
+          options: {
+            ...baseCompletion.options,
+            closeOnUnfocus: true,
+          },
+        };
+        const widget = new rulesShowHint.Widget(completion, baseWidgetData);
+
+        beforeEach(() => {
+          widget.completion.widget = widget;
+          widget.close();
+        });
+
+        it('should trigger cm.off with correct arguments', () => {
+          const expectedArgs = [
+            ['blur', widget.handleBlur],
+            ['focus', widget.handleFocus]
+          ];
+
+          expectedArgs.forEach((args, index) => {
+            expect(baseCompletion.cm.off).toHaveBeenNthCalledWith(index + 1, ...args);
+          });
+        });
+
+        it('should trigger CodeMirror.off with correct arguments', () => {
+          const expectedArgs = [baseCompletion.cm, 'blurHintInput', widget.handleInputBlur];
+
+          expect(CodeMirror.off).toHaveBeenCalledWith(...expectedArgs);
+        });
+      });
+    });
+
+    describe('pick', () => {
+      const selectedHintIndex = 0;
+
+      describe('When current item options are inactive', () => {
+        const widget = new rulesShowHint.Widget(baseCompletion, baseWidgetData);
+        let getSelectedHintInCurrentSectionSpy;
+        let getCurrentSectionSpy;
+
+        beforeEach(() => {
+          getSelectedHintInCurrentSectionSpy = jest.spyOn(widget, 'getSelectedHintInCurrentSection').mockReturnValue(selectedHintIndex);
+          getCurrentSectionSpy = jest.spyOn(widget, 'getCurrentSection').mockReturnValue({
+            list: [
+              {
+                inactive: true,
+              }
+            ],
+          });
+
+          widget.pick();
+        });
+
+        it('should trigger getSelectedHintInCurrentSection', () => {
+          expect(getSelectedHintInCurrentSectionSpy).toHaveBeenCalled();
+        });
+
+        it('should trigger getCurrentSection with correct argument', () => {
+          expect(getCurrentSectionSpy).toHaveBeenCalledWith(baseWidgetData);
+        });
+      });
+
+      describe('When there is multiple selection', () => {
+        const widget = new rulesShowHint.Widget(baseCompletion, baseWidgetData);
+        let getCurrentSectionSpy;
+
+        beforeEach(() => {
+          jest.spyOn(widget, 'getSelectedHintInCurrentSection').mockReturnValue(selectedHintIndex);
+          getCurrentSectionSpy = jest.spyOn(widget, 'getCurrentSection').mockReturnValue({
+            isMultipleSelection: true,
+            list: [
+              {
+                inactive: false,
+              }
+            ],
+          });
+
+          widget.pick();
+        });
+
+        it('should trigger getCurrentSection twice', () => {
+          expect(getCurrentSectionSpy).toHaveBeenCalledTimes(2);
+        });
+      });
+
+      describe('When list nodes are presented', () => {
+        const widget = new rulesShowHint.Widget(baseCompletion, baseWidgetData);
+        const checkItem = jest.fn();
+        let isAnyItemSpy;
+
+        beforeEach(() => {
+          jest.spyOn(widget, 'getSelectedHintInCurrentSection').mockReturnValue(selectedHintIndex);
+          jest.spyOn(widget, 'getCurrentSection').mockReturnValue({
+            isMultipleSelection: true,
+            list: [
+              {
+                inactive: false,
+              }
+            ],
+            listNodes: [{}],
+            checkItem,
+          });
+          isAnyItemSpy = jest.spyOn(utils, 'isAnyItem').mockReturnValue(false);
+
+          widget.pick();
+        });
+
+        it('should trigger isAnyItem', () => {
+          expect(isAnyItemSpy).toHaveBeenCalled();
+        });
+
+        it('should trigger checkItem', () => {
+          expect(checkItem).toHaveBeenCalled();
+        });
+      });
+
+      describe('When there is no multiple selection', () => {
+        const widget = new rulesShowHint.Widget(baseCompletion, baseWidgetData);
+        let getCurrentSectionSpy;
+
+        beforeEach(() => {
+          jest.spyOn(widget, 'getSelectedHintInCurrentSection').mockReturnValue(selectedHintIndex);
+          getCurrentSectionSpy = jest.spyOn(widget, 'getCurrentSection').mockReturnValue({
+            isMultipleSelection: false,
+            list: [
+              {
+                inactive: false,
+              }
+            ],
+          });
+
+          widget.pick();
+        });
+
+        it('should trigger getCurrentSection once', () => {
+          expect(getCurrentSectionSpy).toHaveBeenCalledTimes(1);
+        });
+
+        it('should trigger pick with correct arguments', () => {
+          const expectedArgs = [baseWidgetData, selectedHintIndex];
+
+          expect(baseCompletion.pick).toHaveBeenCalledWith(...expectedArgs);
+        });
+      });
+
+      describe('When there is no multiple selection', () => {
+        const widgetData = {
+          sections: [
+            {
+              list: [],
+            },
+            {
+              list: [],
+            }
+          ],
+        };
+        const widget = new rulesShowHint.Widget(baseCompletion, widgetData);
+        let getCurrentSectionSpy;
+        let changeSectionSpy;
+
+        beforeEach(() => {
+          jest.spyOn(widget, 'getSelectedHintInCurrentSection').mockReturnValue(selectedHintIndex);
+          changeSectionSpy = jest.spyOn(widget, 'changeSection').mockReturnValue({});
+          getCurrentSectionSpy = jest.spyOn(widget, 'getCurrentSection').mockReturnValue({
+            isMultipleSelection: false,
+            list: [
+              {
+                inactive: false,
+              }
+            ],
+          });
+
+          widget.pick();
+        });
+
+        it('should trigger getCurrentSection once', () => {
+          expect(getCurrentSectionSpy).toHaveBeenCalledTimes(1);
+        });
+
+        it('should trigger changeSection', () => {
+          expect(changeSectionSpy).toHaveBeenCalled();
+        });
+      });
+    });
+
+    describe('changeSection', () => {
+      const list = [];
+      const selectedHintIndex = 1;
+
+      describe('When section data list is not empty', () => {
+        const widget = new rulesShowHint.Widget(baseCompletion, baseWidgetData);
+        const setList = jest.fn();
+        let setupNextSectionDataSpy;
+        let getCurrentSectionSpy;
+        let updatePositionSpy;
+
+        beforeEach(() => {
+          jest.spyOn(widget, 'getSectionAt').mockReturnValue({
+            list: [{}],
+          });
+          setupNextSectionDataSpy = jest.spyOn(widget, 'setupNextSectionData').mockReturnValue({});
+          getCurrentSectionSpy = jest.spyOn(widget, 'getCurrentSection').mockReturnValue({
+            list,
+            selectedHintIndex,
+            setList,
+          });
+          updatePositionSpy = jest.spyOn(widget, 'updatePosition').mockReturnValue({});
+
+          widget.changeSection();
+        });
+
+        it('should trigger setupNextSectionData', () => {
+          expect(setupNextSectionDataSpy).toHaveBeenCalled();
+        });
+
+        it('should trigger getCurrentSection with correct argument', () => {
+          expect(getCurrentSectionSpy).toHaveBeenCalledWith(baseWidgetData);
+        });
+
+        it('should trigger setList', () => {
+          expect(setList).toHaveBeenCalled();
+        });
+
+        it('should trigger updatePosition', () => {
+          expect(updatePositionSpy).toHaveBeenCalled();
+        });
+      });
+
+      describe('When section data list is empty', () => {
+        const widget = new rulesShowHint.Widget(baseCompletion, baseWidgetData);
+        let setupNextSectionDataSpy;
+        let getCurrentSectionSpy;
+        let updatePositionSpy;
+
+        beforeEach(() => {
+          jest.spyOn(widget, 'getSectionAt').mockReturnValue({
+            list: [],
+          });
+          setupNextSectionDataSpy = jest.spyOn(widget, 'setupNextSectionData').mockReturnValue({});
+          getCurrentSectionSpy = jest.spyOn(widget, 'getCurrentSection').mockReturnValue({
+            list,
+            selectedHintIndex,
+            setList: jest.fn(),
+          });
+          updatePositionSpy = jest.spyOn(widget, 'updatePosition').mockReturnValue({});
+
+          widget.changeSection();
+        });
+
+        it('should trigger setupNextSectionData', () => {
+          expect(setupNextSectionDataSpy).toHaveBeenCalled();
+        });
+
+        it('should not trigger getCurrentSection', () => {
+          expect(getCurrentSectionSpy).not.toHaveBeenCalled();
+        });
+
+        it('should not trigger updatePosition', () => {
+          expect(updatePositionSpy).not.toHaveBeenCalled();
+        });
+      });
+    });
+
+    describe('selectionsIds', () => {
+      const sectionId = 'id';
+
+      describe('When it is any item', () => {
+        const widget = new rulesShowHint.Widget(baseCompletion, baseWidgetData);
+        const testId = 'test';
+        let getCurrentSectionSpy;
+        let result;
+
+        beforeEach(() => {
+          utils.isAnyItem.mockReturnValue(true);
+          jest.spyOn(widget, 'getSelectedHintInCurrentSection').mockReturnValue(0);
+          getCurrentSectionSpy = jest.spyOn(widget, 'getCurrentSection').mockReturnValue({
+            list: [
+              {
+                id: sectionId,
+              },
+              {
+                id: testId,
+              }
+            ],
+          });
+
+          result = widget.selectionsIds;
+        });
+
+        it('should trigger getCurrentSection with correct argument', () => {
+          expect(getCurrentSectionSpy).toHaveBeenCalledWith(baseWidgetData);
+        });
+
+        it('should return correct data', () => {
+          expect(result).toEqual([testId]);
+        });
+      });
+
+      describe('When it is not any item', () => {
+        const widget = new rulesShowHint.Widget(baseCompletion, baseWidgetData);
+
+        beforeEach(() => {
+          utils.isAnyItem.mockReturnValue(false);
+          jest.spyOn(widget, 'getSelectedHintInCurrentSection').mockReturnValue(0);
+          jest.spyOn(widget, 'getCurrentSection').mockReturnValue({
+            list: [
+              {
+                id: sectionId,
+              }
+            ],
+          });
+        });
+
+        it('should return correct data', () => {
+          const result = widget.selectionsIds;
+
+          expect(result).toEqual([sectionId]);
+        });
+      });
+    });
+
+    describe('changeActive', () => {
+      describe('When section is selected by index', () => {
+        const widget = new rulesShowHint.Widget(baseCompletion, baseWidgetData);
+        const calculateNextHintIndex = jest.fn();
+        const nextActiveHintIndex = 2;
+        const avoidWrap = {};
+        let getCurrentSectionSpy;
+
+        beforeEach(() => {
+          getCurrentSectionSpy = jest.spyOn(widget, 'getCurrentSection').mockReturnValue({
+            calculateNextHintIndex,
+            isSelectedByIndex: jest.fn(() => true),
+          });
+
+          widget.changeActive(nextActiveHintIndex, avoidWrap);
+        });
+
+        it('should trigger getCurrentSection once', () => {
+          expect(getCurrentSectionSpy).toHaveBeenCalledTimes(1);
+        });
+
+        it('should trigger calculateNextHintIndex with correct arguments', () => {
+          expect(calculateNextHintIndex).toHaveBeenCalledWith(nextActiveHintIndex, avoidWrap);
+        });
+      });
+
+      describe('When section is not selected by index', () => {
+        const widget = new rulesShowHint.Widget(baseCompletion, baseWidgetData);
+        const nextActiveHintIndex = 2;
+        const nextHintIndex = 3;
+        const listNodePosition = 4;
+        const avoidWrap = {};
+        const changeActive = jest.fn();
+        const getListNodeAt = jest.fn(() => listNodePosition);
+        let getCurrentSectionSpy;
+
+        beforeEach(() => {
+          getCurrentSectionSpy = jest.spyOn(widget, 'getCurrentSection').mockReturnValue({
+            calculateNextHintIndex: jest.fn(() => nextHintIndex),
+            isSelectedByIndex: jest.fn(() => false),
+            selectedHintIndex: null,
+            itemsOptions: [],
+            changeActive,
+            getListNodeAt,
+          });
+
+          widget.changeActive(nextActiveHintIndex, avoidWrap);
+        });
+
+        it('should trigger getCurrentSection twice', () => {
+          expect(getCurrentSectionSpy).toHaveBeenCalledTimes(2);
+        });
+
+        it('should trigger signal with correct arguments', () => {
+          const expectedArgs = [baseWidgetData, 'select', undefined, listNodePosition];
+
+          expect(CodeMirror.signal).toHaveBeenCalledWith(...expectedArgs);
+        });
+
+        it('should trigger changeActive with correct argument', () => {
+          expect(changeActive).toHaveBeenCalledWith(nextHintIndex);
+        });
+
+        it('should trigger getListNodeAt with correct argument', () => {
+          expect(getListNodeAt).toHaveBeenCalledWith(nextHintIndex);
+        });
+      });
+    });
+
+    describe('calculateMenuSize', () => {
+      const widget = new rulesShowHint.Widget(baseCompletion, baseWidgetData);
+      const offsetHeight = 1;
+
+      it('should return 1 if there is no offsetHeight', () => {
+        jest.spyOn(widget, 'getCurrentSection').mockReturnValue({
+          getListNodeAt: () => ({}),
+        });
+
+        const result = widget.calculateMenuSize();
+
+        expect(result).toBe(1);
+      });
+
+      it('should return correct data if offsetHeight is presented', () => {
+        jest.spyOn(widget, 'getCurrentSection').mockReturnValue({
+          getListNodeAt: () => ({
+            offsetHeight,
+          }),
+        });
+
+        const result = widget.calculateMenuSize();
+
+        expect(result).toBe(createElementMock.clientHeight / offsetHeight);
       });
     });
   });
