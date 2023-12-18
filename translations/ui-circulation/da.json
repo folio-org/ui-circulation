@@ -513,5 +513,7 @@
     "settings.finePolicy.reminderFees.timeUnit.minutes": "Minute(s)",
     "settings.index.printHoldRequests": "Print hold requests",
     "settings.PrintHoldRequests.paneTitle": "Print hold requests",
-    "settings.PrintHoldRequests.allow": "Allow print hold requests (Open - Not yet filled)"
+    "settings.PrintHoldRequests.allow": "Allow print hold requests (Open - Not yet filled)",
+    "settings.patronNotices.emailOrPrint": "Email or print",
+    "settings.patronNotices.printOnly": "Print only"
 }
