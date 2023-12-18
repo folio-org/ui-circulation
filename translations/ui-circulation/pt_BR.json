@@ -513,5 +513,7 @@
     "settings.finePolicy.reminderFees.timeUnit.minutes": "Minuto(s)",
     "settings.index.printHoldRequests": "Solicitações de reserva de recurso impresso",
     "settings.PrintHoldRequests.paneTitle": "Solicitações de reserva de recurso impresso",
-    "settings.PrintHoldRequests.allow": "Permitir solicitações de reserva de recurso impresso (Aberto - Ainda não preenchido)"
+    "settings.PrintHoldRequests.allow": "Permitir solicitações de reserva de recurso impresso (Aberto - Ainda não preenchido)",
+    "settings.patronNotices.emailOrPrint": "Enviar por e-mail ou imprimir",
+    "settings.patronNotices.printOnly": "Imprimir apenas"
 }

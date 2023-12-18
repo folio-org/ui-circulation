@@ -513,5 +513,7 @@
     "settings.finePolicy.reminderFees.timeUnit.minutes": "Minute(n)",
     "settings.index.printHoldRequests": "Vormerkungen drucken",
     "settings.PrintHoldRequests.paneTitle": "Vormerkungen drucken",
-    "settings.PrintHoldRequests.allow": "Druck von Vormerkungen (Offen - noch nicht erfüllt) zulassen"
+    "settings.PrintHoldRequests.allow": "Druck von Vormerkungen (Offen - noch nicht erfüllt) zulassen",
+    "settings.patronNotices.emailOrPrint": "Email or print",
+    "settings.patronNotices.printOnly": "Print only"
 }

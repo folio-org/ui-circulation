@@ -513,5 +513,7 @@
     "settings.finePolicy.reminderFees.timeUnit.minutes": "Minuta(y)",
     "settings.index.printHoldRequests": "Tisk rezervací",
     "settings.PrintHoldRequests.paneTitle": "Tisk rezervací",
-    "settings.PrintHoldRequests.allow": "Povolit tisk rezervací (otevřené – dosud nevyřízené)"
+    "settings.PrintHoldRequests.allow": "Povolit tisk rezervací (otevřené – dosud nevyřízené)",
+    "settings.patronNotices.emailOrPrint": "Email or print",
+    "settings.patronNotices.printOnly": "Print only"
 }
