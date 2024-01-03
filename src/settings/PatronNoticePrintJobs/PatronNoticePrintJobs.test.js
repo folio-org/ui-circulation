@@ -1,7 +1,6 @@
 
 import { render, fireEvent, waitFor, screen } from '@folio/jest-config-stripes/testing-library/react';
 import userEvent from '@folio/jest-config-stripes/testing-library/user-event';
-import { stripesConnect } from '@folio/stripes/core';
 import PatronNoticePrintJobs, { generateFormatter } from './PatronNoticePrintJobs';
 
 jest.unmock('@folio/stripes/components');
@@ -25,7 +24,6 @@ describe('PatronNoticePrintJobs', () => {
   const mockMutator = {
     printingJob: {
       GET: jest.fn(() => ({ content: PDF_IN_HEX })),
-      DELETE: jest.fn(),
       reset: jest.fn(),
     },
     entries: {
