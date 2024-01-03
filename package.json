@@ -34,7 +34,8 @@
       "patron-notice-policy-storage": "0.11",
       "location-units": "2.0",
       "locations": "3.0",
-      "feesfines": "16.0 17.0 18.0 19.0"
+      "feesfines": "16.0 17.0 18.0 19.0",
+      "batch-print": "1.0"
     },
     "permissionSets": [
       {
