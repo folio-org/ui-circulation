@@ -1,10 +1,9 @@
 
-import { render, fireEvent, waitFor, screen } from '@folio/jest-config-stripes/testing-library/react';
+import { render, waitFor, screen } from '@folio/jest-config-stripes/testing-library/react';
 import userEvent from '@folio/jest-config-stripes/testing-library/user-event';
 import PatronNoticePrintJobs, { generateFormatter } from './PatronNoticePrintJobs';
 
 jest.unmock('@folio/stripes/components');
-
 
 jest.mock('@folio/stripes/core', () => ({
   stripesConnect: jest.fn(Component => Component),
@@ -63,7 +62,7 @@ describe('PatronNoticePrintJobs', () => {
     const { getAllByRole } = render(<PatronNoticePrintJobs mutator={mockMutator} resources={mockResources} />);
     const checkboxes = getAllByRole('checkbox');
 
-    fireEvent.click(checkboxes[0]);
+    userEvent.click(checkboxes[0]);
 
     await waitFor(() => {
       checkboxes.slice(1).forEach((checkbox) => {
