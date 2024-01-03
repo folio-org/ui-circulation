@@ -70,6 +70,18 @@ describe('PatronNoticePrintJobs', () => {
       });
     });
   });
+
+  it('calls markPrintJobForDeletion', async () => {
+    const { getAllByRole } = render(<PatronNoticePrintJobs mutator={mockMutator} resources={mockResources} />);
+    const checkboxes = getAllByRole('checkbox');
+    const checkbox = checkboxes[1];
+
+    userEvent.click(checkbox);
+
+    await waitFor(() => {
+      expect(checkbox).toBeChecked();
+    });
+  });
 });
 
 describe('generateFormatter', () => {
