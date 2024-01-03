@@ -513,5 +513,7 @@
     "settings.finePolicy.reminderFees.timeUnit.minutes": "分钟",
     "settings.index.printHoldRequests": "打印预约请求",
     "settings.PrintHoldRequests.paneTitle": "打印预约请求",
-    "settings.PrintHoldRequests.allow": "允许打印预约请求（开放 - 尚未填写）"
+    "settings.PrintHoldRequests.allow": "允许打印预约请求（开放 - 尚未填写）",
+    "settings.patronNotices.emailOrPrint": "发送电子邮件或打印",
+    "settings.patronNotices.printOnly": "仅打印"
 }
