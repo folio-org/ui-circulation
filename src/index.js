@@ -112,7 +112,7 @@ class Circulation extends Component {
             route: 'patron-notice-print-jobs',
             label: this.props.intl.formatMessage({ id: 'ui-circulation.settings.index.patronNoticePrintJobs' }),
             component: PatronNoticePrintJobs,
-            perm: 'ui-circulation.settings.notice-templates',
+            perm: 'mod-batch-print.entries.collection.get',
           },
         ],
       },

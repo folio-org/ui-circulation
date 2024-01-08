@@ -3,7 +3,7 @@ import { Button, Pane, MenuSection, MultiColumnList, Checkbox, FormattedDate, Fo
 import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
-import { stripesConnect } from '@folio/stripes/core';
+import { stripesConnect, useOkapiKy, useCallout } from '@folio/stripes/core';
 
 import css from './PatronNoticePrintJobs.css';
 
@@ -13,8 +13,18 @@ const visibleColumns = ['id', 'created'];
 
 export const generateFormatter = (markPrintJobForDeletion, openPDF) => {
   return {
-    id: (item) => <Checkbox type="checkbox" checked={item.selected} onChange={() => markPrintJobForDeletion(item)} />,
-    created: (item) => <TextLink className={css.printJobLink} onClick={() => openPDF(item)}><FormattedDate value={item.created} /> <FormattedTime value={item.created} /></TextLink>
+    id: (item) => (
+      <Checkbox
+        type="checkbox"
+        checked={item.selected}
+        onChange={() => markPrintJobForDeletion(item)}
+      />
+    ),
+    created: (item) => (
+      <TextLink className={css.printJobLink} onClick={() => openPDF(item)}>
+        <FormattedDate value={item.created} /> <FormattedTime value={item.created} />
+      </TextLink>
+    )
   };
 };
 
@@ -25,6 +35,8 @@ const PatronNoticePrintJobs = (props) => {
   const [sortOrder, setSortOrder] = useState(DESC);
   const [allSelected, toggleSelectAll] = useState(false);
   const sort = () => setSortOrder(sortOrder === DESC ? ASC : DESC);
+  const ky = useOkapiKy();
+  const callout = useCallout();
 
   const markPrintJobForDeletion = (item) => {
     const clonedData = [...contentData];
@@ -49,7 +61,10 @@ const PatronNoticePrintJobs = (props) => {
       const url = URL.createObjectURL(blob);
       window.open(url, '_blank');
     } catch (error) {
-      console.error('PDF generation failed', error);
+      callout.sendCallout({
+        message: <FormattedMessage id="ui-circulation.settings.patronNoticePrintJobs.errors.pdf" />,
+        type: 'error',
+      });
     }
   };
 
@@ -72,17 +87,10 @@ const PatronNoticePrintJobs = (props) => {
 
   const actionMenu = ({ onToggle }) => {
     const removeSelectedPrintJobs = async () => {
-      const { printingJob } = mutator;
       const selectedJobs = contentData.filter(item => item.selected);
+      const ids = selectedJobs.map(job => job.id).join(',');
 
-      for (let i = 0; i < selectedJobs.length; i++) {
-        try {
-          const job = selectedJobs[i];
-          await printingJob.DELETE(job, { path: `print/entries/${job.id}` });
-        } catch (error) {
-          console.error(error);
-        }
-      }
+      await ky.delete(`print/entries?ids=${ids}`);
 
       const filtered = contentData.filter(item => !item.selected);
 
@@ -152,7 +160,6 @@ PatronNoticePrintJobs.propTypes = {
   mutator: PropTypes.shape({
     printingJob: PropTypes.shape({
       GET: PropTypes.func,
-      DELETE: PropTypes.func,
       reset: PropTypes.func,
     }),
   }).isRequired,
