@@ -8,6 +8,7 @@ jest.unmock('@folio/stripes/components');
 jest.mock('@folio/stripes/core', () => ({
   stripesConnect: jest.fn(Component => Component),
   useOkapiKy: jest.fn(),
+  useCallout: jest.fn(),
 }));
 
 global.URL.createObjectURL = jest.fn();
