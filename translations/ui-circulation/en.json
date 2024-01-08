@@ -10,6 +10,7 @@
   "settings.index.staffSlips": "Staff slips",
   "settings.index.requestCancellationReasons": "Request cancellation reasons",
   "settings.index.patronNotices": "Patron notice templates",
+  "settings.index.patronNoticePrintJobs": "Patron notice print jobs",
   "settings.index.noticePolicies": "Patron notice policies",
   "settings.index.requestPolicies": "Request policies",
   "settings.index.titleLevelRequests": "Title level requests",
@@ -221,6 +222,14 @@
   "settings.patronNotices.multipleRequests": "Multiple requests",
   "settings.patronNotices.multipleFeeFineActions": "Multiple fee/fine actions",
   "settings.patronNotices.multipleFeeFineCharges": "Multiple fee/fine charges",
+
+  "settings.patronNoticePrintJobs.actions": "Actions",
+  "settings.patronNoticePrintJobs.actions.delete": "Delete selected print jobs",
+  "settings.patronNoticePrintJobs.name": "Name",
+  "settings.patronNoticePrintJobs.email": "Email",
+  "settings.patronNoticePrintJobs.updated": "Updated",
+  "settings.patronNoticePrintJobs.created": "Created",
+  "settings.patronNoticePrintJobs.errors.pdf": "'PDF generation failed",
 
   "settings.staffSlips.label": "Staff slips",
   "settings.staffSlips.name": "Staff slip name",
