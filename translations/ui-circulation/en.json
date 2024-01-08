@@ -229,6 +229,7 @@
   "settings.patronNoticePrintJobs.email": "Email",
   "settings.patronNoticePrintJobs.updated": "Updated",
   "settings.patronNoticePrintJobs.created": "Created",
+  "settings.patronNoticePrintJobs.errors.pdf": "'PDF generation failed",
 
   "settings.staffSlips.label": "Staff slips",
   "settings.staffSlips.name": "Staff slip name",

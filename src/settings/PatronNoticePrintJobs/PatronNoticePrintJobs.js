@@ -3,7 +3,7 @@ import { Button, Pane, MenuSection, MultiColumnList, Checkbox, FormattedDate, Fo
 import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
-import { stripesConnect, useOkapiKy } from '@folio/stripes/core';
+import { stripesConnect, useOkapiKy, useCallout } from '@folio/stripes/core';
 
 import css from './PatronNoticePrintJobs.css';
 
@@ -36,6 +36,7 @@ const PatronNoticePrintJobs = (props) => {
   const [allSelected, toggleSelectAll] = useState(false);
   const sort = () => setSortOrder(sortOrder === DESC ? ASC : DESC);
   const ky = useOkapiKy();
+  const callout = useCallout();
 
   const markPrintJobForDeletion = (item) => {
     const clonedData = [...contentData];
@@ -60,7 +61,10 @@ const PatronNoticePrintJobs = (props) => {
       const url = URL.createObjectURL(blob);
       window.open(url, '_blank');
     } catch (error) {
-      console.error('PDF generation failed', error);
+      callout.sendCallout({
+        message: <FormattedMessage id="ui-circulation.settings.patronNoticePrintJobs.errors.pdf" />,
+        type: 'error',
+      });
     }
   };
 
