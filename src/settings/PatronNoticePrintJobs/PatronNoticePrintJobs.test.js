@@ -9,6 +9,9 @@ jest.mock('@folio/stripes/core', () => ({
   stripesConnect: jest.fn(Component => Component),
   useOkapiKy: jest.fn(),
   useCallout: jest.fn(),
+  useStripes: {
+    hasPerm: jest.fn()
+  }
 }));
 
 global.URL.createObjectURL = jest.fn();
