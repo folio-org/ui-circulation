@@ -515,5 +515,13 @@
     "settings.PrintHoldRequests.paneTitle": "Solicitações de reserva de recurso impresso",
     "settings.PrintHoldRequests.allow": "Permitir solicitações de reserva de recurso impresso (Aberto - Ainda não preenchido)",
     "settings.patronNotices.emailOrPrint": "Enviar por e-mail ou imprimir",
-    "settings.patronNotices.printOnly": "Imprimir apenas"
+    "settings.patronNotices.printOnly": "Imprimir apenas",
+    "settings.index.patronNoticePrintJobs": "Trabalhos de impressão de avisos ao usuário",
+    "settings.patronNoticePrintJobs.actions": "Ações",
+    "settings.patronNoticePrintJobs.actions.delete": "Excluir trabalhos de impressão selecionados",
+    "settings.patronNoticePrintJobs.name": "Nome",
+    "settings.patronNoticePrintJobs.email": "E-mail",
+    "settings.patronNoticePrintJobs.updated": "Atualizado",
+    "settings.patronNoticePrintJobs.created": "Criado",
+    "settings.patronNoticePrintJobs.errors.pdf": "'Falha na geração do PDF"
 }
