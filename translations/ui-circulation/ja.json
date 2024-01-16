@@ -514,6 +514,14 @@
     "settings.index.printHoldRequests": "Print hold requests",
     "settings.PrintHoldRequests.paneTitle": "Print hold requests",
     "settings.PrintHoldRequests.allow": "Allow print hold requests (Open - Not yet filled)",
-    "settings.patronNotices.emailOrPrint": "Email or print",
-    "settings.patronNotices.printOnly": "Print only"
+    "settings.patronNotices.emailOrPrint": "電子メールまたは印刷",
+    "settings.patronNotices.printOnly": "印刷のみ",
+    "settings.index.patronNoticePrintJobs": "パトロン通知印刷ジョブ",
+    "settings.patronNoticePrintJobs.actions": "アクション",
+    "settings.patronNoticePrintJobs.actions.delete": "選択した印刷ジョブを削除します",
+    "settings.patronNoticePrintJobs.name": "名前",
+    "settings.patronNoticePrintJobs.email": "Eメール",
+    "settings.patronNoticePrintJobs.updated": "更新しました",
+    "settings.patronNoticePrintJobs.created": "作成完了",
+    "settings.patronNoticePrintJobs.errors.pdf": "'PDF の生成に失敗しました"
 }

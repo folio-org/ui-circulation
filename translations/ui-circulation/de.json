@@ -84,7 +84,7 @@
     "settings.loanPolicy.no": "Nein",
     "settings.fDDS.editLabel": "Bearbeiten: {name}",
     "settings.checkout.filterRules": "Filterregeln",
-    "settings.staffSlips.hold": "Vormerkungszettel",
+    "settings.staffSlips.hold": "Bereitstellungszettel",
     "settings.staffSlips.print": "Drucken",
     "settings.staffSlips.editLabel": "Bearbeiten: Dienstzettel - {name}",
     "settings.loanPolicy.openingTimeOffset": "Öffnungszeitenversatz",
@@ -514,6 +514,14 @@
     "settings.index.printHoldRequests": "Vormerkungen drucken",
     "settings.PrintHoldRequests.paneTitle": "Vormerkungen drucken",
     "settings.PrintHoldRequests.allow": "Druck von Vormerkungen (Offen - noch nicht erfüllt) zulassen",
-    "settings.patronNotices.emailOrPrint": "Email or print",
-    "settings.patronNotices.printOnly": "Print only"
+    "settings.patronNotices.emailOrPrint": "E-Mail oder Druck",
+    "settings.patronNotices.printOnly": "Nur drucken",
+    "settings.index.patronNoticePrintJobs": "Patron notice print jobs",
+    "settings.patronNoticePrintJobs.actions": "Actions",
+    "settings.patronNoticePrintJobs.actions.delete": "Delete selected print jobs",
+    "settings.patronNoticePrintJobs.name": "Name",
+    "settings.patronNoticePrintJobs.email": "Email",
+    "settings.patronNoticePrintJobs.updated": "Updated",
+    "settings.patronNoticePrintJobs.created": "Created",
+    "settings.patronNoticePrintJobs.errors.pdf": "'PDF generation failed"
 }

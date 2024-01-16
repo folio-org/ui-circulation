@@ -515,5 +515,13 @@
     "settings.PrintHoldRequests.paneTitle": "Print hold requests",
     "settings.PrintHoldRequests.allow": "Allow print hold requests (Open - Not yet filled)",
     "settings.patronNotices.emailOrPrint": "Email or print",
-    "settings.patronNotices.printOnly": "Print only"
+    "settings.patronNotices.printOnly": "Print only",
+    "settings.index.patronNoticePrintJobs": "Patron notice print jobs",
+    "settings.patronNoticePrintJobs.actions": "Actions",
+    "settings.patronNoticePrintJobs.actions.delete": "Delete selected print jobs",
+    "settings.patronNoticePrintJobs.name": "Name",
+    "settings.patronNoticePrintJobs.email": "Email",
+    "settings.patronNoticePrintJobs.updated": "Updated",
+    "settings.patronNoticePrintJobs.created": "Created",
+    "settings.patronNoticePrintJobs.errors.pdf": "'PDF generation failed"
 }
