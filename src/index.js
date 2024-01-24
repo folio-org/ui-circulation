@@ -13,7 +13,6 @@ import RequestCancellationReasons from './settings/RequestCancellationReasons';
 import CheckoutSettings from './settings/CheckoutSettings/CheckoutSettings';
 import FixedDueDateScheduleManager from './settings/FixedDueDateSchedule/FixedDueDateScheduleManager';
 import PatronNotices from './settings/PatronNotices';
-import PatronNoticePrintJobs from './settings/PatronNoticePrintJobs';
 import StaffSlips from './settings/StaffSlips';
 import NoticePolicySettings from './settings/NoticePolicy';
 import RequestPolicySettings from './settings/RequestPolicy';
@@ -109,12 +108,7 @@ class Circulation extends Component {
             component: PatronNotices,
             perm: 'ui-circulation.settings.notice-templates',
           },
-          {
-            route: 'patron-notice-print-jobs',
-            label: this.props.intl.formatMessage({ id: 'ui-circulation.settings.index.patronNoticePrintJobs' }),
-            component: PatronNoticePrintJobs,
-            perm: 'mod-batch-print.entries.collection.get',
-          },
+
         ],
       },
 

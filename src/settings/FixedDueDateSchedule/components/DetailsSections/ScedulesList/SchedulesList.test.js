@@ -7,8 +7,6 @@ import {
 
 import SchedulesList from './SchedulesList';
 
-jest.unmock('react-intl');
-
 const mockedSchedules = [
   {
     due: '2021-08-14T23:59:59.000+00:00',
