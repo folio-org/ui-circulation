@@ -8,4 +8,3 @@ import './finalFormArrayComponents.mock';
 import './stripesSmartComponents.mock';
 import './stripesCore.mock';
 import './stripesFinalForm.mock';
-import './currenciesData.mock';
