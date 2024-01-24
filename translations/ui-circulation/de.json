@@ -516,12 +516,12 @@
     "settings.PrintHoldRequests.allow": "Druck von Vormerkungen (Offen - noch nicht erfüllt) zulassen",
     "settings.patronNotices.emailOrPrint": "E-Mail oder Druck",
     "settings.patronNotices.printOnly": "Nur drucken",
-    "settings.index.patronNoticePrintJobs": "Patron notice print jobs",
-    "settings.patronNoticePrintJobs.actions": "Actions",
-    "settings.patronNoticePrintJobs.actions.delete": "Delete selected print jobs",
+    "settings.index.patronNoticePrintJobs": "Druckaufträge Benachrichtigungen Benutzende",
+    "settings.patronNoticePrintJobs.actions": "Aktionen",
+    "settings.patronNoticePrintJobs.actions.delete": "Ausgewählte Druckaufträge löschen",
     "settings.patronNoticePrintJobs.name": "Name",
-    "settings.patronNoticePrintJobs.email": "Email",
-    "settings.patronNoticePrintJobs.updated": "Updated",
-    "settings.patronNoticePrintJobs.created": "Created",
-    "settings.patronNoticePrintJobs.errors.pdf": "'PDF generation failed"
+    "settings.patronNoticePrintJobs.email": "E-Mail",
+    "settings.patronNoticePrintJobs.updated": "Aktualisiert",
+    "settings.patronNoticePrintJobs.created": "Erstellt",
+    "settings.patronNoticePrintJobs.errors.pdf": "PDF-Generierung fehlgeschlagen"
 }
