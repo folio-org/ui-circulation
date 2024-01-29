@@ -5,6 +5,7 @@ import { injectIntl } from 'react-intl';
 import { ConfigManager } from '@folio/stripes/smart-components';
 import {
   withStripes,
+  TitleManager,
 } from '@folio/stripes/core';
 
 import TitleLevelRequestsForm from './TitleLevelRequestsForm';
@@ -26,15 +27,20 @@ const TitleLevelRequests = ({
   const ConnectedConfigManager = stripes.connect(ConfigManager);
 
   return (
-    <ConnectedConfigManager
-      label={formatMessage({ id: 'ui-circulation.settings.titleLevelRequests.paneTitle' })}
-      moduleName={MODULE_NAMES.SETTINGS}
-      configName={CONFIG_NAMES.TLR}
-      configFormComponent={TitleLevelRequestsForm}
-      stripes={stripes}
-      getInitialValues={getInitialValues}
-      onBeforeSave={normalizeData}
-    />
+    <TitleManager
+      page={formatMessage({ id: 'ui-circulation.settings.title.general' })}
+      record={formatMessage({ id: 'ui-circulation.settings.title.titleLevelRequests' })}
+    >
+      <ConnectedConfigManager
+        label={formatMessage({ id: 'ui-circulation.settings.titleLevelRequests.paneTitle' })}
+        moduleName={MODULE_NAMES.SETTINGS}
+        configName={CONFIG_NAMES.TLR}
+        configFormComponent={TitleLevelRequestsForm}
+        stripes={stripes}
+        getInitialValues={getInitialValues}
+        onBeforeSave={normalizeData}
+      />
+    </TitleManager>
   );
 };
 

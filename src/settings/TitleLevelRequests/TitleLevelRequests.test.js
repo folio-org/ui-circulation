@@ -1,8 +1,9 @@
 import {
   render,
 } from '@folio/jest-config-stripes/testing-library/react';
-
 import { ConfigManager } from '@folio/stripes/smart-components';
+import { TitleManager } from '@folio/stripes/core';
+
 import TitleLevelRequests from './TitleLevelRequests';
 import TitleLevelRequestsForm from './TitleLevelRequestsForm';
 import {
@@ -18,6 +19,10 @@ describe('TitleLevelRequests', () => {
   const paneTitleLabelId = 'ui-circulation.settings.titleLevelRequests.paneTitle';
   const mockedStripes = {
     connect: jest.fn((component) => component),
+  };
+  const labelIds = {
+    generalTitle: 'ui-circulation.settings.title.general',
+    titleLevelRequestsTitle: 'ui-circulation.settings.title.titleLevelRequests',
   };
 
   beforeEach(() => {
@@ -49,5 +54,14 @@ describe('TitleLevelRequests', () => {
     };
 
     expect(ConfigManager).toHaveBeenLastCalledWith(expectedResult, {});
+  });
+
+  it('should trigger TitleManager with correct props', () => {
+    const expectedProps = {
+      page: labelIds.generalTitle,
+      record: labelIds.titleLevelRequestsTitle,
+    };
+
+    expect(TitleManager).toHaveBeenCalledWith(expect.objectContaining(expectedProps), {});
   });
 });

@@ -11,7 +11,10 @@ import {
 } from 'react-intl';
 
 import { EntryManager } from '@folio/stripes/smart-components';
-import { stripesConnect } from '@folio/stripes/core';
+import {
+  stripesConnect,
+  TitleManager,
+} from '@folio/stripes/core';
 
 import NoticePolicyDetail from './NoticePolicyDetail';
 import NoticePolicyForm from './NoticePolicyForm';
@@ -19,6 +22,7 @@ import normalize from './utils/normalize';
 import { NoticePolicy } from '../Models/NoticePolicy';
 
 import { MAX_UNPAGED_RESOURCE_COUNT } from '../../constants';
+import { getRecordName } from '../utils/utils';
 
 export const changeToString = (notice) => {
   notice.realTime = notice.realTime.toString();
@@ -74,6 +78,7 @@ class NoticePolicySettings extends React.Component {
         DELETE: PropTypes.func.isRequired,
       }),
     }).isRequired,
+    location: PropTypes.object.isRequired,
   };
 
   isPolicyInUse = (policyId) => {
@@ -91,40 +96,50 @@ class NoticePolicySettings extends React.Component {
       intl: {
         formatMessage,
       },
+      location,
     } = this.props;
-
     const permissions = {
       put: 'ui-circulation.settings.notice-policies',
       post: 'ui-circulation.settings.notice-policies',
       delete: 'ui-circulation.settings.notice-policies',
     };
-
     const entryList = sortBy((resources.patronNoticePolicies || {}).records, ['name']);
+    const record = getRecordName({
+      entryList,
+      location,
+      formatMessage,
+      optionNameId: 'ui-circulation.settings.title.patronNoticePolicies',
+    });
 
     return (
-      <EntryManager
-        {...this.props}
-        nameKey="name"
-        resourceKey="patronNoticePolicies"
-        entryList={entryList}
-        parentMutator={mutator}
-        enableDetailsActionMenu
-        permissions={permissions}
-        parentResources={resources}
-        detailComponent={NoticePolicyDetail}
-        entryFormComponent={NoticePolicyForm}
-        paneTitle={formatMessage({ id: 'ui-circulation.settings.noticePolicy.paneTitle' })}
-        entryLabel={formatMessage({ id: 'ui-circulation.settings.noticePolicy.entryLabel' })}
-        defaultEntry={NoticePolicy.defaultNoticePolicy()}
-        isEntryInUse={this.isPolicyInUse}
-        prohibitItemDelete={{
-          close: formatMessage({ id: 'ui-circulation.settings.common.close' }),
-          label: formatMessage({ id: 'ui-circulation.settings.noticePolicy.denyDelete.header' }),
-          message: formatMessage({ id: 'ui-circulation.settings.noticePolicy.denyDelete.body' }),
-        }}
-        parseInitialValues={parseInitialValues}
-        onBeforeSave={normalize}
-      />
+      <TitleManager
+        page={formatMessage({ id: 'ui-circulation.settings.title.general' })}
+        record={record}
+      >
+        <EntryManager
+          {...this.props}
+          nameKey="name"
+          resourceKey="patronNoticePolicies"
+          entryList={entryList}
+          parentMutator={mutator}
+          enableDetailsActionMenu
+          permissions={permissions}
+          parentResources={resources}
+          detailComponent={NoticePolicyDetail}
+          entryFormComponent={NoticePolicyForm}
+          paneTitle={formatMessage({ id: 'ui-circulation.settings.noticePolicy.paneTitle' })}
+          entryLabel={formatMessage({ id: 'ui-circulation.settings.noticePolicy.entryLabel' })}
+          defaultEntry={NoticePolicy.defaultNoticePolicy()}
+          isEntryInUse={this.isPolicyInUse}
+          prohibitItemDelete={{
+            close: formatMessage({ id: 'ui-circulation.settings.common.close' }),
+            label: formatMessage({ id: 'ui-circulation.settings.noticePolicy.denyDelete.header' }),
+            message: formatMessage({ id: 'ui-circulation.settings.noticePolicy.denyDelete.body' }),
+          }}
+          parseInitialValues={parseInitialValues}
+          onBeforeSave={normalize}
+        />
+      </TitleManager>
     );
   }
 }

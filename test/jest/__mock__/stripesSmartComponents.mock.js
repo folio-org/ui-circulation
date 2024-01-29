@@ -7,4 +7,5 @@ jest.mock('@folio/stripes/smart-components', () => ({
     <div {...rest}>{metadata.createdDate}</div>
   )),
   EntryManager: jest.fn(() => null),
+  Settings: jest.fn(() => null),
 }));

@@ -3,6 +3,7 @@ import {
 } from '@folio/jest-config-stripes/testing-library/react';
 
 import { EntryManager } from '@folio/stripes/smart-components';
+import { TitleManager } from '@folio/stripes/core';
 
 import withPreventDelete from '../wrappers/withPreventDelete';
 import FinePolicyDetail from './FinePolicyDetail';
@@ -13,6 +14,7 @@ import FinePolicySettings, {
 } from './FinePolicySettings';
 
 import normalize from './utils/normalize';
+import { getRecordName } from '../utils/utils';
 
 const mockDefaultFinePolicyReturnValue = 'testReturnValue';
 const defaultReminderFeesPolicy = {
@@ -20,10 +22,14 @@ const defaultReminderFeesPolicy = {
     ...ReminderFeesPolicy.defaultReminderFeesFields()
   },
 };
+const recordName = 'recordName';
 
 jest.mock('../wrappers/withPreventDelete', () => jest.fn((component) => component));
 jest.mock('../Models/FinePolicy', () => ({
   defaultFinePolicy: jest.fn(() => mockDefaultFinePolicyReturnValue),
+}));
+jest.mock('../utils/utils', () => ({
+  getRecordName: jest.fn(() => recordName),
 }));
 
 describe('FinePolicySettings', () => {
@@ -31,6 +37,8 @@ describe('FinePolicySettings', () => {
     paneTitle: 'ui-circulation.settings.finePolicy.paneTitle',
     entryLabel: 'ui-circulation.settings.finePolicy.entryLabel',
     overdueFinesPolicies: 'ui-circulation.settings.overdue-fines-policies',
+    generalTitle: 'ui-circulation.settings.title.general',
+    optionNameId: 'ui-circulation.settings.title.overdueFinePolicies',
   };
   const testMutator = {
     finePolicies: {
@@ -47,6 +55,9 @@ describe('FinePolicySettings', () => {
   const testDefaultProps = {
     mutator: testMutator,
     resources: testResources,
+    location: {
+      pathname: 'pathname',
+    },
   };
   afterEach(() => {
     withPreventDelete.mockClear();
@@ -92,6 +103,26 @@ describe('FinePolicySettings', () => {
           },
         }
       ), {});
+    });
+
+    it('should trigger TitleManager with correct props', () => {
+      const expectedProps = {
+        page: labelIds.generalTitle,
+        record: recordName,
+      };
+
+      expect(TitleManager).toHaveBeenCalledWith(expect.objectContaining(expectedProps), {});
+    });
+
+    it('should get record name', () => {
+      const expectedArg = {
+        entryList: [],
+        location: testDefaultProps.location,
+        formatMessage: expect.any(Function),
+        optionNameId: labelIds.optionNameId,
+      };
+
+      expect(getRecordName).toHaveBeenCalledWith(expectedArg);
     });
   });
 

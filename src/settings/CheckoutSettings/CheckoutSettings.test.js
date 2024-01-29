@@ -2,6 +2,7 @@ import { render } from '@folio/jest-config-stripes/testing-library/react';
 import { omit } from 'lodash';
 
 import { ConfigManager } from '@folio/stripes/smart-components';
+import { TitleManager } from '@folio/stripes/core';
 
 import CheckoutSettings, {
   DEFAULT_INITIAL_CONFIG,
@@ -13,6 +14,8 @@ import CheckoutSettingsForm from './CheckoutSettingsForm';
 describe('CheckoutSettings', () => {
   const labelIds = {
     otherSettings: 'ui-circulation.settings.index.otherSettings',
+    generalTitle: 'ui-circulation.settings.title.general',
+    otherSettingsTitle: 'ui-circulation.settings.title.otherSettings',
   };
   const mockedStripes = {
     connect: jest.fn(component => component),
@@ -38,6 +41,15 @@ describe('CheckoutSettings', () => {
     };
 
     expect(ConfigManager).toHaveBeenCalledWith(expectedResult, {});
+  });
+
+  it('should trigger TitleManager with correct props', () => {
+    const expectedProps = {
+      page: labelIds.generalTitle,
+      record: labelIds.otherSettingsTitle,
+    };
+
+    expect(TitleManager).toHaveBeenCalledWith(expect.objectContaining(expectedProps), {});
   });
 });
 

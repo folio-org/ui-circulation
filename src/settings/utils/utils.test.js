@@ -2,6 +2,7 @@ import {
   LAYERS,
   isEditLayer,
   validateUniqueNameById,
+  getRecordName,
 } from './utils';
 
 describe('utils', () => {
@@ -81,6 +82,149 @@ describe('utils', () => {
           id: 'ui-circulation.errorKey',
         },
       }));
+    });
+  });
+
+  describe('getRecordName', () => {
+    const testTitle = 'testTitle';
+    const recordId = 'recordId';
+    const entryList = [
+      {
+        id: recordId,
+        name: 'Record Name',
+      }
+    ];
+    const formatMessage = jest.fn(() => testTitle);
+    const optionNameId = 'ui-circulation.settings.optionNameId';
+
+    afterEach(() => {
+      jest.clearAllMocks();
+    });
+
+    describe('When edit record', () => {
+      const location = {
+        pathname: `pathname/${recordId}`,
+        search: `?layer=${LAYERS.EDIT}`,
+      };
+
+      it('should call formatMessage to get edit record title', () => {
+        const expectedArgs = [
+          {
+            id: 'ui-circulation.settings.title.editRecord',
+          },
+          {
+            name: entryList[0].name,
+          },
+        ];
+
+        getRecordName({
+          entryList,
+          location,
+          formatMessage,
+          optionNameId,
+        });
+
+        expect(formatMessage).toHaveBeenCalledWith(...expectedArgs);
+      });
+    });
+
+    describe('When create record', () => {
+      const location = {
+        pathname: 'pathname',
+        search: `?layer=${LAYERS.ADD}`,
+      };
+
+      it('should call formatMessage to get create record title', () => {
+        const expectedArgs = [
+          {
+            id: 'ui-circulation.settings.title.newRecord',
+          },
+          {
+            name: testTitle.toLowerCase(),
+          },
+        ];
+
+        getRecordName({
+          entryList,
+          location,
+          formatMessage,
+          optionNameId,
+        });
+
+        expect(formatMessage).toHaveBeenCalledWith(...expectedArgs);
+      });
+    });
+
+    describe('When duplicate record', () => {
+      const location = {
+        pathname: 'pathname',
+        search: `?layer=${LAYERS.CLONE}`,
+      };
+
+      it('should call formatMessage to get duplicate record title', () => {
+        const expectedArgs = [
+          {
+            id: 'ui-circulation.settings.title.newRecord',
+          },
+          {
+            name: testTitle.toLowerCase(),
+          },
+        ];
+
+        getRecordName({
+          entryList,
+          location,
+          formatMessage,
+          optionNameId,
+        });
+
+        expect(formatMessage).toHaveBeenCalledWith(...expectedArgs);
+      });
+    });
+
+    describe('When selected record', () => {
+      const location = {
+        pathname: `pathname/${recordId}`,
+        search: '',
+      };
+
+      it('should return selected record title', () => {
+        const recordTitle = getRecordName({
+          entryList,
+          location,
+          formatMessage,
+          optionNameId,
+        });
+
+        expect(recordTitle).toBe(entryList[0].name);
+      });
+    });
+
+    describe('When selected menu option', () => {
+      const location = {
+        pathname: 'pathname',
+        search: '',
+      };
+
+      it('should call formatMessage to get menu option title', () => {
+        const expectedArgs = [
+          {
+            id: optionNameId,
+          },
+          {
+            optionNumber: 2,
+          }
+        ];
+
+        getRecordName({
+          entryList,
+          location,
+          formatMessage,
+          optionNameId,
+        });
+
+        expect(formatMessage).toHaveBeenCalledWith(...expectedArgs);
+      });
     });
   });
 });

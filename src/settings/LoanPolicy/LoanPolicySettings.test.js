@@ -1,15 +1,19 @@
+import { sortBy } from 'lodash';
 import {
   render,
 } from '@folio/jest-config-stripes/testing-library/react';
 
 import { EntryManager } from '@folio/stripes/smart-components';
+import { TitleManager } from '@folio/stripes/core';
 
 import LoanPolicyDetail from './LoanPolicyDetail';
 import LoanPolicyForm from './LoanPolicyForm';
 import { normalize } from './utils/normalize';
 import LoanPolicySettings from './LoanPolicySettings';
+import { getRecordName } from '../utils/utils';
 
 const mockDefaultLoanPolicyReturnValue = 'mockDefaultLoanPolicyReturnValue';
+const recordName = 'recordName';
 
 jest.mock('./LoanPolicyDetail', () => jest.fn(() => null));
 jest.mock('./LoanPolicyForm', () => jest.fn(() => null));
@@ -21,11 +25,16 @@ jest.mock('../wrappers/withPreventDelete', () => jest.fn((component) => componen
 jest.mock('../../constants', () => ({
   MAX_UNPAGED_RESOURCE_COUNT: 1,
 }));
+jest.mock('../utils/utils', () => ({
+  getRecordName: jest.fn(() => recordName),
+}));
 
 describe('LoanPolicySettings', () => {
   const labelIds = {
     paneTitle: 'ui-circulation.settings.loanPolicy.paneTitle',
     entryLabel: 'ui-circulation.settings.loanPolicy.entryLabel',
+    pageTitle: 'ui-circulation.settings.title.general',
+    optionNameId: 'ui-circulation.settings.title.loanPolicies',
   };
   const testMutator = {
     loanPolicies: {
@@ -62,6 +71,9 @@ describe('LoanPolicySettings', () => {
     messageText: testMessageText,
     resources: testResources,
     mutator: testMutator,
+    location: {
+      pathname: 'pathname',
+    },
   };
 
   afterEach(() => {
@@ -142,5 +154,37 @@ describe('LoanPolicySettings', () => {
         entryList: expectedEntryList,
       }), {});
     });
+  });
+
+  it('should trigger TitleManager with correct props', () => {
+    render(
+      <LoanPolicySettings
+        {...testDefaultProps}
+      />
+    );
+
+    const expectedProps = {
+      page: labelIds.pageTitle,
+      record: recordName,
+    };
+
+    expect(TitleManager).toHaveBeenCalledWith(expect.objectContaining(expectedProps), {});
+  });
+
+  it('should get record name', () => {
+    render(
+      <LoanPolicySettings
+        {...testDefaultProps}
+      />
+    );
+
+    const expectedArg = {
+      entryList: sortBy(testResources.loanPolicies.records, 'name'),
+      location: testDefaultProps.location,
+      formatMessage: expect.any(Function),
+      optionNameId: labelIds.optionNameId,
+    };
+
+    expect(getRecordName).toHaveBeenCalledWith(expectedArg);
   });
 });

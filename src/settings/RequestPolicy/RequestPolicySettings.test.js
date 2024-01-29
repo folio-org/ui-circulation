@@ -1,9 +1,10 @@
+import { sortBy } from 'lodash';
 import {
   render,
   screen,
 } from '@folio/jest-config-stripes/testing-library/react';
-
 import { EntryManager } from '@folio/stripes/smart-components';
+import { TitleManager } from '@folio/stripes/core';
 
 import RequestPolicySettings, {
   parseInitialValues,
@@ -13,11 +14,18 @@ import RequestPolicyDetail from './RequestPolicyDetail';
 import RequestPolicyForm from './RequestPolicyForm';
 import RequestPolicy from '../Models/RequestPolicy';
 import normalize from './utils/normalize';
+import { getRecordName } from '../utils/utils';
 
 import {
   REQUEST_TYPE_RULES,
   requestPolicyTypes,
 } from '../../constants';
+
+const recordName = 'recordName';
+
+jest.mock('../utils/utils', () => ({
+  getRecordName: jest.fn(() => recordName),
+}));
 
 describe('RequestPolicySettings', () => {
   const testIds = {
@@ -29,6 +37,8 @@ describe('RequestPolicySettings', () => {
     close: 'ui-circulation.settings.common.close',
     label: 'ui-circulation.settings.requestPolicy.cannotDelete.label',
     message: 'ui-circulation.settings.requestPolicy.cannotDelete.message',
+    generalTitle: 'ui-circulation.settings.title.general',
+    optionNameId: 'ui-circulation.settings.title.requestPolicies',
   };
   const mockedRequestPolicies = {
     records: [
@@ -61,6 +71,9 @@ describe('RequestPolicySettings', () => {
       circulationRules: mockedCirculationRules,
     },
     mutator: mockedMutator,
+    location: {
+      pathname: 'pathname',
+    },
   };
 
   afterEach(() => {
@@ -111,6 +124,38 @@ describe('RequestPolicySettings', () => {
         message: labelIds.message,
       },
     }), {});
+  });
+
+  it('should trigger TitleManager with correct props', () => {
+    render(
+      <RequestPolicySettings
+        {...defaultProps}
+      />
+    );
+
+    const expectedProps = {
+      page: labelIds.generalTitle,
+      record: recordName,
+    };
+
+    expect(TitleManager).toHaveBeenCalledWith(expect.objectContaining(expectedProps), {});
+  });
+
+  it('should get record name', () => {
+    render(
+      <RequestPolicySettings
+        {...defaultProps}
+      />
+    );
+
+    const expectedArg = {
+      entryList: sortBy(defaultProps.resources.requestPolicies.records, 'name'),
+      location: defaultProps.location,
+      formatMessage: expect.any(Function),
+      optionNameId: labelIds.optionNameId,
+    };
+
+    expect(getRecordName).toHaveBeenCalledWith(expectedArg);
   });
 
   it('should execute "EntryManager" with correct props when no "records" in "requestPolicies"', () => {

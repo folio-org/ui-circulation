@@ -10,6 +10,7 @@ import {
 import {
   stripesShape,
   withStripes,
+  TitleManager,
 } from '@folio/stripes/core';
 import { ConfigManager } from '@folio/stripes/smart-components';
 
@@ -77,15 +78,20 @@ class LoanHistorySettings extends React.Component {
     } = this.props;
 
     return (
-      <this.configManager
-        label={formatMessage({ id: 'ui-circulation.settings.index.loanAnonymization' })}
-        moduleName="LOAN_HISTORY"
-        configName="loan_history"
-        configFormComponent={LoanHistoryForm}
-        stripes={this.props.stripes}
-        getInitialValues={getInitialValues}
-        onBeforeSave={normalizeData}
-      />
+      <TitleManager
+        page={formatMessage({ id: 'ui-circulation.settings.title.general' })}
+        record={formatMessage({ id: 'ui-circulation.settings.title.loanAnonymization' })}
+      >
+        <this.configManager
+          label={formatMessage({ id: 'ui-circulation.settings.index.loanAnonymization' })}
+          moduleName="LOAN_HISTORY"
+          configName="loan_history"
+          configFormComponent={LoanHistoryForm}
+          stripes={this.props.stripes}
+          getInitialValues={getInitialValues}
+          onBeforeSave={normalizeData}
+        />
+      </TitleManager>
     );
   }
 }

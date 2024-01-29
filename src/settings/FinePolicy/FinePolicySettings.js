@@ -7,7 +7,10 @@ import {
 } from 'react-intl';
 
 import { EntryManager } from '@folio/stripes/smart-components';
-import { stripesConnect } from '@folio/stripes/core';
+import {
+  stripesConnect,
+  TitleManager,
+} from '@folio/stripes/core';
 
 import FinePolicy from '../Models/FinePolicy';
 import FinePolicyDetail from './FinePolicyDetail';
@@ -15,6 +18,7 @@ import FinePolicyForm from './FinePolicyForm';
 import normalize from './utils/normalize';
 import { MAX_UNPAGED_RESOURCE_COUNT } from '../../constants';
 import withPreventDelete from '../wrappers/withPreventDelete';
+import { getRecordName } from '../utils/utils';
 
 export const parseInitialValues = (init = {}) => {
   const reminderFeesPolicy = init?.reminderFeesPolicy ?? {};
@@ -98,6 +102,7 @@ class FinePolicySettings extends React.Component {
         DELETE: PropTypes.func.isRequired,
       }),
     }).isRequired,
+    location: PropTypes.object.isRequired,
   };
 
   render() {
@@ -108,40 +113,50 @@ class FinePolicySettings extends React.Component {
       intl: {
         formatMessage,
       },
+      location,
     } = this.props;
-
     const permissions = {
       put: 'ui-circulation.settings.overdue-fines-policies',
       post: 'ui-circulation.settings.overdue-fines-policies',
       delete: 'ui-circulation.settings.overdue-fines-policies',
     };
-
     const entryList = sortBy((resources.finePolicies || {}).records, ['name']);
+    const record = getRecordName({
+      entryList,
+      location,
+      formatMessage,
+      optionNameId: 'ui-circulation.settings.title.overdueFinePolicies',
+    });
 
     return (
-      <EntryManager
-        {...this.props}
-        nameKey="name"
-        resourceKey="finePolicies"
-        entryList={entryList}
-        isEntryInUse={checkPolicy}
-        parentMutator={mutator}
-        permissions={permissions}
-        parseInitialValues={parseInitialValues}
-        parentResources={resources}
-        prohibitItemDelete={{
-          close: <FormattedMessage id={this.props.closeText} />,
-          label: <FormattedMessage id={this.props.labelText} />,
-          message: <FormattedMessage id={this.props.messageText} />,
-        }}
-        detailComponent={FinePolicyDetail}
-        enableDetailsActionMenu
-        entryFormComponent={FinePolicyForm}
-        paneTitle={<FormattedMessage id="ui-circulation.settings.finePolicy.paneTitle" />}
-        entryLabel={formatMessage({ id: 'ui-circulation.settings.finePolicy.entryLabel' })}
-        defaultEntry={FinePolicy.defaultFinePolicy()}
-        onBeforeSave={normalize}
-      />
+      <TitleManager
+        page={formatMessage({ id: 'ui-circulation.settings.title.general' })}
+        record={record}
+      >
+        <EntryManager
+          {...this.props}
+          nameKey="name"
+          resourceKey="finePolicies"
+          entryList={entryList}
+          isEntryInUse={checkPolicy}
+          parentMutator={mutator}
+          permissions={permissions}
+          parseInitialValues={parseInitialValues}
+          parentResources={resources}
+          prohibitItemDelete={{
+            close: <FormattedMessage id={this.props.closeText} />,
+            label: <FormattedMessage id={this.props.labelText} />,
+            message: <FormattedMessage id={this.props.messageText} />,
+          }}
+          detailComponent={FinePolicyDetail}
+          enableDetailsActionMenu
+          entryFormComponent={FinePolicyForm}
+          paneTitle={<FormattedMessage id="ui-circulation.settings.finePolicy.paneTitle" />}
+          entryLabel={formatMessage({ id: 'ui-circulation.settings.finePolicy.entryLabel' })}
+          defaultEntry={FinePolicy.defaultFinePolicy()}
+          onBeforeSave={normalize}
+        />
+      </TitleManager>
     );
   }
 }

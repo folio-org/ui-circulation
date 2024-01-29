@@ -1,6 +1,7 @@
 import { render } from '@folio/jest-config-stripes/testing-library/react';
 
 import { ConfigManager } from '@folio/stripes/smart-components';
+import { TitleManager } from '@folio/stripes/core';
 
 import LoanHistorySettings, {
   getInitialValues,
@@ -13,6 +14,8 @@ jest.mock('./LoanHistoryForm', () => jest.fn(() => null));
 describe('LoanHistorySettings', () => {
   const labelIds = {
     loanAnonymization: 'ui-circulation.settings.index.loanAnonymization',
+    generalTitle: 'ui-circulation.settings.title.general',
+    loanAnonymizationTitle: 'ui-circulation.settings.title.loanAnonymization',
   };
 
   const testStripes = {
@@ -28,11 +31,15 @@ describe('LoanHistorySettings', () => {
   });
 
   describe('with default props', () => {
-    it('should render "EntryManager" component', () => {
+    beforeEach(() => {
       render(
-        <LoanHistorySettings {...testDefaultProps} />
+        <LoanHistorySettings
+          {...testDefaultProps}
+        />
       );
+    });
 
+    it('should render "EntryManager" component', () => {
       expect(ConfigManager).toHaveBeenCalledWith(expect.objectContaining({
         label: labelIds.loanAnonymization,
         moduleName: 'LOAN_HISTORY',
@@ -42,6 +49,15 @@ describe('LoanHistorySettings', () => {
         getInitialValues,
         onBeforeSave: normalizeData,
       }), {});
+    });
+
+    it('should trigger TitleManager with correct props', () => {
+      const expectedProps = {
+        page: labelIds.generalTitle,
+        record: labelIds.loanAnonymizationTitle,
+      };
+
+      expect(TitleManager).toHaveBeenCalledWith(expect.objectContaining(expectedProps), {});
     });
   });
 

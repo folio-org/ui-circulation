@@ -3,10 +3,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
 import { EntryManager } from '@folio/stripes/smart-components';
-import { stripesConnect } from '@folio/stripes/core';
+import {
+  stripesConnect,
+  TitleManager,
+} from '@folio/stripes/core';
 
 import StaffSlipDetail from './StaffSlipDetail';
 import StaffSlipForm from './StaffSlipForm';
+import { getRecordName } from '../utils/utils';
 
 class StaffSlipManager extends React.Component {
   static propTypes = {
@@ -23,6 +27,7 @@ class StaffSlipManager extends React.Component {
       }),
     }).isRequired,
     intl: PropTypes.object.isRequired,
+    location: PropTypes.object.isRequired,
   };
 
   static manifest = Object.freeze({
@@ -41,24 +46,37 @@ class StaffSlipManager extends React.Component {
       intl: {
         formatMessage,
       },
+      location,
     } = this.props;
+    const entryList = sortBy((resources.entries || {}).records || [], ['name']);
+    const record = getRecordName({
+      entryList,
+      location,
+      formatMessage,
+      optionNameId: 'ui-circulation.settings.title.staffSlips',
+    });
 
     return (
-      <EntryManager
-        {...this.props}
-        parentMutator={mutator}
-        entryList={sortBy((resources.entries || {}).records || [], ['name'])}
-        detailComponent={StaffSlipDetail}
-        paneTitle={formatMessage({ id: 'ui-circulation.settings.index.staffSlips' })}
-        entryLabel={formatMessage({ id: 'ui-circulation.settings.staffSlips.staffSlipTokenHeader' })}
-        entryFormComponent={StaffSlipForm}
-        nameKey="name"
-        permissions={{
-          put: 'ui-circulation.settings.staff-slips',
-          post: 'ui-circulation.settings.staff-slips.post',
-          delete: 'ui-circulation.settings.staff-slips.delete'
-        }}
-      />
+      <TitleManager
+        page={formatMessage({ id: 'ui-circulation.settings.title.general' })}
+        record={record}
+      >
+        <EntryManager
+          {...this.props}
+          parentMutator={mutator}
+          entryList={entryList}
+          detailComponent={StaffSlipDetail}
+          paneTitle={formatMessage({ id: 'ui-circulation.settings.index.staffSlips' })}
+          entryLabel={formatMessage({ id: 'ui-circulation.settings.staffSlips.staffSlipTokenHeader' })}
+          entryFormComponent={StaffSlipForm}
+          nameKey="name"
+          permissions={{
+            put: 'ui-circulation.settings.staff-slips',
+            post: 'ui-circulation.settings.staff-slips.post',
+            delete: 'ui-circulation.settings.staff-slips.delete'
+          }}
+        />
+      </TitleManager>
     );
   }
 }
