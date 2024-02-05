@@ -1,5 +1,7 @@
+import { sortBy } from 'lodash';
 import { render } from '@folio/jest-config-stripes/testing-library/react';
 import { EntryManager } from '@folio/stripes/smart-components';
+import { TitleManager } from '@folio/stripes/core';
 
 // eslint-disable-next-line import/no-named-as-default
 import PatronNotices, {
@@ -12,15 +14,23 @@ import {
   MAX_UNPAGED_RESOURCE_COUNT,
   patronNoticeCategories,
 } from '../../constants';
+import { getRecordName } from '../utils/utils';
+
+const recordName = 'recordName';
 
 jest.mock('./PatronNoticeDetail', () => () => null);
 jest.mock('./PatronNoticeForm', () => () => null);
+jest.mock('../utils/utils', () => ({
+  getRecordName: jest.fn(() => recordName),
+}));
 
 describe('PatronNotices', () => {
   const labelIds = {
     close: 'ui-circulation.settings.common.close',
     header: 'ui-circulation.settings.patronNotices.denyDelete.header',
     body: 'ui-circulation.settings.patronNotices.denyDelete.body',
+    generalTitle: 'ui-circulation.settings.title.general',
+    optionNameId: 'ui-circulation.settings.title.patronNoticeTemplates',
   };
   const mockedLabel = 'testLabel';
   const mockedEntries = {
@@ -57,6 +67,9 @@ describe('PatronNotices', () => {
       patronNoticePolicies: mockedPatronNoticePolicies,
     },
     mutator: mockedMutator,
+    location: {
+      pathname: 'pathname',
+    },
   };
 
   afterEach(() => {
@@ -109,6 +122,38 @@ describe('PatronNotices', () => {
         message: labelIds.body,
       },
     }), {});
+  });
+
+  it('should trigger TitleManager with correct props', () => {
+    render(
+      <PatronNotices
+        {...defaultProps}
+      />
+    );
+
+    const expectedProps = {
+      page: labelIds.generalTitle,
+      record: recordName,
+    };
+
+    expect(TitleManager).toHaveBeenCalledWith(expect.objectContaining(expectedProps), {});
+  });
+
+  it('should get record name', () => {
+    render(
+      <PatronNotices
+        {...defaultProps}
+      />
+    );
+
+    const expectedArg = {
+      entryList: sortBy(defaultProps.resources.entries.records, 'name'),
+      location: defaultProps.location,
+      formatMessage: expect.any(Function),
+      optionNameId: labelIds.optionNameId,
+    };
+
+    expect(getRecordName).toHaveBeenCalledWith(expectedArg);
   });
 
   it('should execute "EntryManager" with correct props when no "records" in "entries"', () => {

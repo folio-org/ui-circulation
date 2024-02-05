@@ -4,12 +4,16 @@ import { sortBy, get } from 'lodash';
 import { injectIntl } from 'react-intl';
 
 import { EntryManager } from '@folio/stripes/smart-components';
-import { stripesConnect } from '@folio/stripes/core';
+import {
+  stripesConnect,
+  TitleManager,
+} from '@folio/stripes/core';
 
 import RequestPolicyDetail from './RequestPolicyDetail';
 import RequestPolicyForm from './RequestPolicyForm';
 import RequestPolicy from '../Models/RequestPolicy';
 import normalize from './utils/normalize';
+import { getRecordName } from '../utils/utils';
 
 import {
   requestPolicyTypes,
@@ -91,6 +95,7 @@ class RequestPolicySettings extends React.Component {
         DELETE: PropTypes.func.isRequired,
       }),
     }).isRequired,
+    location: PropTypes.object.isRequired,
   }
 
   isPolicyInUse = (policyId) => {
@@ -107,42 +112,52 @@ class RequestPolicySettings extends React.Component {
       intl: {
         formatMessage,
       },
+      location,
     } = this.props;
-
     const permissions = {
       put: 'ui-circulation.settings.request-policies',
       post: 'ui-circulation.settings.request-policies',
       delete: 'ui-circulation.settings.request-policies',
     };
-
     const entryList = sortBy((resources.requestPolicies || {}).records, ['name']);
+    const record = getRecordName({
+      entryList,
+      location,
+      formatMessage,
+      optionNameId: 'ui-circulation.settings.title.requestPolicies',
+    });
 
     return (
-      <EntryManager
-        {...this.props}
-        id="request-policy-settings"
-        data-test-request-policy-settings
-        parentMutator={mutator}
-        parseInitialValues={parseInitialValues(resources.servicePoints)}
-        parentResources={resources}
-        entryList={entryList}
-        resourceKey="requestPolicies"
-        detailComponent={RequestPolicyDetail}
-        entryFormComponent={RequestPolicyForm}
-        paneTitle={formatMessage({ id : 'ui-circulation.settings.requestPolicy.paneTitle' })}
-        entryLabel={formatMessage({ id : 'ui-circulation.settings.requestPolicy.entryLabel' })}
-        nameKey="name"
-        enableDetailsActionMenu
-        permissions={permissions}
-        onBeforeSave={normalize}
-        defaultEntry={RequestPolicy.defaultPolicy()}
-        isEntryInUse={this.isPolicyInUse}
-        prohibitItemDelete={{
-          close: formatMessage({ id : 'ui-circulation.settings.common.close' }),
-          label: formatMessage({ id : 'ui-circulation.settings.requestPolicy.cannotDelete.label' }),
-          message: formatMessage({ id : 'ui-circulation.settings.requestPolicy.cannotDelete.message' }),
-        }}
-      />
+      <TitleManager
+        page={formatMessage({ id: 'ui-circulation.settings.title.general' })}
+        record={record}
+      >
+        <EntryManager
+          {...this.props}
+          id="request-policy-settings"
+          data-test-request-policy-settings
+          parentMutator={mutator}
+          parseInitialValues={parseInitialValues(resources.servicePoints)}
+          parentResources={resources}
+          entryList={entryList}
+          resourceKey="requestPolicies"
+          detailComponent={RequestPolicyDetail}
+          entryFormComponent={RequestPolicyForm}
+          paneTitle={formatMessage({ id : 'ui-circulation.settings.requestPolicy.paneTitle' })}
+          entryLabel={formatMessage({ id : 'ui-circulation.settings.requestPolicy.entryLabel' })}
+          nameKey="name"
+          enableDetailsActionMenu
+          permissions={permissions}
+          onBeforeSave={normalize}
+          defaultEntry={RequestPolicy.defaultPolicy()}
+          isEntryInUse={this.isPolicyInUse}
+          prohibitItemDelete={{
+            close: formatMessage({ id : 'ui-circulation.settings.common.close' }),
+            label: formatMessage({ id : 'ui-circulation.settings.requestPolicy.cannotDelete.label' }),
+            message: formatMessage({ id : 'ui-circulation.settings.requestPolicy.cannotDelete.message' }),
+          }}
+        />
+      </TitleManager>
     );
   }
 }

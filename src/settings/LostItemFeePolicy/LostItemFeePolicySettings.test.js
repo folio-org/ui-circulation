@@ -1,8 +1,10 @@
+import { sortBy } from 'lodash';
 import {
   render,
 } from '@folio/jest-config-stripes/testing-library/react';
 
 import { EntryManager } from '@folio/stripes/smart-components';
+import { TitleManager } from '@folio/stripes/core';
 
 import LostItemFeePolicySettings, {
   parseInitialValues,
@@ -12,13 +14,21 @@ import LostItemFeePolicyForm from './LostItemFeePolicyForm';
 import LostItemFeePolicy from '../Models/LostItemFeePolicy';
 
 import normalize from './utils/normalize';
+import { getRecordName } from '../utils/utils';
+
+const recordName = 'recordName';
 
 jest.mock('../wrappers/withPreventDelete', () => jest.fn(component => component));
+jest.mock('../utils/utils', () => ({
+  getRecordName: jest.fn(() => recordName),
+}));
 
 describe('LostItemFeePolicySettings', () => {
   const labelIds = {
     paneTitle: 'ui-circulation.settings.lostItemFee.paneTitle',
     entryLabel: 'ui-circulation.settings.lostItemFee.entryLabel',
+    generalTitle: 'ui-circulation.settings.title.general',
+    optionNameId: 'ui-circulation.settings.title.lostItemFeePolicies',
   };
   const mockedCheckPolicy = jest.fn();
   const mockedCloseText = 'closeText';
@@ -53,6 +63,9 @@ describe('LostItemFeePolicySettings', () => {
       lostItemFeePolicies: mockedLostItemFeePolicies,
     },
     mutator: mockedMutator,
+    location: {
+      pathname: 'pathname',
+    },
   };
 
   afterEach(() => {
@@ -132,6 +145,38 @@ describe('LostItemFeePolicySettings', () => {
     expect(EntryManager).toBeCalledWith(expect.objectContaining({
       entryList: [],
     }), {});
+  });
+
+  it('should trigger TitleManager with correct props', () => {
+    render(
+      <LostItemFeePolicySettings
+        {...defaultProps}
+      />
+    );
+
+    const expectedProps = {
+      page: labelIds.generalTitle,
+      record: recordName,
+    };
+
+    expect(TitleManager).toHaveBeenCalledWith(expect.objectContaining(expectedProps), {});
+  });
+
+  it('should get record name', () => {
+    render(
+      <LostItemFeePolicySettings
+        {...defaultProps}
+      />
+    );
+
+    const expectedArg = {
+      entryList: sortBy(defaultProps.resources.lostItemFeePolicies.records, 'name'),
+      location: defaultProps.location,
+      formatMessage: expect.any(Function),
+      optionNameId: labelIds.optionNameId,
+    };
+
+    expect(getRecordName).toHaveBeenCalledWith(expectedArg);
   });
 });
 

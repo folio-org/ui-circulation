@@ -7,6 +7,8 @@ import {
 
 export const LAYERS = {
   EDIT: 'edit',
+  CLONE: 'clone',
+  ADD: 'add',
 };
 
 export const validateUniqueNameById = async ({
@@ -39,3 +41,55 @@ export const validateUniqueNameById = async ({
 };
 
 export const isEditLayer = (layer = '') => (layer.includes(LAYERS.EDIT));
+
+export const getRecordName = ({
+  entryList,
+  location,
+  formatMessage,
+  optionNameId,
+}) => {
+  const pathParams = location.pathname.split('/');
+  const recordId = pathParams[pathParams.length - 1];
+  const query = new URLSearchParams(location.search);
+  const layer = query.get('layer');
+  const selectedRecordName = entryList.find(entry => entry.id === recordId)?.name;
+
+  if (layer === LAYERS.EDIT) {
+    return formatMessage(
+      {
+        id: 'ui-circulation.settings.title.editRecord',
+      },
+      {
+        name: selectedRecordName,
+      },
+    );
+  }
+
+  if (layer === LAYERS.ADD || layer === LAYERS.CLONE) {
+    return formatMessage(
+      {
+        id: 'ui-circulation.settings.title.newRecord',
+      },
+      {
+        name: formatMessage(
+          {
+            id: optionNameId,
+          },
+          {
+            optionNumber: 1,
+          }
+        ).toLowerCase(),
+      },
+    );
+  }
+
+  return selectedRecordName ||
+    formatMessage(
+      {
+        id: optionNameId,
+      },
+      {
+        optionNumber: 2,
+      }
+    );
+};

@@ -10,13 +10,17 @@ import {
 } from 'lodash';
 
 import { EntryManager } from '@folio/stripes/smart-components';
-import { stripesConnect } from '@folio/stripes/core';
+import {
+  stripesConnect,
+  TitleManager,
+} from '@folio/stripes/core';
 
 import FixedDueDateScheduleDetail from './FixedDueDateScheduleDetail';
 import FixedDueDateScheduleForm from './FixedDueDateScheduleForm';
 
 import FixedDueDateSchedule from '../Models/FixedDueDateSchedule';
 import { MAX_UNPAGED_RESOURCE_COUNT } from '../../constants';
+import { getRecordName } from '../utils/utils';
 
 export const onBeforeSave = (entry) => {
   const schedule = cloneDeep(entry);
@@ -64,6 +68,7 @@ class FixedDueDateScheduleManager extends React.Component {
         GET: PropTypes.func,
       }).isRequired,
     }).isRequired,
+    location: PropTypes.object.isRequired,
   };
 
   deleteDisabled = (schedule) => {
@@ -80,30 +85,43 @@ class FixedDueDateScheduleManager extends React.Component {
       intl: {
         formatMessage,
       },
+      location,
     } = this.props;
+    const entryList = sortBy(resources.fixedDueDateSchedules?.records || [], ['name']);
+    const record = getRecordName({
+      entryList,
+      location,
+      formatMessage,
+      optionNameId: 'ui-circulation.settings.title.fixedDueDateSchedule',
+    });
 
     return (
-      <EntryManager
-        {...this.props}
-        defaultEntry={FixedDueDateSchedule.defaultFixedDueDateSchedule()}
-        detailComponent={FixedDueDateScheduleDetail}
-        deleteDisabled={this.deleteDisabled}
-        deleteDisabledMessage={formatMessage({ id: 'ui-circulation.settings.fDDS.deleteDisabled' })}
-        entryLabel={formatMessage({ id: 'ui-circulation.settings.fDDSform.entryLabel' })}
-        entryList={sortBy(resources.fixedDueDateSchedules?.records || [], ['name'])}
-        entryFormComponent={FixedDueDateScheduleForm}
-        nameKey="name"
-        paneTitle={formatMessage({ id: 'ui-circulation.settings.fDDS.paneTitle' })}
-        parentMutator={mutator}
-        permissions={{
-          put: 'ui-circulation.settings.fixed-due-date-schedules',
-          post: 'ui-circulation.settings.fixed-due-date-schedules',
-          delete: 'ui-circulation.settings.fixed-due-date-schedules',
-        }}
-        resourceKey="fixedDueDateSchedules"
-        onBeforeSave={onBeforeSave}
-        enableDetailsActionMenu
-      />
+      <TitleManager
+        page={formatMessage({ id: 'ui-circulation.settings.title.general' })}
+        record={record}
+      >
+        <EntryManager
+          {...this.props}
+          defaultEntry={FixedDueDateSchedule.defaultFixedDueDateSchedule()}
+          detailComponent={FixedDueDateScheduleDetail}
+          deleteDisabled={this.deleteDisabled}
+          deleteDisabledMessage={formatMessage({ id: 'ui-circulation.settings.fDDS.deleteDisabled' })}
+          entryLabel={formatMessage({ id: 'ui-circulation.settings.fDDSform.entryLabel' })}
+          entryList={entryList}
+          entryFormComponent={FixedDueDateScheduleForm}
+          nameKey="name"
+          paneTitle={formatMessage({ id: 'ui-circulation.settings.fDDS.paneTitle' })}
+          parentMutator={mutator}
+          permissions={{
+            put: 'ui-circulation.settings.fixed-due-date-schedules',
+            post: 'ui-circulation.settings.fixed-due-date-schedules',
+            delete: 'ui-circulation.settings.fixed-due-date-schedules',
+          }}
+          resourceKey="fixedDueDateSchedules"
+          onBeforeSave={onBeforeSave}
+          enableDetailsActionMenu
+        />
+      </TitleManager>
     );
   }
 }

@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import { Settings } from '@folio/stripes/smart-components';
-import { stripesShape } from '@folio/stripes/core';
+import {
+  stripesShape,
+  TitleManager,
+} from '@folio/stripes/core';
 
 import LoanHistorySettings from './settings/LoanHistory/LoanHistorySettings';
 import LoanPolicySettings from './settings/LoanPolicy/LoanPolicySettings';
@@ -147,11 +150,13 @@ class Circulation extends Component {
 
   render() {
     return (
-      <Settings
-        {...this.props}
-        sections={this.sections}
-        paneTitle={<FormattedMessage id="ui-circulation.settings.index.paneTitle" />}
-      />
+      <TitleManager page={this.props.intl.formatMessage({ id: 'ui-circulation.settings.title.general' })}>
+        <Settings
+          {...this.props}
+          sections={this.sections}
+          paneTitle={<FormattedMessage id="ui-circulation.settings.index.paneTitle" />}
+        />
+      </TitleManager>
     );
   }
 }

@@ -1,7 +1,7 @@
 import {
   render,
 } from '@folio/jest-config-stripes/testing-library/react';
-
+import { TitleManager } from '@folio/stripes/core';
 import { ConfigManager } from '@folio/stripes/smart-components';
 
 import PrintHoldRequests from './PrintHoldRequests';
@@ -19,6 +19,10 @@ describe('PrintHoldRequests', () => {
   const paneTitleLabelId = 'ui-circulation.settings.PrintHoldRequests.paneTitle';
   const mockedStripes = {
     connect: jest.fn((component) => component),
+  };
+  const labelIds = {
+    generalTitle: 'ui-circulation.settings.title.general',
+    printHoldRequestsTitle: 'ui-circulation.settings.title.printHoldRequests',
   };
 
   beforeEach(() => {
@@ -50,5 +54,14 @@ describe('PrintHoldRequests', () => {
     };
 
     expect(ConfigManager).toHaveBeenLastCalledWith(expectedResult, {});
+  });
+
+  it('should trigger TitleManager with correct props', () => {
+    const expectedProps = {
+      page: labelIds.generalTitle,
+      record: labelIds.printHoldRequestsTitle,
+    };
+
+    expect(TitleManager).toHaveBeenCalledWith(expect.objectContaining(expectedProps), {});
   });
 });

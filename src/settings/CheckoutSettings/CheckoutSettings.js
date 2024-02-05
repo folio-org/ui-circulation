@@ -6,7 +6,11 @@ import {
 } from 'lodash';
 import PropTypes from 'prop-types';
 
-import { stripesShape, withStripes } from '@folio/stripes/core';
+import {
+  stripesShape,
+  withStripes,
+  TitleManager,
+} from '@folio/stripes/core';
 import { ConfigManager } from '@folio/stripes/smart-components';
 
 import CheckoutSettingsForm from './CheckoutSettingsForm';
@@ -113,15 +117,20 @@ class CheckoutSettings extends React.Component {
     const { formatMessage } = this.props.intl;
 
     return (
-      <this.configManager
-        label={formatMessage({ id: 'ui-circulation.settings.index.otherSettings' })}
-        moduleName="CHECKOUT"
-        configName="other_settings"
-        getInitialValues={getInitialValues}
-        configFormComponent={CheckoutSettingsForm}
-        stripes={this.props.stripes}
-        onBeforeSave={normalize}
-      />
+      <TitleManager
+        page={formatMessage({ id: 'ui-circulation.settings.title.general' })}
+        record={formatMessage({ id: 'ui-circulation.settings.title.otherSettings' })}
+      >
+        <this.configManager
+          label={formatMessage({ id: 'ui-circulation.settings.index.otherSettings' })}
+          moduleName="CHECKOUT"
+          configName="other_settings"
+          getInitialValues={getInitialValues}
+          configFormComponent={CheckoutSettingsForm}
+          stripes={this.props.stripes}
+          onBeforeSave={normalize}
+        />
+      </TitleManager>
     );
   }
 }

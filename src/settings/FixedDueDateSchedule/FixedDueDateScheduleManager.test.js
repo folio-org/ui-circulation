@@ -5,14 +5,17 @@ import {
 } from '@folio/jest-config-stripes/testing-library/react';
 
 import { EntryManager } from '@folio/stripes/smart-components';
+import { TitleManager } from '@folio/stripes/core';
 
 import FixedDueDateScheduleDetail from './FixedDueDateScheduleDetail';
 import FixedDueDateScheduleForm from './FixedDueDateScheduleForm';
 import FixedDueDateScheduleManager, {
   onBeforeSave,
 } from './FixedDueDateScheduleManager';
+import { getRecordName } from '../utils/utils';
 
 const mockDefaultFixedDueDateScheduleReturnValue = 'testReturnValue';
+const recordName = 'recordName';
 
 jest.mock('lodash', () => {
   const originalModule = jest.requireActual('lodash');
@@ -28,6 +31,9 @@ jest.mock('./FixedDueDateScheduleForm', () => jest.fn(() => null));
 jest.mock('../Models/FixedDueDateSchedule', () => ({
   defaultFixedDueDateSchedule: jest.fn(() => mockDefaultFixedDueDateScheduleReturnValue),
 }));
+jest.mock('../utils/utils', () => ({
+  getRecordName: jest.fn(() => recordName),
+}));
 
 const testIds = {
   entryManager: 'entryManager',
@@ -37,6 +43,8 @@ const labelIds = {
   fDDSPaneTitle: 'ui-circulation.settings.fDDS.paneTitle',
   fDDSformEntryLabel: 'ui-circulation.settings.fDDSform.entryLabel',
   fDDSDeleteDisabled: 'ui-circulation.settings.fDDS.deleteDisabled',
+  generalTitle: 'ui-circulation.settings.title.general',
+  optionNameId: 'ui-circulation.settings.title.fixedDueDateSchedule',
 };
 
 describe('FixedDueDateScheduleManager', () => {
@@ -56,6 +64,9 @@ describe('FixedDueDateScheduleManager', () => {
   const testDefaultProps = {
     mutator: testMutator,
     resources: testResources,
+    location: {
+      pathname: 'pathname',
+    },
   };
   const getById = (id) => within(screen.getByTestId(id));
 
@@ -91,6 +102,26 @@ describe('FixedDueDateScheduleManager', () => {
         resourceKey: 'fixedDueDateSchedules',
         onBeforeSave,
       }), {});
+    });
+
+    it('should trigger TitleManager with correct props', () => {
+      const expectedProps = {
+        page: labelIds.generalTitle,
+        record: recordName,
+      };
+
+      expect(TitleManager).toHaveBeenCalledWith(expect.objectContaining(expectedProps), {});
+    });
+
+    it('should get record name', () => {
+      const expectedArg = {
+        location: testDefaultProps.location,
+        entryList: [],
+        formatMessage: expect.any(Function),
+        optionNameId: labelIds.optionNameId,
+      };
+
+      expect(getRecordName).toHaveBeenCalledWith(expectedArg);
     });
   });
 

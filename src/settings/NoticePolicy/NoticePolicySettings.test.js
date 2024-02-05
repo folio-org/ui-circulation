@@ -4,6 +4,7 @@ import {
 } from '@folio/jest-config-stripes/testing-library/react';
 
 import { EntryManager } from '@folio/stripes/smart-components';
+import { TitleManager } from '@folio/stripes/core';
 
 import NoticePolicySettings, {
   changeToString,
@@ -13,6 +14,14 @@ import NoticePolicyDetail from './NoticePolicyDetail';
 import NoticePolicyForm from './NoticePolicyForm';
 import { NoticePolicy } from '../Models/NoticePolicy';
 import normalize from './utils/normalize';
+import { getRecordName } from '../utils/utils';
+import {sortBy} from "lodash";
+
+const recordName = 'recordName';
+
+jest.mock('../utils/utils', () => ({
+  getRecordName: jest.fn(() => recordName),
+}));
 
 describe('NoticePolicySettings', () => {
   const testIds = {
@@ -24,6 +33,8 @@ describe('NoticePolicySettings', () => {
     close: 'ui-circulation.settings.common.close',
     header: 'ui-circulation.settings.noticePolicy.denyDelete.header',
     body: 'ui-circulation.settings.noticePolicy.denyDelete.body',
+    generalTitle: 'ui-circulation.settings.title.general',
+    optionNameId: 'ui-circulation.settings.title.patronNoticePolicies',
   };
   const mockedPatronNoticePolicies = {
     records: [
@@ -56,6 +67,9 @@ describe('NoticePolicySettings', () => {
       circulationRules: mockedCirculationRules,
     },
     mutator: mockedMutator,
+    location: {
+      pathname: 'pathname',
+    },
   };
 
   afterEach(() => {
@@ -106,6 +120,38 @@ describe('NoticePolicySettings', () => {
       parseInitialValues,
       onBeforeSave: normalize,
     }), {});
+  });
+
+  it('should trigger TitleManager with correct props', () => {
+    render(
+      <NoticePolicySettings
+        {...defaultProps}
+      />
+    );
+
+    const expectedProps = {
+      page: labelIds.generalTitle,
+      record: recordName,
+    };
+
+    expect(TitleManager).toHaveBeenCalledWith(expect.objectContaining(expectedProps), {});
+  });
+
+  it('should get record name', () => {
+    render(
+      <NoticePolicySettings
+        {...defaultProps}
+      />
+    );
+
+    const expectedArg = {
+      entryList: sortBy(defaultProps.resources.patronNoticePolicies.records, 'name'),
+      location: defaultProps.location,
+      formatMessage: expect.any(Function),
+      optionNameId: labelIds.optionNameId,
+    };
+
+    expect(getRecordName).toHaveBeenCalledWith(expectedArg);
   });
 
   it('should execute "EntryManager" with correct props when no "records" in "patronNoticePolicies"', () => {

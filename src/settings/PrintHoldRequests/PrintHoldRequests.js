@@ -5,6 +5,7 @@ import { injectIntl } from 'react-intl';
 import { ConfigManager } from '@folio/stripes/smart-components';
 import {
   withStripes,
+  TitleManager,
 } from '@folio/stripes/core';
 
 import PrintHoldRequestsForm from './PrintHoldRequestsForm';
@@ -26,15 +27,20 @@ const PrintHoldRequests = ({
   const ConnectedConfigManager = stripes.connect(ConfigManager);
 
   return (
-    <ConnectedConfigManager
-      label={formatMessage({ id: 'ui-circulation.settings.PrintHoldRequests.paneTitle' })}
-      moduleName={MODULE_NAMES.SETTINGS}
-      configName={CONFIG_NAMES.PRINT_HOLD_REQUESTS}
-      configFormComponent={PrintHoldRequestsForm}
-      stripes={stripes}
-      getInitialValues={getInitialValues}
-      onBeforeSave={normalizeData}
-    />
+    <TitleManager
+      page={formatMessage({ id: 'ui-circulation.settings.title.general' })}
+      record={formatMessage({ id: 'ui-circulation.settings.title.printHoldRequests' })}
+    >
+      <ConnectedConfigManager
+        label={formatMessage({ id: 'ui-circulation.settings.PrintHoldRequests.paneTitle' })}
+        moduleName={MODULE_NAMES.SETTINGS}
+        configName={CONFIG_NAMES.PRINT_HOLD_REQUESTS}
+        configFormComponent={PrintHoldRequestsForm}
+        stripes={stripes}
+        getInitialValues={getInitialValues}
+        onBeforeSave={normalizeData}
+      />
+    </TitleManager>
   );
 };
 

@@ -4,12 +4,18 @@ import {
 } from 'lodash';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage } from 'react-intl';
+import {
+  injectIntl,
+  FormattedMessage,
+} from 'react-intl';
 import {
   Callout,
   Pane,
 } from '@folio/stripes/components';
-import { stripesConnect } from '@folio/stripes/core';
+import {
+  stripesConnect,
+  TitleManager,
+} from '@folio/stripes/core';
 
 import RulesForm from './lib/RuleEditor/RulesForm';
 import {
@@ -182,7 +188,8 @@ class CirculationRules extends React.Component {
       circulationRules: PropTypes.shape({
         PUT: PropTypes.func.isRequired
       })
-    })
+    }),
+    intl: PropTypes.object.isRequired,
   };
 
   constructor(props) {
@@ -366,10 +373,20 @@ class CirculationRules extends React.Component {
   render() {
     const {
       resources,
+      intl: {
+        formatMessage,
+      },
     } = this.props;
 
     if (!get(resources, 'loanTypes.hasLoaded', false)) {
-      return (<div />);
+      return (
+        <TitleManager
+          page={formatMessage({ id: 'ui-circulation.settings.title.general' })}
+          record={formatMessage({ id: 'ui-circulation.settings.title.circulationRules' })}
+        >
+          <div />
+        </TitleManager>
+      );
     }
 
     const rules = this.state.rules || this.getRules();
@@ -377,7 +394,10 @@ class CirculationRules extends React.Component {
     const metadata = resources.circulationRules.records[0]?.metadata;
 
     return (
-      <>
+      <TitleManager
+        page={formatMessage({ id: 'ui-circulation.settings.title.general' })}
+        record={formatMessage({ id: 'ui-circulation.settings.title.circulationRules' })}
+      >
         <Pane
           id="circulation-rules-pane"
           data-test-circulation-rules
@@ -392,9 +412,9 @@ class CirculationRules extends React.Component {
           />
         </Pane>
         <Callout ref={(ref) => { this.callout = ref; }} />
-      </>
+      </TitleManager>
     );
   }
 }
 
-export default stripesConnect(CirculationRules);
+export default stripesConnect(injectIntl(CirculationRules));
