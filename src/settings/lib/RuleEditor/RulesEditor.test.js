@@ -152,30 +152,48 @@ describe('RulesEditor', () => {
     });
 
     describe('when "selectHint" does not return true', () => {
-      it('should trigger "execCommand" with correct argument', () => {
-        const execCommand = jest.fn();
-        const codeMirror = {
-          execCommand,
-          state: {
-            completionActive: {
-              widget: {
-                currentSectionIndex: 0,
-              },
+      const cursor = {
+        line: '',
+      };
+      const getCursor = jest.fn(() => cursor);
+      const replaceRange = jest.fn();
+      const codeMirror = {
+        getDoc: jest.fn(() => ({
+          getCursor,
+          replaceRange,
+        })),
+        state: {
+          completionActive: {
+            widget: {
+              currentSectionIndex: 0,
             },
           },
-        };
-        const handle = {
-          data: {
-            sections: [{
-              selectedHintIndex: -1,
-            }],
-          },
-        };
-        const expectedArg = 'newlineAndIndent';
+        },
+      };
+      const handle = {
+        data: {
+          sections: [{
+            selectedHintIndex: -1,
+          }],
+        },
+      };
 
+      beforeEach(() => {
         handleEnter(codeMirror, handle);
+      });
 
-        expect(execCommand).toHaveBeenCalledWith(expectedArg);
+      it('should get document information', () => {
+        expect(codeMirror.getDoc).toHaveBeenCalled();
+      });
+
+      it('should get cursor information', () => {
+        expect(getCursor).toHaveBeenCalled();
+      });
+
+      it('should change cursor position', () => {
+        const expectedArgs = ['\n', cursor];
+
+        expect(replaceRange).toHaveBeenCalledWith(...expectedArgs);
       });
     });
   });
