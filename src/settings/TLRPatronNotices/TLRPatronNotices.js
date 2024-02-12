@@ -1,4 +1,3 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
 
@@ -8,17 +7,17 @@ import {
   TitleManager,
 } from '@folio/stripes/core';
 
-import TitleLevelRequestsForm from './TitleLevelRequestsForm';
+import TLRPatronNoticesForm from './TLRPatronNoticesForm';
+import {
+  SCOPES,
+  CONFIG_NAMES,
+} from '../../constants';
 import {
   getInitialValues,
   normalizeData,
 } from './utils';
-import {
-  CONFIG_NAMES,
-  SCOPES,
-} from '../../constants';
 
-const TitleLevelRequests = ({
+const TLRPatronNotices = ({
   stripes,
   intl: {
     formatMessage,
@@ -29,13 +28,13 @@ const TitleLevelRequests = ({
   return (
     <TitleManager
       page={formatMessage({ id: 'ui-circulation.settings.title.general' })}
-      record={formatMessage({ id: 'ui-circulation.settings.title.titleLevelRequestsTlr' })}
+      record={formatMessage({ id: 'ui-circulation.settings.title.tlrPatronNotices' })}
     >
       <ConnectedConfigManager
-        label={formatMessage({ id: 'ui-circulation.settings.titleLevelRequestsTlr.paneTitle' })}
+        label={formatMessage({ id: 'ui-circulation.settings.tlrPatronNotices.paneTitle' })}
         scope={SCOPES.CIRCULATION}
-        configName={CONFIG_NAMES.GENERAL_TLR}
-        configFormComponent={TitleLevelRequestsForm}
+        configName={CONFIG_NAMES.REGULAR_TLR}
+        configFormComponent={TLRPatronNoticesForm}
         stripes={stripes}
         getInitialValues={getInitialValues}
         onBeforeSave={normalizeData}
@@ -44,11 +43,11 @@ const TitleLevelRequests = ({
   );
 };
 
-TitleLevelRequests.propTypes = {
+TLRPatronNotices.propTypes = {
   stripes: PropTypes.shape({
     connect: PropTypes.func.isRequired,
   }).isRequired,
   intl: PropTypes.object.isRequired,
 };
 
-export default withStripes(injectIntl(TitleLevelRequests));
+export default withStripes(injectIntl(TLRPatronNotices));

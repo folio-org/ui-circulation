@@ -21,6 +21,7 @@ import NoticePolicySettings from './settings/NoticePolicy';
 import RequestPolicySettings from './settings/RequestPolicy';
 import TitleLevelRequests from './settings/TitleLevelRequests';
 import PrintHoldRequests from './settings/PrintHoldRequests';
+import TLRPatronNotices from './settings/TLRPatronNotices';
 
 class Circulation extends Component {
   static propTypes = {
@@ -51,6 +52,12 @@ class Circulation extends Component {
             label: <FormattedMessage id="ui-circulation.settings.index.staffSlips" />,
             component: StaffSlips,
             perm: 'ui-circulation.settings.staff-slips',
+          },
+          {
+            route: 'title-level-requests',
+            label: <FormattedMessage id="ui-circulation.settings.index.titleLevelRequestsTlr" />,
+            component: TitleLevelRequests,
+            perm: 'ui-circulation.settings.titleLevelRequests',
           },
         ],
       },
@@ -132,9 +139,9 @@ class Circulation extends Component {
             perm: 'ui-circulation.settings.request-policies',
           },
           {
-            route: 'title-level-requests',
-            label: <FormattedMessage id="ui-circulation.settings.index.titleLevelRequests" />,
-            component: TitleLevelRequests,
+            route: 'tlr-patron-notice-templates',
+            label: <FormattedMessage id="ui-circulation.settings.index.tlrPatronNotices" />,
+            component: TLRPatronNotices,
             perm: 'ui-circulation.settings.titleLevelRequests',
           },
           {

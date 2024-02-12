@@ -1,12 +1,12 @@
+import { Field } from 'react-final-form';
+
 import {
   render,
   screen,
   within,
 } from '@folio/jest-config-stripes/testing-library/react';
-
-import { Field } from 'react-final-form';
-
 import { Select } from '@folio/stripes/components';
+
 import NoticeTemplates from './NoticeTemplates';
 import {
   TITLE_LEVEL_REQUESTS,

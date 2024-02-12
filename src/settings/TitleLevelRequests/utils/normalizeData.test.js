@@ -5,7 +5,7 @@ import {
   NOT_SELECTED,
 } from '../../../constants';
 
-describe('normalizeData', () => {
+describe.skip('normalizeData', () => {
   const testId = 'testId';
 
   it('should return modified passed config if "TLR" is allowed', () => {

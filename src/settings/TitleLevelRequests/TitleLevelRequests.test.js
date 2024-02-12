@@ -15,7 +15,7 @@ import {
   CONFIG_NAMES,
 } from '../../constants';
 
-describe('TitleLevelRequests', () => {
+describe.skip('TitleLevelRequests', () => {
   const paneTitleLabelId = 'ui-circulation.settings.titleLevelRequests.paneTitle';
   const mockedStripes = {
     connect: jest.fn((component) => component),

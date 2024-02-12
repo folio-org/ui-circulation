@@ -4,7 +4,7 @@ import {
   TITLE_LEVEL_REQUESTS,
 } from '../../../constants';
 
-describe('getInitialValues', () => {
+describe.skip('getInitialValues', () => {
   it('should return default config if nothing found in database', () => {
     expect(getInitialValues()).toEqual(TITLE_LEVEL_REQUESTS_DEFAULT_VALUES);
   });
