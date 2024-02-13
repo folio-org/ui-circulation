@@ -3,11 +3,7 @@ import {
   head,
 } from 'lodash';
 
-import {
-  TITLE_LEVEL_REQUESTS_DEFAULT_VALUES,
-  NOT_SELECTED,
-  TLR_FIELDS_FOR_RESET,
-} from '../../../constants';
+import { TITLE_LEVEL_REQUESTS_DEFAULT_VALUES } from '../../../constants';
 
 const getInitialValues = (settings) => {
   if (isEmpty(settings)) {

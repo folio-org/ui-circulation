@@ -1,11 +1,9 @@
-import {
-  render,
-} from '@folio/jest-config-stripes/testing-library/react';
+import { render } from '@folio/jest-config-stripes/testing-library/react';
 import { ConfigManager } from '@folio/stripes/smart-components';
 import { TitleManager } from '@folio/stripes/core';
 
-import TitleLevelRequests from './TitleLevelRequests';
-import TitleLevelRequestsForm from './TitleLevelRequestsForm';
+import TLRPatronNotices from './TLRPatronNotices';
+import TLRPatronNoticesForm from './TLRPatronNoticesForm';
 import {
   getInitialValues,
   normalizeData,
@@ -15,39 +13,38 @@ import {
   SCOPES,
 } from '../../constants';
 
-describe('TitleLevelRequests', () => {
+describe('TLRPatronNotices', () => {
   const mockedStripes = {
     connect: jest.fn((component) => component),
   };
   const labelIds = {
     generalTitle: 'ui-circulation.settings.title.general',
-    titleLevelRequestsTitle: 'ui-circulation.settings.title.titleLevelRequestsTlr',
-    paneTitle: 'ui-circulation.settings.titleLevelRequestsTlr.paneTitle',
+    tlrPatronNoticesTitle: 'ui-circulation.settings.title.tlrPatronNotices',
+    paneTitle: 'ui-circulation.settings.tlrPatronNotices.paneTitle',
   };
 
   beforeEach(() => {
     render(
-      <TitleLevelRequests
+      <TLRPatronNotices
         stripes={mockedStripes}
       />
     );
   });
 
   afterEach(() => {
-    ConfigManager.mockClear();
-    mockedStripes.connect.mockClear();
+    jest.clearAllMocks();
   });
 
-  it('should connect "ConfigManager" to stripes', () => {
+  it('should connect ConfigManager to stripes', () => {
     expect(mockedStripes.connect).toHaveBeenLastCalledWith(ConfigManager);
   });
 
-  it('should execute "ConfigManager" with passed props', () => {
+  it('should trigger ConfigManager with correct props', () => {
     const expectedResult = {
       label: labelIds.paneTitle,
       scope: SCOPES.CIRCULATION,
-      configName: CONFIG_NAMES.GENERAL_TLR,
-      configFormComponent: TitleLevelRequestsForm,
+      configName: CONFIG_NAMES.REGULAR_TLR,
+      configFormComponent: TLRPatronNoticesForm,
       stripes: mockedStripes,
       getInitialValues,
       onBeforeSave: normalizeData,
@@ -59,7 +56,7 @@ describe('TitleLevelRequests', () => {
   it('should trigger TitleManager with correct props', () => {
     const expectedProps = {
       page: labelIds.generalTitle,
-      record: labelIds.titleLevelRequestsTitle,
+      record: labelIds.tlrPatronNoticesTitle,
     };
 
     expect(TitleManager).toHaveBeenCalledWith(expect.objectContaining(expectedProps), {});

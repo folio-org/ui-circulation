@@ -17,7 +17,7 @@ import {
 
 import css from './TLRPatronNoticesForm.css';
 
-const TLRPatronNoticeForm = (props) => {
+const TLRPatronNoticesForm = (props) => {
   const {
     handleSubmit,
     intl: {
@@ -56,7 +56,6 @@ const TLRPatronNoticeForm = (props) => {
     >
       <Pane
         id="tlr-patron-notices-pane"
-        data-testid="tlrPatronNoticesPane"
         defaultWidth="fill"
         fluidContentWidth
         paneTitle={label}
@@ -68,7 +67,7 @@ const TLRPatronNoticeForm = (props) => {
   );
 };
 
-TLRPatronNoticeForm.manifest = Object.freeze({
+TLRPatronNoticesForm.manifest = Object.freeze({
   templates: {
     type: 'okapi',
     path: 'templates',
@@ -80,13 +79,12 @@ TLRPatronNoticeForm.manifest = Object.freeze({
   },
 });
 
-TLRPatronNoticeForm.propTypes = {
+TLRPatronNoticesForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   intl: PropTypes.object.isRequired,
   label: PropTypes.string.isRequired,
   pristine: PropTypes.bool.isRequired,
   submitting: PropTypes.bool.isRequired,
-  form: PropTypes.object.isRequired,
   resources: PropTypes.shape({
     templates: PropTypes.shape({
       records: PropTypes.arrayOf(PropTypes.shape({
@@ -98,7 +96,7 @@ TLRPatronNoticeForm.propTypes = {
   }).isRequired,
 };
 
-const withStripes = stripesConnect(TLRPatronNoticeForm);
+const withStripes = stripesConnect(TLRPatronNoticesForm);
 
 export default injectIntl(stripesFinalForm({
   navigationCheck: true,

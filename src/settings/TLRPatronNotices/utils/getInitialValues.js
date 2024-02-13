@@ -1,5 +1,12 @@
-import {head, isEmpty} from "lodash";
-import {NOT_SELECTED, TLR_FIELDS_FOR_RESET, TLR_PATRON_NOTICES_DEFAULT_VALUES} from "../../../constants";
+import {
+  head,
+  isEmpty,
+} from 'lodash';
+import {
+  NOT_SELECTED,
+  TLR_FIELDS_FOR_RESET,
+  TLR_PATRON_NOTICES_DEFAULT_VALUES,
+} from '../../../constants';
 
 const getInitialValues = (values) => {
   if (isEmpty(values)) {
