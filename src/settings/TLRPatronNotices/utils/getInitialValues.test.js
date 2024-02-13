@@ -12,7 +12,7 @@ describe('getInitialValues', () => {
           value: {
             ...TLR_PATRON_NOTICES_DEFAULT_VALUES,
             [TITLE_LEVEL_REQUESTS.CONFIRMATION_TEMPLATE]: 'id',
-          }
+          },
         }
       ];
 

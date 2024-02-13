@@ -320,7 +320,6 @@
         "subPermissions": [
           "settings.circulation.enabled",
           "templates.collection.get",
-          "configuration.entries.collection.get",
           "mod-settings.global.read.circulation",
           "mod-settings.entries.collection.get",
           "mod-settings.entries.item.get"
@@ -331,8 +330,6 @@
         "displayName": "Settings (Circulation): Title level request edit",
         "subPermissions": [
           "ui-circulation.settings.view-titleLevelRequests",
-          "configuration.entries.item.post",
-          "configuration.entries.item.put",
           "mod-settings.global.write.circulation",
           "mod-settings.entries.item.put",
           "mod-settings.entries.item.post"

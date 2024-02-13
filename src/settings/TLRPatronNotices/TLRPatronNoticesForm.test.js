@@ -21,7 +21,7 @@ const basicProps = {
           id: 'recordId',
         }
       ],
-    }
+    },
   },
 };
 const testIds = {

@@ -48,7 +48,7 @@ const TLRPatronNoticesForm = (props) => {
 
   return (
     <form
-      id="tlr-patron-notices-form"
+      id="tlrPatronNoticesForm"
       data-testid="tlrPatronNoticesForm"
       className={css.TLRPatronNoticesForm}
       noValidate
@@ -92,7 +92,6 @@ TLRPatronNoticesForm.propTypes = {
         name: PropTypes.string.isRequired,
       })),
     }),
-
   }).isRequired,
 };
 
