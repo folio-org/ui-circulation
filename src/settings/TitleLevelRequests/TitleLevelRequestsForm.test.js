@@ -16,13 +16,11 @@ import {
 import { Field } from 'react-final-form';
 
 import TitleLevelRequestsForm from './TitleLevelRequestsForm';
-import NoticeTemplates from './NoticeTemplates';
 import {
   TITLE_LEVEL_REQUESTS_DEFAULT_VALUES,
   TITLE_LEVEL_REQUESTS,
 } from '../../constants';
 
-jest.mock('./NoticeTemplates', () => jest.fn(() => null));
 PaneFooter.mockImplementation(jest.fn(({ renderEnd }) => (
   <div>
     {renderEnd}
@@ -46,24 +44,13 @@ Field.mockImplementation(jest.fn(({ onChange, ...rest }) => (
 
 describe('TitleLevelRequestsForm', () => {
   const mockedHandleSubmit = jest.fn();
-  const mockedRecord = [
-    {
-      id: 'testId',
-      name: 'testName',
-    },
-  ];
-  const mockedResources = {
-    templates: {
-      records: mockedRecord,
-    },
-  };
   const mockedRequest = [{ id: 'testRequest' }];
   const defaultProps = {
     handleSubmit: mockedHandleSubmit,
     label: 'testLabel',
     pristine: false,
     submitting: false,
-    resources: mockedResources,
+    resources: {},
     mutator: {
       requests: {
         GET: () => mockedRequest,
@@ -80,7 +67,7 @@ describe('TitleLevelRequestsForm', () => {
     tlrEnabled: 'ui-circulation.settings.titleLevelRequests.allow',
     tlrByDefault: 'ui-circulation.settings.titleLevelRequests.createTLR',
     tlrHoldShouldFollowCirculationRules: 'ui-circulation.settings.titleLevelRequests.tlrHoldShouldFollowCirculationRules',
-    saveButon: 'stripes-core.button.save',
+    saveButton: 'stripes-core.button.save',
     errorModalTitle: 'ui-circulation.settings.titleLevelRequests.forbiddenDisableTlrModal.title',
     errorModalDescription: 'ui-circulation.settings.titleLevelRequests.forbiddenDisableTlrModal.description',
     closeButton: 'stripes-core.button.close',
@@ -96,7 +83,6 @@ describe('TitleLevelRequestsForm', () => {
     Pane.mockClear();
     Field.mockClear();
     Button.mockClear();
-    NoticeTemplates.mockClear();
     mockedFormChange.mockClear();
   });
 
@@ -173,34 +159,16 @@ describe('TitleLevelRequestsForm', () => {
       expect(Field).toHaveBeenNthCalledWith(orderOfFieldCall.tlrHoldShouldFollowCirculationRules, expectedResult, {});
     });
 
-    it('should execute "NoticeTemplates" with passed props', () => {
-      expect(NoticeTemplates).toHaveBeenLastCalledWith({ templates: mockedRecord }, {});
-    });
-
     it('should execute "Button" with passed props', () => {
       const expectedResult = {
         type: 'submit',
         buttonStyle: 'primary paneHeaderNewButton',
         disabled: false,
         marginBottom0: true,
-        children: labelIds.saveButon,
+        children: labelIds.saveButton,
       };
 
       expect(Button).toHaveBeenLastCalledWith(expectedResult, {});
-    });
-
-    describe('when resources are empty', () => {
-      it('should execute "NoticeTemplates" with empty array instead of templates', () => {
-        render(
-          <TitleLevelRequestsForm
-            form={mockedForm}
-            {...defaultProps}
-            resources={{}}
-          />
-        );
-
-        expect(NoticeTemplates).toHaveBeenLastCalledWith({ templates: [] }, {});
-      });
     });
 
     describe('"Button" should be disabled', () => {
@@ -324,17 +292,13 @@ describe('TitleLevelRequestsForm', () => {
       expect(Field).toHaveBeenNthCalledWith(orderOfFieldCall.tlrEnabled, expect.objectContaining(expectedResult), {});
     });
 
-    it('should not render "NoticeTemplates"', () => {
-      expect(NoticeTemplates).toHaveBeenCalledTimes(0);
-    });
-
     it('should execute "Button" with passed props', () => {
       const expectedResult = {
         type: 'submit',
         buttonStyle: 'primary paneHeaderNewButton',
         disabled: false,
         marginBottom0: true,
-        children: labelIds.saveButon,
+        children: labelIds.saveButton,
       };
 
       expect(Button).toHaveBeenLastCalledWith(expectedResult, {});

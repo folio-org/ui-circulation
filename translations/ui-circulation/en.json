@@ -12,7 +12,8 @@
   "settings.index.patronNotices": "Patron notice templates",
   "settings.index.noticePolicies": "Patron notice policies",
   "settings.index.requestPolicies": "Request policies",
-  "settings.index.titleLevelRequests": "Title level requests",
+  "settings.index.titleLevelRequestsTlr": "Title level requests (TLR)",
+  "settings.index.tlrPatronNotices": "TLR patron notice templates",
   "settings.index.printHoldRequests": "Print hold requests",
   "settings.index.general": "General",
   "settings.index.loans": "Loans",
@@ -33,7 +34,8 @@
   "settings.title.patronNoticeTemplates": "Patron notice {optionNumber, plural, one {template} other {templates}}",
   "settings.title.requestCancellationReasons": "Request cancellation reasons",
   "settings.title.requestPolicies": "Request {optionNumber, plural, one {policy} other {policies}}",
-  "settings.title.titleLevelRequests": "Title level requests",
+  "settings.title.titleLevelRequestsTlr": "Title level requests (TLR)",
+  "settings.title.tlrPatronNotices": "TLR Patron notice templates",
   "settings.title.printHoldRequests": "Print hold requests",
   "settings.title.newRecord": "New {name}",
   "settings.title.editRecord": "Edit {name}",
@@ -329,7 +331,8 @@
   "settings.requestPolicy.requestTypes.allowAll": "Allow all pickup service points",
   "settings.requestPolicy.requestTypes.allowSome": "Allow some pickup service points",
 
-  "settings.titleLevelRequests.paneTitle": "Title level requests",
+  "settings.titleLevelRequestsTlr.paneTitle": "Title level requests (TLR)",
+  "settings.tlrPatronNotices.paneTitle": "TLR Patron notice templates",
   "settings.titleLevelRequests.allow": "Allow title level requests",
   "settings.titleLevelRequests.createTLR": "\"Create title level request\" selected by default",
   "settings.titleLevelRequests.tlrHoldShouldFollowCirculationRules": "Fail to create title level hold when request is blocked by circulation rule",
@@ -555,5 +558,6 @@
   "permission.settings.lost-item-fees-policies": "Settings (Circ): Can create, edit and remove lost item fee policies",
   "permission.settings.view-overdue-fines-policies": "Settings (Circ): Can view overdue fine policies",
   "permission.settings.view-lost-item-fees-policies": "Settings (Circ): Can view lost item fee policies",
+  "permission.settings.view-titleLevelRequests": "Settings (Circulation): Title level request view",
   "permission.settings.titleLevelRequests": "Settings (Circulation): Title level request edit"
 }

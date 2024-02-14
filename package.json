@@ -315,14 +315,24 @@
         "visible": true
       },
       {
-        "permissionName": "ui-circulation.settings.titleLevelRequests",
-        "displayName": "Settings (Circulation): Title level request edit",
+        "permissionName": "ui-circulation.settings.view-titleLevelRequests",
+        "displayName": "Settings (Circulation): Title level request view",
         "subPermissions": [
           "settings.circulation.enabled",
           "templates.collection.get",
-          "configuration.entries.collection.get",
-          "configuration.entries.item.post",
-          "configuration.entries.item.put"
+          "mod-settings.global.read.circulation",
+          "mod-settings.entries.collection.get",
+          "mod-settings.entries.item.get"
+        ]
+      },
+      {
+        "permissionName": "ui-circulation.settings.titleLevelRequests",
+        "displayName": "Settings (Circulation): Title level request edit",
+        "subPermissions": [
+          "ui-circulation.settings.view-titleLevelRequests",
+          "mod-settings.global.write.circulation",
+          "mod-settings.entries.item.put",
+          "mod-settings.entries.item.post"
         ],
         "visible": true
       }
