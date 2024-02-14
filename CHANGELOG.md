@@ -14,6 +14,7 @@
 * Cover Widget by jest tests. Refs UICIRC-899.
 * Add page titles to Circulation settings pages. Refs UICIRC-970.
 * Fix issue with 'Enter' key in circulation rules editor that adds indent to previous line. Refs UICIRC-1042.
+* RulesEditor should use stripes.hasPerm. Refs UICIRC-1047.
 
 ## [9.0.3](https://github.com/folio-org/ui-circulation/tree/v9.0.3) (2023-11-09)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v9.0.2...v9.0.3)
