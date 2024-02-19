@@ -159,8 +159,8 @@ const ReminderFeesFields = props => {
           aria-label={blockTemplateLabel}
           name={`${field}.blockTemplateId`}
           component={Select}
-          dataOptions={[{ label: formatMessage({ id: 'ui-circulation.settings.finePolicy.reminderFees.selectBlockTemplate' }), value: '' }, ...blockTemplateOptions]}
-          disabled={!canEdit}
+          dataOptions={[{ label: formatMessage({ id: 'ui-circulation.settings.finePolicy.reminderFees.noBlock' }), value: '' }, ...blockTemplateOptions]}
+          disabled
         />
       </Col>
     </Row>
