@@ -24,7 +24,7 @@ describe('reminderFeesPolicyValidator', () => {
       },
       'reminderFeesPolicy.reminderSchedule[0].blockTemplateId': {
         rules: [Validation.RULES.IS_NOT_EMPTY_SELECT],
-        shouldValidate: true,
+        shouldValidate: false,
       },
     };
 
