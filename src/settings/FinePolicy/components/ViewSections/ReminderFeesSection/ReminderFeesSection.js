@@ -32,13 +32,13 @@ const columnWidths = {
 const timeUnitsByValue = keyBy(timeUnits, 'value');
 const noticeMethodsByValue = keyBy(noticeMethods, 'value');
 
-export const generateFormatter = (noticeTemplatesById, blockTemplatesById) => {
+export const generateFormatter = (noticeTemplatesById) => {
   return {
     sequence: (item) => (item.rowIndex + 1),
     reminderFee: (item) => parseFloat(item?.reminderFee || 0).toFixed(2),
     after: (item) => <FormattedMessage id={`ui-circulation.settings.finePolicy.reminderFees.${item.rowIndex ? 'previousReminder' : 'overdue'}`} />,
     noticeTemplateId: (item) => noticeTemplatesById[item.noticeTemplateId]?.name ?? '',
-    blockTemplateId: (item) => blockTemplatesById[item.blockTemplateId]?.name ?? '',
+    blockTemplateId: () => <FormattedMessage id="ui-circulation.settings.finePolicy.reminderFees.noBlock" />,
     noticeFormat: (item) => (noticeMethodsByValue[item.noticeFormat]?.label ? <FormattedMessage id={noticeMethodsByValue[item.noticeFormat]?.label} /> : ''),
     timeUnitId: (item) => <FormattedMessage id={timeUnitsByValue[item.timeUnitId]?.label} />,
   };
@@ -48,7 +48,6 @@ const ReminderFeesSection = (props) => {
   const {
     policy,
     noticeTemplates,
-    blockTemplates,
     getCheckboxValue,
   } = props;
   const {
@@ -60,8 +59,7 @@ const ReminderFeesSection = (props) => {
     reminderSchedule,
   } = policy;
   const noticeTemplatesById = keyBy(noticeTemplates, 'id');
-  const blockTemplatesById = keyBy(blockTemplates, 'id');
-  const resultFormatter = generateFormatter(noticeTemplatesById, blockTemplatesById);
+  const resultFormatter = generateFormatter(noticeTemplatesById);
 
   return (
     <Accordion
@@ -127,7 +125,6 @@ const ReminderFeesSection = (props) => {
 ReminderFeesSection.propTypes = {
   policy: PropTypes.object.isRequired,
   noticeTemplates: PropTypes.arrayOf(PropTypes.object),
-  blockTemplates: PropTypes.arrayOf(PropTypes.object),
   getCheckboxValue: PropTypes.func.isRequired,
 };
 
