@@ -86,7 +86,10 @@ export function handleEnter(cm, handle) {
     return;
   }
 
-  cm.execCommand('newlineAndIndent');
+  const activeDocument = cm.getDoc();
+  const cursor = activeDocument.getCursor();
+
+  activeDocument.replaceRange('\n', cursor);
 }
 
 export function selectHint(cm, handle) {
