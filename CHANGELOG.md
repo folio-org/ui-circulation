@@ -1,5 +1,10 @@
 # Change history for ui-circulation
 
+## [9.0.4](https://github.com/folio-org/ui-circulation/tree/v9.0.4) (2024-02-22)
+[Full Changelog](https://github.com/folio-org/ui-circulation/compare/v9.0.3...v9.0.4)
+
+* Fix issue with 'Enter' key in circulation rules editor that adds indent to previous line. Refs UICIRC-1042.
+
 ## [9.0.3](https://github.com/folio-org/ui-circulation/tree/v9.0.3) (2023-11-09)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v9.0.2...v9.0.3)
 
