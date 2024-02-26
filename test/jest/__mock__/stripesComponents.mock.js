@@ -38,6 +38,7 @@ jest.mock('@folio/stripes/components', () => ({
       </span>
     </button>
   )),
+  Callout: jest.fn(() => <div />),
   Checkbox: jest.fn(() => <input type="checkbox" />),
   Col: jest.fn(({ children, ...rest }) => <div {...rest}>{children}</div>),
   ConfirmationModal: jest.fn(({

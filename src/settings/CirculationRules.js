@@ -30,7 +30,7 @@ import {
   convertNamesToIds,
 } from './utils/rules-string-convertors';
 
-const editorDefaultProps = {
+export const editorDefaultProps = {
   // whether or not to show the 'autocomplete' widget (pro mode)
   showAssist: true,
   completionLists: {
@@ -60,7 +60,7 @@ const editorDefaultProps = {
   },
 };
 
-class CirculationRules extends React.Component {
+export class CirculationRules extends React.Component {
   static manifest = Object.freeze({
     circulationRules: {
       type: 'okapi',
