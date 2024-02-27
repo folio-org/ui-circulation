@@ -15,6 +15,7 @@
 * Add page titles to Circulation settings pages. Refs UICIRC-970.
 * RulesEditor should use stripes.hasPerm. Refs UICIRC-1047.
 * Disable block template under reminder fees. Refs UICIRC-1046.
+* UI tests replacement with RTL/Jest for `CirculationRules.js`. Refs UICIRC-958.
 
 ## [9.0.4](https://github.com/folio-org/ui-circulation/tree/v9.0.4) (2024-02-22)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v9.0.3...v9.0.4)
