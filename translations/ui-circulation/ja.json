@@ -516,9 +516,9 @@
     "settings.PrintHoldRequests.allow": "Allow print hold requests (Open - Not yet filled)",
     "settings.patronNotices.emailOrPrint": "電子メールまたは印刷",
     "settings.patronNotices.printOnly": "印刷のみ",
-    "settings.title.general": "Circulation settings",
-    "settings.title.circulationRules": "Circulation rules",
-    "settings.title.otherSettings": "Other settings",
+    "settings.title.general": "貸出・返却の設定",
+    "settings.title.circulationRules": "貸出・返却ルール",
+    "settings.title.otherSettings": "その他の設定",
     "settings.title.staffSlips": "Staff {optionNumber, plural, one {slip} other {slips}}",
     "settings.title.fixedDueDateSchedule": "Fixed due date {optionNumber, plural, one {schedule} other {schedules}}",
     "settings.title.loanAnonymization": "Loan anonymization",
@@ -532,5 +532,6 @@
     "settings.title.titleLevelRequests": "Title level requests",
     "settings.title.printHoldRequests": "Print hold requests",
     "settings.title.newRecord": "New {name}",
-    "settings.title.editRecord": "Edit {name}"
+    "settings.title.editRecord": "Edit {name}",
+    "settings.finePolicy.reminderFees.noBlock": "No block"
 }
