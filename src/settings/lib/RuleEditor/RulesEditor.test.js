@@ -534,11 +534,7 @@ describe('RulesEditor', () => {
       filter: '',
       showAssist: true,
       stripes: {
-        user: {
-          perms: {
-            'ui-circulation.settings.edit-circulation-rules': true
-          }
-        }
+        hasPerm: jest.fn(() => true),
       },
     };
     const rulesHintArgs = {
@@ -855,11 +851,7 @@ describe('RulesEditor', () => {
       const props = {
         ...initialProps,
         stripes: {
-          user: {
-            perms: {
-              'ui-circulation.settings.view-circulation-rules': true
-            }
-          },
+          hasPerm: jest.fn(() => false),
         }
       };
       render(

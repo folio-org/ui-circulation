@@ -532,5 +532,6 @@
     "settings.title.titleLevelRequests": "Title level requests",
     "settings.title.printHoldRequests": "Print hold requests",
     "settings.title.newRecord": "New {name}",
-    "settings.title.editRecord": "Edit {name}"
+    "settings.title.editRecord": "Edit {name}",
+    "settings.finePolicy.reminderFees.noBlock": "Sem bloqueio"
 }

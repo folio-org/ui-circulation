@@ -76,14 +76,6 @@ describe('ReminderFeesSection', () => {
       expect(formatter.noticeTemplateId({ ...mockItem, noticeTemplateId: null })).toEqual('');
     });
 
-    it('should format blockTemplateId correctly', () => {
-      expect(formatter.blockTemplateId(mockItem)).toEqual('Template 3');
-    });
-
-    it('should format blockTemplateId correctly when template is not present', () => {
-      expect(formatter.blockTemplateId({ ...mockItem, blockTemplateId: null })).toEqual('');
-    });
-
     it('should format noticeFormat correctly', () => {
       const { container } = render(<>{formatter.noticeFormat(mockItem)}</>);
       expect(container).toHaveTextContent('ui-circulation.settings.finePolicy.reminderFees.noticeMethods.email');

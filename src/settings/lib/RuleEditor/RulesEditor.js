@@ -213,7 +213,7 @@ class RulesEditor extends React.Component {
           indicatorOpen: openTri,
           indicatorFolded: foldedTri,
         },
-        readOnly: stripes?.user?.perms['ui-circulation.settings.edit-circulation-rules'] ? false : 'nocursor',
+        readOnly: stripes.hasPerm('ui-circulation.settings.edit-circulation-rules') ? false : 'nocursor',
       },
     };
   }

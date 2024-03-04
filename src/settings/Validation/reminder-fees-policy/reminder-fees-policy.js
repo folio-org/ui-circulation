@@ -21,7 +21,7 @@ const reminderFeesPolicyValidator = (reminderFeePolicy) => {
       },
       [`reminderFeesPolicy.reminderSchedule[${index}].blockTemplateId`]: {
         rules: [RULES.IS_NOT_EMPTY_SELECT],
-        shouldValidate: true,
+        shouldValidate: false,
       },
     };
 
