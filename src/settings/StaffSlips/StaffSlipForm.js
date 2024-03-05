@@ -48,8 +48,7 @@ const StaffSlipForm = (props) => {
     : formatMessage({ id: 'ui-circulation.settings.staffSlips.new' });
 
   const footerPaneProps = {
-    pristine,
-    submitting,
+    disabled: pristine || submitting || !stripes.hasPerm('ui-circulation.settings.edit-staff-slips'),
     onCancel,
   };
 

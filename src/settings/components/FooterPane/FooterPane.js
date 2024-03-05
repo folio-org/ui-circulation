@@ -11,8 +11,7 @@ import css from './FooterPane.css';
 
 const FooterPane = (props) => {
   const {
-    pristine,
-    submitting,
+    disabled,
     onCancel,
   } = props;
 
@@ -32,7 +31,7 @@ const FooterPane = (props) => {
           type="submit"
           marginBottom0
           buttonStyle="primary mega"
-          disabled={(pristine || submitting)}
+          disabled={disabled}
         >
           <FormattedMessage id="ui-circulation.settings.common.saveAndClose" />
         </Button>
@@ -42,8 +41,7 @@ const FooterPane = (props) => {
 };
 
 FooterPane.propTypes = {
-  pristine: PropTypes.bool.isRequired,
-  submitting: PropTypes.bool.isRequired,
+  disabled: PropTypes.bool.isRequired,
   onCancel: PropTypes.func.isRequired,
 };
 

@@ -16,6 +16,7 @@
 * RulesEditor should use stripes.hasPerm. Refs UICIRC-1047.
 * Disable block template under reminder fees. Refs UICIRC-1046.
 * UI tests replacement with RTL/Jest for `CirculationRules.js`. Refs UICIRC-958.
+* Create a new permission "Settings (Circulation): Can view staff slips". Refs UICIRC-848.
 
 ## [9.0.4](https://github.com/folio-org/ui-circulation/tree/v9.0.4) (2024-02-22)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v9.0.3...v9.0.4)

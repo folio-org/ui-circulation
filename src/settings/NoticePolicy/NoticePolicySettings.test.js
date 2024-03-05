@@ -1,3 +1,5 @@
+import { sortBy } from 'lodash';
+
 import {
   render,
   screen,
@@ -15,7 +17,6 @@ import NoticePolicyForm from './NoticePolicyForm';
 import { NoticePolicy } from '../Models/NoticePolicy';
 import normalize from './utils/normalize';
 import { getRecordName } from '../utils/utils';
-import {sortBy} from "lodash";
 
 const recordName = 'recordName';
 

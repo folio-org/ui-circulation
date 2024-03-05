@@ -73,8 +73,7 @@ describe('StaffSlipForm', () => {
       connect: jest.fn(),
     };
     const mockedfooterPaneProps = {
-      pristine: true,
-      submitting: true,
+      disabled: false,
       onCancel: mockedOnCancel,
     };
 
@@ -161,8 +160,7 @@ describe('StaffSlipForm', () => {
       hasPerm: jest.fn(() => false),
     };
     const mockedfooterPaneProps = {
-      pristine: false,
-      submitting: false,
+      disabled: true,
       onCancel: mockedOnCancel,
     };
 
