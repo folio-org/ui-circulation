@@ -51,6 +51,11 @@ const getTokens = (locale) => ({
       allowedFor: allowedForAllStaffSlips,
     },
     {
+      token: 'item.displaySummary',
+      previewValue: 'no.1-2v. 121948-1962 (Board)',
+      allowedFor: allowedForAllStaffSlips,
+    },
+    {
       token: 'item.enumeration',
       previewValue: 'no.1-3',
       allowedFor: allowedForAllStaffSlips,

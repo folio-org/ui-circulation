@@ -45,6 +45,11 @@ const item = [
     allowedFor: allowedForAllCategories,
   },
   {
+    token: 'item.displaySummary',
+    previewValue: 'no.1-2v. 121948-1962 (Board)',
+    allowedFor: allowedForAllCategories,
+  },
+  {
     token: 'item.enumeration',
     previewValue: 'no.1-3',
     allowedFor: allowedForAllCategories,
