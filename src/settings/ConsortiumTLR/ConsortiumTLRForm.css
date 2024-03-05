@@ -1,0 +1,12 @@
+.consortiumTlrForm {
+  height: 100%;
+  width: 100%;
+}
+
+.disabledItem {
+  color: var(--color-text-p2);
+}
+
+.notification {
+  margin: 1em 0;
+}

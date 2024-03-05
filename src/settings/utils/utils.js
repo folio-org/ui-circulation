@@ -93,3 +93,13 @@ export const getRecordName = ({
       }
     );
 };
+
+export const getConsortiumTlrPermission = (stripes) => {
+  //TODO: add consortia and ecs-tlr to optionalOkapiInterfaces
+  //TODO: add correct permissions
+  if (stripes.hasInterface('consortia') && stripes.hasInterface('ecs-tlr')) {
+    return 'tlr.settings.ecs-tlr.get';
+  }
+
+  return 'noPermission';
+};

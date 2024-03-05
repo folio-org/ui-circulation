@@ -539,6 +539,10 @@ export const TITLE_LEVEL_REQUESTS = {
   EXPIRATION_TEMPLATE:'expirationPatronNoticeTemplateId',
 };
 
+export const CONSORTIUM_TITLE_LEVEL_REQUESTS = {
+  ECS_TLR_ENABLED: 'ecsTlrFeatureEnabled',
+};
+
 export const NOT_SELECTED = 'notSelected';
 
 export const TITLE_LEVEL_REQUESTS_DEFAULT_VALUES = {

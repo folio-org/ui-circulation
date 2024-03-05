@@ -3,6 +3,7 @@ import {
   isEditLayer,
   validateUniqueNameById,
   getRecordName,
+  getConsortiumTlrPermission,
 } from './utils';
 
 describe('utils', () => {
@@ -226,5 +227,9 @@ describe('utils', () => {
         expect(formatMessage).toHaveBeenCalledWith(...expectedArgs);
       });
     });
+  });
+
+  describe.skip('getConsortiumTlrPermission', () => {
+
   });
 });
