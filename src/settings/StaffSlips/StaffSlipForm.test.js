@@ -73,7 +73,8 @@ describe('StaffSlipForm', () => {
       connect: jest.fn(),
     };
     const mockedfooterPaneProps = {
-      disabled: false,
+      pristine: true,
+      submitting: true,
       onCancel: mockedOnCancel,
     };
 
@@ -113,7 +114,11 @@ describe('StaffSlipForm', () => {
 
       expect(Pane).toHaveBeenLastCalledWith(expect.objectContaining(expectedResult), {});
       expect(CancelButton).toHaveBeenLastCalledWith({ onCancel: mockedOnCancel }, {});
-      expect(FooterPane).toHaveBeenLastCalledWith(mockedfooterPaneProps, {});
+      expect(FooterPane).toHaveBeenLastCalledWith({
+        isSaveButtonDisabled: true,
+        isSaveButtonAvailable: true,
+        onCancel: mockedfooterPaneProps.onCancel,
+      }, {});
     });
 
     it('should render AccordionSet component', () => {
@@ -160,7 +165,8 @@ describe('StaffSlipForm', () => {
       hasPerm: jest.fn(() => false),
     };
     const mockedfooterPaneProps = {
-      disabled: true,
+      pristine: false,
+      submitting: false,
       onCancel: mockedOnCancel,
     };
 
@@ -184,10 +190,11 @@ describe('StaffSlipForm', () => {
         expect.objectContaining({ paneTitle: labelIds.new }),
         {},
       );
-      expect(FooterPane).toHaveBeenLastCalledWith(
-        mockedfooterPaneProps,
-        {},
-      );
+      expect(FooterPane).toHaveBeenLastCalledWith({
+        isSaveButtonDisabled: false,
+        isSaveButtonAvailable: false,
+        onCancel: mockedfooterPaneProps.onCancel,
+      }, {});
     });
   });
 });

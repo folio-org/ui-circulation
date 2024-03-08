@@ -11,7 +11,8 @@ import css from './FooterPane.css';
 
 const FooterPane = (props) => {
   const {
-    disabled,
+    isSaveButtonDisabled,
+    isSaveButtonAvailable,
     onCancel,
   } = props;
 
@@ -26,22 +27,25 @@ const FooterPane = (props) => {
         >
           <FormattedMessage id="ui-circulation.settings.common.cancel" />
         </Button>
-        <Button
-          id="footer-save-entity"
-          type="submit"
-          marginBottom0
-          buttonStyle="primary mega"
-          disabled={disabled}
-        >
-          <FormattedMessage id="ui-circulation.settings.common.saveAndClose" />
-        </Button>
+        {isSaveButtonAvailable &&
+          <Button
+            id="footer-save-entity"
+            type="submit"
+            marginBottom0
+            buttonStyle="primary mega"
+            disabled={isSaveButtonDisabled}
+          >
+            <FormattedMessage id="ui-circulation.settings.common.saveAndClose" />
+          </Button>
+        }
       </div>
     </PaneFooter>
   );
 };
 
 FooterPane.propTypes = {
-  disabled: PropTypes.bool.isRequired,
+  isSaveButtonDisabled: PropTypes.bool.isRequired,
+  isSaveButtonAvailable: PropTypes.bool.isRequired,
   onCancel: PropTypes.func.isRequired,
 };
 
