@@ -1,3 +1,5 @@
+import { sortBy } from 'lodash';
+
 import {
   render,
 } from '@folio/jest-config-stripes/testing-library/react';
@@ -9,7 +11,6 @@ import StaffSlipDetail from './StaffSlipDetail';
 import StaffSlipForm from './StaffSlipForm';
 import StaffSlipManager from './StaffSlipManager';
 import { getRecordName } from '../utils/utils';
-import {sortBy} from "lodash";
 
 const recordName = 'recordName';
 
@@ -44,7 +45,11 @@ describe('StaffSlipManager', () => {
       }],
     },
   };
+  const mockedStripes = {
+    hasPerm: jest.fn(() => true),
+  };
   const testDefaultProps = {
+    stripes: mockedStripes,
     mutator: testMutator,
     resources: testResources,
     location: {

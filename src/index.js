@@ -50,7 +50,7 @@ class Circulation extends Component {
             route: 'staffslips',
             label: <FormattedMessage id="ui-circulation.settings.index.staffSlips" />,
             component: StaffSlips,
-            perm: 'ui-circulation.settings.staff-slips',
+            perm: 'ui-circulation.settings.view-staff-slips',
           },
         ],
       },
