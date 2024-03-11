@@ -10,13 +10,13 @@ import FooterPane from './FooterPane';
 
 const renderFooterPane = ({
   onCancel = jest.fn(),
-  pristine = false,
-  submitting = false,
+  isSaveButtonDisabled = true,
+  isSaveButtonAvailable = true,
 }) => render(
   <FooterPane
     onCancel={onCancel}
-    pristine={pristine}
-    submitting={submitting}
+    isSaveButtonDisabled={isSaveButtonDisabled}
+    isSaveButtonAvailable={isSaveButtonAvailable}
   />
 );
 
