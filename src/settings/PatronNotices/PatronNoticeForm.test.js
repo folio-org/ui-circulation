@@ -86,8 +86,8 @@ describe('PatronNoticeForm', () => {
       values: {}
     };
   });
-  const testPristineValue = true;
-  const testSubmittingValue = true;
+  const testPristineValue = false;
+  const testSubmittingValue = false;
   const testHandleSubmit = jest.fn();
   const testOnCancel = jest.fn();
   const mockedStripes = {
@@ -151,9 +151,9 @@ describe('PatronNoticeForm', () => {
       });
     });
 
-    it('should render FooterPane component', () => {
+    it('should render FooterPane with correct props', () => {
       componentPropsCheck(FooterPane, testIds.patronNoticeFooterPane, {
-        isSaveButtonDisabled: true,
+        isSaveButtonDisabled: false,
         onCancel: testOnCancel,
       });
     });
@@ -201,9 +201,15 @@ describe('PatronNoticeForm', () => {
     };
 
     beforeEach(() => {
+      const defaultProps = {
+        ...defaultTestProps,
+        pristine: true,
+        submitting: true,
+      };
+
       render(
         <PatronNoticeForm
-          {...defaultTestProps}
+          {...defaultProps}
           initialValues={initialValues}
           stripes={testStripes}
           location={{
@@ -228,6 +234,13 @@ describe('PatronNoticeForm', () => {
         connect: testStripes.connect,
         metadata: initialValues.metadata,
       }), {});
+    });
+
+    it('should render FooterPane with correct props', () => {
+      componentPropsCheck(FooterPane, testIds.patronNoticeFooterPane, {
+        isSaveButtonDisabled: true,
+        onCancel: testOnCancel,
+      });
     });
   });
 

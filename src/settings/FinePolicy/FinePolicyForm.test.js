@@ -68,7 +68,7 @@ describe('FinePolicyForm', () => {
   const policyForTest = new FinePolicy(mockedInitialValues);
   const defaultProps = {
     stripes: mockedStripes,
-    pristine: true,
+    pristine: false,
     submitting: false,
     initialValues: mockedInitialValues,
     handleSubmit: mockedHandleSubmit,
@@ -117,7 +117,7 @@ describe('FinePolicyForm', () => {
 
   it('should execute "FooterPane" with passed props', () => {
     expect(FooterPane).toHaveBeenCalledWith({
-      isSaveButtonDisabled: true,
+      isSaveButtonDisabled: false,
       onCancel: mockedOnCancel,
     }, {});
   });
@@ -170,6 +170,29 @@ describe('FinePolicyForm', () => {
       expect(Pane).toHaveBeenCalledWith(expect.objectContaining({
         paneTitle: labelIds.createEntryLabel,
       }), {});
+    });
+  });
+
+  describe('when initialValues are passed ', () => {
+    const defaultTestProps = {
+      ...defaultProps,
+      pristine: true,
+      submitting: true,
+    };
+
+    beforeEach(() => {
+      render(
+        <FinePolicyForm
+          {...defaultTestProps}
+        />
+      );
+    });
+
+    it('should render FooterPane with correct props', () => {
+      expect(FooterPane).toHaveBeenCalledWith({
+        isSaveButtonDisabled: true,
+        onCancel: mockedOnCancel,
+      }, {});
     });
   });
 });
