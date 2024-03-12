@@ -153,8 +153,7 @@ describe('PatronNoticeForm', () => {
 
     it('should render FooterPane component', () => {
       componentPropsCheck(FooterPane, testIds.patronNoticeFooterPane, {
-        pristine: testPristineValue,
-        submitting: testSubmittingValue,
+        isSaveButtonDisabled: true,
         onCancel: testOnCancel,
       });
     });

@@ -117,8 +117,7 @@ describe('FinePolicyForm', () => {
 
   it('should execute "FooterPane" with passed props', () => {
     expect(FooterPane).toHaveBeenCalledWith({
-      pristine: true,
-      submitting: false,
+      isSaveButtonDisabled: true,
       onCancel: mockedOnCancel,
     }, {});
   });

@@ -18,6 +18,7 @@
 * UI tests replacement with RTL/Jest for `CirculationRules.js`. Refs UICIRC-958.
 * Create a new permission "Settings (Circulation): Can view staff slips". Refs UICIRC-848.
 * Add `displaySummary` token for patron notice templates and for staff slips templates. Refs UICIRC-1059.
+* Fix that Save & close button is missing in the circulation forms. Refs UICIRC-1064.
 
 ## [9.0.4](https://github.com/folio-org/ui-circulation/tree/v9.0.4) (2024-02-22)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v9.0.3...v9.0.4)

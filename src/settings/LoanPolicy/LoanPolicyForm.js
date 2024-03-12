@@ -137,8 +137,7 @@ class LoanPolicyForm extends React.Component {
     const schedules = this.generateScheduleOptions();
     const panelTitle = policy.id ? policy.name : formatMessage({ id: 'ui-circulation.settings.loanPolicy.createEntryLabel' });
     const footerPaneProps = {
-      pristine,
-      submitting,
+      isSaveButtonDisabled: pristine || submitting,
       onCancel,
     };
 

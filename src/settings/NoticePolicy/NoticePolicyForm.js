@@ -67,8 +67,7 @@ class NoticePolicyForm extends React.Component {
       : <FormattedMessage id="ui-circulation.settings.noticePolicy.createEntryLabel" />;
 
     const footerPaneProps = {
-      pristine,
-      submitting,
+      isSaveButtonDisabled: pristine || submitting,
       onCancel,
     };
 
