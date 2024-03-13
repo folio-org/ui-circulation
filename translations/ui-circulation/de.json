@@ -533,5 +533,6 @@
     "settings.title.printHoldRequests": "Vormerkungen drucken",
     "settings.title.newRecord": "Neu {name}",
     "settings.title.editRecord": "{name} bearbeiten",
-    "settings.finePolicy.reminderFees.noBlock": "Keine Sperre"
+    "settings.finePolicy.reminderFees.noBlock": "Keine Sperre",
+    "permission.settings.view-staff-slips": "Einstellungen (Ausleihe): Kann Dienstzettel anzeigen"
 }
