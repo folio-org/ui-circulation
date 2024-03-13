@@ -533,5 +533,6 @@
     "settings.title.printHoldRequests": "Tisk rezervací",
     "settings.title.newRecord": "Nový {name}",
     "settings.title.editRecord": "Upravit {name}",
-    "settings.finePolicy.reminderFees.noBlock": "Žádný blok"
+    "settings.finePolicy.reminderFees.noBlock": "Žádný blok",
+    "permission.settings.view-staff-slips": "Settings (Circulation): Can view staff slips"
 }
