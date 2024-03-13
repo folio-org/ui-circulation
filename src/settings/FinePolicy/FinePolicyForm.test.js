@@ -68,7 +68,7 @@ describe('FinePolicyForm', () => {
   const policyForTest = new FinePolicy(mockedInitialValues);
   const defaultProps = {
     stripes: mockedStripes,
-    pristine: false,
+    pristine: true,
     submitting: false,
     initialValues: mockedInitialValues,
     handleSubmit: mockedHandleSubmit,
@@ -117,7 +117,7 @@ describe('FinePolicyForm', () => {
 
   it('should execute "FooterPane" with passed props', () => {
     expect(FooterPane).toHaveBeenCalledWith({
-      isSaveButtonDisabled: false,
+      isSaveButtonDisabled: true,
       onCancel: mockedOnCancel,
     }, {});
   });
@@ -173,11 +173,11 @@ describe('FinePolicyForm', () => {
     });
   });
 
-  describe('when initialValues are passed ', () => {
+  describe('when form value was changed', () => {
     const defaultTestProps = {
       ...defaultProps,
-      pristine: true,
-      submitting: true,
+      pristine: false,
+      submitting: false,
     };
 
     beforeEach(() => {
@@ -190,7 +190,7 @@ describe('FinePolicyForm', () => {
 
     it('should render FooterPane with correct props', () => {
       expect(FooterPane).toHaveBeenCalledWith({
-        isSaveButtonDisabled: true,
+        isSaveButtonDisabled: false,
         onCancel: mockedOnCancel,
       }, {});
     });

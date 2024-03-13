@@ -165,4 +165,27 @@ describe('LostItemFeePolicyForm', () => {
       }), {});
     });
   });
+
+  describe('when form value was changed', () => {
+    const defaultTestProps = {
+      ...defaultProps,
+      pristine: false,
+      submitting: false,
+    };
+
+    beforeEach(() => {
+      render(
+        <LostItemFeePolicyForm
+          {...defaultTestProps}
+        />
+      );
+    });
+
+    it('should render FooterPane with correct props', () => {
+      expect(FooterPane).toHaveBeenCalledWith({
+        isSaveButtonDisabled: false,
+        onCancel: mockedOnCancel,
+      }, {});
+    });
+  });
 });

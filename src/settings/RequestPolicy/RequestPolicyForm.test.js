@@ -79,7 +79,7 @@ describe('RequestPolicyForm', () => {
   const pathname = '/policyId/test';
   const defaultProps = {
     okapi,
-    pristine: false,
+    pristine: true,
     stripes,
     submitting: false,
     onCancel,
@@ -153,7 +153,7 @@ describe('RequestPolicyForm', () => {
 
     it('should executed FooterPane with correct props', () => {
       expect(FooterPane).toHaveBeenCalledWith({
-        isSaveButtonDisabled: false,
+        isSaveButtonDisabled: true,
         onCancel,
       }, {});
     });
@@ -212,8 +212,8 @@ describe('RequestPolicyForm', () => {
     };
     const defaultTestProps = {
       ...defaultProps,
-      pristine: true,
-      submitting: true,
+      pristine: false,
+      submitting: false,
     };
     const testPolicy = new RequestPolicy(initialValues);
 
@@ -259,7 +259,7 @@ describe('RequestPolicyForm', () => {
 
     it('should executed FooterPane with correct props', () => {
       expect(FooterPane).toHaveBeenCalledWith({
-        isSaveButtonDisabled: true,
+        isSaveButtonDisabled: false,
         onCancel,
       }, {});
     });

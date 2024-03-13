@@ -86,7 +86,7 @@ describe('PatronNoticeForm', () => {
       values: {}
     };
   });
-  const testPristineValue = false;
+  const testPristineValue = true;
   const testSubmittingValue = false;
   const testHandleSubmit = jest.fn();
   const testOnCancel = jest.fn();
@@ -153,7 +153,7 @@ describe('PatronNoticeForm', () => {
 
     it('should render FooterPane with correct props', () => {
       componentPropsCheck(FooterPane, testIds.patronNoticeFooterPane, {
-        isSaveButtonDisabled: false,
+        isSaveButtonDisabled: true,
         onCancel: testOnCancel,
       });
     });
@@ -201,15 +201,9 @@ describe('PatronNoticeForm', () => {
     };
 
     beforeEach(() => {
-      const defaultProps = {
-        ...defaultTestProps,
-        pristine: true,
-        submitting: true,
-      };
-
       render(
         <PatronNoticeForm
-          {...defaultProps}
+          {...defaultTestProps}
           initialValues={initialValues}
           stripes={testStripes}
           location={{
@@ -235,13 +229,6 @@ describe('PatronNoticeForm', () => {
         metadata: initialValues.metadata,
       }), {});
     });
-
-    it('should render FooterPane with correct props', () => {
-      componentPropsCheck(FooterPane, testIds.patronNoticeFooterPane, {
-        isSaveButtonDisabled: true,
-        onCancel: testOnCancel,
-      });
-    });
   });
 
   describe('print only', () => {
@@ -260,6 +247,7 @@ describe('PatronNoticeForm', () => {
           }
         };
       });
+
       render(
         <PatronNoticeForm
           {...defaultTestProps}
@@ -290,6 +278,29 @@ describe('PatronNoticeForm', () => {
 
     it('should not return view', () => {
       expect(screen.queryByTestId(testIds.form)).not.toBeInTheDocument();
+    });
+  });
+
+  describe('when form value was changed', () => {
+    const defaultProps = {
+      ...defaultTestProps,
+      pristine: false,
+      submitting: false,
+    };
+
+    beforeEach(() => {
+      render(
+        <PatronNoticeForm
+          {...defaultProps}
+        />
+      );
+    });
+
+    it('should render FooterPane with correct props', () => {
+      componentPropsCheck(FooterPane, testIds.patronNoticeFooterPane, {
+        isSaveButtonDisabled: false,
+        onCancel: testOnCancel,
+      });
     });
   });
 });
