@@ -45,8 +45,12 @@ const FooterPane = (props) => {
 
 FooterPane.propTypes = {
   isSaveButtonDisabled: PropTypes.bool.isRequired,
-  isSaveButtonAvailable: PropTypes.bool.isRequired,
+  isSaveButtonAvailable: PropTypes.bool,
   onCancel: PropTypes.func.isRequired,
+};
+
+FooterPane.defaultProps = {
+  isSaveButtonAvailable: true,
 };
 
 export default FooterPane;

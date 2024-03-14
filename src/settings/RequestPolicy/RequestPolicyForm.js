@@ -203,8 +203,7 @@ class RequestPolicyForm extends React.Component {
       ? policy.name
       : formatMessage({ id: 'ui-circulation.settings.requestPolicy.createEntryLabel' });
     const footerPaneProps = {
-      pristine,
-      submitting,
+      isSaveButtonDisabled: pristine || submitting,
       onCancel,
     };
 

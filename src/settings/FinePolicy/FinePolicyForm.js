@@ -80,8 +80,7 @@ class FinePolicyForm extends React.Component {
       : formatMessage({ id: 'ui-circulation.settings.finePolicy.createEntryLabel' });
 
     const footerPaneProps = {
-      pristine,
-      submitting,
+      isSaveButtonDisabled: pristine || submitting,
       onCancel,
     };
 

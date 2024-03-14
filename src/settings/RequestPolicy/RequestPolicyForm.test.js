@@ -151,10 +151,9 @@ describe('RequestPolicyForm', () => {
       }, {});
     });
 
-    it('"FooterPane" should be executed with correct props', () => {
+    it('should executed FooterPane with correct props', () => {
       expect(FooterPane).toHaveBeenCalledWith({
-        pristine: true,
-        submitting: false,
+        isSaveButtonDisabled: true,
         onCancel,
       }, {});
     });
@@ -211,13 +210,17 @@ describe('RequestPolicyForm', () => {
       getState: jest.fn(() => ({ values: initialValues })),
       change: jest.fn(),
     };
-
+    const defaultTestProps = {
+      ...defaultProps,
+      pristine: false,
+      submitting: false,
+    };
     const testPolicy = new RequestPolicy(initialValues);
 
     beforeEach(() => {
       render(
         <RequestPolicyForm
-          {...defaultProps}
+          {...defaultTestProps}
           initialValues={initialValues}
           form={form}
           location={{
@@ -252,6 +255,13 @@ describe('RequestPolicyForm', () => {
       fireEvent.change(generalSectionInput, event);
 
       expect(form.change).toHaveBeenCalledWith(event.target.name, event.target.value);
+    });
+
+    it('should executed FooterPane with correct props', () => {
+      expect(FooterPane).toHaveBeenCalledWith({
+        isSaveButtonDisabled: false,
+        onCancel,
+      }, {});
     });
 
     describe('validation check', () => {
