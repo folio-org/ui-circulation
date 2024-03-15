@@ -114,7 +114,11 @@ describe('StaffSlipForm', () => {
 
       expect(Pane).toHaveBeenLastCalledWith(expect.objectContaining(expectedResult), {});
       expect(CancelButton).toHaveBeenLastCalledWith({ onCancel: mockedOnCancel }, {});
-      expect(FooterPane).toHaveBeenLastCalledWith(mockedfooterPaneProps, {});
+      expect(FooterPane).toHaveBeenLastCalledWith({
+        isSaveButtonDisabled: true,
+        isSaveButtonAvailable: true,
+        onCancel: mockedfooterPaneProps.onCancel,
+      }, {});
     });
 
     it('should render AccordionSet component', () => {
@@ -186,10 +190,11 @@ describe('StaffSlipForm', () => {
         expect.objectContaining({ paneTitle: labelIds.new }),
         {},
       );
-      expect(FooterPane).toHaveBeenLastCalledWith(
-        mockedfooterPaneProps,
-        {},
-      );
+      expect(FooterPane).toHaveBeenLastCalledWith({
+        isSaveButtonDisabled: false,
+        isSaveButtonAvailable: false,
+        onCancel: mockedfooterPaneProps.onCancel,
+      }, {});
     });
   });
 });

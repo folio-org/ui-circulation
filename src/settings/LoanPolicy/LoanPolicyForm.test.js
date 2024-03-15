@@ -193,8 +193,7 @@ describe('LoanPolicyForm', () => {
 
   it('should execute "FooterPane" with passed props', () => {
     expect(FooterPane).toHaveBeenCalledWith({
-      pristine: true,
-      submitting: false,
+      isSaveButtonDisabled: true,
       onCancel: mockedOnCancel,
     }, {});
   });
@@ -323,6 +322,29 @@ describe('LoanPolicyForm', () => {
 
     it('should correctly sort and pass schedules in "RenewalsSection" component', () => {
       schedulesTest(testIds.renewalsSection);
+    });
+  });
+
+  describe('when form value was changed', () => {
+    const defaultTestProps = {
+      ...defaultProps,
+      pristine: false,
+      submitting: false,
+    };
+
+    beforeEach(() => {
+      render(
+        <LoanPolicyForm
+          {...defaultTestProps}
+        />
+      );
+    });
+
+    it('should render FooterPane with correct props', () => {
+      expect(FooterPane).toHaveBeenCalledWith({
+        isSaveButtonDisabled: false,
+        onCancel: mockedOnCancel,
+      }, {});
     });
   });
 });

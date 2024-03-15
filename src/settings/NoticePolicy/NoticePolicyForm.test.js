@@ -146,8 +146,7 @@ describe('NoticePolicyForm', () => {
 
   it('should execute "FooterPane" with passed props', () => {
     expect(FooterPane).toHaveBeenCalledWith({
-      pristine: true,
-      submitting: false,
+      isSaveButtonDisabled: true,
       onCancel: mockedOnCancel,
     }, {});
   });
@@ -217,6 +216,29 @@ describe('NoticePolicyForm', () => {
 
     it('should render correctly pane title', () => {
       expect(screen.getByText(labelIds.createEntryLabel)).toBeInTheDocument();
+    });
+  });
+
+  describe('when form value was changed', () => {
+    const defaultTestProps = {
+      ...defaultProps,
+      pristine: false,
+      submitting: false,
+    };
+
+    beforeEach(() => {
+      render(
+        <NoticePolicyForm
+          {...defaultTestProps}
+        />
+      );
+    });
+
+    it('should render FooterPane with correct props', () => {
+      expect(FooterPane).toHaveBeenCalledWith({
+        isSaveButtonDisabled: false,
+        onCancel: mockedOnCancel,
+      }, {});
     });
   });
 });

@@ -117,8 +117,7 @@ describe('FinePolicyForm', () => {
 
   it('should execute "FooterPane" with passed props', () => {
     expect(FooterPane).toHaveBeenCalledWith({
-      pristine: true,
-      submitting: false,
+      isSaveButtonDisabled: true,
       onCancel: mockedOnCancel,
     }, {});
   });
@@ -171,6 +170,29 @@ describe('FinePolicyForm', () => {
       expect(Pane).toHaveBeenCalledWith(expect.objectContaining({
         paneTitle: labelIds.createEntryLabel,
       }), {});
+    });
+  });
+
+  describe('when form value was changed', () => {
+    const defaultTestProps = {
+      ...defaultProps,
+      pristine: false,
+      submitting: false,
+    };
+
+    beforeEach(() => {
+      render(
+        <FinePolicyForm
+          {...defaultTestProps}
+        />
+      );
+    });
+
+    it('should render FooterPane with correct props', () => {
+      expect(FooterPane).toHaveBeenCalledWith({
+        isSaveButtonDisabled: false,
+        onCancel: mockedOnCancel,
+      }, {});
     });
   });
 });

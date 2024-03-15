@@ -72,8 +72,7 @@ class LostItemFeePolicyForm extends React.Component {
 
     const panelTitle = policy.id ? policy.name : formatMessage({ id: 'ui-circulation.settings.lostItemFee.entryLabel' });
     const footerPaneProps = {
-      pristine,
-      submitting,
+      isSaveButtonDisabled: pristine || submitting,
       onCancel,
     };
 

@@ -110,8 +110,7 @@ describe('LostItemFeePolicyForm', () => {
 
   it('should execute "FooterPane" with passed props', () => {
     expect(FooterPane).toHaveBeenCalledWith({
-      pristine: true,
-      submitting: false,
+      isSaveButtonDisabled: true,
       onCancel: mockedOnCancel,
     }, {});
   });
@@ -164,6 +163,29 @@ describe('LostItemFeePolicyForm', () => {
       expect(Pane).toHaveBeenCalledWith(expect.objectContaining({
         paneTitle: labelIds.entryLabel,
       }), {});
+    });
+  });
+
+  describe('when form value was changed', () => {
+    const defaultTestProps = {
+      ...defaultProps,
+      pristine: false,
+      submitting: false,
+    };
+
+    beforeEach(() => {
+      render(
+        <LostItemFeePolicyForm
+          {...defaultTestProps}
+        />
+      );
+    });
+
+    it('should render FooterPane with correct props', () => {
+      expect(FooterPane).toHaveBeenCalledWith({
+        isSaveButtonDisabled: false,
+        onCancel: mockedOnCancel,
+      }, {});
     });
   });
 });
