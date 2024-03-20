@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import HtmlToReact, { Parser } from 'html-to-react';
 import { FormattedMessage } from 'react-intl';
+import HtmlToReact, { Parser } from 'html-to-react';
+import { sanitize } from 'dompurify';
 
 import {
   Button,
@@ -26,8 +27,8 @@ const PatronNoticeEmailSection = ({ notice, locale, emailTemplate }) => {
     }
   ];
   const tokens = getTokens(locale);
-
-  const parsedEmailTemplate = parser.parseWithInstructions(emailTemplate, () => true, rules);
+  const purifyEmailTemplate = sanitize(emailTemplate);
+  const parsedEmailTemplate = parser.parseWithInstructions(purifyEmailTemplate, () => true, rules);
   const [openPreview, setOpenPreview] = useState(false);
 
   const togglePreviewDialog = () => {
