@@ -1,6 +1,7 @@
 # Change history for ui-circulation
 
-* Only certain HTML tags should be rendered when displaying staff slips. Refs UICIRC-1070.
+## 9.2.0 IN PROGRESS
+
 * Use Save & close button label stripes-component translation key. Refs UICIRC-1066.
 
 ## [9.1.0](https://github.com/folio-org/ui-circulation/tree/v9.1.0) (2024-03-22)
