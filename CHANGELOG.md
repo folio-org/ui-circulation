@@ -20,6 +20,7 @@
 * Add `displaySummary` token for patron notice templates and for staff slips templates. Refs UICIRC-1059.
 * Fix that Save & close button is missing in the circulation forms. Refs UICIRC-1064.
 * Only certain HTML tags should be rendered when displaying staff slips. Refs UICIRC-1070.
+* Use Save & close button label stripes-component translation key. Refs UICIRC-1066.
 
 ## [9.0.4](https://github.com/folio-org/ui-circulation/tree/v9.0.4) (2024-02-22)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v9.0.3...v9.0.4)

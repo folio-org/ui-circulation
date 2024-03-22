@@ -54,6 +54,6 @@ describe('Footer Pane', () => {
     const { container } = footerPane;
 
     expect(getByText(container, 'ui-circulation.settings.common.cancel')).toBeTruthy();
-    expect(getByText(container, 'ui-circulation.settings.common.saveAndClose')).toBeTruthy();
+    expect(getByText(container, /saveAndClose/)).toBeTruthy();
   });
 });
