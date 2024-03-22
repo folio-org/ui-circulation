@@ -1,6 +1,7 @@
 # Change history for ui-circulation
 
-## 9.1.0 IN PROGRESS
+## [9.1.0](https://github.com/folio-org/ui-circulation/tree/v9.1.0) (2024-03-22)
+[Full Changelog](https://github.com/folio-org/ui-circulation/compare/v9.0.5...v9.1.0)
 
 * Also support `feesfines` interface version `19.0`. Refs UICIRC-992.
 * Create and Display new Staff slip (Search slip (Hold requests)). Refs UICIRC-1001.
@@ -19,7 +20,11 @@
 * Create a new permission "Settings (Circulation): Can view staff slips". Refs UICIRC-848.
 * Add `displaySummary` token for patron notice templates and for staff slips templates. Refs UICIRC-1059.
 * Fix that Save & close button is missing in the circulation forms. Refs UICIRC-1064.
-* Only certain HTML tags should be rendered when displaying staff slips. Refs UICIRC-1070.
+
+## [9.0.5](https://github.com/folio-org/ui-circulation/tree/v9.0.5) (2024-03-21)
+[Full Changelog](https://github.com/folio-org/ui-circulation/compare/v9.0.4...v9.0.5)
+
+* Only certain HTML tags should be rendered when displaying staff slips. Refs UICIRC-1070, UICIRC-1060.
 
 ## [9.0.4](https://github.com/folio-org/ui-circulation/tree/v9.0.4) (2024-02-22)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v9.0.3...v9.0.4)
