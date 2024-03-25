@@ -33,7 +33,7 @@ const labelIds = {
   closeLabel: 'ui-circulation.settings.fDDSform.closeLabel',
   cancel: 'ui-circulation.settings.fDDSform.cancel',
   delete: 'stripes-core.button.delete',
-  saveAndClose: 'ui-circulation.settings.common.saveAndClose',
+  saveAndClose: /saveAndClose/,
   schedule: 'ui-circulation.settings.fDDSform.schedule',
   name: 'ui-circulation.settings.fDDSform.name',
   description: 'ui-circulation.settings.fDDSform.description',

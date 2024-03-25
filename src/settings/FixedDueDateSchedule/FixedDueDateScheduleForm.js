@@ -118,7 +118,7 @@ class FixedDueDateScheduleForm extends React.Component {
             buttonStyle="primary mega"
             disabled={(pristine || submitting)}
           >
-            <FormattedMessage id="ui-circulation.settings.common.saveAndClose" />
+            <FormattedMessage id="stripes-components.saveAndClose" />
           </Button>
         </div>
       </PaneFooter>
