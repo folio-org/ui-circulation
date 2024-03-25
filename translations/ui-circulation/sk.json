@@ -111,7 +111,6 @@
     "settings.patronNotices.predefinedWarning": "This is a predefined notice and cannot be deleted",
     "settings.patronNotices.yes": "Yes",
     "settings.patronNotices.no": "No",
-    "settings.loanPolicy.saveAndClose": "Save and close",
     "settings.loanPolicy.deleteLoanPolicy": "Delete loan policy",
     "settings.loanPolicy.createEntryLabel": "New loan policy",
     "settings.loanPolicy.delete": "Delete",

@@ -111,7 +111,6 @@
     "settings.patronNotices.predefinedWarning": "Ceci est une notification prédéfinie et ne peut être supprimée",
     "settings.patronNotices.yes": "Oui",
     "settings.patronNotices.no": "Non",
-    "settings.loanPolicy.saveAndClose": "Sauvegarder et fermer",
     "settings.loanPolicy.deleteLoanPolicy": "Supprimer la règle de prêt",
     "settings.loanPolicy.createEntryLabel": "Nouvelle règle de prêt",
     "settings.loanPolicy.delete": "Supprimer",

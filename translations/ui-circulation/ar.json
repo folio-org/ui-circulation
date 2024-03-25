@@ -111,7 +111,6 @@
     "settings.patronNotices.predefinedWarning": "هذا إخطار مسبق ولا يمكن حذفه",
     "settings.patronNotices.yes": "نعم",
     "settings.patronNotices.no": "لا",
-    "settings.loanPolicy.saveAndClose": "حفظ وإغلاق",
     "settings.loanPolicy.deleteLoanPolicy": "حذف سياسة الإعارة",
     "settings.loanPolicy.createEntryLabel": "سياسة إعارة جديدة",
     "settings.loanPolicy.delete": "حذف",

@@ -111,7 +111,6 @@
     "settings.patronNotices.predefinedWarning": "Jedná se o předdefinovanou notifikaci, kterou nelze smazat.",
     "settings.patronNotices.yes": "Ano",
     "settings.patronNotices.no": "Ne",
-    "settings.loanPolicy.saveAndClose": "Uložit a zavřít",
     "settings.loanPolicy.deleteLoanPolicy": "Smazat výpůjčkové pravidlo",
     "settings.loanPolicy.createEntryLabel": "Nové výpůjčkové pravidlo",
     "settings.loanPolicy.delete": "Smazat",
@@ -526,7 +525,7 @@
     "settings.title.overdueFinePolicies": "Pozdní vrácení {optionNumber, plural, one {pravidlo} other {pravidla}}",
     "settings.title.lostItemFeePolicies": "Poplatek za ztracenou jednotku {optionNumber, plural, one {pravidlo} other {pravidla}}",
     "settings.title.patronNoticePolicies": "Upozornění pro čtenáře {optionNumber, plural, one {pravidlo} other {pravidla}}",
-    "settings.title.patronNoticeTemplates": "Patron notice {optionNumber, plural, one {template} other {templates}}",
+    "settings.title.patronNoticeTemplates": "Notifikace pro čtenáře {optionNumber, plural, one {šablona} other {šablony}}",
     "settings.title.requestCancellationReasons": "Důvody zrušení žádanky/rezervace",
     "settings.title.requestPolicies": "Žádanka {optionNumber, plural, one {pravidlo} other {pravidla}}",
     "settings.title.titleLevelRequests": "Žádanky na úrovni názvu",
@@ -534,5 +533,5 @@
     "settings.title.newRecord": "Nový {name}",
     "settings.title.editRecord": "Upravit {name}",
     "settings.finePolicy.reminderFees.noBlock": "Žádný blok",
-    "permission.settings.view-staff-slips": "Settings (Circulation): Can view staff slips"
+    "permission.settings.view-staff-slips": "Nastavení (Cirkulace): Může zobrazit zaměstnanecké lístky"
 }
