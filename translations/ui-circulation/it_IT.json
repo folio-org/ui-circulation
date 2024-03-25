@@ -111,7 +111,6 @@
     "settings.patronNotices.predefinedWarning": "Questa è una notifica predefinita e non può essere eliminata",
     "settings.patronNotices.yes": "Si",
     "settings.patronNotices.no": "No",
-    "settings.loanPolicy.saveAndClose": "Salva e chiudi",
     "settings.loanPolicy.deleteLoanPolicy": "Elimina politica di prestito",
     "settings.loanPolicy.createEntryLabel": "Crea politica di prestito",
     "settings.loanPolicy.delete": "Elimina",

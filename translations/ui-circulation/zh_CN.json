@@ -111,7 +111,6 @@
     "settings.patronNotices.predefinedWarning": "这是预定义的通知，无法删除",
     "settings.patronNotices.yes": "是",
     "settings.patronNotices.no": "否",
-    "settings.loanPolicy.saveAndClose": "保存并关闭",
     "settings.loanPolicy.deleteLoanPolicy": "删除借阅政策",
     "settings.loanPolicy.createEntryLabel": "新建借阅政策",
     "settings.loanPolicy.delete": "删除",
