@@ -229,7 +229,31 @@ describe('utils', () => {
     });
   });
 
-  describe.skip('getConsortiumTlrPermission', () => {
+  describe('getConsortiumTlrPermission', () => {
+    describe('when consortia and ecs-tlr interfaces are presented', () => {
+      const stripes = {
+        hasInterface: jest.fn(() => true),
+      };
 
+      it('should return consortium edit permission', () => {
+        const result = getConsortiumTlrPermission(stripes);
+        const consortiumViewPermission = 'tlr.consortium-tlr.view';
+
+        expect(result).toBe(consortiumViewPermission);
+      });
+    });
+
+    describe('when consortia and ecs-tlr interfaces are not presented', () => {
+      const stripes = {
+        hasInterface: jest.fn(() => false),
+      };
+
+      it('should return no permission value', () => {
+        const result = getConsortiumTlrPermission(stripes);
+        const noConsortiumPermission = 'noPermission';
+
+        expect(result).toBe(noConsortiumPermission);
+      });
+    });
   });
 });

@@ -1,4 +1,6 @@
+import PropTypes from 'prop-types';
 import { Field } from 'react-final-form';
+import { FormattedMessage } from 'react-intl';
 
 import stripesFinalForm from '@folio/stripes/final-form';
 import {
@@ -14,15 +16,15 @@ import css from './ConsortiumTLRForm.css';
 
 const ConsortiumTLRForm = ({
   handleSubmit,
-  formatMessage,
   pristine,
-  submitting,
   isEditEnabled,
   tlrSettings,
+  isDataSaving,
+  isConsortiumTlrPending,
 }) => {
-  const isSaveButtonDisabled = pristine || submitting || !isEditEnabled;
-  const isNotificationShown = !tlrSettings.isPending && !tlrSettings.records[0]?.value?.titleLevelRequestsFeatureEnabled;
-  const labelClass = isNotificationShown ? css.disabledItem : '';
+  const isSaveButtonDisabled = pristine || !isEditEnabled || isDataSaving;
+  const isTlrFeatureDisabled = !tlrSettings.isPending && !tlrSettings.records[0]?.value?.titleLevelRequestsFeatureEnabled;
+  const isCheckboxDisabled = isConsortiumTlrPending || isTlrFeatureDisabled;
   const footer = (
     <PaneFooter
       renderEnd={(
@@ -32,7 +34,7 @@ const ConsortiumTLRForm = ({
           disabled={isSaveButtonDisabled}
           marginBottom0
         >
-          {formatMessage({ id: 'stripes-core.button.save' })}
+          <FormattedMessage id="stripes-core.button.save" />
         </Button>
       )}
     />
@@ -43,33 +45,41 @@ const ConsortiumTLRForm = ({
       data-testid="consortiumTlrForm"
       id="consortiumTlrForm"
       className={css.consortiumTlrForm}
-      noValidate
       onSubmit={handleSubmit}
+      noValidate
     >
       <Pane
         id="consortiumTlrPane"
         defaultWidth="fill"
         fluidContentWidth
-        paneTitle={formatMessage({ id: 'ui-circulation.settings.index.consortiumTLR' })}
+        paneTitle={<FormattedMessage id="ui-circulation.settings.index.consortiumTLR" />}
         footer={footer}
       >
-        {isNotificationShown &&
+        {isTlrFeatureDisabled &&
           <div className={css.notification}>
-            {formatMessage({ id: 'ui-circulation.settings.consortiumTlr.notification' })}
+            <FormattedMessage id="ui-circulation.settings.consortiumTlr.notification" />
           </div>
         }
         <Field
           data-testid="consortiumTlrCheckbox"
           name={CONSORTIUM_TITLE_LEVEL_REQUESTS.ECS_TLR_ENABLED}
           type="checkbox"
-          labelClass={labelClass}
-          disabled={isNotificationShown}
-          label={formatMessage({ id: 'ui-circulation.settings.consortiumTlr.allow' })}
+          disabled={isCheckboxDisabled}
+          label={<FormattedMessage id="ui-circulation.settings.consortiumTlr.allow" />}
           component={Checkbox}
         />
       </Pane>
     </form>
   );
+};
+
+ConsortiumTLRForm.propTypes = {
+  handleSubmit: PropTypes.func.isRequired,
+  pristine: PropTypes.bool.isRequired,
+  isDataSaving: PropTypes.bool.isRequired,
+  isConsortiumTlrPending: PropTypes.bool.isRequired,
+  isEditEnabled: PropTypes.bool.isRequired,
+  tlrSettings: PropTypes.object.isRequired,
 };
 
 export default stripesFinalForm({

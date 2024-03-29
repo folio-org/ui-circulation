@@ -1,3 +1,5 @@
+import React from 'react';
+
 import {
   render,
   screen,
@@ -14,11 +16,19 @@ const basicProps = {
   },
   mutator: {
     consortiumTlr: {
-      POST: jest.fn(),
+      PUT: jest.fn().mockResolvedValue({}),
+      GET: jest.fn(),
     },
   },
   resources: {
     settings: {},
+    consortiumTlr: {
+      records: [
+        {
+          ecsTlrFeatureEnabled: false,
+        }
+      ],
+    },
   },
   stripes: {
     hasPerm: jest.fn(() => true),
@@ -43,6 +53,10 @@ jest.mock('./ConsortiumTLRForm', () => jest.fn(({
 
 describe('ConsortiumTLR', () => {
   beforeEach(() => {
+    jest.spyOn(React, 'useContext').mockReturnValue({
+      sendCallout: jest.fn(),
+    });
+
     render(
       <ConsortiumTLR
         {...basicProps}
@@ -81,6 +95,14 @@ describe('ConsortiumTLR', () => {
 
     fireEvent.submit(tlrForm);
 
-    expect(basicProps.mutator.consortiumTlr.POST).toHaveBeenCalled();
+    expect(basicProps.mutator.consortiumTlr.PUT).toHaveBeenCalled();
+  });
+
+  it('should fetch new settings after data submitting', () => {
+    const tlrForm = screen.getByTestId(testIds.tlrForm);
+
+    fireEvent.submit(tlrForm);
+
+    expect(basicProps.mutator.consortiumTlr.GET).toHaveBeenCalled();
   });
 });

@@ -8,9 +8,9 @@ import ConsortiumTLRForm from './ConsortiumTLRForm';
 
 const basicProps = {
   handleSubmit: jest.fn(),
-  formatMessage: jest.fn(({ id }) => id),
   pristine: false,
-  submitting: false,
+  isDataSaving: false,
+  isConsortiumTlrPending: false,
   isEditEnabled: true,
   tlrSettings: {
     isPending: false,

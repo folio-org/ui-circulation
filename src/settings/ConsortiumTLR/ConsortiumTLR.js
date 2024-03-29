@@ -1,8 +1,16 @@
+import PropTypes from 'prop-types';
+import {
+  useEffect,
+  useContext,
+  useState,
+} from 'react';
 import { injectIntl } from 'react-intl';
 
 import {
   TitleManager,
   stripesConnect,
+  stripesShape,
+  CalloutContext,
 } from '@folio/stripes/core';
 
 import ConsortiumTLRForm from './ConsortiumTLRForm';
@@ -19,10 +27,28 @@ const ConsortiumTLR = ({
   resources,
   stripes,
 }) => {
-  const handleSubmit = async (data) => {
-    //TODO: add changes to data if necessary
-    await mutator.consortiumTlr.PUT({ ...data });
+  useEffect(() => {
+    mutator.consortiumTlr.GET();
+  }, []);
+
+  const [isDataSaving, setDataSaving] = useState(false);
+  const callout = useContext(CalloutContext);
+  const handleSubmit = (data) => {
+    setDataSaving(true);
+    mutator.consortiumTlr.PUT(data)
+      .then(() => {
+        callout.sendCallout({ message: formatMessage({ id: 'stripes-smart-components.cm.success' }) });
+
+        return mutator.consortiumTlr.GET();
+      })
+      .finally(() => {
+        setDataSaving(false);
+      });
   };
+  const initialValues = {
+    ecsTlrFeatureEnabled: resources.consortiumTlr.records.slice(-1)[0]?.ecsTlrFeatureEnabled,
+  };
+  const isEditPerm = stripes.hasPerm('tlr.consortium-tlr.edit');
 
   return (
     <TitleManager
@@ -31,14 +57,11 @@ const ConsortiumTLR = ({
     >
       <ConsortiumTLRForm
         onSubmit={handleSubmit}
-        formatMessage={formatMessage}
-        initialValues={{
-          //TODO: take initial value from returned data
-          ecsTlrFeatureEnabled: false,
-        }}
-        //TODO: add correct permission name
-        isEditEnabled={stripes.hasPerm('tlr.settings.ecs-tlr.put')}
+        initialValues={initialValues}
+        isEditEnabled={isEditPerm}
         tlrSettings={resources.settings}
+        isConsortiumTlrPending={resources.consortiumTlr.isPending}
+        isDataSaving={isDataSaving}
       />
     </TitleManager>
   );
@@ -50,12 +73,29 @@ ConsortiumTLR.manifest = Object.freeze({
     path: `settings/entries?query=(scope==${SCOPES.CIRCULATION} and key==${CONFIG_NAMES.GENERAL_TLR})`,
     records: 'items',
   },
-  //TODO: add correct endpoint for saving/getting consortium tlr settings
   consortiumTlr: {
     type: 'okapi',
-    path: 'ecs-tlr/settings',
-    records: 'items',
+    path: 'tlr/settings',
+    fetch: false,
+    accumulate: true,
   },
 });
+
+ConsortiumTLR.propTypes = {
+  intl: PropTypes.shape({
+    formatMessage: PropTypes.func.isRequired,
+  }).isRequired,
+  mutator: PropTypes.shape({
+    consortiumTlr: PropTypes.shape({
+      PUT: PropTypes.func.isRequired,
+      GET: PropTypes.func.isRequired,
+    }).isRequired,
+  }).isRequired,
+  resources: PropTypes.shape({
+    consortiumTlr: PropTypes.object.isRequired,
+    settings: PropTypes.object.isRequired,
+  }).isRequired,
+  stripes: stripesShape.isRequired,
+};
 
 export default injectIntl(stripesConnect(ConsortiumTLR));
