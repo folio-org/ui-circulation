@@ -10,7 +10,6 @@ const basicProps = {
   handleSubmit: jest.fn(),
   pristine: false,
   isDataSaving: false,
-  isConsortiumTlrPending: false,
   isEditEnabled: true,
   tlrSettings: {
     isPending: false,

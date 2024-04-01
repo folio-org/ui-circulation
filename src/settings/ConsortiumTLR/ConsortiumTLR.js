@@ -29,12 +29,13 @@ const ConsortiumTLR = ({
 }) => {
   useEffect(() => {
     mutator.consortiumTlr.GET();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const [isDataSaving, setDataSaving] = useState(false);
+  const [saving, setSaving] = useState(false);
   const callout = useContext(CalloutContext);
   const handleSubmit = (data) => {
-    setDataSaving(true);
+    setSaving(true);
     mutator.consortiumTlr.PUT(data)
       .then(() => {
         callout.sendCallout({ message: formatMessage({ id: 'stripes-smart-components.cm.success' }) });
@@ -42,7 +43,7 @@ const ConsortiumTLR = ({
         return mutator.consortiumTlr.GET();
       })
       .finally(() => {
-        setDataSaving(false);
+        setSaving(false);
       });
   };
   const initialValues = {
@@ -60,8 +61,7 @@ const ConsortiumTLR = ({
         initialValues={initialValues}
         isEditEnabled={isEditPerm}
         tlrSettings={resources.settings}
-        isConsortiumTlrPending={resources.consortiumTlr.isPending}
-        isDataSaving={isDataSaving}
+        isSaving={saving}
       />
     </TitleManager>
   );

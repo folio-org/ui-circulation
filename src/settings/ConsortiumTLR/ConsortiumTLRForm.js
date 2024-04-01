@@ -19,12 +19,10 @@ const ConsortiumTLRForm = ({
   pristine,
   isEditEnabled,
   tlrSettings,
-  isDataSaving,
-  isConsortiumTlrPending,
+  isSaving,
 }) => {
-  const isSaveButtonDisabled = pristine || !isEditEnabled || isDataSaving;
+  const isSaveButtonDisabled = pristine || !isEditEnabled || isSaving;
   const isTlrFeatureDisabled = !tlrSettings.isPending && !tlrSettings.records[0]?.value?.titleLevelRequestsFeatureEnabled;
-  const isCheckboxDisabled = isConsortiumTlrPending || isTlrFeatureDisabled;
   const footer = (
     <PaneFooter
       renderEnd={(
@@ -64,7 +62,7 @@ const ConsortiumTLRForm = ({
           data-testid="consortiumTlrCheckbox"
           name={CONSORTIUM_TITLE_LEVEL_REQUESTS.ECS_TLR_ENABLED}
           type="checkbox"
-          disabled={isCheckboxDisabled}
+          disabled={isTlrFeatureDisabled}
           label={<FormattedMessage id="ui-circulation.settings.consortiumTlr.allow" />}
           component={Checkbox}
         />
@@ -76,8 +74,7 @@ const ConsortiumTLRForm = ({
 ConsortiumTLRForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   pristine: PropTypes.bool.isRequired,
-  isDataSaving: PropTypes.bool.isRequired,
-  isConsortiumTlrPending: PropTypes.bool.isRequired,
+  isSaving: PropTypes.bool.isRequired,
   isEditEnabled: PropTypes.bool.isRequired,
   tlrSettings: PropTypes.object.isRequired,
 };
