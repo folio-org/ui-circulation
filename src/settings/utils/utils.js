@@ -101,3 +101,11 @@ export const getConsortiumTlrPermission = (stripes) => {
 
   return 'noPermission';
 };
+
+export const getLastRecordValue = (resource) => {
+  if (resource.records) {
+    return resource.records.slice(-1)[0];
+  }
+
+  return null;
+};

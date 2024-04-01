@@ -4,6 +4,7 @@ import {
   validateUniqueNameById,
   getRecordName,
   getConsortiumTlrPermission,
+  getLastRecordValue,
 } from './utils';
 
 describe('utils', () => {
@@ -253,6 +254,35 @@ describe('utils', () => {
         const noConsortiumPermission = 'noPermission';
 
         expect(result).toBe(noConsortiumPermission);
+      });
+    });
+  });
+
+  describe('getLastRecordValue', () => {
+    describe('When there is records array', () => {
+      it('should return last element', () => {
+        const resource = {
+          records: [
+            {
+              ecsTlrFeatureEnabled: true,
+            },
+            {
+              ecsTlrFeatureEnabled: false,
+            }
+          ],
+        };
+        const result = getLastRecordValue(resource);
+
+        expect(result).toEqual(resource.records[1]);
+      });
+    });
+
+    describe('When there is no records array', () => {
+      it('should return null', () => {
+        const resource = {};
+        const result = getLastRecordValue(resource);
+
+        expect(result).toBeNull();
       });
     });
   });

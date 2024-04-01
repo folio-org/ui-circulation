@@ -14,6 +14,7 @@ import {
 } from '@folio/stripes/core';
 
 import ConsortiumTLRForm from './ConsortiumTLRForm';
+import { getLastRecordValue } from '../utils/utils';
 import {
   CONFIG_NAMES,
   SCOPES,
@@ -47,7 +48,7 @@ const ConsortiumTLR = ({
       });
   };
   const initialValues = {
-    ecsTlrFeatureEnabled: resources.consortiumTlr.records.slice(-1)[0]?.ecsTlrFeatureEnabled,
+    ecsTlrFeatureEnabled: getLastRecordValue(resources.consortiumTlr)?.ecsTlrFeatureEnabled,
   };
   const isEditPerm = stripes.hasPerm('tlr.consortium-tlr.edit');
 
