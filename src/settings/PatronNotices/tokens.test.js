@@ -23,6 +23,11 @@ describe('getTokens', () => {
   };
   const fieldsForCheck = [
     {
+      category: 'item',
+      name: 'item.displaySummary',
+      expectedResult: 'no.1-2v. 121948-1962 (Board)',
+    },
+    {
       category: 'request',
       name: 'request.requestExpirationDate',
       expectedResult: expectedShortResult,

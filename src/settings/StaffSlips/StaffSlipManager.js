@@ -26,6 +26,9 @@ class StaffSlipManager extends React.Component {
         DELETE: PropTypes.func,
       }),
     }).isRequired,
+    stripes: PropTypes.shape({
+      hasPerm: PropTypes.func.isRequired,
+    }),
     intl: PropTypes.object.isRequired,
     location: PropTypes.object.isRequired,
   };
@@ -43,6 +46,7 @@ class StaffSlipManager extends React.Component {
     const {
       mutator,
       resources,
+      stripes,
       intl: {
         formatMessage,
       },
@@ -55,6 +59,7 @@ class StaffSlipManager extends React.Component {
       formatMessage,
       optionNameId: 'ui-circulation.settings.title.staffSlips',
     });
+    const isEditable = stripes.hasPerm('ui-circulation.settings.edit-staff-slips');
 
     return (
       <TitleManager
@@ -70,6 +75,7 @@ class StaffSlipManager extends React.Component {
           entryLabel={formatMessage({ id: 'ui-circulation.settings.staffSlips.staffSlipTokenHeader' })}
           entryFormComponent={StaffSlipForm}
           nameKey="name"
+          editable={isEditable}
           permissions={{
             put: 'ui-circulation.settings.staff-slips',
             post: 'ui-circulation.settings.staff-slips.post',

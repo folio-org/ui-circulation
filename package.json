@@ -197,13 +197,21 @@
         ]
       },
       {
+        "permissionName": "ui-circulation.settings.view-staff-slips",
+        "displayName": "Settings (Circulation): Can view staff slips",
+        "subPermissions": [
+          "settings.circulation.enabled",
+          "circulation-storage.staff-slips.collection.get",
+          "circulation-storage.staff-slips.item.get"
+        ],
+        "visible": true
+      },
+      {
         "permissionName": "ui-circulation.settings.edit-staff-slips",
         "displayName": "Settings (Circ): Can edit staff slips",
         "subPermissions": [
-          "circulation-storage.staff-slips.collection.get",
-          "circulation-storage.staff-slips.item.put",
-          "circulation-storage.staff-slips.item.get",
-          "settings.circulation.enabled"
+          "ui-circulation.settings.view-staff-slips",
+          "circulation-storage.staff-slips.item.put"
         ],
         "visible": false
       },
@@ -211,12 +219,10 @@
         "permissionName": "ui-circulation.settings.staff-slips",
         "displayName": "Settings (Circ): Can create, edit and remove staff slips",
         "subPermissions": [
+          "ui-circulation.settings.edit-staff-slips",
           "configuration.entries.collection.get",
           "configuration.entries.item.put",
           "configuration.entries.item.post",
-          "ui-circulation.settings.edit-staff-slips",
-          "circulation-storage.staff-slips.item.delete",
-          "circulation-storage.staff-slips.collection.delete",
           "circulation-storage.staff-slips.item.post"
         ],
         "visible": true

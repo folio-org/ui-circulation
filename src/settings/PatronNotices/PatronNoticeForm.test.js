@@ -87,7 +87,7 @@ describe('PatronNoticeForm', () => {
     };
   });
   const testPristineValue = true;
-  const testSubmittingValue = true;
+  const testSubmittingValue = false;
   const testHandleSubmit = jest.fn();
   const testOnCancel = jest.fn();
   const mockedStripes = {
@@ -151,10 +151,9 @@ describe('PatronNoticeForm', () => {
       });
     });
 
-    it('should render FooterPane component', () => {
+    it('should render FooterPane with correct props', () => {
       componentPropsCheck(FooterPane, testIds.patronNoticeFooterPane, {
-        pristine: testPristineValue,
-        submitting: testSubmittingValue,
+        isSaveButtonDisabled: true,
         onCancel: testOnCancel,
       });
     });
@@ -248,6 +247,7 @@ describe('PatronNoticeForm', () => {
           }
         };
       });
+
       render(
         <PatronNoticeForm
           {...defaultTestProps}
@@ -278,6 +278,29 @@ describe('PatronNoticeForm', () => {
 
     it('should not return view', () => {
       expect(screen.queryByTestId(testIds.form)).not.toBeInTheDocument();
+    });
+  });
+
+  describe('when form value was changed', () => {
+    const defaultProps = {
+      ...defaultTestProps,
+      pristine: false,
+      submitting: false,
+    };
+
+    beforeEach(() => {
+      render(
+        <PatronNoticeForm
+          {...defaultProps}
+        />
+      );
+    });
+
+    it('should render FooterPane with correct props', () => {
+      componentPropsCheck(FooterPane, testIds.patronNoticeFooterPane, {
+        isSaveButtonDisabled: false,
+        onCancel: testOnCancel,
+      });
     });
   });
 });

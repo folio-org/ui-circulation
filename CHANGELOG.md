@@ -13,9 +13,13 @@
 * Add the possibility to correctly delete fixed due date schedule range. Refs UICIRC-1026.
 * Cover Widget by jest tests. Refs UICIRC-899.
 * Add page titles to Circulation settings pages. Refs UICIRC-970.
+* Move TLR enable settings to Circulation > General. Refs UICIRC-1038.
 * RulesEditor should use stripes.hasPerm. Refs UICIRC-1047.
 * Disable block template under reminder fees. Refs UICIRC-1046.
 * UI tests replacement with RTL/Jest for `CirculationRules.js`. Refs UICIRC-958.
+* Create a new permission "Settings (Circulation): Can view staff slips". Refs UICIRC-848.
+* Add `displaySummary` token for patron notice templates and for staff slips templates. Refs UICIRC-1059.
+* Fix that Save & close button is missing in the circulation forms. Refs UICIRC-1064.
 * Create a new setting - Enable ECS title level requests. Refs UICIRC-1040.
 
 ## [9.0.4](https://github.com/folio-org/ui-circulation/tree/v9.0.4) (2024-02-22)

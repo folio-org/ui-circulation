@@ -100,12 +100,15 @@ const PatronNoticeForm = (props) => {
       onCancel,
     } = props;
 
+    const footerPaneProps = {
+      isSaveButtonDisabled: pristine || submitting,
+      onCancel,
+    };
+
     return (
       <FooterPane
         data-testid="patronNoticeFooterPane"
-        pristine={pristine}
-        submitting={submitting}
-        onCancel={onCancel}
+        {...footerPaneProps}
       />
     );
   };
