@@ -3,6 +3,8 @@ import {
   isEditLayer,
   validateUniqueNameById,
   getRecordName,
+  getConsortiumTlrPermission,
+  getLastRecordValue,
 } from './utils';
 
 describe('utils', () => {
@@ -224,6 +226,63 @@ describe('utils', () => {
         });
 
         expect(formatMessage).toHaveBeenCalledWith(...expectedArgs);
+      });
+    });
+  });
+
+  describe('getConsortiumTlrPermission', () => {
+    describe('when consortia and ecs-tlr interfaces are presented', () => {
+      const stripes = {
+        hasInterface: jest.fn(() => true),
+      };
+
+      it('should return consortium edit permission', () => {
+        const result = getConsortiumTlrPermission(stripes);
+        const consortiumViewPermission = 'tlr.consortium-tlr.view';
+
+        expect(result).toBe(consortiumViewPermission);
+      });
+    });
+
+    describe('when consortia and ecs-tlr interfaces are not presented', () => {
+      const stripes = {
+        hasInterface: jest.fn(() => false),
+      };
+
+      it('should return no permission value', () => {
+        const result = getConsortiumTlrPermission(stripes);
+        const noConsortiumPermission = 'noPermission';
+
+        expect(result).toBe(noConsortiumPermission);
+      });
+    });
+  });
+
+  describe('getLastRecordValue', () => {
+    describe('When there is records array', () => {
+      it('should return last element', () => {
+        const resource = {
+          records: [
+            {
+              ecsTlrFeatureEnabled: true,
+            },
+            {
+              ecsTlrFeatureEnabled: false,
+            }
+          ],
+        };
+        const result = getLastRecordValue(resource);
+
+        expect(result).toEqual(resource.records[1]);
+      });
+    });
+
+    describe('When there is no records array', () => {
+      it('should return null', () => {
+        const resource = {};
+        const result = getLastRecordValue(resource);
+
+        expect(result).toBeNull();
       });
     });
   });

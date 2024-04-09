@@ -22,6 +22,8 @@ import RequestPolicySettings from './settings/RequestPolicy';
 import TitleLevelRequests from './settings/TitleLevelRequests';
 import PrintHoldRequests from './settings/PrintHoldRequests';
 import TLRPatronNotices from './settings/TLRPatronNotices';
+import ConsortiumTLR from './settings/ConsortiumTLR';
+import { getConsortiumTlrPermission } from './settings/utils/utils';
 
 class Circulation extends Component {
   static propTypes = {
@@ -58,6 +60,12 @@ class Circulation extends Component {
             label: <FormattedMessage id="ui-circulation.settings.index.titleLevelRequestsTlr" />,
             component: TitleLevelRequests,
             perm: 'ui-circulation.settings.titleLevelRequests',
+          },
+          {
+            route: 'consortium-title-level-requests',
+            label: <FormattedMessage id="ui-circulation.settings.index.consortiumTLR" />,
+            component: ConsortiumTLR,
+            perm: getConsortiumTlrPermission(props.stripes),
           },
         ],
       },

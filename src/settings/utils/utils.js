@@ -93,3 +93,19 @@ export const getRecordName = ({
       }
     );
 };
+
+export const getConsortiumTlrPermission = (stripes) => {
+  if (stripes.hasInterface('consortia') && stripes.hasInterface('ecs-tlr')) {
+    return 'tlr.consortium-tlr.view';
+  }
+
+  return 'noPermission';
+};
+
+export const getLastRecordValue = (resource) => {
+  if (resource.records) {
+    return resource.records.slice(-1)[0];
+  }
+
+  return null;
+};
