@@ -22,7 +22,10 @@ import {
   Select,
   TextField,
 } from '@folio/stripes/components';
-import { useCustomFields } from '@folio/stripes/core';
+import {
+  IfPermission,
+  useCustomFields,
+} from '@folio/stripes/core';
 
 import { CheckoutSettings as validateCheckoutSettings } from '../Validation';
 
@@ -62,21 +65,23 @@ const CheckoutSettingsForm = ({
       fluidContentWidth
       paneTitle={label}
       footer={(
-        <PaneFooter
-          renderEnd={(
-            <Button
-              data-testid="otherSettingsFormSubmit"
-              buttonStyle="primary paneHeaderNewButton"
-              disabled={pristine || submitting}
-              id="clickable-savescanid"
-              marginBottom0
-              onClick={handleSubmit}
-              type="submit"
-            >
-              <FormattedMessage id="ui-circulation.settings.checkout.save" />
-            </Button>
-          )}
-        />
+        <IfPermission perm="ui-circulation.settings.other-settings">
+          <PaneFooter
+            renderEnd={(
+              <Button
+                data-testid="otherSettingsFormSubmit"
+                buttonStyle="primary paneHeaderNewButton"
+                disabled={pristine || submitting}
+                id="clickable-savescanid"
+                marginBottom0
+                onClick={handleSubmit}
+                type="submit"
+              >
+                <FormattedMessage id="ui-circulation.settings.checkout.save" />
+              </Button>
+            )}
+          />
+        </IfPermission>
       )}
     >
       <form id="checkout-form">

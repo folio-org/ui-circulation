@@ -2,7 +2,10 @@ import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
 
 import stripesFinalForm from '@folio/stripes/final-form';
-import { stripesConnect } from '@folio/stripes/core';
+import {
+  IfPermission,
+  stripesConnect,
+} from '@folio/stripes/core';
 import {
   Button,
   Pane,
@@ -32,18 +35,20 @@ const TLRPatronNoticesForm = (props) => {
   const templates = resources.templates?.records || [];
 
   const footer = (
-    <PaneFooter
-      renderEnd={(
-        <Button
-          type="submit"
-          buttonStyle="primary paneHeaderNewButton"
-          disabled={pristine || submitting}
-          marginBottom0
-        >
-          {formatMessage({ id: 'stripes-core.button.save' })}
-        </Button>
-      )}
-    />
+    <IfPermission perm="ui-circulation.settings.titleLevelRequests">
+      <PaneFooter
+        renderEnd={(
+          <Button
+            type="submit"
+            buttonStyle="primary paneHeaderNewButton"
+            disabled={pristine || submitting}
+            marginBottom0
+          >
+            {formatMessage({ id: 'stripes-core.button.save' })}
+          </Button>
+        )}
+      />
+    </IfPermission>
   );
 
   return (

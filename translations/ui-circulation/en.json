@@ -565,5 +565,12 @@
   "permission.settings.view-overdue-fines-policies": "Settings (Circ): Can view overdue fine policies",
   "permission.settings.view-lost-item-fees-policies": "Settings (Circ): Can view lost item fee policies",
   "permission.settings.view-titleLevelRequests": "Settings (Circulation): Title level request view",
-  "permission.settings.titleLevelRequests": "Settings (Circulation): Title level request edit"
+  "permission.settings.titleLevelRequests": "Settings (Circulation): Title level request edit",
+  "permission.settings.view-circulation-settings": "Settings (Circulation): Can view all circulation settings",
+  "permission.settings.view-other-settings": "Settings (Circulation): Can view other settings",
+  "permission.settings.view-fixed-due-date-schedules": "Settings (Circulation): Can view fixed due date schedules",
+  "permission.settings.view-notice-policies": "Settings (Circulation): Can view notice policies",
+  "permission.settings.view-notice-templates": "Settings (Circulation): Can view patron notice templates",
+  "permission.settings.view-request-policies": "Settings (Circulation): Can view request policies",
+  "permission.settings.view-cancellation-reasons": "Settings (Circulation): Can view cancellation reasons"
 }
