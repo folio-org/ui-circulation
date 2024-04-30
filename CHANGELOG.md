@@ -21,6 +21,7 @@
 * Add `displaySummary` token for patron notice templates and for staff slips templates. Refs UICIRC-1059.
 * Fix that Save & close button is missing in the circulation forms. Refs UICIRC-1064.
 * Create a new setting - Enable ECS title level requests. Refs UICIRC-1040.
+* Add view permissions for Circulation settings. Refs UICIRC-1056.
 
 ## [9.0.4](https://github.com/folio-org/ui-circulation/tree/v9.0.4) (2024-02-22)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v9.0.3...v9.0.4)

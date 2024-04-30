@@ -1,3 +1,5 @@
+import { omit } from 'lodash';
+
 import { render } from '@folio/jest-config-stripes/testing-library/react';
 import { ControlledVocab } from '@folio/stripes/smart-components';
 import { TitleManager } from '@folio/stripes/core';
@@ -5,8 +7,12 @@ import { TitleManager } from '@folio/stripes/core';
 import RequestCancellationReasons from './RequestCancellationReasons';
 
 describe('RequestCancellationReasons', () => {
+  const mockStripes = {
+    hasPerm: jest.fn(() => true),
+  };
   const props = {
     resources: {},
+    stripes: mockStripes,
   };
   const labelIds = {
     generalTitle: 'ui-circulation.settings.title.general',
@@ -18,8 +24,9 @@ describe('RequestCancellationReasons', () => {
   });
 
   it('should pass correct props', () => {
+    const expectedProps = omit(props, ['stripes']);
     const expectedResult = {
-      ...props,
+      ...expectedProps,
       baseUrl: 'cancellation-reason-storage/cancellation-reasons',
       records: 'cancellationReasons',
       label: expect.any(Object),

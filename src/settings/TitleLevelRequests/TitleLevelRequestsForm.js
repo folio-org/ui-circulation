@@ -4,7 +4,10 @@ import { injectIntl } from 'react-intl';
 import { Field } from 'react-final-form';
 
 import stripesFinalForm from '@folio/stripes/final-form';
-import { stripesConnect } from '@folio/stripes/core';
+import {
+  IfPermission,
+  stripesConnect,
+} from '@folio/stripes/core';
 import {
   Button,
   Checkbox,
@@ -40,18 +43,20 @@ const TitleLevelRequestsForm = (props) => {
   const { values: titleLevelRequestsValues } = form.getState();
 
   const renderFooter = () => (
-    <PaneFooter
-      renderEnd={(
-        <Button
-          type="submit"
-          buttonStyle="primary paneHeaderNewButton"
-          disabled={pristine || submitting}
-          marginBottom0
-        >
-          {formatMessage({ id: 'stripes-core.button.save' })}
-        </Button>
-        )}
-    />
+    <IfPermission perm="ui-circulation.settings.titleLevelRequests">
+      <PaneFooter
+        renderEnd={(
+          <Button
+            type="submit"
+            buttonStyle="primary paneHeaderNewButton"
+            disabled={pristine || submitting}
+            marginBottom0
+          >
+            {formatMessage({ id: 'stripes-core.button.save' })}
+          </Button>
+          )}
+      />
+    </IfPermission>
   );
 
   const handleTlrCheckboxClick = async () => {

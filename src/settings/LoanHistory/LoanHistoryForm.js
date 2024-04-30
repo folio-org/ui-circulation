@@ -9,6 +9,9 @@ import { FieldArray } from 'react-final-form-arrays';
 import setFieldData from 'final-form-set-field-data';
 import { isEqual } from 'lodash';
 
+import {
+  IfPermission,
+} from '@folio/stripes/core';
 import stripesFinalForm from '@folio/stripes/final-form';
 import {
   Button,
@@ -34,7 +37,6 @@ class LoanHistoryForm extends Component {
   static propTypes = {
     handleSubmit: PropTypes.func.isRequired,
     pristine: PropTypes.bool,
-    stripes: PropTypes.object,
     submitting: PropTypes.bool,
     label: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
     form: PropTypes.object.isRequired,
@@ -44,25 +46,26 @@ class LoanHistoryForm extends Component {
   renderFooter = () => {
     const {
       pristine,
-      stripes,
       submitting,
     } = this.props;
 
     return (
-      <PaneFooter
-        renderEnd={(
-          <Button
-            data-testid="submitButton"
-            data-test-loan-history-save-button
-            type="submit"
-            buttonStyle="primary paneHeaderNewButton"
-            disabled={pristine || submitting || !stripes?.user?.perms?.['ui-circulation.settings.edit-loan-history']}
-            marginBottom0
-          >
-            <FormattedMessage id="stripes-core.button.save" />
-          </Button>
-        )}
-      />
+      <IfPermission perm="ui-circulation.settings.edit-loan-history">
+        <PaneFooter
+          renderEnd={(
+            <Button
+              data-testid="submitButton"
+              data-test-loan-history-save-button
+              type="submit"
+              buttonStyle="primary paneHeaderNewButton"
+              disabled={pristine || submitting}
+              marginBottom0
+            >
+              <FormattedMessage id="stripes-core.button.save" />
+            </Button>
+          )}
+        />
+      </IfPermission>
     );
   }
 
