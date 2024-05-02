@@ -35,7 +35,7 @@ const FooterPane = (props) => {
             buttonStyle="primary mega"
             disabled={isSaveButtonDisabled}
           >
-            <FormattedMessage id="ui-circulation.settings.common.saveAndClose" />
+            <FormattedMessage id="stripes-components.saveAndClose" />
           </Button>
         }
       </div>

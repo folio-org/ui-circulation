@@ -1,6 +1,14 @@
 # Change history for ui-circulation
 
-## 9.1.0 IN PROGRESS
+## 9.2.0 IN PROGRESS
+
+* Move TLR enable settings to Circulation > General. Refs UICIRC-1038.
+* Use Save & close button label stripes-component translation key. Refs UICIRC-1066.
+* Create a new setting - Enable ECS title level requests. Refs UICIRC-1040.
+* Add view permissions for Circulation settings. Refs UICIRC-1056.
+
+## [9.1.0](https://github.com/folio-org/ui-circulation/tree/v9.1.0) (2024-03-22)
+[Full Changelog](https://github.com/folio-org/ui-circulation/compare/v9.0.5...v9.1.0)
 
 * Also support `feesfines` interface version `19.0`. Refs UICIRC-992.
 * Create and Display new Staff slip (Search slip (Hold requests)). Refs UICIRC-1001.
@@ -13,15 +21,17 @@
 * Add the possibility to correctly delete fixed due date schedule range. Refs UICIRC-1026.
 * Cover Widget by jest tests. Refs UICIRC-899.
 * Add page titles to Circulation settings pages. Refs UICIRC-970.
-* Move TLR enable settings to Circulation > General. Refs UICIRC-1038.
 * RulesEditor should use stripes.hasPerm. Refs UICIRC-1047.
 * Disable block template under reminder fees. Refs UICIRC-1046.
 * UI tests replacement with RTL/Jest for `CirculationRules.js`. Refs UICIRC-958.
 * Create a new permission "Settings (Circulation): Can view staff slips". Refs UICIRC-848.
 * Add `displaySummary` token for patron notice templates and for staff slips templates. Refs UICIRC-1059.
 * Fix that Save & close button is missing in the circulation forms. Refs UICIRC-1064.
-* Create a new setting - Enable ECS title level requests. Refs UICIRC-1040.
-* Add view permissions for Circulation settings. Refs UICIRC-1056.
+
+## [9.0.5](https://github.com/folio-org/ui-circulation/tree/v9.0.5) (2024-03-21)
+[Full Changelog](https://github.com/folio-org/ui-circulation/compare/v9.0.4...v9.0.5)
+
+* Only certain HTML tags should be rendered when displaying staff slips. Refs UICIRC-1070, UICIRC-1060.
 
 ## [9.0.4](https://github.com/folio-org/ui-circulation/tree/v9.0.4) (2024-02-22)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v9.0.3...v9.0.4)
