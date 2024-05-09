@@ -14,7 +14,7 @@
     "settings.loanPolicy.fDDSlimit": "Rozvrh pevných termínů vrácení (limitní termín vrácení)",
     "settings.loanPolicy.closedDueDateMgmt": "Určení termínu vrácení v době uzavření knihovny",
     "settings.loanPolicy.altFDDSforRenewals": "Náhradní rozvrh pevných termínů vrácení pro prodloužení",
-    "settings.loanPolicy.altFDDSDueDateLimit": "Alternativní rozvrh pevných termínů vrácení (limitní termín vrácení) pro prodlužování",
+    "settings.loanPolicy.altFDDSDueDateLimit": "Alternativní rozvrh pevných termínů vrácení (limitní termín vrácení) pro prodloužení",
     "settings.loanPolicy.alternateLoanPeriodExisting": "Alternativní výpůjční doba pro jednotky s existujícími žádankami",
     "settings.loanPolicy.alternateLoanPeriodRenewals": "Alternativní výpůjční doba pro prodloužení",
     "settings.loanPolicy.gracePeriod": "Doba odkladu",
