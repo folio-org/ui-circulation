@@ -4,6 +4,7 @@
 
 * Move TLR enable settings to Circulation > General. Refs UICIRC-1038.
 * Use Save & close button label stripes-component translation key. Refs UICIRC-1066.
+* Remove bigtests from github actions. Refs UICIRC-1079.
 * Create a new setting - Enable ECS title level requests. Refs UICIRC-1040.
 * Add view permissions for Circulation settings. Refs UICIRC-1056.
 
