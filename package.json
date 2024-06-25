@@ -229,6 +229,7 @@
         "subPermissions": [
           "settings.circulation.enabled",
           "circulation.settings.item.get",
+          "circulation.settings.item.put",
           "circulation.settings.item.post"
         ],
         "visible": true
