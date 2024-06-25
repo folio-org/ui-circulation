@@ -227,7 +227,9 @@
         "permissionName": "ui-circulation.settings.request-print-details",
         "displayName": "Settings (Circ): Can enable request print details",
         "subPermissions": [
-          "settings.circulation.enabled"
+          "settings.circulation.enabled",
+          "circulation.settings.item.get",
+          "circulation.settings.item.post"
         ],
         "visible": true
       },
