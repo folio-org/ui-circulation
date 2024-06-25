@@ -224,6 +224,14 @@
         "visible": true
       },
       {
+        "permissionName": "ui-circulation.settings.request-print-details",
+        "displayName": "Settings (Circ): Can enable request print details",
+        "subPermissions": [
+          "settings.circulation.enabled"
+        ],
+        "visible": true
+      },
+      {
         "permissionName": "ui-circulation.settings.request-policies",
         "displayName": "Settings (Circ): Can create, edit and remove request policies",
         "subPermissions": [
