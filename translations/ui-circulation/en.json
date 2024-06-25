@@ -549,6 +549,7 @@
   "permission.settings.view-staff-slips": "Settings (Circulation): Can view staff slips",
   "permission.settings.edit-staff-slips": "Settings (Circ): Can edit staff slips",
   "permission.settings.staff-slips": "Settings (Circ): Can create, edit and remove staff slips",
+  "permission.settings.request-print-details": "Settings (Circ): Can enable request print details",
   "permission.settings.request-policies": "Settings (Circ): Can create, edit and remove request policies",
   "permission.settings.other-settings": "Settings (Circ): Can create, edit and remove other settings",
   "permission.settings.notice-templates": "Settings (Circ): Can create, edit and remove patron notice templates",
