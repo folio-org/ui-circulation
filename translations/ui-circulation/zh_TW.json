@@ -533,5 +533,6 @@
     "settings.title.newRecord": "新的{name}",
     "settings.title.editRecord": "編輯{name}",
     "settings.finePolicy.reminderFees.noBlock": "無凍結",
-    "permission.settings.view-staff-slips": "設定（流通）：可以查看館員夾書單"
+    "permission.settings.view-staff-slips": "設定（流通）：可以查看館員夾書單",
+    "permission.settings.request-print-details": "Settings (Circ): Can enable request print details"
 }

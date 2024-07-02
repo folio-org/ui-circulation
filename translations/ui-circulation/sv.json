@@ -26,7 +26,7 @@
     "settings.loanPolicy.renewalPeriodDifferent": "Renewal period different from original loan",
     "settings.loanPolicy.about": "About",
     "settings.loanPolicy.policyName": "Loan policy name",
-    "settings.loanPolicy.policyDescription": "Description",
+    "settings.loanPolicy.policyDescription": "Beskrivning",
     "settings.loanPolicy.loanable": "Loanable",
     "settings.loanPolicy.selectInterval": "Select interval",
     "settings.loanPolicy.selectSchedule": "Select schedule",
@@ -198,7 +198,7 @@
     "settings.validate.isFromOneToHundred": "The value must be between 1 and 100",
     "settings.noticePolicy.notices.send": "Send",
     "settings.noticePolicy.notices.triggeringEvent": "Triggering event",
-    "settings.noticePolicy.loanNotices.checkIn": "Check in",
+    "settings.noticePolicy.loanNotices.checkIn": "Återlämning",
     "settings.noticePolicy.loanNotices.checkOut": "Check out",
     "settings.noticePolicy.notices.andEvery": "and every",
     "settings.loanPolicy.profileType.fixed": "Fixed",
@@ -533,5 +533,6 @@
     "settings.title.newRecord": "New {name}",
     "settings.title.editRecord": "Edit {name}",
     "settings.finePolicy.reminderFees.noBlock": "No block",
-    "permission.settings.view-staff-slips": "Settings (Circulation): Can view staff slips"
+    "permission.settings.view-staff-slips": "Settings (Circulation): Can view staff slips",
+    "permission.settings.request-print-details": "Settings (Circ): Can enable request print details"
 }

@@ -533,5 +533,6 @@
     "settings.title.newRecord": "New {name}",
     "settings.title.editRecord": "編集{name}",
     "settings.finePolicy.reminderFees.noBlock": "No block",
-    "permission.settings.view-staff-slips": "Settings (Circulation): Can view staff slips"
+    "permission.settings.view-staff-slips": "Settings (Circulation): Can view staff slips",
+    "permission.settings.request-print-details": "Settings (Circ): Can enable request print details"
 }

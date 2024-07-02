@@ -12,7 +12,7 @@
     "settings.loanPolicy.loanProfile": "借阅配置文件",
     "settings.loanPolicy.fDDS": "固定到期日时间表",
     "settings.loanPolicy.fDDSlimit": "固定到期日时间表 (到期日限制)",
-    "settings.loanPolicy.closedDueDateMgmt": "关闭图书馆到期日管理",
+    "settings.loanPolicy.closedDueDateMgmt": "闭馆到期日管理",
     "settings.loanPolicy.altFDDSforRenewals": "备用固定到期日时间表，用于续借",
     "settings.loanPolicy.altFDDSDueDateLimit": "备用固定到期日时间表（到期日限制），用于续借",
     "settings.loanPolicy.alternateLoanPeriodExisting": "备用借阅期限，用于有请求的单件",
@@ -533,5 +533,6 @@
     "settings.title.newRecord": "新建{name}",
     "settings.title.editRecord": "编辑 {name}",
     "settings.finePolicy.reminderFees.noBlock": "无冻结",
-    "permission.settings.view-staff-slips": "设置（流通）：可查看员工单"
+    "permission.settings.view-staff-slips": "设置（流通）：可查看员工单",
+    "permission.settings.request-print-details": "设置（流通）：可以启用请求打印详细信息"
 }
