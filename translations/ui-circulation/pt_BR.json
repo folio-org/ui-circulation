@@ -533,5 +533,6 @@
     "settings.title.newRecord": "Novo {name}",
     "settings.title.editRecord": "Editar {name}",
     "settings.finePolicy.reminderFees.noBlock": "Sem bloqueio",
-    "permission.settings.view-staff-slips": "Configurações (Circulação): Pode visualizar os boletos da equipe"
+    "permission.settings.view-staff-slips": "Configurações (Circulação): Pode visualizar os boletos da equipe",
+    "permission.settings.request-print-details": "Configurações (Circulação): Pode ativar a solicitação de detalhes de impressão"
 }

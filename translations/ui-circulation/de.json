@@ -243,7 +243,7 @@
     "settings.loanHistory.anonymize": "Abgeschlossene Ausleihen anonymisieren",
     "settings.loanHistory.never": "Niemals",
     "settings.loanHistory.treat": "Abgeschlossene Ausleihen mit verbundenen Forderungen unterschiedlich behandeln",
-    "settings.patronNotices.effectiveLocationTokenHeader": "Effektiver Standort",
+    "settings.patronNotices.effectiveLocationTokenHeader": "Tatsächlicher Standort",
     "settings.loanHistory.closedLoansFeesFines": "Abgeschlossene Ausleihen mit verbundenen Forderungen",
     "settings.loanHistory.anonymizeFeesFines": "Anonymisieren von abgeschlossenen Ausleihen mit verbundenen Forderungen",
     "settings.loanHistory.interval": "Intervall",
@@ -261,7 +261,7 @@
     "settings.loanHistory.paymentMethod.pay": "Bezahlen",
     "settings.loanHistory.errors.paymentMethodSelected": "Diese Zahlungsart ist bereits ausgewählt",
     "settings.staffSlips.itemTokenHeader": "Exemplar",
-    "settings.staffSlips.effectiveLocationTokenHeader": "Effektiver Standort",
+    "settings.staffSlips.effectiveLocationTokenHeader": "Tatsächlicher Standort",
     "settings.staffSlips.staffSlipTokenHeader": "Dienstzettel",
     "settings.staffSlips.requestTokenHeader": "Bestandsanfrage",
     "settings.staffSlips.requesterTokenHeader": "Bestandsanfrage für",
@@ -533,5 +533,6 @@
     "settings.title.newRecord": "Neu {name}",
     "settings.title.editRecord": "{name} bearbeiten",
     "settings.finePolicy.reminderFees.noBlock": "Keine Sperre",
-    "permission.settings.view-staff-slips": "Einstellungen (Ausleihe): Kann Dienstzettel anzeigen"
+    "permission.settings.view-staff-slips": "Einstellungen (Ausleihe): Kann Dienstzettel anzeigen",
+    "permission.settings.request-print-details": "Settings (Circ): Can enable request print details"
 }

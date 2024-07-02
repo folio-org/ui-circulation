@@ -533,5 +533,6 @@
     "settings.title.newRecord": "Nový {name}",
     "settings.title.editRecord": "Upravit {name}",
     "settings.finePolicy.reminderFees.noBlock": "Žádný blok",
-    "permission.settings.view-staff-slips": "Nastavení (Cirkulace): Může zobrazit zaměstnanecké lístky"
+    "permission.settings.view-staff-slips": "Nastavení (Cirkulace): Může zobrazit zaměstnanecké lístky",
+    "permission.settings.request-print-details": "Settings (Circ): Can enable request print details"
 }
