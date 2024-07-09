@@ -297,7 +297,7 @@
     "settings.finePolicy.overdueFinePolicyName": "Nom de la politique amendes/frais de retard",
     "settings.finePolicy.description": "Description",
     "settings.finePolicy.selectInterval": "Sélectionner l'intervalle",
-    "settings.finePolicy.countClosedDHM": "Compter les jours / heures / minutes de fermeture (?)",
+    "settings.finePolicy.countClosedDHM": "Compter les jours/heures/minutes de fermeture",
     "settings.finePolicy.maximumOverdueFine": "Amende maximale pour retard",
     "settings.finePolicy.forgiveOverdueFine": "Ignorer l'amende pour retard si l'exemplaire est renouvelé",
     "settings.finePolicy.overdueRecallFine": "Amende de rappel en retard",
