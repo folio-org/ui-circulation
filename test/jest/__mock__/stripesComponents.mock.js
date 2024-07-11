@@ -100,6 +100,9 @@ jest.mock('@folio/stripes/components', () => ({
     <div {...rest}>{children}</div>
   )),
   Modal: jest.fn(() => null),
+  ModalFooter: jest.fn((props) => (
+    <div>{props.children}</div>
+  )),
   Pane: jest.fn(({ paneTitle, firstMenu, children, footer }) => (
     <div>
       {paneTitle}

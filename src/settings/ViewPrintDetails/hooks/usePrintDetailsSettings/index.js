@@ -1,0 +1,1 @@
+export { usePrintDetailsSettings } from './usePrintDetailsSettings';
