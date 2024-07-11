@@ -465,7 +465,7 @@
     "permission.settings.edit-staff-slips": "Ustawienia (Circ): Może edytować rewersy dla personelu",
     "settings.validate.subject": "Nie powinien zaczynać się od spacji",
     "settings.staffSlips.generalInformation": "General information",
-    "settings.staffSlips.templateContent": "Template content",
+    "settings.staffSlips.templateContent": "Zawartość szablonu",
     "settings.cancelReasons.cannotDeleteTermHeader": "Nie można usunąć powodu anulowania",
     "settings.cancelReasons.cannotDeleteTermMessage": "Powód anulowania nie może być usunięty, ponieważ jest używany w wielu rekordach.",
     "settings.cancelReasons.deleteEntry": "Usuń powód anulowania",
@@ -533,5 +533,6 @@
     "settings.title.newRecord": "New {name}",
     "settings.title.editRecord": "Edit {name}",
     "settings.finePolicy.reminderFees.noBlock": "No block",
-    "permission.settings.view-staff-slips": "Ustawienia (Circ): Może wyświetlać rewersy dla personelu"
+    "permission.settings.view-staff-slips": "Ustawienia (Circ): Może wyświetlać rewersy dla personelu",
+    "permission.settings.request-print-details": "Settings (Circ): Can enable request print details"
 }
