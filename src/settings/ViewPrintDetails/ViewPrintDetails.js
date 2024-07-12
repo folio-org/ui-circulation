@@ -21,7 +21,7 @@ const ViewPrintDetails = () => {
   } = usePrintDetailsSettings();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { createPrintDetailsSettings, updatePrintDetailsSettings } = usePrintDetailsSettingsMutation();
-  const intl = useIntl();
+  const { formatMessage } = useIntl();
   const callout = useCallout();
 
   const createSetting = (values) => {
@@ -51,7 +51,7 @@ const ViewPrintDetails = () => {
         refetch();
         callout.sendCallout({
           type: 'success',
-          message: intl.formatMessage(
+          message: formatMessage(
             { id: 'ui-circulation.settings.ViewPrintDetails.callout.success' },
           ),
         });
@@ -59,7 +59,7 @@ const ViewPrintDetails = () => {
       .catch(() => {
         callout.sendCallout({
           type: 'error',
-          message: intl.formatMessage(
+          message: formatMessage(
             { id: 'ui-circulation.settings.ViewPrintDetails.callout.error' },
           ),
         });
@@ -89,13 +89,13 @@ const ViewPrintDetails = () => {
         onClick={handleModalYes}
         buttonStyle="primary"
       >
-        {intl.formatMessage({ id: 'ui-circulation.settings.ViewPrintDetails.warningPopupMessage.yes' })}
+        {formatMessage({ id: 'ui-circulation.settings.ViewPrintDetails.warningPopupMessage.yes' })}
       </Button>
       <Button
         onClick={handleModalClose}
         buttonStyle="primary"
       >
-        {intl.formatMessage({ id: 'ui-circulation.settings.ViewPrintDetails.warningPopupMessage.no' })}
+        {formatMessage({ id: 'ui-circulation.settings.ViewPrintDetails.warningPopupMessage.no' })}
       </Button>
     </ModalFooter>
   );
@@ -117,7 +117,7 @@ const ViewPrintDetails = () => {
         dismissible
         footer={modalFooter}
       >
-        {intl.formatMessage({ id: 'ui-circulation.settings.ViewPrintDetails.warningPopupMessage' })}
+        {formatMessage({ id: 'ui-circulation.settings.ViewPrintDetails.warningPopupMessage' })}
       </Modal>
     </>
   );
