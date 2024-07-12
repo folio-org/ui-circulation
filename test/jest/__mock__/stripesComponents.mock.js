@@ -126,4 +126,5 @@ jest.mock('@folio/stripes/components', () => ({
   TextArea: jest.fn((props) => <textarea {...props} />),
   TextField: jest.fn((props) => <input {...props} />),
   MultiColumnList: jest.fn(() => <div />),
+  Loading: jest.fn(() => <div>Loading</div>),
 }));
