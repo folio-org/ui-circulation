@@ -40,7 +40,7 @@ const mockKy = {
 describe('ViewPrintDetails', () => {
   const labelIds = {
     generalTitle: 'ui-circulation.settings.title.general',
-    printHoldRequestsTitle: 'ui-circulation.settings.title.viewPrintDetails',
+    viewPrintDetailstitle: 'ui-circulation.settings.title.viewPrintDetails',
   };
   beforeEach(() => {
     mockKy.get.mockClear();
@@ -89,7 +89,7 @@ describe('ViewPrintDetails', () => {
   it('should trigger TitleManager with correct props', () => {
     const expectedProps = {
       page: labelIds.generalTitle,
-      record: labelIds.printHoldRequestsTitle,
+      record: labelIds.viewPrintDetailstitle,
     };
 
     expect(TitleManager).toHaveBeenCalledWith(expect.objectContaining(expectedProps), {});
