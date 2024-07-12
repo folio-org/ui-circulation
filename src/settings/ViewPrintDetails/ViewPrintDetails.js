@@ -2,7 +2,7 @@ import { useIntl } from 'react-intl';
 import { useState } from 'react';
 
 import { Loading, Modal, Button, ModalFooter } from '@folio/stripes/components';
-import { useCallout } from '@folio/stripes/core';
+import { TitleManager, useCallout } from '@folio/stripes/core';
 
 
 import { usePrintDetailsSettings } from './hooks/usePrintDetailsSettings/usePrintDetailsSettings';
@@ -105,7 +105,10 @@ const ViewPrintDetails = () => {
   }
 
   return (
-    <>
+    <TitleManager
+      page={formatMessage({ id: 'ui-circulation.settings.title.general' })}
+      record={formatMessage({ id: 'ui-circulation.settings.title.viewPrintDetails' })}
+    >
       <ViewPrintDetailsForm
         onSubmit={onSubmit}
         initialValues={{ [VIEW_PRINT_DETAILS_ENABLED]: enablePrintLog }}
@@ -119,7 +122,7 @@ const ViewPrintDetails = () => {
       >
         {formatMessage({ id: 'ui-circulation.settings.ViewPrintDetails.warningPopupMessage' })}
       </Modal>
-    </>
+    </TitleManager>
   );
 };
 
