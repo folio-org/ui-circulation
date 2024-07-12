@@ -5,7 +5,7 @@ import {
   render,
   screen,
 } from '@folio/jest-config-stripes/testing-library/react';
-import { useOkapiKy } from '@folio/stripes/core';
+import { useOkapiKy, TitleManager } from '@folio/stripes/core';
 
 import ViewPrintDetails from './ViewPrintDetails';
 import { usePrintDetailsSettings } from './hooks/usePrintDetailsSettings/usePrintDetailsSettings';
@@ -38,6 +38,10 @@ const mockKy = {
 };
 
 describe('ViewPrintDetails', () => {
+  const labelIds = {
+    generalTitle: 'ui-circulation.settings.title.general',
+    printHoldRequestsTitle: 'ui-circulation.settings.title.viewPrintDetails',
+  };
   beforeEach(() => {
     mockKy.get.mockClear();
     usePrintDetailsSettings.mockReturnValue({
@@ -80,5 +84,14 @@ describe('ViewPrintDetails', () => {
   it('should render form with initial values', () => {
     renderComponent();
     expect(screen.getByRole('checkbox')).not.toBeChecked();
+  });
+
+  it('should trigger TitleManager with correct props', () => {
+    const expectedProps = {
+      page: labelIds.generalTitle,
+      record: labelIds.printHoldRequestsTitle,
+    };
+
+    expect(TitleManager).toHaveBeenCalledWith(expect.objectContaining(expectedProps), {});
   });
 });
