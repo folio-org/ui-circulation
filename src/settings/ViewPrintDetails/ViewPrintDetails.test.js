@@ -4,11 +4,8 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import {
   render,
   screen,
-  fireEvent,
-  waitFor
 } from '@folio/jest-config-stripes/testing-library/react';
 import { useOkapiKy } from '@folio/stripes/core';
-import user from '@folio/jest-config-stripes/testing-library/user-event';
 
 import ViewPrintDetails from './ViewPrintDetails';
 import { usePrintDetailsSettings } from './hooks/usePrintDetailsSettings/usePrintDetailsSettings';
