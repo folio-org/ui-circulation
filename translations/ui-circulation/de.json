@@ -534,5 +534,5 @@
     "settings.title.editRecord": "{name} bearbeiten",
     "settings.finePolicy.reminderFees.noBlock": "Keine Sperre",
     "permission.settings.view-staff-slips": "Einstellungen (Ausleihe): Kann Dienstzettel anzeigen",
-    "permission.settings.request-print-details": "Settings (Circ): Can enable request print details"
+    "permission.settings.request-print-details": "Einstellungen (Ausleihe): Kann die Anforderung von Druckdetails aktivieren"
 }
