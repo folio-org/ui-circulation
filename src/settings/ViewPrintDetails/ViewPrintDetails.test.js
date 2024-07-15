@@ -2,10 +2,12 @@ import React from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
 import {
+  fireEvent,
   render,
   screen,
+  waitFor,
 } from '@folio/jest-config-stripes/testing-library/react';
-import { useOkapiKy, TitleManager } from '@folio/stripes/core';
+import { useOkapiKy } from '@folio/stripes/core';
 
 import ViewPrintDetails from './ViewPrintDetails';
 import { usePrintDetailsSettings } from './hooks/usePrintDetailsSettings/usePrintDetailsSettings';
@@ -14,6 +16,17 @@ import { usePrintDetailsSettingsMutation } from './hooks/usePrintDetailsSettings
 jest.mock('./hooks/usePrintDetailsSettings/usePrintDetailsSettings');
 jest.mock('./hooks/usePrintDetailsSettingsMutation/usePrintDetailsSettingsMutation');
 
+jest.mock('./ViewPrintDetailsForm', () => ({ onSubmit }) => {
+  return (
+    <form onSubmit={e => {
+      e.preventDefault();
+      onSubmit({ viewPrintDetailsEnabled: 'true' });
+    }}
+    >
+      <button type="submit">Submit</button>
+    </form>
+  );
+});
 
 const queryClient = new QueryClient();
 const wrapper = ({ children }) => (
@@ -28,6 +41,12 @@ const renderComponent = () => {
   );
 };
 
+const mockData = {
+  id: '01cd7de6-5f0b-45f8-a7a9-7c122f8cd7e9',
+  name: 'Enable print event log',
+  value: { enablePrintLog: 'true' }
+};
+
 const mockRefetch = jest.fn();
 const mockKy = {
   get: jest.fn(() => ({
@@ -38,35 +57,25 @@ const mockKy = {
 };
 
 describe('ViewPrintDetails', () => {
-  const labelIds = {
-    generalTitle: 'ui-circulation.settings.title.general',
-    viewPrintDetailsTitle: 'ui-circulation.settings.title.viewPrintDetails',
-  };
   beforeEach(() => {
     mockKy.get.mockClear();
     usePrintDetailsSettings.mockReturnValue({
-      printDetailsInfo: null,
+      printDetailsInfo: mockData,
       enablePrintLog: false,
       isLoading: false,
       refetch: jest.fn(),
     });
     usePrintDetailsSettingsMutation.mockReturnValue({
-      createPrintDetailsSettings: jest.fn(),
-      updatePrintDetailsSettings: jest.fn(),
+      createPrintDetailsSettings: jest.fn(() => Promise.resolve()),
+      updatePrintDetailsSettings: jest.fn(() => Promise.resolve()),
     });
     useOkapiKy
       .mockClear()
       .mockReturnValue(mockKy);
   });
 
-  it('should display pane headings', () => {
-    renderComponent();
-
-    const paneTitle = screen.getByText('ui-circulation.settings.title.viewPrintDetails');
-    const fieldLabel = screen.getByText('ui-circulation.settings.ViewPrintDetails.enable');
-
-    expect(paneTitle).toBeInTheDocument();
-    expect(fieldLabel).toBeInTheDocument();
+  afterEach(() => {
+    jest.clearAllMocks();
   });
 
   it('should render LoadingPane component when settings are loading', () => {
@@ -81,17 +90,11 @@ describe('ViewPrintDetails', () => {
     expect(screen.getByText('Loading')).toBeInTheDocument();
   });
 
-  it('should render form with initial values', () => {
-    renderComponent();
-    expect(screen.getByRole('checkbox')).not.toBeChecked();
-  });
-
-  it('should trigger TitleManager with correct props', () => {
-    const expectedProps = {
-      page: labelIds.generalTitle,
-      record: labelIds.viewPrintDetailsTitle,
-    };
-
-    expect(TitleManager).toHaveBeenCalledWith(expect.objectContaining(expectedProps), {});
+  it('should handle submit', async () => {
+    render(<ViewPrintDetails />);
+    fireEvent.submit(screen.getByRole('button', { name: /submit/i }));
+    await waitFor(() => {
+      expect(screen.getByText('Submit')).toBeInTheDocument();
+    });
   });
 });

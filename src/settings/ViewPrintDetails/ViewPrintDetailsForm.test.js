@@ -8,10 +8,16 @@ import {
   Field,
 } from 'react-final-form';
 
+import { TitleManager } from '@folio/stripes/core';
+
 import ViewPrintDetailsForm from './ViewPrintDetailsForm';
 import { VIEW_PRINT_DETAILS_ENABLED } from '../../constants';
 
 describe('ViewPrintDetailsForm', () => {
+  const labelIds = {
+    generalTitle: 'ui-circulation.settings.title.general',
+    viewPrintDetailsTitle: 'ui-circulation.settings.title.viewPrintDetails',
+  };
   const mockedHandleSubmit = jest.fn();
   const defaultProps = {
     handleSubmit: mockedHandleSubmit,
@@ -46,8 +52,17 @@ describe('ViewPrintDetailsForm', () => {
   it('should call "handleSubmit" on form submit', () => {
     expect(mockedHandleSubmit).not.toHaveBeenCalled();
 
-    fireEvent.submit(screen.getByTestId('viewPrintDetailsFormSubmit'));
+    fireEvent.submit(screen.getByRole('button', { name: 'stripes-core.button.save' }));
 
     expect(mockedHandleSubmit).toHaveBeenCalled();
+  });
+
+  it('should trigger TitleManager with correct props', () => {
+    const expectedProps = {
+      page: labelIds.generalTitle,
+      record: labelIds.viewPrintDetailsTitle,
+    };
+
+    expect(TitleManager).toHaveBeenCalledWith(expect.objectContaining(expectedProps), {});
   });
 });

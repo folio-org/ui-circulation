@@ -12,6 +12,7 @@ import {
   Row,
 } from '@folio/stripes/components';
 import stripesFinalForm from '@folio/stripes/final-form';
+import { TitleManager } from '@folio/stripes/core';
 
 import { VIEW_PRINT_DETAILS_ENABLED } from '../../constants';
 
@@ -45,32 +46,37 @@ const ViewPrintDetailsForm = ({
   const paneTitle = formatMessage({ id: 'ui-circulation.settings.title.viewPrintDetails' });
 
   return (
-    <form
-      id="viewPrintDetailsForm"
-      data-testid="viewPrintDetailsFormSubmit"
-      className={css.viewPrintDetailsForm}
-      noValidate
-      onSubmit={handleSubmit}
+    <TitleManager
+      page={formatMessage({ id: 'ui-circulation.settings.title.general' })}
+      record={formatMessage({ id: 'ui-circulation.settings.title.viewPrintDetails' })}
     >
-      <Pane
-        defaultWidth="fill"
-        id="viewPrintDetailsFormPane"
-        paneTitle={paneTitle}
-        footer={paneFooter}
+      <form
+        id="viewPrintDetailsForm"
+        data-testid="viewPrintDetailsFormSubmit"
+        className={css.viewPrintDetailsForm}
+        noValidate
+        onSubmit={handleSubmit}
       >
-        <Row>
-          <Col xs={12}>
-            <Field
-              component={Checkbox}
-              data-testid="viewPrintDetailsCheckbox"
-              label={formatMessage({ id: 'ui-circulation.settings.ViewPrintDetails.enable' })}
-              name={VIEW_PRINT_DETAILS_ENABLED}
-              type="checkbox"
-            />
-          </Col>
-        </Row>
-      </Pane>
-    </form>
+        <Pane
+          defaultWidth="fill"
+          id="viewPrintDetailsFormPane"
+          paneTitle={paneTitle}
+          footer={paneFooter}
+        >
+          <Row>
+            <Col xs={12}>
+              <Field
+                component={Checkbox}
+                data-testid="viewPrintDetailsCheckbox"
+                label={formatMessage({ id: 'ui-circulation.settings.ViewPrintDetails.enable' })}
+                name={VIEW_PRINT_DETAILS_ENABLED}
+                type="checkbox"
+              />
+            </Col>
+          </Row>
+        </Pane>
+      </form>
+    </TitleManager>
   );
 };
 
