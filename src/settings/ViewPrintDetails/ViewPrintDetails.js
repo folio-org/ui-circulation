@@ -4,7 +4,6 @@ import { useState } from 'react';
 import { Loading, Modal, Button, ModalFooter } from '@folio/stripes/components';
 import { TitleManager, useCallout } from '@folio/stripes/core';
 
-
 import { usePrintDetailsSettings } from './hooks/usePrintDetailsSettings/usePrintDetailsSettings';
 import { usePrintDetailsSettingsMutation } from './hooks/usePrintDetailsSettingsMutation/usePrintDetailsSettingsMutation';
 import ViewPrintDetailsForm from './ViewPrintDetailsForm';
@@ -20,6 +19,7 @@ const ViewPrintDetails = () => {
     refetch,
   } = usePrintDetailsSettings();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [reRenderFlag, setReRenderFlag] = useState(true);
   const { createPrintDetailsSettings, updatePrintDetailsSettings } = usePrintDetailsSettingsMutation();
   const { formatMessage } = useIntl();
   const callout = useCallout();
@@ -75,6 +75,7 @@ const ViewPrintDetails = () => {
   };
 
   const handleModalClose = () => {
+    setReRenderFlag(!reRenderFlag);
     setIsModalOpen(false);
   };
 
@@ -111,6 +112,7 @@ const ViewPrintDetails = () => {
     >
       <ViewPrintDetailsForm
         onSubmit={onSubmit}
+        key={reRenderFlag}
         initialValues={{ [VIEW_PRINT_DETAILS_ENABLED]: enablePrintLog }}
       />
       <Modal
