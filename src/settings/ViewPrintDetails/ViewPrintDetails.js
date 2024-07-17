@@ -7,9 +7,7 @@ import { useCallout } from '@folio/stripes/core';
 import { usePrintDetailsSettings } from './hooks/usePrintDetailsSettings/usePrintDetailsSettings';
 import { usePrintDetailsSettingsMutation } from './hooks/usePrintDetailsSettingsMutation/usePrintDetailsSettingsMutation';
 import ViewPrintDetailsForm from './ViewPrintDetailsForm';
-import { VIEW_PRINT_DETAILS_ENABLED } from '../../constants';
-
-const PRINT_DETAILS_SETTINGS_KEY = 'Enable print event log';
+import { VIEW_PRINT_DETAILS_ENABLED, PRINT_DETAILS_SETTINGS_KEY } from '../../constants';
 
 const ViewPrintDetails = () => {
   const {

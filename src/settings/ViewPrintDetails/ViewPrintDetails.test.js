@@ -6,12 +6,13 @@ import {
   screen,
   waitFor,
 } from '@folio/jest-config-stripes/testing-library/react';
-import { useOkapiKy } from '@folio/stripes/core';
+import { useOkapiKy, useCallout } from '@folio/stripes/core';
 
 import ViewPrintDetails from './ViewPrintDetails';
 import ViewPrintDetailsForm from './ViewPrintDetailsForm';
 import { usePrintDetailsSettings } from './hooks/usePrintDetailsSettings/usePrintDetailsSettings';
 import { usePrintDetailsSettingsMutation } from './hooks/usePrintDetailsSettingsMutation/usePrintDetailsSettingsMutation';
+import { PRINT_DETAILS_SETTINGS_KEY } from '../../constants';
 
 jest.mock('./hooks/usePrintDetailsSettings/usePrintDetailsSettings');
 jest.mock('./hooks/usePrintDetailsSettingsMutation/usePrintDetailsSettingsMutation');
@@ -25,7 +26,7 @@ const renderComponent = () => {
 
 const mockData = {
   id: '01cd7de6-5f0b-45f8-a7a9-7c122f8cd7e9',
-  name: 'Enable print event log',
+  name: PRINT_DETAILS_SETTINGS_KEY,
   value: { enablePrintLog: 'false' }
 };
 const mockRefetch = jest.fn();
@@ -38,6 +39,7 @@ const mockKy = {
 };
 
 describe('ViewPrintDetails', () => {
+  const sendCallout = jest.fn();
   describe('when form is submitted with enabled print log', () => {
     beforeEach(() => {
       ViewPrintDetailsForm.mockImplementation(({ onSubmit }) => {
@@ -60,6 +62,8 @@ describe('ViewPrintDetails', () => {
         createPrintDetailsSettings: jest.fn(() => Promise.resolve()),
         updatePrintDetailsSettings: jest.fn(() => Promise.resolve()),
       });
+      sendCallout.mockClear();
+      useCallout.mockClear().mockReturnValue({ sendCallout });
       mockKy.put.mockClear();
       useOkapiKy
         .mockClear()
@@ -103,6 +107,10 @@ describe('ViewPrintDetails', () => {
       await waitFor(() => {
         expect(screen.getByText('Submit')).toBeInTheDocument();
         expect(usePrintDetailsSettingsMutation().updatePrintDetailsSettings).toHaveBeenCalled();
+        expect(sendCallout).toHaveBeenCalledWith({
+          type: 'success',
+          message: 'ui-circulation.settings.ViewPrintDetails.callout.success',
+        });
       });
     });
   });
@@ -135,6 +143,8 @@ describe('ViewPrintDetails', () => {
         createPrintDetailsSettings: jest.fn(() => Promise.resolve()),
         updatePrintDetailsSettings: jest.fn(() => Promise.resolve()),
       });
+      sendCallout.mockClear();
+      useCallout.mockClear().mockReturnValue({ sendCallout });
       mockKy.put.mockClear();
       useOkapiKy
         .mockClear()
@@ -166,6 +176,10 @@ describe('ViewPrintDetails', () => {
       await waitFor(() => {
         expect(usePrintDetailsSettingsMutation().updatePrintDetailsSettings).toHaveBeenCalled();
         expect(screen.queryByText('ui-circulation.settings.ViewPrintDetails.warningPopupMessage')).not.toBeInTheDocument();
+        expect(sendCallout).toHaveBeenCalledWith({
+          type: 'success',
+          message: 'ui-circulation.settings.ViewPrintDetails.callout.success',
+        });
       });
     });
 
@@ -185,6 +199,7 @@ describe('ViewPrintDetails', () => {
         expect(usePrintDetailsSettingsMutation().createPrintDetailsSettings).not.toHaveBeenCalled();
         expect(usePrintDetailsSettingsMutation().updatePrintDetailsSettings).not.toHaveBeenCalled();
         expect(screen.queryByText('ui-circulation.settings.ViewPrintDetails.warningPopupMessage')).not.toBeInTheDocument();
+        expect(sendCallout).not.toHaveBeenCalled();
       });
     });
   });
