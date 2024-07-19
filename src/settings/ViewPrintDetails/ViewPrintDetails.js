@@ -1,13 +1,12 @@
 import { useIntl } from 'react-intl';
-import { useState } from 'react';
 
-import { Loading, Modal, Button, ModalFooter } from '@folio/stripes/components';
+import { LoadingPane } from '@folio/stripes/components';
 import { useCallout } from '@folio/stripes/core';
 
 import { usePrintDetailsSettings } from './hooks/usePrintDetailsSettings/usePrintDetailsSettings';
 import { usePrintDetailsSettingsMutation } from './hooks/usePrintDetailsSettingsMutation/usePrintDetailsSettingsMutation';
 import ViewPrintDetailsForm from './ViewPrintDetailsForm';
-import { VIEW_PRINT_DETAILS_ENABLED, PRINT_DETAILS_SETTINGS_KEY } from '../../constants';
+import { VIEW_PRINT_DETAILS_ENABLED, VIEW_PRINT_DETAILS_SETTINGS_KEY } from '../../constants';
 
 const ViewPrintDetails = () => {
   const {
@@ -16,15 +15,13 @@ const ViewPrintDetails = () => {
     isLoading,
     refetch,
   } = usePrintDetailsSettings();
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [reRenderFlag, setReRenderFlag] = useState(true);
   const { createPrintDetailsSettings, updatePrintDetailsSettings } = usePrintDetailsSettingsMutation();
   const { formatMessage } = useIntl();
   const callout = useCallout();
 
   const createSetting = (values) => {
     return createPrintDetailsSettings({
-      name: PRINT_DETAILS_SETTINGS_KEY,
+      name: VIEW_PRINT_DETAILS_SETTINGS_KEY,
       value: {
         enablePrintLog: values[VIEW_PRINT_DETAILS_ENABLED].toString(),
       }
@@ -41,10 +38,10 @@ const ViewPrintDetails = () => {
     });
   };
 
-  const apiHandler = (values) => {
-    const handler = printDetailsInfo?.id ? updateSetting : createSetting;
+  const onSubmit = (values) => {
+    const apiHandler = printDetailsInfo?.id ? updateSetting : createSetting;
 
-    return handler(values)
+    return apiHandler(values)
       .then(() => {
         refetch();
         callout.sendCallout({
@@ -64,62 +61,21 @@ const ViewPrintDetails = () => {
       });
   };
 
-  const onSubmit = async (values) => {
-    if (!values[VIEW_PRINT_DETAILS_ENABLED]) {
-      setIsModalOpen(true);
-    } else {
-      apiHandler(values);
-    }
-  };
-
-  const handleModalClose = () => {
-    setReRenderFlag(!reRenderFlag);
-    setIsModalOpen(false);
-  };
-
-  const handleModalYes = () => {
-    apiHandler({ [VIEW_PRINT_DETAILS_ENABLED]: false });
-    setIsModalOpen(false);
-  };
-
-  const modalFooter = (
-    <ModalFooter>
-      <Button
-        onClick={handleModalYes}
-        buttonStyle="primary"
-      >
-        {formatMessage({ id: 'ui-circulation.settings.ViewPrintDetails.warningPopupMessage.yes' })}
-      </Button>
-      <Button
-        onClick={handleModalClose}
-        buttonStyle="primary"
-      >
-        {formatMessage({ id: 'ui-circulation.settings.ViewPrintDetails.warningPopupMessage.no' })}
-      </Button>
-    </ModalFooter>
-  );
+  const paneTitle = formatMessage({ id: 'ui-circulation.settings.title.viewPrintDetails' });
 
   if (isLoading) {
-    return <Loading />;
+    return <LoadingPane
+      defaultWidth="50%"
+      paneTitle={paneTitle}
+    />;
   }
 
   return (
-    <>
-      <ViewPrintDetailsForm
-        onSubmit={onSubmit}
-        key={reRenderFlag}
-        initialValues={{ [VIEW_PRINT_DETAILS_ENABLED]: enablePrintLog }}
-      />
-      <Modal
-        data-testid="viewPrintDetailsModal"
-        open={isModalOpen}
-        onClose={handleModalClose}
-        dismissible
-        footer={modalFooter}
-      >
-        {formatMessage({ id: 'ui-circulation.settings.ViewPrintDetails.warningPopupMessage' })}
-      </Modal>
-    </>
+    <ViewPrintDetailsForm
+      onSubmit={onSubmit}
+      initialValues={{ [VIEW_PRINT_DETAILS_ENABLED]: enablePrintLog }}
+      paneTitle={paneTitle}
+    />
   );
 };
 

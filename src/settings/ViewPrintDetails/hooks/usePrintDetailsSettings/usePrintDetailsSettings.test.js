@@ -10,11 +10,11 @@ import {
 import { useOkapiKy } from '@folio/stripes/core';
 
 import { usePrintDetailsSettings } from './usePrintDetailsSettings';
-import { PRINT_DETAILS_SETTINGS_KEY } from '../../../../constants';
+import { VIEW_PRINT_DETAILS_SETTINGS_KEY } from '../../../../constants';
 
 const printDetailsSettings = {
   id: '0acf50df-709f-44d9-9fa0-5a95e349419b',
-  name: PRINT_DETAILS_SETTINGS_KEY,
+  name: VIEW_PRINT_DETAILS_SETTINGS_KEY,
   value: { enablePrintLog: 'true' },
 };
 

@@ -21,13 +21,24 @@ describe('ViewPrintDetailsForm', () => {
   const mockedHandleSubmit = jest.fn();
   const defaultProps = {
     handleSubmit: mockedHandleSubmit,
+    paneTitle: 'ui-circulation.settings.title.viewPrintDetails',
     pristine: true,
     submitting: false,
+  };
+  const mockedFormChange = jest.fn();
+  const mockedForm = {
+    getFieldState: jest.fn(() => ({
+      value: true,
+    })),
+    change: mockedFormChange,
   };
 
   beforeEach(() => {
     render(
-      <ViewPrintDetailsForm {...defaultProps} />
+      <ViewPrintDetailsForm
+        form={mockedForm}
+        {...defaultProps}
+      />
     );
   });
 
@@ -35,9 +46,8 @@ describe('ViewPrintDetailsForm', () => {
     expect(screen.getByText('ui-circulation.settings.title.viewPrintDetails')).toBeInTheDocument();
   });
 
-  it('should render View Print Details checkbox and checkbox label', () => {
+  it('should render View Print Details checkbox', () => {
     expect(screen.getByTestId('viewPrintDetailsCheckbox')).toBeInTheDocument();
-    expect(screen.getByText('ui-circulation.settings.ViewPrintDetails.enable')).toBeInTheDocument();
   });
 
   it('should execute "Field" with correct props', () => {
@@ -49,14 +59,6 @@ describe('ViewPrintDetailsForm', () => {
     }), {});
   });
 
-  it('should call "handleSubmit" on form submit', () => {
-    expect(mockedHandleSubmit).not.toHaveBeenCalled();
-
-    fireEvent.submit(screen.getByRole('button', { name: 'stripes-core.button.save' }));
-
-    expect(mockedHandleSubmit).toHaveBeenCalled();
-  });
-
   it('should trigger TitleManager with correct props', () => {
     const expectedProps = {
       page: labelIds.generalTitle,
@@ -64,5 +66,41 @@ describe('ViewPrintDetailsForm', () => {
     };
 
     expect(TitleManager).toHaveBeenCalledWith(expect.objectContaining(expectedProps), {});
+  });
+
+  describe('when form is submitting with enable print log', () => {
+    it('should call "handleSubmit" on form submit', () => {
+      fireEvent.submit(screen.getByRole('button', { name: 'stripes-core.button.save' }));
+      expect(mockedHandleSubmit).toHaveBeenCalled();
+    });
+  });
+
+  describe('when form is submitting with disable print log', () => {
+    beforeEach(() => {
+      mockedForm.getFieldState.mockClear().mockReturnValue({
+        value: false,
+      });
+    });
+    it('should open modal', () => {
+      fireEvent.submit(screen.getByRole('button', { name: 'stripes-core.button.save' }));
+
+      expect(screen.getByText('ui-circulation.settings.ViewPrintDetails.warningPopup.heading')).toBeInTheDocument();
+      expect(screen.getByText('ui-circulation.settings.ViewPrintDetails.warningPopup.message')).toBeInTheDocument();
+      expect(screen.getByText('ui-circulation.settings.ViewPrintDetails.warningPopup.message.confirm')).toBeInTheDocument();
+      expect(screen.getByText('ui-circulation.settings.ViewPrintDetails.warningPopup.message.cancel')).toBeInTheDocument();
+    });
+
+    it('should call "handleSubmit" on click of "Confirm" button in modal', () => {
+      fireEvent.submit(screen.getByRole('button', { name: 'stripes-core.button.save' }));
+      fireEvent.click(screen.getByText('ui-circulation.settings.ViewPrintDetails.warningPopup.message.confirm'));
+
+      expect(mockedHandleSubmit).toHaveBeenCalled();
+    });
+
+    it('should call mockedFormChange on click of "Confirm" button in modal', () => {
+      fireEvent.submit(screen.getByRole('button', { name: 'stripes-core.button.save' }));
+      fireEvent.click(screen.getByText('ui-circulation.settings.ViewPrintDetails.warningPopup.message.cancel'));
+      expect(mockedForm.change).toHaveBeenCalled();
+    });
   });
 });

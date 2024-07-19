@@ -349,9 +349,10 @@
   "settings.ViewPrintDetails.enable": "Enable view print details (Pick slips)",
   "settings.ViewPrintDetails.callout.success": "Setting was successfully updated.",
   "settings.ViewPrintDetails.callout.error": "Something went wrong.",
-  "settings.ViewPrintDetails.warningPopupMessage": "Disabling this setting will result in the loss of existing print history logs. Are you sure ?",
-  "settings.ViewPrintDetails.warningPopupMessage.yes": "Yes",
-  "settings.ViewPrintDetails.warningPopupMessage.no": "No",
+  "settings.ViewPrintDetails.warningPopup.heading": "Disable view print details (Pick slips)",
+  "settings.ViewPrintDetails.warningPopup.message": "Disabling this setting will result in the loss of existing print history logs. Are you sure ?",
+  "settings.ViewPrintDetails.warningPopup.message.confirm": "Confirm",
+  "settings.ViewPrintDetails.warningPopup.message.cancel": "Cancel",
 
   "settings.noticePolicy.addNotice": "Add notice",
   "settings.noticePolicy.countableNotice": "Notice {counter}",

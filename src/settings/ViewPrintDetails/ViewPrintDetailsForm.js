@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Field } from 'react-final-form';
 import { injectIntl } from 'react-intl';
@@ -7,6 +7,7 @@ import {
   Button,
   Checkbox,
   Col,
+  ConfirmationModal,
   Pane,
   PaneFooter,
   Row,
@@ -20,12 +21,15 @@ import css from './ViewPrintDetailsForm.css';
 
 const ViewPrintDetailsForm = ({
   handleSubmit,
+  paneTitle,
   pristine,
   submitting,
+  form,
   intl: {
     formatMessage
   },
 }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const paneFooter = useMemo(() => {
     const end = (
       <Button
@@ -40,10 +44,26 @@ const ViewPrintDetailsForm = ({
     );
 
     return <PaneFooter renderEnd={end} />;
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [handleSubmit, pristine, submitting]);
+  }, [formatMessage, pristine, submitting]);
 
-  const paneTitle = formatMessage({ id: 'ui-circulation.settings.title.viewPrintDetails' });
+  const handleModalCancel = () => {
+    form.change(VIEW_PRINT_DETAILS_ENABLED, true);
+    setIsModalOpen(false);
+  };
+
+  const handleModalConfirm = () => {
+    handleSubmit({ [VIEW_PRINT_DETAILS_ENABLED]: false });
+    setIsModalOpen(false);
+  };
+
+  const onSubmit = (eventObject) => {
+    if (!form.getFieldState(VIEW_PRINT_DETAILS_ENABLED).value) {
+      eventObject.preventDefault();
+      setIsModalOpen(true);
+    } else {
+      handleSubmit(eventObject);
+    }
+  };
 
   return (
     <TitleManager
@@ -55,7 +75,7 @@ const ViewPrintDetailsForm = ({
         data-testid="viewPrintDetailsFormSubmit"
         className={css.viewPrintDetailsForm}
         noValidate
-        onSubmit={handleSubmit}
+        onSubmit={onSubmit}
       >
         <Pane
           defaultWidth="fill"
@@ -74,6 +94,16 @@ const ViewPrintDetailsForm = ({
               />
             </Col>
           </Row>
+          <ConfirmationModal
+            id="disable-print-details-modal"
+            open={isModalOpen}
+            onConfirm={handleModalConfirm}
+            onCancel={handleModalCancel}
+            heading={formatMessage({ id: 'ui-circulation.settings.ViewPrintDetails.warningPopup.heading' })}
+            message={formatMessage({ id: 'ui-circulation.settings.ViewPrintDetails.warningPopup.message' })}
+            confirmLabel={formatMessage({ id: 'ui-circulation.settings.ViewPrintDetails.warningPopup.message.confirm' })}
+            cancelLabel={formatMessage({ id: 'ui-circulation.settings.ViewPrintDetails.warningPopup.message.cancel' })}
+          />
         </Pane>
       </form>
     </TitleManager>
@@ -85,6 +115,8 @@ ViewPrintDetailsForm.propTypes = {
   intl: PropTypes.object.isRequired,
   pristine: PropTypes.bool.isRequired,
   submitting: PropTypes.bool.isRequired,
+  paneTitle: PropTypes.string.isRequired,
+  form: PropTypes.object.isRequired,
 };
 
 export default injectIntl(stripesFinalForm({

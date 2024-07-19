@@ -10,7 +10,7 @@ import {
 } from '@folio/jest-config-stripes/testing-library/react';
 import { useOkapiKy } from '@folio/stripes/core';
 
-import { PRINT_DETAILS_SETTINGS_KEY, VIEW_PRINT_DETAILS_SETTINGS_API } from '../../../../constants';
+import { VIEW_PRINT_DETAILS_SETTINGS_KEY, VIEW_PRINT_DETAILS_SETTINGS_API } from '../../../../constants';
 import { usePrintDetailsSettingsMutation } from './usePrintDetailsSettingsMutation';
 
 const putMock = jest.fn();
@@ -18,7 +18,7 @@ const postMock = jest.fn();
 
 const printDetailsSettingsData = {
   id: '0acf50df-709f-44d9-9fa0-5a95e349419b',
-  name: PRINT_DETAILS_SETTINGS_KEY,
+  name: VIEW_PRINT_DETAILS_SETTINGS_KEY,
   value: { enablePrintLog: 'true' },
 };
 

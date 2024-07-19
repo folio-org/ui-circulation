@@ -12,7 +12,7 @@ import ViewPrintDetails from './ViewPrintDetails';
 import ViewPrintDetailsForm from './ViewPrintDetailsForm';
 import { usePrintDetailsSettings } from './hooks/usePrintDetailsSettings/usePrintDetailsSettings';
 import { usePrintDetailsSettingsMutation } from './hooks/usePrintDetailsSettingsMutation/usePrintDetailsSettingsMutation';
-import { PRINT_DETAILS_SETTINGS_KEY } from '../../constants';
+import { VIEW_PRINT_DETAILS_SETTINGS_KEY } from '../../constants';
 
 jest.mock('./hooks/usePrintDetailsSettings/usePrintDetailsSettings');
 jest.mock('./hooks/usePrintDetailsSettingsMutation/usePrintDetailsSettingsMutation');
@@ -26,7 +26,7 @@ const renderComponent = () => {
 
 const mockData = {
   id: '01cd7de6-5f0b-45f8-a7a9-7c122f8cd7e9',
-  name: PRINT_DETAILS_SETTINGS_KEY,
+  name: VIEW_PRINT_DETAILS_SETTINGS_KEY,
   value: { enablePrintLog: 'false' }
 };
 const mockRefetch = jest.fn();
@@ -40,166 +40,103 @@ const mockKy = {
 
 describe('ViewPrintDetails', () => {
   const sendCallout = jest.fn();
-  describe('when form is submitted with enabled print log', () => {
-    beforeEach(() => {
-      ViewPrintDetailsForm.mockImplementation(({ onSubmit }) => {
-        return (
-          <form onSubmit={() => {
-            onSubmit({ viewPrintDetailsEnabled: true });
-          }}
-          >
-            <button type="submit">Submit</button>
-          </form>
-        );
-      });
-      usePrintDetailsSettings.mockReturnValue({
-        printDetailsInfo: null,
-        enablePrintLog: false,
-        isLoading: false,
-        refetch: jest.fn(),
-      });
-      usePrintDetailsSettingsMutation.mockReturnValue({
-        createPrintDetailsSettings: jest.fn(() => Promise.resolve()),
-        updatePrintDetailsSettings: jest.fn(() => Promise.resolve()),
-      });
-      sendCallout.mockClear();
-      useCallout.mockClear().mockReturnValue({ sendCallout });
-      mockKy.put.mockClear();
-      useOkapiKy
-        .mockClear()
-        .mockReturnValue(mockKy);
+  beforeEach(() => {
+    ViewPrintDetailsForm.mockImplementation(({ onSubmit }) => {
+      return (
+        <form onSubmit={() => {
+          onSubmit({ viewPrintDetailsEnabled: true });
+        }}
+        >
+          <button type="submit">Submit</button>
+        </form>
+      );
     });
-
-    it('should render LoadingPane component when settings are loading', () => {
-      usePrintDetailsSettings.mockReturnValueOnce({
-        printDetailsInfo: null,
-        enablePrintLog: false,
-        isLoading: true,
-        refetch: mockRefetch,
-      });
-      renderComponent();
-
-      expect(screen.getByText('Loading')).toBeInTheDocument();
+    usePrintDetailsSettings.mockReturnValue({
+      printDetailsInfo: null,
+      enablePrintLog: false,
+      isLoading: false,
+      refetch: jest.fn(),
     });
-
-    it('should call createPrintDetailsSettings Mutation when printDetailsInfo.id is not present', async () => {
-      render(<ViewPrintDetails />);
-
-      fireEvent.submit(screen.getByRole('button', { name: /submit/i }));
-
-      await waitFor(() => {
-        expect(screen.getByText('Submit')).toBeInTheDocument();
-        expect(usePrintDetailsSettingsMutation().createPrintDetailsSettings).toHaveBeenCalled();
-      });
+    usePrintDetailsSettingsMutation.mockReturnValue({
+      createPrintDetailsSettings: jest.fn(() => Promise.resolve()),
+      updatePrintDetailsSettings: jest.fn(() => Promise.resolve()),
     });
+    sendCallout.mockClear();
+    useCallout.mockClear().mockReturnValue({ sendCallout });
+    mockKy.put.mockClear();
+    useOkapiKy
+      .mockClear()
+      .mockReturnValue(mockKy);
+  });
 
-    it('should call updatePrintDetailsSettings Mutation when printDetailsInfo.id is present', async () => {
-      usePrintDetailsSettings.mockReturnValue({
-        printDetailsInfo: mockData,
-        enablePrintLog: false,
-        isLoading: false,
-        refetch: jest.fn(),
-      });
-      render(<ViewPrintDetails />);
+  it('should render LoadingPane component when settings are loading', () => {
+    usePrintDetailsSettings.mockReturnValueOnce({
+      printDetailsInfo: null,
+      enablePrintLog: false,
+      isLoading: true,
+      refetch: mockRefetch,
+    });
+    renderComponent();
 
-      fireEvent.submit(screen.getByRole('button', { name: /submit/i }));
+    expect(screen.getByText('Loading')).toBeInTheDocument();
+  });
 
-      await waitFor(() => {
-        expect(screen.getByText('Submit')).toBeInTheDocument();
-        expect(usePrintDetailsSettingsMutation().updatePrintDetailsSettings).toHaveBeenCalled();
-        expect(sendCallout).toHaveBeenCalledWith({
-          type: 'success',
-          message: 'ui-circulation.settings.ViewPrintDetails.callout.success',
-        });
+  it('should call createPrintDetailsSettings Mutation on form submit when printDetailsInfo.id is not present', async () => {
+    render(<ViewPrintDetails />);
+
+    fireEvent.submit(screen.getByRole('button', { name: /submit/i }));
+
+    await waitFor(() => {
+      expect(screen.getByText('Submit')).toBeInTheDocument();
+      expect(usePrintDetailsSettingsMutation().createPrintDetailsSettings).toHaveBeenCalled();
+    });
+  });
+
+  it('should call updatePrintDetailsSettings Mutation on form submit when printDetailsInfo.id is present', async () => {
+    usePrintDetailsSettings.mockReturnValue({
+      printDetailsInfo: mockData,
+      enablePrintLog: false,
+      isLoading: false,
+      refetch: jest.fn(),
+    });
+    render(<ViewPrintDetails />);
+
+    fireEvent.submit(screen.getByRole('button', { name: /submit/i }));
+
+    await waitFor(() => {
+      expect(screen.getByText('Submit')).toBeInTheDocument();
+      expect(usePrintDetailsSettingsMutation().updatePrintDetailsSettings).toHaveBeenCalled();
+    });
+  });
+
+  it('should display success callout when settings is updated successfully', async () => {
+    render(<ViewPrintDetails />);
+
+    fireEvent.submit(screen.getByRole('button', { name: /submit/i }));
+
+    await waitFor(() => {
+      expect(screen.getByText('Submit')).toBeInTheDocument();
+      expect(sendCallout).toHaveBeenCalledWith({
+        type: 'success',
+        message: 'ui-circulation.settings.ViewPrintDetails.callout.success',
       });
     });
   });
 
-  describe('when form is submitted with disabled print log', () => {
-    beforeEach(() => {
-      ViewPrintDetailsForm.mockImplementation(({ onSubmit }) => {
-        return (
-          <form onSubmit={() => {
-            onSubmit({ viewPrintDetailsEnabled: false });
-          }}
-          >
-            <button type="submit">Submit</button>
-          </form>
-        );
-      });
-      usePrintDetailsSettings.mockReturnValue({
-        printDetailsInfo: {
-          ...mockData,
-          value: {
-            ...mockData.value,
-            enablePrintLog: 'true',
-          },
-        },
-        enablePrintLog: true,
-        isLoading: false,
-        refetch: jest.fn(),
-      });
-      usePrintDetailsSettingsMutation.mockReturnValue({
-        createPrintDetailsSettings: jest.fn(() => Promise.resolve()),
-        updatePrintDetailsSettings: jest.fn(() => Promise.resolve()),
-      });
-      sendCallout.mockClear();
-      useCallout.mockClear().mockReturnValue({ sendCallout });
-      mockKy.put.mockClear();
-      useOkapiKy
-        .mockClear()
-        .mockReturnValue(mockKy);
+  it('should display error callout when settings is not updated successfully', async () => {
+    usePrintDetailsSettingsMutation.mockReturnValue({
+      createPrintDetailsSettings: jest.fn(() => Promise.reject()),
+      updatePrintDetailsSettings: jest.fn(() => Promise.reject()),
     });
+    render(<ViewPrintDetails />);
 
-    it('should open modal', async () => {
-      render(<ViewPrintDetails />);
+    fireEvent.submit(screen.getByRole('button', { name: /submit/i }));
 
-      fireEvent.submit(screen.getByRole('button', { name: /submit/i }));
-
-      expect(await screen.getByText('ui-circulation.settings.ViewPrintDetails.warningPopupMessage')).toBeInTheDocument();
-      expect(await screen.getByText('ui-circulation.settings.ViewPrintDetails.warningPopupMessage.yes')).toBeInTheDocument();
-      expect(await screen.getByText('ui-circulation.settings.ViewPrintDetails.warningPopupMessage.no')).toBeInTheDocument();
-    });
-
-    it('should call updatePrintDetailsSettings Mutation and close Modal on "Yes" button click', async () => {
-      render(<ViewPrintDetails />);
-
-      fireEvent.submit(screen.getByRole('button', { name: /submit/i }));
-
-      expect(screen.queryByText('ui-circulation.settings.ViewPrintDetails.warningPopupMessage')).toBeInTheDocument();
-      await waitFor(() => {
-        expect(screen.getByText('Submit')).toBeInTheDocument();
-      });
-
-      fireEvent.click(screen.getByText('ui-circulation.settings.ViewPrintDetails.warningPopupMessage.yes'));
-
-      await waitFor(() => {
-        expect(usePrintDetailsSettingsMutation().updatePrintDetailsSettings).toHaveBeenCalled();
-        expect(screen.queryByText('ui-circulation.settings.ViewPrintDetails.warningPopupMessage')).not.toBeInTheDocument();
-        expect(sendCallout).toHaveBeenCalledWith({
-          type: 'success',
-          message: 'ui-circulation.settings.ViewPrintDetails.callout.success',
-        });
-      });
-    });
-
-    it('should not call updatePrintDetailsSettings Mutation and close Modal on "No" button click', async () => {
-      render(<ViewPrintDetails />);
-
-      fireEvent.submit(screen.getByRole('button', { name: /submit/i }));
-
-      expect(screen.queryByText('ui-circulation.settings.ViewPrintDetails.warningPopupMessage')).toBeInTheDocument();
-      await waitFor(() => {
-        expect(screen.getByText('Submit')).toBeInTheDocument();
-      });
-
-      fireEvent.click(screen.getByText('ui-circulation.settings.ViewPrintDetails.warningPopupMessage.no'));
-
-      await waitFor(() => {
-        expect(usePrintDetailsSettingsMutation().createPrintDetailsSettings).not.toHaveBeenCalled();
-        expect(usePrintDetailsSettingsMutation().updatePrintDetailsSettings).not.toHaveBeenCalled();
-        expect(screen.queryByText('ui-circulation.settings.ViewPrintDetails.warningPopupMessage')).not.toBeInTheDocument();
-        expect(sendCallout).not.toHaveBeenCalled();
+    await waitFor(() => {
+      expect(screen.getByText('Submit')).toBeInTheDocument();
+      expect(sendCallout).toHaveBeenCalledWith({
+        type: 'error',
+        message: 'ui-circulation.settings.ViewPrintDetails.callout.error',
       });
     });
   });

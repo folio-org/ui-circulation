@@ -8,10 +8,11 @@ import {
 
 import { VIEW_PRINT_DETAILS_SETTINGS_API } from '../../../../constants';
 
+const DEFAULT_DATA = {};
+
 export const usePrintDetailsSettings = (options = {}) => {
   const ky = useOkapiKy();
   const [namespace] = useNamespace('print-details-settings');
-  const DEFAULT_DATA = {};
   const searchParams = {
     limit: 1,
   };
