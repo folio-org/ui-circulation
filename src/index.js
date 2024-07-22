@@ -21,6 +21,7 @@ import NoticePolicySettings from './settings/NoticePolicy';
 import RequestPolicySettings from './settings/RequestPolicy';
 import TitleLevelRequests from './settings/TitleLevelRequests';
 import PrintHoldRequests from './settings/PrintHoldRequests';
+import ViewPrintDetails from './settings/ViewPrintDetails';
 
 class Circulation extends Component {
   static propTypes = {
@@ -142,6 +143,12 @@ class Circulation extends Component {
             label: <FormattedMessage id="ui-circulation.settings.index.printHoldRequests" />,
             component: PrintHoldRequests,
             perm: 'ui-circulation.settings.staff-slips',
+          },
+          {
+            route: 'view-print-details',
+            label: <FormattedMessage id="ui-circulation.settings.index.viewPrintDetails" />,
+            component: ViewPrintDetails,
+            perm: 'ui-circulation.settings.request-print-details',
           },
         ],
       },

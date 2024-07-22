@@ -592,3 +592,7 @@ export const REQUEST_TYPE_RULES = {
   ALLOW_ALL: 'allowAll',
   ALLOW_SOME: 'allowSome',
 };
+
+export const VIEW_PRINT_DETAILS_SETTINGS_API = 'circulation/settings';
+export const VIEW_PRINT_DETAILS_ENABLED = 'viewPrintDetailsEnabled';
+export const VIEW_PRINT_DETAILS_SETTINGS_KEY = 'printEventLogFeature';

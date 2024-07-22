@@ -14,6 +14,7 @@
   "settings.index.requestPolicies": "Request policies",
   "settings.index.titleLevelRequests": "Title level requests",
   "settings.index.printHoldRequests": "Print hold requests",
+  "settings.index.viewPrintDetails": "View print details",
   "settings.index.general": "General",
   "settings.index.loans": "Loans",
   "settings.index.feesFines": "Fee/fine",
@@ -35,6 +36,7 @@
   "settings.title.requestPolicies": "Request {optionNumber, plural, one {policy} other {policies}}",
   "settings.title.titleLevelRequests": "Title level requests",
   "settings.title.printHoldRequests": "Print hold requests",
+  "settings.title.viewPrintDetails": "View print details",  
   "settings.title.newRecord": "New {name}",
   "settings.title.editRecord": "Edit {name}",
 
@@ -343,6 +345,14 @@
 
   "settings.PrintHoldRequests.paneTitle": "Print hold requests",
   "settings.PrintHoldRequests.allow": "Allow print hold requests (Open - Not yet filled)",
+
+  "settings.ViewPrintDetails.enable": "Enable view print details (Pick slips)",
+  "settings.ViewPrintDetails.callout.success": "Setting was successfully updated.",
+  "settings.ViewPrintDetails.callout.error": "Something went wrong.",
+  "settings.ViewPrintDetails.warningPopup.heading": "Disable view print details (Pick slips)",
+  "settings.ViewPrintDetails.warningPopup.message": "Disabling this setting will result in the loss of existing print history logs. Are you sure ?",
+  "settings.ViewPrintDetails.warningPopup.message.confirm": "Confirm",
+  "settings.ViewPrintDetails.warningPopup.message.cancel": "Cancel",
 
   "settings.noticePolicy.addNotice": "Add notice",
   "settings.noticePolicy.countableNotice": "Notice {counter}",
