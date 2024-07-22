@@ -81,6 +81,7 @@ describe('ViewPrintDetailsForm', () => {
         value: false,
       });
     });
+
     it('should open modal', () => {
       fireEvent.submit(screen.getByRole('button', { name: 'stripes-core.button.save' }));
 

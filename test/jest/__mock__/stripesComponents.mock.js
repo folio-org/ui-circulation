@@ -100,20 +100,7 @@ jest.mock('@folio/stripes/components', () => ({
   MessageBanner: jest.fn(({ children, ...rest }) => (
     <div {...rest}>{children}</div>
   )),
-  Modal: jest.fn(({ children, open, onClose, dismissible, footer, ...rest }) => {
-    return (open ?
-      <div
-        data-test={dismissible ? '' : ''}
-        {...rest}
-      >
-        <button type="button" onClick={onClose}>
-          Close Modal
-        </button>
-        {children}
-        {footer}
-      </div> : null
-    );
-  }),
+  Modal: jest.fn(() => null),
   Pane: jest.fn(({ paneTitle, firstMenu, children, footer }) => (
     <div>
       {paneTitle}
