@@ -228,6 +228,7 @@
         "displayName": "Settings (Circ): Can enable request print details",
         "subPermissions": [
           "settings.circulation.enabled",
+          "circulation.settings.collection.get",
           "circulation.settings.item.get",
           "circulation.settings.item.put",
           "circulation.settings.item.post"
