@@ -534,5 +534,14 @@
     "settings.title.editRecord": "{name} bearbeiten",
     "settings.finePolicy.reminderFees.noBlock": "Keine Sperre",
     "permission.settings.view-staff-slips": "Einstellungen (Ausleihe): Kann Dienstzettel anzeigen",
-    "permission.settings.request-print-details": "Einstellungen (Ausleihe): Kann die Anforderung von Druckdetails aktivieren"
+    "permission.settings.request-print-details": "Einstellungen (Ausleihe): Kann die Anforderung von Druckdetails aktivieren",
+    "settings.index.viewPrintDetails": "View print details",
+    "settings.title.viewPrintDetails": "View print details",
+    "settings.ViewPrintDetails.enable": "Enable view print details (Pick slips)",
+    "settings.ViewPrintDetails.callout.success": "Setting was successfully updated.",
+    "settings.ViewPrintDetails.callout.error": "Something went wrong.",
+    "settings.ViewPrintDetails.warningPopup.heading": "Disable view print details (Pick slips)",
+    "settings.ViewPrintDetails.warningPopup.message": "Disabling this setting will result in the loss of existing print history logs. Are you sure ?",
+    "settings.ViewPrintDetails.warningPopup.message.confirm": "Confirm",
+    "settings.ViewPrintDetails.warningPopup.message.cancel": "Cancel"
 }
