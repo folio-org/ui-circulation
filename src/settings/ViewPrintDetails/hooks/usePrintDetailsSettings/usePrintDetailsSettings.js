@@ -6,7 +6,7 @@ import {
   useOkapiKy,
 } from '@folio/stripes/core';
 
-import { VIEW_PRINT_DETAILS_SETTINGS_API } from '../../../../constants';
+import { VIEW_PRINT_DETAILS_SETTINGS_API, VIEW_PRINT_DETAILS_SETTINGS_KEY } from '../../../../constants';
 
 const DEFAULT_DATA = {};
 
@@ -14,7 +14,7 @@ export const usePrintDetailsSettings = (options = {}) => {
   const ky = useOkapiKy();
   const [namespace] = useNamespace('print-details-settings');
   const searchParams = {
-    limit: 1,
+    query: `(name=${VIEW_PRINT_DETAILS_SETTINGS_KEY})`,
   };
 
   const {
