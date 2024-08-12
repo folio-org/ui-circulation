@@ -39,7 +39,7 @@ const ViewPrintDetails = () => {
   };
 
   const onSubmit = (values) => {
-    const apiHandler = printDetailsInfo?.id ? updateSetting : createSetting;
+    const apiHandler = printDetailsInfo?.name === VIEW_PRINT_DETAILS_SETTINGS_KEY ? updateSetting : createSetting;
 
     return apiHandler(values)
       .then(() => {
