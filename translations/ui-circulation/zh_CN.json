@@ -535,13 +535,13 @@
     "settings.finePolicy.reminderFees.noBlock": "无冻结",
     "permission.settings.view-staff-slips": "设置（流通）：可查看员工单",
     "permission.settings.request-print-details": "设置（流通）：可以启用请求打印详细信息",
-    "settings.index.viewPrintDetails": "View print details",
-    "settings.title.viewPrintDetails": "View print details",
-    "settings.ViewPrintDetails.enable": "Enable view print details (Pick slips)",
-    "settings.ViewPrintDetails.callout.success": "Setting was successfully updated.",
-    "settings.ViewPrintDetails.callout.error": "Something went wrong.",
-    "settings.ViewPrintDetails.warningPopup.heading": "Disable view print details (Pick slips)",
-    "settings.ViewPrintDetails.warningPopup.message": "Disabling this setting will result in the loss of existing print history logs. Are you sure ?",
-    "settings.ViewPrintDetails.warningPopup.message.confirm": "Confirm",
-    "settings.ViewPrintDetails.warningPopup.message.cancel": "Cancel"
+    "settings.index.viewPrintDetails": "查看打印详情",
+    "settings.title.viewPrintDetails": "查看打印详情",
+    "settings.ViewPrintDetails.enable": "启用查看打印详情（选取单）",
+    "settings.ViewPrintDetails.callout.success": "设置更新成功。",
+    "settings.ViewPrintDetails.callout.error": "出了些问题。",
+    "settings.ViewPrintDetails.warningPopup.heading": "禁用查看打印详情（选取单）",
+    "settings.ViewPrintDetails.warningPopup.message": "禁用此设置将导致现有打印历史日志丢失。确定吗？",
+    "settings.ViewPrintDetails.warningPopup.message.confirm": "确认",
+    "settings.ViewPrintDetails.warningPopup.message.cancel": "取消"
 }
