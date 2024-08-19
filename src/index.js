@@ -24,6 +24,7 @@ import PrintHoldRequests from './settings/PrintHoldRequests';
 import TLRPatronNotices from './settings/TLRPatronNotices';
 import ConsortiumTLR from './settings/ConsortiumTLR';
 import { getConsortiumTlrPermission } from './settings/utils/utils';
+import ViewPrintDetails from './settings/ViewPrintDetails';
 
 class Circulation extends Component {
   static propTypes = {
@@ -152,6 +153,12 @@ class Circulation extends Component {
             label: <FormattedMessage id="ui-circulation.settings.index.printHoldRequests" />,
             component: PrintHoldRequests,
             perm: 'ui-circulation.settings.view-staff-slips',
+          },
+          {
+            route: 'view-print-details',
+            label: <FormattedMessage id="ui-circulation.settings.index.viewPrintDetails" />,
+            component: ViewPrintDetails,
+            perm: 'ui-circulation.settings.request-print-details',
           },
         ],
       },

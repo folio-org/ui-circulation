@@ -47,12 +47,13 @@ jest.mock('@folio/stripes/components', () => ({
     onCancel,
     onConfirm,
     confirmLabel,
+    cancelLabel,
     ...rest
   }) => (
     <div {...rest}>
       <span>{heading}</span>
       <span>{message}</span>
-      <button type="button" onClick={onCancel}>Cancel</button>
+      <button type="button" onClick={onCancel}>{cancelLabel}</button>
       <button type="button" onClick={onConfirm}>{confirmLabel}</button>
     </div>
   )),
@@ -123,4 +124,5 @@ jest.mock('@folio/stripes/components', () => ({
   TextArea: jest.fn((props) => <textarea {...props} />),
   TextField: jest.fn((props) => <input {...props} />),
   MultiColumnList: jest.fn(() => <div />),
+  LoadingPane: jest.fn(() => <div>Loading</div>),
 }));

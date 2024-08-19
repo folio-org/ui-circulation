@@ -1,7 +1,7 @@
 import { render } from '@folio/jest-config-stripes/testing-library/react';
 import { TitleManager } from '@folio/stripes/core';
 
-import Circulation from './';
+import Circulation from '.';
 
 const props = {
   stripes: {},

@@ -533,5 +533,15 @@
     "settings.title.newRecord": "New {name}",
     "settings.title.editRecord": "Edit {name}",
     "settings.finePolicy.reminderFees.noBlock": "Sem bloqueio",
-    "permission.settings.view-staff-slips": "Settings (Circulation): Can view staff slips"
+    "permission.settings.view-staff-slips": "Settings (Circulation): Can view staff slips",
+    "permission.settings.request-print-details": "Settings (Circ): Can enable request print details",
+    "settings.index.viewPrintDetails": "View print details",
+    "settings.title.viewPrintDetails": "View print details",
+    "settings.ViewPrintDetails.enable": "Enable view print details (Pick slips)",
+    "settings.ViewPrintDetails.callout.success": "Setting was successfully updated.",
+    "settings.ViewPrintDetails.callout.error": "Something went wrong.",
+    "settings.ViewPrintDetails.warningPopup.heading": "Disable view print details (Pick slips)",
+    "settings.ViewPrintDetails.warningPopup.message": "Disabling this setting will result in the loss of existing print history logs. Are you sure ?",
+    "settings.ViewPrintDetails.warningPopup.message.confirm": "Confirm",
+    "settings.ViewPrintDetails.warningPopup.message.cancel": "Cancel"
 }

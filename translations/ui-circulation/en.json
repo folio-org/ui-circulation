@@ -16,6 +16,7 @@
   "settings.index.tlrPatronNotices": "TLR patron notice templates",
   "settings.index.consortiumTLR": "Consortium title level requests (TLR)",
   "settings.index.printHoldRequests": "Print hold requests",
+  "settings.index.viewPrintDetails": "View print details",
   "settings.index.general": "General",
   "settings.index.loans": "Loans",
   "settings.index.feesFines": "Fee/fine",
@@ -39,6 +40,7 @@
   "settings.title.tlrPatronNotices": "TLR Patron notice templates",
   "settings.title.consortiumTLR": "Consortium title level requests (TLR)",
   "settings.title.printHoldRequests": "Print hold requests",
+  "settings.title.viewPrintDetails": "View print details",  
   "settings.title.newRecord": "New {name}",
   "settings.title.editRecord": "Edit {name}",
 
@@ -351,6 +353,14 @@
   "settings.PrintHoldRequests.paneTitle": "Print hold requests",
   "settings.PrintHoldRequests.allow": "Allow print hold requests (Open - Not yet filled)",
 
+  "settings.ViewPrintDetails.enable": "Enable view print details (Pick slips)",
+  "settings.ViewPrintDetails.callout.success": "Setting was successfully updated.",
+  "settings.ViewPrintDetails.callout.error": "Something went wrong.",
+  "settings.ViewPrintDetails.warningPopup.heading": "Disable view print details (Pick slips)",
+  "settings.ViewPrintDetails.warningPopup.message": "Disabling this setting will result in the loss of existing print history logs. Are you sure ?",
+  "settings.ViewPrintDetails.warningPopup.message.confirm": "Confirm",
+  "settings.ViewPrintDetails.warningPopup.message.cancel": "Cancel",
+
   "settings.noticePolicy.addNotice": "Add notice",
   "settings.noticePolicy.countableNotice": "Notice {counter}",
   "settings.noticePolicy.notices.via": "via",
@@ -556,6 +566,7 @@
   "permission.settings.view-staff-slips": "Settings (Circulation): Can view staff slips",
   "permission.settings.edit-staff-slips": "Settings (Circ): Can edit staff slips",
   "permission.settings.staff-slips": "Settings (Circ): Can create, edit and remove staff slips",
+  "permission.settings.request-print-details": "Settings (Circ): Can enable request print details",
   "permission.settings.request-policies": "Settings (Circ): Can create, edit and remove request policies",
   "permission.settings.other-settings": "Settings (Circ): Can create, edit and remove other settings",
   "permission.settings.notice-templates": "Settings (Circ): Can create, edit and remove patron notice templates",

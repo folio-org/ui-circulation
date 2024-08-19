@@ -21,5 +21,8 @@ jest.mock('@folio/stripes/core', () => {
     IfPermission: jest.fn(({ children }) => <div>{children}</div>),
     TitleManager: jest.fn(({ children }) => <div>{children}</div>),
     useCustomFields: jest.fn(() => []),
+    useOkapiKy: jest.fn(),
+    useNamespace: jest.fn(() => ['namespace']),
+    useCallout: jest.fn(() => ({ sendCallout: jest.fn() })),
   };
 });

@@ -169,6 +169,11 @@ const getTokens = (locale) => ({
       previewValue: 'Please deliver to the History building for Professor McCoy.',
       allowedFor: allowedForAllStaffSlips,
     },
+    {
+      token: 'request.barcodeImage',
+      previewValue: '<Barcode>40afe5ce68a47</Barcode>',
+      allowedFor: allowedForAllStaffSlips,
+    },
   ],
   requestDeliveryAddress: [
     {
@@ -258,6 +263,11 @@ const getTokens = (locale) => ({
     {
       token: 'staffSlip.currentDateTime',
       previewValue: '3/18/22, 11:59 AM',
+      allowedFor: allowedForAllStaffSlips,
+    },
+    {
+      token: 'staffSlip.staffUsername',
+      previewValue: 'johndoe',
       allowedFor: allowedForAllStaffSlips,
     },
   ],
