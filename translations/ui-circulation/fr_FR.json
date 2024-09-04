@@ -452,7 +452,7 @@
     "settings.titleLevelRequests.cancellationNotice": "Notification d'annulation",
     "settings.titleLevelRequests.expirationNotice": "Notification d'échéance",
     "settings.titleLevelRequests.desription": "Sélectionnez des modèles pour les notifications usagers suivantes. Si aucune modèle n'est sélectionné, aucune notification ne sera envoyé.",
-    "settings.titleLevelRequests.defaultTemplateValue": "Select notice",
+    "settings.titleLevelRequests.defaultTemplateValue": "Sélectionner le type de notification",
     "settings.titleLevelRequests.forbiddenDisableTlrModal.title": "Impossible de modifier le paramètre \"Autoriser les réservations au niveau du titre\"",
     "settings.titleLevelRequests.forbiddenDisableTlrModal.description": "Le paramètre \"Autoriser les réservations au niveau du titre\" ne peut pas être modifié car il est utilisé par une ou plusieurs réservations",
     "permission.settings.view-loan-policies": "Settings (Circ): Can view loan policies",

@@ -541,7 +541,7 @@
     "settings.ViewPrintDetails.callout.success": "Nastavení bylo úspěšně aktualizováno.",
     "settings.ViewPrintDetails.callout.error": "Něco se pokazilo.",
     "settings.ViewPrintDetails.warningPopup.heading": "Zakázat zobrazení detailů tisku (Cirkulační lístky žádanek)",
-    "settings.ViewPrintDetails.warningPopup.message": "Zakázáním tohoto nastavení dojde ke ztrátě existujících logů historie tisku. Jste si jisti ?",
+    "settings.ViewPrintDetails.warningPopup.message": "Výběrem možnosti Potvrdit zastavíte zaznamenávání detailů tiskové úlohy.",
     "settings.ViewPrintDetails.warningPopup.message.confirm": "Potvrdit",
     "settings.ViewPrintDetails.warningPopup.message.cancel": "Zrušit"
 }
