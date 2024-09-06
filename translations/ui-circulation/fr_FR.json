@@ -391,7 +391,7 @@
     "settings.finePolicy.select": "Sélection - frais/amendes en retard",
     "settings.finePolicy.quantity": "Quantité de frais/d'amendes en retard",
     "settings.lostItemFee.chargeAmount": "Facturer le montant",
-    "settings.lostItemFee.chargeAmount.patron": "Charge amount item by patron",
+    "settings.lostItemFee.chargeAmount.patron": "Montant des frais facturés par document à l'usager",
     "settings.lostItemFee.chargeAmount.system": "Charge amount item by system",
     "settings.lostItemFee.returned": "Exemplaire perdu retourné",
     "settings.loanHistory.paymentMethodSelect": "Sélectionnez le mode de paiement",
