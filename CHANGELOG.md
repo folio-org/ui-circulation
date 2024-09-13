@@ -10,6 +10,7 @@
 * Add staffUsername as staff slips token in Settings. Refs UICIRC-1101.
 * Add request.barcodeImage as staff slips token in Settings. Refs UICIRC-1103.
 * Update warning message when disabling the "Enable view print details (Pick slips)" configuration. Refs UICIRC-1106.
+* Update upload-artifact actions from v1 and v2 to v4. Refs UICIRC-1109.
 
 ## [9.1.0](https://github.com/folio-org/ui-circulation/tree/v9.1.0) (2024-03-22)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v9.0.5...v9.1.0)
