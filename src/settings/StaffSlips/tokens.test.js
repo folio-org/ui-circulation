@@ -76,10 +76,6 @@ describe('getTokens', () => {
   }) => {
     it(`should have correctly preview value for ${name} token`, () => {
       const tokenForCheck = result[category].find(element => element.token === name);
-      if (name === 'loan.dueDate') {
-        console.log('tokenForCheck ', tokenForCheck);
-        console.log('category ', result[category]);
-      }
 
       expect(tokenForCheck.previewValue).toEqual(expectedResult);
     });
