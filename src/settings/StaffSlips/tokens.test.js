@@ -53,6 +53,16 @@ describe('getTokens', () => {
       expectedResult: '3/18/22, 11:59 AM',
     },
     {
+      category: 'borrower',
+      name: 'borrower.firstName',
+      expectedResult: 'John',
+    },
+    {
+      category: 'loan',
+      name: 'loan.dueDate',
+      expectedResult: expectedDateResult,
+    },
+    {
       category: 'effectiveLocation',
       name: 'item.effectiveLocationPrimaryServicePointName',
       expectedResult: 'Circulation Desk',
@@ -66,6 +76,10 @@ describe('getTokens', () => {
   }) => {
     it(`should have correctly preview value for ${name} token`, () => {
       const tokenForCheck = result[category].find(element => element.token === name);
+      if (name === 'loan.dueDate') {
+        console.log('tokenForCheck ', tokenForCheck);
+        console.log('category ', result[category]);
+      }
 
       expect(tokenForCheck.previewValue).toEqual(expectedResult);
     });
