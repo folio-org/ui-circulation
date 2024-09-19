@@ -541,7 +541,7 @@
     "settings.ViewPrintDetails.callout.success": "A configuração foi atualizada com sucesso.",
     "settings.ViewPrintDetails.callout.error": "Algo deu errado.",
     "settings.ViewPrintDetails.warningPopup.heading": "Desativar a exibição de detalhes de impressão (slips de retirada)",
-    "settings.ViewPrintDetails.warningPopup.message": "A desativação dessa configuração resultará na perda dos registros do histórico de impressão existentes. Tem certeza?",
+    "settings.ViewPrintDetails.warningPopup.message": "Selecionando <b>Confirmar</b> interromperá a gravação dos detalhes do trabalho de impressão.",
     "settings.ViewPrintDetails.warningPopup.message.confirm": "Confirmar",
     "settings.ViewPrintDetails.warningPopup.message.cancel": "Cancelar"
 }
