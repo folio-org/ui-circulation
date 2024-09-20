@@ -258,6 +258,8 @@
   "settings.staffSlips.itemTokenHeader": "Item",
   "settings.staffSlips.effectiveLocationTokenHeader": "Effective location",
   "settings.staffSlips.staffSlipTokenHeader": "Staff slip",
+  "settings.staffSlips.borrowerTokenHeader": "Borrower",
+  "settings.staffSlips.loanTokenHeader": "Loan",
   "settings.staffSlips.requestTokenHeader": "Request",
   "settings.staffSlips.requestDeliveryAddressTokenHeader": "Request delivery address",
   "settings.staffSlips.requesterTokenHeader": "Requester",

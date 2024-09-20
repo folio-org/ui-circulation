@@ -271,6 +271,40 @@ const getTokens = (locale) => ({
       allowedFor: allowedForAllStaffSlips,
     },
   ],
+  borrower: [
+    {
+      token: 'borrower.firstName',
+      previewValue: 'John',
+      allowedFor: allowedForAllStaffSlips,
+    },
+    {
+      token: 'borrower.lastName',
+      previewValue: 'Smith',
+      allowedFor: allowedForAllStaffSlips,
+    },
+    {
+      token: 'borrower.middleName',
+      previewValue: 'Adam',
+      allowedFor: allowedForAllStaffSlips,
+    },
+    {
+      token: 'borrower.preferredFirstName',
+      previewValue: 'Paul',
+      allowedFor: allowedForAllStaffSlips,
+    },
+    {
+      token: 'borrower.patronGroup',
+      previewValue: 'Undergraduate',
+      allowedFor: allowedForAllStaffSlips,
+    },
+  ],
+  loan: [
+    {
+      token: 'loan.dueDate',
+      previewValue: generatePreviewDateValue(locale, DATE_FORMAT_WITH_TIME),
+      allowedFor: allowedForAllStaffSlips,
+    },
+  ],
 });
 
 export default getTokens;

@@ -53,6 +53,16 @@ describe('getTokens', () => {
       expectedResult: '3/18/22, 11:59 AM',
     },
     {
+      category: 'borrower',
+      name: 'borrower.firstName',
+      expectedResult: 'John',
+    },
+    {
+      category: 'loan',
+      name: 'loan.dueDate',
+      expectedResult: expectedDateResult,
+    },
+    {
       category: 'effectiveLocation',
       name: 'item.effectiveLocationPrimaryServicePointName',
       expectedResult: 'Circulation Desk',
