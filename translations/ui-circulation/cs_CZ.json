@@ -543,5 +543,7 @@
     "settings.ViewPrintDetails.warningPopup.heading": "Zakázat zobrazení detailů tisku (Cirkulační lístky žádanek)",
     "settings.ViewPrintDetails.warningPopup.message": "Výběrem možnosti Potvrdit zastavíte zaznamenávání detailů tiskové úlohy.",
     "settings.ViewPrintDetails.warningPopup.message.confirm": "Potvrdit",
-    "settings.ViewPrintDetails.warningPopup.message.cancel": "Zrušit"
+    "settings.ViewPrintDetails.warningPopup.message.cancel": "Zrušit",
+    "settings.staffSlips.borrowerTokenHeader": "Kdo vypůjčil",
+    "settings.staffSlips.loanTokenHeader": "Výpůjčka"
 }

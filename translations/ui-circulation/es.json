@@ -543,5 +543,7 @@
     "settings.ViewPrintDetails.warningPopup.heading": "Disable view print details (Pick slips)",
     "settings.ViewPrintDetails.warningPopup.message": "Selecting Confirm will stop the recording of print job details.",
     "settings.ViewPrintDetails.warningPopup.message.confirm": "Confirm",
-    "settings.ViewPrintDetails.warningPopup.message.cancel": "Cancel"
+    "settings.ViewPrintDetails.warningPopup.message.cancel": "Cancel",
+    "settings.staffSlips.borrowerTokenHeader": "Borrower",
+    "settings.staffSlips.loanTokenHeader": "Loan"
 }

@@ -534,14 +534,16 @@
     "settings.title.editRecord": "Bewerken {name}",
     "settings.finePolicy.reminderFees.noBlock": "Geen blokkering",
     "permission.settings.view-staff-slips": "Instellingen (Circ): Circulatielijsten bekijken",
-    "permission.settings.request-print-details": "Settings (Circ): Can enable request print details",
-    "settings.index.viewPrintDetails": "View print details",
-    "settings.title.viewPrintDetails": "View print details",
-    "settings.ViewPrintDetails.enable": "Enable view print details (Pick slips)",
+    "permission.settings.request-print-details": "Instellingen (Circ): Kan printdetails voor aanvragen inschakelen",
+    "settings.index.viewPrintDetails": "Printdetails bekijken",
+    "settings.title.viewPrintDetails": "Printdetails bekijken",
+    "settings.ViewPrintDetails.enable": "Printdetails bekijken inschakelen (Afhaalbonnen)",
     "settings.ViewPrintDetails.callout.success": "De instelling is bijgewerkt.",
     "settings.ViewPrintDetails.callout.error": "Er ging iets mis.",
-    "settings.ViewPrintDetails.warningPopup.heading": "Disable view print details (Pick slips)",
-    "settings.ViewPrintDetails.warningPopup.message": "Selecting Confirm will stop the recording of print job details.",
+    "settings.ViewPrintDetails.warningPopup.heading": "Printdetails bekijken uitschakelen (Afhaalbonnen)",
+    "settings.ViewPrintDetails.warningPopup.message": "Als u deze instelling uitschakelt, zullen de bestaande logs voor de printgeschiedenis verloren gaan. Weet u dit zeker?",
     "settings.ViewPrintDetails.warningPopup.message.confirm": "Bevestigen",
-    "settings.ViewPrintDetails.warningPopup.message.cancel": "Annuleren"
+    "settings.ViewPrintDetails.warningPopup.message.cancel": "Annuleren",
+    "settings.staffSlips.borrowerTokenHeader": "Borrower",
+    "settings.staffSlips.loanTokenHeader": "Loan"
 }

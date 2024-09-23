@@ -406,7 +406,7 @@
     "permission.settings.request-policies": "Einstellungen (Ausleihe): Kann Richtlinien zu Bestandsanfragen erstellen, bearbeiten und entfernen",
     "permission.settings.other-settings": "Einstellungen (Ausleihe): Kann andere Einstellungen erstellen, bearbeiten und entfernen",
     "permission.settings.notice-templates": "Einstellungen (Ausleihe): Kann Vorlagen für Benutzerbenachrichtigungen erstellen, bearbeiten und entfernen",
-    "permission.settings.overdue-fines-policies": "Einstellungen (Ausleihe): Kann Richtlinien (Gebühren für überfällige Exemplare) erstellen, bearbeiten und entfernen",
+    "permission.settings.overdue-fines-policies": "Einstellungen (Ausleihe): Kann Gebührenrichtlinien für überfällige Exemplare erstellen, bearbeiten und entfernen",
     "permission.settings.lost-item-fees-policies": "Einstellungen (Ausleihe): Kann Richtlinien (Gebühren für verlorene Exemplare) erstellen, bearbeiten und entfernen",
     "settings.lostItemFee.validate.hasPositiveLostItemProcessingFeeAndItemsAgedToLostAfterOverdue": "'Bearbeitungsgebühr Verlust' muss > 0 und 'Exemplare werden automatisch für verloren erklärt nach Überfälligkeitszeitraum' Betrag muss > 0 sein für diese Auswahl",
     "settings.lostItemFee.validate.emptyAmount": "Bitte Betrag eingeben",
@@ -440,7 +440,7 @@
     "settings.fDDSform.dateFormTitle": "Datumsbereich {number}",
     "settings.finePolicy.overdueFineTitle": "Säumnisgebühr für überfällige Exemplare",
     "settings.finePolicy.perPeriod": "{number} pro {period}",
-    "permission.settings.view-overdue-fines-policies": "Einstellungen (Ausleihe): Kann Richtlinien (Gebühren für überfällige Exemplare) anzeigen",
+    "permission.settings.view-overdue-fines-policies": "Einstellungen (Ausleihe): Kann Gebührenrichtlinien für überfällige Exemplare anzeigen",
     "permission.settings.view-lost-item-fees-policies": "Einstellungen (Ausleihe): Kann Richtlinien (Gebühren für verlorene Exemplare) anzeigen",
     "permission.settings.titleLevelRequests": "Einstellungen (Ausleihe): Bestandsanfragen auf Titelebene bearbeiten",
     "settings.index.titleLevelRequests": "Bestandsanfragen auf Titelebene",
@@ -543,5 +543,7 @@
     "settings.ViewPrintDetails.warningPopup.heading": "Deaktivieren der Druckdetails Anzeige (Entnahmezettel)",
     "settings.ViewPrintDetails.warningPopup.message": "Deaktivierung dieser Einstellung führt zum Verlust vorhandener Druckverlaufsprotokolle. Sicher?",
     "settings.ViewPrintDetails.warningPopup.message.confirm": "Bestätigen",
-    "settings.ViewPrintDetails.warningPopup.message.cancel": "Abbrechen"
+    "settings.ViewPrintDetails.warningPopup.message.cancel": "Abbrechen",
+    "settings.staffSlips.borrowerTokenHeader": "Borrower",
+    "settings.staffSlips.loanTokenHeader": "Loan"
 }
