@@ -543,5 +543,7 @@
     "settings.ViewPrintDetails.warningPopup.heading": "Désactiver l'affichage des détails d'impressions (Bons de réservations)",
     "settings.ViewPrintDetails.warningPopup.message": "Désactiver ce paramètre entraînera la perte de l'historique des impressions existantes. Êtes-vous sûr ?",
     "settings.ViewPrintDetails.warningPopup.message.confirm": "Confirmer",
-    "settings.ViewPrintDetails.warningPopup.message.cancel": "Annuler"
+    "settings.ViewPrintDetails.warningPopup.message.cancel": "Annuler",
+    "settings.staffSlips.borrowerTokenHeader": "Borrower",
+    "settings.staffSlips.loanTokenHeader": "Loan"
 }
