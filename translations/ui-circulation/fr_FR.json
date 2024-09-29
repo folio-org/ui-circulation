@@ -393,7 +393,7 @@
     "settings.lostItemFee.chargeAmount": "Facturer le montant",
     "settings.lostItemFee.chargeAmount.patron": "Montant des frais facturés par document à l'usager",
     "settings.lostItemFee.chargeAmount.system": "Charge amount item by system",
-    "settings.lostItemFee.returned": "Exemplaire perdu retourné",
+    "settings.lostItemFee.returned": "Exemplaire perdu restitué",
     "settings.loanHistory.paymentMethodSelect": "Sélectionnez le mode de paiement",
     "settings.lostItemFee.lostItemNotChargeFeesFine": "Pour les exemplaires perdus sans frais/amende, clôturez le prêt après",
     "permission.settings.cancellation-reasons": "Settings (Circ): Can create, edit and remove cancellation reasons",

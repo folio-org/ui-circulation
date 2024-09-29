@@ -544,6 +544,6 @@
     "settings.ViewPrintDetails.warningPopup.message": "Selecionando <b>Confirmar</b> interromperá a gravação dos detalhes do trabalho de impressão.",
     "settings.ViewPrintDetails.warningPopup.message.confirm": "Confirmar",
     "settings.ViewPrintDetails.warningPopup.message.cancel": "Cancelar",
-    "settings.staffSlips.borrowerTokenHeader": "Borrower",
-    "settings.staffSlips.loanTokenHeader": "Loan"
+    "settings.staffSlips.borrowerTokenHeader": "Usuário com empréstimo",
+    "settings.staffSlips.loanTokenHeader": "Empréstimo"
 }
