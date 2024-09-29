@@ -545,5 +545,5 @@
     "settings.ViewPrintDetails.warningPopup.message.confirm": "確認する",
     "settings.ViewPrintDetails.warningPopup.message.cancel": "キャンセル",
     "settings.staffSlips.borrowerTokenHeader": "Borrower",
-    "settings.staffSlips.loanTokenHeader": "Loan"
+    "settings.staffSlips.loanTokenHeader": "貸出"
 }
