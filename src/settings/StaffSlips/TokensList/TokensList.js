@@ -59,6 +59,28 @@ class TokensList extends React.Component {
               />
             </Col>
           </Row>
+          <Row>
+            <Col xs={12}>
+              <TokensSection
+                section="borrower"
+                header={formatMessage({ id: 'ui-circulation.settings.staffSlips.borrowerTokenHeader' })}
+                tokens={tokens.borrower}
+                onSectionInit={onSectionInit}
+                onTokenSelect={onTokenSelect}
+              />
+            </Col>
+          </Row>
+          <Row>
+            <Col xs={12}>
+              <TokensSection
+                section="loan"
+                header={formatMessage({ id: 'ui-circulation.settings.staffSlips.loanTokenHeader' })}
+                tokens={tokens.loan}
+                onSectionInit={onSectionInit}
+                onTokenSelect={onTokenSelect}
+              />
+            </Col>
+          </Row>
         </Col>
         <Col xs={4}>
           <Row>

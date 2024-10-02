@@ -25,6 +25,8 @@ describe('TokensList', () => {
     'item',
     'effectiveLocation',
     'staffSlip',
+    'borrower',
+    'loan',
     'request',
     'requestDeliveryAddress',
     'requester',
