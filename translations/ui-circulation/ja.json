@@ -224,7 +224,7 @@
     "settings.common.close": "閉じる",
     "settings.noticePolicy.denyDelete.header": "Cannot delete patron notice",
     "settings.noticePolicy.denyDelete.body": "This notice policy cannot be deleted, as it is in use by one or more records.",
-    "settings.patronNotices.addToken": "Add token",
+    "settings.patronNotices.addToken": "トークンを追加する",
     "settings.patronNotices.itemTokenHeader": "資料",
     "settings.common.print": "Print",
     "settings.patronNotices.userTokenHeader": "ユーザー",

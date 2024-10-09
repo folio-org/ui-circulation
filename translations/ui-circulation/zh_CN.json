@@ -541,9 +541,9 @@
     "settings.ViewPrintDetails.callout.success": "设置更新成功。",
     "settings.ViewPrintDetails.callout.error": "出了些问题。",
     "settings.ViewPrintDetails.warningPopup.heading": "禁用查看打印详情（选取单）",
-    "settings.ViewPrintDetails.warningPopup.message": "禁用此设置将导致现有打印历史日志丢失。确定吗？",
+    "settings.ViewPrintDetails.warningPopup.message": "选择确认将停止记录打印任务详情。",
     "settings.ViewPrintDetails.warningPopup.message.confirm": "确认",
     "settings.ViewPrintDetails.warningPopup.message.cancel": "取消",
-    "settings.staffSlips.borrowerTokenHeader": "Borrower",
-    "settings.staffSlips.loanTokenHeader": "Loan"
+    "settings.staffSlips.borrowerTokenHeader": "借阅者",
+    "settings.staffSlips.loanTokenHeader": "借阅"
 }
