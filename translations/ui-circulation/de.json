@@ -544,6 +544,6 @@
     "settings.ViewPrintDetails.warningPopup.message": "Deaktivierung dieser Einstellung führt zum Verlust vorhandener Druckverlaufsprotokolle. Sicher?",
     "settings.ViewPrintDetails.warningPopup.message.confirm": "Bestätigen",
     "settings.ViewPrintDetails.warningPopup.message.cancel": "Abbrechen",
-    "settings.staffSlips.borrowerTokenHeader": "Borrower",
-    "settings.staffSlips.loanTokenHeader": "Loan"
+    "settings.staffSlips.borrowerTokenHeader": "Entleiher/-in",
+    "settings.staffSlips.loanTokenHeader": "Ausleihe"
 }
