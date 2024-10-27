@@ -153,7 +153,7 @@
     "settings.requestPolicy.generalInformation": "Informação geral",
     "settings.requestPolicy.policyName": "Nome da política de pedidos",
     "settings.requestPolicy.policyDescription": "Descrição da política de pedidos",
-    "settings.requestPolicy.policyTypes": "Tipos de solicitação permitidos",
+    "settings.requestPolicy.policyTypes": "Tipos de requisição permitidos",
     "settings.requestPolicy.saveAndClose": "Guardar",
     "settings.requestPolicy.createEntryLabel": "Nova política de pedido",
     "settings.common.edit": "Editar",
