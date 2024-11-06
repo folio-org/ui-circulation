@@ -1,6 +1,7 @@
 # Change history for ui-circulation
 
-## 9.2.0 IN PROGRESS
+## [9.2.0](https://github.com/folio-org/ui-circulation/tree/v9.2.0) (2024-10-30)
+[Full Changelog](https://github.com/folio-org/ui-circulation/compare/v9.1.0...v9.2.0)
 
 * Move TLR enable settings to Circulation > General. Refs UICIRC-1038.
 * Use Save & close button label stripes-component translation key. Refs UICIRC-1066.

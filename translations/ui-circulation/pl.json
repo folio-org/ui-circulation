@@ -24,7 +24,7 @@
     "settings.loanPolicy.numRenewalsAllowed": "Liczba dozwolonych prolongat",
     "settings.loanPolicy.renewFrom": "Prolonguj od",
     "settings.loanPolicy.renewalPeriodDifferent": "Okres prolongaty różni się od oryginalnego czasu wypożyczenia",
-    "settings.loanPolicy.about": "O",
+    "settings.loanPolicy.about": "O regule wypożyczeń",
     "settings.loanPolicy.policyName": "Nazwa reguły wypożyczenia",
     "settings.loanPolicy.policyDescription": "Opis",
     "settings.loanPolicy.loanable": "Przeznaczony do wypożyczania",
