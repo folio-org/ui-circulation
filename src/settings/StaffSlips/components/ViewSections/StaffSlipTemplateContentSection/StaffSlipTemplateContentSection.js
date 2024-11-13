@@ -5,7 +5,7 @@ import {
   injectIntl,
 } from 'react-intl';
 import HtmlToReact, { Parser } from 'html-to-react';
-import { sanitize } from 'dompurify';
+import DOMPurify from 'dompurify';
 
 import {
   Button,
@@ -36,7 +36,7 @@ const StaffSlipTemplateContentSection = ({ intl, staffSlip }) => {
     },
   ];
   const parser = new Parser();
-  const purifyTemplate = sanitize(template);
+  const purifyTemplate = DOMPurify.sanitize(template);
   const parsedEmailTemplate = parser.parseWithInstructions(purifyTemplate, () => true, rules);
   const [openPreview, setOpenPreview] = useState(false);
   const togglePreviewDialog = () => {
