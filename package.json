@@ -1,6 +1,6 @@
 {
   "name": "@folio/circulation",
-  "version": "10.0.0",
+  "version": "9.2.1",
   "description": "Circulation manager",
   "repository": "folio-org/ui-circulation",
   "publishConfig": {
