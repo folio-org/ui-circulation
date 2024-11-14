@@ -541,7 +541,7 @@
     "settings.ViewPrintDetails.callout.success": "Einstellung wurde erfolgreich aktualisiert.",
     "settings.ViewPrintDetails.callout.error": "Fehler ist aufgetreten",
     "settings.ViewPrintDetails.warningPopup.heading": "Deaktivieren der Druckdetails Anzeige (Entnahmezettel)",
-    "settings.ViewPrintDetails.warningPopup.message": "Deaktivierung dieser Einstellung führt zum Verlust vorhandener Druckverlaufsprotokolle. Sicher?",
+    "settings.ViewPrintDetails.warningPopup.message": "Durch die Auswahl \"Bestätigen\" wird die Aufzeichnung der Druckauftragsdetails beendet.",
     "settings.ViewPrintDetails.warningPopup.message.confirm": "Bestätigen",
     "settings.ViewPrintDetails.warningPopup.message.cancel": "Abbrechen",
     "settings.staffSlips.borrowerTokenHeader": "Entleiher/-in",
