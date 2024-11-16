@@ -393,7 +393,8 @@
           "mod-settings.global.read.circulation",
           "mod-settings.entries.collection.get",
           "mod-settings.entries.item.get",
-          "circulation.requests.collection.get"
+          "circulation.requests.collection.get",
+          "configuration.entries.collection.get"
         ]
       },
       {
@@ -403,7 +404,9 @@
           "ui-circulation.settings.view-titleLevelRequests",
           "mod-settings.global.write.circulation",
           "mod-settings.entries.item.put",
-          "mod-settings.entries.item.post"
+          "mod-settings.entries.item.post",
+          "configuration.entries.item.post",
+          "configuration.entries.item.put"
         ],
         "visible": true
       },
