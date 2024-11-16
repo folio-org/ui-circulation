@@ -4,6 +4,10 @@
 * Move TLR enable settings to Circulation > General. Refs UICIRC-1038.
 * Create a new setting - Enable ECS title level requests. Refs UICIRC-1040.
 * Add view permissions for Circulation settings. Refs UICIRC-1056.
+
+## [9.2.1](https://github.com/folio-org/ui-circulation/tree/v9.2.1) (2024-11-13)
+[Full Changelog](https://github.com/folio-org/ui-circulation/compare/v9.2.0...v9.2.1)
+
 * Fix DOMPurify import. Refs UICIRC-1122.
 
 ## [9.2.0](https://github.com/folio-org/ui-circulation/tree/v9.2.0) (2024-10-30)
