@@ -21,6 +21,9 @@ import NoticePolicySettings from './settings/NoticePolicy';
 import RequestPolicySettings from './settings/RequestPolicy';
 import TitleLevelRequests from './settings/TitleLevelRequests';
 import PrintHoldRequests from './settings/PrintHoldRequests';
+import TLRPatronNotices from './settings/TLRPatronNotices';
+import ConsortiumTLR from './settings/ConsortiumTLR';
+import { getConsortiumTlrPermission } from './settings/utils/utils';
 import ViewPrintDetails from './settings/ViewPrintDetails';
 
 class Circulation extends Component {
@@ -45,7 +48,7 @@ class Circulation extends Component {
             route: 'checkout',
             label: <FormattedMessage id="ui-circulation.settings.index.otherSettings" />,
             component: CheckoutSettings,
-            perm: 'ui-circulation.settings.other-settings',
+            perm: 'ui-circulation.settings.view-other-settings',
           },
           {
             route: 'staffslips',
@@ -53,17 +56,28 @@ class Circulation extends Component {
             component: StaffSlips,
             perm: 'ui-circulation.settings.view-staff-slips',
           },
+          {
+            route: 'title-level-requests',
+            label: <FormattedMessage id="ui-circulation.settings.index.titleLevelRequestsTlr" />,
+            component: TitleLevelRequests,
+            perm: 'ui-circulation.settings.view-titleLevelRequests',
+          },
+          {
+            route: 'consortium-title-level-requests',
+            label: <FormattedMessage id="ui-circulation.settings.index.consortiumTLR" />,
+            component: ConsortiumTLR,
+            perm: getConsortiumTlrPermission(props.stripes),
+          },
         ],
       },
       {
         label: <FormattedMessage id="ui-circulation.settings.index.loans" />,
         pages: [
-
           {
             route: 'fixed-due-date-schedules',
             label: <FormattedMessage id="ui-circulation.settings.index.fdds" />,
             component: FixedDueDateScheduleManager,
-            perm: 'ui-circulation.settings.fixed-due-date-schedules',
+            perm: 'ui-circulation.settings.view-fixed-due-date-schedules',
           },
           {
             route: 'loan-anonymization',
@@ -96,7 +110,6 @@ class Circulation extends Component {
           },
         ],
       },
-
       {
         label: <FormattedMessage id="ui-circulation.settings.index.patronNoticesSettings" />,
         pages: [
@@ -104,45 +117,42 @@ class Circulation extends Component {
             route: 'notice-policies',
             label: <FormattedMessage id="ui-circulation.settings.index.noticePolicies" />,
             component: NoticePolicySettings,
-            perm: 'ui-circulation.settings.notice-policies',
+            perm: 'ui-circulation.settings.view-notice-policies',
           },
           {
             route: 'patron-notices',
             label: this.props.intl.formatMessage({ id: 'ui-circulation.settings.index.patronNotices' }),
             component: PatronNotices,
-            perm: 'ui-circulation.settings.notice-templates',
+            perm: 'ui-circulation.settings.view-notice-templates',
           },
-
         ],
       },
-
       {
         label: <FormattedMessage id="ui-circulation.settings.index.request" />,
         pages: [
-
           {
             route: 'cancellation-reasons',
             label: <FormattedMessage id="ui-circulation.settings.index.requestCancellationReasons" />,
             component: RequestCancellationReasons,
-            perm: 'ui-circulation.settings.cancellation-reasons',
+            perm: 'ui-circulation.settings.view-cancellation-reasons',
           },
           {
             route: 'request-policies',
             label: <FormattedMessage id="ui-circulation.settings.index.requestPolicies" />,
             component: RequestPolicySettings,
-            perm: 'ui-circulation.settings.request-policies',
+            perm: 'ui-circulation.settings.view-request-policies',
           },
           {
-            route: 'title-level-requests',
-            label: <FormattedMessage id="ui-circulation.settings.index.titleLevelRequests" />,
-            component: TitleLevelRequests,
-            perm: 'ui-circulation.settings.titleLevelRequests',
+            route: 'tlr-patron-notice-templates',
+            label: <FormattedMessage id="ui-circulation.settings.index.tlrPatronNotices" />,
+            component: TLRPatronNotices,
+            perm: 'ui-circulation.settings.view-titleLevelRequests',
           },
           {
             route: 'print-hold-requests',
             label: <FormattedMessage id="ui-circulation.settings.index.printHoldRequests" />,
             component: PrintHoldRequests,
-            perm: 'ui-circulation.settings.staff-slips',
+            perm: 'ui-circulation.settings.view-staff-slips',
           },
           {
             route: 'view-print-details',

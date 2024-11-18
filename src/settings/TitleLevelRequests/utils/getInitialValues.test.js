@@ -12,18 +12,14 @@ describe('getInitialValues', () => {
   it('should return config with values from database', () => {
     const testData = [
       {
-        value: JSON.stringify({
+        value: {
           [TITLE_LEVEL_REQUESTS.TLR_ENABLED]: true,
-          [TITLE_LEVEL_REQUESTS.CONFIRMATION_TEMPLATE]: 'testId',
-          [TITLE_LEVEL_REQUESTS.EXPIRATION_TEMPLATE]: null,
-          [TITLE_LEVEL_REQUESTS.CANCELLATION_TEMPLATE]: null,
-        }),
+        },
       },
     ];
     const expectedData = {
       ...TITLE_LEVEL_REQUESTS_DEFAULT_VALUES,
       [TITLE_LEVEL_REQUESTS.TLR_ENABLED]: true,
-      [TITLE_LEVEL_REQUESTS.CONFIRMATION_TEMPLATE]: 'testId',
     };
 
     expect(getInitialValues(testData)).toEqual(expectedData);

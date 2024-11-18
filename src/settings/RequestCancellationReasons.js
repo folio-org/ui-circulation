@@ -21,6 +21,7 @@ class RequestCancellationReasons extends React.Component {
   static propTypes = {
     stripes: PropTypes.shape({
       connect: PropTypes.func.isRequired,
+      hasPerm: PropTypes.func.isRequired,
     }).isRequired,
     intl: PropTypes.object.isRequired,
   };
@@ -32,10 +33,13 @@ class RequestCancellationReasons extends React.Component {
 
   render() {
     const {
+      stripes,
       intl: {
         formatMessage,
       },
     } = this.props;
+
+    const isEditable = stripes.hasPerm('ui-circulation.settings.cancellation-reasons');
 
     return (
       <TitleManager
@@ -44,6 +48,7 @@ class RequestCancellationReasons extends React.Component {
       >
         <this.connectedControlledVocab
           {...this.props}
+          editable={isEditable}
           baseUrl="cancellation-reason-storage/cancellation-reasons"
           records="cancellationReasons"
           label={<FormattedMessage id="ui-circulation.settings.cancelReasons.label" />}

@@ -36,6 +36,10 @@
       "locations": "3.0",
       "feesfines": "16.0 17.0 18.0 19.0"
     },
+    "optionalOkapiInterfaces": {
+      "consortia": "1.0",
+      "ecs-tlr": "1.0"
+    },
     "permissionSets": [
       {
         "permissionName": "settings.circulation.enabled",
@@ -45,18 +49,26 @@
         ]
       },
       {
-        "permissionName": "ui-circulation.settings.cancellation-reasons",
-        "displayName": "Settings (Circ): Can create, edit and remove cancellation reasons",
+        "permissionName": "ui-circulation.settings.view-cancellation-reasons",
+        "displayName": "Settings (Circulation): Can view cancellation reasons",
         "subPermissions": [
           "circulation-storage.cancellation-reasons.item.get",
-          "circulation-storage.cancellation-reasons.item.post",
-          "circulation-storage.cancellation-reasons.item.put",
-          "circulation-storage.cancellation-reasons.item.delete",
           "circulation-storage.cancellation-reasons.collection.get",
-          "circulation-storage.cancellation-reasons.collection.delete",
           "users.collection.get",
           "users.item.get",
           "settings.circulation.enabled"
+        ],
+        "visible": false
+      },
+      {
+        "permissionName": "ui-circulation.settings.cancellation-reasons",
+        "displayName": "Settings (Circ): Can create, edit and remove cancellation reasons",
+        "subPermissions": [
+          "ui-circulation.settings.view-cancellation-reasons",
+          "circulation-storage.cancellation-reasons.item.post",
+          "circulation-storage.cancellation-reasons.item.put",
+          "circulation-storage.cancellation-reasons.item.delete",
+          "circulation-storage.cancellation-reasons.collection.delete"
         ],
         "visible": true
       },
@@ -108,13 +120,10 @@
         "visible": true
       },
       {
-        "permissionName": "ui-circulation.settings.notice-policies",
-        "displayName": "Settings (Circ): Can create, edit and remove notice policies",
+        "permissionName": "ui-circulation.settings.view-notice-policies",
+        "displayName": "Settings (Circulation): Can view notice policies",
         "subPermissions": [
           "circulation.rules.get",
-          "circulation-storage.patron-notice-policies.item.post",
-          "circulation-storage.patron-notice-policies.item.put",
-          "circulation-storage.patron-notice-policies.item.delete",
           "circulation-storage.patron-notice-policies.collection.get",
           "circulation-storage.patron-notice-policies.item.get",
           "templates.collection.get",
@@ -122,6 +131,17 @@
           "users.collection.get",
           "users.item.get",
           "settings.circulation.enabled"
+        ],
+        "visible": false
+      },
+      {
+        "permissionName": "ui-circulation.settings.notice-policies",
+        "displayName": "Settings (Circ): Can create, edit and remove notice policies",
+        "subPermissions": [
+          "ui-circulation.settings.view-notice-policies",
+          "circulation-storage.patron-notice-policies.item.post",
+          "circulation-storage.patron-notice-policies.item.put",
+          "circulation-storage.patron-notice-policies.item.delete"
         ],
         "visible": true
       },
@@ -170,18 +190,26 @@
         "visible": true
       },
       {
-        "permissionName": "ui-circulation.settings.fixed-due-date-schedules",
-        "displayName": "Settings (Circ): Can create, edit and remove fixed due date schedules",
+        "permissionName": "ui-circulation.settings.view-fixed-due-date-schedules",
+        "displayName": "Settings (Circulation): Can view fixed due date schedules",
         "subPermissions": [
           "circulation-storage.fixed-due-date-schedules.collection.get",
           "circulation-storage.fixed-due-date-schedules.item.get",
-          "circulation-storage.fixed-due-date-schedules.item.post",
-          "circulation-storage.fixed-due-date-schedules.item.put",
-          "circulation-storage.fixed-due-date-schedules.item.delete",
-          "circulation-storage.fixed-due-date-schedules.collection.delete",
           "users.collection.get",
           "users.item.get",
           "settings.circulation.enabled"
+        ],
+        "visible": false
+      },
+      {
+        "permissionName": "ui-circulation.settings.fixed-due-date-schedules",
+        "displayName": "Settings (Circ): Can create, edit and remove fixed due date schedules",
+        "subPermissions": [
+          "ui-circulation.settings.view-fixed-due-date-schedules",
+          "circulation-storage.fixed-due-date-schedules.item.post",
+          "circulation-storage.fixed-due-date-schedules.item.put",
+          "circulation-storage.fixed-due-date-schedules.item.delete",
+          "circulation-storage.fixed-due-date-schedules.collection.delete"
         ],
         "visible": true
       },
@@ -236,31 +264,47 @@
         "visible": true
       },
       {
-        "permissionName": "ui-circulation.settings.request-policies",
-        "displayName": "Settings (Circ): Can create, edit and remove request policies",
+        "permissionName": "ui-circulation.settings.view-request-policies",
+        "displayName": "Settings (Circulation): Can view request policies",
         "subPermissions": [
           "circulation.rules.get",
           "circulation-storage.request-policies.collection.get",
           "circulation-storage.request-policies.item.get",
-          "circulation-storage.request-policies.collection.delete",
-          "circulation-storage.request-policies.item.delete",
-          "circulation-storage.request-policies.item.post",
-          "circulation-storage.request-policies.item.put",
           "users.collection.get",
           "users.item.get",
           "settings.circulation.enabled",
           "inventory-storage.service-points.collection.get"
         ],
+        "visible": false
+      },
+      {
+        "permissionName": "ui-circulation.settings.request-policies",
+        "displayName": "Settings (Circ): Can create, edit and remove request policies",
+        "subPermissions": [
+          "ui-circulation.settings.view-request-policies",
+          "circulation-storage.request-policies.collection.delete",
+          "circulation-storage.request-policies.item.delete",
+          "circulation-storage.request-policies.item.post",
+          "circulation-storage.request-policies.item.put"
+        ],
         "visible": true
+      },
+      {
+        "permissionName": "ui-circulation.settings.view-other-settings",
+        "displayName": "Settings (Circulation): Can view other settings",
+        "subPermissions": [
+          "user-settings.custom-fields.collection.get",
+          "settings.circulation.enabled",
+          "configuration.entries.collection.get",
+          "configuration.entries.item.get"
+        ],
+        "visible": false
       },
       {
         "permissionName": "ui-circulation.settings.other-settings",
         "displayName": "Settings (Circ): Can create, edit and remove other settings",
         "subPermissions": [
-          "user-settings.custom-fields.collection.get",
-          "settings.circulation.enabled",
-          "configuration.entries.collection.get",
-          "configuration.entries.item.get",
+          "ui-circulation.settings.view-other-settings",
           "configuration.entries.item.post",
           "configuration.entries.item.put",
           "configuration.entries.item.delete"
@@ -268,17 +312,25 @@
         "visible": true
       },
       {
-        "permissionName": "ui-circulation.settings.notice-templates",
-        "displayName": "Settings (Circ): Can create, edit and remove patron notice templates",
+        "permissionName": "ui-circulation.settings.view-notice-templates",
+        "displayName": "Settings (Circulation): Can view patron notice templates",
         "subPermissions": [
           "circulation-storage.patron-notice-policies.collection.get",
           "templates.collection.get",
           "templates.item.get",
+          "settings.circulation.enabled"
+        ],
+        "visible": false
+      },
+      {
+        "permissionName": "ui-circulation.settings.notice-templates",
+        "displayName": "Settings (Circ): Can create, edit and remove patron notice templates",
+        "subPermissions": [
+          "ui-circulation.settings.view-notice-templates",
           "templates.item.post",
           "templates.item.put",
           "templates.item.delete",
-          "template-request.post",
-          "settings.circulation.enabled"
+          "template-request.post"
         ],
         "visible": true
       },
@@ -333,14 +385,51 @@
         "visible": true
       },
       {
-        "permissionName": "ui-circulation.settings.titleLevelRequests",
-        "displayName": "Settings (Circulation): Title level request edit",
+        "permissionName": "ui-circulation.settings.view-titleLevelRequests",
+        "displayName": "Settings (Circulation): Title level request view",
         "subPermissions": [
           "settings.circulation.enabled",
           "templates.collection.get",
-          "configuration.entries.collection.get",
-          "configuration.entries.item.post",
-          "configuration.entries.item.put"
+          "mod-settings.global.read.circulation",
+          "mod-settings.entries.collection.get",
+          "mod-settings.entries.item.get",
+          "circulation.requests.collection.get"
+        ]
+      },
+      {
+        "permissionName": "ui-circulation.settings.titleLevelRequests",
+        "displayName": "Settings (Circulation): Title level request edit",
+        "subPermissions": [
+          "ui-circulation.settings.view-titleLevelRequests",
+          "mod-settings.global.write.circulation",
+          "mod-settings.entries.item.put",
+          "mod-settings.entries.item.post"
+        ],
+        "visible": true
+      },
+      {
+        "permissionName": "ui-circulation.settings.view-circulation-settings",
+        "displayName": "Settings (Circulation): Can view all circulation settings",
+        "subPermissions": [
+          "ui-circulation.settings.view-circulation-rules",
+          "ui-circulation.settings.view-other-settings",
+          "ui-circulation.settings.view-staff-slips",
+          "ui-circulation.settings.view-titleLevelRequests",
+          "tlr.consortium-tlr.view",
+
+          "ui-circulation.settings.view-fixed-due-date-schedules",
+          "ui-circulation.settings.loan-history",
+          "ui-circulation.settings.view-loan-policies",
+
+          "ui-circulation.settings.view-overdue-fines-policies",
+          "ui-circulation.settings.view-lost-item-fees-policies",
+
+          "ui-circulation.settings.view-notice-policies",
+          "ui-circulation.settings.view-notice-templates",
+
+          "ui-circulation.settings.view-cancellation-reasons",
+          "ui-circulation.settings.view-request-policies",
+          "ui-circulation.settings.view-staff-slips"
         ],
         "visible": true
       }

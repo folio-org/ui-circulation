@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import {
   injectIntl,
 } from 'react-intl';
-
 import { Field } from 'react-final-form';
 
 import {
@@ -12,6 +11,7 @@ import {
   Headline,
   Select,
 } from '@folio/stripes/components';
+
 import {
   NOT_SELECTED,
   TITLE_LEVEL_REQUESTS,

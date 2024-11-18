@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
-
 import { Field } from 'react-final-form';
 
 import stripesFinalForm from '@folio/stripes/final-form';
-import { stripesConnect } from '@folio/stripes/core';
+import {
+  IfPermission,
+  stripesConnect,
+} from '@folio/stripes/core';
 import {
   Button,
   Checkbox,
@@ -16,10 +18,7 @@ import {
   Modal,
 } from '@folio/stripes/components';
 
-import NoticeTemplates from './NoticeTemplates';
 import {
-  patronNoticeCategoryIds,
-  MAX_UNPAGED_RESOURCE_COUNT,
   TITLE_LEVEL_REQUESTS,
   OPEN_REQUESTS_STATUSES,
   REQUEST_LEVEL,
@@ -37,27 +36,27 @@ const TitleLevelRequestsForm = (props) => {
     pristine,
     submitting,
     form,
-    resources,
     mutator,
   } = props;
 
   const [isErrorModalOpen, setIsErrorModalOpen] = useState(false);
-  const templates = resources.templates?.records || [];
   const { values: titleLevelRequestsValues } = form.getState();
 
   const renderFooter = () => (
-    <PaneFooter
-      renderEnd={(
-        <Button
-          type="submit"
-          buttonStyle="primary paneHeaderNewButton"
-          disabled={pristine || submitting}
-          marginBottom0
-        >
-          {formatMessage({ id: 'stripes-core.button.save' })}
-        </Button>
-        )}
-    />
+    <IfPermission perm="ui-circulation.settings.titleLevelRequests">
+      <PaneFooter
+        renderEnd={(
+          <Button
+            type="submit"
+            buttonStyle="primary paneHeaderNewButton"
+            disabled={pristine || submitting}
+            marginBottom0
+          >
+            {formatMessage({ id: 'stripes-core.button.save' })}
+          </Button>
+          )}
+      />
+    </IfPermission>
   );
 
   const handleTlrCheckboxClick = async () => {
@@ -119,7 +118,6 @@ const TitleLevelRequestsForm = (props) => {
         </Row>
         {
           titleLevelRequestsValues[TITLE_LEVEL_REQUESTS.TLR_ENABLED] &&
-          <>
             <div className={css.tlrSettings}>
               <Field
                 name={TITLE_LEVEL_REQUESTS.CREATE_TLR_BY_DEFAULT}
@@ -134,12 +132,6 @@ const TitleLevelRequestsForm = (props) => {
                 component={Checkbox}
               />
             </div>
-            <div className={css.tlrNoticeSection}>
-              <NoticeTemplates
-                templates={templates}
-              />
-            </div>
-          </>
         }
         <Modal
           data-testid="forbiddenDisableTlrModal"
@@ -157,15 +149,6 @@ const TitleLevelRequestsForm = (props) => {
 };
 
 TitleLevelRequestsForm.manifest = Object.freeze({
-  templates: {
-    type: 'okapi',
-    path: 'templates',
-    records: 'templates',
-    params: {
-      query: `cql.allRecords=1 AND category="${patronNoticeCategoryIds.REQUEST}" AND active="true"`,
-    },
-    perRequest: MAX_UNPAGED_RESOURCE_COUNT,
-  },
   requests: {
     type: 'okapi',
     path: 'circulation/requests',
@@ -187,12 +170,6 @@ TitleLevelRequestsForm.propTypes = {
   submitting: PropTypes.bool.isRequired,
   form: PropTypes.object.isRequired,
   resources: PropTypes.shape({
-    templates: PropTypes.shape({
-      records: PropTypes.arrayOf(PropTypes.shape({
-        id: PropTypes.string.isRequired,
-        name: PropTypes.string.isRequired,
-      })),
-    }),
     requests: PropTypes.shape({
       records: PropTypes.arrayOf(PropTypes.object).isRequired,
     }).isRequired,

@@ -10,6 +10,10 @@ const labelIds = {
   generalTitle: 'ui-circulation.settings.title.general',
 };
 
+jest.mock('./settings/utils/utils', () => ({
+  getConsortiumTlrPermission: jest.fn(),
+}));
+
 describe('Circulation', () => {
   beforeEach(() => {
     render(

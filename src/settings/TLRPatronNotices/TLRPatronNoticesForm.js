@@ -1,7 +1,5 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
-import { Field } from 'react-final-form';
 
 import stripesFinalForm from '@folio/stripes/final-form';
 import {
@@ -10,20 +8,19 @@ import {
 } from '@folio/stripes/core';
 import {
   Button,
-  Checkbox,
-  Col,
   Pane,
-  Row,
   PaneFooter,
 } from '@folio/stripes/components';
 
+import NoticeTemplates from './NoticeTemplates';
 import {
-  PRINT_HOLD_REQUESTS,
+  patronNoticeCategoryIds,
+  MAX_UNPAGED_RESOURCE_COUNT,
 } from '../../constants';
 
-import css from './PrintHoldRequestsForm.css';
+import css from './TLRPatronNoticesForm.css';
 
-const PrintHoldRequestsForm = (props) => {
+const TLRPatronNoticesForm = (props) => {
   const {
     handleSubmit,
     intl: {
@@ -32,10 +29,13 @@ const PrintHoldRequestsForm = (props) => {
     label,
     pristine,
     submitting,
+    resources,
   } = props;
 
-  const renderFooter = () => (
-    <IfPermission perm="ui-circulation.settings.staff-slips">
+  const templates = resources.templates?.records || [];
+
+  const footer = (
+    <IfPermission perm="ui-circulation.settings.titleLevelRequests">
       <PaneFooter
         renderEnd={(
           <Button
@@ -46,55 +46,63 @@ const PrintHoldRequestsForm = (props) => {
           >
             {formatMessage({ id: 'stripes-core.button.save' })}
           </Button>
-          )}
+        )}
       />
     </IfPermission>
   );
 
   return (
     <form
-      id="printHoldRequestsForm"
-      data-testid="printHoldRequestsFormSubmit"
-      className={css.printHoldRequestsForm}
+      id="tlrPatronNoticesForm"
+      data-testid="tlrPatronNoticesForm"
+      className={css.TLRPatronNoticesForm}
       noValidate
       onSubmit={handleSubmit}
     >
       <Pane
-        id="printHoldRequestsFormPane"
+        id="tlr-patron-notices-pane"
         defaultWidth="fill"
         fluidContentWidth
         paneTitle={label}
-        footer={renderFooter()}
+        footer={footer}
       >
-        <Row>
-          <Col xs={12}>
-            <Field
-              data-testid="printHoldRequestsCheckbox"
-              name={PRINT_HOLD_REQUESTS.PRINT_HOLD_REQUESTS_ENABLED}
-              type="checkbox"
-              label={formatMessage({ id: 'ui-circulation.settings.PrintHoldRequests.allow' })}
-              component={Checkbox}
-            />
-          </Col>
-        </Row>
+        <NoticeTemplates templates={templates} />
       </Pane>
     </form>
   );
 };
 
-PrintHoldRequestsForm.propTypes = {
+TLRPatronNoticesForm.manifest = Object.freeze({
+  templates: {
+    type: 'okapi',
+    path: 'templates',
+    records: 'templates',
+    params: {
+      query: `cql.allRecords=1 AND category="${patronNoticeCategoryIds.REQUEST}" AND active="true"`,
+    },
+    perRequest: MAX_UNPAGED_RESOURCE_COUNT,
+  },
+});
+
+TLRPatronNoticesForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   intl: PropTypes.object.isRequired,
   label: PropTypes.string.isRequired,
   pristine: PropTypes.bool.isRequired,
   submitting: PropTypes.bool.isRequired,
+  resources: PropTypes.shape({
+    templates: PropTypes.shape({
+      records: PropTypes.arrayOf(PropTypes.shape({
+        id: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
+      })),
+    }),
+  }).isRequired,
 };
 
-const withStripes = stripesConnect(PrintHoldRequestsForm);
+const withStripes = stripesConnect(TLRPatronNoticesForm);
 
 export default injectIntl(stripesFinalForm({
   navigationCheck: true,
-  subscription: {
-    values: true,
-  },
+  subscription: { values: true },
 })(withStripes));
