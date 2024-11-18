@@ -22,6 +22,7 @@ import RequestPolicySettings from './settings/RequestPolicy';
 import TitleLevelRequests from './settings/TitleLevelRequests';
 import PrintHoldRequests from './settings/PrintHoldRequests';
 import TLRPatronNotices from './settings/TLRPatronNotices';
+import DeprecatedTitleLevelRequests from './deprecated/settings/TitleLevelRequests';
 import ConsortiumTLR from './settings/ConsortiumTLR';
 import { getConsortiumTlrPermission } from './settings/utils/utils';
 import ViewPrintDetails from './settings/ViewPrintDetails';
@@ -34,6 +35,9 @@ class Circulation extends Component {
 
   constructor(props) {
     super(props);
+
+    const isEnabledEcsRequests = props.stripes?.config?.enableEcsRequests;
+
     this.sections = [
       {
         label: <FormattedMessage id="ui-circulation.settings.index.general" />,
@@ -55,18 +59,6 @@ class Circulation extends Component {
             label: <FormattedMessage id="ui-circulation.settings.index.staffSlips" />,
             component: StaffSlips,
             perm: 'ui-circulation.settings.view-staff-slips',
-          },
-          {
-            route: 'title-level-requests',
-            label: <FormattedMessage id="ui-circulation.settings.index.titleLevelRequestsTlr" />,
-            component: TitleLevelRequests,
-            perm: 'ui-circulation.settings.view-titleLevelRequests',
-          },
-          {
-            route: 'consortium-title-level-requests',
-            label: <FormattedMessage id="ui-circulation.settings.index.consortiumTLR" />,
-            component: ConsortiumTLR,
-            perm: getConsortiumTlrPermission(props.stripes),
           },
         ],
       },
@@ -143,12 +135,6 @@ class Circulation extends Component {
             perm: 'ui-circulation.settings.view-request-policies',
           },
           {
-            route: 'tlr-patron-notice-templates',
-            label: <FormattedMessage id="ui-circulation.settings.index.tlrPatronNotices" />,
-            component: TLRPatronNotices,
-            perm: 'ui-circulation.settings.view-titleLevelRequests',
-          },
-          {
             route: 'print-hold-requests',
             label: <FormattedMessage id="ui-circulation.settings.index.printHoldRequests" />,
             component: PrintHoldRequests,
@@ -163,6 +149,34 @@ class Circulation extends Component {
         ],
       },
     ];
+
+    if (isEnabledEcsRequests === true) {
+      this.sections[0].pages.push({
+        route: 'title-level-requests',
+        label: <FormattedMessage id="ui-circulation.settings.index.titleLevelRequestsTlr" />,
+        component: TitleLevelRequests,
+        perm: 'ui-circulation.settings.view-titleLevelRequests',
+      },
+      {
+        route: 'consortium-title-level-requests',
+        label: <FormattedMessage id="ui-circulation.settings.index.consortiumTLR" />,
+        component: ConsortiumTLR,
+        perm: getConsortiumTlrPermission(props.stripes),
+      });
+      this.sections[4].pages.splice(2, 0, {
+        route: 'tlr-patron-notice-templates',
+        label: <FormattedMessage id="ui-circulation.settings.index.tlrPatronNotices" />,
+        component: TLRPatronNotices,
+        perm: 'ui-circulation.settings.view-titleLevelRequests',
+      });
+    } else {
+      this.sections[4].pages.splice(2, 0, {
+        route: 'title-level-requests',
+        label: <FormattedMessage id="ui-circulation.settings.index.titleLevelRequests" />,
+        component: DeprecatedTitleLevelRequests,
+        perm: 'ui-circulation.settings.view-titleLevelRequests',
+      });
+    }
   }
 
   render() {
