@@ -2,9 +2,6 @@ import PropTypes from 'prop-types';
 import { Field } from 'react-final-form';
 import { FormattedMessage } from 'react-intl';
 
-import {
-  IfPermission,
-} from '@folio/stripes/core';
 import stripesFinalForm from '@folio/stripes/final-form';
 import {
   Button,
@@ -27,20 +24,18 @@ const ConsortiumTLRForm = ({
   const isSaveButtonDisabled = pristine || !isEditEnabled || isSaving;
   const isTlrFeatureDisabled = !tlrSettings.isPending && !tlrSettings.records[0]?.value?.titleLevelRequestsFeatureEnabled;
   const footer = (
-    <IfPermission perm="tlr.consortium-tlr.edit">
-      <PaneFooter
-        renderEnd={(
-          <Button
-            type="submit"
-            buttonStyle="primary paneHeaderNewButton"
-            disabled={isSaveButtonDisabled}
-            marginBottom0
-          >
-            <FormattedMessage id="stripes-core.button.save" />
-          </Button>
-        )}
-      />
-    </IfPermission>
+    <PaneFooter
+      renderEnd={(
+        <Button
+          type="submit"
+          buttonStyle="primary paneHeaderNewButton"
+          disabled={isSaveButtonDisabled}
+          marginBottom0
+        >
+          <FormattedMessage id="stripes-core.button.save" />
+        </Button>
+      )}
+    />
   );
 
   return (

@@ -24,7 +24,6 @@ import PrintHoldRequests from './settings/PrintHoldRequests';
 import TLRPatronNotices from './settings/TLRPatronNotices';
 import DeprecatedTitleLevelRequests from './deprecated/settings/TitleLevelRequests';
 import ConsortiumTLR from './settings/ConsortiumTLR';
-import { getConsortiumTlrPermission } from './settings/utils/utils';
 import ViewPrintDetails from './settings/ViewPrintDetails';
 
 class Circulation extends Component {
@@ -161,7 +160,7 @@ class Circulation extends Component {
         route: 'consortium-title-level-requests',
         label: <FormattedMessage id="ui-circulation.settings.index.consortiumTLR" />,
         component: ConsortiumTLR,
-        perm: getConsortiumTlrPermission(props.stripes),
+        perm: 'ui-circulation.settings.view-titleLevelRequests',
       });
       this.sections[4].pages.splice(2, 0, {
         route: 'tlr-patron-notice-templates',

@@ -419,6 +419,7 @@
           "ui-circulation.settings.view-staff-slips",
           "ui-circulation.settings.view-titleLevelRequests",
           "tlr.consortium-tlr.view",
+          "tlr.consortium-tlr.edit",
 
           "ui-circulation.settings.view-fixed-due-date-schedules",
           "ui-circulation.settings.loan-history",

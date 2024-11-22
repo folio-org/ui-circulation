@@ -9,7 +9,6 @@ import { injectIntl } from 'react-intl';
 import {
   TitleManager,
   stripesConnect,
-  stripesShape,
   CalloutContext,
 } from '@folio/stripes/core';
 
@@ -26,7 +25,6 @@ const ConsortiumTLR = ({
   },
   mutator,
   resources,
-  stripes,
 }) => {
   useEffect(() => {
     mutator.consortiumTlr.GET();
@@ -50,7 +48,7 @@ const ConsortiumTLR = ({
   const initialValues = {
     ecsTlrFeatureEnabled: getLastRecordValue(resources.consortiumTlr)?.ecsTlrFeatureEnabled,
   };
-  const isEditPerm = stripes.hasPerm('tlr.consortium-tlr.edit');
+  const isEditPerm = true;
 
   return (
     <TitleManager
@@ -96,7 +94,6 @@ ConsortiumTLR.propTypes = {
     consortiumTlr: PropTypes.object.isRequired,
     settings: PropTypes.object.isRequired,
   }).isRequired,
-  stripes: stripesShape.isRequired,
 };
 
 export default injectIntl(stripesConnect(ConsortiumTLR));
