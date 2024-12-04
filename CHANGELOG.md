@@ -1,6 +1,7 @@
 # Change history for ui-circulation
 
-## 10.1.0 IN PROGRESS
+## [10.0.1](https://github.com/folio-org/ui-circulation/tree/v10.0.1) (2024-12-04)
+[Full Changelog](https://github.com/folio-org/ui-circulation/compare/v10.0.0...v10.0.1)
 
 * Added missing translations. Refs UICIRC-1128.
 
