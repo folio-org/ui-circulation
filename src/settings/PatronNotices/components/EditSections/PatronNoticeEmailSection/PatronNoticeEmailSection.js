@@ -14,8 +14,10 @@ import { TemplateEditor } from '@folio/stripes-template-editor';
 import getTokens from '../../../tokens';
 import TokensList from '../../../TokensList';
 
-const PatronNoticeEmailSection = ({ category, locale, printOnly }) => {
+const PatronNoticeEmailSection = ({ template, category, locale, printOnly }) => {
   const tokens = getTokens(locale);
+
+  console.log('PatronNoticeEmailSection template ', template, template?.en?.body);
 
   return (
     <div data-testid="emailAccordionContent">
@@ -70,5 +72,6 @@ PatronNoticeEmailSection.propTypes = {
   category: PropTypes.string,
   locale: PropTypes.string,
   printOnly: PropTypes.bool,
+  template: PropTypes.object,
 };
 export default PatronNoticeEmailSection;

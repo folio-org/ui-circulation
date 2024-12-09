@@ -159,6 +159,7 @@ const PatronNoticeForm = (props) => {
                   printOnly={printOnly}
                   category={category}
                   locale={locale}
+                  template={values?.localizedTemplates}
                 />
               </Accordion>
             </AccordionSet>

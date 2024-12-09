@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import Proptypes from 'prop-types';
 import { injectIntl } from 'react-intl';
 import { Field } from 'react-final-form';
@@ -19,91 +19,101 @@ import {
 import { patronNoticeCategories } from '../../../../../constants';
 import { validateUniqueNameById } from '../../../../utils/utils';
 
-const PatronNoticeAboutSection = ({ initialValues, okapi, intl }) => {
-  const { formatMessage } = intl;
-  const categoryOptions = patronNoticeCategories.map(({ label, id }) => ({
-    label: formatMessage({ id: label }),
-    value: id,
-  }));
-  const isActive = initialValues && initialValues.active;
+const PatronNoticeAboutSection = memo(
+  ({ initialValues, okapi, intl }) => {
+    const { formatMessage } = intl;
+    const categoryOptions = patronNoticeCategories.map(({ label, id }) => ({
+      label: formatMessage({ id: label }),
+      value: id,
+    }));
+    const isActive = initialValues && initialValues.active;
 
-  const getTemplatesByName = (name) => {
-    return fetch(`${okapi.url}/templates?query=(name=="${name}")`,
-      {
-        ...getHeaderWithCredentials(okapi)
-      });
-  };
+    const getTemplatesByName = (name) => {
+      return fetch(`${okapi.url}/templates?query=(name=="${name}")`,
+        {
+          ...getHeaderWithCredentials(okapi)
+        });
+    };
 
-  const validateName = memoize((name) => (
-    validateUniqueNameById({
-      currentName: name,
-      previousId: initialValues.id,
-      getByName: getTemplatesByName,
-      selector: 'templates',
-      errorKey: 'settings.patronNotices.errors.nameExists',
-    })
-  ));
+    const validateName = memoize((name) => (
+      validateUniqueNameById({
+        currentName: name,
+        previousId: initialValues.id,
+        getByName: getTemplatesByName,
+        selector: 'templates',
+        errorKey: 'settings.patronNotices.errors.nameExists',
+      })
+    ));
 
-  return (
-    <div data-testid="patronNoticeAboutSection">
-      <Row>
-        <Col
-          xs={12}
-          data-test-patron-notice-template-name
-        >
-          <Field
-            data-testid="patronNoticesNoticeName"
-            label={formatMessage({ id: 'ui-circulation.settings.patronNotices.notice.name' })}
-            name="name"
-            required
-            id="input-patron-notice-name"
-            autoFocus
-            component={TextField}
-            validate={validateName}
-          />
-        </Col>
-      </Row>
-      <Row>
-        <Col xs={12}>
-          <Field
-            data-testid="patronNoticesNoticeActive"
-            label={formatMessage({ id:'ui-circulation.settings.patronNotices.notice.active' })}
-            name="active"
-            id="input-patron-notice-active"
-            component={Checkbox}
-            defaultChecked={isActive}
-          />
-        </Col>
-      </Row>
-      <br />
-      <Row>
-        <Col xs={12}>
-          <Field
-            data-testid="patronNoticesNoticeDescription"
-            label={formatMessage({ id:'ui-circulation.settings.patronNotices.notice.description' })}
-            name="description"
-            id="input-patron-notice-description"
-            component={TextArea}
-          />
-        </Col>
-      </Row>
-      <Row>
-        <Col xs={12}>
-          <div data-test-template-category>
+    return (
+      <div data-testid="patronNoticeAboutSection">
+        <Row>
+          <Col
+            xs={12}
+            data-test-patron-notice-template-name
+          >
             <Field
-              data-testid="patronNoticesNoticeCategory"
-              label={formatMessage({ id:'ui-circulation.settings.patronNotices.notice.category' })}
-              name="category"
-              component={Select}
-              fullWidth
-              dataOptions={categoryOptions}
+              data-testid="patronNoticesNoticeName"
+              label={formatMessage({ id: 'ui-circulation.settings.patronNotices.notice.name' })}
+              name="name"
+              required
+              id="input-patron-notice-name"
+              autoFocus
+              component={TextField}
+              validate={validateName}
             />
-          </div>
-        </Col>
-      </Row>
-    </div>
-  );
-};
+          </Col>
+        </Row>
+        <Row>
+          <Col xs={12}>
+            <Field
+              data-testid="patronNoticesNoticeActive"
+              label={formatMessage({ id:'ui-circulation.settings.patronNotices.notice.active' })}
+              name="active"
+              id="input-patron-notice-active"
+              component={Checkbox}
+              defaultChecked={isActive}
+            />
+          </Col>
+        </Row>
+        <br />
+        <Row>
+          <Col xs={12}>
+            <Field
+              data-testid="patronNoticesNoticeDescription"
+              label={formatMessage({ id:'ui-circulation.settings.patronNotices.notice.description' })}
+              name="description"
+              id="input-patron-notice-description"
+              component={TextArea}
+            />
+          </Col>
+        </Row>
+        <Row>
+          <Col xs={12}>
+            <div data-test-template-category>
+              <Field
+                data-testid="patronNoticesNoticeCategory"
+                label={formatMessage({ id:'ui-circulation.settings.patronNotices.notice.category' })}
+                name="category"
+                component={Select}
+                fullWidth
+                dataOptions={categoryOptions}
+              />
+            </div>
+          </Col>
+        </Row>
+      </div>
+    );
+  },
+  (prevProps, newProps) => {
+    const { prevId, prevActive } = prevProps.initialValues;
+    const { newId, newActive } = newProps.initialValues;
+    console.log('PatronNoticeAboutSection are initial values same ', prevId === newId && prevActive === newActive);
+
+    return prevId === newId && prevActive === newActive;
+  }
+);
+
 PatronNoticeAboutSection.propTypes = {
   initialValues: Proptypes.object.isRequired,
   okapi: Proptypes.object.isRequired,
