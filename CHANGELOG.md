@@ -2,6 +2,8 @@
 
 ## 10.1.0 IN PROGRESS
 
+* Remove feature toggle. Refs UICIRC-1125.
+
 ## [10.0.1](https://github.com/folio-org/ui-circulation/tree/v10.0.1) (2024-12-04)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v10.0.0...v10.0.1)
 
