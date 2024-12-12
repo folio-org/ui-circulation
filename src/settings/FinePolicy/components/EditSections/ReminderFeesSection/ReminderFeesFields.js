@@ -21,11 +21,11 @@ import { timeUnits, noticeMethods } from '../../../../../constants';
 const ReminderFeesFields = props => {
   const { formatMessage } = useIntl();
   const {
-    canAdd,
-    canEdit,
-    canDelete,
-    noticeTemplates,
-    blockTemplates,
+    canAdd = true,
+    canEdit = true,
+    canDelete = true,
+    noticeTemplates = [],
+    blockTemplates = [],
   } = props;
   const sequenceLabel = formatMessage({ id: 'ui-circulation.settings.finePolicy.reminderFees.sequence' });
   const intervalLabel = formatMessage({ id: 'ui-circulation.settings.finePolicy.reminderFees.interval' });
@@ -192,14 +192,6 @@ ReminderFeesFields.propTypes = {
   canDelete: PropTypes.bool,
   noticeTemplates: PropTypes.arrayOf(PropTypes.object),
   blockTemplates: PropTypes.arrayOf(PropTypes.object),
-};
-
-ReminderFeesFields.defaultProps = {
-  canAdd: true,
-  canEdit: true,
-  canDelete: true,
-  noticeTemplates: [],
-  blockTemplates: [],
 };
 
 export default ReminderFeesFields;
