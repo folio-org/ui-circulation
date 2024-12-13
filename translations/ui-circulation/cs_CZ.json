@@ -560,5 +560,8 @@
     "permission.settings.view-notice-policies": "Nastavení (Cirkulace): Může zobrazit pravidla oznámení",
     "permission.settings.view-notice-templates": "Nastavení (Cirkulace): Může zobrazit šablony oznámení pro čtenáře",
     "permission.settings.view-request-policies": "Nastavení (Cirkulace): Může zobrazit pravidla žádanek",
-    "permission.settings.view-cancellation-reasons": "Nastavení (Cirkulace): Může zobrazit důvody zrušení"
+    "permission.settings.view-cancellation-reasons": "Nastavení (Cirkulace): Může zobrazit důvody zrušení",
+    "settings.index.titleLevelRequests": "Žádanky na úrovni názvu",
+    "settings.title.titleLevelRequests": "Žádanky na úrovni názvu",
+    "settings.titleLevelRequests.paneTitle": "Žádanky na úrovni názvu"
 }
