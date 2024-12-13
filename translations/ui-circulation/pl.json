@@ -187,7 +187,7 @@
     "settings.circulationRules.paneTitle": "Edytor reguł udostępniania",
     "settings.circulationRules.rulesUpdated": "Reguły zostały pomyślnie zaktualizowane",
     "settings.circulationRules.newRule": "Nowa reguła (#)",
-    "settings.circulationRules.patronGroups": "Grupy czytelników",
+    "settings.circulationRules.patronGroups": "Grupy czytelnika",
     "settings.circulationRules.materialTypes": "Rodzaje materiału",
     "settings.circulationRules.loanTypes": "Rodzaje wypożyczeń",
     "settings.circulationRules.loanPolicies": "Reguły wypożyczenia",
@@ -560,5 +560,8 @@
     "permission.settings.view-notice-policies": "Settings (Circulation): Can view notice policies",
     "permission.settings.view-notice-templates": "Settings (Circulation): Can view patron notice templates",
     "permission.settings.view-request-policies": "Settings (Circulation): Can view request policies",
-    "permission.settings.view-cancellation-reasons": "Settings (Circulation): Can view cancellation reasons"
+    "permission.settings.view-cancellation-reasons": "Settings (Circulation): Can view cancellation reasons",
+    "settings.index.titleLevelRequests": "Title level requests",
+    "settings.title.titleLevelRequests": "Title level requests",
+    "settings.titleLevelRequests.paneTitle": "Title level requests"
 }
