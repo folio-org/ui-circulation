@@ -375,7 +375,7 @@
     "settings.finePolicy.validate.maximumRecallOverdueFine": "Maximum overdue recall fine must be greater than or equal to Overdue recall fine",
     "settings.finePolicy.validate.hasOverdueFineInterval": "L'amende pour retard doit être supérieure à 0 si l'intervalle est défini",
     "settings.finePolicy.validate.hasOverdueRecallFineInterval": "Overdue recall fine must be greater than 0 if interval set",
-    "settings.finePolicy.validate.invalidMaximumOverdueFine": "Veuillez saisir un montant d'amende en souffrance ou définir l'amende en souffrance maximale sur 0",
+    "settings.finePolicy.validate.invalidMaximumOverdueFine": "Veuillez saisir un montant d'amende impayée ou définir l'amende impayée maximale sur 0",
     "settings.finePolicy.validate.invalidMaximumRecallOverdueFine": "Veuillez saisir un montant d'amende de rappel en retard ou définir l'amende de rappel en retard maximale sur 0",
     "settings.lostItemFee.validate.hasPatronBilledAfterAgedToLostValue": "Saisie obligatoire si un montant a été saisi pour \"Usager facturé pour exemplaire considéré comme perdu\"",
     "settings.lostItemFee.validate.hasNoChargeLostItemProcessingFee": "\"Frais de traitement d'exemplaire perdu\" ne peut pas être > 0 sauf si \"Facturer les frais de traitement d'exemplaire perdu si l'exemplaire est déclaré perdu par l'usager\" et/ou si \"Facturer les frais de traitement d'exemplaire perdu si l'exemplaire est considéré comme perdu par le système\" est \"Oui\"",
