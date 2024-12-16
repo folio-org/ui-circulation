@@ -2,6 +2,7 @@
 
 ## 10.1.0 IN PROGRESS
 
+* React v19: refactor away from default props for functional components. Refs UICIRC-1080.
 * Remove feature toggle. Refs UICIRC-1125.
 
 ## [10.0.1](https://github.com/folio-org/ui-circulation/tree/v10.0.1) (2024-12-04)

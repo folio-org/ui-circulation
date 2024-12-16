@@ -16,8 +16,8 @@ const GeneralSection = (props) => {
     connect,
     metadata,
     policyName,
-    isPolicyActive,
-    policyDescription,
+    isPolicyActive = false,
+    policyDescription = '',
   } = props;
 
   const active = isPolicyActive
@@ -79,11 +79,6 @@ GeneralSection.propTypes = {
   policyName: PropTypes.string.isRequired,
   policyDescription: PropTypes.string,
   connect: PropTypes.func.isRequired,
-};
-
-GeneralSection.defaultProps = {
-  policyDescription: '',
-  isPolicyActive: false,
 };
 
 export default GeneralSection;

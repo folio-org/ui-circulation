@@ -9,7 +9,7 @@ import {
 
 const CancelButton = ({
   onCancel,
-  labelKey,
+  labelKey = 'ui-circulation.settings.common.closeEntryDialog',
 }) => (
   <PaneMenu data-test-cancel-pane-menu>
     <FormattedMessage id={labelKey}>
@@ -30,10 +30,6 @@ const CancelButton = ({
 CancelButton.propTypes = {
   onCancel: PropTypes.func.isRequired,
   labelKey: PropTypes.string,
-};
-
-CancelButton.defaultProps = {
-  labelKey: 'ui-circulation.settings.common.closeEntryDialog',
 };
 
 export default CancelButton;
