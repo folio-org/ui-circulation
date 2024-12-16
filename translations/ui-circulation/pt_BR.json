@@ -560,5 +560,8 @@
     "permission.settings.view-notice-policies": "Configurações (Circulação): Pode visualizar políticas de aviso",
     "permission.settings.view-notice-templates": "Configurações (Circulação): Pode visualizar modelos de aviso ao usuário",
     "permission.settings.view-request-policies": "Configurações (Circulação): Pode visualizar políticas de requisição",
-    "permission.settings.view-cancellation-reasons": "Configurações (Circulação): Pode visualizar os motivos do cancelamento"
+    "permission.settings.view-cancellation-reasons": "Configurações (Circulação): Pode visualizar os motivos do cancelamento",
+    "settings.index.titleLevelRequests": "Requisições de nível de título",
+    "settings.title.titleLevelRequests": "Requisições de nível de título",
+    "settings.titleLevelRequests.paneTitle": "Requisições de nível de título"
 }
