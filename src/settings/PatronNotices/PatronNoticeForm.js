@@ -39,10 +39,10 @@ import css from './PatronNoticeForm.css';
 const PatronNoticeForm = (props) => {
   const {
     handleSubmit,
-    initialValues,
+    initialValues = {},
     initialValues: {
       id: initialId,
-    },
+    } = {},
     location: {
       search,
     },
@@ -88,8 +88,8 @@ const PatronNoticeForm = (props) => {
       initialValues: notice,
     } = props;
 
-    return notice.id
-      ? notice.name
+    return notice?.id
+      ? notice?.name
       : formatMessage({ id: 'ui-circulation.settings.patronNotices.newLabel' });
   };
 
@@ -190,9 +190,6 @@ PatronNoticeForm.propTypes = {
   stripes: stripesShape.isRequired,
 };
 
-PatronNoticeForm.defaultProps = {
-  initialValues: {},
-};
 export default stripesFinalForm({
   navigationCheck: true,
   validate: validatePatronNoticeTemplate,

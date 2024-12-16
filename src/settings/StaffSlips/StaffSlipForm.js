@@ -31,7 +31,7 @@ const StaffSlipForm = (props) => {
   const {
     stripes,
     handleSubmit,
-    initialValues,
+    initialValues = {},
     pristine,
     submitting,
     onCancel,
@@ -116,10 +116,6 @@ StaffSlipForm.propTypes = {
   pristine: PropTypes.bool,
   submitting: PropTypes.bool,
   intl: PropTypes.object.isRequired,
-};
-
-StaffSlipForm.defaultProps = {
-  initialValues: {},
 };
 
 export default stripesFinalForm({

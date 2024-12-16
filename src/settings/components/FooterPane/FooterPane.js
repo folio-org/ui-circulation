@@ -12,7 +12,7 @@ import css from './FooterPane.css';
 const FooterPane = (props) => {
   const {
     isSaveButtonDisabled,
-    isSaveButtonAvailable,
+    isSaveButtonAvailable = true,
     onCancel,
   } = props;
 
@@ -47,10 +47,6 @@ FooterPane.propTypes = {
   isSaveButtonDisabled: PropTypes.bool.isRequired,
   isSaveButtonAvailable: PropTypes.bool,
   onCancel: PropTypes.func.isRequired,
-};
-
-FooterPane.defaultProps = {
-  isSaveButtonAvailable: true,
 };
 
 export default FooterPane;
