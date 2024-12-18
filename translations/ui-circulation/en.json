@@ -12,7 +12,6 @@
   "settings.index.patronNotices": "Patron notice templates",
   "settings.index.noticePolicies": "Patron notice policies",
   "settings.index.requestPolicies": "Request policies",
-  "settings.index.titleLevelRequests": "Title level requests",
   "settings.index.titleLevelRequestsTlr": "Title level requests (TLR)",
   "settings.index.tlrPatronNotices": "TLR patron notice templates",
   "settings.index.consortiumTLR": "Consortium title level requests (TLR)",
@@ -37,7 +36,6 @@
   "settings.title.patronNoticeTemplates": "Patron notice {optionNumber, plural, one {template} other {templates}}",
   "settings.title.requestCancellationReasons": "Request cancellation reasons",
   "settings.title.requestPolicies": "Request {optionNumber, plural, one {policy} other {policies}}",
-  "settings.title.titleLevelRequests": "Title level requests",
   "settings.title.titleLevelRequestsTlr": "Title level requests (TLR)",
   "settings.title.tlrPatronNotices": "TLR Patron notice templates",
   "settings.title.consortiumTLR": "Consortium title level requests (TLR)",
@@ -338,7 +336,6 @@
   "settings.requestPolicy.requestTypes.allowAll": "Allow all pickup service points",
   "settings.requestPolicy.requestTypes.allowSome": "Allow some pickup service points",
 
-  "settings.titleLevelRequests.paneTitle": "Title level requests",
   "settings.titleLevelRequestsTlr.paneTitle": "Title level requests (TLR)",
   "settings.tlrPatronNotices.paneTitle": "TLR Patron notice templates",
   "settings.titleLevelRequests.allow": "Allow title level requests",
