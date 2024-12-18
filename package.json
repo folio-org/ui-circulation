@@ -43,7 +43,7 @@
     "permissionSets": [
       {
         "permissionName": "settings.circulation.enabled",
-        "displayName": "Settings (Circ): display list of settings pages",
+        "displayName": "Settings (Circulation): display list of settings pages",
         "subPermissions": [
           "settings.enabled"
         ]
@@ -62,7 +62,7 @@
       },
       {
         "permissionName": "ui-circulation.settings.cancellation-reasons",
-        "displayName": "Settings (Circ): Can create, edit and remove cancellation reasons",
+        "displayName": "Settings (Circulation): Can create, edit and remove cancellation reasons",
         "subPermissions": [
           "ui-circulation.settings.view-cancellation-reasons",
           "circulation-storage.cancellation-reasons.item.post",
@@ -74,7 +74,7 @@
       },
       {
         "permissionName": "ui-circulation.settings.loan-history",
-        "displayName": "Settings (Circ): Can view loan history",
+        "displayName": "Settings (Circulation): Can view loan history",
         "subPermissions": [
           "configuration.entries.collection.get",
           "settings.circulation.enabled",
@@ -84,7 +84,7 @@
       },
       {
         "permissionName": "ui-circulation.settings.edit-loan-history",
-        "displayName": "Settings (Circ): Can edit loan history",
+        "displayName": "Settings (Circulation): Can edit loan history",
         "subPermissions": [
           "ui-circulation.settings.loan-history",
           "configuration.entries.item.post",
@@ -94,7 +94,7 @@
       },
       {
         "permissionName": "ui-circulation.settings.view-loan-policies",
-        "displayName": "Settings (Circ): Can view loan policies",
+        "displayName": "Settings (Circulation): Can view loan policies",
         "subPermissions": [
           "circulation.loans.collection.get",
           "circulation-storage.loan-policies.collection.get",
@@ -109,7 +109,7 @@
       },
       {
         "permissionName": "ui-circulation.settings.loan-policies",
-        "displayName": "Settings (Circ): Can create, edit and remove loan policies",
+        "displayName": "Settings (Circulation): Can create, edit and remove loan policies",
         "subPermissions": [
           "ui-circulation.settings.view-loan-policies",
           "circulation-storage.loan-policies.item.post",
@@ -136,7 +136,7 @@
       },
       {
         "permissionName": "ui-circulation.settings.notice-policies",
-        "displayName": "Settings (Circ): Can create, edit and remove notice policies",
+        "displayName": "Settings (Circulation): Can create, edit and remove notice policies",
         "subPermissions": [
           "ui-circulation.settings.view-notice-policies",
           "circulation-storage.patron-notice-policies.item.post",
@@ -147,14 +147,14 @@
       },
       {
         "permissionName": "settings.loan-policies.all",
-        "displayName": "Settings (Circ): Can create, edit and remove loan policies [LEGACY]",
+        "displayName": "Settings (Circulation): Can create, edit and remove loan policies [LEGACY]",
         "subPermissions": [
           "ui-circulation.settings.loan-policies"
         ]
       },
       {
         "permissionName": "ui-circulation.settings.view-circulation-rules",
-        "displayName": "Settings (Circ): View circulation rules",
+        "displayName": "Settings (Circulation): View circulation rules",
         "subPermissions": [
           "circulation-storage.circulation-rules.get",
           "circulation.rules.get",
@@ -181,7 +181,7 @@
       },
       {
         "permissionName": "ui-circulation.settings.edit-circulation-rules",
-        "displayName": "Settings (Circ): Can create, edit and remove circulation rules",
+        "displayName": "Settings (Circulation): Can create, edit and remove circulation rules",
         "subPermissions": [
           "ui-circulation.settings.view-circulation-rules",
           "circulation-storage.circulation-rules.put",
@@ -203,7 +203,7 @@
       },
       {
         "permissionName": "ui-circulation.settings.fixed-due-date-schedules",
-        "displayName": "Settings (Circ): Can create, edit and remove fixed due date schedules",
+        "displayName": "Settings (Circulation): Can create, edit and remove fixed due date schedules",
         "subPermissions": [
           "ui-circulation.settings.view-fixed-due-date-schedules",
           "circulation-storage.fixed-due-date-schedules.item.post",
@@ -215,7 +215,7 @@
       },
       {
         "permissionName": "settings.loan-rules.all",
-        "displayName": "Settings (Circ): Can create, edit and remove loan rules [LEGACY]",
+        "displayName": "Settings (Circulation): Can create, edit and remove loan rules [LEGACY]",
         "subPermissions": [
           "ui-circulation.settings.edit-circulation-rules"
         ]
@@ -232,7 +232,7 @@
       },
       {
         "permissionName": "ui-circulation.settings.edit-staff-slips",
-        "displayName": "Settings (Circ): Can edit staff slips",
+        "displayName": "Settings (Circulation): Can edit staff slips",
         "subPermissions": [
           "ui-circulation.settings.view-staff-slips",
           "circulation-storage.staff-slips.item.put"
@@ -241,7 +241,7 @@
       },
       {
         "permissionName": "ui-circulation.settings.staff-slips",
-        "displayName": "Settings (Circ): Can create, edit and remove staff slips",
+        "displayName": "Settings (Circulation): Can create, edit and remove staff slips",
         "subPermissions": [
           "ui-circulation.settings.edit-staff-slips",
           "configuration.entries.collection.get",
@@ -253,7 +253,7 @@
       },
       {
         "permissionName": "ui-circulation.settings.request-print-details",
-        "displayName": "Settings (Circ): Can enable request print details",
+        "displayName": "Settings (Circulation): Can enable request print details",
         "subPermissions": [
           "settings.circulation.enabled",
           "circulation.settings.collection.get",
@@ -279,7 +279,7 @@
       },
       {
         "permissionName": "ui-circulation.settings.request-policies",
-        "displayName": "Settings (Circ): Can create, edit and remove request policies",
+        "displayName": "Settings (Circulation): Can create, edit and remove request policies",
         "subPermissions": [
           "ui-circulation.settings.view-request-policies",
           "circulation-storage.request-policies.collection.delete",
@@ -302,7 +302,7 @@
       },
       {
         "permissionName": "ui-circulation.settings.other-settings",
-        "displayName": "Settings (Circ): Can create, edit and remove other settings",
+        "displayName": "Settings (Circulation): Can create, edit and remove other settings",
         "subPermissions": [
           "ui-circulation.settings.view-other-settings",
           "configuration.entries.item.post",
@@ -324,7 +324,7 @@
       },
       {
         "permissionName": "ui-circulation.settings.notice-templates",
-        "displayName": "Settings (Circ): Can create, edit and remove patron notice templates",
+        "displayName": "Settings (Circulation): Can create, edit and remove patron notice templates",
         "subPermissions": [
           "ui-circulation.settings.view-notice-templates",
           "templates.item.post",
@@ -336,7 +336,7 @@
       },
       {
         "permissionName": "ui-circulation.settings.view-overdue-fines-policies",
-        "displayName": "Settings (Circ): Can view overdue fine policies",
+        "displayName": "Settings (Circulation): Can view overdue fine policies",
         "subPermissions": [
           "circulation.loans.collection.get",
           "manual-block-templates.collection.get",
@@ -351,7 +351,7 @@
       },
       {
         "permissionName": "ui-circulation.settings.overdue-fines-policies",
-        "displayName": "Settings (Circ): Can create, edit and remove overdue fine policies",
+        "displayName": "Settings (Circulation): Can create, edit and remove overdue fine policies",
         "subPermissions": [
           "ui-circulation.settings.view-overdue-fines-policies",
           "overdue-fines-policies.item.post",
@@ -362,7 +362,7 @@
       },
       {
         "permissionName": "ui-circulation.settings.view-lost-item-fees-policies",
-        "displayName": "Settings (Circ): Can view lost item fee policies",
+        "displayName": "Settings (Circulation): Can view lost item fee policies",
         "subPermissions": [
           "circulation.loans.collection.get",
           "lost-item-fees-policies.collection.get",
@@ -375,7 +375,7 @@
       },
       {
         "permissionName": "ui-circulation.settings.lost-item-fees-policies",
-        "displayName": "Settings (Circ): Can create, edit and remove lost item fee policies",
+        "displayName": "Settings (Circulation): Can create, edit and remove lost item fee policies",
         "subPermissions": [
           "ui-circulation.settings.view-lost-item-fees-policies",
           "lost-item-fees-policies.item.post",
