@@ -3,6 +3,7 @@
 ## 10.1.0 IN PROGRESS
 
 * React v19: refactor away from default props for functional components. Refs UICIRC-1080.
+* Update Circulation permissions names. UICIRC-1051.
 
 ## [10.0.1](https://github.com/folio-org/ui-circulation/tree/v10.0.1) (2024-12-04)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v10.0.0...v10.0.1)
