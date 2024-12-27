@@ -563,5 +563,6 @@
     "permission.settings.view-cancellation-reasons": "Einstellungen (Ausleihe): Kann Stornierungsgründe anzeigen",
     "settings.index.titleLevelRequests": "Title level requests",
     "settings.title.titleLevelRequests": "Title level requests",
-    "settings.titleLevelRequests.paneTitle": "Title level requests"
+    "settings.titleLevelRequests.paneTitle": "Title level requests",
+    "permission.settings.edit-loan-history": "Settings (Circulation): Can edit loan history"
 }

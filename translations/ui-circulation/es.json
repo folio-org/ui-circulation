@@ -531,7 +531,7 @@
     "settings.title.editRecord": "Edit {name}",
     "settings.finePolicy.reminderFees.noBlock": "No block",
     "permission.settings.view-staff-slips": "Settings (Circulation): Can view staff slips",
-    "permission.settings.request-print-details": "Settings (Circ): Can enable request print details",
+    "permission.settings.request-print-details": "Settings (Circulation): Can enable request print details",
     "settings.index.viewPrintDetails": "View print details",
     "settings.title.viewPrintDetails": "View print details",
     "settings.ViewPrintDetails.enable": "Enable view print details (Pick slips)",
@@ -563,5 +563,6 @@
     "permission.settings.view-cancellation-reasons": "Settings (Circulation): Can view cancellation reasons",
     "settings.index.titleLevelRequests": "Title level requests",
     "settings.title.titleLevelRequests": "Title level requests",
-    "settings.titleLevelRequests.paneTitle": "Title level requests"
+    "settings.titleLevelRequests.paneTitle": "Title level requests",
+    "permission.settings.edit-loan-history": "Settings (Circulation): Can edit loan history"
 }

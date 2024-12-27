@@ -563,5 +563,6 @@
     "permission.settings.view-cancellation-reasons": "Nastavení (Cirkulace): Může zobrazit důvody zrušení",
     "settings.index.titleLevelRequests": "Žádanky na úrovni názvu",
     "settings.title.titleLevelRequests": "Žádanky na úrovni názvu",
-    "settings.titleLevelRequests.paneTitle": "Žádanky na úrovni názvu"
+    "settings.titleLevelRequests.paneTitle": "Žádanky na úrovni názvu",
+    "permission.settings.edit-loan-history": "Settings (Circulation): Can edit loan history"
 }
