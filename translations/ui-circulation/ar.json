@@ -460,7 +460,7 @@
     "settings.lostItemPolicy.denyDelete.header": "لا يمكن حذف سياسة رسوم المادة الضائعة",
     "settings.checkout.wildcardLookup": "إجراء بحث بدل عن المواد بواسطة الباركود في تطبيقات الإعارة (الرد، الإعارة)",
     "settings.index.loanAnonymization": "عدم تعريف هوية الاستعارة",
-    "permission.settings.edit-staff-slips": "Settings (Circ): Can edit staff slips",
+    "permission.settings.edit-staff-slips": "Settings (Circulation): Can edit staff slips",
     "settings.validate.subject": "Should not begin with a space",
     "settings.staffSlips.generalInformation": "General information",
     "settings.staffSlips.templateContent": "Template content",
@@ -472,8 +472,8 @@
     "settings.patronNotices.generalInformation": "General information",
     "settings.noticePolicy.feeFineNotices.realTime.longTerm": "Send overnight with multiple lost item fee charges by patron.",
     "settings.noticePolicy.feeFineNotices.realTime.shortTerm": "Send throughout the day with one lost item fee charge per notice.",
-    "permission.settings.view-circulation-rules": "Settings (Circ): View circulation rules",
-    "permission.settings.edit-circulation-rules": "Settings (Circ): Can create, edit and remove circulation rules",
+    "permission.settings.view-circulation-rules": "Settings (Circulation): View circulation rules",
+    "permission.settings.edit-circulation-rules": "Settings (Circulation): Can create, edit and remove circulation rules",
     "settings.patronNotices.userAddressTokenHeader": "User Address",
     "settings.finePolicy.reminderFees.label": "Reminder fees",
     "settings.finePolicy.reminderFees.add": "Add reminder fee",
@@ -531,7 +531,7 @@
     "settings.title.editRecord": "Edit {name}",
     "settings.finePolicy.reminderFees.noBlock": "No block",
     "permission.settings.view-staff-slips": "Settings (Circulation): Can view staff slips",
-    "permission.settings.request-print-details": "Settings (Circ): Can enable request print details",
+    "permission.settings.request-print-details": "Settings (Circulation): Can enable request print details",
     "settings.index.viewPrintDetails": "View print details",
     "settings.title.viewPrintDetails": "View print details",
     "settings.ViewPrintDetails.enable": "Enable view print details (Pick slips)",
@@ -563,5 +563,6 @@
     "permission.settings.view-cancellation-reasons": "Settings (Circulation): Can view cancellation reasons",
     "settings.index.titleLevelRequests": "Title level requests",
     "settings.title.titleLevelRequests": "Title level requests",
-    "settings.titleLevelRequests.paneTitle": "Title level requests"
+    "settings.titleLevelRequests.paneTitle": "Title level requests",
+    "permission.settings.edit-loan-history": "Settings (Circulation): Can edit loan history"
 }

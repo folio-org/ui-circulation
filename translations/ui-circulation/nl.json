@@ -563,5 +563,6 @@
     "permission.settings.view-cancellation-reasons": "Instellingen (Circulatie): Kan annuleringsredenen bekijken",
     "settings.index.titleLevelRequests": "Aanvragen op titelniveau",
     "settings.title.titleLevelRequests": "Aanvragen op titelniveau",
-    "settings.titleLevelRequests.paneTitle": "Aanvragen op titelniveau"
+    "settings.titleLevelRequests.paneTitle": "Aanvragen op titelniveau",
+    "permission.settings.edit-loan-history": "Settings (Circulation): Can edit loan history"
 }
