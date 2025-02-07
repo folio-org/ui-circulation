@@ -1,9 +1,10 @@
 # Change history for ui-circulation
 
-## 10.1.0 IN PROGRESS
+## 11.0.0 IN PROGRESS
 
 * React v19: refactor away from default props for functional components. Refs UICIRC-1080.
 * Update Circulation permissions names. UICIRC-1051.
+* *BREAKING* Update `react-intl` to `^7`. Refs UICIRC-1177.
 
 ## [10.0.1](https://github.com/folio-org/ui-circulation/tree/v10.0.1) (2024-12-04)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v10.0.0...v10.0.1)
