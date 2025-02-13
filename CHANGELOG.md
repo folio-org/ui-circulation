@@ -6,6 +6,7 @@
 * Update Circulation permissions names. UICIRC-1051.
 * *BREAKING* Update `react-intl` to `^7`. Refs UICIRC-1177.
 * Migrate to shared GA workflows. Refs UICIRC-1174.
+* *BREAKING* Update stripes-* dependencies to latest version. Refs UICIRC-1176.
 
 ## [10.0.1](https://github.com/folio-org/ui-circulation/tree/v10.0.1) (2024-12-04)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v10.0.0...v10.0.1)
