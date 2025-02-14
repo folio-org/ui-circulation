@@ -110,6 +110,41 @@ const getTokens = (locale) => ({
       previewValue: 'Circulation Desk - Main Library',
       allowedFor: allowedForAllStaffSlips,
     },
+    {
+      token: 'item.accessionNumber',
+      previewValue: '1234RFID',
+      allowedFor: allowedForAllStaffSlips,
+    },
+    {
+      token: 'item.administrativeNotes',
+      previewValue: 'Send to bookbinder',
+      allowedFor: allowedForAllStaffSlips,
+    },
+    {
+      token: 'item.datesOfPublication',
+      previewValue: '2016',
+      allowedFor: allowedForAllStaffSlips,
+    },
+    {
+      token: 'item.editions',
+      previewValue: '2nd. edition',
+      allowedFor: allowedForAllStaffSlips,
+    },
+    {
+      token: 'item.physicalDescriptions',
+      previewValue: 'xx, 238 p. : ill. ; 24 cm.',
+      allowedFor: allowedForAllStaffSlips,
+    },
+    {
+      token: 'item.instanceHrid',
+      previewValue: 'inst000000000022',
+      allowedFor: allowedForAllStaffSlips,
+    },
+    {
+      token: 'item.instanceHridImage',
+      previewValue: '<Barcode>inst000000000022</Barcode>',
+      allowedFor: allowedForAllStaffSlips,
+    },
   ],
   effectiveLocation: [
     {
