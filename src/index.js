@@ -11,7 +11,7 @@ import LoanHistorySettings from './settings/LoanHistory/LoanHistorySettings';
 import LoanPolicySettings from './settings/LoanPolicy/LoanPolicySettings';
 import FinePolicySettings from './settings/FinePolicy/FinePolicySettings';
 import LostItemFeePolicySettings from './settings/LostItemFeePolicy/LostItemFeePolicySettings';
-import CirculationRules from './settings/CirculationRules';
+import CirculationRules from './settings/CirculationRules'; // eslint-disable-line import/no-named-as-default
 import RequestCancellationReasons from './settings/RequestCancellationReasons';
 import CheckoutSettings from './settings/CheckoutSettings/CheckoutSettings';
 import FixedDueDateScheduleManager from './settings/FixedDueDateSchedule/FixedDueDateScheduleManager';
