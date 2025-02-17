@@ -162,6 +162,8 @@ class RulesEditor extends React.Component {
   constructor(props) {
     super(props);
 
+    console.log('PROPS FROM CONSTRUCTOR: ', props);
+
     initRulesCMM(Codemirror);
     initFoldRules(Codemirror);
     this.state = this.getInitialState();
@@ -232,22 +234,71 @@ class RulesEditor extends React.Component {
     this.cm.display.input.textarea.ariaLabel = formatMessage({ id: 'ui-circulation.settings.circulationRules.label' });
   }
 
-  UNSAFE_componentWillReceiveProps(nextProps) {
+  // UNSAFE_componentWillReceiveProps(nextProps) {
+  //   const nextState = {};
+  //   // console.log('START')
+  //
+  //   if (nextProps.typeMapping && !isEqual(nextProps.typeMapping, this.props.typeMapping)) {
+  //     nextState.typeMapping = nextProps.typeMapping;
+  //   }
+  //
+  //   if (nextProps.policyMapping && !isEqual(nextProps.policyMapping, this.props.policyMapping)) {
+  //     nextState.policyMapping = nextProps.policyMapping;
+  //   }
+  //
+  //   if (nextProps.completionLists && !isEqual(nextProps.completionLists, this.props.completionLists)) {
+  //     nextState.completionLists = nextProps.completionLists;
+  //   }
+  //
+  //   if (!isEmpty(nextState)) {
+  //     this.setState(({ codeMirrorOptions }) => {
+  //       const newCodeMirrorOptions = cloneDeep(codeMirrorOptions);
+  //
+  //       return { codeMirrorOptions: Object.assign(newCodeMirrorOptions.mode, nextState) };
+  //     });
+  //   }
+  //
+  //   if (nextProps.code !== this.props.code) {
+  //     this.setState(() => ({ code: nextProps.code }));
+  //   }
+  //
+  //   if (nextProps.filter !== this.props.filter) {
+  //     this.filterRules(nextProps.filter);
+  //   }
+  //
+  //   // console.log('END: ', nextProps)
+  // }
+
+  componentDidUpdate(prevProps) {
+    console.log('prevProps: ', prevProps);
+    console.log('this.props: ', this.props);
+    this.clearErrors();
+    this.cm.refresh();
+
+    const { errors } = this.props;
     const nextState = {};
 
-    if (nextProps.typeMapping && !isEqual(nextProps.typeMapping, this.props.typeMapping)) {
-      nextState.typeMapping = nextProps.typeMapping;
+    if (!isEmpty(errors)) {
+      errors.forEach(({ line, message }) => this.renderError(line, message));
     }
 
-    if (nextProps.policyMapping && !isEqual(nextProps.policyMapping, this.props.policyMapping)) {
-      nextState.policyMapping = nextProps.policyMapping;
+    if (this.props.typeMapping && !isEqual(this.props.typeMapping, prevProps.typeMapping)) {
+      console.log('1 this.props.typeMapping: ', this.props.typeMapping);
+      nextState.typeMapping = this.props.typeMapping;
     }
 
-    if (nextProps.completionLists && !isEqual(nextProps.completionLists, this.props.completionLists)) {
-      nextState.completionLists = nextProps.completionLists;
+    if (this.props.policyMapping && !isEqual(this.props.policyMapping, prevProps.policyMapping)) {
+      console.log('2 this.props.policyMapping: ', this.props.policyMapping);
+      nextState.policyMapping = this.props.policyMapping;
+    }
+
+    if (this.props.completionLists && !isEqual(this.props.completionLists, prevProps.completionLists)) {
+      console.log('3 this.props.completionLists: ', this.props.completionLists);
+      nextState.completionLists = this.props.completionLists;
     }
 
     if (!isEmpty(nextState)) {
+      console.log('4 nextState: ', nextState);
       this.setState(({ codeMirrorOptions }) => {
         const newCodeMirrorOptions = cloneDeep(codeMirrorOptions);
 
@@ -255,24 +306,17 @@ class RulesEditor extends React.Component {
       });
     }
 
-    if (nextProps.code !== this.props.code) {
-      this.setState(() => ({ code: nextProps.code }));
+    if (this.props.code !== prevProps.code) {
+      console.log('5 code: ', this.props.code);
+      this.setState(() => ({ code: this.props.code }));
     }
 
-    if (nextProps.filter !== this.props.filter) {
-      this.filterRules(nextProps.filter);
+    if (this.props.filter !== prevProps.filter) {
+      console.log('6 this.props.filter: ', this.props.filter);
+      this.filterRules(this.props.filter);
     }
-  }
 
-  componentDidUpdate() {
-    this.clearErrors();
-    this.cm.refresh();
-
-    const { errors } = this.props;
-
-    if (!isEmpty(errors)) {
-      errors.forEach(({ line, message }) => this.renderError(line, message));
-    }
+    console.log('this.state: ', this.state);
   }
 
   filterRules = filter => {
