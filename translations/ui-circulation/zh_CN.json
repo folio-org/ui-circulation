@@ -564,5 +564,5 @@
     "settings.index.titleLevelRequests": "标题/品种级请求",
     "settings.title.titleLevelRequests": "标题/品种级请求",
     "settings.titleLevelRequests.paneTitle": "标题/品种级请求",
-    "permission.settings.edit-loan-history": "Settings (Circulation): Can edit loan history"
+    "permission.settings.edit-loan-history": "设置（流通）：可以编辑借阅历史"
 }

@@ -218,7 +218,7 @@
     "settings.common.weeks": "Týden(y)",
     "settings.common.months": "Měsíc(e)",
     "settings.common.years": "Rok(y)",
-    "settings.common.blankPlaceholder": " ",
+    "settings.common.blankPlaceholder": ".",
     "settings.requestPolicy.cannotDelete.label": "Pravidla pro žádanky/rezervace nelze smazat",
     "settings.requestPolicy.cannotDelete.message": "Toto pravidlo žádanek je používáno pravidly pro cirkulace a nelze ho smazat",
     "settings.common.close": "Zavřít",
