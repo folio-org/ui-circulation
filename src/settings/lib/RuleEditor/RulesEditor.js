@@ -232,46 +232,43 @@ class RulesEditor extends React.Component {
     this.cm.display.input.textarea.ariaLabel = formatMessage({ id: 'ui-circulation.settings.circulationRules.label' });
   }
 
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    const nextState = {};
-
-    if (nextProps.typeMapping && !isEqual(nextProps.typeMapping, this.props.typeMapping)) {
-      nextState.typeMapping = nextProps.typeMapping;
-    }
-
-    if (nextProps.policyMapping && !isEqual(nextProps.policyMapping, this.props.policyMapping)) {
-      nextState.policyMapping = nextProps.policyMapping;
-    }
-
-    if (nextProps.completionLists && !isEqual(nextProps.completionLists, this.props.completionLists)) {
-      nextState.completionLists = nextProps.completionLists;
-    }
-
-    if (!isEmpty(nextState)) {
-      this.setState(({ codeMirrorOptions }) => {
-        const newCodeMirrorOptions = cloneDeep(codeMirrorOptions);
-
-        return { codeMirrorOptions: Object.assign(newCodeMirrorOptions.mode, nextState) };
-      });
-    }
-
-    if (nextProps.code !== this.props.code) {
-      this.setState(() => ({ code: nextProps.code }));
-    }
-
-    if (nextProps.filter !== this.props.filter) {
-      this.filterRules(nextProps.filter);
-    }
-  }
-
-  componentDidUpdate() {
+  componentDidUpdate(prevProps) {
     this.clearErrors();
     this.cm.refresh();
 
-    const { errors } = this.props;
+    const {
+      errors,
+      completionLists,
+      filter,
+      code,
+    } = this.props;
 
     if (!isEmpty(errors)) {
       errors.forEach(({ line, message }) => this.renderError(line, message));
+    }
+
+    if (completionLists && !isEqual(completionLists, prevProps.completionLists)) {
+      this.setState(({ codeMirrorOptions }) => {
+        const newCodeMirrorOptions = cloneDeep(codeMirrorOptions);
+
+        return {
+          codeMirrorOptions: {
+            ...newCodeMirrorOptions,
+            mode: {
+              ...newCodeMirrorOptions.mode,
+              completionLists,
+            },
+          },
+        };
+      });
+    }
+
+    if (code !== prevProps.code) {
+      this.setState({ code });
+    }
+
+    if (filter !== prevProps.filter) {
+      this.filterRules(filter);
     }
   }
 
