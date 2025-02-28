@@ -96,8 +96,13 @@ describe('getTokens', () => {
       category: 'feeFineAction',
       name: 'feeAction.actionDateTime',
       expectedResult: expectedLongResult,
+    }, 
+    {
+      category: 'item',
+      name: 'item.accessionNumber',
+      expectedResult: '1234RFID',
     },
-  ];
+ ];
   const result = getTokens(testLocale);
   const tokenTest = ({
     category,
