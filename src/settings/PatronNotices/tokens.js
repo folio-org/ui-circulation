@@ -94,6 +94,41 @@ const item = [
     previewValue: 'Can circulate',
     allowedFor: allowedForAllCategories,
   },
+  {
+    token: 'item.accessionNumber',
+    previewValue: '1234RFID',
+    allowedFor: allowedForAllCategories,
+  },
+  {
+    token: 'item.administrativeNotes',
+    previewValue: 'Send to bookbinder',
+    allowedFor: allowedForAllCategories,
+  },
+  {
+    token: 'item.datesOfPublication',
+    previewValue: '2016',
+    allowedFor: allowedForAllCategories,
+  },
+  {
+    token: 'item.editions',
+    previewValue: '2nd. edition',
+    allowedFor: allowedForAllCategories,
+  },
+  {
+    token: 'item.physicalDescriptions',
+    previewValue: 'xx, 238 p. : ill. ; 24 cm.',
+    allowedFor: allowedForAllCategories,
+  },
+  {
+    token: 'item.instanceHrid',
+    previewValue: 'inst000000000022',
+    allowedFor: allowedForAllCategories,
+  },
+  {
+    token: 'item.instanceHridImage',
+    previewValue: '<Barcode>inst000000000022</Barcode>',
+    allowedFor: allowedForAllCategories,
+  },
 ];
 const effectiveLocation = [
   {
