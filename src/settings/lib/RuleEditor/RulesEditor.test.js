@@ -686,16 +686,10 @@ describe('RulesEditor', () => {
         });
       });
 
-      describe('when new "typeMapping", "policyMapping" and "completionLists" props', () => {
+      describe('when new "completionLists" prop', () => {
         const test = 'test';
         const props = {
           ...initialProps,
-          typeMapping: {
-            test,
-          },
-          policyMapping: {
-            test,
-          },
           completionLists: {
             test,
           },
@@ -707,19 +701,17 @@ describe('RulesEditor', () => {
         );
 
         it('should render "CodeMirror" with correct "options" prop', () => {
-          const codeMirrorOptions = {
-            name: 'rulesCMM',
-            completionLists: {
-              test,
+          const codeMirrorOptions = expect.objectContaining({
+            mode: {
+              name: 'rulesCMM',
+              completionLists: {
+                test,
+              },
+              policyMapping: {},
+              typeMapping: {},
+              keySelector: ['all', 'rare'],
             },
-            typeMapping: {
-              test,
-            },
-            policyMapping: {
-              test,
-            },
-            keySelector: ['all', 'rare'],
-          };
+          });
           const expectedProps = {
             options: codeMirrorOptions,
           };
