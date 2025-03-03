@@ -5,6 +5,10 @@ import {
   get,
 } from 'lodash';
 
+import {
+  checkIfUserInCentralTenant,
+} from '@folio/stripes/core';
+
 export const LAYERS = {
   EDIT: 'edit',
   CLONE: 'clone',
@@ -95,7 +99,7 @@ export const getRecordName = ({
 };
 
 export const getConsortiumTlrPermission = (stripes) => {
-  if (stripes.hasInterface('consortia') && stripes.hasInterface('ecs-tlr')) {
+  if (stripes.hasInterface('consortia') && stripes.hasInterface('ecs-tlr') && checkIfUserInCentralTenant(stripes)) {
     return 'tlr.consortium-tlr.view';
   }
 
