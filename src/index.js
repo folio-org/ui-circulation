@@ -33,12 +33,13 @@ class Circulation extends Component {
     intl: PropTypes.object.isRequired,
   }
 
-  constructor(props) {
-    super(props);
+  getSections() {
+    const {
+      stripes,
+    } = this.props;
+    const isEnabledEcsRequests = stripes?.config?.enableEcsRequests;
 
-    const isEnabledEcsRequests = props.stripes?.config?.enableEcsRequests;
-
-    this.sections = [
+    const sections = [
       {
         label: <FormattedMessage id="ui-circulation.settings.index.general" />,
         pages: [
@@ -113,7 +114,7 @@ class Circulation extends Component {
           },
           {
             route: 'patron-notices',
-            label: this.props.intl.formatMessage({ id: 'ui-circulation.settings.index.patronNotices' }),
+            label: <FormattedMessage id="ui-circulation.settings.index.patronNotices" />,
             component: PatronNotices,
             perm: 'ui-circulation.settings.view-notice-templates',
           },
@@ -151,7 +152,7 @@ class Circulation extends Component {
     ];
 
     if (isEnabledEcsRequests === true) {
-      this.sections[0].pages.push({
+      sections[0].pages.push({
         route: 'title-level-requests',
         label: <FormattedMessage id="ui-circulation.settings.index.titleLevelRequestsTlr" />,
         component: TitleLevelRequests,
@@ -161,30 +162,33 @@ class Circulation extends Component {
         route: 'consortium-title-level-requests',
         label: <FormattedMessage id="ui-circulation.settings.index.consortiumTLR" />,
         component: ConsortiumTLR,
-        perm: getConsortiumTlrPermission(props.stripes),
+        perm: getConsortiumTlrPermission(stripes),
       });
-      this.sections[4].pages.splice(2, 0, {
+      sections[4].pages.splice(2, 0, {
         route: 'tlr-patron-notice-templates',
         label: <FormattedMessage id="ui-circulation.settings.index.tlrPatronNotices" />,
         component: TLRPatronNotices,
         perm: 'ui-circulation.settings.view-titleLevelRequests',
       });
     } else {
-      this.sections[4].pages.splice(2, 0, {
+      sections[4].pages.splice(2, 0, {
         route: 'title-level-requests',
         label: <FormattedMessage id="ui-circulation.settings.index.titleLevelRequests" />,
         component: DeprecatedTitleLevelRequests,
         perm: 'ui-circulation.settings.view-titleLevelRequests',
       });
     }
+
+    return sections;
   }
 
   render() {
     return (
       <TitleManager page={this.props.intl.formatMessage({ id: 'ui-circulation.settings.title.general' })}>
         <Settings
+          key={getConsortiumTlrPermission(this.props.stripes)}
           {...this.props}
-          sections={this.sections}
+          sections={this.getSections()}
           paneTitle={<FormattedMessage id="ui-circulation.settings.index.paneTitle" />}
         />
       </TitleManager>

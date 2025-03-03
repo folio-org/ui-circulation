@@ -24,5 +24,6 @@ jest.mock('@folio/stripes/core', () => {
     useOkapiKy: jest.fn(),
     useNamespace: jest.fn(() => ['namespace']),
     useCallout: jest.fn(() => ({ sendCallout: jest.fn() })),
+    checkIfUserInCentralTenant: jest.fn(() => true),
   };
 });
