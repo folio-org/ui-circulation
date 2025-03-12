@@ -8,7 +8,10 @@ import { Field } from 'react-final-form';
 
 import AnonymizingTypeSelect from './AnonymizingTypeSelect';
 import Period from '../Period';
-import AnonymizingTypeSelectContainer from './AnonymizingTypeSelectContainer';
+import AnonymizingTypeSelectContainer, {
+  afterCloseTranslationKey,
+} from './AnonymizingTypeSelectContainer';
+import {closedLoansRules} from "../../../constants";
 
 Field.mockImplementation(() => null);
 
@@ -29,6 +32,7 @@ describe('AnonymizingTypeSelectContainer', () => {
   };
   const labelIds = {
     afterClose: 'ui-circulation.settings.loanHistory.afterClose',
+    afterCloseOrSuspended: 'ui-circulation.settings.loanHistory.afterCloseOrSuspended',
     immediatelyAfterClose: 'ui-circulation.settings.loanHistory.immediatelyAfterClose',
     interval: 'ui-circulation.settings.loanHistory.interval',
   };
@@ -80,6 +84,16 @@ describe('AnonymizingTypeSelectContainer', () => {
       expect(Field).toHaveBeenCalledWith(expect.objectContaining({
         name: `${testPath}Selected`,
       }), {});
+    });
+  });
+
+  describe('afterCloseTranslationKey', () => {
+    it(`should return ${labelIds.afterClose} when name is ${closedLoansRules.DEFAULT}`, () => {
+      expect(afterCloseTranslationKey(closedLoansRules.DEFAULT)).toBe(labelIds.afterClose);
+    });
+
+    it(`should return ${labelIds.afterCloseOrSuspended} when name is ${closedLoansRules.WITH_FEES_FINES}`, () => {
+      expect(afterCloseTranslationKey(closedLoansRules.WITH_FEES_FINES)).toBe(labelIds.afterCloseOrSuspended);
     });
   });
 });
