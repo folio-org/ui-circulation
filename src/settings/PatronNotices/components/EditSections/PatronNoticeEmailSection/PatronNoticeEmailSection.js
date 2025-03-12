@@ -28,6 +28,7 @@ const PatronNoticeEmailSection = ({ category, locale, printOnly }) => {
             label={<FormattedMessage id="ui-circulation.settings.patronNotices.printOnly" />}
             name="additionalProperties.printOnly"
             type="checkbox"
+            validateFields={[]}
           />
         </Col>
       </Row>
@@ -43,6 +44,7 @@ const PatronNoticeEmailSection = ({ category, locale, printOnly }) => {
               required
               label={<FormattedMessage id="ui-circulation.settings.patronNotices.subject" />}
               name="localizedTemplates.en.header"
+              validateFields={[]}
             />
           </Col>
         </Row>
@@ -60,6 +62,7 @@ const PatronNoticeEmailSection = ({ category, locale, printOnly }) => {
             tokensList={TokensList}
             previewModalHeader={<FormattedMessage id="ui-circulation.settings.patronNotices.form.previewHeader" />}
             selectedCategory={category}
+            validateFields={[]}
           />
         </Col>
       </Row>

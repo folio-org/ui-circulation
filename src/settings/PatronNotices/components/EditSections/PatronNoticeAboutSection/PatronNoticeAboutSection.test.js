@@ -88,6 +88,7 @@ describe('PatronNoticeAboutSectionEdit', () => {
       id: 'input-patron-notice-active',
       component: Checkbox,
       defaultChecked: true,
+      validateFields: [],
     }, true);
   });
 
@@ -97,6 +98,7 @@ describe('PatronNoticeAboutSectionEdit', () => {
       name: 'description',
       id: 'input-patron-notice-description',
       component: TextArea,
+      validateFields: [],
     }, true);
   });
 
@@ -110,6 +112,7 @@ describe('PatronNoticeAboutSectionEdit', () => {
         value: 'testId',
         label: 'testLabel',
       }],
+      validateFields: [],
     });
   });
 });
