@@ -427,7 +427,7 @@
     "settings.lostItemFee.patronBilledAfterRecalledAgedLost": "Czytelnik obciążony kosztami za wezwanie do zwrotu po uznaniu zagubienia",
     "settings.lostItemFee.validate.hasPatronBilledAfterRecalledAgedToLostValue": "Wpis jest wymagany jeżeli \"Czytelnik jest obciążony kosztami za wezwanie do zwrotu po uznaniu zagubienia\"",
     "settings.checkout.userCustomFields": "Pola własne użytkownika",
-    "settings.checkout.userCustomFields.noValidFieldsAreDefined": "No matching custom fields have been configured",
+    "settings.checkout.userCustomFields.noValidFieldsAreDefined": "Nie skonfigurowano żadnych pasujących pól własnych",
     "settings.checkout.userCustomFields.none": "None",
     "settings.checkout.identifiers.barcode": "Kod kreskowy",
     "settings.checkout.identifiers.externalSystemId": "ID w systemie zewnętrznym",
