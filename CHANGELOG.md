@@ -11,6 +11,7 @@
 * Refactor RulesEditor away from componentWillReceiveProps. Refs UICIRC-431.
 * Add seven new item-level tokens to patron note editor. Fixes UICIRC-1178.
 * Make `Consortium title level request` settings available only in Central tenant. Refs UICIRC-1192.
+* Get rid of unnecessary validation of "Patron notice template name" field. Refs UICIRC-1191.
 
 ## [10.0.1](https://github.com/folio-org/ui-circulation/tree/v10.0.1) (2024-12-04)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v10.0.0...v10.0.1)

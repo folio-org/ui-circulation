@@ -67,6 +67,7 @@ describe('PatronNoticeEmailEditSection', () => {
       component: TextField,
       required: true,
       name: 'localizedTemplates.en.header',
+      validateFields: [],
     }, true);
   });
 
@@ -84,6 +85,7 @@ describe('PatronNoticeEmailEditSection', () => {
       tokens: mockGetTokensReturnValue,
       tokensList: TokensList,
       selectedCategory: categoryValue,
+      validateFields: [],
     }, true);
   });
 });

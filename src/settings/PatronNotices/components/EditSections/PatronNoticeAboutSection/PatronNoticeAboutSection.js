@@ -72,6 +72,7 @@ const PatronNoticeAboutSection = ({ initialValues, okapi, intl }) => {
             id="input-patron-notice-active"
             component={Checkbox}
             defaultChecked={isActive}
+            validateFields={[]}
           />
         </Col>
       </Row>
@@ -84,6 +85,7 @@ const PatronNoticeAboutSection = ({ initialValues, okapi, intl }) => {
             name="description"
             id="input-patron-notice-description"
             component={TextArea}
+            validateFields={[]}
           />
         </Col>
       </Row>
@@ -97,6 +99,7 @@ const PatronNoticeAboutSection = ({ initialValues, okapi, intl }) => {
               component={Select}
               fullWidth
               dataOptions={categoryOptions}
+              validateFields={[]}
             />
           </div>
         </Col>
