@@ -18,6 +18,7 @@ import LoanHistoryForm from './LoanHistoryForm';
 import ExceptionsList from './ExceptionsList';
 import {
   closingTypes,
+  CLOSING_TYPES_WITH_FEES_FINES,
   closedLoansRules,
 } from '../../constants';
 
@@ -190,7 +191,7 @@ describe('LoanHistoryForm', () => {
       expect(AnonymizingTypeSelectContainer).toHaveBeenNthCalledWith(2, expect.objectContaining({
         name: closedLoansRules.WITH_FEES_FINES,
         path: closedLoansRules.WITH_FEES_FINES,
-        types: closingTypes,
+        types: CLOSING_TYPES_WITH_FEES_FINES,
       }), {});
     });
 

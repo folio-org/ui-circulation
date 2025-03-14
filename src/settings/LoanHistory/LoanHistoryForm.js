@@ -27,6 +27,7 @@ import AnonymizingTypeSelectContainer from '../components/AnonymizingTypeSelect/
 import ExceptionsList from './ExceptionsList';
 import {
   closingTypes,
+  CLOSING_TYPES_WITH_FEES_FINES,
   closedLoansRules,
 } from '../../constants';
 import { LoanHistory as validateLoanHistorySettings } from '../Validation';
@@ -151,7 +152,7 @@ class LoanHistoryForm extends Component {
               <AnonymizingTypeSelectContainer
                 name={closedLoansRules.WITH_FEES_FINES}
                 path={closedLoansRules.WITH_FEES_FINES}
-                types={closingTypes}
+                types={CLOSING_TYPES_WITH_FEES_FINES}
               />
               <FieldArray
                 name="loanExceptions"
