@@ -13,9 +13,14 @@ import {
   closingTypesMap,
   intervalPeriods,
   anonymizingIntervals,
+  closedLoansRules,
 } from '../../../constants';
 
 import css from './AnonymizingTypeSelectContainer.css';
+
+export const afterCloseTranslationKey = (name) => (name === closedLoansRules.WITH_FEES_FINES
+  ? 'ui-circulation.settings.loanHistory.afterCloseOrSuspended'
+  : 'ui-circulation.settings.loanHistory.afterClose');
 
 class AnonymizingTypeSelectContainer extends Component {
   static propTypes = {
@@ -48,7 +53,7 @@ class AnonymizingTypeSelectContainer extends Component {
         />
         <FormattedMessage
           tagName="div"
-          id="ui-circulation.settings.loanHistory.afterClose"
+          id={afterCloseTranslationKey(name)}
           values={{ name: <FormattedMessage id={`ui-circulation.settings.loanHistory.${name}`} /> }}
         />
       </div>
