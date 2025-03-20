@@ -564,5 +564,7 @@
     "settings.index.titleLevelRequests": "Title level requests",
     "settings.title.titleLevelRequests": "Title level requests",
     "settings.titleLevelRequests.paneTitle": "Title level requests",
-    "permission.settings.edit-loan-history": "Settings (Circulation): Can edit loan history"
+    "permission.settings.edit-loan-history": "Settings (Circulation): Can edit loan history",
+    "settings.loanHistory.immediatelyAfterCloseOrSuspended": "Immediately after {name} closes (or is suspended)",
+    "settings.loanHistory.afterCloseOrSuspended": "after {name} closes (or is suspended)"
 }

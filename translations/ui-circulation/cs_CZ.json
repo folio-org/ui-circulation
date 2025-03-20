@@ -564,5 +564,7 @@
     "settings.index.titleLevelRequests": "Žádanky na úrovni názvu",
     "settings.title.titleLevelRequests": "Žádanky na úrovni názvu",
     "settings.titleLevelRequests.paneTitle": "Žádanky na úrovni názvu",
-    "permission.settings.edit-loan-history": "Nastavení (cirkulace): Může upravovat historii výpůjček"
+    "permission.settings.edit-loan-history": "Nastavení (cirkulace): Může upravovat historii výpůjček",
+    "settings.loanHistory.immediatelyAfterCloseOrSuspended": "Bezprostředně po uzavření (nebo pozastavení) {name}",
+    "settings.loanHistory.afterCloseOrSuspended": "po uzavření (nebo pozastavení) {name}"
 }

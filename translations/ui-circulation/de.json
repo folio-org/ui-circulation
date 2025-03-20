@@ -564,5 +564,7 @@
     "settings.index.titleLevelRequests": "Bestandsanfrage auf Titelebene",
     "settings.title.titleLevelRequests": "Bestandsanfragen auf Titelebene",
     "settings.titleLevelRequests.paneTitle": "Bestandsanfragen auf Titelebene",
-    "permission.settings.edit-loan-history": "Einstellungen (Ausleihe): Kann Ausleihhistorie bearbeiten"
+    "permission.settings.edit-loan-history": "Einstellungen (Ausleihe): Kann Ausleihhistorie bearbeiten",
+    "settings.loanHistory.immediatelyAfterCloseOrSuspended": "Immediately after {name} closes (or is suspended)",
+    "settings.loanHistory.afterCloseOrSuspended": "after {name} closes (or is suspended)"
 }
