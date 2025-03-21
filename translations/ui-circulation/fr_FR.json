@@ -564,5 +564,7 @@
     "settings.index.titleLevelRequests": "Réservations au niveau du titre",
     "settings.title.titleLevelRequests": "Réservations au niveau du titre",
     "settings.titleLevelRequests.paneTitle": "Réservations au niveau du titre",
-    "permission.settings.edit-loan-history": "Settings (Circulation): Can edit loan history"
+    "permission.settings.edit-loan-history": "Settings (Circulation): Can edit loan history",
+    "settings.loanHistory.immediatelyAfterCloseOrSuspended": "Immediately after {name} closes (or is suspended)",
+    "settings.loanHistory.afterCloseOrSuspended": "after {name} closes (or is suspended)"
 }
