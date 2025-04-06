@@ -3,6 +3,7 @@
 ## 11.1.0 IN PROGRESS
 
 * Change fee/fine verbiage on Loan Anonymization page. Refs UICIRC-1200.
+* Add "users.collection.get" sub-permission for viewing circulation rules. Refs UICIRC-1225.
 
 ## [11.0.0](https://github.com/folio-org/ui-circulation/tree/v11.0.0) (2024-03-14)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v10.0.1...v11.0.0)
