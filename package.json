@@ -175,7 +175,8 @@
           "inventory-storage.location-units.libraries.collection.get",
           "inventory-storage.locations.collection.get",
           "overdue-fines-policies.collection.get",
-          "lost-item-fees-policies.collection.get"
+          "lost-item-fees-policies.collection.get",
+          "users.collection.get"
         ],
         "visible": true
       },
