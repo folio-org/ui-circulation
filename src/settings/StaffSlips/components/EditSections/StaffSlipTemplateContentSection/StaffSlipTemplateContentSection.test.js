@@ -36,6 +36,7 @@ describe('StaffSlipTemplateContentEditSection', () => {
       previewModalHeader: labelIds.preview,
       tokensList: TokensList,
       printable: true,
+      editAsHtml: false,
     };
 
     expect(Field).toHaveBeenCalledWith(expectedResult, {});
