@@ -19,6 +19,7 @@ jest.mock('@folio/stripes/core', () => {
     stripesShape: {},
     withStripes: (Component) => (props) => <Component {...props} />,
     IfPermission: jest.fn(({ children }) => <div>{children}</div>),
+    IfInterface: jest.fn(({ children }) => <div>{children}</div>),
     TitleManager: jest.fn(({ children }) => <div>{children}</div>),
     useCustomFields: jest.fn(() => []),
     useOkapiKy: jest.fn(),
