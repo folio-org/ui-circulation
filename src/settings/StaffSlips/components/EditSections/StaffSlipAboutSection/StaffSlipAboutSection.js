@@ -2,8 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Field } from 'react-final-form';
 import { FormattedMessage } from 'react-intl';
+import { IfInterface } from '@folio/stripes/core';
 
 import {
+  Checkbox,
   Col,
   KeyValue,
   Row,
@@ -46,6 +48,25 @@ const StaffSlipAboutSection = ({ initialValues, disabled }) => {
           />
         </Col>
       </Row>
+      {/* Version 1.1 of the `staff-slips-storage` interface added the `isRawHtml` field */}
+      <IfInterface name="staff-slips-storage" version="1.1">
+        <Row>
+          <Col
+            data-test-staff-slip-isRawHtml
+            xs={12}
+          >
+            <Field
+              label={<FormattedMessage id="ui-circulation.settings.staffSlips.isRawHtml" />}
+              name="isRawHtml"
+              id="input-staff-slip-isRawHtml"
+              data-testid="staffSlipDescriptionIsRawHtml"
+              component={Checkbox}
+              type="checkbox"
+              disabled={disabled}
+            />
+          </Col>
+        </Row>
+      </IfInterface>
     </div>
   );
 };

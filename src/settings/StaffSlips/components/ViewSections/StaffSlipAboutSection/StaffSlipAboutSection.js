@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
+import { IfInterface } from '@folio/stripes/core';
 
 import {
   Col,
@@ -40,6 +41,19 @@ const StaffSlipAboutSection = ({ staffSlip }) => {
           </div>
         </Col>
       </Row>
+      {/* Version 1.1 of the `staff-slips-storage` interface added the `isRawHtml` field */}
+      <IfInterface name="staff-slips-storage" version="1.1">
+        <Row>
+          <Col xs={12}>
+            <KeyValue
+              label={<FormattedMessage id="ui-circulation.settings.staffSlips.isRawHtml" />}
+              value={staffSlip.isRawHtml ?
+                     <FormattedMessage id="ui-circulation.settings.common.yes" /> :
+                     <FormattedMessage id="ui-circulation.settings.common.no" />}
+            />
+          </Col>
+        </Row>
+      </IfInterface>
     </div>
   );
 };

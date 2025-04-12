@@ -253,6 +253,7 @@
   "settings.staffSlips.new": "New staff slip",
   "settings.staffSlips.display": "Display",
   "settings.staffSlips.description": "Description",
+  "settings.staffSlips.isRawHtml": "Maintained as raw HTML?",
   "settings.staffSlips.preview": "Preview",
   "settings.staffSlips.hold": "Hold",
   "settings.staffSlips.untitledStaffSlip": "Staff slip name",

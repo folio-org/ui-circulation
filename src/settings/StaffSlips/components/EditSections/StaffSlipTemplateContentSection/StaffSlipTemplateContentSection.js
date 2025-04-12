@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {
   injectIntl,
 } from 'react-intl';
-import { Field } from 'react-final-form';
+import { useFormState, Field } from 'react-final-form';
 
 import {
   Col,
@@ -15,6 +15,7 @@ import TokensList from '../../../TokensList';
 import getTokens from '../../../tokens';
 
 const StaffSlipTemplateContentSection = ({ intl }) => {
+  const { values } = useFormState();
   const {
     formatMessage,
     locale,
@@ -32,6 +33,7 @@ const StaffSlipTemplateContentSection = ({ intl }) => {
           previewModalHeader={formatMessage({ id:'ui-circulation.settings.staffSlips.form.previewLabel' })}
           tokensList={TokensList}
           printable
+          editAsHtml={!!values.isRawHtml}
         />
       </Col>
     </Row>
