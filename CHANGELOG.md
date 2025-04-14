@@ -1,5 +1,11 @@
 # Change history for ui-circulation
 
+## [11.0.1](https://github.com/folio-org/ui-circulation/tree/v11.0.1) (2024-04-14)
+[Full Changelog](https://github.com/folio-org/ui-circulation/compare/v11.0.0...v11.0.1)
+
+* Add "users.collection.get" sub-permission for viewing staff-slips. Refs UICIRC-1223.
+* Add "users.collection.get" sub-permission for viewing circulation rules. Refs UICIRC-1225.
+
 ## [11.0.0](https://github.com/folio-org/ui-circulation/tree/v11.0.0) (2024-03-14)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v10.0.1...v11.0.0)
 
