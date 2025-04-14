@@ -226,7 +226,8 @@
         "subPermissions": [
           "settings.circulation.enabled",
           "circulation-storage.staff-slips.collection.get",
-          "circulation-storage.staff-slips.item.get"
+          "circulation-storage.staff-slips.item.get",
+          "users.collection.get"
         ],
         "visible": true
       },
