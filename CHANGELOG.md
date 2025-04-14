@@ -3,9 +3,13 @@
 ## 11.1.0 IN PROGRESS
 
 * Change fee/fine verbiage on Loan Anonymization page. Refs UICIRC-1200.
+* When version 1.1 or higher of the `staff-slips-storage` interface is provided, display and maintain the new `isRawHtml` field; when that field is set for a staff slip, request that raw HTML is used by the template editor. Fixes UICIRC-1226.
+
+## [11.0.1](https://github.com/folio-org/ui-circulation/tree/v11.0.1) (2024-04-14)
+[Full Changelog](https://github.com/folio-org/ui-circulation/compare/v11.0.0...v11.0.1)
+
 * Add "users.collection.get" sub-permission for viewing staff-slips. Refs UICIRC-1223.
 * Add "users.collection.get" sub-permission for viewing circulation rules. Refs UICIRC-1225.
-* When version 1.1 or higher of the `staff-slips-storage` interface is provided, display and maintain the new `isRawHtml` field; when that field is set for a staff slip, request that raw HTML is used by the template editor. Fixes UICIRC-1226.
 
 ## [11.0.0](https://github.com/folio-org/ui-circulation/tree/v11.0.0) (2024-03-14)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v10.0.1...v11.0.0)
