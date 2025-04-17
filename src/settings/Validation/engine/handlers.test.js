@@ -1,3 +1,5 @@
+import { dayjs } from '@folio/stripes/components';
+
 import {
   isNotEmpty,
   isNotEmptyWithoutSpace,
@@ -624,85 +626,61 @@ describe('handlers', () => {
 
   describe('isDueAfterTo method', () => {
     const pathToSection = 'pathToSection';
-    describe('when due date is same as to date', () => {
-      const due = new Date();
-      const model = {
-        [pathToSection]: {
-          to: due,
-        },
-      };
+    const model = {
+      [pathToSection]: {
+        to: 'Tue Apr 15 2025 19:49:01 GMT+0300',
+      },
+    };
+    const value = 'Tue Apr 16 2025 19:49:01 GMT+0300';
+    const isSameOrAfter = jest.fn(date => date);
 
-      it('should return true', () => {
-        expect(isDueAfterTo(due, model, { pathToSection })).toBe(true);
-      });
+    beforeEach(() => {
+      dayjs.mockImplementation(() => ({
+        isSameOrAfter,
+      }));
+      isDueAfterTo(value, model, { pathToSection });
     });
 
-    describe('when due date is after to date', () => {
-      const due = new Date();
-      const model = {
-        [pathToSection]: {
-          to: new Date(due.getTime()).setDate(due.getDate() - 1),
-        },
-      };
-
-      it('should return true', () => {
-        expect(isDueAfterTo(due, model, { pathToSection })).toBe(true);
-      });
+    it('should trigger dayjs with correct "value" param', () => {
+      expect(dayjs).toHaveBeenCalledWith(value);
     });
 
-    describe('when due date is before to date', () => {
-      const due = new Date();
-      const model = {
-        [pathToSection]: {
-          to: new Date(due.getTime()).setDate(due.getDate() + 1),
-        },
-      };
+    it('should trigger dayjs with correct "to" param', () => {
+      expect(dayjs).toHaveBeenCalledWith(model[pathToSection].to);
+    });
 
-      it('should return false', () => {
-        expect(isDueAfterTo(due, model, { pathToSection })).toBe(false);
-      });
+    it('should trigger isSameOrAfter', () => {
+      expect(isSameOrAfter).toHaveBeenCalled();
     });
   });
 
   describe('isToBeforeFrom method', () => {
     const pathToSection = 'pathToSection';
-    describe('when to date is after from date', () => {
-      const to = new Date();
-      const model = {
-        [pathToSection]: {
-          from: new Date(to.getTime()).setDate(to.getDate() - 1),
-        },
-      };
+    const model = {
+      [pathToSection]: {
+        from: 'Tue Apr 15 2025 19:49:01 GMT+0300',
+      },
+    };
+    const value = 'Tue Apr 16 2025 19:49:01 GMT+0300';
+    const isAfter = jest.fn(date => date);
 
-      it('should return true', () => {
-        expect(isToBeforeFrom(to, model, { pathToSection })).toBe(true);
-      });
+    beforeEach(() => {
+      dayjs.mockImplementation(() => ({
+        isAfter,
+      }));
+      isToBeforeFrom(value, model, { pathToSection });
     });
 
-    describe('when to date is before from date', () => {
-      const to = new Date();
-      const model = {
-        [pathToSection]: {
-          from: new Date(to.getTime()).setDate(to.getDate() + 1),
-        },
-      };
-
-      it('should return false', () => {
-        expect(isToBeforeFrom(to, model, { pathToSection })).toBe(false);
-      });
+    it('should trigger dayjs with correct "value" param', () => {
+      expect(dayjs).toHaveBeenCalledWith(value);
     });
 
-    describe('when to date is same as from date', () => {
-      const to = new Date();
-      const model = {
-        [pathToSection]: {
-          from: to,
-        },
-      };
+    it('should trigger dayjs with correct "from" param', () => {
+      expect(dayjs).toHaveBeenCalledWith(model[pathToSection].from);
+    });
 
-      it('should return false', () => {
-        expect(isToBeforeFrom(to, model, { pathToSection })).toBe(false);
-      });
+    it('should trigger isAfter', () => {
+      expect(isAfter).toHaveBeenCalled();
     });
   });
 

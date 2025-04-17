@@ -1,8 +1,9 @@
-import moment from 'moment';
 import {
   isEmpty,
   uniqueId,
 } from 'lodash';
+
+import { dayjs } from '@folio/stripes/components';
 
 import Schedule from './Schedule';
 import { Metadata } from '../common';
@@ -32,8 +33,8 @@ export default class FixedDueDateSchedule {
       const s1 = this.schedules[i];
       for (let j = i + 1; j < this.schedules.length; j++) {
         const s2 = this.schedules[j];
-        const condA = (s1.from && s2.to) ? moment(s1.from).isBefore(s2.to) : false;
-        const condB = (s1.to && s2.from) ? moment(s1.to).isAfter(s2.from) : false;
+        const condA = (s1.from && s2.to) ? dayjs(s1.from).isBefore(s2.to) : false;
+        const condB = (s1.to && s2.from) ? dayjs(s1.to).isAfter(s2.from) : false;
         if (condA && condB) {
           overlaps.num1 = i + 1;
           overlaps.num2 = j + 1;

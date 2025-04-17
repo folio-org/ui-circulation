@@ -7,7 +7,7 @@ import {
   isString,
 } from 'lodash';
 
-import moment from 'moment';
+import { dayjs } from '@folio/stripes/components';
 
 import LostItemFeePolicy from '../../Models/LostItemFeePolicy';
 
@@ -122,15 +122,15 @@ export const hasChargeAmountItemSystemSelected = (value, model) => {
 };
 
 export const isToBeforeFrom = (value, model, { pathToSection }) => {
-  const to = moment(value);
-  const from = moment(get(model, `${pathToSection}.from`));
+  const to = dayjs(value);
+  const from = dayjs(get(model, `${pathToSection}.from`));
 
   return to.isAfter(from);
 };
 
 export const isDueAfterTo = (value, model, { pathToSection }) => {
-  const due = moment(value);
-  const to = moment(get(model, `${pathToSection}.to`));
+  const due = dayjs(value);
+  const to = dayjs(get(model, `${pathToSection}.to`));
 
   return due.isSameOrAfter(to);
 };

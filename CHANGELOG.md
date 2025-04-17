@@ -4,6 +4,7 @@
 
 * Change fee/fine verbiage on Loan Anonymization page. Refs UICIRC-1200.
 * When version 1.1 or higher of the `staff-slips-storage` interface is provided, display and maintain the new `isRawHtml` field; when that field is set for a staff slip, request that raw HTML is used by the template editor. Fixes UICIRC-1226.
+* Replace moment with day.js. Refs UICIRC-1194.
 
 ## [11.0.1](https://github.com/folio-org/ui-circulation/tree/v11.0.1) (2024-04-14)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v11.0.0...v11.0.1)

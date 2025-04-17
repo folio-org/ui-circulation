@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import moment from 'moment-timezone';
 import { Field } from 'react-final-form';
 import {
   FormattedMessage,
@@ -12,6 +11,7 @@ import {
   Datepicker,
   IconButton,
   Row,
+  dayjs,
 } from '@folio/stripes/components';
 
 import { DATE_FORMAT } from '../../../../../../constants';
@@ -22,13 +22,13 @@ export const parseDate = (date, timezone, isEndOfDay) => {
     return date;
   }
 
-  let momentDate = moment.tz(date, timezone);
+  let dayjsDate = dayjs.tz(date, timezone);
 
   if (isEndOfDay) {
-    momentDate = momentDate.endOf('day');
+    dayjsDate = dayjsDate.endOf('day');
   }
 
-  return momentDate.format();
+  return dayjsDate.format();
 };
 
 class ScheduleCard extends React.Component {

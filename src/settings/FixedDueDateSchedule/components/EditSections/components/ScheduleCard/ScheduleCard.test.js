@@ -4,24 +4,18 @@ import {
   within,
   fireEvent,
 } from '@folio/jest-config-stripes/testing-library/react';
-import moment from 'moment-timezone';
 
 import { FormattedMessage } from 'react-intl';
 import {
   Datepicker,
   IconButton,
+  dayjs,
 } from '@folio/stripes/components';
 import { Field } from 'react-final-form';
 import { DATE_FORMAT } from '../../../../../../constants';
 import ScheduleCard, {
   parseDate,
 } from './ScheduleCard';
-
-jest.mock('moment-timezone', () => ({
-  tz: jest.fn(),
-  endOf: jest.fn(),
-  format: jest.fn(),
-}));
 
 IconButton.mockImplementation(({ onClick }) => {
   return (
@@ -141,6 +135,11 @@ describe('ScheduleCard', () => {
   });
 
   describe('parseDate', () => {
+    dayjs.tz = jest.fn(() => ({
+      endOf: jest.fn(),
+      format: jest.fn(),
+    }));
+
     describe('when input date is empty', () => {
       const testDate = '';
       const testParseDate = (isEndOfDay) => {
@@ -164,13 +163,13 @@ describe('ScheduleCard', () => {
       it('should return parsed date start of day', () => {
         const testFormattedStartOfDay = 'testFormattedStartOfDay';
 
-        moment.tz.mockReturnValue({
+        dayjs.tz.mockReturnValue({
           format: jest.fn(() => testFormattedStartOfDay),
         });
 
         const resultValue = parseDate(testDate, testTimeZone);
 
-        expect(moment.tz).toHaveBeenCalledWith(testDate, testTimeZone);
+        expect(dayjs.tz).toHaveBeenCalledWith(testDate, testTimeZone);
         expect(resultValue).toBe(testFormattedStartOfDay);
       });
 
@@ -185,11 +184,11 @@ describe('ScheduleCard', () => {
           endOf: jest.fn(() => endOfMethodMockedReturnedValue),
         };
 
-        moment.tz.mockReturnValue(tzMethodMockedReturnedValue);
+        dayjs.tz.mockReturnValue(tzMethodMockedReturnedValue);
 
         const resultValue = parseDate(testDate, testTimeZone, true);
 
-        expect(moment.tz).toHaveBeenCalledWith(testDate, testTimeZone);
+        expect(dayjs.tz).toHaveBeenCalledWith(testDate, testTimeZone);
         expect(tzMethodMockedReturnedValue.endOf).toHaveBeenCalledWith('day');
         expect(resultValue).toBe(testFormattedEndOfDay);
       });
