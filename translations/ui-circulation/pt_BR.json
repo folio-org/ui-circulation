@@ -566,5 +566,6 @@
     "settings.titleLevelRequests.paneTitle": "Requisições de nível de título",
     "permission.settings.edit-loan-history": "Configurações (Circulação): Pode editar o histórico de empréstimos",
     "settings.loanHistory.immediatelyAfterCloseOrSuspended": "Imediatamente após o fechamento (ou suspensão) de {name}",
-    "settings.loanHistory.afterCloseOrSuspended": "após fechamento (ou suspensão) de {name}"
+    "settings.loanHistory.afterCloseOrSuspended": "após fechamento (ou suspensão) de {name}",
+    "settings.staffSlips.isRawHtml": "Manter como HTML bruto?"
 }
