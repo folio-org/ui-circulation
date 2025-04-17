@@ -565,6 +565,7 @@
     "settings.title.titleLevelRequests": "标题/品种级请求",
     "settings.titleLevelRequests.paneTitle": "标题/品种级请求",
     "permission.settings.edit-loan-history": "设置 : 流通 )  : 可以编辑借阅历史",
-    "settings.loanHistory.immediatelyAfterCloseOrSuspended": "Immediately after {name} closes (or is suspended)",
-    "settings.loanHistory.afterCloseOrSuspended": "after {name} closes (or is suspended)"
+    "settings.loanHistory.immediatelyAfterCloseOrSuspended": "{name}关闭（或暂停）后立即",
+    "settings.loanHistory.afterCloseOrSuspended": "{name}关闭（或暂停）后",
+    "settings.staffSlips.isRawHtml": "Maintained as raw HTML?"
 }
