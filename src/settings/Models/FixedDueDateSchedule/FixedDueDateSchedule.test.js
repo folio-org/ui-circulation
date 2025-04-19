@@ -1,4 +1,4 @@
-import moment from 'moment';
+import { dayjs } from '@folio/stripes/components';
 
 import { Metadata } from '../common';
 import FixedDueDateSchedule from './FixedDueDateSchedule';
@@ -37,14 +37,14 @@ describe('FixedDueDateSchedule', () => {
 
   describe('when props were passed', () => {
     const firstTestSchedule = {
-      from: moment.utc().subtract(2, 'days'),
-      to: moment().utc().add(2, 'days'),
-      due: moment.utc().add(3, 'days'),
+      from: 'Tue Apr 17 2025 21:08:59 GMT+0300',
+      to: 'Tue Apr 18 2025 21:08:59 GMT+0300',
+      due: 'Tue Apr 19 2025 21:08:59 GMT+0300',
     };
     const secondTestSchedule = {
-      from: moment.utc().add(3, 'days'),
-      to: moment().utc().add(5, 'days'),
-      due: moment.utc().add(6, 'days'),
+      from: 'Tue Apr 10 2025 21:08:59 GMT+0300',
+      to: 'Tue Apr 11 2025 21:08:59 GMT+0300',
+      due: 'Tue Apr 12 2025 21:08:59 GMT+0300',
     };
     const validScheduleProps = {
       id: 'testId',
@@ -61,7 +61,16 @@ describe('FixedDueDateSchedule', () => {
       ],
     };
 
+    afterEach(() => {
+      jest.clearAllMocks();
+    });
+
     describe('when all props are valid', () => {
+      dayjs.mockImplementation(() => ({
+        isBefore: jest.fn(() => true),
+        isAfter: jest.fn(() => false),
+      }));
+
       const scheduleInstance = new FixedDueDateSchedule(validScheduleProps);
 
       it('should have correct values', () => {
@@ -92,10 +101,17 @@ describe('FixedDueDateSchedule', () => {
     });
 
     describe('when instance contains schedules with overlaps', () => {
+      beforeEach(() => {
+        dayjs.mockImplementation(() => ({
+          isBefore: jest.fn(() => true),
+          isAfter: jest.fn(() => true),
+        }));
+      });
+
       const thirdTestSchedule = {
-        from: moment.utc(),
-        to: moment().utc().add(2, 'days'),
-        due: moment.utc().add(3, 'days'),
+        from: 'Tue Apr 22 2025 21:08:59 GMT+0300',
+        to: 'Tue Apr 23 2025 21:08:59 GMT+0300',
+        due: 'Tue Apr 24 2025 21:08:59 GMT+0300',
       };
       const scheduleInstance = new FixedDueDateSchedule({
         ...validScheduleProps,
@@ -113,8 +129,8 @@ describe('FixedDueDateSchedule', () => {
 
     describe('when instance contains invalid schedules', () => {
       const thirdTestSchedule = {
-        from: moment.utc(),
-        to: moment().utc().add(2, 'days'),
+        from: '',
+        to: 'Tue Apr 23 2025 21:08:59 GMT+0300',
       };
       const scheduleInstance = new FixedDueDateSchedule({
         ...validScheduleProps,
