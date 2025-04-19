@@ -249,8 +249,8 @@
     "settings.loanHistory.interval": "Intervall",
     "settings.loanHistory.loan": "Ausleihe",
     "settings.loanHistory.feeFine": "Forderungen",
-    "settings.loanHistory.immediatelyAfterClose": "Unmittelbar nach dem Schließen von {name}",
-    "settings.loanHistory.afterClose": "Nach dem Schließen von {name}",
+    "settings.loanHistory.immediatelyAfterClose": "Unmittelbar nachdem {name} geschlossen wurde",
+    "settings.loanHistory.afterClose": "Nachdem {name} geschlossen wurde",
     "settings.loanHistory.selectPaymentMethod": "Zahlungsart auswählen",
     "settings.loanHistory.exceptionSectionHeader": "Ausnahme für Zahlungsart",
     "settings.loanHistory.paymentMethodLabel": "Einstellung für Zahlungsart",
@@ -288,7 +288,7 @@
     "settings.index.feesFines": "Forderungen",
     "settings.index.patronNoticesSettings": "Benachrichtigungen Benutzende",
     "settings.index.request": "Bestandsanfragen",
-    "settings.validate.greaterThanOrEqualToZero": "Wert muss größer oder gleich Null sein",
+    "settings.validate.greaterThanOrEqualToZero": "Wert muss größer oder gleich 0 sein",
     "settings.finePolicy.entryLabel": "Gebührenrichtlinien für überfällige Exemplare",
     "settings.finePolicy.paneTitle": "Gebührenrichtlinien für überfällige Exemplare",
     "settings.finePolicy.overdueFine": "Säumnisgebühr für überfälliges Exemplar",
@@ -565,6 +565,7 @@
     "settings.title.titleLevelRequests": "Bestandsanfragen auf Titelebene",
     "settings.titleLevelRequests.paneTitle": "Bestandsanfragen auf Titelebene",
     "permission.settings.edit-loan-history": "Einstellungen (Ausleihe): Kann Ausleihhistorie bearbeiten",
-    "settings.loanHistory.immediatelyAfterCloseOrSuspended": "Immediately after {name} closes (or is suspended)",
-    "settings.loanHistory.afterCloseOrSuspended": "after {name} closes (or is suspended)"
+    "settings.loanHistory.immediatelyAfterCloseOrSuspended": "Unmittelbar nachdem {name} geschlossen (oder ausgesetzt) wurde",
+    "settings.loanHistory.afterCloseOrSuspended": "Nachdem {name} geschlossen (oder ausgesetzt) wurde",
+    "settings.staffSlips.isRawHtml": "Maintained as raw HTML?"
 }

@@ -561,10 +561,11 @@
     "permission.settings.view-notice-templates": "Settings (Circulation): Can view patron notice templates",
     "permission.settings.view-request-policies": "Settings (Circulation): Can view request policies",
     "permission.settings.view-cancellation-reasons": "Settings (Circulation): Can view cancellation reasons",
-    "settings.index.titleLevelRequests": "Title level requests",
-    "settings.title.titleLevelRequests": "Title level requests",
-    "settings.titleLevelRequests.paneTitle": "Title level requests",
+    "settings.index.titleLevelRequests": "Rezerwacje tytułu",
+    "settings.title.titleLevelRequests": "Rezerwacje tytułu",
+    "settings.titleLevelRequests.paneTitle": "Rezerwacje tytułu",
     "permission.settings.edit-loan-history": "Settings (Circulation): Can edit loan history",
     "settings.loanHistory.immediatelyAfterCloseOrSuspended": "Natychmiast po {name} zamknięciu (lub zawieszeniu)",
-    "settings.loanHistory.afterCloseOrSuspended": "Po {name} zamknięciu (lub zawieszeniu)"
+    "settings.loanHistory.afterCloseOrSuspended": "Po {name} zamknięciu (lub zawieszeniu)",
+    "settings.staffSlips.isRawHtml": "Maintained as raw HTML?"
 }
