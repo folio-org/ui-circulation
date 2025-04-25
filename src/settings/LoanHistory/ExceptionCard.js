@@ -24,7 +24,9 @@ import css from './ExceptionCard.css';
 
 class ExceptionCard extends Component {
   static propTypes = {
-    intl: PropTypes.object,
+    intl: PropTypes.shape({
+      formatMessage: PropTypes.func.isRequired,
+    }).isRequired,
     pathToException: PropTypes.string.isRequired,
     paymentMethods: PropTypes.arrayOf(PropTypes.shape({
       value: PropTypes.string.isRequired,

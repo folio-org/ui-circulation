@@ -47,7 +47,9 @@ TLRPatronNotices.propTypes = {
   stripes: PropTypes.shape({
     connect: PropTypes.func.isRequired,
   }).isRequired,
-  intl: PropTypes.object.isRequired,
+  intl: PropTypes.shape({
+    formatMessage: PropTypes.func.isRequired,
+  }).isRequired,
 };
 
 export default withStripes(injectIntl(TLRPatronNotices));

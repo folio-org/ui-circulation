@@ -11,7 +11,7 @@ import Period from '../Period';
 import AnonymizingTypeSelectContainer, {
   afterCloseTranslationKey,
 } from './AnonymizingTypeSelectContainer';
-import {closedLoansRules} from "../../../constants";
+import { closedLoansRules } from '../../../constants';
 
 Field.mockImplementation(() => null);
 

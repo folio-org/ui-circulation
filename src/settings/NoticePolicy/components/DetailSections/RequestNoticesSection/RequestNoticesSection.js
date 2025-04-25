@@ -17,7 +17,12 @@ import {
 
 class RequestNoticesSection extends React.Component {
   static propTypes = {
-    policy: PropTypes.object.isRequired,
+    policy: PropTypes.shape({
+      requestNotices: PropTypes.arrayOf(PropTypes.shape({
+        format: PropTypes.string,
+        templateId: PropTypes.string,
+      })),
+    }).isRequired,
     templates: PropTypes.arrayOf(PropTypes.shape({
       value: PropTypes.string.isRequired,
       label: PropTypes.string.isRequired,

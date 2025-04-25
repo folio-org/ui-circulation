@@ -34,7 +34,11 @@ const propTypes = {
   onChange: PropTypes.func.isRequired,
 
   // collection of 'code hint' data: all the possible named values/selectors from all of the system categories (typeGroups)
-  completionLists: PropTypes.object,
+  completionLists: PropTypes.shape({
+    loanPolicies: PropTypes.arrayOf(PropTypes.string),
+    loanTypes: PropTypes.arrayOf(PropTypes.string),
+    lostItemFeePolicies: PropTypes.arrayOf(PropTypes.string),
+  }),
 
   /*
     values that could be applied to selections of typeGroups:
@@ -44,7 +48,12 @@ const propTypes = {
     }
     A value of this should be applied for each typegroup that's expected to be highlighted by the editor.
   */
-  typeMapping: PropTypes.object.isRequired,
+  typeMapping: PropTypes.shape({
+    a: PropTypes.string,
+    b: PropTypes.string,
+    c: PropTypes.string,
+    g: PropTypes.string,
+  }).isRequired,
 
   /*
     values that could be applied to selections of policies:
@@ -54,7 +63,13 @@ const propTypes = {
       'n': 'Notice policies',
     }
   */
-  policyMapping: PropTypes.object.isRequired,
+  policyMapping: PropTypes.shape({
+    i: PropTypes.string,
+    l: PropTypes.string,
+    n: PropTypes.string,
+    o: PropTypes.string,
+    r: PropTypes.string,
+  }).isRequired,
   code: PropTypes.string, // the code that appears in the editor
   errors: PropTypes.arrayOf(
     PropTypes.shape({
@@ -64,7 +79,9 @@ const propTypes = {
   ),
   showAssist: PropTypes.bool,
   filter: PropTypes.string,
-  intl: PropTypes.object.isRequired,
+  intl: PropTypes.shape({
+    formatMessage: PropTypes.func.isRequired,
+  }).isRequired,
   stripes: stripesShape.isRequired,
 };
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import Proptypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
 import { Field } from 'react-final-form';
 import { memoize } from 'lodash';
@@ -108,8 +108,15 @@ const PatronNoticeAboutSection = ({ initialValues, okapi, intl }) => {
   );
 };
 PatronNoticeAboutSection.propTypes = {
-  initialValues: Proptypes.object.isRequired,
-  okapi: Proptypes.object.isRequired,
-  intl: Proptypes.object.isRequired,
+  initialValues: PropTypes.shape({
+    id: PropTypes.string,
+    active: PropTypes.bool,
+  }).isRequired,
+  okapi: PropTypes.shape({
+    url: PropTypes.string,
+  }).isRequired,
+  intl: PropTypes.shape({
+    formatMessage: PropTypes.func.isRequired,
+  }).isRequired,
 };
 export default injectIntl(PatronNoticeAboutSection);

@@ -13,6 +13,7 @@ import { TokensSection } from '@folio/stripes-template-editor';
 
 import {
   patronNoticeCategoryIds,
+  TOKEN_PROP_TYPES,
 } from '../../../constants';
 
 export const TOKEN_SECTION = {
@@ -36,11 +37,13 @@ export const isDisabledLoop = (selectedCategory, tag, disableLoop) => (
 class TokensList extends React.Component {
   static propTypes = {
     selectedCategory: PropTypes.string.isRequired,
-    tokens: PropTypes.object.isRequired,
+    tokens: TOKEN_PROP_TYPES.isRequired,
     onLoopSelect: PropTypes.func.isRequired,
     onSectionInit: PropTypes.func.isRequired,
     onTokenSelect: PropTypes.func.isRequired,
-    intl: PropTypes.object.isRequired,
+    intl: PropTypes.shape({
+      formatMessage: PropTypes.func.isRequired,
+    }).isRequired,
   };
 
   render() {

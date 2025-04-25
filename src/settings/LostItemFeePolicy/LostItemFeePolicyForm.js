@@ -39,11 +39,19 @@ class LostItemFeePolicyForm extends React.Component {
     stripes: stripesShape.isRequired,
     pristine: PropTypes.bool.isRequired,
     submitting: PropTypes.bool.isRequired,
-    initialValues: PropTypes.object,
-    form: PropTypes.object.isRequired,
+    initialValues: PropTypes.shape({
+      id: PropTypes.string,
+      name: PropTypes.string,
+    }),
+    form: PropTypes.shape({
+      getState: PropTypes.func.isRequired,
+      change: PropTypes.func.isRequired,
+    }).isRequired,
     handleSubmit: PropTypes.func.isRequired,
     onCancel: PropTypes.func.isRequired,
-    intl: PropTypes.object.isRequired,
+    intl: PropTypes.shape({
+      formatMessage: PropTypes.func.isRequired,
+    }).isRequired,
   };
 
   static defaultProps = {

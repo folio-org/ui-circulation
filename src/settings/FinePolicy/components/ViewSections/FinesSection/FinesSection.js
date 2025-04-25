@@ -137,7 +137,21 @@ const FinesSection = (props) => {
 };
 
 FinesSection.propTypes = {
-  policy: PropTypes.object.isRequired,
+  policy: PropTypes.shape({
+    overdueFine: PropTypes.shape({
+      intervalId: PropTypes.string,
+      quantity: PropTypes.number,
+    }),
+    overdueRecallFine: PropTypes.shape({
+      intervalId: PropTypes.string,
+      quantity: PropTypes.number,
+    }),
+    maxOverdueRecallFine: PropTypes.number,
+    gracePeriodRecall: PropTypes.bool,
+    forgiveOverdueFine: PropTypes.bool,
+    maxOverdueFine: PropTypes.number,
+    countClosed: PropTypes.bool,
+  }).isRequired,
   getCheckboxValue: PropTypes.func.isRequired,
 };
 

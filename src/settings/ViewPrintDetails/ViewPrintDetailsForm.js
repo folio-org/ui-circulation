@@ -112,11 +112,16 @@ const ViewPrintDetailsForm = ({
 
 ViewPrintDetailsForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
-  intl: PropTypes.object.isRequired,
+  intl: PropTypes.shape({
+    formatMessage: PropTypes.func.isRequired,
+  }).isRequired,
   pristine: PropTypes.bool.isRequired,
   submitting: PropTypes.bool.isRequired,
   paneTitle: PropTypes.string.isRequired,
-  form: PropTypes.object.isRequired,
+  form: PropTypes.shape({
+    change: PropTypes.func.isRequired,
+    getFieldState: PropTypes.func.isRequired,
+  }).isRequired,
 };
 
 export default injectIntl(stripesFinalForm({

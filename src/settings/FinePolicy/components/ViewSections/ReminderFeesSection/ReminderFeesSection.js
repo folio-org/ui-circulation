@@ -123,8 +123,21 @@ const ReminderFeesSection = (props) => {
 };
 
 ReminderFeesSection.propTypes = {
-  policy: PropTypes.object.isRequired,
-  noticeTemplates: PropTypes.arrayOf(PropTypes.object),
+  policy: PropTypes.shape({
+    allowRenewalOfItemsWithReminderFees: PropTypes.bool,
+    clearPatronBlockWhenPaid: PropTypes.bool,
+    countClosed: PropTypes.bool,
+    ignoreGracePeriodHolds: PropTypes.bool,
+    ignoreGracePeriodRecall: PropTypes.bool,
+    reminderSchedule: PropTypes.arrayOf(PropTypes.shape({
+      interval: PropTypes.number,
+      reminderFee: PropTypes.number,
+      noticeFormat: PropTypes.string,
+    })),
+  }).isRequired,
+  noticeTemplates: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string,
+  })),
   getCheckboxValue: PropTypes.func.isRequired,
 };
 

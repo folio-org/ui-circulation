@@ -183,13 +183,108 @@ export class CirculationRules extends React.Component {
   });
 
   static propTypes = {
-    resources: PropTypes.object.isRequired,
+    resources: PropTypes.shape({
+      patronGroups: PropTypes.shape({
+        records: PropTypes.arrayOf(PropTypes.shape({
+          id: PropTypes.string,
+          group: PropTypes.string,
+        })),
+        isPending: PropTypes.bool,
+      }),
+      materialTypes: PropTypes.shape({
+        records: PropTypes.arrayOf(PropTypes.shape({
+          id: PropTypes.string,
+          name: PropTypes.string,
+        })),
+        isPending: PropTypes.bool,
+      }),
+      loanTypes: PropTypes.shape({
+        records: PropTypes.arrayOf(PropTypes.shape({
+          id: PropTypes.string,
+          name: PropTypes.string,
+        })),
+        isPending: PropTypes.bool,
+      }),
+      loanPolicies: PropTypes.shape({
+        records: PropTypes.arrayOf(PropTypes.shape({
+          id: PropTypes.string,
+          name: PropTypes.string,
+        })),
+        isPending: PropTypes.bool,
+      }),
+      noticePolicies: PropTypes.shape({
+        records: PropTypes.arrayOf(PropTypes.shape({
+          id: PropTypes.string,
+          name: PropTypes.string,
+        })),
+        isPending: PropTypes.bool,
+      }),
+      requestPolicies: PropTypes.shape({
+        records: PropTypes.arrayOf(PropTypes.shape({
+          id: PropTypes.string,
+          name: PropTypes.string,
+        })),
+        isPending: PropTypes.bool,
+      }),
+      overdueFinePolicies: PropTypes.shape({
+        records: PropTypes.arrayOf(PropTypes.shape({
+          id: PropTypes.string,
+          name: PropTypes.string,
+        })),
+        isPending: PropTypes.bool,
+      }),
+      lostItemFeePolicies: PropTypes.shape({
+        records: PropTypes.arrayOf(PropTypes.shape({
+          id: PropTypes.string,
+          name: PropTypes.string,
+        })),
+        isPending: PropTypes.bool,
+      }),
+      institutions: PropTypes.shape({
+        records: PropTypes.arrayOf(PropTypes.shape({
+          id: PropTypes.string,
+          name: PropTypes.string,
+        })),
+        isPending: PropTypes.bool,
+      }),
+      campuses: PropTypes.shape({
+        records: PropTypes.arrayOf(PropTypes.shape({
+          id: PropTypes.string,
+          name: PropTypes.string,
+        })),
+        isPending: PropTypes.bool,
+      }),
+      libraries: PropTypes.shape({
+        records: PropTypes.arrayOf(PropTypes.shape({
+          id: PropTypes.string,
+          name: PropTypes.string,
+        })),
+        isPending: PropTypes.bool,
+      }),
+      locations: PropTypes.shape({
+        records: PropTypes.arrayOf(PropTypes.shape({
+          id: PropTypes.string,
+          name: PropTypes.string,
+        })),
+        isPending: PropTypes.bool,
+      }),
+      circulationRules: PropTypes.shape({
+        records: PropTypes.arrayOf(PropTypes.shape({
+          rulesAsText: PropTypes.string,
+          metadata: PropTypes.shape({
+            createdDate: PropTypes.string,
+          }),
+        })),
+      }),
+    }).isRequired,
     mutator: PropTypes.shape({
       circulationRules: PropTypes.shape({
         PUT: PropTypes.func.isRequired
       })
     }),
-    intl: PropTypes.object.isRequired,
+    intl: PropTypes.shape({
+      formatMessage: PropTypes.func.isRequired,
+    }).isRequired,
   };
 
   constructor(props) {

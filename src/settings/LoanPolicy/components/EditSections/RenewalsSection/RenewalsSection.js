@@ -21,8 +21,17 @@ import {
 
 class RenewalsSection extends React.Component {
   static propTypes = {
-    intl: PropTypes.object,
-    policy: PropTypes.object.isRequired,
+    intl: PropTypes.shape({
+      formatMessage: PropTypes.func.isRequired,
+    }).isRequired,
+    policy: PropTypes.shape({
+      isLoanable: PropTypes.func,
+      isProfileRolling: PropTypes.func,
+      isRenewable: PropTypes.func,
+      isDifferentPeriod: PropTypes.func,
+      isUnlimitedRenewals: PropTypes.func,
+      isProfileFixed: PropTypes.func,
+    }).isRequired,
     schedules: PropTypes.arrayOf(PropTypes.node).isRequired,
     change: PropTypes.func.isRequired,
   };

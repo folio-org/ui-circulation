@@ -110,12 +110,21 @@ StaffSlipForm.propTypes = {
     hasPerm: PropTypes.func.isRequired,
     connect:PropTypes.func,
   }).isRequired,
-  initialValues: PropTypes.object,
+  initialValues: PropTypes.shape({
+    id: PropTypes.string,
+    name: PropTypes.string,
+    metadata: PropTypes.shape({
+      createdDate: PropTypes.string,
+    }),
+  }),
   handleSubmit: PropTypes.func.isRequired,
   onCancel: PropTypes.func,
   pristine: PropTypes.bool,
   submitting: PropTypes.bool,
-  intl: PropTypes.object.isRequired,
+  intl: PropTypes.shape({
+    formatMessage: PropTypes.func.isRequired,
+    locale: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default stripesFinalForm({

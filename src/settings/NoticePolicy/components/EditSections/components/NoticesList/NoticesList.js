@@ -14,8 +14,18 @@ import css from './NoticesList.css';
 
 class NoticesList extends React.Component {
   static propTypes = {
-    fields: PropTypes.object.isRequired,
-    policy: PropTypes.object.isRequired,
+    fields: PropTypes.shape({
+      push: PropTypes.func,
+      remove: PropTypes.func,
+      map: PropTypes.func,
+    }).isRequired,
+    policy: PropTypes.shape({
+      id: PropTypes.string,
+      name: PropTypes.string,
+      loanNotices: PropTypes.arrayOf(PropTypes.shape({
+        templateId: PropTypes.string,
+      })),
+    }).isRequired,
     sectionKey: PropTypes.string.isRequired,
     templates: PropTypes.arrayOf(PropTypes.shape({
       value: PropTypes.string.isRequired,

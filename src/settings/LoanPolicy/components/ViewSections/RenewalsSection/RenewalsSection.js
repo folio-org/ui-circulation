@@ -152,13 +152,20 @@ const RenewalsSection = (props) => {
 
 RenewalsSection.propTypes = {
   isVisible: PropTypes.bool.isRequired,
-  policy: PropTypes.object.isRequired,
+  policy: PropTypes.shape({
+    isProfileRolling: PropTypes.func,
+    isRenewable: PropTypes.func,
+    isDifferentPeriod: PropTypes.func,
+    isUnlimitedRenewals: PropTypes.func,
+  }).isRequired,
   getValue: PropTypes.func.isRequired,
   getDropdownValue: PropTypes.func.isRequired,
   getPeriodValue: PropTypes.func.isRequired,
   getCheckboxValue: PropTypes.func.isRequired,
   getScheduleValue: PropTypes.func.isRequired,
-  intl: PropTypes.object.isRequired,
+  intl: PropTypes.shape({
+    formatMessage: PropTypes.func.isRequired,
+  }).isRequired,
 };
 
 export default injectIntl(RenewalsSection);

@@ -176,10 +176,26 @@ const PatronNoticeForm = (props) => {
 };
 
 PatronNoticeForm.propTypes = {
-  intl: PropTypes.object.isRequired,
-  okapi: PropTypes.object.isRequired,
-  initialValues: PropTypes.object,
-  form: PropTypes.object.isRequired,
+  intl: PropTypes.shape({
+    formatMessage: PropTypes.func.isRequired,
+    locale: PropTypes.string.isRequired,
+  }).isRequired,
+  okapi: PropTypes.shape({
+    url: PropTypes.string,
+  }).isRequired,
+  initialValues: PropTypes.shape({
+    id: PropTypes.string,
+    name: PropTypes.string,
+    metadata: PropTypes.shape({
+      createdDate: PropTypes.string,
+    }),
+    predefined: PropTypes.bool,
+  }),
+  form: PropTypes.shape({
+    change: PropTypes.func.isRequired,
+    getFieldState: PropTypes.func.isRequired,
+    getState: PropTypes.func.isRequired,
+  }).isRequired,
   pristine: PropTypes.bool.isRequired,
   submitting: PropTypes.bool.isRequired,
   handleSubmit: PropTypes.func.isRequired,

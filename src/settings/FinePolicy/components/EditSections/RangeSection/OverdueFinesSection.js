@@ -73,7 +73,9 @@ const OverdueFinesSection = (props) => {
   );
 };
 OverdueFinesSection.propTypes = {
-  intl: PropTypes.object.isRequired,
+  intl: PropTypes.shape({
+    formatMessage: PropTypes.func.isRequired,
+  }).isRequired,
   label: PropTypes.node,
   name: PropTypes.string,
   period: PropTypes.string,

@@ -28,7 +28,9 @@ export const formatNumber = (value = 0) => {
 
 class LostItemFeeSection extends React.Component {
   static propTypes = {
-    intl: PropTypes.object,
+    intl: PropTypes.shape({
+      formatMessage: PropTypes.func.isRequired,
+    }).isRequired,
     change: PropTypes.func.isRequired,
   };
 

@@ -33,7 +33,9 @@ export const parseDate = (date, timezone, isEndOfDay) => {
 
 class ScheduleCard extends React.Component {
   static propTypes = {
-    intl: PropTypes.object.isRequired,
+    intl: PropTypes.shape({
+      formatMessage: PropTypes.func.isRequired,
+    }).isRequired,
     pathToSchedule: PropTypes.string.isRequired,
     scheduleIndex: PropTypes.number.isRequired,
     onRemoveSchedule: PropTypes.func.isRequired,

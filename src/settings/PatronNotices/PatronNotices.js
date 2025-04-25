@@ -46,12 +46,16 @@ export class PatronNotices extends React.Component {
     label: PropTypes.string.isRequired,
     resources: PropTypes.shape({
       entries: PropTypes.shape({
-        records: PropTypes.arrayOf(PropTypes.object),
+        records: PropTypes.arrayOf(PropTypes.shape({
+          id: PropTypes.string,
+          name: PropTypes.string,
+        })),
       }),
       patronNoticePolicies: PropTypes.shape({
-        entries: PropTypes.shape({
-          records: PropTypes.arrayOf(PropTypes.object),
-        }),
+        records: PropTypes.arrayOf(PropTypes.shape({
+          id: PropTypes.string,
+          name: PropTypes.string,
+        })),
       }),
     }).isRequired,
     mutator: PropTypes.shape({
@@ -61,8 +65,12 @@ export class PatronNotices extends React.Component {
         DELETE: PropTypes.func,
       }),
     }).isRequired,
-    intl: PropTypes.object.isRequired,
-    location: PropTypes.object.isRequired,
+    intl: PropTypes.shape({
+      formatMessage: PropTypes.func.isRequired,
+    }).isRequired,
+    location: PropTypes.shape({
+      pathname: PropTypes.string,
+    }).isRequired,
   };
 
   static manifest = Object.freeze({
@@ -99,6 +107,7 @@ export class PatronNotices extends React.Component {
       },
       location,
     } = this.props;
+
     const [{ id: defaultCategory }] = patronNoticeCategories;
     const entryList = sortBy((this.props.resources.entries || {}).records || [], ['name']);
     const record = getRecordName({

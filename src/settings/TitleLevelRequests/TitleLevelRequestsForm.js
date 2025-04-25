@@ -164,14 +164,21 @@ TitleLevelRequestsForm.manifest = Object.freeze({
 
 TitleLevelRequestsForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
-  intl: PropTypes.object.isRequired,
+  intl: PropTypes.shape({
+    formatMessage: PropTypes.func.isRequired,
+  }).isRequired,
   label: PropTypes.string.isRequired,
   pristine: PropTypes.bool.isRequired,
   submitting: PropTypes.bool.isRequired,
-  form: PropTypes.object.isRequired,
+  form: PropTypes.shape({
+    change: PropTypes.func.isRequired,
+    getState: PropTypes.func.isRequired,
+  }).isRequired,
   resources: PropTypes.shape({
     requests: PropTypes.shape({
-      records: PropTypes.arrayOf(PropTypes.object).isRequired,
+      records: PropTypes.arrayOf(PropTypes.shape({
+        id: PropTypes.string,
+      })).isRequired,
     }).isRequired,
   }).isRequired,
   mutator: PropTypes.shape({

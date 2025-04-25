@@ -24,10 +24,14 @@ export const afterCloseTranslationKey = (name) => (name === closedLoansRules.WIT
 
 class AnonymizingTypeSelectContainer extends Component {
   static propTypes = {
-    intl: PropTypes.object.isRequired,
+    intl: PropTypes.shape({
+      formatMessage: PropTypes.func.isRequired,
+    }).isRequired,
     name: PropTypes.string.isRequired,
     path: PropTypes.string.isRequired,
-    types: PropTypes.arrayOf(PropTypes.object).isRequired,
+    types: PropTypes.arrayOf(PropTypes.shape({
+      value: PropTypes.string,
+    })).isRequired,
   }
 
   constructor(props) {

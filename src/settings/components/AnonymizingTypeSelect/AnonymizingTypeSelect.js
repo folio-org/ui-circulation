@@ -31,7 +31,9 @@ const AnonymizingTypeSelect = ({ name, types }) => {
 
 AnonymizingTypeSelect.propTypes = {
   name: PropTypes.string.isRequired,
-  types: PropTypes.arrayOf(PropTypes.object).isRequired,
+  types: PropTypes.arrayOf(PropTypes.shape({
+    value: PropTypes.string,
+  })).isRequired,
 };
 
 export default AnonymizingTypeSelect;

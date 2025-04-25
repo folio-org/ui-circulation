@@ -28,7 +28,9 @@ export const transformInputValue = (value) => {
 
 class Period extends PureComponent {
   static propTypes = {
-    intl: PropTypes.object.isRequired,
+    intl: PropTypes.shape({
+      formatMessage: PropTypes.func.isRequired,
+    }).isRequired,
     inputValuePath: PropTypes.string.isRequired,
     selectValuePath: PropTypes.string.isRequired,
     intervalPeriods: PropTypes.arrayOf(PropTypes.node).isRequired,

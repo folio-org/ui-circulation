@@ -28,8 +28,21 @@ class RulesForm extends React.Component {
     submitting: PropTypes.bool.isRequired,
     onSubmit: PropTypes.func.isRequired,
     handleSubmit: PropTypes.func.isRequired,
-    intl: PropTypes.object.isRequired,
-    editorProps: PropTypes.object,
+    intl: PropTypes.shape({
+      formatMessage: PropTypes.func.isRequired,
+    }).isRequired,
+    editorProps: PropTypes.shape({
+      showAssist: PropTypes.bool,
+      typeMapping: PropTypes.shape({
+        a: PropTypes.string,
+        b: PropTypes.string,
+        c: PropTypes.string,
+        g: PropTypes.string,
+        m: PropTypes.string,
+        s: PropTypes.string,
+        t: PropTypes.string,
+      }),
+    }),
     stripes: stripesShape.isRequired,
     metadata: PropTypes.shape({
       createdByUserId: PropTypes.string.isRequired,

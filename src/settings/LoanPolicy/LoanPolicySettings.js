@@ -7,6 +7,7 @@ import { EntryManager } from '@folio/stripes/smart-components';
 import {
   stripesConnect,
   TitleManager,
+  stripesShape,
 } from '@folio/stripes/core';
 
 import LoanPolicyDetail from './LoanPolicyDetail';
@@ -43,13 +44,27 @@ class LoanPolicySettings extends React.Component {
   static propTypes = {
     checkPolicy: PropTypes.func.isRequired,
     closeText: PropTypes.string.isRequired,
-    intl: PropTypes.object.isRequired,
+    intl: PropTypes.shape({
+      formatMessage: PropTypes.func.isRequired,
+    }).isRequired,
     labelText: PropTypes.string.isRequired,
     messageText: PropTypes.string.isRequired,
-    location: PropTypes.object.isRequired,
+    location: PropTypes.shape({
+      pathname: PropTypes.string,
+    }).isRequired,
     resources: PropTypes.shape({
-      loanPolicies: PropTypes.object,
-      fixedDueDateSchedules: PropTypes.object,
+      loanPolicies: PropTypes.shape({
+        records: PropTypes.arrayOf(PropTypes.shape({
+          id: PropTypes.string,
+          name: PropTypes.string,
+        })),
+      }),
+      fixedDueDateSchedules: PropTypes.shape({
+        records: PropTypes.arrayOf(PropTypes.shape({
+          id: PropTypes.string,
+          name: PropTypes.string,
+        })),
+      }),
     }).isRequired,
     mutator: PropTypes.shape({
       loanPolicies: PropTypes.shape({
@@ -58,7 +73,7 @@ class LoanPolicySettings extends React.Component {
         DELETE: PropTypes.func.isRequired,
       }),
     }).isRequired,
-    stripes: PropTypes.object.isRequired,
+    stripes: stripesShape.isRequired,
   };
 
   constructor(props) {

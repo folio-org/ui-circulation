@@ -22,8 +22,23 @@ import {
 
 class RequestManagementSection extends React.Component {
   static propTypes = {
-    intl: PropTypes.object.isRequired,
-    policy: PropTypes.object.isRequired,
+    intl: PropTypes.shape({
+      formatMessage: PropTypes.func.isRequired,
+    }).isRequired,
+    policy: PropTypes.shape({
+      loanable: PropTypes.bool,
+      loansPolicy: PropTypes.shape({
+        profileId: PropTypes.string,
+      }),
+      requestManagement: PropTypes.shape({
+        recalls: PropTypes.shape({
+          allowRecallsToExtendOverdueLoans: PropTypes.bool,
+        }),
+        holds: PropTypes.shape({
+          renewItemsWithRequest: PropTypes.bool,
+        }),
+      }),
+    }).isRequired,
     change: PropTypes.func.isRequired,
   };
 

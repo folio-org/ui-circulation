@@ -97,8 +97,14 @@ const ReminderFeesSection = ({ noticeTemplates, blockTemplates }) => {
 };
 
 ReminderFeesSection.propTypes = {
-  noticeTemplates: PropTypes.arrayOf(PropTypes.object),
-  blockTemplates: PropTypes.arrayOf(PropTypes.object),
+  noticeTemplates: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string,
+    name: PropTypes.string,
+  })),
+  blockTemplates: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string,
+    name: PropTypes.string,
+  })),
 };
 
 export default ReminderFeesSection;

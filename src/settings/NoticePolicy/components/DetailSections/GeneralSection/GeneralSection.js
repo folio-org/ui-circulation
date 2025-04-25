@@ -74,7 +74,9 @@ const GeneralSection = (props) => {
 };
 
 GeneralSection.propTypes = {
-  metadata: PropTypes.object.isRequired,
+  metadata: PropTypes.shape({
+    createdDate: PropTypes.string,
+  }).isRequired,
   isPolicyActive: PropTypes.bool,
   policyName: PropTypes.string.isRequired,
   policyDescription: PropTypes.string,

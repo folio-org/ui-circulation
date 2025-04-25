@@ -62,7 +62,9 @@ OverdueFinesSectionColumn.propTypes = {
   label: PropTypes.node,
   name: PropTypes.string,
   component: PropTypes.string,
-  intl: PropTypes.object,
+  intl: PropTypes.shape({
+    formatMessage: PropTypes.func.isRequired,
+  }).isRequired,
 };
 
 export default OverdueFinesSectionColumn;

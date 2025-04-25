@@ -87,13 +87,18 @@ class FinePolicySettings extends React.Component {
   static propTypes = {
     checkPolicy: PropTypes.func.isRequired,
     closeText: PropTypes.string.isRequired,
-    intl: PropTypes.object,
+    intl: PropTypes.shape({
+      formatMessage: PropTypes.func.isRequired,
+    }).isRequired,
     labelText: PropTypes.string.isRequired,
     messageText: PropTypes.string.isRequired,
     resources: PropTypes.shape({
-      finePolicies: PropTypes.object,
-      fixedDueDateSchedules: PropTypes.object,
-      templates: PropTypes.object,
+      finePolicies: PropTypes.shape({
+        records: PropTypes.arrayOf(PropTypes.shape({
+          id: PropTypes.string,
+          name: PropTypes.string,
+        })),
+      }),
     }).isRequired,
     mutator: PropTypes.shape({
       finePolicies: PropTypes.shape({
@@ -102,7 +107,9 @@ class FinePolicySettings extends React.Component {
         DELETE: PropTypes.func.isRequired,
       }),
     }).isRequired,
-    location: PropTypes.object.isRequired,
+    location: PropTypes.shape({
+      pathname: PropTypes.string,
+    }).isRequired,
   };
 
   render() {

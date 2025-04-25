@@ -82,11 +82,27 @@ class RequestPolicySettings extends React.Component {
   });
 
   static propTypes = {
-    intl: PropTypes.object,
+    intl: PropTypes.shape({
+      formatMessage: PropTypes.func.isRequired,
+    }).isRequired,
     resources: PropTypes.shape({
-      requestPolicies: PropTypes.object,
-      circulationRules: PropTypes.object,
-      servicePoints: PropTypes.object,
+      requestPolicies: PropTypes.shape({
+        records: PropTypes.arrayOf(PropTypes.shape({
+          id: PropTypes.string,
+          name: PropTypes.string,
+        })),
+      }),
+      circulationRules: PropTypes.shape({
+        records: PropTypes.arrayOf(PropTypes.shape({
+          rulesAsText: PropTypes.string,
+        })),
+      }),
+      servicePoints: PropTypes.shape({
+        records: PropTypes.arrayOf(PropTypes.shape({
+          id: PropTypes.string,
+          name: PropTypes.string,
+        })),
+      }),
     }).isRequired,
     mutator: PropTypes.shape({
       requestPolicies: PropTypes.shape({
@@ -95,7 +111,9 @@ class RequestPolicySettings extends React.Component {
         DELETE: PropTypes.func.isRequired,
       }),
     }).isRequired,
-    location: PropTypes.object.isRequired,
+    location: PropTypes.shape({
+      pathname: PropTypes.string,
+    }).isRequired,
   }
 
   isPolicyInUse = (policyId) => {

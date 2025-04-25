@@ -86,7 +86,9 @@ TLRPatronNoticesForm.manifest = Object.freeze({
 
 TLRPatronNoticesForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
-  intl: PropTypes.object.isRequired,
+  intl: PropTypes.shape({
+    formatMessage: PropTypes.func.isRequired,
+  }).isRequired,
   label: PropTypes.string.isRequired,
   pristine: PropTypes.bool.isRequired,
   submitting: PropTypes.bool.isRequired,

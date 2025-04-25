@@ -63,7 +63,11 @@ const SchedulesList = ({ schedules, timezone }) => {
 };
 
 SchedulesList.propTypes = {
-  schedules: PropTypes.arrayOf(PropTypes.object).isRequired,
+  schedules: PropTypes.arrayOf(PropTypes.shape({
+    from: PropTypes.string,
+    to: PropTypes.string,
+    due: PropTypes.string,
+  })).isRequired,
   timezone: PropTypes.string.isRequired,
 };
 

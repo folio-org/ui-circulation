@@ -73,8 +73,20 @@ const PatronNoticeDetail = (props) => {
 };
 
 PatronNoticeDetail.propTypes = {
-  initialValues: PropTypes.object.isRequired,
-  intl: PropTypes.object.isRequired,
+  initialValues: PropTypes.shape({
+    localizedTemplates: PropTypes.shape({
+      en: PropTypes.shape({
+        body: PropTypes.string,
+      }),
+    }),
+    metadata: PropTypes.shape({
+      createdDate: PropTypes.string,
+    }),
+  }).isRequired,
+  intl: PropTypes.shape({
+    formatMessage: PropTypes.func.isRequired,
+    locale: PropTypes.string.isRequired,
+  }).isRequired,
   stripes: stripesShape.isRequired,
 };
 
