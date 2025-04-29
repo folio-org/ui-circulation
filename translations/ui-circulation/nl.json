@@ -567,5 +567,5 @@
     "permission.settings.edit-loan-history": "Instellingen (Circulatie): Uitleninggeschiedenis bewerken",
     "settings.loanHistory.immediatelyAfterCloseOrSuspended": "Onmiddellijk na {name} sluit (of wordt opgeschort)",
     "settings.loanHistory.afterCloseOrSuspended": "na {name} sluit (of wordt opgeschort)",
-    "settings.staffSlips.isRawHtml": "Maintained as raw HTML?"
+    "settings.staffSlips.isRawHtml": "Onderhouden als onbewerkte HTML?"
 }
