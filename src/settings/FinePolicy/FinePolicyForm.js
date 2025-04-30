@@ -38,13 +38,34 @@ class FinePolicyForm extends React.Component {
     stripes: stripesShape.isRequired,
     pristine: PropTypes.bool,
     submitting: PropTypes.bool,
-    initialValues: PropTypes.object,
+    initialValues: PropTypes.shape({
+      id: PropTypes.string,
+      name: PropTypes.string,
+    }),
     handleSubmit: PropTypes.func.isRequired,
     onSave: PropTypes.func.isRequired,
     onCancel: PropTypes.func.isRequired,
-    form: PropTypes.object.isRequired,
-    intl: PropTypes.object.isRequired,
-    parentResources: PropTypes.object.isRequired,
+    form: PropTypes.shape({
+      change: PropTypes.func.isRequired,
+      getState: PropTypes.func.isRequired,
+    }).isRequired,
+    intl: PropTypes.shape({
+      formatMessage: PropTypes.func.isRequired,
+    }).isRequired,
+    parentResources: PropTypes.shape({
+      noticeTemplates: PropTypes.shape({
+        records: PropTypes.arrayOf(PropTypes.shape({
+          id: PropTypes.string,
+          name: PropTypes.string,
+        })),
+      }),
+      blockTemplates: PropTypes.shape({
+        records: PropTypes.arrayOf(PropTypes.shape({
+          id: PropTypes.string,
+          name: PropTypes.string,
+        })),
+      }),
+    }).isRequired,
   };
 
   static defaultProps = {

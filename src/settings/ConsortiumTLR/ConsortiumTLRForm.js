@@ -81,7 +81,14 @@ ConsortiumTLRForm.propTypes = {
   pristine: PropTypes.bool.isRequired,
   isSaving: PropTypes.bool.isRequired,
   isEditEnabled: PropTypes.bool.isRequired,
-  tlrSettings: PropTypes.object.isRequired,
+  tlrSettings: PropTypes.shape({
+    isPending: PropTypes.bool,
+    records: PropTypes.arrayOf(PropTypes.shape({
+      value: PropTypes.shape({
+        titleLevelRequestsFeatureEnabled: PropTypes.bool,
+      }),
+    })),
+  }).isRequired,
 };
 
 export default stripesFinalForm({

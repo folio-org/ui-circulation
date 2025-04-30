@@ -8,12 +8,16 @@ import {
 } from '@folio/stripes/components';
 import { TokensSection } from '@folio/stripes-template-editor';
 
+import { TOKEN_PROP_TYPES } from '../../../constants';
+
 class TokensList extends React.Component {
   static propTypes = {
-    tokens: PropTypes.object.isRequired,
+    tokens: TOKEN_PROP_TYPES.isRequired,
     onSectionInit: PropTypes.func.isRequired,
     onTokenSelect: PropTypes.func.isRequired,
-    intl: PropTypes.object.isRequired,
+    intl: PropTypes.shape({
+      formatMessage: PropTypes.func.isRequired,
+    }).isRequired,
   };
 
   render() {

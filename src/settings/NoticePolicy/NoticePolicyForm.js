@@ -36,12 +36,19 @@ import css from './NoticePolicyForm.css';
 
 class NoticePolicyForm extends React.Component {
   static propTypes = {
-    form: PropTypes.object.isRequired,
+    form: PropTypes.shape({
+      getState: PropTypes.func.isRequired,
+    }).isRequired,
     stripes: stripesShape.isRequired,
     pristine: PropTypes.bool.isRequired,
     submitting: PropTypes.bool.isRequired,
     parentResources: PropTypes.shape({
-      templates: PropTypes.object,
+      templates: PropTypes.shape({
+        records: PropTypes.arrayOf(PropTypes.shape({
+          id: PropTypes.string,
+          name: PropTypes.string,
+        })),
+      }),
     }).isRequired,
     onSave: PropTypes.func.isRequired,
     onCancel: PropTypes.func.isRequired,

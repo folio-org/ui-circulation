@@ -81,7 +81,14 @@ const PatronNoticeEmailSection = ({ notice, locale, emailTemplate }) => {
 };
 
 PatronNoticeEmailSection.propTypes = {
-  notice: PropTypes.object.isRequired,
+  notice: PropTypes.shape({
+    name: PropTypes.string,
+    localizedTemplates: PropTypes.shape({
+      en: PropTypes.shape({
+        header: PropTypes.string,
+      }),
+    }),
+  }).isRequired,
   locale: PropTypes.string,
   emailTemplate: PropTypes.string
 };

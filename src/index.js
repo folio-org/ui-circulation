@@ -30,7 +30,9 @@ import ViewPrintDetails from './settings/ViewPrintDetails';
 class Circulation extends Component {
   static propTypes = {
     stripes: stripesShape.isRequired,
-    intl: PropTypes.object.isRequired,
+    intl: PropTypes.shape({
+      formatMessage: PropTypes.func.isRequired,
+    }).isRequired,
   }
 
   getSections() {

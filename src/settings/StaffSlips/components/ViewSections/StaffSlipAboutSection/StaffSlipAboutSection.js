@@ -48,8 +48,8 @@ const StaffSlipAboutSection = ({ staffSlip }) => {
             <KeyValue
               label={<FormattedMessage id="ui-circulation.settings.staffSlips.isRawHtml" />}
               value={staffSlip.isRawHtml ?
-                     <FormattedMessage id="ui-circulation.settings.common.yes" /> :
-                     <FormattedMessage id="ui-circulation.settings.common.no" />}
+                <FormattedMessage id="ui-circulation.settings.common.yes" /> :
+                <FormattedMessage id="ui-circulation.settings.common.no" />}
             />
           </Col>
         </Row>

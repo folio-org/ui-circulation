@@ -56,8 +56,22 @@ class FixedDueDateScheduleManager extends React.Component {
   });
 
   static propTypes = {
-    resources: PropTypes.object.isRequired,
-    intl: PropTypes.object.isRequired,
+    resources: PropTypes.shape({
+      fixedDueDateSchedules: PropTypes.shape({
+        records: PropTypes.arrayOf(PropTypes.shape({
+          id: PropTypes.string,
+          name: PropTypes.string,
+        })),
+      }),
+      loanPolicies: PropTypes.shape({
+        records: PropTypes.arrayOf(PropTypes.shape({
+          fixedDueDateSchedule: PropTypes.string,
+        })),
+      }),
+    }).isRequired,
+    intl: PropTypes.shape({
+      formatMessage: PropTypes.func.isRequired,
+    }).isRequired,
     mutator: PropTypes.shape({
       fixedDueDateSchedules: PropTypes.shape({
         POST: PropTypes.func,
@@ -68,7 +82,9 @@ class FixedDueDateScheduleManager extends React.Component {
         GET: PropTypes.func,
       }).isRequired,
     }).isRequired,
-    location: PropTypes.object.isRequired,
+    location: PropTypes.shape({
+      pathname: PropTypes.string,
+    }).isRequired,
   };
 
   deleteDisabled = (schedule) => {

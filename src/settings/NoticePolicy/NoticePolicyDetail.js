@@ -24,10 +24,23 @@ import { patronNoticeCategoryIds } from '../../constants';
 
 class NoticePolicyDetail extends React.Component {
   static propTypes= {
-    initialValues: PropTypes.object.isRequired,
+    initialValues: PropTypes.shape({
+      id: PropTypes.string,
+      name: PropTypes.string,
+      active: PropTypes.bool,
+      description: PropTypes.string,
+      metadata: PropTypes.shape({
+        createdDate: PropTypes.string,
+      }),
+    }).isRequired,
     stripes: stripesShape.isRequired,
     parentResources: PropTypes.shape({
-      templates: PropTypes.object.isRequired,
+      templates: PropTypes.shape({
+        records: PropTypes.arrayOf(PropTypes.shape({
+          id: PropTypes.string,
+          name: PropTypes.string,
+        })),
+      }).isRequired,
     }).isRequired,
   };
 

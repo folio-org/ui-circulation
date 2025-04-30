@@ -146,7 +146,14 @@ const LoansSection = (props) => {
 };
 
 LoansSection.propTypes = {
-  policy: PropTypes.object.isRequired,
+  policy: PropTypes.shape({
+    id: PropTypes.string,
+    name: PropTypes.string,
+    loanable: PropTypes.bool,
+    isProfileRolling: PropTypes.func,
+    isOpeningTimeOffsetActive: PropTypes.func,
+    isProfileFixed: PropTypes.func,
+  }).isRequired,
   getDropdownValue: PropTypes.func.isRequired,
   getPeriodValue: PropTypes.func.isRequired,
   getScheduleValue: PropTypes.func.isRequired,

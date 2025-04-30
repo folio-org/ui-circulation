@@ -16,8 +16,14 @@ const RulesField = (props) => {
 };
 
 RulesField.propTypes = {
-  input: PropTypes.object,
-  meta: PropTypes.object,
+  input: PropTypes.shape({
+    value: PropTypes.string,
+    onChange: PropTypes.func,
+  }),
+  meta: PropTypes.shape({
+    active: PropTypes.bool,
+    dirty: PropTypes.bool,
+  }),
   code: PropTypes.string,
 };
 

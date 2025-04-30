@@ -15,7 +15,11 @@ import OverdueFinesSection from '../RangeSection/OverdueFinesSection';
 import OverdueFinesSectionColumn from '../RangeSection/OverdueFinesSectionColumn';
 
 class FinesSection extends React.Component {
-  static propTypes = { intl: PropTypes.object.isRequired };
+  static propTypes = {
+    intl: PropTypes.shape({
+      formatMessage: PropTypes.func.isRequired,
+    }).isRequired,
+  };
 
   constructor(props) {
     super(props);

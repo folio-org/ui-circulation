@@ -35,14 +35,21 @@ const withPreventDelete = (WrappedComponent, policyType) => class withPreventDel
   };
 
   static propTypes = {
-    location: PropTypes.object.isRequired,
+    location: PropTypes.shape({
+      pathname: PropTypes.string,
+    }).isRequired,
     mutator: PropTypes.shape({
       selectedPolicyId: PropTypes.shape({
         replace: PropTypes.func.isRequired,
       }),
     }).isRequired,
     resources: PropTypes.shape({
-      loans: PropTypes.object,
+      loans: PropTypes.shape({
+        isLoading: PropTypes.bool,
+        records: PropTypes.arrayOf(PropTypes.shape({
+          id: PropTypes.string,
+        })),
+      }),
     }).isRequired,
   }
 

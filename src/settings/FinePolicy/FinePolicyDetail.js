@@ -29,10 +29,26 @@ import FinePolicy from '../Models/FinePolicy';
 
 class FinePolicyDetail extends React.Component {
   static propTypes = {
-    initialValues: PropTypes.object,
+    initialValues: PropTypes.shape({
+      id: PropTypes.string,
+      name: PropTypes.string,
+    }),
     stripes: stripesShape.isRequired,
-    intl: PropTypes.object.isRequired,
-    parentResources: PropTypes.object.isRequired,
+    intl: PropTypes.shape({
+      formatMessage: PropTypes.func.isRequired,
+    }).isRequired,
+    parentResources: PropTypes.shape({
+      noticeTemplates: PropTypes.shape({
+        records: PropTypes.arrayOf(PropTypes.shape({
+          id: PropTypes.string,
+        })),
+      }),
+      blockTemplates: PropTypes.shape({
+        records: PropTypes.arrayOf(PropTypes.shape({
+          id: PropTypes.string,
+        })),
+      }),
+    }).isRequired,
   };
 
   static defaultProps = {

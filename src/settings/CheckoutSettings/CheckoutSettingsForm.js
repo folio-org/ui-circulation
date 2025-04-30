@@ -191,7 +191,10 @@ CheckoutSettingsForm.propTypes = {
   pristine: PropTypes.bool,
   submitting: PropTypes.bool,
   label: PropTypes.node,
-  form: PropTypes.object.isRequired,
+  form: PropTypes.shape({
+    change: PropTypes.func.isRequired,
+    getState: PropTypes.func.isRequired,
+  }).isRequired,
 };
 
 export default stripesFinalForm({

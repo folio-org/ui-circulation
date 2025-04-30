@@ -11,7 +11,9 @@ import {
 class Metadata extends React.Component {
   static propTypes = {
     connect: PropTypes.func.isRequired,
-    metadata: PropTypes.object,
+    metadata: PropTypes.shape({
+      createdDate: PropTypes.string,
+    }),
     useAccordion: PropTypes.bool,
     noBackGround: PropTypes.bool,
     inlineLayout: PropTypes.bool,

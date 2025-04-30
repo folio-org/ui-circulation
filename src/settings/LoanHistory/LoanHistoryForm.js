@@ -40,8 +40,12 @@ class LoanHistoryForm extends Component {
     pristine: PropTypes.bool,
     submitting: PropTypes.bool,
     label: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-    form: PropTypes.object.isRequired,
-    intl: PropTypes.object.isRequired,
+    form: PropTypes.shape({
+      getState: PropTypes.func.isRequired,
+    }).isRequired,
+    intl: PropTypes.shape({
+      formatMessage: PropTypes.func.isRequired,
+    }).isRequired,
   };
 
   renderFooter = () => {

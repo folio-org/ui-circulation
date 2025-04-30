@@ -61,7 +61,9 @@ export const normalizeData = (value) => {
 class LoanHistorySettings extends React.Component {
   static propTypes = {
     stripes: stripesShape.isRequired,
-    intl: PropTypes.object.isRequired,
+    intl: PropTypes.shape({
+      formatMessage: PropTypes.func.isRequired,
+    }).isRequired,
   };
 
   constructor(props) {

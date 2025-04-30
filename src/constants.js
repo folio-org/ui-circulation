@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 // These next sets are temporary Select list options for LoanPolicyDetail.js
 // The idea is to eventually replace them with small, controlled vocabularies
 // on the server side.
@@ -623,3 +625,30 @@ export const REQUEST_TYPE_RULES = {
 export const VIEW_PRINT_DETAILS_SETTINGS_API = 'circulation/settings';
 export const VIEW_PRINT_DETAILS_ENABLED = 'viewPrintDetailsEnabled';
 export const VIEW_PRINT_DETAILS_SETTINGS_KEY = 'printEventLogFeature';
+
+export const TOKEN_PROP_TYPES = PropTypes.shape({
+  effectiveLocation: PropTypes.arrayOf(PropTypes.shape({
+    token: PropTypes.string,
+    previewValue: PropTypes.string,
+  })),
+  request: PropTypes.arrayOf(PropTypes.shape({
+    token: PropTypes.string,
+    previewValue: PropTypes.string,
+  })),
+  item: PropTypes.arrayOf(PropTypes.shape({
+    token: PropTypes.string,
+    previewValue: PropTypes.string,
+  })),
+  requester: PropTypes.arrayOf(PropTypes.shape({
+    token: PropTypes.string,
+    previewValue: PropTypes.string,
+  })),
+  loan: PropTypes.arrayOf(PropTypes.shape({
+    token: PropTypes.string,
+    previewValue: PropTypes.string,
+  })),
+  borrower: PropTypes.arrayOf(PropTypes.shape({
+    token: PropTypes.string,
+    previewValue: PropTypes.string,
+  })),
+});

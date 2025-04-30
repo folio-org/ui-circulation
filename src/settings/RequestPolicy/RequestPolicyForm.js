@@ -15,6 +15,9 @@ import {
 import {
   getHeaderWithCredentials,
 } from '@folio/stripes/util';
+import {
+  stripesShape,
+} from '@folio/stripes/core';
 
 import RequestPolicy from '../Models/RequestPolicy';
 import { RequestPolicy as validateRequestPolicy } from '../Validation';
@@ -37,22 +40,42 @@ import css from './RequestPolicyForm.css';
 
 class RequestPolicyForm extends React.Component {
   static propTypes = {
-    form: PropTypes.object.isRequired,
-    initialValues: PropTypes.object,
-    okapi: PropTypes.object.isRequired,
+    form: PropTypes.shape({
+      getState: PropTypes.func.isRequired,
+      change: PropTypes.func.isRequired,
+    }).isRequired,
+    initialValues: PropTypes.shape({
+      id: PropTypes.string,
+    }),
+    okapi: PropTypes.shape({
+      url: PropTypes.string,
+    }).isRequired,
     pristine: PropTypes.bool.isRequired,
-    stripes: PropTypes.object.isRequired,
+    stripes: stripesShape.isRequired,
     submitting: PropTypes.bool.isRequired,
     onCancel: PropTypes.func.isRequired,
     handleSubmit: PropTypes.func.isRequired,
-    intl: PropTypes.object.isRequired,
+    intl: PropTypes.shape({
+      formatMessage: PropTypes.func.isRequired,
+    }).isRequired,
     location: PropTypes.shape({
       search: PropTypes.string.isRequired,
       pathname: PropTypes.string.isRequired,
     }).isRequired,
     parentResources: PropTypes.shape({
-      requestPolicies: PropTypes.object,
-      servicePoints: PropTypes.object,
+      requestPolicies: PropTypes.shape({
+        records: PropTypes.arrayOf(PropTypes.shape({
+          id: PropTypes.string,
+          name: PropTypes.string,
+        })),
+        isPending: PropTypes.bool,
+      }),
+      servicePoints: PropTypes.shape({
+        records: PropTypes.arrayOf(PropTypes.shape({
+          id: PropTypes.string,
+        })),
+        isPending: PropTypes.bool,
+      }),
     }).isRequired,
   };
 

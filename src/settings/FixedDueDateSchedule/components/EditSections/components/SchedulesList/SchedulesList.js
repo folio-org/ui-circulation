@@ -16,8 +16,15 @@ import css from './SchedulesList.css';
 
 class SchedulesList extends React.Component {
   static propTypes = {
-    fields: PropTypes.object.isRequired,
-    meta: PropTypes.object.isRequired,
+    fields: PropTypes.shape({
+      push: PropTypes.func,
+      remove: PropTypes.func,
+      map: PropTypes.func,
+    }).isRequired,
+    meta: PropTypes.shape({
+      error: PropTypes.string,
+      submitFailed: PropTypes.bool,
+    }).isRequired,
     timezone: PropTypes.string.isRequired,
   };
 

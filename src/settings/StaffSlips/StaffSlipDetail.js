@@ -20,7 +20,11 @@ import {
 
 class StaffSlipDetail extends React.Component {
   static propTypes = {
-    initialValues: PropTypes.object.isRequired,
+    initialValues: PropTypes.shape({
+      metadata: PropTypes.shape({
+        createdDate: PropTypes.string,
+      }),
+    }).isRequired,
     stripes: stripesShape.isRequired,
   };
 

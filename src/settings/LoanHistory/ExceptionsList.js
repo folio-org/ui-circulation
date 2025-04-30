@@ -23,9 +23,19 @@ class ExceptionsList extends Component {
   });
 
   static propTypes = {
-    fields: PropTypes.object.isRequired,
+    fields: PropTypes.shape({
+      push: PropTypes.func,
+      remove: PropTypes.func,
+      map: PropTypes.func,
+    }).isRequired,
     resources: PropTypes.shape({
-      paymentMethods: PropTypes.object,
+      paymentMethods: PropTypes.shape({
+        records: PropTypes.arrayOf(PropTypes.shape({
+          payments: PropTypes.shape({
+            nameMethod: PropTypes.string,
+          }),
+        })),
+      }),
     }).isRequired,
   }
 

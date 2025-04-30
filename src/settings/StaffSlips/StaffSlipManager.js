@@ -16,7 +16,10 @@ class StaffSlipManager extends React.Component {
   static propTypes = {
     resources: PropTypes.shape({
       entries: PropTypes.shape({
-        records: PropTypes.arrayOf(PropTypes.object),
+        records: PropTypes.arrayOf(PropTypes.shape({
+          id: PropTypes.string,
+          name: PropTypes.string,
+        })),
       }),
     }).isRequired,
     mutator: PropTypes.shape({
@@ -29,8 +32,12 @@ class StaffSlipManager extends React.Component {
     stripes: PropTypes.shape({
       hasPerm: PropTypes.func.isRequired,
     }),
-    intl: PropTypes.object.isRequired,
-    location: PropTypes.object.isRequired,
+    intl: PropTypes.shape({
+      formatMessage: PropTypes.func.isRequired,
+    }).isRequired,
+    location: PropTypes.shape({
+      pathname: PropTypes.string,
+    }).isRequired,
   };
 
   static manifest = Object.freeze({

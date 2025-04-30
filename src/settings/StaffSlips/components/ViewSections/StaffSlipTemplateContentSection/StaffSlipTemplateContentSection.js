@@ -95,7 +95,10 @@ const StaffSlipTemplateContentSection = ({ intl, staffSlip }) => {
 };
 
 StaffSlipTemplateContentSection.propTypes = {
-  intl: PropTypes.object.isRequired,
+  intl: PropTypes.shape({
+    formatMessage: PropTypes.func.isRequired,
+    locale: PropTypes.string.isRequired,
+  }).isRequired,
   staffSlip: PropTypes.shape({
     name: PropTypes.string,
     description: PropTypes.string,

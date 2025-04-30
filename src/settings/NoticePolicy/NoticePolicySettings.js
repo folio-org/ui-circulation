@@ -65,11 +65,27 @@ class NoticePolicySettings extends React.Component {
   });
 
   static propTypes = {
-    intl: PropTypes.object,
+    intl: PropTypes.shape({
+      formatMessage: PropTypes.func.isRequired,
+    }).isRequired,
     resources: PropTypes.shape({
-      patronNoticePolicies: PropTypes.object,
-      templates: PropTypes.object,
-      circulationRules: PropTypes.object,
+      patronNoticePolicies: PropTypes.shape({
+        records: PropTypes.arrayOf(PropTypes.shape({
+          id: PropTypes.string,
+          name: PropTypes.string,
+        })),
+      }),
+      templates: PropTypes.shape({
+        records: PropTypes.arrayOf(PropTypes.shape({
+          id: PropTypes.string,
+          name: PropTypes.string,
+        })),
+      }),
+      circulationRules: PropTypes.shape({
+        records: PropTypes.arrayOf(PropTypes.shape({
+          rulesAsText: PropTypes.string,
+        })),
+      }),
     }).isRequired,
     mutator: PropTypes.shape({
       patronNoticePolicies: PropTypes.shape({
@@ -78,7 +94,9 @@ class NoticePolicySettings extends React.Component {
         DELETE: PropTypes.func.isRequired,
       }),
     }).isRequired,
-    location: PropTypes.object.isRequired,
+    location: PropTypes.shape({
+      pathname: PropTypes.string,
+    }).isRequired,
   };
 
   isPolicyInUse = (policyId) => {

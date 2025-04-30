@@ -32,8 +32,19 @@ import css from './NoticeCard.css';
 class NoticeCard extends React.Component {
   static propTypes = {
     index: PropTypes.number.isRequired,
-    intl: PropTypes.object,
-    notice: PropTypes.object.isRequired,
+    intl: PropTypes.shape({
+      formatMessage: PropTypes.func.isRequired,
+    }).isRequired,
+    notice: PropTypes.shape({
+      sendOptions: PropTypes.shape({
+        sendWhen: PropTypes.string,
+        isLostItemFeesSelected: PropTypes.func,
+        isSendOptionsAvailable: PropTypes.func,
+        isBeforeOrAfter: PropTypes.func,
+        isFrequencyAvailable: PropTypes.func,
+      }),
+      isRecurring: PropTypes.func,
+    }).isRequired,
     sendEvents: PropTypes.arrayOf(PropTypes.shape({
       value: PropTypes.string.isRequired,
       label: PropTypes.string.isRequired,

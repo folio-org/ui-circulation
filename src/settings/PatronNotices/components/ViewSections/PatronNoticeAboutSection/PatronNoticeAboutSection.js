@@ -73,6 +73,11 @@ const PatronNoticeAboutSection = ({ notice }) => {
 };
 
 PatronNoticeAboutSection.propTypes = {
-  notice: PropTypes.object.isRequired,
+  notice: PropTypes.shape({
+    name: PropTypes.string,
+    description: PropTypes.string,
+    category: PropTypes.string,
+    active: PropTypes.bool,
+  }).isRequired,
 };
 export default PatronNoticeAboutSection;

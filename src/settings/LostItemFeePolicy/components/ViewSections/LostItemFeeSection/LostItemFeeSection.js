@@ -255,7 +255,23 @@ const LostItemFeeSection = (props) => {
 };
 
 LostItemFeeSection.propTypes = {
-  policy: PropTypes.object.isRequired,
+  policy: PropTypes.shape({
+    chargeAmountItem: PropTypes.shape({
+      chargeType: PropTypes.string,
+      amount: PropTypes.number,
+    }),
+    feesFinesShallRefunded: PropTypes.shape({
+      duration: PropTypes.number,
+    }),
+    lostItemProcessingFee: PropTypes.number,
+    chargeAmountItemPatron: PropTypes.bool,
+    chargeAmountItemSystem: PropTypes.bool,
+    returnedLostItemProcessingFee: PropTypes.bool,
+    replacementProcessingFee: PropTypes.number,
+    replacementAllowed: PropTypes.bool,
+    lostItemReturned: PropTypes.string,
+    replacedLostItemProcessingFee: PropTypes.bool,
+  }).isRequired,
   getPeriodValue: PropTypes.func.isRequired,
   formatMessage: PropTypes.func.isRequired,
 };

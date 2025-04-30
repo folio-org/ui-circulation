@@ -33,11 +33,25 @@ import { intervalPeriods } from '../../constants';
 
 class LoanPolicyDetail extends React.Component {
   static propTypes = {
-    intl: PropTypes.object.isRequired,
-    initialValues: PropTypes.object,
+    intl: PropTypes.shape({
+      formatMessage: PropTypes.func.isRequired,
+    }).isRequired,
+    initialValues: PropTypes.shape({
+      loanable: PropTypes.bool,
+      metadata: PropTypes.shape({
+        createdDate: PropTypes.string,
+      }),
+      id: PropTypes.string,
+      name: PropTypes.string,
+    }),
     stripes: stripesShape.isRequired,
     parentResources: PropTypes.shape({
-      fixedDueDateSchedules: PropTypes.object,
+      fixedDueDateSchedules: PropTypes.shape({
+        records: PropTypes.arrayOf(PropTypes.shape({
+          id: PropTypes.string,
+          name: PropTypes.string,
+        })),
+      }),
     }),
   };
 

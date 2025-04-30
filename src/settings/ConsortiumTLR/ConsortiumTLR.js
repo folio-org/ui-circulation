@@ -93,8 +93,19 @@ ConsortiumTLR.propTypes = {
     }).isRequired,
   }).isRequired,
   resources: PropTypes.shape({
-    consortiumTlr: PropTypes.object.isRequired,
-    settings: PropTypes.object.isRequired,
+    consortiumTlr: PropTypes.shape({
+      records: PropTypes.arrayOf(PropTypes.shape({
+        ecsTlrFeatureEnabled: PropTypes.bool,
+      })),
+    }).isRequired,
+    settings: PropTypes.shape({
+      isPending: PropTypes.bool,
+      records: PropTypes.arrayOf(PropTypes.shape({
+        value: PropTypes.shape({
+          titleLevelRequestsFeatureEnabled: PropTypes.bool,
+        }),
+      })),
+    }).isRequired,
   }).isRequired,
   stripes: stripesShape.isRequired,
 };

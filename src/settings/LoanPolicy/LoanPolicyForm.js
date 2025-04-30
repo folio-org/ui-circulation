@@ -42,15 +42,28 @@ import css from './LoanPolicyForm.css';
 
 class LoanPolicyForm extends React.Component {
   static propTypes = {
-    intl: PropTypes.object.isRequired,
-    form: PropTypes.object.isRequired,
+    intl: PropTypes.shape({
+      formatMessage: PropTypes.func.isRequired,
+    }).isRequired,
+    form: PropTypes.shape({
+      getState: PropTypes.func.isRequired,
+      change: PropTypes.func.isRequired,
+    }).isRequired,
     stripes: stripesShape.isRequired,
     pristine: PropTypes.bool,
     submitting: PropTypes.bool,
     parentResources: PropTypes.shape({
-      fixedDueDateSchedules: PropTypes.object,
+      fixedDueDateSchedules: PropTypes.shape({
+        records: PropTypes.arrayOf(PropTypes.shape({
+          id: PropTypes.string,
+          name: PropTypes.string,
+        })),
+      }),
     }).isRequired,
-    initialValues: PropTypes.object,
+    initialValues: PropTypes.shape({
+      id: PropTypes.string,
+      name: PropTypes.string,
+    }),
     handleSubmit: PropTypes.func.isRequired,
     onSave: PropTypes.func.isRequired,
     onCancel: PropTypes.func.isRequired,

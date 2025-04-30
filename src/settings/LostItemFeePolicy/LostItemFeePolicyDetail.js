@@ -31,12 +31,17 @@ import { intervalPeriodsLower } from '../../constants';
 
 class LostItemFeePolicyDetail extends React.Component {
   static propTypes = {
-    intl: PropTypes.object,
-    initialValues: PropTypes.object,
-    stripes: stripesShape.isRequired,
-    parentResources: PropTypes.shape({
-      fixedDueDateSchedules: PropTypes.object,
+    intl: PropTypes.shape({
+      formatMessage: PropTypes.func.isRequired,
+    }).isRequired,
+    initialValues: PropTypes.shape({
+      id: PropTypes.string,
+      name: PropTypes.string,
+      metadata: PropTypes.shape({
+        createdDate: PropTypes.string,
+      }),
     }),
+    stripes: stripesShape.isRequired,
   };
 
   static defaultProps = {

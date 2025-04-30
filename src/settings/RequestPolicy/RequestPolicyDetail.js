@@ -21,7 +21,14 @@ export const requestTypeFormater = (requestType) => <li key={requestType}>{reque
 class RequestPolicyDetail extends React.Component {
   static propTypes = {
     stripes: stripesShape.isRequired,
-    initialValues: PropTypes.object,
+    initialValues: PropTypes.shape({
+      name: PropTypes.string,
+      description: PropTypes.string,
+      requestTypes: PropTypes.arrayOf(PropTypes.string),
+      metadata: PropTypes.shape({
+        createdDate: PropTypes.string,
+      }),
+    }),
   };
 
   static defaultProps = {

@@ -104,7 +104,9 @@ export const normalize = ({
 class CheckoutSettings extends React.Component {
   static propTypes = {
     stripes: stripesShape.isRequired,
-    intl: PropTypes.object.isRequired,
+    intl: PropTypes.shape({
+      formatMessage: PropTypes.func.isRequired,
+    }).isRequired,
   };
 
   constructor(props) {

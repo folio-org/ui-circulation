@@ -19,7 +19,18 @@ import SchedulesList from './components/DetailsSections/ScedulesList';
 
 class FixedDueDateScheduleDetail extends React.Component {
   static propTypes = {
-    initialValues: PropTypes.object,
+    initialValues: PropTypes.shape({
+      metadata: PropTypes.shape({
+        createdDate: PropTypes.string,
+      }),
+      name: PropTypes.string,
+      description: PropTypes.string,
+      schedules: PropTypes.arrayOf(PropTypes.shape({
+        from: PropTypes.string,
+        to: PropTypes.string,
+        due: PropTypes.string,
+      })),
+    }),
     stripes: stripesShape.isRequired,
   }
 

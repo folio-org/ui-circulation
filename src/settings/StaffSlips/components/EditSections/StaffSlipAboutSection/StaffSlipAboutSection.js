@@ -72,7 +72,9 @@ const StaffSlipAboutSection = ({ initialValues, disabled }) => {
 };
 
 StaffSlipAboutSection.propTypes = {
-  initialValues: PropTypes.object,
+  initialValues: PropTypes.shape({
+    name: PropTypes.string,
+  }),
   disabled: PropTypes.bool,
 };
 

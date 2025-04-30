@@ -43,12 +43,20 @@ import css from './FixedDueDateSchedule.css';
 class FixedDueDateScheduleForm extends React.Component {
   static propTypes = {
     stripes: stripesShape.isRequired,
-    initialValues: PropTypes.object,
+    initialValues: PropTypes.shape({
+      id: PropTypes.string,
+      name: PropTypes.string,
+      metadata: PropTypes.shape({
+        createdDate: PropTypes.string,
+      }),
+    }),
     handleSubmit: PropTypes.func.isRequired,
     onCancel: PropTypes.func.isRequired,
     pristine: PropTypes.bool.isRequired,
     submitting: PropTypes.bool.isRequired,
-    okapi: PropTypes.object.isRequired,
+    okapi: PropTypes.shape({
+      url: PropTypes.string,
+    }).isRequired,
     location: PropTypes.shape({
       search: PropTypes.string.isRequired,
     }).isRequired,

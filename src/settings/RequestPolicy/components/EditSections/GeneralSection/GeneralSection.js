@@ -142,10 +142,16 @@ export const renderTypes = (props) => {
 class GeneralSection extends React.Component {
   static propTypes = {
     isOpen: PropTypes.bool.isRequired,
-    metadata: PropTypes.object.isRequired,
+    metadata: PropTypes.shape({
+      createdDate: PropTypes.string,
+    }).isRequired,
     connect: PropTypes.func.isRequired,
     validateName: PropTypes.func.isRequired,
-    requestTypesRules: PropTypes.object.isRequired,
+    requestTypesRules: PropTypes.shape({
+      [REQUEST_POLICY_TYPES.HOLD]: PropTypes.string,
+      [REQUEST_POLICY_TYPES.PAGE]: PropTypes.string,
+      [REQUEST_POLICY_TYPES.RECALL]: PropTypes.string,
+    }).isRequired,
     handleChangeRequestTypesRules: PropTypes.func.isRequired,
     isLoading: PropTypes.bool.isRequired,
     servicePoints: PropTypes.arrayOf(PropTypes.shape({

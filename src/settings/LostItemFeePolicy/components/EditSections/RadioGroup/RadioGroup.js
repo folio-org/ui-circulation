@@ -75,7 +75,9 @@ const RadioGroup = (props) => (
 );
 
 RadioGroup.propTypes = {
-  intl: PropTypes.object.isRequired,
+  intl: PropTypes.shape({
+    formatMessage: PropTypes.func.isRequired,
+  }).isRequired,
   onBlur: PropTypes.func,
 };
 

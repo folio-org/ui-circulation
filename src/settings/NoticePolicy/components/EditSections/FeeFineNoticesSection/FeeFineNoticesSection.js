@@ -18,7 +18,10 @@ export const getSendEvents = () => {
 
 class FeeFineNoticesSection extends React.Component {
   static propTypes = {
-    policy: PropTypes.object.isRequired,
+    policy: PropTypes.shape({
+      id: PropTypes.string,
+      name: PropTypes.string,
+    }).isRequired,
     templates: PropTypes.arrayOf(PropTypes.shape({
       value: PropTypes.string.isRequired,
       label: PropTypes.string.isRequired,

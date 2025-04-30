@@ -27,8 +27,19 @@ import optionsGenerator from '../../../../utils/options-generator';
 
 class LoansSection extends React.Component {
   static propTypes = {
-    intl: PropTypes.object.isRequired,
-    policy: PropTypes.object.isRequired,
+    intl: PropTypes.shape({
+      formatMessage: PropTypes.func.isRequired,
+    }).isRequired,
+    policy: PropTypes.shape({
+      isProfileRolling: PropTypes.func,
+      isShortTermLoan: PropTypes.func,
+      isLoanable: PropTypes.func,
+      isProfileFixed: PropTypes.func,
+      isOpeningTimeOffsetActive: PropTypes.func,
+      loansPolicy: PropTypes.shape({
+        closedLibraryDueDateManagementId: PropTypes.string,
+      }),
+    }).isRequired,
     schedules: PropTypes.arrayOf(PropTypes.node).isRequired,
     change: PropTypes.func.isRequired,
   };

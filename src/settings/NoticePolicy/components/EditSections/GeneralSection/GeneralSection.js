@@ -17,7 +17,9 @@ import styles from './GeneralSection.css';
 
 class GeneralSection extends React.Component {
   static propTypes = {
-    metadata: PropTypes.object.isRequired,
+    metadata: PropTypes.shape({
+      createdDate: PropTypes.string,
+    }).isRequired,
     connect: PropTypes.func.isRequired,
   };
 
