@@ -333,7 +333,8 @@
           "templates.item.post",
           "templates.item.put",
           "templates.item.delete",
-          "template-request.post"
+          "template-request.post",
+          "users.collection.get"
         ],
         "visible": true
       },
