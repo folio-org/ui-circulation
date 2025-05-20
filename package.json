@@ -321,7 +321,8 @@
           "circulation-storage.patron-notice-policies.collection.get",
           "templates.collection.get",
           "templates.item.get",
-          "settings.circulation.enabled"
+          "settings.circulation.enabled",
+          "users.collection.get"
         ],
         "visible": false
       },
