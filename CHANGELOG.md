@@ -7,6 +7,7 @@
 * Replace moment with day.js. Refs UICIRC-1194.
 * Reduce count of eslint errors after update eslint-config-stripes. Refs UICIRC-1209.
 * Add "users.collection.get" sub-permission for viewing circulation patron notice template. Refs UICIRC-1232.
+* Invocation of `useFormState` in `StaffSlipTemplateContentSection.js` is no longer conditional, so switching between HTML and WYSIWYG editors for a staff slip works even in minified builds. Fixes UICIRC-1238.
 
 ## [11.0.1](https://github.com/folio-org/ui-circulation/tree/v11.0.1) (2024-04-14)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v11.0.0...v11.0.1)

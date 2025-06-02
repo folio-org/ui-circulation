@@ -1,3 +1,8 @@
+jest.mock('react-final-form', () => ({
+  Field: jest.fn(() => (component) => component),
+  useFormState: jest.fn(() => ({})),
+}));
+
 import { Field } from 'react-final-form';
 
 import { render } from '@folio/jest-config-stripes/testing-library/react';
