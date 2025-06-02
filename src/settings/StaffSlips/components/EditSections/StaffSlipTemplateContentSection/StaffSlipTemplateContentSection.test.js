@@ -1,8 +1,3 @@
-jest.mock('react-final-form', () => ({
-  Field: jest.fn(() => (component) => component),
-  useFormState: jest.fn(() => ({})),
-}));
-
 import { Field } from 'react-final-form';
 
 import { render } from '@folio/jest-config-stripes/testing-library/react';
@@ -11,6 +6,11 @@ import { TemplateEditor } from '@folio/stripes-template-editor';
 import StaffSlipTemplateContentSection from './StaffSlipTemplateContentSection';
 import TokensList from '../../../TokensList';
 import getTokens from '../../../tokens';
+
+jest.mock('react-final-form', () => ({
+  Field: jest.fn(() => (component) => component),
+  useFormState: jest.fn(() => ({})),
+}));
 
 jest.mock('@folio/stripes-template-editor', () => ({
   TemplateEditor: jest.fn(() => null),
