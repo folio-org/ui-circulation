@@ -15,8 +15,7 @@ import TokensList from '../../../TokensList';
 import getTokens from '../../../tokens';
 
 const StaffSlipTemplateContentSection = ({ intl }) => {
-  // I can't find a way to mock useFormState for Jest, so we allow for it being undefined in testing
-  const formState = useFormState ? useFormState() : {};
+  const formState = useFormState();
   const values = formState.values || {};
 
   const {
