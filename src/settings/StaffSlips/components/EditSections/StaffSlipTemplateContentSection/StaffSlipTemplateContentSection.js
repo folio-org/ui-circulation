@@ -17,6 +17,7 @@ import getTokens from '../../../tokens';
 const StaffSlipTemplateContentSection = ({ intl }) => {
   const formState = useFormState();
   const values = formState.values || {};
+  console.log('  *** StaffSlipTemplateContentSection: isRawHtml =', !!values.isRawHtml, '--', values);
 
   const {
     formatMessage,
