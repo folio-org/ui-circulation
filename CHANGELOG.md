@@ -10,6 +10,7 @@
 * Invocation of `useFormState` in `StaffSlipTemplateContentSection.js` is no longer conditional, so switching between HTML and WYSIWYG editors for a staff slip works even in minified builds. Fixes UICIRC-1238.
 * Add new token "Series statements" to staff slips. Fixes UICIRC-1179 to 1185.
 * In loan-policy editor, support "For use at location" and "Hold shelf expiry period". Fixes UICIRC-1239.
+* Hide button when there are no permission for it. Refs UICIRC-1130.
 
 ## [11.0.1](https://github.com/folio-org/ui-circulation/tree/v11.0.1) (2024-04-14)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v11.0.0...v11.0.1)
