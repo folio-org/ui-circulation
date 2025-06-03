@@ -13,6 +13,8 @@ export default class LoansPolicy {
     this.period = new Period(policy.period);
     this.gracePeriod = new Period(policy.gracePeriod);
     this.openingTimeOffset = new Period(policy.openingTimeOffset);
+    this.forUseAtLocation = policy.forUseAtLocation;
+    this.holdShelfExpiryPeriodForUseAtLocation = new Period(policy.holdShelfExpiryPeriodForUseAtLocation);
   }
 
   // set correct closedLibraryDueDateManagementId
