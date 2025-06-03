@@ -21,7 +21,6 @@ const LoansSection = (props) => {
     getDropdownValue,
     getScheduleValue,
     getCheckboxValue,
-    getTimePeriodValue,
     getValue,
   } = props;
 
@@ -157,7 +156,7 @@ const LoansSection = (props) => {
             <div data-test-loans-section-hold-shelf-expiry-period>
               <KeyValue
                 label={<FormattedMessage id="ui-circulation.settings.loanPolicy.holdShelfExpirationPeriod" />}
-                value={getTimePeriodValue('loansPolicy.holdShelfExpiryPeriodForUseAtLocation')}
+                value={getPeriodValue('loansPolicy.holdShelfExpiryPeriodForUseAtLocation')}
               />
             </div>
           </Col>
