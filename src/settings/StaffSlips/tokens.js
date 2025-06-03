@@ -136,6 +136,11 @@ const getTokens = (locale) => ({
       allowedFor: allowedForAllStaffSlips,
     },
     {
+      token: 'item.seriesStatements',
+      previewValue: 'Department of State publication',
+      allowedFor: allowedForAllStaffSlips,
+    },
+    {
       token: 'item.instanceHrid',
       previewValue: 'inst000000000022',
       allowedFor: allowedForAllStaffSlips,
