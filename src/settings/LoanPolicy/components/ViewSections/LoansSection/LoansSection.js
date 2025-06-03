@@ -140,6 +140,28 @@ const LoansSection = (props) => {
           </div>
         </Col>
       </Row>
+      <Row data-testid="forUseAtLocationTestId">
+        <Col xs={12}>
+          <div data-test-loans-section-for-use-at-location>
+            <KeyValue
+              label={<FormattedMessage id="ui-circulation.settings.loanPolicy.forUseAtLocation" />}
+              value={getCheckboxValue('loansPolicy.forUseAtLocation')}
+            />
+          </div>
+        </Col>
+      </Row>
+      {getValue('loansPolicy.forUseAtLocation') &&
+        <Row data-testid="holdShelfExpiryPeriodTestId">
+          <Col xs={12}>
+            <div data-test-loans-section-hold-shelf-expiry-period>
+              <KeyValue
+                label={<FormattedMessage id="ui-circulation.settings.loanPolicy.holdShelfExpirationPeriod" />}
+                value={getPeriodValue('loansPolicy.holdShelfExpiryPeriodForUseAtLocation')}
+              />
+            </div>
+          </Col>
+        </Row>
+      }
       <hr />
     </div>
   );

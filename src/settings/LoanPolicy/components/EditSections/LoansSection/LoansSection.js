@@ -179,6 +179,27 @@ class LoansSection extends React.Component {
                 />
               </Col>
             </Row>
+            <Row>
+              <Col xs={12}>
+                <Field
+                  data-test-loans-section-for-use-at-location
+                  label={<FormattedMessage id="ui-circulation.settings.loanPolicy.forUseAtLocation" />}
+                  name="loansPolicy.forUseAtLocation"
+                  id="input_for_use_at_location"
+                  component={Checkbox}
+                  type="checkbox"
+                />
+              </Col>
+            </Row>
+            { policy.loansPolicy.forUseAtLocation &&
+              <Period
+                fieldLabel="ui-circulation.settings.loanPolicy.holdShelfExpirationPeriod"
+                inputValuePath="loansPolicy.holdShelfExpiryPeriodForUseAtLocation.duration"
+                selectValuePath="loansPolicy.holdShelfExpiryPeriodForUseAtLocation.intervalId"
+                intervalPeriods={this.generateOptions(intervalPeriods, 'ui-circulation.settings.loanPolicy.selectInterval')}
+                changeFormValue={change}
+              />
+            }
           </>}
         <hr />
       </div>
