@@ -16,7 +16,6 @@ import {
   AccordionSet,
   AccordionStatus,
   Col,
-  NoValue,
   Row,
   ExpandAllButton,
 } from '@folio/stripes/components';
@@ -72,21 +71,6 @@ class LoanPolicyDetail extends React.Component {
     return seletedValue
       ? <FormattedMessage id="ui-circulation.settings.common.yes" />
       : <FormattedMessage id="ui-circulation.settings.common.no" />;
-  };
-
-  getTimePeriodValue = (pathToValue) => {
-    const value = this.getValue(pathToValue);
-
-    if (!value || !value.duration || !value.intervalId) {
-      return <NoValue />;
-    }
-
-    return (
-      <>
-        {value.duration}
-        {' '}
-        <FormattedMessage id={`ui-circulation.settings.common.${value.intervalId.toLowerCase()}`} />
-      </>);
   };
 
   getDropdownValue = (pathToId, items) => {
@@ -166,7 +150,6 @@ class LoanPolicyDetail extends React.Component {
                 getPeriodValue={this.getPeriodValue}
                 getScheduleValue={this.getScheduleValue}
                 getCheckboxValue={this.getCheckboxValue}
-                getTimePeriodValue={this.getTimePeriodValue}
                 getValue={this.getValue}
               />
               <RenewalsSection
