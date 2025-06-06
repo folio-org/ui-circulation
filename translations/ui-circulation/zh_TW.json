@@ -567,5 +567,7 @@
     "permission.settings.edit-loan-history": "設定 ( 流通 ) : 可編輯借閱歷史紀錄",
     "settings.loanHistory.immediatelyAfterCloseOrSuspended": "Immediately after {name} closes (or is suspended)",
     "settings.loanHistory.afterCloseOrSuspended": "after {name} closes (or is suspended)",
-    "settings.staffSlips.isRawHtml": "Maintained as raw HTML?"
+    "settings.staffSlips.isRawHtml": "Maintained as raw HTML?",
+    "settings.loanPolicy.forUseAtLocation": "For use at location",
+    "settings.loanPolicy.holdShelfExpirationPeriod": "Hold shelf expiration period"
 }

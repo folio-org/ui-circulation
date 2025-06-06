@@ -181,7 +181,7 @@
     "settings.noticePolicy.requestNotices.holdRequest": "Requisição de reserva",
     "settings.noticePolicy.requestNotices.pagingRequest": "Requisição de item disponível",
     "settings.noticePolicy.requestNotices.available": "Aguardando retirada",
-    "settings.noticePolicy.requestNotices.holdExpiration": "Expiração da reserva",
+    "settings.noticePolicy.requestNotices.holdExpiration": "Vencimento da reserva",
     "settings.noticePolicy.requestNotices.requestCancelation": "Requisição cancelada",
     "settings.index.circulationRules": "Regras de circulação",
     "settings.circulationRules.paneTitle": "Editor de regras de circulação",
@@ -567,5 +567,7 @@
     "permission.settings.edit-loan-history": "Configurações (Circulação): Pode editar o histórico de empréstimos",
     "settings.loanHistory.immediatelyAfterCloseOrSuspended": "Imediatamente após o fechamento (ou suspensão) de {name}",
     "settings.loanHistory.afterCloseOrSuspended": "após fechamento (ou suspensão) de {name}",
-    "settings.staffSlips.isRawHtml": "Manter como HTML bruto?"
+    "settings.staffSlips.isRawHtml": "Manter como HTML bruto?",
+    "settings.loanPolicy.forUseAtLocation": "Para uso no local",
+    "settings.loanPolicy.holdShelfExpirationPeriod": "Período de vencimento da reserva"
 }

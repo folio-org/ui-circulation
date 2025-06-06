@@ -567,5 +567,7 @@
     "permission.settings.edit-loan-history": "Einstellungen (Ausleihe): Kann Ausleihhistorie bearbeiten",
     "settings.loanHistory.immediatelyAfterCloseOrSuspended": "Unmittelbar nachdem {name} geschlossen (oder ausgesetzt) wurde",
     "settings.loanHistory.afterCloseOrSuspended": "Nachdem {name} geschlossen (oder ausgesetzt) wurde",
-    "settings.staffSlips.isRawHtml": "Als reines HTML beibehalten?"
+    "settings.staffSlips.isRawHtml": "Als reines HTML beibehalten?",
+    "settings.loanPolicy.forUseAtLocation": "For use at location",
+    "settings.loanPolicy.holdShelfExpirationPeriod": "Hold shelf expiration period"
 }
