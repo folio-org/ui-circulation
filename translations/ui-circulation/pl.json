@@ -567,5 +567,7 @@
     "permission.settings.edit-loan-history": "Settings (Circulation): Can edit loan history",
     "settings.loanHistory.immediatelyAfterCloseOrSuspended": "Natychmiast po {name} zamknięciu (lub zawieszeniu)",
     "settings.loanHistory.afterCloseOrSuspended": "Po {name} zamknięciu (lub zawieszeniu)",
-    "settings.staffSlips.isRawHtml": "Maintained as raw HTML?"
+    "settings.staffSlips.isRawHtml": "Maintained as raw HTML?",
+    "settings.loanPolicy.forUseAtLocation": "For use at location",
+    "settings.loanPolicy.holdShelfExpirationPeriod": "Hold shelf expiration period"
 }

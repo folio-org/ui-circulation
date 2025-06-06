@@ -567,5 +567,7 @@
     "permission.settings.edit-loan-history": "الإعدادات (الإعارة): إمكانية تحرير سجل الإعارة",
     "settings.loanHistory.immediatelyAfterCloseOrSuspended": "مباشرةً بعد إغلاق {name} (أو تعليقه)",
     "settings.loanHistory.afterCloseOrSuspended": "بعد إغلاق {name} (أو تعليقه)",
-    "settings.staffSlips.isRawHtml": "Maintained as raw HTML?"
+    "settings.staffSlips.isRawHtml": "Maintained as raw HTML?",
+    "settings.loanPolicy.forUseAtLocation": "For use at location",
+    "settings.loanPolicy.holdShelfExpirationPeriod": "Hold shelf expiration period"
 }
