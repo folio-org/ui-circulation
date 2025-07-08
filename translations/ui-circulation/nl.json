@@ -568,6 +568,6 @@
     "settings.loanHistory.immediatelyAfterCloseOrSuspended": "Onmiddellijk na {name} sluit (of wordt opgeschort)",
     "settings.loanHistory.afterCloseOrSuspended": "na {name} sluit (of wordt opgeschort)",
     "settings.staffSlips.isRawHtml": "Onderhouden als onbewerkte HTML?",
-    "settings.loanPolicy.forUseAtLocation": "For use at location",
-    "settings.loanPolicy.holdShelfExpirationPeriod": "Hold shelf expiration period"
+    "settings.loanPolicy.forUseAtLocation": "Voor gebruik op Locatie",
+    "settings.loanPolicy.holdShelfExpirationPeriod": "Reservering vervaldatum schap"
 }

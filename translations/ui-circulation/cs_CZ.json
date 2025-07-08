@@ -568,6 +568,6 @@
     "settings.loanHistory.immediatelyAfterCloseOrSuspended": "Bezprostředně po uzavření (nebo pozastavení) {name}",
     "settings.loanHistory.afterCloseOrSuspended": "po uzavření (nebo pozastavení) {name}",
     "settings.staffSlips.isRawHtml": "Udržovat jako surové HTML?",
-    "settings.loanPolicy.forUseAtLocation": "For use at location",
-    "settings.loanPolicy.holdShelfExpirationPeriod": "Hold shelf expiration period"
+    "settings.loanPolicy.forUseAtLocation": "Pro použití v lokaci",
+    "settings.loanPolicy.holdShelfExpirationPeriod": "Doba pro vyzvednutí rezervace z regálu"
 }
