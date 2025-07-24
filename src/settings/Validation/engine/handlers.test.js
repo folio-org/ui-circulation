@@ -972,12 +972,12 @@ describe('handlers', () => {
   describe('hasPositiveLostItemProcessingFeeAndInvalidItemsAgedToLostAfterOverdue method', () => {
     describe(`
       when value is true
-      and lostItemProcessingFee is less than zero
+      and lostItemProcessingFee is more than zero
       and itemAgedLostOverdue duration is more than zero
     `, () => {
       const value = true;
       const model = {
-        lostItemProcessingFee: '-10.10',
+        lostItemProcessingFee: '10.10',
         itemAgedLostOverdue: {
           duration: '10.10',
         },
@@ -1026,12 +1026,12 @@ describe('handlers', () => {
 
     describe(`
       when value is true
-      and lostItemProcessingFee is more than zero
+      and lostItemProcessingFee is less than zero
       and itemAgedLostOverdue duration is more than zero
     `, () => {
       const value = true;
       const model = {
-        lostItemProcessingFee: '10.10',
+        lostItemProcessingFee: '-10.10',
         itemAgedLostOverdue: {
           duration: '10.10',
         },
