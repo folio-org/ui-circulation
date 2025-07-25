@@ -160,7 +160,7 @@ export const hasPositiveLostItemProcessingFeeAndInvalidItemsAgedToLostAfterOverd
   const lostItemProcessingFee = get(model, 'lostItemProcessingFee');
   const itemAgedToLost = get(model, 'itemAgedLostOverdue.duration');
 
-  return value && parseFloat(lostItemProcessingFee, 10) < 0 && parseInt(itemAgedToLost, 10) > 0;
+  return value && parseFloat(lostItemProcessingFee, 10) > 0 && parseInt(itemAgedToLost, 10) > 0;
 };
 
 // If 'Patron billed for recall after aged to lost' has a value, then
