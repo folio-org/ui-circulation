@@ -475,8 +475,8 @@
     "permission.settings.view-circulation-rules": "设置 : 流通 )  : 查看流通规则",
     "permission.settings.edit-circulation-rules": "设置 : 流通 )  : 可以创建、编辑和移除流通规则",
     "settings.patronNotices.userAddressTokenHeader": "用户地址",
-    "settings.finePolicy.reminderFees.label": "提醒费",
-    "settings.finePolicy.reminderFees.add": "添加提醒费",
+    "settings.finePolicy.reminderFees.label": "提醒费用",
+    "settings.finePolicy.reminderFees.add": "添加提醒费用",
     "settings.finePolicy.reminderFees.sequence": "顺序",
     "settings.finePolicy.reminderFees.interval": "间隔",
     "settings.finePolicy.reminderFees.frequency": "频率",
@@ -499,7 +499,7 @@
     "settings.finePolicy.reminderFees.clearPatronBlockWhenPaid": "付款后清除读者冻结",
     "settings.titleLevelRequests.tlrHoldShouldFollowCirculationRules": "当请求被流通规则冻结时，无法创建标题级别预约",
     "settings.finePolicy.reminderFees.ignoreGracePeriodHolds": "忽略预约的宽限期",
-    "settings.finePolicy.reminderFees.allowRenewalOfItemsWithReminderFees": "允许续借带有提醒费的单件",
+    "settings.finePolicy.reminderFees.allowRenewalOfItemsWithReminderFees": "允许续借带有提醒费用的单件",
     "settings.requestPolicy.errors.selectServicePoint": "请至少选择一个服务点",
     "settings.requestPolicy.requestTypes.allowAll": "允许全部取件服务点",
     "settings.requestPolicy.requestTypes.allowSome": "允许某些取件服务点",
@@ -568,6 +568,6 @@
     "settings.loanHistory.immediatelyAfterCloseOrSuspended": "{name}关闭（或暂停）后立即",
     "settings.loanHistory.afterCloseOrSuspended": "{name}关闭（或暂停）后",
     "settings.staffSlips.isRawHtml": "以原始 HTML 形式维护？",
-    "settings.loanPolicy.forUseAtLocation": "For use at location",
-    "settings.loanPolicy.holdShelfExpirationPeriod": "Hold shelf expiration period"
+    "settings.loanPolicy.forUseAtLocation": "在现场使用",
+    "settings.loanPolicy.holdShelfExpirationPeriod": "预约书架到期有效期"
 }
