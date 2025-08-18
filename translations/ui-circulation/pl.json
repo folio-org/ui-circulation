@@ -413,7 +413,7 @@
     "settings.lostItemFee.validate.hasPositiveItemsAgedToLostAfterOverdueAmount": "\"Określone koszty\" muszą być > 0 LUB \"Naliczać opłatę za zagubienie jeżeli egzemplarz został zagubiony przez system?\" musi mieć wartość Tak jeżeli \"Egzemplarz uznany za zagubiony po przeterminowaniu ma wartość > 0 lub \"Egzemplarz z wysłanym upomnieniem uznany za zagubiony po przeterminowaniu\" ma wartość > 0.",
     "settings.lostItemFee.validate.hasReplacementAllowedAndPositiveLostItemPolicyFee": "\"Opłata za zagubienie\" musi mieć wartość > 0 i \"Wymiana dozwolona\" musi mieć wartość \"Tak\" dla tej opcji",
     "settings.lostItemFee.validate.hasReplacementAllowedAndNegativeLostItemPolicyFee": "\"Wymiana dozwolona\" musi mieć wartość \"Tak\" dla tej opcji",
-    "settings.circulationRules.all": "Wszystkie",
+    "settings.circulationRules.all": "Wszystko",
     "settings.circulationRules.not": "! (nie)",
     "settings.requestManagement.allowRecallsToExtendOverdueLoans": "Pozwalaj na przedłużenie terminu zwrotu przy wysłanych upomnieniach",
     "settings.requestManagement.alternateRecallReturnInterval": "Opcjonalny czas przypomnienia dla przeterminowanych wypożyczeń",

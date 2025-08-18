@@ -203,7 +203,7 @@
     "settings.noticePolicy.notices.andEvery": "and every",
     "settings.loanPolicy.profileType.fixed": "Fixed",
     "settings.loanPolicy.profileType.rolling": "Rolling",
-    "settings.loanPolicy.renewFrom.systemDate": "System date",
+    "settings.loanPolicy.renewFrom.systemDate": "システム日付",
     "settings.loanPolicy.renewFrom.currentDueDate": "現在の期限",
     "settings.loanPolicy.shortTermLoan.currentDueDateTime": "Keep the current due date/time",
     "settings.loanPolicy.shortTermLoan.endOfTheCurrentServicePointHours": "Move to the end of the current service point hours",
