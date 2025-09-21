@@ -430,7 +430,7 @@
     "settings.checkout.userCustomFields.noValidFieldsAreDefined": "No matching custom fields have been configured",
     "settings.checkout.userCustomFields.none": "なし",
     "settings.checkout.identifiers.barcode": "バーコード",
-    "settings.checkout.identifiers.externalSystemId": "学部システムID",
+    "settings.checkout.identifiers.externalSystemId": "外部システムID",
     "settings.checkout.identifiers.id": "FOLIO record number (ID)",
     "settings.checkout.identifiers.username": "ユーザー名",
     "settings.checkout.audioTheme": "Select audio-alerts theme",
