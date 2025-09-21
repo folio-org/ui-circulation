@@ -540,7 +540,7 @@
     "settings.ViewPrintDetails.warningPopup.heading": "Wyłącz wyświetlanie szczegółów wydruku (Rewersy zamówienia)",
     "settings.ViewPrintDetails.warningPopup.message": "Wybranie opcji Potwierdź spowoduje zatrzymanie rejestrowania szczegółów zadania drukowania.",
     "settings.ViewPrintDetails.warningPopup.message.confirm": "Potwierdzić",
-    "settings.ViewPrintDetails.warningPopup.message.cancel": "Anulować",
+    "settings.ViewPrintDetails.warningPopup.message.cancel": "Anuluj",
     "settings.staffSlips.borrowerTokenHeader": "Wypożyczający",
     "settings.staffSlips.loanTokenHeader": "Wypożyczenie",
     "settings.index.titleLevelRequestsTlr": "Rezerwacje tytułu (TLR)",
