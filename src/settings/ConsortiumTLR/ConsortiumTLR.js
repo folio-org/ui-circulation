@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import {
+  useMemo,
   useEffect,
   useContext,
   useState,
@@ -14,9 +15,17 @@ import {
 } from '@folio/stripes/core';
 
 import ConsortiumTLRForm from './ConsortiumTLRForm';
-import { getLastRecordValue } from '../utils/utils';
+import {
+  useCurrentTenants,
+} from './hooks';
+import {
+  getLastRecordValue,
+  getExcludeTenant,
+  getNormalizeData,
+} from '../utils/utils';
 import {
   CONFIG_NAMES,
+  CONSORTIUM_TITLE_LEVEL_REQUESTS,
   SCOPES,
 } from '../../constants';
 
@@ -33,11 +42,17 @@ const ConsortiumTLR = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const {
+    tenants,
+  } = useCurrentTenants();
   const [saving, setSaving] = useState(false);
   const callout = useContext(CalloutContext);
   const handleSubmit = (data) => {
     setSaving(true);
-    mutator.consortiumTlr.PUT(data)
+
+    const normalizeData = getNormalizeData(data);
+
+    mutator.consortiumTlr.PUT(normalizeData)
       .then(() => {
         callout.sendCallout({ message: formatMessage({ id: 'stripes-smart-components.cm.success' }) });
 
@@ -47,8 +62,15 @@ const ConsortiumTLR = ({
         setSaving(false);
       });
   };
+  const lastRecordValue = getLastRecordValue(resources.consortiumTlr);
+  const ecsTlrFeatureEnabled = lastRecordValue?.[CONSORTIUM_TITLE_LEVEL_REQUESTS.ECS_TLR_ENABLED];
+  const excludeFromEcsRequestLendingTenantSearch = lastRecordValue?.[CONSORTIUM_TITLE_LEVEL_REQUESTS.EXCLUDE_FROM_ECS_REQUEST_LENDING_TENANT_SEARCH];
+  const excludeTenant = useMemo(() => (
+    getExcludeTenant(excludeFromEcsRequestLendingTenantSearch, tenants)
+  ), [tenants, excludeFromEcsRequestLendingTenantSearch]);
   const initialValues = {
-    ecsTlrFeatureEnabled: getLastRecordValue(resources.consortiumTlr)?.ecsTlrFeatureEnabled,
+    ecsTlrFeatureEnabled,
+    excludeFromEcsRequestLendingTenantSearch: excludeTenant,
   };
   const isEditPerm = stripes.hasPerm('tlr.consortium-tlr.edit');
 

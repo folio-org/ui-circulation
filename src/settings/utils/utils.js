@@ -8,6 +8,7 @@ import {
 import {
   checkIfUserInCentralTenant,
 } from '@folio/stripes/core';
+import {CONSORTIUM_TITLE_LEVEL_REQUESTS} from "../../constants";
 
 export const LAYERS = {
   EDIT: 'edit',
@@ -113,3 +114,35 @@ export const getLastRecordValue = (resource) => {
 
   return null;
 };
+
+export const getExcludeTenant = (excludeTenantId, tenants = []) => (
+  excludeTenantId?.length
+    ? tenants.filter(({ id }) => excludeTenantId.includes(id)).map(({ id, name }) => ({ label: name, value: id }))
+    : []
+);
+
+export const getNormalizeData = (data) => {
+  const ecsTlrFeatureEnabled = data?.[CONSORTIUM_TITLE_LEVEL_REQUESTS.ECS_TLR_ENABLED];
+  const excludeFromEcsRequestLendingTenantSearch = data?.[CONSORTIUM_TITLE_LEVEL_REQUESTS.EXCLUDE_FROM_ECS_REQUEST_LENDING_TENANT_SEARCH];
+  let excludeTenant = [];
+
+  if (ecsTlrFeatureEnabled) {
+    excludeTenant = excludeFromEcsRequestLendingTenantSearch?.length
+      ? excludeFromEcsRequestLendingTenantSearch.map(({ value }) => value)
+      : [];
+  }
+
+  return ({
+    ecsTlrFeatureEnabled,
+    excludeFromEcsRequestLendingTenantSearch: excludeTenant,
+  });
+};
+
+export const getDataOptions = (tenants = []) => (
+  tenants.map(({ id, name }) => (
+    {
+      label: name,
+      value: id,
+    }
+  ))
+);

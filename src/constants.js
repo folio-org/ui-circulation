@@ -558,6 +558,7 @@ export const TITLE_LEVEL_REQUESTS = {
 
 export const CONSORTIUM_TITLE_LEVEL_REQUESTS = {
   ECS_TLR_ENABLED: 'ecsTlrFeatureEnabled',
+  EXCLUDE_FROM_ECS_REQUEST_LENDING_TENANT_SEARCH: 'excludeFromEcsRequestLendingTenantSearch',
 };
 
 export const NOT_SELECTED = 'notSelected';

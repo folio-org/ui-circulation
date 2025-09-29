@@ -345,6 +345,7 @@
   "settings.titleLevelRequestsTlr.paneTitle": "Title level requests (TLR)",
   "settings.tlrPatronNotices.paneTitle": "TLR Patron notice templates",
   "settings.titleLevelRequests.allow": "Allow title level requests",
+  "settings.titleLevelRequests.excludeTenants": "Exclude tenants",
   "settings.consortiumTlr.allow": "Enable consortium title level requests (TLR)",
   "settings.consortiumTlr.notification": "Consortium title level requests (TLR) is disabled. The setting will become active after the \"Allow title level requests\" checkbox is <strong>checked and saved</strong> in the title level requests (TLR) setting \"(Settings > Circulation > General > Title level requests (TLR))\".",
   "settings.titleLevelRequests.createTLR": "\"Create title level request\" selected by default",
