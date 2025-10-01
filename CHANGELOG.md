@@ -1,5 +1,7 @@
 # Change history for ui-circulation
 
+* ECS requesting: Implement possibility to exclude tenants (Consortium tenant Setting). Refs UICIRC-1270.
+
 ## [11.0.1](https://github.com/folio-org/ui-circulation/tree/v11.0.1) (2024-04-14)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v11.0.0...v11.0.1)
 

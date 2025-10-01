@@ -42,6 +42,14 @@ const testIds = {
   tlrForm: 'tlrForm',
 };
 
+jest.mock('./hooks', () => ({
+  useCurrentTenants: jest.fn(() => ({
+    tenants: [
+      { id: 'tenant1', name: 'Tenant 1' },
+    ],
+    isLoading: false,
+  })),
+}));
 jest.mock('./ConsortiumTLRForm', () => jest.fn(({
   onSubmit,
 }) => (
@@ -82,6 +90,7 @@ describe('ConsortiumTLR', () => {
       onSubmit: expect.any(Function),
       initialValues: {
         ecsTlrFeatureEnabled: false,
+        excludeFromEcsRequestLendingTenantSearch: [],
       },
       isEditEnabled: true,
       tlrSettings: basicProps.resources.settings,
