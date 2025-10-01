@@ -20,7 +20,7 @@ import {
 } from './hooks';
 import {
   getLastRecordValue,
-  getExcludeTenant,
+  getExcludeTenants,
   getNormalizeData,
 } from '../utils/utils';
 import {
@@ -66,7 +66,7 @@ const ConsortiumTLR = ({
   const ecsTlrFeatureEnabled = lastRecordValue?.[CONSORTIUM_TITLE_LEVEL_REQUESTS.ECS_TLR_ENABLED];
   const excludeFromEcsRequestLendingTenantSearch = lastRecordValue?.[CONSORTIUM_TITLE_LEVEL_REQUESTS.EXCLUDE_FROM_ECS_REQUEST_LENDING_TENANT_SEARCH];
   const excludeTenant = useMemo(() => (
-    getExcludeTenant(excludeFromEcsRequestLendingTenantSearch, tenants)
+    getExcludeTenants(excludeFromEcsRequestLendingTenantSearch, tenants)
   ), [tenants, excludeFromEcsRequestLendingTenantSearch]);
   const initialValues = {
     ecsTlrFeatureEnabled,

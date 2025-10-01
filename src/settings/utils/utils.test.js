@@ -5,7 +5,7 @@ import {
   getRecordName,
   getConsortiumTlrPermission,
   getLastRecordValue,
-  getExcludeTenant,
+  getExcludeTenants,
   getNormalizeData,
   getDataOptions,
 } from './utils';
@@ -293,31 +293,31 @@ describe('utils', () => {
     });
   });
 
-  describe('getExcludeTenant', () => {
-    it('should return an empty array if no tenants or excludeTenantId are provided', () => {
-      const result = getExcludeTenant();
+  describe('getExcludeTenants', () => {
+    it('should return an empty array if no tenants or excludeTenantIds are provided', () => {
+      const result = getExcludeTenants();
 
       expect(result).toEqual([]);
     });
 
-    it('should filter tenants based on excludeTenantId and return formatted objects', () => {
+    it('should filter tenants based on excludeTenantIds and return formatted objects', () => {
       const tenants = [
         { id: '1', name: 'Tenant A' },
         { id: '2', name: 'Tenant B' },
       ];
-      const excludeTenantId = ['1'];
-      const result = getExcludeTenant(excludeTenantId, tenants);
+      const excludeTenantIds = ['1'];
+      const result = getExcludeTenants(excludeTenantIds, tenants);
 
       expect(result).toEqual([{ label: 'Tenant A', value: '1' }]);
     });
 
-    it('should return an empty array if excludeTenantId does not match any tenant', () => {
+    it('should return an empty array if excludeTenantIds does not match any tenant', () => {
       const tenants = [
         { id: '1', name: 'Tenant A' },
         { id: '2', name: 'Tenant B' },
       ];
-      const excludeTenantId = ['3'];
-      const result = getExcludeTenant(excludeTenantId, tenants);
+      const excludeTenantIds = ['3'];
+      const result = getExcludeTenants(excludeTenantIds, tenants);
 
       expect(result).toEqual([]);
     });
