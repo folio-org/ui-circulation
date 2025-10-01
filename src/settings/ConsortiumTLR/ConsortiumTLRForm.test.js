@@ -7,6 +7,13 @@ import {
 import ConsortiumTLRForm from './ConsortiumTLRForm';
 
 const basicProps = {
+  form: {
+    getState: jest.fn(() => ({
+      values: {
+        ecsTlrFeatureEnabled: true,
+      },
+    })),
+  },
   handleSubmit: jest.fn(),
   pristine: false,
   isDataSaving: false,
@@ -31,6 +38,15 @@ const labelIds = {
 const testIds = {
   consortiumTlrForm: 'consortiumTlrForm',
 };
+
+jest.mock('./hooks', () => ({
+  useCurrentTenants: jest.fn(() => ({
+    tenants: [
+      { id: 'tenant1', name: 'Tenant 1' },
+    ],
+    isLoading: false,
+  })),
+}));
 
 describe('ConsortiumTLRForm', () => {
   afterEach(() => {

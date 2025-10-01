@@ -8,6 +8,9 @@ import {
 import {
   checkIfUserInCentralTenant,
 } from '@folio/stripes/core';
+import {
+  CONSORTIUM_TITLE_LEVEL_REQUESTS,
+} from '../../constants';
 
 export const LAYERS = {
   EDIT: 'edit',
@@ -113,3 +116,67 @@ export const getLastRecordValue = (resource) => {
 
   return null;
 };
+
+/**
+ * Filters and transforms an array of tenants based on the provided exclusion list.
+ *
+ * @param {Array<string>} excludeTenantIds - An array of tenant IDs to exclude.
+ * @param {Array<{ id: string, name: string }>} tenants - The input array of tenant objects.
+ *        Each tenant object should have an `id` (unique identifier) and a `name` (display name).
+ *
+ * @returns {Array<{ label: string, value: string }>} - The filtered and transformed array of tenant options.
+ *          Each option object contains a `label` (tenant name) and a `value` (tenant ID).
+ */
+export const getExcludeTenants = (excludeTenantIds = [], tenants = []) => (
+  excludeTenantIds?.length
+    ? tenants.filter(({ id }) => excludeTenantIds.includes(id)).map(({ id, name }) => ({ label: name, value: id }))
+    : []
+);
+
+/**
+ * Normalizes the data object for Consortium Title Level Requests (TLR).
+ *
+ * @param {Object} data - The input data object containing TLR settings.
+ * @param {boolean} data.[CONSORTIUM_TITLE_LEVEL_REQUESTS.ECS_TLR_ENABLED] - Indicates if the ECS TLR feature is enabled.
+ * @param {Array<{ value: string }>} data.[CONSORTIUM_TITLE_LEVEL_REQUESTS.EXCLUDE_FROM_ECS_REQUEST_LENDING_TENANT_SEARCH] -
+ *        An array of tenant objects to exclude from ECS request lending tenant search.
+ *
+ * @returns {{"[CONSORTIUM_TITLE_LEVEL_REQUESTS.ECS_TLR_ENABLED]": *, "[CONSORTIUM_TITLE_LEVEL_REQUESTS.EXCLUDE_FROM_ECS_REQUEST_LENDING_TENANT_SEARCH]": *[]}} - The normalized data object.
+ * @returns {boolean} data.[CONSORTIUM_TITLE_LEVEL_REQUESTS.ECS_TLR_ENABLED] - Indicates if the ECS TLR feature is enabled.
+ * @returns {Array<string>} data.[CONSORTIUM_TITLE_LEVEL_REQUESTS.EXCLUDE_FROM_ECS_REQUEST_LENDING_TENANT_SEARCH] -
+ *          An array of tenant IDs to exclude from ECS request lending tenant search.
+ */
+export const getNormalizeData = (data) => {
+  const ecsTlrFeatureEnabled = data?.[CONSORTIUM_TITLE_LEVEL_REQUESTS.ECS_TLR_ENABLED];
+  const excludeFromEcsRequestLendingTenantSearch = data?.[CONSORTIUM_TITLE_LEVEL_REQUESTS.EXCLUDE_FROM_ECS_REQUEST_LENDING_TENANT_SEARCH];
+  let excludeTenant = [];
+
+  if (ecsTlrFeatureEnabled) {
+    excludeTenant = excludeFromEcsRequestLendingTenantSearch?.length
+      ? excludeFromEcsRequestLendingTenantSearch.map(({ value }) => value)
+      : [];
+  }
+
+  return ({
+    [CONSORTIUM_TITLE_LEVEL_REQUESTS.ECS_TLR_ENABLED]: ecsTlrFeatureEnabled,
+    [CONSORTIUM_TITLE_LEVEL_REQUESTS.EXCLUDE_FROM_ECS_REQUEST_LENDING_TENANT_SEARCH]: excludeTenant,
+  });
+};
+
+/**
+ * Transforms an array of tenant objects into an array of options for dropdowns or select inputs.
+ *
+ * @param {Array<{ id: string, name: string }>} tenants - The input array of tenant objects.
+ *        Each tenant object should have an `id` (unique identifier) and a `name` (display name).
+ *
+ * @returns {Array<{ label: string, value: string }>} - The transformed array of options.
+ *          Each option object contains a `label` (tenant name) and a `value` (tenant ID).
+ */
+export const getDataOptions = (tenants = []) => (
+  tenants.map(({ id, name }) => (
+    {
+      label: name,
+      value: id,
+    }
+  ))
+);

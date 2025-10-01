@@ -1,3 +1,6 @@
+import {
+  useMemo,
+} from 'react';
 import PropTypes from 'prop-types';
 import { Field } from 'react-final-form';
 import { FormattedMessage } from 'react-intl';
@@ -8,22 +11,38 @@ import {
 import stripesFinalForm from '@folio/stripes/final-form';
 import {
   Button,
+  Col,
   Checkbox,
+  MultiSelection,
   Pane,
   PaneFooter,
 } from '@folio/stripes/components';
 
-import { CONSORTIUM_TITLE_LEVEL_REQUESTS } from '../../constants';
+import {
+  useCurrentTenants,
+} from './hooks';
+import {
+  getDataOptions,
+} from '../utils/utils';
+import {
+  CONSORTIUM_TITLE_LEVEL_REQUESTS,
+} from '../../constants';
 
 import css from './ConsortiumTLRForm.css';
 
 const ConsortiumTLRForm = ({
+  form,
   handleSubmit,
   pristine,
   isEditEnabled,
   tlrSettings,
   isSaving,
 }) => {
+  const {
+    tenants,
+  } = useCurrentTenants();
+  const dataOptions = useMemo(() => getDataOptions(tenants), [tenants]);
+  const { values } = form.getState();
   const isSaveButtonDisabled = pristine || !isEditEnabled || isSaving;
   const isTlrFeatureDisabled = !tlrSettings.isPending && !tlrSettings.records[0]?.value?.titleLevelRequestsFeatureEnabled;
   const footer = (
@@ -71,12 +90,28 @@ const ConsortiumTLRForm = ({
           label={<FormattedMessage id="ui-circulation.settings.consortiumTlr.allow" />}
           component={Checkbox}
         />
+        {values?.ecsTlrFeatureEnabled &&
+          <div className={css.notification}>
+            <Col xs={12}>
+              <Field
+                id={CONSORTIUM_TITLE_LEVEL_REQUESTS.EXCLUDE_FROM_ECS_REQUEST_LENDING_TENANT_SEARCH}
+                name={CONSORTIUM_TITLE_LEVEL_REQUESTS.EXCLUDE_FROM_ECS_REQUEST_LENDING_TENANT_SEARCH}
+                label={<FormattedMessage id="ui-circulation.settings.titleLevelRequests.excludeTenants" />}
+                dataOptions={dataOptions}
+                component={MultiSelection}
+              />
+            </Col>
+          </div>
+        }
       </Pane>
     </form>
   );
 };
 
 ConsortiumTLRForm.propTypes = {
+  form: PropTypes.shape({
+    getState: PropTypes.func.isRequired,
+  }).isRequired,
   handleSubmit: PropTypes.func.isRequired,
   pristine: PropTypes.bool.isRequired,
   isSaving: PropTypes.bool.isRequired,

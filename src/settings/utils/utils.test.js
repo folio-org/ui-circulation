@@ -5,7 +5,13 @@ import {
   getRecordName,
   getConsortiumTlrPermission,
   getLastRecordValue,
+  getExcludeTenants,
+  getNormalizeData,
+  getDataOptions,
 } from './utils';
+import {
+  CONSORTIUM_TITLE_LEVEL_REQUESTS,
+} from '../../constants';
 
 describe('utils', () => {
   describe('isEditLayer', () => {
@@ -284,6 +290,97 @@ describe('utils', () => {
 
         expect(result).toBeNull();
       });
+    });
+  });
+
+  describe('getExcludeTenants', () => {
+    it('should return an empty array if no tenants or excludeTenantIds are provided', () => {
+      const result = getExcludeTenants();
+
+      expect(result).toEqual([]);
+    });
+
+    it('should filter tenants based on excludeTenantIds and return formatted objects', () => {
+      const tenants = [
+        { id: '1', name: 'Tenant A' },
+        { id: '2', name: 'Tenant B' },
+      ];
+      const excludeTenantIds = ['1'];
+      const result = getExcludeTenants(excludeTenantIds, tenants);
+
+      expect(result).toEqual([{ label: 'Tenant A', value: '1' }]);
+    });
+
+    it('should return an empty array if excludeTenantIds does not match any tenant', () => {
+      const tenants = [
+        { id: '1', name: 'Tenant A' },
+        { id: '2', name: 'Tenant B' },
+      ];
+      const excludeTenantIds = ['3'];
+      const result = getExcludeTenants(excludeTenantIds, tenants);
+
+      expect(result).toEqual([]);
+    });
+  });
+
+  describe('getNormalizeData', () => {
+    it('should return normalized data with empty excludeFromEcsRequestLendingTenantSearch if ecsTlrFeatureEnabled is false', () => {
+      const data = {
+        [CONSORTIUM_TITLE_LEVEL_REQUESTS.ECS_TLR_ENABLED]: false,
+        [CONSORTIUM_TITLE_LEVEL_REQUESTS.EXCLUDE_FROM_ECS_REQUEST_LENDING_TENANT_SEARCH]: [{ value: '1' }],
+      };
+      const result = getNormalizeData(data);
+
+      expect(result).toEqual({
+        ecsTlrFeatureEnabled: false,
+        excludeFromEcsRequestLendingTenantSearch: [],
+      });
+    });
+
+    it('should return normalized data with mapped excludeFromEcsRequestLendingTenantSearch if ecsTlrFeatureEnabled is true', () => {
+      const data = {
+        [CONSORTIUM_TITLE_LEVEL_REQUESTS.ECS_TLR_ENABLED]: true,
+        [CONSORTIUM_TITLE_LEVEL_REQUESTS.EXCLUDE_FROM_ECS_REQUEST_LENDING_TENANT_SEARCH]: [{ value: '1' }, { value: '2' }],
+      };
+      const result = getNormalizeData(data);
+
+      expect(result).toEqual({
+        ecsTlrFeatureEnabled: true,
+        excludeFromEcsRequestLendingTenantSearch: ['1', '2'],
+      });
+    });
+
+    it('should handle missing excludeFromEcsRequestLendingTenantSearch', () => {
+      const data = {
+        [CONSORTIUM_TITLE_LEVEL_REQUESTS.ECS_TLR_ENABLED]: true,
+      };
+      const result = getNormalizeData(data);
+
+      expect(result).toEqual({
+        ecsTlrFeatureEnabled: true,
+        excludeFromEcsRequestLendingTenantSearch: [],
+      });
+    });
+  });
+
+  describe('getDataOptions', () => {
+    it('should return an empty array if no tenants are provided', () => {
+      const result = getDataOptions();
+
+      expect(result).toEqual([]);
+    });
+
+    it('should map tenants to an array of objects with label and value properties', () => {
+      const tenants = [
+        { id: '1', name: 'Tenant A' },
+        { id: '2', name: 'Tenant B' },
+      ];
+      const result = getDataOptions(tenants);
+
+      expect(result).toEqual([
+        { label: 'Tenant A', value: '1' },
+        { label: 'Tenant B', value: '2' },
+      ]);
     });
   });
 });
