@@ -569,5 +569,6 @@
     "settings.loanHistory.afterCloseOrSuspended": "na {name} sluit (of wordt opgeschort)",
     "settings.staffSlips.isRawHtml": "Onderhouden als onbewerkte HTML?",
     "settings.loanPolicy.forUseAtLocation": "Voor gebruik op Locatie",
-    "settings.loanPolicy.holdShelfExpirationPeriod": "Reservering vervaldatum schap"
+    "settings.loanPolicy.holdShelfExpirationPeriod": "Reservering vervaldatum schap",
+    "settings.titleLevelRequests.excludeTenants": "Exclude tenants"
 }

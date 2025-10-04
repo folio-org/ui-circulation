@@ -458,7 +458,7 @@
     "settings.policy.denyDelete.body": "本政策无法删除，因为它正被一条或多条记录使用。",
     "settings.overdueFinePolicy.denyDelete.header": "无法删除超期罚款政策",
     "settings.lostItemPolicy.denyDelete.header": "无法删除遗失单件费用政策",
-    "settings.checkout.wildcardLookup": "在流通应用程序中按条码执行通配符查找单件 : 归还、借出 ) ",
+    "settings.checkout.wildcardLookup": "在流通应用程序中按条码执行通配符查找单件（归还、借出）",
     "settings.index.loanAnonymization": "借阅匿名化",
     "permission.settings.edit-staff-slips": "设置 : 流通 )  : 可以编辑员工单",
     "settings.validate.subject": "不应以空格开头",
@@ -569,5 +569,6 @@
     "settings.loanHistory.afterCloseOrSuspended": "{name}关闭（或暂停）后",
     "settings.staffSlips.isRawHtml": "以原始 HTML 形式维护？",
     "settings.loanPolicy.forUseAtLocation": "在现场使用",
-    "settings.loanPolicy.holdShelfExpirationPeriod": "预约书架到期有效期"
+    "settings.loanPolicy.holdShelfExpirationPeriod": "预约书架到期有效期",
+    "settings.titleLevelRequests.excludeTenants": "排除租户"
 }

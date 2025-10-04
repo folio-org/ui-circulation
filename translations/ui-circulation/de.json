@@ -569,5 +569,6 @@
     "settings.loanHistory.afterCloseOrSuspended": "Nachdem {name} geschlossen (oder ausgesetzt) wurde",
     "settings.staffSlips.isRawHtml": "Als reines HTML beibehalten?",
     "settings.loanPolicy.forUseAtLocation": "Zur Verwendung am Standort",
-    "settings.loanPolicy.holdShelfExpirationPeriod": "Abholregal-Ablaufdatum"
+    "settings.loanPolicy.holdShelfExpirationPeriod": "Abholregal-Ablaufdatum",
+    "settings.titleLevelRequests.excludeTenants": "Exclude tenants"
 }

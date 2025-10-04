@@ -569,5 +569,6 @@
     "settings.loanHistory.afterCloseOrSuspended": "after {name} closes (or is suspended)",
     "settings.staffSlips.isRawHtml": "Maintained as raw HTML?",
     "settings.loanPolicy.forUseAtLocation": "For use at location",
-    "settings.loanPolicy.holdShelfExpirationPeriod": "Hold shelf expiration period"
+    "settings.loanPolicy.holdShelfExpirationPeriod": "Hold shelf expiration period",
+    "settings.titleLevelRequests.excludeTenants": "Exclude tenants"
 }
