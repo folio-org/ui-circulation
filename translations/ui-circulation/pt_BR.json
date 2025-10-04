@@ -58,7 +58,7 @@
     "settings.checkout.paneTitle": "Outras configurações",
     "settings.checkout.validate.selectContinue": "Por favor selecione para continuar",
     "settings.checkout.save": "Salvar",
-    "settings.checkout.patronIds": "ID(s) de usuário para o escaneamento de empréstimo",
+    "settings.checkout.patronIds": "ID(s) de usuário para o escaneamento para empréstimo",
     "settings.checkout.audioAlerts": "Ativar alertas de áudio",
     "settings.checkout.no": "Não",
     "settings.checkout.yes": "Sim",
@@ -151,7 +151,7 @@
     "settings.requestPolicy.entryLabel": "Política de pedido",
     "settings.requestPolicy.deletPolicy": "Excluir política de pedido",
     "settings.requestPolicy.generalInformation": "Informações gerais",
-    "settings.requestPolicy.policyName": "Nome da política de pedido",
+    "settings.requestPolicy.policyName": "Nome da política de requisição",
     "settings.requestPolicy.policyDescription": "Descrição",
     "settings.requestPolicy.policyTypes": "Tipos de requisição permitidos",
     "settings.requestPolicy.saveAndClose": "Salvar",
@@ -449,7 +449,7 @@
     "settings.titleLevelRequests.confirmationNotice": "Aviso de confirmação",
     "settings.titleLevelRequests.cancellationNotice": "Aviso de cancelamento",
     "settings.titleLevelRequests.expirationNotice": "Aviso de expiração",
-    "settings.titleLevelRequests.desription": "Selecione modelos para os seguintes avisos de cliente. Se nenhum modelo for selecionado, nenhum aviso será enviado.",
+    "settings.titleLevelRequests.desription": "Selecione modelos para os seguintes avisos ao usuário. Se nenhum modelo for selecionado, nenhum aviso será enviado.",
     "settings.titleLevelRequests.defaultTemplateValue": "Selecione o aviso",
     "settings.titleLevelRequests.forbiddenDisableTlrModal.title": "Não é possível alterar \"Permitir requisições de nível de título\"",
     "settings.titleLevelRequests.forbiddenDisableTlrModal.description": "\"Permitir requisições de nível de título\" não pode ser alterado porque está em uso por uma ou mais requisições",
@@ -569,5 +569,6 @@
     "settings.loanHistory.afterCloseOrSuspended": "após fechamento (ou suspensão) de {name}",
     "settings.staffSlips.isRawHtml": "Manter como HTML bruto?",
     "settings.loanPolicy.forUseAtLocation": "Para uso no local",
-    "settings.loanPolicy.holdShelfExpirationPeriod": "Período de vencimento da reserva"
+    "settings.loanPolicy.holdShelfExpirationPeriod": "Período de vencimento da reserva",
+    "settings.titleLevelRequests.excludeTenants": "Excluir locatários"
 }

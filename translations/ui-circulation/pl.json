@@ -569,5 +569,6 @@
     "settings.loanHistory.afterCloseOrSuspended": "Po {name} zamknięciu (lub zawieszeniu)",
     "settings.staffSlips.isRawHtml": "Maintained as raw HTML?",
     "settings.loanPolicy.forUseAtLocation": "Do użytku w lokalizacji",
-    "settings.loanPolicy.holdShelfExpirationPeriod": "Okres odbioru z biblioteki"
+    "settings.loanPolicy.holdShelfExpirationPeriod": "Okres odbioru z biblioteki",
+    "settings.titleLevelRequests.excludeTenants": "Exclude tenants"
 }
