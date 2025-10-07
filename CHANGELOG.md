@@ -12,6 +12,10 @@
 * In loan-policy editor, support "For use at location" and "Hold shelf expiry period". Fixes UICIRC-1239.
 * Hide button when there are no permission for it. Refs UICIRC-1130.
 * User gets an error when try to fill in Lost item processing fee field with > 0. Refs UICIRC-1249.
+
+## [11.0.2](https://github.com/folio-org/ui-circulation/tree/v11.0.2) (2024-10-07)
+[Full Changelog](https://github.com/folio-org/ui-circulation/compare/v11.0.1...v11.0.2)
+
 * ECS requesting: Implement possibility to exclude tenants (Consortium tenant Setting). Refs UICIRC-1270.
 * Add includeShadow and includeShadowLocations parameters to circulation queries to make shadow locations available for mapping in circulation rules. Refs UICIRC-1271.
 
