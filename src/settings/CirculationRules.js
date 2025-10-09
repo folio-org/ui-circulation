@@ -147,6 +147,7 @@ export class CirculationRules extends React.Component {
       params: {
         query: 'cql.allRecords=1 sortby code name',
         limit: (q, p, r, l, props) => props?.stripes?.config?.maxUnpagedResourceCount || MAX_UNPAGED_RESOURCE_COUNT,
+        includeShadowLocations: true,
       },
       resourceShouldRefresh: true,
     },
@@ -157,6 +158,7 @@ export class CirculationRules extends React.Component {
       params: {
         query: 'cql.allRecords=1 sortby name',
         limit: (q, p, r, l, props) => props?.stripes?.config?.maxUnpagedResourceCount || MAX_UNPAGED_RESOURCE_COUNT,
+        includeShadow: true,
       },
       resourceShouldRefresh: true,
     },
@@ -167,6 +169,7 @@ export class CirculationRules extends React.Component {
       params: {
         query: 'cql.allRecords=1 sortby name',
         limit: (q, p, r, l, props) => props?.stripes?.config?.maxUnpagedResourceCount || MAX_UNPAGED_RESOURCE_COUNT,
+        includeShadow: true,
       },
       resourceShouldRefresh: true,
     },
@@ -177,6 +180,7 @@ export class CirculationRules extends React.Component {
       params: {
         query: 'cql.allRecords=1 sortby name',
         limit: (q, p, r, l, props) => props?.stripes?.config?.maxUnpagedResourceCount || MAX_UNPAGED_RESOURCE_COUNT,
+        includeShadow: true,
       },
       resourceShouldRefresh: true,
     },
