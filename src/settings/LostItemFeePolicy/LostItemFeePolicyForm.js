@@ -137,6 +137,7 @@ class LostItemFeePolicyForm extends React.Component {
 }
 
 export default stripesFinalForm({
+  keepDirtyOnReinitialize: true,
   navigationCheck: true,
   validate: model => validateLostItemFeePolicy(transformModelBooleans(model)),
 })(injectIntl(LostItemFeePolicyForm));
