@@ -191,6 +191,7 @@ PatronNoticeForm.propTypes = {
 };
 
 export default stripesFinalForm({
+  keepDirtyOnReinitialize: true,
   navigationCheck: true,
   validate: validatePatronNoticeTemplate,
   subscription: { values: true },

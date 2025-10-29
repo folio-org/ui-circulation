@@ -142,6 +142,7 @@ class FinePolicyForm extends React.Component {
 }
 
 export default stripesFinalForm({
+  keepDirtyOnReinitialize: true,
   navigationCheck: true,
   validate: validateFinePolicy,
 })(injectIntl(FinePolicyForm));

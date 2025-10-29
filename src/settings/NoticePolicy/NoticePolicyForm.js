@@ -124,6 +124,7 @@ class NoticePolicyForm extends React.Component {
 }
 
 export default stripesFinalForm({
+  keepDirtyOnReinitialize: true,
   navigationCheck: true,
   validate: validateNoticePolicy,
   subscription: { values: true },
