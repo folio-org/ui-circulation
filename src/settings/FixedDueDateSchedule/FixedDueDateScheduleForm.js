@@ -264,6 +264,7 @@ class FixedDueDateScheduleForm extends React.Component {
 }
 
 export default stripesFinalForm({
+  keepDirtyOnReinitialize: true,
   navigationCheck: true,
   validate: validateFixedDueDateSchedule,
 })(FixedDueDateScheduleForm);

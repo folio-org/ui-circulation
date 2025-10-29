@@ -221,6 +221,7 @@ class LoanPolicyForm extends React.Component {
 }
 
 export default stripesFinalForm({
+  keepDirtyOnReinitialize: true,
   navigationCheck: true,
   validate: validateLoanPolicy,
   subscription: { values: true },
