@@ -458,7 +458,7 @@
     "settings.policy.denyDelete.body": "Esta política não pode ser excluída, pois está em uso por um ou mais registros.",
     "settings.overdueFinePolicy.denyDelete.header": "Não é possível excluir a política de multas vencidas",
     "settings.lostItemPolicy.denyDelete.header": "Não é possível excluir a política de taxa de item perdido",
-    "settings.checkout.wildcardLookup": "Realizar pesquisa curinga de itens por código de barras em aplicativos de circulação (Empréstimo, Devolução)",
+    "settings.checkout.wildcardLookup": "Realizar consulta curinga de itens por código de barras em aplicativos de circulação (Empréstimo, Devolução)",
     "settings.index.loanAnonymization": "Anonimização de empréstimos",
     "permission.settings.edit-staff-slips": "Configurações (Circulação): Pode editar recibos de funcionários",
     "settings.validate.subject": "Não deve começar com um espaço",

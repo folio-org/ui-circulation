@@ -548,11 +548,11 @@
     "settings.index.consortiumTLR": "Consortium titel niveau aanvragen (TLR)",
     "settings.title.titleLevelRequestsTlr": "Aanvragen op titelniveau (TLR)",
     "settings.title.tlrPatronNotices": "TLR Templates voor aankondigingen van Gebruikers",
-    "settings.title.consortiumTLR": "Consortium titel niveau aanvragen",
+    "settings.title.consortiumTLR": "Consortium titel niveau aanvragen (TRL)",
     "settings.titleLevelRequestsTlr.paneTitle": "Titelniveau-aanvragen (TLR)",
     "settings.tlrPatronNotices.paneTitle": "TLR Gebruiker kennisgeving templates",
     "settings.consortiumTlr.allow": "Consortiumtitel-niveau aanvragen (TLR) inschakelen",
-    "settings.consortiumTlr.notification": "Consortium titel niveau aanvragen is uitgeschakeld. De instelling wordt actief nadat het selectievakje \"Sta titel niveau aanvragen toe\" is <strong>aangevinkt en opgeslagen</strong> in de titel niveau aanvragen instelling \"(Instellingen > Circulatie > Algemeen > Titel niveau aanvragen)\".",
+    "settings.consortiumTlr.notification": "Consortium titel niveau aanvragen (TLR) is uitgeschakeld. De instelling wordt actief nadat het selectievakje \"Sta titel niveau aanvragen toe\" is <strong>checked and saved</strong> in de titel niveau aanvragen instelling \"(Instellingen > Circulatie > Algemeen > Titel niveau aanvragen (TRL))\".",
     "permission.settings.view-titleLevelRequests": "Instellingen (Circulatie): Titel niveau aanvraagweergave",
     "permission.settings.view-circulation-settings": "Instellingen (Circulatie): Kan alle circulatie-instellingen bekijken",
     "permission.settings.view-other-settings": "Instellingen (Circulatie): Kan andere instellingen bekijken",
@@ -570,5 +570,5 @@
     "settings.staffSlips.isRawHtml": "Onderhouden als onbewerkte HTML?",
     "settings.loanPolicy.forUseAtLocation": "Voor gebruik op Locatie",
     "settings.loanPolicy.holdShelfExpirationPeriod": "Reservering vervaldatum schap",
-    "settings.titleLevelRequests.excludeTenants": "Exclude tenants"
+    "settings.titleLevelRequests.excludeTenants": "Huurders uitsluiten"
 }
