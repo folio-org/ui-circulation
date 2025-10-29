@@ -469,7 +469,7 @@
     "settings.cancelReasons.deleteEntry": "Usuń powód anulowania",
     "settings.cancelReasons.termDeleted": "Powód anulowania <b>{term}</b> został pomyślnie <b>usunięty</b>",
     "settings.cancelReasons.termWillBeDeleted": "The cancel reason <b>{term}</b> will be <b>deleted.</b>",
-    "settings.patronNotices.generalInformation": "General information",
+    "settings.patronNotices.generalInformation": "Informacje ogólne",
     "settings.noticePolicy.feeFineNotices.realTime.longTerm": "Wysyłaj w trybie nocnym z wieloma opłatami za zagubione przez czytelnika egzemplarze.",
     "settings.noticePolicy.feeFineNotices.realTime.shortTerm": "Wysyłaj w ciągu dnia powiadomienia z każdą opłatą za zagubiony egzemplarz oddzielnie.",
     "permission.settings.view-circulation-rules": "Ustawienia (Udostępnianie): wyświetlanie reguł udostępniania",
