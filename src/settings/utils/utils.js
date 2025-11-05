@@ -49,6 +49,8 @@ export const validateUniqueNameById = async ({
 
 export const isEditLayer = (layer = '') => (layer.includes(LAYERS.EDIT));
 
+export const isAddLayer = (layer = '') => (layer.includes(LAYERS.ADD));
+
 export const getRecordName = ({
   entryList,
   location,

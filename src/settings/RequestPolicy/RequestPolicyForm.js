@@ -28,6 +28,7 @@ import {
 } from '../components';
 
 import {
+  isAddLayer,
   isEditLayer,
   validateUniqueNameById,
 } from '../utils/utils';
@@ -131,23 +132,26 @@ class RequestPolicyForm extends React.Component {
       },
       location,
     } = this.props;
-    const allowedServicePoints = requestPolicies.records
-      .find(({ id }) => location.pathname.includes(id))?.allowedServicePoints;
 
-    if (allowedServicePoints) {
-      const selectedRequestTypes = Object.keys(allowedServicePoints);
-      const rules = {};
+    if (!isAddLayer(location.search)) {
+      const allowedServicePoints = requestPolicies.records
+        .find(({ id }) => location.pathname.includes(id))?.allowedServicePoints;
 
-      selectedRequestTypes.forEach(requestType => {
-        rules[requestType] = REQUEST_TYPE_RULES.ALLOW_SOME;
-      });
+      if (allowedServicePoints) {
+        const selectedRequestTypes = Object.keys(allowedServicePoints);
+        const rules = {};
 
-      this.setState((prevState) => ({
-        requestTypesRules: {
-          ...prevState.requestTypesRules,
-          ...rules,
-        },
-      }));
+        selectedRequestTypes.forEach(requestType => {
+          rules[requestType] = REQUEST_TYPE_RULES.ALLOW_SOME;
+        });
+
+        this.setState((prevState) => ({
+          requestTypesRules: {
+            ...prevState.requestTypesRules,
+            ...rules,
+          },
+        }));
+      }
     }
   };
 

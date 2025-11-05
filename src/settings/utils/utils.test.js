@@ -1,5 +1,6 @@
 import {
   LAYERS,
+  isAddLayer,
   isEditLayer,
   validateUniqueNameById,
   getRecordName,
@@ -14,6 +15,20 @@ import {
 } from '../../constants';
 
 describe('utils', () => {
+  describe('isAddLayer', () => {
+    it('should return true if layer is add', () => {
+      expect(isAddLayer(LAYERS.ADD)).toBe(true);
+    });
+
+    it('should return false if layer is not add', () => {
+      expect(isAddLayer('any')).toBe(false);
+    });
+
+    it('should return false if layer is not provided', () => {
+      expect(isAddLayer()).toBe(false);
+    });
+  });
+
   describe('isEditLayer', () => {
     it('should return true if layer is edit', () => {
       expect(isEditLayer(LAYERS.EDIT)).toBe(true);
