@@ -28,7 +28,7 @@ import {
 } from '../components';
 
 import {
-  isAddLayer,
+  isCloneLayer,
   isEditLayer,
   validateUniqueNameById,
 } from '../utils/utils';
@@ -133,7 +133,8 @@ class RequestPolicyForm extends React.Component {
       location,
     } = this.props;
 
-    if (!isAddLayer(location.search)) {
+
+    if (isEditLayer(location.search) || isCloneLayer(location.search)) {
       const allowedServicePoints = requestPolicies.records
         .find(({ id }) => location.pathname.includes(id))?.allowedServicePoints;
 

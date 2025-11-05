@@ -224,7 +224,7 @@ describe('RequestPolicyForm', () => {
           initialValues={initialValues}
           form={form}
           location={{
-            search: 'edit',
+            search: '?layer=edit',
             pathname,
           }}
         />
@@ -368,7 +368,7 @@ describe('RequestPolicyForm', () => {
     const props = {
       ...defaultProps,
       location: {
-        search: 'edit',
+        search: '?layer=edit',
         pathname,
       },
     };

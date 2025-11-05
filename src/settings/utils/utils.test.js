@@ -1,7 +1,8 @@
 import {
   LAYERS,
-  isAddLayer,
+  isSelectedLayer,
   isEditLayer,
+  isCloneLayer,
   validateUniqueNameById,
   getRecordName,
   getConsortiumTlrPermission,
@@ -15,27 +16,45 @@ import {
 } from '../../constants';
 
 describe('utils', () => {
-  describe('isAddLayer', () => {
-    it('should return true if layer is add', () => {
-      expect(isAddLayer(LAYERS.ADD)).toBe(true);
+  describe('isSelectedLayer', () => {
+    it('should return true if layer is match', () => {
+      expect(isSelectedLayer(LAYERS.ADD, '?layer=add')).toBe(true);
     });
 
-    it('should return false if layer is not add', () => {
-      expect(isAddLayer('any')).toBe(false);
+    it('should return false if layer is do not match', () => {
+      expect(isSelectedLayer(LAYERS.ADD, '?layer=edit')).toBe(false);
+    });
+
+    it('should return false if locationSearch is not provided', () => {
+      expect(isSelectedLayer(LAYERS.ADD)).toBe(false);
+    });
+
+    it('should return false if layer and locationSearch is not provided', () => {
+      expect(isSelectedLayer()).toBe(false);
+    });
+  });
+
+  describe('isCloneLayer', () => {
+    it('should return true if layer is clone', () => {
+      expect(isCloneLayer('?layer=clone')).toBe(true);
+    });
+
+    it('should return false if layer is not clone', () => {
+      expect(isCloneLayer('?layer=edit')).toBe(false);
     });
 
     it('should return false if layer is not provided', () => {
-      expect(isAddLayer()).toBe(false);
+      expect(isCloneLayer()).toBe(false);
     });
   });
 
   describe('isEditLayer', () => {
     it('should return true if layer is edit', () => {
-      expect(isEditLayer(LAYERS.EDIT)).toBe(true);
+      expect(isEditLayer('?layer=edit')).toBe(true);
     });
 
     it('should return false if layer is not edit', () => {
-      expect(isEditLayer('any')).toBe(false);
+      expect(isEditLayer('?layer=add')).toBe(false);
     });
 
     it('should return false if layer is not provided', () => {
