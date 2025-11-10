@@ -203,7 +203,7 @@ describe('FixedDueDateScheduleForm', () => {
       pristine: false,
       initialValues,
       location: {
-        search: 'edit',
+        search: '?layer=edit',
       },
     };
 
@@ -351,7 +351,7 @@ describe('FixedDueDateScheduleForm', () => {
     const props = {
       ...defaultProps,
       location: {
-        search: 'edit',
+        search: '?layer=edit',
       },
     };
 

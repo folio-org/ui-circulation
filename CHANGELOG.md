@@ -14,6 +14,7 @@
 * User gets an error when try to fill in Lost item processing fee field with > 0. Refs UICIRC-1249.
 * Fixed a problem with clearing field values. Refs UICIRC-1287.
 * Added a new triggering event for hold notices. Refs UICIRC-1245.
+* Fixed new request policy form applied settings from previously edited request policy. Refs UICIRC-1293.
 
 ## [11.0.2](https://github.com/folio-org/ui-circulation/tree/v11.0.2) (2024-10-07)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v11.0.1...v11.0.2)

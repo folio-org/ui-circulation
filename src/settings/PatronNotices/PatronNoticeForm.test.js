@@ -207,7 +207,7 @@ describe('PatronNoticeForm', () => {
           initialValues={initialValues}
           stripes={testStripes}
           location={{
-            search: 'edit',
+            search: '?layer=edit',
           }}
         />
       );
@@ -253,7 +253,7 @@ describe('PatronNoticeForm', () => {
           {...defaultTestProps}
           stripes={testStripes}
           location={{
-            search: 'edit',
+            search: '?layer=edit',
           }}
         />
       );
@@ -268,7 +268,7 @@ describe('PatronNoticeForm', () => {
     const props = {
       ...defaultTestProps,
       location: {
-        search: 'edit',
+        search: '?layer=edit',
       },
     };
 

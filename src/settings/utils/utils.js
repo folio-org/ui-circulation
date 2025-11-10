@@ -47,7 +47,16 @@ export const validateUniqueNameById = async ({
   return error;
 };
 
-export const isEditLayer = (layer = '') => (layer.includes(LAYERS.EDIT));
+export const isSelectedLayer = (layer = '', locationSearch = '') => {
+  const query = new URLSearchParams(locationSearch);
+  const currentLayer = query.get('layer');
+
+  return currentLayer === layer;
+};
+
+export const isEditLayer = (locationSearch = '') => isSelectedLayer(LAYERS.EDIT, locationSearch);
+
+export const isCloneLayer = (locationSearch = '') => isSelectedLayer(LAYERS.CLONE, locationSearch);
 
 export const getRecordName = ({
   entryList,
