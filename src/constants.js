@@ -245,6 +245,7 @@ export const loanUserInitiatedEventsIds = {
   RENEWED: 'Renewed',
   MANUAL_DUE_DATE_CHANGE: 'Manual due date change',
   ITEM_RECALLED: 'Item recalled',
+  HOLD_REQUEST_FOR_ITEM: 'Hold request for item',
 };
 
 export const loanTimeBasedEventsIds = {
@@ -276,6 +277,10 @@ export const loanNoticesTriggeringEvents = [
   {
     value: loanUserInitiatedEventsIds.ITEM_RECALLED,
     label: 'ui-circulation.settings.noticePolicy.loanNotices.itemRecalled',
+  },
+  {
+    value: loanUserInitiatedEventsIds.HOLD_REQUEST_FOR_ITEM,
+    label: 'ui-circulation.settings.noticePolicy.loanNotices.holdRequestForItem',
   },
   {
     value: loanTimeBasedEventsIds.AGED_TO_LOST,
