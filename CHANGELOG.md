@@ -15,6 +15,7 @@
 * Fixed a problem with clearing field values. Refs UICIRC-1287.
 * Added a new triggering event for hold notices. Refs UICIRC-1245.
 * Fixed new request policy form applied settings from previously edited request policy. Refs UICIRC-1293.
+* Added global permissions for get read-access to values such as tenant’s locale, timezone, and currency. Refs UICIRC-1296.
 
 ## [11.0.2](https://github.com/folio-org/ui-circulation/tree/v11.0.2) (2024-10-07)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v11.0.1...v11.0.2)
