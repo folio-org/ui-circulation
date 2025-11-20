@@ -570,5 +570,6 @@
     "settings.staffSlips.isRawHtml": "Udržovat jako surové HTML?",
     "settings.loanPolicy.forUseAtLocation": "Pro použití v lokaci",
     "settings.loanPolicy.holdShelfExpirationPeriod": "Doba pro vyzvednutí rezervace z regálu",
-    "settings.titleLevelRequests.excludeTenants": "Vyloučení nájemců"
+    "settings.titleLevelRequests.excludeTenants": "Vyloučení nájemců",
+    "settings.noticePolicy.loanNotices.holdRequestForItem": "Hold request for item"
 }

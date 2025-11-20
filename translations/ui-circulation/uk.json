@@ -570,5 +570,6 @@
     "settings.staffSlips.isRawHtml": "Підтримується як необроблений HTML?",
     "settings.loanPolicy.forUseAtLocation": "Для використання у місці розміщення",
     "settings.loanPolicy.holdShelfExpirationPeriod": "Період для терміну зберігання на бронеполиці",
-    "settings.titleLevelRequests.excludeTenants": "Exclude tenants"
+    "settings.titleLevelRequests.excludeTenants": "Exclude tenants",
+    "settings.noticePolicy.loanNotices.holdRequestForItem": "Hold request for item"
 }
