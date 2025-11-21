@@ -570,5 +570,6 @@
     "settings.staffSlips.isRawHtml": "Onderhouden als onbewerkte HTML?",
     "settings.loanPolicy.forUseAtLocation": "Voor gebruik op Locatie",
     "settings.loanPolicy.holdShelfExpirationPeriod": "Reservering vervaldatum schap",
-    "settings.titleLevelRequests.excludeTenants": "Huurders uitsluiten"
+    "settings.titleLevelRequests.excludeTenants": "Huurders uitsluiten",
+    "settings.noticePolicy.loanNotices.holdRequestForItem": "Hold request for item"
 }

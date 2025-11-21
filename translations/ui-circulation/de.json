@@ -570,5 +570,6 @@
     "settings.staffSlips.isRawHtml": "Als reines HTML beibehalten?",
     "settings.loanPolicy.forUseAtLocation": "Zur Verwendung am Standort",
     "settings.loanPolicy.holdShelfExpirationPeriod": "Abholregal-Ablaufdatum",
-    "settings.titleLevelRequests.excludeTenants": "Mandanten ausschließen"
+    "settings.titleLevelRequests.excludeTenants": "Mandanten ausschließen",
+    "settings.noticePolicy.loanNotices.holdRequestForItem": "Hold request for item"
 }

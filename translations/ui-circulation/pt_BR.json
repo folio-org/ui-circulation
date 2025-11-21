@@ -570,5 +570,6 @@
     "settings.staffSlips.isRawHtml": "Manter como HTML bruto?",
     "settings.loanPolicy.forUseAtLocation": "Para uso no local",
     "settings.loanPolicy.holdShelfExpirationPeriod": "Período de vencimento da reserva",
-    "settings.titleLevelRequests.excludeTenants": "Excluir locatários"
+    "settings.titleLevelRequests.excludeTenants": "Excluir locatários",
+    "settings.noticePolicy.loanNotices.holdRequestForItem": "Solicitação de reserva do item"
 }
