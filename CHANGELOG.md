@@ -1,5 +1,8 @@
 # Change history for ui-circulation
 
+## [11.0.3](https://github.com/folio-org/ui-circulation/tree/v11.0.3) (2024-12-08)
+[Full Changelog](https://github.com/folio-org/ui-circulation/compare/v11.0.2...v11.0.3)
+
 * Fixed a problem with clearing field values. Refs UICIRC-1287.
 
 ## [11.0.2](https://github.com/folio-org/ui-circulation/tree/v11.0.2) (2024-10-07)
