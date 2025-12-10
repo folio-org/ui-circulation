@@ -15,6 +15,10 @@
 * Added a new triggering event for hold notices. Refs UICIRC-1245.
 * Fixed new request policy form applied settings from previously edited request policy. Refs UICIRC-1293.
 * Added global permissions for get read-access to values such as tenant’s locale, timezone, and currency. Refs UICIRC-1296.
+
+## [11.0.4](https://github.com/folio-org/ui-circulation/tree/v11.0.4) (2024-12-10)
+[Full Changelog](https://github.com/folio-org/ui-circulation/compare/v11.0.3...v11.0.4)
+
 * Add includeShadow and includeShadowLocations parameters to circulation queries to make shadow locations available for mapping in circulation rules. Refs UICIRC-1271.
 
 ## [11.0.3](https://github.com/folio-org/ui-circulation/tree/v11.0.3) (2024-12-08)
