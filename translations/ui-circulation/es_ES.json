@@ -571,5 +571,5 @@
     "settings.loanPolicy.forUseAtLocation": "For use at location",
     "settings.loanPolicy.holdShelfExpirationPeriod": "Hold shelf expiration period",
     "settings.titleLevelRequests.excludeTenants": "Exclude tenants",
-    "settings.noticePolicy.loanNotices.holdRequestForItem": "Hold request for item"
+    "settings.noticePolicy.loanNotices.holdRequestForItem": "Solicitud de reserva de ejemplar"
 }
