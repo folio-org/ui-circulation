@@ -17,6 +17,10 @@
 }
 
 .circulationRulesFormBody {
-  flex-grow: 1 !important;
+  flex-grow: 1;
   position: relative;
+}
+
+.circulationRulesFormBody[class*="row"] {
+  flex-grow: 1;
 }
