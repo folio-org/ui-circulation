@@ -1,8 +1,10 @@
 import {
   render,
 } from '@folio/jest-config-stripes/testing-library/react';
-import { ConfigManager } from '@folio/stripes/smart-components';
-import { TitleManager } from '@folio/stripes/core';
+
+import {
+  TitleManager,
+} from '@folio/stripes/core';
 
 import TitleLevelRequests from './TitleLevelRequests';
 import TitleLevelRequestsForm from './TitleLevelRequestsForm';
@@ -11,57 +13,58 @@ import {
   normalizeData,
 } from './utils';
 import {
+  CirculationSettingsConfig,
+} from '../components';
+
+import {
   CONFIG_NAMES,
-  SCOPES,
 } from '../../constants';
 
-describe('TitleLevelRequests', () => {
-  const mockedStripes = {
-    connect: jest.fn((component) => component),
-  };
-  const labelIds = {
-    generalTitle: 'ui-circulation.settings.title.general',
-    titleLevelRequestsTitle: 'ui-circulation.settings.title.titleLevelRequestsTlr',
-    paneTitle: 'ui-circulation.settings.titleLevelRequestsTlr.paneTitle',
-  };
+jest.mock('@folio/stripes/core', () => ({
+  TitleManager: jest.fn(({ children }) => <>{children}</>),
+}));
+jest.mock('./TitleLevelRequestsForm', () => jest.fn(() => null));
+jest.mock('../components', () => ({
+  CirculationSettingsConfig: jest.fn(() => null),
+}));
 
+const labelIds = {
+  generalTitle: 'ui-circulation.settings.title.general',
+  titleLevelRequestsTlrTitle: 'ui-circulation.settings.title.titleLevelRequestsTlr',
+  paneTitle: 'ui-circulation.settings.titleLevelRequestsTlr.paneTitle',
+};
+
+describe('TitleLevelRequests', () => {
   beforeEach(() => {
-    render(
-      <TitleLevelRequests
-        stripes={mockedStripes}
-      />
-    );
+    jest.clearAllMocks();
+
+    render(<TitleLevelRequests />);
   });
 
   afterEach(() => {
-    ConfigManager.mockClear();
-    mockedStripes.connect.mockClear();
+    jest.restoreAllMocks();
   });
 
-  it('should connect "ConfigManager" to stripes', () => {
-    expect(mockedStripes.connect).toHaveBeenLastCalledWith(ConfigManager);
+  it('should render TitleManager with correct props', () => {
+    expect(TitleManager).toHaveBeenCalledWith(
+      expect.objectContaining({
+        page: labelIds.generalTitle,
+        record: labelIds.titleLevelRequestsTlrTitle,
+      }),
+      {}
+    );
   });
 
-  it('should execute "ConfigManager" with passed props', () => {
-    const expectedResult = {
-      label: labelIds.paneTitle,
-      scope: SCOPES.CIRCULATION,
-      configName: CONFIG_NAMES.GENERAL_TLR,
-      configFormComponent: TitleLevelRequestsForm,
-      stripes: mockedStripes,
-      getInitialValues,
-      onBeforeSave: normalizeData,
-    };
-
-    expect(ConfigManager).toHaveBeenLastCalledWith(expectedResult, {});
-  });
-
-  it('should trigger TitleManager with correct props', () => {
-    const expectedProps = {
-      page: labelIds.generalTitle,
-      record: labelIds.titleLevelRequestsTitle,
-    };
-
-    expect(TitleManager).toHaveBeenCalledWith(expect.objectContaining(expectedProps), {});
+  it('should render CirculationSettingsConfig with correct props', () => {
+    expect(CirculationSettingsConfig).toHaveBeenCalledWith(
+      expect.objectContaining({
+        label: labelIds.paneTitle,
+        configName: CONFIG_NAMES.GENERAL_TLR,
+        configFormComponent: TitleLevelRequestsForm,
+        getInitialValues,
+        onBeforeSave: normalizeData,
+      }),
+      {}
+    );
   });
 });

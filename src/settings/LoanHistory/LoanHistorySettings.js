@@ -1,25 +1,24 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { injectIntl } from 'react-intl';
 import {
-  head,
-  isEmpty,
+  useIntl,
+} from 'react-intl';
+import {
   cloneDeep,
 } from 'lodash';
 
 import {
-  stripesShape,
-  withStripes,
   TitleManager,
 } from '@folio/stripes/core';
-import { ConfigManager } from '@folio/stripes/smart-components';
 
+import {
+  CirculationSettingsConfig,
+} from '../components';
 import normalize from './utils/normalize';
 import LoanHistoryForm from './LoanHistoryForm';
+import {
+  CONFIG_NAMES,
+} from '../../constants';
 
 export const getInitialValues = (settings) => {
-  let config;
-  const value = isEmpty(settings) ? '' : head(settings).value;
   const defaultConfig = {
     closingType: {
       loan: null,
@@ -32,13 +31,10 @@ export const getInitialValues = (settings) => {
     treatEnabled: false,
   };
 
-  try {
-    config = { ...defaultConfig, ...JSON.parse(value) };
-  } catch (e) {
-    config = defaultConfig;
-  }
-
-  return { ...config };
+  return {
+    ...defaultConfig,
+    ...settings,
+  };
 };
 
 export const normalizeData = (value) => {
@@ -55,47 +51,28 @@ export const normalizeData = (value) => {
     ? loanHistorySettings.closingType.feeFine
     : null;
 
-  return JSON.stringify(loanHistorySettings);
+  return loanHistorySettings;
 };
 
-class LoanHistorySettings extends React.Component {
-  static propTypes = {
-    stripes: stripesShape.isRequired,
-    intl: PropTypes.shape({
-      formatMessage: PropTypes.func.isRequired,
-    }).isRequired,
-  };
+const LoanHistorySettings = () => {
+  const {
+    formatMessage,
+  } = useIntl();
 
-  constructor(props) {
-    super(props);
+  return (
+    <TitleManager
+      page={formatMessage({ id: 'ui-circulation.settings.title.general' })}
+      record={formatMessage({ id: 'ui-circulation.settings.title.loanAnonymization' })}
+    >
+      <CirculationSettingsConfig
+        label={formatMessage({ id: 'ui-circulation.settings.index.loanAnonymization' })}
+        configName={CONFIG_NAMES.LOAN_HISTORY}
+        configFormComponent={LoanHistoryForm}
+        getInitialValues={getInitialValues}
+        onBeforeSave={normalizeData}
+      />
+    </TitleManager>
+  );
+};
 
-    this.configManager = props.stripes.connect(ConfigManager);
-  }
-
-  render() {
-    const {
-      intl: {
-        formatMessage,
-      },
-    } = this.props;
-
-    return (
-      <TitleManager
-        page={formatMessage({ id: 'ui-circulation.settings.title.general' })}
-        record={formatMessage({ id: 'ui-circulation.settings.title.loanAnonymization' })}
-      >
-        <this.configManager
-          label={formatMessage({ id: 'ui-circulation.settings.index.loanAnonymization' })}
-          moduleName="LOAN_HISTORY"
-          configName="loan_history"
-          configFormComponent={LoanHistoryForm}
-          stripes={this.props.stripes}
-          getInitialValues={getInitialValues}
-          onBeforeSave={normalizeData}
-        />
-      </TitleManager>
-    );
-  }
-}
-
-export default injectIntl(withStripes(LoanHistorySettings));
+export default LoanHistorySettings;

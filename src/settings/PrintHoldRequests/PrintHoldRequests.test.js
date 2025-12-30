@@ -1,8 +1,10 @@
 import {
   render,
 } from '@folio/jest-config-stripes/testing-library/react';
-import { TitleManager } from '@folio/stripes/core';
-import { ConfigManager } from '@folio/stripes/smart-components';
+
+import {
+  TitleManager,
+} from '@folio/stripes/core';
 
 import PrintHoldRequests from './PrintHoldRequests';
 import PrintHoldRequestsForm from './PrintHoldRequestsForm';
@@ -11,57 +13,58 @@ import {
   normalizeData,
 } from './utils';
 import {
-  MODULE_NAMES,
+  CirculationSettingsConfig,
+} from '../components';
+
+import {
   CONFIG_NAMES,
 } from '../../constants';
 
-describe('PrintHoldRequests', () => {
-  const paneTitleLabelId = 'ui-circulation.settings.PrintHoldRequests.paneTitle';
-  const mockedStripes = {
-    connect: jest.fn((component) => component),
-  };
-  const labelIds = {
-    generalTitle: 'ui-circulation.settings.title.general',
-    printHoldRequestsTitle: 'ui-circulation.settings.title.printHoldRequests',
-  };
+jest.mock('@folio/stripes/core', () => ({
+  TitleManager: jest.fn(({ children }) => <>{children}</>),
+}));
+jest.mock('./PrintHoldRequestsForm', () => jest.fn(() => null));
+jest.mock('../components', () => ({
+  CirculationSettingsConfig: jest.fn(() => null),
+}));
 
+const labelIds = {
+  generalTitle: 'ui-circulation.settings.title.general',
+  printHoldRequestsTitle: 'ui-circulation.settings.title.printHoldRequests',
+  paneTitle: 'ui-circulation.settings.PrintHoldRequests.paneTitle',
+};
+
+describe('PrintHoldRequests', () => {
   beforeEach(() => {
-    render(
-      <PrintHoldRequests
-        stripes={mockedStripes}
-      />
-    );
+    jest.clearAllMocks();
+
+    render(<PrintHoldRequests />);
   });
 
   afterEach(() => {
-    ConfigManager.mockClear();
-    mockedStripes.connect.mockClear();
+    jest.restoreAllMocks();
   });
 
-  it('should connect "ConfigManager" to stripes', () => {
-    expect(mockedStripes.connect).toHaveBeenLastCalledWith(ConfigManager);
+  it('should render TitleManager with correct props', () => {
+    expect(TitleManager).toHaveBeenCalledWith(
+      expect.objectContaining({
+        page: labelIds.generalTitle,
+        record: labelIds.printHoldRequestsTitle,
+      }),
+      {}
+    );
   });
 
-  it('should execute "ConfigManager" with passed props', () => {
-    const expectedResult = {
-      label: paneTitleLabelId,
-      moduleName: MODULE_NAMES.SETTINGS,
-      configName: CONFIG_NAMES.PRINT_HOLD_REQUESTS,
-      configFormComponent: PrintHoldRequestsForm,
-      stripes: mockedStripes,
-      getInitialValues,
-      onBeforeSave: normalizeData,
-    };
-
-    expect(ConfigManager).toHaveBeenLastCalledWith(expectedResult, {});
-  });
-
-  it('should trigger TitleManager with correct props', () => {
-    const expectedProps = {
-      page: labelIds.generalTitle,
-      record: labelIds.printHoldRequestsTitle,
-    };
-
-    expect(TitleManager).toHaveBeenCalledWith(expect.objectContaining(expectedProps), {});
+  it('should render CirculationSettingsConfig with correct props', () => {
+    expect(CirculationSettingsConfig).toHaveBeenCalledWith(
+      expect.objectContaining({
+        label: labelIds.paneTitle,
+        configName: CONFIG_NAMES.PRINT_HOLD_REQUESTS,
+        configFormComponent: PrintHoldRequestsForm,
+        getInitialValues,
+        onBeforeSave: normalizeData,
+      }),
+      {}
+    );
   });
 });

@@ -1,6 +1,6 @@
 # Change history for ui-circulation
 
-## 11.1.0 IN PROGRESS
+## 12.0.0 IN PROGRESS
 
 * Change fee/fine verbiage on Loan Anonymization page. Refs UICIRC-1200.
 * When version 1.1 or higher of the `staff-slips-storage` interface is provided, display and maintain the new `isRawHtml` field; when that field is set for a staff slip, request that raw HTML is used by the template editor. Fixes UICIRC-1226.
@@ -16,6 +16,7 @@
 * Fixed new request policy form applied settings from previously edited request policy. Refs UICIRC-1293.
 * Added global permissions for get read-access to values such as tenant’s locale, timezone, and currency. Refs UICIRC-1296.
 * Update css for fix problem visibility Circulation rules. Refs UICIRC-1311.
+* *BREAKING* Migration from mod-config and mod-settings to mod-circulation. Refs UICIRC-1247.
 
 ## [11.0.4](https://github.com/folio-org/ui-circulation/tree/v11.0.4) (2024-12-10)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v11.0.3...v11.0.4)
