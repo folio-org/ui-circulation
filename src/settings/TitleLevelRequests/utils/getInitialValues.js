@@ -12,7 +12,7 @@ const getInitialValues = (settings) => {
 
   return {
     ...TITLE_LEVEL_REQUESTS_DEFAULT_VALUES,
-    ...(head(settings)?.value || {}),
+    ...settings,
   };
 };
 

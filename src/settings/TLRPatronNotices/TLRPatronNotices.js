@@ -1,15 +1,14 @@
 import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
 
-import { ConfigManager } from '@folio/stripes/smart-components';
 import {
   withStripes,
   TitleManager,
 } from '@folio/stripes/core';
 
+import { ConfigManager } from '../components';
 import TLRPatronNoticesForm from './TLRPatronNoticesForm';
 import {
-  SCOPES,
   CONFIG_NAMES,
 } from '../../constants';
 import {
@@ -32,7 +31,6 @@ const TLRPatronNotices = ({
     >
       <ConnectedConfigManager
         label={formatMessage({ id: 'ui-circulation.settings.tlrPatronNotices.paneTitle' })}
-        scope={SCOPES.CIRCULATION}
         configName={CONFIG_NAMES.REGULAR_TLR}
         configFormComponent={TLRPatronNoticesForm}
         stripes={stripes}

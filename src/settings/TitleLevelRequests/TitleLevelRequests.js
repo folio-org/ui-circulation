@@ -2,12 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
 
-import { ConfigManager } from '@folio/stripes/smart-components';
 import {
   withStripes,
   TitleManager,
 } from '@folio/stripes/core';
 
+import { ConfigManager } from '../components';
 import TitleLevelRequestsForm from './TitleLevelRequestsForm';
 import {
   getInitialValues,
@@ -15,7 +15,6 @@ import {
 } from './utils';
 import {
   CONFIG_NAMES,
-  SCOPES,
 } from '../../constants';
 
 const TitleLevelRequests = ({
@@ -33,7 +32,6 @@ const TitleLevelRequests = ({
     >
       <ConnectedConfigManager
         label={formatMessage({ id: 'ui-circulation.settings.titleLevelRequestsTlr.paneTitle' })}
-        scope={SCOPES.CIRCULATION}
         configName={CONFIG_NAMES.GENERAL_TLR}
         configFormComponent={TitleLevelRequestsForm}
         stripes={stripes}

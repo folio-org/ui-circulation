@@ -1,19 +1,18 @@
 import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
 
-import { ConfigManager } from '@folio/stripes/smart-components';
 import {
   withStripes,
   TitleManager,
 } from '@folio/stripes/core';
 
+import { ConfigManager } from '../components';
 import PrintHoldRequestsForm from './PrintHoldRequestsForm';
 import {
   getInitialValues,
   normalizeData,
 } from './utils';
 import {
-  MODULE_NAMES,
   CONFIG_NAMES,
 } from '../../constants';
 
@@ -32,7 +31,6 @@ const PrintHoldRequests = ({
     >
       <ConnectedConfigManager
         label={formatMessage({ id: 'ui-circulation.settings.PrintHoldRequests.paneTitle' })}
-        moduleName={MODULE_NAMES.SETTINGS}
         configName={CONFIG_NAMES.PRINT_HOLD_REQUESTS}
         configFormComponent={PrintHoldRequestsForm}
         stripes={stripes}

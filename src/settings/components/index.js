@@ -1,4 +1,5 @@
 export { default as CancelButton } from './CancelButton';
+export { default as ConfigManager } from './ConfigManager';
 export { default as Metadata } from './Metadata';
 export { default as Period } from './Period';
 export { default as AnonymizingTypeSelect } from './AnonymizingTypeSelect';

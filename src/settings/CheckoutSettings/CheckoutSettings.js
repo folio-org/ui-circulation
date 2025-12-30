@@ -11,8 +11,8 @@ import {
   withStripes,
   TitleManager,
 } from '@folio/stripes/core';
-import { ConfigManager } from '@folio/stripes/smart-components';
 
+import { ConfigManager } from '../components';
 import CheckoutSettingsForm from './CheckoutSettingsForm';
 
 export const DEFAULT_INITIAL_CONFIG = {
@@ -26,15 +26,10 @@ export const DEFAULT_INITIAL_CONFIG = {
 };
 
 export const getInitialValues = (settings) => {
-  let config;
-
-  const value = isEmpty(settings) ? '' : head(settings).value;
-
-  try {
-    config = { ...DEFAULT_INITIAL_CONFIG, ...JSON.parse(value) };
-  } catch (e) {
-    config = DEFAULT_INITIAL_CONFIG;
-  }
+  const config = {
+    ...DEFAULT_INITIAL_CONFIG,
+    ...settings,
+  };
 
   // This section unfortunately must assume knowledge of how the IDs and Custom Field IDs
   // are rendered in CheckoutSettingsForm. IDs can be toggled on and off by a checkbox,
@@ -88,7 +83,7 @@ export const normalize = ({
     ...selectedCustomFieldPatronIdentifiers,
   ].join(',');
 
-  const otherSettings = JSON.stringify({
+  return {
     audioAlertsEnabled,
     audioTheme,
     checkoutTimeout,
@@ -96,9 +91,7 @@ export const normalize = ({
     prefPatronIdentifier,
     useCustomFieldsAsIdentifiers,
     wildcardLookupEnabled,
-  });
-
-  return otherSettings;
+  };
 };
 
 class CheckoutSettings extends React.Component {
@@ -125,7 +118,6 @@ class CheckoutSettings extends React.Component {
       >
         <this.configManager
           label={formatMessage({ id: 'ui-circulation.settings.index.otherSettings' })}
-          moduleName="CHECKOUT"
           configName="other_settings"
           getInitialValues={getInitialValues}
           configFormComponent={CheckoutSettingsForm}

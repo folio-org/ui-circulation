@@ -14,7 +14,7 @@ const getInitialValues = (settings) => {
 
   const settingsForReturn = {
     ...PRINT_HOLD_REQUESTS_DEFAULT_VALUES,
-    ...JSON.parse(head(settings).value),
+    ...settings,
   };
 
   return settingsForReturn;
