@@ -1,19 +1,18 @@
-import React from 'react';
-import { injectIntl } from 'react-intl';
 import {
-  head,
-  isEmpty,
-} from 'lodash';
-import PropTypes from 'prop-types';
+  useIntl,
+} from 'react-intl';
 
 import {
-  stripesShape,
-  withStripes,
   TitleManager,
 } from '@folio/stripes/core';
-import { ConfigManager } from '@folio/stripes/smart-components';
 
+import {
+  CirculationSettingsConfig,
+} from '../components';
 import CheckoutSettingsForm from './CheckoutSettingsForm';
+import {
+  CONFIG_NAMES,
+} from '../../constants';
 
 export const DEFAULT_INITIAL_CONFIG = {
   audioAlertsEnabled: false,
@@ -26,15 +25,10 @@ export const DEFAULT_INITIAL_CONFIG = {
 };
 
 export const getInitialValues = (settings) => {
-  let config;
-
-  const value = isEmpty(settings) ? '' : head(settings).value;
-
-  try {
-    config = { ...DEFAULT_INITIAL_CONFIG, ...JSON.parse(value) };
-  } catch (e) {
-    config = DEFAULT_INITIAL_CONFIG;
-  }
+  const config = {
+    ...DEFAULT_INITIAL_CONFIG,
+    ...settings,
+  };
 
   // This section unfortunately must assume knowledge of how the IDs and Custom Field IDs
   // are rendered in CheckoutSettingsForm. IDs can be toggled on and off by a checkbox,
@@ -88,7 +82,7 @@ export const normalize = ({
     ...selectedCustomFieldPatronIdentifiers,
   ].join(',');
 
-  const otherSettings = JSON.stringify({
+  return {
     audioAlertsEnabled,
     audioTheme,
     checkoutTimeout,
@@ -96,45 +90,28 @@ export const normalize = ({
     prefPatronIdentifier,
     useCustomFieldsAsIdentifiers,
     wildcardLookupEnabled,
-  });
-
-  return otherSettings;
+  };
 };
 
-class CheckoutSettings extends React.Component {
-  static propTypes = {
-    stripes: stripesShape.isRequired,
-    intl: PropTypes.shape({
-      formatMessage: PropTypes.func.isRequired,
-    }).isRequired,
-  };
+const CheckoutSettings = () => {
+  const {
+    formatMessage,
+  } = useIntl();
 
-  constructor(props) {
-    super(props);
+  return (
+    <TitleManager
+      page={formatMessage({ id: 'ui-circulation.settings.title.general' })}
+      record={formatMessage({ id: 'ui-circulation.settings.title.otherSettings' })}
+    >
+      <CirculationSettingsConfig
+        label={formatMessage({ id: 'ui-circulation.settings.index.otherSettings' })}
+        configName={CONFIG_NAMES.OTHER_SETTINGS}
+        getInitialValues={getInitialValues}
+        configFormComponent={CheckoutSettingsForm}
+        onBeforeSave={normalize}
+      />
+    </TitleManager>
+  );
+};
 
-    this.configManager = props.stripes.connect(ConfigManager);
-  }
-
-  render() {
-    const { formatMessage } = this.props.intl;
-
-    return (
-      <TitleManager
-        page={formatMessage({ id: 'ui-circulation.settings.title.general' })}
-        record={formatMessage({ id: 'ui-circulation.settings.title.otherSettings' })}
-      >
-        <this.configManager
-          label={formatMessage({ id: 'ui-circulation.settings.index.otherSettings' })}
-          moduleName="CHECKOUT"
-          configName="other_settings"
-          getInitialValues={getInitialValues}
-          configFormComponent={CheckoutSettingsForm}
-          stripes={this.props.stripes}
-          onBeforeSave={normalize}
-        />
-      </TitleManager>
-    );
-  }
-}
-
-export default injectIntl(withStripes(CheckoutSettings));
+export default CheckoutSettings;
