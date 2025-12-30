@@ -1,12 +1,12 @@
-import React from 'react';
 import PropTypes from 'prop-types';
-import { injectIntl } from 'react-intl';
+import {
+  useIntl,
+} from 'react-intl';
 import { Field } from 'react-final-form';
 
 import stripesFinalForm from '@folio/stripes/final-form';
 import {
   IfPermission,
-  stripesConnect,
 } from '@folio/stripes/core';
 import {
   Button,
@@ -23,16 +23,15 @@ import {
 
 import css from './PrintHoldRequestsForm.css';
 
-const PrintHoldRequestsForm = (props) => {
+const PrintHoldRequestsForm = ({
+  handleSubmit,
+  label,
+  pristine,
+  submitting,
+}) => {
   const {
-    handleSubmit,
-    intl: {
-      formatMessage,
-    },
-    label,
-    pristine,
-    submitting,
-  } = props;
+    formatMessage,
+  } = useIntl();
 
   const renderFooter = () => (
     <IfPermission perm="ui-circulation.settings.staff-slips">
@@ -92,11 +91,9 @@ PrintHoldRequestsForm.propTypes = {
   submitting: PropTypes.bool.isRequired,
 };
 
-const withStripes = stripesConnect(PrintHoldRequestsForm);
-
-export default injectIntl(stripesFinalForm({
+export default stripesFinalForm({
   navigationCheck: true,
   subscription: {
     values: true,
   },
-})(withStripes));
+})(PrintHoldRequestsForm);

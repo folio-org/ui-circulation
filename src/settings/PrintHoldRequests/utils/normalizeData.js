@@ -3,12 +3,10 @@ import {
   PRINT_HOLD_REQUESTS_DEFAULT_VALUES,
 } from '../../../constants';
 
-const normalizeData = (value = {}) => {
-  const configForReturn = value[PRINT_HOLD_REQUESTS.PRINT_HOLD_REQUESTS_ENABLED]
+const normalizeData = (value = {}) => (
+  value[PRINT_HOLD_REQUESTS.PRINT_HOLD_REQUESTS_ENABLED]
     ? value
-    : PRINT_HOLD_REQUESTS_DEFAULT_VALUES;
-
-  return JSON.stringify(configForReturn);
-};
+    : PRINT_HOLD_REQUESTS_DEFAULT_VALUES
+);
 
 export default normalizeData;

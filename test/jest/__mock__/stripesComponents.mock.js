@@ -131,3 +131,7 @@ jest.mock('@folio/stripes/components', () => ({
   MultiColumnList: jest.fn(() => <div />),
   LoadingPane: jest.fn(() => <div>Loading</div>),
 }));
+
+jest.mock('@folio/stripes-components/util/currencies', () => {
+  return {};
+});
