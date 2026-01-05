@@ -95,6 +95,7 @@ PrintHoldRequestsForm.propTypes = {
 const withStripes = stripesConnect(PrintHoldRequestsForm);
 
 export default injectIntl(stripesFinalForm({
+  keepDirtyOnReinitialize: true,
   navigationCheck: true,
   subscription: {
     values: true,

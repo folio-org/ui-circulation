@@ -93,8 +93,8 @@ const ConsortiumTLR = ({
 ConsortiumTLR.manifest = Object.freeze({
   settings: {
     type: 'okapi',
-    path: `settings/entries?query=(scope==${SCOPES.CIRCULATION} and key==${CONFIG_NAMES.GENERAL_TLR})`,
-    records: 'items',
+    path: `circulation/settings?query=(name==${CONFIG_NAMES.GENERAL_TLR})`,
+    records: 'circulationSettings',
   },
   consortiumTlr: {
     type: 'okapi',

@@ -12,14 +12,12 @@ import {
   withStripes,
   TitleManager,
 } from '@folio/stripes/core';
-import { ConfigManager } from '@folio/stripes/smart-components';
 
+import { ConfigManager } from '../components';
 import normalize from './utils/normalize';
 import LoanHistoryForm from './LoanHistoryForm';
 
 export const getInitialValues = (settings) => {
-  let config;
-  const value = isEmpty(settings) ? '' : head(settings).value;
   const defaultConfig = {
     closingType: {
       loan: null,
@@ -32,13 +30,10 @@ export const getInitialValues = (settings) => {
     treatEnabled: false,
   };
 
-  try {
-    config = { ...defaultConfig, ...JSON.parse(value) };
-  } catch (e) {
-    config = defaultConfig;
-  }
-
-  return { ...config };
+  return {
+    ...defaultConfig,
+    ...settings,
+  };
 };
 
 export const normalizeData = (value) => {
@@ -55,7 +50,7 @@ export const normalizeData = (value) => {
     ? loanHistorySettings.closingType.feeFine
     : null;
 
-  return JSON.stringify(loanHistorySettings);
+  return loanHistorySettings;
 };
 
 class LoanHistorySettings extends React.Component {
@@ -86,7 +81,6 @@ class LoanHistorySettings extends React.Component {
       >
         <this.configManager
           label={formatMessage({ id: 'ui-circulation.settings.index.loanAnonymization' })}
-          moduleName="LOAN_HISTORY"
           configName="loan_history"
           configFormComponent={LoanHistoryForm}
           stripes={this.props.stripes}
