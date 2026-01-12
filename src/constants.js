@@ -593,13 +593,12 @@ export const MODULE_NAMES = {
 };
 
 export const CONFIG_NAMES = {
+  OTHER_SETTINGS: 'other_settings',
+  LOAN_HISTORY: 'loan_history',
   GENERAL_TLR: 'generalTlr',
   REGULAR_TLR: 'regularTlr',
+  TLR: 'TLR',
   PRINT_HOLD_REQUESTS: 'PRINT_HOLD_REQUESTS',
-};
-
-export const SCOPES = {
-  CIRCULATION: 'circulation',
 };
 
 export const OPEN_REQUESTS_STATUSES = [

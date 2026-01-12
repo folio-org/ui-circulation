@@ -1,172 +1,169 @@
-import { render } from '@folio/jest-config-stripes/testing-library/react';
-import { omit } from 'lodash';
+import {
+  render,
+} from '@folio/jest-config-stripes/testing-library/react';
 
-import { ConfigManager } from '@folio/stripes/smart-components';
-import { TitleManager } from '@folio/stripes/core';
+import {
+  TitleManager,
+} from '@folio/stripes/core';
 
 import CheckoutSettings, {
-  DEFAULT_INITIAL_CONFIG,
   getInitialValues,
   normalize,
 } from './CheckoutSettings';
 import CheckoutSettingsForm from './CheckoutSettingsForm';
 
-describe('CheckoutSettings', () => {
-  const labelIds = {
-    otherSettings: 'ui-circulation.settings.index.otherSettings',
-    generalTitle: 'ui-circulation.settings.title.general',
-    otherSettingsTitle: 'ui-circulation.settings.title.otherSettings',
-  };
-  const mockedStripes = {
-    connect: jest.fn(component => component),
-  };
+import {
+  CirculationSettingsConfig,
+} from '../components';
 
+import {
+  CONFIG_NAMES,
+} from '../../constants';
+
+jest.mock('@folio/stripes/core', () => ({
+  TitleManager: jest.fn(({ children }) => <>{children}</>),
+}));
+jest.mock('./CheckoutSettingsForm', () => jest.fn(() => null));
+jest.mock('../components', () => ({
+  CirculationSettingsConfig: jest.fn(() => null),
+}));
+
+const labelIds = {
+  generalTitle: 'ui-circulation.settings.title.general',
+  otherSettingsTitle: 'ui-circulation.settings.title.otherSettings',
+  paneTitle: 'ui-circulation.settings.index.otherSettings',
+};
+
+describe('CheckoutSettings', () => {
   beforeEach(() => {
-    render(
-      <CheckoutSettings
-        stripes={mockedStripes}
-      />
+    jest.clearAllMocks();
+
+    render(<CheckoutSettings />);
+  });
+
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
+
+  it('should render TitleManager with correct props', () => {
+    expect(TitleManager).toHaveBeenCalledWith(
+      expect.objectContaining({
+        page: labelIds.generalTitle,
+        record: labelIds.otherSettingsTitle,
+      }),
+      {}
     );
   });
 
-  it('should execute `ConfigManager` with passed props', () => {
-    const expectedResult = {
-      label: labelIds.otherSettings,
-      moduleName: 'CHECKOUT',
-      configName: 'other_settings',
-      getInitialValues,
-      configFormComponent: CheckoutSettingsForm,
-      stripes: mockedStripes,
-      onBeforeSave: normalize,
-    };
-
-    expect(ConfigManager).toHaveBeenCalledWith(expectedResult, {});
-  });
-
-  it('should trigger TitleManager with correct props', () => {
-    const expectedProps = {
-      page: labelIds.generalTitle,
-      record: labelIds.otherSettingsTitle,
-    };
-
-    expect(TitleManager).toHaveBeenCalledWith(expect.objectContaining(expectedProps), {});
+  it('should render CirculationSettingsConfig with correct props', () => {
+    expect(CirculationSettingsConfig).toHaveBeenCalledWith(
+      expect.objectContaining({
+        label: labelIds.paneTitle,
+        configName: CONFIG_NAMES.OTHER_SETTINGS,
+        configFormComponent: CheckoutSettingsForm,
+        getInitialValues,
+        onBeforeSave: normalize,
+      }),
+      {}
+    );
   });
 });
 
 describe('getInitialValues', () => {
-  const defaultExpectedConfig = {
-    ...omit(DEFAULT_INITIAL_CONFIG, 'prefPatronIdentifier'),
-    identifiers: {
-      custom: [],
-    },
-  };
+  it('should returns default config when input is empty', () => {
+    expect(getInitialValues()).toEqual({
+      audioAlertsEnabled: false,
+      audioTheme: 'classic',
+      checkoutTimeout: true,
+      checkoutTimeoutDuration: 3,
+      identifiers: { custom: [] },
+      useCustomFieldsAsIdentifiers: false,
+      wildcardLookupEnabled: false,
+    });
 
-  it('should return default expected config if `settings` is empty', () => {
-    expect(getInitialValues([])).toEqual(defaultExpectedConfig);
+    expect(getInitialValues({})).toEqual({
+      audioAlertsEnabled: false,
+      audioTheme: 'classic',
+      checkoutTimeout: true,
+      checkoutTimeoutDuration: 3,
+      identifiers: { custom: [] },
+      useCustomFieldsAsIdentifiers: false,
+      wildcardLookupEnabled: false,
+    });
   });
 
-  it('should return default expected config if invalid settings are passed', () => {
-    expect(getInitialValues([{ value: "{'settings':'testSettings'}" }])).toEqual(defaultExpectedConfig);
-  });
-
-  it('should correctly process passed `prefPatronIdentifier` field', () => {
-    const customField = 'customFields.testCustomField';
-    const commonField = 'testIdentifier';
-    const mockedConfigValue = {
-      prefPatronIdentifier: `${customField},${commonField}`,
+  it('should merges provided settings with defaults', () => {
+    const custom = {
+      audioAlertsEnabled: true,
+      audioTheme: 'modern',
+      checkoutTimeout: false,
+      checkoutTimeoutDuration: 10,
+      prefPatronIdentifier: 'barcode,customFields.cf1',
+      useCustomFieldsAsIdentifiers: true,
+      wildcardLookupEnabled: true,
     };
-    const configForTest = [{
-      value: JSON.stringify(mockedConfigValue),
-    }];
-    const expectedResult = {
-      ...defaultExpectedConfig,
+
+    expect(getInitialValues(custom)).toEqual({
+      audioAlertsEnabled: true,
+      audioTheme: 'modern',
+      checkoutTimeout: false,
+      checkoutTimeoutDuration: 10,
       identifiers: {
-        custom: [
-          { value: customField },
-        ],
-        [commonField]: true,
+        barcode: true,
+        custom: [{ value: 'customFields.cf1' }],
       },
-    };
-
-    expect(getInitialValues(configForTest)).toEqual(expectedResult);
-  });
-
-  it('should correctly pass fields from `settings`', () => {
-    const mockedConfig = {
-      audioAlertsEnabled: 'testAudioAlertsEnabled',
-      audioTheme: 'testAudioTheme',
-      checkoutTimeout: 'testCheckoutTimeout',
-      checkoutTimeoutDuration: 'testCheckoutTimeoutDuration',
-      useCustomFieldsAsIdentifiers: 'testUseCustomFieldsAsIdentifiers',
-      wildcardLookupEnabled: 'testwildcardLookupEnabled',
-    };
-    const configForTest = [{
-      value: JSON.stringify(mockedConfig),
-    }];
-    const expectedResult = {
-      ...mockedConfig,
-      identifiers: {
-        custom: [],
-      },
-    };
-
-    expect(getInitialValues(configForTest)).toEqual(expectedResult);
+      useCustomFieldsAsIdentifiers: true,
+      wildcardLookupEnabled: true,
+    });
   });
 });
 
 describe('normalize', () => {
-  it('should correctly process passed `identifiers` field', () => {
-    const identifiers = {
-      custom: [
-        { value: 'firstCustomIdentifire' },
-        { value: 'secondCustomIdentifire' },
-      ],
-      firstDefaultIdentifire: false,
-      secondDefaultIdentifire: true,
-    };
-    const expectedResult = [
-      'secondDefaultIdentifire',
-      'firstCustomIdentifire',
-      'secondCustomIdentifire',
-    ];
-    const result = normalize({ identifiers });
-
-    expect(JSON.parse(result)).toEqual(expect.objectContaining({ prefPatronIdentifier: expectedResult.join(',') }));
-  });
-
-  it('should correctly normalize `checkoutTimeoutDuration` field', () => {
-    const identifiers = {
-      custom: [],
-    };
-    const expectedResult = {
-      useCustomFieldsAsIdentifiers: '24',
-    };
-    const testConfig = {
-      ...expectedResult,
-      identifiers,
-    };
-    const result = normalize(testConfig);
-
-    expect(JSON.parse(result)).toEqual(expect.objectContaining(expectedResult));
-  });
-
-  it('should pass values as is', () => {
-    const identifiers = {
-      custom: [],
-    };
-    const expectedResult = {
-      audioAlertsEnabled: false,
-      audioTheme: 'testTheme',
-      checkoutTimeout: 20,
+  it('should normalizes identifiers to prefPatronIdentifier string', () => {
+    const input = {
+      audioAlertsEnabled: true,
+      audioTheme: 'modern',
+      checkoutTimeout: false,
+      checkoutTimeoutDuration: '7',
+      identifiers: {
+        barcode: true,
+        username: true,
+        custom: [{ value: 'customFields.cf1' }, { value: 'customFields.cf2' }],
+      },
       useCustomFieldsAsIdentifiers: true,
+      wildcardLookupEnabled: true,
+    };
+
+    expect(normalize(input)).toEqual({
+      audioAlertsEnabled: true,
+      audioTheme: 'modern',
+      checkoutTimeout: false,
+      checkoutTimeoutDuration: 7,
+      prefPatronIdentifier: 'barcode,username,customFields.cf1,customFields.cf2',
+      useCustomFieldsAsIdentifiers: true,
+      wildcardLookupEnabled: true,
+    });
+  });
+
+  it('should handles empty identifiers', () => {
+    const input = {
+      audioAlertsEnabled: false,
+      audioTheme: 'classic',
+      checkoutTimeout: true,
+      checkoutTimeoutDuration: 3,
+      identifiers: { custom: [] },
+      useCustomFieldsAsIdentifiers: false,
       wildcardLookupEnabled: false,
     };
-    const testConfig = {
-      ...expectedResult,
-      identifiers,
-    };
-    const result = normalize(testConfig);
 
-    expect(JSON.parse(result)).toEqual(expect.objectContaining(expectedResult));
+    expect(normalize(input)).toEqual({
+      audioAlertsEnabled: false,
+      audioTheme: 'classic',
+      checkoutTimeout: true,
+      checkoutTimeoutDuration: 3,
+      prefPatronIdentifier: '',
+      useCustomFieldsAsIdentifiers: false,
+      wildcardLookupEnabled: false,
+    });
   });
 });

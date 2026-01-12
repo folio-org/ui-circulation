@@ -5,11 +5,26 @@ import {
 } from '../../../constants';
 
 describe('getInitialValues', () => {
-  it('should return default config if nothing found in database', () => {
+  it('should returns default values when input is empty', () => {
     expect(getInitialValues()).toEqual(TITLE_LEVEL_REQUESTS_DEFAULT_VALUES);
+    expect(getInitialValues([])).toEqual(TITLE_LEVEL_REQUESTS_DEFAULT_VALUES);
+    expect(getInitialValues({})).toEqual(TITLE_LEVEL_REQUESTS_DEFAULT_VALUES);
   });
 
-  it('should return config with values from database', () => {
+  it('should merges provided values with defaults', () => {
+    const customValues = {
+      [TITLE_LEVEL_REQUESTS.TLR_ENABLED]: true,
+      anotherField: 'test',
+    };
+    const expected = {
+      ...TITLE_LEVEL_REQUESTS_DEFAULT_VALUES,
+      ...customValues,
+    };
+
+    expect(getInitialValues(customValues)).toEqual(expected);
+  });
+
+  it('should handles array input with value property', () => {
     const testData = [
       {
         value: {
@@ -17,11 +32,11 @@ describe('getInitialValues', () => {
         },
       },
     ];
-    const expectedData = {
+    const expected = {
       ...TITLE_LEVEL_REQUESTS_DEFAULT_VALUES,
       [TITLE_LEVEL_REQUESTS.TLR_ENABLED]: true,
     };
 
-    expect(getInitialValues(testData)).toEqual(expectedData);
+    expect(getInitialValues(testData[0].value)).toEqual(expected);
   });
 });
