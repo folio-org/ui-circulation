@@ -1,5 +1,4 @@
 import {
-  head,
   isEmpty,
 } from 'lodash';
 import {
@@ -15,7 +14,7 @@ const getInitialValues = (values) => {
 
   const settingsForReturn = {
     ...TLR_PATRON_NOTICES_DEFAULT_VALUES,
-    ...(head(values)?.value || {}),
+    ...values,
   };
 
   TLR_FIELDS_FOR_RESET.forEach(field => {

@@ -1,4 +1,6 @@
-import React from 'react';
+import {
+  useCallback,
+} from 'react';
 import PropTypes from 'prop-types';
 import {
   FormattedMessage,
@@ -38,6 +40,7 @@ export const getCustomFieldPatronIdentifiers = (customFields) => (
 );
 
 const CheckoutSettingsForm = ({
+  form,
   form: { getState },
   handleSubmit,
   label,
@@ -58,6 +61,13 @@ const CheckoutSettingsForm = ({
     { value: 'future', label: formatMessage({ id: 'ui-circulation.settings.checkout.audioTheme.future' }) },
   ];
 
+  const handleSaveAndReset = useCallback(() => {
+    handleSubmit();
+    form.setConfig('keepDirtyOnReinitialize', false);
+    form.reset();
+    form.setConfig('keepDirtyOnReinitialize', true);
+  }, [handleSubmit, form]);
+
   return (
     <Pane
       id="other-settings-pane"
@@ -74,7 +84,7 @@ const CheckoutSettingsForm = ({
                 disabled={pristine || submitting}
                 id="clickable-savescanid"
                 marginBottom0
-                onClick={handleSubmit}
+                onClick={handleSaveAndReset}
                 type="submit"
               >
                 <FormattedMessage id="ui-circulation.settings.checkout.save" />
@@ -194,10 +204,12 @@ CheckoutSettingsForm.propTypes = {
   form: PropTypes.shape({
     change: PropTypes.func.isRequired,
     getState: PropTypes.func.isRequired,
+    setConfig: PropTypes.func.isRequired,
   }).isRequired,
 };
 
 export default stripesFinalForm({
+  keepDirtyOnReinitialize: true,
   navigationCheck: true,
   validate: validateCheckoutSettings,
   subscription: { values: true },

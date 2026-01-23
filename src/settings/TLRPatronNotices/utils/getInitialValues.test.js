@@ -1,30 +1,34 @@
 import getInitialValues from './getInitialValues';
 import {
-  TITLE_LEVEL_REQUESTS,
   TLR_PATRON_NOTICES_DEFAULT_VALUES,
+  TLR_FIELDS_FOR_RESET,
+  NOT_SELECTED,
 } from '../../../constants';
 
 describe('getInitialValues', () => {
-  describe('When data is provided', () => {
-    it('should return correct data object', () => {
-      const values = [
-        {
-          value: {
-            ...TLR_PATRON_NOTICES_DEFAULT_VALUES,
-            [TITLE_LEVEL_REQUESTS.CONFIRMATION_TEMPLATE]: 'id',
-          },
-        }
-      ];
+  it('should returns default values when input is empty', () => {
+    expect(getInitialValues()).toEqual(TLR_PATRON_NOTICES_DEFAULT_VALUES);
+    expect(getInitialValues([])).toEqual(TLR_PATRON_NOTICES_DEFAULT_VALUES);
+  });
 
-      expect(getInitialValues(values)).toEqual(values[0].value);
+  it('should merges provided values with defaults', () => {
+    const customValues = { someField: 'custom', ...TLR_PATRON_NOTICES_DEFAULT_VALUES };
+
+    expect(getInitialValues(customValues)).toEqual({
+      ...TLR_PATRON_NOTICES_DEFAULT_VALUES,
+      ...customValues,
     });
   });
 
-  describe('When data is not provided', () => {
-    it('should return correct data object', () => {
-      const values = [];
+  it('should resets fields in TLR_FIELDS_FOR_RESET to NOT_SELECTED if null', () => {
+    const values = {};
+    TLR_FIELDS_FOR_RESET.forEach(field => {
+      values[field] = null;
+    });
+    const result = getInitialValues(values);
 
-      expect(getInitialValues(values)).toEqual(TLR_PATRON_NOTICES_DEFAULT_VALUES);
+    TLR_FIELDS_FOR_RESET.forEach(field => {
+      expect(result[field]).toBe(NOT_SELECTED);
     });
   });
 });

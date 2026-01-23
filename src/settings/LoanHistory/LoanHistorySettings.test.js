@@ -1,98 +1,136 @@
-import { render } from '@folio/jest-config-stripes/testing-library/react';
+import {
+  render,
+} from '@folio/jest-config-stripes/testing-library/react';
 
-import { ConfigManager } from '@folio/stripes/smart-components';
-import { TitleManager } from '@folio/stripes/core';
+import {
+  TitleManager,
+} from '@folio/stripes/core';
 
+import LoanHistoryForm from './LoanHistoryForm';
 import LoanHistorySettings, {
   getInitialValues,
   normalizeData,
 } from './LoanHistorySettings';
-import LoanHistoryForm from './LoanHistoryForm';
+import {
+  CirculationSettingsConfig,
+} from '../components';
+import normalize from './utils/normalize';
 
+import {
+  CONFIG_NAMES,
+} from '../../constants';
+
+jest.mock('@folio/stripes/core', () => ({
+  TitleManager: jest.fn(({ children }) => <>{children}</>),
+}));
 jest.mock('./LoanHistoryForm', () => jest.fn(() => null));
+jest.mock('../components', () => ({
+  CirculationSettingsConfig: jest.fn(() => null),
+}));
+jest.mock('./utils/normalize', () => jest.fn(v => ({
+  closingType: { loan: 'l', feeFine: 'f', loanExceptions: ['e'] },
+  loan: { a: 1 },
+  feeFine: { b: 2 },
+  loanExceptions: ['e'],
+  treatEnabled: v?.treatEnabled ?? false,
+})));
+
+const labelIds = {
+  generalTitle: 'ui-circulation.settings.title.general',
+  loanHistorySettingsTitle: 'ui-circulation.settings.title.loanAnonymization',
+  paneTitle: 'ui-circulation.settings.index.loanAnonymization',
+};
 
 describe('LoanHistorySettings', () => {
-  const labelIds = {
-    loanAnonymization: 'ui-circulation.settings.index.loanAnonymization',
-    generalTitle: 'ui-circulation.settings.title.general',
-    loanAnonymizationTitle: 'ui-circulation.settings.title.loanAnonymization',
-  };
+  beforeEach(() => {
+    jest.clearAllMocks();
 
-  const testStripes = {
-    connect: jest.fn((Component) => Component),
-  };
-
-  const testDefaultProps = {
-    stripes: testStripes,
-  };
+    render(<LoanHistorySettings />);
+  });
 
   afterEach(() => {
-    ConfigManager.mockClear();
+    jest.restoreAllMocks();
   });
 
-  describe('with default props', () => {
-    beforeEach(() => {
-      render(
-        <LoanHistorySettings
-          {...testDefaultProps}
-        />
-      );
-    });
+  it('should render TitleManager with correct props', () => {
+    expect(TitleManager).toHaveBeenCalledWith(
+      expect.objectContaining({
+        page: labelIds.generalTitle,
+        record: labelIds.loanHistorySettingsTitle,
+      }),
+      {}
+    );
+  });
 
-    it('should render "EntryManager" component', () => {
-      expect(ConfigManager).toHaveBeenCalledWith(expect.objectContaining({
-        label: labelIds.loanAnonymization,
-        moduleName: 'LOAN_HISTORY',
-        configName: 'loan_history',
+  it('should render CirculationSettingsConfig with correct props', () => {
+    expect(CirculationSettingsConfig).toHaveBeenCalledWith(
+      expect.objectContaining({
+        label: labelIds.paneTitle,
+        configName: CONFIG_NAMES.LOAN_HISTORY,
         configFormComponent: LoanHistoryForm,
-        stripes: testStripes,
         getInitialValues,
         onBeforeSave: normalizeData,
-      }), {});
-    });
-
-    it('should trigger TitleManager with correct props', () => {
-      const expectedProps = {
-        page: labelIds.generalTitle,
-        record: labelIds.loanAnonymizationTitle,
-      };
-
-      expect(TitleManager).toHaveBeenCalledWith(expect.objectContaining(expectedProps), {});
-    });
+      }),
+      {}
+    );
   });
+});
 
-  describe('getInitialValues method', () => {
-    const defaultConfig = {
-      closingType: {
-        loan: null,
-        feeFine: null,
-        loanExceptions: [],
-      },
+describe('getInitialValues', () => {
+  it('should returns default config when input is empty', () => {
+    expect(getInitialValues()).toEqual({
+      closingType: { loan: null, feeFine: null, loanExceptions: [] },
       loan: {},
       feeFine: {},
       loanExceptions: [],
       treatEnabled: false,
-    };
-
-    it('should get initial values when settings are not passed', () => {
-      expect(getInitialValues()).toEqual(defaultConfig);
     });
-
-    it('should get initial values when settings are passed and settings are empty object', () => {
-      expect(getInitialValues({})).toEqual(defaultConfig);
+    expect(getInitialValues({})).toEqual({
+      closingType: { loan: null, feeFine: null, loanExceptions: [] },
+      loan: {},
+      feeFine: {},
+      loanExceptions: [],
+      treatEnabled: false,
     });
+  });
 
-    it('should get initial values when settings are passed and settings are not empty object', () => {
-      const value = {
-        a: 'a',
-        b: 'b',
-      };
-      const expectedResult = {
-        ...defaultConfig,
-        ...value,
-      };
+  it('should merges provided settings with defaults', () => {
+    const custom = { treatEnabled: true, loan: { a: 1 } };
 
-      expect(getInitialValues([{ value: JSON.stringify(value) }])).toEqual(expectedResult);
+    expect(getInitialValues(custom)).toEqual({
+      closingType: { loan: null, feeFine: null, loanExceptions: [] },
+      loan: { a: 1 },
+      feeFine: {},
+      loanExceptions: [],
+      treatEnabled: true,
     });
+  });
+});
+
+describe('normalizeData', () => {
+  beforeEach(() => {
+    normalize.mockClear();
+  });
+
+  it('should returns normalized data with feeFine if treatEnabled is true', () => {
+    const input = { treatEnabled: true };
+    const result = normalizeData(input);
+
+    expect(result).toEqual({
+      closingType: { loan: 'l', feeFine: 'f', loanExceptions: ['e'] },
+      loan: { a: 1 },
+      feeFine: { b: 2 },
+      loanExceptions: ['e'],
+      treatEnabled: true,
+    });
+    expect(normalize).toHaveBeenCalledWith(input);
+  });
+
+  it('should sets closingType.feeFine to null if treatEnabled is false', () => {
+    const input = { treatEnabled: false };
+    const result = normalizeData(input);
+
+    expect(result.closingType.feeFine).toBeNull();
+    expect(result.treatEnabled).toBe(false);
   });
 });

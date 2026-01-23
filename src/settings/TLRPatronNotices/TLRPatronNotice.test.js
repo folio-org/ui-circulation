@@ -1,6 +1,10 @@
-import { render } from '@folio/jest-config-stripes/testing-library/react';
-import { ConfigManager } from '@folio/stripes/smart-components';
-import { TitleManager } from '@folio/stripes/core';
+import {
+  render,
+} from '@folio/jest-config-stripes/testing-library/react';
+
+import {
+  TitleManager,
+} from '@folio/stripes/core';
 
 import TLRPatronNotices from './TLRPatronNotices';
 import TLRPatronNoticesForm from './TLRPatronNoticesForm';
@@ -9,56 +13,58 @@ import {
   normalizeData,
 } from './utils';
 import {
+  CirculationSettingsConfig,
+} from '../components';
+
+import {
   CONFIG_NAMES,
-  SCOPES,
 } from '../../constants';
 
-describe('TLRPatronNotices', () => {
-  const mockedStripes = {
-    connect: jest.fn((component) => component),
-  };
-  const labelIds = {
-    generalTitle: 'ui-circulation.settings.title.general',
-    tlrPatronNoticesTitle: 'ui-circulation.settings.title.tlrPatronNotices',
-    paneTitle: 'ui-circulation.settings.tlrPatronNotices.paneTitle',
-  };
+jest.mock('@folio/stripes/core', () => ({
+  TitleManager: jest.fn(({ children }) => <>{children}</>),
+}));
+jest.mock('./TLRPatronNoticesForm', () => jest.fn(() => null));
+jest.mock('../components', () => ({
+  CirculationSettingsConfig: jest.fn(() => null),
+}));
 
+const labelIds = {
+  generalTitle: 'ui-circulation.settings.title.general',
+  tlrPatronNoticesTitle: 'ui-circulation.settings.title.tlrPatronNotices',
+  paneTitle: 'ui-circulation.settings.tlrPatronNotices.paneTitle',
+};
+
+describe('TLRPatronNotices', () => {
   beforeEach(() => {
-    render(
-      <TLRPatronNotices
-        stripes={mockedStripes}
-      />
-    );
+    jest.clearAllMocks();
+
+    render(<TLRPatronNotices />);
   });
 
   afterEach(() => {
-    jest.clearAllMocks();
+    jest.restoreAllMocks();
   });
 
-  it('should connect ConfigManager to stripes', () => {
-    expect(mockedStripes.connect).toHaveBeenLastCalledWith(ConfigManager);
+  it('should render TitleManager with correct props', () => {
+    expect(TitleManager).toHaveBeenCalledWith(
+      expect.objectContaining({
+        page: labelIds.generalTitle,
+        record: labelIds.tlrPatronNoticesTitle,
+      }),
+      {}
+    );
   });
 
-  it('should trigger ConfigManager with correct props', () => {
-    const expectedResult = {
-      label: labelIds.paneTitle,
-      scope: SCOPES.CIRCULATION,
-      configName: CONFIG_NAMES.REGULAR_TLR,
-      configFormComponent: TLRPatronNoticesForm,
-      stripes: mockedStripes,
-      getInitialValues,
-      onBeforeSave: normalizeData,
-    };
-
-    expect(ConfigManager).toHaveBeenLastCalledWith(expectedResult, {});
-  });
-
-  it('should trigger TitleManager with correct props', () => {
-    const expectedProps = {
-      page: labelIds.generalTitle,
-      record: labelIds.tlrPatronNoticesTitle,
-    };
-
-    expect(TitleManager).toHaveBeenCalledWith(expect.objectContaining(expectedProps), {});
+  it('should render CirculationSettingsConfig with correct props', () => {
+    expect(CirculationSettingsConfig).toHaveBeenCalledWith(
+      expect.objectContaining({
+        label: labelIds.paneTitle,
+        configName: CONFIG_NAMES.REGULAR_TLR,
+        configFormComponent: TLRPatronNoticesForm,
+        getInitialValues,
+        onBeforeSave: normalizeData,
+      }),
+      {}
+    );
   });
 });
