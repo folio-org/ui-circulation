@@ -166,4 +166,54 @@ describe('normalize', () => {
       wildcardLookupEnabled: false,
     });
   });
+
+  it('should not include custom field identifiers when useCustomFieldsAsIdentifiers is false', () => {
+    const input = {
+      audioAlertsEnabled: true,
+      audioTheme: 'modern',
+      checkoutTimeout: false,
+      checkoutTimeoutDuration: '5',
+      identifiers: {
+        barcode: true,
+        custom: [{ value: 'customFields.cf1' }, { value: 'customFields.cf2' }],
+      },
+      useCustomFieldsAsIdentifiers: false,
+      wildcardLookupEnabled: true,
+    };
+
+    expect(normalize(input)).toEqual({
+      audioAlertsEnabled: true,
+      audioTheme: 'modern',
+      checkoutTimeout: false,
+      checkoutTimeoutDuration: 5,
+      prefPatronIdentifier: 'barcode',
+      useCustomFieldsAsIdentifiers: false,
+      wildcardLookupEnabled: true,
+    });
+  });
+
+  it('should include custom field identifiers when useCustomFieldsAsIdentifiers is true', () => {
+    const input = {
+      audioAlertsEnabled: true,
+      audioTheme: 'modern',
+      checkoutTimeout: false,
+      checkoutTimeoutDuration: '5',
+      identifiers: {
+        barcode: true,
+        custom: [{ value: 'customFields.cf1' }, { value: 'customFields.cf2' }],
+      },
+      useCustomFieldsAsIdentifiers: true,
+      wildcardLookupEnabled: true,
+    };
+
+    expect(normalize(input)).toEqual({
+      audioAlertsEnabled: true,
+      audioTheme: 'modern',
+      checkoutTimeout: false,
+      checkoutTimeoutDuration: 5,
+      prefPatronIdentifier: 'barcode,customFields.cf1,customFields.cf2',
+      useCustomFieldsAsIdentifiers: true,
+      wildcardLookupEnabled: true,
+    });
+  });
 });
