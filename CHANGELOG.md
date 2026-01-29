@@ -17,6 +17,7 @@
 * Added global permissions for get read-access to values such as tenant’s locale, timezone, and currency. Refs UICIRC-1296.
 * Update css for fix problem visibility Circulation rules. Refs UICIRC-1311.
 * *BREAKING* Migration from mod-config and mod-settings to mod-circulation. Refs UICIRC-1247.
+* Fixed an issue where the value containing the previously selected option was not reset. Refs UICIRC-1317.
 
 ## [11.0.4](https://github.com/folio-org/ui-circulation/tree/v11.0.4) (2024-12-10)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v11.0.3...v11.0.4)

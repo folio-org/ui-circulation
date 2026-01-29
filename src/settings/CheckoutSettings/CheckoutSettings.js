@@ -75,7 +75,9 @@ export const normalize = ({
     .filter(([_key, value]) => value === true)
     .map(([key]) => key);
 
-  const selectedCustomFieldPatronIdentifiers = customFieldIdentifiers.map(i => i.value);
+  const selectedCustomFieldPatronIdentifiers = useCustomFieldsAsIdentifiers
+    ? customFieldIdentifiers.map(i => i.value)
+    : [];
 
   const prefPatronIdentifier = [
     ...selectedDefaultPatronIdentifiers,
