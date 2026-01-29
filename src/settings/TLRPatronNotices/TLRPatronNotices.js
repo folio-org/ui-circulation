@@ -1,15 +1,16 @@
-import PropTypes from 'prop-types';
-import { injectIntl } from 'react-intl';
-
-import { ConfigManager } from '@folio/stripes/smart-components';
 import {
-  withStripes,
+  useIntl,
+} from 'react-intl';
+
+import {
   TitleManager,
 } from '@folio/stripes/core';
 
+import {
+  CirculationSettingsConfig,
+} from '../components';
 import TLRPatronNoticesForm from './TLRPatronNoticesForm';
 import {
-  SCOPES,
   CONFIG_NAMES,
 } from '../../constants';
 import {
@@ -17,25 +18,20 @@ import {
   normalizeData,
 } from './utils';
 
-const TLRPatronNotices = ({
-  stripes,
-  intl: {
+const TLRPatronNotices = () => {
+  const {
     formatMessage,
-  },
-}) => {
-  const ConnectedConfigManager = stripes.connect(ConfigManager);
+  } = useIntl();
 
   return (
     <TitleManager
       page={formatMessage({ id: 'ui-circulation.settings.title.general' })}
       record={formatMessage({ id: 'ui-circulation.settings.title.tlrPatronNotices' })}
     >
-      <ConnectedConfigManager
+      <CirculationSettingsConfig
         label={formatMessage({ id: 'ui-circulation.settings.tlrPatronNotices.paneTitle' })}
-        scope={SCOPES.CIRCULATION}
         configName={CONFIG_NAMES.REGULAR_TLR}
         configFormComponent={TLRPatronNoticesForm}
-        stripes={stripes}
         getInitialValues={getInitialValues}
         onBeforeSave={normalizeData}
       />
@@ -43,13 +39,4 @@ const TLRPatronNotices = ({
   );
 };
 
-TLRPatronNotices.propTypes = {
-  stripes: PropTypes.shape({
-    connect: PropTypes.func.isRequired,
-  }).isRequired,
-  intl: PropTypes.shape({
-    formatMessage: PropTypes.func.isRequired,
-  }).isRequired,
-};
-
-export default withStripes(injectIntl(TLRPatronNotices));
+export default TLRPatronNotices;

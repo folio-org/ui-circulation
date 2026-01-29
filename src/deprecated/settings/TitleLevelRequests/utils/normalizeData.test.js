@@ -27,7 +27,7 @@ describe('deprecated normalizeData', () => {
       [TITLE_LEVEL_REQUESTS.EXPIRATION_TEMPLATE]: testId,
     };
 
-    expect(normalizeData(testData)).toBe(JSON.stringify(expectedResult));
+    expect(normalizeData(testData)).toEqual(expectedResult);
   });
 
   it('should return modified default config if "TLR" is not allowed', () => {
@@ -36,6 +36,6 @@ describe('deprecated normalizeData', () => {
       someData: 'test',
     };
 
-    expect(normalizeData(testData)).toBe(JSON.stringify(TITLE_LEVEL_REQUESTS_DEFAULT_VALUES));
+    expect(normalizeData(testData)).toEqual(TITLE_LEVEL_REQUESTS_DEFAULT_VALUES);
   });
 });

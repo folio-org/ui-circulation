@@ -1,6 +1,5 @@
 import {
   isEmpty,
-  head,
 } from 'lodash';
 
 import {
@@ -18,7 +17,7 @@ const getInitialValues = (settings) => {
 
   const settingsForReturn = {
     ...TITLE_LEVEL_REQUESTS_DEFAULT_VALUES,
-    ...JSON.parse(head(settings).value),
+    ...settings,
   };
 
   TLR_FIELDS_FOR_RESET.forEach(field => {

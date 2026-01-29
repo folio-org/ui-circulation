@@ -18,7 +18,7 @@ const normalizeData = (value) => {
     }
   });
 
-  return JSON.stringify(configForReturn);
+  return configForReturn;
 };
 
 export default normalizeData;

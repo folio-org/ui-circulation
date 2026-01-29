@@ -1,6 +1,5 @@
 import {
   isEmpty,
-  head,
 } from 'lodash';
 
 import { TITLE_LEVEL_REQUESTS_DEFAULT_VALUES } from '../../../constants';
@@ -12,7 +11,7 @@ const getInitialValues = (settings) => {
 
   return {
     ...TITLE_LEVEL_REQUESTS_DEFAULT_VALUES,
-    ...(head(settings)?.value || {}),
+    ...settings,
   };
 };
 

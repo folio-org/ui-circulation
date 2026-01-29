@@ -1,23 +1,20 @@
 import normalizeData from './normalizeData';
-
 import {
-  PRINT_HOLD_REQUESTS_DEFAULT_VALUES,
   PRINT_HOLD_REQUESTS,
+  PRINT_HOLD_REQUESTS_DEFAULT_VALUES,
 } from '../../../constants';
 
 describe('normalizeData', () => {
-  it('should return default values', () => {
-    expect(normalizeData()).toBe(JSON.stringify(PRINT_HOLD_REQUESTS_DEFAULT_VALUES));
+  it('should returns default values when no value or disabled', () => {
+    expect(normalizeData()).toBe(PRINT_HOLD_REQUESTS_DEFAULT_VALUES);
+    expect(normalizeData({})).toBe(PRINT_HOLD_REQUESTS_DEFAULT_VALUES);
+    expect(normalizeData({ [PRINT_HOLD_REQUESTS.PRINT_HOLD_REQUESTS_ENABLED]: false }))
+      .toBe(PRINT_HOLD_REQUESTS_DEFAULT_VALUES);
   });
 
-  it('should return values', () => {
-    const testData = {
-      [PRINT_HOLD_REQUESTS.PRINT_HOLD_REQUESTS_ENABLED]: true,
-    };
-    const expectedResult = {
-      [PRINT_HOLD_REQUESTS.PRINT_HOLD_REQUESTS_ENABLED]: true,
-    };
+  it('should returns input value when enabled', () => {
+    const enabledData = { [PRINT_HOLD_REQUESTS.PRINT_HOLD_REQUESTS_ENABLED]: true };
 
-    expect(normalizeData(testData)).toBe(JSON.stringify(expectedResult));
+    expect(normalizeData(enabledData)).toBe(enabledData);
   });
 });
