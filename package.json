@@ -79,7 +79,8 @@
         "permissionName": "ui-circulation.settings.loan-history",
         "displayName": "Settings (Circulation): Can view loan history",
         "subPermissions": [
-          "configuration.entries.collection.get",
+          "circulation.settings.collection.get",
+          "circulation.settings.item.get",
           "settings.circulation.enabled",
           "payments.collection.get"
         ],
@@ -90,8 +91,8 @@
         "displayName": "Settings (Circulation): Can edit loan history",
         "subPermissions": [
           "ui-circulation.settings.loan-history",
-          "configuration.entries.item.post",
-          "configuration.entries.item.put"
+          "circulation.settings.item.put",
+          "circulation.settings.item.post"
         ],
         "visible": true
       },
@@ -300,8 +301,8 @@
         "subPermissions": [
           "user-settings.custom-fields.collection.get",
           "settings.circulation.enabled",
-          "configuration.entries.collection.get",
-          "configuration.entries.item.get"
+          "circulation.settings.collection.get",
+          "circulation.settings.item.get"
         ],
         "visible": false
       },
@@ -310,9 +311,9 @@
         "displayName": "Settings (Circulation): Can create, edit and remove other settings",
         "subPermissions": [
           "ui-circulation.settings.view-other-settings",
-          "configuration.entries.item.post",
-          "configuration.entries.item.put",
-          "configuration.entries.item.delete"
+          "circulation.settings.item.put",
+          "circulation.settings.item.post",
+          "circulation.settings.item.delete"
         ],
         "visible": true
       },
@@ -400,7 +401,8 @@
           "mod-settings.entries.collection.get",
           "mod-settings.entries.item.get",
           "circulation.requests.collection.get",
-          "configuration.entries.collection.get"
+          "circulation.settings.collection.get",
+          "circulation.settings.item.get"
         ]
       },
       {
@@ -411,8 +413,8 @@
           "mod-settings.global.write.circulation",
           "mod-settings.entries.item.put",
           "mod-settings.entries.item.post",
-          "configuration.entries.item.post",
-          "configuration.entries.item.put"
+          "circulation.settings.item.put",
+          "circulation.settings.item.post"
         ],
         "visible": true
       },
