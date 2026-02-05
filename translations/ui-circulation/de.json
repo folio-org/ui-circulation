@@ -568,7 +568,7 @@
     "settings.loanHistory.immediatelyAfterCloseOrSuspended": "Unmittelbar nachdem {name} geschlossen (oder ausgesetzt) wurde",
     "settings.loanHistory.afterCloseOrSuspended": "Nachdem {name} geschlossen (oder ausgesetzt) wurde",
     "settings.staffSlips.isRawHtml": "Als reines HTML beibehalten?",
-    "settings.loanPolicy.forUseAtLocation": "Zur Verwendung am Standort",
+    "settings.loanPolicy.forUseAtLocation": "Zur Nutzung am Standort",
     "settings.loanPolicy.holdShelfExpirationPeriod": "Abholregal-Ablaufdatum",
     "settings.titleLevelRequests.excludeTenants": "Mandanten ausschließen",
     "settings.noticePolicy.loanNotices.holdRequestForItem": "Vormerkung für Exemplar"

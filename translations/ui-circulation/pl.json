@@ -477,7 +477,7 @@
     "settings.patronNotices.userAddressTokenHeader": "Adres użytkownika",
     "settings.finePolicy.reminderFees.label": "Opłaty za przypomnienia",
     "settings.finePolicy.reminderFees.add": "Dodaj opłatę za przypomnienie",
-    "settings.finePolicy.reminderFees.sequence": "Kolejność",
+    "settings.finePolicy.reminderFees.sequence": "Sekwencja",
     "settings.finePolicy.reminderFees.interval": "Interwał",
     "settings.finePolicy.reminderFees.frequency": "Częstotliwość",
     "settings.finePolicy.reminderFees.after": "Po",
