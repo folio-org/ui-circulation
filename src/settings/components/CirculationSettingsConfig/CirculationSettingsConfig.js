@@ -89,7 +89,12 @@ CirculationSettingsConfig.propTypes = {
   children: PropTypes.node,
   configFormComponent: PropTypes.elementType.isRequired,
   configName: PropTypes.string.isRequired,
+  customFieldsOptions: PropTypes.arrayOf(PropTypes.shape({
+    label: PropTypes.string,
+    value: PropTypes.string,
+  })).isRequired,
   getInitialValues: PropTypes.func,
+  isLoadingCustomFields: PropTypes.bool,
   label: PropTypes.node.isRequired,
   lastMenu: PropTypes.element,
   mutator: PropTypes.shape({

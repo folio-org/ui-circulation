@@ -1,3 +1,5 @@
+import { Field } from 'react-final-form';
+
 import {
   render,
   screen,
@@ -195,7 +197,19 @@ describe('CheckoutSettingsForm', () => {
     });
   });
 
-  it('should display label for custom fields at checkout field', () => {
-    expect(screen.getByText(labelIds.customFieldsAtCheckout)).toBeInTheDocument();
+  describe('Custom fields at checkout field', () => {
+    it('should display a label', () => {
+      expect(screen.getByText(labelIds.customFieldsAtCheckout)).toBeInTheDocument();
+    });
+
+    describe('when removing first item', () => {
+      it('should have the itemToString property returning option.value to display the second item as the first one', () => {
+        const fieldCall = Field.mock.calls.find(call => call[0]?.name === 'allowedCustomFieldRefIds');
+        const itemToString = fieldCall[0].itemToString;
+        const option = { value: 'testValue' };
+
+        expect(itemToString(option)).toBe('testValue');
+      });
+    });
   });
 });

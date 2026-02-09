@@ -210,6 +210,10 @@ const CheckoutSettingsForm = ({
 };
 
 CheckoutSettingsForm.propTypes = {
+  customFieldsOptions: PropTypes.arrayOf(PropTypes.shape({
+    label: PropTypes.string,
+    value: PropTypes.string,
+  })).isRequired,
   handleSubmit: PropTypes.func.isRequired,
   pristine: PropTypes.bool,
   submitting: PropTypes.bool,

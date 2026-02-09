@@ -152,6 +152,19 @@ describe('getInitialValues', () => {
   });
 });
 
+it('should handle missing custom fields in allowedCustomFieldRefIds', () => {
+  const custom = {
+    allowedCustomFieldRefIds: ['refId1', 'refId3'],
+  };
+
+  expect(getInitialValues(custom, customFieldsOptions).allowedCustomFieldRefIds).toEqual([{
+    label: 'Custom Field 1',
+    value: 'refId1',
+  }, {
+    value: 'refId3',
+    label: 'refId3',
+  }]);
+});
 describe('normalize', () => {
   it('should normalizes identifiers to prefPatronIdentifier string', () => {
     const input = {
