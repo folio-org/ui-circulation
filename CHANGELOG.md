@@ -19,6 +19,7 @@
 * *BREAKING* Migration from mod-config and mod-settings to mod-circulation. Refs UICIRC-1247.
 * Update permissions after migration to mod-circulation. Refs UICIRC-1324.
 * Fixed an issue where the value containing the previously selected option was not reset. Refs UICIRC-1317.
+* Add a new field in "Other settings" to control the display of custom fields in Checkout app. Refs UICIRC-1091.
 
 ## [11.0.4](https://github.com/folio-org/ui-circulation/tree/v11.0.4) (2024-12-10)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v11.0.3...v11.0.4)

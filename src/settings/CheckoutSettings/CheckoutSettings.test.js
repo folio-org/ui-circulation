@@ -5,6 +5,9 @@ import {
 import {
   TitleManager,
 } from '@folio/stripes/core';
+import {
+  useCustomFieldsQuery,
+} from '@folio/stripes/smart-components';
 
 import CheckoutSettings, {
   getInitialValues,
@@ -34,9 +37,28 @@ const labelIds = {
   paneTitle: 'ui-circulation.settings.index.otherSettings',
 };
 
+const customFieldsOptions = [{
+  label: 'Custom Field 1',
+  value: 'refId1'
+}, {
+  label: 'Custom Field 2',
+  value: 'refId2'
+}];
+
 describe('CheckoutSettings', () => {
   beforeEach(() => {
     jest.clearAllMocks();
+
+    useCustomFieldsQuery.mockReturnValue({
+      customFields: [{
+        name: 'Custom Field 1',
+        refId: 'refId1',
+      }, {
+        name: 'Custom Field 2',
+        refId: 'refId2',
+      }],
+      isLoadingCustomFields: false,
+    });
 
     render(<CheckoutSettings />);
   });
@@ -61,8 +83,10 @@ describe('CheckoutSettings', () => {
         label: labelIds.paneTitle,
         configName: CONFIG_NAMES.OTHER_SETTINGS,
         configFormComponent: CheckoutSettingsForm,
-        getInitialValues,
+        getInitialValues: expect.any(Function),
         onBeforeSave: normalize,
+        customFieldsOptions,
+        isLoadingCustomFields: false,
       }),
       {}
     );
@@ -79,6 +103,7 @@ describe('getInitialValues', () => {
       identifiers: { custom: [] },
       useCustomFieldsAsIdentifiers: false,
       wildcardLookupEnabled: false,
+      allowedCustomFieldRefIds: [],
     });
 
     expect(getInitialValues({})).toEqual({
@@ -89,6 +114,7 @@ describe('getInitialValues', () => {
       identifiers: { custom: [] },
       useCustomFieldsAsIdentifiers: false,
       wildcardLookupEnabled: false,
+      allowedCustomFieldRefIds: [],
     });
   });
 
@@ -101,9 +127,10 @@ describe('getInitialValues', () => {
       prefPatronIdentifier: 'barcode,customFields.cf1',
       useCustomFieldsAsIdentifiers: true,
       wildcardLookupEnabled: true,
+      allowedCustomFieldRefIds: ['refId1', 'refId2'],
     };
 
-    expect(getInitialValues(custom)).toEqual({
+    expect(getInitialValues(custom, customFieldsOptions)).toEqual({
       audioAlertsEnabled: true,
       audioTheme: 'modern',
       checkoutTimeout: false,
@@ -114,6 +141,13 @@ describe('getInitialValues', () => {
       },
       useCustomFieldsAsIdentifiers: true,
       wildcardLookupEnabled: true,
+      allowedCustomFieldRefIds: [{
+        label: 'Custom Field 1',
+        value: 'refId1',
+      }, {
+        label: 'Custom Field 2',
+        value: 'refId2',
+      }],
     });
   });
 });
@@ -132,6 +166,10 @@ describe('normalize', () => {
       },
       useCustomFieldsAsIdentifiers: true,
       wildcardLookupEnabled: true,
+      allowedCustomFieldRefIds: [{
+        label: 'Custom Field 1',
+        value: 'refId1',
+      }],
     };
 
     expect(normalize(input)).toEqual({
@@ -142,6 +180,7 @@ describe('normalize', () => {
       prefPatronIdentifier: 'barcode,username,customFields.cf1,customFields.cf2',
       useCustomFieldsAsIdentifiers: true,
       wildcardLookupEnabled: true,
+      allowedCustomFieldRefIds: ['refId1'],
     });
   });
 
@@ -154,6 +193,7 @@ describe('normalize', () => {
       identifiers: { custom: [] },
       useCustomFieldsAsIdentifiers: false,
       wildcardLookupEnabled: false,
+      allowedCustomFieldRefIds: [],
     };
 
     expect(normalize(input)).toEqual({
@@ -164,6 +204,7 @@ describe('normalize', () => {
       prefPatronIdentifier: '',
       useCustomFieldsAsIdentifiers: false,
       wildcardLookupEnabled: false,
+      allowedCustomFieldRefIds: [],
     });
   });
 
@@ -179,6 +220,7 @@ describe('normalize', () => {
       },
       useCustomFieldsAsIdentifiers: false,
       wildcardLookupEnabled: true,
+      allowedCustomFieldRefIds: [],
     };
 
     expect(normalize(input)).toEqual({
@@ -189,6 +231,7 @@ describe('normalize', () => {
       prefPatronIdentifier: 'barcode',
       useCustomFieldsAsIdentifiers: false,
       wildcardLookupEnabled: true,
+      allowedCustomFieldRefIds: [],
     });
   });
 
@@ -204,6 +247,7 @@ describe('normalize', () => {
       },
       useCustomFieldsAsIdentifiers: true,
       wildcardLookupEnabled: true,
+      allowedCustomFieldRefIds: [],
     };
 
     expect(normalize(input)).toEqual({
@@ -214,6 +258,7 @@ describe('normalize', () => {
       prefPatronIdentifier: 'barcode,customFields.cf1,customFields.cf2',
       useCustomFieldsAsIdentifiers: true,
       wildcardLookupEnabled: true,
+      allowedCustomFieldRefIds: [],
     });
   });
 });

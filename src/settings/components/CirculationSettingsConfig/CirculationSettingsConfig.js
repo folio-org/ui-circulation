@@ -30,6 +30,8 @@ const CirculationSettingsConfig = ({
   resources,
   stripes,
   validate,
+  customFieldsOptions,
+  isLoadingCustomFields,
 }) => {
   const callout = useRef();
 
@@ -58,7 +60,7 @@ const CirculationSettingsConfig = ({
       });
   }, [resources, configName, mutator, calloutMessage, onBeforeSave]);
 
-  const isLoaded = resources?.settings?.hasLoaded;
+  const isLoaded = resources?.settings?.hasLoaded && !isLoadingCustomFields;
 
   if (!isLoaded) {
     return <div />;
@@ -72,6 +74,7 @@ const CirculationSettingsConfig = ({
         initialValues={initialValues}
         stripes={stripes}
         validate={validate}
+        customFieldsOptions={customFieldsOptions}
         onSubmit={onSave}
       >
         {children}

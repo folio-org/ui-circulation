@@ -33,6 +33,7 @@ describe('CheckoutSettingsForm', () => {
     audioTheme: 'ui-circulation.settings.checkout.audioTheme',
     wildcardLookup: 'ui-circulation.settings.checkout.wildcardLookup',
     otherSettingsFormSubmit: 'ui-circulation.settings.checkout.save',
+    customFieldsAtCheckout: 'ui-circulation.settings.checkout.customFieldsAtCheckout',
   };
   const mockedInitialValues = {
     checkoutValues: {
@@ -192,5 +193,9 @@ describe('CheckoutSettingsForm', () => {
     it('should have label for "otherSettingsFormSubmit" in the document', () => {
       expect(screen.getByText(labelIds.otherSettingsFormSubmit)).toBeInTheDocument();
     });
+  });
+
+  it('should display label for custom fields at checkout field', () => {
+    expect(screen.getByText(labelIds.customFieldsAtCheckout)).toBeInTheDocument();
   });
 });

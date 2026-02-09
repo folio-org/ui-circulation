@@ -7,6 +7,7 @@ import {
   useIntl,
 } from 'react-intl';
 import { Field } from 'react-final-form';
+import isEqual from 'lodash/isEqual';
 
 import stripesFinalForm from '@folio/stripes/final-form';
 
@@ -46,6 +47,7 @@ const CheckoutSettingsForm = ({
   label,
   pristine,
   submitting,
+  customFieldsOptions,
 }) => {
   const { formatMessage } = useIntl();
 
@@ -190,6 +192,17 @@ const CheckoutSettingsForm = ({
           label={<FormattedMessage id="ui-circulation.settings.checkout.wildcardLookup" />}
           name="wildcardLookupEnabled"
           type="checkbox"
+        />
+        <hr />
+        <Field
+          name="allowedCustomFieldRefIds"
+          component={MultiSelection}
+          dataOptions={customFieldsOptions}
+          label={formatMessage({ id: 'ui-circulation.settings.checkout.customFieldsAtCheckout' })}
+          isEqual={isEqual}
+          itemToString={option => (option ? option.value : '')}
+          usePortal
+          emptyMessage={formatMessage({ id: 'ui-circulation.settings.checkout.customFieldsAtCheckout.noCustomFields' })}
         />
       </form>
     </Pane>
