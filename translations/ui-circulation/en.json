@@ -203,6 +203,8 @@
   "settings.checkout.identifiers.externalSystemId": "External system ID",
   "settings.checkout.identifiers.id": "FOLIO record number (ID)",
   "settings.checkout.identifiers.username": "Username",
+  "settings.checkout.customFieldsAtCheckout": "Users custom fields to display at Check out",
+  "settings.checkout.customFieldsAtCheckout.noCustomFields": "No matching custom fields have been configured",
 
   "settings.patronNotices.categories.feeFineAction": "Manual fee/fine action (pay, waive, refund, transfer or cancel/error)",
   "settings.patronNotices.categories.feeFineCharge": "Manual fee/fine charge",

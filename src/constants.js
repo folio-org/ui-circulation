@@ -657,3 +657,6 @@ export const TOKEN_PROP_TYPES = PropTypes.shape({
     previewValue: PropTypes.string,
   })),
 });
+
+export const USERS_MODULE = 'users';
+export const CUSTOM_FIELDS_ENTITY_TYPE = 'user';

@@ -30,6 +30,8 @@ const CirculationSettingsConfig = ({
   resources,
   stripes,
   validate,
+  customFieldsOptions,
+  isLoadingCustomFields,
 }) => {
   const callout = useRef();
 
@@ -58,7 +60,7 @@ const CirculationSettingsConfig = ({
       });
   }, [resources, configName, mutator, calloutMessage, onBeforeSave]);
 
-  const isLoaded = resources?.settings?.hasLoaded;
+  const isLoaded = resources?.settings?.hasLoaded && !isLoadingCustomFields;
 
   if (!isLoaded) {
     return <div />;
@@ -72,6 +74,7 @@ const CirculationSettingsConfig = ({
         initialValues={initialValues}
         stripes={stripes}
         validate={validate}
+        customFieldsOptions={customFieldsOptions}
         onSubmit={onSave}
       >
         {children}
@@ -86,7 +89,12 @@ CirculationSettingsConfig.propTypes = {
   children: PropTypes.node,
   configFormComponent: PropTypes.elementType.isRequired,
   configName: PropTypes.string.isRequired,
+  customFieldsOptions: PropTypes.arrayOf(PropTypes.shape({
+    label: PropTypes.string,
+    value: PropTypes.string,
+  })).isRequired,
   getInitialValues: PropTypes.func,
+  isLoadingCustomFields: PropTypes.bool,
   label: PropTypes.node.isRequired,
   lastMenu: PropTypes.element,
   mutator: PropTypes.shape({

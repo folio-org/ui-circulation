@@ -1,3 +1,5 @@
+import { Field } from 'react-final-form';
+
 import {
   render,
   screen,
@@ -33,6 +35,7 @@ describe('CheckoutSettingsForm', () => {
     audioTheme: 'ui-circulation.settings.checkout.audioTheme',
     wildcardLookup: 'ui-circulation.settings.checkout.wildcardLookup',
     otherSettingsFormSubmit: 'ui-circulation.settings.checkout.save',
+    customFieldsAtCheckout: 'ui-circulation.settings.checkout.customFieldsAtCheckout',
   };
   const mockedInitialValues = {
     checkoutValues: {
@@ -191,6 +194,22 @@ describe('CheckoutSettingsForm', () => {
     });
     it('should have label for "otherSettingsFormSubmit" in the document', () => {
       expect(screen.getByText(labelIds.otherSettingsFormSubmit)).toBeInTheDocument();
+    });
+  });
+
+  describe('Custom fields at checkout field', () => {
+    it('should display a label', () => {
+      expect(screen.getByText(labelIds.customFieldsAtCheckout)).toBeInTheDocument();
+    });
+
+    describe('when removing first item', () => {
+      it('should have the itemToString property returning option.value to display the second item as the first one', () => {
+        const fieldCall = Field.mock.calls.find(call => call[0]?.name === 'allowedCustomFieldRefIds');
+        const itemToString = fieldCall[0].itemToString;
+        const option = { value: 'testValue' };
+
+        expect(itemToString(option)).toBe('testValue');
+      });
     });
   });
 });

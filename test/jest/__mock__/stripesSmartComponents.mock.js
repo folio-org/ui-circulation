@@ -8,4 +8,8 @@ jest.mock('@folio/stripes/smart-components', () => ({
   )),
   EntryManager: jest.fn(() => null),
   Settings: jest.fn(() => null),
+  useCustomFieldsQuery: jest.fn(() => ({
+    customFields: [],
+    isLoadingCustomFields: false,
+  })),
 }));
