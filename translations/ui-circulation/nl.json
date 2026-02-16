@@ -571,5 +571,7 @@
     "settings.loanPolicy.forUseAtLocation": "Voor gebruik op Locatie",
     "settings.loanPolicy.holdShelfExpirationPeriod": "Reservering vervaldatum schap",
     "settings.titleLevelRequests.excludeTenants": "Huurders uitsluiten",
-    "settings.noticePolicy.loanNotices.holdRequestForItem": "Reserveringsverzoek voor item"
+    "settings.noticePolicy.loanNotices.holdRequestForItem": "Reserveringsverzoek voor item",
+    "settings.checkout.customFieldsAtCheckout": "Users custom fields to display at Check out",
+    "settings.checkout.customFieldsAtCheckout.noCustomFields": "No matching custom fields have been configured"
 }

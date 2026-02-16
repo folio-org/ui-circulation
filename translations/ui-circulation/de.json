@@ -571,5 +571,7 @@
     "settings.loanPolicy.forUseAtLocation": "Zur Nutzung am Standort",
     "settings.loanPolicy.holdShelfExpirationPeriod": "Abholregal-Ablaufdatum",
     "settings.titleLevelRequests.excludeTenants": "Mandanten ausschließen",
-    "settings.noticePolicy.loanNotices.holdRequestForItem": "Vormerkung für Exemplar"
+    "settings.noticePolicy.loanNotices.holdRequestForItem": "Vormerkung für Exemplar",
+    "settings.checkout.customFieldsAtCheckout": "Users custom fields to display at Check out",
+    "settings.checkout.customFieldsAtCheckout.noCustomFields": "No matching custom fields have been configured"
 }
