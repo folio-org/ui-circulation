@@ -571,5 +571,7 @@
     "settings.loanPolicy.forUseAtLocation": "Para uso no local",
     "settings.loanPolicy.holdShelfExpirationPeriod": "Período de vencimento da reserva",
     "settings.titleLevelRequests.excludeTenants": "Excluir locatários",
-    "settings.noticePolicy.loanNotices.holdRequestForItem": "Solicitação de reserva do item"
+    "settings.noticePolicy.loanNotices.holdRequestForItem": "Solicitação de reserva do item",
+    "settings.checkout.customFieldsAtCheckout": "Users custom fields to display at Check out",
+    "settings.checkout.customFieldsAtCheckout.noCustomFields": "No matching custom fields have been configured"
 }

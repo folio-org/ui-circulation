@@ -571,5 +571,7 @@
     "settings.loanPolicy.forUseAtLocation": "Konumda kullanım için",
     "settings.loanPolicy.holdShelfExpirationPeriod": "Mevcut kopya kaydı bekletme süresinin sona ermesi",
     "settings.titleLevelRequests.excludeTenants": "Kiracıları hariç tut",
-    "settings.noticePolicy.loanNotices.holdRequestForItem": "Ürün için bekletme talebi"
+    "settings.noticePolicy.loanNotices.holdRequestForItem": "Ürün için bekletme talebi",
+    "settings.checkout.customFieldsAtCheckout": "Users custom fields to display at Check out",
+    "settings.checkout.customFieldsAtCheckout.noCustomFields": "No matching custom fields have been configured"
 }

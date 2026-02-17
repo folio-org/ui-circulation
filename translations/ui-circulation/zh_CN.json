@@ -571,5 +571,7 @@
     "settings.loanPolicy.forUseAtLocation": "在现场使用",
     "settings.loanPolicy.holdShelfExpirationPeriod": "预约书架到期有效期",
     "settings.titleLevelRequests.excludeTenants": "排除租户",
-    "settings.noticePolicy.loanNotices.holdRequestForItem": "单件的预约请求"
+    "settings.noticePolicy.loanNotices.holdRequestForItem": "单件的预约请求",
+    "settings.checkout.customFieldsAtCheckout": "Users custom fields to display at Check out",
+    "settings.checkout.customFieldsAtCheckout.noCustomFields": "No matching custom fields have been configured"
 }

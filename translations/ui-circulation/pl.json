@@ -180,7 +180,7 @@
     "settings.noticePolicy.requestNotices.recallRequest": "Rezerwacja z wezwaniem do zwrotu obecnego posiadacza",
     "settings.noticePolicy.requestNotices.holdRequest": "Rezerwacja",
     "settings.noticePolicy.requestNotices.pagingRequest": "Zamówienie",
-    "settings.noticePolicy.requestNotices.available": "Oczekujący na odbiór",
+    "settings.noticePolicy.requestNotices.available": "Oczekuje na odbiór",
     "settings.noticePolicy.requestNotices.holdExpiration": "Ostateczny termin odbioru z biblioteki",
     "settings.noticePolicy.requestNotices.requestCancelation": "Anuluj zamówienie",
     "settings.index.circulationRules": "Reguły udostępniania",
@@ -501,8 +501,8 @@
     "settings.finePolicy.reminderFees.ignoreGracePeriodHolds": "Ignoruj okres karencji dla rezerwacji",
     "settings.finePolicy.reminderFees.allowRenewalOfItemsWithReminderFees": "Pozwalaj na prolongatę egzemplarza z opłatą/opłatami za przypomnienie",
     "settings.requestPolicy.errors.selectServicePoint": "Proszę wybrać przynajmniej jeden punkt obsługi",
-    "settings.requestPolicy.requestTypes.allowAll": "Zezwalaj na wszystkie punkty obsługi",
-    "settings.requestPolicy.requestTypes.allowSome": "Zezwalaj na wybrane punkty obsługi",
+    "settings.requestPolicy.requestTypes.allowAll": "Zezwalaj na wszystkie punkty odbioru",
+    "settings.requestPolicy.requestTypes.allowSome": "Zezwalaj na wybrane punkty odbioru",
     "settings.finePolicy.reminderFees.noticeMethods.print": "Drukuj",
     "settings.finePolicy.reminderFees.noticeMethods.none": "Brak",
     "settings.requestPolicy.policyTypes.hold.infoPopover.content": "Jeśli ustawienie „Nie udało się utworzyć rezerwacji tytułu, gdy rezerwacja jest blokowana przez regułę udostępniania” jest <strong>odznaczone</strong>, rezerwacje tytułu będą zawsze dozwolone. (Ustawienia > Udostępnianie > Rezerwacje tytułu)",
@@ -539,7 +539,7 @@
     "settings.ViewPrintDetails.callout.error": "Coś poszło nie tak.",
     "settings.ViewPrintDetails.warningPopup.heading": "Wyłącz wyświetlanie szczegółów wydruku (Rewersy zamówienia)",
     "settings.ViewPrintDetails.warningPopup.message": "Wybranie opcji Potwierdź spowoduje zatrzymanie rejestrowania szczegółów zadania drukowania.",
-    "settings.ViewPrintDetails.warningPopup.message.confirm": "Potwierdzić",
+    "settings.ViewPrintDetails.warningPopup.message.confirm": "Potwierdź",
     "settings.ViewPrintDetails.warningPopup.message.cancel": "Anuluj",
     "settings.staffSlips.borrowerTokenHeader": "Wypożyczający",
     "settings.staffSlips.loanTokenHeader": "Wypożyczenie",
@@ -571,5 +571,7 @@
     "settings.loanPolicy.forUseAtLocation": "Do użytku w lokalizacji",
     "settings.loanPolicy.holdShelfExpirationPeriod": "Okres odbioru z biblioteki",
     "settings.titleLevelRequests.excludeTenants": "Exclude tenants",
-    "settings.noticePolicy.loanNotices.holdRequestForItem": "Hold request for item"
+    "settings.noticePolicy.loanNotices.holdRequestForItem": "Hold request for item",
+    "settings.checkout.customFieldsAtCheckout": "Users custom fields to display at Check out",
+    "settings.checkout.customFieldsAtCheckout.noCustomFields": "No matching custom fields have been configured"
 }

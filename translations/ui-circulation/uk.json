@@ -99,7 +99,7 @@
     "settings.patronNotices.notice.category": "Категорія",
     "settings.patronNotices.email": "Електронна пошта",
     "settings.patronNotices.preview": "Попередній перегляд",
-    "settings.patronNotices.subject": "Предмет",
+    "settings.patronNotices.subject": "Предметна рубрика",
     "settings.patronNotices.body": "Зміст",
     "settings.patronNotices.errors.nameExists": "Повідомлення для користувача з такою назвою вже існує",
     "settings.patronNotices.closeDialog": "Закрити",
@@ -571,5 +571,7 @@
     "settings.loanPolicy.forUseAtLocation": "Для використання у місці розміщення",
     "settings.loanPolicy.holdShelfExpirationPeriod": "Період для терміну зберігання на бронеполиці",
     "settings.titleLevelRequests.excludeTenants": "Exclude tenants",
-    "settings.noticePolicy.loanNotices.holdRequestForItem": "Hold request for item"
+    "settings.noticePolicy.loanNotices.holdRequestForItem": "Hold request for item",
+    "settings.checkout.customFieldsAtCheckout": "Users custom fields to display at Check out",
+    "settings.checkout.customFieldsAtCheckout.noCustomFields": "No matching custom fields have been configured"
 }

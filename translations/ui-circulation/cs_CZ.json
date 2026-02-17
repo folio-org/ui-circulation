@@ -571,5 +571,7 @@
     "settings.loanPolicy.forUseAtLocation": "Pro použití v lokaci",
     "settings.loanPolicy.holdShelfExpirationPeriod": "Doba pro vyzvednutí rezervace z regálu",
     "settings.titleLevelRequests.excludeTenants": "Vyloučení nájemců",
-    "settings.noticePolicy.loanNotices.holdRequestForItem": "Žádost o rezervaci položky"
+    "settings.noticePolicy.loanNotices.holdRequestForItem": "Žádost o rezervaci položky",
+    "settings.checkout.customFieldsAtCheckout": "Users custom fields to display at Check out",
+    "settings.checkout.customFieldsAtCheckout.noCustomFields": "No matching custom fields have been configured"
 }
