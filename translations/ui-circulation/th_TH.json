@@ -225,7 +225,7 @@
     "settings.noticePolicy.denyDelete.header": "Cannot delete patron notice",
     "settings.noticePolicy.denyDelete.body": "This notice policy cannot be deleted, as it is in use by one or more records.",
     "settings.patronNotices.addToken": "Add token",
-    "settings.patronNotices.itemTokenHeader": "Item",
+    "settings.patronNotices.itemTokenHeader": "รายการทรัพยากร",
     "settings.common.print": "Print",
     "settings.patronNotices.userTokenHeader": "User",
     "settings.patronNotices.requestTokenHeader": "Request",
@@ -260,7 +260,7 @@
     "settings.loanHistory.paymentMethod.replace": "Replace",
     "settings.loanHistory.paymentMethod.pay": "Pay",
     "settings.loanHistory.errors.paymentMethodSelected": "This payment method is already selected",
-    "settings.staffSlips.itemTokenHeader": "Item",
+    "settings.staffSlips.itemTokenHeader": "รายการทรัพยากร",
     "settings.staffSlips.effectiveLocationTokenHeader": "Effective location",
     "settings.staffSlips.staffSlipTokenHeader": "Staff slip",
     "settings.staffSlips.requestTokenHeader": "Request",
@@ -572,6 +572,6 @@
     "settings.loanPolicy.holdShelfExpirationPeriod": "Hold shelf expiration period",
     "settings.titleLevelRequests.excludeTenants": "Exclude tenants",
     "settings.noticePolicy.loanNotices.holdRequestForItem": "Hold request for item",
-    "settings.checkout.customFieldsAtCheckout": "Users custom fields to display at Check out",
-    "settings.checkout.customFieldsAtCheckout.noCustomFields": "No matching custom fields have been configured"
+    "settings.checkout.customFieldsAtCheckout": "ฟิลด์แบบกำหนดเองของผู้ใช้ที่แสดงประตูยืม",
+    "settings.checkout.customFieldsAtCheckout.noCustomFields": "ยังไม่มีการกำหนดฟิลด์แบบกำหนดเองที่ตรงกัน"
 }
