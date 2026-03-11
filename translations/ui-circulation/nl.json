@@ -572,6 +572,6 @@
     "settings.loanPolicy.holdShelfExpirationPeriod": "Reservering vervaldatum schap",
     "settings.titleLevelRequests.excludeTenants": "Huurders uitsluiten",
     "settings.noticePolicy.loanNotices.holdRequestForItem": "Reserveringsverzoek voor item",
-    "settings.checkout.customFieldsAtCheckout": "Users custom fields to display at Check out",
-    "settings.checkout.customFieldsAtCheckout.noCustomFields": "No matching custom fields have been configured"
+    "settings.checkout.customFieldsAtCheckout": "Aangepaste velden voor Gebruikers om weer te geven bij Uitchecken",
+    "settings.checkout.customFieldsAtCheckout.noCustomFields": "Er zijn geen overeenkomende aangepaste velden geconfigureerd"
 }

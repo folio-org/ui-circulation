@@ -572,6 +572,6 @@
     "settings.loanPolicy.holdShelfExpirationPeriod": "Período de vencimento da reserva",
     "settings.titleLevelRequests.excludeTenants": "Excluir locatários",
     "settings.noticePolicy.loanNotices.holdRequestForItem": "Solicitação de reserva do item",
-    "settings.checkout.customFieldsAtCheckout": "Users custom fields to display at Check out",
-    "settings.checkout.customFieldsAtCheckout.noCustomFields": "No matching custom fields have been configured"
+    "settings.checkout.customFieldsAtCheckout": "Campos personalizados de usuários a serem exibidos no Empréstimo",
+    "settings.checkout.customFieldsAtCheckout.noCustomFields": "Nenhum campo personalizado correspondente foi configurado"
 }
