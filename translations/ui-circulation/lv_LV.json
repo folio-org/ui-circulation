@@ -1,5 +1,5 @@
 {
-    "settings.index.paneTitle": "Circulation",
+    "settings.index.paneTitle": "Cirkulācija",
     "settings.index.loanPolicies": "Loan policies",
     "settings.index.fdds": "Fixed due date schedules",
     "settings.index.otherSettings": "Other settings",
@@ -79,7 +79,7 @@
     "settings.cancelReasons.labelShort": "Cancel reason",
     "settings.cancelReasons.descriptionInternal": "Description (internal)",
     "settings.cancelReasons.descriptionPublic": "Description (public)",
-    "meta.title": "Circulation",
+    "meta.title": "Cirkulācija",
     "settings.loanPolicy.yes": "Yes",
     "settings.loanPolicy.no": "No",
     "settings.fDDS.editLabel": "Edit: {name}",
