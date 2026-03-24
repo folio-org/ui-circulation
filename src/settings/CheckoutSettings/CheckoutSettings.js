@@ -32,11 +32,13 @@ export const DEFAULT_INITIAL_CONFIG = {
   allowedCustomFieldRefIds: [],
 };
 
-export const getInitialValues = (settings, customFieldsOptions) => {
+export const getInitialValues = (settings, customFieldsOptions, customFieldPatronIdentifiers) => {
   const config = {
     ...DEFAULT_INITIAL_CONFIG,
     ...settings,
   };
+
+  const hasCustomFieldExisted = (customFieldRefId, fieldOptions) => fieldOptions.some(fieldOption => fieldOption.value === customFieldRefId);
 
   // This section unfortunately must assume knowledge of how the IDs and Custom Field IDs
   // are rendered in CheckoutSettingsForm. IDs can be toggled on and off by a checkbox,
@@ -47,15 +49,19 @@ export const getInitialValues = (settings, customFieldsOptions) => {
   const identifiers = { custom: [] };
   (prefPatronIdentifier ? prefPatronIdentifier.split(',') : []).forEach(identifier => {
     if (identifier.startsWith('customFields.')) {
-      identifiers.custom.push({ value: identifier });
+      if (hasCustomFieldExisted(identifier, customFieldPatronIdentifiers)) {
+        const option = customFieldPatronIdentifiers.find(customField => customField.value === identifier);
+
+        identifiers.custom.push(option);
+      }
     } else {
       identifiers[identifier] = true;
     }
   });
 
-  const allowedCustomFieldRefIds = config.allowedCustomFieldRefIds.map(refId => {
-    return customFieldsOptions.find(customField => customField.value === refId) || { value: refId, label: refId };
-  });
+  const allowedCustomFieldRefIds = config.allowedCustomFieldRefIds
+    .filter(refId => hasCustomFieldExisted(refId, customFieldsOptions))
+    .map(refId => customFieldsOptions.find(customField => customField.value === refId));
 
   return {
     audioAlertsEnabled: config.audioAlertsEnabled,
@@ -131,9 +137,18 @@ const CheckoutSettings = () => {
     }));
   }, [customFields]);
 
+  const customFieldPatronIdentifiers = useMemo(() => {
+    return (customFields || [])
+      .filter(cf => cf.type === 'TEXTBOX_SHORT' || cf.type === 'TEXTBOX_LONG')
+      .map(cf => ({
+        label: cf.name,
+        value: `customFields.${cf.refId}`,
+      }));
+  }, [customFields]);
+
   const getOriginalValues = useCallback((settings) => {
-    return getInitialValues(settings, customFieldsOptions);
-  }, [customFieldsOptions]);
+    return getInitialValues(settings, customFieldsOptions, customFieldPatronIdentifiers);
+  }, [customFieldsOptions, customFieldPatronIdentifiers]);
 
   return (
     <TitleManager
@@ -146,6 +161,7 @@ const CheckoutSettings = () => {
         getInitialValues={getOriginalValues}
         configFormComponent={CheckoutSettingsForm}
         customFieldsOptions={customFieldsOptions}
+        customFieldPatronIdentifiers={customFieldPatronIdentifiers}
         isLoadingCustomFields={isLoadingCustomFields}
         onBeforeSave={normalize}
       />

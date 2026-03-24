@@ -27,18 +27,11 @@ import {
 } from '@folio/stripes/components';
 import {
   IfPermission,
-  useCustomFields,
 } from '@folio/stripes/core';
 
 import { CheckoutSettings as validateCheckoutSettings } from '../Validation';
 
 const DEFAULT_PATRON_IDENTIFIERS = ['barcode', 'externalSystemId', 'id', 'username'];
-
-export const getCustomFieldPatronIdentifiers = (customFields) => (
-  customFields
-    .filter(cf => cf.entityType === 'user' && (cf.type === 'TEXTBOX_SHORT' || cf.type === 'TEXTBOX_LONG'))
-    .map(cf => ({ label: cf.name, value: `customFields.${cf.refId}` }))
-);
 
 const CheckoutSettingsForm = ({
   form,
@@ -48,13 +41,11 @@ const CheckoutSettingsForm = ({
   pristine,
   submitting,
   customFieldsOptions,
+  customFieldPatronIdentifiers,
 }) => {
   const { formatMessage } = useIntl();
 
   const { values: checkoutValues } = getState();
-  const [customFields = []] = useCustomFields('users');
-
-  const customFieldPatronIdentifiers = getCustomFieldPatronIdentifiers(customFields);
 
   const audioThemeOptions = [
     // One entry (here and in the translations files) for each theme in ../../../sound
@@ -69,6 +60,23 @@ const CheckoutSettingsForm = ({
     form.reset();
     form.setConfig('keepDirtyOnReinitialize', true);
   }, [handleSubmit, form]);
+
+  const renderMultiSelectionField = ({
+    name,
+    dataOptions,
+    ...rest
+  }) => {
+    return (
+      <Field
+        name={name}
+        component={MultiSelection}
+        dataOptions={dataOptions}
+        isEqual={isEqual}
+        itemToString={option => (option ? option.value : '')}
+        {...rest}
+      />
+    );
+  };
 
   return (
     <Pane
@@ -125,17 +133,13 @@ const CheckoutSettingsForm = ({
               />
               {checkoutValues.useCustomFieldsAsIdentifiers &&
                 <Layout className="margin-start-gutter">
-                  <Field
-                    data-testid="useCustomFieldsAsIdentifiers"
-                    component={MultiSelection}
-                    dataOptions={customFieldPatronIdentifiers}
-                    emptyMessage={formatMessage({ id: 'ui-circulation.settings.checkout.userCustomFields.noValidFieldsAreDefined' })}
-                    formatter={({ option }) => (
-                      customFieldPatronIdentifiers.find(cf => cf.value === option.value)?.label ?? option.value
-                    )}
-                    name="identifiers.custom"
-                    placeholder={formatMessage({ id: 'ui-circulation.settings.checkout.userCustomFields.none' })}
-                  />
+                  {renderMultiSelectionField({
+                    name: 'identifiers.custom',
+                    dataOptions: customFieldPatronIdentifiers,
+                    'data-testid': 'customFieldPatronIdentifiers',
+                    emptyMessage: formatMessage({ id: 'ui-circulation.settings.checkout.userCustomFields.noValidFieldsAreDefined' }),
+                    placeholder: formatMessage({ id: 'ui-circulation.settings.checkout.userCustomFields.none' }),
+                  })}
                 </Layout>
               }
             </div>
@@ -194,16 +198,13 @@ const CheckoutSettingsForm = ({
           type="checkbox"
         />
         <hr />
-        <Field
-          name="allowedCustomFieldRefIds"
-          component={MultiSelection}
-          dataOptions={customFieldsOptions}
-          label={formatMessage({ id: 'ui-circulation.settings.checkout.customFieldsAtCheckout' })}
-          isEqual={isEqual}
-          itemToString={option => (option ? option.value : '')}
-          usePortal
-          emptyMessage={formatMessage({ id: 'ui-circulation.settings.checkout.customFieldsAtCheckout.noCustomFields' })}
-        />
+        {renderMultiSelectionField({
+          name: 'allowedCustomFieldRefIds',
+          dataOptions: customFieldsOptions,
+          label: formatMessage({ id: 'ui-circulation.settings.checkout.customFieldsAtCheckout' }),
+          usePortal: true,
+          emptyMessage: formatMessage({ id: 'ui-circulation.settings.checkout.customFieldsAtCheckout.noCustomFields' }),
+        })}
       </form>
     </Pane>
   );
@@ -211,6 +212,10 @@ const CheckoutSettingsForm = ({
 
 CheckoutSettingsForm.propTypes = {
   customFieldsOptions: PropTypes.arrayOf(PropTypes.shape({
+    label: PropTypes.string,
+    value: PropTypes.string,
+  })).isRequired,
+  customFieldPatronIdentifiers: PropTypes.arrayOf(PropTypes.shape({
     label: PropTypes.string,
     value: PropTypes.string,
   })).isRequired,

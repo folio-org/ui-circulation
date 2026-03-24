@@ -11,7 +11,7 @@ import {
 } from '@folio/stripes/core';
 import {
   Callout,
-} from '@folio/stripes-components';
+} from '@folio/stripes/components';
 
 export const getPath = (_q, _p, _r, _l, props) => (
   `circulation/settings?query=(name==${props.configName})`
@@ -31,6 +31,7 @@ const CirculationSettingsConfig = ({
   stripes,
   validate,
   customFieldsOptions,
+  customFieldPatronIdentifiers,
   isLoadingCustomFields,
 }) => {
   const callout = useRef();
@@ -75,6 +76,7 @@ const CirculationSettingsConfig = ({
         stripes={stripes}
         validate={validate}
         customFieldsOptions={customFieldsOptions}
+        customFieldPatronIdentifiers={customFieldPatronIdentifiers}
         onSubmit={onSave}
       >
         {children}
@@ -90,6 +92,10 @@ CirculationSettingsConfig.propTypes = {
   configFormComponent: PropTypes.elementType.isRequired,
   configName: PropTypes.string.isRequired,
   customFieldsOptions: PropTypes.arrayOf(PropTypes.shape({
+    label: PropTypes.string,
+    value: PropTypes.string,
+  })).isRequired,
+  customFieldPatronIdentifiers: PropTypes.arrayOf(PropTypes.shape({
     label: PropTypes.string,
     value: PropTypes.string,
   })).isRequired,

@@ -5,9 +5,7 @@ import {
   screen,
 } from '@folio/jest-config-stripes/testing-library/react';
 
-import CheckoutSettingsForm, {
-  getCustomFieldPatronIdentifiers,
-} from './CheckoutSettingsForm';
+import CheckoutSettingsForm from './CheckoutSettingsForm';
 
 describe('CheckoutSettingsForm', () => {
   const testIds = {
@@ -75,26 +73,7 @@ describe('CheckoutSettingsForm', () => {
   });
 
   afterEach(() => {
-    mockedHandleSubmit.mockClear();
-  });
-
-  it('Should not return identifiers', () => {
-    expect(getCustomFieldPatronIdentifiers([])).toEqual([]);
-  });
-
-  it('Should return identifiers', () => {
-    const expected = [{
-      entityType: 'user',
-      type:'TEXTBOX_LONG',
-      name: 'name',
-      refId: 'refId',
-    }];
-    const received = [{
-      label: 'name',
-      value: 'customFields.refId',
-    }];
-
-    expect(getCustomFieldPatronIdentifiers(expected)).toEqual(received);
+    jest.clearAllMocks();
   });
 
   it('should have label for "patronIds" in the document', () => {
