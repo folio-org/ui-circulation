@@ -37,13 +37,31 @@ const labelIds = {
   paneTitle: 'ui-circulation.settings.index.otherSettings',
 };
 
-const customFieldsOptions = [{
-  label: 'Custom Field 1',
-  value: 'refId1'
-}, {
-  label: 'Custom Field 2',
-  value: 'refId2'
-}];
+const customFieldsOptions = [
+  {
+    label: 'Custom Field 1',
+    value: 'refId1'
+  },
+  {
+    label: 'Custom Field 2',
+    value: 'refId2'
+  },
+  {
+    label: 'Custom Field 3',
+    value: 'refId3'
+  }
+];
+
+const customFieldPatronIdentifiers = [
+  {
+    label: 'Custom Field 1',
+    value: 'customFields.refId1'
+  },
+  {
+    label: 'Custom Field 2',
+    value: 'customFields.refId2'
+  }
+];
 
 describe('CheckoutSettings', () => {
   beforeEach(() => {
@@ -53,9 +71,15 @@ describe('CheckoutSettings', () => {
       customFields: [{
         name: 'Custom Field 1',
         refId: 'refId1',
+        type: 'TEXTBOX_SHORT',
       }, {
         name: 'Custom Field 2',
         refId: 'refId2',
+        type: 'TEXTBOX_LONG',
+      }, {
+        name: 'Custom Field 3',
+        refId: 'refId3',
+        type: 'SINGLE_CHECKBOX',
       }],
       isLoadingCustomFields: false,
     });
@@ -86,6 +110,7 @@ describe('CheckoutSettings', () => {
         getInitialValues: expect.any(Function),
         onBeforeSave: normalize,
         customFieldsOptions,
+        customFieldPatronIdentifiers,
         isLoadingCustomFields: false,
       }),
       {}
@@ -124,20 +149,23 @@ describe('getInitialValues', () => {
       audioTheme: 'modern',
       checkoutTimeout: false,
       checkoutTimeoutDuration: 10,
-      prefPatronIdentifier: 'barcode,customFields.cf1',
+      prefPatronIdentifier: 'barcode,customFields.refId1',
       useCustomFieldsAsIdentifiers: true,
       wildcardLookupEnabled: true,
       allowedCustomFieldRefIds: ['refId1', 'refId2'],
     };
 
-    expect(getInitialValues(custom, customFieldsOptions)).toEqual({
+    expect(getInitialValues(custom, customFieldsOptions, customFieldPatronIdentifiers)).toEqual({
       audioAlertsEnabled: true,
       audioTheme: 'modern',
       checkoutTimeout: false,
       checkoutTimeoutDuration: 10,
       identifiers: {
         barcode: true,
-        custom: [{ value: 'customFields.cf1' }],
+        custom: [{
+          value: 'customFields.refId1',
+          label: 'Custom Field 1',
+        }],
       },
       useCustomFieldsAsIdentifiers: true,
       wildcardLookupEnabled: true,
@@ -154,15 +182,12 @@ describe('getInitialValues', () => {
 
 it('should handle missing custom fields in allowedCustomFieldRefIds', () => {
   const custom = {
-    allowedCustomFieldRefIds: ['refId1', 'refId3'],
+    allowedCustomFieldRefIds: ['refId1', 'deletedRefId'],
   };
 
   expect(getInitialValues(custom, customFieldsOptions).allowedCustomFieldRefIds).toEqual([{
     label: 'Custom Field 1',
     value: 'refId1',
-  }, {
-    value: 'refId3',
-    label: 'refId3',
   }]);
 });
 describe('normalize', () => {

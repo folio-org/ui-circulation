@@ -660,3 +660,7 @@ export const TOKEN_PROP_TYPES = PropTypes.shape({
 
 export const USERS_MODULE = 'users';
 export const CUSTOM_FIELDS_ENTITY_TYPE = 'user';
+export const CUSTOM_FIELD_TYPES = {
+  TEXTBOX_SHORT: 'TEXTBOX_SHORT',
+  TEXTBOX_LONG: 'TEXTBOX_LONG',
+};
