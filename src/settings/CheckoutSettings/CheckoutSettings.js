@@ -19,6 +19,7 @@ import {
   CONFIG_NAMES,
   USERS_MODULE,
   CUSTOM_FIELDS_ENTITY_TYPE,
+  CUSTOM_FIELD_TYPES,
 } from '../../constants';
 
 export const DEFAULT_INITIAL_CONFIG = {
@@ -139,7 +140,7 @@ const CheckoutSettings = () => {
 
   const customFieldPatronIdentifiers = useMemo(() => {
     return (customFields || [])
-      .filter(cf => cf.type === 'TEXTBOX_SHORT' || cf.type === 'TEXTBOX_LONG')
+      .filter(cf => cf.type === CUSTOM_FIELD_TYPES.TEXTBOX_SHORT || cf.type === CUSTOM_FIELD_TYPES.TEXTBOX_LONG)
       .map(cf => ({
         label: cf.name,
         value: `customFields.${cf.refId}`,
