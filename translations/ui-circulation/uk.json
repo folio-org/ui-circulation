@@ -570,8 +570,8 @@
     "settings.staffSlips.isRawHtml": "Підтримується як необроблений HTML?",
     "settings.loanPolicy.forUseAtLocation": "Для використання у місці розміщення",
     "settings.loanPolicy.holdShelfExpirationPeriod": "Період для терміну зберігання на бронеполиці",
-    "settings.titleLevelRequests.excludeTenants": "Exclude tenants",
-    "settings.noticePolicy.loanNotices.holdRequestForItem": "Hold request for item",
+    "settings.titleLevelRequests.excludeTenants": "Виключити клієнти (тенанти)",
+    "settings.noticePolicy.loanNotices.holdRequestForItem": "Замовлення на утримання для примірника",
     "settings.checkout.customFieldsAtCheckout": "Користувацькі поля користувача для відображення у Видачі",
     "settings.checkout.customFieldsAtCheckout.noCustomFields": "Не налаштовано жодних відповідних користувацьких полів"
 }
