@@ -14,6 +14,7 @@ import {
 } from '@folio/stripes/components';
 
 import { componentPropsCheck } from '../../../../../../test/jest/helpers';
+import { validateUniqueNameById } from '../../../../utils/utils';
 import PatronNoticeAboutSection from './PatronNoticeAboutSection';
 
 jest.mock('../../../../../constants', () => ({
@@ -21,6 +22,10 @@ jest.mock('../../../../../constants', () => ({
     id: 'testId',
     label: 'testLabel',
   }],
+}));
+
+jest.mock('../../../../utils/utils', () => ({
+  validateUniqueNameById: jest.fn(() => Promise.resolve()),
 }));
 
 describe('PatronNoticeAboutSectionEdit', () => {
@@ -113,6 +118,47 @@ describe('PatronNoticeAboutSectionEdit', () => {
         label: 'testLabel',
       }],
       validateFields: [],
+    });
+  });
+
+  describe('validateName debounce', () => {
+    let validateFn;
+
+    beforeEach(() => {
+      jest.useFakeTimers();
+      const nameFieldCall = Field.mock.calls
+        .reverse()
+        .find(([props]) => props['data-testid'] === testIds.patronNoticesNoticeName);
+      validateFn = nameFieldCall[0].validate;
+    });
+
+    afterEach(() => {
+      validateUniqueNameById.mockClear();
+      jest.useRealTimers();
+    });
+
+    it('should return a Promise', () => {
+      expect(validateFn('test')).toBeInstanceOf(Promise);
+    });
+
+    it('should not call validateUniqueNameById before the debounce delay', () => {
+      validateFn('test');
+      expect(validateUniqueNameById).not.toHaveBeenCalled();
+    });
+
+    it('should call validateUniqueNameById once with the last value after the debounce delay', () => {
+      validateFn('t');
+      validateFn('te');
+      validateFn('tes');
+      validateFn('test');
+
+      jest.runAllTimers();
+
+      expect(validateUniqueNameById).toHaveBeenCalledTimes(1);
+      expect(validateUniqueNameById).toHaveBeenCalledWith(expect.objectContaining({
+        currentName: 'test',
+        previousId: initialValues.id,
+      }));
     });
   });
 });

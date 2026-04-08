@@ -34,7 +34,7 @@ const PatronNoticeAboutSection = ({ initialValues, okapi, intl }) => {
         ...getHeaderWithCredentials(okapi)
       });
   };
-  
+
   const debouncedValidate = (name) => new Promise((resolve) => {
     clearTimeout(validateNameTimer.current);
     validateNameTimer.current = setTimeout(() => {
