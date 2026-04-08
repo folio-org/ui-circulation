@@ -1,8 +1,7 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
 import { Field } from 'react-final-form';
-import { memoize } from 'lodash';
 
 import {
   Checkbox,
@@ -21,6 +20,8 @@ import { validateUniqueNameById } from '../../../../utils/utils';
 
 const PatronNoticeAboutSection = ({ initialValues, okapi, intl }) => {
   const { formatMessage } = intl;
+  const validateNameTimer = useRef(null);
+
   const categoryOptions = patronNoticeCategories.map(({ label, id }) => ({
     label: formatMessage({ id: label }),
     value: id,
@@ -33,16 +34,19 @@ const PatronNoticeAboutSection = ({ initialValues, okapi, intl }) => {
         ...getHeaderWithCredentials(okapi)
       });
   };
-
-  const validateName = memoize((name) => (
-    validateUniqueNameById({
-      currentName: name,
-      previousId: initialValues.id,
-      getByName: getTemplatesByName,
-      selector: 'templates',
-      errorKey: 'settings.patronNotices.errors.nameExists',
-    })
-  ));
+  
+  const debouncedValidate = (name) => new Promise((resolve) => {
+    clearTimeout(validateNameTimer.current);
+    validateNameTimer.current = setTimeout(() => {
+      validateUniqueNameById({
+        currentName: name,
+        previousId: initialValues.id,
+        getByName: getTemplatesByName,
+        selector: 'templates',
+        errorKey: 'settings.patronNotices.errors.nameExists',
+      }).then(resolve);
+    }, 300);
+  });
 
   return (
     <div data-testid="patronNoticeAboutSection">
@@ -59,7 +63,7 @@ const PatronNoticeAboutSection = ({ initialValues, okapi, intl }) => {
             id="input-patron-notice-name"
             autoFocus
             component={TextField}
-            validate={validateName}
+            validate={debouncedValidate}
           />
         </Col>
       </Row>
