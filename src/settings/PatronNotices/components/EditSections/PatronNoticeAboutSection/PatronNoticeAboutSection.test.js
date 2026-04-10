@@ -15,6 +15,7 @@ import {
 
 import { componentPropsCheck } from '../../../../../../test/jest/helpers';
 import { validateUniqueNameById } from '../../../../utils/utils';
+import { useDebounceValidate } from '../../../../../hooks';
 import PatronNoticeAboutSection from './PatronNoticeAboutSection';
 
 jest.mock('../../../../../constants', () => ({
@@ -26,6 +27,10 @@ jest.mock('../../../../../constants', () => ({
 
 jest.mock('../../../../utils/utils', () => ({
   validateUniqueNameById: jest.fn(() => Promise.resolve()),
+}));
+
+jest.mock('../../../../../hooks', () => ({
+  useDebounceValidate: jest.fn((fn) => fn),
 }));
 
 describe('PatronNoticeAboutSectionEdit', () => {
@@ -60,6 +65,7 @@ describe('PatronNoticeAboutSectionEdit', () => {
   afterEach(() => {
     KeyValue.mockClear();
     Field.mockClear();
+    useDebounceValidate.mockClear();
   });
 
   beforeEach(() => {
@@ -121,43 +127,29 @@ describe('PatronNoticeAboutSectionEdit', () => {
     });
   });
 
-  describe('validateName debounce', () => {
-    let validateFn;
-
-    beforeEach(() => {
-      jest.useFakeTimers();
-      const nameFieldCall = Field.mock.calls
-        .reverse()
-        .find(([props]) => props['data-testid'] === testIds.patronNoticesNoticeName);
-      validateFn = nameFieldCall[0].validate;
+  describe('validateName', () => {
+    it('should pass a validateFn to useDebounceValidate', () => {
+      expect(useDebounceValidate).toHaveBeenCalledWith(expect.any(Function));
     });
 
-    afterEach(() => {
-      validateUniqueNameById.mockClear();
-      jest.useRealTimers();
+    it('should use the result of useDebounceValidate as the validate prop for the name Field', () => {
+      const debouncedValidate = useDebounceValidate.mock.results[0].value;
+
+      componentPropsCheck(Field, testIds.patronNoticesNoticeName, {
+        validate: debouncedValidate,
+      }, true);
     });
 
-    it('should return a Promise', () => {
-      expect(validateFn('test')).toBeInstanceOf(Promise);
-    });
+    it('should call validateUniqueNameById with correct params when validateFn is invoked', () => {
+      const validateFn = useDebounceValidate.mock.calls[0][0];
 
-    it('should not call validateUniqueNameById before the debounce delay', () => {
-      validateFn('test');
-      expect(validateUniqueNameById).not.toHaveBeenCalled();
-    });
+      validateFn('testName');
 
-    it('should call validateUniqueNameById once with the last value after the debounce delay', () => {
-      validateFn('t');
-      validateFn('te');
-      validateFn('tes');
-      validateFn('test');
-
-      jest.runAllTimers();
-
-      expect(validateUniqueNameById).toHaveBeenCalledTimes(1);
       expect(validateUniqueNameById).toHaveBeenCalledWith(expect.objectContaining({
-        currentName: 'test',
+        currentName: 'testName',
         previousId: initialValues.id,
+        selector: 'templates',
+        errorKey: 'settings.patronNotices.errors.nameExists',
       }));
     });
   });

@@ -1,4 +1,3 @@
-import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
 import { Field } from 'react-final-form';
@@ -17,10 +16,10 @@ import {
 
 import { patronNoticeCategories } from '../../../../../constants';
 import { validateUniqueNameById } from '../../../../utils/utils';
+import { useDebounceValidate } from '../../../../../hooks';
 
 const PatronNoticeAboutSection = ({ initialValues, okapi, intl }) => {
   const { formatMessage } = intl;
-  const validateNameTimer = useRef(null);
 
   const categoryOptions = patronNoticeCategories.map(({ label, id }) => ({
     label: formatMessage({ id: label }),
@@ -35,18 +34,15 @@ const PatronNoticeAboutSection = ({ initialValues, okapi, intl }) => {
       });
   };
 
-  const debouncedValidate = (name) => new Promise((resolve) => {
-    clearTimeout(validateNameTimer.current);
-    validateNameTimer.current = setTimeout(() => {
-      validateUniqueNameById({
-        currentName: name,
-        previousId: initialValues.id,
-        getByName: getTemplatesByName,
-        selector: 'templates',
-        errorKey: 'settings.patronNotices.errors.nameExists',
-      }).then(resolve);
-    }, 300);
+  const validateName = (name) => validateUniqueNameById({
+    currentName: name,
+    previousId: initialValues.id,
+    getByName: getTemplatesByName,
+    selector: 'templates',
+    errorKey: 'settings.patronNotices.errors.nameExists',
   });
+
+  const debouncedValidate = useDebounceValidate(validateName);
 
   return (
     <div data-testid="patronNoticeAboutSection">
