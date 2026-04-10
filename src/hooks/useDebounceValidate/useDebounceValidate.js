@@ -13,7 +13,7 @@ const useDebounceValidate = (validateFn, delay = 300) => {
     if (pendingResolveRef.current) {
       pendingResolveRef.current(undefined);
     }
-    
+
     pendingResolveRef.current = resolve;
     clearTimeout(timerRef.current);
 
