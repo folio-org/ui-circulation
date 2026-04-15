@@ -75,7 +75,7 @@
     "settings.staffSlips.deleteStaffSlipMessage": "Cirkulační lístek <strong>{name}</strong> bude <strong>smazán</strong>.",
     "settings.index.requestCancellationReasons": "Důvody zrušení žádanky/rezervace",
     "settings.loanPolicy.generalInformation": "Obecné informace",
-    "settings.cancelReasons.label": "Vyžádat důvody zrušení",
+    "settings.cancelReasons.label": "Důvody zrušení žádanky",
     "settings.cancelReasons.labelShort": "Důvod zrušení",
     "settings.cancelReasons.descriptionInternal": "Popis (vnitřní)",
     "settings.cancelReasons.descriptionPublic": "Popis (veřejný)",

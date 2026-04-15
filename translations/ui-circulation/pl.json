@@ -437,7 +437,7 @@
     "settings.checkout.audioTheme.classic": "Klasyczna",
     "settings.checkout.audioTheme.modern": "Nowoczesna",
     "settings.checkout.audioTheme.future": "Awangardowa",
-    "settings.fDDSform.dateFormTitle": "Date range {number}",
+    "settings.fDDSform.dateFormTitle": "Zakres dat {number}",
     "settings.finePolicy.overdueFineTitle": "Kara za przetrzymanie",
     "settings.finePolicy.perPeriod": "{number} na {period}",
     "permission.settings.view-overdue-fines-policies": "Ustawienia (Udostępnianie): można wyświetlać reguły kar za zaległości",
