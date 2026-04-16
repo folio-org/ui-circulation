@@ -1,6 +1,7 @@
 # Change history for ui-circulation
 
-## 12.0.0 IN PROGRESS
+## [12.0.0](https://github.com/folio-org/ui-circulation/tree/v12.0.0) (2026-04-16)
+[Full Changelog](https://github.com/folio-org/ui-circulation/compare/v11.0.4...v12.0.0)
 
 * Change fee/fine verbiage on Loan Anonymization page. Refs UICIRC-1200.
 * When version 1.1 or higher of the `staff-slips-storage` interface is provided, display and maintain the new `isRawHtml` field; when that field is set for a staff slip, request that raw HTML is used by the template editor. Fixes UICIRC-1226.
