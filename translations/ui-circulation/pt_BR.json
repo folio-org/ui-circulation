@@ -570,8 +570,8 @@
     "settings.staffSlips.isRawHtml": "Manter como HTML bruto?",
     "settings.loanPolicy.forUseAtLocation": "Para uso no local",
     "settings.loanPolicy.holdShelfExpirationPeriod": "Período de vencimento da reserva",
-    "settings.titleLevelRequests.excludeTenants": "Excluir locatários",
-    "settings.noticePolicy.loanNotices.holdRequestForItem": "Solicitação de reserva do item",
+    "settings.titleLevelRequests.excludeTenants": "Excluir inquilino",
+    "settings.noticePolicy.loanNotices.holdRequestForItem": "Solicitação de reserva para o item",
     "settings.checkout.customFieldsAtCheckout": "Campos personalizados de usuários a serem exibidos no Empréstimo",
     "settings.checkout.customFieldsAtCheckout.noCustomFields": "Nenhum campo personalizado correspondente foi configurado"
 }
