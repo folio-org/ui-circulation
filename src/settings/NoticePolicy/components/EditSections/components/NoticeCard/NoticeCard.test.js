@@ -134,6 +134,18 @@ describe('NoticeCard', () => {
       expect(screen.getByText(labelIds.deleteButton));
     });
 
+    it('should render drag handle button when drag props are passed', () => {
+      render(
+        <NoticeCard
+          {...defaultProps}
+          dragHandleProps={{}}
+          dragHandleTitleId="noticeCardTitle1"
+        />
+      );
+
+      expect(screen.getByText('iconButton-drag-drop')).toBeVisible();
+    });
+
     it('should execute correct method on delete button click', () => {
       expect(onRemoveNotice).not.toBeCalled();
 

@@ -1,3 +1,11 @@
 .buttonContainer {
   margin-top: 15px;
 }
+
+.sortableNotice {
+  position: relative;
+}
+
+.sortableNoticeDragging {
+  z-index: 1;
+}

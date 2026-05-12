@@ -5,7 +5,11 @@ import {
   fireEvent,
 } from '@folio/jest-config-stripes/testing-library/react';
 
-import NoticesList from './NoticesList';
+import NoticesList, {
+  getAlignedNoticeIds,
+  moveNoticeIds,
+  reorderNoticeFields,
+} from './NoticesList';
 import NoticeCard from '../NoticeCard';
 
 const testIds = {
@@ -53,6 +57,7 @@ describe('NoticesList', () => {
     },
   ];
   const testFields = {
+    move: jest.fn(),
     push: jest.fn(),
     remove: jest.fn(),
     map: (callback) => testFieldsNames.map(callback),
@@ -92,8 +97,68 @@ describe('NoticesList', () => {
 
   afterEach(() => {
     NoticeCard.mockClear();
+    testFields.move.mockClear();
     testFields.push.mockClear();
     testFields.remove.mockClear();
+  });
+
+  describe('reorderNoticeFields', () => {
+    it('should move a notice when drop target changes', () => {
+      reorderNoticeFields({
+        active: { id: testFieldsNames[0] },
+        over: { id: testFieldsNames[1] },
+      }, testFieldsNames, testFields.move);
+
+      expect(testFields.move).toHaveBeenCalledWith(0, 1);
+    });
+
+    it('should not move a notice when dropped onto itself', () => {
+      reorderNoticeFields({
+        active: { id: testFieldsNames[0] },
+        over: { id: testFieldsNames[0] },
+      }, testFieldsNames, testFields.move);
+
+      expect(testFields.move).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('getAlignedNoticeIds', () => {
+    it('should append stable ids until the count is reached', () => {
+      const createNoticeId = jest
+        .fn()
+        .mockReturnValueOnce('notice-card-1')
+        .mockReturnValueOnce('notice-card-2');
+
+      expect(getAlignedNoticeIds([], 2, createNoticeId)).toEqual([
+        'notice-card-1',
+        'notice-card-2',
+      ]);
+    });
+
+    it('should trim extra ids when the count shrinks', () => {
+      expect(getAlignedNoticeIds([
+        'notice-card-1',
+        'notice-card-2',
+        'notice-card-3',
+      ], 2, jest.fn())).toEqual([
+        'notice-card-1',
+        'notice-card-2',
+      ]);
+    });
+  });
+
+  describe('moveNoticeIds', () => {
+    it('should keep ids attached to the moved notice', () => {
+      expect(moveNoticeIds([
+        'notice-card-1',
+        'notice-card-2',
+        'notice-card-3',
+      ], 0, 2)).toEqual([
+        'notice-card-2',
+        'notice-card-3',
+        'notice-card-1',
+      ]);
+    });
   });
 
   describe(('notice cards'), () => {

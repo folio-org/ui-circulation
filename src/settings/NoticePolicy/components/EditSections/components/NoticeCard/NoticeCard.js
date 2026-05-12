@@ -63,6 +63,9 @@ class NoticeCard extends React.Component {
       label: PropTypes.string.isRequired,
     })).isRequired,
     onRemoveNotice: PropTypes.func.isRequired,
+    dragHandleProps: PropTypes.object,
+    dragHandleRef: PropTypes.func,
+    dragHandleTitleId: PropTypes.string,
   };
 
   constructor(props) {
@@ -92,6 +95,9 @@ class NoticeCard extends React.Component {
       sendEventTriggeringIds,
       templates,
       triggeringEvents,
+      dragHandleProps,
+      dragHandleRef,
+      dragHandleTitleId,
     } = this.props;
 
     const blankPlaceholder = formatMessage({ id: 'ui-circulation.settings.common.blankPlaceholder' });
@@ -111,15 +117,33 @@ class NoticeCard extends React.Component {
               xs={3}
               className={css.headerTitle}
               data-test-notice-card-counter
+              id={dragHandleTitleId}
             >
               <FormattedMessage
                 id="ui-circulation.settings.noticePolicy.countableNotice"
                 values={{ counter: noticeIndex + 1 }}
               />
             </Col>
+            {dragHandleProps && (
+              <Col
+                xs={1}
+                xsOffset={7}
+                className={css.headerIcon}
+              >
+                <IconButton
+                  icon="drag-drop"
+                  data-testid="noticeCardDragHandle"
+                  data-test-notice-card-drag-handle
+                  aria-labelledby={dragHandleTitleId}
+                  className={css.dragHandle}
+                  ref={dragHandleRef}
+                  {...dragHandleProps}
+                />
+              </Col>
+            )}
             <Col
               xs={1}
-              xsOffset={8}
+              xsOffset={dragHandleProps ? undefined : 8}
               className={css.headerIcon}
             >
               <IconButton
