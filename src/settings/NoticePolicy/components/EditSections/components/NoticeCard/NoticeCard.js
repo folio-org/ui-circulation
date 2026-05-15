@@ -62,6 +62,7 @@ class NoticeCard extends React.Component {
       value: PropTypes.string.isRequired,
       label: PropTypes.string.isRequired,
     })).isRequired,
+    onAddNotice: PropTypes.func.isRequired,
     onRemoveNotice: PropTypes.func.isRequired,
   };
 
@@ -78,6 +79,15 @@ class NoticeCard extends React.Component {
     } = this.props;
 
     onRemoveNotice(noticeIndex);
+  };
+
+  onAdd = () => {
+    const {
+      noticeIndex,
+      onAddNotice,
+    } = this.props;
+
+    onAddNotice(noticeIndex);
   };
 
   render() {
@@ -118,10 +128,15 @@ class NoticeCard extends React.Component {
               />
             </Col>
             <Col
-              xs={1}
-              xsOffset={8}
+              xs={2}
+              xsOffset={7}
               className={css.headerIcon}
             >
+              <IconButton
+                icon="plus-sign"
+                data-test-notice-card-add
+                onClick={this.onAdd}
+              />
               <IconButton
                 icon="trash"
                 data-test-notice-card-remove

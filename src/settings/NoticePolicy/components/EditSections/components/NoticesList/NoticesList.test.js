@@ -14,16 +14,30 @@ const testIds = {
 const labelIds = {
   addNotice: 'ui-circulation.settings.noticePolicy.addNotice',
 };
+const emptyNotice = {
+  sendOptions: {
+    sendBy: {},
+    sendEvery: {},
+  },
+};
 
 jest.mock('../NoticeCard', () => jest.fn(({
+  onAddNotice,
   onRemoveNotice,
   noticeIndex,
 }) => (
-  // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
-  <div
-    data-testid={`noticeCard${noticeIndex}`}
-    onClick={() => onRemoveNotice(noticeIndex)}
-  />
+  <div data-testid={`noticeCard${noticeIndex}`}>
+    <button
+      type="button"
+      data-testid={`addNoticeCard${noticeIndex}`}
+      onClick={() => onAddNotice(noticeIndex)}
+    />
+    <button
+      type="button"
+      data-testid={`removeNoticeCard${noticeIndex}`}
+      onClick={() => onRemoveNotice(noticeIndex)}
+    />
+  </div>
 )));
 
 describe('NoticesList', () => {
@@ -53,6 +67,7 @@ describe('NoticesList', () => {
     },
   ];
   const testFields = {
+    insert: jest.fn(),
     push: jest.fn(),
     remove: jest.fn(),
     map: (callback) => testFieldsNames.map(callback),
@@ -92,6 +107,7 @@ describe('NoticesList', () => {
 
   afterEach(() => {
     NoticeCard.mockClear();
+    testFields.insert.mockClear();
     testFields.push.mockClear();
     testFields.remove.mockClear();
   });
@@ -118,16 +134,25 @@ describe('NoticesList', () => {
               sendEventTriggeringIds,
               templates,
               triggeringEvents,
+              onAddNotice: expect.any(Function),
             }), {}
           );
         });
 
         it('should remove notice', () => {
-          const noticeCard = screen.getAllByTestId(currentNoticeCardTestId);
+          const noticeCard = screen.getByTestId(`removeNoticeCard${noticeIndex}`);
 
-          fireEvent.click(noticeCard[0]);
+          fireEvent.click(noticeCard);
 
           expect(testFields.remove).toHaveBeenCalledWith(noticeIndex);
+        });
+
+        it('should add notice after current card', () => {
+          const noticeCard = screen.getByTestId(`addNoticeCard${noticeIndex}`);
+
+          fireEvent.click(noticeCard);
+
+          expect(testFields.insert).toHaveBeenCalledWith(noticeIndex + 1, emptyNotice);
         });
       });
     };
@@ -149,7 +174,7 @@ describe('NoticesList', () => {
 
       fireEvent.click(addNotice);
 
-      expect(testFields.push).toHaveBeenCalledWith({});
+      expect(testFields.push).toHaveBeenCalledWith(emptyNotice);
     });
   });
 });

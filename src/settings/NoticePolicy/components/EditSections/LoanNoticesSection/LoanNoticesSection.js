@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { FieldArray } from 'react-final-form-arrays';
-import { values } from 'lodash';
+import { values, isEqual } from 'lodash';
 import { Accordion } from '@folio/stripes/components';
 
 import NoticesList from '../components';
@@ -43,6 +43,7 @@ class LoanNoticesSection extends React.Component {
           label={<FormattedMessage id="ui-circulation.settings.noticePolicy.loanNotices" />}
         >
           <FieldArray
+            isEqual={isEqual}
             name="loanNotices"
             sectionKey="loanNotices"
             component={NoticesList}

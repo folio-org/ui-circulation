@@ -63,6 +63,7 @@ const PatronNoticeEmailSection = ({ category, locale, printOnly }) => {
             previewModalHeader={<FormattedMessage id="ui-circulation.settings.patronNotices.form.previewHeader" />}
             selectedCategory={category}
             validateFields={[]}
+            editAsHtml={true}
           />
         </Col>
       </Row>

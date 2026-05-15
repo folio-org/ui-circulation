@@ -58,6 +58,19 @@ const PatronNoticeForm = (props) => {
   } = props;
   const category = getFieldState('category')?.value;
   const { values } = getState();
+  console.log('values', values)
+
+  const onFormSubmit = (e) => {
+    e.preventDefault();
+    // const body = getState().values?.localizedTemplates?.en?.body;
+    // console.log('body', body)
+    // if (body) {
+    //   const div = document.createElement('div');
+    //   div.innerHTML = body;
+    //   change('localizedTemplates.en.body', div.textContent || '');
+    // }
+    handleSubmit();
+  };
   const header = values?.localizedTemplates?.en?.header;
   const printOnly = values?.additionalProperties?.printOnly;
 
@@ -120,6 +133,7 @@ const PatronNoticeForm = (props) => {
       className={css.patronNoticeForm}
       noValidate
       data-test-patron-notice-form
+      // onSubmit={onFormSubmit}
       onSubmit={handleSubmit}
     >
       <Paneset

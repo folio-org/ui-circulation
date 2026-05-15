@@ -55,6 +55,7 @@ describe('NoticeCard', () => {
     andEvery: 'ui-circulation.settings.noticePolicy.notices.andEvery',
     longTerm: 'ui-circulation.settings.noticePolicy.notices.send.longTerm',
     shortTerm: 'ui-circulation.settings.noticePolicy.notices.send.shortTerm',
+    addButton: 'iconButton-plus-sign',
     deleteButton: 'iconButton-trash',
     testNotificationKeyId: 'testNotificationKeyId',
   };
@@ -99,6 +100,7 @@ describe('NoticeCard', () => {
     value: 'testTriggeringEventsValue',
     label: 'testTriggeringEventsLabel',
   }];
+  const onAddNotice = jest.fn();
   const onRemoveNotice = jest.fn();
   const defaultProps = {
     notice,
@@ -108,10 +110,12 @@ describe('NoticeCard', () => {
     sendEventTriggeringIds,
     templates,
     triggeringEvents,
+    onAddNotice,
     onRemoveNotice,
   };
 
   afterEach(() => {
+    onAddNotice.mockClear();
     onRemoveNotice.mockClear();
     Field.mockClear();
     MessageBanner.mockClear();
@@ -132,6 +136,18 @@ describe('NoticeCard', () => {
 
     it('should render button for notice deleting', () => {
       expect(screen.getByText(labelIds.deleteButton));
+    });
+
+    it('should render button for notice adding', () => {
+      expect(screen.getByText(labelIds.addButton));
+    });
+
+    it('should execute correct method on add button click', () => {
+      expect(onAddNotice).not.toBeCalled();
+
+      fireEvent.click(screen.getByText(labelIds.addButton));
+
+      expect(onAddNotice).toBeCalledWith(noticeIndex);
     });
 
     it('should execute correct method on delete button click', () => {

@@ -23,6 +23,7 @@ export const config = {
 };
 
 const patronNoticeTemplate = (template) => {
+  console.log('template', template);
   const formValidator = new FormValidator(config);
 
   return formValidator.validate(template);
