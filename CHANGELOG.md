@@ -1,5 +1,9 @@
 # Change history for ui-circulation
 
+## [12.1.0] IN_PROGRESS
+
+* Add missing sub-permissions for staff slips. Refs UICIRC-1356.
+
 ## [12.0.0](https://github.com/folio-org/ui-circulation/tree/v12.0.0) (2026-04-16)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v11.0.4...v12.0.0)
 
