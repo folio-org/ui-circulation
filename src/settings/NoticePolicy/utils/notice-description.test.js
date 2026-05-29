@@ -18,7 +18,6 @@ const mockedData = {
     loanUserInitiatedEventsIds.RENEWED,
     loanUserInitiatedEventsIds.MANUAL_DUE_DATE_CHANGE,
     loanUserInitiatedEventsIds.ITEM_RECALLED,
-    loanUserInitiatedEventsIds.HOLD_REQUEST_FOR_ITEM,
     requestItemStateChangeEventsIds.AVAILABLE,
     ...Object.values(requestUserInitiatedEventsIds),
     ...Object.values(requestTimeBasedEventsIds),
