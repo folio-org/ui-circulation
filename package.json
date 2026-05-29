@@ -229,6 +229,8 @@
         "displayName": "Settings (Circulation): Can view staff slips",
         "subPermissions": [
           "settings.circulation.enabled",
+          "circulation.settings.collection.get",
+          "circulation.settings.item.get",
           "circulation-storage.staff-slips.collection.get",
           "circulation-storage.staff-slips.item.get",
           "users.collection.get"
@@ -252,6 +254,8 @@
           "configuration.entries.collection.get",
           "configuration.entries.item.put",
           "configuration.entries.item.post",
+          "circulation.settings.item.put",
+          "circulation.settings.item.post",
           "circulation-storage.staff-slips.item.post"
         ],
         "visible": true
