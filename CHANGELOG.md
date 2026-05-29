@@ -13,6 +13,7 @@
 * In loan-policy editor, support "For use at location" and "Hold shelf expiry period". Fixes UICIRC-1239.
 * Hide button when there are no permission for it. Refs UICIRC-1130.
 * User gets an error when try to fill in Lost item processing fee field with > 0. Refs UICIRC-1249.
+* Added a new triggering event for hold notices. Refs UICIRC-1245.
 * Fixed new request policy form applied settings from previously edited request policy. Refs UICIRC-1293.
 * Added global permissions for get read-access to values such as tenant’s locale, timezone, and currency. Refs UICIRC-1296.
 * Update css for fix problem visibility Circulation rules. Refs UICIRC-1311.
