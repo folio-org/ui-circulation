@@ -4,6 +4,11 @@
 
 * Add missing sub-permissions for staff slips. Refs UICIRC-1356.
 
+## [12.0.1](https://github.com/folio-org/ui-circulation/tree/v12.0.1) (2026-05-29)
+[Full Changelog](https://github.com/folio-org/ui-circulation/compare/v12.0.0...v12.0.1)
+
+* Revert UICIRC-1245: Remove "Hold request for item" loan notice trigger. Fixes UICIRC-1362.
+
 ## [12.0.0](https://github.com/folio-org/ui-circulation/tree/v12.0.0) (2026-04-16)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v11.0.4...v12.0.0)
 
