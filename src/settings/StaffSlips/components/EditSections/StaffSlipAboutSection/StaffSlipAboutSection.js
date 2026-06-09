@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Field } from 'react-final-form';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { IfInterface } from '@folio/stripes/core';
 
 import {
@@ -11,8 +11,15 @@ import {
   Row,
   TextArea,
 } from '@folio/stripes/components';
+import { staffSlipNameI18nMap } from '../../../../../constants';
+
 
 const StaffSlipAboutSection = ({ initialValues, disabled }) => {
+  const { formatMessage } = useIntl();
+  const localizedName = staffSlipNameI18nMap[initialValues?.name]
+    ? formatMessage({ id: staffSlipNameI18nMap[initialValues.name] })
+    : initialValues?.name;
+
   return (
     <div
       data-test-staff-slip-edit-about-section
@@ -26,7 +33,7 @@ const StaffSlipAboutSection = ({ initialValues, disabled }) => {
           >
             <KeyValue
               label={<FormattedMessage id="ui-circulation.settings.staffSlips.name" />}
-              value={initialValues?.name}
+              value={localizedName}
             />
           </div>
         </Col>
