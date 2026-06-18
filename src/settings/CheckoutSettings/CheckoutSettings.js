@@ -14,7 +14,9 @@ import { useCustomFieldsQuery } from '@folio/stripes/smart-components';
 import {
   CirculationSettingsConfig,
 } from '../components';
-import CheckoutSettingsForm from './CheckoutSettingsForm';
+import CheckoutSettingsForm, {
+  DEFAULT_PATRON_IDENTIFIERS,
+} from './CheckoutSettingsForm';
 import {
   CONFIG_NAMES,
   USERS_MODULE,
@@ -48,6 +50,7 @@ export const getInitialValues = (settings, customFieldsOptions, customFieldPatro
   // into the `custom` object.
   const { prefPatronIdentifier } = config;
   const identifiers = { custom: [] };
+  DEFAULT_PATRON_IDENTIFIERS.forEach(id => { identifiers[id] = false; });
   (prefPatronIdentifier ? prefPatronIdentifier.split(',') : []).forEach(identifier => {
     if (identifier.startsWith('customFields.')) {
       if (hasCustomFieldExisted(identifier, customFieldPatronIdentifiers)) {

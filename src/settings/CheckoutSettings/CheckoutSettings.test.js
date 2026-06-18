@@ -26,7 +26,11 @@ import {
 jest.mock('@folio/stripes/core', () => ({
   TitleManager: jest.fn(({ children }) => <>{children}</>),
 }));
-jest.mock('./CheckoutSettingsForm', () => jest.fn(() => null));
+jest.mock('./CheckoutSettingsForm', () => ({
+  __esModule: true,
+  default: jest.fn(() => null),
+  DEFAULT_PATRON_IDENTIFIERS: ['barcode', 'externalSystemId', 'id', 'username'],
+}));
 jest.mock('../components', () => ({
   CirculationSettingsConfig: jest.fn(() => null),
 }));
@@ -120,12 +124,20 @@ describe('CheckoutSettings', () => {
 
 describe('getInitialValues', () => {
   it('should returns default config when input is empty', () => {
+    const defaultIdentifiers = {
+      barcode: false,
+      externalSystemId: false,
+      id: false,
+      username: false,
+      custom: [],
+    };
+
     expect(getInitialValues()).toEqual({
       audioAlertsEnabled: false,
       audioTheme: 'classic',
       checkoutTimeout: true,
       checkoutTimeoutDuration: 3,
-      identifiers: { custom: [] },
+      identifiers: defaultIdentifiers,
       useCustomFieldsAsIdentifiers: false,
       wildcardLookupEnabled: false,
       allowedCustomFieldRefIds: [],
@@ -136,7 +148,7 @@ describe('getInitialValues', () => {
       audioTheme: 'classic',
       checkoutTimeout: true,
       checkoutTimeoutDuration: 3,
-      identifiers: { custom: [] },
+      identifiers: defaultIdentifiers,
       useCustomFieldsAsIdentifiers: false,
       wildcardLookupEnabled: false,
       allowedCustomFieldRefIds: [],
@@ -162,6 +174,9 @@ describe('getInitialValues', () => {
       checkoutTimeoutDuration: 10,
       identifiers: {
         barcode: true,
+        externalSystemId: false,
+        id: false,
+        username: false,
         custom: [{
           value: 'customFields.refId1',
           label: 'Custom Field 1',
