@@ -174,6 +174,35 @@ describe('CheckoutSettingsForm', () => {
     it('should have label for "otherSettingsFormSubmit" in the document', () => {
       expect(screen.getByText(labelIds.otherSettingsFormSubmit)).toBeInTheDocument();
     });
+    it('should be disabled when pristine is true', () => {
+      expect(screen.getByTestId(testIds.otherSettingsFormSubmit)).toBeDisabled();
+    });
+    it('should be disabled when invalid is true', () => {
+      render(
+        <CheckoutSettingsForm
+          {...defaultProps}
+          pristine={false}
+          invalid
+        />
+      );
+
+      const buttons = screen.getAllByTestId(testIds.otherSettingsFormSubmit);
+
+      expect(buttons[buttons.length - 1]).toBeDisabled();
+    });
+    it('should be enabled when pristine is false and invalid is false', () => {
+      render(
+        <CheckoutSettingsForm
+          {...defaultProps}
+          pristine={false}
+          invalid={false}
+        />
+      );
+
+      const buttons = screen.getAllByTestId(testIds.otherSettingsFormSubmit);
+
+      expect(buttons[buttons.length - 1]).toBeEnabled();
+    });
   });
 
   describe('Custom fields at checkout field', () => {

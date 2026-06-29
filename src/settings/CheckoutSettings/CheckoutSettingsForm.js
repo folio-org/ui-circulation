@@ -31,12 +31,13 @@ import {
 
 import { CheckoutSettings as validateCheckoutSettings } from '../Validation';
 
-const DEFAULT_PATRON_IDENTIFIERS = ['barcode', 'externalSystemId', 'id', 'username'];
+export const DEFAULT_PATRON_IDENTIFIERS = ['barcode', 'externalSystemId', 'id', 'username'];
 
 const CheckoutSettingsForm = ({
   form,
   form: { getState },
   handleSubmit,
+  invalid,
   label,
   pristine,
   submitting,
@@ -91,7 +92,7 @@ const CheckoutSettingsForm = ({
               <Button
                 data-testid="otherSettingsFormSubmit"
                 buttonStyle="primary paneHeaderNewButton"
-                disabled={pristine || submitting}
+                disabled={pristine || submitting || invalid}
                 id="clickable-savescanid"
                 marginBottom0
                 onClick={handleSaveAndReset}
@@ -105,7 +106,7 @@ const CheckoutSettingsForm = ({
       )}
     >
       <form id="checkout-form">
-        <Field name="identifiers">
+        <Field name="identifiers" isEqual={isEqual}>
           {({ meta }) => (
             <div>
               <Label required>
@@ -220,6 +221,7 @@ CheckoutSettingsForm.propTypes = {
     value: PropTypes.string,
   })).isRequired,
   handleSubmit: PropTypes.func.isRequired,
+  invalid: PropTypes.bool,
   pristine: PropTypes.bool,
   submitting: PropTypes.bool,
   label: PropTypes.node,
@@ -234,5 +236,5 @@ export default stripesFinalForm({
   keepDirtyOnReinitialize: true,
   navigationCheck: true,
   validate: validateCheckoutSettings,
-  subscription: { values: true },
+  subscription: { values: true, invalid: true },
 })(CheckoutSettingsForm);
