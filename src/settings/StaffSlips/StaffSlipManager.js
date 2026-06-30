@@ -61,7 +61,7 @@ class StaffSlipManager extends React.Component {
       location,
     } = this.props;
     const entryList = sortBy(
-      ((resources.entries || {}).records || []).map(entry => ({
+      (resources.entries?.records ?? []).map(entry => ({
         ...entry,
         localizedName: staffSlipNameI18nMap[entry.name]
           ? formatMessage({ id: staffSlipNameI18nMap[entry.name] })

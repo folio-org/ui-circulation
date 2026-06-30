@@ -44,10 +44,12 @@ const StaffSlipForm = (props) => {
   } = intl;
 
   const disabled = !stripes.hasPerm('ui-circulation.settings.edit-staff-slips');
+  const i18nKey = staffSlipNameI18nMap[initialValues.name];
+  const existingTitle = i18nKey
+    ? formatMessage({ id: i18nKey })
+    : initialValues.name;
   const panelTitle = initialValues.id
-    ? (staffSlipNameI18nMap[initialValues.name]
-      ? formatMessage({ id: staffSlipNameI18nMap[initialValues.name] })
-      : initialValues.name)
+    ? existingTitle
     : formatMessage({ id: 'ui-circulation.settings.staffSlips.new' });
 
   const footerPaneProps = {
