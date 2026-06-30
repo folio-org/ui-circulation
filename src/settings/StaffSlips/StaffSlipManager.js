@@ -11,6 +11,7 @@ import {
 import StaffSlipDetail from './StaffSlipDetail';
 import StaffSlipForm from './StaffSlipForm';
 import { getRecordName } from '../utils/utils';
+import { staffSlipNameI18nMap } from '../../constants';
 
 class StaffSlipManager extends React.Component {
   static propTypes = {
@@ -59,7 +60,15 @@ class StaffSlipManager extends React.Component {
       },
       location,
     } = this.props;
-    const entryList = sortBy((resources.entries || {}).records || [], ['name']);
+    const entryList = sortBy(
+      ((resources.entries || {}).records || []).map(entry => ({
+        ...entry,
+        localizedName: staffSlipNameI18nMap[entry.name]
+          ? formatMessage({ id: staffSlipNameI18nMap[entry.name] })
+          : entry.name,
+      })),
+      ['localizedName']
+    );
     const record = getRecordName({
       entryList,
       location,
@@ -81,7 +90,8 @@ class StaffSlipManager extends React.Component {
           paneTitle={formatMessage({ id: 'ui-circulation.settings.index.staffSlips' })}
           entryLabel={formatMessage({ id: 'ui-circulation.settings.staffSlips.staffSlipTokenHeader' })}
           entryFormComponent={StaffSlipForm}
-          nameKey="name"
+          nameKey="localizedName"
+          onBeforeSave={({ localizedName: _, ...entry }) => entry}
           editable={isEditable}
           permissions={{
             put: 'ui-circulation.settings.staff-slips',

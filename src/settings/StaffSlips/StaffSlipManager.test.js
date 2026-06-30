@@ -67,13 +67,11 @@ describe('StaffSlipManager', () => {
         <StaffSlipManager {...testDefaultProps} />
       );
 
-      const expectedEntryList = [{
-        name: 'Alex',
-      }, {
-        name: 'Pasha',
-      }, {
-        name: 'Zelda',
-      }];
+      const expectedEntryList = [
+        { localizedName: 'Alex', name: 'Alex' },
+        { localizedName: 'Pasha', name: 'Pasha' },
+        { localizedName: 'Zelda', name: 'Zelda' }
+      ];
 
       expect(EntryManager).toHaveBeenCalledWith(expect.objectContaining({
         parentMutator: testMutator,
@@ -82,7 +80,8 @@ describe('StaffSlipManager', () => {
         paneTitle: labelIds.staffSlips,
         entryLabel: labelIds.staffSlipTokenHeader,
         entryFormComponent: StaffSlipForm,
-        nameKey: 'name',
+        nameKey: 'localizedName',
+        onBeforeSave: expect.any(Function),
         permissions: {
           put: 'ui-circulation.settings.staff-slips',
           post: 'ui-circulation.settings.staff-slips.post',
@@ -114,7 +113,13 @@ describe('StaffSlipManager', () => {
       );
 
       const expectedArg = {
-        entryList: sortBy(testDefaultProps.resources.entries.records, 'name'),
+        entryList: sortBy(
+          ((testDefaultProps.resources.entries || {}).records || []).map(entry => ({
+            ...entry,
+            localizedName: entry.name,
+          })),
+          ['localizedName']
+        ),
         location: testDefaultProps.location,
         formatMessage: expect.any(Function),
         optionNameId: labelIds.optionNameId,

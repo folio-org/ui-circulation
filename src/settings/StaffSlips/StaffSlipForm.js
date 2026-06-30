@@ -24,6 +24,7 @@ import {
   StaffSlipAboutSection,
   StaffSlipTemplateContentSection,
 } from './components/EditSections';
+import { staffSlipNameI18nMap } from '../../constants';
 
 import css from './StaffSlipForm.css';
 
@@ -44,7 +45,9 @@ const StaffSlipForm = (props) => {
 
   const disabled = !stripes.hasPerm('ui-circulation.settings.edit-staff-slips');
   const panelTitle = initialValues.id
-    ? initialValues.name
+    ? (staffSlipNameI18nMap[initialValues.name]
+      ? formatMessage({ id: staffSlipNameI18nMap[initialValues.name] })
+      : initialValues.name)
     : formatMessage({ id: 'ui-circulation.settings.staffSlips.new' });
 
   const footerPaneProps = {

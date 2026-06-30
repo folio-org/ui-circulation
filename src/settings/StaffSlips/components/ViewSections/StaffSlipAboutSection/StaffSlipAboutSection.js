@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { IfInterface } from '@folio/stripes/core';
 
 import {
@@ -8,8 +8,15 @@ import {
   Row,
   KeyValue,
 } from '@folio/stripes/components';
+import { staffSlipNameI18nMap } from '../../../../../constants';
+
 
 const StaffSlipAboutSection = ({ staffSlip }) => {
+  const { formatMessage } = useIntl();
+  const localizedName = staffSlipNameI18nMap[staffSlip.name]
+    ? formatMessage({ id: staffSlipNameI18nMap[staffSlip.name] })
+    : staffSlip.name;
+
   return (
     <div
       data-test-staff-slip-detail-about-section
@@ -23,7 +30,7 @@ const StaffSlipAboutSection = ({ staffSlip }) => {
           >
             <KeyValue
               label={<FormattedMessage id="ui-circulation.settings.staffSlips.name" />}
-              value={staffSlip.name}
+              value={localizedName}
             />
           </div>
         </Col>

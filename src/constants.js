@@ -343,6 +343,16 @@ export const staffSlipMap = {
   SEARCH_SLIP_HOLD_REQUESTS: 'Search slip (Hold requests)',
 };
 
+export const staffSlipNameI18nMap = {
+  'Hold': 'ui-circulation.settings.staffSlips.names.hold',
+  'Transit': 'ui-circulation.settings.staffSlips.names.transit',
+  'Transit (mediated requests)': 'ui-circulation.settings.staffSlips.names.transitMediatedRequests',
+  'Pick slip': 'ui-circulation.settings.staffSlips.names.pickSlip',
+  'Request delivery': 'ui-circulation.settings.staffSlips.names.requestDelivery',
+  'Search slip (Hold requests)': 'ui-circulation.settings.staffSlips.names.searchSlipHoldRequests',
+  'Due date receipt': 'ui-circulation.settings.staffSlips.names.dueDateReceipt',
+};
+
 export const patronNoticeCategoryIds = {
   LOAN: 'Loan',
   REQUEST: 'Request',
