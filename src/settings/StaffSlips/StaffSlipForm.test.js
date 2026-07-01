@@ -45,6 +45,7 @@ const labelIds = {
   new: 'ui-circulation.settings.staffSlips.new',
   staffSlipsGeneralInformation: 'ui-circulation.settings.staffSlips.generalInformation',
   staffSlipsTemplateContent: 'ui-circulation.settings.staffSlips.templateContent',
+  holdSlipName: 'ui-circulation.settings.staffSlips.names.hold',
 };
 
 describe('StaffSlipForm', () => {
@@ -154,6 +155,40 @@ describe('StaffSlipForm', () => {
         connect: mockedStripes.connect,
         metadata: mockedInitialValues.metadata,
       }), {});
+    });
+  });
+
+  describe('when initialValues has a name mapped in staffSlipNameI18nMap', () => {
+    const mockedInitialValues = {
+      id: 'testId',
+      name: 'Hold',
+      metadata: 'testMetadata',
+    };
+    const mockedStripes = {
+      hasPerm: jest.fn(() => true),
+      connect: jest.fn(),
+    };
+
+    beforeEach(() => {
+      render(
+        <StaffSlipForm
+          stripes={mockedStripes}
+          handleSubmit={mockedHandleSubmit}
+          initialValues={mockedInitialValues}
+          onCancel={mockedOnCancel}
+        />
+      );
+    });
+
+    afterEach(() => {
+      mockedStripes.hasPerm.mockClear();
+    });
+
+    it('should use the localized slip name as pane title', () => {
+      expect(Pane).toHaveBeenLastCalledWith(
+        expect.objectContaining({ paneTitle: labelIds.holdSlipName }),
+        {},
+      );
     });
   });
 
