@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import { Field, useField } from 'react-final-form';
 import { FormattedMessage, useIntl } from 'react-intl';
@@ -14,7 +14,10 @@ import { TemplateEditor } from '@folio/stripes-template-editor';
 
 import getTokens from '../../../tokens';
 import TokensList from '../../../TokensList';
-import { isSubjectEnabled } from '../../../utils';
+import {
+  isSubjectEnabled,
+  resolveNoticeFormatFieldValues,
+} from '../../../utils';
 import { NOTICE_FORMATS } from '../../../../../constants';
 
 const PatronNoticeEmailSection = ({
@@ -23,6 +26,7 @@ const PatronNoticeEmailSection = ({
   initialValues,
 }) => {
   const intl = useIntl();
+  const previousValuesRef = useRef({});
   const { input: noticeFormatInput } = useField('additionalProperties.noticeFormat');
   const { input: subjectInput } = useField('localizedTemplates.en.header');
   const { input: bodyInput } = useField('localizedTemplates.en.body');
@@ -53,15 +57,19 @@ const PatronNoticeEmailSection = ({
   ];
 
   const handleNoticeFormatChange = (e) => {
+    previousValuesRef.current[noticeFormatInput.value] = {
+      header: subjectInput.value,
+      body: bodyInput.value,
+    };
+
     noticeFormatInput.onChange(e);
 
-    if (e.target.value === NOTICE_FORMATS.EMAIL) {
-      subjectInput.onChange(initialValues.localizedTemplates.en.header);
-      bodyInput.onChange(initialValues.localizedTemplates.en.body);
-    } else {
-      subjectInput.onChange('');
-      bodyInput.onChange('');
-    }
+    // If the user switches back to a previously selected format,
+    // the previous values of Subject and Body will be restored.
+    const { header, body } = resolveNoticeFormatFieldValues(e.target.value, previousValuesRef.current, initialValues);
+
+    subjectInput.onChange(header);
+    bodyInput.onChange(body);
   };
 
   return (

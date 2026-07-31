@@ -6,12 +6,14 @@ import { TitleManager } from '@folio/stripes/core';
 // eslint-disable-next-line import/no-named-as-default
 import PatronNotices, {
   isTemplateExist,
+  parseInitialValues,
   PatronNotices as PatronNoticesClass,
 } from './PatronNotices';
 import PatronNoticeDetail from './PatronNoticeDetail';
 import PatronNoticeForm from './PatronNoticeForm';
 import {
   MAX_UNPAGED_RESOURCE_COUNT,
+  NOTICE_FORMATS,
   patronNoticeCategories,
 } from '../../constants';
 import { getRecordName } from '../utils/utils';
@@ -252,6 +254,199 @@ describe('PatronNotices', () => {
 
         expect(isTemplateExist(templateId, noticePolicies)).toBe(false);
       });
+    });
+  });
+
+  describe('parseInitialValues', () => {
+    it('should return the entity unchanged when it has no "metadata" (new entity)', () => {
+      const entity = {
+        active: true,
+        category: 'testCategory',
+      };
+
+      expect(parseInitialValues(entity)).toBe(entity);
+    });
+
+    it('should return the entity unchanged when called without arguments', () => {
+      expect(parseInitialValues()).toEqual({});
+    });
+
+    it('should keep the header and set "noticeFormat" for an existing email notice', () => {
+      const entity = {
+        metadata: { createdDate: '2024-01-01' },
+        localizedTemplates: {
+          en: {
+            header: 'Existing subject',
+            body: 'Existing body',
+          },
+        },
+        additionalProperties: {
+          noticeFormat: NOTICE_FORMATS.EMAIL,
+        },
+      };
+
+      expect(parseInitialValues(entity)).toEqual({
+        ...entity,
+        localizedTemplates: {
+          en: {
+            header: 'Existing subject',
+            body: 'Existing body',
+          },
+        },
+        additionalProperties: {
+          noticeFormat: NOTICE_FORMATS.EMAIL,
+        },
+      });
+    });
+
+    it('should reset the header for an existing print notice', () => {
+      const entity = {
+        metadata: { createdDate: '2024-01-01' },
+        localizedTemplates: {
+          en: {
+            header: 'print',
+            body: 'Existing body',
+          },
+        },
+        additionalProperties: {
+          noticeFormat: NOTICE_FORMATS.PRINT,
+        },
+      };
+
+      expect(parseInitialValues(entity)).toEqual({
+        ...entity,
+        localizedTemplates: {
+          en: {
+            header: undefined,
+            body: 'Existing body',
+          },
+        },
+        additionalProperties: {
+          noticeFormat: NOTICE_FORMATS.PRINT,
+        },
+      });
+    });
+
+    it('should derive "noticeFormat" from the legacy "printOnly" flag when it is not set', () => {
+      const entity = {
+        metadata: { createdDate: '2024-01-01' },
+        localizedTemplates: {
+          en: {
+            header: 'print',
+            body: 'Existing body',
+          },
+        },
+        additionalProperties: {
+          printOnly: true,
+        },
+      };
+
+      const result = parseInitialValues(entity);
+
+      expect(result.additionalProperties.noticeFormat).toBe(NOTICE_FORMATS.PRINT);
+      expect(result.localizedTemplates.en.header).toBe(undefined);
+    });
+  });
+
+  describe('handleBeforeSave', () => {
+    const getInstance = () => new PatronNoticesClass(defaultProps);
+
+    it('should keep the header and mark output as html for the email format', () => {
+      const values = {
+        localizedTemplates: {
+          en: {
+            header: 'A subject',
+            body: 'A body',
+          },
+        },
+        additionalProperties: {
+          noticeFormat: NOTICE_FORMATS.EMAIL,
+        },
+      };
+
+      const result = getInstance().handleBeforeSave(values);
+
+      expect(result.localizedTemplates.en.header).toBe('A subject');
+      expect(result.outputFormats).toEqual(['text/html']);
+      expect(result.additionalProperties.printOnly).toBe(false);
+    });
+
+    it('should overwrite the header and mark output as html for the print format', () => {
+      const values = {
+        localizedTemplates: {
+          en: {
+            header: '',
+            body: 'A body',
+          },
+        },
+        additionalProperties: {
+          noticeFormat: NOTICE_FORMATS.PRINT,
+        },
+      };
+
+      const result = getInstance().handleBeforeSave(values);
+
+      expect(result.localizedTemplates.en.header).toBe(NOTICE_FORMATS.PRINT);
+      expect(result.outputFormats).toEqual(['text/html']);
+      expect(result.additionalProperties.printOnly).toBe(true);
+    });
+
+    it('should overwrite the header and mark output as plain text for the text message format', () => {
+      const values = {
+        localizedTemplates: {
+          en: {
+            header: '',
+            body: 'A body',
+          },
+        },
+        additionalProperties: {
+          noticeFormat: NOTICE_FORMATS.TEXT_MESSAGE,
+        },
+      };
+
+      const result = getInstance().handleBeforeSave(values);
+
+      expect(result.localizedTemplates.en.header).toBe(NOTICE_FORMATS.TEXT_MESSAGE);
+      expect(result.outputFormats).toEqual(['text/plain']);
+      expect(result.additionalProperties.printOnly).toBe(false);
+    });
+
+    it('should clear a stale legacy "printOnly" flag when switching away from the print format', () => {
+      const values = {
+        localizedTemplates: {
+          en: {
+            header: 'A subject',
+            body: 'A body',
+          },
+        },
+        additionalProperties: {
+          noticeFormat: NOTICE_FORMATS.EMAIL,
+          printOnly: true,
+        },
+      };
+
+      const result = getInstance().handleBeforeSave(values);
+
+      expect(result.additionalProperties.printOnly).toBe(false);
+    });
+
+    it('should not mutate the "values" passed in', () => {
+      const values = {
+        localizedTemplates: {
+          en: {
+            header: '',
+            body: 'A body',
+          },
+        },
+        additionalProperties: {
+          noticeFormat: NOTICE_FORMATS.PRINT,
+        },
+      };
+
+      getInstance().handleBeforeSave(values);
+
+      expect(values.localizedTemplates.en.header).toBe('');
+      expect(values.additionalProperties.printOnly).toBeUndefined();
     });
   });
 });

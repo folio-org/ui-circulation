@@ -44,7 +44,7 @@ export const parseInitialValues = (entity = {}) => {
   // field when it is disabled.
   const header = isSubjectEnabled(noticeFormat)
     ? entity.localizedTemplates?.en?.header
-    : '';
+    : undefined; // set to undefined to satisfy the `pristine`
 
   return {
     ...entity,
@@ -144,7 +144,7 @@ export class PatronNotices extends React.Component {
     const payload = cloneDeep(values);
 
     // The "Subject" field is enabled only for the email format, but BE requires
-    // the `header` field to be sent for all formats. So, we need to set anything.
+    // the `header` field to be sent for all formats. So, we need to set something.
     if (!isSubjectEnabled(noticeFormat)) {
       const headerValue = noticeFormat === NOTICE_FORMATS.PRINT
         ? NOTICE_FORMATS.PRINT
@@ -158,9 +158,7 @@ export class PatronNotices extends React.Component {
       : ['text/html'];
 
     // Set the `printOnly` flag to support consumers that still rely on it.
-    if (noticeFormat === NOTICE_FORMATS.PRINT) {
-      payload.additionalProperties.printOnly = true;
-    }
+    payload.additionalProperties.printOnly = noticeFormat === NOTICE_FORMATS.PRINT;
 
     return payload;
   }

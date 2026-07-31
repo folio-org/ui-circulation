@@ -2,3 +2,4 @@
 export { default as generatePreviewDateValue } from './preview';
 export { isSubjectEnabled } from './isSubjectEnabled';
 export { getNoticeFormat } from './getNoticeFormat';
+export { resolveNoticeFormatFieldValues } from './resolveNoticeFormatFieldValues';
