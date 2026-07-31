@@ -6,7 +6,6 @@ import {
 import {
   sortBy,
   get,
-  reduce,
   cloneDeep,
 } from 'lodash';
 
@@ -63,14 +62,14 @@ export const parseInitialValues = (entity = {}) => {
 };
 
 export const isTemplateExist = (templateId, noticePolicies) => {
-  const patronNoticeTemplateIds = reduce(noticePolicies, (templateIds, policy) => {
+  const patronNoticeTemplateIds = noticePolicies.reduce((templateIds, policy) => {
     const notices = [
       ...policy.loanNotices,
       ...policy.requestNotices,
       ...policy.feeFineNotices,
     ];
 
-    const noticeIds = reduce(notices, (ids, notice) => {
+    const noticeIds = notices.reduce((ids, notice) => {
       return [...ids, notice.templateId];
     }, []);
 
