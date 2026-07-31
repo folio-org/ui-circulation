@@ -60,7 +60,7 @@ const labelIds = {
   patronNoticesNew: 'ui-circulation.settings.patronNotices.newLabel',
   patronNoticesCloseDialog: 'ui-circulation.settings.patronNotices.closeDialog',
   patronNoticesEmail: 'ui-circulation.settings.patronNotices.email',
-  patronNoticesEmailOrPrint: 'ui-circulation.settings.patronNotices.emailOrPrint',
+  patronNoticeContent: 'ui-circulation.settings.patronNotices.patronNoticeContent',
   patronNoticesPredefinedWarning: 'ui-circulation.settings.patronNotices.predefinedWarning',
   patronNoticesGeneralInformation: 'ui-circulation.settings.patronNotices.generalInformation',
 };
@@ -178,8 +178,8 @@ describe('PatronNoticeForm', () => {
       expect(screen.getByText(labelIds.patronNoticesGeneralInformation)).toBeDefined();
     });
 
-    it('should render "Email or print" label', () => {
-      expect(screen.getByText(labelIds.patronNoticesEmailOrPrint)).toBeDefined();
+    it('should render "Patron notice content" accordion label', () => {
+      expect(screen.getByText(labelIds.patronNoticeContent)).toBeDefined();
     });
 
     it('should render PatronNoticeAboutSection', () => {

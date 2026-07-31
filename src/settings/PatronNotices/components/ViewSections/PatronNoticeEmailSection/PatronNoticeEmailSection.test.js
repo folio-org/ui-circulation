@@ -52,17 +52,17 @@ describe('PatronNoticeEmailSection', () => {
   };
   const testEmailTemplate = '<div>test</div>';
   const keyValueCallOrderByPlace = {
-    subject: 1,
+    noticeFormat: 1,
     body: 2,
   };
   const testIds = {
-    patronNoticeSubject: 'patronNoticeSubject',
+    noticeFormat: 'noticeFormat',
     patronNoticeBody: 'patronNoticeBody',
     emailAccordionContent: 'emailAccordionContent',
     previewModal: 'previewModal',
   };
   const labelIds = {
-    subject: 'ui-circulation.settings.patronNotices.subject',
+    noticeFormat: 'ui-circulation.settings.patronNotices.noticeFormat',
     body: 'ui-circulation.settings.patronNotices.body',
     viewPreviewHeader: 'ui-circulation.settings.patronNotices.view.previewHeader',
   };
@@ -90,15 +90,15 @@ describe('PatronNoticeEmailSection', () => {
     expect(screen.getByTestId(testIds.emailAccordionContent)).toBeVisible();
   });
 
-  it('should render label of "subject" field', () => {
-    expect(getItemByTestId(testIds.patronNoticeSubject).getByText(labelIds.subject)).toBeVisible();
+  it('should render label of "Notice format" field', () => {
+    expect(getItemByTestId(testIds.noticeFormat).getByText(labelIds.noticeFormat)).toBeVisible();
   });
 
-  it('should render "subject" KeyValue', () => {
+  it('should render Notice format KeyValue', () => {
     expect(KeyValue).toHaveBeenNthCalledWith(
-      keyValueCallOrderByPlace.subject,
+      keyValueCallOrderByPlace.noticeFormat,
       expect.objectContaining({
-        value: testNotice.localizedTemplates.en.header,
+        value: 'ui-circulation.settings.patronNotices.email',
       }), {}
     );
   });

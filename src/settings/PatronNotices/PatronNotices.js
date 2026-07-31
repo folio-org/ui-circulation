@@ -7,6 +7,7 @@ import {
   sortBy,
   get,
   reduce,
+  cloneDeep,
 } from 'lodash';
 
 import { EntryManager } from '@folio/stripes/smart-components';
@@ -20,8 +21,46 @@ import PatronNoticeForm from './PatronNoticeForm';
 import {
   patronNoticeCategories,
   MAX_UNPAGED_RESOURCE_COUNT,
+  NOTICE_FORMATS,
 } from '../../constants';
 import { getRecordName } from '../utils/utils';
+import {
+  getNoticeFormat,
+  isSubjectEnabled,
+} from './utils';
+
+export const parseInitialValues = (entity = {}) => {
+  // There is no need to change the initial values when creating a new entity.
+  // Rely on the `metadata` to determine if this is a new entity.
+  // The `entity.id` is not a reliable indicator, it is also missing when duplicating the record.
+  if (!entity.metadata) {
+    return entity;
+  }
+
+  // Set the `noticeFormat` using `getNoticeFormat` to support legacy fields.
+  const noticeFormat = getNoticeFormat(entity);
+
+  // Reset the `header` field to prevent displaying a value in the "Subject"
+  // field when it is disabled.
+  const header = isSubjectEnabled(noticeFormat)
+    ? entity.localizedTemplates?.en?.header
+    : '';
+
+  return {
+    ...entity,
+    localizedTemplates: {
+      ...entity.localizedTemplates,
+      en: {
+        ...entity.localizedTemplates?.en,
+        header,
+      },
+    },
+    additionalProperties: {
+      ...entity.additionalProperties,
+      noticeFormat,
+    },
+  };
+};
 
 export const isTemplateExist = (templateId, noticePolicies) => {
   const patronNoticeTemplateIds = reduce(noticePolicies, (templateIds, policy) => {
@@ -100,6 +139,32 @@ export class PatronNotices extends React.Component {
     return isTemplateExist(templateId, noticePolicies);
   };
 
+  handleBeforeSave = (values) => {
+    const noticeFormat = values?.additionalProperties?.noticeFormat;
+    const payload = cloneDeep(values);
+
+    // The "Subject" field is enabled only for the email format, but BE requires
+    // the `header` field to be sent for all formats. So, we need to set anything.
+    if (!isSubjectEnabled(noticeFormat)) {
+      const headerValue = noticeFormat === NOTICE_FORMATS.PRINT
+        ? NOTICE_FORMATS.PRINT
+        : NOTICE_FORMATS.TEXT_MESSAGE;
+
+      payload.localizedTemplates.en.header = headerValue;
+    }
+
+    payload.outputFormats = noticeFormat === NOTICE_FORMATS.TEXT_MESSAGE
+      ? ['text/plain']
+      : ['text/html'];
+
+    // Set the `printOnly` flag to support consumers that still rely on it.
+    if (noticeFormat === NOTICE_FORMATS.PRINT) {
+      payload.additionalProperties.printOnly = true;
+    }
+
+    return payload;
+  }
+
   render() {
     const {
       intl: {
@@ -130,9 +195,9 @@ export class PatronNotices extends React.Component {
           paneTitle={this.props.label}
           entryLabel={this.props.label}
           entryFormComponent={PatronNoticeForm}
+          parseInitialValues={parseInitialValues}
           defaultEntry={{
             active: true,
-            outputFormats: ['text/html'],
             templateResolver: 'mustache',
             category: defaultCategory,
           }}
@@ -150,6 +215,7 @@ export class PatronNotices extends React.Component {
             label: formatMessage({ id: 'ui-circulation.settings.patronNotices.denyDelete.header' }),
             message: formatMessage({ id: 'ui-circulation.settings.patronNotices.denyDelete.body' }),
           }}
+          onBeforeSave={this.handleBeforeSave}
         />
       </TitleManager>
     );

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import HtmlToReact, { Parser } from 'html-to-react';
 import DOMPurify from 'dompurify';
 
@@ -16,8 +16,18 @@ import {
 } from '@folio/stripes-template-editor';
 
 import getTokens from '../../../tokens';
+import { getNoticeFormat } from '../../../utils';
+import { NOTICE_FORMATS } from '../../../../../constants';
+
+const noticeFormatLabelIds = {
+  [NOTICE_FORMATS.PRINT]: 'ui-circulation.settings.patronNotices.printOnly',
+  [NOTICE_FORMATS.TEXT_MESSAGE]: 'ui-circulation.settings.patronNotices.textMessage',
+  [NOTICE_FORMATS.EMAIL]: 'ui-circulation.settings.patronNotices.email',
+};
 
 const PatronNoticeEmailSection = ({ notice, locale, emailTemplate }) => {
+  const intl = useIntl();
+
   const processNodeDefinitions = new HtmlToReact.ProcessNodeDefinitions(React);
   const parser = new Parser();
   const rules = [
@@ -31,6 +41,8 @@ const PatronNoticeEmailSection = ({ notice, locale, emailTemplate }) => {
   const parsedEmailTemplate = parser.parseWithInstructions(purifyEmailTemplate, () => true, rules);
   const [openPreview, setOpenPreview] = useState(false);
 
+  const noticeFormatLabel = intl.formatMessage({ id: noticeFormatLabelIds[getNoticeFormat(notice)] });
+
   const togglePreviewDialog = () => {
     setOpenPreview(!openPreview);
   };
@@ -40,11 +52,11 @@ const PatronNoticeEmailSection = ({ notice, locale, emailTemplate }) => {
       <Row>
         <Col
           xs={8}
-          data-testid="patronNoticeSubject"
+          data-testid="noticeFormat"
         >
           <KeyValue
-            label={<FormattedMessage id="ui-circulation.settings.patronNotices.subject" />}
-            value={notice.localizedTemplates.en.header}
+            label={<FormattedMessage id="ui-circulation.settings.patronNotices.noticeFormat" />}
+            value={noticeFormatLabel}
           />
         </Col>
         <Col xs={4}>

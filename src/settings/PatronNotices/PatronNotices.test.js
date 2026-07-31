@@ -104,7 +104,6 @@ describe('PatronNotices', () => {
       entryFormComponent: PatronNoticeForm,
       defaultEntry: {
         active: true,
-        outputFormats: ['text/html'],
         templateResolver: 'mustache',
         category: patronNoticeCategories[0].id,
       },
@@ -121,6 +120,8 @@ describe('PatronNotices', () => {
         label: labelIds.header,
         message: labelIds.body,
       },
+      parseInitialValues: expect.any(Function),
+      onBeforeSave: expect.any(Function),
     }), {});
   });
 

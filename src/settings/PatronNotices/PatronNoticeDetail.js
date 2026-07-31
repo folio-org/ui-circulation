@@ -54,7 +54,7 @@ const PatronNoticeDetail = (props) => {
             <PatronNoticeAboutSection notice={notice} />
           </Accordion>
           <Accordion
-            label={formatMessage({ id: 'ui-circulation.settings.patronNotices.emailOrPrint' })}
+            label={formatMessage({ id: 'ui-circulation.settings.patronNotices.patronNoticeContent' })}
           >
             {
               emailTemplate && (

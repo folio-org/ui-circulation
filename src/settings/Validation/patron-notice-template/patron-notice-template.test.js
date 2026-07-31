@@ -18,13 +18,34 @@ jest.mock('../engine/FormValidator', () => (class {
 }));
 
 describe('patronNoticeTemplate', () => {
-  it('should correctly process passed policy', () => {
-    const testPolicyData = 'testPolicyData';
+  it('should correctly process passed policy for the email format', () => {
+    const testPolicyData = {
+      additionalProperties: {
+        noticeFormat: 'email',
+      },
+    };
     const expectedResult = {
       ...patronNoticeConfig,
       passedPolicy: testPolicyData,
       hasBeenValidate: true,
     };
+
+    expect(patronNoticeTemplate(testPolicyData)).toEqual(expectedResult);
+  });
+
+  it('should correctly process passed policy for the non-email format', () => {
+    const testPolicyData = {
+      additionalProperties: {
+        noticeFormat: 'testMessage',
+      },
+    };
+    const expectedResult = {
+      ...patronNoticeConfig,
+      passedPolicy: testPolicyData,
+      hasBeenValidate: true,
+    };
+
+    expectedResult[PATRON_NOTICE_PATH.LOCALIZED_TEMPLATES_EN_HEADER] = undefined;
 
     expect(patronNoticeTemplate(testPolicyData)).toEqual(expectedResult);
   });

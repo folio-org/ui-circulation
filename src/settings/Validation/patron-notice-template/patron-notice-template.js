@@ -1,3 +1,5 @@
+import { omit } from 'lodash';
+
 import FormValidator from '../engine/FormValidator';
 
 import {
@@ -5,6 +7,7 @@ import {
   GENERAL_NAME_FIELD_VALIDATION_PROPS,
 } from '../../../constants/Validation/general';
 import { PATRON_NOTICE_PATH } from '../../../constants/Validation/patron-notice-template';
+import { isSubjectEnabled } from '../../PatronNotices/utils';
 
 export const config = {
   ...GENERAL_NAME_FIELD_VALIDATION_PROPS,
@@ -23,7 +26,14 @@ export const config = {
 };
 
 const patronNoticeTemplate = (template) => {
-  const formValidator = new FormValidator(config);
+  let updatedConfig = config;
+
+  // The LOCALIZED_TEMPLATES_EN_HEADER has value only for email notices,
+  // so we need to remove it from validation config for other notice formats.
+  if (!isSubjectEnabled(template.additionalProperties?.noticeFormat)) {
+    updatedConfig = omit(config, PATRON_NOTICE_PATH.LOCALIZED_TEMPLATES_EN_HEADER);
+  }
+  const formValidator = new FormValidator(updatedConfig);
 
   return formValidator.validate(template);
 };
