@@ -674,3 +674,9 @@ export const CUSTOM_FIELD_TYPES = {
   TEXTBOX_SHORT: 'TEXTBOX_SHORT',
   TEXTBOX_LONG: 'TEXTBOX_LONG',
 };
+
+export const NOTICE_FORMATS = {
+  EMAIL: 'email',
+  PRINT: 'print',
+  TEXT_MESSAGE: 'textMessage',
+};

@@ -3,7 +3,7 @@ import { generatePreviewDateValue } from './utils';
 import { DATE_FORMAT_WITH_TIME } from './utils/constantsForMoment';
 
 const allowedForAllCategories = [...Object.values(patronNoticeCategoryIds)];
-const item = [
+const getItem = ({ disableImages = false } = {}) => [
   {
     token: 'item.title',
     previewValue: 'The Wines of Italy',
@@ -28,6 +28,7 @@ const item = [
     token: 'item.barcodeImage',
     previewValue: '<Barcode>31924001521792</Barcode>',
     allowedFor: allowedForAllCategories,
+    disabled: disableImages,
   },
   {
     token: 'item.callNumber',
@@ -128,6 +129,7 @@ const item = [
     token: 'item.instanceHridImage',
     previewValue: '<Barcode>inst000000000022</Barcode>',
     allowedFor: allowedForAllCategories,
+    disabled: disableImages,
   },
 ];
 const effectiveLocation = [
@@ -157,8 +159,8 @@ const effectiveLocation = [
     allowedFor: allowedForAllCategories,
   },
 ];
-const getTokens = (locale) => ({
-  item,
+const getTokens = (locale, { disableImages = false } = {}) => ({
+  item: getItem({ disableImages }),
   user: [
     {
       token: 'user.firstName',
@@ -189,6 +191,7 @@ const getTokens = (locale) => ({
       token: 'user.barcodeImage',
       previewValue: '<Barcode>456123789</Barcode>',
       allowedFor: allowedForAllCategories,
+      disabled: disableImages,
     },
   ],
   userAddress: [
