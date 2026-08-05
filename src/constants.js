@@ -163,6 +163,7 @@ export const requestPolicyTypes = [
 
 export const noticesFormatsMap = {
   EMAIL: 'Email',
+  TEXT_MESSAGE: 'SMS',
 };
 
 export const noticesFrequencyMap = {
@@ -180,6 +181,10 @@ export const noticesFormats = [
   {
     value: noticesFormatsMap.EMAIL,
     label: 'ui-circulation.settings.noticePolicy.notices.email',
+  },
+  {
+    value: noticesFormatsMap.TEXT_MESSAGE,
+    label: 'ui-circulation.settings.noticePolicy.notices.textMessage',
   },
 ];
 

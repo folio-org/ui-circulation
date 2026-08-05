@@ -394,6 +394,7 @@
   "settings.noticePolicy.notices.frequency": "Frequency",
   "settings.noticePolicy.notices.send": "Send",
   "settings.noticePolicy.notices.email": "Email",
+  "settings.noticePolicy.notices.textMessage": "Text message",
   "settings.noticePolicy.notices.oneTime": "One Time",
   "settings.noticePolicy.notices.recurring": "Recurring",
   "settings.noticePolicy.notices.before": "Before",

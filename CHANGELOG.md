@@ -5,6 +5,7 @@
 * Settings > Circulation: "Save" button status is incorrect when editing "Patron id(s) for checkout scanning". Refs UICIRC-1316.
 * Add internationalization support for staff slip names. Fixes UICIRC-1354.
 * Update patron notice template to include Text message format. Refs UICIRC-1350.
+* Update patron notice policy to include Text message format. Refs UICIRC-1349.
 
 ## [12.0.2](https://github.com/folio-org/ui-circulation/tree/v12.0.2) (2026-06-02)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v12.0.1...v12.0.2)
