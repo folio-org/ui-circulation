@@ -28,6 +28,16 @@ describe('getTokens', () => {
       expectedResult: 'no.1-2v. 121948-1962 (Board)',
     },
     {
+      category: 'item',
+      name: 'item.title',
+      expectedResult: 'The Wines of Italy: A Comprehensive Guide to Regional Varietals',
+    },
+    {
+      category: 'item',
+      name: 'item.titleShort',
+      expectedResult: 'The Wines of Italy: A Com',
+    },
+    {
       category: 'request',
       name: 'request.requestExpirationDate',
       expectedResult: expectedShortResult,

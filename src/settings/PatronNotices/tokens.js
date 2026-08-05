@@ -3,10 +3,18 @@ import { generatePreviewDateValue } from './utils';
 import { DATE_FORMAT_WITH_TIME } from './utils/constantsForMoment';
 
 const allowedForAllCategories = [...Object.values(patronNoticeCategoryIds)];
+const ITEM_TITLE_SHORT_LENGTH = 25;
+const itemTitlePreviewValue = 'The Wines of Italy: A Comprehensive Guide to Regional Varietals';
+
 const getItem = ({ disableImages = false } = {}) => [
   {
     token: 'item.title',
-    previewValue: 'The Wines of Italy',
+    previewValue: itemTitlePreviewValue,
+    allowedFor: allowedForAllCategories,
+  },
+  {
+    token: 'item.titleShort',
+    previewValue: itemTitlePreviewValue.slice(0, ITEM_TITLE_SHORT_LENGTH),
     allowedFor: allowedForAllCategories,
   },
   {
