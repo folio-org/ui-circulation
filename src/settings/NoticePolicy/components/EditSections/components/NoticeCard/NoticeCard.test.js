@@ -150,6 +150,7 @@ describe('NoticeCard', () => {
         component: Select,
         dataOptions: templates,
         placeholder: labelIds.blankPlaceholder,
+        dirty: false,
       });
     });
 
@@ -165,6 +166,7 @@ describe('NoticeCard', () => {
         component: Select,
         placeholder: labelIds.blankPlaceholder,
         children: noticesFormats,
+        dirty: false,
       });
     });
 
@@ -176,6 +178,7 @@ describe('NoticeCard', () => {
         component: Select,
         placeholder: labelIds.blankPlaceholder,
         children: triggeringEvents,
+        dirty: true,
       });
     });
 
@@ -189,6 +192,7 @@ describe('NoticeCard', () => {
         component: Select,
         placeholder: labelIds.blankPlaceholder,
         children: sendEvents,
+        dirty: false,
       });
     });
 
@@ -218,6 +222,7 @@ describe('NoticeCard', () => {
         component: Select,
         placeholder: labelIds.blankPlaceholder,
         children: noticesFrequency,
+        dirty: false,
       });
     });
 

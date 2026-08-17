@@ -128,6 +128,11 @@ jest.mock('@folio/stripes/components', () => ({
   Select: jest.fn(() => <select> </select>),
   TextArea: jest.fn((props) => <textarea {...props} />),
   TextField: jest.fn((props) => <input {...props} />),
+  Tooltip: jest.fn(({ children }) => {
+    const ariaIds = { text: 'tooltip-text' };
+
+    return <div>{children?.({ ariaIds }) || children}</div>;
+  }),
   MultiColumnList: jest.fn(() => <div />),
   LoadingPane: jest.fn(() => <div>Loading</div>),
 }));

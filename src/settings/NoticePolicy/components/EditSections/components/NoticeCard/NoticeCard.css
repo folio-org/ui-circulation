@@ -16,8 +16,16 @@
   background-color: #e6e6e6;
 }
 
-.headerTitle {
+.leftButtons {
+  display: flex;
+  align-items: center;
+  column-gap: 10px;
   padding: 5px 10px;
+}
+
+.dragHandleIcon {
+  display: flex;
+  cursor: grab;
 }
 
 .headerIcon {

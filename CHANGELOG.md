@@ -7,6 +7,7 @@
 * Update patron notice template to include Text message format. Refs UICIRC-1350.
 * Update patron notice policy to include Text message format. Refs UICIRC-1349.
 * Add shortened `item.titleShort` token to patron notices for text messages. Refs UICIRC-1353.
+* Implement drag-and-drop functionality for notice cards. Refs UICIRC-1372.
 
 ## [12.0.2](https://github.com/folio-org/ui-circulation/tree/v12.0.2) (2026-06-02)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v12.0.1...v12.0.2)

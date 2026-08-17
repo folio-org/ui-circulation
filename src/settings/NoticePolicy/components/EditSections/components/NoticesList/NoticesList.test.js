@@ -4,6 +4,7 @@ import {
   within,
   fireEvent,
 } from '@folio/jest-config-stripes/testing-library/react';
+import { DragDropProvider } from '@dnd-kit/react';
 
 import NoticesList from './NoticesList';
 import NoticeCard from '../NoticeCard';
@@ -55,6 +56,7 @@ describe('NoticesList', () => {
   const testFields = {
     push: jest.fn(),
     remove: jest.fn(),
+    move: jest.fn(),
     map: (callback) => testFieldsNames.map(callback),
     value: testFieldsValue,
   };
@@ -94,6 +96,8 @@ describe('NoticesList', () => {
     NoticeCard.mockClear();
     testFields.push.mockClear();
     testFields.remove.mockClear();
+    testFields.move.mockClear();
+    DragDropProvider.mockClear();
   });
 
   describe(('notice cards'), () => {
@@ -150,6 +154,32 @@ describe('NoticesList', () => {
       fireEvent.click(addNotice);
 
       expect(testFields.push).toHaveBeenCalledWith({});
+    });
+  });
+
+  describe('dragging notices', () => {
+    beforeEach(() => {
+      renderComponent();
+    });
+
+    it('should move a notice to its dragged position outside the drag transition', async () => {
+      const { onDragEnd } = DragDropProvider.mock.calls[0][0];
+
+      onDragEnd({
+        canceled: false,
+        operation: {
+          source: {
+            initialIndex: 0,
+            index: 2,
+          },
+        },
+      });
+
+      expect(testFields.move).not.toHaveBeenCalled();
+
+      await Promise.resolve();
+
+      expect(testFields.move).toHaveBeenCalledWith(0, 2);
     });
   });
 });
