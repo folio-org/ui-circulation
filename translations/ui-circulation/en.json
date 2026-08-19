@@ -386,7 +386,9 @@
   "settings.ViewPrintDetails.warningPopup.message.cancel": "Cancel",
 
   "settings.noticePolicy.addNotice": "Add notice",
+  "settings.noticePolicy.addNoticeAbove": "Add notice above",
   "settings.noticePolicy.countableNotice": "Notice {counter}",
+  "settings.noticePolicy.deleteNotice": "Delete notice",
   "settings.noticePolicy.dragAndDrop": "Drag & drop",
   "settings.noticePolicy.notices.via": "via",
   "settings.noticePolicy.notices.by": "by",

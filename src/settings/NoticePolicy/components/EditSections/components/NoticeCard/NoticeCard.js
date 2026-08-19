@@ -71,6 +71,7 @@ class NoticeCard extends React.Component {
       value: PropTypes.string.isRequired,
       label: PropTypes.string.isRequired,
     })).isRequired,
+    onAddNotice: PropTypes.func.isRequired,
     onRemoveNotice: PropTypes.func.isRequired,
   };
 
@@ -93,6 +94,15 @@ class NoticeCard extends React.Component {
     } = this.props;
 
     onRemoveNotice(noticeIndex);
+  };
+
+  onAdd = () => {
+    const {
+      noticeIndex,
+      onAddNotice,
+    } = this.props;
+
+    onAddNotice(noticeIndex);
   };
 
   render() {
@@ -163,11 +173,42 @@ class NoticeCard extends React.Component {
                 xsOffset={8}
                 className={css.headerIcon}
               >
-                <IconButton
-                  icon="trash"
-                  data-test-notice-card-remove
-                  onClick={this.onRemove}
-                />
+                <Tooltip
+                  id={`notice-card-add-tooltip-${noticeIndex}`}
+                  text={<FormattedMessage id="ui-circulation.settings.noticePolicy.addNoticeAbove" />}
+                >
+                  {({ ref, ariaIds }) => (
+                    <span
+                      ref={ref}
+                      aria-labelledby={ariaIds.text}
+                    >
+                      <IconButton
+                        ariaLabel={formatMessage({ id: 'ui-circulation.settings.noticePolicy.addNoticeAbove' })}
+                        icon="plus-sign"
+                        data-test-notice-card-add
+                        onClick={this.onAdd}
+                      />
+                    </span>
+                  )}
+                </Tooltip>
+                <Tooltip
+                  id={`notice-card-remove-tooltip-${noticeIndex}`}
+                  text={<FormattedMessage id="ui-circulation.settings.noticePolicy.deleteNotice" />}
+                >
+                  {({ ref, ariaIds }) => (
+                    <span
+                      ref={ref}
+                      aria-labelledby={ariaIds.text}
+                    >
+                      <IconButton
+                        ariaLabel={formatMessage({ id: 'ui-circulation.settings.noticePolicy.deleteNotice' })}
+                        icon="trash"
+                        data-test-notice-card-remove
+                        onClick={this.onRemove}
+                      />
+                    </span>
+                  )}
+                </Tooltip>
               </Col>
             </Row>
             <Row>
