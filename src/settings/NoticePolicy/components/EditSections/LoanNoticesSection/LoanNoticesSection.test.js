@@ -67,6 +67,7 @@ describe('LoanNoticesSection', () => {
       getSendEvents,
       sendEventTriggeringIds: Object.values(loanTimeBasedEventsIds),
       triggeringEvents: loanNoticesTriggeringEvents,
+      isEqual: expect.any(Function),
     };
 
     expect(FieldArray).toHaveBeenCalledWith(expectedResult, {});

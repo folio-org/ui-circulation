@@ -387,6 +387,7 @@
 
   "settings.noticePolicy.addNotice": "Add notice",
   "settings.noticePolicy.countableNotice": "Notice {counter}",
+  "settings.noticePolicy.dragAndDrop": "Drag & drop",
   "settings.noticePolicy.notices.via": "via",
   "settings.noticePolicy.notices.by": "by",
   "settings.noticePolicy.notices.template": "Template",

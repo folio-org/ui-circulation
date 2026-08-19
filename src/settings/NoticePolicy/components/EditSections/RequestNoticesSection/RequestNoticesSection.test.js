@@ -66,6 +66,7 @@ describe('RequestNoticesSection', () => {
       sendEventTriggeringIds: Object.values(requestTimeBasedEventsIds),
       templates: mockedTemplates,
       triggeringEvents: requestNoticesTriggeringEvents,
+      isEqual: expect.any(Function),
     };
 
     expect(FieldArray).toHaveBeenLastCalledWith(expectedProps, {});
