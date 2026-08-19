@@ -55,6 +55,7 @@ describe('NoticesList', () => {
   ];
   const testFields = {
     push: jest.fn(),
+    insert: jest.fn(),
     remove: jest.fn(),
     move: jest.fn(),
     map: (callback) => testFieldsNames.map(callback),
@@ -95,6 +96,7 @@ describe('NoticesList', () => {
   afterEach(() => {
     NoticeCard.mockClear();
     testFields.push.mockClear();
+    testFields.insert.mockClear();
     testFields.remove.mockClear();
     testFields.move.mockClear();
     DragDropProvider.mockClear();
@@ -122,6 +124,7 @@ describe('NoticesList', () => {
               sendEventTriggeringIds,
               templates,
               triggeringEvents,
+              onAddNotice: expect.any(Function),
             }), {}
           );
         });
@@ -137,6 +140,16 @@ describe('NoticesList', () => {
     };
 
     testFieldsNames.forEach(generateTests);
+  });
+
+  it('should insert a notice above the selected card', () => {
+    renderComponent();
+
+    const addNoticeAbove = NoticeCard.mock.calls[1][0].onAddNotice;
+
+    addNoticeAbove(1);
+
+    expect(testFields.insert).toHaveBeenCalledWith(1, {});
   });
 
   describe(('add notice'), () => {

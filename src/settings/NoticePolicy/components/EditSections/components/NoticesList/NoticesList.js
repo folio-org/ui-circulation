@@ -18,6 +18,7 @@ class NoticesList extends React.Component {
   static propTypes = {
     fields: PropTypes.shape({
       push: PropTypes.func,
+      insert: PropTypes.func,
       remove: PropTypes.func,
       move: PropTypes.func,
       map: PropTypes.func,
@@ -69,6 +70,11 @@ class NoticesList extends React.Component {
   onAddField = () => {
     this.noticeIds.push(this.nextNoticeId++);
     this.props.fields.push({});
+  };
+
+  onInsertField = (index) => {
+    this.noticeIds.splice(index, 0, this.nextNoticeId++);
+    this.props.fields.insert(index, {});
   };
 
   onRemoveField = (index) => {
@@ -131,6 +137,7 @@ class NoticesList extends React.Component {
               sendEventTriggeringIds={sendEventTriggeringIds}
               templates={templates}
               triggeringEvents={triggeringEvents}
+              onAddNotice={this.onInsertField}
               onRemoveNotice={this.onRemoveField}
             />
           );

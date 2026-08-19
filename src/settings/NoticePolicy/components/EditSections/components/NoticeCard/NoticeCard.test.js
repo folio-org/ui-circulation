@@ -56,6 +56,9 @@ describe('NoticeCard', () => {
     longTerm: 'ui-circulation.settings.noticePolicy.notices.send.longTerm',
     shortTerm: 'ui-circulation.settings.noticePolicy.notices.send.shortTerm',
     deleteButton: 'iconButton-trash',
+    addButton: 'iconButton-plus-sign',
+    addNoticeAbove: 'ui-circulation.settings.noticePolicy.addNoticeAbove',
+    deleteNotice: 'ui-circulation.settings.noticePolicy.deleteNotice',
     testNotificationKeyId: 'testNotificationKeyId',
   };
   const testIds = {
@@ -100,6 +103,7 @@ describe('NoticeCard', () => {
     label: 'testTriggeringEventsLabel',
   }];
   const onRemoveNotice = jest.fn();
+  const onAddNotice = jest.fn();
   const defaultProps = {
     notice,
     noticeIndex,
@@ -108,11 +112,13 @@ describe('NoticeCard', () => {
     sendEventTriggeringIds,
     templates,
     triggeringEvents,
+    onAddNotice,
     onRemoveNotice,
   };
 
   afterEach(() => {
     onRemoveNotice.mockClear();
+    onAddNotice.mockClear();
     Field.mockClear();
     MessageBanner.mockClear();
   });
@@ -132,6 +138,27 @@ describe('NoticeCard', () => {
 
     it('should render button for notice deleting', () => {
       expect(screen.getByText(labelIds.deleteButton));
+    });
+
+    it('should render button for adding a notice above', () => {
+      expect(screen.getByText(labelIds.addButton));
+    });
+
+    it('should label notice action buttons', () => {
+      expect(IconButton).toHaveBeenCalledWith(expect.objectContaining({
+        ariaLabel: labelIds.addNoticeAbove,
+        icon: 'plus-sign',
+      }), {});
+      expect(IconButton).toHaveBeenCalledWith(expect.objectContaining({
+        ariaLabel: labelIds.deleteNotice,
+        icon: 'trash',
+      }), {});
+    });
+
+    it('should add a notice above the current notice', () => {
+      fireEvent.click(screen.getByText(labelIds.addButton));
+
+      expect(onAddNotice).toHaveBeenCalledWith(noticeIndex);
     });
 
     it('should execute correct method on delete button click', () => {
