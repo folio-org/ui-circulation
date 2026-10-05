@@ -41,7 +41,8 @@ const PatronNoticeEmailSection = ({ notice, locale, emailTemplate }) => {
   const parsedEmailTemplate = parser.parseWithInstructions(purifyEmailTemplate, () => true, rules);
   const [openPreview, setOpenPreview] = useState(false);
 
-  const noticeFormatLabel = intl.formatMessage({ id: noticeFormatLabelIds[getNoticeFormat(notice)] });
+  const noticeFormat = getNoticeFormat(notice);
+  const noticeFormatLabel = intl.formatMessage({ id: noticeFormatLabelIds[noticeFormat] });
 
   const togglePreviewDialog = () => {
     setOpenPreview(!openPreview);
@@ -65,6 +66,23 @@ const PatronNoticeEmailSection = ({ notice, locale, emailTemplate }) => {
           </Button>
         </Col>
       </Row>
+
+      {
+        noticeFormat === NOTICE_FORMATS.EMAIL && (
+          <Row>
+            <Col
+              xs={12}
+              data-testid="patronNoticeSubject"
+            >
+              <KeyValue
+                label={<FormattedMessage id="ui-circulation.settings.patronNotices.subject" />}
+                value={notice.localizedTemplates.en.header}
+              />
+            </Col>
+          </Row>
+        )
+      }
+
       <Row>
         <Col
           xs={12}
