@@ -53,7 +53,7 @@ describe('PatronNoticeEmailSection', () => {
   const testEmailTemplate = '<div>test</div>';
   const keyValueCallOrderByPlace = {
     noticeFormat: 1,
-    body: 2,
+    body: 3,
   };
   const testIds = {
     noticeFormat: 'noticeFormat',
