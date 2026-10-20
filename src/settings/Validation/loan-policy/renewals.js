@@ -20,6 +20,14 @@ const renewals = (loanPolicy) => {
       rules: ['isNotEmptySelect'],
       shouldValidate: loanPolicy.isRenewable() && loanPolicy.isProfileRolling(),
     },
+    'renewalsPolicy.daysBefore': {
+      rules: ['isNotEmpty', 'isIntegerBetween1And100'],
+      shouldValidate: loanPolicy.isDaysBeforeSelected(),
+    },
+    'renewalsPolicy.automaticRenewalRetryPeriodInDays': {
+      rules: ['isIntegerBetween0And100OrBlank'],
+      shouldValidate: loanPolicy.isAutomaticRenewals(),
+    },
   };
 };
 

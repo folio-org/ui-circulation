@@ -30,6 +30,8 @@ import {
   hasPositiveLostItemProcessingFeeAndInvalidItemsAgedToLostAfterOverdue,
   hasPatronBilledAfterRecalledAgedToLostValue,
   noWhiteSpaceAtBegin,
+  isIntegerInInterval,
+  isIntegerInIntervalOrBlank,
 } from './handlers';
 import LostItemFeePolicy from '../../Models/LostItemFeePolicy';
 
@@ -1459,6 +1461,118 @@ describe('handlers', () => {
 
       it('should return false', () => {
         expect(noWhiteSpaceAtBegin(1)).toBe(false);
+      });
+    });
+  });
+
+  describe('isIntegerInInterval method', () => {
+    describe('when value is an integer within the interval', () => {
+      it('should return true', () => {
+        expect(isIntegerInInterval(1, 100, 50)).toBe(true);
+      });
+    });
+
+    describe('when value equals the minimum boundary', () => {
+      it('should return true', () => {
+        expect(isIntegerInInterval(1, 100, 1)).toBe(true);
+      });
+    });
+
+    describe('when value equals the maximum boundary', () => {
+      it('should return true', () => {
+        expect(isIntegerInInterval(1, 100, 100)).toBe(true);
+      });
+    });
+
+    describe('when value is below the minimum', () => {
+      it('should return false', () => {
+        expect(isIntegerInInterval(1, 100, 0)).toBe(false);
+      });
+    });
+
+    describe('when value is above the maximum', () => {
+      it('should return false', () => {
+        expect(isIntegerInInterval(1, 100, 101)).toBe(false);
+      });
+    });
+
+    describe('when value is a float', () => {
+      it('should return false', () => {
+        expect(isIntegerInInterval(1, 100, 1.5)).toBe(false);
+      });
+    });
+
+    describe('when value is an empty string', () => {
+      it('should return false', () => {
+        expect(isIntegerInInterval(1, 100, '')).toBe(false);
+      });
+    });
+
+    describe('when value is null', () => {
+      it('should return false', () => {
+        expect(isIntegerInInterval(1, 100, null)).toBe(false);
+      });
+    });
+
+    describe('when value is undefined', () => {
+      it('should return false', () => {
+        expect(isIntegerInInterval(1, 100, undefined)).toBe(false);
+      });
+    });
+  });
+
+  describe('isIntegerInIntervalOrBlank method', () => {
+    describe('when value is an empty string', () => {
+      it('should return true', () => {
+        expect(isIntegerInIntervalOrBlank(1, 100, '')).toBe(true);
+      });
+    });
+
+    describe('when value is null', () => {
+      it('should return true', () => {
+        expect(isIntegerInIntervalOrBlank(1, 100, null)).toBe(true);
+      });
+    });
+
+    describe('when value is undefined', () => {
+      it('should return true', () => {
+        expect(isIntegerInIntervalOrBlank(1, 100, undefined)).toBe(true);
+      });
+    });
+
+    describe('when value is an integer within the interval', () => {
+      it('should return true', () => {
+        expect(isIntegerInIntervalOrBlank(1, 100, 50)).toBe(true);
+      });
+    });
+
+    describe('when value equals the minimum boundary', () => {
+      it('should return true', () => {
+        expect(isIntegerInIntervalOrBlank(1, 100, 1)).toBe(true);
+      });
+    });
+
+    describe('when value equals the maximum boundary', () => {
+      it('should return true', () => {
+        expect(isIntegerInIntervalOrBlank(1, 100, 100)).toBe(true);
+      });
+    });
+
+    describe('when value is below the minimum', () => {
+      it('should return false', () => {
+        expect(isIntegerInIntervalOrBlank(1, 100, 0)).toBe(false);
+      });
+    });
+
+    describe('when value is above the maximum', () => {
+      it('should return false', () => {
+        expect(isIntegerInIntervalOrBlank(1, 100, 101)).toBe(false);
+      });
+    });
+
+    describe('when value is a float', () => {
+      it('should return false', () => {
+        expect(isIntegerInIntervalOrBlank(1, 100, 1.5)).toBe(false);
       });
     });
   });

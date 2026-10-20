@@ -8,7 +8,10 @@ import {
 
 import LoanPolicy from '../../Models/LoanPolicy';
 import { Period } from '../../Models/common';
-import { loanProfileMap } from '../../../constants';
+import {
+  ATTEMPT_DAYS_BEFORE,
+  loanProfileMap,
+} from '../../../constants';
 
 export const checkInvalidPeriods = (policy) => {
   const loanPolicy = cloneDeep(policy);
@@ -64,6 +67,28 @@ export const checkDifferentRenewalPeriod = (policy) => {
   if (!isDifferentPeriod) {
     unset(loanPolicy, 'renewalsPolicy.alternateFixedDueDateScheduleId');
     unset(loanPolicy, 'renewalsPolicy.period');
+  }
+
+  return loanPolicy;
+};
+
+export const checkAutomaticRenewals = (policy) => {
+  const loanPolicy = cloneDeep(policy);
+  const automaticRenewal = get(loanPolicy, 'renewalsPolicy.automaticRenewal');
+
+  if (!automaticRenewal) {
+    unset(loanPolicy, 'renewalsPolicy.attemptFirstRenewal');
+    unset(loanPolicy, 'renewalsPolicy.daysBefore');
+    unset(loanPolicy, 'renewalsPolicy.automaticRenewalRetryPeriodInDays');
+  } else {
+    const attemptFirstRenewal = get(loanPolicy, 'renewalsPolicy.attemptFirstRenewal');
+    const daysBefore = get(loanPolicy, 'renewalsPolicy.daysBefore');
+
+    loanPolicy.renewalsPolicy.firstAutomaticRenewalAttemptDaysBeforeDueDate =
+      attemptFirstRenewal === ATTEMPT_DAYS_BEFORE ? daysBefore : 0;
+
+    unset(loanPolicy, 'renewalsPolicy.attemptFirstRenewal');
+    unset(loanPolicy, 'renewalsPolicy.daysBefore');
   }
 
   return loanPolicy;
@@ -180,6 +205,7 @@ export const normalize = (entity) => {
     checkUnlimitedRenewals,
     checkRenewFrom,
     checkDifferentRenewalPeriod,
+    checkAutomaticRenewals,
     checkRenewable,
     checkLoanable,
     checkInvalidPeriods,

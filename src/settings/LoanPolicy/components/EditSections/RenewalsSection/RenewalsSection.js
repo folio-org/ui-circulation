@@ -8,16 +8,27 @@ import {
 
 import {
   Checkbox,
+  Col,
+  InfoPopover,
+  Label,
+  RadioButton,
+  Row,
   Select,
   TextField,
 } from '@folio/stripes/components';
 
 import optionsGenerator from '../../../../utils/options-generator';
-import Period from '../../../../components/Period';
+import Period, {
+  transformInputValue,
+} from '../../../../components/Period';
 import {
   intervalPeriods,
   renewFromOptions,
+  ATTEMPT_ON_DUE_DATE,
+  ATTEMPT_DAYS_BEFORE,
 } from '../../../../../constants';
+
+import css from './RenewalsSection.css';
 
 class RenewalsSection extends React.Component {
   static propTypes = {
@@ -31,6 +42,8 @@ class RenewalsSection extends React.Component {
       isDifferentPeriod: PropTypes.func,
       isUnlimitedRenewals: PropTypes.func,
       isProfileFixed: PropTypes.func,
+      isAutomaticRenewals: PropTypes.func,
+      isDaysBeforeSelected: PropTypes.func,
     }).isRequired,
     schedules: PropTypes.arrayOf(PropTypes.node).isRequired,
     change: PropTypes.func.isRequired,
@@ -40,6 +53,19 @@ class RenewalsSection extends React.Component {
     super(props);
 
     this.generateOptions = optionsGenerator.bind(null, this.props.intl.formatMessage);
+  }
+
+  handleAutomaticRenewalsChange = (e) => {
+    const {
+      change,
+      policy,
+    } = this.props;
+
+    change('renewalsPolicy.automaticRenewal', e.target.checked);
+
+    if (e.target.checked && policy.renewalsPolicy.attemptFirstRenewal !== ATTEMPT_DAYS_BEFORE) {
+      change('renewalsPolicy.attemptFirstRenewal', ATTEMPT_ON_DUE_DATE);
+    }
   }
 
   render() {
@@ -168,6 +194,105 @@ class RenewalsSection extends React.Component {
               {schedules}
             </Field>
           </div>}
+        { policy.isRenewable() &&
+          <div data-testid="automaticRenewal">
+            <Field
+              label={
+                <>
+                  <FormattedMessage id="ui-circulation.settings.loanPolicy.automaticRenewals" />
+                  <InfoPopover
+                    content={<FormattedMessage id="ui-circulation.settings.loanPolicy.automaticRenewals.infoPopover" />}
+                    iconSize="medium"
+                  />
+                </>
+              }
+              name="renewalsPolicy.automaticRenewal"
+              id="renewalsPolicy.automaticRenewal"
+              component={Checkbox}
+              type="checkbox"
+              onChange={this.handleAutomaticRenewalsChange}
+            />
+          </div>}
+        { policy.isAutomaticRenewals() &&
+          <>
+            <div data-testid="attemptFirstRenewal">
+              <Row>
+                <Col xs={12}>
+                  <Label required>
+                    <FormattedMessage id="ui-circulation.settings.loanPolicy.attemptFirstRenewal" />
+                  </Label>
+                </Col>
+              </Row>
+              <Row>
+                <Col xs={12}>
+                  <Field
+                    label={<FormattedMessage id="ui-circulation.settings.loanPolicy.attemptFirstRenewal.onDueDate" />}
+                    name="renewalsPolicy.attemptFirstRenewal"
+                    component={RadioButton}
+                    type="radio"
+                    id="attemptFirstRenewal.onDueDate"
+                    value={ATTEMPT_ON_DUE_DATE}
+                  />
+                </Col>
+              </Row>
+              <Row
+                role="presentation"
+                onClick={() => change('renewalsPolicy.attemptFirstRenewal', ATTEMPT_DAYS_BEFORE)}
+              >
+                <Col xs="auto" className={css.attemptFirstRenewalCol}>
+                  <Field
+                    name="renewalsPolicy.attemptFirstRenewal"
+                    component={RadioButton}
+                    type="radio"
+                    id="attemptFirstRenewal.daysBefore"
+                    value={ATTEMPT_DAYS_BEFORE}
+                  />
+                </Col>
+                <Col xs={2}>
+                  <Field
+                    name="renewalsPolicy.daysBefore"
+                    component={TextField}
+                    type="number"
+                    min={1}
+                    max={100}
+                    parse={transformInputValue}
+                    required={policy.isDaysBeforeSelected()}
+                  />
+                </Col>
+                <Col xs={9}>
+                  <Label>
+                    <FormattedMessage id="ui-circulation.settings.loanPolicy.attemptFirstRenewal.daysBefore" />
+                  </Label>
+                </Col>
+              </Row>
+            </div>
+            <div data-testid="attemptAdditionalRetries">
+              <Row>
+                <Col xs={12}>
+                  <Label>
+                    <FormattedMessage id="ui-circulation.settings.loanPolicy.attemptAdditionalRetries" />
+                  </Label>
+                </Col>
+              </Row>
+              <Row>
+                <Col xs={2}>
+                  <Field
+                    name="renewalsPolicy.automaticRenewalRetryPeriodInDays"
+                    component={TextField}
+                    type="number"
+                    min={0}
+                    max={100}
+                    parse={transformInputValue}
+                  />
+                </Col>
+                <Col xs={10}>
+                  <Label>
+                    <FormattedMessage id="ui-circulation.settings.loanPolicy.days" />
+                  </Label>
+                </Col>
+              </Row>
+            </div>
+          </>}
         <hr />
       </div>
     );

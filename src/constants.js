@@ -540,6 +540,9 @@ export const userInitiatedTimeBasedFeeFineEventsIds = {
   ATL_FINE_ITEM_RETURNED: 'Aged to lost & item returned - fine adjusted',
 };
 
+export const ATTEMPT_ON_DUE_DATE = 'onDueDate';
+export const ATTEMPT_DAYS_BEFORE = 'daysBefore';
+
 export const feeFineNoticesTriggeringEvents = [
   {
     value: timeBasedFeeFineEventsIds.RETURNED,

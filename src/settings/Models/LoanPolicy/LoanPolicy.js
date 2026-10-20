@@ -10,6 +10,7 @@ import { Metadata } from '../common';
 import {
   intervalIdsMap,
   loanProfileMap,
+  ATTEMPT_DAYS_BEFORE,
   BEGINNING_OF_THE_NEXT_OPEN_SERVICE_POINT_HOURS,
 } from '../../../constants';
 
@@ -87,6 +88,14 @@ export default class LoanPolicy {
 
   isNumberOfRenewalsAllowedActive() {
     return this.isRenewable() && !this.renewalsPolicy.unlimited;
+  }
+
+  isAutomaticRenewals() {
+    return this.isRenewable() && this.renewalsPolicy.automaticRenewal;
+  }
+
+  isDaysBeforeSelected() {
+    return this.isAutomaticRenewals() && this.renewalsPolicy.attemptFirstRenewal === ATTEMPT_DAYS_BEFORE;
   }
 
   isAlternateFixedDueDateScheduleIdRequired() {
