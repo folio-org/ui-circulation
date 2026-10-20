@@ -5,12 +5,12 @@ import {
   injectIntl,
 } from 'react-intl';
 import HtmlToReact, { Parser } from 'html-to-react';
-import DOMPurify from 'dompurify';
 
 import {
   Button,
   Col,
   Row,
+  sanitizeHtml
 } from '@folio/stripes/components';
 import {
   PreviewModal,
@@ -36,7 +36,7 @@ const StaffSlipTemplateContentSection = ({ intl, staffSlip }) => {
     },
   ];
   const parser = new Parser();
-  const purifyTemplate = DOMPurify.sanitize(template);
+  const purifyTemplate = sanitizeHtml(template);
   const parsedEmailTemplate = parser.parseWithInstructions(purifyTemplate, () => true, rules);
   const [openPreview, setOpenPreview] = useState(false);
   const togglePreviewDialog = () => {
@@ -81,10 +81,10 @@ const StaffSlipTemplateContentSection = ({ intl, staffSlip }) => {
         data-testid="previewModal"
         open={openPreview}
         header={
-            formatMessage({
-              id: 'ui-circulation.settings.staffSlips.view.previewLabel',
-            }, { name })
-          }
+          formatMessage({
+            id: 'ui-circulation.settings.staffSlips.view.previewLabel',
+          }, { name })
+        }
         previewTemplate={template}
         previewFormat={tokensReducer(tokens)}
         printable

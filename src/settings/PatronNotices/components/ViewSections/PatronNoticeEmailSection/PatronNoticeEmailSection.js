@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage, useIntl } from 'react-intl';
 import HtmlToReact, { Parser } from 'html-to-react';
-import DOMPurify from 'dompurify';
 
 import {
   Button,
   Col,
   KeyValue,
   Row,
+  sanitizeHtml
 } from '@folio/stripes/components';
 import {
   PreviewModal,
@@ -37,7 +37,7 @@ const PatronNoticeEmailSection = ({ notice, locale, emailTemplate }) => {
     }
   ];
   const tokens = getTokens(locale);
-  const purifyEmailTemplate = DOMPurify.sanitize(emailTemplate);
+  const purifyEmailTemplate = sanitizeHtml(emailTemplate);
   const parsedEmailTemplate = parser.parseWithInstructions(purifyEmailTemplate, () => true, rules);
   const [openPreview, setOpenPreview] = useState(false);
 
