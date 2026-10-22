@@ -174,7 +174,7 @@ export const hasPatronBilledAfterRecalledAgedToLostValue = (value, model) => {
 };
 
 export const isIntegerInInterval = (min, max, value) => {
-  const num = Number.parseFloat(value);
+  const num = Number(value);
 
   return Number.isInteger(num) && num >= min && num <= max;
 };
@@ -184,7 +184,7 @@ export const isIntegerInIntervalOrBlank = (min, max, value) => {
     return true;
   }
 
-  const num = Number.parseFloat(value);
+  const num = Number(value);
 
   return Number.isInteger(num) && num >= min && num <= max;
 };

@@ -28,8 +28,6 @@ import {
   ATTEMPT_DAYS_BEFORE,
 } from '../../../../../constants';
 
-import css from './RenewalsSection.css';
-
 class RenewalsSection extends React.Component {
   static propTypes = {
     intl: PropTypes.shape({
@@ -73,6 +71,7 @@ class RenewalsSection extends React.Component {
       policy,
       schedules,
       change,
+      intl,
     } = this.props;
 
     if (!policy.isLoanable()) {
@@ -218,58 +217,62 @@ class RenewalsSection extends React.Component {
             <div data-testid="attemptFirstRenewal">
               <Row>
                 <Col xs={12}>
-                  <Label required>
+                  <Label required id="attempt-first-renewal-label">
                     <FormattedMessage id="ui-circulation.settings.loanPolicy.attemptFirstRenewal" />
                   </Label>
                 </Col>
               </Row>
-              <Row>
-                <Col xs={12}>
-                  <Field
-                    label={<FormattedMessage id="ui-circulation.settings.loanPolicy.attemptFirstRenewal.onDueDate" />}
-                    name="renewalsPolicy.attemptFirstRenewal"
-                    component={RadioButton}
-                    type="radio"
-                    id="attemptFirstRenewal.onDueDate"
-                    value={ATTEMPT_ON_DUE_DATE}
-                  />
-                </Col>
-              </Row>
-              <Row
-                role="presentation"
-                onClick={() => change('renewalsPolicy.attemptFirstRenewal', ATTEMPT_DAYS_BEFORE)}
-              >
-                <Col xs="auto" className={css.attemptFirstRenewalCol}>
-                  <Field
-                    name="renewalsPolicy.attemptFirstRenewal"
-                    component={RadioButton}
-                    type="radio"
-                    id="attemptFirstRenewal.daysBefore"
-                    value={ATTEMPT_DAYS_BEFORE}
-                  />
-                </Col>
-                <Col xs={2}>
-                  <Field
-                    name="renewalsPolicy.daysBefore"
-                    component={TextField}
-                    type="number"
-                    min={1}
-                    max={100}
-                    parse={transformInputValue}
-                    required={policy.isDaysBeforeSelected()}
-                  />
-                </Col>
-                <Col xs={9}>
-                  <Label>
-                    <FormattedMessage id="ui-circulation.settings.loanPolicy.attemptFirstRenewal.daysBefore" />
-                  </Label>
-                </Col>
-              </Row>
+              <fieldset aria-labelledby="attempt-first-renewal-label">
+                <Row>
+                  <Col xs={12}>
+                    <Field
+                      label={<FormattedMessage id="ui-circulation.settings.loanPolicy.attemptFirstRenewal.onDueDate" />}
+                      name="renewalsPolicy.attemptFirstRenewal"
+                      component={RadioButton}
+                      type="radio"
+                      id="attemptFirstRenewal.onDueDate"
+                      value={ATTEMPT_ON_DUE_DATE}
+                    />
+                  </Col>
+                </Row>
+                <Row
+                  role="presentation"
+                  onClick={() => change('renewalsPolicy.attemptFirstRenewal', ATTEMPT_DAYS_BEFORE)}
+                >
+                  <Col xs="auto" style={{ maxWidth: '10px' }}>
+                    <Field
+                      name="renewalsPolicy.attemptFirstRenewal"
+                      component={RadioButton}
+                      type="radio"
+                      id="attemptFirstRenewal.daysBefore"
+                      value={ATTEMPT_DAYS_BEFORE}
+                      aria-label={intl.formatMessage({ id: 'ui-circulation.settings.loanPolicy.attemptFirstRenewal.daysBefore' })}
+                    />
+                  </Col>
+                  <Col xs={2}>
+                    <Field
+                      name="renewalsPolicy.daysBefore"
+                      component={TextField}
+                      type="number"
+                      min={1}
+                      max={100}
+                      parse={transformInputValue}
+                      required={policy.isDaysBeforeSelected()}
+                      aria-label={intl.formatMessage({ id: 'ui-circulation.settings.loanPolicy.attemptFirstRenewal.daysBefore' })}
+                    />
+                  </Col>
+                  <Col xs={9}>
+                    <strong>
+                      <FormattedMessage id="ui-circulation.settings.loanPolicy.attemptFirstRenewal.daysBefore" />
+                    </strong>
+                  </Col>
+                </Row>
+              </fieldset>
             </div>
             <div data-testid="attemptAdditionalRetries">
               <Row>
                 <Col xs={12}>
-                  <Label>
+                  <Label htmlFor="automaticRenewalRetryPeriodInDays">
                     <FormattedMessage id="ui-circulation.settings.loanPolicy.attemptAdditionalRetries" />
                   </Label>
                 </Col>
@@ -277,6 +280,7 @@ class RenewalsSection extends React.Component {
               <Row>
                 <Col xs={2}>
                   <Field
+                    id="automaticRenewalRetryPeriodInDays"
                     name="renewalsPolicy.automaticRenewalRetryPeriodInDays"
                     component={TextField}
                     type="number"
@@ -286,9 +290,9 @@ class RenewalsSection extends React.Component {
                   />
                 </Col>
                 <Col xs={10}>
-                  <Label>
+                  <strong>
                     <FormattedMessage id="ui-circulation.settings.loanPolicy.days" />
-                  </Label>
+                  </strong>
                 </Col>
               </Row>
             </div>
