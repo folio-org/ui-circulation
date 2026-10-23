@@ -31,6 +31,8 @@ import {
   hasPositiveLostItemProcessingFeeAndInvalidItemsAgedToLostAfterOverdue,
   hasReplacementAllowedAndNegativeLostItemPolicyFee,
   hasNegativeReplacementAllowedAndPositiveLostItemPolicyFee,
+  isIntegerInInterval,
+  isIntegerInIntervalOrBlank,
 } from './handlers';
 
 export default {
@@ -73,6 +75,14 @@ export default {
   isFromOneToHundred: {
     validate: isInInterval.bind(null, 1, 100),
     message: <FormattedMessage id="ui-circulation.settings.validate.isFromOneToHundred" />,
+  },
+  isIntegerBetween1And100: {
+    validate: isIntegerInInterval.bind(null, 1, 100),
+    message: <FormattedMessage id="ui-circulation.settings.validate.intervalBetween1And100" />,
+  },
+  isIntegerBetween0And100OrBlank: {
+    validate: isIntegerInIntervalOrBlank.bind(null, 0, 100),
+    message: <FormattedMessage id="ui-circulation.settings.validate.intervalBetween0And100" />,
   },
   isNotEmptyEditor: {
     validate: isNotEmptyEditor,

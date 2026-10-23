@@ -172,3 +172,19 @@ export const hasPatronBilledAfterRecalledAgedToLostValue = (value, model) => {
   return !!((isUndefined(patronBilledRecalledValue) || patronBilledRecalledValue === '') ||
     (recalledLostValue && patronBilledRecalledValue >= 0));
 };
+
+export const isIntegerInInterval = (min, max, value) => {
+  const num = Number(value);
+
+  return Number.isInteger(num) && num >= min && num <= max;
+};
+
+export const isIntegerInIntervalOrBlank = (min, max, value) => {
+  if (value === '' || value === null || value === undefined) {
+    return true;
+  }
+
+  const num = Number(value);
+
+  return Number.isInteger(num) && num >= min && num <= max;
+};

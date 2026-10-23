@@ -14,9 +14,38 @@ import LoanPolicyDetail from './LoanPolicyDetail';
 import LoanPolicyForm from './LoanPolicyForm';
 import LoanPolicy from '../Models/LoanPolicy';
 import { normalize } from './utils/normalize';
-import { MAX_UNPAGED_RESOURCE_COUNT } from '../../constants';
+import {
+  MAX_UNPAGED_RESOURCE_COUNT,
+  ATTEMPT_ON_DUE_DATE,
+  ATTEMPT_DAYS_BEFORE,
+} from '../../constants';
 import withPreventDelete from '../wrappers/withPreventDelete';
 import { getRecordName } from '../utils/utils';
+
+export const parseInitialValues = (policy = {}) => {
+  const { renewalsPolicy } = policy;
+
+  if (!renewalsPolicy) {
+    return policy;
+  }
+
+  const { firstAutomaticRenewalAttemptDaysBeforeDueDate } = renewalsPolicy;
+
+  if (firstAutomaticRenewalAttemptDaysBeforeDueDate === undefined || firstAutomaticRenewalAttemptDaysBeforeDueDate === null) {
+    return policy;
+  }
+
+  const isDaysBefore = firstAutomaticRenewalAttemptDaysBeforeDueDate !== 0;
+
+  return {
+    ...policy,
+    renewalsPolicy: {
+      ...renewalsPolicy,
+      attemptFirstRenewal: isDaysBefore ? ATTEMPT_DAYS_BEFORE : ATTEMPT_ON_DUE_DATE,
+      daysBefore: isDaysBefore ? firstAutomaticRenewalAttemptDaysBeforeDueDate : undefined,
+    },
+  };
+};
 
 class LoanPolicySettings extends React.Component {
   static manifest = Object.freeze({
@@ -131,6 +160,7 @@ class LoanPolicySettings extends React.Component {
           entryLabel={formatMessage({ id: 'ui-circulation.settings.loanPolicy.entryLabel' })}
           defaultEntry={LoanPolicy.defaultLoanPolicy()}
           onBeforeSave={normalize}
+          parseInitialValues={parseInitialValues}
         />
       </TitleManager>
     );

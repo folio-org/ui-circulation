@@ -8,6 +8,8 @@ describe('renewals', () => {
     isNumberOfRenewalsAllowedActive: jest.fn().mockReturnValue(true),
     isRenewable: jest.fn().mockReturnValue(true),
     isProfileRolling: jest.fn().mockReturnValue(true),
+    isDaysBeforeSelected: jest.fn().mockReturnValue(true),
+    isAutomaticRenewals: jest.fn().mockReturnValue(true),
   };
   let result;
 
@@ -39,6 +41,14 @@ describe('renewals', () => {
     expect(loanPolicy.isProfileRolling).toHaveBeenCalledTimes(1);
   });
 
+  it('should trigger "isDaysBeforeSelected" once', () => {
+    expect(loanPolicy.isDaysBeforeSelected).toHaveBeenCalledTimes(1);
+  });
+
+  it('should trigger "isAutomaticRenewals" once', () => {
+    expect(loanPolicy.isAutomaticRenewals).toHaveBeenCalledTimes(1);
+  });
+
   it('should return correct config', () => {
     const expectedResult = {
       'renewalsPolicy.alternateFixedDueDateScheduleId': {
@@ -59,6 +69,14 @@ describe('renewals', () => {
       },
       'renewalsPolicy.renewFromId': {
         rules: ['isNotEmptySelect'],
+        shouldValidate: true,
+      },
+      'renewalsPolicy.daysBefore': {
+        rules: ['isNotEmpty', 'isIntegerBetween1And100'],
+        shouldValidate: true,
+      },
+      'renewalsPolicy.automaticRenewalRetryPeriodInDays': {
+        rules: ['isIntegerBetween0And100OrBlank'],
         shouldValidate: true,
       },
     };
@@ -143,6 +161,38 @@ describe('renewals', () => {
       const config = renewals(policy);
 
       expect(config['renewalsPolicy.renewFromId'].shouldValidate).toBe(false);
+    });
+  });
+
+  describe('when "isDaysBeforeSelected" returns true', () => {
+    it('should return "shouldValidate: true" for "renewalsPolicy.daysBefore"', () => {
+      const config = renewals({ ...loanPolicy, isDaysBeforeSelected: () => true });
+
+      expect(config['renewalsPolicy.daysBefore'].shouldValidate).toBe(true);
+    });
+  });
+
+  describe('when "isDaysBeforeSelected" returns false', () => {
+    it('should return "shouldValidate: false" for "renewalsPolicy.daysBefore"', () => {
+      const config = renewals({ ...loanPolicy, isDaysBeforeSelected: () => false });
+
+      expect(config['renewalsPolicy.daysBefore'].shouldValidate).toBe(false);
+    });
+  });
+
+  describe('when "isAutomaticRenewals" returns true', () => {
+    it('should return "shouldValidate: true" for "renewalsPolicy.automaticRenewalRetryPeriodInDays"', () => {
+      const config = renewals({ ...loanPolicy, isAutomaticRenewals: () => true });
+
+      expect(config['renewalsPolicy.automaticRenewalRetryPeriodInDays'].shouldValidate).toBe(true);
+    });
+  });
+
+  describe('when "isAutomaticRenewals" returns false', () => {
+    it('should return "shouldValidate: false" for "renewalsPolicy.automaticRenewalRetryPeriodInDays"', () => {
+      const config = renewals({ ...loanPolicy, isAutomaticRenewals: () => false });
+
+      expect(config['renewalsPolicy.automaticRenewalRetryPeriodInDays'].shouldValidate).toBe(false);
     });
   });
 });

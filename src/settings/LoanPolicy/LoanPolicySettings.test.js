@@ -9,7 +9,7 @@ import { TitleManager } from '@folio/stripes/core';
 import LoanPolicyDetail from './LoanPolicyDetail';
 import LoanPolicyForm from './LoanPolicyForm';
 import { normalize } from './utils/normalize';
-import LoanPolicySettings from './LoanPolicySettings';
+import LoanPolicySettings, { parseInitialValues } from './LoanPolicySettings';
 import { getRecordName } from '../utils/utils';
 
 const mockDefaultLoanPolicyReturnValue = 'mockDefaultLoanPolicyReturnValue';
@@ -24,6 +24,8 @@ jest.mock('./utils/normalize', () => jest.fn(() => null));
 jest.mock('../wrappers/withPreventDelete', () => jest.fn((component) => component));
 jest.mock('../../constants', () => ({
   MAX_UNPAGED_RESOURCE_COUNT: 1,
+  ATTEMPT_ON_DUE_DATE: 'onDueDate',
+  ATTEMPT_DAYS_BEFORE: 'daysBefore',
 }));
 jest.mock('../utils/utils', () => ({
   getRecordName: jest.fn(() => recordName),
@@ -118,6 +120,7 @@ describe('LoanPolicySettings', () => {
         entryLabel: labelIds.entryLabel,
         defaultEntry: mockDefaultLoanPolicyReturnValue,
         onBeforeSave: normalize,
+        parseInitialValues,
       }), {});
     });
 
@@ -186,5 +189,47 @@ describe('LoanPolicySettings', () => {
     };
 
     expect(getRecordName).toHaveBeenCalledWith(expectedArg);
+  });
+});
+
+describe('parseInitialValues', () => {
+  it('should return policy unchanged when renewalsPolicy is absent', () => {
+    const policy = { name: 'test' };
+    expect(parseInitialValues(policy)).toEqual(policy);
+  });
+
+  it('should return policy unchanged when firstAutomaticRenewalAttemptDaysBeforeDueDate is absent', () => {
+    const policy = { renewalsPolicy: { unlimited: false } };
+    expect(parseInitialValues(policy)).toEqual(policy);
+  });
+
+  it('should set attemptFirstRenewal to "onDueDate" and clear daysBefore when value is 0', () => {
+    const policy = {
+      renewalsPolicy: {
+        automaticRenewal: true,
+        firstAutomaticRenewalAttemptDaysBeforeDueDate: 0,
+      },
+    };
+    const result = parseInitialValues(policy);
+
+    expect(result.renewalsPolicy.attemptFirstRenewal).toBe('onDueDate');
+    expect(result.renewalsPolicy.daysBefore).toBeUndefined();
+  });
+
+  it('should set attemptFirstRenewal to "daysBefore" and populate daysBefore when value is > 0', () => {
+    const policy = {
+      renewalsPolicy: {
+        automaticRenewal: true,
+        firstAutomaticRenewalAttemptDaysBeforeDueDate: 5,
+      },
+    };
+    const result = parseInitialValues(policy);
+
+    expect(result.renewalsPolicy.attemptFirstRenewal).toBe('daysBefore');
+    expect(result.renewalsPolicy.daysBefore).toBe(5);
+  });
+
+  it('should return empty object when called without arguments', () => {
+    expect(parseInitialValues()).toEqual({});
   });
 });

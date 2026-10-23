@@ -6,6 +6,7 @@ import { Metadata } from '../common';
 import {
   intervalIdsMap,
   loanProfileMap,
+  ATTEMPT_DAYS_BEFORE,
   BEGINNING_OF_THE_NEXT_OPEN_SERVICE_POINT_HOURS,
 } from '../../../constants';
 
@@ -333,6 +334,91 @@ describe('LoanPolicy', () => {
       const loanPolicyInstance = new LoanPolicy(policy);
 
       expect(loanPolicyInstance.isRenewalsPolicyPeriodRequired()).toEqual(false);
+    });
+  });
+
+  describe('isAutomaticRenewals', () => {
+    it('should return true when renewable is true and automaticRenewal is true', () => {
+      const policy = {
+        ...fullPolicy,
+        renewable: true,
+        renewalsPolicy: {
+          automaticRenewal: true,
+        },
+      };
+      const loanPolicyInstance = new LoanPolicy(policy);
+
+      expect(loanPolicyInstance.isAutomaticRenewals()).toEqual(true);
+    });
+
+    it('should return false when renewable is false', () => {
+      const policy = {
+        ...fullPolicy,
+        renewable: false,
+        renewalsPolicy: {
+          automaticRenewal: true,
+        },
+      };
+      const loanPolicyInstance = new LoanPolicy(policy);
+
+      expect(loanPolicyInstance.isAutomaticRenewals()).toEqual(false);
+    });
+
+    it('should return false when automaticRenewal is false', () => {
+      const policy = {
+        ...fullPolicy,
+        renewable: true,
+        renewalsPolicy: {
+          automaticRenewal: false,
+        },
+      };
+      const loanPolicyInstance = new LoanPolicy(policy);
+
+      expect(loanPolicyInstance.isAutomaticRenewals()).toEqual(false);
+    });
+  });
+
+  describe('isDaysBeforeSelected', () => {
+    it('should return true when automaticRenewal is true and attemptFirstRenewal is "daysBefore"', () => {
+      const policy = {
+        ...fullPolicy,
+        renewable: true,
+        renewalsPolicy: {
+          automaticRenewal: true,
+          attemptFirstRenewal: ATTEMPT_DAYS_BEFORE,
+        },
+      };
+      const loanPolicyInstance = new LoanPolicy(policy);
+
+      expect(loanPolicyInstance.isDaysBeforeSelected()).toEqual(true);
+    });
+
+    it('should return false when automaticRenewal is false', () => {
+      const policy = {
+        ...fullPolicy,
+        renewable: true,
+        renewalsPolicy: {
+          automaticRenewal: false,
+          attemptFirstRenewal: ATTEMPT_DAYS_BEFORE,
+        },
+      };
+      const loanPolicyInstance = new LoanPolicy(policy);
+
+      expect(loanPolicyInstance.isDaysBeforeSelected()).toEqual(false);
+    });
+
+    it('should return false when attemptFirstRenewal is not "daysBefore"', () => {
+      const policy = {
+        ...fullPolicy,
+        renewable: true,
+        renewalsPolicy: {
+          automaticRenewal: true,
+          attemptFirstRenewal: 'onDueDate',
+        },
+      };
+      const loanPolicyInstance = new LoanPolicy(policy);
+
+      expect(loanPolicyInstance.isDaysBeforeSelected()).toEqual(false);
     });
   });
 });
