@@ -20,6 +20,8 @@ import {
   closingTypes,
   CLOSING_TYPES_WITH_FEES_FINES,
   closedLoansRules,
+  USER_SPECIFIC_CLOSING_TYPES,
+  USER_SPECIFIC_RULE,
 } from '../../constants';
 
 jest.mock('../components/AnonymizingTypeSelect/AnonymizingTypeSelectContainer', () => jest.fn(() => null));
@@ -30,6 +32,8 @@ jest.mock('../../constants', () => ({
     DEFAULT: 'testDefault',
     WITH_FEES_FINES: 'testWithFeesFines',
   },
+  USER_SPECIFIC_CLOSING_TYPES: 'testUserSpecificClosingTypes',
+  USER_SPECIFIC_RULE: 'testUserSpecific',
 }));
 
 describe('LoanHistoryForm', () => {
@@ -38,6 +42,7 @@ describe('LoanHistoryForm', () => {
     'libraryPolicy': 'ui-circulation.settings.loanHistory.libraryPolicy',
     'anonymize': 'ui-circulation.settings.loanHistory.anonymize',
     'treat': 'ui-circulation.settings.loanHistory.treat',
+    'userSpecific': 'ui-circulation.settings.loanHistory.userSpecific',
     'feeFinePolicy': 'ui-circulation.settings.loanHistory.feeFinePolicy',
     'anonymizeFeesFines': 'ui-circulation.settings.loanHistory.anonymizeFeesFines',
   };
@@ -46,6 +51,7 @@ describe('LoanHistoryForm', () => {
     submitButton: 'submitButton',
     closedLoans: 'closedLoans',
     closedLoansHeadline: 'closedLoansHeadline',
+    userSpecificHeadline: 'userSpecificHeadline',
     closedLoansFeesFinesHeadline: 'closedLoansFeesFinesHeadline',
     loansFeefineSection: 'loansFeefineSection',
   };
@@ -140,6 +146,19 @@ describe('LoanHistoryForm', () => {
       }), {});
     });
 
+    it('should render user-specific label', () => {
+      expect(getById(testIds.userSpecificHeadline).getByText(labelIds.userSpecific)).toBeVisible();
+    });
+
+    it('should render user-specific AnonymizingTypeSelectContainer component', () => {
+      expect(AnonymizingTypeSelectContainer).toHaveBeenNthCalledWith(2, expect.objectContaining({
+        label: labelIds.anonymize,
+        name: closedLoansRules.DEFAULT,
+        path: USER_SPECIFIC_RULE,
+        types: USER_SPECIFIC_CLOSING_TYPES,
+      }), {});
+    });
+
     it('should render treat enabled Field component', () => {
       expect(Field).toHaveBeenCalledWith({
         name: 'treatEnabled',
@@ -155,7 +174,7 @@ describe('LoanHistoryForm', () => {
     });
 
     it('should render closed loans fees fines AnonymizingTypeSelectContainer component disabled', () => {
-      expect(AnonymizingTypeSelectContainer).toHaveBeenNthCalledWith(2, expect.objectContaining({
+      expect(AnonymizingTypeSelectContainer).toHaveBeenNthCalledWith(3, expect.objectContaining({
         disabled: true,
       }), {});
     });
@@ -193,7 +212,7 @@ describe('LoanHistoryForm', () => {
     });
 
     it('should render closed loans fees fines AnonymizingTypeSelectContainer component', () => {
-      expect(AnonymizingTypeSelectContainer).toHaveBeenNthCalledWith(2, expect.objectContaining({
+      expect(AnonymizingTypeSelectContainer).toHaveBeenNthCalledWith(3, expect.objectContaining({
         label: labelIds.anonymizeFeesFines,
         name: closedLoansRules.WITH_FEES_FINES,
         path: closedLoansRules.WITH_FEES_FINES,

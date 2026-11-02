@@ -448,6 +448,21 @@ export const CLOSING_TYPES_WITH_FEES_FINES = [
   },
 ];
 
+export const USER_SPECIFIC_CLOSING_TYPES = [
+  {
+    value: userSpecificClosingTypesMap.DISABLED,
+    label: 'ui-circulation.settings.loanHistory.userSpecific.disabled',
+  },
+  {
+    value: userSpecificClosingTypesMap.IMMEDIATELY,
+    label: 'ui-circulation.settings.loanHistory.immediatelyAfterClose',
+  },
+  {
+    value: userSpecificClosingTypesMap.INTERVAL,
+    label: 'ui-circulation.settings.loanHistory.interval',
+  },
+];
+
 export const closedLoansRules = {
   DEFAULT: 'loan',
   WITH_FEES_FINES: 'feeFine',

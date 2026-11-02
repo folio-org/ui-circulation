@@ -443,6 +443,8 @@
   "settings.loanHistory.selectInterval": "Select interval",
   "settings.loanHistory.selectPaymentMethod": "Select payment method",
   "settings.loanHistory.libraryPolicy": "Library loan anonymization policy",
+  "settings.loanHistory.userSpecific": "Opt-in loan anonymization policy",
+  "settings.loanHistory.userSpecific.disabled": "Do not allow user-specific loan anonymization",
   "settings.loanHistory.feeFinePolicy": "Anonymization policy for loans with fees/fines",
   "settings.loanHistory.anonymize": "Anonymize closed loans",
   "settings.loanHistory.anonymizeFeesFines": "Anonymize closed loans with associated fees/fines",

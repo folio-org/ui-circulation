@@ -30,6 +30,8 @@ import {
   closingTypes,
   CLOSING_TYPES_WITH_FEES_FINES,
   closedLoansRules,
+  USER_SPECIFIC_CLOSING_TYPES,
+  USER_SPECIFIC_RULE,
 } from '../../constants';
 import { LoanHistory as validateLoanHistorySettings } from '../Validation';
 
@@ -120,6 +122,26 @@ class LoanHistoryForm extends Component {
               name={closedLoansRules.DEFAULT}
               path={closedLoansRules.DEFAULT}
               types={closingTypes}
+            />
+          </Layout>
+          <hr />
+          <Layout
+            data-testid="userSpecificSection"
+            className="padding-bottom-gutter"
+          >
+            <Headline
+              data-testid="userSpecificHeadline"
+              size="large"
+              margin="xx-small"
+              tag="h3"
+            >
+              <FormattedMessage id="ui-circulation.settings.loanHistory.userSpecific" />
+            </Headline>
+            <AnonymizingTypeSelectContainer
+              label="ui-circulation.settings.loanHistory.anonymize"
+              name={closedLoansRules.DEFAULT}
+              path={USER_SPECIFIC_RULE}
+              types={USER_SPECIFIC_CLOSING_TYPES}
             />
           </Layout>
           <hr />
