@@ -28,9 +28,10 @@ jest.mock('../components', () => ({
   CirculationSettingsConfig: jest.fn(() => null),
 }));
 jest.mock('./utils/normalize', () => jest.fn(v => ({
-  closingType: { loan: 'l', feeFine: 'f', loanExceptions: ['e'] },
+  closingType: { loan: 'l', feeFine: 'f', loanExceptions: ['e'], userSpecific: 'u' },
   loan: { a: 1 },
   feeFine: { b: 2 },
+  userSpecific: { c: 3 },
   loanExceptions: ['e'],
   treatEnabled: v?.treatEnabled ?? false,
 })));
@@ -79,16 +80,18 @@ describe('LoanHistorySettings', () => {
 describe('getInitialValues', () => {
   it('should returns default config when input is empty', () => {
     expect(getInitialValues()).toEqual({
-      closingType: { loan: null, feeFine: null, loanExceptions: [] },
+      closingType: { loan: null, feeFine: null, loanExceptions: [], userSpecific: 'disabled' },
       loan: {},
       feeFine: {},
+      userSpecific: {},
       loanExceptions: [],
       treatEnabled: false,
     });
     expect(getInitialValues({})).toEqual({
-      closingType: { loan: null, feeFine: null, loanExceptions: [] },
+      closingType: { loan: null, feeFine: null, loanExceptions: [], userSpecific: 'disabled' },
       loan: {},
       feeFine: {},
+      userSpecific: {},
       loanExceptions: [],
       treatEnabled: false,
     });
@@ -98,12 +101,35 @@ describe('getInitialValues', () => {
     const custom = { treatEnabled: true, loan: { a: 1 } };
 
     expect(getInitialValues(custom)).toEqual({
-      closingType: { loan: null, feeFine: null, loanExceptions: [] },
+      closingType: { loan: null, feeFine: null, loanExceptions: [], userSpecific: 'disabled' },
       loan: { a: 1 },
       feeFine: {},
+      userSpecific: {},
       loanExceptions: [],
       treatEnabled: true,
     });
+  });
+
+  it('should treat a missing or null user-specific closing type as disabled', () => {
+    const closingType = { loan: 'immediately', feeFine: null, loanExceptions: [] };
+
+    expect(getInitialValues({ closingType }).closingType).toEqual({
+      ...closingType,
+      userSpecific: 'disabled',
+    });
+    expect(getInitialValues({ closingType: { ...closingType, userSpecific: null } }).closingType).toEqual({
+      ...closingType,
+      userSpecific: 'disabled',
+    });
+  });
+
+  it('should keep a stored user-specific closing type and period', () => {
+    const settings = {
+      closingType: { loan: 'interval', feeFine: null, loanExceptions: [], userSpecific: 'interval' },
+      userSpecific: { duration: 7, intervalId: 'Days' },
+    };
+
+    expect(getInitialValues(settings)).toEqual(expect.objectContaining(settings));
   });
 });
 
@@ -117,9 +143,10 @@ describe('normalizeData', () => {
     const result = normalizeData(input);
 
     expect(result).toEqual({
-      closingType: { loan: 'l', feeFine: 'f', loanExceptions: ['e'] },
+      closingType: { loan: 'l', feeFine: 'f', loanExceptions: ['e'], userSpecific: 'u' },
       loan: { a: 1 },
       feeFine: { b: 2 },
+      userSpecific: { c: 3 },
       loanExceptions: ['e'],
       treatEnabled: true,
     });

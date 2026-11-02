@@ -16,6 +16,7 @@ import normalize from './utils/normalize';
 import LoanHistoryForm from './LoanHistoryForm';
 import {
   CONFIG_NAMES,
+  userSpecificClosingTypesMap,
 } from '../../constants';
 
 export const getInitialValues = (settings) => {
@@ -27,22 +28,31 @@ export const getInitialValues = (settings) => {
     },
     loan: {},
     feeFine: {},
+    userSpecific: {},
     loanExceptions: [],
     treatEnabled: false,
   };
-
-  return {
+  const initialValues = {
     ...defaultConfig,
     ...settings,
   };
+
+  // Settings saved before this feature have no closingType.userSpecific: treat as disabled, like the backend
+  initialValues.closingType = {
+    ...initialValues.closingType,
+    userSpecific: initialValues.closingType?.userSpecific ?? userSpecificClosingTypesMap.DISABLED,
+  };
+
+  return initialValues;
 };
 
 export const normalizeData = (value) => {
-  const { closingType, loan, feeFine, loanExceptions, treatEnabled } = normalize(value);
+  const { closingType, loan, feeFine, userSpecific, loanExceptions, treatEnabled } = normalize(value);
   const loanHistorySettings = {
     closingType: cloneDeep(closingType),
     loan,
     feeFine,
+    userSpecific,
     loanExceptions,
     treatEnabled
   };

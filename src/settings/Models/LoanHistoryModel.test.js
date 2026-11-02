@@ -22,6 +22,10 @@ describe('LoanHistory', () => {
         duration: undefined,
         intervalId: undefined,
       },
+      userSpecific: {
+        duration: undefined,
+        intervalId: undefined,
+      },
       loanExceptions: [],
       treatEnabled: false,
     }));
@@ -37,6 +41,10 @@ describe('LoanHistory', () => {
       feeFine: {
         duration: 'testFeeFineDuration',
         intervalId: 'testFeeFineIntervalId',
+      },
+      userSpecific: {
+        duration: 'testUserSpecificDuration',
+        intervalId: 'testUserSpecificIntervalId',
       },
       loanExceptions: ['testException'],
       treatEnabled: true,

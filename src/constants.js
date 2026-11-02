@@ -400,6 +400,13 @@ export const closingTypesMap = {
   NEVER: 'never',
 };
 
+// closingType.userSpecific: "disabled" turns user-specific anonymization off, unlike "never" above
+export const userSpecificClosingTypesMap = {
+  DISABLED: 'disabled',
+  IMMEDIATELY: 'immediately',
+  INTERVAL: 'interval',
+};
+
 export const timeUnitsMap = {
   MINUTE: 'minute',
   DAY: 'day',
@@ -445,6 +452,8 @@ export const closedLoansRules = {
   DEFAULT: 'loan',
   WITH_FEES_FINES: 'feeFine',
 };
+
+export const USER_SPECIFIC_RULE = 'userSpecific';
 
 export const timeUnits = [
   {
