@@ -153,8 +153,20 @@ describe('LoanHistoryForm', () => {
       }, {});
     });
 
-    it('should not render loans feefine section', () => {
-      expect(screen.queryByTestId(testIds.loansFeefineSection)).not.toBeInTheDocument();
+    it('should render loans feefine section', () => {
+      expect(screen.getByTestId(testIds.loansFeefineSection)).toBeVisible();
+    });
+
+    it('should render closed loans fees fines AnonymizingTypeSelectContainer component disabled', () => {
+      expect(AnonymizingTypeSelectContainer).toHaveBeenNthCalledWith(2, expect.objectContaining({
+        disabled: true,
+      }), {});
+    });
+
+    it('should render loan exceptions FieldArray component disabled', () => {
+      expect(FieldArray).toHaveBeenCalledWith(expect.objectContaining({
+        disabled: true,
+      }), {});
     });
   });
 
@@ -192,6 +204,7 @@ describe('LoanHistoryForm', () => {
         name: closedLoansRules.WITH_FEES_FINES,
         path: closedLoansRules.WITH_FEES_FINES,
         types: CLOSING_TYPES_WITH_FEES_FINES,
+        disabled: false,
       }), {});
     });
 
@@ -199,6 +212,7 @@ describe('LoanHistoryForm', () => {
       expect(FieldArray).toHaveBeenCalledWith({
         name: 'loanExceptions',
         component: ExceptionsList,
+        disabled: false,
       }, {});
     });
   });

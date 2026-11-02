@@ -35,6 +35,7 @@ class Period extends PureComponent {
     selectValuePath: PropTypes.string.isRequired,
     intervalPeriods: PropTypes.arrayOf(PropTypes.node).isRequired,
     required: PropTypes.bool,
+    disabled: PropTypes.bool,
     inputSize: PropTypes.number,
     selectSize: PropTypes.number,
     fieldLabel: PropTypes.string,
@@ -73,6 +74,7 @@ class Period extends PureComponent {
       inputPlaceholder,
       selectPlaceholder,
       required,
+      disabled,
       inputSize,
       selectSize,
       intervalPeriodsSuffix,
@@ -112,6 +114,7 @@ class Period extends PureComponent {
                 onClearField={this.onInputClear}
                 parse={transformInputValue}
                 placeholder={inputPlaceholder}
+                disabled={disabled}
               />
             </div>
           </Col>
@@ -126,6 +129,7 @@ class Period extends PureComponent {
                 component={Select}
                 required={required}
                 placeholder={isEmpty(selectPlaceholder) ? '' : formatMessage({ id: selectPlaceholder })}
+                disabled={disabled}
               >
                 {intervalPeriods}
               </Field>

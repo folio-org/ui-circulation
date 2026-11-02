@@ -61,4 +61,22 @@ describe('AnonymizingTypeSelect', () => {
   });
 
   mockedProps.types.forEach(testAnonymizingTypeRow);
+
+  describe('when disabled', () => {
+    beforeEach(() => {
+      Field.mockClear();
+      render(
+        <AnonymizingTypeSelect
+          {...mockedProps}
+          disabled
+        />
+      );
+    });
+
+    it('should disable "Field" in each row', () => {
+      mockedProps.types.forEach((type, index) => {
+        expect(Field).toHaveBeenNthCalledWith(index + 1, expect.objectContaining({ disabled: true }), {});
+      });
+    });
+  });
 });

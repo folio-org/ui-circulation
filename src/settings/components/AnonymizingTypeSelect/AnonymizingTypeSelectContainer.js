@@ -24,6 +24,7 @@ export const afterCloseTranslationKey = (name) => (name === closedLoansRules.WIT
 
 class AnonymizingTypeSelectContainer extends Component {
   static propTypes = {
+    disabled: PropTypes.bool,
     intl: PropTypes.shape({
       formatMessage: PropTypes.func.isRequired,
     }).isRequired,
@@ -54,6 +55,7 @@ class AnonymizingTypeSelectContainer extends Component {
           intervalPeriods={this.generateOptions(this.selectedPeriods, 'ui-circulation.settings.loanHistory.selectInterval')}
           inputSize={4}
           selectSize={7}
+          disabled={this.props.disabled}
         />
         <FormattedMessage
           tagName="div"
@@ -87,6 +89,7 @@ class AnonymizingTypeSelectContainer extends Component {
 
   render() {
     const {
+      disabled,
       name,
       path,
     } = this.props;
@@ -96,6 +99,7 @@ class AnonymizingTypeSelectContainer extends Component {
         <AnonymizingTypeSelect
           name={path}
           types={this.getClosingTypes(name, path)}
+          disabled={disabled}
         />
         <Field
           name={`${path}Selected`}

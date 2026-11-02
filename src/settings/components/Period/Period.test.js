@@ -245,6 +245,22 @@ describe('Period', () => {
     });
   });
 
+  describe('when "disabled" props is passed', () => {
+    beforeEach(() => {
+      render(
+        <Period
+          {...commonMockedProps}
+          disabled
+        />
+      );
+    });
+
+    it('should disable duration and interval fields', () => {
+      expect(Field).toHaveBeenNthCalledWith(fieldCallOrderByPlace.finePolicyDurationColumn, expect.objectContaining({ disabled: true }), {});
+      expect(Field).toHaveBeenNthCalledWith(fieldCallOrderByPlace.finePolicyIntervalColumn, expect.objectContaining({ disabled: true }), {});
+    });
+  });
+
   describe('transformInputValue', () => {
     it('should return input value transformed to number when it is not empty', () => {
       expect(transformInputValue('12')).toBe(12);

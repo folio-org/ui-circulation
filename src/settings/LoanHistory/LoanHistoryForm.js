@@ -136,33 +136,34 @@ class LoanHistoryForm extends Component {
             </Col>
           </Row>
           <br />
-          {loanHistoryValues.treatEnabled &&
-            <div
-              data-testid="loansFeefineSection"
-              data-test-closed-loans-feefine
+          <div
+            data-testid="loansFeefineSection"
+            data-test-closed-loans-feefine
+          >
+            <Headline
+              data-testid="closedLoansFeesFinesHeadline"
+              size="large"
+              margin="xx-large"
+              tag="h3"
             >
-              <Headline
-                data-testid="closedLoansFeesFinesHeadline"
-                size="large"
-                margin="xx-large"
-                tag="h3"
-              >
-                <FormattedMessage id="ui-circulation.settings.loanHistory.closedLoansFeesFines" />
-              </Headline>
-              <FormattedMessage
-                tagName="p"
-                id="ui-circulation.settings.loanHistory.anonymizeFeesFines"
-              />
-              <AnonymizingTypeSelectContainer
-                name={closedLoansRules.WITH_FEES_FINES}
-                path={closedLoansRules.WITH_FEES_FINES}
-                types={CLOSING_TYPES_WITH_FEES_FINES}
-              />
-              <FieldArray
-                name="loanExceptions"
-                component={ExceptionsList}
-              />
-            </div>}
+              <FormattedMessage id="ui-circulation.settings.loanHistory.closedLoansFeesFines" />
+            </Headline>
+            <FormattedMessage
+              tagName="p"
+              id="ui-circulation.settings.loanHistory.anonymizeFeesFines"
+            />
+            <AnonymizingTypeSelectContainer
+              name={closedLoansRules.WITH_FEES_FINES}
+              path={closedLoansRules.WITH_FEES_FINES}
+              types={CLOSING_TYPES_WITH_FEES_FINES}
+              disabled={!loanHistoryValues.treatEnabled}
+            />
+            <FieldArray
+              name="loanExceptions"
+              component={ExceptionsList}
+              disabled={!loanHistoryValues.treatEnabled}
+            />
+          </div>
         </Pane>
       </form>
     );

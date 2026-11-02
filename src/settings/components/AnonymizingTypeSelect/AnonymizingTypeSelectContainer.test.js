@@ -87,6 +87,22 @@ describe('AnonymizingTypeSelectContainer', () => {
     });
   });
 
+  describe('when disabled', () => {
+    beforeEach(() => {
+      render(
+        <AnonymizingTypeSelectContainer
+          {...testDefaultProps}
+          disabled
+        />
+      );
+    });
+
+    it('should disable AnonymizingTypeSelect and Period components', () => {
+      expect(AnonymizingTypeSelect).toHaveBeenCalledWith(expect.objectContaining({ disabled: true }), {});
+      expect(Period).toHaveBeenCalledWith(expect.objectContaining({ disabled: true }), {});
+    });
+  });
+
   describe('afterCloseTranslationKey', () => {
     it(`should return ${labelIds.afterClose} when name is ${closedLoansRules.DEFAULT}`, () => {
       expect(afterCloseTranslationKey(closedLoansRules.DEFAULT)).toBe(labelIds.afterClose);
