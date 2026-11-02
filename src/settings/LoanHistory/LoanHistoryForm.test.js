@@ -43,7 +43,10 @@ describe('LoanHistoryForm', () => {
     'anonymize': 'ui-circulation.settings.loanHistory.anonymize',
     'treat': 'ui-circulation.settings.loanHistory.treat',
     'userSpecific': 'ui-circulation.settings.loanHistory.userSpecific',
+    'userSpecificInfoPopover': 'ui-circulation.settings.loanHistory.userSpecific.infoPopover',
+    'userSpecificAnonymize': 'ui-circulation.settings.loanHistory.userSpecific.anonymize',
     'feeFinePolicy': 'ui-circulation.settings.loanHistory.feeFinePolicy',
+    'feeFinePolicyInfoPopover': 'ui-circulation.settings.loanHistory.feeFinePolicy.infoPopover',
     'anonymizeFeesFines': 'ui-circulation.settings.loanHistory.anonymizeFeesFines',
   };
   const testIds = {
@@ -146,17 +149,22 @@ describe('LoanHistoryForm', () => {
       }), {});
     });
 
-    it('should render user-specific label', () => {
+    it('should render user-specific label and info popover', () => {
       expect(getById(testIds.userSpecificHeadline).getByText(labelIds.userSpecific)).toBeVisible();
+      expect(getById(testIds.userSpecificHeadline).getByText(labelIds.userSpecificInfoPopover)).toBeVisible();
     });
 
     it('should render user-specific AnonymizingTypeSelectContainer component', () => {
       expect(AnonymizingTypeSelectContainer).toHaveBeenNthCalledWith(2, expect.objectContaining({
-        label: labelIds.anonymize,
+        label: labelIds.userSpecificAnonymize,
         name: closedLoansRules.DEFAULT,
         path: USER_SPECIFIC_RULE,
         types: USER_SPECIFIC_CLOSING_TYPES,
       }), {});
+    });
+
+    it('should render fee/fine info popover', () => {
+      expect(getById(testIds.closedLoansFeesFinesHeadline).getByText(labelIds.feeFinePolicyInfoPopover)).toBeVisible();
     });
 
     it('should render treat enabled Field component', () => {

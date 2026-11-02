@@ -20,6 +20,7 @@ import {
   Pane,
   Row,
   Headline,
+  InfoPopover,
   Layout,
   PaneFooter,
 } from '@folio/stripes/components';
@@ -136,9 +137,12 @@ class LoanHistoryForm extends Component {
               tag="h3"
             >
               <FormattedMessage id="ui-circulation.settings.loanHistory.userSpecific" />
+              <InfoPopover
+                content={<FormattedMessage id="ui-circulation.settings.loanHistory.userSpecific.infoPopover" />}
+              />
             </Headline>
             <AnonymizingTypeSelectContainer
-              label="ui-circulation.settings.loanHistory.anonymize"
+              label="ui-circulation.settings.loanHistory.userSpecific.anonymize"
               name={closedLoansRules.DEFAULT}
               path={USER_SPECIFIC_RULE}
               types={USER_SPECIFIC_CLOSING_TYPES}
@@ -156,6 +160,9 @@ class LoanHistoryForm extends Component {
               tag="h3"
             >
               <FormattedMessage id="ui-circulation.settings.loanHistory.feeFinePolicy" />
+              <InfoPopover
+                content={<FormattedMessage id="ui-circulation.settings.loanHistory.feeFinePolicy.infoPopover" />}
+              />
             </Headline>
             <Row>
               <Col xs={12}>
