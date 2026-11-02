@@ -413,6 +413,10 @@ export const noticeMethodMap = {
 
 export const closingTypes = [
   {
+    value: closingTypesMap.NEVER,
+    label: 'ui-circulation.settings.loanHistory.never',
+  },
+  {
     value: closingTypesMap.IMMEDIATELY,
     label: 'ui-circulation.settings.loanHistory.immediatelyAfterClose',
   },
@@ -420,13 +424,13 @@ export const closingTypes = [
     value: closingTypesMap.INTERVAL,
     label: 'ui-circulation.settings.loanHistory.interval',
   },
+];
+
+export const CLOSING_TYPES_WITH_FEES_FINES = [
   {
     value: closingTypesMap.NEVER,
     label: 'ui-circulation.settings.loanHistory.never',
   },
-];
-
-export const CLOSING_TYPES_WITH_FEES_FINES = [
   {
     value: closingTypesMap.IMMEDIATELY,
     label: 'ui-circulation.settings.loanHistory.immediatelyAfterCloseOrSuspended',
@@ -434,10 +438,6 @@ export const CLOSING_TYPES_WITH_FEES_FINES = [
   {
     value: closingTypesMap.INTERVAL,
     label: 'ui-circulation.settings.loanHistory.interval',
-  },
-  {
-    value: closingTypesMap.NEVER,
-    label: 'ui-circulation.settings.loanHistory.never',
   },
 ];
 

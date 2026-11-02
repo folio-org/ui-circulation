@@ -245,6 +245,28 @@ describe('Period', () => {
     });
   });
 
+  describe('when "inputLabel" and "selectLabel" props are passed', () => {
+    beforeEach(() => {
+      render(
+        <Period
+          {...commonMockedProps}
+          inputLabel="testInputLabel"
+          selectLabel="testSelectLabel"
+        />
+      );
+    });
+
+    it('should render labels instead of aria-labels', () => {
+      const durationField = Field.mock.calls[fieldCallOrderByPlace.finePolicyDurationColumn - 1][0];
+      const intervalField = Field.mock.calls[fieldCallOrderByPlace.finePolicyIntervalColumn - 1][0];
+
+      expect(durationField.label.props.id).toBe('testInputLabel');
+      expect(durationField['aria-label']).toBeUndefined();
+      expect(intervalField.label.props.id).toBe('testSelectLabel');
+      expect(intervalField['aria-label']).toBeUndefined();
+    });
+  });
+
   describe('when "disabled" props is passed', () => {
     beforeEach(() => {
       render(

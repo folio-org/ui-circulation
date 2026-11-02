@@ -25,6 +25,7 @@ const AnonymizingTypeSelect = ({ name, types, disabled }) => {
           value={type.value}
           disabled={disabled}
         />
+        {type.details}
       </Col>
     </Row>
   ));
@@ -35,6 +36,7 @@ AnonymizingTypeSelect.propTypes = {
   name: PropTypes.string.isRequired,
   types: PropTypes.arrayOf(PropTypes.shape({
     value: PropTypes.string,
+    details: PropTypes.node,
   })).isRequired,
 };
 

@@ -79,4 +79,19 @@ describe('AnonymizingTypeSelect', () => {
       });
     });
   });
+
+  describe('when a type has details', () => {
+    beforeEach(() => {
+      render(
+        <AnonymizingTypeSelect
+          name="testName"
+          types={[{ label: 'testLabel', value: 'testValue', details: <div data-testid="testDetails" /> }]}
+        />
+      );
+    });
+
+    it('should render details below the radio button', () => {
+      expect(screen.getByTestId('testDetails')).toBeInTheDocument();
+    });
+  });
 });

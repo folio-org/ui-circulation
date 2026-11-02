@@ -20,6 +20,7 @@ import {
   Pane,
   Row,
   Headline,
+  Layout,
   PaneFooter,
 } from '@folio/stripes/components';
 
@@ -101,41 +102,27 @@ class LoanHistoryForm extends Component {
           paneTitle={label}
           footer={this.renderFooter()}
         >
-          <div
+          <Layout
             data-testid="closedLoans"
             data-test-closed-loans
+            className="padding-bottom-gutter"
           >
             <Headline
               data-testid="closedLoansHeadline"
               size="large"
-              margin="xx-large"
+              margin="xx-small"
               tag="h3"
             >
-              <FormattedMessage id="ui-circulation.settings.loanHistory.closedLoans" />
+              <FormattedMessage id="ui-circulation.settings.loanHistory.libraryPolicy" />
             </Headline>
-            <FormattedMessage
-              tagName="p"
-              id="ui-circulation.settings.loanHistory.anonymize"
-            />
             <AnonymizingTypeSelectContainer
+              label="ui-circulation.settings.loanHistory.anonymize"
               name={closedLoansRules.DEFAULT}
               path={closedLoansRules.DEFAULT}
               types={closingTypes}
             />
-          </div>
-          <br />
-          <Row>
-            <Col xs={12}>
-              <Field
-                name="treatEnabled"
-                type="checkbox"
-                id="treatEnabled-checkbox"
-                component={Checkbox}
-                label={formatMessage({ id: 'ui-circulation.settings.loanHistory.treat' })}
-              />
-            </Col>
-          </Row>
-          <br />
+          </Layout>
+          <hr />
           <div
             data-testid="loansFeefineSection"
             data-test-closed-loans-feefine
@@ -143,21 +130,31 @@ class LoanHistoryForm extends Component {
             <Headline
               data-testid="closedLoansFeesFinesHeadline"
               size="large"
-              margin="xx-large"
+              margin="xx-small"
               tag="h3"
             >
-              <FormattedMessage id="ui-circulation.settings.loanHistory.closedLoansFeesFines" />
+              <FormattedMessage id="ui-circulation.settings.loanHistory.feeFinePolicy" />
             </Headline>
-            <FormattedMessage
-              tagName="p"
-              id="ui-circulation.settings.loanHistory.anonymizeFeesFines"
-            />
-            <AnonymizingTypeSelectContainer
-              name={closedLoansRules.WITH_FEES_FINES}
-              path={closedLoansRules.WITH_FEES_FINES}
-              types={CLOSING_TYPES_WITH_FEES_FINES}
-              disabled={!loanHistoryValues.treatEnabled}
-            />
+            <Row>
+              <Col xs={12}>
+                <Field
+                  name="treatEnabled"
+                  type="checkbox"
+                  id="treatEnabled-checkbox"
+                  component={Checkbox}
+                  label={formatMessage({ id: 'ui-circulation.settings.loanHistory.treat' })}
+                />
+              </Col>
+            </Row>
+            <Layout className="marginTopHalf">
+              <AnonymizingTypeSelectContainer
+                label="ui-circulation.settings.loanHistory.anonymizeFeesFines"
+                name={closedLoansRules.WITH_FEES_FINES}
+                path={closedLoansRules.WITH_FEES_FINES}
+                types={CLOSING_TYPES_WITH_FEES_FINES}
+                disabled={!loanHistoryValues.treatEnabled}
+              />
+            </Layout>
             <FieldArray
               name="loanExceptions"
               component={ExceptionsList}

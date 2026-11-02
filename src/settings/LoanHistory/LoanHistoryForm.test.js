@@ -35,10 +35,10 @@ jest.mock('../../constants', () => ({
 describe('LoanHistoryForm', () => {
   const labelIds = {
     'buttonSave': 'stripes-core.button.save',
-    'closedLoans': 'ui-circulation.settings.loanHistory.closedLoans',
+    'libraryPolicy': 'ui-circulation.settings.loanHistory.libraryPolicy',
     'anonymize': 'ui-circulation.settings.loanHistory.anonymize',
     'treat': 'ui-circulation.settings.loanHistory.treat',
-    'closedLoansFeesFines': 'ui-circulation.settings.loanHistory.closedLoansFeesFines',
+    'feeFinePolicy': 'ui-circulation.settings.loanHistory.feeFinePolicy',
     'anonymizeFeesFines': 'ui-circulation.settings.loanHistory.anonymizeFeesFines',
   };
   const testIds = {
@@ -127,16 +127,13 @@ describe('LoanHistoryForm', () => {
       expect(getById(testIds.submitButton).getByText(labelIds.buttonSave)).toBeVisible();
     });
 
-    it('should render closed loans label', () => {
-      expect(getById(testIds.closedLoansHeadline).getByText(labelIds.closedLoans)).toBeVisible();
-    });
-
-    it('should render anonymize label', () => {
-      expect(getById(testIds.closedLoans).getByText(labelIds.anonymize)).toBeVisible();
+    it('should render library policy label', () => {
+      expect(getById(testIds.closedLoansHeadline).getByText(labelIds.libraryPolicy)).toBeVisible();
     });
 
     it('should render closed loans AnonymizingTypeSelectContainer component', () => {
       expect(AnonymizingTypeSelectContainer).toHaveBeenNthCalledWith(1, expect.objectContaining({
+        label: labelIds.anonymize,
         name: closedLoansRules.DEFAULT,
         path: closedLoansRules.DEFAULT,
         types: closingTypes,
@@ -191,16 +188,13 @@ describe('LoanHistoryForm', () => {
       expect(screen.getByTestId(testIds.loansFeefineSection)).toBeVisible();
     });
 
-    it('should render closed loans fees fines label', () => {
-      expect(getById(testIds.closedLoansFeesFinesHeadline).getByText(labelIds.closedLoansFeesFines)).toBeVisible();
-    });
-
-    it('should render anonymize fees fines label', () => {
-      expect(getById(testIds.loansFeefineSection).getByText(labelIds.anonymizeFeesFines)).toBeVisible();
+    it('should render fee/fine policy label', () => {
+      expect(getById(testIds.closedLoansFeesFinesHeadline).getByText(labelIds.feeFinePolicy)).toBeVisible();
     });
 
     it('should render closed loans fees fines AnonymizingTypeSelectContainer component', () => {
       expect(AnonymizingTypeSelectContainer).toHaveBeenNthCalledWith(2, expect.objectContaining({
+        label: labelIds.anonymizeFeesFines,
         name: closedLoansRules.WITH_FEES_FINES,
         path: closedLoansRules.WITH_FEES_FINES,
         types: CLOSING_TYPES_WITH_FEES_FINES,
