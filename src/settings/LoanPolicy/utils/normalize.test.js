@@ -3,6 +3,7 @@ import {
   checkFixedProfile,
   checkUnlimitedRenewals,
   checkDifferentRenewalPeriod,
+  checkAutomaticRenewals,
   checkOpeningTimeOffset,
   checkLoanable,
   checkRenewable,
@@ -14,7 +15,10 @@ import {
 
 import LoanPolicy from '../../Models/LoanPolicy';
 
-import { loanProfileMap } from '../../../constants';
+import {
+  ATTEMPT_DAYS_BEFORE,
+  loanProfileMap,
+} from '../../../constants';
 
 const testData = 'testData';
 const periodTestData = {
@@ -179,6 +183,115 @@ describe('LoanPolicy/utils functions', () => {
       };
 
       expect(checkDifferentRenewalPeriod(dataForTest)).toEqual(dataForTest);
+    });
+  });
+
+  describe('checkAutomaticRenewals', () => {
+    it('should remove all automatic renewal fields when automaticRenewal is false', () => {
+      const mockedData = {
+        renewalsPolicy: {
+          automaticRenewal: false,
+          attemptFirstRenewal: ATTEMPT_DAYS_BEFORE,
+          daysBefore: 5,
+          automaticRenewalRetryPeriodInDays: 3,
+          firstAutomaticRenewalAttemptDaysBeforeDueDate: 10,
+        },
+      };
+      const expectedResult = {
+        renewalsPolicy: {
+          automaticRenewal: false,
+        },
+      };
+
+      expect(checkAutomaticRenewals(mockedData)).toEqual(expectedResult);
+    });
+
+    it('should remove all automatic renewal fields when automaticRenewal is undefined', () => {
+      const mockedData = {
+        renewalsPolicy: {
+          attemptFirstRenewal: ATTEMPT_DAYS_BEFORE,
+          daysBefore: 5,
+          automaticRenewalRetryPeriodInDays: 3,
+          firstAutomaticRenewalAttemptDaysBeforeDueDate: 10,
+        },
+      };
+      const expectedResult = {
+        renewalsPolicy: {},
+      };
+
+      expect(checkAutomaticRenewals(mockedData)).toEqual(expectedResult);
+    });
+
+    it('should set firstAutomaticRenewalAttemptDaysBeforeDueDate to daysBefore when attemptFirstRenewal is ATTEMPT_DAYS_BEFORE', () => {
+      const mockedData = {
+        renewalsPolicy: {
+          automaticRenewal: true,
+          attemptFirstRenewal: ATTEMPT_DAYS_BEFORE,
+          daysBefore: 5,
+        },
+      };
+      const expectedResult = {
+        renewalsPolicy: {
+          automaticRenewal: true,
+          firstAutomaticRenewalAttemptDaysBeforeDueDate: 5,
+          automaticRenewalRetryPeriodInDays: 0,
+        },
+      };
+
+      expect(checkAutomaticRenewals(mockedData)).toEqual(expectedResult);
+    });
+
+    it('should set firstAutomaticRenewalAttemptDaysBeforeDueDate to 0 when attemptFirstRenewal is not ATTEMPT_DAYS_BEFORE', () => {
+      const mockedData = {
+        renewalsPolicy: {
+          automaticRenewal: true,
+          attemptFirstRenewal: 'onDueDate',
+          daysBefore: 5,
+        },
+      };
+      const expectedResult = {
+        renewalsPolicy: {
+          automaticRenewal: true,
+          firstAutomaticRenewalAttemptDaysBeforeDueDate: 0,
+          automaticRenewalRetryPeriodInDays: 0,
+        },
+      };
+
+      expect(checkAutomaticRenewals(mockedData)).toEqual(expectedResult);
+    });
+
+    it('should preserve existing automaticRenewalRetryPeriodInDays when automaticRenewal is true', () => {
+      const mockedData = {
+        renewalsPolicy: {
+          automaticRenewal: true,
+          attemptFirstRenewal: ATTEMPT_DAYS_BEFORE,
+          daysBefore: 3,
+          automaticRenewalRetryPeriodInDays: 7,
+        },
+      };
+      const expectedResult = {
+        renewalsPolicy: {
+          automaticRenewal: true,
+          firstAutomaticRenewalAttemptDaysBeforeDueDate: 3,
+          automaticRenewalRetryPeriodInDays: 7,
+        },
+      };
+
+      expect(checkAutomaticRenewals(mockedData)).toEqual(expectedResult);
+    });
+
+    it('should remove attemptFirstRenewal and daysBefore when automaticRenewal is true', () => {
+      const mockedData = {
+        renewalsPolicy: {
+          automaticRenewal: true,
+          attemptFirstRenewal: ATTEMPT_DAYS_BEFORE,
+          daysBefore: 5,
+        },
+      };
+      const result = checkAutomaticRenewals(mockedData);
+
+      expect(result.renewalsPolicy.attemptFirstRenewal).toBeUndefined();
+      expect(result.renewalsPolicy.daysBefore).toBeUndefined();
     });
   });
 

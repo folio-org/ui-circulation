@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   render,
   screen,
@@ -8,6 +9,7 @@ import { Field } from 'react-final-form';
 
 import {
   Checkbox,
+  Row,
   Select,
   TextField,
 } from '@folio/stripes/components';
@@ -88,6 +90,7 @@ describe('RenewalsSection', () => {
 
   afterEach(() => {
     Field.mockClear();
+    Row.mockClear();
   });
 
   describe('with props which allows render all sections', () => {
@@ -431,6 +434,47 @@ describe('RenewalsSection', () => {
       it('should not call "change" for "attemptFirstRenewal"', () => {
         expect(mockedChange).not.toHaveBeenCalledWith('renewalsPolicy.attemptFirstRenewal', expect.anything());
       });
+    });
+  });
+
+  describe('handleDaysBeforeRowClick', () => {
+    const focusMock = jest.fn();
+    const daysBeforeRefMock = {
+      current: {
+        focus: focusMock,
+      },
+    };
+
+    const getDaysBeforeRowOnClick = () => {
+      const call = Row.mock.calls.find(([props]) => props.role === 'presentation');
+
+      return call[0].onClick;
+    };
+
+    beforeEach(() => {
+      jest.spyOn(React, 'createRef').mockReturnValue(daysBeforeRefMock);
+      mockedChange.mockClear();
+      focusMock.mockClear();
+
+      render(
+        <RenewalsSection
+          {...defaultProps}
+          policy={{
+            ...mockedPolicy,
+            isAutomaticRenewals: () => true,
+          }}
+        />
+      );
+    });
+
+    afterEach(() => {
+      jest.restoreAllMocks();
+    });
+
+    it('should call "change" with ATTEMPT_DAYS_BEFORE', () => {
+      getDaysBeforeRowOnClick()();
+
+      expect(mockedChange).toHaveBeenCalledWith('renewalsPolicy.attemptFirstRenewal', ATTEMPT_DAYS_BEFORE);
     });
   });
 });

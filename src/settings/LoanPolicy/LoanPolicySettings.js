@@ -29,7 +29,7 @@ export const parseInitialValues = (policy = {}) => {
     return policy;
   }
 
-  const { firstAutomaticRenewalAttemptDaysBeforeDueDate } = renewalsPolicy;
+  const { firstAutomaticRenewalAttemptDaysBeforeDueDate, ...restRenewalsPolicy } = renewalsPolicy;
 
   if (firstAutomaticRenewalAttemptDaysBeforeDueDate === undefined || firstAutomaticRenewalAttemptDaysBeforeDueDate === null) {
     return policy;
@@ -40,7 +40,7 @@ export const parseInitialValues = (policy = {}) => {
   return {
     ...policy,
     renewalsPolicy: {
-      ...renewalsPolicy,
+      ...restRenewalsPolicy,
       attemptFirstRenewal: isDaysBefore ? ATTEMPT_DAYS_BEFORE : ATTEMPT_ON_DUE_DATE,
       daysBefore: isDaysBefore ? firstAutomaticRenewalAttemptDaysBeforeDueDate : undefined,
     },

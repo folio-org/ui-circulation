@@ -53,6 +53,14 @@ class RenewalsSection extends React.Component {
     this.generateOptions = optionsGenerator.bind(null, this.props.intl.formatMessage);
   }
 
+  handleDaysBeforeRowClick = () => {
+    const {
+      change,
+    } = this.props;
+
+    change('renewalsPolicy.attemptFirstRenewal', ATTEMPT_DAYS_BEFORE);
+  }
+
   handleAutomaticRenewalsChange = (e) => {
     const {
       change,
@@ -237,7 +245,7 @@ class RenewalsSection extends React.Component {
                 </Row>
                 <Row
                   role="presentation"
-                  onClick={() => change('renewalsPolicy.attemptFirstRenewal', ATTEMPT_DAYS_BEFORE)}
+                  onClick={this.handleDaysBeforeRowClick}
                 >
                   <Col xs="auto" style={{ maxWidth: '10px' }}>
                     <Field
