@@ -214,6 +214,7 @@ describe('parseInitialValues', () => {
 
     expect(result.renewalsPolicy.attemptFirstRenewal).toBe('onDueDate');
     expect(result.renewalsPolicy.daysBefore).toBeUndefined();
+    expect(result.renewalsPolicy.firstAutomaticRenewalAttemptDaysBeforeDueDate).toBeUndefined();
   });
 
   it('should set attemptFirstRenewal to "daysBefore" and populate daysBefore when value is > 0', () => {
@@ -227,6 +228,7 @@ describe('parseInitialValues', () => {
 
     expect(result.renewalsPolicy.attemptFirstRenewal).toBe('daysBefore');
     expect(result.renewalsPolicy.daysBefore).toBe(5);
+    expect(result.renewalsPolicy.firstAutomaticRenewalAttemptDaysBeforeDueDate).toBeUndefined();
   });
 
   it('should return empty object when called without arguments', () => {

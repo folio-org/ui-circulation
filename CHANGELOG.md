@@ -1,6 +1,6 @@
 # Change history for ui-circulation
 
-## [12.1.0] IN_PROGRESS
+## [13.0.0] IN_PROGRESS
 
 * Settings > Circulation: "Save" button status is incorrect when editing "Patron id(s) for checkout scanning". Refs UICIRC-1316.
 * Add internationalization support for staff slip names. Fixes UICIRC-1354.
@@ -10,6 +10,7 @@
 * Implement drag-and-drop functionality for notice cards. Refs UICIRC-1372.
 * Add plus icon for adding a notice above the current notice. Refs UICIRC-1355.
 * Add Automatic renewals section to Loan policy page. Refs UICIRC-1387.
+* *BREAKING* Add Automatic renewals section to Loan policy page. Refs UICIRC-1390.
 
 ## [12.0.2](https://github.com/folio-org/ui-circulation/tree/v12.0.2) (2026-06-02)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v12.0.1...v12.0.2)
