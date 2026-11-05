@@ -6,6 +6,11 @@ import {
 } from 'react-intl';
 import { Field } from 'react-final-form';
 
+import {
+  Label,
+  Layout,
+} from '@folio/stripes/components';
+
 import AnonymizingTypeSelect from './AnonymizingTypeSelect';
 import Period from '../Period';
 import optionsGenerator from '../../utils/options-generator';
@@ -19,14 +24,16 @@ import {
 import css from './AnonymizingTypeSelectContainer.css';
 
 export const afterCloseTranslationKey = (name) => (name === closedLoansRules.WITH_FEES_FINES
-  ? 'ui-circulation.settings.loanHistory.afterCloseOrSuspended'
-  : 'ui-circulation.settings.loanHistory.afterClose');
+  ? 'ui-circulation.settings.loanHistory.retainAfterCloseOrSuspended'
+  : 'ui-circulation.settings.loanHistory.retainAfterClose');
 
 class AnonymizingTypeSelectContainer extends Component {
   static propTypes = {
+    disabled: PropTypes.bool,
     intl: PropTypes.shape({
       formatMessage: PropTypes.func.isRequired,
     }).isRequired,
+    label: PropTypes.string,
     name: PropTypes.string.isRequired,
     path: PropTypes.string.isRequired,
     types: PropTypes.arrayOf(PropTypes.shape({
@@ -41,26 +48,24 @@ class AnonymizingTypeSelectContainer extends Component {
     this.selectedPeriods = intervalPeriods.filter(period => anonymizingIntervals.includes(period.value));
   }
 
-  renderPeriod(name, path) {
+  renderPeriod(path) {
     return (
-      <div
+      <Layout
         data-testid="period"
         data-test-period-section
-        className={css.periodContainer}
+        className={`margin-start-gutter ${css.periodContainer}`}
       >
         <Period
           inputValuePath={`${path}.duration`}
           selectValuePath={`${path}.intervalId`}
           intervalPeriods={this.generateOptions(this.selectedPeriods, 'ui-circulation.settings.loanHistory.selectInterval')}
+          inputLabel="ui-circulation.settings.loanHistory.length"
+          selectLabel="ui-circulation.settings.loanHistory.interval"
           inputSize={4}
           selectSize={7}
+          disabled={this.props.disabled}
         />
-        <FormattedMessage
-          tagName="div"
-          id={afterCloseTranslationKey(name)}
-          values={{ name: <FormattedMessage id={`ui-circulation.settings.loanHistory.${name}`} /> }}
-        />
-      </div>
+      </Layout>
     );
   }
 
@@ -79,23 +84,37 @@ class AnonymizingTypeSelectContainer extends Component {
       }
 
       return {
-        label: this.renderPeriod(name, path),
+        label: (
+          <FormattedMessage
+            id={afterCloseTranslationKey(name)}
+            values={{ name: <FormattedMessage id={`ui-circulation.settings.loanHistory.${name}`} /> }}
+          />
+        ),
         value: closingTypesMap.INTERVAL,
+        details: this.renderPeriod(path),
       };
     });
   }
 
   render() {
     const {
+      disabled,
+      label,
       name,
       path,
     } = this.props;
 
     return (
-      <>
+      <fieldset>
+        {label && (
+          <Label tagName="legend">
+            <FormattedMessage id={label} />
+          </Label>
+        )}
         <AnonymizingTypeSelect
           name={path}
           types={this.getClosingTypes(name, path)}
+          disabled={disabled}
         />
         <Field
           name={`${path}Selected`}
@@ -103,7 +122,7 @@ class AnonymizingTypeSelectContainer extends Component {
             return meta.touched && meta.error ? <span className={css.error}>{meta.error}</span> : null;
           }}
         />
-      </>
+      </fieldset>
     );
   }
 }

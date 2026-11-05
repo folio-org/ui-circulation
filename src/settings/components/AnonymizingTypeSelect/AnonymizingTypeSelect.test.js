@@ -61,4 +61,37 @@ describe('AnonymizingTypeSelect', () => {
   });
 
   mockedProps.types.forEach(testAnonymizingTypeRow);
+
+  describe('when disabled', () => {
+    beforeEach(() => {
+      Field.mockClear();
+      render(
+        <AnonymizingTypeSelect
+          {...mockedProps}
+          disabled
+        />
+      );
+    });
+
+    it('should disable "Field" in each row', () => {
+      mockedProps.types.forEach((type, index) => {
+        expect(Field).toHaveBeenNthCalledWith(index + 1, expect.objectContaining({ disabled: true }), {});
+      });
+    });
+  });
+
+  describe('when a type has details', () => {
+    beforeEach(() => {
+      render(
+        <AnonymizingTypeSelect
+          name="testName"
+          types={[{ label: 'testLabel', value: 'testValue', details: <div data-testid="testDetails" /> }]}
+        />
+      );
+    });
+
+    it('should render details below the radio button', () => {
+      expect(screen.getByTestId('testDetails')).toBeInTheDocument();
+    });
+  });
 });
