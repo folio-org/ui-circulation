@@ -1,6 +1,6 @@
 {
   "name": "@folio/circulation",
-  "version": "12.1.0",
+  "version": "13.0.0",
   "description": "Circulation manager",
   "repository": "folio-org/ui-circulation",
   "publishConfig": {
@@ -30,7 +30,7 @@
       "circulation-settings": "1.0",
       "configuration": "2.0",
       "fixed-due-date-schedules-storage": "2.0",
-      "loan-policy-storage": "1.0 2.0",
+      "loan-policy-storage": "2.5",
       "staff-slips-storage": "1.0",
       "template-engine": "2.0",
       "patron-notice-policy-storage": "0.11",
