@@ -76,6 +76,31 @@ describe('LoanHistory', () => {
     it('should return false when "closingType" by key do not contains any value', () => {
       expect(loanHistory.isClosingTypeIntervalSelected('unexistedKey')).toBe(false);
     });
+
+    describe(`when "${closedLoansRules.WITH_FEES_FINES}" interval is selected`, () => {
+      const closingType = {
+        [closedLoansRules.DEFAULT]: closingTypesMap.INTERVAL,
+        [closedLoansRules.WITH_FEES_FINES]: closingTypesMap.INTERVAL,
+      };
+
+      it('should return true when "treatEnabled" is true', () => {
+        const model = new LoanHistory({ closingType, treatEnabled: true });
+
+        expect(model.isClosingTypeIntervalSelected(closedLoansRules.WITH_FEES_FINES)).toBe(true);
+      });
+
+      it('should return false when "treatEnabled" is false', () => {
+        const model = new LoanHistory({ closingType, treatEnabled: false });
+
+        expect(model.isClosingTypeIntervalSelected(closedLoansRules.WITH_FEES_FINES)).toBe(false);
+      });
+
+      it(`should still return true for "${closedLoansRules.DEFAULT}" when "treatEnabled" is false`, () => {
+        const model = new LoanHistory({ closingType, treatEnabled: false });
+
+        expect(model.isClosingTypeIntervalSelected(closedLoansRules.DEFAULT)).toBe(true);
+      });
+    });
   });
 
   describe('isAnyClosingTypeSelected', () => {

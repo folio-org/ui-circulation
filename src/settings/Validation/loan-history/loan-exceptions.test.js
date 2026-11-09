@@ -17,6 +17,7 @@ describe('loanExceptions', () => {
         'secondTestItem',
       ],
       closingType,
+      treatEnabled: true,
     };
     const result = loanExceptions(testData, testSectionKey);
 
@@ -47,6 +48,7 @@ describe('loanExceptions', () => {
     const testData = {
       [testSectionKey]: ['firstTestItem'],
       closingType: {},
+      treatEnabled: true,
     };
     const result = loanExceptions(testData, testSectionKey);
 
@@ -63,6 +65,21 @@ describe('loanExceptions', () => {
           expect(result[intervalIdKey].shouldValidate).toBeUndefined();
         });
       });
+    });
+  });
+
+  describe('when "treatEnabled" is false', () => {
+    const testSectionKey = 'testSectionKey';
+    const testData = {
+      [testSectionKey]: ['firstTestItem'],
+      closingType: { [testSectionKey]: [closingTypesMap.INTERVAL] },
+      treatEnabled: false,
+    };
+    const result = loanExceptions(testData, testSectionKey);
+
+    it('should not validate duration and interval of an exception with an interval selected', () => {
+      expect(result[`${testSectionKey}[0].duration`].shouldValidate).toBeFalsy();
+      expect(result[`${testSectionKey}[0].intervalId`].shouldValidate).toBeFalsy();
     });
   });
 });

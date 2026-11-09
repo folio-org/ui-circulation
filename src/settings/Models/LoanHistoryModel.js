@@ -36,7 +36,14 @@ export default class LoanHistory {
   }
 
   isClosingTypeIntervalSelected(item) {
-    return this.closingType[item] === closingTypesMap.INTERVAL;
+    const isIntervalSelected = this.closingType[item] === closingTypesMap.INTERVAL;
+
+    // The fee/fine settings are disabled and not saved unless "treat differently" is enabled
+    if (item === closedLoansRules.WITH_FEES_FINES) {
+      return this.treatEnabled && isIntervalSelected;
+    }
+
+    return isIntervalSelected;
   }
 
   isAnyClosingTypeSelected(item) {
