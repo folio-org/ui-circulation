@@ -38,12 +38,13 @@ export const getInitialValues = (settings) => {
   };
 
   // Settings saved before this feature have no closingType.userSpecific: treat as disabled, like the backend
-  initialValues.closingType = {
-    ...initialValues.closingType,
-    userSpecific: initialValues.closingType?.userSpecific ?? userSpecificClosingTypesMap.DISABLED,
+  return {
+    ...initialValues,
+    closingType: {
+      ...initialValues.closingType,
+      userSpecific: initialValues.closingType?.userSpecific ?? userSpecificClosingTypesMap.DISABLED,
+    },
   };
-
-  return initialValues;
 };
 
 export const normalizeData = (value) => {
