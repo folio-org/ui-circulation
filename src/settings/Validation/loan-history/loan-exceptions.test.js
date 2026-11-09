@@ -57,12 +57,12 @@ describe('loanExceptions', () => {
         const durationKey = `${testSectionKey}[${index}].duration`;
         const intervalIdKey = `${testSectionKey}[${index}].intervalId`;
 
-        it(`should be undefined for ${durationKey} key`, () => {
-          expect(result[durationKey].shouldValidate).toBeUndefined();
+        it(`should be false for ${durationKey} key`, () => {
+          expect(result[durationKey].shouldValidate).toBe(false);
         });
 
-        it(`should be undefined for ${intervalIdKey} key`, () => {
-          expect(result[intervalIdKey].shouldValidate).toBeUndefined();
+        it(`should be false for ${intervalIdKey} key`, () => {
+          expect(result[intervalIdKey].shouldValidate).toBe(false);
         });
       });
     });
@@ -78,8 +78,8 @@ describe('loanExceptions', () => {
     const result = loanExceptions(testData, testSectionKey);
 
     it('should not validate duration and interval of an exception with an interval selected', () => {
-      expect(result[`${testSectionKey}[0].duration`].shouldValidate).toBeFalsy();
-      expect(result[`${testSectionKey}[0].intervalId`].shouldValidate).toBeFalsy();
+      expect(result[`${testSectionKey}[0].duration`].shouldValidate).toBe(false);
+      expect(result[`${testSectionKey}[0].intervalId`].shouldValidate).toBe(false);
     });
   });
 });

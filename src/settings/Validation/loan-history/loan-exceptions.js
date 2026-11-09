@@ -4,7 +4,7 @@ const loanExceptions = (data, sectionKey) => {
   return data[sectionKey].reduce((config, item, index) => {
     const section = data.closingType[sectionKey];
     // Exceptions are disabled unless "treat differently" is enabled
-    const isClosingTypeIntervalSelected = data.treatEnabled && section && section[index] === closingTypesMap.INTERVAL;
+    const isClosingTypeIntervalSelected = data.treatEnabled && section?.[index] === closingTypesMap.INTERVAL;
 
     const loanExceptionConfig = {
       [`${sectionKey}[${index}].paymentMethod`]: {
