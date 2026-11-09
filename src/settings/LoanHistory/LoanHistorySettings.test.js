@@ -80,7 +80,7 @@ describe('LoanHistorySettings', () => {
 describe('getInitialValues', () => {
   it('should returns default config when input is empty', () => {
     expect(getInitialValues()).toEqual({
-      closingType: { loan: null, feeFine: null, loanExceptions: [], userSpecific: 'disabled' },
+      closingType: { loan: 'never', feeFine: null, loanExceptions: [], userSpecific: 'disabled' },
       loan: {},
       feeFine: {},
       userSpecific: {},
@@ -88,7 +88,7 @@ describe('getInitialValues', () => {
       treatEnabled: false,
     });
     expect(getInitialValues({})).toEqual({
-      closingType: { loan: null, feeFine: null, loanExceptions: [], userSpecific: 'disabled' },
+      closingType: { loan: 'never', feeFine: null, loanExceptions: [], userSpecific: 'disabled' },
       loan: {},
       feeFine: {},
       userSpecific: {},
@@ -101,7 +101,7 @@ describe('getInitialValues', () => {
     const custom = { treatEnabled: true, loan: { a: 1 } };
 
     expect(getInitialValues(custom)).toEqual({
-      closingType: { loan: null, feeFine: null, loanExceptions: [], userSpecific: 'disabled' },
+      closingType: { loan: 'never', feeFine: null, loanExceptions: [], userSpecific: 'disabled' },
       loan: { a: 1 },
       feeFine: {},
       userSpecific: {},
@@ -120,6 +120,19 @@ describe('getInitialValues', () => {
     expect(getInitialValues({ closingType: { ...closingType, userSpecific: null } }).closingType).toEqual({
       ...closingType,
       userSpecific: 'disabled',
+    });
+  });
+
+  it('should treat a missing or null library closing type as never, like the backend', () => {
+    const closingType = { feeFine: null, loanExceptions: [], userSpecific: 'interval' };
+
+    expect(getInitialValues({ closingType }).closingType).toEqual({
+      ...closingType,
+      loan: 'never',
+    });
+    expect(getInitialValues({ closingType: { ...closingType, loan: null } }).closingType).toEqual({
+      ...closingType,
+      loan: 'never',
     });
   });
 

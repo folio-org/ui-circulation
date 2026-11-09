@@ -16,6 +16,7 @@ import normalize from './utils/normalize';
 import LoanHistoryForm from './LoanHistoryForm';
 import {
   CONFIG_NAMES,
+  closingTypesMap,
   userSpecificClosingTypesMap,
 } from '../../constants';
 
@@ -37,11 +38,13 @@ export const getInitialValues = (settings) => {
     ...settings,
   };
 
-  // Settings saved before this feature have no closingType.userSpecific: treat as disabled, like the backend
+  // Show what the backend applies to missing values: closed loans are never anonymized without a library
+  // policy, and settings saved before this feature have no closingType.userSpecific, which counts as disabled
   return {
     ...initialValues,
     closingType: {
       ...initialValues.closingType,
+      loan: initialValues.closingType?.loan ?? closingTypesMap.NEVER,
       userSpecific: initialValues.closingType?.userSpecific ?? userSpecificClosingTypesMap.DISABLED,
     },
   };
