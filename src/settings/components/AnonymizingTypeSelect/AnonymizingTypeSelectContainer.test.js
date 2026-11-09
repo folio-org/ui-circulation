@@ -87,8 +87,9 @@ describe('AnonymizingTypeSelectContainer', () => {
       expect(screen.getByTestId(testIds.period)).toBeInTheDocument();
     });
 
-    it('should not render a legend', () => {
+    it('should not render a fieldset without a legend', () => {
       expect(screen.queryByText(labelIds.anonymize)).not.toBeInTheDocument();
+      expect(document.querySelector('fieldset')).not.toBeInTheDocument();
     });
 
     it('should render Field component', () => {

@@ -104,13 +104,8 @@ class AnonymizingTypeSelectContainer extends Component {
       path,
     } = this.props;
 
-    return (
-      <fieldset>
-        {label && (
-          <Label tagName="legend">
-            <FormattedMessage id={label} />
-          </Label>
-        )}
+    const content = (
+      <>
         <AnonymizingTypeSelect
           name={path}
           types={this.getClosingTypes(name, path)}
@@ -122,6 +117,19 @@ class AnonymizingTypeSelectContainer extends Component {
             return meta.touched && meta.error ? <span className={css.error}>{meta.error}</span> : null;
           }}
         />
+      </>
+    );
+
+    if (!label) {
+      return content;
+    }
+
+    return (
+      <fieldset>
+        <Label tagName="legend">
+          <FormattedMessage id={label} />
+        </Label>
+        {content}
       </fieldset>
     );
   }
