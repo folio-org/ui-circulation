@@ -24,6 +24,7 @@ import css from './ExceptionCard.css';
 
 class ExceptionCard extends Component {
   static propTypes = {
+    disabled: PropTypes.bool,
     intl: PropTypes.shape({
       formatMessage: PropTypes.func.isRequired,
     }).isRequired,
@@ -73,6 +74,7 @@ class ExceptionCard extends Component {
       pathToException,
       paymentMethods,
       intl,
+      disabled,
     } = this.props;
 
     const selectedPayments = this.getPaymentMethodOptions(intl, paymentMethods, 'ui-circulation.settings.loanHistory.selectPaymentMethod');
@@ -95,6 +97,7 @@ class ExceptionCard extends Component {
                 aria-label={intl.formatMessage({ id: 'ui-circulation.settings.loanHistory.paymentMethodSelect' })}
                 name={`${pathToException}.paymentMethod`}
                 component={Select}
+                disabled={disabled}
               >
                 {selectedPayments}
               </Field>
@@ -105,6 +108,7 @@ class ExceptionCard extends Component {
                 icon="trash"
                 data-test-remove-exception-icon
                 onClick={this.onRemove}
+                disabled={disabled}
               />
             </Col>
           </Row>
@@ -112,6 +116,7 @@ class ExceptionCard extends Component {
             name={closedLoansRules.WITH_FEES_FINES}
             path={pathToException}
             types={closingTypes}
+            disabled={disabled}
           />
         </Col>
       </Row>

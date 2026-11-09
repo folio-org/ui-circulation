@@ -1,4 +1,5 @@
 import {
+  cleanup,
   render,
   screen,
   within,
@@ -121,5 +122,28 @@ describe('ExceptionsList', () => {
     await userEvent.click(screen.getByRole('button'));
 
     expect(mockedFields.push).toHaveBeenCalledWith({});
+  });
+
+  describe('when disabled', () => {
+    beforeEach(() => {
+      cleanup();
+      ExceptionCard.mockClear();
+      render(
+        <ExceptionsList
+          fields={mockedFields}
+          resources={mockedResources}
+          disabled
+        />
+      );
+    });
+
+    it('should disable "ExceptionCard" components', () => {
+      expect(ExceptionCard).toHaveBeenCalledTimes(mockedFields.values.length);
+      expect(ExceptionCard).toHaveBeenCalledWith(expect.objectContaining({ disabled: true }), {});
+    });
+
+    it('should disable add exception button', () => {
+      expect(screen.getByRole('button')).toBeDisabled();
+    });
   });
 });

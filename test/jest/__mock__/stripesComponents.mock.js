@@ -99,6 +99,7 @@ jest.mock('@folio/stripes/components', () => ({
     children,
     ...rest
   }) => (<label htmlFor={htmlFor} id={id} {...rest}>{children}</label>)),
+  Layout: jest.fn(({ children, ...rest }) => <div {...rest}>{children}</div>),
   List: jest.fn(({
     children,
   }) => <div>{children}</div>),

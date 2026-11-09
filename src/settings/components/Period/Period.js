@@ -35,6 +35,9 @@ class Period extends PureComponent {
     selectValuePath: PropTypes.string.isRequired,
     intervalPeriods: PropTypes.arrayOf(PropTypes.node).isRequired,
     required: PropTypes.bool,
+    disabled: PropTypes.bool,
+    inputLabel: PropTypes.string,
+    selectLabel: PropTypes.string,
     inputSize: PropTypes.number,
     selectSize: PropTypes.number,
     fieldLabel: PropTypes.string,
@@ -73,6 +76,9 @@ class Period extends PureComponent {
       inputPlaceholder,
       selectPlaceholder,
       required,
+      disabled,
+      inputLabel,
+      selectLabel,
       inputSize,
       selectSize,
       intervalPeriodsSuffix,
@@ -104,7 +110,9 @@ class Period extends PureComponent {
           >
             <div data-test-period-duration>
               <Field
-                aria-label={formatMessage({ id: 'ui-circulation.settings.finePolicy.duration' })}
+                // The visible label is the accessible name when set
+                aria-label={inputLabel ? undefined : formatMessage({ id: 'ui-circulation.settings.finePolicy.duration' })}
+                label={inputLabel && <FormattedMessage id={inputLabel} />}
                 type="number"
                 required={required}
                 name={inputValuePath}
@@ -112,6 +120,7 @@ class Period extends PureComponent {
                 onClearField={this.onInputClear}
                 parse={transformInputValue}
                 placeholder={inputPlaceholder}
+                disabled={disabled}
               />
             </div>
           </Col>
@@ -121,11 +130,14 @@ class Period extends PureComponent {
           >
             <div data-test-period-interval>
               <Field
-                aria-label={formatMessage({ id: 'ui-circulation.settings.finePolicy.interval' })}
+                // Select does not show a visible label when aria-label is set
+                aria-label={selectLabel ? undefined : formatMessage({ id: 'ui-circulation.settings.finePolicy.interval' })}
+                label={selectLabel && <FormattedMessage id={selectLabel} />}
                 name={selectValuePath}
                 component={Select}
                 required={required}
                 placeholder={isEmpty(selectPlaceholder) ? '' : formatMessage({ id: selectPlaceholder })}
+                disabled={disabled}
               >
                 {intervalPeriods}
               </Field>

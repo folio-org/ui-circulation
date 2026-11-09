@@ -1,6 +1,9 @@
 import general from './general';
 
-import { closedLoansRules } from '../../../constants';
+import {
+  closedLoansRules,
+  USER_SPECIFIC_RULE,
+} from '../../../constants';
 
 describe('general', () => {
   describe('data methods', () => {
@@ -86,6 +89,34 @@ describe('general', () => {
           expect(result[`${rule}Selected`].shouldValidate).toBe(true);
         });
       });
+    });
+  });
+
+  describe('user-specific period', () => {
+    it('should validate duration and interval when "interval" is selected', () => {
+      const result = general({
+        isClosingTypeIntervalSelected: (item) => item === USER_SPECIFIC_RULE,
+        isAnyClosingTypeSelected: () => false,
+      });
+
+      expect(result[`${USER_SPECIFIC_RULE}.duration`]).toEqual({
+        rules: ['isNotEmpty', 'isIntegerGreaterThanZero', 'isFromOneToHundred'],
+        shouldValidate: true,
+      });
+      expect(result[`${USER_SPECIFIC_RULE}.intervalId`]).toEqual({
+        rules: ['isNotEmptySelect'],
+        shouldValidate: true,
+      });
+    });
+
+    it('should not validate duration and interval when "interval" is not selected', () => {
+      const result = general({
+        isClosingTypeIntervalSelected: () => false,
+        isAnyClosingTypeSelected: () => false,
+      });
+
+      expect(result[`${USER_SPECIFIC_RULE}.duration`].shouldValidate).toBe(false);
+      expect(result[`${USER_SPECIFIC_RULE}.intervalId`].shouldValidate).toBe(false);
     });
   });
 });

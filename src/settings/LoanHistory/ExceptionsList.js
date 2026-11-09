@@ -23,6 +23,7 @@ class ExceptionsList extends Component {
   });
 
   static propTypes = {
+    disabled: PropTypes.bool,
     fields: PropTypes.shape({
       push: PropTypes.func,
       remove: PropTypes.func,
@@ -70,6 +71,7 @@ class ExceptionsList extends Component {
                 paymentMethods={uniqBy(paymentMethods, 'label')}
                 exceptionIndex={exceptionIndex}
                 onRemoveException={this.handleRemoveField}
+                disabled={this.props.disabled}
               />))}
           </div>
           <div className={css.exceptionAddButton}>
@@ -78,6 +80,7 @@ class ExceptionsList extends Component {
               buttonStyle="default"
               data-test-add-exception-button
               onClick={this.handleAddField}
+              disabled={this.props.disabled}
             >
               <FormattedMessage id="ui-circulation.settings.loanHistory.addExceptionButton" />
             </Button>
