@@ -11,6 +11,7 @@
 * Add plus icon for adding a notice above the current notice. Refs UICIRC-1355.
 * Add Automatic renewals section to Loan policy page. Refs UICIRC-1387.
 * *BREAKING* Add Automatic renewals section to Loan policy page. Refs UICIRC-1390.
+* Add Automatic renewals to the details. Refs UICIRC-1399.
 
 ## [12.0.2](https://github.com/folio-org/ui-circulation/tree/v12.0.2) (2026-06-02)
 [Full Changelog](https://github.com/folio-org/ui-circulation/compare/v12.0.1...v12.0.2)
