@@ -24,6 +24,9 @@ describe('RenewalsSection', () => {
     renewFrom: 'ui-circulation.settings.loanPolicy.renewFrom',
     renewalPeriodDifferent: 'ui-circulation.settings.loanPolicy.renewalPeriodDifferent',
     alternateLoanPeriodRenewals: 'ui-circulation.settings.loanPolicy.alternateLoanPeriodRenewals',
+    automaticRenewals: 'ui-circulation.settings.loanPolicy.automaticRenewals',
+    attemptFirstRenewal: 'ui-circulation.settings.loanPolicy.attemptFirstRenewal',
+    attemptAdditionalRetries: 'ui-circulation.settings.loanPolicy.attemptAdditionalRetries',
   };
   const testIds = {
     renewals: 'renewals',
@@ -34,6 +37,9 @@ describe('RenewalsSection', () => {
     renewalPeriodDifferent: 'renewalPeriodDifferent',
     alternateLoanPeriodRenewals: 'alternateLoanPeriodRenewals',
     altFDDS: 'altFDDS',
+    automaticRenewal: 'automaticRenewal',
+    attemptFirstRenewal: 'attemptFirstRenewal',
+    attemptAdditionalRetries: 'attemptAdditionalRetries',
   };
   const orderOfKeyValueCall = {
     renewable: 1,
@@ -43,12 +49,15 @@ describe('RenewalsSection', () => {
     renewalPeriodDifferent: 5,
     alternateLoanPeriodRenewals: 6,
     altFDDS: 7,
+    automaticRenewal: 8,
   };
   const mockedPolicy = {
     isProfileRolling: () => true,
     isUnlimitedRenewals: () => false,
     isDifferentPeriod: () => true,
     isRenewable: () => true,
+    isAutomaticRenewals: () => false,
+    isDaysBeforeSelected: () => false,
   };
   const mockedGetCheckbox = jest.fn((id) => ({ id, func: 'getCheckboxValue' }));
   const mockedGetDropdown = jest.fn((id, options) => ({ id, options }));
@@ -173,6 +182,98 @@ describe('RenewalsSection', () => {
       expect(screen.getByTestId(testIds.altFDDS)).toBeVisible();
       expect(KeyValue).toHaveBeenNthCalledWith(orderOfKeyValueCall.altFDDS, expectedProps, {});
     });
+
+    it('should render "automaticRenewal" section correctly', () => {
+      const expectedProps = {
+        label: labelIds.automaticRenewals,
+        value: {
+          id: 'renewalsPolicy.automaticRenewal',
+          func: 'getCheckboxValue',
+        },
+      };
+
+      expect(screen.getByTestId(testIds.automaticRenewal)).toBeVisible();
+      expect(KeyValue).toHaveBeenNthCalledWith(orderOfKeyValueCall.automaticRenewal, expectedProps, {});
+    });
+
+    it('should not render "attemptFirstRenewal" section when automatic renewals is disabled', () => {
+      expect(screen.queryByTestId(testIds.attemptFirstRenewal)).not.toBeInTheDocument();
+    });
+
+    it('should not render "attemptAdditionalRetries" section when automatic renewals is disabled', () => {
+      expect(screen.queryByTestId(testIds.attemptAdditionalRetries)).not.toBeInTheDocument();
+    });
+  });
+
+  describe('when "isAutomaticRenewals" returns true and "isDaysBeforeSelected" returns false', () => {
+    beforeEach(() => {
+      render(
+        <RenewalsSection
+          {...defaultProps}
+          policy={{
+            ...mockedPolicy,
+            isAutomaticRenewals: () => true,
+            isDaysBeforeSelected: () => false,
+          }}
+        />
+      );
+    });
+
+    it('should render "attemptFirstRenewal" with "On due date" value', () => {
+      expect(screen.getByTestId(testIds.attemptFirstRenewal)).toBeVisible();
+      expect(KeyValue).toHaveBeenCalledWith(expect.objectContaining({
+        label: labelIds.attemptFirstRenewal,
+        value: 'ui-circulation.settings.loanPolicy.attemptFirstRenewal.onDueDate',
+      }), {});
+    });
+
+    it('should render "attemptAdditionalRetries" section', () => {
+      expect(screen.getByTestId(testIds.attemptAdditionalRetries)).toBeVisible();
+    });
+  });
+
+  describe('when "isAutomaticRenewals" returns true and "isDaysBeforeSelected" returns true', () => {
+    beforeEach(() => {
+      mockedGetValue.mockImplementation((id) => {
+        if (id === 'renewalsPolicy.automaticRenewalRetryPeriodInDays') return 5;
+        return { id, func: 'getValue' };
+      });
+
+      render(
+        <RenewalsSection
+          {...defaultProps}
+          getValue={mockedGetValue}
+          policy={{
+            ...mockedPolicy,
+            isAutomaticRenewals: () => true,
+            isDaysBeforeSelected: () => true,
+            renewalsPolicy: {
+              daysBefore: 3,
+            },
+          }}
+        />
+      );
+    });
+
+    afterEach(() => {
+      mockedGetValue.mockImplementation((id) => ({ id, func: 'getValue' }));
+    });
+
+    it('should render "attemptFirstRenewal" with days before due date value', () => {
+      expect(screen.getByTestId(testIds.attemptFirstRenewal)).toBeVisible();
+      expect(KeyValue).toHaveBeenCalledWith(expect.objectContaining({
+        label: labelIds.attemptFirstRenewal,
+        value: '3 ui-circulation.settings.loanPolicy.attemptFirstRenewal.daysBefore',
+      }), {});
+    });
+
+    it('should render "attemptAdditionalRetries" with days value', () => {
+      expect(screen.getByTestId(testIds.attemptAdditionalRetries)).toBeVisible();
+      expect(KeyValue).toHaveBeenCalledWith(expect.objectContaining({
+        label: labelIds.attemptAdditionalRetries,
+        value: '5 ui-circulation.settings.loanPolicy.days',
+      }), {});
+    });
   });
 
   describe('when "isProfileRolling" returns false', () => {
@@ -193,7 +294,7 @@ describe('RenewalsSection', () => {
     });
 
     it('should render "altFDDS" section correctly', () => {
-      expect(KeyValue).toHaveBeenLastCalledWith(expect.objectContaining({
+      expect(KeyValue).toHaveBeenCalledWith(expect.objectContaining({
         label: labelIds.altFDDSforRenewals,
       }), {});
     });
@@ -272,6 +373,10 @@ describe('RenewalsSection', () => {
 
     it('should not render "altFDDS" section', () => {
       expect(screen.queryByTestId(testIds.altFDDS)).not.toBeInTheDocument();
+    });
+
+    it('should not render "automaticRenewal" section', () => {
+      expect(screen.queryByTestId(testIds.automaticRenewal)).not.toBeInTheDocument();
     });
   });
 

@@ -145,6 +145,52 @@ const RenewalsSection = (props) => {
             </Col>
           </Row>
         </div>}
+      { policy.isRenewable() &&
+        <Row>
+          <Col xs={12}>
+            <div
+              data-testid="automaticRenewal"
+              data-test-renewals-section-automatic-renewal
+            >
+              <KeyValue
+                label={formatMessage({ id: 'ui-circulation.settings.loanPolicy.automaticRenewals' })}
+                value={getCheckboxValue('renewalsPolicy.automaticRenewal')}
+              />
+            </div>
+          </Col>
+        </Row>}
+      { policy.isAutomaticRenewals() &&
+        <>
+          <Row>
+            <Col xs={12}>
+              <div
+                data-testid="attemptFirstRenewal"
+                data-test-renewals-section-attempt-first-renewal
+              >
+                <KeyValue
+                  label={formatMessage({ id: 'ui-circulation.settings.loanPolicy.attemptFirstRenewal' })}
+                  value={policy.isDaysBeforeSelected()
+                    ? `${policy.renewalsPolicy.daysBefore} ${formatMessage({ id: 'ui-circulation.settings.loanPolicy.attemptFirstRenewal.daysBefore' })}`
+                    : formatMessage({ id: 'ui-circulation.settings.loanPolicy.attemptFirstRenewal.onDueDate' })}
+                />
+              </div>
+            </Col>
+          </Row>
+          <Row>
+            <Col xs={12}>
+              <div
+                data-testid="attemptAdditionalRetries"
+                data-test-renewals-section-attempt-additional-retries
+              >
+                <KeyValue
+                  label={formatMessage({ id: 'ui-circulation.settings.loanPolicy.attemptAdditionalRetries' })}
+                  value={`${getValue('renewalsPolicy.automaticRenewalRetryPeriodInDays') ?? 0} ${formatMessage({ id: 'ui-circulation.settings.loanPolicy.days' })}`}
+                />
+              </div>
+            </Col>
+          </Row>
+        </>}
+
       <hr />
     </div>
   );
@@ -157,6 +203,8 @@ RenewalsSection.propTypes = {
     isRenewable: PropTypes.func,
     isDifferentPeriod: PropTypes.func,
     isUnlimitedRenewals: PropTypes.func,
+    isAutomaticRenewals: PropTypes.func,
+    isDaysBeforeSelected: PropTypes.func,
   }).isRequired,
   getValue: PropTypes.func.isRequired,
   getDropdownValue: PropTypes.func.isRequired,
