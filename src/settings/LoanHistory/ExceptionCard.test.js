@@ -1,4 +1,5 @@
 import {
+  cleanup,
   render,
   screen,
   within,
@@ -107,6 +108,30 @@ describe('ExceptionCard', () => {
     };
 
     expect(AnonymizingTypeSelectContainer).toHaveBeenCalledWith(expectedResult, {});
+  });
+
+  describe('when disabled', () => {
+    beforeEach(() => {
+      cleanup();
+      AnonymizingTypeSelectContainer.mockClear();
+      Field.mockClear();
+      IconButton.mockClear();
+      render(
+        <ExceptionCard
+          pathToException={mockedPathToException}
+          paymentMethods={mockedPaymentMethods}
+          exceptionIndex={mockedExceptionIndex}
+          onRemoveException={mockedOnRemoveException}
+          disabled
+        />
+      );
+    });
+
+    it('should disable payment method, remove button and anonymizing type select', () => {
+      expect(Field).toHaveBeenCalledWith(expect.objectContaining({ disabled: true }), {});
+      expect(IconButton).toHaveBeenCalledWith(expect.objectContaining({ disabled: true }), {});
+      expect(AnonymizingTypeSelectContainer).toHaveBeenCalledWith(expect.objectContaining({ disabled: true }), {});
+    });
   });
 
   describe('payment method options', () => {

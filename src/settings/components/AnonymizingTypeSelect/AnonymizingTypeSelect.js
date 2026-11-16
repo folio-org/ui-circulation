@@ -8,7 +8,7 @@ import {
   RadioButton,
 } from '@folio/stripes/components';
 
-const AnonymizingTypeSelect = ({ name, types }) => {
+const AnonymizingTypeSelect = ({ name, types, disabled }) => {
   return types.map((type, index) => (
     <Row
       key={`row-${index}`}
@@ -23,16 +23,20 @@ const AnonymizingTypeSelect = ({ name, types }) => {
           type="radio"
           id={`${type.value}-${name}-radio-button`}
           value={type.value}
+          disabled={disabled}
         />
+        {type.details}
       </Col>
     </Row>
   ));
 };
 
 AnonymizingTypeSelect.propTypes = {
+  disabled: PropTypes.bool,
   name: PropTypes.string.isRequired,
   types: PropTypes.arrayOf(PropTypes.shape({
     value: PropTypes.string,
+    details: PropTypes.node,
   })).isRequired,
 };
 

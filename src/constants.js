@@ -400,6 +400,13 @@ export const closingTypesMap = {
   NEVER: 'never',
 };
 
+// closingType.userSpecific: "disabled" turns user-specific anonymization off, unlike "never" above
+export const userSpecificClosingTypesMap = {
+  DISABLED: 'disabled',
+  IMMEDIATELY: 'immediately',
+  INTERVAL: 'interval',
+};
+
 export const timeUnitsMap = {
   MINUTE: 'minute',
   DAY: 'day',
@@ -413,6 +420,10 @@ export const noticeMethodMap = {
 
 export const closingTypes = [
   {
+    value: closingTypesMap.NEVER,
+    label: 'ui-circulation.settings.loanHistory.never',
+  },
+  {
     value: closingTypesMap.IMMEDIATELY,
     label: 'ui-circulation.settings.loanHistory.immediatelyAfterClose',
   },
@@ -420,13 +431,13 @@ export const closingTypes = [
     value: closingTypesMap.INTERVAL,
     label: 'ui-circulation.settings.loanHistory.interval',
   },
+];
+
+export const CLOSING_TYPES_WITH_FEES_FINES = [
   {
     value: closingTypesMap.NEVER,
     label: 'ui-circulation.settings.loanHistory.never',
   },
-];
-
-export const CLOSING_TYPES_WITH_FEES_FINES = [
   {
     value: closingTypesMap.IMMEDIATELY,
     label: 'ui-circulation.settings.loanHistory.immediatelyAfterCloseOrSuspended',
@@ -435,9 +446,20 @@ export const CLOSING_TYPES_WITH_FEES_FINES = [
     value: closingTypesMap.INTERVAL,
     label: 'ui-circulation.settings.loanHistory.interval',
   },
+];
+
+export const USER_SPECIFIC_CLOSING_TYPES = [
   {
-    value: closingTypesMap.NEVER,
-    label: 'ui-circulation.settings.loanHistory.never',
+    value: userSpecificClosingTypesMap.DISABLED,
+    label: 'ui-circulation.settings.loanHistory.userSpecific.disabled',
+  },
+  {
+    value: userSpecificClosingTypesMap.IMMEDIATELY,
+    label: 'ui-circulation.settings.loanHistory.immediatelyAfterClose',
+  },
+  {
+    value: userSpecificClosingTypesMap.INTERVAL,
+    label: 'ui-circulation.settings.loanHistory.interval',
   },
 ];
 
@@ -445,6 +467,8 @@ export const closedLoansRules = {
   DEFAULT: 'loan',
   WITH_FEES_FINES: 'feeFine',
 };
+
+export const USER_SPECIFIC_RULE = 'userSpecific';
 
 export const timeUnits = [
   {

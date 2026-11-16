@@ -20,6 +20,8 @@ import {
   closingTypes,
   CLOSING_TYPES_WITH_FEES_FINES,
   closedLoansRules,
+  USER_SPECIFIC_CLOSING_TYPES,
+  USER_SPECIFIC_RULE,
 } from '../../constants';
 
 jest.mock('../components/AnonymizingTypeSelect/AnonymizingTypeSelectContainer', () => jest.fn(() => null));
@@ -30,15 +32,21 @@ jest.mock('../../constants', () => ({
     DEFAULT: 'testDefault',
     WITH_FEES_FINES: 'testWithFeesFines',
   },
+  USER_SPECIFIC_CLOSING_TYPES: 'testUserSpecificClosingTypes',
+  USER_SPECIFIC_RULE: 'testUserSpecific',
 }));
 
 describe('LoanHistoryForm', () => {
   const labelIds = {
     'buttonSave': 'stripes-core.button.save',
-    'closedLoans': 'ui-circulation.settings.loanHistory.closedLoans',
+    'libraryPolicy': 'ui-circulation.settings.loanHistory.libraryPolicy',
     'anonymize': 'ui-circulation.settings.loanHistory.anonymize',
     'treat': 'ui-circulation.settings.loanHistory.treat',
-    'closedLoansFeesFines': 'ui-circulation.settings.loanHistory.closedLoansFeesFines',
+    'userSpecific': 'ui-circulation.settings.loanHistory.userSpecific',
+    'userSpecificInfoPopover': 'ui-circulation.settings.loanHistory.userSpecific.infoPopover',
+    'userSpecificAnonymize': 'ui-circulation.settings.loanHistory.userSpecific.anonymize',
+    'feeFinePolicy': 'ui-circulation.settings.loanHistory.feeFinePolicy',
+    'feeFinePolicyInfoPopover': 'ui-circulation.settings.loanHistory.feeFinePolicy.infoPopover',
     'anonymizeFeesFines': 'ui-circulation.settings.loanHistory.anonymizeFeesFines',
   };
   const testIds = {
@@ -46,6 +54,7 @@ describe('LoanHistoryForm', () => {
     submitButton: 'submitButton',
     closedLoans: 'closedLoans',
     closedLoansHeadline: 'closedLoansHeadline',
+    userSpecificHeadline: 'userSpecificHeadline',
     closedLoansFeesFinesHeadline: 'closedLoansFeesFinesHeadline',
     loansFeefineSection: 'loansFeefineSection',
   };
@@ -127,20 +136,35 @@ describe('LoanHistoryForm', () => {
       expect(getById(testIds.submitButton).getByText(labelIds.buttonSave)).toBeVisible();
     });
 
-    it('should render closed loans label', () => {
-      expect(getById(testIds.closedLoansHeadline).getByText(labelIds.closedLoans)).toBeVisible();
-    });
-
-    it('should render anonymize label', () => {
-      expect(getById(testIds.closedLoans).getByText(labelIds.anonymize)).toBeVisible();
+    it('should render library policy label', () => {
+      expect(getById(testIds.closedLoansHeadline).getByText(labelIds.libraryPolicy)).toBeVisible();
     });
 
     it('should render closed loans AnonymizingTypeSelectContainer component', () => {
       expect(AnonymizingTypeSelectContainer).toHaveBeenNthCalledWith(1, expect.objectContaining({
+        label: labelIds.anonymize,
         name: closedLoansRules.DEFAULT,
         path: closedLoansRules.DEFAULT,
         types: closingTypes,
       }), {});
+    });
+
+    it('should render user-specific label and info popover', () => {
+      expect(getById(testIds.userSpecificHeadline).getByText(labelIds.userSpecific)).toBeVisible();
+      expect(getById(testIds.userSpecificHeadline).getByText(labelIds.userSpecificInfoPopover)).toBeVisible();
+    });
+
+    it('should render user-specific AnonymizingTypeSelectContainer component', () => {
+      expect(AnonymizingTypeSelectContainer).toHaveBeenNthCalledWith(2, expect.objectContaining({
+        label: labelIds.userSpecificAnonymize,
+        name: closedLoansRules.DEFAULT,
+        path: USER_SPECIFIC_RULE,
+        types: USER_SPECIFIC_CLOSING_TYPES,
+      }), {});
+    });
+
+    it('should render fee/fine info popover', () => {
+      expect(getById(testIds.closedLoansFeesFinesHeadline).getByText(labelIds.feeFinePolicyInfoPopover)).toBeVisible();
     });
 
     it('should render treat enabled Field component', () => {
@@ -153,8 +177,20 @@ describe('LoanHistoryForm', () => {
       }, {});
     });
 
-    it('should not render loans feefine section', () => {
-      expect(screen.queryByTestId(testIds.loansFeefineSection)).not.toBeInTheDocument();
+    it('should render loans feefine section', () => {
+      expect(screen.getByTestId(testIds.loansFeefineSection)).toBeVisible();
+    });
+
+    it('should render closed loans fees fines AnonymizingTypeSelectContainer component disabled', () => {
+      expect(AnonymizingTypeSelectContainer).toHaveBeenNthCalledWith(3, expect.objectContaining({
+        disabled: true,
+      }), {});
+    });
+
+    it('should render loan exceptions FieldArray component disabled', () => {
+      expect(FieldArray).toHaveBeenCalledWith(expect.objectContaining({
+        disabled: true,
+      }), {});
     });
   });
 
@@ -179,19 +215,17 @@ describe('LoanHistoryForm', () => {
       expect(screen.getByTestId(testIds.loansFeefineSection)).toBeVisible();
     });
 
-    it('should render closed loans fees fines label', () => {
-      expect(getById(testIds.closedLoansFeesFinesHeadline).getByText(labelIds.closedLoansFeesFines)).toBeVisible();
-    });
-
-    it('should render anonymize fees fines label', () => {
-      expect(getById(testIds.loansFeefineSection).getByText(labelIds.anonymizeFeesFines)).toBeVisible();
+    it('should render fee/fine policy label', () => {
+      expect(getById(testIds.closedLoansFeesFinesHeadline).getByText(labelIds.feeFinePolicy)).toBeVisible();
     });
 
     it('should render closed loans fees fines AnonymizingTypeSelectContainer component', () => {
-      expect(AnonymizingTypeSelectContainer).toHaveBeenNthCalledWith(2, expect.objectContaining({
+      expect(AnonymizingTypeSelectContainer).toHaveBeenNthCalledWith(3, expect.objectContaining({
+        label: labelIds.anonymizeFeesFines,
         name: closedLoansRules.WITH_FEES_FINES,
         path: closedLoansRules.WITH_FEES_FINES,
         types: CLOSING_TYPES_WITH_FEES_FINES,
+        disabled: false,
       }), {});
     });
 
@@ -199,6 +233,7 @@ describe('LoanHistoryForm', () => {
       expect(FieldArray).toHaveBeenCalledWith({
         name: 'loanExceptions',
         component: ExceptionsList,
+        disabled: false,
       }, {});
     });
   });
